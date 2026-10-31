@@ -46,3 +46,15 @@ M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	previousIndex	ITER_WALK	{"t
 M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	remove	ITER_READ_ONLY	{"test": "iterator_remove", "iter_call": "remove()"}
 M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	set	ITER_READ_ONLY	{"test": "iterator_set", "iter_call": "set(probe)"}
 M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	add	ITER_READ_ONLY	{"test": "iterator_add", "iter_call": "add(probe)"}
+M3IndexedArrayAtomsTest	jdk.internal.m3.M3IndexedArray	*	CLASS	{"modules": "java.base/jdk.internal.m3:open java.base/java.util:open", "summary": "Per-atom contracts of jdk.internal.m3.M3IndexedArray private atoms against an ArrayList model (generated, template views)"}
+M3IndexedArrayAtomsTest	jdk.internal.m3.M3IndexedArray	checkMasks	ARRAY_CHECK_MASKS	{}
+M3IndexedArrayAtomsTest	jdk.internal.m3.M3IndexedArray	select	ARRAY_SELECT	{"test": "selectValueEpoch", "arity": "2", "state_capable": "false", "select_doc": "predicate, comparator", "select_args": "f.backing, p, c"}
+M3IndexedArrayAtomsTest	jdk.internal.m3.M3IndexedArray	select	ARRAY_SELECT	{"test": "selectStateEpoch", "arity": "5", "state_capable": "true", "select_doc": "predicate, comparator, required, forbidden, stateAware", "select_args": "f.backing, p, c, kind.stateAware ? M3IndexedArray.LIVE : 0, kind.stateAware ? M3IndexedArray.LEASED : 0, kind.stateAware"}
+M3IndexedArrayAtomsTest	jdk.internal.m3.M3IndexedArray	allocateSlot	ARRAY_ALLOCATE_SLOT	{}
+M3IndexedArrayAtomsTest	jdk.internal.m3.M3IndexedArray	validSlot	ARRAY_VALID_SLOT	{}
+M3IndexedArrayAtomsTest	jdk.internal.m3.M3IndexedArray	updateLeaseMask	ARRAY_UPDATE_LEASE_MASK	{}
+M3IndexedArrayAtomsTest	jdk.internal.m3.M3IndexedArray	valueAtSlot	ARRAY_VALUE_AT_SLOT	{}
+M3IndexedArrayAtomsTest	jdk.internal.m3.M3IndexedArray	pack	ARRAY_PACK	{}
+M3IndexedArrayAtomsTest	jdk.internal.m3.M3IndexedArray	rejectReentrantMutation	ARRAY_REJECT_REENTRANT	{"test": "rejectValueEpoch", "arity": "1", "reject_doc": "initialVersion", "epoch_doc": "value", "initial": "f.backing.version()", "reject_args": "f.backing, initial", "move": "f.append(new Item(0, ITEMS));"}
+M3IndexedArrayAtomsTest	jdk.internal.m3.M3IndexedArray	rejectReentrantMutation	ARRAY_REJECT_REENTRANT	{"test": "rejectStateEpoch", "arity": "2", "reject_doc": "initialVersion, stateAware", "epoch_doc": "state", "initial": "stateVersion(f)", "reject_args": "f.backing, initial, true", "move": "f.lease(0);"}
+M3IndexedArrayAtomsTest	jdk.internal.m3.M3IndexedArray	stableSort	ARRAY_STABLE_SORT	{}

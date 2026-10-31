@@ -39,7 +39,7 @@ echo "tests: $(echo "$TESTS" | grep -c . || true) sources"
     -cp "$JUNIT" -Xlint:none -nowarn $TESTS) > "$OUT/logs/javac-test.log" 2>&1 \
     || { cat "$OUT/logs/javac-test.log"; exit 1; }
 set +e
-"$JDK/bin/java" -ea -esa -Djava.awt.headless=true --patch-module "java.base=$OUT/classes" "${OPENFLAGS[@]}" \
+"$JDK/bin/java" -ea -esa -Djava.awt.headless=true -Djdk.m3.objectEvents.enabled=true --patch-module "java.base=$OUT/classes" "${OPENFLAGS[@]}" \
     -jar "$JUNIT" execute --class-path "$OUT/testclasses" --scan-class-path --include-classname "$INCLUDE" \
     --reports-dir "$OUT/reports" --disable-banner --details=none --disable-ansi-colors \
     > "$OUT/logs/junit.log" 2>&1

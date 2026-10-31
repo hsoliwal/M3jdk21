@@ -727,3 +727,166 @@ import jdk.internal.m3.M3IndexedArray;
             assertEquals(expected, view);
         });
     }
+//@@ SUPPORT SLOT_VALUES
+    /** Values of a slot directory, read through the valueAtSlot atom of the owner. */
+    private static List<Item> slotValues(Fixture f, int[] slots) throws Throwable {
+        MethodHandle valueAt = OWNER.method("valueAtSlot", 1);
+        List<Item> out = new ArrayList<>();
+        for (int slot : slots) {
+            out.add((Item) valueAt.invoke(f.backing, slot));
+        }
+        return out;
+    }
+//@@ PATTERN ARRAY_CHECK_MASKS | uses= | oracle=IllegalArgumentException on overlapping bits
+    /** ${atom}(required, forbidden) rejects overlapping state bits and accepts disjoint ones. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 2);
+        atom.invoke(M3IndexedArray.LIVE, M3IndexedArray.LEASED | M3IndexedArray.RETIRED);
+        atom.invoke(0, 0);
+        assertEquals("overlapping required/forbidden M3 state bits", assertThrows(IllegalArgumentException.class,
+                () -> atom.invoke(M3IndexedArray.LEASED, M3IndexedArray.LEASED | M3IndexedArray.SHARED)).getMessage());
+    }
+//@@ PATTERN ARRAY_SELECT | uses=SLOT_VALUES | oracle=ArrayList model filtered, state-selected and stably sorted
+    /** ${atom}(${select_doc}) returns the slot directory of the model selection; mutating callbacks are rejected. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", ${arity});
+        forEachKind((f, kind, view, expected) -> {
+            if (kind.stateAware && !${state_capable}) {
+                return;
+            }
+            Predicate<Item> p = kind.filtered ? KEEP : null;
+            Comparator<Item> c = kind.sorted ? BY_RANK : null;
+            int[] slots = (int[]) atom.invoke(${select_args});
+            assertEquals(expected, slotValues(f, slots), "${atom} " + kind);
+        });
+        Fixture f = new Fixture();
+        Predicate<Item> p = item -> {
+            f.append(new Item(0, ITEMS));
+            return true;
+        };
+        Comparator<Item> c = null;
+        Kind kind = Kind.FILTERED_MASKED;
+        assertThrows(ConcurrentModificationException.class, () -> atom.invoke(${select_args}), "${atom} rejects reentrancy");
+    }
+//@@ PATTERN ARRAY_ALLOCATE_SLOT | uses= | oracle=LIFO free-list reuse; fresh slots start at generation 1
+    /** ${atom}() reuses the most recently freed slot first, else allocates the next slot at generation 1. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 0);
+        Fixture f = new Fixture();
+        int allocated = (int) OWNER.field("allocated").get(f.backing);
+        long first = f.handles.get(0);
+        long second = f.handles.get(2);
+        assertTrue(f.backing.remove(first));
+        assertTrue(f.backing.remove(second));
+        assertEquals((int) second, (int) atom.invoke(f.backing), "the last freed slot is reused first");
+        assertEquals((int) first, (int) atom.invoke(f.backing));
+        int fresh = (int) atom.invoke(f.backing);
+        assertEquals(allocated, fresh, "then a new slot");
+        assertEquals(1, ((int[]) OWNER.field("generations").get(f.backing))[fresh]);
+    }
+//@@ PATTERN ARRAY_VALID_SLOT | uses= | oracle=generation-qualified handle validation
+    /** ${atom}(handle) accepts live handles and rejects stale, forged or out-of-range ones. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 1);
+        Fixture f = new Fixture();
+        long live = f.handles.get(0);
+        assertEquals((int) live, (int) atom.invoke(f.backing, live));
+        long removable = f.handles.get(2);
+        assertTrue(f.backing.remove(removable));
+        long recycled = f.backing.append(new Item(1, ITEMS));
+        assertEquals((int) removable, (int) recycled, "the slot is reused under a new generation");
+        String stale = "stale or invalid M3 handle";
+        for (long bad : new long[] {removable, (int) live, live + ((long) ITEMS << Integer.SIZE), (long) ITEMS * ITEMS, -1L}) {
+            assertEquals(stale, assertThrows(IllegalArgumentException.class, () -> atom.invoke(f.backing, bad)).getMessage(),
+                    "${atom} rejects " + Long.toHexString(bad));
+        }
+    }
+//@@ PATTERN ARRAY_UPDATE_LEASE_MASK | uses= | oracle=LIVE, plus LEASED when count > 0 and SHARED when count > 1; state epoch bump
+    /** ${atom}(slot) derives the state bits from the lease count and bumps only the state epoch. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 1);
+        Fixture f = new Fixture();
+        int slot = (int) (long) f.handles.get(0);
+        int[] leases = (int[]) OWNER.field("leaseCounts").get(f.backing);
+        int[] expectedStates = {M3IndexedArray.LIVE, M3IndexedArray.LIVE | M3IndexedArray.LEASED,
+                M3IndexedArray.LIVE | M3IndexedArray.LEASED | M3IndexedArray.SHARED};
+        for (int owners = 0; owners < expectedStates.length; owners++) {
+            leases[slot] = owners;
+            long version = f.backing.version();
+            long epoch = stateVersion(f);
+            atom.invoke(f.backing, slot);
+            assertEquals(expectedStates[owners], ((int[]) OWNER.field("states").get(f.backing))[slot], "owners=" + owners);
+            assertEquals(version, f.backing.version(), "values unchanged");
+            assertEquals(epoch + 1, stateVersion(f), "${atom} bumps the state epoch");
+        }
+        leases[slot] = 0;
+        atom.invoke(f.backing, slot);
+    }
+//@@ PATTERN ARRAY_VALUE_AT_SLOT | uses= | oracle=payload of the slot of each logical index
+    /** ${atom}(slot) is the payload stored in that physical slot. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 1);
+        Fixture f = new Fixture();
+        for (int i = 0; i < f.model.size(); i++) {
+            assertSame(f.model.get(i), atom.invoke(f.backing, (int) f.backing.handleAt(i)), "${atom} index " + i);
+        }
+    }
+//@@ PATTERN ARRAY_PACK | uses= | oracle=handle bit layout: generation high, unsigned slot low
+    /** ${atom}(slot, generation) packs the generation into the high and the unsigned slot into the low 32 bits. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 2);
+        Fixture f = new Fixture();
+        int[] generations = (int[]) OWNER.field("generations").get(f.backing);
+        for (long handle : f.handles) {
+            assertEquals(handle, (long) atom.invoke((int) handle, generations[(int) handle]), "${atom} round trip");
+        }
+        assertEquals(0xFFFF_FFFFL | (1L << Integer.SIZE), (long) atom.invoke(-1, 1), "the slot is unsigned");
+        assertEquals((long) Integer.MAX_VALUE << Integer.SIZE, (long) atom.invoke(0, Integer.MAX_VALUE));
+    }
+//@@ PATTERN ARRAY_REJECT_REENTRANT | uses= | oracle=ConcurrentModificationException once the epoch moved
+    /** ${atom}(${reject_doc}) throws once the ${epoch_doc} epoch moved past the initial one. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", ${arity});
+        Fixture f = new Fixture();
+        long initial = ${initial};
+        atom.invoke(${reject_args});
+        ${move}
+        assertEquals("M3 predicate/comparator mutated the backing store",
+                assertThrows(ConcurrentModificationException.class, () -> atom.invoke(${reject_args})).getMessage());
+    }
+//@@ PATTERN ARRAY_STABLE_SORT | uses=SLOT_VALUES | oracle=List.sort stable order; bulk-copy runs; reentrancy rejected
+    /** ${atom}(indexes, comparator, version, stateAware) stably sorts slot indexes by their payloads. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 4);
+        Fixture f = new Fixture();
+        for (int i = 0; i < ITEMS * QUARTER; i++) {
+            f.append(new Item(i < ITEMS * 2 ? 0 : i % RANKS, ITEMS + i));
+        }
+        int[] slots = new int[f.model.size()];
+        for (int i = 0; i < slots.length; i++) {
+            slots[i] = (int) f.backing.handleAt(i);
+        }
+        List<Item> expected = new ArrayList<>(f.model);
+        expected.sort(BY_RANK);
+        atom.invoke(f.backing, slots, BY_RANK, f.backing.version(), false);
+        assertEquals(expected, slotValues(f, slots), "${atom} matches List.sort");
+        Comparator<Item> mutating = (x, y) -> {
+            f.append(new Item(0, -1));
+            return 0;
+        };
+        int[] again = slots.clone();
+        assertThrows(ConcurrentModificationException.class,
+                () -> atom.invoke(f.backing, again, mutating, f.backing.version(), false));
+        int[] single = {slots[0]};
+        atom.invoke(f.backing, single, mutating, f.backing.version(), false);
+        assertEquals(slots[0], single[0], "fewer than two slots never compare");
+    }

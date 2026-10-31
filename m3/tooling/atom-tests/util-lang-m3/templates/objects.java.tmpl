@@ -1,0 +1,722 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+//@@ IMPORTS
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
+//@@ CONSTANTS
+    private static final MethodHandles.Lookup LOOKUP = MethodHandles.lookup();
+    private static final Access STATE = new Access("java.lang.M3ObjectRuntime$State");
+    private static final Access PLAN = new Access("java.lang.M3ObjectRuntime$AccessPlan");
+    private static final Access FIELD = new Access("java.lang.M3Object$Field");
+    private static final Access M3_OBJECT = new Access("java.lang.M3Object");
+    private static final long EVENT_TIMEOUT_SECONDS = 10;
+    private static final long QUIET_MILLIS = 200;
+    /** Owners created by the ofLocked growth check; retained so the weak registry keeps them. */
+    private static final int MANY_OWNERS = 40;
+    private static final int UNKNOWN_MASK_BIT = 8;
+    private static final int INITIAL_LANES = 4;
+//@@ HELPERS
+    /** Observation payload with reference, primitive and floating fields. */
+    static class Node {
+        Object ref;
+        int count;
+        float ratio;
+    }
+
+    static final class SubNode extends Node {
+    }
+
+    /** Listener recording deliveries from the framework dispatch thread. */
+    static final class Recorder implements ObjectChangeListener {
+        final BlockingQueue<ObjectEvent> events = new LinkedBlockingQueue<>();
+        final List<Thread> threads = new ArrayList<>();
+
+        @Override
+        public void onChange(ObjectEvent event) {
+            synchronized (threads) {
+                threads.add(Thread.currentThread());
+            }
+            events.add(event);
+        }
+
+        ObjectEvent next() throws InterruptedException {
+            ObjectEvent e = events.poll(EVENT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+            assertTrue(e != null, "an event is delivered");
+            return e;
+        }
+
+        void quiet() throws InterruptedException {
+            assertEquals(null, events.poll(QUIET_MILLIS, TimeUnit.MILLISECONDS), "no event is delivered");
+        }
+    }
+
+    static M3Object.Field field(Object source, String name, Class<?> type) {
+        return M3Object.of(source).field(LOOKUP, Node.class, name, type);
+    }
+
+    static Object lock() {
+        return OWNER.constant("LOCK");
+    }
+
+    static Object state(Object source) {
+        return M3_OBJECT.field("state").get(M3Object.of(source));
+    }
+
+    static Object plan(M3Object.Field f) {
+        return FIELD.field("plan").get(f);
+    }
+
+    static Object planOf(String name, Class<?> type) throws Throwable {
+        return PLAN.constructor("AccessPlan", 4).invoke(LOOKUP, Node.class, name, type);
+    }
+
+    /** Runs {@code body} on an InnocuousThread, as the framework dispatch thread does. */
+    static void onInnocuousThread(Runnable body) throws InterruptedException {
+        Thread t = jdk.internal.misc.InnocuousThread.newSystemThread("m3-atom-test", body);
+        t.start();
+        t.join(TimeUnit.SECONDS.toMillis(EVENT_TIMEOUT_SECONDS));
+        assertFalse(t.isAlive(), "the innocuous body finished");
+    }
+
+    interface LockedAction {
+        void run() throws Throwable;
+    }
+
+    static void locked(LockedAction action) throws Throwable {
+        synchronized (lock()) {
+            action.run();
+        }
+    }
+//@@ PATTERN OBJ_ENABLED | uses= | oracle=startup property jdk.m3.objectEvents.enabled=true
+    /** ${atom}() reflects the startup property and agrees with M3Object.observationEnabled(). */
+    @Test
+    void ${test}() throws Throwable {
+        assertTrue((boolean) OWNER.method("${atom}", 0).invoke(), "${atom} under -Djdk.m3.objectEvents.enabled=true");
+        assertEquals(M3Object.observationEnabled(), (boolean) OWNER.method("${atom}", 0).invoke());
+    }
+//@@ PATTERN OBJ_OF | uses= | oracle=identity-bound capability, same as M3Object.of
+    /** ${atom}(source) returns one capability per source identity, the one M3Object.of returns. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 1);
+        Node node = new Node();
+        Object owner = atom.invoke(node);
+        assertSame(owner, atom.invoke(node), "${atom} is identity-bound");
+        assertSame(M3Object.of(node), owner);
+        assertSame(node, ((M3Object) owner).source());
+        assertNotSame(owner, atom.invoke(new Node()), "distinct sources, distinct capabilities");
+    }
+//@@ PATTERN OBJ_FIND_LOCKED | uses= | oracle=registry lookup never creates an owner
+    /** ${atom}(source) finds a registered owner and returns null for an unknown source. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 1);
+        Node unknown = new Node();
+        Node known = new Node();
+        M3Object owner = M3Object.of(known);
+        locked(() -> {
+            assertEquals(null, atom.invoke(unknown), "${atom} does not create");
+            assertSame(owner, atom.invoke(known));
+        });
+        locked(() -> assertEquals(null, atom.invoke(unknown), "still unknown after the lookup"));
+    }
+//@@ PATTERN OBJ_OF_LOCKED | uses= | oracle=registry growth and reuse
+    /** ${atom}(source) registers new owners, reusing them, and grows the weak registry when full. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 1);
+        List<Object> retained = new ArrayList<>();
+        List<Node> sources = new ArrayList<>();
+        locked(() -> {
+            for (int i = 0; i < MANY_OWNERS; i++) {
+                Node n = new Node();
+                sources.add(n);
+                retained.add(atom.invoke(n));
+            }
+            for (int i = 0; i < MANY_OWNERS; i++) {
+                assertSame(retained.get(i), atom.invoke(sources.get(i)), "${atom} reuses " + i);
+            }
+        });
+        assertTrue(((Object[]) OWNER.field("owners").get()).length >= MANY_OWNERS, "${atom} grew the registry");
+    }
+//@@ PATTERN OBJ_PLAN | uses= | oracle=plan sharing per (lookup, declaringType, name, type)
+    /** ${atom}(lookup, declaringType, name, type) shares one reachable plan per key. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 4);
+        Object p = atom.invoke(LOOKUP, Node.class, "count", int.class);
+        assertSame(p, atom.invoke(LOOKUP, Node.class, "count", int.class), "${atom} shares");
+        assertNotSame(p, atom.invoke(LOOKUP, Node.class, "ratio", float.class), "another name");
+        assertNotSame(p, atom.invoke(MethodHandles.privateLookupIn(Node.class, LOOKUP), Node.class, "count", int.class),
+                "another lookup");
+        assertEquals("count", PLAN.field("name").get(p));
+    }
+//@@ PATTERN OBJ_SET | uses= | oracle=field value, type checks, one event per real change
+    /** ${atom}(field, value) writes, type-checks, and publishes only real changes. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 2);
+        Node node = new Node();
+        M3Object.Field ref = field(node, "ref", Object.class);
+        M3Object.Field count = field(node, "count", int.class);
+        Recorder r = new Recorder();
+        try (ObjectSubscription s = ref.listen(ObjectEvent.REFERENCE, r)) {
+            String value = "v";
+            atom.invoke(ref, value);
+            assertSame(value, node.ref);
+            assertEquals(ObjectEvent.REFERENCE, r.next().mask());
+            atom.invoke(ref, value);
+            r.quiet();
+        }
+        atom.invoke(count, 1 + 1);
+        assertEquals(1 + 1, node.count);
+        assertEquals("value is not java.lang.Integer",
+                assertThrows(ClassCastException.class, () -> atom.invoke(count, "x")).getMessage());
+        assertEquals("primitive value", assertThrows(NullPointerException.class, () -> atom.invoke(count, null)).getMessage());
+    }
+//@@ PATTERN OBJ_COMPARE_AND_SET | uses= | oracle=VarHandle compareAndSet result and change events
+    /** ${atom}(field, expected, value) succeeds only on the expected value and publishes the change. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 3);
+        Node node = new Node();
+        M3Object.Field count = field(node, "count", int.class);
+        Recorder r = new Recorder();
+        try (ObjectSubscription s = count.listen(ObjectEvent.VALUE, r)) {
+            assertTrue((boolean) atom.invoke(count, 0, 1));
+            assertEquals(1, node.count);
+            assertEquals(ObjectEvent.VALUE, r.next().mask());
+            assertFalse((boolean) atom.invoke(count, 0, 1 + 1), "${atom} fails on a stale expectation");
+            assertEquals(1, node.count);
+            r.quiet();
+        }
+    }
+//@@ PATTERN OBJ_FIELD_CHANGED_LOCKED | uses= | oracle=VALUE event on the observed field slot
+    /** ${atom}(owner, plan) publishes the plan's slot to interested owners. */
+    @Test
+    void ${test}() throws Throwable {
+        Node node = new Node();
+        M3Object.Field count = field(node, "count", int.class);
+        Recorder r = new Recorder();
+        try (ObjectSubscription s = count.listen(ObjectEvent.VALUE, r)) {
+            locked(() -> OWNER.method("${atom}", 2).invoke(M3Object.of(node), plan(count)));
+            ObjectEvent e = r.next();
+            assertEquals(ObjectEvent.VALUE, e.mask());
+            assertSame(node, e.source());
+        }
+        locked(() -> OWNER.method("${atom}", 2).invoke(M3Object.of(new Node()), plan(count)));
+    }
+//@@ PATTERN OBJ_CONTENT_CHANGED | uses= | oracle=CONTENT event to owner listeners
+    /** ${atom}(owner) delivers one CONTENT event to whole-owner listeners. */
+    @Test
+    void ${test}() throws Throwable {
+        Node node = new Node();
+        Recorder r = new Recorder();
+        try (ObjectSubscription s = M3Object.of(node).listen(ObjectEvent.CONTENT, r)) {
+            OWNER.method("${atom}", 1).invoke(M3Object.of(node));
+            ObjectEvent e = r.next();
+            assertEquals(ObjectEvent.CONTENT, e.mask());
+            assertEquals(null, e.field(), "a whole-owner event names no field");
+        }
+    }
+//@@ PATTERN OBJ_NOTIFY_CONTENT | uses= | oracle=JNI producer contract: no owner creation, CONTENT to observers
+    /** ${atom}(source) rejects null, never creates an owner, and notifies observed sources. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 1);
+        assertEquals("source", assertThrows(NullPointerException.class, () -> atom.invoke((Object) null)).getMessage());
+        Node stranger = new Node();
+        atom.invoke(stranger);
+        locked(() -> assertEquals(null, OWNER.method("findLocked", 1).invoke(stranger), "${atom} creates no owner"));
+        Node node = new Node();
+        Recorder r = new Recorder();
+        try (ObjectSubscription s = M3Object.of(node).listen(ObjectEvent.CONTENT, r)) {
+            atom.invoke(node);
+            assertEquals(ObjectEvent.CONTENT, r.next().mask());
+        }
+    }
+//@@ PATTERN OBJ_NOTIFY_FIELD | uses= | oracle=argument validation and slot event
+    /** ${atom}(source, declaringType, name, type, mask) validates the commit and notifies the field slot. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 5);
+        Node node = new Node();
+        assertThrows(NullPointerException.class, () -> atom.invoke(node, Node.class, null, Object.class, ObjectEvent.REFERENCE));
+        String invalid = "invalid committed field notification";
+        assertEquals(invalid, assertThrows(IllegalArgumentException.class,
+                () -> atom.invoke(node, Node.class, "count", int.class, ObjectEvent.REFERENCE)).getMessage());
+        assertEquals(invalid, assertThrows(IllegalArgumentException.class,
+                () -> atom.invoke(node, Node.class, "ref", void.class, ObjectEvent.VALUE)).getMessage());
+        assertEquals(invalid, assertThrows(IllegalArgumentException.class,
+                () -> atom.invoke("not a node", Node.class, "ref", Object.class, ObjectEvent.REFERENCE)).getMessage());
+        M3Object.Field ref = field(node, "ref", Object.class);
+        Recorder r = new Recorder();
+        try (ObjectSubscription s = ref.listen(ObjectEvent.REFERENCE, r)) {
+            atom.invoke(node, Node.class, "ref", Object.class, ObjectEvent.REFERENCE);
+            assertEquals(ObjectEvent.REFERENCE, r.next().mask());
+        }
+    }
+//@@ PATTERN OBJ_LISTEN | uses= | oracle=argument validation; open subscription; delivery
+    /** ${atom}(owner, field, mask, listener) validates, admits a subscription and delivers to it. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 4);
+        Node node = new Node();
+        M3Object owner = M3Object.of(node);
+        Recorder r = new Recorder();
+        assertEquals("listener", assertThrows(NullPointerException.class,
+                () -> atom.invoke(owner, (M3Object.Field) null, ObjectEvent.CONTENT, (ObjectChangeListener) null)).getMessage());
+        for (int bad : new int[] {0, UNKNOWN_MASK_BIT}) {
+            assertEquals("invalid event mask", assertThrows(IllegalArgumentException.class,
+                    () -> atom.invoke(owner, (M3Object.Field) null, bad, r)).getMessage());
+        }
+        ObjectSubscription s = (ObjectSubscription) atom.invoke(owner, (M3Object.Field) null, ObjectEvent.CONTENT, r);
+        assertFalse(s.isClosed());
+        owner.contentChanged();
+        assertEquals(ObjectEvent.CONTENT, r.next().mask());
+        s.close();
+    }
+//@@ PATTERN OBJ_CLOSE | uses= | oracle=closed subscriptions receive nothing; idempotent
+    /** ${atom}(subscription) detaches the subscriber exactly once; later changes are not delivered. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 1);
+        Node node = new Node();
+        Recorder r = new Recorder();
+        ObjectSubscription s = M3Object.of(node).listen(ObjectEvent.CONTENT, r);
+        atom.invoke(s);
+        assertTrue(s.isClosed());
+        M3Object.of(node).contentChanged();
+        r.quiet();
+        atom.invoke(s);
+        assertEquals(0, (int) STATE.field("subscriberCount").get(state(node)), "${atom} released the slot");
+    }
+//@@ PATTERN OBJ_STATE_LOCKED | uses= | oracle=one State per owner with increasing ids
+    /** ${atom}(owner) creates the owner's State once, with a fresh increasing id. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 1);
+        M3Object first = M3Object.of(new Node());
+        M3Object second = M3Object.of(new Node());
+        locked(() -> {
+            Object a = atom.invoke(first);
+            assertSame(a, atom.invoke(first), "${atom} is idempotent");
+            assertSame(a, M3_OBJECT.field("state").get(first));
+            Object b = atom.invoke(second);
+            assertTrue((long) STATE.field("id").get(b) > (long) STATE.field("id").get(a), "ids increase");
+        });
+    }
+//@@ PATTERN OBJ_FOLLOW_EDGE | uses= | oracle=parent/child follow edges of CONTENT-following reference listeners
+    /** ${atom}(...): ${follow_doc} */
+    @Test
+    void ${test}() throws Throwable {
+        Node parent = new Node();
+        Node child = new Node();
+        Node other = new Node();
+        parent.ref = child;
+        M3Object.Field ref = field(parent, "ref", Object.class);
+        Recorder r = new Recorder();
+        try (ObjectSubscription s = ref.listen(ObjectEvent.CONTENT, r)) {
+            Object parentState = state(parent);
+            Object childState = state(child);
+            int slot = (int) STATE.method("findField", 3).invoke(parentState, Node.class, "ref", Object.class);
+            assertSame(childState, ((Object[]) STATE.field("children").get(parentState))[slot], "a follow edge exists");
+            assertEquals(1, (int) STATE.field("parentCount").get(childState));
+            ${follow_body}
+        }
+    }
+//@@ PATTERN OBJ_PUBLISH_LOCKED | uses= | oracle=CONTENT event with increasing sequence
+    /** ${atom}(state, slot, mask) captures the publication for subscribers and advances the owner sequence. */
+    @Test
+    void ${test}() throws Throwable {
+        Node node = new Node();
+        Recorder r = new Recorder();
+        try (ObjectSubscription s = M3Object.of(node).listen(ObjectEvent.CONTENT, r)) {
+            Object st = state(node);
+            long before = (long) STATE.field("sequence").get(st);
+            locked(() -> OWNER.method("${atom}", 3).invoke(st, -1, ObjectEvent.CONTENT));
+            ObjectEvent e = r.next();
+            assertEquals(ObjectEvent.CONTENT, e.mask());
+            assertEquals(before + 1, e.sequence(), "${atom} advances the sequence");
+            assertEquals((long) STATE.field("id").get(st), e.originId(), "the source is the origin");
+        }
+    }
+//@@ PATTERN OBJ_CAPTURE_LOCKED | uses= | oracle=requested-mask filtering and origin bookkeeping
+    /** ${atom}(state, slot, mask, origin, originSequence) records accepted bits and the origin for delivery. */
+    @Test
+    void ${test}() throws Throwable {
+        Node node = new Node();
+        Recorder r = new Recorder();
+        long origin = 1L << Integer.SIZE;
+        long originSequence = 1L << Short.SIZE;
+        try (ObjectSubscription s = M3Object.of(node).listen(ObjectEvent.CONTENT, r)) {
+            Object st = state(node);
+            MethodHandle atom = OWNER.method("${atom}", 5);
+            locked(() -> atom.invoke(st, -1, ObjectEvent.VALUE, origin, originSequence));
+            r.quiet();
+            locked(() -> atom.invoke(st, -1, ObjectEvent.CONTENT | ObjectEvent.VALUE, origin, originSequence));
+            ObjectEvent e = r.next();
+            assertEquals(ObjectEvent.CONTENT, e.mask(), "only requested bits are accepted");
+            assertEquals(origin, e.originId());
+            assertEquals(originSequence, e.originSequence());
+        }
+    }
+//@@ PATTERN OBJ_ENQUEUE_LOCKED | uses= | oracle=dispatch queue membership; dispatch drains it
+    /** ${atom}(state) appends the owner once to the dispatch queue; the worker then dequeues it. */
+    @Test
+    void ${test}() throws Throwable {
+        Node node = new Node();
+        Recorder r = new Recorder();
+        try (ObjectSubscription s = M3Object.of(node).listen(ObjectEvent.CONTENT, r)) {
+            Object st = state(node);
+            MethodHandle atom = OWNER.method("${atom}", 1);
+            locked(() -> {
+                atom.invoke(st);
+                assertTrue((boolean) STATE.field("queued").get(st), "${atom} marks the owner queued");
+                assertSame(st, OWNER.field("last").get(), "appended at the tail");
+                atom.invoke(st);
+                assertEquals(null, STATE.field("next").get(st), "a queued owner is not appended twice");
+            });
+            long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(EVENT_TIMEOUT_SECONDS);
+            while ((boolean) STATE.field("queued").get(st) && System.nanoTime() < deadline) {
+                Thread.onSpinWait();
+            }
+            assertFalse((boolean) STATE.field("queued").get(st), "the dispatch worker dequeued the owner");
+            r.quiet();
+        }
+    }
+//@@ PATTERN OBJ_REMOVE_IF_CLEAN | uses= | oracle=queue removal only without pending work
+    /** ${atom}(state) unlinks a queued owner with no pending work and keeps one with pending work. */
+    @Test
+    void ${test}() throws Throwable {
+        Node node = new Node();
+        Recorder r = new Recorder();
+        try (ObjectSubscription s = M3Object.of(node).listen(ObjectEvent.CONTENT, r)) {
+            Object st = state(node);
+            MethodHandle atom = OWNER.method("${atom}", 1);
+            int index = (int) new Access("java.lang.ObjectSubscription").field("index").get(s);
+            locked(() -> {
+                OWNER.method("enqueueLocked", 1).invoke(st);
+                ((int[]) STATE.field("pending").get(st))[index] = ObjectEvent.CONTENT;
+                atom.invoke(st);
+                assertTrue((boolean) STATE.field("queued").get(st), "pending work keeps the owner queued");
+                ((int[]) STATE.field("pending").get(st))[index] = 0;
+                atom.invoke(st);
+                assertFalse((boolean) STATE.field("queued").get(st), "${atom} unlinks a clean owner");
+                assertNotSame(st, OWNER.field("first").get());
+            });
+            r.quiet();
+        }
+    }
+//@@ PATTERN OBJ_ENSURE_WORKER | uses= | oracle=one daemon dispatch thread
+    /** ${atom}() starts one daemon "M3Object-dispatch" thread and reuses it. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 0);
+        locked(() -> {
+            atom.invoke();
+            Thread worker = (Thread) OWNER.field("worker").get();
+            assertTrue(worker.isDaemon() && worker.isAlive());
+            assertEquals("M3Object-dispatch", worker.getName());
+            atom.invoke();
+            assertSame(worker, OWNER.field("worker").get(), "${atom} is idempotent");
+        });
+    }
+//@@ PATTERN OBJ_DISPATCH | uses= | oracle=worker stack runs dispatch; deliveries happen on the worker
+    /** ${atom}() is the worker loop: events arrive on the worker thread, which idles inside ${atom}. */
+    @Test
+    void ${test}() throws Throwable {
+        Node node = new Node();
+        Recorder r = new Recorder();
+        try (ObjectSubscription s = M3Object.of(node).listen(ObjectEvent.CONTENT, r)) {
+            M3Object.of(node).contentChanged();
+            r.next();
+            Thread worker = (Thread) OWNER.field("worker").get();
+            synchronized (r.threads) {
+                assertEquals(List.of(worker), r.threads, "delivered on the dispatch worker");
+            }
+            boolean inLoop = false;
+            for (StackTraceElement frame : worker.getStackTrace()) {
+                inLoop |= frame.getClassName().equals("java.lang.M3ObjectRuntime") && frame.getMethodName().equals("${atom}");
+            }
+            assertTrue(inLoop, "the worker idles in ${atom}");
+        }
+    }
+//@@ PATTERN OBJ_DRAIN | uses= | oracle=synchronous delivery and pending reset on the calling innocuous thread
+    /** ${atom}(state) delivers each pending subscriber once on the calling thread and clears its lanes. */
+    @Test
+    void ${test}() throws Throwable {
+        Node node = new Node();
+        Recorder r = new Recorder();
+        try (ObjectSubscription s = M3Object.of(node).listen(ObjectEvent.CONTENT, r)) {
+            Object st = state(node);
+            int index = (int) new Access("java.lang.ObjectSubscription").field("index").get(s);
+            locked(() -> {
+                ((int[]) STATE.field("pending").get(st))[index] = ObjectEvent.CONTENT;
+                ((long[]) STATE.field("sequences").get(st))[index] = 1;
+            });
+            onInnocuousThread(() -> {
+                try {
+                    OWNER.method("${atom}", 1).invoke(st);
+                } catch (Throwable e) {
+                    throw new AssertionError(e);
+                }
+            });
+            ObjectEvent e = r.next();
+            assertEquals(ObjectEvent.CONTENT, e.mask());
+            assertEquals(1, e.sequence());
+            assertEquals(0, ((int[]) STATE.field("pending").get(st))[index], "${atom} cleared the lane");
+            synchronized (r.threads) {
+                assertEquals("m3-atom-test", r.threads.get(0).getName(), "delivered on the calling thread");
+            }
+        }
+    }
+//@@ PATTERN STATE_CONSTRUCTOR | uses= | oracle=field round trip; no lanes before admission
+    /** ${atom}(owner, id) records owner and id and allocates no lanes. */
+    @Test
+    void ${test}() throws Throwable {
+        M3Object owner = M3Object.of(new Node());
+        Object st = STATE.constructor("${atom}", 2).invoke(owner, (long) INITIAL_LANES);
+        assertSame(owner, STATE.field("owner").get(st));
+        assertEquals((long) INITIAL_LANES, (long) STATE.field("id").get(st));
+        assertEquals(null, STATE.field("subscriptions").get(st), "lanes are allocated only for admitted work");
+    }
+//@@ PATTERN STATE_INTERESTED | uses= | oracle=subscriberCount or parentCount non-zero
+    /** ${atom}() is true exactly when the owner has subscribers or parents. */
+    @Test
+    void ${test}() throws Throwable {
+        Object st = STATE.constructor("State", 2).invoke(M3Object.of(new Node()), 1L);
+        MethodHandle atom = STATE.method("${atom}", 0);
+        assertFalse((boolean) atom.invoke(st));
+        STATE.field("subscriberCount").set(st, 1);
+        assertTrue((boolean) atom.invoke(st));
+        STATE.field("subscriberCount").set(st, 0);
+        STATE.field("parentCount").set(st, 1);
+        assertTrue((boolean) atom.invoke(st));
+    }
+//@@ PATTERN STATE_SUBSCRIBER_SLOT | uses= | oracle=first free slot; complete lane-set doubling
+    /** ${atom}() returns the first free slot, growing all subscriber lanes together (4, then doubling). */
+    @Test
+    void ${test}() throws Throwable {
+        Object st = STATE.constructor("State", 2).invoke(M3Object.of(new Node()), 1L);
+        MethodHandle atom = STATE.method("${atom}", 0);
+        assertEquals(0, (int) atom.invoke(st));
+        Object[] subscriptions = (Object[]) STATE.field("subscriptions").get(st);
+        assertEquals(INITIAL_LANES, subscriptions.length);
+        assertEquals(0, (int) atom.invoke(st), "a free slot is reused");
+        for (int i = 0; i < INITIAL_LANES; i++) {
+            subscriptions[i] = new Access("java.lang.ObjectSubscription").constant("CLOSED");
+        }
+        assertEquals(INITIAL_LANES, (int) atom.invoke(st), "a full lane set grows");
+        for (String lane : new String[] {"listeners", "selected", "requested", "slots", "pending", "firstSequences",
+                "sequences", "pendingGenerations", "origins", "originSequences", "coalesced", "subscriptions"}) {
+            assertEquals(2 * INITIAL_LANES, java.lang.reflect.Array.getLength(STATE.field(lane).get(st)), lane);
+        }
+    }
+//@@ PATTERN STATE_FIND_FIELD | uses= | oracle=plan match by (declaringType, name, type)
+    /** ${atom}(declaringType, name, type) finds an allocated field slot by plan identity, else -1. */
+    @Test
+    void ${test}() throws Throwable {
+        Node node = new Node();
+        Object st = STATE.constructor("State", 2).invoke(M3Object.of(node), 1L);
+        MethodHandle atom = STATE.method("${atom}", 3);
+        assertEquals(-1, (int) atom.invoke(st, Node.class, "ref", Object.class));
+        int slot = (int) STATE.method("fieldSlot", 1).invoke(st, field(node, "ref", Object.class));
+        assertEquals(slot, (int) atom.invoke(st, Node.class, "ref", Object.class));
+        assertEquals(-1, (int) atom.invoke(st, Node.class, "ref", String.class), "type is part of the key");
+    }
+//@@ PATTERN STATE_FIELD_SLOT | uses= | oracle=slot reuse per plan key; doubling growth; generation bump
+    /** ${atom}(field) reuses the slot of an equal plan key, allocates new keys and bumps the slot generation. */
+    @Test
+    void ${test}() throws Throwable {
+        Node node = new Node();
+        Object st = STATE.constructor("State", 2).invoke(M3Object.of(node), 1L);
+        MethodHandle atom = STATE.method("${atom}", 1);
+        int ref = (int) atom.invoke(st, field(node, "ref", Object.class));
+        assertEquals(ref, (int) atom.invoke(st, field(node, "ref", Object.class)), "equal key, same slot");
+        int count = (int) atom.invoke(st, field(node, "count", int.class));
+        assertTrue(count != ref, "a new key gets a new slot");
+        assertEquals(1L, ((long[]) STATE.field("generations").get(st))[count], "allocation bumps the generation");
+        atom.invoke(st, field(node, "ratio", float.class));
+        atom.invoke(st, field(node, "ref", String.class));
+        assertEquals(INITIAL_LANES, ((Object[]) STATE.field("fields").get(st)).length);
+        assertEquals(INITIAL_LANES, (int) atom.invoke(st, field(node, "count", long.class)),
+                "a full table doubles and returns the first new slot");
+        assertEquals(2 * INITIAL_LANES, ((Object[]) STATE.field("fields").get(st)).length);
+        assertEquals(2 * INITIAL_LANES, ((Object[]) STATE.field("children").get(st)).length);
+    }
+//@@ PATTERN STATE_ENSURE_PARENT_CAPACITY | uses= | oracle=4 initial parent lanes, doubling when full
+    /** ${atom}() allocates 4 parent lanes and doubles them when parentCount reaches capacity. */
+    @Test
+    void ${test}() throws Throwable {
+        Object st = STATE.constructor("State", 2).invoke(M3Object.of(new Node()), 1L);
+        MethodHandle atom = STATE.method("${atom}", 0);
+        atom.invoke(st);
+        assertEquals(INITIAL_LANES, ((Object[]) STATE.field("parents").get(st)).length);
+        atom.invoke(st);
+        assertEquals(INITIAL_LANES, ((Object[]) STATE.field("parents").get(st)).length, "not full, no growth");
+        STATE.field("parentCount").set(st, INITIAL_LANES);
+        atom.invoke(st);
+        assertEquals(2 * INITIAL_LANES, ((Object[]) STATE.field("parents").get(st)).length);
+        assertEquals(2 * INITIAL_LANES, ((int[]) STATE.field("parentSlots").get(st)).length);
+        assertEquals(2 * INITIAL_LANES, ((long[]) STATE.field("parentGenerations").get(st)).length);
+    }
+//@@ PATTERN STATE_ADD_PARENT | uses= | oracle=edge lanes on both ends
+    /** ${atom}(parent, slot) records the edge, its generation and the reverse edge index. */
+    @Test
+    void ${test}() throws Throwable {
+        Node node = new Node();
+        Object parent = STATE.constructor("State", 2).invoke(M3Object.of(node), 1L);
+        int slot = (int) STATE.method("fieldSlot", 1).invoke(parent, field(node, "ref", Object.class));
+        Object child = STATE.constructor("State", 2).invoke(M3Object.of(new Node()), 2L);
+        STATE.method("ensureParentCapacity", 0).invoke(child);
+        STATE.method("${atom}", 2).invoke(child, parent, slot);
+        assertEquals(1, (int) STATE.field("parentCount").get(child));
+        assertSame(parent, ((Object[]) STATE.field("parents").get(child))[0]);
+        assertEquals(slot, ((int[]) STATE.field("parentSlots").get(child))[0]);
+        assertEquals(((long[]) STATE.field("generations").get(parent))[slot], ((long[]) STATE.field("parentGenerations").get(child))[0]);
+        assertEquals(0, ((int[]) STATE.field("childEdges").get(parent))[slot]);
+    }
+//@@ PATTERN STATE_CLEAR_PENDING | uses= | oracle=all seven pending lanes reset at one index
+    /** ${atom}(index) resets every pending lane at that index and leaves the others. */
+    @Test
+    void ${test}() throws Throwable {
+        Object st = STATE.constructor("State", 2).invoke(M3Object.of(new Node()), 1L);
+        STATE.method("subscriberSlot", 0).invoke(st);
+        for (String lane : new String[] {"firstSequences", "sequences", "pendingGenerations", "origins", "originSequences"}) {
+            java.util.Arrays.fill((long[]) STATE.field(lane).get(st), 1L);
+        }
+        java.util.Arrays.fill((int[]) STATE.field("pending").get(st), ObjectEvent.ALL);
+        java.util.Arrays.fill((boolean[]) STATE.field("coalesced").get(st), true);
+        STATE.method("${atom}", 1).invoke(st, 1);
+        assertEquals(0, ((int[]) STATE.field("pending").get(st))[1]);
+        assertEquals(ObjectEvent.ALL, ((int[]) STATE.field("pending").get(st))[0], "other indexes untouched");
+        assertFalse(((boolean[]) STATE.field("coalesced").get(st))[1]);
+        for (String lane : new String[] {"firstSequences", "sequences", "pendingGenerations", "origins", "originSequences"}) {
+            assertEquals(0L, ((long[]) STATE.field(lane).get(st))[1], lane);
+        }
+    }
+//@@ PATTERN PLAN_CONSTRUCTOR | uses= | oracle=field round trip; lazy handle
+    /** ${atom}(lookup, declaringType, name, type) records the key and resolves nothing eagerly. */
+    @Test
+    void ${test}() throws Throwable {
+        Object p = PLAN.constructor("${atom}", 4).invoke(LOOKUP, Node.class, "count", int.class);
+        assertSame(LOOKUP, PLAN.field("lookup").get(p));
+        assertSame(Node.class, PLAN.field("declaringType").get(p));
+        assertEquals("count", PLAN.field("name").get(p));
+        assertSame(int.class, PLAN.field("type").get(p));
+        assertEquals(null, PLAN.field("handle").get(p), "no eager resolution");
+    }
+//@@ PATTERN PLAN_MATCHES | uses= | oracle=exact (declaringType, name, type) key
+    /** ${atom}(declaringType, name, type) compares the exact key. */
+    @Test
+    void ${test}() throws Throwable {
+        Object p = planOf("count", int.class);
+        MethodHandle atom = PLAN.method("${atom}", 3);
+        assertTrue((boolean) atom.invoke(p, Node.class, "count", int.class));
+        assertFalse((boolean) atom.invoke(p, SubNode.class, "count", int.class), "subclass is a different key");
+        assertFalse((boolean) atom.invoke(p, Node.class, "ratio", int.class));
+        assertFalse((boolean) atom.invoke(p, Node.class, "count", long.class));
+        assertTrue((boolean) atom.invoke(p, Node.class, new String("count"), int.class), "names compare by value");
+    }
+//@@ PATTERN PLAN_RESOLVE | uses= | oracle=findVarHandle on the declared field; cached; IAE for missing or inherited
+    /** ${atom}() resolves and caches a VarHandle on the declaring class only. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = PLAN.method("${atom}", 0);
+        Object p = planOf("count", int.class);
+        VarHandle h = (VarHandle) atom.invoke(p);
+        assertSame(h, atom.invoke(p), "${atom} caches");
+        Node node = new Node();
+        node.count = INITIAL_LANES;
+        assertEquals(INITIAL_LANES, (int) h.get(node));
+        Object missing = planOf("missing", int.class);
+        assertEquals("cannot resolve instance field " + Node.class.getName() + ".missing",
+                assertThrows(IllegalArgumentException.class, () -> atom.invoke(missing)).getMessage());
+        Object inherited = PLAN.constructor("AccessPlan", 4).invoke(LOOKUP, SubNode.class, "count", int.class);
+        assertThrows(IllegalArgumentException.class, () -> atom.invoke(inherited), "inherited members do not resolve");
+    }
+//@@ PATTERN PLAN_CHECK_VALUE | uses= | oracle=boxing rules and reference assignability
+    /** ${atom}(value) rejects null primitives and values of the wrong (boxed) type. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = PLAN.method("${atom}", 1);
+        Object count = planOf("count", int.class);
+        atom.invoke(count, 1);
+        assertEquals("primitive value", assertThrows(NullPointerException.class, () -> atom.invoke(count, null)).getMessage());
+        assertEquals("value is not java.lang.Integer",
+                assertThrows(ClassCastException.class, () -> atom.invoke(count, 1L)).getMessage());
+        Object ratio = planOf("ratio", float.class);
+        atom.invoke(ratio, 1f);
+        assertThrows(ClassCastException.class, () -> atom.invoke(ratio, 1d));
+        Object typed = PLAN.constructor("AccessPlan", 4).invoke(LOOKUP, Node.class, "ref", Node.class);
+        atom.invoke(typed, null);
+        atom.invoke(typed, new SubNode());
+        assertEquals("value is not " + Node.class.getName(),
+                assertThrows(ClassCastException.class, () -> atom.invoke(typed, "x")).getMessage());
+    }
+//@@ PATTERN PLAN_SAME | uses= | oracle=reference identity; primitive bit identity (NaN, signed zero)
+    /** ${atom}(left, right) is identity for references and bit identity for primitives. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = PLAN.method("${atom}", 2);
+        Object ref = planOf("ref", Object.class);
+        String a = "same";
+        assertTrue((boolean) atom.invoke(ref, a, a));
+        assertFalse((boolean) atom.invoke(ref, a, new String(a)), "equal but not identical");
+        Object ratio = planOf("ratio", float.class);
+        assertTrue((boolean) atom.invoke(ratio, Float.NaN, Float.NaN), "NaN is bit-identical to itself");
+        assertFalse((boolean) atom.invoke(ratio, 0f, -0f), "signed zeros differ in bits");
+        Object count = planOf("count", int.class);
+        assertTrue((boolean) atom.invoke(count, Integer.valueOf(Short.MAX_VALUE + 1), Integer.valueOf(Short.MAX_VALUE + 1)),
+                "boxes compare by value");
+    }
+//@@ PATTERN PLAN_BITS | uses= | oracle=consistency with same(); unsupported reference plans
+    /** ${atom}(value) distinguishes primitive values and is undefined (AssertionError) for references. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = PLAN.method("${atom}", 1);
+        Object count = planOf("count", int.class);
+        assertEquals((long) atom.invoke(count, 1), (long) atom.invoke(count, 1));
+        assertTrue((long) atom.invoke(count, 1) != (long) atom.invoke(count, 2));
+        Object ratio = planOf("ratio", float.class);
+        assertTrue((long) atom.invoke(ratio, 0f) != (long) atom.invoke(ratio, -0f));
+        Object flag = PLAN.constructor("AccessPlan", 4).invoke(LOOKUP, Node.class, "flag", boolean.class);
+        assertTrue((long) atom.invoke(flag, true) != (long) atom.invoke(flag, false));
+        assertEquals("unsupported primitive field",
+                assertThrows(AssertionError.class, () -> atom.invoke(planOf("ref", Object.class), "x")).getMessage());
+    }
+//@@ PATTERN M3OBJECT_CONSTRUCTOR | uses= | oracle=payload ownership without observation state
+    /** ${atom}(source) wraps the payload owner and creates no observation state. */
+    @Test
+    void ${test}() throws Throwable {
+        Node node = new Node();
+        M3Object owner = (M3Object) M3_OBJECT.constructor("${atom}", 1).invoke(node);
+        assertSame(node, owner.source());
+        assertEquals(null, M3_OBJECT.field("state").get(owner));
+        assertNotSame(M3Object.of(node), owner, "only M3Object.of registers identity-bound capabilities");
+    }
+//@@ PATTERN FIELD_CONSTRUCTOR | uses= | oracle=owner and plan round trip
+    /** ${atom}(owner, plan) binds a receiver to an access plan. */
+    @Test
+    void ${test}() throws Throwable {
+        Node node = new Node();
+        Object plan = planOf("ref", Object.class);
+        M3Object.Field f = (M3Object.Field) FIELD.constructor("${atom}", 2).invoke(M3Object.of(node), plan);
+        assertSame(node, f.source());
+        assertSame(plan, FIELD.field("plan").get(f));
+        assertEquals("ref", f.name());
+        assertSame(Object.class, f.type());
+    }
+//@@ PATTERN FIELD_DECLARING_TYPE | uses= | oracle=the plan's declaring class
+    /** ${atom}() is the class that declares the field, also for a subclass receiver. */
+    @Test
+    void ${test}() throws Throwable {
+        SubNode sub = new SubNode();
+        M3Object.Field f = M3Object.of(sub).field(LOOKUP, Node.class, "count", int.class);
+        assertSame(Node.class, f.${atom}());
+        assertSame(sub, f.source());
+    }

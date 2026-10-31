@@ -1,4 +1,46 @@
 owner	atom	pattern	test	oracle
+java.lang.M3ObjectRuntime	M3ObjectRuntime	PRIVATE_UTILITY_CONSTRUCTOR	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::M3ObjectRuntime	reflection: one private constructor, no state
+java.lang.M3ObjectRuntime	enabled	OBJ_ENABLED	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::enabled	startup property jdk.m3.objectEvents.enabled=true
+java.lang.M3ObjectRuntime	of	OBJ_OF	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::of	identity-bound capability, same as M3Object.of
+java.lang.M3ObjectRuntime	findLocked	OBJ_FIND_LOCKED	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::findLocked	registry lookup never creates an owner
+java.lang.M3ObjectRuntime	ofLocked	OBJ_OF_LOCKED	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::ofLocked	registry growth and reuse
+java.lang.M3ObjectRuntime	plan	OBJ_PLAN	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::plan	plan sharing per (lookup, declaringType, name, type)
+java.lang.M3ObjectRuntime	set	OBJ_SET	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::set	field value, type checks, one event per real change
+java.lang.M3ObjectRuntime	compareAndSet	OBJ_COMPARE_AND_SET	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::compareAndSet	VarHandle compareAndSet result and change events
+java.lang.M3ObjectRuntime	fieldChangedLocked	OBJ_FIELD_CHANGED_LOCKED	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::fieldChangedLocked	VALUE event on the observed field slot
+java.lang.M3ObjectRuntime	contentChanged	OBJ_CONTENT_CHANGED	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::contentChanged	CONTENT event to owner listeners
+java.lang.M3ObjectRuntime	notifyContentChanged	OBJ_NOTIFY_CONTENT	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::notifyContentChanged	JNI producer contract: no owner creation, CONTENT to observers
+java.lang.M3ObjectRuntime	notifyFieldChanged	OBJ_NOTIFY_FIELD	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::notifyFieldChanged	argument validation and slot event
+java.lang.M3ObjectRuntime	listen	OBJ_LISTEN	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::listen	argument validation; open subscription; delivery
+java.lang.M3ObjectRuntime	close	OBJ_CLOSE	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::close	closed subscriptions receive nothing; idempotent
+java.lang.M3ObjectRuntime	stateLocked	OBJ_STATE_LOCKED	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::stateLocked	one State per owner with increasing ids
+java.lang.M3ObjectRuntime	publishLocked	OBJ_PUBLISH_LOCKED	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::publishLocked	CONTENT event with increasing sequence
+java.lang.M3ObjectRuntime	captureLocked	OBJ_CAPTURE_LOCKED	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::captureLocked	requested-mask filtering and origin bookkeeping
+java.lang.M3ObjectRuntime	enqueueLocked	OBJ_ENQUEUE_LOCKED	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::enqueueLocked	dispatch queue membership; dispatch drains it
+java.lang.M3ObjectRuntime	removeIfCleanLocked	OBJ_REMOVE_IF_CLEAN	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::removeIfCleanLocked	queue removal only without pending work
+java.lang.M3ObjectRuntime	ensureWorkerLocked	OBJ_ENSURE_WORKER	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::ensureWorkerLocked	one daemon dispatch thread
+java.lang.M3ObjectRuntime	dispatch	OBJ_DISPATCH	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::dispatch	worker stack runs dispatch; deliveries happen on the worker
+java.lang.M3ObjectRuntime	drain	OBJ_DRAIN	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::drain	synchronous delivery and pending reset on the calling innocuous thread
+java.lang.M3ObjectRuntime	detachLocked	OBJ_FOLLOW_EDGE	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::detachLocked	parent/child follow edges of CONTENT-following reference listeners
+java.lang.M3ObjectRuntime	rebindLocked	OBJ_FOLLOW_EDGE	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::rebindLockedFollowing	parent/child follow edges of CONTENT-following reference listeners
+java.lang.M3ObjectRuntime	rebindLocked	OBJ_FOLLOW_EDGE	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::rebindLockedExplicit	parent/child follow edges of CONTENT-following reference listeners
+java.lang.M3ObjectRuntime	State	STATE_CONSTRUCTOR	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::state_State	field round trip; no lanes before admission
+java.lang.M3ObjectRuntime	interested	STATE_INTERESTED	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::state_interested	subscriberCount or parentCount non-zero
+java.lang.M3ObjectRuntime	subscriberSlot	STATE_SUBSCRIBER_SLOT	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::state_subscriberSlot	first free slot; complete lane-set doubling
+java.lang.M3ObjectRuntime	findField	STATE_FIND_FIELD	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::state_findField	plan match by (declaringType, name, type)
+java.lang.M3ObjectRuntime	fieldSlot	STATE_FIELD_SLOT	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::state_fieldSlot	slot reuse per plan key; doubling growth; generation bump
+java.lang.M3ObjectRuntime	ensureParentCapacity	STATE_ENSURE_PARENT_CAPACITY	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::state_ensureParentCapacity	4 initial parent lanes, doubling when full
+java.lang.M3ObjectRuntime	addParent	STATE_ADD_PARENT	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::state_addParent	edge lanes on both ends
+java.lang.M3ObjectRuntime	clearPending	STATE_CLEAR_PENDING	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::state_clearPending	all seven pending lanes reset at one index
+java.lang.M3ObjectRuntime	AccessPlan	PLAN_CONSTRUCTOR	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::plan_AccessPlan	field round trip; lazy handle
+java.lang.M3ObjectRuntime	matches	PLAN_MATCHES	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::plan_matches	exact (declaringType, name, type) key
+java.lang.M3ObjectRuntime	resolve	PLAN_RESOLVE	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::plan_resolve	findVarHandle on the declared field; cached; IAE for missing or inherited
+java.lang.M3ObjectRuntime	checkValue	PLAN_CHECK_VALUE	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::plan_checkValue	boxing rules and reference assignability
+java.lang.M3ObjectRuntime	same	PLAN_SAME	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::plan_same	reference identity; primitive bit identity (NaN, signed zero)
+java.lang.M3ObjectRuntime	bits	PLAN_BITS	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::plan_bits	consistency with same(); unsupported reference plans
+java.lang.M3Object	M3Object	M3OBJECT_CONSTRUCTOR	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::m3object_constructor	payload ownership without observation state
+java.lang.M3Object	Field	FIELD_CONSTRUCTOR	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::field_constructor	owner and plan round trip
+java.lang.M3Object	declaringType	FIELD_DECLARING_TYPE	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::field_declaringType	the plan's declaring class
 java.util.M3ComparisonSorts	insertion	PERF_LOOP	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsPerf.java::perf_insertion_small	same checksum as the JDK baseline; interleaved invokeExact timing
 java.util.M3ComparisonSorts	binaryInsertion	PERF_LOOP	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsPerf.java::perf_binaryInsertion_small	same checksum as the JDK baseline; interleaved invokeExact timing
 java.util.M3ComparisonSorts	quick	PERF_LOOP	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsPerf.java::perf_quick_large	same checksum as the JDK baseline; interleaved invokeExact timing
@@ -183,3 +225,14 @@ jdk.internal.m3.M3IndexedView	previousIndex	ITER_WALK	test/jdk/jdk/internal/m3/a
 jdk.internal.m3.M3IndexedView	remove	ITER_READ_ONLY	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::iterator_remove	Collections.unmodifiableList iterator exception class
 jdk.internal.m3.M3IndexedView	set	ITER_READ_ONLY	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::iterator_set	Collections.unmodifiableList iterator exception class
 jdk.internal.m3.M3IndexedView	add	ITER_READ_ONLY	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::iterator_add	Collections.unmodifiableList iterator exception class
+jdk.internal.m3.M3IndexedArray	checkMasks	ARRAY_CHECK_MASKS	test/jdk/jdk/internal/m3/atoms/M3IndexedArrayAtomsTest.java::checkMasks	IllegalArgumentException on overlapping bits
+jdk.internal.m3.M3IndexedArray	select	ARRAY_SELECT	test/jdk/jdk/internal/m3/atoms/M3IndexedArrayAtomsTest.java::selectValueEpoch	ArrayList model filtered, state-selected and stably sorted
+jdk.internal.m3.M3IndexedArray	select	ARRAY_SELECT	test/jdk/jdk/internal/m3/atoms/M3IndexedArrayAtomsTest.java::selectStateEpoch	ArrayList model filtered, state-selected and stably sorted
+jdk.internal.m3.M3IndexedArray	allocateSlot	ARRAY_ALLOCATE_SLOT	test/jdk/jdk/internal/m3/atoms/M3IndexedArrayAtomsTest.java::allocateSlot	LIFO free-list reuse; fresh slots start at generation 1
+jdk.internal.m3.M3IndexedArray	validSlot	ARRAY_VALID_SLOT	test/jdk/jdk/internal/m3/atoms/M3IndexedArrayAtomsTest.java::validSlot	generation-qualified handle validation
+jdk.internal.m3.M3IndexedArray	updateLeaseMask	ARRAY_UPDATE_LEASE_MASK	test/jdk/jdk/internal/m3/atoms/M3IndexedArrayAtomsTest.java::updateLeaseMask	LIVE, plus LEASED when count > 0 and SHARED when count > 1; state epoch bump
+jdk.internal.m3.M3IndexedArray	valueAtSlot	ARRAY_VALUE_AT_SLOT	test/jdk/jdk/internal/m3/atoms/M3IndexedArrayAtomsTest.java::valueAtSlot	payload of the slot of each logical index
+jdk.internal.m3.M3IndexedArray	pack	ARRAY_PACK	test/jdk/jdk/internal/m3/atoms/M3IndexedArrayAtomsTest.java::pack	handle bit layout: generation high, unsigned slot low
+jdk.internal.m3.M3IndexedArray	rejectReentrantMutation	ARRAY_REJECT_REENTRANT	test/jdk/jdk/internal/m3/atoms/M3IndexedArrayAtomsTest.java::rejectValueEpoch	ConcurrentModificationException once the epoch moved
+jdk.internal.m3.M3IndexedArray	rejectReentrantMutation	ARRAY_REJECT_REENTRANT	test/jdk/jdk/internal/m3/atoms/M3IndexedArrayAtomsTest.java::rejectStateEpoch	ConcurrentModificationException once the epoch moved
+jdk.internal.m3.M3IndexedArray	stableSort	ARRAY_STABLE_SORT	test/jdk/jdk/internal/m3/atoms/M3IndexedArrayAtomsTest.java::stableSort	List.sort stable order; bulk-copy runs; reentrancy rejected

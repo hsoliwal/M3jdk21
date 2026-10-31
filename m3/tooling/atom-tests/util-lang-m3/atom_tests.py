@@ -84,6 +84,7 @@ def render_class(scaffold, family, tmpl, test_class, rows):
     modules = meta.get("modules", f"java.base/{package}:open")
     java = string.Template(scaffold).substitute(
         summary=summary, modules=modules, test_class=test_class, owner=owner, family=family,
+        run_options=meta.get("run_options", ""),
         imports=tmpl["IMPORTS"], constants=tmpl["CONSTANTS"], tests="\n".join(tests), helpers=helpers)
     path = meta.get("path", PACKAGE_DIRS[package]) + "/" + test_class + ".java"
     java = "\n".join(line.rstrip() for line in java.split("\n"))
