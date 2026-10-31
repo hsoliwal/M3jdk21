@@ -62,7 +62,7 @@ $lanes
 $proof
 EOF
 }
-rm -rf "$WORK" && mkdir -p "$WORK/gen" "$WORK/out" "$WORK/cls" "$WORK/hcls" "$WORK/nc"
+rm -rf "$WORK" && mkdir -p "$WORK/gen" "$WORK/out" "$WORK/cls" "$WORK/hcls" "$WORK/nc" "$WORK/test"
 echo "M3_DECORATOR_FILL stage=generator"
 # The generator is four atoms: the CLI and classifier, its helper templates, the JDK_STANDARD pass and the rule checks.
 ATOMS=("$Q/M3DecoratorTemplates.java" "$Q/M3DecoratorJdkStandard.java" "$Q/M3DecoratorRuleCheck.java")
@@ -140,6 +140,23 @@ while IFS=$'\t' read -r id ref target check backing policy expect; do
 	[ "$caught" = CAUGHT ] || touch "$WORK/nc-missed"
 done
 [ -e "$WORK/nc-missed" ] && fail=1
+# JUnit: one test per method atom of every target (M3DecoratorAtomTest), per generator atom (M3DecoratorGeneratorTest:
+# rule checks, byte-identical replay, layout fixed point, helper templates) and a perf guard per method atom
+# (M3DecoratorPerfTest, timings in $WORK/PERF.tsv). JUNIT_CONSOLE = a junit-platform-console-standalone jar.
+junit=NOT_RUN; jtests=0; jfailed=0
+if [ -n "${JUNIT_CONSOLE:-}" ]; then
+	JCP="$JAR$SEP$WORK/gen$SEP$WORK/cls$SEP$WORK/hcls"
+	"$BIN/javac" -proc:none -Xlint:all -Werror -cp "$JCP$SEP$JUNIT_CONSOLE" -d "$WORK/test" \
+		"$Q/M3DecoratorAtomTest.java" "$Q/M3DecoratorGeneratorTest.java" "$Q/M3DecoratorPerfTest.java"
+	jrc=0; "$BIN/java" -Dm3.commons.sources="$SRC" -Dm3.owned="$WORK/filled.txt" -Dm3.perf.out="$WORK/PERF.tsv" \
+		-cp "$JUNIT_CONSOLE$SEP$JCP$SEP$WORK/test" org.junit.platform.console.ConsoleLauncher execute --disable-banner \
+		--details=summary --select-class M3DecoratorAtomTest --select-class M3DecoratorGeneratorTest \
+		--select-class M3DecoratorPerfTest > "$WORK/junit.log" 2>&1 || jrc=$?
+	jtests=$(grep -oE '[0-9]+ tests found' "$WORK/junit.log" | grep -oE '^[0-9]+' || echo 0)
+	jfailed=$(grep -oE '[0-9]+ tests failed' "$WORK/junit.log" | grep -oE '^[0-9]+' || echo 0)
+	junit=$([ "$jrc" -eq 0 ] && echo PASS || echo FAIL); [ "$jrc" -eq 0 ] || fail=1
+fi
+echo "M3_DECORATOR_FILL stage=junit $junit tests=$jtests failed=$jfailed"
 tr -d '\r' < "$WORK/mismatch.tsv" > "$Q/MISMATCHES.tsv"
 filled=$(wc -l < "$WORK/filled.txt"); atoms=$(($(wc -l < "$Q/METHOD_ATOMS.tsv") - 1)); manual=$(grep -c $'\tMANUAL\t' "$Q/METHOD_ATOMS.tsv" || true)
 targets=$(($(wc -l < "$Q/DIFFERENTIAL.tsv") - 1)); mism=$(wc -l < "$Q/MISMATCHES.tsv"); verdict=$([ "$fail" -eq 0 ] && echo PASS || echo FAIL)
@@ -147,9 +164,9 @@ probes=$(($(wc -l < "$Q/PROBES.tsv") - 1)); ncs=$(($(wc -l < "$Q/NEGATIVE_CONTRO
 rulechecks=$(grep -c $'\t\(PASS\|FAIL\)$' "$Q/RULE_CHECKS.tsv" || true); rulefail=$(grep -c $'\tFAIL$' "$Q/RULE_CHECKS.tsv" || true)
 # M3-SCALE section 5 output contract: STATUS, RUN_CONTEXT, PROVENANCE, VERIFY_CONTRACT, OUTPUT_CONTRACT, FINAL_REPORT.
 sha() { sha256sum "$1" | cut -c1-64; }
-printf 'stage\tstatus\tevidence\nrule_check\t%s\tchecks=%s fail=%s\nfill\tDONE\tfilled=%s atoms=%s manual=%s\ncompile\tDONE\tjavac -Xlint:all -Werror over %s classes\ndifferential\t%s\ttargets=%s probes=%s mismatches=%s\nnegative_controls\t%s\tcontrols=%s caught=%s\n' \
+printf 'stage\tstatus\tevidence\nrule_check\t%s\tchecks=%s fail=%s\nfill\tDONE\tfilled=%s atoms=%s manual=%s\ncompile\tDONE\tjavac -Xlint:all -Werror over %s classes\ndifferential\t%s\ttargets=%s probes=%s mismatches=%s\nnegative_controls\t%s\tcontrols=%s caught=%s\njunit\t%s\ttests=%s failed=%s\n' \
 	"$([ "$rulefail" -eq 0 ] && echo PASS || echo FAIL)" "$rulechecks" "$rulefail" "$filled" "$atoms" "$manual" "$filled" "$verdict" "$targets" "$probes" "$mism" \
-	"$([ "$caught" -eq "$ncs" ] && echo PASS || echo FAIL)" "$ncs" "$caught" > "$Q/STATUS.tsv"
+	"$([ "$caught" -eq "$ncs" ] && echo PASS || echo FAIL)" "$ncs" "$caught" "$junit" "$jtests" "$jfailed" > "$Q/STATUS.tsv"
 printf 'key\tvalue\nscaffold_rev\t%s\njava\t%s\nrun_mode\tapply\nshards\t1\n' "$SCAFFOLD_REV" "$("$BIN/java" -version 2>&1 | head -1 | tr -d '\r"')" > "$Q/RUN_CONTEXT.tsv"
 printf 'input\tsha256\nM3DecoratorFill.java\t%s\nM3DecoratorTemplates.java\t%s\nM3DecoratorJdkStandard.java\t%s\nM3DecoratorRuleCheck.java\t%s\nM3DecoratorDifferential.java\t%s\nM3PredicatedProbe.java\t%s\nNEGATIVE_CONTROLS_SPEC.tsv\t%s\ncommons-collections4-4.5.0.jar\t%s\nTARGETS.tsv\t%s\n' \
 	"$(sha "$Q/M3DecoratorFill.java")" "$(sha "${ATOMS[0]}")" "$(sha "${ATOMS[1]}")" "$(sha "${ATOMS[2]}")" "$(sha "$Q/M3DecoratorDifferential.java")" "$(sha "$Q/M3PredicatedProbe.java")" "$(sha "$Q/NEGATIVE_CONTROLS_SPEC.tsv")" \

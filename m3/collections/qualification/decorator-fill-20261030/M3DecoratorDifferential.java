@@ -142,6 +142,8 @@ public final class M3DecoratorDifferential {
     private static final long[] SEEDS =
             {2L, 11L, 42L, 1_009L, 20_261_030L, 0xFEEDL, -5L, 555_555_555L};
     private static final int STEPS = 4_000;
+    /** Warm-up calls per side and method atom before {@link #perf} measures (C2 compiles). */
+    private static final int WARMUP = Integer.getInteger("m3.perf.warmup", 20_000);
     private static final Object ABSENT = "absent-key";
     private static final Map<String, Supplier<Object>> BACKINGS = Map.ofEntries(
             Map.entry("list", ArrayList::new), Map.entry("deque", LinkedList::new),
@@ -163,7 +165,19 @@ public final class M3DecoratorDifferential {
     private final Method oracleFactory;
     private final List<Method> methods;
     private final List<String> mismatches = new ArrayList<>();
+    /** Per method atom ({@code name[parameter types]}): how many seeded steps exercised it. */
+    private final Map<String, Long> exercised = new java.util.TreeMap<>();
     private long checks;
+
+    /**
+     * The outcome of one differential run.
+     *
+     * @param mismatches one row per mismatch ({@code where, oracle=.., m3=..})
+     * @param exercised per method atom key, the number of seeded steps that called it
+     * @param checks the number of comparisons made
+     */
+    record Result(List<String> mismatches, Map<String, Long> exercised, long checks) {
+    }
 
     private M3DecoratorDifferential(Class<?> m3, Class<?> oracle, String kind, String factory)
             throws NoSuchMethodException {
@@ -189,25 +203,134 @@ public final class M3DecoratorDifferential {
      *         be written
      */
     public static void main(String[] args) throws Exception {
+        Result run = run(args[0], args[1], args[2], args[3],
+                args.length > 5 ? args[5] : "-");
+        Files.write(Path.of(args[4]),
+                run.mismatches().stream().map(r -> args[0] + "\t" + r).toList(),
+                StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+        LOG.info(() -> "M3_DECORATOR_DIFF class=" + args[0] + " oracle=" + args[1]
+                + " factory=" + args[3] + " methods=" + run.exercised().size()
+                + " seeds=" + SEEDS.length + " steps=" + STEPS + " checks=" + run.checks()
+                + " mismatches=" + run.mismatches().size());
+        System.exit(run.mismatches().isEmpty() ? 0 : 4);
+    }
+
+    /**
+     * Runs the differential of one M3 decorator against its Commons oracle in process (the JUnit
+     * atom tests and {@link #main} share it).
+     *
+     * @param m3 the M3 class name
+     * @param oracle the Commons oracle class name
+     * @param backing the backing kind
+     * @param factory the static factory name
+     * @param policy the lane policy, or {@code -} for the default {@code both}
+     * @return the mismatches, the per-method exercise counts and the number of checks
+     * @throws ReflectiveOperationException if a class or factory method cannot be found
+     */
+    static synchronized Result run(String m3, String oracle, String backing, String factory,
+            String policy) throws ReflectiveOperationException {
         M3DecoratorDifferential run = new M3DecoratorDifferential(
-                Class.forName(args[0]), Class.forName(args[1]), args[2], args[3]);
+                Class.forName(m3), Class.forName(oracle), backing, factory);
         pred = Arrays.asList(run.oracleFactory.getParameterTypes())
                 .contains(org.apache.commons.collections4.Predicate.class);
-        run.policy = args.length > 5 && !args[5].equals("-") ? args[5] : "both";
+        run.policy = !policy.equals("-") ? policy : "both";
         rejectNull = run.policy.equals("rejectnull");
+        run.methods.forEach(m -> run.exercised.put(key(m), 0L));
         run.once();
         if (pred) {
             run.predicatedOnce();
         }
         Arrays.stream(SEEDS).forEach(run::seed);
-        Files.write(Path.of(args[4]),
-                run.mismatches.stream().map(r -> args[0] + "\t" + r).toList(),
-                StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-        LOG.info(() -> "M3_DECORATOR_DIFF class=" + args[0] + " oracle=" + args[1]
-                + " factory=" + args[3] + " methods=" + run.methods.size()
-                + " seeds=" + SEEDS.length + " steps=" + STEPS + " checks=" + run.checks
-                + " mismatches=" + run.mismatches.size());
-        System.exit(run.mismatches.isEmpty() ? 0 : 4);
+        return new Result(List.copyOf(run.mismatches), Map.copyOf(run.exercised), run.checks);
+    }
+
+    /**
+     * Times every method atom of one owned decorator against its Commons oracle: equal backings,
+     * the same seeded arguments on both sides, {@code m3.perf.warmup} warm-up calls per side
+     * (default 20,000), then the median of {@code rounds} measured rounds of {@code calls} calls,
+     * alternating which side runs first. Both sides are called reflectively with access checks
+     * off, so the ratio compares the decorators, not the call path.
+     *
+     * @param m3 the M3 class name
+     * @param oracle the Commons oracle class name
+     * @param backing the backing kind
+     * @param factory the static factory name
+     * @param policy the lane policy, or {@code -} for the default {@code both}
+     * @param calls the calls per round and side
+     * @param rounds the measured rounds
+     * @return per atom key, {M3 ns per call, oracle ns per call} ({@code NaN} when the oracle
+     *         has no such method or a factory fails)
+     * @throws ReflectiveOperationException if a class or factory method cannot be found
+     */
+    static synchronized Map<String, double[]> perf(String m3, String oracle, String backing,
+            String factory, String policy, int calls, int rounds)
+            throws ReflectiveOperationException {
+        M3DecoratorDifferential run = new M3DecoratorDifferential(
+                Class.forName(m3), Class.forName(oracle), backing, factory);
+        pred = Arrays.asList(run.oracleFactory.getParameterTypes())
+                .contains(org.apache.commons.collections4.Predicate.class);
+        run.policy = !policy.equals("-") ? policy : "both";
+        rejectNull = run.policy.equals("rejectnull");
+        Map<String, double[]> out = new java.util.TreeMap<>();
+        run.methods.forEach(m -> out.put(key(m), run.time(m, calls, rounds)));
+        return out;
+    }
+
+    private double[] time(Method m, int calls, int rounds) {
+        Object o = build(oracleFactory, filled(new Random(7)));
+        Object x = build(m3Factory, filled(new Random(7)));
+        Method om;
+        Method xm;
+        try {
+            // the same reflective path on both sides: access checks off for both methods
+            om = o.getClass().getMethod(m.getName(), m.getParameterTypes());
+            om.setAccessible(true);
+            xm = x.getClass().getMethod(m.getName(), m.getParameterTypes());
+            xm.setAccessible(true);
+        } catch (NoSuchMethodException e) {
+            return new double[] {Double.NaN, Double.NaN};
+        }
+        if (o instanceof Throwable || x instanceof Throwable) {
+            return new double[] {Double.NaN, Double.NaN};
+        }
+        Object[][] ao = new Object[calls][];
+        Object[][] ax = new Object[calls][];
+        java.util.stream.IntStream.range(0, calls).forEach(i -> {
+            ao[i] = args(m.getParameterTypes(), new Random(i));
+            ax[i] = args(m.getParameterTypes(), new Random(i));
+        });
+        // warm-up past the C2 compile threshold: Commons decorators inherit shared base methods
+        // that earlier targets already compiled, while each owned class has its own method
+        java.util.stream.IntStream.range(0, WARMUP).forEach(i -> {
+            call(om, o, ao[i % calls]);
+            call(xm, x, ax[i % calls]);
+        });
+        long[] to = new long[rounds];
+        long[] tx = new long[rounds];
+        for (int round = 0; round < rounds; round++) {
+            // alternate which side runs first, so neither always gets the warmer caches
+            boolean oracleFirst = (round & 1) == 0;
+            long first = timeCalls(oracleFirst ? om : xm, oracleFirst ? o : x,
+                    oracleFirst ? ao : ax);
+            long second = timeCalls(oracleFirst ? xm : om, oracleFirst ? x : o,
+                    oracleFirst ? ax : ao);
+            to[round] = oracleFirst ? first : second;
+            tx[round] = oracleFirst ? second : first;
+        }
+        Arrays.sort(to);
+        Arrays.sort(tx);
+        return new double[] {tx[rounds / 2] / (double) calls, to[rounds / 2] / (double) calls};
+    }
+
+    private static long timeCalls(Method m, Object target, Object[][] calls) {
+        long start = System.nanoTime();
+        Arrays.stream(calls).forEach(c -> call(m, target, c));
+        return System.nanoTime() - start;
+    }
+
+    /** The atom key of a method, as the step loop names it in mismatch rows. */
+    static String key(Method m) {
+        return m.getName() + Arrays.toString(m.getParameterTypes());
     }
 
     private void once() {
@@ -360,6 +483,7 @@ public final class M3DecoratorDifferential {
                     norm(mutate(b2, new Random(mutationSeed), add)));
         } else {
             Method m = methods.get(r.nextInt(methods.size()));
+            exercised.merge(key(m), 1L, Long::sum);
             long argSeed = r.nextLong();
             if (isEquals(m) && r.nextInt(3) == 0) {
                 // equal but not identical argument: the true path of equals, which identity and
