@@ -12,13 +12,6 @@
  * Contributors:
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
-/*
- * Pattern DECORATOR_DIFFERENTIAL lock-scope trace probe (SYNC family; written by the adversarial verify pass that refuted
- * the BLOCKS/FREE probe as blind to WHERE the backing call runs). The backing is a recording java.lang.reflect.Proxy over the
- * factory parameter interface; every call that reaches the backing (or a Set/Collection the backing returned) records
- * method name + Thread.holdsLock(decorator). Oracle and M3 traces must be equal per public method and per view method.
- * Usage: java -cp commons.jar;classes;. M3LockTraceProbe <m3 fqn> <commons fqn> <backing> <factory> <out.tsv>; exit 0/4.
- */
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -30,18 +23,45 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
+import java.util.function.IntFunction;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.logging.Logger;
 
+import org.apache.commons.collections4.bag.HashBag;
+import org.apache.commons.collections4.bag.TreeBag;
+import org.apache.commons.collections4.multiset.HashMultiSet;
+
+/**
+ * Lock-scope trace probe for pattern DECORATOR_DIFFERENTIAL (SYNC family).
+ *
+ * <p>Written by the adversarial verify pass that refuted the BLOCKS/FREE probe as blind to
+ * where the backing call runs. The backing is a recording {@link Proxy} over the factory
+ * parameter interface; every call that reaches the backing (or a {@code Set} or
+ * {@code Collection} the backing returned) records the method name and
+ * {@code Thread.holdsLock(decorator)}. Oracle and M3 traces must be equal per public method
+ * and per view method.
+ *
+ * <p>Usage: {@code java -cp commons.jar;classes;. M3LockTraceProbe <m3 fqn> <commons fqn>
+ * <backing> <factory> <out.tsv>}; exit status 0 or 4.
+ */
 public final class M3LockTraceProbe {
     private static final Logger LOG = Logger.getLogger(M3LockTraceProbe.class.getName());
     private static final Map<String, Supplier<Collection<Object>>> BACKINGS = Map.of(
-            "list", ArrayList::new, "deque", java.util.LinkedList::new,
-            "hashbag", org.apache.commons.collections4.bag.HashBag::new, "treebag", org.apache.commons.collections4.bag.TreeBag::new,
-            "hashmultiset", org.apache.commons.collections4.multiset.HashMultiSet::new);
+            "list", ArrayList::new, "deque", LinkedList::new,
+            "hashbag", HashBag::new, "treebag", TreeBag::new,
+            "hashmultiset", HashMultiSet::new);
+
+    /**
+     * Creates a probe instance; the probe is normally run through {@link #main(String[])}.
+     */
+    public M3LockTraceProbe() {
+    }
 
     /** One side: recording backing plus the decorator that owns the monitor. */
     static final class Side {
@@ -49,26 +69,40 @@ public final class M3LockTraceProbe {
         Object owner;
 
         Object record(Object target, Class<?> iface) {
-            return Proxy.newProxyInstance(M3LockTraceProbe.class.getClassLoader(), new Class<?>[] {iface}, (p, m, a) -> {
-                trace.add(m.getName() + ":" + (owner != null && Thread.holdsLock(owner) ? "L" : "-"));
+            return Proxy.newProxyInstance(M3LockTraceProbe.class.getClassLoader(),
+                    new Class<?>[] {iface}, (p, m, a) -> {
+                trace.add(m.getName() + ":"
+                        + (owner != null && Thread.holdsLock(owner) ? "L" : "-"));
                 Object r;
                 try {
                     r = m.invoke(target, a);
                 } catch (InvocationTargetException e) {
                     throw e.getCause();
                 }
-                return r instanceof Set<?> s && m.getReturnType() == Set.class ? record(s, Set.class) : r;
+                return r instanceof Set<?> s && m.getReturnType() == Set.class
+                        ? record(s, Set.class) : r;
             });
         }
     }
 
+    /**
+     * Compares the oracle and M3 backing-call lock traces and exits with status 0 when they
+     * match or 4 on any mismatch.
+     *
+     * @param args the M3 class name, the Commons Collections class name, the backing kind,
+     *        the factory method name and the output TSV path
+     * @throws Exception if a class or factory method cannot be loaded or invoked, or the
+     *         output file cannot be written
+     */
     public static void main(String[] args) throws Exception {
         Class<?> m3 = Class.forName(args[0]);
-        Method of = Arrays.stream(Class.forName(args[1]).getMethods()).filter(m -> m.getName().equals(args[3])).findFirst().orElseThrow();
+        Method of = Arrays.stream(Class.forName(args[1]).getMethods())
+                .filter(m -> m.getName().equals(args[3])).findFirst().orElseThrow();
         Method xf = m3.getMethod(args[3], of.getParameterTypes());
         Class<?> iface = of.getParameterTypes()[0];
         List<Method> methods = Arrays.stream(m3.getDeclaredMethods())
-                .filter(m -> Modifier.isPublic(m.getModifiers()) && !Modifier.isStatic(m.getModifiers()) && !m.isSynthetic())
+                .filter(m -> Modifier.isPublic(m.getModifiers())
+                        && !Modifier.isStatic(m.getModifiers()) && !m.isSynthetic())
                 .sorted(Comparator.comparing(Method::toGenericString)).toList();
         List<String> mismatches = new ArrayList<>();
         int checks = 0;
@@ -86,7 +120,8 @@ public final class M3LockTraceProbe {
             if (!so.trace.equals(sx.trace)) {
                 mismatches.add(m.toGenericString() + "\toracle=" + so.trace + "\tm3=" + sx.trace);
             }
-            if (Set.class.isAssignableFrom(m.getReturnType()) && m.getParameterCount() == 0 && ov instanceof Set && xv instanceof Set) {
+            if (Set.class.isAssignableFrom(m.getReturnType()) && m.getParameterCount() == 0
+                    && ov instanceof Set && xv instanceof Set) {
                 for (Method vm : Set.class.getMethods()) {
                     if (Modifier.isStatic(vm.getModifiers())) {
                         continue;
@@ -97,15 +132,19 @@ public final class M3LockTraceProbe {
                     call(vm, xv, argsFor(vm));
                     checks++;
                     if (!so.trace.equals(sx.trace)) {
-                        mismatches.add(m.getName() + "()." + vm.getName() + Arrays.toString(vm.getParameterTypes()) + "\toracle=" + so.trace
-                                + "\tm3=" + sx.trace);
+                        mismatches.add(m.getName() + "()." + vm.getName()
+                                + Arrays.toString(vm.getParameterTypes())
+                                + "\toracle=" + so.trace + "\tm3=" + sx.trace);
                     }
                 }
             }
         }
-        Files.write(Path.of(args[4]), mismatches.stream().map(r -> args[0] + "\t" + r).toList(), StandardCharsets.UTF_8);
+        Files.write(Path.of(args[4]),
+                mismatches.stream().map(r -> args[0] + "\t" + r).toList(),
+                StandardCharsets.UTF_8);
         final int n = checks;
-        LOG.info(() -> "M3_LOCK_TRACE class=" + args[0] + " methods=" + methods.size() + " checks=" + n + " mismatches=" + mismatches.size());
+        LOG.info(() -> "M3_LOCK_TRACE class=" + args[0] + " methods=" + methods.size()
+                + " checks=" + n + " mismatches=" + mismatches.size());
         System.exit(mismatches.isEmpty() ? 0 : 4);
     }
 
@@ -116,11 +155,13 @@ public final class M3LockTraceProbe {
     }
 
     private static Object[] argsFor(Method m) {
-        return Arrays.stream(m.getParameterTypes()).map(t -> t == int.class ? (Object) 1 : t.isArray() ? new Integer[0]
+        return Arrays.stream(m.getParameterTypes()).map(t -> t == int.class ? (Object) 1
+                : t.isArray() ? new Integer[0]
                 : Collection.class.isAssignableFrom(t) ? new ArrayList<>(List.of(1, 9))
-                : t == java.util.function.Predicate.class ? (java.util.function.Predicate<Object>) v -> false
-                : t == java.util.function.Consumer.class ? (java.util.function.Consumer<Object>) v -> { }
-                : t == java.util.function.IntFunction.class ? (java.util.function.IntFunction<Object[]>) Integer[]::new : (Object) 9).toArray();
+                : t == Predicate.class ? (Predicate<Object>) v -> false
+                : t == Consumer.class ? (Consumer<Object>) v -> { }
+                : t == IntFunction.class ? (IntFunction<Object[]>) Integer[]::new
+                : (Object) 9).toArray();
     }
 
     private static Object call(Method m, Object target, Object[] a) {

@@ -19,12 +19,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 /**
- * Planted-defect tool for DECORATOR_FILL negative controls: applies every NEGATIVE_CONTROLS_SPEC.tsv row of one control
- * id (columns: id, refutation, target, old, new, ...) as an exact literal replacement (no regex) that must hit exactly one
- * site, so a control either applies as written or fails loudly. {@code \n} in a literal stands for a newline.
- * Usage: {@code java M3Mutant <spec.tsv> <id> <in.java> <out.java>}. Exit 0 = applied, 2 = a site count is not 1.
+ * Planted-defect tool for DECORATOR_FILL negative controls: applies every
+ * NEGATIVE_CONTROLS_SPEC.tsv row of one control id (columns: id, refutation,
+ * target, old, new, ...) as an exact literal replacement (no regex) that must
+ * hit exactly one site, so a control either applies as written or fails
+ * loudly. {@code \n} in a literal stands for a newline.
+ * Usage: {@code java M3Mutant <spec.tsv> <id> <in.java> <out.java>}.
+ * Exit 0 = applied, 2 = a site count is not 1.
  */
 public final class M3Mutant {
     private static final Logger LOG = Logger.getLogger(M3Mutant.class.getName());
@@ -32,13 +36,23 @@ public final class M3Mutant {
     private M3Mutant() {
     }
 
+    /**
+     * Applies the rows of one negative control to a source file.
+     *
+     * @param args the spec TSV path, the control id, the input source path
+     *        and the output source path, in that order
+     * @throws IOException if a file cannot be read or written
+     */
     public static void main(String[] args) throws IOException {
-        String text = Files.readString(Path.of(args[2]), StandardCharsets.UTF_8).replace("\r\n", "\n");
-        List<String[]> rows = Files.readAllLines(Path.of(args[0]), StandardCharsets.UTF_8).stream().map(l -> l.replace("\r", "").split("\t", -1))
+        String text = Files.readString(Path.of(args[2]), StandardCharsets.UTF_8)
+                .replace("\r\n", "\n");
+        List<String[]> rows = Files.readAllLines(Path.of(args[0]), StandardCharsets.UTF_8)
+                .stream()
+                .map(l -> l.replace("\r", "").split("\t", -1))
                 .filter(r -> r[0].equals(args[1])).toList();
         for (String[] r : rows) {
             String old = r[3].replace("\\n", "\n");
-            int sites = text.split(java.util.regex.Pattern.quote(old), -1).length - 1;
+            int sites = text.split(Pattern.quote(old), -1).length - 1;
             LOG.info(() -> "M3_MUTANT id=" + args[1] + " sites=" + sites);
             if (sites != 1) {
                 System.exit(2);
