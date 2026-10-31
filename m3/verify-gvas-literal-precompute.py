@@ -122,9 +122,9 @@ def proof(jdk: Path, work: Path, lib: Path, image: Path, digest: str) -> None:
 
 
 def main() -> None:
-    jdk = Path(os.environ.get("M3_JDK", os.environ.get("JAVA_HOME", "/usr/lib/jvm/java-21-openjdk-amd64")))
+    jdk = Path(os.environ.get("M3JDK", os.environ.get("JAVA_HOME", "/usr/lib/jvm/java-21-openjdk-amd64")))
     if not (jdk / "bin/javac").is_file():
-        raise RuntimeError(f"Java 21 JDK missing at {jdk}; set M3_JDK")
+        raise RuntimeError(f"Java 21 JDK missing at {jdk}; set M3JDK")
     with tempfile.TemporaryDirectory(prefix="m3-gvas-literal-") as temporary:
         work = Path(temporary)
         lib = compile_sources(work, jdk)

@@ -13,7 +13,7 @@
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
 /*
- * Source-sealed Maven transformation recipe for additive M3JDK21 Java owners.
+ * Source-sealed Maven transformation recipe for additive M3JDK 21 Java owners.
  */
 package jdk.internal.m3;
 

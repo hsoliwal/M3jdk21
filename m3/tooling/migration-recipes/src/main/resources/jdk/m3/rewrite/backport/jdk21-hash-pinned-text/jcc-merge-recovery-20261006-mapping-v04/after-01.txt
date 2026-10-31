@@ -10,7 +10,7 @@ The current exact destination input is `09075810b55229662329a158923287e8a7118f86
 
 ## Earlier notes, preserved as historical context
 
-# JCC source handoff through the existing M3JDK21 receiving lifecycle
+# JCC source handoff through the existing M3JDK 21 receiving lifecycle
 
 ## Scope and decision
 

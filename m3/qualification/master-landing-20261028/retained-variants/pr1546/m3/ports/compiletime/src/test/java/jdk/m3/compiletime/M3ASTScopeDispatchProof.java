@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Direct M3JDK21 scope-routing proof over the original MIndexAST-derived
+ * Direct M3JDK 21 scope-routing proof over the original MIndexAST-derived
  * leaf hierarchy. No compiler/parser is started and no source is reparsed.
  */
 public final class M3ASTScopeDispatchProof {

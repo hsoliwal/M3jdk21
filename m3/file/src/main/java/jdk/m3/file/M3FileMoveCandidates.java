@@ -7,7 +7,7 @@ import java.util.Objects;
 
 /**
  * Digest-indexed move candidates over one already-scanned M3File delta generation.
- * This is part of the M3JDK21 file representation, not a parallel filesystem.
+ * This is part of the M3JDK 21 file representation, not a parallel filesystem.
  * Removed slots retain their prior SHA-256 digest; created slots own the newly
  * observed digest. Results are only rename/copy hypotheses: byte-identical
  * independent files and digest collisions cannot certify a filesystem move.

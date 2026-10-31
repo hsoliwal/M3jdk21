@@ -3,7 +3,7 @@ package jdk.m3.collections;
 
 import java.util.Arrays;
 
-/** Test that all three M3JDK21 JNI projections coexist in one original library. */
+/** Test that all three M3JDK 21 JNI projections coexist in one original library. */
 public final class M3ViewportUnionContract {
     private M3ViewportUnionContract() { }
     private static void check(boolean passes) {

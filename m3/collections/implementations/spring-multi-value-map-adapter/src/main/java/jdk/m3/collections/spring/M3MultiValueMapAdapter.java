@@ -28,7 +28,7 @@ import org.springframework.util.MultiValueMap;
  *
  * <p>The adapter contract is write-through: every change lands in the caller's target map and every read
  * observes it, so the adapter keeps no lanes of its own and stores one reference. Value lists it creates
- * ({@code add}, {@code addAll}, {@code set}) are {@link ArrayList}s, as Spring's are; in M3jdk21 that type is
+ * ({@code add}, {@code addAll}, {@code set}) are {@link ArrayList}s, as Spring's are; in M3JDK 21 that type is
  * itself backed in place by M3 array lanes, so the per-key storage is array-backed without a second list
  * type. Map defaults ({@code compute}, {@code merge}, {@code replaceAll}, ...) dispatch through this
  * adapter exactly as Spring's inherited defaults do.

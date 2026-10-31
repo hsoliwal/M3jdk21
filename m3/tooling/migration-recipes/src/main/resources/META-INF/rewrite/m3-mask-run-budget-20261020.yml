@@ -1,4 +1,4 @@
-# M3JDK21 product-source receipt: exact pre/post images; no public API changes.
+# M3JDK 21 product-source receipt: exact pre/post images; no public API changes.
 type: specs.openrewrite.org/v1beta/recipe
 name: jdk.internal.m3.rewrite.M3MaskRunBudget20261020
 displayName: M3JDK21 bounded deletion-mask fragmentation scan

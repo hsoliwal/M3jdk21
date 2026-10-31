@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # M3 vCPU native layer: HAL core + built-in CPU backend (m3vcpu), OpenCL backend (m3vcpu_opencl,
 # OpenCL.dll loaded at run time), JNI glue (m3vcpu_jni), ctest gates.
-# Template: M3jdk21 m3/ports/precompute/src/main/native (C11 core + _jni.c glue, -Werror, path file).
+# Template: M3JDK 21 m3/ports/precompute/src/main/native (C11 core + _jni.c glue, -Werror, path file).
 cmake_minimum_required(VERSION 3.20)
 project(m3vcpu VERSION 0.1.0 LANGUAGES C)
 

@@ -1,4 +1,4 @@
-# Independent review of executed M3jdk21 E3 receiving evidence
+# Independent review of executed M3JDK 21 E3 receiving evidence
 
 ## Result
 

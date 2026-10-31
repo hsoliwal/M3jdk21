@@ -18,7 +18,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
 import jdk.m3.collections.M3ObjectStream;
 import java.util.Objects;
-/** Opt-in typed surface; M3JDK21 remains the sole operator engine. */
+/** Opt-in typed surface; M3JDK 21 remains the sole operator engine. */
 public final class M3GuavaStreams {
     private M3GuavaStreams() {}
     public static <K,V> M3ObjectStream<V> snapshotValues(Multimap<K,V> map, K key) {

@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * M3JDK21 target-path scope adapter.
+ * M3JDK 21 target-path scope adapter.
  *
- * <p>Java-source scope inference delegates to canonical Synexia. M3JDK21 retains only the
+ * <p>Java-source scope inference delegates to canonical Synexia. M3JDK 21 retains only the
  * target-specific inference required for non-Java OpenJDK build/resources paths such as make
  * fragments, completion files and documentation.</p>
  */

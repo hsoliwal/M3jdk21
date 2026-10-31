@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * M3FMT binding to the existing M3JDK21 frozen M3FileDictionary.
+ * M3FMT binding to the existing M3JDK 21 frozen M3FileDictionary.
  * No copied string payload, second dictionary, cached Entry or mutable overlay is retained.
  * Language/tag/version/word order are sealed by one deterministic SHA-256 manifest root.
  */

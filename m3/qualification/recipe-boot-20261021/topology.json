@@ -5670,10 +5670,10 @@
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_RECIPE_PROOF"
     },
-    "m3/tooling/m3-jdk-a3-recipes/pom.xml": {
+    "m3/tooling/m3jdk-a3-recipes/pom.xml": {
       "gav": [
         "com.synexia",
-        "m3-jdk-a3-recipes",
+        "m3jdk-a3-recipes",
         "1.0.0-SNAPSHOT"
       ],
       "parent": null,
@@ -5682,7 +5682,7 @@
       "before_sha256": "adb92d8db5802590986586d0de67f0e75888d40fdaf3df080de10b59165982e1",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/m3-jdk-a3-recipes/pom.xml"
+      "install_root": "m3/tooling/m3jdk-a3-recipes/pom.xml"
     },
     "m3/tooling/text-metadata-current-owner/source/m3-openrewrite-recipes/tasks/composite-summary-20261012/pom.xml": {
       "gav": [

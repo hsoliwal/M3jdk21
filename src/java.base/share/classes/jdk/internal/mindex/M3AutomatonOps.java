@@ -6,7 +6,7 @@
 //   MinimizationOperations (ffd6edd44e1b7d84d53530c227da9dfbef3d43fb), Automata (cf1581fc9127c41c83b9541b15a2f1f38219c944),
 //   StateSet (6d4a7ea3b83305cf61014f193d1aebbbf015bbec), IntSet (6c64629c64fcc9ca3ddf4b1077c7d4c118d19a3c),
 //   FrozenIntSet (1e80171d510708572452bf6272394d1dd063fdfb) and TooComplexToDeterminizeException
-//   (0a3da3c01e912077ed198bcbc415ee365e686ea6), vendored unchanged in M3jdk21 at m3/vendor/third_party/lucene-core
+//   (0a3da3c01e912077ed198bcbc415ee365e686ea6), vendored unchanged in M3JDK 21 at m3/vendor/third_party/lucene-core
 //   (BLOB_EQUAL to upstream tag 695c0ac84508438302cd346a812cfa2fdc5a10df), Apache License, Version 2.0.
 //   Modifications: package jdk.internal.mindex; no org.apache.lucene imports; alphabet bounded to UTF-16 code units
 //   [0, MAX_LABEL] instead of code points; hppc IntIntHashMap/BitMixer replaced by dense int count/position lanes and a

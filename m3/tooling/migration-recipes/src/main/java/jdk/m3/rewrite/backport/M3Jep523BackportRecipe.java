@@ -10,7 +10,7 @@ import org.openrewrite.Recipe;
  *
  * <p>Upstream authority is openjdk/jdk commit
  * {@code 86637704fd01493ddb57e455dbd1e35e4798237d}. The product change is one HotSpot C++
- * FILE atom. M3JDK21 adds a separate structured jtreg atom adapting its existing Java-21
+ * FILE atom. M3JDK 21 adds a separate structured jtreg atom adapting its existing Java-21
  * default-GC regression to the new ergonomic policy while proving explicit SerialGC still wins.
  *
  * <p>This recipe is candidate-only. It does not authorize product promotion without HotSpot build,

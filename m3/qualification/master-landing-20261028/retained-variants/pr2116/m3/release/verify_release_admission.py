@@ -330,7 +330,7 @@ def custody_report(root: Path, scope: str) -> dict:
             pom = root / "m3/pom.xml"
             document = ET.parse(pom)
             legacy = {"m3-import/pure-int-recipe-custody", "tooling/migration-recipes",
-                      "tooling/m3-jdk-a3-recipes", "tooling/recipe-agent-api"}
+                      "tooling/m3jdk-a3-recipes", "tooling/recipe-agent-api"}
             for module in document.findall(".//{http://maven.apache.org/POM/4.0.0}module"):
                 if module.text and module.text.strip() in legacy:
                     residue.append("m3/pom.xml -> " + module.text.strip())

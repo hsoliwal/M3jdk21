@@ -1,4 +1,4 @@
-# JCC source publication and the existing M3JDK21 receiving lifecycle
+# JCC source publication and the existing M3JDK 21 receiving lifecycle
 
 The receiving ledger now binds the actual Synexia implementation publication `d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906` and its exact source/evidence objects. The two JCC capability records remain **blocked**. The final source replay passed 91 core tests and eight parent tests, then stopped at its required original upstream gate: 67 tests, 66 passed, zero failures and one error. Later required JNI stages did not execute. Artifact publication and finite test passes do not establish source export or JDK acceptance.
 

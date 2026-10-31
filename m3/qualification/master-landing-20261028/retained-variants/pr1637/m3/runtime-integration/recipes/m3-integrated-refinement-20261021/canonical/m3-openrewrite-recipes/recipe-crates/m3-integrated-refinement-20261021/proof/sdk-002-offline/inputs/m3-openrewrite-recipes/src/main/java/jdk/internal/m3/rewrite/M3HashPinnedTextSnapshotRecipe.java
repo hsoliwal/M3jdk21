@@ -280,7 +280,7 @@ public final class M3HashPinnedTextSnapshotRecipe
         || value.chars().anyMatch(Character::isISOControl)) {
       return false;
     }
-    // Existing M3JDK21 viewport owner uses a two-level Maven module path.
+    // Existing M3JDK 21 viewport owner uses a two-level Maven module path.
     // Admit that exact C file; retain the generic Maven-root restrictions.
     boolean nativePath = value.equals("m3/collections/src/main/c/m3maskviewport.c")
         ||

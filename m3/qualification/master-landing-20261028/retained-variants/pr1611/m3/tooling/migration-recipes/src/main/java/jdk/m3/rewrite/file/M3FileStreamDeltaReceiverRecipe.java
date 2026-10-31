@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 import org.openrewrite.Recipe;
 
-/** M3JDK21 target receiver for the hash-pinned M3File stream/delta substrate. */
+/** M3JDK 21 target receiver for the hash-pinned M3File stream/delta substrate. */
 public final class M3FileStreamDeltaReceiverRecipe extends Recipe {
     public static final String CRATE = "m3-file-shadow-stream-delta-20261020";
 

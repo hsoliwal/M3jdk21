@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Verified receiving image for M3JDK21's existing javac M3SourceSignals plugin (/1 protocol).
+ * Verified receiving image for M3JDK 21's existing javac M3SourceSignals plugin (/1 protocol).
  * The compiler already manufactures the static facts; this class parses its sealed sidecar once
  * into typed primitive columns, unsigned lexical-feature lanes and a CSR call-candidate graph.
  * No AST parsing, runtime reflection or per-row Entry objects are retained by the image.

@@ -24,4 +24,4 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Verify compiled literal image and exact pointer across JVMs
-        run: M3_JDK="$JAVA_HOME" python3 m3/verify-gvas-literal-precompute.py
+        run: M3JDK="$JAVA_HOME" python3 m3/verify-gvas-literal-precompute.py

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-# This bounded tool builds patched Java21 class sources; it does NOT build the full M3JDK21 image.
+# This bounded tool builds patched Java21 class sources; it does NOT build the full M3JDK 21 image.
 set -euo pipefail
 
 root="$(cd "$(dirname "$0")/../../.." && pwd)"
@@ -94,7 +94,7 @@ javap -p -c "$tmp/classes/java/util/Vector.class" > "$tmp/vector-bytecode.txt"
 grep -Fq "jdk/internal/mindex/M3CollectionMaskCompactor.compact" "$tmp/arraylist-bytecode.txt"
 grep -Fq "jdk/internal/mindex/M3CollectionMaskCompactor.compact" "$tmp/vector-bytecode.txt"
 
-# Execute actual M3JDK21 java.util.ArrayList and Vector under mixed and interpreted VM modes.
+# Execute actual M3JDK 21 java.util.ArrayList and Vector under mixed and interpreted VM modes.
 java --patch-module "java.base=$tmp/classes" \
   --add-opens "java.base/java.util=ALL-UNNAMED" \
   -cp "$tmp/tests" M3ArrayMaskCallersContract

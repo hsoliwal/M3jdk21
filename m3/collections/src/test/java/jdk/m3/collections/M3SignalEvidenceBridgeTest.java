@@ -3,7 +3,7 @@ package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
 
-/** Actual original M3JDK21 owning Maven/JUnit test for typed progressive evidence. */
+/** Actual original M3JDK 21 owning Maven/JUnit test for typed progressive evidence. */
 final class M3SignalEvidenceBridgeTest {
     @Test
     void failClosedTypedCoordinatesAndOriginalProgressiveBounds() {

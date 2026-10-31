@@ -795,7 +795,7 @@
       "retained_from_target_commit": "7fad958f073602247b1c34a8fd756b1a0ecd3edb",
       "canonical_recipe": "jdk.internal.m3.rewrite.M3Jdk21PrimitiveCollectionsV1",
       "canonical_recipe_commit": "38ea4f44572b4711489d1291c898f2aac52bb054",
-      "canonical_origin_notice": "M3_JDK_SHAPED_BACKENDS.md",
+      "canonical_origin_notice": "M3JDK_SHAPED_BACKENDS.md",
       "license": "Apache-2.0",
       "disposition": "UNCHANGED_CURRENT_TARGET_OWNER"
     },
@@ -806,7 +806,7 @@
       "retained_from_target_commit": "7fad958f073602247b1c34a8fd756b1a0ecd3edb",
       "canonical_recipe": "jdk.internal.m3.rewrite.M3Jdk21PrimitiveCollectionsV1",
       "canonical_recipe_commit": "38ea4f44572b4711489d1291c898f2aac52bb054",
-      "canonical_origin_notice": "M3_JDK_SHAPED_BACKENDS.md",
+      "canonical_origin_notice": "M3JDK_SHAPED_BACKENDS.md",
       "license": "Apache-2.0",
       "disposition": "UNCHANGED_CURRENT_TARGET_OWNER"
     },
@@ -817,7 +817,7 @@
       "retained_from_target_commit": "7fad958f073602247b1c34a8fd756b1a0ecd3edb",
       "canonical_recipe": "jdk.internal.m3.rewrite.M3Jdk21PrimitiveCollectionsV1",
       "canonical_recipe_commit": "38ea4f44572b4711489d1291c898f2aac52bb054",
-      "canonical_origin_notice": "M3_JDK_SHAPED_BACKENDS.md",
+      "canonical_origin_notice": "M3JDK_SHAPED_BACKENDS.md",
       "license": "Apache-2.0",
       "disposition": "UNCHANGED_CURRENT_TARGET_OWNER"
     }

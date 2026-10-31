@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-# Direct product verification: M3JDK21 is the JDK, not a library atop the JDK.
+# Direct product verification: M3JDK 21 is the JDK, not a library atop the JDK.
 name: Collection views contracts
 on:
   pull_request:

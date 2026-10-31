@@ -65,11 +65,11 @@
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/README.md"
     },
     {
-      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/before/.github/workflows/m3-jdk21-backport-wave-admission.yml",
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/before/.github/workflows/m3jdk21-backport-wave-admission.yml",
       "gitBlob": "60a24153dcefb57499c921a264c94402df8af16d",
       "bytes": 3717,
       "sha256": "1cf79b31b3dbcb74bf3858f1c898072a836ffae2da6f0d5de731cf09d4132d31",
-      "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/before/.github/workflows/m3-jdk21-backport-wave-admission.yml"
+      "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/before/.github/workflows/m3jdk21-backport-wave-admission.yml"
     },
     {
       "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/before/m3/backports/BACKPORT_EXECUTION_WAVES.md",
@@ -142,11 +142,11 @@
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/inverse/manifest.tsv"
     },
     {
-      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/inverse/out/.github/workflows/m3-jdk21-backport-wave-admission.yml",
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/inverse/out/.github/workflows/m3jdk21-backport-wave-admission.yml",
       "gitBlob": "60a24153dcefb57499c921a264c94402df8af16d",
       "bytes": 3717,
       "sha256": "1cf79b31b3dbcb74bf3858f1c898072a836ffae2da6f0d5de731cf09d4132d31",
-      "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/inverse/out/.github/workflows/m3-jdk21-backport-wave-admission.yml"
+      "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/inverse/out/.github/workflows/m3jdk21-backport-wave-admission.yml"
     },
     {
       "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/manifest.tsv",
@@ -156,11 +156,11 @@
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/manifest.tsv"
     },
     {
-      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/out/.github/workflows/m3-jdk21-backport-wave-admission.yml",
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/out/.github/workflows/m3jdk21-backport-wave-admission.yml",
       "gitBlob": "c9017928ee7796eb70ea2c899c541ce139d7b458",
       "bytes": 3717,
       "sha256": "539abe591a91c37ddc16601b0ce2bcccc4a238605f8eda72c3f8008920c9b51f",
-      "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/out/.github/workflows/m3-jdk21-backport-wave-admission.yml"
+      "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/out/.github/workflows/m3jdk21-backport-wave-admission.yml"
     },
     {
       "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/out/m3/backports/BACKPORT_EXECUTION_WAVES.md",
@@ -349,7 +349,7 @@
       "license": "Apache-2.0"
     },
     {
-      "path": ".github/workflows/m3-jdk21-backport-wave-admission.yml",
+      "path": ".github/workflows/m3jdk21-backport-wave-admission.yml",
       "gitBlob": "60a24153dcefb57499c921a264c94402df8af16d",
       "bytes": 3717,
       "sha256": "1cf79b31b3dbcb74bf3858f1c898072a836ffae2da6f0d5de731cf09d4132d31",

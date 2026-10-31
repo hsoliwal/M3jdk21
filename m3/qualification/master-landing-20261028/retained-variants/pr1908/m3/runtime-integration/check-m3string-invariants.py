@@ -1804,7 +1804,7 @@ for fragment in [
     if fragment not in recipe_authority:
         fail(f"Synexia String recipe authority receipt missing: {fragment}")
 
-# Reusable M3 String history-convergence recipe custody is Synexia-only. M3JDK21 is a
+# Reusable M3 String history-convergence recipe custody is Synexia-only. M3JDK 21 is a
 # thin receiver/runtime owner and must not recreate a second local recipe descriptor, crate or test.
 for forbidden_recipe_path in [
     "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-string-history-convergence.yml",
@@ -1817,9 +1817,9 @@ for forbidden_recipe_path in [
 
 # Synexia is the full qualified donor/convergence workspace. Recipes/postimages/tests are
 # first-class donor candidates, but licensing/provenance follows every copied artifact and
-# M3JDK21 retains target/runtime ownership.
+# M3JDK 21 retains target/runtime ownership.
 for fragment in [
-    '"id": "M3-JDK-DONOR-ARTIFACTS-1"',
+    '"id": "M3JDK-DONOR-ARTIFACTS-1"',
     '"candidate_source": "whole qualified hsoliwal/com.synexia workspace"',
     '"recipe"',
     '"generated-postimage"',

@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * Test-side mirror of {@code m3/ports/precompute/src/main/java/jdk/m3/precompute/
- * M3RegexOracleCorpus.java} (M3jdk21 master 2f2beb2e; first-party Synexia
+ * M3RegexOracleCorpus.java} (M3JDK 21 master 2f2beb2e; first-party Synexia
  * {@code Regex10kMatrixMasteryCorpus}): 10 bases x 10 repeats x 10 wrappers x 10 tails over
  * 4 prefixes x 4 cores x 4 suffixes. The three root digests pin byte-identical inputs.
  */

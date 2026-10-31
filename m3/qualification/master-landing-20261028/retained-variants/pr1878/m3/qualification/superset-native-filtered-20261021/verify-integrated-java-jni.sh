@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-# Exact original-owner Java21/JNI host probe; not a source-built full M3JDK21 image.
+# Exact original-owner Java21/JNI host probe; not a source-built full M3JDK 21 image.
 set -euo pipefail
 
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
@@ -48,7 +48,7 @@ base="$root/src/java.base/share/classes"
 libjava="$root/src/java.base/share/native/libjava"
 tests="$root/test/jdk"
 
-# Compile only the original, exact M3JDK21 product owners. Passing the
+# Compile only the original, exact M3JDK 21 product owners. Passing the
 # entire OpenJDK source tree to --patch-module can implicitly compile unrelated
 # WeakHashMap.java and fail on its upstream this-escape warning under -Werror.
 # Keep ALL lint categories enabled and source-stage only these four JDK owners.

@@ -1,7 +1,7 @@
 /*
  * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
  * SPDX-License-Identifier: Apache-2.0
- * Derived from the first-party M3ArrayLookupCostProbe at M3jdk21@4b24824.
+ * Derived from the first-party M3ArrayLookupCostProbe at M3JDK 21@4b24824.
  * Changes: numeric copy workloads, both primitive widths, exact graph shallow sizes,
  * repeated CPU samples, and before/after process/direct-buffer memory observations.
  */

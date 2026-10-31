@@ -9,7 +9,7 @@ import org.openrewrite.Recipe;
  * Java-21-compatible adaptation of upstream JDK-8347112.
  *
  * <p>The upstream donor is openjdk/jdk commit
- * {@code b221cb6ba138672802644f37eebf368521a0a6f4}. M3JDK21 deliberately splits the
+ * {@code b221cb6ba138672802644f37eebf368521a0a6f4}. M3JDK 21 deliberately splits the
  * compatible leaf: recursive {@code doc-files} copying becomes the default and
  * {@code -excludedocfilessubdir *} excludes all nested directories, while the Java 21
  * {@code -docfilessubdirs} option remains accepted with its existing processing contract.

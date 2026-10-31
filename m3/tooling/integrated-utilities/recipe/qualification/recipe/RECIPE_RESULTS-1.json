@@ -8,7 +8,7 @@
     {"path": "m3/compatibility/test_integrated_utility_coverage.py", "sha256": "e783a54fcd7430755874e55dd2af19530d217084a76d61d845ab14f3c1069f5f"},
     {"path": "m3/docs/INTEGRATED_UTILITY_COVERAGE_20261018.md", "sha256": "301320272695a993769df1164709d2c5fbe469e45543139ecbbece8bf824fbf2"},
     {"path": "m3/docs/name-mapping.d/m3-integrated-utility-families-20261018.json", "sha256": "0271ca2761cb871091fb22c5d7989ff11822ff2deb65d67d2c58080878948ff5"},
-    {"path": "m3/docs/name-mapping.d/m3-jdk-module-owners-20261018.json", "sha256": "7ec04178398539f8f27459d0d754a294af275f5469fcfa51db6ce58d872d47b1"},
+    {"path": "m3/docs/name-mapping.d/m3jdk-module-owners-20261018.json", "sha256": "7ec04178398539f8f27459d0d754a294af275f5469fcfa51db6ce58d872d47b1"},
     {"path": "m3/docs/name-mapping.json", "sha256": "2bb378d4e2af9c0bf62482182acdf53f1919abe16e6146195d38d9bcfc6ab9d7"},
     {"path": "m3/runtime-integration/integrated-collections/FOSS_REUSE_DECISION.json", "sha256": "3ee2e50f838470732304b728ee7c37a224611dc42fd56148faf687f3c14b1cad"},
     {"path": "m3/runtime-integration/integrated-collections/README.md", "sha256": "dc79aace9491a7ab1755d52076fdc08844109388405fe10802ba5cb85cbb5287"},

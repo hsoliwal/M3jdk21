@@ -1615,7 +1615,7 @@
       "bytes": 15148,
       "gitBlob": "bd3d1f2be2a884d9b00ec3cdab9f966e867dadea",
       "mode": "100644",
-      "path": "src/test/resources/before/.github/workflows/m3-jdk21-backports.yml",
+      "path": "src/test/resources/before/.github/workflows/m3jdk21-backports.yml",
       "sha256": "95cf2675cf9756311909303a568662efdc5f4d3c796f9f5fc92a10072c6c97ad"
     },
     {
@@ -3662,7 +3662,7 @@
         "bytes": 15148,
         "gitBlob": "bd3d1f2be2a884d9b00ec3cdab9f966e867dadea",
         "mode": "100644",
-        "path": "src/test/resources/before/.github/workflows/m3-jdk21-backports.yml",
+        "path": "src/test/resources/before/.github/workflows/m3jdk21-backports.yml",
         "sha256": "95cf2675cf9756311909303a568662efdc5f4d3c796f9f5fc92a10072c6c97ad"
       },
       {

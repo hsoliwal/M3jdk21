@@ -24,8 +24,8 @@ import java.util.Objects;
  * <p>Short labels (severities, units, numbers, file extensions, short names)
  * need no String, no pool entry and no reference count: their text is the
  * value, equality is {@code ==} and the hash is a mix of the value. The layout
- * of an immediate is the one of the M3 JDK's immediate String owner, so on the
- * M3 JDK the same text has the same 64-bit value:</p>
+ * of an immediate is the one of the M3JDK's immediate String owner, so on the
+ * M3JDK the same text has the same 64-bit value:</p>
  * <pre>
  *   bits 63..61  tag: 0 = pool id (bits 30..0), 1 = LATIN1, 2 = IDENT; 3..7 never used
  *   LATIN1  1..7 units, each &lt;= 0xFF; bits 58..56 length; unit i at bits 8i..8i+7

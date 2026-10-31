@@ -1,5 +1,5 @@
 {
-  "schema": "m3-jdk21-namespace-source-qualification-v1",
+  "schema": "m3jdk21-namespace-source-qualification-v1",
   "sourceCommit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
   "sourcePrefix": "src/java.base/share/classes",
   "sourceFiles": 59,

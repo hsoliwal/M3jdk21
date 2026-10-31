@@ -3,7 +3,7 @@ package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
 
-/** Original M3JDK21 owning Maven/JUnit strict domain policy differential. */
+/** Original M3JDK 21 owning Maven/JUnit strict domain policy differential. */
 final class M3SignalTopKTest {
     @Test
     void boundedDomainTopKAndStablePhysicalOccurrenceOrder() {

@@ -9497,7 +9497,7 @@
             "repo": "hsoliwal/com.synexia",
             "commit": "730294cac8e98d860aaddd12222874a014146d44",
             "module": "m3-openrewrite-recipes",
-            "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-jdk-filtered-batch-20261025/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-jdk-filtered-batch-20261025/0001-CollectionViews.java.txt",
+            "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk-filtered-batch-20261025/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk-filtered-batch-20261025/0001-CollectionViews.java.txt",
             "symbol": "java.util.CollectionViews",
             "signatures": [
               "boolean FilteredCollection.addAll(Collection<? extends E>)"
@@ -9571,8 +9571,8 @@
         },
         "recipe": {
           "id": "jdk.internal.m3.m3jdk.CollectionsContractRefinement20261017",
-          "version": "m3-jdk-filtered-batch-20261025",
-          "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-jdk-filtered-batch-20261025/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3-jdk-filtered-batch-20261025.yml",
+          "version": "m3jdk-filtered-batch-20261025",
+          "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk-filtered-batch-20261025/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3jdk-filtered-batch-20261025.yml",
           "sha256": "4097e22acb7b6fa00eb33bc745ff41cf665f6abd57e2911a6536dc3d9a3e3e55",
           "preconditions": [
             "Private actual SDK5/sealing10/receiver9 proof against exact source preimages; refuse foreign/mixed inputs.",
@@ -9619,7 +9619,7 @@
               "repo": "hsoliwal/com.synexia",
               "commit": "730294cac8e98d860aaddd12222874a014146d44",
               "module": "m3-openrewrite-recipes",
-              "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-jdk-filtered-batch-20261025/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-jdk-filtered-batch-20261025/0001-CollectionViews.java.txt",
+              "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk-filtered-batch-20261025/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk-filtered-batch-20261025/0001-CollectionViews.java.txt",
               "symbol": "java.util.CollectionViews",
               "signatures": [
                 "boolean FilteredCollection.addAll(Collection<? extends E>)"
@@ -9675,7 +9675,7 @@
             "repo": "hsoliwal/com.synexia",
             "commit": "730294cac8e98d860aaddd12222874a014146d44",
             "module": "m3-openrewrite-recipes",
-            "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-jdk-reverse-seek-20261025/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-jdk-reverse-seek-20261025/0001-ReverseOrderSortedSetView.java.txt",
+            "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk-reverse-seek-20261025/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk-reverse-seek-20261025/0001-ReverseOrderSortedSetView.java.txt",
             "symbol": "java.util.ReverseOrderSortedSetView",
             "signatures": [
               "Iterator<E> Subset.iterator()"
@@ -9736,8 +9736,8 @@
         },
         "recipe": {
           "id": "jdk.internal.m3.m3jdk.CollectionsContractRefinement20261017",
-          "version": "m3-jdk-reverse-seek-20261025",
-          "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-jdk-reverse-seek-20261025/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3-jdk-reverse-seek-20261025.yml",
+          "version": "m3jdk-reverse-seek-20261025",
+          "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk-reverse-seek-20261025/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3jdk-reverse-seek-20261025.yml",
           "sha256": "79f88c644586050d4a4dbca1fe294dc7b70ca7ce73268685dde50654acef0822",
           "preconditions": [
             "Private actual SDK5/sealing10/receiver9 proof against exact source preimages; refuse foreign/mixed inputs.",
@@ -9784,7 +9784,7 @@
               "repo": "hsoliwal/com.synexia",
               "commit": "730294cac8e98d860aaddd12222874a014146d44",
               "module": "m3-openrewrite-recipes",
-              "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-jdk-reverse-seek-20261025/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-jdk-reverse-seek-20261025/0001-ReverseOrderSortedSetView.java.txt",
+              "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk-reverse-seek-20261025/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk-reverse-seek-20261025/0001-ReverseOrderSortedSetView.java.txt",
               "symbol": "java.util.ReverseOrderSortedSetView",
               "signatures": [
                 "Iterator<E> Subset.iterator()"
@@ -9821,7 +9821,7 @@
   "precompute_port_map": "m3/docs/m3-string-precompute-port-map.tsv",
   "precompute_scope_rule": "Only String-semantic and String-search donor precompute maps into M3JDK String/runtime internals; Synexia language, semantic, DAG, probabilistic and reasoning precompute must not be transplanted into java.lang.String.",
   "porting_invariant": {
-    "id": "M3-JDK-PORT-1",
+    "id": "M3JDK-PORT-1",
     "authority": "M3JDK21",
     "source_workspace": "hsoliwal/com.synexia",
     "target_repository": "hsoliwal/M3jdk21",
@@ -9974,7 +9974,7 @@
     }
   },
   "donor_artifact_policy": {
-    "id": "M3-JDK-DONOR-ARTIFACTS-1",
+    "id": "M3JDK-DONOR-ARTIFACTS-1",
     "candidate_source": "whole qualified hsoliwal/com.synexia workspace",
     "artifact_classes": [
       "source",

@@ -1,4 +1,4 @@
-# JEP 485 Stream Gatherers — M3JDK21 compatibility packet
+# JEP 485 Stream Gatherers — M3JDK 21 compatibility packet
 
 Status: candidate implementation packet; not a completion claim.
 

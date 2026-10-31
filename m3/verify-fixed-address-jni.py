@@ -11,7 +11,7 @@ import subprocess
 import tempfile
 
 ROOT = Path(__file__).resolve().parent
-JDK = Path(os.environ.get("M3_JDK", "/usr/lib/jvm/default-java"))
+JDK = Path(os.environ.get("M3JDK", "/usr/lib/jvm/default-java"))
 if not (JDK / "bin/javac").exists():
     JDK = Path(shutil.which("javac")).resolve().parent.parent
 CC = os.environ.get("CC", "cc")

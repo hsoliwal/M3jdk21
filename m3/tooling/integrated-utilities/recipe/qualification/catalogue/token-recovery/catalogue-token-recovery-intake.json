@@ -49,7 +49,7 @@
       "before_source": "CANONICAL_CORE_RECIPE_TEMPLATE_AT_4de06d536308121b64bbe714096f7cad6bc0b908"
     }
   ],
-  "unchanged_existing_catalogue_target": "m3/docs/name-mapping.d/m3-jdk-module-owners-20261018.json",
+  "unchanged_existing_catalogue_target": "m3/docs/name-mapping.d/m3jdk-module-owners-20261018.json",
   "all_prior_mapping_rows_and_phase_states_preserved": true,
   "runtime_qualification": "SEPARATE_FRESH_SOURCE_BOUND_TOKEN_RECEIPTS",
   "verifier_execution": "PENDING_RESULT_INSPECTION",

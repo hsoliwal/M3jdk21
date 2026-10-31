@@ -18,7 +18,7 @@ import jdk.m3.collections.M3ObjectStream;
 import java.util.Objects;
 import jdk.m3.collections.eclipse.api.RichIterable;
 import jdk.m3.collections.eclipse.api.list.MutableList;
-/** Opt-in RichIterable/MutableList gateway into M3JDK21 operations. */
+/** Opt-in RichIterable/MutableList gateway into M3JDK 21 operations. */
 public final class M3EclipseStreams {
     private M3EclipseStreams() {}
     public static <T> M3ObjectStream<T> snapshot(RichIterable<T> input) {

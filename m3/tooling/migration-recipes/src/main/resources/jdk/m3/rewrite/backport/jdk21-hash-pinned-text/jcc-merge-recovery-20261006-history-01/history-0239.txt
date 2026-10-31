@@ -39189,7 +39189,7 @@
       },
       {
         "mode": "040000",
-        "path": "m3-jdk-precompute-bridge",
+        "path": "m3jdk-precompute-bridge",
         "sha": "5ff23d034e89cd303706bf5672995661423972b6",
         "type": "tree"
       },
@@ -44741,7 +44741,7 @@
       },
       {
         "mode": "040000",
-        "path": "m3-jdk-precompute-bridge",
+        "path": "m3jdk-precompute-bridge",
         "sha": "5ff23d034e89cd303706bf5672995661423972b6",
         "type": "tree"
       },

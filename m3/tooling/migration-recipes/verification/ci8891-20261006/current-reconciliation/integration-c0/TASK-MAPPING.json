@@ -2504,14 +2504,14 @@
     },
     {
       "bytes": 15148,
-      "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/extracted/ic0/project/src/test/resources/before/.github/workflows/m3-jdk21-backports.yml",
+      "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/extracted/ic0/project/src/test/resources/before/.github/workflows/m3jdk21-backports.yml",
       "gitBlob": "bd3d1f2be2a884d9b00ec3cdab9f966e867dadea",
-      "m3Path": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/test/resources/before/.github/workflows/m3-jdk21-backports.yml",
+      "m3Path": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/test/resources/before/.github/workflows/m3jdk21-backports.yml",
       "mode": "100644",
-      "projectPath": "src/test/resources/before/.github/workflows/m3-jdk21-backports.yml",
+      "projectPath": "src/test/resources/before/.github/workflows/m3jdk21-backports.yml",
       "role": "qualified-project-flat",
       "sha256": "95cf2675cf9756311909303a568662efdc5f4d3c796f9f5fc92a10072c6c97ad",
-      "synexiaPath": "m3-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/src/test/resources/before/.github/workflows/m3-jdk21-backports.yml"
+      "synexiaPath": "m3-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/src/test/resources/before/.github/workflows/m3jdk21-backports.yml"
     },
     {
       "bytes": 6120,

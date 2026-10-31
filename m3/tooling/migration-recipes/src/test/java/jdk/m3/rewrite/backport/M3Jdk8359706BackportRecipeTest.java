@@ -46,7 +46,7 @@ final class M3Jdk8359706BackportRecipeTest {
                 recipe.getRecipeList().get(1));
 
         assertEquals("jdk21u-open-fds-8359706-text", text.getCrateName());
-        assertEquals("m3-jdk21u-open-fds-8359706-java", java.getCrateName());
+        assertEquals("m3jdk21u-open-fds-8359706-java", java.getCrateName());
         assertEquals(7, text.targetPaths().size());
         assertEquals(1, java.targetPaths().size());
         assertTrue(text.targetPaths().contains(

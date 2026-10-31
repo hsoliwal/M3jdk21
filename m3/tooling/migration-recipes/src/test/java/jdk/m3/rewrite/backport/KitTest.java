@@ -22,7 +22,7 @@ import org.openrewrite.text.PlainText;
 /** Exercises actual recipe scheduling; workflow success remains an independent runtime gate. */
 final class KitTest {
     private static final String ROOT = "/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/proof-kit/";
-    private static final String PATH = ".github/workflows/m3-jdk-proof.yml";
+    private static final String PATH = ".github/workflows/m3jdk-proof.yml";
 
     @Test
     void exactGenerationAndFixedPointPreserveUnrelatedSource() throws IOException {

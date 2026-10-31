@@ -16,7 +16,7 @@ import java.util.Objects;
 public final class M3ObjectMetrics {
     static {
         // Local patch-module tests cannot install into the bootstrap library path.
-        // In a built M3JDK21 the native entrypoint resides in libjava.
+        // In a built M3JDK 21 the native entrypoint resides in libjava.
         String testLibrary = System.getProperty("jdk.m3.native.path");
         if (testLibrary == null) {
             System.loadLibrary("java");

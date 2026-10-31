@@ -21,7 +21,7 @@
   <dependencies>
     <dependency>
       <groupId>com.synexia</groupId>
-      <artifactId>m3-jdk-a3-recipes</artifactId>
+      <artifactId>m3jdk-a3-recipes</artifactId>
       <version>${m3.a3.version}</version>
     </dependency>
     <dependency>

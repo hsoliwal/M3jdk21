@@ -3,7 +3,7 @@ package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
 
-/** Owning M3JDK21 collections JUnit entrypoint, not a replacement JDK API. */
+/** Owning M3JDK 21 collections JUnit entrypoint, not a replacement JDK API. */
 final class M3SignalDomainPolicyTest {
     @Test
     void certifiedProgressiveBoundsAndDomainRanking() throws Exception {

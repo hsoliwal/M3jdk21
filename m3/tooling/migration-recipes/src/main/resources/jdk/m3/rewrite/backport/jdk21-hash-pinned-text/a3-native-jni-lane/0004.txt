@@ -105,7 +105,7 @@ class GenerateRecipeCratesTest(unittest.TestCase):
             yaml = (
                 out
                 / self.mod.YAML_ROOT
-                / "m3-jdk22-candidate-backports.yml"
+                / "m3jdk22-candidate-backports.yml"
             ).read_text(encoding="utf-8")
             self.assertIn(
                 "jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe",
@@ -183,7 +183,7 @@ class GenerateRecipeCratesTest(unittest.TestCase):
             yaml = (
                 out
                 / self.mod.YAML_ROOT
-                / "m3-jdk22-candidate-backports.yml"
+                / "m3jdk22-candidate-backports.yml"
             ).read_text(encoding="utf-8")
             self.assertIn("jdk.m3.generated.jdk22_0001", yaml)
             self.assertIn("jdk.m3.generated.jdk22_0002", yaml)
@@ -252,7 +252,7 @@ class GenerateRecipeCratesTest(unittest.TestCase):
             yaml = (
                 out
                 / self.mod.YAML_ROOT
-                / "m3-jdk24-candidate-backports.yml"
+                / "m3jdk24-candidate-backports.yml"
             ).read_text(encoding="utf-8")
             self.assertIn(
                 "jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe",
@@ -324,7 +324,7 @@ class GenerateRecipeCratesTest(unittest.TestCase):
             yaml = (
                 out
                 / self.mod.YAML_ROOT
-                / "m3-jdk24-candidate-backports.yml"
+                / "m3jdk24-candidate-backports.yml"
             ).read_text(encoding="utf-8")
             self.assertIn(
                 "jdk.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe",

@@ -332,7 +332,7 @@ def materialize(
         yaml.append(f"  - jdk.m3.generated.{recipe_name}")
     yaml.append("")
 
-    (yaml_root / f"m3-jdk{release}-candidate-backports.yml").write_text(
+    (yaml_root / f"m3jdk{release}-candidate-backports.yml").write_text(
         "\n".join(yaml),
         encoding="utf-8",
     )

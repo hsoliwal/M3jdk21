@@ -6,7 +6,7 @@ import java.util.Set;
 import org.openrewrite.Recipe;
 
 /**
- * Source-sealed receiver for the M3JDK21 backport execution-wave control plane.
+ * Source-sealed receiver for the M3JDK 21 backport execution-wave control plane.
  *
  * <p>The received Python/Markdown/POM files are planning/proof substrate only. They schedule
  * already-admitted backport recipe atoms; they do not edit JDK product source, approve scope

@@ -6,4 +6,4 @@ displayName: Recover the M3JDK21 policy and receive Synexia reuse
 description: Create the missing target policy only with the exact retained JDK build guard.
 recipeList:
   - jdk.internal.m3.rewrite.M3HashPinnedTextSnapshotRecipe:
-      crateName: m3-jdk-free-reuse-target
+      crateName: m3jdk-free-reuse-target

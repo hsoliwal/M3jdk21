@@ -68,4 +68,4 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          M3_JDK="$JAVA_HOME" bash m3/lexicon/run-wordrows-proof.sh
+          M3JDK="$JAVA_HOME" bash m3/lexicon/run-wordrows-proof.sh

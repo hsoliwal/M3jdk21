@@ -1,7 +1,7 @@
 /*
  * Copyright 2002-2025 the original author or authors.
  * Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project:
- * M3JDK21 allocates module-scan results with its existing M3 ordered set.
+ * M3JDK 21 allocates module-scan results with its existing M3 ordered set.
  * The original lazy resource enumeration and lookup pipeline is preserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");

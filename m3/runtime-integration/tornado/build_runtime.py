@@ -263,7 +263,7 @@ def validate_phase_chain(state, phase):
 
 def verify_m3_receipt(path, jdk):
     value = json.loads(Path(path).read_text(encoding="utf-8"))
-    require(value.get("schema") == "m3-jdk-source-build/1" and value.get("status") == "PASS",
+    require(value.get("schema") == "m3jdk-source-build/1" and value.get("status") == "PASS",
             "successful M3 source-build receipt required")
     require(Path(value["jdk_home"]).resolve() == jdk.resolve(), "M3 receipt identifies a different image")
     require(re.fullmatch(r"[0-9a-f]{40}", value["source"]["commit"]), "source commit absent")
@@ -924,7 +924,7 @@ def parse_args(argv=None):
     parser.add_argument("--backend", choices=BACKENDS, default="opencl")
     parser.add_argument("--phase", choices=PHASES + ("all",), required=True)
     parser.add_argument("--allow-bootstrap-jdk", action="store_true")
-    parser.add_argument("--m3-jdk-receipt", type=Path)
+    parser.add_argument("--m3jdk-receipt", type=Path)
     parser.add_argument("--require-device", action="store_true")
     parser.add_argument("--require-gpu", action="store_true", help="require a reported GPU device; implies --require-device")
     parser.add_argument("--resolve-build-tools", action="store_true", help="permit explicit Maven build-tool resolution; runtime artifacts remain hash-locked")

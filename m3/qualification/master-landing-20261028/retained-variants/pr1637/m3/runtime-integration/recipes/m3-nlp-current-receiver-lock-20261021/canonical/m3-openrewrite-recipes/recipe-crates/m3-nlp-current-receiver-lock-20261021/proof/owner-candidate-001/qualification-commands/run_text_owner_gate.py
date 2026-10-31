@@ -50,7 +50,7 @@ def run() -> None:
     head = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
     if head != BASE:
         raise AssertionError("Unexpected checkout head: " + head)
-    env = dict(os.environ, M3_JDK=str(JDK), JAVA_HOME=str(JDK),
+    env = dict(os.environ, M3JDK=str(JDK), JAVA_HOME=str(JDK),
                PATH=str(JDK / "bin") + os.pathsep + os.environ.get("PATH", ""))
     commands = []
     if args.owner == "gvas":

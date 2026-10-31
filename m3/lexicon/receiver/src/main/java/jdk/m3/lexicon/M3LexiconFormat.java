@@ -7,7 +7,7 @@ import java.nio.ByteOrder;
 import java.util.Optional;
 
 /**
- * Every lexicon/word/language image format known on the Synexia and M3JDK21 pins, keyed by its 8-byte
+ * Every lexicon/word/language image format known on the Synexia and M3JDK 21 pins, keyed by its 8-byte
  * ASCII magic at offset 0. Field facts are recorded only where verified at a pin (see
  * {@code m3/lexicon/LEXICON_RECEIVER_LEDGER.tsv}); {@code versionOffset < 0} means "not verified".
  */
@@ -75,7 +75,7 @@ public enum M3LexiconFormat {
         return headerBytes;
     }
 
-    /** @return the M3JDK21 receiving owner, or {@code NONE} */
+    /** @return the M3JDK 21 receiving owner, or {@code NONE} */
     public String m3Owner() {
         return m3Owner;
     }

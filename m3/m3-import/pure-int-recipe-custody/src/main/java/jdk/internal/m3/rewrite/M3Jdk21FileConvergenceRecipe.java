@@ -7,11 +7,11 @@ import org.openrewrite.Recipe;
 import org.openrewrite.java.RemoveUnusedImports;
 
 /**
- * Canonical Synexia owner for M3JDK21 FILE-local Java convergence.
+ * Canonical Synexia owner for M3JDK 21 FILE-local Java convergence.
  *
  * <p>The target repository may retain a deprecated receiver facade, but the reusable ordered
  * recipe composition is owned here. Child ordering is intentionally identical to the historical
- * M3JDK21 recipe: inventory -> atomize -> patternize -> document -> conservative import cleanup.</p>
+ * M3JDK 21 recipe: inventory -> atomize -> patternize -> document -> conservative import cleanup.</p>
  */
 public final class M3Jdk21FileConvergenceRecipe extends Recipe {
     @Override

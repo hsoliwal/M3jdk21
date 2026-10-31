@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 /**
- * Real M3JDK21 Java21 array/index/state-mask oracle for both exact-byte and
+ * Real M3JDK 21 Java21 array/index/state-mask oracle for both exact-byte and
  * inclusion/exclusion histogram algorithms. No second production owner.
  */
 public final class M3StateMaskAdaptiveCountContract {

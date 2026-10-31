@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2026 Hitesh Soliwal and Contributors to the Synexia Project.
  * SPDX-License-Identifier: Apache-2.0
- * M3JDK21 product regression checks for the Synexia Chrome summary donation.
+ * M3JDK 21 product regression checks for the Synexia Chrome summary donation.
  * A deterministic test provider proves contracts; it does not execute Chrome AI.
  */
 package jdk.m3.llm.test;

@@ -6,7 +6,7 @@ package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
 
-/** Qualified in the original M3JDK21 collections Maven module. */
+/** Qualified in the original M3JDK 21 collections Maven module. */
 final class M3IndexedDescendingGroupMaskTest {
     @Test
     void comparatorTapesAndStablePhysicalSlotsStayUnchanged() {

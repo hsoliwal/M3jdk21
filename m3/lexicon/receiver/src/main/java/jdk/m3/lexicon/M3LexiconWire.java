@@ -12,7 +12,7 @@ import java.util.Objects;
 
 /**
  * Portable M3FMT v1 frames over an immutable, ordered M3 lexicon. Word IDs are
- * CWIDs (row + 1); zero is reserved for misses. This is part of M3JDK21, not
+ * CWIDs (row + 1); zero is reserved for misses. This is part of M3JDK 21, not
  * an M3-to-JDK adapter. The source bytes are stored once per frozen lexicon,
  * while frames store references, slices and exact literal fallbacks.
  *

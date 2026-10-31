@@ -1,4 +1,4 @@
-# JCC source recovery and the existing M3JDK21 receiving lifecycle
+# JCC source recovery and the existing M3JDK 21 receiving lifecycle
 
 The receiving ledger binds the actual Synexia recovery publication `0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8`, root `0361e4a07b77a01df170523033fef01c4052ddc5`, while both JCC capability records remain **blocked**. The recovery was prepared from `be92c62ece9023b5c33676716a1076d00e26120a`, root `3c4f32b66633a251ba2c117090830252a7e2da03`. Its source execution is described by the actual recovery receipts below. Publication custody, finite source tests, a separately qualified native lane, source export and JDK acceptance are separate evidence dimensions.
 

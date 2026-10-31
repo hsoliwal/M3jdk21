@@ -15,7 +15,7 @@
     <module>m3-import</module>
     <module>m3-import/pure-int-recipe-custody</module>
     <module>tooling/migration-recipes</module>
-    <module>tooling/m3-jdk-a3-recipes</module>
+    <module>tooling/m3jdk-a3-recipes</module>
     <module>tooling/a3</module>
     <module>tooling/backport-dag</module>
     <module>backports</module>

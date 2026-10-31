@@ -18,7 +18,7 @@ def main() -> None:
     args = parser.parse_args()
     out = WORK / "source-lock-correction" / (args.owner + "-owner-002")
     out.mkdir(parents=True, exist_ok=False)
-    env = dict(os.environ, M3_JDK=str(JDK), JAVA_HOME=str(JDK))
+    env = dict(os.environ, M3JDK=str(JDK), JAVA_HOME=str(JDK))
     if args.owner == "gvas":
         previous = json.loads((out.parent / "gvas-owner-001/RESULT.json").read_text())
         paths = [row["path"] for row in previous["gate_inputs"]]

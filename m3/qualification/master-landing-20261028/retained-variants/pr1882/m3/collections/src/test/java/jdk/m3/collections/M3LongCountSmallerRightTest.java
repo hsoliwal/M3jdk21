@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 import org.junit.jupiter.api.Test;
 
-/** Original M3JDK21 LC315 Java/JNI primitive index-merging contracts. */
+/** Original M3JDK 21 LC315 Java/JNI primitive index-merging contracts. */
 final class M3LongCountSmallerRightTest {
     @Test
     void countSmallerRightIsStableAndDoesNotCopyOwnerPayload() {

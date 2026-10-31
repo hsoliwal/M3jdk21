@@ -6,9 +6,9 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 JAVAC=javac
 JAVA=java
-if [[ -n "${M3_JDK:-}" ]]; then
-  JAVAC="$M3_JDK/bin/javac"
-  JAVA="$M3_JDK/bin/java"
+if [[ -n "${M3JDK:-}" ]]; then
+  JAVAC="$M3JDK/bin/javac"
+  JAVA="$M3JDK/bin/java"
 fi
 WORK="$(mktemp -d)"
 trap 'rm -rf "$WORK"' EXIT

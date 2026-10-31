@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-# Exact original-owner Java21/JNI host probe; not a source-built full M3JDK21 image.
+# Exact original-owner Java21/JNI host probe; not a source-built full M3JDK 21 image.
 set -euo pipefail
 
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
@@ -48,7 +48,7 @@ base="$root/src/java.base/share/classes"
 libjava="$root/src/java.base/share/native/libjava"
 tests="$root/test/jdk"
 
-# Compile the actual M3JDK21 product owners, with no synthetic replacement classes.
+# Compile the actual M3JDK 21 product owners, with no synthetic replacement classes.
 "$JAVA_HOME/bin/javac" -source 21 -target 21 -Xlint:all -Werror -proc:none \
   --patch-module "java.base=$base" -h "$scratch/headers" -d "$scratch/classes" \
   "$base/jdk/internal/m3/M3IndexMaskWindow.java" \

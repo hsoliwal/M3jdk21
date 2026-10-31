@@ -23,7 +23,7 @@ import org.openrewrite.SourceFile;
 import org.openrewrite.internal.InMemoryLargeSourceSet;
 import org.openrewrite.java.JavaParser;
 
-/** Original four-source native M3 JDK-generic collection recipe contract. */
+/** Original four-source native M3JDK-generic collection recipe contract. */
 final class M3NativeGenericDequePriority20261018RecipeTest {
     private static final String NAME = "m3-native-generic-deque-priority-20261018";
     private static final String ROOT = "/jdk/internal/m3/rewrite/hash-pinned-java/" + NAME + "/";

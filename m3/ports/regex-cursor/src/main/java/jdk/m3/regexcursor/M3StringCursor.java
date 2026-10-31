@@ -8,7 +8,7 @@ import java.util.Objects;
  * Chunk cursor over an M3 string: each chunk is one visible run of one terminal atom, in logical
  * order, forward and backward.
  *
- * <p>The descent is the one of {@code java.lang.M3String.CodeUnitCursor.seek} (M3jdk21 master
+ * <p>The descent is the one of {@code java.lang.M3String.CodeUnitCursor.seek} (M3JDK 21 master
  * 2f2beb2e): from the root {@code (owner, start, length)} go left when the position lies in the
  * left child, else right, clipping the visible run at every level, until the owner is an atom.
  * State is one atom reference plus four ints; no stack, no text copy. {@link #advance()} and

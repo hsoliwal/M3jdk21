@@ -1,5 +1,5 @@
 {
-  "schema": "M3_JDK_INTEGRATED_UTILITY_CONTRACTS_V1",
+  "schema": "M3JDK_INTEGRATED_UTILITY_CONTRACTS_V1",
   "target_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
   "module": "java.base",
   "integration": "DIRECT_EXISTING_JDK_PACKAGES_NO_COMPANION_SDK",

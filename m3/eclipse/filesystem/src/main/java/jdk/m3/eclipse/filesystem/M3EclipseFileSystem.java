@@ -10,7 +10,7 @@ import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.filesystem.IFileStore;
 import org.eclipse.core.filesystem.provider.FileSystem;
 
-/** Eclipse API ownership and explicit mounts over the M3JDK21 filesystem owner. */
+/** Eclipse API ownership and explicit mounts over the M3JDK 21 filesystem owner. */
 public final class M3EclipseFileSystem extends FileSystem implements AutoCloseable {
     public static final String PLUGIN_ID = "jdk.m3.eclipse.filesystem";
     public static final String SCHEME = "m3fs";

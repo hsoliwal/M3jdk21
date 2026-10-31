@@ -17,7 +17,7 @@ import java.util.Objects;
  * <p>This class intentionally does not recreate the Synexia mastery engine. It validates the
  * exported wire schema, recomputes the exact V6 content-addressed root, requires the caller's
  * expected root, and refuses every authority-bearing variant. Cross-repository consumers such as
- * M3JDK21 and Nebula can therefore verify mastery evidence without importing the full mastery graph.
+ * M3JDK 21 and Nebula can therefore verify mastery evidence without importing the full mastery graph.
  */
 public final class M3RecipeMasteryPortableReceipt {
     public static final String SCHEMA = "M3_RECIPE_MASTERY_FANIN_V6";

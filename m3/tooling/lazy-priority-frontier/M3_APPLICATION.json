@@ -10,7 +10,7 @@
   "recipe": {
     "owner": "Synexia",
     "class": "jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe",
-    "crate": "m3-jdk-lazy-long-priority-frontier-20261012-v1",
+    "crate": "m3jdk-lazy-long-priority-frontier-20261012-v1",
     "admission": "exact ABSENT preimage and SHA-256 postimage per target"
   },
   "license": "Apache-2.0",

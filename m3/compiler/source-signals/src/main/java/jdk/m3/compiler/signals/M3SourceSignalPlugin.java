@@ -59,7 +59,7 @@ import javax.lang.model.type.WildcardType;
 import javax.lang.model.util.ElementFilter;
 
 /**
- * Opt-in javac analysis-time signals for M3JDK21, without modifying the public Java AST or ABI.
+ * Opt-in javac analysis-time signals for M3JDK 21, without modifying the public Java AST or ABI.
  *
  * <p>Compiler-attributed source facts are precomputed once, then serialized as deterministic,
  * immutable primitive/histogram data. Static call targets are candidate graph edges: virtual

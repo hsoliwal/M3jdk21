@@ -1,4 +1,4 @@
-# M3JDK21 static language and affect geometry
+# M3JDK 21 static language and affect geometry
 
 ## Product invariant
 

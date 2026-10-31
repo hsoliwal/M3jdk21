@@ -1,5 +1,5 @@
 // Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
-// Product-specific, read-only M3JDK21 receiver. Synexia owns the source recipe.
+// Product-specific, read-only M3JDK 21 receiver. Synexia owns the source recipe.
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -16,7 +16,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Bind a qualified Synexia ordered-convergence proposal to the unchanged, exact M3JDK21 source
+ * Bind a qualified Synexia ordered-convergence proposal to the unchanged, exact M3JDK 21 source
  * revision. No target source mutation or product-gate promotion occurs in this process.
  *
  * Source receipt format: M3_ORDERED_CONVERGENCE_HANDOFF_V1, emitted by the Synexia Maven

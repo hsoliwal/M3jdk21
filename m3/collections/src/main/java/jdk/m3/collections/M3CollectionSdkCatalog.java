@@ -29,7 +29,7 @@ public final class M3CollectionSdkCatalog {
         JDK_RETAINED,
         /** An M3 component exists but provider API substitutability is not proven. */
         M3_BACKEND_ONLY,
-        /** An M3 JDK-shaped view exists; full external-library parity is not claimed. */
+        /** An M3JDK-shaped view exists; full external-library parity is not claimed. */
         M3_VIEW_ONLY,
         /** Real adapter in optional M3 interop artifact; third-party dependencies required. */
         OPTIONAL_ADAPTER,

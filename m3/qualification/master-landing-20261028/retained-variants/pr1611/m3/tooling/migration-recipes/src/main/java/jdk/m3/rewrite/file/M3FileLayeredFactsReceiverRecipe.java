@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 import org.openrewrite.Recipe;
 
-/** M3JDK21 target receiver for one-pass layered M3File fact receipts. */
+/** M3JDK 21 target receiver for one-pass layered M3File fact receipts. */
 public final class M3FileLayeredFactsReceiverRecipe extends Recipe {
     public static final String CRATE = "m3-file-layered-facts-20261020";
 

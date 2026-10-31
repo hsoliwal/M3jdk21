@@ -13,13 +13,13 @@ import org.openrewrite.Recipe;
 /**
  * Thin receiver for the Synexia-owned reusable A3 recipe.
  *
- * <p>M3JDK21 owns JDK-specific inventory/planning/application policy only. The reusable source
+ * <p>M3JDK 21 owns JDK-specific inventory/planning/application policy only. The reusable source
  * transformation is mastered in hsoliwal/com.synexia and arrives as a pinned Maven artifact.
  */
 final class A3RecipeHome {
     static final String M3_REPOSITORY = "hsoliwal/com.synexia";
     static final String M3_COMMIT = "4172b7ea5bb35f74ee19c578bddfb582eb210b5d";
-    static final String ARTIFACT = "com.synexia:m3-jdk-a3-recipes:1.0.0-SNAPSHOT";
+    static final String ARTIFACT = "com.synexia:m3jdk-a3-recipes:1.0.0-SNAPSHOT";
     static final String RECIPE_CLASS =
             "jdk.internal.m3.rewrite.atom.M3PureIntConvergenceRecipe";
     static final String EXPORT_MANIFEST =

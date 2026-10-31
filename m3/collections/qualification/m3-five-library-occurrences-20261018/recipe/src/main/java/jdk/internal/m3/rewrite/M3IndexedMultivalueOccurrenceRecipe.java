@@ -14,7 +14,7 @@
  *******************************************************************************/
 package jdk.internal.m3.rewrite;
 
-/** Hash-sealed serial M3JDK21 existing-owner refinement; no parallel rewrite engine. */
+/** Hash-sealed serial M3JDK 21 existing-owner refinement; no parallel rewrite engine. */
 public final class M3IndexedMultivalueOccurrenceRecipe extends M3GpuToolJoinRecipe {
     public M3IndexedMultivalueOccurrenceRecipe() { }
     @Override protected String resourceRoot() {

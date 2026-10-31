@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
-# Actual original M3JDK21 image and selected regex/collection/JNI tests; not full JCK.
+# Actual original M3JDK 21 image and selected regex/collection/JNI tests; not full JCK.
 name: M3JDK21 regex collections original image
 on:
   pull_request:

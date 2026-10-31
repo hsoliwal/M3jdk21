@@ -10,13 +10,13 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Fail-closed M3JDK21 receiver policy for Synexia-canonical recipe ownership.
+ * Fail-closed M3JDK 21 receiver policy for Synexia-canonical recipe ownership.
  *
  * <p>The canonical ownership decision is imported from Synexia. This class does not invent or
  * widen ownership. It only applies the pinned borrowing ledger to the current target recipe tree.
  */
 public final class M3RecipeOwnershipPolicy {
-    public static final String EXPECTED_SCHEMA = "M3_JDK21_M3_BORROWING_V1";
+    public static final String EXPECTED_SCHEMA = "M3JDK21_M3_BORROWING_V1";
     public static final String EXPECTED_TARGET = "hsoliwal/M3jdk21";
     public static final String RECIPE_SOURCE_ROOT =
             "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/";

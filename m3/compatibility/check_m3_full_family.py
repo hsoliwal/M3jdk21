@@ -182,7 +182,7 @@ def unique_json_object(pairs: list[tuple[str, object]]) -> dict:
 def validate_receiving_sequence(path: Path = ROOT / "m3/docs/name-mapping.json") -> dict:
     data = json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=unique_json_object)
     policy = data.get("porting_invariant")
-    if not isinstance(policy, dict) or policy.get("id") != "M3-JDK-PORT-1":
+    if not isinstance(policy, dict) or policy.get("id") != "M3JDK-PORT-1":
         raise ValueError("missing canonical porting invariant")
     plan = policy.get("receiving_sequence")
     if not isinstance(plan, dict):

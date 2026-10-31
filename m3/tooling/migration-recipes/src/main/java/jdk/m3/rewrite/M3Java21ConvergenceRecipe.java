@@ -6,10 +6,10 @@ import java.util.Set;
 import org.openrewrite.Recipe;
 
 /**
- * M3JDK21 compatibility facade for Synexia's canonical FILE-local convergence recipe.
+ * M3JDK 21 compatibility facade for Synexia's canonical FILE-local convergence recipe.
  *
  * <p>The reusable ordered recipe composition is owned by hsoliwal/com.synexia. This target class
- * name is retained only for M3JDK21 activation/backward compatibility.</p>
+ * name is retained only for M3JDK 21 activation/backward compatibility.</p>
  */
 @Deprecated(forRemoval = false)
 public final class M3Java21ConvergenceRecipe extends Recipe {

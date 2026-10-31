@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 import org.openrewrite.Recipe;
 
-/** M3JDK21 compatibility facade for the canonical Synexia A3 catalogue packet. */
+/** M3JDK 21 compatibility facade for the canonical Synexia A3 catalogue packet. */
 @Deprecated(forRemoval = false)
 public final class M3A3AlgorithmCatalogueRecipe extends Recipe {
     @Override

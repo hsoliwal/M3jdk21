@@ -10,7 +10,7 @@ ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd -P)"
 [[ "$(uname -s)" == Linux ]] || { echo 'Host script qualified on Linux only.' >&2; exit 2; }
 export JAVA_HOME="$M3_JAVA_HOME" PATH="$M3_JAVA_HOME/bin:$PATH"
 CC="${CC:-cc}"
-WORK="$(mktemp -d "${TMPDIR:-/tmp}/m3-jdk-views.XXXXXX")"
+WORK="$(mktemp -d "${TMPDIR:-/tmp}/m3jdk-views.XXXXXX")"
 trap 'rm -rf -- "$WORK"' EXIT
 COLL_REL=m3/collections/src/main/java/jdk/m3/collections
 PROOF_REL=m3/collections/qualification/jdk-rx7-view-convergence-20261019/proof

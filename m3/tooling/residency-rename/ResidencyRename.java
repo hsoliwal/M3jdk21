@@ -8,7 +8,7 @@ import java.util.HexFormat;
 import java.util.List;
 
 /**
- * Hash-pinned package rename of the SWT residency engine into M3jdk21 {@code m3/ports/swing-viewport}.
+ * Hash-pinned package rename of the SWT residency engine into M3JDK 21 {@code m3/ports/swing-viewport}.
  *
  * <pre>java ResidencyRename.java RENAME_MANIFEST.tsv SWT_WORKTREE M3JDK21_ROOT</pre>
  *

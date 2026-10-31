@@ -24,4 +24,4 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Compile Java 21/JNI and prove identical address in two JVMs
-        run: M3_JDK="$JAVA_HOME" python3 m3/verify-fixed-address-jni.py
+        run: M3JDK="$JAVA_HOME" python3 m3/verify-fixed-address-jni.py

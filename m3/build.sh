@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 cd "$(dirname "$0")"
-: "${M3_JDK:?Set M3_JDK to an isolated JDK 21 directory}"
+: "${M3JDK:?Set M3JDK to an isolated JDK 21 directory}"
 mkdir -p build/classes build/tests build/logs
 mapfile -t sources < <(find core/src -name '*.java' | sort)
-"$M3_JDK/bin/javac" --release 21 -Xlint:all,-module -d build/classes "${sources[@]}" > build/logs/compile.log 2>&1
-"$M3_JDK/bin/jar" --create --file build/jdk.m3.text.jar -C build/classes .
-"$M3_JDK/bin/javac" --release 21 --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -d build/tests \
+"$M3JDK/bin/javac" --release 21 -Xlint:all,-module -d build/classes "${sources[@]}" > build/logs/compile.log 2>&1
+"$M3JDK/bin/jar" --create --file build/jdk.m3.text.jar -C build/classes .
+"$M3JDK/bin/javac" --release 21 --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -d build/tests \
   core/test/FoundationTest.java core/test/M3LexiconPrecomputeTest.java \
   core/test/M3DictionaryFrequencyContractTest.java \
   core/test/M3TranslationReceiverMapTest.java \
@@ -20,28 +20,28 @@ mapfile -t sources < <(find core/src -name '*.java' | sort)
   core/test/M3InstanceIndexPrecomputeTest.java
 for mode in jit int nocompact c2; do
  flags=();case "$mode" in int)flags=(-Xint);; nocompact)flags=(-XX:-CompactStrings);; c2)flags=(-Xbatch -XX:-TieredCompilation);; esac
- "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests FoundationTest | tee "build/logs/test-$mode.log"
- "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3LexiconPrecomputeTest | tee "build/logs/typed-precompute-$mode.log"
- "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3InstanceIndexPrecomputeTest | tee "build/logs/instance-index-$mode.log"
+ "$M3JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests FoundationTest | tee "build/logs/test-$mode.log"
+ "$M3JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3LexiconPrecomputeTest | tee "build/logs/typed-precompute-$mode.log"
+ "$M3JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3InstanceIndexPrecomputeTest | tee "build/logs/instance-index-$mode.log"
 # Run numeric ownership/mapping proofs before the independent dictionary-frequency gate.
- "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3NumberSpaceTest | tee "build/logs/number-space-$mode.log"
- "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3NumberSpaceContractTest | tee "build/logs/number-contract-$mode.log"
- "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3DictionaryFrequencyContractTest | tee "build/logs/dictionary-frequency-contract-$mode.log"
- "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3TranslationReceiverMapTest | tee "build/logs/translation-receiver-map-$mode.log"
- "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3PrecomputePayloadTest | tee "build/logs/m3-payload-$mode.log"
- "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3PrecomputeReceiverTest | tee "build/logs/m3-receiver-$mode.log"
- "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests LangDexProjectionReceiverTest | tee "build/logs/langdex-receiver-$mode.log"
- "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests LangDexSourceEnvelopeTest | tee "build/logs/langdex-source-envelope-$mode.log"
- "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests SharedLexiconFamilySidecarCatalogTest | tee "build/logs/m3-family-sidecar-$mode.log"
- "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests SharedLexiconCatalogFamilyAdmissionTest | tee "build/logs/m3-family-admission-$mode.log"
- "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests SharedLexiconFamilyContractTest | tee "build/logs/m3-family-contract-$mode.log"
- "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3SiUnitDecoderTest | tee "build/logs/m3-si-unit-$mode.log"
- "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3LanguageGrammarSupportTest | tee "build/logs/grammar-support-$mode.log"
+ "$M3JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3NumberSpaceTest | tee "build/logs/number-space-$mode.log"
+ "$M3JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3NumberSpaceContractTest | tee "build/logs/number-contract-$mode.log"
+ "$M3JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3DictionaryFrequencyContractTest | tee "build/logs/dictionary-frequency-contract-$mode.log"
+ "$M3JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3TranslationReceiverMapTest | tee "build/logs/translation-receiver-map-$mode.log"
+ "$M3JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3PrecomputePayloadTest | tee "build/logs/m3-payload-$mode.log"
+ "$M3JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3PrecomputeReceiverTest | tee "build/logs/m3-receiver-$mode.log"
+ "$M3JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests LangDexProjectionReceiverTest | tee "build/logs/langdex-receiver-$mode.log"
+ "$M3JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests LangDexSourceEnvelopeTest | tee "build/logs/langdex-source-envelope-$mode.log"
+ "$M3JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests SharedLexiconFamilySidecarCatalogTest | tee "build/logs/m3-family-sidecar-$mode.log"
+ "$M3JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests SharedLexiconCatalogFamilyAdmissionTest | tee "build/logs/m3-family-admission-$mode.log"
+ "$M3JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests SharedLexiconFamilyContractTest | tee "build/logs/m3-family-contract-$mode.log"
+ "$M3JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3SiUnitDecoderTest | tee "build/logs/m3-si-unit-$mode.log"
+ "$M3JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3LanguageGrammarSupportTest | tee "build/logs/grammar-support-$mode.log"
 done
 # Build in a private temporary directory, then publish a complete content-addressed file.
 lexicon_tmp=$(mktemp -d build/lexicon.XXXXXX)
 trap 'rm -rf "$lexicon_tmp"' EXIT
-"$M3_JDK/bin/java" --module-path build/jdk.m3.text.jar -m jdk.m3.text/jdk.m3.text.LexiconTool build lexicon/english-demo.txt "$lexicon_tmp/image"
+"$M3JDK/bin/java" --module-path build/jdk.m3.text.jar -m jdk.m3.text/jdk.m3.text.LexiconTool build lexicon/english-demo.txt "$lexicon_tmp/image"
 image="build/english-demo-$(sha256sum "$lexicon_tmp/image" | cut -d' ' -f1).m3lex"
 chmod a-w "$lexicon_tmp/image"
 mv -n "$lexicon_tmp/image" "$image"

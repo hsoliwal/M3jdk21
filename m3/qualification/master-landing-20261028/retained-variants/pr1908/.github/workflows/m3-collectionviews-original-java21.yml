@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
 # Execute existing original CollectionViews in java.base with no separate owner.
-# Host Java21 source-patch proof, not full installed M3JDK21 JCK/runtime admission.
+# Host Java21 source-patch proof, not full installed M3JDK 21 JCK/runtime admission.
 name: M3JDK21 direct filtered sorted CollectionViews host
 on:
   pull_request:

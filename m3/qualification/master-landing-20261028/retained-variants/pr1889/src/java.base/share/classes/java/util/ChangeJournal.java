@@ -8,7 +8,7 @@ package java.util;
  * A bounded, versioned journal for positional model changes. Changes occupy
  * parallel primitive/reference lanes rather than retained event objects.
  * Readers materialize immutable batches only on demand. This is a non-standard
- * M3JDK21 API candidate, not an implementation of EMF's notification contract.
+ * M3JDK 21 API candidate, not an implementation of EMF's notification contract.
  *
  * <p>A cursor is the version of the last processed change. A cursor older than
  * the retained history is rejected rather than silently losing changes.

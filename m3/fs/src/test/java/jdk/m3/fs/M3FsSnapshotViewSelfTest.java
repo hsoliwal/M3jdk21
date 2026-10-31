@@ -1,6 +1,6 @@
 // Copyright 2026 Hitesh Soliwal and contributors
 // SPDX-License-Identifier: Apache-2.0
-// Adapted for the M3JDK21 M3FS runtime from the pinned Synexia donor.
+// Adapted for the M3JDK 21 M3FS runtime from the pinned Synexia donor.
 package jdk.m3.fs;
 
 import java.io.IOException;

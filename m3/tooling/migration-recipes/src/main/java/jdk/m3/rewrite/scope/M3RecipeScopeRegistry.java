@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * M3JDK21 target-only recipe-scope overlay.
+ * M3JDK 21 target-only recipe-scope overlay.
  *
  * <p>Portable reusable recipe scope is canonical in
  * {@link jdk.internal.m3.rewrite.M3RecipeScopeRegistry}. This class owns only OpenJDK/JEP/receiver

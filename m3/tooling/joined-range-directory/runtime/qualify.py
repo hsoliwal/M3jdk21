@@ -206,9 +206,9 @@ def qualify():
     java = str(regular(java_home / "bin/java"))
     javac = str(regular(java_home / "bin/javac"))
     environment = os.environ.copy()
-    environment["M3_JDK"] = str(java_home)
+    environment["M3JDK"] = str(java_home)
     # The supervised parent sets all temp/cache paths; no fallback path is introduced.
-    os.environ["M3_JDK"] = environment["M3_JDK"]
+    os.environ["M3JDK"] = environment["M3JDK"]
     cohorts = {}
     candidate = source_values[TARGET] if source_values[TARGET] == after else after
     for label, owner in (("baseline", before), ("candidate", candidate)):

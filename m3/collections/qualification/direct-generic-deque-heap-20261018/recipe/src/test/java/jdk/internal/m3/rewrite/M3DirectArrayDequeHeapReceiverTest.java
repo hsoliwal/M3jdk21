@@ -27,7 +27,7 @@ import org.openrewrite.SourceFile;
 import org.openrewrite.internal.InMemoryLargeSourceSet;
 import org.openrewrite.java.JavaParser;
 
-/** Execute the actual M3JDK21 OpenRewrite Java-LST owner, not an independent generator. */
+/** Execute the actual M3JDK 21 OpenRewrite Java-LST owner, not an independent generator. */
 final class M3DirectArrayDequeHeapReceiverTest {
     private static final String CRATE = "m3-native-generic-deque-priority-20261018";
     private static final String ROOT = "/jdk/internal/m3/rewrite/hash-pinned-java/" + CRATE + "/";

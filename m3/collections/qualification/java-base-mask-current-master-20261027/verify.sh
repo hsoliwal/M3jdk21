@@ -28,7 +28,7 @@ done
 # The historical proof script is reused, never rewritten or weakened.
 bash m3/collections/qualification/java-base-mask-20261023/verify.sh
 # The public GC oracle is a stock-JDK reference here; a separate jtreg
-# workflow must run it against the actual source-built M3JDK21 image.
+# workflow must run it against the actual source-built M3JDK 21 image.
 build=$(mktemp -d)
 trap 'rm -rf -- "$build"' EXIT
 javac --release 21 -Xlint:all -Werror -d "$build" \

@@ -30,7 +30,7 @@
 package java.util;
 
 /**
- * On a built M3JDK21, the native entry comes from libjava. For stock-JDK
+ * On a built M3JDK 21, the native entry comes from libjava. For stock-JDK
  * patch-module qualification only, set test.m3.masks.native.library to the
  * absolute path of a separately compiled copy of the same production C file.
  * System.load runs from this bootstrap-loaded helper, preserving JNI lookup.

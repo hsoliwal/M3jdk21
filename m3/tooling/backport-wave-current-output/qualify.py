@@ -67,7 +67,7 @@ def write(name, value):
     destination.write_text(json.dumps(value, indent=2) + "\n", encoding="utf-8")
 
 
-TARGET_WORKFLOW = ".github/workflows/m3-jdk21-backport-wave-admission.yml"
+TARGET_WORKFLOW = ".github/workflows/m3jdk21-backport-wave-admission.yml"
 SOURCE_GIT = {
     "m3/backports/test_compatibility_policy.py": "cd7b5a28ce3ec1f5a4475a145b40a3074b1a5c21",
     "m3/backports/compatibility_policy.py": "89673d65b2ad42fc694d809d5c6f4d0eab7adbd8",
@@ -78,7 +78,7 @@ SOURCE_GIT = {
     "m3/backports/backport_execution_waves.py": "cc2a6ceb90b56d3b05d1307e705586c8d7cf1b40",
     "m3/backports/BACKPORT_EXECUTION_WAVES.md": "428d775ca476b187dceb26a012401b11b975bbbb",
     "m3/compatibility/m3-wave-admission-pin-20261014.tsv": "60c11d68f482efadeadbbe6f58bfac9ec9aa0090",
-    ".github/workflows/m3-jdk21-backport-wave-admission.yml": "60a24153dcefb57499c921a264c94402df8af16d"
+    ".github/workflows/m3jdk21-backport-wave-admission.yml": "60a24153dcefb57499c921a264c94402df8af16d"
 }
 AFTER_GIT = {**SOURCE_GIT, TARGET_WORKFLOW: "c9017928ee7796eb70ea2c899c541ce139d7b458"}
 

@@ -3,7 +3,7 @@
 //
 // Lineage (TARGET_OWNED_PORT, leaf R6-AUTOMATON, run 20261017-m3-to-public):
 //   Apache Lucene 9.10.0 org.apache.lucene.util.automaton.RunAutomaton (git blob d4b2a2ec41e14c3e49b2aa92ddb815d013952754)
-//   and CharacterRunAutomaton (git blob f65ccd29ac77560f5bba69135c1c963faef47f18), vendored unchanged in M3jdk21 at
+//   and CharacterRunAutomaton (git blob f65ccd29ac77560f5bba69135c1c963faef47f18), vendored unchanged in M3JDK 21 at
 //   m3/vendor/third_party/lucene-core (BLOB_EQUAL to upstream tag 695c0ac84508438302cd346a812cfa2fdc5a10df),
 //   Apache License, Version 2.0. Modifications: package jdk.internal.mindex; no org.apache.lucene imports; UTF-16
 //   code-unit alphabet instead of code points; state cap; FixedBitSet -> long[] accept lane; Accountable dropped; added

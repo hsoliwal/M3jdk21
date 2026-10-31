@@ -24,7 +24,7 @@
     <m3.fs.native.prefix></m3.fs.native.prefix>
   </properties>
   <dependencies>
-    <!-- Original M3File stream is a direct first-class M3JDK21 module owner. -->
+    <!-- Original M3File stream is a direct first-class M3JDK 21 module owner. -->
     <dependency>
       <groupId>com.m3</groupId>
       <artifactId>m3-file</artifactId>

@@ -12,7 +12,7 @@ Rules (recorded in CONSUMER_SWITCH.tsv):
   * BOM: suffix the <version> of the managed <dependency> entry for the artifact (the shared property
     such as ${jackson.version} is left alone so artifacts that were not inlined keep resolving).
   * explicit <version>X</version> pins in consumer poms: X -> X-m3-source-1 when the module exists.
-  * never switched: artifacts in NATIVE_IN_BINARY (natives live in the binary jar) and M3jdk21 consumers
+  * never switched: artifacts in NATIVE_IN_BINARY (natives live in the binary jar) and M3JDK 21 consumers
     (no published repository for the source-built coordinate).
 Dry-run by default; --apply writes the index entries (worktree files inside the cone are written too).
 """

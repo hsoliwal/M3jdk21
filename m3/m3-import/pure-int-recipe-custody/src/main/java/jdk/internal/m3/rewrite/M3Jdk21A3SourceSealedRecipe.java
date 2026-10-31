@@ -25,7 +25,7 @@ import org.openrewrite.java.JavaParser;
 import org.openrewrite.java.tree.J;
 
 /**
- * Canonical Synexia source-sealed replay atom for M3JDK21 A3 tooling packets.
+ * Canonical Synexia source-sealed replay atom for M3JDK 21 A3 tooling packets.
  *
  * <p>The target repository owns only a compatibility receiver facade. Exact preimage/postimage
  * custody, duplicate/drift refusal, additive target generation and second-pass fixed-point

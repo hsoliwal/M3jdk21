@@ -9,7 +9,7 @@ import org.openrewrite.Recipe;
  * Java-21-compatible backport of OpenJDK JDK-8368692.
  *
  * <p>Upstream donor: {@code openjdk/jdk@9131c72d63cac7d2a0e845952cee0e3c7edbfc93}.
- * M3JDK21 preserves the JDK 21 Security Manager-era access path by resolving the new property
+ * M3JDK 21 preserves the JDK 21 Security Manager-era access path by resolving the new property
  * through {@code SecurityProperties.privilegedGetOverridable}. The default remains {@code true},
  * so existing JDK 21 behavior is unchanged unless the property is explicitly disabled.</p>
  */

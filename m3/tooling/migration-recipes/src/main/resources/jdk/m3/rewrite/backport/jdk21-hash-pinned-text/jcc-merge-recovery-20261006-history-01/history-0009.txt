@@ -1,4 +1,4 @@
-# JCC source handoff through the existing M3JDK21 receiving lifecycle
+# JCC source handoff through the existing M3JDK 21 receiving lifecycle
 
 ## Scope and decision
 

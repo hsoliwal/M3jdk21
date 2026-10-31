@@ -10,7 +10,7 @@ import java.util.Random;
 
 /**
  * Independent real JNI/Java viewport parity oracle. Run with -Xcheck:jni
- * and the exact M3JDK21 native library compiled from m3maskviewport.c.
+ * and the exact M3JDK 21 native library compiled from m3maskviewport.c.
  * It proves only the explicitly checked source and runtime profile.
  */
 public final class M3MaskViewportCheckedJniContract {

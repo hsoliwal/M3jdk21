@@ -8,7 +8,7 @@ package jdk.m3.file;
 import java.util.Objects;
 
 /**
- * Native M3JDK21 incremental build-impact propagation over the original
+ * Native M3JDK 21 incremental build-impact propagation over the original
  * M3FileDeltaLedger physical slots. The source/class SHA-256 ledger owns file
  * identities; javac/M3AST/JDT supply the reverse dependency graph and semantic
  * evidence. Maven/Gradle consume the resulting impacted slot sequence.

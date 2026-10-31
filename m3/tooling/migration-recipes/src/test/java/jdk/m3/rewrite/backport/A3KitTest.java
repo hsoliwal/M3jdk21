@@ -21,7 +21,7 @@ import org.openrewrite.text.PlainText;
 /** Real recipe replay of CI selection; a successful replay is not a passing hosted workflow. */
 final class A3KitTest {
     private static final String ROOT = "/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-proof-kit/";
-    private static final String PATH = ".github/workflows/m3-jdk-proof.yml";
+    private static final String PATH = ".github/workflows/m3jdk-proof.yml";
 
     @Test
     void namedRecipeReplaysExactWorkflowThenStops() throws IOException {
@@ -64,8 +64,8 @@ final class A3KitTest {
         assertEquals(PATH, row[0]);
         assertEquals(M3Jdk21HashPinnedTextSnapshotRecipe.sha256(before), row[1]);
         assertEquals(M3Jdk21HashPinnedTextSnapshotRecipe.sha256(after), row[2]);
-        assertEquals(before.replace("      - '.github/workflows/m3-jdk-proof.yml'\n",
-                "      - '.github/workflows/m3-jdk-proof.yml'\n"
+        assertEquals(before.replace("      - '.github/workflows/m3jdk-proof.yml'\n",
+                "      - '.github/workflows/m3jdk-proof.yml'\n"
                         + "      - 'm3/tooling/migration-recipes/**'\n"
                         + "      - 'm3/tooling/a3/**'\n"), after);
     }

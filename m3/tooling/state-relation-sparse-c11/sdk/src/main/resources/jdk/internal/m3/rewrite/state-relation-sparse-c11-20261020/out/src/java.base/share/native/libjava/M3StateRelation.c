@@ -1,4 +1,4 @@
-/* M3JDK21 adaptation: C/JNI/header identifiers only; Synexia remains the source owner. */
+/* M3JDK 21 adaptation: C/JNI/header identifiers only; Synexia remains the source owner. */
 /* SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
  * SPDX-License-Identifier: Apache-2.0 */
 #include "m3_state_relation.h"

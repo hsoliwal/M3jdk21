@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-# Source/CI candidate: Synexia convergence recipe -> original M3JDK21 JNI owner.
+# Source/CI candidate: Synexia convergence recipe -> original M3JDK 21 JNI owner.
 name: M3 LC4 merged rank selection Java21 JNI
 
 on:

@@ -159,7 +159,7 @@ public final class M3CollectionSdk {
 
     /**
      * Detach an immutable Object[] owner and its physical int[] index directory.
-     * This is an M3JDK21 snapshot, not a live filtered java.util wrapper.
+     * This is an M3JDK 21 snapshot, not a live filtered java.util wrapper.
      */
     public static <E> M3IndexedListSnapshot<E> indexedObjectSnapshot(
             Collection<? extends E> source) {

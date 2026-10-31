@@ -7931,7 +7931,7 @@
   "precompute_port_map": "m3/docs/m3-string-precompute-port-map.tsv",
   "precompute_scope_rule": "Only String-semantic and String-search donor precompute maps into M3JDK String/runtime internals; Synexia language, semantic, DAG, probabilistic and reasoning precompute must not be transplanted into java.lang.String.",
   "porting_invariant": {
-    "id": "M3-JDK-PORT-1",
+    "id": "M3JDK-PORT-1",
     "authority": "M3JDK21",
     "source_workspace": "hsoliwal/com.synexia",
     "target_repository": "hsoliwal/M3jdk21",
@@ -8084,7 +8084,7 @@
     }
   },
   "donor_artifact_policy": {
-    "id": "M3-JDK-DONOR-ARTIFACTS-1",
+    "id": "M3JDK-DONOR-ARTIFACTS-1",
     "candidate_source": "whole qualified hsoliwal/com.synexia workspace",
     "artifact_classes": [
       "source",

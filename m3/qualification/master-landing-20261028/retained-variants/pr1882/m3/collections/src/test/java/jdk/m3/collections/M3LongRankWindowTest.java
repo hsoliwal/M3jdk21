@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
-/** Original M3JDK21 module contract for caller-owned signed-long range output. */
+/** Original M3JDK 21 module contract for caller-owned signed-long range output. */
 final class M3LongRankWindowTest {
     @Test
     void publicSnapshotWritesOnlyTheAdmittedPhysicalResultWindow() {

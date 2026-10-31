@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 /**
- * M3JDK21 target adapter for Synexia's canonical reusable recipe-scope policy.
+ * M3JDK 21 target adapter for Synexia's canonical reusable recipe-scope policy.
  *
  * <p>The target retains this value only to preserve existing package/API references. Portable
  * recipe semantics are converted from {@link jdk.internal.m3.rewrite.M3RecipeScopePolicy}; only

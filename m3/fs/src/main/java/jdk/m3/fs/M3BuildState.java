@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 /**
- * Versioned, immutable, array/offset/mask build facts owned by M3JDK21's M3FS.
+ * Versioned, immutable, array/offset/mask build facts owned by M3JDK 21's M3FS.
  * The producer (M3File and M3AST/javac) supplies verified facts. Native inventory capture
  * delegates byte observation to M3FS; this class never parses code or infers ABI compatibility.
  * Dependency offsets contain the row indices on which each row depends.

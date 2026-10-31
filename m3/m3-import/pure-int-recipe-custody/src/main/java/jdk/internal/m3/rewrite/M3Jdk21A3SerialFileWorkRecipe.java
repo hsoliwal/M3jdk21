@@ -5,7 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
-/** Canonical Synexia owner for the M3JDK21 A3 serial FILE-work source-sealed packet. */
+/** Canonical Synexia owner for the M3JDK 21 A3 serial FILE-work source-sealed packet. */
 public final class M3Jdk21A3SerialFileWorkRecipe extends M3Jdk21A3SourceSealedRecipe {
     @Override
     protected String resourceRoot() {

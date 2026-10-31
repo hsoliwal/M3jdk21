@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
-# Full original M3JDK21 source image build with Java warnings as errors preserved.
+# Full original M3JDK 21 source image build with Java warnings as errors preserved.
 name: M3JDK21 strict ChangeJournal docs and regex source image
 on:
   pull_request:
@@ -79,7 +79,7 @@ jobs:
           fi
           home="$(dirname "$(dirname "$java_path")")"
           "$home/bin/java" -version
-          out="$RUNNER_TEMP/m3-jdk-doclint"
+          out="$RUNNER_TEMP/m3jdk-doclint"
           mkdir -p "$out"
           "$home/bin/javac" -source 21 -target 21 -proc:none -Xlint:all -Werror \
             -d "$out" test/jdk/java/util/regex/M3RegexFrontierShortCircuitTest.java

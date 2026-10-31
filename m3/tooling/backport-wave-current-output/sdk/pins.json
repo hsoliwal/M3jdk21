@@ -50,7 +50,7 @@
       "sha256": "e554af162f93a84dfbe7ee2bcd0781cf95678f760f0b289492bdba190e2bcfb1"
     },
     {
-      "path": "src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/before/.github/workflows/m3-jdk21-backport-wave-admission.yml",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/before/.github/workflows/m3jdk21-backport-wave-admission.yml",
       "gitBlob": "60a24153dcefb57499c921a264c94402df8af16d",
       "bytes": 3717,
       "sha256": "1cf79b31b3dbcb74bf3858f1c898072a836ffae2da6f0d5de731cf09d4132d31"
@@ -116,7 +116,7 @@
       "sha256": "ac09b63f395cd1e0ea6126c07e8cf3fac9a79e4ff59f5be18f390b69fd04b703"
     },
     {
-      "path": "src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/inverse/out/.github/workflows/m3-jdk21-backport-wave-admission.yml",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/inverse/out/.github/workflows/m3jdk21-backport-wave-admission.yml",
       "gitBlob": "60a24153dcefb57499c921a264c94402df8af16d",
       "bytes": 3717,
       "sha256": "1cf79b31b3dbcb74bf3858f1c898072a836ffae2da6f0d5de731cf09d4132d31"
@@ -128,7 +128,7 @@
       "sha256": "df4fd6e222f64e6a9e1d9b6ad7e99b05a3f2bc4dbe41646fe2672f216492204b"
     },
     {
-      "path": "src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/out/.github/workflows/m3-jdk21-backport-wave-admission.yml",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/out/.github/workflows/m3jdk21-backport-wave-admission.yml",
       "gitBlob": "c9017928ee7796eb70ea2c899c541ce139d7b458",
       "bytes": 3717,
       "sha256": "539abe591a91c37ddc16601b0ce2bcccc4a238605f8eda72c3f8008920c9b51f"

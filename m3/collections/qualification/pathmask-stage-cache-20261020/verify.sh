@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Source-guarded M3JDK21 Java 21 / JNI C17 differential, not a complete runtime release gate.
+# Source-guarded M3JDK 21 Java 21 / JNI C17 differential, not a complete runtime release gate.
 set -euo pipefail
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
 work="$(mktemp -d)"

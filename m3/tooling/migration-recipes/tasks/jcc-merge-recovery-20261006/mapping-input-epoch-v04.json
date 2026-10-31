@@ -1233,7 +1233,7 @@
         "canonical_document": "m3/docs/m3jdk21-porting-invariant.md",
         "first_party_rule": "Synexia-original Apache-2.0 material is a target donor candidate; contribution under different target terms requires actual rights and an explicit target-side licensing decision.",
         "generated_output_rule": "A recipe license does not relicense its inputs or outputs; generated postimages must satisfy source provenance and destination licensing.",
-        "id": "M3-JDK-DONOR-ARTIFACTS-1",
+        "id": "M3JDK-DONOR-ARTIFACTS-1",
         "idea_rule": "Ideas, algorithms, behaviors and architecture patterns may be independently reimplemented under target ownership while retaining donor provenance as engineering evidence.",
         "recipe_rule": "Qualified Synexia recipes and their proof crates may be copied or adapted into target tooling; recipe execution is never a Synexia runtime dependency.",
         "runtime_dependency_rule": "M3JDK21 runtime has no dependency on Synexia modules, services or build tooling.",
@@ -1345,7 +1345,7 @@
       "porting_invariant": {
         "authority": "M3JDK21",
         "canonical_document": "m3/docs/m3jdk21-porting-invariant.md",
-        "id": "M3-JDK-PORT-1",
+        "id": "M3JDK-PORT-1",
         "naming_analogy": "MIndexString -> java.lang.M3String while public java.lang.String remains String",
         "rules": [
           "Public JDK APIs retain JDK names and contracts.",

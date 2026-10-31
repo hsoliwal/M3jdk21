@@ -6,7 +6,7 @@ import java.util.Set;
 import org.openrewrite.Recipe;
 
 /**
- * Target-specific M3JDK21 receiver for JEP 496 ML-KEM.
+ * Target-specific M3JDK 21 receiver for JEP 496 ML-KEM.
  *
  * <p>The reusable hash-pinned mechanics remain canonical in Synexia; this class binds the exact
  * Java-21 SHAKE-branch preimages to reviewed ML-KEM product/test/vector postimages. Public

@@ -3,7 +3,7 @@
 # Copyright 2026 Hitesh Soliwal and contributors.
 set -euo pipefail
 ROOT=$(cd -- "$(dirname -- "$0")" && pwd)
-JAVA_HOME=${M3_JDK:-${JAVA_HOME:-$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")}}
+JAVA_HOME=${M3JDK:-${JAVA_HOME:-$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")}}
 export JAVA_HOME
 OUT=${M3_OPTANE_BUILD:-"$ROOT/target"}
 if [[ -e "$OUT" ]]; then echo "Refusing existing output: $OUT" >&2; exit 2; fi

@@ -229,7 +229,7 @@ recipe engines are unchanged. Target emission must use that qualified receiver;
 never patch generated output to repair a failed transformation.
 
 After receiving, run `verify_progress_job.py --baseline-root <repair-source-tree>
---candidate <received-tree> --stock-jdk <stock-java21> --m3-jdk <built-m3-java21>
+--candidate <received-tree> --stock-jdk <stock-java21> --m3jdk <built-m3-java21>
 --eclipse-dir <pinned-eclipse-inputs> --output <new-proof-directory>`. The exact
 existing dependency hashes are in `DONOR-REVIEW.json`. The verifier performs the
 original JDK protected/package doclint and warning-as-error compile, strict

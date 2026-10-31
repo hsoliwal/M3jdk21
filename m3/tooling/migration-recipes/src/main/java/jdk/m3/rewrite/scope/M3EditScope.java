@@ -4,7 +4,7 @@ package jdk.m3.rewrite.scope;
 import java.util.Objects;
 
 /**
- * M3JDK21 compatibility vocabulary for Synexia's canonical edit-scope lattice.
+ * M3JDK 21 compatibility vocabulary for Synexia's canonical edit-scope lattice.
  *
  * <p>This enum is a thin target adapter only. Ordering/promotion semantics are delegated to the
  * provenance-pinned Apache-2.0 {@link jdk.internal.m3.rewrite.M3EditScope} owner.</p>

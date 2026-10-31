@@ -1294,7 +1294,7 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
         <!--endregion Phase 21: verify-->
 
     
-    <!-- M3JDK21 canonical source-pinned recipe: opt-in original-AST audit. -->
+    <!-- M3JDK 21 canonical source-pinned recipe: opt-in original-AST audit. -->
     <profile>
       <id>m3-ast-source-audit-20261021</id>
       <build>

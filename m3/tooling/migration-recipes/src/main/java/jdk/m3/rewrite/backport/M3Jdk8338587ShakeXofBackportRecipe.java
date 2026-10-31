@@ -9,7 +9,7 @@ import org.openrewrite.Recipe;
  * Java-21 compatibility adaptation of JDK-8338587 for post-quantum security backports.
  *
  * <p>The upstream change assumes the later long[]/VarHandle SHA3 representation and removes the
- * standalone SHAKE classes. M3JDK21 preserves its Java-21 byte-state SHA3 engine and standalone
+ * standalone SHAKE classes. M3JDK 21 preserves its Java-21 byte-state SHA3 engine and standalone
  * SHAKE256 compatibility while adding only the nested streaming XOF and public lane permutation
  * surfaces required by ML-KEM/ML-DSA.</p>
  */

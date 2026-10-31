@@ -6,9 +6,9 @@ import java.util.Set;
 import org.openrewrite.Recipe;
 
 /**
- * M3JDK21 compatibility receiver for Synexia's canonical semantic-hash recipe.
+ * M3JDK 21 compatibility receiver for Synexia's canonical semantic-hash recipe.
  *
- * <p>The reusable recipe implementation is owned by hsoliwal/com.synexia. M3JDK21 retains this
+ * <p>The reusable recipe implementation is owned by hsoliwal/com.synexia. M3JDK 21 retains this
  * class name only as a thin target adapter and delegates execution to the canonical child recipe.</p>
  */
 @Deprecated(forRemoval = false)

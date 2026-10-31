@@ -33,7 +33,7 @@ def main() -> None:
               "commands": [], "scope": "Only explicitly declares the existing public no-arg Builder constructor; original whole-module lint gate retained.",
               "driver_sha256": digest(Path(__file__).read_bytes()),
               "source_closure": len(core_paths)}
-    env = dict(os.environ, M3_JDK=str(JDK), JAVA_HOME=str(JDK))
+    env = dict(os.environ, M3JDK=str(JDK), JAVA_HOME=str(JDK))
     begin = time.monotonic()
     def command(label, argv, root):
         log = out / (label + ".log")

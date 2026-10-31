@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.tooling.dag;
 
-/** CLI proof entry point for the canonical M3JDK21 backport DAG. */
+/** CLI proof entry point for the canonical M3JDK 21 backport DAG. */
 public final class M3BackportDagMain {
     private M3BackportDagMain() {}
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# M3JDK21 focused Java21 / JNI C17 product-owner qualification, not a full JDK release.
+# M3JDK 21 focused Java21 / JNI C17 product-owner qualification, not a full JDK release.
 set -euo pipefail
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
 work="$(mktemp -d)"

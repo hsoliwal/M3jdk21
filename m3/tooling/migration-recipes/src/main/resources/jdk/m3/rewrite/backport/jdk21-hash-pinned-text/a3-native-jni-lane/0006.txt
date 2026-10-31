@@ -1,4 +1,4 @@
-# JDK 22–27 → M3JDK21 complete compatible-backport programme
+# JDK 22–27 → M3JDK 21 complete compatible-backport programme
 
 Status: active downstream backport programme. Target baseline is OpenJDK 21 semantics.
 

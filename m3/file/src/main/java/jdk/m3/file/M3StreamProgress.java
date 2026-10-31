@@ -5,7 +5,7 @@ package jdk.m3.file;
 import java.util.Objects;
 import java.util.concurrent.CancellationException;
 
-/** A byte-work progress contract shared by M3JDK21 input and output streams. */
+/** A byte-work progress contract shared by M3JDK 21 input and output streams. */
 @FunctionalInterface
 public interface M3StreamProgress {
     /** Nonnegative units completed by this caller, including deliberate replay work. */

@@ -28,7 +28,7 @@ import org.openrewrite.java.tree.J;
 import org.openrewrite.test.TypeValidation;
 
 /**
- * M3JDK21 receiver proof for the canonical Synexia pure-int recipe.
+ * M3JDK 21 receiver proof for the canonical Synexia pure-int recipe.
  *
  * <p>This test owns only target/source-corpus admission. Recipe implementation and mastery remain
  * canonical in hsoliwal/com.synexia.</p>

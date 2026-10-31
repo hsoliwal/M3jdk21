@@ -29,9 +29,9 @@ OWNER_GIT = {
     "m3/backports/backport_execution_waves.py": "cc2a6ceb90b56d3b05d1307e705586c8d7cf1b40",
     "m3/backports/BACKPORT_EXECUTION_WAVES.md": "428d775ca476b187dceb26a012401b11b975bbbb",
     "m3/compatibility/m3-wave-admission-pin-20261014.tsv": "60c11d68f482efadeadbbe6f58bfac9ec9aa0090",
-    ".github/workflows/m3-jdk21-backport-wave-admission.yml": "60a24153dcefb57499c921a264c94402df8af16d"
+    ".github/workflows/m3jdk21-backport-wave-admission.yml": "60a24153dcefb57499c921a264c94402df8af16d"
 }
-WAVE_OWNER = ".github/workflows/m3-jdk21-backport-wave-admission.yml"
+WAVE_OWNER = ".github/workflows/m3jdk21-backport-wave-admission.yml"
 WAVE_BEFORE_SHA = "1cf79b31b3dbcb74bf3858f1c898072a836ffae2da6f0d5de731cf09d4132d31"
 WAVE_AFTER_GIT = "c9017928ee7796eb70ea2c899c541ce139d7b458"
 WAVE_AFTER_SHA = "539abe591a91c37ddc16601b0ce2bcccc4a238605f8eda72c3f8008920c9b51f"

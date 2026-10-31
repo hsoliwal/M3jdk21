@@ -13,7 +13,7 @@
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
 /*
- * Source-sealed Synexia recipe: M3JDK21 indexed stable descending groups.
+ * Source-sealed Synexia recipe: M3JDK 21 indexed stable descending groups.
  */
 package jdk.m3.collections;
 

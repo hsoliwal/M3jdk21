@@ -6,7 +6,7 @@ on:
       - "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/semantic/M3SemanticHashRecipeTest.java"
       - "m3/m3-import/current-full-borrow/string-target-successor-chain.tsv"
       - "m3/m3-import/current-full-borrow/test_string_phase_successors.py"
-      - ".github/workflows/m3-jdk21-backport-dag.yml"
+      - ".github/workflows/m3jdk21-backport-dag.yml"
       - ".github/workflows/m3-full-borrow-receiver.yml"
       - ".github/workflows/m3-shared-proof-repair.yml"
   workflow_dispatch:

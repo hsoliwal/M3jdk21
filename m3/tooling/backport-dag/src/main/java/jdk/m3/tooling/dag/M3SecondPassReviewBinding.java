@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Exact read-only M3JDK21 custody binding to the merged Synexia second-pass review DAG.
+ * Exact read-only M3JDK 21 custody binding to the merged Synexia second-pass review DAG.
  *
  * <p>The binding is pre-admission evidence only. It grants no JDK source mutation, semantic
  * equivalence, donor-source copy, JNI/native execution, or promotion authority.</p>

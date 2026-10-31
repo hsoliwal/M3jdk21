@@ -15,7 +15,7 @@
 package jdk.internal.m3.rewrite;
 
 /**
- * Receive already-qualified Synexia M3 BiMap into current M3JDK21 master.
+ * Receive already-qualified Synexia M3 BiMap into current M3JDK 21 master.
  * Only new files; source-sealed OpenRewrite PlainText results, no second engine.
  * Any subsequent existing-owner refinement must use an attributed Java LST recipe.
  */

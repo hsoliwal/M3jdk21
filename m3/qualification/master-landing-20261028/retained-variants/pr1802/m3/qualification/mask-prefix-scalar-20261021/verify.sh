@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-# This bounded tool builds patched Java21 class sources; it does NOT build the full M3JDK21 image.
+# This bounded tool builds patched Java21 class sources; it does NOT build the full M3JDK 21 image.
 set -euo pipefail
 
 root="$(cd "$(dirname "$0")/../../.." && pwd)"

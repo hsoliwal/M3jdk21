@@ -330,7 +330,7 @@
           "beforeBytes": 15148,
           "beforeSHA256": "95cf2675cf9756311909303a568662efdc5f4d3c796f9f5fc92a10072c6c97ad",
           "operation": "REPLACE",
-          "path": ".github/workflows/m3-jdk21-backports.yml"
+          "path": ".github/workflows/m3jdk21-backports.yml"
         },
         {
           "afterBytes": 6325,

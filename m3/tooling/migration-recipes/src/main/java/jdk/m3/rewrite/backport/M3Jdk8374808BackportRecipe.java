@@ -9,7 +9,7 @@ import org.openrewrite.Recipe;
  * Java-21-compatible additive API leaf from upstream JDK-8374808.
  *
  * <p>The donor commit is openjdk/jdk
- * {@code 264fdc5b4ed5f4e35168048533196e670c3dda6c}. M3JDK21 deliberately
+ * {@code 264fdc5b4ed5f4e35168048533196e670c3dda6c}. M3JDK 21 deliberately
  * imports only the compatible API/SPI leaf: KeyStore exposes creation time as
  * {@code Instant}, while KeyStoreSpi provides a default adapter over the
  * existing Java 21 {@code Date} method. Provider storage remains unchanged.</p>

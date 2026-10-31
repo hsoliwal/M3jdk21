@@ -36,7 +36,7 @@ def copy(source, target):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    for name in ("baseline-root", "candidate", "stock-jdk", "m3-jdk", "eclipse-dir", "output"):
+    for name in ("baseline-root", "candidate", "stock-jdk", "m3jdk", "eclipse-dir", "output"):
         parser.add_argument("--" + name, type=Path, required=True)
     args = parser.parse_args()
     args.output = args.output.resolve()

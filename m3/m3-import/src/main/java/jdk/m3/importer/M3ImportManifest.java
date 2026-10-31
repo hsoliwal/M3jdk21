@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
-/** Independent M3JDK21 verifier for a concrete Synexia delivery-export TSV. */
+/** Independent M3JDK 21 verifier for a concrete Synexia delivery-export TSV. */
 public record M3ImportManifest(
         String sourceRevision,
         String targetId,

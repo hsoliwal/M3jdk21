@@ -1,4 +1,4 @@
-// M3JDK21 adaptation: package/type/progress mapping only; Synexia remains the source owner.
+// M3JDK 21 adaptation: package/type/progress mapping only; Synexia remains the source owner.
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Hitesh Soliwal and contributors.
 package jdk.internal.mindex;

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # SPDX-License-Identifier: Apache-2.0
-# Focused Java21 proof of the actual M3JDK21 java.base product source.
+# Focused Java21 proof of the actual M3JDK 21 java.base product source.
 set -euo pipefail
 cd "$(dirname "$0")/../../.."
 src=src/java.base/share/classes/jdk/internal/util/M3PipelinePlan.java

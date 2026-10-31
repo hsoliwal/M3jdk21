@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 # Leaf-1 proof for the native wc kernel (libm3textio) and jdk.m3.text.Wc on a stock
-# JDK 21 plus gcc, without an M3 JDK image (build.py stays the image path).
+# JDK 21 plus gcc, without an M3JDK image (build.py stays the image path).
 # Prints one PASS/FAIL/NOT_RUN/HOLD line per gate with parsed counts (BLLSE) and
 # keeps every raw log under OUT. Exit status 1 when any gate FAILs.
 #

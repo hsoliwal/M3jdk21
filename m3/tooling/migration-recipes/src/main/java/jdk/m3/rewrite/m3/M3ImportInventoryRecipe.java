@@ -14,7 +14,7 @@ import org.openrewrite.Tree;
 import org.openrewrite.TreeVisitor;
 import org.openrewrite.text.PlainText;
 
-/** Read-only OpenRewrite inventory for the pinned Synexia -> M3JDK21 Apache delivery manifest. */
+/** Read-only OpenRewrite inventory for the pinned Synexia -> M3JDK 21 Apache delivery manifest. */
 public final class M3ImportInventoryRecipe
         extends ScanningRecipe<M3ImportInventoryRecipe.Inventory> {
     private static final String MANIFEST = "m3/m3-import/m3-seed-export.tsv";

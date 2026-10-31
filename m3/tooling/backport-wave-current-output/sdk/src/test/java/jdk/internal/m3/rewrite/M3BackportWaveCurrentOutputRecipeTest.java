@@ -31,7 +31,7 @@ final class M3BackportWaveCurrentOutputRecipeTest {
     private static final String INVERSE_MANIFEST_SHA = "ac09b63f395cd1e0ea6126c07e8cf3fac9a79e4ff59f5be18f390b69fd04b703";
     private static final String FORWARD_DESCRIPTOR_SHA = "fbb55455fd65f0e2ebebcdad693034c1ca5f2feb0359841181c7ebb31359462f";
     private static final String INVERSE_DESCRIPTOR_SHA = "8d8ede14073be15d433eadd78706cc9fbc0facb44d1bd00c6dcd3f0ce404ce45";
-    private static final String WAVE_OWNER = ".github/workflows/m3-jdk21-backport-wave-admission.yml";
+    private static final String WAVE_OWNER = ".github/workflows/m3jdk21-backport-wave-admission.yml";
     private static final String WAVE_AFTER = "539abe591a91c37ddc16601b0ce2bcccc4a238605f8eda72c3f8008920c9b51f";
     private static final Map<String, String> BEFORE = Map.ofEntries(
             Map.entry("m3/backports/test_compatibility_policy.py", "69694e6e3725aeee8687a8c58bce477c7256f626d8425c04a9ce9772250a2bb6"),
@@ -43,7 +43,7 @@ final class M3BackportWaveCurrentOutputRecipeTest {
             Map.entry("m3/backports/backport_execution_waves.py", "2cb19465a6a0d4f24dc228921eb1a2d7c2bbc4e53ce68e635b0e60ddb2a563dc"),
             Map.entry("m3/backports/BACKPORT_EXECUTION_WAVES.md", "df2aca41ab120bdbc8c165d4abe3552c54a91c591aab116b718b94283ae23f28"),
             Map.entry("m3/compatibility/m3-wave-admission-pin-20261014.tsv", "984af6023eb4f4e0b917a700c5e75bd936083b7ae2f0daef07c37ad6a3e2ddd4"),
-            Map.entry(".github/workflows/m3-jdk21-backport-wave-admission.yml", "1cf79b31b3dbcb74bf3858f1c898072a836ffae2da6f0d5de731cf09d4132d31"));
+            Map.entry(".github/workflows/m3jdk21-backport-wave-admission.yml", "1cf79b31b3dbcb74bf3858f1c898072a836ffae2da6f0d5de731cf09d4132d31"));
     private static final Set<String> PASSED = new LinkedHashSet<>();
     private static final Map<Boolean, String> EMITTED = new HashMap<>();
     private static int successfulRuns;

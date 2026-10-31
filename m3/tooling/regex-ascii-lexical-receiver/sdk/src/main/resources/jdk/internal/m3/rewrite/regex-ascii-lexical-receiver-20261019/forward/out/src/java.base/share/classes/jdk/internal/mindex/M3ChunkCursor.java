@@ -5,7 +5,7 @@
 //   0.1.5 (commit fd4c51c73587981219daf9a36184aabbddae78ee, src/cursor.rs blob ca55f27b1f69d44222d7d4e62ef0a5ee8499015e,
 //   dual-licensed MIT OR Apache-2.0); Rust donor, pattern only (Java-only law): no code copied. UTF-16 units replace bytes,
 //   surrogateAware() replaces utf8_aware(). Intended implementor: the existing java.lang.M3String.CodeUnitCursor
-//   (M3String.java L579-622 on M3jdk21 master 970a34350eb), extended in the next leaf to expose its contiguous run and keep
+//   (M3String.java L579-622 on M3JDK 21 master 970a34350eb), extended in the next leaf to expose its contiguous run and keep
 //   its descent path in lanes; this leaf adds no second tuple cursor.
 package jdk.internal.mindex;
 

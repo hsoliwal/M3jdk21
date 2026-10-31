@@ -4,7 +4,7 @@ package jdk.m3.collections;
 import java.util.Arrays;
 import java.util.Random;
 
-/** Standalone Java21/native parity of the M3JDK21 original index-path-mask owner. */
+/** Standalone Java21/native parity of the M3JDK 21 original index-path-mask owner. */
 public final class M3PathMaskStageCacheParity {
     private static int cases;
     private static int cached;

@@ -4,7 +4,7 @@
 """Compile pinned Apache-2.0 Synexia test references; never ship them in M3."""
 import hashlib,os,pathlib,subprocess
 root=pathlib.Path(__file__).resolve().parents[1]
-jdk=pathlib.Path(os.environ['M3_JDK'])
+jdk=pathlib.Path(os.environ['M3JDK'])
 commit='64a2ea61c73b548413fed6686a9daeeb0b9b0564'
 pins={'FrozenChars.java':'791fffa3f9938e5266663c1cb256cc4d00f8c0f5',
       'FrozenBytes.java':'22656cfaa3ccf0c6b214f214c92324d7f3ea55be'}

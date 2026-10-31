@@ -5,7 +5,7 @@ on:
     branches: ['m3/jdk-proof-20261004']
   pull_request:
     paths:
-      - '.github/workflows/m3-jdk-proof.yml'
+      - '.github/workflows/m3jdk-proof.yml'
 permissions:
   contents: read
 jobs:
@@ -69,7 +69,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: m3-jdk-kit-${{ github.event.pull_request.head.sha || github.sha }}
+          name: m3jdk-kit-${{ github.event.pull_request.head.sha || github.sha }}
           path: ${{ runner.temp }}/kit
           retention-days: 3
           if-no-files-found: error

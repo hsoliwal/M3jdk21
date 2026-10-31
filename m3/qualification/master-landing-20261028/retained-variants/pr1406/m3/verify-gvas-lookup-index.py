@@ -20,7 +20,7 @@ def main() -> None:
         raise RuntimeError("existing GVAS proof owner is unavailable")
     proof = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(proof)
-    jdk = Path(os.environ.get("M3_JDK", os.environ.get(
+    jdk = Path(os.environ.get("M3JDK", os.environ.get(
         "JAVA_HOME", "/usr/lib/jvm/java-21-openjdk-amd64")))
     test = ROOT / "core/test/jdk/m3/text/M3GvasLookupIndexContractTest.java"
     test_class = "jdk.m3.text.M3GvasLookupIndexContractTest"

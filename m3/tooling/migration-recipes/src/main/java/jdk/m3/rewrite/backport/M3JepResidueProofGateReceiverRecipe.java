@@ -6,7 +6,7 @@ import java.util.Set;
 import org.openrewrite.Recipe;
 
 /**
- * Thin M3JDK21 receiver for the canonical Synexia released-JEP residue proof repair.
+ * Thin M3JDK 21 receiver for the canonical Synexia released-JEP residue proof repair.
  *
  * <p>Source authority is the SHA-256-pinned Synexia recipe crate at
  * {@code hsoliwal/com.synexia#10724}. This receiver reuses the existing JDK21 text replay

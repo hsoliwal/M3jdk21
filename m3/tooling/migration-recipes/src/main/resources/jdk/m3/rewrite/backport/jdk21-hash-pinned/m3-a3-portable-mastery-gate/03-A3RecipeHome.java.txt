@@ -14,7 +14,7 @@ import org.openrewrite.Recipe;
 /**
  * Thin receiver for the Synexia-owned reusable A3 recipe and mastery evidence verifier.
  *
- * <p>M3JDK21 owns JDK-specific inventory/planning/application policy only. Reusable source
+ * <p>M3JDK 21 owns JDK-specific inventory/planning/application policy only. Reusable source
  * transformations and portable mastery evidence validation are mastered in hsoliwal/com.synexia
  * and arrive through one pinned slim Maven artifact.</p>
  */
@@ -22,7 +22,7 @@ final class A3RecipeHome {
     static final String M3_REPOSITORY = "hsoliwal/com.synexia";
     static final String M3_COMMIT = "3357736011d1d3e3173433d1a8bdb2795f71599e";
     static final String M3_PR = "9599";
-    static final String ARTIFACT = "com.synexia:m3-jdk-a3-recipes:1.0.0-SNAPSHOT";
+    static final String ARTIFACT = "com.synexia:m3jdk-a3-recipes:1.0.0-SNAPSHOT";
     static final String RECIPE_CLASS =
             "jdk.internal.m3.rewrite.atom.M3PureIntConvergenceRecipe";
     static final String PORTABLE_MASTERY_CLASS =

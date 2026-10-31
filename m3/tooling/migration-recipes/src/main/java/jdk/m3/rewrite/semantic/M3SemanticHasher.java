@@ -2,9 +2,9 @@
 package jdk.m3.rewrite.semantic;
 
 /**
- * M3JDK21 compatibility facade for Synexia's canonical semantic hasher.
+ * M3JDK 21 compatibility facade for Synexia's canonical semantic hasher.
  *
- * <p>No semantic hash logic is owned here. The target preserves this API only so existing M3JDK21
+ * <p>No semantic hash logic is owned here. The target preserves this API only so existing M3JDK 21
  * tooling callers can migrate without a flag day.</p>
  */
 @Deprecated(forRemoval = false)

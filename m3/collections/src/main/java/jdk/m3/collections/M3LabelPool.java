@@ -60,7 +60,7 @@ public final class M3LabelPool {
 
 	/**
 	 * Maps a label to a 64-bit id that identifies its text, for runtimes that
-	 * already keep canonical text (the M3 JDK's canonical string atoms). The
+	 * already keep canonical text (the M3JDK's canonical string atoms). The
 	 * function must be injective on text and must never answer 0; the pool then
 	 * compares ids instead of characters.
 	 */

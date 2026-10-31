@@ -15,7 +15,7 @@ import org.openrewrite.Recipe;
  * macOS signal-path assertion with a precondition and restores the build.
  *
  * <p>HotSpot/platform C++ and headers are exact hash-pinned text atoms. The focused jtreg test
- * remains a structured Java LST atom. M3JDK21's Java 21 semantics and public Java APIs are
+ * remains a structured Java LST atom. M3JDK 21's Java 21 semantics and public Java APIs are
  * unchanged.
  */
 public final class M3Jdk8359706BackportRecipe extends Recipe {
@@ -65,6 +65,6 @@ public final class M3Jdk8359706BackportRecipe extends Recipe {
                 new M3Jdk21HashPinnedTextSnapshotRecipe(
                         "jdk21u-open-fds-8359706-text"),
                 new M3Jdk21HashPinnedSnapshotRecipe(
-                        "m3-jdk21u-open-fds-8359706-java"));
+                        "m3jdk21u-open-fds-8359706-java"));
     }
 }

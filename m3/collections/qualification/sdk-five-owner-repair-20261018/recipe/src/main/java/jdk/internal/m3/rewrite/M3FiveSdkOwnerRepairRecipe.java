@@ -15,7 +15,7 @@
 package jdk.internal.m3.rewrite;
 
 /**
- * Source-sealed M3JDK21 SDK repair: reuse the admitted GPU-tool-join scanning
+ * Source-sealed M3JDK 21 SDK repair: reuse the admitted GPU-tool-join scanning
  * recipe to regenerate one exact existing owner and two additive proof classes.
  *
  * <p>Only resourceRoot differs from the admitted source/manifest engine.

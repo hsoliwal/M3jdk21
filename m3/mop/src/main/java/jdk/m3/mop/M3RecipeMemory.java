@@ -24,7 +24,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 /**
- * M3JDK21's executable Machine Oriented Programming recipe-memory custody.
+ * M3JDK 21's executable Machine Oriented Programming recipe-memory custody.
  * This does not execute or replace an OpenRewrite recipe or any source parser.
  * A correction is append-only, source/guard sealed and requires an external
  * compile/test/fixed-point proof receipt before admission.
@@ -243,7 +243,7 @@ public final class M3RecipeMemory {
         return target;
     }
 
-    /** Command-line entrypoint for coding agents and the M3JDK21 Maven recipe gate. */
+    /** Command-line entrypoint for coding agents and the M3JDK 21 Maven recipe gate. */
     public static void main(String[] args) throws Exception {
         if (args.length == 3 && "show".equals(args[0])) {
             for (Entry row : read(destination(Path.of(args[1]), args[2]))) {

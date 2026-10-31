@@ -16,7 +16,7 @@ on:
       - 'm3/backports/backport_execution_waves.py'
       - 'm3/backports/BACKPORT_EXECUTION_WAVES.md'
       - 'm3/compatibility/m3-wave-admission-pin-20261014.tsv'
-      - '.github/workflows/m3-jdk21-backport-wave-admission.yml'
+      - '.github/workflows/m3jdk21-backport-wave-admission.yml'
 permissions:
   contents: read
 concurrency:
@@ -108,7 +108,7 @@ jobs:
             /m3/backports/backport_execution_waves.py
             /m3/backports/BACKPORT_EXECUTION_WAVES.md
             /m3/compatibility/m3-wave-admission-pin-20261014.tsv
-            /.github/workflows/m3-jdk21-backport-wave-admission.yml
+            /.github/workflows/m3jdk21-backport-wave-admission.yml
       - name: Qualify reversible wave consumer recipe and exact owning inputs
         shell: bash
         env:
@@ -335,8 +335,8 @@ jobs:
                   external+=sorted((sdk/"target/surefire-reports").glob("TEST-*.xml"))
                   external+=sorted((sdk/"target/surefire-reports").glob("*.txt"))
                   external+=[sdk/"target/sdk-receipt.json",sdk/"target/recipe-test-counters.json",qualifier.parent/"source-binding.json"]
-                  external+=[sdk/"target/emitted/.github/workflows/m3-jdk21-backport-wave-admission.yml",sdk/"target/inverse-emitted/.github/workflows/m3-jdk21-backport-wave-admission.yml"]
-                  aliases={sdk/"target/emitted/.github/workflows/m3-jdk21-backport-wave-admission.yml":"emitted-product-workflow.yml",sdk/"target/inverse-emitted/.github/workflows/m3-jdk21-backport-wave-admission.yml":"emitted-inverse-workflow.yml"}
+                  external+=[sdk/"target/emitted/.github/workflows/m3jdk21-backport-wave-admission.yml",sdk/"target/inverse-emitted/.github/workflows/m3jdk21-backport-wave-admission.yml"]
+                  aliases={sdk/"target/emitted/.github/workflows/m3jdk21-backport-wave-admission.yml":"emitted-product-workflow.yml",sdk/"target/inverse-emitted/.github/workflows/m3jdk21-backport-wave-admission.yml":"emitted-inverse-workflow.yml"}
                   selected=present+[p for p in external if p.is_file()]
                   if any(not p.is_file() or any(q.is_symlink() for q in [p,*p.parents]) for p in selected):raise RuntimeError("closed artifact source fence")
                   by_name={}

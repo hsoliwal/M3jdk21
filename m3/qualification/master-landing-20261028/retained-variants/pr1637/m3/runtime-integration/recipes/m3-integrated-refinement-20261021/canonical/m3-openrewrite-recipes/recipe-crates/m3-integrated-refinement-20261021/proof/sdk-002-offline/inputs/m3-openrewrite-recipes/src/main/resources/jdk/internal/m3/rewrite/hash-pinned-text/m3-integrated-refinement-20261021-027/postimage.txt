@@ -1,5 +1,5 @@
 <!-- Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 -->
-# Resource change snapshots in M3JDK21
+# Resource change snapshots in M3JDK 21
 
 This refinement extends the existing Eclipse resource snapshot owner. The original
 `capture(root, maxNodes)` method retains its method body, callbacks, traversal,

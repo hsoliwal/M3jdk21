@@ -53,10 +53,10 @@
       "template": "templates/m3/docs/name-mapping.d/m3-integrated-utility-families-20261018.json"
     },
     {
-      "path": "m3/docs/name-mapping.d/m3-jdk-module-owners-20261018.json",
+      "path": "m3/docs/name-mapping.d/m3jdk-module-owners-20261018.json",
       "before_sha256": "ABSENT",
       "after_sha256": "7ec04178398539f8f27459d0d754a294af275f5469fcfa51db6ce58d872d47b1",
-      "template": "templates/m3/docs/name-mapping.d/m3-jdk-module-owners-20261018.json"
+      "template": "templates/m3/docs/name-mapping.d/m3jdk-module-owners-20261018.json"
     },
     {
       "path": "m3/docs/name-mapping.json",

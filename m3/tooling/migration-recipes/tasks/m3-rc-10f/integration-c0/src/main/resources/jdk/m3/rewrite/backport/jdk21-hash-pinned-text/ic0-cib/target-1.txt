@@ -38,7 +38,7 @@ on:
       - "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8374808BackportRecipeTest.java"
       - "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/jdk27-keystore-creation-instant-8374808/**"
       - "m3/tooling/recipe-catalogue.tsv"
-      - ".github/workflows/m3-jdk21-backports.yml"
+      - ".github/workflows/m3jdk21-backports.yml"
   pull_request:
     paths:
       - "m3/backports/**"
@@ -74,7 +74,7 @@ on:
       - "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8374808BackportRecipeTest.java"
       - "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/jdk27-keystore-creation-instant-8374808/**"
       - "m3/tooling/recipe-catalogue.tsv"
-      - ".github/workflows/m3-jdk21-backports.yml"
+      - ".github/workflows/m3jdk21-backports.yml"
   workflow_dispatch:
 
 permissions:

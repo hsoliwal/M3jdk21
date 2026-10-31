@@ -6,7 +6,7 @@ import org.openrewrite.DataTable;
 import org.openrewrite.Recipe;
 
 /**
- * Legacy M3JDK21 semantic-hash row type retained for source compatibility only.
+ * Legacy M3JDK 21 semantic-hash row type retained for source compatibility only.
  *
  * <p>New executions emit {@link jdk.internal.m3.rewrite.semantic.M3SemanticHashTable} rows from the
  * canonical Synexia recipe. This target-local type owns no hashing or recipe semantics.</p>

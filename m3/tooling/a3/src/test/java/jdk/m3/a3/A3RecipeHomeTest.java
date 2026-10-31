@@ -15,7 +15,7 @@ class A3RecipeHomeTest {
                 "a062661e91e769a00c2d027e1f04a7a0c8f9dc28",
                 A3RecipeHome.M3_COMMIT);
         assertEquals(
-                "com.synexia:m3-jdk-a3-recipes:1.0.0-SNAPSHOT",
+                "com.synexia:m3jdk-a3-recipes:1.0.0-SNAPSHOT",
                 A3RecipeHome.ARTIFACT);
         assertEquals("9599", A3RecipeHome.M3_PR);
         assertEquals(

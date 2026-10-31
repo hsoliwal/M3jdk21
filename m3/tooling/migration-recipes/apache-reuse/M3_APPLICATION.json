@@ -3,7 +3,7 @@
   "invariant": "M3_RECIPE_OWNERSHIP_V1",
   "synexiaRepository": "hsoliwal/com.synexia",
   "synexiaRevision": "11232235ad7c1267506b0d21ded2b55d2db5c22f",
-  "synexiaRecipeCrate": "m3-openrewrite-recipes/crates/m3-jdk-handoff/apache-reuse",
+  "synexiaRecipeCrate": "m3-openrewrite-recipes/crates/m3jdk-handoff/apache-reuse",
   "mavenProfile": "m3jdk21-receiver",
   "engine": "jdk.internal.m3.rewrite.M3HashPinnedTextSnapshotRecipe",
   "engineGitBlob": "ef22455c2eb68a5fd3c1dc87531d3bce5529d8c3",
@@ -21,62 +21,62 @@
   },
   "sourceAssets": [
     {
-      "path": "m3-openrewrite-recipes/crates/m3-jdk-handoff/apache-reuse/pom.xml",
+      "path": "m3-openrewrite-recipes/crates/m3jdk-handoff/apache-reuse/pom.xml",
       "gitBlob": "06e9adb6a9ebaefd28d00a5ffa60bd2accc813c2",
       "sha256": "857e5bc6a61c2c0dae7fd6adee3518ce260f87829fb75f7189ddef7547b23b9b"
     },
     {
-      "path": "m3-openrewrite-recipes/crates/m3-jdk-handoff/apache-reuse/receivers/m3jdk21/manifest.tsv",
+      "path": "m3-openrewrite-recipes/crates/m3jdk-handoff/apache-reuse/receivers/m3jdk21/manifest.tsv",
       "gitBlob": "1a9da6ed651ee859e83ecdc68ed68ee9d2253671",
       "sha256": "83bbbf95c4e4c65444fa5cb554b1c4f000784e1e10f20e9faa47b77d6396a619"
     },
     {
-      "path": "m3-openrewrite-recipes/crates/m3-jdk-handoff/apache-reuse/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/apache-public-reuse-v1/manifest.tsv",
+      "path": "m3-openrewrite-recipes/crates/m3jdk-handoff/apache-reuse/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/apache-public-reuse-v1/manifest.tsv",
       "gitBlob": "c35897abecea05e625debeda0689e07628d18b69",
       "sha256": "db386ae931571ff16483c6dbdbcd6c15d1fb3e61ca814df7f3a647b475d90e7c"
     },
     {
-      "path": "m3-openrewrite-recipes/crates/m3-jdk-handoff/apache-reuse/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/apache-public-reuse-v1/policy.properties.txt",
+      "path": "m3-openrewrite-recipes/crates/m3jdk-handoff/apache-reuse/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/apache-public-reuse-v1/policy.properties.txt",
       "gitBlob": "c5cd06b5d7661ae04625e04cccc7bbb74c45e59a",
       "sha256": "dc56c10461d8910e3d2f36ea137237f309983c91bea56526cade6956ca4bde5e"
     },
     {
-      "path": "m3-openrewrite-recipes/crates/m3-jdk-handoff/apache-reuse/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/apache-public-reuse-v1/reuse.md.txt",
+      "path": "m3-openrewrite-recipes/crates/m3jdk-handoff/apache-reuse/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/apache-public-reuse-v1/reuse.md.txt",
       "gitBlob": "b574940c818c605cb5c8e2d035211b557db31706",
       "sha256": "6957c8f8796a7546a8676cdead62fff1440a32a742f1fcc377ae54cb2f31ee2c"
     },
     {
-      "path": "m3-openrewrite-recipes/crates/m3-jdk-handoff/apache-reuse/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/apache-public-reuse-v1/scope.tsv.txt",
+      "path": "m3-openrewrite-recipes/crates/m3jdk-handoff/apache-reuse/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/apache-public-reuse-v1/scope.tsv.txt",
       "gitBlob": "756e9d17a70bab5a7973d38d76bcfd9ffbd78454",
       "sha256": "f0c4956693279ffea733c13e504ba3ce83f679aba7af2c714c9f49dfc17b7447"
     },
     {
-      "path": "m3-openrewrite-recipes/crates/m3-jdk-handoff/apache-reuse/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/apache-reuse-receiver-custody-v1/README.before.txt",
+      "path": "m3-openrewrite-recipes/crates/m3jdk-handoff/apache-reuse/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/apache-reuse-receiver-custody-v1/README.before.txt",
       "gitBlob": "1ec43f57f9fa55c445bb17d9397731163de2481e",
       "sha256": "fbf916ee02a45f1d6f418f533e190bd85b128e2b6432b1b40072eda2c669dcb4"
     },
     {
-      "path": "m3-openrewrite-recipes/crates/m3-jdk-handoff/apache-reuse/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/apache-reuse-receiver-custody-v1/README.md.txt",
+      "path": "m3-openrewrite-recipes/crates/m3jdk-handoff/apache-reuse/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/apache-reuse-receiver-custody-v1/README.md.txt",
       "gitBlob": "f2a72b2fec345da73fa5fb85bcda4989558ed5bd",
       "sha256": "78cf843b37b7e0e6e143ec902cbb79735fbe37390253a9f823c8c7a381e1c263"
     },
     {
-      "path": "m3-openrewrite-recipes/crates/m3-jdk-handoff/apache-reuse/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/apache-reuse-receiver-custody-v1/manifest.tsv",
+      "path": "m3-openrewrite-recipes/crates/m3jdk-handoff/apache-reuse/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/apache-reuse-receiver-custody-v1/manifest.tsv",
       "gitBlob": "4e3c93d1b931eca1ddae9c28ed2eb58d5e16b3c0",
       "sha256": "c2e0c2bc3c7a46dc529177677e85c06d6122a2e26be82e7b1f4e9d3bf9e203f9"
     },
     {
-      "path": "m3-openrewrite-recipes/crates/m3-jdk-handoff/apache-reuse/src/test/java/jdk/internal/m3/handoff/ApacheReuseProof.java",
+      "path": "m3-openrewrite-recipes/crates/m3jdk-handoff/apache-reuse/src/test/java/jdk/internal/m3/handoff/ApacheReuseProof.java",
       "gitBlob": "f9632f420896c5d0ad0810ba69724cd5a1cd9109",
       "sha256": "70848e18871a23b18b91b0a155796e6772780bd6cf36ab6b89e893451af93803"
     },
     {
-      "path": "m3-openrewrite-recipes/crates/m3-jdk-handoff/apache-reuse/src/test/java/jdk/internal/m3/handoff/ApacheReuseReceiverTest.java",
+      "path": "m3-openrewrite-recipes/crates/m3jdk-handoff/apache-reuse/src/test/java/jdk/internal/m3/handoff/ApacheReuseReceiverTest.java",
       "gitBlob": "f350d901ecde151022a4f7ab97452d1bcf125075",
       "sha256": "b9364a59585733e8ee0d1c46df2329a38fe25556a4672932bd3bbe34aa63adf6"
     },
     {
-      "path": "m3-openrewrite-recipes/crates/m3-jdk-handoff/apache-reuse/src/test/java/jdk/internal/m3/handoff/ApacheReuseRecipeTest.java",
+      "path": "m3-openrewrite-recipes/crates/m3jdk-handoff/apache-reuse/src/test/java/jdk/internal/m3/handoff/ApacheReuseRecipeTest.java",
       "gitBlob": "4be34d58ace390a50b1cde4ba1211ebc9b8ec74e",
       "sha256": "48ebf817e65689d8d60940814b5db54571aebd870ae450090339b104fbfc2f94"
     },

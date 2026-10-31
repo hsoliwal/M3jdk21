@@ -25,7 +25,7 @@ import org.junit.jupiter.api.Test;
 final class M3ShortLabelTest {
 	private static final String IDENT = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_$";
 
-	/** The layout of the M3 JDK's immediate String owner, written out independently. */
+	/** The layout of the M3JDK's immediate String owner, written out independently. */
 	private static long expected (String text) {
 		if (text.length () <= 7) {
 			long value = 1L << 61 | (long) text.length () << 56;

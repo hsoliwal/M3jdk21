@@ -67,7 +67,7 @@
       "evidence": [
         "m3/pom.xml"
       ],
-      "next_action": "Reconcile pure-int custody, migration-recipes, m3-jdk-a3-recipes and recipe-agent-api module wiring into qualified Synexia execution, preserving product postimages and callers.",
+      "next_action": "Reconcile pure-int custody, migration-recipes, m3jdk-a3-recipes and recipe-agent-api module wiring into qualified Synexia execution, preserving product postimages and callers.",
       "detail": "No recipe directory/module is deleted. Preflight detects actual POM wiring before Maven legacy execution.",
       "observed_source": {
         "repository": "hsoliwal/M3jdk21",

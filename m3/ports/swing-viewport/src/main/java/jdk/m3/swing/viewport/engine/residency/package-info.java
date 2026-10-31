@@ -11,9 +11,9 @@
  * {@code jdk.m3.swing.viewport.engine.swap.SwapPageBinaryOpsSelector}, is dual-licensed
  * {@code EPL-2.0 OR Apache-2.0} (Copyright 2026 Hitesh Soliwal and contributors). The files ported
  * from Synexia in {@code jdk.m3.swing.viewport.engine.swap} stay Apache-2.0 with their original
- * notices. No pre-existing SWT file changes licence. The Swing reuse in M3jdk21
+ * notices. No pre-existing SWT file changes licence. The Swing reuse in M3JDK 21
  * {@code m3/ports/swing-viewport} takes the Apache-2.0 option; copies into {@code java.desktop}
- * internals are an explicit relicence to GPL-2.0 with the Classpath Exception, recorded in M3jdk21
+ * internals are an explicit relicence to GPL-2.0 with the Classpath Exception, recorded in M3JDK 21
  * {@code m3/docs/m3-item-residency-explicit-relicense.md}.</p>
  */
 package jdk.m3.swing.viewport.engine.residency;

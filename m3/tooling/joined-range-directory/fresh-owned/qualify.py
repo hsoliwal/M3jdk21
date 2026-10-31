@@ -426,7 +426,7 @@ def runtime():
                 "three distinct cohort source identities required")
     java_home = Path(os.environ["JAVA_HOME"])
     java, javac = str(regular(java_home / "bin/java")), str(regular(java_home / "bin/javac"))
-    os.environ["M3_JDK"] = str(java_home)
+    os.environ["M3JDK"] = str(java_home)
     require(ident(read(PARENT / "runtime/M3JoinedRangeProof.java"))["gitBlob"] == CFG["donors"]["proof"],
             "unchanged original118/4026 combined proof required")
     legacy = parse(read(ARTIFACTS / "runtime-receipt.json"))

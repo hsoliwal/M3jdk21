@@ -47,7 +47,7 @@
       "source_paths": [
         ".github/workflows/m3-foundation.yml"
       ],
-      "next_action": "Check current workflow JDK selection. The captured preparation exports M3_JDK; select the admitted JDK for Maven explicitly and observe Maven's actual Java version before verification.",
+      "next_action": "Check current workflow JDK selection. The captured preparation exports M3JDK; select the admitted JDK for Maven explicitly and observe Maven's actual Java version before verification.",
       "qualification": "The failure proves the compiler rejected release 21. The exact Java version used by Maven is not printed in this log, so no specific lower JDK version is asserted.",
       "status": "FAILURE_OBSERVED",
       "current_master_applicability": "NOT_INSPECTED_BY_THIS_READ_ONLY_CI_TASK",
@@ -70,7 +70,7 @@
         },
         {
           "line": 229,
-          "text": "2026-10-05T18:25:21.6195928Z \u001b[36;1mecho \"M3_JDK=$RUNNER_TEMP/jdk-21+35\" >> \"$GITHUB_ENV\"\u001b[0m"
+          "text": "2026-10-05T18:25:21.6195928Z \u001b[36;1mecho \"M3JDK=$RUNNER_TEMP/jdk-21+35\" >> \"$GITHUB_ENV\"\u001b[0m"
         },
         {
           "line": 271,

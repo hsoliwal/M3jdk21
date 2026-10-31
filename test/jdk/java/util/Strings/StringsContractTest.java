@@ -1,6 +1,6 @@
 /* Copyright (c) 2026, Hitesh Soliwal. GPLv2 with Classpath exception. */
 /* @test
- * @summary M3JDK21 Strings utility family, Unicode and donor behavior
+ * @summary M3JDK 21 Strings utility family, Unicode and donor behavior
  * @compile StringsContractTest.java
  * @run main StringsContractTest
  */

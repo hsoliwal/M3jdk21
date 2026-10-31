@@ -6,7 +6,7 @@ import java.util.Set;
 import org.openrewrite.Recipe;
 
 /**
- * Target-specific M3JDK21 receiver for JEP 497 ML-DSA.
+ * Target-specific M3JDK 21 receiver for JEP 497 ML-DSA.
  *
  * <p>The receiver is stacked on the reviewed JEP 496/SHAKE/named-key state. Feature-private
  * ML-DSA implementation classes use the released JDK24-GA FIPS-204-final donor state while shared
