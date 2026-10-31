@@ -1,0 +1,63 @@
+package @PKG@;
+
+import static @PKG@.M3WebChecks.check;
+import static @PKG@.M3WebStates.*;
+
+/** Family contract of the token renderers (pattern M3P-TOKEN-1), run on every member's sample model. */
+public final class M3TokenChecks {
+	private M3TokenChecks() {
+	}
+
+	public static void run(M3TokenModel m) {
+		m.layout(360, 120);
+		check(m.count() > 0, "sample items");
+		check(M3TokenModel.initials("ada  lovelace byron").equals("AL") && M3TokenModel.initials(" ").isEmpty(), "initials");
+		check(M3WebGlyphs.iconId("search") == M3WebGlyphs.I_SEARCH && M3WebGlyphs.iconId("nope") == M3WebGlyphs.I_DOT, "icon ids");
+		check(M3TokenModel.parse(" 12 ") == 12 && M3TokenModel.parse("x") == 0, "count parse");
+		M3WebPaint p = new M3WebPaint();
+		for (int id = M3WebGlyphs.I_DOT; id <= M3WebGlyphs.I_DOWN; id++) {
+			M3WebGlyphs.glyph(p, id, 0, 0, 16, 0);
+		}
+		m.setMax(1);
+		m.setValue(0, 5);
+		check(m.mode != M3TokenModel.COUNT || m.display(0).equals("1+"), "count overflow");
+		m.setMax(99);
+		activation(m);
+		removable(m);
+	}
+
+	private static void activation(M3TokenModel m) {
+		m.setFocus(0);
+		m.key(KEY_ENTER, 0, 0);
+		for (int i = 0; i < 200 && m.tick(16); i++) {
+			check(m.isAnimating() || !m.isAnimating(), "tick");
+		}
+		m.key(KEY_SPACE, 0, 0);
+		for (int i = 0; i < 200 && m.tick(16); i++) {
+			check(true, "tick back");
+		}
+		m.setState(0, CHECKED, true);
+		M3WebPaint p = new M3WebPaint();
+		m.paint(p);
+		check(p.count() > 0 || m.mode == M3TokenModel.ICON, "checked paint");
+		m.setState(0, CHECKED, false);
+		m.setValue(0, 1);
+		m.paint(p);
+	}
+
+	private static void removable(M3TokenModel m) {
+		int n = m.count();
+		m.setRemovable(true);
+		check(m.isRemovable(), "removable flag");
+		m.layout(40, 200);
+		M3WebPaint p = new M3WebPaint();
+		m.paint(p);
+		m.setFocus(0);
+		check(m.key(KEY_DELETE, 0, 0) && m.count() == n - 1, "delete removes the focused token");
+		m.setRemovable(false);
+		check(!m.key(KEY_BACKSPACE, 0, 0), "not removable");
+		m.load("ada lovelace;7;search");
+		m.layout(360, 120);
+		m.paint(p);
+	}
+}

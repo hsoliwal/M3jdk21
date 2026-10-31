@@ -1,0 +1,212 @@
+package @PKG@;
+
+import java.util.Arrays;
+
+/**
+ * Viewport aspects of an M3 web widget model (pattern M3P-VIEWPORT-1, ALL_WIDGETS_VIEWPORT_PLAN section 1):
+ * <ul>
+ * <li><b>R</b> resident window: only items in {@code [residentFirst, residentEnd)} get rects and paint;
+ * the rest are lanes ({@link #setLogicalCount(int)} sizes lanes without objects);</li>
+ * <li><b>G</b> logical geometry: extent and scroll offset are {@code long}; scroll bars are int
+ * projections ({@link #thumb(int, int[])}); no native overflow;</li>
+ * <li><b>D</b> damage only: an item change damages its rect; a scroll records a blit distance and
+ * damages only the exposed strip;</li>
+ * <li><b>P</b> retained planes: body, header, overlay and scrollbar planes carry their own offset;
+ * moving a plane damages only its old and new bounds.</li>
+ * </ul>
+ * The window follows the contract of the Swing port's {@code M3ViewportIndexWindow.project}
+ * (half-open visible range plus overscan), so both toolkits answer the same.
+ */
+//FLLDCIM: DOOP — long extents, int windows, plane offsets in one int lane
+public abstract class M3WebView extends M3WebLanes {
+	public static final int A_R = 1, A_G = 2, A_D = 4, A_P = 8;
+	public static final int BODY = 0, HEADER = 1, OVERLAY = 2, SCROLLBAR = 3, PLANES = 4;
+	public static final int D_SCROLL = 512, D_PLANE = 1024;
+	protected int itemExtent = 32, overscan = 2, blit;
+	protected long scroll;
+	protected final int[] planes = new int[PLANES * 6];
+	protected final int[] window = new int[4];
+	private int[] matches = new int[8];
+	private int nm = -1;
+	private String filter = "";
+
+	/** Recomputes the window and the resident rects at the current scroll offset, without damage. */
+	protected abstract void arrange();
+
+	/** Viewport aspects this family implements (A_R | A_G | A_D | A_P). */
+	public abstract int aspects();
+
+	/** Sizes every lane to {@code n} items in one step; no strings, no per-item objects. */
+	public void setLogicalCount(int n) {
+		if (n > flags.length) {
+			grow(n);
+		}
+		Arrays.fill(text, count, n, null);
+		Arrays.fill(detail, count, n, null);
+		count = n;
+		nm = -1;
+		filter = "";
+		relayout(-1, D_ITEMS);
+	}
+
+	/** Extent of one item along the scroll axis (pixels). */
+	public void setItemExtent(int px) {
+		itemExtent = Math.max(1, px);
+		relayout(-1, D_LAYOUT);
+	}
+
+	public int itemExtent() {
+		return itemExtent;
+	}
+
+	/** Logical extent of all (filtered) items: may exceed the int range. */
+	public long logicalExtent() {
+		return (long) logicalCount() * itemExtent;
+	}
+
+	/** Number of positions along the scroll axis: the filter's matches, or every item. */
+	public int logicalCount() {
+		return nm < 0 ? count : nm;
+	}
+
+	/** Item at a scroll position (identity without a filter). */
+	public int itemAt(int position) {
+		return nm < 0 ? position : matches[position];
+	}
+
+	/** Case-insensitive substring filter over item texts; empty clears it. Positions compact to the matches. */
+	public void setFilter(String query) {
+		filter = query == null ? "" : query.toLowerCase(java.util.Locale.ROOT);
+		nm = filter.isEmpty() ? -1 : 0;
+		for (int i = 0; nm >= 0 && i < count; i++) {
+			if (text[i] != null && text[i].toLowerCase(java.util.Locale.ROOT).contains(filter)) {
+				if (nm == matches.length) {
+					matches = Arrays.copyOf(matches, nm * 2);
+				}
+				matches[nm++] = i;
+			}
+		}
+		scroll = 0;
+		relayout(-1, D_ITEMS);
+	}
+
+	public String filter() {
+		return filter;
+	}
+
+	@Override
+	public void clear() {
+		nm = -1;
+		filter = "";
+		super.clear();
+	}
+
+	@Override
+	public void remove(int item) {
+		nm = -1;
+		filter = "";
+		super.remove(item);
+	}
+
+	public long scrollOffset() {
+		return scroll;
+	}
+
+	/** Viewport length along the scroll axis. */
+	public int viewLength() {
+		return height;
+	}
+
+	/** Start of the scrolled viewport along the scroll axis (a field or header above it stays put). */
+	public int viewOrigin() {
+		return 0;
+	}
+
+	/** True when the scroll axis is horizontal (blits move pixels along x). */
+	public boolean scrollsHorizontally() {
+		return false;
+	}
+
+	/** Scrolls to a logical offset; a short move is a blit plus the exposed strip. */
+	public void scrollTo(long offset) {
+		long max = Math.max(0, logicalExtent() - viewLength());
+		long to = Math.max(0, Math.min(max, offset));
+		long dy = scroll - to;
+		if (dy == 0) {
+			return;
+		}
+		scroll = to;
+		arrange();
+		if (Math.abs(dy) < viewLength() && (aspects() & A_D) != 0) {
+			blit += (int) dy;
+			int at = viewOrigin() + (dy > 0 ? 0 : viewLength() + (int) dy), len = (int) Math.abs(dy);
+			if (scrollsHorizontally()) {
+				damage(at, 0, len, height);
+			} else {
+				damage(0, at, width, len);
+			}
+		} else {
+			damageAll();
+		}
+		fire(-1, D_SCROLL);
+	}
+
+	/** Blit distance accumulated since the last call (positive moves pixels down); the toolkit copies before repainting. */
+	public int takeBlit() {
+		int b = blit;
+		blit = 0;
+		return b;
+	}
+
+	/** Recomputes the visible and resident window from the scroll offset. */
+	protected void project() {
+		int n = logicalCount();
+		int first = (int) Math.min(n, scroll / itemExtent);
+		int visible = viewLength() <= 0 ? 0 : (int) Math.min(n, (scroll % itemExtent + viewLength() + itemExtent - 1) / itemExtent);
+		int start = Math.min(first, n);
+		int end = visible == 0 ? start : (int) Math.min((long) n, (long) start + visible);
+		window[0] = start;
+		window[1] = end;
+		window[2] = visible == 0 || start == end ? start : Math.max(0, start - overscan);
+		window[3] = visible == 0 || start == end ? end : (int) Math.min((long) n, (long) end + overscan);
+	}
+
+	/** {@code k}: 0 first visible, 1 end visible, 2 first resident, 3 end resident. */
+	public int window(int k) {
+		return window[k];
+	}
+
+	public int residentCount() {
+		return window[3] - window[2];
+	}
+
+	/** Scroll bar projection into {@code out}: thumb offset and thumb length in a track of {@code track} pixels. */
+	public void thumb(int track, int[] out) {
+		long ext = Math.max(1, logicalExtent());
+		int len = (int) Math.max(Math.min(track, 8), Math.min(track, (long) track * viewLength() / ext));
+		long range = Math.max(1, ext - viewLength());
+		out[0] = (int) ((track - len) * Math.min(scroll, range) / range);
+		out[1] = len;
+	}
+
+	/** Declares a plane's bounds (in plane coordinates); families call this from layout. */
+	protected void setPlane(int plane, int x, int y, int w, int h) {
+		int b = plane * 6;
+		planes[b] = x; planes[b + 1] = y; planes[b + 2] = w; planes[b + 3] = h;
+	}
+
+	/** Moves a plane: damages its old and new bounds only, never the body. */
+	public void movePlane(int plane, int dx, int dy) {
+		int b = plane * 6;
+		damage(planes[b] + planes[b + 4], planes[b + 1] + planes[b + 5], planes[b + 2], planes[b + 3]);
+		planes[b + 4] = dx;
+		planes[b + 5] = dy;
+		damage(planes[b] + dx, planes[b + 1] + dy, planes[b + 2], planes[b + 3]);
+		fire(-1, D_PLANE);
+	}
+
+	/** Plane geometry: {@code k} 0..3 bounds, 4..5 offset. */
+	public int plane(int plane, int k) {
+		return planes[plane * 6 + k];
+	}
+}

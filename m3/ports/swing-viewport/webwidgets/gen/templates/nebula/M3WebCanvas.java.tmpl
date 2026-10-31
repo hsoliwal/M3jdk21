@@ -1,0 +1,273 @@
+package @WPKG@;
+
+import @PKG@.M3WebModel;
+import @PKG@.M3WebPaint;
+import @PKG@.M3WebStates;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.accessibility.ACC;
+import org.eclipse.swt.accessibility.AccessibleAdapter;
+import org.eclipse.swt.accessibility.AccessibleControlAdapter;
+import org.eclipse.swt.accessibility.AccessibleControlEvent;
+import org.eclipse.swt.accessibility.AccessibleEvent;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
+import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.widgets.Canvas;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Event;
+
+/**
+ * One drawn Canvas per M3 web widget (pattern M3P-CORE-1, SWT side). The control owns no widget
+ * state: it maps SWT events to neutral model keys and pointer kinds, repaints only the model's
+ * damage, records damage without painting while the part is hidden ({@code SWT.PartVisible} /
+ * {@code SWT.PartHidden} when the SWT build has them, else Show/Hide), and replays the model's
+ * display list through the GC. Colours and fonts are cached per widget and disposed with it.
+ *
+ * @param <M> the lane model
+ */
+public class M3WebCanvas<M extends M3WebModel> extends Canvas {
+	static final int PART_VISIBLE = eventType("PartVisible"), PART_HIDDEN = eventType("PartHidden");
+	private static final int[] EVENTS = { SWT.Paint, SWT.Resize, SWT.KeyDown, SWT.MouseMove, SWT.MouseDown, SWT.MouseUp, SWT.MouseExit,
+			SWT.MouseVerticalWheel, SWT.FocusIn, SWT.FocusOut, SWT.Traverse, SWT.Dispose, SWT.Show, SWT.Hide };
+	private static final int[] SWT_KEYS = { SWT.ARROW_LEFT, SWT.ARROW_RIGHT, SWT.ARROW_UP, SWT.ARROW_DOWN, SWT.HOME, SWT.END, SWT.PAGE_UP,
+			SWT.PAGE_DOWN, SWT.CR, ' ', SWT.ESC, SWT.TAB, SWT.DEL, SWT.BS };
+	protected final M model;
+	private final M3WebPaint paint = new M3WebPaint();
+	private final int[] damage = new int[4];
+	private final M3WebCanvasCache cache;
+	private final Runnable ticker = this::tick;
+	private boolean partVisible = true, pending, ticking;
+
+	public M3WebCanvas(Composite parent, int style, M model) {
+		super(parent, style | SWT.DOUBLE_BUFFERED | SWT.NO_BACKGROUND);
+		this.model = model;
+		this.cache = new M3WebCanvasCache(getDisplay());
+		model.setDelta(this::changed);
+		for (int type : EVENTS) {
+			addListener(type, this::handle);
+		}
+		if (PART_VISIBLE != 0) {
+			addListener(PART_VISIBLE, this::handle);
+			addListener(PART_HIDDEN, this::handle);
+		}
+		initAccessible();
+	}
+
+	static int eventType(String name) {
+		try {
+			return SWT.class.getField(name).getInt(null);
+		} catch (ReflectiveOperationException e) {
+			return 0;
+		}
+	}
+
+	/** The lane model; all widget behaviour is model API. */
+	public M getModel() {
+		checkWidget();
+		return model;
+	}
+
+	@Override
+	public Point computeSize(int wHint, int hHint, boolean changed) {
+		checkWidget();
+		model.layout(wHint == SWT.DEFAULT ? 320 : wHint, hHint == SWT.DEFAULT ? 0 : hHint);
+		Point p = new Point(wHint == SWT.DEFAULT ? model.prefWidth() : wHint, hHint == SWT.DEFAULT ? model.prefHeight() : hHint);
+		model.layout(getSize().x, getSize().y);
+		return p;
+	}
+
+	private void handle(Event e) {
+		switch (e.type) {
+		case SWT.Paint: onPaint(e); break;
+		case SWT.Resize: model.layout(getSize().x, getSize().y); break;
+		case SWT.KeyDown: onKey(e); break;
+		case SWT.Traverse: onTraverse(e); break;
+		case SWT.FocusIn: case SWT.FocusOut: model.setState(-1, M3WebStates.FOCUS, e.type == SWT.FocusIn); break;
+		case SWT.Dispose: cache.dispose(); break;
+		case SWT.Show: setPartVisible(true); break;
+		case SWT.Hide: setPartVisible(false); break;
+		default: onOther(e);
+		}
+	}
+
+	private void onOther(Event e) {
+		if (e.type == PART_VISIBLE || e.type == PART_HIDDEN) {
+			setPartVisible(e.type == PART_VISIBLE);
+		} else {
+			onMouse(e);
+		}
+	}
+
+	private void onMouse(Event e) {
+		int mods = mods(e.stateMask);
+		switch (e.type) {
+		case SWT.MouseMove: model.pointer((e.stateMask & SWT.BUTTON1) != 0 ? M3WebStates.P_DRAG : M3WebStates.P_MOVE, e.x, e.y, mods); break;
+		case SWT.MouseDown: forceFocus(); model.pointer(M3WebStates.P_DOWN, e.x, e.y, mods); break;
+		case SWT.MouseUp: model.pointer(M3WebStates.P_UP, e.x, e.y, mods); break;
+		case SWT.MouseExit: model.pointer(M3WebStates.P_EXIT, e.x, e.y, mods); break;
+		default: model.pointer(M3WebStates.P_WHEEL, e.x, -e.count, mods);
+		}
+	}
+
+	private void onKey(Event e) {
+		int key = M3WebStates.KEY_CHAR;
+		for (int i = 0; i < SWT_KEYS.length; i++) {
+			if (e.keyCode == SWT_KEYS[i]) {
+				key = i + 1;
+			}
+		}
+		if (key != M3WebStates.KEY_CHAR || e.character >= ' ') {
+			e.doit = !model.key(key, e.character, mods(e.stateMask));
+		}
+	}
+
+	private void onTraverse(Event e) {
+		switch (e.detail) {
+		case SWT.TRAVERSE_ARROW_NEXT: case SWT.TRAVERSE_ARROW_PREVIOUS: case SWT.TRAVERSE_RETURN: case SWT.TRAVERSE_ESCAPE:
+			e.doit = false; break;
+		case SWT.TRAVERSE_TAB_NEXT: case SWT.TRAVERSE_TAB_PREVIOUS:
+			e.doit = !model.key(M3WebStates.KEY_TAB, 0, e.detail == SWT.TRAVERSE_TAB_PREVIOUS ? M3WebStates.MOD_SHIFT : 0); break;
+		default: break;
+		}
+	}
+
+	private static int mods(int stateMask) {
+		return ((stateMask & SWT.SHIFT) != 0 ? M3WebStates.MOD_SHIFT : 0) | ((stateMask & SWT.MOD1) != 0 ? M3WebStates.MOD_CTRL : 0)
+				| ((stateMask & SWT.ALT) != 0 ? M3WebStates.MOD_ALT : 0);
+	}
+
+	/** Model delta: damage-only redraw while visible; while hidden only remember that damage exists. */
+	private void changed(int item, int mask) {
+		if (isDisposed()) {
+			return;
+		}
+		if (!partVisible) {
+			pending = true;
+			return;
+		}
+		int dy = model.takeBlit();
+		if (dy != 0) {
+			Point size = getSize();
+			boolean h = model.scrollsHorizontally();
+			int o = model.viewOrigin(), len = model.viewLength();
+			if (h) {
+				scroll(o + dy, 0, o, 0, len, size.y, false);
+			} else {
+				scroll(0, o + dy, 0, o, size.x, len, false);
+			}
+		}
+		if (model.takeDamage(damage)) {
+			redraw(damage[0], damage[1], damage[2], damage[3], false);
+		}
+		if (model.isAnimating() && !ticking) {
+			ticking = true;
+			getDisplay().timerExec(16, ticker);
+		}
+	}
+
+	/** PartVisible-aware hook: one flush and one paint when the part becomes visible. */
+	protected void setPartVisible(boolean visible) {
+		partVisible = visible;
+		if (visible && pending) {
+			pending = false;
+			changed(-1, 0);
+		}
+	}
+
+	public boolean isPartVisible() {
+		return partVisible;
+	}
+
+	private void tick() {
+		ticking = false;
+		if (!isDisposed() && partVisible && model.tick(16)) {
+			ticking = true;
+			getDisplay().timerExec(16, ticker);
+		}
+	}
+
+	private void onPaint(Event e) {
+		GC gc = e.gc;
+		gc.setAntialias(SWT.ON);
+		gc.setBackground(cache.color(model.theme().slot(0)));
+		gc.fillRectangle(e.x, e.y, e.width, e.height);
+		model.paint(paint);
+		for (int i = 0; i < paint.count(); i++) {
+			if (paint.intersects(i, e.x, e.y, e.width, e.height)) {
+				replay(gc, i, e);
+			}
+		}
+	}
+
+	private void replay(GC gc, int i, Event e) {
+		int x = paint.get(i, M3WebPaint.F_X), y = paint.get(i, M3WebPaint.F_Y), w = paint.get(i, M3WebPaint.F_W), h = paint.get(i, M3WebPaint.F_H);
+		int arg = paint.get(i, M3WebPaint.F_ARG);
+		Color c = cache.color(paint.get(i, M3WebPaint.F_RGB));
+		gc.setBackground(c);
+		gc.setForeground(c);
+		switch (paint.get(i, M3WebPaint.F_OP)) {
+		case M3WebPaint.RECT: gc.fillRectangle(x, y, w, h); break;
+		case M3WebPaint.ROUND: gc.fillRoundRectangle(x, y, w, h, 2 * arg, 2 * arg); break;
+		case M3WebPaint.ROUND_LINE: gc.drawRoundRectangle(x, y, w - 1, h - 1, 2 * arg, 2 * arg); break;
+		case M3WebPaint.OVAL: gc.fillOval(x, y, w, h); break;
+		case M3WebPaint.OVAL_LINE: gc.drawOval(x, y, w - 1, h - 1); break;
+		case M3WebPaint.LINE: gc.drawLine(x, arg == 0 ? y : y + h, x + w, arg == 0 ? y + h : y); break;
+		default: replayRest(gc, i, x, y, w, h, arg, e);
+		}
+	}
+
+	private void replayRest(GC gc, int i, int x, int y, int w, int h, int arg, Event e) {
+		switch (paint.get(i, M3WebPaint.F_OP)) {
+		case M3WebPaint.TEXT: text(gc, paint.text(paint.get(i, M3WebPaint.F_REF)), x, y, w, h, arg, e); break;
+		case M3WebPaint.GRADIENT: gc.setBackground(cache.color(arg)); gc.fillGradientRectangle(x, y, w, h, false); break;
+		case M3WebPaint.ARC: gc.drawArc(x, y, w, h, arg, paint.get(i, M3WebPaint.F_REF)); break;
+		default: gc.drawPolyline(points(i, arg));
+		}
+	}
+
+	private int[] points(int i, int n) {
+		int[] xy = new int[2 * n]; // TODO M3P-CORE-1: a reusable scratch array per point count
+		int off = paint.get(i, M3WebPaint.F_REF);
+		for (int k = 0; k < xy.length; k++) {
+			xy[k] = paint.point(off + k);
+		}
+		return xy;
+	}
+
+	private void text(GC gc, String s, int x, int y, int w, int h, int style, Event e) {
+		gc.setFont(cache.font(getFont(), style));
+		Point ext = gc.textExtent(s);
+		int tx = (style & M3WebPaint.CENTER) != 0 ? x + (w - ext.x) / 2 : (style & M3WebPaint.RIGHT) != 0 ? x + w - ext.x : x;
+		int ty = y + (h - ext.y) / 2;
+		gc.setClipping(x, y, w, h);
+		gc.drawText(s, tx, ty, true);
+		if ((style & M3WebPaint.UNDERLINE) != 0) {
+			gc.drawLine(tx, ty + ext.y - 1, tx + ext.x, ty + ext.y - 1);
+		}
+		gc.setClipping(e.x, e.y, e.width, e.height);
+	}
+
+	private void initAccessible() {
+		getAccessible().addAccessibleListener(new AccessibleAdapter() {
+			@Override
+			public void getName(AccessibleEvent e) {
+				e.result = model.accessibleName(e.childID == ACC.CHILDID_SELF ? -1 : e.childID);
+			}
+		});
+		getAccessible().addAccessibleControlListener(new AccessibleControlAdapter() {
+			@Override
+			public void getRole(AccessibleControlEvent e) {
+				e.detail = M3WebCanvasCache.accRole(M3WebStates.roleName(model.role()));
+			}
+		});
+	}
+
+	/** Font data of the widget font scaled to a pixel size (used by the cache). */
+	static FontData scaled(Font base, int px, int style) {
+		FontData fd = base.getFontData()[0];
+		String name = (style & M3WebPaint.MONO) != 0 ? "Consolas" : fd.getName();
+		return new FontData(name, Math.max(6, px * 3 / 4), (style & M3WebPaint.BOLD) != 0 ? SWT.BOLD : SWT.NORMAL);
+	}
+}

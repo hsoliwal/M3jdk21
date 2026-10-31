@@ -1,0 +1,355 @@
+package @WPKG@;
+
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
+import java.awt.event.HierarchyEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
+import java.util.Arrays;
+
+import javax.accessibility.AccessibleContext;
+import javax.accessibility.AccessibleRole;
+import javax.swing.JComponent;
+import javax.swing.Timer;
+
+import @PKG@.M3WebModel;
+import @PKG@.M3WebPaint;
+import @PKG@.M3WebStates;
+
+/**
+ * One lightweight JComponent per M3 web widget (pattern M3P-CORE-1, Swing side of the M3JDK port).
+ * Same lane model and display list as the Nebula Canvas: AWT events become neutral model keys and
+ * pointer kinds, only the model's damage is repainted, damage is held while the component is not
+ * showing (HierarchyEvent.SHOWING_CHANGED is the Swing part-visible signal), and the display list is
+ * replayed through Graphics2D.
+ *
+ * @param <M> the lane model
+ */
+public class M3WebComponent<M extends M3WebModel> extends JComponent {
+	private static final int[] AWT_KEYS = { KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_HOME,
+			KeyEvent.VK_END, KeyEvent.VK_PAGE_UP, KeyEvent.VK_PAGE_DOWN, KeyEvent.VK_ENTER, KeyEvent.VK_SPACE, KeyEvent.VK_ESCAPE,
+			KeyEvent.VK_TAB, KeyEvent.VK_DELETE, KeyEvent.VK_BACK_SPACE };
+	private static final String[] ROLE_NAMES = { "button", "link", "checkbox", "radio", "slider", "tab", "tablist", "progressbar", "dialog",
+			"tooltip", "menu", "menuitem", "toolbar", "list", "listitem", "grid", "tree", "img", "status", "alert", "textbox", "combobox",
+			"group", "separator", "document" };
+	private static final AccessibleRole[] ROLES = { AccessibleRole.PUSH_BUTTON, AccessibleRole.HYPERLINK, AccessibleRole.CHECK_BOX,
+			AccessibleRole.RADIO_BUTTON, AccessibleRole.SLIDER, AccessibleRole.PAGE_TAB, AccessibleRole.PAGE_TAB_LIST, AccessibleRole.PROGRESS_BAR,
+			AccessibleRole.DIALOG, AccessibleRole.TOOL_TIP, AccessibleRole.MENU, AccessibleRole.MENU_ITEM, AccessibleRole.TOOL_BAR,
+			AccessibleRole.LIST, AccessibleRole.LIST_ITEM, AccessibleRole.TABLE, AccessibleRole.TREE, AccessibleRole.ICON, AccessibleRole.STATUS_BAR,
+			AccessibleRole.ALERT, AccessibleRole.TEXT, AccessibleRole.COMBO_BOX, AccessibleRole.GROUP_BOX, AccessibleRole.SEPARATOR,
+			AccessibleRole.HTML_CONTAINER };
+	protected final transient M model;
+	private final transient M3WebPaint paint = new M3WebPaint();
+	private final int[] damage = new int[4];
+	private final Timer timer = new Timer(16, e -> tick());
+	private int[] rgbs = new int[16], fontKeys = new int[4];
+	private Color[] colors = new Color[16];
+	private Font[] fonts = new Font[4];
+	private int nc, nf;
+	private boolean pending, partVisible, dirtyAll = true;
+	private transient java.awt.image.BufferedImage body;
+	private final Rectangle dirty = new Rectangle(), rendered = new Rectangle();
+
+	public M3WebComponent(M model) {
+		this.model = model;
+		model.setDelta(this::changed);
+		setFocusable(true);
+		setOpaque(true);
+		enableEvents(java.awt.AWTEvent.KEY_EVENT_MASK | java.awt.AWTEvent.MOUSE_EVENT_MASK | java.awt.AWTEvent.MOUSE_MOTION_EVENT_MASK
+				| java.awt.AWTEvent.MOUSE_WHEEL_EVENT_MASK | java.awt.AWTEvent.FOCUS_EVENT_MASK | java.awt.AWTEvent.HIERARCHY_EVENT_MASK);
+	}
+
+	/** The lane model; all widget behaviour is model API. */
+	public M getModel() {
+		return model;
+	}
+
+	@Override
+	public void setBounds(int x, int y, int w, int h) {
+		super.setBounds(x, y, w, h);
+		model.layout(w, h);
+	}
+
+	@Override
+	public Dimension getPreferredSize() {
+		if (isPreferredSizeSet()) {
+			return super.getPreferredSize();
+		}
+		model.layout(getWidth() > 0 ? getWidth() : 320, getHeight());
+		Dimension d = new Dimension(model.prefWidth(), model.prefHeight());
+		model.layout(getWidth(), getHeight());
+		return d;
+	}
+
+	@Override
+	protected void processKeyEvent(KeyEvent e) {
+		super.processKeyEvent(e);
+		if (e.isConsumed()) {
+			return;
+		}
+		int key = e.getID() == KeyEvent.KEY_TYPED ? M3WebStates.KEY_CHAR : keyOf(e.getKeyCode());
+		boolean typedChar = e.getID() == KeyEvent.KEY_TYPED && e.getKeyChar() >= ' ' && e.getKeyChar() != 127;
+		boolean pressedKey = e.getID() == KeyEvent.KEY_PRESSED && key != M3WebStates.KEY_CHAR;
+		if ((typedChar || pressedKey) && model.key(key, e.getKeyChar(), mods(e.getModifiersEx()))) {
+			e.consume();
+		}
+	}
+
+	private static int keyOf(int code) {
+		for (int i = 0; i < AWT_KEYS.length; i++) {
+			if (AWT_KEYS[i] == code) {
+				return i + 1;
+			}
+		}
+		return M3WebStates.KEY_CHAR;
+	}
+
+	private static int mods(int ex) {
+		return ((ex & InputEvent.SHIFT_DOWN_MASK) != 0 ? M3WebStates.MOD_SHIFT : 0)
+				| ((ex & InputEvent.CTRL_DOWN_MASK) != 0 ? M3WebStates.MOD_CTRL : 0)
+				| ((ex & InputEvent.ALT_DOWN_MASK) != 0 ? M3WebStates.MOD_ALT : 0);
+	}
+
+	@Override
+	protected void processMouseEvent(MouseEvent e) {
+		super.processMouseEvent(e);
+		int kind = e.getID() == MouseEvent.MOUSE_PRESSED ? M3WebStates.P_DOWN : e.getID() == MouseEvent.MOUSE_RELEASED ? M3WebStates.P_UP
+				: e.getID() == MouseEvent.MOUSE_EXITED ? M3WebStates.P_EXIT : 0;
+		if (kind == M3WebStates.P_DOWN && isRequestFocusEnabled()) {
+			requestFocusInWindow();
+		}
+		if (kind != 0) {
+			model.pointer(kind, e.getX(), e.getY(), mods(e.getModifiersEx()));
+		}
+	}
+
+	@Override
+	protected void processMouseMotionEvent(MouseEvent e) {
+		super.processMouseMotionEvent(e);
+		model.pointer(e.getID() == MouseEvent.MOUSE_DRAGGED ? M3WebStates.P_DRAG : M3WebStates.P_MOVE, e.getX(), e.getY(),
+				mods(e.getModifiersEx()));
+	}
+
+	@Override
+	protected void processMouseWheelEvent(MouseWheelEvent e) {
+		super.processMouseWheelEvent(e);
+		model.pointer(M3WebStates.P_WHEEL, e.getX(), e.getWheelRotation(), mods(e.getModifiersEx()));
+	}
+
+	@Override
+	protected void processFocusEvent(java.awt.event.FocusEvent e) {
+		super.processFocusEvent(e);
+		model.setState(-1, M3WebStates.FOCUS, e.getID() == java.awt.event.FocusEvent.FOCUS_GAINED);
+	}
+
+	@Override
+	protected void processHierarchyEvent(HierarchyEvent e) {
+		super.processHierarchyEvent(e);
+		if ((e.getChangeFlags() & HierarchyEvent.SHOWING_CHANGED) != 0) {
+			setPartVisible(isShowing());
+		}
+	}
+
+	/** PartVisible-aware hook: one flush and one repaint when the component starts showing. */
+	protected void setPartVisible(boolean visible) {
+		partVisible = visible;
+		if (visible && pending) {
+			pending = false;
+			changed(-1, 0);
+		}
+		if (!visible) {
+			timer.stop();
+		}
+	}
+
+	/** Model delta: damage-only repaint while showing; while hidden only remember that damage exists. */
+	private void changed(int item, int mask) {
+		if (!partVisible) {
+			pending = true;
+			return;
+		}
+		int dy = model.takeBlit();
+		if (dy != 0 && body != null && !dirtyAll) {
+			Graphics2D g = body.createGraphics();
+			int o = model.viewOrigin(), len = model.viewLength();
+			if (model.scrollsHorizontally()) {
+				g.setClip(o, 0, len, getHeight());
+				g.copyArea(o + Math.max(0, -dy), 0, len - Math.abs(dy), getHeight(), dy, 0);
+			} else {
+				g.setClip(0, o, getWidth(), len);
+				g.copyArea(0, o + Math.max(0, -dy), getWidth(), len - Math.abs(dy), 0, dy);
+			}
+			g.dispose();
+		}
+		if (model.takeDamage(damage)) {
+			Rectangle r = new Rectangle(damage[0], damage[1], damage[2], damage[3]);
+			if (dirty.isEmpty()) {
+				dirty.setBounds(r);
+			} else {
+				dirty.add(r);
+			}
+			repaint(dy != 0 ? new Rectangle(0, 0, getWidth(), getHeight()) : new Rectangle(damage[0], damage[1], damage[2], damage[3]));
+		}
+		if (model.isAnimating() && !timer.isRunning()) {
+			timer.start();
+		}
+	}
+
+	private void tick() {
+		if (!partVisible || !model.tick(16)) {
+			timer.stop();
+		}
+	}
+
+	/** Retained body plane: re-renders only the dirty region (or everything after a resize), then blits the plane. */
+	@Override
+	protected void paintComponent(Graphics g) {
+		int w = Math.max(1, getWidth()), h = Math.max(1, getHeight());
+		if (body == null || body.getWidth() != w || body.getHeight() != h) {
+			body = new java.awt.image.BufferedImage(w, h, java.awt.image.BufferedImage.TYPE_INT_RGB);
+			dirtyAll = true;
+		}
+		if (dirtyAll || !dirty.isEmpty()) {
+			render(dirtyAll ? new Rectangle(0, 0, w, h) : dirty.intersection(new Rectangle(0, 0, w, h)));
+		}
+		g.drawImage(body, 0, 0, null);
+	}
+
+	private void render(Rectangle clip) {
+		Graphics2D g2 = body.createGraphics();
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g2.setClip(clip);
+		g2.setColor(color(model.theme().slot(0)));
+		g2.fillRect(clip.x, clip.y, clip.width, clip.height);
+		model.paint(paint);
+		for (int i = 0; i < paint.count(); i++) {
+			if (paint.intersects(i, clip.x, clip.y, clip.width, clip.height)) {
+				replay(g2, i);
+			}
+		}
+		g2.dispose();
+		rendered.setBounds(clip);
+		dirty.setBounds(0, 0, 0, 0);
+		dirtyAll = false;
+	}
+
+	/** The region the last paint re-rendered into the body plane (the D aspect: equals the model damage). */
+	public Rectangle lastRendered() {
+		return new Rectangle(rendered);
+	}
+
+	private void replay(Graphics2D g, int i) {
+		int x = paint.get(i, M3WebPaint.F_X), y = paint.get(i, M3WebPaint.F_Y), w = paint.get(i, M3WebPaint.F_W), h = paint.get(i, M3WebPaint.F_H);
+		int arg = paint.get(i, M3WebPaint.F_ARG);
+		g.setColor(color(paint.get(i, M3WebPaint.F_RGB)));
+		switch (paint.get(i, M3WebPaint.F_OP)) {
+		case M3WebPaint.RECT: g.fillRect(x, y, w, h); break;
+		case M3WebPaint.ROUND: g.fillRoundRect(x, y, w, h, 2 * arg, 2 * arg); break;
+		case M3WebPaint.ROUND_LINE: g.drawRoundRect(x, y, w - 1, h - 1, 2 * arg, 2 * arg); break;
+		case M3WebPaint.OVAL: g.fillOval(x, y, w, h); break;
+		case M3WebPaint.OVAL_LINE: g.drawOval(x, y, w - 1, h - 1); break;
+		case M3WebPaint.LINE: g.drawLine(x, arg == 0 ? y : y + h, x + w, arg == 0 ? y + h : y); break;
+		default: replayRest(g, i, x, y, w, h, arg);
+		}
+	}
+
+	private void replayRest(Graphics2D g, int i, int x, int y, int w, int h, int arg) {
+		switch (paint.get(i, M3WebPaint.F_OP)) {
+		case M3WebPaint.TEXT: text(g, paint.text(paint.get(i, M3WebPaint.F_REF)), x, y, w, h, arg); break;
+		case M3WebPaint.GRADIENT: g.setPaint(new GradientPaint(x, y, g.getColor(), x + w, y, color(arg))); g.fillRect(x, y, w, h); break;
+		case M3WebPaint.ARC: g.setStroke(new BasicStroke(2f)); g.drawArc(x, y, w, h, arg, paint.get(i, M3WebPaint.F_REF)); break;
+		default: poly(g, i, arg);
+		}
+	}
+
+	private void poly(Graphics2D g, int i, int n) {
+		int off = paint.get(i, M3WebPaint.F_REF);
+		for (int k = 0; k + 1 < n; k++) {
+			g.drawLine(paint.point(off + 2 * k), paint.point(off + 2 * k + 1), paint.point(off + 2 * k + 2), paint.point(off + 2 * k + 3));
+		}
+	}
+
+	private void text(Graphics2D g, String s, int x, int y, int w, int h, int style) {
+		g.setFont(font(style));
+		FontMetrics fm = g.getFontMetrics();
+		int tw = fm.stringWidth(s);
+		int tx = (style & M3WebPaint.CENTER) != 0 ? x + (w - tw) / 2 : (style & M3WebPaint.RIGHT) != 0 ? x + w - tw : x;
+		int ty = y + (h - fm.getHeight()) / 2 + fm.getAscent();
+		Graphics2D c = (Graphics2D) g.create(x, y, Math.max(1, w), Math.max(1, h));
+		c.drawString(s, tx - x, ty - y);
+		if ((style & M3WebPaint.UNDERLINE) != 0) {
+			c.drawLine(tx - x, ty - y + 1, tx - x + tw, ty - y + 1);
+		}
+		c.dispose();
+	}
+
+	/** Cached colour of a packed RGB. */
+	protected Color color(int rgb) {
+		for (int i = 0; i < nc; i++) {
+			if (rgbs[i] == rgb) {
+				return colors[i];
+			}
+		}
+		if (nc == colors.length) {
+			colors = Arrays.copyOf(colors, nc * 2);
+			rgbs = Arrays.copyOf(rgbs, nc * 2);
+		}
+		rgbs[nc] = rgb;
+		colors[nc] = new Color(rgb);
+		return colors[nc++];
+	}
+
+	private Font font(int style) {
+		int key = style & (0xff | M3WebPaint.BOLD | M3WebPaint.MONO);
+		for (int i = 0; i < nf; i++) {
+			if (fontKeys[i] == key) {
+				return fonts[i];
+			}
+		}
+		if (nf == fonts.length) {
+			fonts = Arrays.copyOf(fonts, nf * 2);
+			fontKeys = Arrays.copyOf(fontKeys, nf * 2);
+		}
+		Font base = (key & M3WebPaint.MONO) != 0 ? new Font(Font.MONOSPACED, Font.PLAIN, 12) : getFont() != null ? getFont() : new Font(Font.DIALOG, Font.PLAIN, 12);
+		fontKeys[nf] = key;
+		fonts[nf] = base.deriveFont((key & M3WebPaint.BOLD) != 0 ? Font.BOLD : Font.PLAIN, (float) Math.max(6, key & 0xff));
+		return fonts[nf++];
+	}
+
+	@Override
+	public AccessibleContext getAccessibleContext() {
+		if (accessibleContext == null) {
+			accessibleContext = new AccessibleM3Web();
+		}
+		return accessibleContext;
+	}
+
+	/** ARIA role and name of the model through Swing accessibility. */
+	protected class AccessibleM3Web extends AccessibleJComponent {
+		@Override
+		public AccessibleRole getAccessibleRole() {
+			String role = M3WebStates.roleName(model.role());
+			for (int i = 0; i < ROLE_NAMES.length; i++) {
+				if (ROLE_NAMES[i].equals(role)) {
+					return ROLES[i];
+				}
+			}
+			return AccessibleRole.PANEL;
+		}
+
+		@Override
+		public String getAccessibleName() {
+			return accessibleName != null ? accessibleName : model.accessibleName(-1);
+		}
+	}
+}

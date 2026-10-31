@@ -1,0 +1,103 @@
+package @PKG@;
+
+/**
+ * Toolkit-neutral API of every M3 web widget (pattern M3P-CORE-1). Items are int ids into packed
+ * lanes; item {@code -1} addresses the widget itself in {@link #is} and {@link #setState}.
+ */
+public interface M3WebApi {
+	String concept();
+
+	/** ARIA role id, see {@link M3WebStates#roleName(int)}. */
+	int role();
+
+	/** Accessible name of an item (or of the widget for {@code -1}). */
+	String accessibleName(int item);
+
+	int add(String label);
+
+	int add(String label, String detail);
+
+	void remove(int item);
+
+	void clear();
+
+	int count();
+
+	String text(int item);
+
+	void setText(int item, String text);
+
+	String detail(int item);
+
+	void setDetail(int item, String detail);
+
+	int value(int item);
+
+	void setValue(int item, int value);
+
+	int aux(int item);
+
+	void setAux(int item, int aux);
+
+	int group(int item);
+
+	void setGroup(int item, int group);
+
+	boolean is(int item, int state);
+
+	void setState(int item, int state, boolean on);
+
+	int variant();
+
+	void setVariant(int variant);
+
+	int size();
+
+	void setSize(int size);
+
+	boolean isRtl();
+
+	void setRtl(boolean rtl);
+
+	boolean isDark();
+
+	void setDark(boolean dark);
+
+	int focus();
+
+	void setFocus(int item);
+
+	/** Re-resolves every item text through a translator; the first call remembers the source keys. */
+	void localize(java.util.function.UnaryOperator<String> translator);
+
+	void layout(int width, int height);
+
+	int prefWidth();
+
+	int prefHeight();
+
+	/** Rect of an item: {@code k} 0 x, 1 y, 2 width, 3 height. */
+	int itemRect(int item, int k);
+
+	int hitTest(int x, int y);
+
+	void paint(M3WebPaint paint);
+
+	boolean key(int key, int ch, int mods);
+
+	void pointer(int kind, int x, int y, int mods);
+
+	boolean tick(int ms);
+
+	boolean isAnimating();
+
+	void setDelta(M3WebDelta delta);
+
+	/** Moves the accumulated damage into {@code out[0..4)} (x, y, w, h); false when nothing is dirty. */
+	boolean takeDamage(int[] out);
+
+	int generation();
+
+	/** Every lane as one int array: the Nebula/Swing differential compares these. */
+	int[] snapshot();
+}

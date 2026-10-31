@@ -1,0 +1,249 @@
+package @PKG@;
+
+import static @PKG@.M3WebStates.*;
+
+/**
+ * Ordered segments with a current index (pattern M3P-SEGMENTS-1, aspects R+G+D+P): steps, timeline
+ * events, crumbs, pages, segments, toggles, stars, slides, tiles and navigation rows. Segments are laid
+ * out along one axis at {@link #itemExtent()} each; only the resident window gets rects, so a pager of
+ * 10^6 pages paints a handful. Carousel dots live on the OVERLAY plane. Members: stepper, timeline,
+ * breadcrumb, pagination, segmented-bar, toggle-group, rating, carousel, carousel-tiles, navigation.
+ */
+public class M3SegmentsModel extends M3WebModel implements M3SegmentsApi {
+	public static final int STEPPER = 0, TIMELINE = 1, BREADCRUMB = 2, PAGINATION = 3, SEGMENTED = 4, TOGGLE = 5, RATING = 6, CAROUSEL = 7,
+			TILES = 8, NAV = 9;
+	private static final int[] EXTENT = { 120, 56, 96, 36, 96, 88, 28, 320, 112, 40 };
+	private int current = -1;
+
+	public M3SegmentsModel(String concept, int role, int mode, int shape, int variant) {
+		super(concept, role, mode, shape, variant);
+		itemExtent = EXTENT[mode];
+	}
+
+	@Override
+	public int aspects() {
+		return A_R | A_G | A_D | A_P;
+	}
+
+	@Override
+	public void load(String sample) {
+		clear();
+		if (mode == PAGINATION) {
+			setLogicalCount(Math.max(1, M3WebStates.parse(sample)));
+		} else {
+			for (String s : sample.split(";")) {
+				String[] f = s.split("~", -1);
+				add(f[0], f.length > 1 ? f[1] : null);
+			}
+		}
+		select(mode == RATING ? -1 : 0);
+	}
+
+	@Override
+	public int current() {
+		return current;
+	}
+
+	@Override
+	public void select(int item) {
+		current = item < 0 ? -1 : checked(item);
+		for (int i = 0; i < count; i++) {
+			flags[i] = i == current ? flags[i] | SELECTED : flags[i] & ~SELECTED;
+			flags[i] = mode == STEPPER && i < current ? flags[i] | DONE : flags[i] & ~DONE;
+		}
+		if (current >= 0 && mode != RATING) {
+			reveal(current);
+		}
+		relayout(current, D_VALUE);
+	}
+
+	/** Display label: the text, or the 1-based number for text-less segments (pages). */
+	@Override
+	public String labelOf(int item) {
+		return text[checked(item)] != null ? text[item] : Integer.toString(item + 1);
+	}
+
+	@Override
+	protected boolean vertical() {
+		return mode == TIMELINE || mode == NAV;
+	}
+
+	@Override
+	public int viewLength() {
+		return vertical() ? height : width;
+	}
+
+	@Override
+	public boolean scrollsHorizontally() {
+		return !vertical();
+	}
+
+	/** Scrolls the minimum so the segment is inside the visible window. */
+	public void reveal(int item) {
+		long start = (long) item * itemExtent, end = start + itemExtent;
+		if (start < scroll) {
+			scrollTo(start);
+		} else if (end > scroll + viewLength()) {
+			scrollTo(end - viewLength());
+		}
+	}
+
+	@Override
+	protected void doLayout() {
+		int cross = vertical() ? width : mode == CAROUSEL ? Math.max(rowHeight(), height - rowHeight()) : Math.min(height, crossExtent());
+		for (int i = 0; i < count; i++) {
+			if (i < window[2] || i >= window[3]) {
+				setRect(i, 0, 0, 0, 0);
+				continue;
+			}
+			int pos = (int) ((long) i * itemExtent - scroll);
+			int ext = mode == SEGMENTED || mode == TOGGLE || mode == PAGINATION || mode == RATING ? itemExtent - 2 : itemExtent;
+			if (vertical()) {
+				setRect(i, 0, pos, cross, ext);
+			} else {
+				setRect(i, pos, 0, ext, cross);
+			}
+		}
+		setPlane(OVERLAY, 0, Math.max(0, height - rowHeight()), width, rowHeight());
+	}
+
+	private int crossExtent() {
+		return mode == STEPPER ? rowHeight() * 2 : mode == TILES ? itemExtent - gap() : rowHeight();
+	}
+
+	@Override
+	protected void emit(M3WebPaint p) {
+		if (mode == SEGMENTED || mode == TOGGLE) {
+			p.round(0, 0, Math.min(width, (int) Math.min(Integer.MAX_VALUE, logicalExtent())), rowHeight(), radius(), M3WebTheme.mix(theme.slot(M3WebTheme.FG), theme.slot(M3WebTheme.SURFACE), 6));
+		}
+		for (int i = window[2]; i < window[3]; i++) {
+			int b = i * 4;
+			if (rects[b + 2] > 0 && (flags[i] & HIDDEN) == 0) {
+				segment(p, i, rects[b], rects[b + 1], rects[b + 2], rects[b + 3]);
+			}
+		}
+		if (mode == CAROUSEL) {
+			dots(p);
+		}
+	}
+
+	private void segment(M3WebPaint p, int i, int x, int y, int w, int h) {
+		switch (mode) {
+		case STEPPER: step(p, i, x, y, w, h); break;
+		case TIMELINE: event(p, i, x, y, w, h); break;
+		case BREADCRUMB: crumb(p, i, x, y, w, h); break;
+		case RATING: star(p, i, x, y, w, h); break;
+		case NAV: nav(p, i, x, y, w, h); break;
+		case CAROUSEL: case TILES: slide(p, i, x, y, w, h); break;
+		default: pill(p, i, x, y, w, h);
+		}
+	}
+
+	private void step(M3WebPaint p, int i, int x, int y, int w, int h) {
+		int r = rowHeight(), cx = x + (rtl ? w - r : 0);
+		boolean done = (flags[i] & DONE) != 0, cur = i == current;
+		if (i < count - 1) {
+			p.line(cx + (rtl ? 0 : r), y + r / 2, cx + (rtl ? -w + r : w), y + r / 2, theme.slot(done ? M3WebTheme.ACCENT : M3WebTheme.BORDER));
+		}
+		p.oval(cx, y, r, r, done || cur ? theme.slot(M3WebTheme.ACCENT) : theme.slot(M3WebTheme.SURFACE));
+		p.ovalLine(cx, y, r, r, theme.line(V_PRIMARY, flags[i]));
+		if (done) {
+			M3WebGlyphs.glyph(p, M3WebGlyphs.I_CHECK, cx, y, r, 0xffffff);
+		} else {
+			p.text(cx, y, r, r, cur ? 0xffffff : theme.slot(M3WebTheme.FG), font() | M3WebPaint.CENTER, Integer.toString(i + 1));
+		}
+		label(p, i, labelOf(i), x, y + r, w, h - r, cur ? M3WebPaint.BOLD : 0);
+	}
+
+	private void event(M3WebPaint p, int i, int x, int y, int w, int h) {
+		int d = Math.max(8, rowHeight() / 3), lx = rtl ? x + w - d : x;
+		p.line(lx + d / 2, y, lx + d / 2, y + h, theme.slot(M3WebTheme.BORDER));
+		p.oval(lx, y + d / 2, d, d, theme.slot(i == current ? M3WebTheme.ACCENT : M3WebTheme.MUTED));
+		label(p, i, labelOf(i), rtl ? x : x + 2 * d, y, w - 2 * d, rowHeight(), M3WebPaint.BOLD);
+		muted(p, detail[i], rtl ? x : x + 2 * d, y + rowHeight() / 2 + 4, w - 2 * d, rowHeight(), 0);
+	}
+
+	private void crumb(M3WebPaint p, int i, int x, int y, int w, int h) {
+		boolean last = i == count - 1;
+		int g = h / 2, tw = w - (last ? 0 : g);
+		p.text(rtl ? x + g : x, y, tw, h, theme.slot(last ? M3WebTheme.FG : M3WebTheme.ACCENT), font() | (last ? M3WebPaint.BOLD : M3WebPaint.UNDERLINE), labelOf(i));
+		if (!last) {
+			M3WebGlyphs.glyph(p, rtl ? M3WebGlyphs.I_PREV : M3WebGlyphs.I_NEXT, rtl ? x : x + w - g, y + h / 4, g, theme.slot(M3WebTheme.MUTED));
+		}
+	}
+
+	private void star(M3WebPaint p, int i, int x, int y, int w, int h) {
+		boolean lit = i <= current || (hover >= 0 && i <= hover);
+		int c = lit ? theme.slot(M3WebTheme.WARNING) : theme.slot(M3WebTheme.BORDER);
+		M3WebGlyphs.glyph(p, M3WebGlyphs.I_STAR, x, y, Math.min(w, h), c);
+	}
+
+	private void nav(M3WebPaint p, int i, int x, int y, int w, int h) {
+		if (i == current) {
+			p.round(x, y + 2, w, h - 4, radius(), M3WebTheme.mix(theme.slot(M3WebTheme.ACCENT), theme.slot(M3WebTheme.SURFACE), 14));
+			p.rect(rtl ? x + w - 3 : x, y + 6, 3, h - 12, theme.slot(M3WebTheme.ACCENT));
+		} else if ((flags[i] & HOVER) != 0) {
+			p.round(x, y + 2, w, h - 4, radius(), M3WebTheme.mix(theme.slot(M3WebTheme.FG), theme.slot(M3WebTheme.SURFACE), 6));
+		}
+		label(p, i, labelOf(i), x + pad(), y, w - 2 * pad(), h, i == current ? M3WebPaint.BOLD : 0);
+	}
+
+	private void slide(M3WebPaint p, int i, int x, int y, int w, int h) {
+		int m = mode == TILES ? gap() / 2 : 0;
+		surface(p, i, x + m, y + m, w - 2 * m, h - 2 * m);
+		label(p, i, labelOf(i), x, y, w, h, M3WebPaint.CENTER | M3WebPaint.BOLD | Math.min(255, font() * (mode == CAROUSEL ? 2 : 1)));
+	}
+
+	private void pill(M3WebPaint p, int i, int x, int y, int w, int h) {
+		boolean sel = i == current;
+		int st = flags[i] & ~SELECTED;
+		if (sel) {
+			p.round(x + 1, y + 1, w - 2, h - 2, radius(), mode == TOGGLE || mode == PAGINATION ? theme.fill(V_PRIMARY, st) : theme.slot(M3WebTheme.SURFACE));
+		} else if (mode == PAGINATION) {
+			p.roundLine(x + 1, y + 1, w - 2, h - 2, radius(), theme.line(V_DEFAULT, st));
+		}
+		int ink = sel && (mode == TOGGLE || mode == PAGINATION) ? 0xffffff : theme.ink(V_DEFAULT, st);
+		p.text(x, y, w, h, ink, font() | M3WebPaint.CENTER | (sel ? M3WebPaint.BOLD : 0), labelOf(i));
+	}
+
+	private void dots(M3WebPaint p) {
+		int d = 8, n = Math.min(count, 12), x0 = (width - n * 2 * d) / 2, y = plane(OVERLAY, 1) + (rowHeight() - d) / 2;
+		p.translate(plane(OVERLAY, 4), plane(OVERLAY, 5));
+		for (int k = 0; k < n; k++) {
+			p.oval(x0 + k * 2 * d, y, d, d, theme.slot(k == Math.floorMod(current, n) ? M3WebTheme.ACCENT : M3WebTheme.BORDER));
+		}
+		p.translate(0, 0);
+	}
+
+	@Override
+	protected void activate(int item) {
+		select(mode == RATING && item == current ? -1 : item);
+		fire(item, D_ACTION);
+	}
+
+	@Override
+	public void setFocus(int item) {
+		super.setFocus(item);
+		if (item >= 0) {
+			reveal(item);
+			if (mode == SEGMENTED || mode == TOGGLE || mode == CAROUSEL) {
+				select(item);
+			}
+		}
+	}
+
+	@Override
+	protected boolean onKey(int key, int ch, int mods) {
+		if (key == KEY_PAGE_DOWN || key == KEY_PAGE_UP) {
+			int stepN = Math.max(1, viewLength() / itemExtent);
+			setFocus(Math.max(0, Math.min(count - 1, Math.max(0, focus) + (key == KEY_PAGE_DOWN ? stepN : -stepN))));
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	protected void onWheel(int delta) {
+		scrollTo(scroll + (long) delta * itemExtent);
+	}
+}

@@ -1,0 +1,108 @@
+package @PKG@;
+
+import static @PKG@.M3WebChecks.check;
+import static @PKG@.M3WebStates.*;
+
+/** Family contract of the virtual collections (pattern M3P-COLLECTION-1). */
+public final class M3CollectionChecks {
+	private M3CollectionChecks() {
+	}
+
+	public static void run(M3CollectionModel m) {
+		m.layout(360, 240);
+		M3WebPaint p = new M3WebPaint();
+		for (int i = 0; i < 40; i++) {
+			m.add("row " + i);
+		}
+		m.setGroup(1, 1);
+		m.layout(360, 240);
+		m.paint(p);
+		keys(m, p);
+		drag(m, p);
+		loading(m, p);
+		m.setFilter("row 1");
+		check(m.logicalCount() > 0 && m.logicalCount() < m.count(), "filter compacts positions");
+		m.paint(p);
+		m.setFilter("");
+		m.setRtl(true);
+		m.paint(p);
+		m.setRtl(false);
+	}
+
+	private static void keys(M3CollectionModel m, M3WebPaint p) {
+		m.setFocus(0);
+		m.key(KEY_DOWN, 0, MOD_ALT);
+		check(m.focus() == 1 || m.mode == M3CollectionModel.GALLERY, "alt+down reorders");
+		m.key(KEY_UP, 0, MOD_ALT);
+		m.key(KEY_UP, 0, MOD_ALT);
+		m.key(KEY_RIGHT, 0, MOD_CTRL);
+		m.key(KEY_LEFT, 0, MOD_CTRL);
+		m.key(KEY_PAGE_DOWN, 0, 0);
+		m.key(KEY_PAGE_UP, 0, 0);
+		m.key(KEY_DELETE, 0, 0);
+		m.paint(p);
+		m.key(KEY_ENTER, 0, 0);
+		m.key(KEY_DELETE, 0, 0);
+		m.setFocus(m.count() - 1);
+		m.paint(p);
+		m.move(m.count() - 1, 0);
+		check(m.focus() == 0, "move keeps focus on the moved item");
+		m.moveToColumn(0, -2);
+		check(m.group(0) == 0, "column clamps");
+		m.setFocus(-1);
+		String first = m.text(0);
+		m.key(KEY_DOWN, 0, MOD_ALT);
+		check(first.equals(m.text(0)), "no focus, no reorder (the key only moves the focus)");
+	}
+
+	private static void drag(M3CollectionModel m, M3WebPaint p) {
+		m.scrollTo(0);
+		m.layout(360, 240);
+		int x = m.itemRect(0, 0) + 10, y = m.itemRect(0, 1) + 5;
+		m.pointer(P_DOWN, x, y, 0);
+		m.pointer(P_DRAG, x - 200, y + 50, 0);
+		m.paint(p);
+		m.pointer(P_UP, x - 200, y + 50, 0);
+		m.pointer(P_DOWN, x, y, 0);
+		m.pointer(P_DRAG, x - 20, y, 0);
+		m.pointer(P_UP, x - 20, y, 0);
+		m.swipe(0, -1000);
+		check(m.mode != M3CollectionModel.SWIPE || m.aux(0) < 0, "swipe opens");
+		m.paint(p);
+		m.pointer(P_DOWN, 300, 230, 0);
+		m.pointer(P_UP, 300, 230, 0);
+		m.pointer(P_DOWN, -5, -5, 0);
+		m.pointer(P_DRAG, 0, 0, 0);
+		m.pointer(P_UP, -5, -5, 0);
+		m.swipe(0, 0);
+	}
+
+	private static void loading(M3CollectionModel m, M3WebPaint p) {
+		int[] loads = new int[1];
+		m.setDelta((item, mask) -> loads[0] += (mask & M3WebLanes.D_LOAD) != 0 ? 1 : 0);
+		m.setThreshold(3);
+		m.scrollTo(Long.MAX_VALUE);
+		int once = loads[0];
+		m.scrollTo(Long.MAX_VALUE - 1);
+		check(m.mode != M3CollectionModel.INFINITE || (m.needsMore() && once <= 1 && loads[0] == once), "one load per item count");
+		m.add("more");
+		m.scrollTo(Long.MAX_VALUE);
+		check(m.mode != M3CollectionModel.INFINITE || loads[0] == once + 1, "a new item count loads again");
+		m.scrollTo(0);
+		m.pointer(P_WHEEL, 0, -4, 0);
+		m.pointer(P_WHEEL, 0, -4, 0);
+		check(m.mode != M3CollectionModel.PULL || (m.pull() > 0 && m.is(-1, LOADING)), "pull to refresh");
+		m.paint(p);
+		for (int i = 0; i < 5; i++) {
+			m.tick(16);
+		}
+		m.endRefresh();
+		check(m.pull() == 0 && !m.is(-1, LOADING), "refresh ended");
+		int y = m.itemRect(0, 1) + 2;
+		m.pointer(P_DOWN, 20, y, 0);
+		m.pointer(P_DRAG, 20, y + 200, 0);
+		m.pointer(P_UP, 20, y + 200, 0);
+		m.endRefresh();
+		m.setDelta(null);
+	}
+}

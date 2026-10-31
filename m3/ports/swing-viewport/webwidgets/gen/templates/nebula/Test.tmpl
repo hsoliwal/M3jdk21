@@ -1,0 +1,16 @@
+package @PKG@;
+
+import org.junit.Test;
+
+/** Headless model contract of M3 @CONCEPT@ (family @FAM@, pattern @PATTERN@). */
+public class M3@C@Model_Test {
+	@Test
+	public void sampleContract() {
+		M3WebChecks.core(M3@C@Model.sample(), M3@C@Api.SAMPLE, "@ROLE@");
+	}
+
+	@Test
+	public void familyContract() {
+		M3@FAMILY@Checks.run(M3@C@Model.sample());
+	}
+}
