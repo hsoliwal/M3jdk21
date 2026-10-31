@@ -94,7 +94,7 @@ jobs:
       - name: Build source-vendored recipe and JUnit prerequisites
         run: >-
           mvn -B -ntp -f m3/vendor/third_party/pom.xml
-          -pl rewrite-core,rewrite-java,rewrite-java-21,slf4j-api-1.7.36,slf4j-api-2.0.12,junit-jupiter-5.10.2,junit-platform-launcher-1.10.2
+          -pl rewrite-core,rewrite-java,rewrite-java-21,slf4j-api-2.0.12,junit-jupiter-5.10.2,junit-platform-launcher-1.10.2
           -am -DskipTests install
       - name: Run original hash-pinned JMOD descriptor OpenRewrite JUnit
         run: >-
