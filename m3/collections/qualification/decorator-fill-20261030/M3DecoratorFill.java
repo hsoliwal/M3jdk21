@@ -109,6 +109,10 @@ public final class M3DecoratorFill {
     /** SFA: a Java string literal (data, never rewritten). */
     private static final String LIT = "\"(?:[^\"\\\\]|\\\\.)*\"";
     private static final Pattern LITERAL = Pattern.compile(LIT);
+    /** v1.6 INVERSE_CACHE body: a bidi map's inverse view, created once and linked back. */
+    private static final Pattern INVERSE_CACHE = Pattern.compile(
+            "^if \\(inverse == null\\) \\{ inverse = new (\\w+)<>\\(decorated\\(\\)\\.(\\w+)"
+            + "\\(\\)\\); inverse\\.inverse = this; \\} return inverse;$");
     /**
      * LANES_CONSTRUCTOR statement shapes s1..s4 (normalized Commons constructor text, super(..)
      * chain flattened).
@@ -168,6 +172,8 @@ public final class M3DecoratorFill {
      * accessors return.
      */
     private final Set<String> aliases = new LinkedHashSet<>();
+    /** v1.6: extra instance fields of the owned class (INVERSE_CACHE), emitted after backing. */
+    private final List<String> fields = new ArrayList<>();
     /**
      * v1.3 LANES: enclosing generator of an inner helper (its lane members live there), else null.
      */
@@ -819,6 +825,11 @@ public final class M3DecoratorFill {
     }
 
     private Emit wrap(Atom a, String body, List<String> names) {
+        Matcher inverse = INVERSE_CACHE.matcher(body);
+        if (inverse.matches() && names.isEmpty()) {
+            return inverseCache(a, inverse.group(1), inverse.group(2)).orElse(
+                    new Emit("MANUAL", body));
+        }
         String wrapper = "(new \\w+<>|\\w+\\.\\w+|\\w+)";
         // v1.6: super.m() of this no-argument atom reads as decorated().m() when the superclass
         // body of m is the delegate (R6(1) guard)
@@ -874,6 +885,34 @@ public final class M3DecoratorFill {
         String expr = template.replace("%s", delegated).replace("%b", "backing").replace("%c",
                 a.name + "(" + args(a) + ")");
         return new Emit(view ? "UNMODIFIABLE_MAP_ITERATOR" : "WRAP", "return " + expr + ";");
+    }
+
+    /**
+     * v1.6 INVERSE_CACHE guards: the view is this class, the Commons class declares the field
+     * {@code inverse} as itself with the type parameters swapped, and the decorated call is
+     * {@code inverseBidiMap()}. The scaffold signature keeps the Commons modifiers
+     * ({@code synchronized}).
+     */
+    private Optional<Emit> inverseCache(Atom a, String view, String call) {
+        String[] tp = typeParamNames();
+        String swapped = tp.length == 2 ? tp[1] + ", " + tp[0] : "";
+        boolean field = Arrays.stream(commons.getDeclaredFields()).anyMatch(
+                x -> x.getName().equals("inverse") && x.getGenericType().getTypeName()
+                .equals(commons.getName() + "<" + swapped + ">"));
+        if (tp.length != 2 || !field || !view.equals(commons.getSimpleName())
+                || !call.equals("inverseBidiMap")) {
+            return Optional.empty();
+        }
+        if (fields.isEmpty()) {
+            fields.add("    /** The inverse view, created once and linked back (INVERSE_CACHE). */"
+                    + "\n"
+                    + "    private " + m3Simple + "<" + swapped + "> inverse;\n");
+        }
+        return Optional.of(new Emit("INVERSE_CACHE", "if (inverse == null) {\n"
+                + "            inverse = new " + m3Simple + "<>(backing." + call + "());\n"
+                + "            inverse.inverse = this;\n"
+                + "        }\n"
+                + "        return inverse;"));
     }
 
     /** Whether the simple name resolves, as the declaring Commons source sees it, to fqn. */
@@ -1064,7 +1103,8 @@ public final class M3DecoratorFill {
                                         ? "    /** The monitor shared with the owning decorator. " +
                                         "*/\n"
                                         + "    @SuppressWarnings(\"serial\")\n    private final " +
-                                                "Object lock;\n" : "")))
+                                                "Object lock;\n" : "")
+                                + String.join("", fields)))
                 .replaceAll("\n{3,}", "\n\n");
     }
 
@@ -3101,7 +3141,8 @@ public final class M3DecoratorFill {
                 int at = p.start(m);
                 boolean documented = text.substring(0, at).stripTrailing().endsWith("*/");
                 if (exported && !override && !documented) {
-                    Optional<List<String>> doc = factoryDoc(p, cls, m, noun);
+                    Optional<List<String>> doc = factoryDoc(p, cls, m, noun).or(
+                            () -> inverseDoc(m, commons));
                     if (doc.isEmpty()) {
                         residue.add(
                                 String.join("\t", "JAVADOC", top, m.getName().toString(),
@@ -3158,6 +3199,25 @@ public final class M3DecoratorFill {
          * validation of the decorated
          * elements -> IllegalArgumentException).
          */
+        /**
+         * v1.6 INVERSE_CACHE documentation: a public no-argument {@code inverse*} instance method
+         * that is not an override (UnmodifiableOrderedBidiMap.inverseOrderedBidiMap).
+         */
+        private static Optional<List<String>> inverseDoc(com.sun.source.tree.MethodTree m,
+                Class<?> commons) {
+            if (!m.getName().toString().startsWith("inverse") || !m.getParameters().isEmpty()
+                    || m.getModifiers().getFlags().contains(
+                            javax.lang.model.element.Modifier.STATIC)) {
+                return Optional.empty();
+            }
+            String unmodifiable = org.apache.commons.collections4.Unmodifiable.class
+                    .isAssignableFrom(commons) ? " unmodifiable" : "";
+            return Optional.of(List.of(
+                    "Returns the" + unmodifiable + " view of this map with its keys and values",
+                    "reversed. The view is created on the first call and kept.", "",
+                    "@return the inverse view of this map"));
+        }
+
         private Optional<List<String>> factoryDoc(Parsed p, com.sun.source.tree.ClassTree cls,
                 com.sun.source.tree.MethodTree m, Noun noun) {
             String name = m.getName().toString();

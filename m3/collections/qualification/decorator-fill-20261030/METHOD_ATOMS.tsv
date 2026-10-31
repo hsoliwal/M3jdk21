@@ -1596,7 +1596,7 @@ M3UnmodifiableBidiMap	int size()	DELEGATE	return backing.size();
 M3UnmodifiableBidiMap	java.util.Set<K> keySet()	WRAP	return java.util.Collections.unmodifiableSet(backing.keySet());
 M3UnmodifiableBidiMap	java.util.Set<V> values()	WRAP	return java.util.Collections.unmodifiableSet(backing.values());
 M3UnmodifiableBidiMap	java.util.Set<java.util.Map.Entry<K, V>> entrySet()	WRAP	return java.util.Collections.unmodifiableMap(backing).entrySet();
-M3UnmodifiableBidiMap	org.apache.commons.collections4.BidiMap<V, K> inverseBidiMap()	MANUAL	if (inverse == null) { inverse = new UnmodifiableBidiMap<>(decorated().inverseBidiMap()); inverse.inverse = this; } return inverse;
+M3UnmodifiableBidiMap	org.apache.commons.collections4.BidiMap<V, K> inverseBidiMap()	INVERSE_CACHE	if (inverse == null) {             inverse = new M3UnmodifiableBidiMap<>(backing.inverseBidiMap());             inverse.inverse = this;         }         return inverse;
 M3UnmodifiableBidiMap	org.apache.commons.collections4.MapIterator<K, V> mapIterator()	UNMODIFIABLE_MAP_ITERATOR	return new UnmodifiableMapIteratorView<>(backing.mapIterator());
 M3UnmodifiableBidiMap	static <K, V> org.apache.commons.collections4.BidiMap<K, V> unmodifiableBidiMap(org.apache.commons.collections4.BidiMap<? extends K, ? extends V> arg0)	FACTORY	if (arg0 instanceof org.apache.commons.collections4.Unmodifiable) {             return (org.apache.commons.collections4.BidiMap<K, V>) arg0;         }         return new M3UnmodifiableBidiMap<>(arg0);
 M3UnmodifiableBidiMap	void clear()	THROW	throw new UnsupportedOperationException();
@@ -1852,7 +1852,7 @@ M3UnmodifiableOrderedBidiMap	java.util.Set<K> keySet()	WRAP	return java.util.Col
 M3UnmodifiableOrderedBidiMap	java.util.Set<V> values()	WRAP	return java.util.Collections.unmodifiableSet(backing.values());
 M3UnmodifiableOrderedBidiMap	java.util.Set<java.util.Map.Entry<K, V>> entrySet()	WRAP	return java.util.Collections.unmodifiableMap(backing).entrySet();
 M3UnmodifiableOrderedBidiMap	org.apache.commons.collections4.OrderedBidiMap<V, K> inverseBidiMap()	SELF_CALL	return inverseOrderedBidiMap();
-M3UnmodifiableOrderedBidiMap	org.apache.commons.collections4.OrderedBidiMap<V, K> inverseOrderedBidiMap()	MANUAL	if (inverse == null) { inverse = new UnmodifiableOrderedBidiMap<>(decorated().inverseBidiMap()); inverse.inverse = this; } return inverse;
+M3UnmodifiableOrderedBidiMap	org.apache.commons.collections4.OrderedBidiMap<V, K> inverseOrderedBidiMap()	INVERSE_CACHE	if (inverse == null) {             inverse = new M3UnmodifiableOrderedBidiMap<>(backing.inverseBidiMap());             inverse.inverse = this;         }         return inverse;
 M3UnmodifiableOrderedBidiMap	org.apache.commons.collections4.OrderedMapIterator<K, V> mapIterator()	UNMODIFIABLE_MAP_ITERATOR	return new UnmodifiableOrderedMapIteratorView<>(backing.mapIterator());
 M3UnmodifiableOrderedBidiMap	static <K, V> org.apache.commons.collections4.OrderedBidiMap<K, V> unmodifiableOrderedBidiMap(org.apache.commons.collections4.OrderedBidiMap<? extends K, ? extends V> arg0)	FACTORY	if (arg0 instanceof org.apache.commons.collections4.Unmodifiable) {             return (org.apache.commons.collections4.OrderedBidiMap<K, V>) arg0;         }         return new M3UnmodifiableOrderedBidiMap<>(arg0);
 M3UnmodifiableOrderedBidiMap	void clear()	THROW	throw new UnsupportedOperationException();
@@ -1995,7 +1995,7 @@ M3UnmodifiableSortedBidiMap	java.util.SortedMap<K, V> reversed()	DEFAULT	return 
 M3UnmodifiableSortedBidiMap	java.util.SortedMap<K, V> subMap(K arg0, K arg1)	WRAP	return java.util.Collections.unmodifiableSortedMap(backing.subMap(arg0, arg1));
 M3UnmodifiableSortedBidiMap	java.util.SortedMap<K, V> tailMap(K arg0)	WRAP	return java.util.Collections.unmodifiableSortedMap(backing.tailMap(arg0));
 M3UnmodifiableSortedBidiMap	org.apache.commons.collections4.OrderedMapIterator<K, V> mapIterator()	UNMODIFIABLE_MAP_ITERATOR	return new UnmodifiableOrderedMapIteratorView<>(backing.mapIterator());
-M3UnmodifiableSortedBidiMap	org.apache.commons.collections4.SortedBidiMap<V, K> inverseBidiMap()	MANUAL	if (inverse == null) { inverse = new UnmodifiableSortedBidiMap<>(decorated().inverseBidiMap()); inverse.inverse = this; } return inverse;
+M3UnmodifiableSortedBidiMap	org.apache.commons.collections4.SortedBidiMap<V, K> inverseBidiMap()	INVERSE_CACHE	if (inverse == null) {             inverse = new M3UnmodifiableSortedBidiMap<>(backing.inverseBidiMap());             inverse.inverse = this;         }         return inverse;
 M3UnmodifiableSortedBidiMap	static <K, V> org.apache.commons.collections4.SortedBidiMap<K, V> unmodifiableSortedBidiMap(org.apache.commons.collections4.SortedBidiMap<K, ? extends V> arg0)	FACTORY	if (arg0 instanceof org.apache.commons.collections4.Unmodifiable) {             return (org.apache.commons.collections4.SortedBidiMap<K, V>) arg0;         }         return new M3UnmodifiableSortedBidiMap<>(arg0);
 M3UnmodifiableSortedBidiMap	void clear()	THROW	throw new UnsupportedOperationException();
 M3UnmodifiableSortedBidiMap	void forEach(java.util.function.BiConsumer<? super K, ? super V> arg0)	DEFAULT	org.apache.commons.collections4.SortedBidiMap.super.forEach(arg0);

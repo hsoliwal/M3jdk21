@@ -179,10 +179,14 @@ v1.6 extends WRAP and ALIAS to the Unmodifiable maps and adds one helper:
 - **Constructor of a K, V owner:** the backing is typed over the class's own type parameters, and the null message is
   the one of the Commons constructor chain (`"map"`, `"trie"`).
 
-Result: UnmodifiableOrderedMap and UnmodifiableTrie are owned (34 filled); MANUAL atoms 209 to 156. TARGETS.tsv has
-two new rows (backings `linkedmap` and `trie`): 46 targets, 0 mismatches, rule checks 13/13, negative controls 16/16.
-The other Unmodifiable maps keep 1 to 3 atoms each (the cached inverse of the bidi maps, UnmodifiableSortedMap's
-ordered navigation, UnmodifiableMap's IterableMap branch); they are the next candidates in PATTERNS.tsv. The
+- **INVERSE_CACHE:** a bidi map's inverse view, created once and linked back, over a field of the owned class typed
+  with the type parameters swapped (the scaffold keeps Commons' `synchronized`).
+
+Result: UnmodifiableOrderedMap, UnmodifiableTrie and the three Unmodifiable bidi maps are owned (37 filled); MANUAL
+atoms 209 to 153. TARGETS.tsv has five new rows (backings `linkedmap`, `trie`, `dualhashbidi`, `treebidi`,
+`dualtreebidi`): 49 targets, 0 mismatches, rule checks 13/13, negative controls 16/16. The other Unmodifiable maps
+keep 1 to 3 atoms each (UnmodifiableSortedMap's ordered navigation, UnmodifiableMap's IterableMap branch,
+UnmodifiableMultiValuedMap's keys); they are the next candidates in PATTERNS.tsv. The
 GENERATED block now takes its version from one constant, a comment-only change for the earlier classes (`-g:none`
 class files unchanged).
 
