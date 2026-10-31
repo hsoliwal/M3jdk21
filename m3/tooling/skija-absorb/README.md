@@ -80,3 +80,30 @@ Owner (parameter of `gen_rename.py`, changeable by rerunning it):
 3. Consumers: run the same recipe over SWT Render M3 / GPU M3 (and Nebula, SwingX ports), then drop the Skija jars from
    the SWT fragment.
 4. Swing / SwingX: a Java2D pipeline in `java.desktop` backed by the same owner, so Swing draws through M3 too.
+
+## Leaf 1: Java absorption (done, compile- and API-gated)
+
+`src/jdk.m3.graphics/share/classes` holds 225 sources and `module-info.java`. The module requires only `java.base` and
+exports `jdk.m3.graphics` plus `.impl`, `.paragraph`, `.resources`, `.shaper`, `.skottie`, `.sksg` and `.svg`. It is in
+`PLATFORM_MODULES` of `make/conf/module-loader-map.conf`, and `make/modules/jdk.m3.graphics/Java.gmk` disables the four
+lint kinds it raises. Licence and changes: `src/jdk.m3.graphics/share/legal/skija.md`.
+
+Pipeline (each stage gated, `leaf1/GATES.tsv`):
+
+1. Donor compile with Lombok: 275 classes. Its public surface equals the published 0.143.18 jars.
+2. `lombok.jar delombok` 1.18.48, then `tools/delombok_clean.py`. The tool removes the markers and the timestamps, which
+   would make the output non-deterministic, and adds the SneakyThrow helper. The result compiles without Lombok, and its
+   API is unchanged (plus the helper).
+3. `tools/absorb_rename.py`. It strips the JetBrains annotations (3,026), renames packages (401) and type tokens (6,584).
+   Edits happen only in code regions (SFA), and an unqualified token is renamed only when javac's scope makes it ours:
+   1 token is shadowed by `java.nio.file.*`. The one string naming the old package is reported in
+   `leaf1/STRING_MENTIONS.tsv`; it is the native loader's module name, replaced in leaf 2.
+4. Gates: 0 errors with no jar on the classpath. The javap surface equals the donor's renamed surface: 4,622 = 4,622.
+
+Owner correction (recorded): `io.github.humbleui.skija.impl` maps to `jdk.m3.graphics.impl`, not
+`jdk.internal.m3.graphics`. SWT Render M3 uses `impl.Native` (6 places) and `impl.Library`, so the package is exported,
+and a `jdk.internal` package is not exported unqualified. The ledgers and the recipe were regenerated with this owner.
+
+Runtime state: the module compiles and its API is complete, but its natives are not built. `M3Library` still looks for
+the donor's native module, and the JNI symbols in the shipped dll carry the old names, so calls into native code fail
+until leaf 2 builds `libm3graphics` under the new names (`ledgers/JNI_RENAME.tsv`).

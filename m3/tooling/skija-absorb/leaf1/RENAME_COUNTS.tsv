@@ -1,0 +1,7 @@
+rule	count
+files	225
+jb_annotation	3026
+jb_import	193
+pkg	401
+type_token	6584
+type_token_shadowed	1
