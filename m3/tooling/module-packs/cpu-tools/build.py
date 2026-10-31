@@ -41,7 +41,8 @@ FIXTURES = ("M3DonorToolsTest", "M3SourceToolsTest", "M3CpuToolsTest", "M3FileCp
             "M3LogicFlowContract", "M3IndexedDataContract",
             "M3TemporalModelContract", "M3IndexedSystemsContract",
             "M3AutomataPlanningContract", "M3IndexDiffAdmissionContract",
-            "M3MatchingSearchContract", "M3DataflowScheduleContract")
+            "M3MatchingSearchContract", "M3DataflowScheduleContract",
+            "M3WeightedGraphContract", "M3SuffixNumericContract")
 FIXED_JAR_DATE = "2026-01-01T00:00:00Z"
 COMMAND_SECONDS = 115
 CLEANUP_SECONDS = 5
