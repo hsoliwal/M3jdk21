@@ -7,6 +7,28 @@ package jdk.internal.math;
 import java.util.Arrays;
 
 abstract class M3AbstractNumberParser {
+    //FLLDCIM: M3 - LITERAL_CONSTANTS v1: this class's magic literals, named by role (user rule: no magic numbers, no floating strings)
+    /** First decimal digit; ch - DIGIT_ZERO is the digit value. */
+    private static final char DIGIT_ZERO = '0';
+    /** Last decimal digit. */
+    private static final char DIGIT_NINE = '9';
+    /** First upper-case hex digit letter. */
+    private static final char HEX_UPPER_A = 'A';
+    /** Last upper-case hex digit letter. */
+    private static final char HEX_UPPER_F = 'F';
+    /** Value of the hex digit A (a). */
+    private static final int HEX_LETTER_BASE = 10;
+    /** First lower-case hex digit letter. */
+    private static final char HEX_LOWER_A = 'a';
+    /** Last lower-case hex digit letter. */
+    private static final char HEX_LOWER_F = 'f';
+    /** Decimal point character. */
+    private static final char DECIMAL_POINT = '.';
+    /** Unsigned byte mask: a byte as a CHAR_TO_HEX_MAP index. */
+    private static final int BYTE_MASK = 0xff;
+    /** Chars at or above this (non-ASCII) are never hex digits. */
+    private static final int HEX_MAP_CHAR_LIMIT = 128;
+
     /**
      * Message text for the {@link IllegalArgumentException} that is thrown
      * when offset or length are illegal
@@ -41,16 +63,16 @@ abstract class M3AbstractNumberParser {
 
     static {
         Arrays.fill(CHAR_TO_HEX_MAP, OTHER_CLASS);
-        for (char ch = '0'; ch <= '9'; ch++) {
-            CHAR_TO_HEX_MAP[ch] = (byte) (ch - '0');
+        for (char ch = DIGIT_ZERO; ch <= DIGIT_NINE; ch++) {
+            CHAR_TO_HEX_MAP[ch] = (byte) (ch - DIGIT_ZERO);
         }
-        for (char ch = 'A'; ch <= 'F'; ch++) {
-            CHAR_TO_HEX_MAP[ch] = (byte) (ch - 'A' + 10);
+        for (char ch = HEX_UPPER_A; ch <= HEX_UPPER_F; ch++) {
+            CHAR_TO_HEX_MAP[ch] = (byte) (ch - HEX_UPPER_A + HEX_LETTER_BASE);
         }
-        for (char ch = 'a'; ch <= 'f'; ch++) {
-            CHAR_TO_HEX_MAP[ch] = (byte) (ch - 'a' + 10);
+        for (char ch = HEX_LOWER_A; ch <= HEX_LOWER_F; ch++) {
+            CHAR_TO_HEX_MAP[ch] = (byte) (ch - HEX_LOWER_A + HEX_LETTER_BASE);
         }
-        CHAR_TO_HEX_MAP['.'] = DECIMAL_POINT_CLASS;
+        CHAR_TO_HEX_MAP[DECIMAL_POINT] = DECIMAL_POINT_CLASS;
     }
 
     /**
@@ -102,7 +124,7 @@ abstract class M3AbstractNumberParser {
      * @return the hex value or a value &lt; 0.
      */
     protected static int lookupHex(byte ch) {
-        return CHAR_TO_HEX_MAP[ch & 0xff];
+        return CHAR_TO_HEX_MAP[ch & BYTE_MASK];
     }
 
     /**
@@ -121,7 +143,7 @@ abstract class M3AbstractNumberParser {
         // Branch-less code: return CHAR_TO_HEX_MAP[ch & 0xff] | (127 - ch) >> 31;
         // Branch-less code: return CHAR_TO_HEX_MAP[(ch|((127-ch)>>31))&0xff];
         // Branch-less code: return CHAR_TO_HEX_MAP[ch<128?ch:0];
-        return ch < 128 ? CHAR_TO_HEX_MAP[ch] : -1;
+        return ch < HEX_MAP_CHAR_LIMIT ? CHAR_TO_HEX_MAP[ch] : -1;
     }
 
     /**

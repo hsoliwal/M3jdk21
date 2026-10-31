@@ -1,0 +1,489 @@
+file	line	col	class	member	literal	type	name	state	role
+M3AbstractJavaFloatingPointBitsFromByteArray.java	28	50	M3AbstractJavaFloatingPointBitsFromByteArray	skipWhitespace#1	0xff	int	BYTE_MASK	DECLARED	Unsigned byte mask.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	28	59	M3AbstractJavaFloatingPointBitsFromByteArray	skipWhitespace#1	' '	char	MAX_WHITESPACE	DECLARED	Chars at or below the space character are white space.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	80	39	M3AbstractJavaFloatingPointBitsFromByteArray	parseDecFloatLiteral#1	'0'	char	DIGIT_ZERO	DECLARED	First decimal digit; ch - DIGIT_ZERO is the digit value.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	81	25	M3AbstractJavaFloatingPointBitsFromByteArray	parseDecFloatLiteral#1	10	int	DECIMAL_RADIX	DECLARED	Radix of decimal digits.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	83	31	M3AbstractJavaFloatingPointBitsFromByteArray	parseDecFloatLiteral#2	10	int	DECIMAL_RADIX	DECLARED	Radix of decimal digits.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	84	30	M3AbstractJavaFloatingPointBitsFromByteArray	parseDecFloatLiteral#1	'.'	char	DECIMAL_POINT	DECLARED	Decimal point character.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	87	43	M3AbstractJavaFloatingPointBitsFromByteArray	parseDecFloatLiteral#1	4	int	DIGITS_PER_SWAR_GROUP	DECLARED	Decimal digits parsed at once.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	87	55	M3AbstractJavaFloatingPointBitsFromByteArray	parseDecFloatLiteral#2	4	int	DIGITS_PER_SWAR_GROUP	DECLARED	Decimal digits parsed at once.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	93	35	M3AbstractJavaFloatingPointBitsFromByteArray	parseDecFloatLiteral#1	10_000L	long	TEN_POW_4	DECLARED	10^4: scales the significand by four parsed digits.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	114	19	M3AbstractJavaFloatingPointBitsFromByteArray	parseDecFloatLiteral#1	0x20	int	LOWER_CASE_BIT	DECLARED	Folds an ASCII letter to lower case.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	114	28	M3AbstractJavaFloatingPointBitsFromByteArray	parseDecFloatLiteral#1	'e'	char	EXPONENT_INDICATOR	DECLARED	Decimal exponent indicator (folded to lower case).
+M3AbstractJavaFloatingPointBitsFromByteArray.java	116	48	M3AbstractJavaFloatingPointBitsFromByteArray	parseDecFloatLiteral#1	'-'	char	MINUS_SIGN	DECLARED	Minus sign.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	117	45	M3AbstractJavaFloatingPointBitsFromByteArray	parseDecFloatLiteral#1	'+'	char	PLUS_SIGN	DECLARED	Plus sign.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	120	38	M3AbstractJavaFloatingPointBitsFromByteArray	parseDecFloatLiteral#2	'0'	char	DIGIT_ZERO	DECLARED	First decimal digit; ch - DIGIT_ZERO is the digit value.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	121	33	M3AbstractJavaFloatingPointBitsFromByteArray	parseDecFloatLiteral#3	10	int	DECIMAL_RADIX	DECLARED	Radix of decimal digits.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	125	33	M3AbstractJavaFloatingPointBitsFromByteArray	parseDecFloatLiteral#4	10	int	DECIMAL_RADIX	DECLARED	Radix of decimal digits.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	128	38	M3AbstractJavaFloatingPointBitsFromByteArray	parseDecFloatLiteral#3	'0'	char	DIGIT_ZERO	DECLARED	First decimal digit; ch - DIGIT_ZERO is the digit value.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	129	30	M3AbstractJavaFloatingPointBitsFromByteArray	parseDecFloatLiteral#5	10	int	DECIMAL_RADIX	DECLARED	Radix of decimal digits.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	139	19	M3AbstractJavaFloatingPointBitsFromByteArray	parseDecFloatLiteral#1	0x22	int	TYPE_SUFFIX_FOLD	DECLARED	Maps the float type suffixes f, F, d and D to f.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	139	28	M3AbstractJavaFloatingPointBitsFromByteArray	parseDecFloatLiteral#1	'f'	char	TYPE_SUFFIX_FOLDED	DECLARED	A float type suffix after TYPE_SUFFIX_FOLD.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	156	26	M3AbstractJavaFloatingPointBitsFromByteArray	parseDecFloatLiteral#1	19	int	MAX_EXACT_DECIMAL_DIGITS	DECLARED	Decimal digit count that always fits an unsigned long.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	160	27	M3AbstractJavaFloatingPointBitsFromByteArray	parseDecFloatLiteral#2	'.'	char	DECIMAL_POINT	DECLARED	Decimal point character.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	164	39	M3AbstractJavaFloatingPointBitsFromByteArray	parseDecFloatLiteral#6	10	int	DECIMAL_RADIX	DECLARED	Radix of decimal digits.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	164	65	M3AbstractJavaFloatingPointBitsFromByteArray	parseDecFloatLiteral#4	'0'	char	DIGIT_ZERO	DECLARED	First decimal digit; ch - DIGIT_ZERO is the digit value.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	212	42	M3AbstractJavaFloatingPointBitsFromByteArray	parseFloatingPointLiteral#1	'-'	char	MINUS_SIGN	DECLARED	Minus sign.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	213	33	M3AbstractJavaFloatingPointBitsFromByteArray	parseFloatingPointLiteral#1	'+'	char	PLUS_SIGN	DECLARED	Plus sign.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	222	19	M3AbstractJavaFloatingPointBitsFromByteArray	parseFloatingPointLiteral#1	'I'	char	INFINITY_CHAR_I	DECLARED	The I of Infinity; only NaN and Infinity start at or above it.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	228	46	M3AbstractJavaFloatingPointBitsFromByteArray	parseFloatingPointLiteral#1	'0'	char	DIGIT_ZERO	DECLARED	First decimal digit; ch - DIGIT_ZERO is the digit value.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	231	23	M3AbstractJavaFloatingPointBitsFromByteArray	parseFloatingPointLiteral#1	0x20	int	LOWER_CASE_BIT	DECLARED	Folds an ASCII letter to lower case.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	231	32	M3AbstractJavaFloatingPointBitsFromByteArray	parseFloatingPointLiteral#1	'x'	char	HEX_INDICATOR	DECLARED	Hex prefix letter (folded to lower case).
+M3AbstractJavaFloatingPointBitsFromByteArray.java	279	47	M3AbstractJavaFloatingPointBitsFromByteArray	parseHexFloatingPointLiteral#1	4	int	BITS_PER_HEX_DIGIT	DECLARED	Bits of one hex digit.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	304	116	M3AbstractJavaFloatingPointBitsFromByteArray	parseHexFloatingPointLiteral#2	4	int	BITS_PER_HEX_DIGIT	DECLARED	Bits of one hex digit.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	310	43	M3AbstractJavaFloatingPointBitsFromByteArray	parseHexFloatingPointLiteral#1	0x20	int	LOWER_CASE_BIT	DECLARED	Folds an ASCII letter to lower case.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	310	52	M3AbstractJavaFloatingPointBitsFromByteArray	parseHexFloatingPointLiteral#1	'p'	char	BINARY_EXPONENT_INDICATOR	DECLARED	Binary exponent indicator of a hex literal (folded to lower case).
+M3AbstractJavaFloatingPointBitsFromByteArray.java	313	48	M3AbstractJavaFloatingPointBitsFromByteArray	parseHexFloatingPointLiteral#1	'-'	char	MINUS_SIGN	DECLARED	Minus sign.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	314	45	M3AbstractJavaFloatingPointBitsFromByteArray	parseHexFloatingPointLiteral#1	'+'	char	PLUS_SIGN	DECLARED	Plus sign.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	317	38	M3AbstractJavaFloatingPointBitsFromByteArray	parseHexFloatingPointLiteral#1	'0'	char	DIGIT_ZERO	DECLARED	First decimal digit; ch - DIGIT_ZERO is the digit value.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	318	33	M3AbstractJavaFloatingPointBitsFromByteArray	parseHexFloatingPointLiteral#1	10	int	DECIMAL_RADIX	DECLARED	Radix of decimal digits.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	322	33	M3AbstractJavaFloatingPointBitsFromByteArray	parseHexFloatingPointLiteral#2	10	int	DECIMAL_RADIX	DECLARED	Radix of decimal digits.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	325	38	M3AbstractJavaFloatingPointBitsFromByteArray	parseHexFloatingPointLiteral#2	'0'	char	DIGIT_ZERO	DECLARED	First decimal digit; ch - DIGIT_ZERO is the digit value.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	326	30	M3AbstractJavaFloatingPointBitsFromByteArray	parseHexFloatingPointLiteral#3	10	int	DECIMAL_RADIX	DECLARED	Radix of decimal digits.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	336	19	M3AbstractJavaFloatingPointBitsFromByteArray	parseHexFloatingPointLiteral#1	0x22	int	TYPE_SUFFIX_FOLD	DECLARED	Maps the float type suffixes f, F, d and D to f.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	336	28	M3AbstractJavaFloatingPointBitsFromByteArray	parseHexFloatingPointLiteral#1	'f'	char	TYPE_SUFFIX_FOLDED	DECLARED	A float type suffix after TYPE_SUFFIX_FOLD.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	353	26	M3AbstractJavaFloatingPointBitsFromByteArray	parseHexFloatingPointLiteral#1	16	int	MAX_EXACT_HEX_DIGITS	DECLARED	Hex digit count that always fits a long.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	361	55	M3AbstractJavaFloatingPointBitsFromByteArray	parseHexFloatingPointLiteral#3	4	int	BITS_PER_HEX_DIGIT	DECLARED	Bits of one hex digit.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	375	78	M3AbstractJavaFloatingPointBitsFromByteArray	parseHexFloatingPointLiteral#4	4	int	BITS_PER_HEX_DIGIT	DECLARED	Bits of one hex digit.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	380	27	M3AbstractJavaFloatingPointBitsFromByteArray	parseNaNOrInfinity#1	'N'	char	NAN_CHAR_N	DECLARED	The N of NaN.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	381	25	M3AbstractJavaFloatingPointBitsFromByteArray	parseNaNOrInfinity#1	2	int	NAN_LAST_INDEX	DECLARED	Index of the last char of NaN.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	383	42	M3AbstractJavaFloatingPointBitsFromByteArray	parseNaNOrInfinity#1	'a'	char	NAN_CHAR_A	DECLARED	The a of NaN.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	384	36	M3AbstractJavaFloatingPointBitsFromByteArray	parseNaNOrInfinity#2	2	int	NAN_LAST_INDEX	DECLARED	Index of the last char of NaN.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	384	42	M3AbstractJavaFloatingPointBitsFromByteArray	parseNaNOrInfinity#2	'N'	char	NAN_CHAR_N	DECLARED	The N of NaN.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	386	53	M3AbstractJavaFloatingPointBitsFromByteArray	parseNaNOrInfinity#1	3	int	NAN_CHAR_COUNT	DECLARED	Length of NaN.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	392	25	M3AbstractJavaFloatingPointBitsFromByteArray	parseNaNOrInfinity#1	7	int	INFINITY_LAST_INDEX	DECLARED	Index of the last char of Infinity.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	393	67	M3AbstractJavaFloatingPointBitsFromByteArray	parseNaNOrInfinity#1	0x7974696e69666e49L	long	INFINITY_UTF8_LE	DECLARED	The eight ASCII bytes of Infinity read as one little-endian long.
+M3AbstractJavaFloatingPointBitsFromByteArray.java	395	53	M3AbstractJavaFloatingPointBitsFromByteArray	parseNaNOrInfinity#1	8	int	INFINITY_CHAR_COUNT	DECLARED	Length of Infinity.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	28	57	M3AbstractJavaFloatingPointBitsFromCharSequence	skipWhitespace#1	' '	char	MAX_WHITESPACE	DECLARED	Chars at or below the space character are white space.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	80	38	M3AbstractJavaFloatingPointBitsFromCharSequence	parseDecFloatLiteral#1	'0'	char	DIGIT_ZERO	DECLARED	First decimal digit; ch - DIGIT_ZERO is the digit value.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	81	25	M3AbstractJavaFloatingPointBitsFromCharSequence	parseDecFloatLiteral#1	10	int	DECIMAL_RADIX	DECLARED	Radix of decimal digits.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	83	31	M3AbstractJavaFloatingPointBitsFromCharSequence	parseDecFloatLiteral#2	10	int	DECIMAL_RADIX	DECLARED	Radix of decimal digits.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	84	30	M3AbstractJavaFloatingPointBitsFromCharSequence	parseDecFloatLiteral#1	'.'	char	DECIMAL_POINT	DECLARED	Decimal point character.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	115	19	M3AbstractJavaFloatingPointBitsFromCharSequence	parseDecFloatLiteral#1	0x20	int	LOWER_CASE_BIT	DECLARED	Folds an ASCII letter to lower case.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	115	28	M3AbstractJavaFloatingPointBitsFromCharSequence	parseDecFloatLiteral#1	'e'	char	EXPONENT_INDICATOR	DECLARED	Decimal exponent indicator (folded to lower case).
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	117	48	M3AbstractJavaFloatingPointBitsFromCharSequence	parseDecFloatLiteral#1	'-'	char	MINUS_SIGN	DECLARED	Minus sign.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	118	45	M3AbstractJavaFloatingPointBitsFromCharSequence	parseDecFloatLiteral#1	'+'	char	PLUS_SIGN	DECLARED	Plus sign.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	121	38	M3AbstractJavaFloatingPointBitsFromCharSequence	parseDecFloatLiteral#2	'0'	char	DIGIT_ZERO	DECLARED	First decimal digit; ch - DIGIT_ZERO is the digit value.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	122	33	M3AbstractJavaFloatingPointBitsFromCharSequence	parseDecFloatLiteral#3	10	int	DECIMAL_RADIX	DECLARED	Radix of decimal digits.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	126	33	M3AbstractJavaFloatingPointBitsFromCharSequence	parseDecFloatLiteral#4	10	int	DECIMAL_RADIX	DECLARED	Radix of decimal digits.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	129	38	M3AbstractJavaFloatingPointBitsFromCharSequence	parseDecFloatLiteral#3	'0'	char	DIGIT_ZERO	DECLARED	First decimal digit; ch - DIGIT_ZERO is the digit value.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	130	30	M3AbstractJavaFloatingPointBitsFromCharSequence	parseDecFloatLiteral#5	10	int	DECIMAL_RADIX	DECLARED	Radix of decimal digits.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	140	19	M3AbstractJavaFloatingPointBitsFromCharSequence	parseDecFloatLiteral#1	0x22	int	TYPE_SUFFIX_FOLD	DECLARED	Maps the float type suffixes f, F, d and D to f.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	140	28	M3AbstractJavaFloatingPointBitsFromCharSequence	parseDecFloatLiteral#1	'f'	char	TYPE_SUFFIX_FOLDED	DECLARED	A float type suffix after TYPE_SUFFIX_FOLD.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	157	26	M3AbstractJavaFloatingPointBitsFromCharSequence	parseDecFloatLiteral#1	19	int	MAX_EXACT_DECIMAL_DIGITS	DECLARED	Decimal digit count that always fits an unsigned long.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	161	27	M3AbstractJavaFloatingPointBitsFromCharSequence	parseDecFloatLiteral#2	'.'	char	DECIMAL_POINT	DECLARED	Decimal point character.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	165	39	M3AbstractJavaFloatingPointBitsFromCharSequence	parseDecFloatLiteral#6	10	int	DECIMAL_RADIX	DECLARED	Radix of decimal digits.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	165	63	M3AbstractJavaFloatingPointBitsFromCharSequence	parseDecFloatLiteral#4	'0'	char	DIGIT_ZERO	DECLARED	First decimal digit; ch - DIGIT_ZERO is the digit value.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	212	42	M3AbstractJavaFloatingPointBitsFromCharSequence	parseFloatingPointLiteral#1	'-'	char	MINUS_SIGN	DECLARED	Minus sign.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	213	33	M3AbstractJavaFloatingPointBitsFromCharSequence	parseFloatingPointLiteral#1	'+'	char	PLUS_SIGN	DECLARED	Plus sign.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	222	19	M3AbstractJavaFloatingPointBitsFromCharSequence	parseFloatingPointLiteral#1	'I'	char	INFINITY_CHAR_I	DECLARED	The I of Infinity; only NaN and Infinity start at or above it.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	228	46	M3AbstractJavaFloatingPointBitsFromCharSequence	parseFloatingPointLiteral#1	'0'	char	DIGIT_ZERO	DECLARED	First decimal digit; ch - DIGIT_ZERO is the digit value.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	231	23	M3AbstractJavaFloatingPointBitsFromCharSequence	parseFloatingPointLiteral#1	0x20	int	LOWER_CASE_BIT	DECLARED	Folds an ASCII letter to lower case.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	231	32	M3AbstractJavaFloatingPointBitsFromCharSequence	parseFloatingPointLiteral#1	'x'	char	HEX_INDICATOR	DECLARED	Hex prefix letter (folded to lower case).
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	279	46	M3AbstractJavaFloatingPointBitsFromCharSequence	parseHexFloatLiteral#1	4	int	BITS_PER_HEX_DIGIT	DECLARED	Bits of one hex digit.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	283	43	M3AbstractJavaFloatingPointBitsFromCharSequence	parseHexFloatLiteral#1	8	int	HEX_DIGITS_PER_SWAR_GROUP	DECLARED	Hex digits parsed at once.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	283	55	M3AbstractJavaFloatingPointBitsFromCharSequence	parseHexFloatLiteral#2	8	int	HEX_DIGITS_PER_SWAR_GROUP	DECLARED	Hex digits parsed at once.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	287	55	M3AbstractJavaFloatingPointBitsFromCharSequence	parseHexFloatLiteral#1	32	int	BITS_PER_SWAR_GROUP	DECLARED	Bits of eight hex digits.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	302	116	M3AbstractJavaFloatingPointBitsFromCharSequence	parseHexFloatLiteral#2	4	int	BITS_PER_HEX_DIGIT	DECLARED	Bits of one hex digit.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	308	43	M3AbstractJavaFloatingPointBitsFromCharSequence	parseHexFloatLiteral#1	0x20	int	LOWER_CASE_BIT	DECLARED	Folds an ASCII letter to lower case.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	308	52	M3AbstractJavaFloatingPointBitsFromCharSequence	parseHexFloatLiteral#1	'p'	char	BINARY_EXPONENT_INDICATOR	DECLARED	Binary exponent indicator of a hex literal (folded to lower case).
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	311	48	M3AbstractJavaFloatingPointBitsFromCharSequence	parseHexFloatLiteral#1	'-'	char	MINUS_SIGN	DECLARED	Minus sign.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	312	45	M3AbstractJavaFloatingPointBitsFromCharSequence	parseHexFloatLiteral#1	'+'	char	PLUS_SIGN	DECLARED	Plus sign.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	315	38	M3AbstractJavaFloatingPointBitsFromCharSequence	parseHexFloatLiteral#1	'0'	char	DIGIT_ZERO	DECLARED	First decimal digit; ch - DIGIT_ZERO is the digit value.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	316	33	M3AbstractJavaFloatingPointBitsFromCharSequence	parseHexFloatLiteral#1	10	int	DECIMAL_RADIX	DECLARED	Radix of decimal digits.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	320	33	M3AbstractJavaFloatingPointBitsFromCharSequence	parseHexFloatLiteral#2	10	int	DECIMAL_RADIX	DECLARED	Radix of decimal digits.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	323	38	M3AbstractJavaFloatingPointBitsFromCharSequence	parseHexFloatLiteral#2	'0'	char	DIGIT_ZERO	DECLARED	First decimal digit; ch - DIGIT_ZERO is the digit value.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	324	30	M3AbstractJavaFloatingPointBitsFromCharSequence	parseHexFloatLiteral#3	10	int	DECIMAL_RADIX	DECLARED	Radix of decimal digits.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	334	19	M3AbstractJavaFloatingPointBitsFromCharSequence	parseHexFloatLiteral#1	0x22	int	TYPE_SUFFIX_FOLD	DECLARED	Maps the float type suffixes f, F, d and D to f.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	334	28	M3AbstractJavaFloatingPointBitsFromCharSequence	parseHexFloatLiteral#1	'f'	char	TYPE_SUFFIX_FOLDED	DECLARED	A float type suffix after TYPE_SUFFIX_FOLD.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	351	26	M3AbstractJavaFloatingPointBitsFromCharSequence	parseHexFloatLiteral#1	16	int	MAX_EXACT_HEX_DIGITS	DECLARED	Hex digit count that always fits a long.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	359	54	M3AbstractJavaFloatingPointBitsFromCharSequence	parseHexFloatLiteral#3	4	int	BITS_PER_HEX_DIGIT	DECLARED	Bits of one hex digit.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	373	78	M3AbstractJavaFloatingPointBitsFromCharSequence	parseHexFloatLiteral#4	4	int	BITS_PER_HEX_DIGIT	DECLARED	Bits of one hex digit.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	378	34	M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity#1	'N'	char	NAN_CHAR_N	DECLARED	The N of NaN.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	379	25	M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity#1	2	int	NAN_LAST_INDEX	DECLARED	Index of the last char of NaN.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	381	49	M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity#1	'a'	char	NAN_CHAR_A	DECLARED	The a of NaN.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	382	43	M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity#2	2	int	NAN_LAST_INDEX	DECLARED	Index of the last char of NaN.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	382	49	M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity#2	'N'	char	NAN_CHAR_N	DECLARED	The N of NaN.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	384	53	M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity#1	3	int	NAN_CHAR_COUNT	DECLARED	Length of NaN.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	390	25	M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity#1	7	int	INFINITY_LAST_INDEX	DECLARED	Index of the last char of Infinity.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	391	45	M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity#1	'I'	char	INFINITY_CHAR_I	DECLARED	The I of Infinity; only NaN and Infinity start at or above it.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	392	49	M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity#1	'n'	char	INFINITY_CHAR_N	DECLARED	The n of Infinity.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	393	43	M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity#3	2	int	INFINITY_INDEX_F	DECLARED	Index of the f in Infinity.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	393	49	M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity#1	'f'	char	INFINITY_CHAR_F	DECLARED	The f of Infinity.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	394	43	M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity#2	3	int	INFINITY_INDEX_LOWER_I	DECLARED	Index of the first lower-case i in Infinity.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	394	49	M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity#1	'i'	char	INFINITY_CHAR_LOWER_I	DECLARED	The lower-case i of Infinity.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	395	43	M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity#1	4	int	INFINITY_INDEX_SECOND_N	DECLARED	Index of the second n in Infinity.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	395	49	M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity#2	'n'	char	INFINITY_CHAR_N	DECLARED	The n of Infinity.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	396	43	M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity#1	5	int	INFINITY_INDEX_SECOND_I	DECLARED	Index of the second lower-case i in Infinity.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	396	49	M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity#2	'i'	char	INFINITY_CHAR_LOWER_I	DECLARED	The lower-case i of Infinity.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	397	43	M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity#1	6	int	INFINITY_INDEX_T	DECLARED	Index of the t in Infinity.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	397	49	M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity#1	't'	char	INFINITY_CHAR_T	DECLARED	The t of Infinity.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	398	43	M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity#2	7	int	INFINITY_LAST_INDEX	DECLARED	Index of the last char of Infinity.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	398	49	M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity#1	'y'	char	INFINITY_CHAR_Y	DECLARED	The y of Infinity.
+M3AbstractJavaFloatingPointBitsFromCharSequence.java	400	53	M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity#1	8	int	INFINITY_CHAR_COUNT	DECLARED	Length of Infinity.
+M3AbstractNumberParser.java	44	24	M3AbstractNumberParser	<clinit>#1	'0'	char	DIGIT_ZERO	DECLARED	First decimal digit; ch - DIGIT_ZERO is the digit value.
+M3AbstractNumberParser.java	44	35	M3AbstractNumberParser	<clinit>#1	'9'	char	DIGIT_NINE	DECLARED	Last decimal digit.
+M3AbstractNumberParser.java	45	48	M3AbstractNumberParser	<clinit>#2	'0'	char	DIGIT_ZERO	DECLARED	First decimal digit; ch - DIGIT_ZERO is the digit value.
+M3AbstractNumberParser.java	47	24	M3AbstractNumberParser	<clinit>#1	'A'	char	HEX_UPPER_A	DECLARED	First upper-case hex digit letter.
+M3AbstractNumberParser.java	47	35	M3AbstractNumberParser	<clinit>#1	'F'	char	HEX_UPPER_F	DECLARED	Last upper-case hex digit letter.
+M3AbstractNumberParser.java	48	48	M3AbstractNumberParser	<clinit>#2	'A'	char	HEX_UPPER_A	DECLARED	First upper-case hex digit letter.
+M3AbstractNumberParser.java	48	54	M3AbstractNumberParser	<clinit>#1	10	int	HEX_LETTER_BASE	DECLARED	Value of the hex digit A (a).
+M3AbstractNumberParser.java	50	24	M3AbstractNumberParser	<clinit>#1	'a'	char	HEX_LOWER_A	DECLARED	First lower-case hex digit letter.
+M3AbstractNumberParser.java	50	35	M3AbstractNumberParser	<clinit>#1	'f'	char	HEX_LOWER_F	DECLARED	Last lower-case hex digit letter.
+M3AbstractNumberParser.java	51	48	M3AbstractNumberParser	<clinit>#2	'a'	char	HEX_LOWER_A	DECLARED	First lower-case hex digit letter.
+M3AbstractNumberParser.java	51	54	M3AbstractNumberParser	<clinit>#2	10	int	HEX_LETTER_BASE	DECLARED	Value of the hex digit A (a).
+M3AbstractNumberParser.java	53	25	M3AbstractNumberParser	<clinit>#1	'.'	char	DECIMAL_POINT	DECLARED	Decimal point character.
+M3AbstractNumberParser.java	105	37	M3AbstractNumberParser	lookupHex#1	0xff	int	BYTE_MASK	DECLARED	Unsigned byte mask: a byte as a CHAR_TO_HEX_MAP index.
+M3AbstractNumberParser.java	124	21	M3AbstractNumberParser	lookupHex#1	128	int	HEX_MAP_CHAR_LIMIT	DECLARED	Chars at or above this (non-ASCII) are never hex digits.
+M3FastDoubleMath.java	772	33	M3FastDoubleMath	tryDecFloatToDoubleTruncated#1	-0.0	double	NEGATIVE_ZERO	DECLARED	IEEE 754 negative zero (double).
+M3FastDoubleMath.java	825	13	M3FastDoubleMath	tryDecToDoubleWithFastAlgorithm#1	-22	int	FAST_PATH_MIN_POWER_OF_TEN	DECLARED	Smallest power of ten of the exact (Clinger) double fast path.
+M3FastDoubleMath.java	825	38	M3FastDoubleMath	tryDecToDoubleWithFastAlgorithm#1	22	int	FAST_PATH_MAX_POWER_OF_TEN	DECLARED	Largest power of ten of the exact (Clinger) double fast path (10^22 is exact in a double).
+M3FastDoubleMath.java	884	28	M3FastDoubleMath	tryDecToDoubleWithFastAlgorithm#1	152170L	long	LOG2_FIVE_SCALED	DECLARED	log2(5) * 2^16, rounded.
+M3FastDoubleMath.java	884	38	M3FastDoubleMath	tryDecToDoubleWithFastAlgorithm#1	65536L	long	ONE_SCALED	DECLARED	1 * 2^16: adds the power itself to the log2(5^power) estimate.
+M3FastDoubleMath.java	884	58	M3FastDoubleMath	tryDecToDoubleWithFastAlgorithm#1	16	int	LOG2_FIVE_SCALE_SHIFT	DECLARED	Removes the 2^16 scale of LOG2_FIVE_SCALED and ONE_SCALED.
+M3FastDoubleMath.java	884	87	M3FastDoubleMath	tryDecToDoubleWithFastAlgorithm#1	64	int	WORD_BITS	DECLARED	Bits of the 64-bit product word.
+M3FastDoubleMath.java	898	35	M3FastDoubleMath	tryDecToDoubleWithFastAlgorithm#1	63	int	HIGH_BIT_SHIFT	DECLARED	Bit 63: the top bit of the 64-bit product and the double sign bit.
+M3FastDoubleMath.java	899	47	M3FastDoubleMath	tryDecToDoubleWithFastAlgorithm#1	9	int	MANTISSA_ALIGN_SHIFT	DECLARED	64 - DOUBLE_SIGNIFICAND_WIDTH - 2: keeps 54 significant bits of the product.
+M3FastDoubleMath.java	908	23	M3FastDoubleMath	tryDecToDoubleWithFastAlgorithm#1	0x1ff	int	HALFWAY_TRAILING_MASK	DECLARED	The 9 bits shifted out: all ones or all zeros may be a halfway case.
+M3FastDoubleMath.java	908	33	M3FastDoubleMath	tryDecToDoubleWithFastAlgorithm#2	0x1ff	int	HALFWAY_TRAILING_MASK	DECLARED	The 9 bits shifted out: all ones or all zeros may be a halfway case.
+M3FastDoubleMath.java	909	30	M3FastDoubleMath	tryDecToDoubleWithFastAlgorithm#3	0x1ff	int	HALFWAY_TRAILING_MASK	DECLARED	The 9 bits shifted out: all ones or all zeros may be a halfway case.
+M3FastDoubleMath.java	909	58	M3FastDoubleMath	tryDecToDoubleWithFastAlgorithm#1	3	int	LOW_TWO_BITS_MASK	DECLARED	The two lowest mantissa bits (round-half-even check).
+M3FastDoubleMath.java	949	39	M3FastDoubleMath	tryDecToDoubleWithFastAlgorithm#2	63	int	HIGH_BIT_SHIFT	DECLARED	Bit 63: the top bit of the 64-bit product and the double sign bit.
+M3FastDoubleMath.java	974	66	M3FastDoubleMath	tryHexFloatToDoubleTruncated#1	0x1p64	double	TWO_POW_64	DECLARED	2^64: corrects the signed conversion of an unsigned 64-bit significand.
+M3FastDoubleSwar.java	51	28	M3FastDoubleSwar	isDigit#1	'0'	char	DIGIT_ZERO	DECLARED	First decimal digit; ch - DIGIT_ZERO is the digit value.
+M3FastDoubleSwar.java	51	35	M3FastDoubleSwar	isDigit#1	10	int	DECIMAL_RADIX	DECLARED	Radix of decimal digits.
+M3FastDoubleSwar.java	64	28	M3FastDoubleSwar	isDigit#2	'0'	char	DIGIT_ZERO	DECLARED	First decimal digit; ch - DIGIT_ZERO is the digit value.
+M3FastDoubleSwar.java	64	35	M3FastDoubleSwar	isDigit#2	10	int	DECIMAL_RADIX	DECLARED	Radix of decimal digits.
+M3FastDoubleSwar.java	82	43	M3FastDoubleSwar	isEightDigits#1	16	int	UTF16_LANE_1_SHIFT	DECLARED	Bit offset of the second UTF-16 lane of a long.
+M3FastDoubleSwar.java	83	37	M3FastDoubleSwar	isEightDigits#1	2	int	GROUP_CHAR_2	DECLARED	Index of the third char of an eight-char (or four-char) group.
+M3FastDoubleSwar.java	83	43	M3FastDoubleSwar	isEightDigits#1	32	int	UTF16_LANE_2_SHIFT	DECLARED	Bit offset of the third UTF-16 lane of a long.
+M3FastDoubleSwar.java	84	37	M3FastDoubleSwar	isEightDigits#1	3	int	GROUP_CHAR_3	DECLARED	Index of the fourth char of a char group.
+M3FastDoubleSwar.java	84	43	M3FastDoubleSwar	isEightDigits#1	48	int	UTF16_LANE_3_SHIFT	DECLARED	Bit offset of the fourth UTF-16 lane of a long.
+M3FastDoubleSwar.java	85	34	M3FastDoubleSwar	isEightDigits#1	4	int	GROUP_CHAR_4	DECLARED	Index of the fifth char of an eight-char group.
+M3FastDoubleSwar.java	86	37	M3FastDoubleSwar	isEightDigits#1	5	int	GROUP_CHAR_5	DECLARED	Index of the sixth char of an eight-char group.
+M3FastDoubleSwar.java	86	43	M3FastDoubleSwar	isEightDigits#2	16	int	UTF16_LANE_1_SHIFT	DECLARED	Bit offset of the second UTF-16 lane of a long.
+M3FastDoubleSwar.java	87	37	M3FastDoubleSwar	isEightDigits#1	6	int	GROUP_CHAR_6	DECLARED	Index of the seventh char of an eight-char group.
+M3FastDoubleSwar.java	87	43	M3FastDoubleSwar	isEightDigits#2	32	int	UTF16_LANE_2_SHIFT	DECLARED	Bit offset of the third UTF-16 lane of a long.
+M3FastDoubleSwar.java	88	37	M3FastDoubleSwar	isEightDigits#1	7	int	GROUP_CHAR_7	DECLARED	Index of the eighth char of an eight-char group.
+M3FastDoubleSwar.java	88	43	M3FastDoubleSwar	isEightDigits#2	48	int	UTF16_LANE_3_SHIFT	DECLARED	Bit offset of the fourth UTF-16 lane of a long.
+M3FastDoubleSwar.java	94	29	M3FastDoubleSwar	isEightDigits#1	8	int	DIGITS_PER_GROUP	DECLARED	Chars checked by one eight-digit test.
+M3FastDoubleSwar.java	102	29	M3FastDoubleSwar	isEightDigitsUtf16#1	0x0030_0030_0030_0030L	long	UTF16_LANES_ZERO	DECLARED	The digit 0 in each of four UTF-16 lanes.
+M3FastDoubleSwar.java	103	30	M3FastDoubleSwar	isEightDigitsUtf16#2	0x0030_0030_0030_0030L	long	UTF16_LANES_ZERO	DECLARED	The digit 0 in each of four UTF-16 lanes.
+M3FastDoubleSwar.java	109	29	M3FastDoubleSwar	isEightDigitsUtf16#1	0x0046_0046_0046_0046L	long	UTF16_LANES_NINE_OVERFLOW	DECLARED	0x7f - 0x39 per UTF-16 lane: a char above 9 sets bit 7 of its lane.
+M3FastDoubleSwar.java	110	30	M3FastDoubleSwar	isEightDigitsUtf16#2	0x0046_0046_0046_0046L	long	UTF16_LANES_NINE_OVERFLOW	DECLARED	0x7f - 0x39 per UTF-16 lane: a char above 9 sets bit 7 of its lane.
+M3FastDoubleSwar.java	111	33	M3FastDoubleSwar	isEightDigitsUtf16#1	0xff80_ff80_ff80_ff80L	long	UTF16_LANES_NOT_DIGIT_MASK	DECLARED	Bits set in a UTF-16 lane only when its char is not a digit (after the bias).
+M3FastDoubleSwar.java	115	28	M3FastDoubleSwar	isEightDigitsUtf8#1	0x3030303030303030L	long	UTF8_LANES_ZERO	DECLARED	The digit 0 in each of eight byte lanes.
+M3FastDoubleSwar.java	116	36	M3FastDoubleSwar	isEightDigitsUtf8#1	0x4646464646464646L	long	UTF8_LANES_NINE_OVERFLOW	DECLARED	0x7f - 0x39 per byte lane: a char above 9 sets bit 7 of its lane.
+M3FastDoubleSwar.java	116	66	M3FastDoubleSwar	isEightDigitsUtf8#1	0x8080808080808080L	long	UTF8_LANES_HIGH_BITS	DECLARED	Bit 7 of each byte lane.
+M3FastDoubleSwar.java	126	29	M3FastDoubleSwar	isEightZeroes#1	8	int	DIGITS_PER_GROUP	DECLARED	Chars checked by one eight-digit test.
+M3FastDoubleSwar.java	127	24	M3FastDoubleSwar	isEightZeroes#1	'0'	char	DIGIT_ZERO	DECLARED	First decimal digit; ch - DIGIT_ZERO is the digit value.
+M3FastDoubleSwar.java	143	43	M3FastDoubleSwar	isEightZeroes#1	16	int	UTF16_LANE_1_SHIFT	DECLARED	Bit offset of the second UTF-16 lane of a long.
+M3FastDoubleSwar.java	144	37	M3FastDoubleSwar	isEightZeroes#1	2	int	GROUP_CHAR_2	DECLARED	Index of the third char of an eight-char (or four-char) group.
+M3FastDoubleSwar.java	144	43	M3FastDoubleSwar	isEightZeroes#1	32	int	UTF16_LANE_2_SHIFT	DECLARED	Bit offset of the third UTF-16 lane of a long.
+M3FastDoubleSwar.java	145	37	M3FastDoubleSwar	isEightZeroes#1	3	int	GROUP_CHAR_3	DECLARED	Index of the fourth char of a char group.
+M3FastDoubleSwar.java	145	43	M3FastDoubleSwar	isEightZeroes#1	48	int	UTF16_LANE_3_SHIFT	DECLARED	Bit offset of the fourth UTF-16 lane of a long.
+M3FastDoubleSwar.java	146	34	M3FastDoubleSwar	isEightZeroes#1	4	int	GROUP_CHAR_4	DECLARED	Index of the fifth char of an eight-char group.
+M3FastDoubleSwar.java	147	37	M3FastDoubleSwar	isEightZeroes#1	5	int	GROUP_CHAR_5	DECLARED	Index of the sixth char of an eight-char group.
+M3FastDoubleSwar.java	147	43	M3FastDoubleSwar	isEightZeroes#2	16	int	UTF16_LANE_1_SHIFT	DECLARED	Bit offset of the second UTF-16 lane of a long.
+M3FastDoubleSwar.java	148	37	M3FastDoubleSwar	isEightZeroes#1	6	int	GROUP_CHAR_6	DECLARED	Index of the seventh char of an eight-char group.
+M3FastDoubleSwar.java	148	43	M3FastDoubleSwar	isEightZeroes#2	32	int	UTF16_LANE_2_SHIFT	DECLARED	Bit offset of the third UTF-16 lane of a long.
+M3FastDoubleSwar.java	149	37	M3FastDoubleSwar	isEightZeroes#1	7	int	GROUP_CHAR_7	DECLARED	Index of the eighth char of an eight-char group.
+M3FastDoubleSwar.java	149	43	M3FastDoubleSwar	isEightZeroes#2	48	int	UTF16_LANE_3_SHIFT	DECLARED	Bit offset of the fourth UTF-16 lane of a long.
+M3FastDoubleSwar.java	154	25	M3FastDoubleSwar	isEightZeroesUtf16#1	0x0030_0030_0030_0030L	long	UTF16_LANES_ZERO	DECLARED	The digit 0 in each of four UTF-16 lanes.
+M3FastDoubleSwar.java	155	30	M3FastDoubleSwar	isEightZeroesUtf16#2	0x0030_0030_0030_0030L	long	UTF16_LANES_ZERO	DECLARED	The digit 0 in each of four UTF-16 lanes.
+M3FastDoubleSwar.java	159	25	M3FastDoubleSwar	isEightZeroesUtf8#1	0x3030303030303030L	long	UTF8_LANES_ZERO	DECLARED	The digit 0 in each of eight byte lanes.
+M3FastDoubleSwar.java	187	43	M3FastDoubleSwar	tryToParseEightDigits#1	16	int	UTF16_LANE_1_SHIFT	DECLARED	Bit offset of the second UTF-16 lane of a long.
+M3FastDoubleSwar.java	188	37	M3FastDoubleSwar	tryToParseEightDigits#1	2	int	GROUP_CHAR_2	DECLARED	Index of the third char of an eight-char (or four-char) group.
+M3FastDoubleSwar.java	188	43	M3FastDoubleSwar	tryToParseEightDigits#1	32	int	UTF16_LANE_2_SHIFT	DECLARED	Bit offset of the third UTF-16 lane of a long.
+M3FastDoubleSwar.java	189	37	M3FastDoubleSwar	tryToParseEightDigits#1	3	int	GROUP_CHAR_3	DECLARED	Index of the fourth char of a char group.
+M3FastDoubleSwar.java	189	43	M3FastDoubleSwar	tryToParseEightDigits#1	48	int	UTF16_LANE_3_SHIFT	DECLARED	Bit offset of the fourth UTF-16 lane of a long.
+M3FastDoubleSwar.java	190	34	M3FastDoubleSwar	tryToParseEightDigits#1	4	int	GROUP_CHAR_4	DECLARED	Index of the fifth char of an eight-char group.
+M3FastDoubleSwar.java	191	37	M3FastDoubleSwar	tryToParseEightDigits#1	5	int	GROUP_CHAR_5	DECLARED	Index of the sixth char of an eight-char group.
+M3FastDoubleSwar.java	191	43	M3FastDoubleSwar	tryToParseEightDigits#2	16	int	UTF16_LANE_1_SHIFT	DECLARED	Bit offset of the second UTF-16 lane of a long.
+M3FastDoubleSwar.java	192	37	M3FastDoubleSwar	tryToParseEightDigits#1	6	int	GROUP_CHAR_6	DECLARED	Index of the seventh char of an eight-char group.
+M3FastDoubleSwar.java	192	43	M3FastDoubleSwar	tryToParseEightDigits#2	32	int	UTF16_LANE_2_SHIFT	DECLARED	Bit offset of the third UTF-16 lane of a long.
+M3FastDoubleSwar.java	193	37	M3FastDoubleSwar	tryToParseEightDigits#1	7	int	GROUP_CHAR_7	DECLARED	Index of the eighth char of an eight-char group.
+M3FastDoubleSwar.java	193	43	M3FastDoubleSwar	tryToParseEightDigits#2	48	int	UTF16_LANE_3_SHIFT	DECLARED	Bit offset of the fourth UTF-16 lane of a long.
+M3FastDoubleSwar.java	211	52	M3FastDoubleSwar	tryToParseEightDigits#3	16	int	UTF16_LANE_1_SHIFT	DECLARED	Bit offset of the second UTF-16 lane of a long.
+M3FastDoubleSwar.java	212	46	M3FastDoubleSwar	tryToParseEightDigits#2	2	int	GROUP_CHAR_2	DECLARED	Index of the third char of an eight-char (or four-char) group.
+M3FastDoubleSwar.java	212	52	M3FastDoubleSwar	tryToParseEightDigits#3	32	int	UTF16_LANE_2_SHIFT	DECLARED	Bit offset of the third UTF-16 lane of a long.
+M3FastDoubleSwar.java	213	46	M3FastDoubleSwar	tryToParseEightDigits#2	3	int	GROUP_CHAR_3	DECLARED	Index of the fourth char of a char group.
+M3FastDoubleSwar.java	213	52	M3FastDoubleSwar	tryToParseEightDigits#3	48	int	UTF16_LANE_3_SHIFT	DECLARED	Bit offset of the fourth UTF-16 lane of a long.
+M3FastDoubleSwar.java	214	43	M3FastDoubleSwar	tryToParseEightDigits#2	4	int	GROUP_CHAR_4	DECLARED	Index of the fifth char of an eight-char group.
+M3FastDoubleSwar.java	215	46	M3FastDoubleSwar	tryToParseEightDigits#2	5	int	GROUP_CHAR_5	DECLARED	Index of the sixth char of an eight-char group.
+M3FastDoubleSwar.java	215	52	M3FastDoubleSwar	tryToParseEightDigits#4	16	int	UTF16_LANE_1_SHIFT	DECLARED	Bit offset of the second UTF-16 lane of a long.
+M3FastDoubleSwar.java	216	46	M3FastDoubleSwar	tryToParseEightDigits#2	6	int	GROUP_CHAR_6	DECLARED	Index of the seventh char of an eight-char group.
+M3FastDoubleSwar.java	216	52	M3FastDoubleSwar	tryToParseEightDigits#4	32	int	UTF16_LANE_2_SHIFT	DECLARED	Bit offset of the third UTF-16 lane of a long.
+M3FastDoubleSwar.java	217	46	M3FastDoubleSwar	tryToParseEightDigits#2	7	int	GROUP_CHAR_7	DECLARED	Index of the eighth char of an eight-char group.
+M3FastDoubleSwar.java	217	52	M3FastDoubleSwar	tryToParseEightDigits#4	48	int	UTF16_LANE_3_SHIFT	DECLARED	Bit offset of the fourth UTF-16 lane of a long.
+M3FastDoubleSwar.java	236	29	M3FastDoubleSwar	tryToParseEightDigitsUtf16#1	0x0030_0030_0030_0030L	long	UTF16_LANES_ZERO	DECLARED	The digit 0 in each of four UTF-16 lanes.
+M3FastDoubleSwar.java	237	30	M3FastDoubleSwar	tryToParseEightDigitsUtf16#2	0x0030_0030_0030_0030L	long	UTF16_LANES_ZERO	DECLARED	The digit 0 in each of four UTF-16 lanes.
+M3FastDoubleSwar.java	243	29	M3FastDoubleSwar	tryToParseEightDigitsUtf16#1	0x0046_0046_0046_0046L	long	UTF16_LANES_NINE_OVERFLOW	DECLARED	0x7f - 0x39 per UTF-16 lane: a char above 9 sets bit 7 of its lane.
+M3FastDoubleSwar.java	244	30	M3FastDoubleSwar	tryToParseEightDigitsUtf16#2	0x0046_0046_0046_0046L	long	UTF16_LANES_NINE_OVERFLOW	DECLARED	0x7f - 0x39 per UTF-16 lane: a char above 9 sets bit 7 of its lane.
+M3FastDoubleSwar.java	245	30	M3FastDoubleSwar	tryToParseEightDigitsUtf16#1	0xff80_ff80_ff80_ff80L	long	UTF16_LANES_NOT_DIGIT_MASK	DECLARED	Bits set in a UTF-16 lane only when its char is not a digit (after the bias).
+M3FastDoubleSwar.java	249	30	M3FastDoubleSwar	tryToParseEightDigitsUtf16#1	0x03e8_0064_000a_0001L	long	UTF16_LANES_DECIMAL_WEIGHTS	DECLARED	1000, 100, 10 and 1 per UTF-16 lane: one multiply sums four digits.
+M3FastDoubleSwar.java	249	57	M3FastDoubleSwar	tryToParseEightDigitsUtf16#1	48	int	UTF16_LANE_3_SHIFT	DECLARED	Bit offset of the fourth UTF-16 lane of a long.
+M3FastDoubleSwar.java	250	33	M3FastDoubleSwar	tryToParseEightDigitsUtf16#2	0x03e8_0064_000a_0001L	long	UTF16_LANES_DECIMAL_WEIGHTS	DECLARED	1000, 100, 10 and 1 per UTF-16 lane: one multiply sums four digits.
+M3FastDoubleSwar.java	250	60	M3FastDoubleSwar	tryToParseEightDigitsUtf16#2	48	int	UTF16_LANE_3_SHIFT	DECLARED	Bit offset of the fourth UTF-16 lane of a long.
+M3FastDoubleSwar.java	250	66	M3FastDoubleSwar	tryToParseEightDigitsUtf16#1	10000	int	TEN_POW_4	DECLARED	10^4.
+M3FastDoubleSwar.java	288	28	M3FastDoubleSwar	tryToParseEightDigitsUtf8#1	0x3030303030303030L	long	UTF8_LANES_ZERO	DECLARED	The digit 0 in each of eight byte lanes.
+M3FastDoubleSwar.java	292	36	M3FastDoubleSwar	tryToParseEightDigitsUtf8#1	0x4646464646464646L	long	UTF8_LANES_NINE_OVERFLOW	DECLARED	0x7f - 0x39 per byte lane: a char above 9 sets bit 7 of its lane.
+M3FastDoubleSwar.java	292	66	M3FastDoubleSwar	tryToParseEightDigitsUtf8#1	0x8080808080808080L	long	UTF8_LANES_HIGH_BITS	DECLARED	Bit 7 of each byte lane.
+M3FastDoubleSwar.java	298	21	M3FastDoubleSwar	tryToParseEightDigitsUtf8#1	0xff_000000ffL	long	DIGIT_PAIR_LANES_MASK	DECLARED	Byte lanes 0 and 4: the two-digit sums after the first SWAR step.
+M3FastDoubleSwar.java	299	21	M3FastDoubleSwar	tryToParseEightDigitsUtf8#1	100	int	TEN_POW_2	DECLARED	10^2.
+M3FastDoubleSwar.java	299	28	M3FastDoubleSwar	tryToParseEightDigitsUtf8#1	100_0000L	long	TEN_POW_6	DECLARED	10^6.
+M3FastDoubleSwar.java	299	41	M3FastDoubleSwar	tryToParseEightDigitsUtf8#1	32	int	HALF_LONG_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3FastDoubleSwar.java	300	26	M3FastDoubleSwar	tryToParseEightDigitsUtf8#1	1_0000L	long	TEN_POW_4_LONG	DECLARED	10^4 (long).
+M3FastDoubleSwar.java	300	37	M3FastDoubleSwar	tryToParseEightDigitsUtf8#2	32	int	HALF_LONG_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3FastDoubleSwar.java	301	21	M3FastDoubleSwar	tryToParseEightDigitsUtf8#1	10	int	DECIMAL_RADIX	DECLARED	Radix of decimal digits.
+M3FastDoubleSwar.java	301	35	M3FastDoubleSwar	tryToParseEightDigitsUtf8#1	8	int	BYTE_SHIFT	DECLARED	Bits of one byte lane.
+M3FastDoubleSwar.java	302	46	M3FastDoubleSwar	tryToParseEightDigitsUtf8#1	16	int	TWO_BYTES_SHIFT	DECLARED	Bits of two byte lanes.
+M3FastDoubleSwar.java	302	68	M3FastDoubleSwar	tryToParseEightDigitsUtf8#3	32	int	HALF_LONG_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3FastDoubleSwar.java	315	51	M3FastDoubleSwar	tryToParseEightHexDigits#1	48	int	UTF16_LANE_3_SHIFT	DECLARED	Bit offset of the fourth UTF-16 lane of a long.
+M3FastDoubleSwar.java	316	52	M3FastDoubleSwar	tryToParseEightHexDigits#1	32	int	UTF16_LANE_2_SHIFT	DECLARED	Bit offset of the third UTF-16 lane of a long.
+M3FastDoubleSwar.java	317	46	M3FastDoubleSwar	tryToParseEightHexDigits#1	2	int	GROUP_CHAR_2	DECLARED	Index of the third char of an eight-char (or four-char) group.
+M3FastDoubleSwar.java	317	52	M3FastDoubleSwar	tryToParseEightHexDigits#1	16	int	UTF16_LANE_1_SHIFT	DECLARED	Bit offset of the second UTF-16 lane of a long.
+M3FastDoubleSwar.java	318	46	M3FastDoubleSwar	tryToParseEightHexDigits#1	3	int	GROUP_CHAR_3	DECLARED	Index of the fourth char of a char group.
+M3FastDoubleSwar.java	319	50	M3FastDoubleSwar	tryToParseEightHexDigits#1	4	int	GROUP_CHAR_4	DECLARED	Index of the fifth char of an eight-char group.
+M3FastDoubleSwar.java	319	56	M3FastDoubleSwar	tryToParseEightHexDigits#2	48	int	UTF16_LANE_3_SHIFT	DECLARED	Bit offset of the fourth UTF-16 lane of a long.
+M3FastDoubleSwar.java	320	46	M3FastDoubleSwar	tryToParseEightHexDigits#1	5	int	GROUP_CHAR_5	DECLARED	Index of the sixth char of an eight-char group.
+M3FastDoubleSwar.java	320	52	M3FastDoubleSwar	tryToParseEightHexDigits#2	32	int	UTF16_LANE_2_SHIFT	DECLARED	Bit offset of the third UTF-16 lane of a long.
+M3FastDoubleSwar.java	321	46	M3FastDoubleSwar	tryToParseEightHexDigits#1	6	int	GROUP_CHAR_6	DECLARED	Index of the seventh char of an eight-char group.
+M3FastDoubleSwar.java	321	52	M3FastDoubleSwar	tryToParseEightHexDigits#2	16	int	UTF16_LANE_1_SHIFT	DECLARED	Bit offset of the second UTF-16 lane of a long.
+M3FastDoubleSwar.java	322	46	M3FastDoubleSwar	tryToParseEightHexDigits#1	7	int	GROUP_CHAR_7	DECLARED	Index of the eighth char of an eight-char group.
+M3FastDoubleSwar.java	336	46	M3FastDoubleSwar	tryToParseEightHexDigits#3	48	int	UTF16_LANE_3_SHIFT	DECLARED	Bit offset of the fourth UTF-16 lane of a long.
+M3FastDoubleSwar.java	337	47	M3FastDoubleSwar	tryToParseEightHexDigits#3	32	int	UTF16_LANE_2_SHIFT	DECLARED	Bit offset of the third UTF-16 lane of a long.
+M3FastDoubleSwar.java	338	41	M3FastDoubleSwar	tryToParseEightHexDigits#2	2	int	GROUP_CHAR_2	DECLARED	Index of the third char of an eight-char (or four-char) group.
+M3FastDoubleSwar.java	338	47	M3FastDoubleSwar	tryToParseEightHexDigits#3	16	int	UTF16_LANE_1_SHIFT	DECLARED	Bit offset of the second UTF-16 lane of a long.
+M3FastDoubleSwar.java	339	41	M3FastDoubleSwar	tryToParseEightHexDigits#2	3	int	GROUP_CHAR_3	DECLARED	Index of the fourth char of a char group.
+M3FastDoubleSwar.java	340	45	M3FastDoubleSwar	tryToParseEightHexDigits#2	4	int	GROUP_CHAR_4	DECLARED	Index of the fifth char of an eight-char group.
+M3FastDoubleSwar.java	340	51	M3FastDoubleSwar	tryToParseEightHexDigits#4	48	int	UTF16_LANE_3_SHIFT	DECLARED	Bit offset of the fourth UTF-16 lane of a long.
+M3FastDoubleSwar.java	341	41	M3FastDoubleSwar	tryToParseEightHexDigits#2	5	int	GROUP_CHAR_5	DECLARED	Index of the sixth char of an eight-char group.
+M3FastDoubleSwar.java	341	47	M3FastDoubleSwar	tryToParseEightHexDigits#4	32	int	UTF16_LANE_2_SHIFT	DECLARED	Bit offset of the third UTF-16 lane of a long.
+M3FastDoubleSwar.java	342	41	M3FastDoubleSwar	tryToParseEightHexDigits#2	6	int	GROUP_CHAR_6	DECLARED	Index of the seventh char of an eight-char group.
+M3FastDoubleSwar.java	342	47	M3FastDoubleSwar	tryToParseEightHexDigits#4	16	int	UTF16_LANE_1_SHIFT	DECLARED	Bit offset of the second UTF-16 lane of a long.
+M3FastDoubleSwar.java	343	41	M3FastDoubleSwar	tryToParseEightHexDigits#2	7	int	GROUP_CHAR_7	DECLARED	Index of the eighth char of an eight-char group.
+M3FastDoubleSwar.java	382	33	M3FastDoubleSwar	tryToParseEightHexDigitsUtf16#1	0xff80_ff80_ff80_ff80L	long	UTF16_LANES_NOT_DIGIT_MASK	DECLARED	Bits set in a UTF-16 lane only when its char is not a digit (after the bias).
+M3FastDoubleSwar.java	385	26	M3FastDoubleSwar	tryToParseEightHexDigitsUtf16#1	0x0000_0000_0001_0100L	long	UTF16_TO_UTF8_PACK_MULTIPLIER	DECLARED	Moves the low byte of each odd UTF-16 lane next to the low byte of its even neighbour.
+M3FastDoubleSwar.java	386	27	M3FastDoubleSwar	tryToParseEightHexDigitsUtf16#2	0x0000_0000_0001_0100L	long	UTF16_TO_UTF8_PACK_MULTIPLIER	DECLARED	Moves the low byte of each odd UTF-16 lane next to the low byte of its even neighbour.
+M3FastDoubleSwar.java	387	31	M3FastDoubleSwar	tryToParseEightHexDigitsUtf16#1	0xffff_0000_0000_0000L	long	UTF16_LANE_3_MASK	DECLARED	The fourth UTF-16 lane of a long.
+M3FastDoubleSwar.java	388	25	M3FastDoubleSwar	tryToParseEightHexDigitsUtf16#1	0xffff_0000L	long	UTF16_LANE_1_MASK	DECLARED	The second UTF-16 lane of a long.
+M3FastDoubleSwar.java	388	42	M3FastDoubleSwar	tryToParseEightHexDigitsUtf16#1	16	int	UTF16_LANE_1_SHIFT	DECLARED	Bit offset of the second UTF-16 lane of a long.
+M3FastDoubleSwar.java	389	25	M3FastDoubleSwar	tryToParseEightHexDigitsUtf16#2	0xffff_0000_0000_0000L	long	UTF16_LANE_3_MASK	DECLARED	The fourth UTF-16 lane of a long.
+M3FastDoubleSwar.java	389	53	M3FastDoubleSwar	tryToParseEightHexDigitsUtf16#1	32	int	UTF16_LANE_2_SHIFT	DECLARED	Bit offset of the third UTF-16 lane of a long.
+M3FastDoubleSwar.java	390	25	M3FastDoubleSwar	tryToParseEightHexDigitsUtf16#2	0xffff_0000L	long	UTF16_LANE_1_MASK	DECLARED	The second UTF-16 lane of a long.
+M3FastDoubleSwar.java	390	43	M3FastDoubleSwar	tryToParseEightHexDigitsUtf16#2	16	int	UTF16_LANE_1_SHIFT	DECLARED	Bit offset of the second UTF-16 lane of a long.
+M3FastDoubleSwar.java	409	29	M3FastDoubleSwar	tryToParseEightHexDigitsUtf8#1	0x30_30_30_30_30_30_30_30L	long	UTF8_LANES_ZERO	DECLARED	The digit 0 in each of eight byte lanes.
+M3FastDoubleSwar.java	410	17	M3FastDoubleSwar	tryToParseEightHexDigitsUtf8#1	0x80_80_80_80_80_80_80_80L	long	UTF8_LANES_HIGH_BITS	DECLARED	Bit 7 of each byte lane.
+M3FastDoubleSwar.java	413	30	M3FastDoubleSwar	tryToParseEightHexDigitsUtf8#1	0x39_39_39_39_39_39_39_39L	long	UTF8_LANES_NINE	DECLARED	The digit 9 in each of eight byte lanes.
+M3FastDoubleSwar.java	413	59	M3FastDoubleSwar	tryToParseEightHexDigitsUtf8#1	0x7f_7f_7f_7f_7f_7f_7f_7fL	long	UTF8_LANES_ASCII_MAX	DECLARED	0x7f in each of eight byte lanes.
+M3FastDoubleSwar.java	414	17	M3FastDoubleSwar	tryToParseEightHexDigitsUtf8#2	0x80_80_80_80_80_80_80_80L	long	UTF8_LANES_HIGH_BITS	DECLARED	Bit 7 of each byte lane.
+M3FastDoubleSwar.java	419	29	M3FastDoubleSwar	tryToParseEightHexDigitsUtf8#1	0x20_20_20_20_20_20_20_20L	long	UTF8_LANES_LOWER_CASE_BIT	DECLARED	0x20 per byte lane: folds ASCII letters to lower case.
+M3FastDoubleSwar.java	419	59	M3FastDoubleSwar	tryToParseEightHexDigitsUtf8#2	0x30_30_30_30_30_30_30_30L	long	UTF8_LANES_ZERO	DECLARED	The digit 0 in each of eight byte lanes.
+M3FastDoubleSwar.java	422	28	M3FastDoubleSwar	tryToParseEightHexDigitsUtf8#3	0x30_30_30_30_30_30_30_30L	long	UTF8_LANES_ZERO	DECLARED	The digit 0 in each of eight byte lanes.
+M3FastDoubleSwar.java	422	57	M3FastDoubleSwar	tryToParseEightHexDigitsUtf8#2	0x7f_7f_7f_7f_7f_7f_7f_7fL	long	UTF8_LANES_ASCII_MAX	DECLARED	0x7f in each of eight byte lanes.
+M3FastDoubleSwar.java	423	17	M3FastDoubleSwar	tryToParseEightHexDigitsUtf8#3	0x80_80_80_80_80_80_80_80L	long	UTF8_LANES_HIGH_BITS	DECLARED	Bit 7 of each byte lane.
+M3FastDoubleSwar.java	426	27	M3FastDoubleSwar	tryToParseEightHexDigitsUtf8#1	0x37_37_37_37_37_37_37_37L	long	UTF8_LANES_HEX_F_LIMIT	DECLARED	0x66 - 0x30 + 1 per byte lane: lanes at or below hex digit f stay negative.
+M3FastDoubleSwar.java	436	35	M3FastDoubleSwar	tryToParseEightHexDigitsUtf8#1	7	int	HIGH_BIT_TO_LOW_BIT_SHIFT	DECLARED	Moves bit 7 of each byte lane to bit 0.
+M3FastDoubleSwar.java	436	40	M3FastDoubleSwar	tryToParseEightHexDigitsUtf8#1	0xffL	long	BYTE_LANE_FILL	DECLARED	Multiplier that spreads bit 0 of a byte lane over the whole lane.
+M3FastDoubleSwar.java	439	43	M3FastDoubleSwar	tryToParseEightHexDigitsUtf8#1	0x27272727_27272727L	long	UTF8_LANES_HEX_LETTER_OFFSET	DECLARED	0x61 - 0x30 - 10 per byte lane: turns a folded hex letter minus 0x30 into its value.
+M3FastDoubleSwar.java	443	29	M3FastDoubleSwar	tryToParseEightHexDigitsUtf8#1	4	int	NIBBLE_SHIFT	DECLARED	Bits of one hex digit.
+M3FastDoubleSwar.java	444	24	M3FastDoubleSwar	tryToParseEightHexDigitsUtf8#1	0x00ff00ff_00ff00ffL	long	EVEN_BYTE_LANES_MASK	DECLARED	Byte lanes 0, 2, 4 and 6.
+M3FastDoubleSwar.java	445	31	M3FastDoubleSwar	tryToParseEightHexDigitsUtf8#1	8	int	BYTE_SHIFT	DECLARED	Bits of one byte lane.
+M3FastDoubleSwar.java	446	28	M3FastDoubleSwar	tryToParseEightHexDigitsUtf8#1	16	int	TWO_BYTES_SHIFT	DECLARED	Bits of two byte lanes.
+M3FastDoubleSwar.java	446	34	M3FastDoubleSwar	tryToParseEightHexDigitsUtf8#1	0xffff_0000L	long	UTF16_LANE_1_MASK	DECLARED	The second UTF-16 lane of a long.
+M3FastDoubleSwar.java	446	55	M3FastDoubleSwar	tryToParseEightHexDigitsUtf8#1	0xffffL	long	UTF16_LANE_0_MASK	DECLARED	The first UTF-16 lane of a long.
+M3FastDoubleSwar.java	453	43	M3FastDoubleSwar	tryToParseFourDigits#1	16	int	UTF16_LANE_1_SHIFT	DECLARED	Bit offset of the second UTF-16 lane of a long.
+M3FastDoubleSwar.java	454	37	M3FastDoubleSwar	tryToParseFourDigits#1	2	int	GROUP_CHAR_2	DECLARED	Index of the third char of an eight-char (or four-char) group.
+M3FastDoubleSwar.java	454	43	M3FastDoubleSwar	tryToParseFourDigits#1	32	int	UTF16_LANE_2_SHIFT	DECLARED	Bit offset of the third UTF-16 lane of a long.
+M3FastDoubleSwar.java	455	37	M3FastDoubleSwar	tryToParseFourDigits#1	3	int	GROUP_CHAR_3	DECLARED	Index of the fourth char of a char group.
+M3FastDoubleSwar.java	455	43	M3FastDoubleSwar	tryToParseFourDigits#1	48	int	UTF16_LANE_3_SHIFT	DECLARED	Bit offset of the fourth UTF-16 lane of a long.
+M3FastDoubleSwar.java	461	52	M3FastDoubleSwar	tryToParseFourDigits#2	16	int	UTF16_LANE_1_SHIFT	DECLARED	Bit offset of the second UTF-16 lane of a long.
+M3FastDoubleSwar.java	462	46	M3FastDoubleSwar	tryToParseFourDigits#2	2	int	GROUP_CHAR_2	DECLARED	Index of the third char of an eight-char (or four-char) group.
+M3FastDoubleSwar.java	462	52	M3FastDoubleSwar	tryToParseFourDigits#2	32	int	UTF16_LANE_2_SHIFT	DECLARED	Bit offset of the third UTF-16 lane of a long.
+M3FastDoubleSwar.java	463	46	M3FastDoubleSwar	tryToParseFourDigits#2	3	int	GROUP_CHAR_3	DECLARED	Index of the fourth char of a char group.
+M3FastDoubleSwar.java	463	52	M3FastDoubleSwar	tryToParseFourDigits#2	48	int	UTF16_LANE_3_SHIFT	DECLARED	Bit offset of the fourth UTF-16 lane of a long.
+M3FastDoubleSwar.java	473	29	M3FastDoubleSwar	tryToParseFourDigitsUtf16#1	0x0030_0030_0030_0030L	long	UTF16_LANES_ZERO	DECLARED	The digit 0 in each of four UTF-16 lanes.
+M3FastDoubleSwar.java	479	29	M3FastDoubleSwar	tryToParseFourDigitsUtf16#1	0x0046_0046_0046_0046L	long	UTF16_LANES_NINE_OVERFLOW	DECLARED	0x7f - 0x39 per UTF-16 lane: a char above 9 sets bit 7 of its lane.
+M3FastDoubleSwar.java	480	21	M3FastDoubleSwar	tryToParseFourDigitsUtf16#1	0xff80_ff80_ff80_ff80L	long	UTF16_LANES_NOT_DIGIT_MASK	DECLARED	Bits set in a UTF-16 lane only when its char is not a digit (after the bias).
+M3FastDoubleSwar.java	484	30	M3FastDoubleSwar	tryToParseFourDigitsUtf16#1	0x03e8_0064_000a_0001L	long	UTF16_LANES_DECIMAL_WEIGHTS	DECLARED	1000, 100, 10 and 1 per UTF-16 lane: one multiply sums four digits.
+M3FastDoubleSwar.java	484	57	M3FastDoubleSwar	tryToParseFourDigitsUtf16#1	48	int	UTF16_LANE_3_SHIFT	DECLARED	Bit offset of the fourth UTF-16 lane of a long.
+M3FastDoubleSwar.java	490	27	M3FastDoubleSwar	tryToParseFourDigitsUtf8#1	0x30303030	int	UTF8_INT_LANES_ZERO	DECLARED	The digit 0 in each of four byte lanes of an int.
+M3FastDoubleSwar.java	491	35	M3FastDoubleSwar	tryToParseFourDigitsUtf8#1	0x46464646	int	UTF8_INT_LANES_NINE_OVERFLOW	DECLARED	0x7f - 0x39 per byte lane of an int: a char above 9 sets bit 7 of its lane.
+M3FastDoubleSwar.java	491	56	M3FastDoubleSwar	tryToParseFourDigitsUtf8#1	0x80808080	int	UTF8_INT_LANES_HIGH_BITS	DECLARED	Bit 7 of each byte lane of an int.
+M3FastDoubleSwar.java	497	27	M3FastDoubleSwar	tryToParseFourDigitsUtf8#1	10	int	DECIMAL_RADIX	DECLARED	Radix of decimal digits.
+M3FastDoubleSwar.java	497	33	M3FastDoubleSwar	tryToParseFourDigitsUtf8#1	8	int	BYTE_SHIFT	DECLARED	Bits of one byte lane.
+M3FastDoubleSwar.java	497	41	M3FastDoubleSwar	tryToParseFourDigitsUtf8#2	8	int	BYTE_SHIFT	DECLARED	Bits of one byte lane.
+M3FastDoubleSwar.java	498	22	M3FastDoubleSwar	tryToParseFourDigitsUtf8#1	0xff	int	BYTE_MASK	DECLARED	The low byte lane of an int.
+M3FastDoubleSwar.java	498	30	M3FastDoubleSwar	tryToParseFourDigitsUtf8#1	100	int	TEN_POW_2	DECLARED	10^2.
+M3FastDoubleSwar.java	498	44	M3FastDoubleSwar	tryToParseFourDigitsUtf8#1	0xff0000	int	BYTE_2_MASK	DECLARED	The third byte lane of an int.
+M3FastDoubleSwar.java	498	57	M3FastDoubleSwar	tryToParseFourDigitsUtf8#1	16	int	TWO_BYTES_SHIFT	DECLARED	Bits of two byte lanes.
+M3FastDoubleSwar.java	508	22	M3FastDoubleSwar	tryToParseUpTo7Digits#1	10	int	DECIMAL_RADIX	DECLARED	Radix of decimal digits.
+M3FastDoubleSwar.java	508	43	M3FastDoubleSwar	tryToParseUpTo7Digits#1	'0'	char	DIGIT_ZERO	DECLARED	First decimal digit; ch - DIGIT_ZERO is the digit value.
+M3FastDoubleSwar.java	519	22	M3FastDoubleSwar	tryToParseUpTo7Digits#2	10	int	DECIMAL_RADIX	DECLARED	Radix of decimal digits.
+M3FastDoubleSwar.java	519	43	M3FastDoubleSwar	tryToParseUpTo7Digits#2	'0'	char	DIGIT_ZERO	DECLARED	First decimal digit; ch - DIGIT_ZERO is the digit value.
+M3FastDoubleSwar.java	530	22	M3FastDoubleSwar	tryToParseUpTo7Digits#3	10	int	DECIMAL_RADIX	DECLARED	Radix of decimal digits.
+M3FastDoubleSwar.java	530	43	M3FastDoubleSwar	tryToParseUpTo7Digits#3	'0'	char	DIGIT_ZERO	DECLARED	First decimal digit; ch - DIGIT_ZERO is the digit value.
+M3FastFloatMath.java	49	33	M3FastFloatMath	tryDecFloatToFloatTruncated#1	-0.0f	float	NEGATIVE_ZERO	DECLARED	IEEE 754 negative zero (float).
+M3FastFloatMath.java	103	64	M3FastFloatMath	tryHexFloatToFloatTruncated#1	0x1p64f	float	TWO_POW_64	DECLARED	2^64: corrects the signed conversion of an unsigned 64-bit significand.
+M3FastFloatMath.java	140	13	M3FastFloatMath	tryDecToFloatWithFastAlgorithm#1	-10	int	FAST_PATH_MIN_POWER_OF_TEN	DECLARED	Smallest power of ten of the exact float fast path.
+M3FastFloatMath.java	140	38	M3FastFloatMath	tryDecToFloatWithFastAlgorithm#1	10	int	FAST_PATH_MAX_POWER_OF_TEN	DECLARED	Largest power of ten of the exact float fast path (10^10 is exact in a float).
+M3FastFloatMath.java	199	28	M3FastFloatMath	tryDecToFloatWithFastAlgorithm#1	152170L	long	LOG2_FIVE_SCALED	DECLARED	log2(5) * 2^16, rounded.
+M3FastFloatMath.java	199	38	M3FastFloatMath	tryDecToFloatWithFastAlgorithm#1	65536L	long	ONE_SCALED	DECLARED	1 * 2^16: adds the power itself to the log2(5^power) estimate.
+M3FastFloatMath.java	199	58	M3FastFloatMath	tryDecToFloatWithFastAlgorithm#1	16	int	LOG2_FIVE_SCALE_SHIFT	DECLARED	Removes the 2^16 scale of LOG2_FIVE_SCALED and ONE_SCALED.
+M3FastFloatMath.java	199	86	M3FastFloatMath	tryDecToFloatWithFastAlgorithm#1	64	int	WORD_BITS	DECLARED	Bits of the 64-bit product word.
+M3FastFloatMath.java	213	35	M3FastFloatMath	tryDecToFloatWithFastAlgorithm#1	63	int	HIGH_BIT_SHIFT	DECLARED	Moves bit 63 of a long to bit 0.
+M3FastFloatMath.java	214	47	M3FastFloatMath	tryDecToFloatWithFastAlgorithm#1	38	int	MANTISSA_ALIGN_SHIFT	DECLARED	64 - FLOAT_SIGNIFICAND_WIDTH - 2: keeps 25 significant bits of the product.
+M3FastFloatMath.java	224	23	M3FastFloatMath	tryDecToFloatWithFastAlgorithm#1	0x3_FFFFF_FFFFL	long	HALFWAY_TRAILING_MASK	DECLARED	The 38 bits shifted out: all ones or all zeros may be a halfway case.
+M3FastFloatMath.java	224	43	M3FastFloatMath	tryDecToFloatWithFastAlgorithm#2	0x3_FFFFF_FFFFL	long	HALFWAY_TRAILING_MASK	DECLARED	The 38 bits shifted out: all ones or all zeros may be a halfway case.
+M3FastFloatMath.java	225	30	M3FastFloatMath	tryDecToFloatWithFastAlgorithm#3	0x3_FFFFF_FFFFL	long	HALFWAY_TRAILING_MASK	DECLARED	The 38 bits shifted out: all ones or all zeros may be a halfway case.
+M3FastFloatMath.java	225	68	M3FastFloatMath	tryDecToFloatWithFastAlgorithm#1	3	int	LOW_TWO_BITS_MASK	DECLARED	The two lowest mantissa bits (round-half-even check).
+M3FastFloatMath.java	266	39	M3FastFloatMath	tryDecToFloatWithFastAlgorithm#1	31	int	FLOAT_SIGN_SHIFT	DECLARED	Position of the float sign bit.
+M3FastIntegerMath.java	70	18	M3FastIntegerMath	computeTenRaisedByNFloor16Recursive#1	15	int	FLOOR_16_REMAINDER_MASK	DECLARED	n and not mask rounds n down to a multiple of 16.
+M3FastIntegerMath.java	90	25	M3FastIntegerMath	createPowersOfTenFloor16Map#1	16	int	POW_16_EXPONENT	DECLARED	Exponent of the precomputed 16th-power entries (TEN_POW_16, FIVE_POW_16).
+M3FastIntegerMath.java	99	38	M3FastIntegerMath	estimateNumBits#1	3402L	long	LOG2_TEN_SCALED	DECLARED	log2(10) * 1024 rounded up: bits per decimal digit, scaled by 2^10.
+M3FastIntegerMath.java	99	49	M3FastIntegerMath	estimateNumBits#1	10	int	LOG2_TEN_SCALE_SHIFT	DECLARED	Removes the 2^10 scale of LOG2_TEN_SCALED.
+M3FastIntegerMath.java	112	42	M3FastIntegerMath	fillPowersOf10Floor16#1	5	int	POWERS_OF_FIVE_BASE	DECLARED	Base of the powers-of-five map that is shifted into powers of ten.
+M3FastIntegerMath.java	113	20	M3FastIntegerMath	fillPowersOf10Floor16#1	16	int	POW_16_EXPONENT	DECLARED	Exponent of the precomputed 16th-power entries (TEN_POW_16, FIVE_POW_16).
+M3FastIntegerMath.java	128	26	M3FastIntegerMath	fillPowersOfNFloor16Recursive#1	18	int	RECURSION_BASE_MAX_DIGITS	DECLARED	Digit counts up to this need no further precomputed power.
+M3FastIntegerMath.java	158	23	M3FastIntegerMath	unsignedMultiplyHigh#1	0xffffffffL	long	LOW_32_BITS_MASK	DECLARED	Low 32-bit half of a long.
+M3FastIntegerMath.java	158	47	M3FastIntegerMath	unsignedMultiplyHigh#1	32	int	HALF_LONG_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3FastIntegerMath.java	159	23	M3FastIntegerMath	unsignedMultiplyHigh#2	0xffffffffL	long	LOW_32_BITS_MASK	DECLARED	Low 32-bit half of a long.
+M3FastIntegerMath.java	159	47	M3FastIntegerMath	unsignedMultiplyHigh#2	32	int	HALF_LONG_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3FastIntegerMath.java	164	38	M3FastIntegerMath	unsignedMultiplyHigh#3	32	int	HALF_LONG_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3FastIntegerMath.java	164	51	M3FastIntegerMath	unsignedMultiplyHigh#3	0xffffffffL	long	LOW_32_BITS_MASK	DECLARED	Low 32-bit half of a long.
+M3FastIntegerMath.java	167	34	M3FastIntegerMath	unsignedMultiplyHigh#4	32	int	HALF_LONG_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3FastIntegerMath.java	167	49	M3FastIntegerMath	unsignedMultiplyHigh#5	32	int	HALF_LONG_SHIFT	DECLARED	Distance between the low and the high 32-bit half of a long.
+M3FastIntegerMath.java	179	36	M3FastIntegerMath	splitFloor16#1	31	int	SPLIT_ROUND_UP	DECLARED	Rounds the range up to a multiple of 32 before it is halved.
+M3FastIntegerMath.java	179	44	M3FastIntegerMath	splitFloor16#1	5	int	SPLIT_DIVIDE_BY_32_SHIFT	DECLARED	Divides the rounded range by 32.
+M3FastIntegerMath.java	179	50	M3FastIntegerMath	splitFloor16#1	4	int	SPLIT_TIMES_16_SHIFT	DECLARED	Multiplies by 16: the upper half becomes a multiple of 16.
+M3FftMultiplier.java	77	23	M3FftMultiplier	bitsPerFftPoint#1	19	int	POINT_BITS_19	DECLARED	19 bits per FFT point.
+M3FftMultiplier.java	77	34	M3FftMultiplier	bitsPerFftPoint#1	9	int	POINT_BITS_19_LOG_MAX_POINTS	DECLARED	log2 of the most FFT points that 19 bits per point allow.
+M3FftMultiplier.java	78	20	M3FftMultiplier	bitsPerFftPoint#2	19	int	POINT_BITS_19	DECLARED	19 bits per FFT point.
+M3FftMultiplier.java	80	23	M3FftMultiplier	bitsPerFftPoint#1	18	int	POINT_BITS_18	DECLARED	18 bits per FFT point.
+M3FftMultiplier.java	80	34	M3FftMultiplier	bitsPerFftPoint#1	10	int	POINT_BITS_18_LOG_MAX_POINTS	DECLARED	log2 of the most FFT points that 18 bits per point allow.
+M3FftMultiplier.java	81	20	M3FftMultiplier	bitsPerFftPoint#2	18	int	POINT_BITS_18	DECLARED	18 bits per FFT point.
+M3FftMultiplier.java	83	23	M3FftMultiplier	bitsPerFftPoint#1	17	int	POINT_BITS_17	DECLARED	17 bits per FFT point.
+M3FftMultiplier.java	83	34	M3FftMultiplier	bitsPerFftPoint#1	12	int	POINT_BITS_17_LOG_MAX_POINTS	DECLARED	log2 of the most FFT points that 17 bits per point allow.
+M3FftMultiplier.java	84	20	M3FftMultiplier	bitsPerFftPoint#2	17	int	POINT_BITS_17	DECLARED	17 bits per FFT point.
+M3FftMultiplier.java	86	23	M3FftMultiplier	bitsPerFftPoint#1	16	int	POINT_BITS_16	DECLARED	16 bits per FFT point.
+M3FftMultiplier.java	86	34	M3FftMultiplier	bitsPerFftPoint#1	14	int	POINT_BITS_16_LOG_MAX_POINTS	DECLARED	log2 of the most FFT points that 16 bits per point allow.
+M3FftMultiplier.java	87	20	M3FftMultiplier	bitsPerFftPoint#2	16	int	POINT_BITS_16	DECLARED	16 bits per FFT point.
+M3FftMultiplier.java	89	23	M3FftMultiplier	bitsPerFftPoint#1	15	int	POINT_BITS_15	DECLARED	15 bits per FFT point.
+M3FftMultiplier.java	89	34	M3FftMultiplier	bitsPerFftPoint#3	16	int	POINT_BITS_15_LOG_MAX_POINTS	DECLARED	log2 of the most FFT points that 15 bits per point allow.
+M3FftMultiplier.java	90	20	M3FftMultiplier	bitsPerFftPoint#2	15	int	POINT_BITS_15	DECLARED	15 bits per FFT point.
+M3FftMultiplier.java	92	23	M3FftMultiplier	bitsPerFftPoint#2	14	int	POINT_BITS_14	DECLARED	14 bits per FFT point.
+M3FftMultiplier.java	92	34	M3FftMultiplier	bitsPerFftPoint#3	18	int	POINT_BITS_14_LOG_MAX_POINTS	DECLARED	log2 of the most FFT points that 14 bits per point allow.
+M3FftMultiplier.java	93	20	M3FftMultiplier	bitsPerFftPoint#3	14	int	POINT_BITS_14	DECLARED	14 bits per FFT point.
+M3FftMultiplier.java	95	23	M3FftMultiplier	bitsPerFftPoint#1	13	int	POINT_BITS_13	DECLARED	13 bits per FFT point.
+M3FftMultiplier.java	95	34	M3FftMultiplier	bitsPerFftPoint#1	20	int	POINT_BITS_13_LOG_MAX_POINTS	DECLARED	log2 of the most FFT points that 13 bits per point allow.
+M3FftMultiplier.java	96	20	M3FftMultiplier	bitsPerFftPoint#2	13	int	POINT_BITS_13	DECLARED	13 bits per FFT point.
+M3FftMultiplier.java	98	23	M3FftMultiplier	bitsPerFftPoint#2	12	int	POINT_BITS_12	DECLARED	12 bits per FFT point.
+M3FftMultiplier.java	98	34	M3FftMultiplier	bitsPerFftPoint#1	21	int	POINT_BITS_12_LOG_MAX_POINTS	DECLARED	log2 of the most FFT points that 12 bits per point allow.
+M3FftMultiplier.java	99	20	M3FftMultiplier	bitsPerFftPoint#3	12	int	POINT_BITS_12	DECLARED	12 bits per FFT point.
+M3FftMultiplier.java	101	23	M3FftMultiplier	bitsPerFftPoint#1	11	int	POINT_BITS_11	DECLARED	11 bits per FFT point.
+M3FftMultiplier.java	101	34	M3FftMultiplier	bitsPerFftPoint#1	23	int	POINT_BITS_11_LOG_MAX_POINTS	DECLARED	log2 of the most FFT points that 11 bits per point allow.
+M3FftMultiplier.java	102	20	M3FftMultiplier	bitsPerFftPoint#2	11	int	POINT_BITS_11	DECLARED	11 bits per FFT point.
+M3FftMultiplier.java	104	23	M3FftMultiplier	bitsPerFftPoint#2	10	int	POINT_BITS_10	DECLARED	10 bits per FFT point.
+M3FftMultiplier.java	104	34	M3FftMultiplier	bitsPerFftPoint#1	25	int	POINT_BITS_10_LOG_MAX_POINTS	DECLARED	log2 of the most FFT points that 10 bits per point allow.
+M3FftMultiplier.java	105	20	M3FftMultiplier	bitsPerFftPoint#3	10	int	POINT_BITS_10	DECLARED	10 bits per FFT point.
+M3FftMultiplier.java	107	23	M3FftMultiplier	bitsPerFftPoint#2	9	int	POINT_BITS_9	DECLARED	9 bits per FFT point.
+M3FftMultiplier.java	107	33	M3FftMultiplier	bitsPerFftPoint#1	27	int	POINT_BITS_9_LOG_MAX_POINTS	DECLARED	log2 of the most FFT points that 9 bits per point allow.
+M3FftMultiplier.java	108	20	M3FftMultiplier	bitsPerFftPoint#3	9	int	POINT_BITS_9	DECLARED	9 bits per FFT point.
+M3FftMultiplier.java	110	16	M3FftMultiplier	bitsPerFftPoint#1	8	int	POINT_BITS_8	DECLARED	8 bits per FFT point: the fewest, for the largest inputs.
+M3FftMultiplier.java	130	23	M3FftMultiplier	calculateRootsOfUnity#1	2	int	HALF_DIVISOR	DECLARED	x / HALF_DIVISOR is half of x.
+M3FftMultiplier.java	131	28	M3FftMultiplier	calculateRootsOfUnity#1	0.5	double	QUADRANT_PI_FACTOR	DECLARED	pi / 2 is the first quadrant that the roots of unity cover.
+M3FftMultiplier.java	132	33	M3FftMultiplier	calculateRootsOfUnity#2	2	int	HALF_DIVISOR	DECLARED	x / HALF_DIVISOR is half of x.
+M3FftMultiplier.java	155	20	M3FftMultiplier	fft#1	31	int	INT_MSB_INDEX	DECLARED	Index of the top bit of an int: INT_MSB_INDEX - numberOfLeadingZeros(n) is floor(log2(n)).
+M3FftMultiplier.java	165	21	M3FftMultiplier	fft#1	2	int	RADIX_4_STAGES	DECLARED	FFT stages done by one radix-4 pass.
+M3FftMultiplier.java	165	29	M3FftMultiplier	fft#2	2	int	RADIX_4_STAGES	DECLARED	FFT stages done by one radix-4 pass.
+M3FftMultiplier.java	166	46	M3FftMultiplier	fft#3	2	int	RADIX_4_STAGES	DECLARED	FFT stages done by one radix-4 pass.
+M3FftMultiplier.java	169	41	M3FftMultiplier	fft#1	4	int	QUARTER_DIVISOR	DECLARED	x / QUARTER_DIVISOR is a quarter of x.
+M3FftMultiplier.java	177	44	M3FftMultiplier	fft#2	4	int	QUARTER_DIVISOR	DECLARED	x / QUARTER_DIVISOR is a quarter of x.
+M3FftMultiplier.java	178	44	M3FftMultiplier	fft#4	2	int	HALF_DIVISOR	DECLARED	x / HALF_DIVISOR is half of x.
+M3FftMultiplier.java	179	44	M3FftMultiplier	fft#1	3	int	THREE_QUARTERS_NUMERATOR	DECLARED	x * THREE_QUARTERS_NUMERATOR / QUARTER_DIVISOR is three quarters of x.
+M3FftMultiplier.java	179	48	M3FftMultiplier	fft#3	4	int	QUARTER_DIVISOR	DECLARED	x / QUARTER_DIVISOR is a quarter of x.
+M3FftMultiplier.java	216	41	M3FftMultiplier	fft#5	2	int	RADIX_2_SPAN	DECLARED	Points of one radix-2 butterfly.
+M3FftMultiplier.java	242	35	M3FftMultiplier	fft3#1	-0.5	double	MINUS_ONE_HALF	DECLARED	cos(2 pi / 3): the real part of a primitive cube root of unity.
+M3FftMultiplier.java	242	52	M3FftMultiplier	fft3#1	3	int	RADIX_3	DECLARED	Radix of the length-3 transform; sqrt(RADIX_3) / 2 is sin(pi / 3).
+M3FftMultiplier.java	248	24	M3FftMultiplier	fft3#1	0.5	double	ONE_HALF	DECLARED	One half.
+M3FftMultiplier.java	249	24	M3FftMultiplier	fft3#2	0.5	double	ONE_HALF	DECLARED	One half.
+M3FftMultiplier.java	280	35	M3FftMultiplier	fftMixedRadix#1	3	int	THIRD_DIVISOR	DECLARED	x / THIRD_DIVISOR is a third of x.
+M3FftMultiplier.java	282	70	M3FftMultiplier	fftMixedRadix#1	2	int	TWO_THIRDS_NUMERATOR	DECLARED	oneThird * TWO_THIRDS_NUMERATOR ends the second third.
+M3FftMultiplier.java	283	60	M3FftMultiplier	fftMixedRadix#2	2	int	TWO_THIRDS_NUMERATOR	DECLARED	oneThird * TWO_THIRDS_NUMERATOR ends the second third.
+M3FftMultiplier.java	290	40	M3FftMultiplier	fftMixedRadix#1	4	int	QUARTER_DIVISOR	DECLARED	x / QUARTER_DIVISOR is a quarter of x.
+M3FftMultiplier.java	297	33	M3FftMultiplier	fftMixedRadix#2	4	int	QUARTER_DIVISOR	DECLARED	x / QUARTER_DIVISOR is a quarter of x.
+M3FftMultiplier.java	298	46	M3FftMultiplier	fftMixedRadix#3	4	int	QUARTER_DIVISOR	DECLARED	x / QUARTER_DIVISOR is a quarter of x.
+M3FftMultiplier.java	314	35	M3FftMultiplier	fromFftVector#1	25	int	MAX_POINT_BITS	DECLARED	Most bits per FFT point that still leave slack in an int.
+M3FftMultiplier.java	314	58	M3FftMultiplier	fromFftVector#1	" does not fit into an int with slack"	String	MSG_POINT_BITS_NO_SLACK	DECLARED	Assertion message: too many bits per FFT point.
+M3FftMultiplier.java	316	77	M3FftMultiplier	fromFftVector#1	32	int	INT_BITS	DECLARED	Bits of an int.
+M3FftMultiplier.java	317	29	M3FftMultiplier	fromFftVector#1	8	int	TWO_PARTS_INT_BYTES	DECLARED	Bytes of one int for each of the two result parts (real and imaginary).
+M3FftMultiplier.java	317	68	M3FftMultiplier	fromFftVector#1	31	int	INT_BITS_ROUND_UP	DECLARED	Rounds a bit count up to whole ints.
+M3FftMultiplier.java	317	74	M3FftMultiplier	fromFftVector#2	32	int	INT_BITS	DECLARED	Bits of an int.
+M3FftMultiplier.java	321	26	M3FftMultiplier	fromFftVector#3	32	int	INT_BITS	DECLARED	Bits of an int.
+M3FftMultiplier.java	323	38	M3FftMultiplier	fromFftVector#2	8	int	BITS_PER_BYTE	DECLARED	Bits of a byte.
+M3FftMultiplier.java	326	54	M3FftMultiplier	fromFftVector#1	3	int	BITS_TO_BYTES_SHIFT	DECLARED	Converts a bit index to a byte index and back.
+M3FftMultiplier.java	326	71	M3FftMultiplier	fromFftVector#1	4	int	INT_BYTES	DECLARED	Bytes of an int.
+M3FftMultiplier.java	332	58	M3FftMultiplier	fromFftVector#2	3	int	BITS_TO_BYTES_SHIFT	DECLARED	Converts a bit index to a byte index and back.
+M3FftMultiplier.java	332	75	M3FftMultiplier	fromFftVector#2	4	int	INT_BYTES	DECLARED	Bytes of an int.
+M3FftMultiplier.java	333	54	M3FftMultiplier	fromFftVector#3	3	int	BITS_TO_BYTES_SHIFT	DECLARED	Converts a bit index to a byte index and back.
+M3FftMultiplier.java	334	59	M3FftMultiplier	fromFftVector#4	3	int	BITS_TO_BYTES_SHIFT	DECLARED	Converts a bit index to a byte index and back.
+M3FftMultiplier.java	353	41	M3FftMultiplier	getRootsOfUnity2#1	2	int	RADIX_4_STAGES	DECLARED	FFT stages done by one radix-4 pass.
+M3FftMultiplier.java	375	60	M3FftMultiplier	getRootsOfUnity3#1	3	int	RADIX_3	DECLARED	Radix of the length-3 transform: the transform length is RADIX_3 * 2^logN.
+M3FftMultiplier.java	379	42	M3FftMultiplier	getRootsOfUnity3#2	3	int	RADIX_3	DECLARED	Radix of the length-3 transform: the transform length is RADIX_3 * 2^logN.
+M3FftMultiplier.java	396	20	M3FftMultiplier	ifft#1	31	int	INT_MSB_INDEX	DECLARED	Index of the top bit of an int: INT_MSB_INDEX - numberOfLeadingZeros(n) is floor(log2(n)).
+M3FftMultiplier.java	408	20	M3FftMultiplier	ifft#1	2	int	RADIX_4_STAGES	DECLARED	FFT stages done by one radix-4 pass.
+M3FftMultiplier.java	409	41	M3FftMultiplier	ifft#2	2	int	RADIX_2_SPAN	DECLARED	Points of one radix-2 butterfly.
+M3FftMultiplier.java	422	32	M3FftMultiplier	ifft#3	2	int	RADIX_4_STAGES	DECLARED	FFT stages done by one radix-4 pass.
+M3FftMultiplier.java	426	41	M3FftMultiplier	ifft#1	4	int	QUARTER_DIVISOR	DECLARED	x / QUARTER_DIVISOR is a quarter of x.
+M3FftMultiplier.java	434	44	M3FftMultiplier	ifft#2	4	int	QUARTER_DIVISOR	DECLARED	x / QUARTER_DIVISOR is a quarter of x.
+M3FftMultiplier.java	435	44	M3FftMultiplier	ifft#4	2	int	HALF_DIVISOR	DECLARED	x / HALF_DIVISOR is half of x.
+M3FftMultiplier.java	436	44	M3FftMultiplier	ifft#1	3	int	THREE_QUARTERS_NUMERATOR	DECLARED	x * THREE_QUARTERS_NUMERATOR / QUARTER_DIVISOR is three quarters of x.
+M3FftMultiplier.java	436	48	M3FftMultiplier	ifft#3	4	int	QUARTER_DIVISOR	DECLARED	x / QUARTER_DIVISOR is a quarter of x.
+M3FftMultiplier.java	496	35	M3FftMultiplier	ifftMixedRadix#1	3	int	THIRD_DIVISOR	DECLARED	x / THIRD_DIVISOR is a third of x.
+M3FftMultiplier.java	498	70	M3FftMultiplier	ifftMixedRadix#1	2	int	TWO_THIRDS_NUMERATOR	DECLARED	oneThird * TWO_THIRDS_NUMERATOR ends the second third.
+M3FftMultiplier.java	499	60	M3FftMultiplier	ifftMixedRadix#2	2	int	TWO_THIRDS_NUMERATOR	DECLARED	oneThird * TWO_THIRDS_NUMERATOR ends the second third.
+M3FftMultiplier.java	508	40	M3FftMultiplier	ifftMixedRadix#1	4	int	QUARTER_DIVISOR	DECLARED	x / QUARTER_DIVISOR is a quarter of x.
+M3FftMultiplier.java	515	33	M3FftMultiplier	ifftMixedRadix#2	4	int	QUARTER_DIVISOR	DECLARED	x / QUARTER_DIVISOR is a quarter of x.
+M3FftMultiplier.java	516	46	M3FftMultiplier	ifftMixedRadix#3	4	int	QUARTER_DIVISOR	DECLARED	x / QUARTER_DIVISOR is a quarter of x.
+M3FftMultiplier.java	526	36	M3FftMultiplier	ifftMixedRadix#2	3	int	THIRD_DIVISOR	DECLARED	x / THIRD_DIVISOR is a third of x.
+M3FftMultiplier.java	539	28	M3FftMultiplier	multiply#1	"a==null"	String	MSG_A_NULL	DECLARED	Assertion message: operand a is null.
+M3FftMultiplier.java	540	28	M3FftMultiplier	multiply#1	"b==null"	String	MSG_B_NULL	DECLARED	Assertion message: operand b is null.
+M3FftMultiplier.java	553	34	M3FftMultiplier	multiply#1	32L	long	INT_BITS_LONG	DECLARED	Bits of an int, as a long (the range check runs in 64 bits).
+M3FftMultiplier.java	554	43	M3FftMultiplier	multiply#1	"BigInteger would overflow supported range"	String	MSG_RANGE_OVERFLOW	DECLARED	ArithmeticException message: the product exceeds the supported BigInteger range.
+M3FftMultiplier.java	611	59	M3FftMultiplier	multiplyFft#1	8	int	BITS_PER_BYTE	DECLARED	Bits of a byte.
+M3FftMultiplier.java	614	25	M3FftMultiplier	multiplyFft#1	32	int	INT_BITS	DECLARED	Bits of an int.
+M3FftMultiplier.java	618	33	M3FftMultiplier	multiplyFft#1	3	int	THREE_QUARTERS_NUMERATOR	DECLARED	x * THREE_QUARTERS_NUMERATOR / QUARTER_DIVISOR is three quarters of x.
+M3FftMultiplier.java	618	37	M3FftMultiplier	multiplyFft#1	4	int	QUARTER_DIVISOR	DECLARED	x / QUARTER_DIVISOR is a quarter of x.
+M3FftMultiplier.java	619	45	M3FftMultiplier	multiplyFft#2	3	int	MIN_MIXED_RADIX_LOG_LENGTH	DECLARED	Mixed-radix (3 * 2^n) transforms need a log2 length above this.
+M3FftMultiplier.java	620	67	M3FftMultiplier	multiplyFft#1	2	int	MIXED_RADIX_LOG_SHIFT	DECLARED	log2 length reduction of the power-of-two parts of a 3 * 2^n transform.
+M3FftMultiplier.java	621	66	M3FftMultiplier	multiplyFft#2	2	int	MIXED_RADIX_LOG_SHIFT	DECLARED	log2 length reduction of the power-of-two parts of a 3 * 2^n transform.
+M3FftMultiplier.java	622	67	M3FftMultiplier	multiplyFft#2	4	int	TWIDDLES_LOG_SHIFT	DECLARED	log2 length reduction of the mixed-radix twiddle factors.
+M3FftMultiplier.java	663	35	M3FftMultiplier	squareFft#1	8	int	BITS_PER_BYTE	DECLARED	Bits of a byte.
+M3FftMultiplier.java	666	25	M3FftMultiplier	squareFft#1	32	int	INT_BITS	DECLARED	Bits of an int.
+M3FftMultiplier.java	670	33	M3FftMultiplier	squareFft#1	3	int	THREE_QUARTERS_NUMERATOR	DECLARED	x * THREE_QUARTERS_NUMERATOR / QUARTER_DIVISOR is three quarters of x.
+M3FftMultiplier.java	670	37	M3FftMultiplier	squareFft#1	4	int	QUARTER_DIVISOR	DECLARED	x / QUARTER_DIVISOR is a quarter of x.
+M3FftMultiplier.java	674	67	M3FftMultiplier	squareFft#1	2	int	MIXED_RADIX_LOG_SHIFT	DECLARED	log2 length reduction of the power-of-two parts of a 3 * 2^n transform.
+M3FftMultiplier.java	675	66	M3FftMultiplier	squareFft#2	2	int	MIXED_RADIX_LOG_SHIFT	DECLARED	log2 length reduction of the power-of-two parts of a 3 * 2^n transform.
+M3FftMultiplier.java	676	67	M3FftMultiplier	squareFft#2	4	int	TWIDDLES_LOG_SHIFT	DECLARED	log2 length reduction of the mixed-radix twiddle factors.
+M3FftMultiplier.java	701	35	M3FftMultiplier	toFftVector#1	25	int	MAX_POINT_BITS	DECLARED	Most bits per FFT point that still leave slack in an int.
+M3FftMultiplier.java	701	58	M3FftMultiplier	toFftVector#1	" does not fit into an int with slack"	String	MSG_POINT_BITS_NO_SLACK	DECLARED	Assertion message: too many bits per FFT point.
+M3FftMultiplier.java	704	26	M3FftMultiplier	toFftVector#1	4	int	INT_BYTES	DECLARED	Bytes of an int.
+M3FftMultiplier.java	705	41	M3FftMultiplier	toFftVector#2	4	int	INT_BYTES	DECLARED	Bytes of an int.
+M3FftMultiplier.java	706	49	M3FftMultiplier	toFftVector#3	4	int	INT_BYTES	DECLARED	Bytes of an int.
+M3FftMultiplier.java	712	31	M3FftMultiplier	toFftVector#1	2	int	HALF_DIVISOR	DECLARED	x / HALF_DIVISOR is half of x.
+M3FftMultiplier.java	714	26	M3FftMultiplier	toFftVector#1	32	int	INT_BITS	DECLARED	Bits of an int.
+M3FftMultiplier.java	715	38	M3FftMultiplier	toFftVector#1	8	int	BITS_PER_BYTE	DECLARED	Bits of a byte.
+M3FftMultiplier.java	719	54	M3FftMultiplier	toFftVector#1	3	int	BITS_TO_BYTES_SHIFT	DECLARED	Converts a bit index to a byte index and back.
+M3FftMultiplier.java	719	71	M3FftMultiplier	toFftVector#4	4	int	INT_BYTES	DECLARED	Bytes of an int.
+M3FftMultiplier.java	720	55	M3FftMultiplier	toFftVector#2	3	int	BITS_TO_BYTES_SHIFT	DECLARED	Converts a bit index to a byte index and back.
+M3FftMultiplier.java	725	47	M3FftMultiplier	toFftVector#1	31	int	INT_SIGN_SHIFT	DECLARED	Moves the int sign bit to bit 0.
+M3FftMultiplier.java	805	57	ComplexVector	applyInverseWeights#1	2	int	COMPLEX_SIZE	DECLARED	Doubles per complex number (real and imaginary part).
+M3FftMultiplier.java	812	25	ComplexVector	applyInverseWeights#2	2	int	COMPLEX_SIZE	DECLARED	Doubles per complex number (real and imaginary part).
+M3FftMultiplier.java	827	57	ComplexVector	applyWeights#1	2	int	COMPLEX_SIZE	DECLARED	Doubles per complex number (real and imaginary part).
+M3FftMultiplier.java	831	25	ComplexVector	applyWeights#2	2	int	COMPLEX_SIZE	DECLARED	Doubles per complex number (real and imaginary part).
+M3FftMultiplier.java	925	57	ComplexVector	multiplyPointwise#1	2	int	COMPLEX_SIZE	DECLARED	Doubles per complex number (real and imaginary part).
+M3FftMultiplier.java	933	25	ComplexVector	multiplyPointwise#2	2	int	COMPLEX_SIZE	DECLARED	Doubles per complex number (real and imaginary part).
+M3FftMultiplier.java	966	57	ComplexVector	squarePointwise#1	2	int	COMPLEX_SIZE	DECLARED	Doubles per complex number (real and imaginary part).
+M3FftMultiplier.java	970	34	ComplexVector	squarePointwise#2	2	int	SQUARE_CROSS_FACTOR	DECLARED	Factor of the cross term: (a + bi)^2 = a^2 - b^2 + 2abi.
+M3FftMultiplier.java	1068	32	MutableComplex	squareInto#1	2	int	SQUARE_CROSS_FACTOR	DECLARED	Factor of the cross term: (a + bi)^2 = a^2 - b^2 + 2abi.

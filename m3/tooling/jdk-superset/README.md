@@ -36,6 +36,18 @@ one per jackson-core version).
      and exceptions.
    - Benchmark on the mixed corpus: about 1.5x faster.
    - Licence and notices: `src/java.base/share/legal/fastdoubleparser.md` (MIT; fast_float MIT; bigint BSD-2).
+6. Constants (user rule: no magic numbers, no floating strings). Recipe LITERAL_CONSTANTS v1,
+   `tools/literal_constants.py`:
+   - Inventory (`LITERALS.tsv`): 488 literals to name in the 13 types (409 numeric, 74 char, 5 string). 0, 1 and -1
+     stay, and so do the five final tables (1,316 elements). The wiring in `FloatingDecimal` has none.
+   - Each literal became a `private static final` constant in its class, named by its role (`CONSTANT_NAMES.tsv`;
+     one row per occurrence in `CONSTANTS.tsv`). That is 205 constants. A value with two roles gets two names.
+     Rerunning the tool makes 0 edits.
+   - Each constant keeps the literal's own type and spelling, so javac folds it back into the code: all 24 classes
+     have instruction-identical methods (`tools/bytecode_identity.py`). The differential, the JUnit atoms (11/11) and
+     a same-host perf A/B (`tools/perf_ab_high.ps1`, `tools/perf_gate.py`) agree.
+   - Strings: no M3 interner is reachable from `jdk.internal.math`, so the 4 strings are compile-time constants, which
+     the JVM interns. The gap is recorded in `RECIPE_MEMORY.tsv`.
 
 Next:
 - Point jackson-core's fast path at the JDK (`Double.parseDouble`) by recipe, then drop the three vendored
