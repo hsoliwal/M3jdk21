@@ -1,0 +1,10 @@
+gate	command	result
+toolchain	python --version; git version	Python 3.12.6, git 2.53.0.windows.2; donors read from M3JDK master 52fb81c4
+v1_input	sha256sum inputs/CSV_API_SUPERSET.v1.tsv	PASS: 78e3e80f1f2177e4e6459130a8eb1a93b9c87932ade2458be83a5ff6d7713537 = #2215 m3/tooling/jdk-superset/csv/CSV_API_SUPERSET.tsv (commit d51b01e296e); 242 keys, 8 matched across donors by name
+donor_docs	python tools/csv_donor_docs.py m3/vendor/third_party inputs/DONOR_METHODS.tsv inputs/DONOR_FEATURES.tsv inputs/DONOR_EXTRA.tsv (twice, cmp)	PASS: 313 configuration methods (297 with Javadoc), 30 enum options, 106 keys outside v1 (18 gap-config, 88 operation); re-run byte-identical
+capability_gate	python tools/csv_capabilities.py inputs/CSV_API_SUPERSET.v1.tsv inputs/DONOR_FEATURES.tsv inputs/DONOR_EXTRA.tsv CSV_CAPABILITY_SYNONYMS.tsv CSV_CAPABILITIES.tsv	PASS: 386/386 donor keys mapped exactly once to 78 capabilities (27 CORE, 44 EXTENDED, 6 INTEGRATION, 1 INTERNAL); 0 duplicate, 0 unknown, 0 empty; first run found 1 MISSING (jackson addNumberColumn), fixed
+capability_fixed_point	csv_capabilities.py twice, cmp	PASS: CSV_CAPABILITIES.tsv sha256 bc915785e9e3f421... byte-identical
+name_match_review	csv_capabilities.py NAME_MATCH lines	PASS: the 8 v1 name matches = 5 TRUE_SYNONYM (delimiter, delimiterString, lineSeparator, nullValue, quote) + 3 FALSE_FRIEND (escapeChar, format, header); after review 41 capabilities are shared by 2+ donors (14 by all 3)
+interface_coverage	grep each capability id of CSV_CAPABILITIES.tsv in INTERFACE.md	PASS: 78/78 capabilities have a home row
+gate_script	bash tools/run_gates.sh	PASS: 5/5 lines PASS, exit 0
+implementation	-	HOLD: the jdk.m3.csv types are new production classes (Chrome local AI, one call per file), unavailable; behaviour tests per capability NOT_RUN
