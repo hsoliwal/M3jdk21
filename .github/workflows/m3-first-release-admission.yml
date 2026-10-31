@@ -190,7 +190,7 @@ jobs:
           print(json.dumps({'source_commit': result['source_commit'],
                             'canonical_maven_gate': checks}, sort_keys=True))
           if not result['policy_valid'] or len(checks) != 1 or checks[0]['status'] != 'PASS':
-              raise SystemExit('HOLD: execute and qualify source-bound recipes in hsoliwal/com.synexia; attach the exact command, source pins and raw artifact hashes.')
+              raise SystemExit('HOLD: execute and qualify the source-bound Maven/OpenRewrite control reactor in this repository; attach the exact command, source pins and raw artifact hashes.')
           PYCODE
       - name: Full-family and receiving-policy verification
         if: always()

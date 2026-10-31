@@ -44,8 +44,9 @@ The current public P0 foundation is intentionally narrower than the full M3 prog
 - an independently authored immutable-text/precompute foundation exists under the explicit
   first-party licensing boundary;
 - product verification machinery, Java precompute differential tests and JNI/native
-  parity tests exist here; canonical transformation recipes and their mastery
-  evidence are authored and executed in Synexia;
+  parity tests exist here; under the standalone rule (2026-10-31) the transformation
+  recipes this repository carries and their control-reactor evidence are executed here
+  as well, with donor lineage kept in ledgers (`m3/tooling/standalone/`);
 - the project has a deterministic release contract, rights/provenance record, and proof-pack
   checksum process.
 
@@ -71,7 +72,7 @@ A release candidate must preserve:
 - foundation build/test logs;
 - Java precompute differential results;
 - JNI/native parity results where JNI/native is used;
-- canonical Synexia Maven recipe/control-reactor execution and replay receipts;
+- Maven/OpenRewrite control-reactor execution and replay receipts produced in this repository;
 - product compilation and applicable installed-image/module tests;
 - release-contract validation;
 - generated SHA-256 manifest;
@@ -165,7 +166,7 @@ Receipt field details: artifact paths resolve relative to the manifest directory
 Every gate includes `owner_repository` and an `environment` object with `os`,
 `architecture` and `toolchain`. `M3_MAVEN_CONTROL_REACTOR` also requires
 `canonical_recipe` with `repository`, `commit` and `recipe_id`; its repository
-is `hsoliwal/com.synexia`. The product verifier consumes these records as data
+is `hsoliwal/M3jdk21` (standalone rule, 2026-10-31). The product verifier consumes these records as data
 and never executes command text supplied by a receipt.
 
 ## Retained PR source and naming queues
@@ -235,13 +236,16 @@ only qualified product results and evidence live in M3JDK21.
 ## Canonical recipe execution and migration HOLD
 
 The release workflow consumes the mandatory `M3_MAVEN_CONTROL_REACTOR` receipt
-from source-bound work executed in `hsoliwal/com.synexia`. Its control job
+from source-bound work executed in this repository (`hsoliwal/M3jdk21`). Standalone
+rule (2026-10-31): no other repository is needed to build, test, gate or release;
+donor lineage stays in `m3/tooling/standalone/` (`SYNEXIA_REFS.tsv`,
+`LINEAGE_SOURCES.tsv`). Its control job
 requires both `policy_valid` and an exact passing canonical Maven gate; absent,
 stale, malformed or failed evidence keeps the job and release summary on HOLD.
 Historical target-local recipe scripts and the target recipe reactor are no
 longer execution entrypoints in this workflow. Their retained sources remain
-visible custody migration debt and are preserved for a separately qualified
-Synexia cleanup.
+visible custody migration debt (`legacy_recipe_custody` HOLD) and are preserved
+for a separately qualified cleanup.
 
 Foundation, precompute Java/JNI and full-family product checks remain active,
 along with naming and retained-source queues. The dated
