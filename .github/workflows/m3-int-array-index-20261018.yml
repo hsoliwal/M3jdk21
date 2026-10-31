@@ -64,4 +64,6 @@ jobs:
             -Djava.library.path="$RUNNER_TEMP/native" -cp "$RUNNER_TEMP/classes" \
             com.m3.collections.M3IntArrayListContractProof --native
       - name: Owning Maven reactor tests
-        run: mvn -B -ntp -f m3/collections/pom.xml verify
+        run: |
+          mvn -B -ntp -f m3/arrays/pom.xml -Pnative-linux -DskipTests install
+          mvn -B -ntp -f m3/collections/pom.xml "-Dm3.arrays.native.path=$GITHUB_WORKSPACE/m3/arrays/target/native/libm3_arrays.so" verify

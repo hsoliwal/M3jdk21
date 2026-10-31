@@ -27,6 +27,8 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
+      - name: Build m3/arrays, which the collection module requires
+        run: mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
       - name: Check the collection receiver and compile tool
         run: mvn -B -ntp -f m3/collections/pom.xml -DskipTests package
       - name: Execute bounded CPU tool self-test

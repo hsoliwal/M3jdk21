@@ -28,7 +28,9 @@ jobs:
           mvn -B -ntp -f "$RECIPE/pom.xml" verify
           java -cp "$RECIPE/target/classes" com.synexia.m3.M3LongBitmapFilterPlanRecipe --check .
       - name: Owning collection Maven tests
-        run: mvn -B -ntp -f m3/collections/pom.xml test
+        run: |
+          mvn -B -ntp -f m3/arrays/pom.xml -Pnative-linux -DskipTests install
+          mvn -B -ntp -f m3/collections/pom.xml "-Dm3.arrays.native.path=$GITHUB_WORKSPACE/m3/arrays/target/native/libm3_arrays.so" test
       - name: Real selected-source Java/JNI parity and UBSan
         run: |
           set -eu
