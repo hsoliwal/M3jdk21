@@ -89,14 +89,20 @@ def main():
     # Reuse the existing source-owned com.m3.arrays module (Eclipse/Synexia
     # collection donor), rather than compiling com.m3.collections as an
     # unresolved JPMS module or placing arrays classes on the class path.
-    maven(ROOT / 'm3/arrays/pom.xml', '-Dmaven.test.skip=true', 'install')
+    # The collection owners create their backing arrays through the arrays JNI owner
+    # (M3-COLLECTION-JNI-ARRAY-STORAGE-1), so both stages load its library. The owner's own
+    # native-linux profile builds it with CMake (and runs its ctest); no second native build.
+    maven(ROOT / 'm3/arrays/pom.xml', '-Pnative-linux', '-Dmaven.test.skip=true', 'install')
     array_jar = ROOT / 'm3/arrays/target/m3-arrays-0.1.0-SNAPSHOT.jar'
     if not array_jar.is_file():
         raise RuntimeError('Source-built com.m3.arrays module jar is absent')
     with zipfile.ZipFile(array_jar) as archive:
         if 'module-info.class' not in archive.namelist():
             raise RuntimeError('com.m3.arrays module descriptor is missing')
-    dependency_proof['com.m3.arrays'] = {'jar_sha256': sha(array_jar)}
+    array_library = ROOT / 'm3/arrays/target/native/libm3_arrays.so'
+    if not array_library.is_file():
+        raise RuntimeError('Source-built com.m3.arrays JNI library is absent')
+    dependency_proof['com.m3.arrays'] = {'jar_sha256': sha(array_jar), 'jni_sha256': sha(array_library)}
     sources = sorted((MODULE / 'src/main/java').rglob('*.java'))
     tests = sorted((MODULE / 'src/test/java').rglob('*.java'))
     (OUT / 'main.args').write_text('\n'.join(map(str, sources)) + '\n')
@@ -140,7 +146,8 @@ def main():
               '-o', gather_fixture])
     run([gather_fixture])
     common = ['-Xmx768m', '-XX:ActiveProcessorCount=2', '-Xcheck:jni',
-              '-Dm3.collections.rank.native=true', '-Dm3.collections.signal.native=true']
+              '-Dm3.collections.rank.native=true', '-Dm3.collections.signal.native=true',
+              '-Dm3.arrays.native.path=' + str(array_library)]
     results = {}
     for mode, required in [('java', 'false'), ('native', 'true')]:
         library = OUT / ('native' if mode == 'native' else 'missing')
