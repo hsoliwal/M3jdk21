@@ -162,29 +162,66 @@ class M3FastFloatMath {
      * @param power       int32 the exponent of the number
      * @return the computed double on success, {@link Double#NaN} on failure
      */
+    //FLLDCIM: HPCPOP - JIT_ATOMIZE v1: the fast-path decision; the 278 bytes were "already compiled into a medium
+    // method" / "too big" from tryDecFloatToFloatTruncated; now a trivial atom (<= MaxInlineSize 35) over the exact
+    // (Clinger) atom and the Eisel-Lemire atom
     static float tryDecToFloatWithFastAlgorithm(boolean isNegative, long significand, int power) {
 
         // we start with a fast path
-        if (FAST_PATH_MIN_POWER_OF_TEN <= power && power <= FAST_PATH_MAX_POWER_OF_TEN && Long.compareUnsigned(significand, (1L << FLOAT_SIGNIFICAND_WIDTH) - 1L) <= 0) {
-            // convert the integer into a float. This is lossless since
-            // 0 <= i <= 2^24 - 1.
-            float d = (float) significand;
-            //
-            // The general idea is as follows.
-            // If 0 <= s < 2^24 and if 10^0 <= p <= 10^10 then
-            // 1) Both s and p can be represented exactly as 32-bit floating-point values
-            // 2) Because s and p can be represented exactly as floating-point values,
-            // then s * p and s / p will produce correctly rounded values.
-            //
-            if (power < 0) {
-                d = d / FLOAT_POWER_OF_TEN[-power];
-            } else {
-                d = d * FLOAT_POWER_OF_TEN[power];
-            }
+        if (isClingerFastPath(significand, power)) {
+            float d = clingerFastPath(significand, power);
             return (isNegative) ? -d : d;
         }
+        return tryDecToFloatWithEiselLemire(isNegative, significand, power);
+    }
 
+    //FLLDCIM: HPCPOP - JIT_ATOMIZE v1: the condition of the exact fast path (Clinger 1990)
+    /**
+     * @param significand uint64 the significand
+     * @param power       int32 the exponent of the number
+     * @return true if {@code significand} and {@code 10^power} are both exact floats: power in
+     * [{@value #FAST_PATH_MIN_POWER_OF_TEN}, {@value #FAST_PATH_MAX_POWER_OF_TEN}] and significand at most
+     * 2^24 - 1 (unsigned)
+     */
+    private static boolean isClingerFastPath(long significand, int power) {
+        return FAST_PATH_MIN_POWER_OF_TEN <= power && power <= FAST_PATH_MAX_POWER_OF_TEN && Long.compareUnsigned(significand, (1L << FLOAT_SIGNIFICAND_WIDTH) - 1L) <= 0;
+    }
 
+    //FLLDCIM: HPCPOP - JIT_ATOMIZE v1: the exact fast path (Clinger 1990): one correctly rounded multiplication or
+    // division; the sign stays in the decision so the atom fits MaxInlineSize 35 (it inlines from any call site)
+    /**
+     * Computes {@code significand * 10^power} when {@link #isClingerFastPath} holds.
+     *
+     * @param significand the significand, at most 2^24 - 1
+     * @param power       the exponent of the number, in [-10, 10]
+     * @return the correctly rounded (non-negative) float
+     */
+    private static float clingerFastPath(long significand, int power) {
+        // convert the integer into a float. This is lossless since
+        // 0 <= i <= 2^24 - 1.
+        //
+        // The general idea is as follows.
+        // If 0 <= s < 2^24 and if 10^0 <= p <= 10^10 then
+        // 1) Both s and p can be represented exactly as 32-bit floating-point values
+        // 2) Because s and p can be represented exactly as floating-point values,
+        // then s * p and s / p will produce correctly rounded values.
+        //
+        return power < 0 ? (float) significand / FLOAT_POWER_OF_TEN[-power]
+                         : (float) significand * FLOAT_POWER_OF_TEN[power];
+    }
+
+    //FLLDCIM: HPCPOP - JIT_ATOMIZE v1: the Eisel-Lemire path of tryDecToFloatWithFastAlgorithm (fast_float)
+    /**
+     * Computes {@code significand * 10^power} with a 64-bit product against the truncated 64-bit mantissa of the
+     * power of ten (Eisel-Lemire), when {@link #isClingerFastPath} does not hold.
+     *
+     * @param isNegative  whether the number is negative
+     * @param significand uint64 the significand, not 0
+     * @param power       int32 the exponent of the number, in
+     *                    [{@value #FLOAT_MIN_EXPONENT_POWER_OF_TEN}, {@value #FLOAT_MAX_EXPONENT_POWER_OF_TEN}]
+     * @return the computed float on success, {@link Float#NaN} when it may be a halfway case or out of range
+     */
+    private static float tryDecToFloatWithEiselLemire(boolean isNegative, long significand, int power) {
         // The fast path has now failed, so we are falling back on the slower path.
 
         // We are going to need to do some 64-bit arithmetic to get a more precise product.

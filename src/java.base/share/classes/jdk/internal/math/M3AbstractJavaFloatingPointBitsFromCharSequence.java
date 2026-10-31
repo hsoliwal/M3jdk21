@@ -84,6 +84,13 @@ abstract class M3AbstractJavaFloatingPointBitsFromCharSequence extends M3Abstrac
     private static final char INFINITY_CHAR_Y = 'y';
     /** Length of Infinity. */
     private static final int INFINITY_CHAR_COUNT = 8;
+    //FLLDCIM: HPCPOP - JIT_ATOMIZE v1: the packed result of parseExponentNumber and parseLiteralTail, named by role
+    /** Shift of the index field of a packed scan result (the exponent number is the low int). */
+    private static final int PACKED_INDEX_SHIFT = Integer.SIZE;
+    /** Sign bit of a packed scan result: set when no digit follows an exponent indicator. */
+    private static final long ILLEGAL_EXPONENT_BIT = Long.MIN_VALUE;
+    /** The exponent fields of a packed scan result: the sign bit and the exponent number (low int). */
+    private static final long EXPONENT_FIELDS_MASK = ILLEGAL_EXPONENT_BIT | (1L << PACKED_INDEX_SHIFT) - 1;
 
     /**
      * Skips optional white space in the provided string
@@ -98,6 +105,85 @@ abstract class M3AbstractJavaFloatingPointBitsFromCharSequence extends M3Abstrac
             index++;
         }
         return index;
+    }
+
+    //FLLDCIM: HPCPOP - JIT_ATOMIZE v1: the exponent loop of parseDecFloatLiteral and parseHexFloatLiteral (one atom)
+    /**
+     * Parses the {@code SignedInteger} after an exponent indicator ({@code e E p P}): an optional sign, then
+     * decimal digits. As in the donor, the number stops growing once it reaches
+     * {@link M3AbstractFloatValueParser#MAX_EXPONENT_NUMBER} (later digits are consumed), and when no digit follows
+     * the indicator and sign, the char there is still accumulated once (the result is illegal then).
+     *
+     * @param str      a string
+     * @param index    index of the exponent indicator
+     * @param endIndex end index (exclusive)
+     * @return the exponent number (negated after a minus sign) in the low 32 bits, the index after the last
+     * exponent digit in bits 32 to 62 ({@link #packedIndex}), and {@link #ILLEGAL_EXPONENT_BIT} set when no
+     * digit follows the indicator and its sign
+     */
+    private static long parseExponentNumber(CharSequence str, int index, int endIndex) {
+        char ch = charAt(str, ++index, endIndex);
+        boolean isExponentNegative = ch == MINUS_SIGN;
+        if (isExponentNegative || ch == PLUS_SIGN) {
+            ch = charAt(str, ++index, endIndex);
+        }
+        int digit = (char) (ch - DIGIT_ZERO);
+        final boolean illegal = digit >= DECIMAL_RADIX;
+        int expNumber = 0;
+        do {
+            // Guard against overflow
+            if (expNumber < M3AbstractFloatValueParser.MAX_EXPONENT_NUMBER) {
+                expNumber = DECIMAL_RADIX * expNumber + digit;
+            }
+            ch = charAt(str, ++index, endIndex);
+            digit = (char) (ch - DIGIT_ZERO);
+        } while (digit < DECIMAL_RADIX);
+        if (isExponentNegative) {
+            expNumber = -expNumber;
+        }
+        return (illegal ? ILLEGAL_EXPONENT_BIT : 0L) | (long) index << PACKED_INDEX_SHIFT
+                | Integer.toUnsignedLong(expNumber);
+    }
+
+    //FLLDCIM: HPCPOP - JIT_ATOMIZE v1: the literal tail after the significand, shared by parseDecFloatLiteral and
+    // parseHexFloatLiteral: [exponent] [FloatTypeSuffix] [WhiteSpace]
+    /**
+     * Parses the tail of a {@code FloatingPointLiteral} after its significand: the exponent when
+     * {@code hasExponent} ({@code ch} is the indicator), then an optional {@code FloatTypeSuffix}
+     * ({@code f F d D}), then optional white space.
+     *
+     * @param str         a string
+     * @param ch          the char that ended the significand (the last char read)
+     * @param index       index of that char
+     * @param endIndex    end index (exclusive)
+     * @param hasExponent true if {@code ch} is the exponent indicator of the literal's grammar
+     * @return the exponent number (0 without an exponent) in the low 32 bits, the index after the trailing white
+     * space in bits 32 to 62 ({@link #packedIndex}), and {@link #ILLEGAL_EXPONENT_BIT} as in
+     * {@link #parseExponentNumber}
+     */
+    private static long parseLiteralTail(CharSequence str, char ch, int index, int endIndex, boolean hasExponent) {
+        long exponentBits = 0L;
+        if (hasExponent) {
+            final long scanned = parseExponentNumber(str, index, endIndex);
+            index = packedIndex(scanned);
+            ch = charAt(str, index, endIndex);
+            exponentBits = scanned & EXPONENT_FIELDS_MASK;
+        }
+        // Skip optional FloatTypeSuffix
+        // long-circuit-or is faster than short-circuit-or
+        if ((ch | TYPE_SUFFIX_FOLD) == TYPE_SUFFIX_FOLDED) { // ~ "fFdD"
+            index++;
+        }
+        return exponentBits | (long) skipWhitespace(str, index, endIndex) << PACKED_INDEX_SHIFT;
+    }
+
+    //FLLDCIM: HPCPOP - JIT_ATOMIZE v1: decodes the index field of a packed scan result
+    /**
+     * @param scanned a {@link #parseExponentNumber} or {@link #parseLiteralTail} result
+     * @return its index field (bits 32 to 62)
+     */
+    private static int packedIndex(long scanned) {
+        return (int) (scanned >>> PACKED_INDEX_SHIFT) & Integer.MAX_VALUE;
     }
 
     /**
@@ -134,6 +220,8 @@ abstract class M3AbstractJavaFloatingPointBitsFromCharSequence extends M3Abstrac
      * @return the bit pattern of the parsed value, if the input is legal;
      * otherwise, {@code -1L}.
      */
+    //FLLDCIM: HPCPOP - JIT_ATOMIZE v1: 466 bytes were "hot method too big" (FreqInlineSize 325) for the C2 inlining
+    // into parseFloatingPointLiteral; the exponent loop and the truncated re-parse are atoms now
     private long parseDecFloatLiteral(CharSequence str, int index, int startIndex, int endIndex, boolean isNegative, boolean hasLeadingZero) {
         // Parse significand
         // -----------------
@@ -178,71 +266,68 @@ abstract class M3AbstractJavaFloatingPointBitsFromCharSequence extends M3Abstrac
             exponent = virtualIndexOfPoint - significandEndIndex + 1;
         }
 
-        // Parse exponent number
+        // Parse exponent number, skip optional FloatTypeSuffix and trailing whitespace
         // ---------------------
-        int expNumber = 0;
-        if ((ch | LOWER_CASE_BIT) == EXPONENT_INDICATOR) {// equals ignore case
-            ch = charAt(str, ++index, endIndex);
-            boolean isExponentNegative = ch == MINUS_SIGN;
-            if (isExponentNegative || ch == PLUS_SIGN) {
-                ch = charAt(str, ++index, endIndex);
-            }
-            int digit = (char) (ch - DIGIT_ZERO);
-            illegal |= digit >= DECIMAL_RADIX;
-            do {
-                // Guard against overflow
-                if (expNumber < M3AbstractFloatValueParser.MAX_EXPONENT_NUMBER) {
-                    expNumber = DECIMAL_RADIX * expNumber + digit;
-                }
-                ch = charAt(str, ++index, endIndex);
-                digit = (char) (ch - DIGIT_ZERO);
-            } while (digit < DECIMAL_RADIX);
-            if (isExponentNegative) {
-                expNumber = -expNumber;
-            }
-            exponent += expNumber;
-        }
+        final long tail = parseLiteralTail(str, ch, index, endIndex,
+                (ch | LOWER_CASE_BIT) == EXPONENT_INDICATOR);// equals ignore case
+        final int expNumber = (int) tail;
+        exponent += expNumber;
+        index = packedIndex(tail);
 
-        // Skip optional FloatTypeSuffix
-        // long-circuit-or is faster than short-circuit-or
+        // Check if FloatingPointLiteral is complete
         // ------------------------
-        if ((ch | TYPE_SUFFIX_FOLD) == TYPE_SUFFIX_FOLDED) { // ~ "fFdD"
-            index++;
-        }
-
-        // Skip trailing whitespace and check if FloatingPointLiteral is complete
-        // ------------------------
-        index = skipWhitespace(str, index, endIndex);
-        if (illegal || index < endIndex
+        if (illegal || tail < 0 || index < endIndex
                 || !hasLeadingZero && digitCount == 0) {
             throw new NumberFormatException(SYNTAX_ERROR);
         }
 
         // Re-parse significand in case of a potential overflow
         // -----------------------------------------------
-        final boolean isSignificandTruncated;
-        int skipCountInTruncatedDigits = 0;//counts +1 if we skipped over the decimal point
-        int exponentOfTruncatedSignificand;
         if (digitCount > MAX_EXACT_DECIMAL_DIGITS) {
-            significand = 0;
-            for (index = significandStartIndex; index < significandEndIndex; index++) {
-                ch = str.charAt(index);
-                if (ch == DECIMAL_POINT) {
-                    skipCountInTruncatedDigits++;
+            return valueOfTruncatedDecFloatLiteral(str, startIndex, endIndex, isNegative, exponent,
+                    significandStartIndex, significandEndIndex, virtualIndexOfPoint, expNumber);
+        }
+        return valueOfFloatLiteral(str, startIndex, endIndex, isNegative, significand, exponent, false, 0);
+    }
+
+    //FLLDCIM: HPCPOP - JIT_ATOMIZE v1: the truncated re-parse of parseDecFloatLiteral (more than 19 digits); an
+    // instance atom because it ends in the abstract valueOfFloatLiteral
+    /**
+     * Re-parses the significand of a legal decimal literal with more than {@value #MAX_EXACT_DECIMAL_DIGITS}
+     * digits: digits are accumulated while the significand is below
+     * {@link M3AbstractFloatValueParser#MINIMAL_NINETEEN_DIGIT_INTEGER}; the rest are truncated.
+     *
+     * @param str                   a string
+     * @param startIndex            start index inclusive of the literal
+     * @param endIndex              end index (exclusive)
+     * @param isNegative            true if the float value is negative
+     * @param exponent              the exponent of the full significand
+     * @param significandStartIndex index of the first significand char
+     * @param significandEndIndex   index after the last significand char
+     * @param virtualIndexOfPoint   index of the decimal point (significandEndIndex when there is none)
+     * @param expNumber             the exponent number of the literal
+     * @return the bit pattern of the parsed value
+     */
+    private long valueOfTruncatedDecFloatLiteral(CharSequence str, int startIndex, int endIndex, boolean isNegative,
+                                                 int exponent, int significandStartIndex, int significandEndIndex,
+                                                 int virtualIndexOfPoint, int expNumber) {
+        long significand = 0;
+        int skipCountInTruncatedDigits = 0;//counts +1 if we skipped over the decimal point
+        int index;
+        for (index = significandStartIndex; index < significandEndIndex; index++) {
+            char ch = str.charAt(index);
+            if (ch == DECIMAL_POINT) {
+                skipCountInTruncatedDigits++;
+            } else {
+                if (Long.compareUnsigned(significand, M3AbstractFloatValueParser.MINIMAL_NINETEEN_DIGIT_INTEGER) < 0) {
+                    significand = DECIMAL_RADIX * significand + ch - DIGIT_ZERO;
                 } else {
-                    if (Long.compareUnsigned(significand, M3AbstractFloatValueParser.MINIMAL_NINETEEN_DIGIT_INTEGER) < 0) {
-                        significand = DECIMAL_RADIX * significand + ch - DIGIT_ZERO;
-                    } else {
-                        break;
-                    }
+                    break;
                 }
             }
-            isSignificandTruncated = index < significandEndIndex;
-            exponentOfTruncatedSignificand = virtualIndexOfPoint - index + skipCountInTruncatedDigits + expNumber;
-        } else {
-            isSignificandTruncated = false;
-            exponentOfTruncatedSignificand = 0;
         }
+        final boolean isSignificandTruncated = index < significandEndIndex;
+        final int exponentOfTruncatedSignificand = virtualIndexOfPoint - index + skipCountInTruncatedDigits + expNumber;
         return valueOfFloatLiteral(str, startIndex, endIndex, isNegative, significand, exponent, isSignificandTruncated,
                 exponentOfTruncatedSignificand);
     }
@@ -328,6 +413,8 @@ abstract class M3AbstractJavaFloatingPointBitsFromCharSequence extends M3Abstrac
      * @return the bit pattern of the parsed value, if the input is legal;
      * otherwise, {@code -1L}.
      */
+    //FLLDCIM: HPCPOP - JIT_ATOMIZE v1: 515 bytes were "hot method too big" (FreqInlineSize 325) for the C2 inlining
+    // into parseFloatingPointLiteral; the exponent loop and the truncated re-parse are atoms now
     private long parseHexFloatLiteral(
             CharSequence str, int index, int startIndex, int endIndex, boolean isNegative) {
 
@@ -373,41 +460,15 @@ abstract class M3AbstractJavaFloatingPointBitsFromCharSequence extends M3Abstrac
 
         // Parse exponent
         // --------------
-        int expNumber = 0;
         final boolean hasExponent = (ch | LOWER_CASE_BIT) == BINARY_EXPONENT_INDICATOR;// equals ignore case;
-        if (hasExponent) {
-            ch = charAt(str, ++index, endIndex);
-            boolean isExponentNegative = ch == MINUS_SIGN;
-            if (isExponentNegative || ch == PLUS_SIGN) {
-                ch = charAt(str, ++index, endIndex);
-            }
-            int digit = (char) (ch - DIGIT_ZERO);
-            illegal |= digit >= DECIMAL_RADIX;
-            do {
-                // Guard against overflow
-                if (expNumber < M3AbstractFloatValueParser.MAX_EXPONENT_NUMBER) {
-                    expNumber = DECIMAL_RADIX * expNumber + digit;
-                }
-                ch = charAt(str, ++index, endIndex);
-                digit = (char) (ch - DIGIT_ZERO);
-            } while (digit < DECIMAL_RADIX);
-            if (isExponentNegative) {
-                expNumber = -expNumber;
-            }
-            exponent += expNumber;
-        }
+        final long tail = parseLiteralTail(str, ch, index, endIndex, hasExponent);
+        final int expNumber = (int) tail;
+        exponent += expNumber;
+        index = packedIndex(tail);
 
-        // Skip optional FloatTypeSuffix
-        // long-circuit-or is faster than short-circuit-or
+        // Skip optional FloatTypeSuffix and trailing whitespace (parseLiteralTail); check if FloatingPointLiteral is complete
         // ------------------------
-        if ((ch | TYPE_SUFFIX_FOLD) == TYPE_SUFFIX_FOLDED) { // ~ "fFdD"
-            index++;
-        }
-
-        // Skip trailing whitespace and check if FloatingPointLiteral is complete
-        // ------------------------
-        index = skipWhitespace(str, index, endIndex);
-        if (illegal || index < endIndex
+        if (illegal || tail < 0 || index < endIndex
                 || digitCount == 0
                 || !hasExponent) {
             throw new NumberFormatException(SYNTAX_ERROR);
@@ -415,29 +476,54 @@ abstract class M3AbstractJavaFloatingPointBitsFromCharSequence extends M3Abstrac
 
         // Re-parse significand in case of a potential overflow
         // -----------------------------------------------
-        final boolean isSignificandTruncated;
-        int skipCountInTruncatedDigits = 0;//counts +1 if we skipped over the decimal point
         if (digitCount > MAX_EXACT_HEX_DIGITS) {
-            significand = 0;
-            for (index = significandStartIndex; index < significandEndIndex; index++) {
-                ch = str.charAt(index);
-                // Table look up is faster than a sequence of if-else-branches.
-                int hexValue = lookupHex(ch);
-                if (hexValue >= 0) {
-                    if (Long.compareUnsigned(significand, M3AbstractFloatValueParser.MINIMAL_NINETEEN_DIGIT_INTEGER) < 0) {
-                        significand = significand << BITS_PER_HEX_DIGIT | hexValue;
-                    } else {
-                        break;
-                    }
-                } else {
-                    skipCountInTruncatedDigits++;
-                }
-            }
-            isSignificandTruncated = index < significandEndIndex;
-        } else {
-            isSignificandTruncated = false;
+            return valueOfTruncatedHexLiteral(str, startIndex, endIndex, isNegative, exponent,
+                    significandStartIndex, significandEndIndex, virtualIndexOfPoint, expNumber);
         }
+        // index == endIndex here (white space skipped, legal), as in the donor's untruncated call
+        return valueOfHexLiteral(str, startIndex, endIndex, isNegative, significand, exponent, false,
+                (virtualIndexOfPoint - index) * BITS_PER_HEX_DIGIT + expNumber);
+    }
 
+    //FLLDCIM: HPCPOP - JIT_ATOMIZE v1: the truncated re-parse of parseHexFloatLiteral (more than 16 hex digits); an
+    // instance atom because it ends in the abstract valueOfHexLiteral
+    /**
+     * Re-parses the significand of a legal hexadecimal literal with more than {@value #MAX_EXACT_HEX_DIGITS} digits:
+     * digits are accumulated while the significand is below
+     * {@link M3AbstractFloatValueParser#MINIMAL_NINETEEN_DIGIT_INTEGER}; the rest are truncated.
+     *
+     * @param str                   the input string
+     * @param startIndex            the start index of the string
+     * @param endIndex              the end index of the string
+     * @param isNegative            if the resulting number is negative
+     * @param exponent              the binary exponent of the full significand
+     * @param significandStartIndex index of the first significand char
+     * @param significandEndIndex   index after the last significand char
+     * @param virtualIndexOfPoint   index of the point (significandEndIndex when there is none)
+     * @param expNumber             the binary exponent number of the literal
+     * @return the bit pattern of the parsed value
+     */
+    private long valueOfTruncatedHexLiteral(CharSequence str, int startIndex, int endIndex, boolean isNegative,
+                                            int exponent, int significandStartIndex, int significandEndIndex,
+                                            int virtualIndexOfPoint, int expNumber) {
+        long significand = 0;
+        int skipCountInTruncatedDigits = 0;//counts +1 if we skipped over the decimal point
+        int index;
+        for (index = significandStartIndex; index < significandEndIndex; index++) {
+            char ch = str.charAt(index);
+            // Table look up is faster than a sequence of if-else-branches.
+            int hexValue = lookupHex(ch);
+            if (hexValue >= 0) {
+                if (Long.compareUnsigned(significand, M3AbstractFloatValueParser.MINIMAL_NINETEEN_DIGIT_INTEGER) < 0) {
+                    significand = significand << BITS_PER_HEX_DIGIT | hexValue;
+                } else {
+                    break;
+                }
+            } else {
+                skipCountInTruncatedDigits++;
+            }
+        }
+        final boolean isSignificandTruncated = index < significandEndIndex;
         return valueOfHexLiteral(str, startIndex, endIndex, isNegative, significand, exponent, isSignificandTruncated,
                 (virtualIndexOfPoint - index + skipCountInTruncatedDigits) * BITS_PER_HEX_DIGIT + expNumber);
     }

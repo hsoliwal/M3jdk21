@@ -845,29 +845,67 @@ class M3FastDoubleMath {
      * @param power       the exponent number (the power)
      * @return the computed double on success, {@link Double#NaN} on failure
      */
+    //FLLDCIM: HPCPOP - JIT_ATOMIZE v1: the fast-path decision; the 279 bytes did not inline from the colder call
+    // sites (the truncated branch of tryDecFloatToDoubleTruncated); now a trivial atom (<= MaxInlineSize 35) over
+    // the exact (Clinger) atom and the Eisel-Lemire atom
     static double tryDecToDoubleWithFastAlgorithm(boolean isNegative, long significand, int power) {
         // we start with a fast path
         // It was described in Clinger WD (1990).
-        if (FAST_PATH_MIN_POWER_OF_TEN <= power && power <= FAST_PATH_MAX_POWER_OF_TEN && Long.compareUnsigned(significand, (1L << DOUBLE_SIGNIFICAND_WIDTH) - 1) <= 0) {
-            // convert the integer into a double. This is lossless since
-            // 0 <= i <= 2^53 - 1.
-            double d = (double) significand;
-            //
-            // The general idea is as follows.
-            // If 0 <= s < 2^53 and if 10^0 <= p <= 10^22 then
-            // 1) Both s and p can be represented exactly as 64-bit floating-point values
-            // 2) Because s and p can be represented exactly as floating-point values,
-            // then s * p and s / p will produce correctly rounded values.
-            //
-            if (power < 0) {
-                d = d / DOUBLE_POWERS_OF_TEN[-power];
-            } else {
-                d = d * DOUBLE_POWERS_OF_TEN[power];
-            }
+        if (isClingerFastPath(significand, power)) {
+            double d = clingerFastPath(significand, power);
             return isNegative ? -d : d;
         }
+        return tryDecToDoubleWithEiselLemire(isNegative, significand, power);
+    }
 
+    //FLLDCIM: HPCPOP - JIT_ATOMIZE v1: the condition of the exact fast path (Clinger 1990)
+    /**
+     * @param significand uint64 the significand
+     * @param power       the exponent number (the power)
+     * @return true if {@code significand} and {@code 10^power} are both exact doubles: power in
+     * [{@value #FAST_PATH_MIN_POWER_OF_TEN}, {@value #FAST_PATH_MAX_POWER_OF_TEN}] and significand at most
+     * 2^53 - 1 (unsigned)
+     */
+    private static boolean isClingerFastPath(long significand, int power) {
+        return FAST_PATH_MIN_POWER_OF_TEN <= power && power <= FAST_PATH_MAX_POWER_OF_TEN && Long.compareUnsigned(significand, (1L << DOUBLE_SIGNIFICAND_WIDTH) - 1) <= 0;
+    }
 
+    //FLLDCIM: HPCPOP - JIT_ATOMIZE v1: the exact fast path (Clinger 1990): one correctly rounded multiplication or
+    // division; the sign stays in the decision so the atom fits MaxInlineSize 35 (it inlines from any call site)
+    /**
+     * Computes {@code significand * 10^power} when {@link #isClingerFastPath} holds.
+     *
+     * @param significand the significand, at most 2^53 - 1
+     * @param power       the exponent number, in [-22, 22]
+     * @return the correctly rounded (non-negative) double
+     */
+    private static double clingerFastPath(long significand, int power) {
+        // convert the integer into a double. This is lossless since
+        // 0 <= i <= 2^53 - 1.
+        //
+        // The general idea is as follows.
+        // If 0 <= s < 2^53 and if 10^0 <= p <= 10^22 then
+        // 1) Both s and p can be represented exactly as 64-bit floating-point values
+        // 2) Because s and p can be represented exactly as floating-point values,
+        // then s * p and s / p will produce correctly rounded values.
+        //
+        return power < 0 ? (double) significand / DOUBLE_POWERS_OF_TEN[-power]
+                         : (double) significand * DOUBLE_POWERS_OF_TEN[power];
+    }
+
+    //FLLDCIM: HPCPOP - JIT_ATOMIZE v1: the Eisel-Lemire path of tryDecToDoubleWithFastAlgorithm (fast_float)
+    /**
+     * Computes {@code significand * 10^power} with a 64-bit product against the truncated 64-bit mantissa of the
+     * power of ten (Eisel-Lemire; Mushtak and Lemire 2023 prove one product suffices), when
+     * {@link #isClingerFastPath} does not hold.
+     *
+     * @param isNegative  whether the number is negative
+     * @param significand uint64 the significand, not 0
+     * @param power       the exponent number, in
+     *                    [{@value #DOUBLE_MIN_EXPONENT_POWER_OF_TEN}, {@value #DOUBLE_MAX_EXPONENT_POWER_OF_TEN}]
+     * @return the computed double on success, {@link Double#NaN} when it may be a halfway case or out of range
+     */
+    private static double tryDecToDoubleWithEiselLemire(boolean isNegative, long significand, int power) {
         // The fast path has now failed, so we are falling back on the slower path.
 
         // We are going to need to do some 64-bit arithmetic to get a more precise product.
