@@ -10,6 +10,8 @@ import static @PKG@.M3WebStates.*;
  */
 public class M3PlotModel extends M3WebModel implements M3PlotApi {
 	public static final int SPARK = 0, BARS = 1, QR = 2, TREEMAP = 3, GANTT = 4;
+	/** Number of modes: mode ids are 0 .. MODES - 1 (the family checks run every one). */
+	public static final int MODES = 5;
 	/** Modules per side of the matrix (version 1 size). */
 	public static final int QR_SIZE = 21;
 	private final int[] pts = new int[2 * 64];

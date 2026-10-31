@@ -24,6 +24,11 @@ public final class M3PickerChecks {
 	}
 
 	public static void run(M3PickerModel m) {
+		sample(m);
+		edges(m);
+	}
+
+	private static void sample(M3PickerModel m) {
 		check(M3PickerModel.days(19700101) == 0 && M3PickerModel.civil(0) == 19700101, "epoch");
 		check(M3PickerModel.civil(M3PickerModel.days(20261030)) == 20261030 && M3PickerModel.civil(M3PickerModel.days(20000229)) == 20000229, "civil round trip");
 		check(M3PickerModel.civil(M3PickerModel.MONDAY0) == 19691229, "first Monday");
@@ -99,5 +104,28 @@ public final class M3PickerChecks {
 				return;
 			}
 		}
+	}
+
+	/** Edges: no picked value, cascades deeper than the path, activation in day modes, descend and back by arrow keys. */
+	private static void edges(M3PickerModel m) {
+		m.setRange(Integer.MIN_VALUE, Integer.MIN_VALUE);
+		check(m.valueText() != null, "value text without a value");
+		if (m.count() > 0) {
+			m.activate(0);
+		}
+		m.load("a/b/c/d/e/f/g/h/i/j;a/x");
+		m.layout(360, 260);
+		m.setOpen(true);
+		for (int i = 0; i < m.count(); i++) {
+			m.choose(i);
+		}
+		m.paint(new M3WebPaint());
+		m.setOpen(true);
+		m.setFocus(0);
+		m.key(KEY_RIGHT, 0, 0);
+		m.key(KEY_RIGHT, 0, 0);
+		m.key(KEY_LEFT, 0, 0);
+		m.key(KEY_LEFT, 0, 0);
+		m.setOpen(false);
 	}
 }

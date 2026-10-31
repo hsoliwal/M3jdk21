@@ -9,6 +9,11 @@ public final class M3EmbedChecks {
 	}
 
 	public static void run(M3EmbedModel m) {
+		sample(m);
+		edges(m);
+	}
+
+	private static void sample(M3EmbedModel m) {
 		m.layout(360, 240);
 		M3WebPaint p = new M3WebPaint();
 		m.paint(p);
@@ -66,5 +71,28 @@ public final class M3EmbedChecks {
 		m.setState(-1, DRAGGING, true);
 		m.paint(p);
 		m.setState(-1, DRAGGING, false);
+	}
+
+	/** Edges: over-deep headings and code fences with hashes and blank lines, a clip without duration, playback with no items. */
+	private static void edges(M3EmbedModel m) {
+		m.markdown("####### seven\n```\n# code\n\n```\ntext");
+		check(m.count() >= 3, "markdown blocks");
+		m.load("clip");
+		m.layout(360, 260);
+		m.play(true);
+		m.paint(new M3WebPaint());
+		m.tick(1200);
+		m.clear();
+		m.play(true);
+		m.tick(1200);
+		m.load("clip~90");
+		m.play(true);
+		m.clear();
+		m.tick(1200);
+		m.load("clip~1");
+		m.play(true);
+		m.tick(1100);
+		m.tick(1100);
+		m.play(false);
 	}
 }

@@ -44,6 +44,13 @@ See `spec/FAMILIES.tsv` (pattern, aspects, behaviour atom, members, SwingX patte
 
 - Swing: `run-tests.sh compile` (javac --release 21 -Xlint:all -Werror) then the JUnit console on `com.m3.swing.web`.
 - Nebula: `tools/gate_nebula.sh` (javac --release 21 -Xlint:all -Werror against an SWT jar, JUnit 4 headless model tests).
+- Coverage (target 99% line and branch on the generated code of each side): `tools/coverage_swing.sh` (headless) and
+  `tools/coverage_nebula.sh` (model and SWT canvas tests in one JVM on the hidden test desktop through
+  `ui_lock.sh` + `hidden_java.sh`); both write CSV + XML only and `tools/coverage_missed.sh` lists every open line.
+  A branch no test can reach is a row of `COVERAGE_EXCEPTIONS.tsv` (file:line, missed, reason) on that side.
+- Tests per member: model (`core` incl. the TOP sweep, family, edges), component (Swing, headless) or canvas
+  (Nebula, desktop); per family: every mode id plus the members the toolkit already ships (`M3<Family>Modes*`), and on
+  Nebula every mode on the generic canvas (`M3<Family>CanvasModes_Test`).
 - Fixed point: run the generator twice; the second run must report `written=0`.
 
 SwingX is LGPL-2.1: behaviour reference only, never copied. Web kits contribute shapes only. See

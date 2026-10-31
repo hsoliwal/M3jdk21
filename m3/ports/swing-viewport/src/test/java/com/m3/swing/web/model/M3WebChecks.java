@@ -50,6 +50,250 @@ public final class M3WebChecks {
 		nullTexts(m);
 		viewport(m);
 		removal(m);
+		sweep(m, sample);
+	}
+
+	private static final int[] MODS = { 0, MOD_SHIFT, MOD_CTRL, MOD_ALT, MOD_CTRL | MOD_SHIFT };
+	private static final int[] KEYS = { KEY_HOME, KEY_END, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN, KEY_PAGE_UP, KEY_PAGE_DOWN, KEY_TAB,
+			KEY_ENTER, KEY_SPACE, KEY_DELETE, KEY_BACKSPACE, KEY_ESCAPE };
+	private static final char[] CHARS = { 'a', 'Z', '7', '0', ' ', '#', '-' };
+
+	/**
+	 * TOP sweep (pattern M3P-CORE-1): every key and character under every modifier set from both ends of the
+	 * item range, LTR and RTL, open and closed, then a pointer grid with every pointer kind, and the same on an
+	 * empty model. Invariants only: no exception, focus inside the lanes, deterministic paint.
+	 */
+	static void sweep(M3WebModel m, String sample) {
+		check(role("no-such-role") == 0 && roleName(-1).equals(roleName(0)) && roleName(1 << 20).equals(roleName(0)), "role table bounds");
+		for (int pass = 0; pass < 8; pass++) {
+			m.load(sample);
+			m.layout(360, 260);
+			m.setRtl((pass & 1) != 0);
+			m.setState(-1, OPEN, (pass & 2) != 0);
+			m.setState(-1, FOCUS, true);
+			sweepKeys(m, (pass & 4) != 0 ? m.count() - 1 : 0);
+			sweepPointer(m, MODS[pass % MODS.length]);
+		}
+		m.setRtl(false);
+		edges(m, sample);
+		stale(m, sample);
+		ids(m);
+		sweepKeys(m, -1);
+		sweepPointer(m, 0);
+		m.load(sample);
+		probeEdges();
+	}
+
+	/** Lane and view edges: text writes, keyless localisation, lower index bound, filters, extents, theme slots, helpers. */
+	static void edges(M3WebModel m, String sample) {
+		m.load(sample);
+		m.add(null);
+		m.localize(s -> "x" + s);
+		check(m.text(m.count() - 1) == null, "a text-less item stays text-less when localised");
+		m.setText(0, "edge");
+		check("edge".equals(m.text(0)) && m.itemExtent() > 0, "text lane write");
+		m.setFilter(null);
+		m.setFilter("e");
+		check("e".equals(m.filter()) && m.logicalCount() <= m.count(), "filter over text-less items");
+		m.setFilter("");
+		indexBounds(m);
+		int accent = m.theme().slot(M3WebTheme.ACCENT);
+		m.theme().setSlot(M3WebTheme.ACCENT, 0x1234567);
+		check(m.theme().slot(M3WebTheme.ACCENT) == 0x234567, "slot write masks to RGB");
+		m.theme().setSlot(M3WebTheme.ACCENT, accent);
+		helpers(m);
+	}
+
+	private static void indexBounds(M3WebModel m) {
+		try {
+			m.text(-1);
+			check(false, "negative index check");
+		} catch (IndexOutOfBoundsException expected) {
+			// ids below 0 are rejected like ids at or beyond the count
+		}
+	}
+
+	/** Protected paint helpers: widget-level labels (no item) and sized muted text; snapshot of dark RTL state. */
+	private static void helpers(M3WebModel m) {
+		M3WebPaint p = new M3WebPaint();
+		m.label(p, -1, "widget", 0, 0, 40, 20, 0);
+		m.muted(p, "sized", 0, 0, 40, 20, 14);
+		check(p.count() == 2, "helper records");
+		m.setDark(true);
+		m.setRtl(true);
+		check(m.snapshot().length > 0, "dark RTL snapshot");
+		m.setRtl(false);
+		m.setDark(false);
+	}
+
+	/**
+	 * Stale indices after {@link M3WebModel#clear()}: focus, hover and press keep their ids until the next
+	 * interaction; paint, keys and pointer must treat them as absent. Also Enter on a disabled focused item and a
+	 * release on an item disabled while pressed.
+	 */
+	static void stale(M3WebModel m, String sample) {
+		m.load(sample);
+		m.layout(360, 260);
+		if (m.count() > 0) {
+			int x = m.itemRect(0, 0) + Math.max(1, m.itemRect(0, 2) / 2), y = m.itemRect(0, 1) + Math.max(1, m.itemRect(0, 3) / 2);
+			m.setFocus(0);
+			m.setState(0, DISABLED, true);
+			check(!m.key(KEY_ENTER, 0, 0) || m.focus() >= 0, "enter on a disabled item activates nothing");
+			m.setState(0, DISABLED, false);
+			m.pointer(P_DOWN, x, y, 0);
+			m.setState(0, DISABLED, true);
+			m.pointer(P_UP, x, y, 0);
+			m.pointer(P_MOVE, x, y, 0);
+			m.setFocus(0);
+			m.setState(-1, FOCUS, true);
+		}
+		m.clear();
+		m.paint(new M3WebPaint());
+		m.pointer(P_MOVE, 1, 1, 0);
+		m.setFocus(-1);
+		m.setState(-1, FOCUS, false);
+	}
+
+	/**
+	 * Lane ids stay on their items: removal shifts focus, hover and press ids above the removed item down, drops
+	 * hover and press of the removed item and keeps focus at its position; shrinking the logical count clamps them;
+	 * a text write while localised replaces the key.
+	 */
+	static void ids(M3WebModel m) {
+		m.clear();
+		for (int i = 0; i < 6; i++) {
+			m.add("i" + i);
+		}
+		m.localize(s -> s + "!");
+		m.setText(5, "k5");
+		m.localize(s -> s + "?");
+		check("k5?".equals(m.text(5)), "a localised text write replaces the key");
+		m.focus = 4;
+		m.hover = 3;
+		m.pressed = 2;
+		m.remove(1);
+		check(m.focus == 3 && m.hover == 2 && m.pressed == 1, "ids above the removed item shift down");
+		m.remove(2);
+		check(m.focus == 2 && m.hover == -1 && m.pressed == 1, "hover of the removed item goes");
+		m.remove(1);
+		check(m.focus == 1 && m.pressed == -1, "press of the removed item goes");
+		m.hover = 2;
+		m.remove(1);
+		check(m.focus == 1 && m.hover == 1, "focus stays at the removed position");
+		ids2(m);
+	}
+
+	private static void ids2(M3WebModel m) {
+		m.hover = 1;
+		m.pressed = 1;
+		m.setLogicalCount(1);
+		check(m.hover == -1 && m.pressed == -1 && m.focus == 0, "shrinking clamps the ids");
+		m.hover = 0;
+		m.pressed = 0;
+		m.setLogicalCount(3);
+		check(m.hover == 0 && m.pressed == 0 && m.text(2) == null, "growing keeps the ids and blanks new items");
+		m.clear();
+	}
+
+	/** A press and release at a point. */
+	public static void click(M3WebModel m, int x, int y) {
+		m.pointer(P_DOWN, x, y, 0);
+		m.pointer(P_UP, x, y, 0);
+	}
+
+	/** A press and release at the centre of an item. */
+	public static void clickItem(M3WebModel m, int item) {
+		click(m, m.itemRect(item, 0) + m.itemRect(item, 2) / 2, m.itemRect(item, 1) + m.itemRect(item, 3) / 2);
+	}
+
+	/** The pixel probe on crafted display lists: fills crossing every edge, later outlines, text boxes by alignment. */
+	static void probeEdges() {
+		int[][] boxes = { { -20, 100, 30, 30 }, { 100, -20, 30, 30 }, { 340, 100, 40, 30 }, { 100, 240, 30, 40 }, { 0, 0, 360, 260 } };
+		for (int[] b : boxes) {
+			int[] probe = M3WebPixelProbe.probe(crafted(p -> {
+				p.rect(b[0], b[1], b[2], b[3], 0x336699);
+				p.roundLine(b[0] + 4, b[1] + 4, b[2] - 8, b[3] - 8, 40, 0x111111);
+				p.ovalLine(b[0] - 6, b[1] - 6, b[2] + 12, b[3] + 12, 0x222222);
+				p.text(b[0], b[1], b[2], b[3], 0x333333, 12 | M3WebPaint.CENTER, "probe");
+				p.text(b[0], b[1], b[2], b[3], 0x333333, M3WebPaint.RIGHT, "r");
+				p.text(-300, -300, 10, 10, 0x333333, 0, "far");
+			}), 360, 260);
+			check(probe.length == 0 || probe.length == 4, "probe result shape");
+		}
+		for (int[] d : new int[][] { { 150, 0 }, { 0, 120 }, { -150, 0 }, { 0, -120 } }) {
+			int[] probe = M3WebPixelProbe.probe(crafted(p -> {
+				p.rect(150, 120, 60, 60, 0x336699);
+				p.roundLine(150 + d[0], 120 + d[1], 60, 60, 8, 0x111111);
+				p.text(150 + d[0], 120 + d[1], 60, 60, 0x333333, 12, "side");
+			}), 360, 260);
+			check(probe.length == 4, "a fill beside later records keeps its probe");
+		}
+	}
+
+	/** A model whose display list is the given records (test-only, for the probe). */
+	static M3WebModel crafted(java.util.function.Consumer<M3WebPaint> records) {
+		M3WebModel m = new M3WebModel("crafted", 0, 0, RECT, 0) {
+			@Override
+			public int aspects() {
+				return M3WebView.A_D;
+			}
+
+			@Override
+			public void load(String sample) {
+				add(sample);
+			}
+
+			@Override
+			protected void doLayout() {
+				// the records carry their own geometry
+			}
+
+			@Override
+			protected void emit(M3WebPaint p) {
+				records.accept(p);
+			}
+		};
+		m.layout(360, 260);
+		return m;
+	}
+
+	private static void sweepKeys(M3WebModel m, int item) {
+		for (int mod : MODS) {
+			m.setFocus(Math.min(item, m.count() - 1));
+			for (int k : KEYS) {
+				m.key(k, 0, mod);
+				invariant(m);
+			}
+			for (char c : CHARS) {
+				m.key(KEY_CHAR, c, mod);
+				invariant(m);
+			}
+			m.tick(16);
+			m.tick(2000);
+		}
+	}
+
+	private static void sweepPointer(M3WebModel m, int mod) {
+		for (int y = 1; y < 260; y += 23) {
+			for (int x = 1; x < 360; x += 29) {
+				m.pointer(P_MOVE, x, y, mod);
+				m.pointer(P_DOWN, x, y, mod);
+				m.pointer(P_DRAG, x + 9, y + 17, mod);
+				m.pointer(P_UP, x + 9, y + 17, mod);
+				invariant(m);
+			}
+			m.pointer(P_WHEEL, 5, y % 2 == 0 ? 1 : -1, mod);
+		}
+		m.pointer(P_EXIT, -1, -1, mod);
+		m.tick(2000);
+		invariant(m);
+	}
+
+	private static void invariant(M3WebModel m) {
+		check(m.focus() >= -1 && m.focus() < Math.max(1, m.count()), "focus inside the lanes: " + m.focus() + " of " + m.count());
+		M3WebPaint p = new M3WebPaint();
+		m.paint(p);
+		check(p.count() >= 0 && m.prefWidth() > 0, "paints");
 	}
 
 	/** Text-less items (lanes without objects) must paint in every family. */

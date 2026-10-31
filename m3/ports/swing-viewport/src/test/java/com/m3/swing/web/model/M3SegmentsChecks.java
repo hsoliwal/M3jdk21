@@ -24,6 +24,11 @@ public final class M3SegmentsChecks {
 	}
 
 	public static void run(M3SegmentsModel m) {
+		sample(m);
+		edges(m);
+	}
+
+	private static void sample(M3SegmentsModel m) {
 		m.layout(360, 240);
 		M3WebPaint p = new M3WebPaint();
 		check(m.count() > 0, "segments");
@@ -66,5 +71,17 @@ public final class M3SegmentsChecks {
 		m.paint(p);
 		m.reveal(0);
 		check(m.scrollOffset() == 0, "reveal first");
+	}
+
+	/** Edges: hidden segments and zero-width segments in the resident window are not painted. */
+	private static void edges(M3SegmentsModel m) {
+		m.load("a;b;c");
+		m.layout(360, 120);
+		m.setState(m.count() - 1, HIDDEN, true);
+		m.paint(new M3WebPaint());
+		m.setState(m.count() - 1, HIDDEN, false);
+		m.layout(0, 120);
+		m.paint(new M3WebPaint());
+		m.layout(360, 120);
 	}
 }

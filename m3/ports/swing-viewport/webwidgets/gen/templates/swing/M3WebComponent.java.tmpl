@@ -69,6 +69,15 @@ public class M3WebComponent<M extends M3WebModel> extends JComponent {
 				| java.awt.AWTEvent.MOUSE_WHEEL_EVENT_MASK | java.awt.AWTEvent.FOCUS_EVENT_MASK | java.awt.AWTEvent.HIERARCHY_EVENT_MASK);
 	}
 
+	/**
+	 * Lays the model out at a size and drops its full-area damage: a resize repaints the whole control and a size
+	 * query restores the layout, so the next item change stays damage-only (D aspect).
+	 */
+	private void layoutTo(int w, int h) {
+		model.layout(w, h);
+		model.takeDamage(damage);
+	}
+
 	/** The lane model; all widget behaviour is model API. */
 	public M getModel() {
 		return model;
@@ -77,7 +86,7 @@ public class M3WebComponent<M extends M3WebModel> extends JComponent {
 	@Override
 	public void setBounds(int x, int y, int w, int h) {
 		super.setBounds(x, y, w, h);
-		model.layout(w, h);
+		layoutTo(w, h);
 	}
 
 	@Override
@@ -87,7 +96,7 @@ public class M3WebComponent<M extends M3WebModel> extends JComponent {
 		}
 		model.layout(getWidth() > 0 ? getWidth() : 320, getHeight());
 		Dimension d = new Dimension(model.prefWidth(), model.prefHeight());
-		model.layout(getWidth(), getHeight());
+		layoutTo(getWidth(), getHeight());
 		return d;
 	}
 
@@ -179,17 +188,8 @@ public class M3WebComponent<M extends M3WebModel> extends JComponent {
 			return;
 		}
 		int dy = model.takeBlit();
-		if (dy != 0 && body != null && !dirtyAll) {
-			Graphics2D g = body.createGraphics();
-			int o = model.viewOrigin(), len = model.viewLength();
-			if (model.scrollsHorizontally()) {
-				g.setClip(o, 0, len, getHeight());
-				g.copyArea(o + Math.max(0, -dy), 0, len - Math.abs(dy), getHeight(), dy, 0);
-			} else {
-				g.setClip(0, o, getWidth(), len);
-				g.copyArea(0, o + Math.max(0, -dy), getWidth(), len - Math.abs(dy), 0, dy);
-			}
-			g.dispose();
+		if (dy != 0 && body != null) { // the body plane is never dirtyAll once painted
+			blit(dy);
 		}
 		if (model.takeDamage(damage)) {
 			Rectangle r = new Rectangle(damage[0], damage[1], damage[2], damage[3]);
@@ -205,7 +205,22 @@ public class M3WebComponent<M extends M3WebModel> extends JComponent {
 		}
 	}
 
-	private void tick() {
+	/** Short scroll: moves the retained body plane along the model's axis inside the viewport rect. */
+	private void blit(int dy) {
+		Graphics2D g = body.createGraphics();
+		int o = model.viewOrigin(), len = model.viewLength();
+		if (model.scrollsHorizontally()) {
+			g.setClip(o, 0, len, getHeight());
+			g.copyArea(o + Math.max(0, -dy), 0, len - Math.abs(dy), getHeight(), dy, 0);
+		} else {
+			g.setClip(0, o, getWidth(), len);
+			g.copyArea(0, o + Math.max(0, -dy), getWidth(), len - Math.abs(dy), 0, dy);
+		}
+		g.dispose();
+	}
+
+	/** One animation frame from the Swing timer (package-visible for the component contract). */
+	void tick() {
 		if (!partVisible || !model.tick(16)) {
 			timer.stop();
 		}

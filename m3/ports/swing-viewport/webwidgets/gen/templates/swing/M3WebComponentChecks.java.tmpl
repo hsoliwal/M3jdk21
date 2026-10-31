@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 
 import javax.accessibility.AccessibleContext;
 
+import @PKG@.M3WebModel;
 import @PKG@.M3WebPixelProbe;
 import @PKG@.M3WebStates;
 
@@ -24,6 +25,7 @@ public final class M3WebComponentChecks {
 	}
 
 	public static void run(M3WebComponent<?> c) {
+		check(c.planePixel(1, 1) == 0, "no plane before the first paint");
 		c.setSize(360, 240);
 		check(c.getPreferredSize().width > 0, "preferred size");
 		BufferedImage img = paint(c);
@@ -35,6 +37,7 @@ public final class M3WebComponentChecks {
 		c.getModel().setDark(true);
 		paint(c);
 		damageOnly(c);
+		edges(c);
 	}
 
 	/** D on the Swing side: after a full paint, an item change re-renders exactly the model damage. */
@@ -104,5 +107,107 @@ public final class M3WebComponentChecks {
 		c.dispatchEvent(new HierarchyEvent(c, HierarchyEvent.HIERARCHY_CHANGED, c, null, HierarchyEvent.SHOWING_CHANGED));
 		c.dispatchEvent(new HierarchyEvent(c, HierarchyEvent.HIERARCHY_CHANGED, c, null, HierarchyEvent.PARENT_CHANGED));
 		check(!c.getModel().is(-1, M3WebStates.FOCUS), "focus lost");
+	}
+
+	/**
+	 * Component edges: fixed and pre-layout preferred sizes, body plane bounds and resizes, AWT keys and focus
+	 * straight into the process hooks, a press without a focus request, deferred damage, blits, timer frames,
+	 * the font cache past its capacity and an accessible name override.
+	 */
+	static void edges(M3WebComponent<?> c) {
+		sizes(c);
+		keys(c);
+		c.setRequestFocusEnabled(false);
+		c.dispatchEvent(new MouseEvent(c, MouseEvent.MOUSE_PRESSED, 0, 0, 3, 3, 1, false, MouseEvent.BUTTON1));
+		c.setRequestFocusEnabled(true);
+		c.processFocusEvent(new FocusEvent(c, FocusEvent.FOCUS_GAINED));
+		check(c.getModel().is(-1, M3WebStates.FOCUS), "focus gained");
+		c.processFocusEvent(new FocusEvent(c, FocusEvent.FOCUS_LOST));
+		check(!c.getModel().is(-1, M3WebStates.FOCUS), "focus lost");
+		frames(c);
+		unpainted(c);
+		fonts(c);
+		c.getAccessibleContext().setAccessibleName("named");
+		check("named".equals(c.getAccessibleContext().getAccessibleName()), "accessible name override");
+	}
+
+	private static void sizes(M3WebComponent<?> c) {
+		int w = c.getWidth(), h = c.getHeight();
+		check(c.planePixel(-1, 0) == 0 && c.planePixel(0, -1) == 0 && c.planePixel(w, 0) == 0 && c.planePixel(0, h) == 0, "plane bounds");
+		check(c.planePixel(w / 2, h / 2) == c.planePixel(w / 2, h / 2), "plane pixel");
+		c.setPreferredSize(new java.awt.Dimension(33, 22));
+		check(c.getPreferredSize().width == 33, "fixed preferred size");
+		c.setPreferredSize(null);
+		c.setSize(0, 0);
+		check(c.getPreferredSize().width > 0, "preferred size before layout");
+		c.setSize(w, h - 20);
+		paint(c);
+		c.setSize(w - 20, h - 20);
+		paint(c);
+		c.setSize(w, h);
+		paint(c);
+	}
+
+	private static void keys(M3WebComponent<?> c) {
+		c.getModel().setState(-1, M3WebStates.FOCUS, true);
+		for (int code : new int[] { KeyEvent.VK_HOME, KeyEvent.VK_LEFT, KeyEvent.VK_BACK_SPACE, KeyEvent.VK_F1 }) {
+			c.processKeyEvent(new KeyEvent(c, KeyEvent.KEY_PRESSED, 0, java.awt.event.InputEvent.SHIFT_DOWN_MASK, code, KeyEvent.CHAR_UNDEFINED));
+		}
+		for (char ch : new char[] { 'a', (char) 1, (char) 127, ' ' }) {
+			c.processKeyEvent(new KeyEvent(c, KeyEvent.KEY_TYPED, 0, 0, KeyEvent.VK_UNDEFINED, ch));
+		}
+		c.processKeyEvent(new KeyEvent(c, KeyEvent.KEY_RELEASED, 0, 0, KeyEvent.VK_A, 'a'));
+		KeyEvent consumed = new KeyEvent(c, KeyEvent.KEY_PRESSED, 0, 0, KeyEvent.VK_HOME, KeyEvent.CHAR_UNDEFINED);
+		consumed.consume();
+		c.processKeyEvent(consumed);
+		check(consumed.isConsumed(), "a consumed event stays with its consumer");
+	}
+
+	private static void frames(M3WebComponent<?> c) {
+		M3WebModel m = c.getModel();
+		c.setPartVisible(true);
+		c.setPartVisible(true);
+		m.setLogicalCount(1000);
+		m.setItemExtent(20);
+		m.layout(c.getWidth(), c.getHeight());
+		paint(c);
+		m.scrollTo(5);
+		m.scrollTo(0);
+		m.pointer(M3WebStates.P_WHEEL, 5, -3, 0);
+		paint(c);
+		m.setFocus(m.count() > 0 ? 0 : -1);
+		m.key(M3WebStates.KEY_ENTER, 0, 0);
+		paint(c);
+		c.tick();
+		c.setPartVisible(false);
+		c.tick();
+		c.setPartVisible(true);
+	}
+
+	/** A scroll before the first paint has no body plane to blit (fresh component on a fresh model of the same class). */
+	static void unpainted(M3WebComponent<?> c) {
+		M3WebModel fresh;
+		try {
+			fresh = c.getModel().getClass().getConstructor().newInstance();
+		} catch (ReflectiveOperationException e) {
+			throw new AssertionError("member models have a public no-argument constructor", e);
+		}
+		M3WebComponent<M3WebModel> u = new M3WebComponent<>(fresh);
+		u.setSize(200, 120);
+		u.setPartVisible(true);
+		fresh.setLogicalCount(1000);
+		fresh.setItemExtent(20);
+		fresh.layout(200, 120);
+		fresh.scrollTo(5);
+		check(u.planePixel(1, 1) == 0, "no plane before the first paint");
+	}
+
+	private static void fonts(M3WebComponent<?> c) {
+		c.setFont(new java.awt.Font(java.awt.Font.SERIF, java.awt.Font.PLAIN, 13));
+		for (int s = M3WebStates.SIZE_XS; s <= M3WebStates.SIZE_XL; s++) {
+			c.getModel().setSize(s);
+			paint(c);
+		}
+		c.getModel().setSize(M3WebStates.SIZE_M);
 	}
 }

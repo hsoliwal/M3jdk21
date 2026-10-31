@@ -101,7 +101,9 @@ public final class M3WebGen {
 		for (String c : s.nebula() ? new String[] { "M3WebCanvas", "M3WebCanvasCache" } : new String[] { "M3WebComponent" }) {
 			emit(tk + c + ".java.tmpl", s.main(s.wpkg()).resolve(c + ".java"), base);
 		}
-		if (!s.nebula()) {
+		if (s.nebula()) {
+			emit("nebula/M3WebCanvasChecks.java.tmpl", s.test(s.wpkg()).resolve("M3WebCanvasChecks.java"), base);
+		} else {
 			emit("swing/M3WebComponentChecks.java.tmpl", s.test(s.wpkg()).resolve("M3WebComponentChecks.java"), base);
 		}
 		for (String fam : families()) {
@@ -155,6 +157,8 @@ public final class M3WebGen {
 		emit("family/" + fam + ".java.tmpl", s.main(s.pkg()).resolve("M3" + cls + "Model.java"), base);
 		emit("family/" + fam + ".api.tmpl", s.main(s.pkg()).resolve("M3" + cls + "Api.java"), base);
 		emit("checks/" + fam + ".checks.tmpl", s.test(s.pkg()).resolve("M3" + cls + "Checks.java"), base);
+		modes(s, fam, cls, base);
+		canvasModes(s, fam, cls, base);
 		for (Map<String, String> m : members) {
 			if (m.get("family").equals(fam) && s.exists(m).isEmpty()) {
 				member(s, m, cls);
@@ -162,10 +166,22 @@ public final class M3WebGen {
 		}
 	}
 
-	void member(Side s, Map<String, String> m, String famClass) throws IOException {
+	/** Desktop canvas contract of every family mode (Nebula only: the Swing component contract runs headless per member). */
+	void canvasModes(Side s, String fam, String famClass, Map<String, String> base) throws IOException {
+		if (s.nebula()) {
+			Map<String, String> v = new LinkedHashMap<>(base);
+			v.put("@FAMILY@", famClass);
+			v.put("@FAM@", fam);
+			emit("nebula/CanvasModesTest.tmpl", s.test(s.wpkg()).resolve("M3" + famClass + "CanvasModes_Test.java"), v);
+		}
+	}
+
+	/** Placeholders of one member row on one side. */
+	Map<String, String> vars(Side s, Map<String, String> m, String famClass) {
 		String c = pascal(m.get("concept"));
 		Map<String, String> v = new LinkedHashMap<>();
 		v.put("@PKG@", s.pkg()); v.put("@WPKG@", s.wpkg()); v.put("@C@", c); v.put("@CONCEPT@", m.get("concept"));
+		v.put("@METHOD@", "member" + c);
 		v.put("@FAMILY@", famClass); v.put("@FAM@", m.get("family")); v.put("@PATTERN@", "M3P-" + m.get("family") + "-1");
 		v.put("@MODE@", m.get("mode")); v.put("@ROLE@", m.get("role")); v.put("@SHAPE@", m.get("shape"));
 		v.put("@VARIANT@", m.get("variant")); v.put("@SAMPLE@", m.get("sample").replace("\\", "\\\\").replace("\"", "\\\""));
@@ -173,20 +189,53 @@ public final class M3WebGen {
 		String form = html(row.getOrDefault("viewport_form", ""));
 		v.put("@FORM@", form.isEmpty() ? "the family pattern (see CONCEPTS.tsv)" : form);
 		v.put("@SWINGX@", row.getOrDefault("swingx_pattern", "").isEmpty() ? "none" : row.get("swingx_pattern").replace(";", ", "));
+		return v;
+	}
+
+	/** Family-model contract of the members this toolkit already ships: their family model still serves the concept. */
+	void modes(Side s, String fam, String famClass, Map<String, String> base) throws IOException {
+		String tk = s.nebula() ? "nebula/" : "swing/";
+		String tmpl = template(tk + "ModesCase.tmpl");
+		StringBuilder b = new StringBuilder();
+		for (Map<String, String> m : members) {
+			if (m.get("family").equals(fam) && !s.exists(m).isEmpty()) {
+				b.append(bind(tmpl, vars(s, m, famClass)));
+			}
+		}
+		Map<String, String> v = new LinkedHashMap<>(base);
+		v.put("@CASES@", b.toString()); v.put("@FAMILY@", famClass); v.put("@FAM@", fam);
+		emit(tk + "ModesTest.tmpl", s.test(s.pkg()).resolve("M3" + famClass + (s.nebula() ? "Modes_Test.java" : "ModesTest.java")), v);
+	}
+
+	void member(Side s, Map<String, String> m, String famClass) throws IOException {
+		String c = pascal(m.get("concept"));
+		Map<String, String> v = vars(s, m, famClass);
 		emit("member/Api.tmpl", s.main(s.pkg()).resolve("M3" + c + "Api.java"), v);
 		emit("member/Model.tmpl", s.main(s.pkg()).resolve("M3" + c + "Model.java"), v);
 		String tk = s.nebula() ? "nebula/" : "swing/";
 		emit(tk + "Widget.tmpl", s.main(s.wpkg()).resolve("M3" + c + ".java"), v);
 		emit(tk + "Test.tmpl", s.nebula() ? s.test(s.pkg()).resolve("M3" + c + "Model_Test.java") : s.test(s.wpkg()).resolve("M3" + c + "Test.java"), v);
+		if (s.nebula()) {
+			emit("nebula/CanvasTest.tmpl", s.test(s.wpkg()).resolve("M3" + c + "_Test.java"), v);
+		}
 		emit(tk + (s.nebula() ? "Snippet.tmpl" : "Example.tmpl"), s.example(s.wpkg() + (s.nebula() ? ".snippets" : ".examples"))
 				.resolve("M3" + c + (s.nebula() ? "Snippet.java" : "Example.java")), v);
 	}
 
-	void emit(String template, Path out, Map<String, String> vars) throws IOException {
-		String body = Files.readString(gen.resolve("templates/" + template), StandardCharsets.UTF_8).replace("\r\n", "\n");
+	String template(String template) throws IOException {
+		return Files.readString(gen.resolve("templates/" + template), StandardCharsets.UTF_8).replace("\r\n", "\n");
+	}
+
+	static String bind(String body, Map<String, String> vars) {
+		String out = body;
 		for (Map.Entry<String, String> e : vars.entrySet()) {
-			body = body.replace(e.getKey(), e.getValue());
+			out = out.replace(e.getKey(), e.getValue());
 		}
+		return out;
+	}
+
+	void emit(String template, Path out, Map<String, String> vars) throws IOException {
+		String body = bind(template(template), vars);
 		if (body.contains("@") && body.matches("(?s).*@[A-Z]+@.*")) {
 			throw new IllegalStateException("unbound placeholder in " + template + " -> " + out);
 		}

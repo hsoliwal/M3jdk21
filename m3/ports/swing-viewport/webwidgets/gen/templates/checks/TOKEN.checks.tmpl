@@ -9,6 +9,11 @@ public final class M3TokenChecks {
 	}
 
 	public static void run(M3TokenModel m) {
+		sample(m);
+		edges(m);
+	}
+
+	private static void sample(M3TokenModel m) {
 		m.layout(360, 120);
 		check(m.count() > 0, "sample items");
 		check(M3TokenModel.initials("ada  lovelace byron").equals("AL") && M3TokenModel.initials(" ").isEmpty() && M3TokenModel.initials(null).isEmpty(), "initials");
@@ -59,5 +64,27 @@ public final class M3TokenChecks {
 		m.load("ada lovelace;7;search");
 		m.layout(360, 120);
 		m.paint(p);
+	}
+
+	/** Edges: display text in every mode, hidden tokens, removal keys without focus and with other keys, frames without focus. */
+	private static void edges(M3TokenModel m) {
+		m.load("Ada Lovelace;7;search");
+		m.layout(360, 120);
+		for (int i = 0; i < m.count(); i++) {
+			check(m.display(i) != null, "display text");
+		}
+		m.setState(m.count() - 1, HIDDEN, true);
+		m.paint(new M3WebPaint());
+		m.setRemovable(true);
+		m.setFocus(-1);
+		m.key(KEY_DELETE, 0, 0);
+		m.setFocus(0);
+		m.key(KEY_HOME, 0, 0);
+		check(m.key(KEY_BACKSPACE, 0, 0) && m.count() == 2, "backspace removes the focused token");
+		m.setRemovable(false);
+		m.setFocus(0);
+		m.key(KEY_ENTER, 0, 0);
+		m.setFocus(-1);
+		m.tick(16);
 	}
 }

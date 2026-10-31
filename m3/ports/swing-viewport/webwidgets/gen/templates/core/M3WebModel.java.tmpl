@@ -103,7 +103,7 @@ public abstract class M3WebModel extends M3WebView {
 	public void setFocus(int item) {
 		int old = focus;
 		focus = item < 0 ? -1 : checked(item);
-		if (old >= 0 && old < count) {
+		if (old >= 0) {
 			damageItem(old);
 		}
 		if (focus >= 0) {
@@ -165,7 +165,7 @@ public abstract class M3WebModel extends M3WebView {
 	public final void paint(M3WebPaint p) {
 		p.reset();
 		emit(p);
-		if (focus >= 0 && focus < count && (widgetFlags & FOCUS) != 0) {
+		if (focus >= 0 && (widgetFlags & FOCUS) != 0) {
 			int b = focus * 4;
 			p.roundLine(rects[b] - 2, rects[b + 1] - 2, rects[b + 2] + 4, rects[b + 3] + 4, radius() + 2, theme.slot(M3WebTheme.ACCENT));
 		}
@@ -262,7 +262,7 @@ public abstract class M3WebModel extends M3WebView {
 		if (hit == hover) {
 			return;
 		}
-		if (hover >= 0 && hover < count) {
+		if (hover >= 0) {
 			setState(hover, HOVER, false);
 		}
 		hover = hit;

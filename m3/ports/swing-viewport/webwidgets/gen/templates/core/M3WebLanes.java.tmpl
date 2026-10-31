@@ -34,6 +34,9 @@ public abstract class M3WebLanes implements M3WebApi {
 			grow(count * 2);
 		}
 		text[count] = label;
+		if (keys != null) {
+			keys[count] = label;
+		}
 		detail[count] = det;
 		flags[count] = value[count] = aux[count] = group[count] = 0;
 		count++;
@@ -57,15 +60,33 @@ public abstract class M3WebLanes implements M3WebApi {
 		}
 		System.arraycopy(text, item + 1, text, item, tail);
 		System.arraycopy(detail, item + 1, detail, item, tail);
+		if (keys != null) {
+			System.arraycopy(keys, item + 1, keys, item, tail);
+		}
 		count--;
-		focus = Math.min(focus, count - 1);
+		focus = focus > item ? focus - 1 : Math.min(focus, count - 1);
+		hover = hover == item ? -1 : hover > item ? hover - 1 : hover;
+		pressed = pressed == item ? -1 : pressed > item ? pressed - 1 : pressed;
 		relayout(item, D_ITEMS);
+	}
+
+	/** Empties the lanes of ids {@code [from, to)}: new logical items carry no state, value, text or key. */
+	protected void blank(int from, int to) {
+		for (int[] lane : new int[][] { flags, value, aux, group }) {
+			Arrays.fill(lane, from, to, 0);
+		}
+		Arrays.fill(text, from, to, null);
+		Arrays.fill(detail, from, to, null);
+		if (keys != null) {
+			Arrays.fill(keys, from, to, null);
+		}
 	}
 
 	@Override
 	public void clear() {
 		count = 0;
 		focus = hover = pressed = -1;
+		keys = null;
 		relayout(-1, D_ITEMS);
 	}
 
@@ -84,6 +105,9 @@ public abstract class M3WebLanes implements M3WebApi {
 	public void setText(int item, String s) {
 		check(item);
 		text[item] = s;
+		if (keys != null) {
+			keys[item] = s;
+		}
 		relayout(item, D_TEXT);
 	}
 

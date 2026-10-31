@@ -56,9 +56,13 @@ public abstract class M3WebView extends M3WebLanes {
 		if (n > flags.length) {
 			grow(n);
 		}
-		Arrays.fill(text, count, n, null);
-		Arrays.fill(detail, count, n, null);
+		if (n > count) {
+			blank(count, n);
+		}
 		count = n;
+		focus = Math.min(focus, n - 1);
+		hover = hover < n ? hover : -1;
+		pressed = pressed < n ? pressed : -1;
 		nm = -1;
 		filter = "";
 		relayout(-1, D_ITEMS);
@@ -156,7 +160,7 @@ public abstract class M3WebView extends M3WebLanes {
 		if ((dirty & M3WebViewportCore.SCROLLBAR) != 0) {
 			damage(planes[SCROLLBAR * 6], planes[SCROLLBAR * 6 + 1], planes[SCROLLBAR * 6 + 2], planes[SCROLLBAR * 6 + 3]);
 		}
-		if (Math.abs(dy) < viewLength() && (aspects() & A_D) != 0) {
+		if (Math.abs(dy) < viewLength()) { // every family declares D (M3WebChecks.viewport)
 			blit += (int) dy;
 			int at = viewOrigin() + (dy > 0 ? 0 : viewLength() + (int) dy), len = (int) Math.abs(dy);
 			if (scrollsHorizontally()) {

@@ -24,6 +24,11 @@ public final class M3PlotChecks {
 	}
 
 	public static void run(M3PlotModel m) {
+		sample(m);
+		edges(m);
+	}
+
+	private static void sample(M3PlotModel m) {
 		m.layout(360, 200);
 		M3WebPaint p = new M3WebPaint();
 		check(m.maxValue() >= 1, "max");
@@ -49,5 +54,23 @@ public final class M3PlotChecks {
 		m.load("0;0");
 		m.layout(360, 200);
 		m.paint(p);
+	}
+
+	/** Edges: more points than the polyline scratch holds, focus outside the resident window, codes without a payload. */
+	private static void edges(M3PlotModel m) {
+		m.clear();
+		for (int i = 0; i < 2000; i++) {
+			m.setValue(m.add(null), i % 7);
+		}
+		m.setItemExtent(1);
+		m.layout(360, 200);
+		m.setFocus(1999);
+		m.scrollTo(0);
+		m.paint(new M3WebPaint());
+		m.setText(0, null);
+		check(m.module(9, 9) == m.module(9, 9), "modules without a payload");
+		m.clear();
+		check(m.module(9, 9) == m.module(9, 9), "modules of an empty code");
+		m.setItemExtent(32);
 	}
 }

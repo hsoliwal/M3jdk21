@@ -36,9 +36,12 @@ public class M3WebCanvas<M extends M3WebModel> extends Canvas {
 	protected final M model;
 	private final M3WebPaint paint = new M3WebPaint();
 	private final int[] damage = new int[4];
+	/** The region the last damage-only redraw asked for (the D aspect; package-visible for the canvas contract). */
+	final int[] lastRedraw = new int[4];
 	private final M3WebCanvasCache cache;
 	private final Runnable ticker = this::tick;
 	private boolean partVisible = true, pending, ticking;
+	private int[] xy = new int[0];
 
 	public M3WebCanvas(Composite parent, int style, M model) {
 		super(parent, style | SWT.DOUBLE_BUFFERED | SWT.NO_BACKGROUND);
@@ -63,6 +66,15 @@ public class M3WebCanvas<M extends M3WebModel> extends Canvas {
 		}
 	}
 
+	/**
+	 * Lays the model out at a size and drops its full-area damage: a resize repaints the whole control and a size
+	 * query restores the layout, so the next item change stays damage-only (D aspect).
+	 */
+	private void layoutTo(int w, int h) {
+		model.layout(w, h);
+		model.takeDamage(damage);
+	}
+
 	/** The lane model; all widget behaviour is model API. */
 	public M getModel() {
 		checkWidget();
@@ -74,14 +86,14 @@ public class M3WebCanvas<M extends M3WebModel> extends Canvas {
 		checkWidget();
 		model.layout(wHint == SWT.DEFAULT ? 320 : wHint, hHint == SWT.DEFAULT ? 0 : hHint);
 		Point p = new Point(wHint == SWT.DEFAULT ? model.prefWidth() : wHint, hHint == SWT.DEFAULT ? model.prefHeight() : hHint);
-		model.layout(getSize().x, getSize().y);
+		layoutTo(getSize().x, getSize().y);
 		return p;
 	}
 
 	private void handle(Event e) {
 		switch (e.type) {
 		case SWT.Paint: onPaint(e); break;
-		case SWT.Resize: model.layout(getSize().x, getSize().y); break;
+		case SWT.Resize: layoutTo(getSize().x, getSize().y); break;
 		case SWT.KeyDown: onKey(e); break;
 		case SWT.Traverse: onTraverse(e); break;
 		case SWT.FocusIn: case SWT.FocusOut: model.setState(-1, M3WebStates.FOCUS, e.type == SWT.FocusIn); break;
@@ -159,6 +171,7 @@ public class M3WebCanvas<M extends M3WebModel> extends Canvas {
 			}
 		}
 		if (model.takeDamage(damage)) {
+			System.arraycopy(damage, 0, lastRedraw, 0, 4);
 			redraw(damage[0], damage[1], damage[2], damage[3], false);
 		}
 		if (model.isAnimating() && !ticking) {
@@ -227,8 +240,11 @@ public class M3WebCanvas<M extends M3WebModel> extends Canvas {
 		}
 	}
 
+	/** Point run of a polyline record in the reusable scratch array (reallocated only when the point count changes). */
 	private int[] points(int i, int n) {
-		int[] xy = new int[2 * n]; // TODO M3P-CORE-1: a reusable scratch array per point count
+		if (xy.length != 2 * n) {
+			xy = new int[2 * n];
+		}
 		int off = paint.get(i, M3WebPaint.F_REF);
 		for (int k = 0; k < xy.length; k++) {
 			xy[k] = paint.point(off + k);
@@ -249,19 +265,24 @@ public class M3WebCanvas<M extends M3WebModel> extends Canvas {
 		gc.setClipping(e.x, e.y, e.width, e.height);
 	}
 
+	/** Accessible name of the widget ({@code CHILDID_SELF}) or of an item (package-visible for the canvas contract). */
+	final AccessibleAdapter names = new AccessibleAdapter() {
+		@Override
+		public void getName(AccessibleEvent e) {
+			e.result = model.accessibleName(e.childID == ACC.CHILDID_SELF ? -1 : e.childID);
+		}
+	};
+	/** ARIA role of the model mapped to an {@code ACC.ROLE_*} (package-visible for the canvas contract). */
+	final AccessibleControlAdapter roles = new AccessibleControlAdapter() {
+		@Override
+		public void getRole(AccessibleControlEvent e) {
+			e.detail = M3WebCanvasCache.accRole(M3WebStates.roleName(model.role()));
+		}
+	};
+
 	private void initAccessible() {
-		getAccessible().addAccessibleListener(new AccessibleAdapter() {
-			@Override
-			public void getName(AccessibleEvent e) {
-				e.result = model.accessibleName(e.childID == ACC.CHILDID_SELF ? -1 : e.childID);
-			}
-		});
-		getAccessible().addAccessibleControlListener(new AccessibleControlAdapter() {
-			@Override
-			public void getRole(AccessibleControlEvent e) {
-				e.detail = M3WebCanvasCache.accRole(M3WebStates.roleName(model.role()));
-			}
-		});
+		getAccessible().addAccessibleListener(names);
+		getAccessible().addAccessibleControlListener(roles);
 	}
 
 	/** Font data of the widget font scaled to a pixel size (used by the cache). */

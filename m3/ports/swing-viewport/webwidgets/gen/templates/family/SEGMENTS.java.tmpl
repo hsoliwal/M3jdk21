@@ -12,6 +12,8 @@ import static @PKG@.M3WebStates.*;
 public class M3SegmentsModel extends M3WebModel implements M3SegmentsApi {
 	public static final int STEPPER = 0, TIMELINE = 1, BREADCRUMB = 2, PAGINATION = 3, SEGMENTED = 4, TOGGLE = 5, RATING = 6, CAROUSEL = 7,
 			TILES = 8, NAV = 9;
+	/** Number of modes: mode ids are 0 .. MODES - 1 (the family checks run every one). */
+	public static final int MODES = 10;
 	private static final int[] EXTENT = { 120, 56, 96, 36, 96, 88, 28, 320, 112, 40 };
 	private int current = -1;
 
@@ -234,7 +236,7 @@ public class M3SegmentsModel extends M3WebModel implements M3SegmentsApi {
 
 	@Override
 	protected boolean onKey(int key, int ch, int mods) {
-		if (key == KEY_PAGE_DOWN || key == KEY_PAGE_UP) {
+		if ((key == KEY_PAGE_DOWN || key == KEY_PAGE_UP) && count > 0) {
 			int stepN = Math.max(1, viewLength() / itemExtent);
 			setFocus(Math.max(0, Math.min(count - 1, Math.max(0, focus) + (key == KEY_PAGE_DOWN ? stepN : -stepN))));
 			return true;

@@ -11,6 +11,8 @@ import static @PKG@.M3WebStates.*;
  */
 public class M3PickerModel extends M3WebModel implements M3PickerApi {
 	public static final int CASCADER = 0, DATE = 1, RANGE = 2, CALENDAR = 3, TIME = 4;
+	/** Number of modes: mode ids are 0 .. MODES - 1 (the family checks run every one). */
+	public static final int MODES = 5;
 	/** Epoch day of Monday 1969-12-29, the first week row. */
 	public static final int MONDAY0 = -3;
 	public static final int WEEKS = 5300, SLOTS = 96;

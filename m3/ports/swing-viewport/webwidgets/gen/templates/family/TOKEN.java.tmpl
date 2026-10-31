@@ -12,6 +12,8 @@ import static @PKG@.M3WebStates.*;
 public class M3TokenModel extends M3WebModel implements M3TokenApi {
 	public static final int TEXT = 0, INITIALS = 1, COUNT = 2, ICON = 3, CHIP = 4, KEYCAP = 5, MARK = 6, CODE = 7, CAPTCHA = 8, LED = 9,
 			LINK = 10, SWITCH = 11;
+	/** Number of modes: mode ids are 0 .. MODES - 1 (the family checks run every one). */
+	public static final int MODES = 12;
 	private int max = 99;
 	private boolean removable;
 
@@ -204,7 +206,7 @@ public class M3TokenModel extends M3WebModel implements M3TokenApi {
 
 	@Override
 	protected boolean advance(int ms) {
-		boolean on = focus >= 0 && focus < count && (flags[focus] & CHECKED) != 0;
+		boolean on = focus >= 0 && (flags[focus] & CHECKED) != 0;
 		phase = on ? Math.min(1000, phase + ms * 8) : Math.max(0, phase - ms * 8);
 		return on ? phase < 1000 : phase > 0;
 	}

@@ -10,6 +10,8 @@ import static @PKG@.M3WebStates.*;
  */
 public class M3CommandsModel extends M3WebModel implements M3CommandsApi {
 	public static final int RIBBON = 0, APPBAR = 1, SPLIT = 2;
+	/** Number of modes: mode ids are 0 .. MODES - 1 (the family checks run every one). */
+	public static final int MODES = 3;
 	public static final int PUSH = 0, TOGGLE = 1, SPLIT_KIND = 2, DROPDOWN = 3;
 	private String[] captions = new String[0];
 
@@ -31,7 +33,7 @@ public class M3CommandsModel extends M3WebModel implements M3CommandsApi {
 			setGroup(i, f.length > 1 ? M3WebStates.parse(f[0]) : 0);
 			setAux(i, f.length > 2 && f[2].equals("L") ? 1 : 0);
 		}
-		if (mode == SPLIT && count > 0) {
+		if (mode == SPLIT) { // load adds at least one item
 			setValue(0, SPLIT_KIND);
 		}
 	}
@@ -194,7 +196,7 @@ public class M3CommandsModel extends M3WebModel implements M3CommandsApi {
 	protected boolean onKey(int key, int ch, int mods) {
 		if (key == KEY_DOWN && mode == SPLIT && !isMenuOpen()) {
 			setMenuOpen(true);
-			setFocus(count > 1 ? 1 : 0);
+			setFocus(Math.min(1, count - 1));
 			return true;
 		}
 		return false;

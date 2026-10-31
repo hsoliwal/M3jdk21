@@ -9,6 +9,11 @@ public final class M3CommandsChecks {
 	}
 
 	public static void run(M3CommandsModel m) {
+		sample(m);
+		edges(m);
+	}
+
+	private static void sample(M3CommandsModel m) {
 		m.layout(480, 160);
 		M3WebPaint p = new M3WebPaint();
 		m.setCaptions("Clipboard", "Font");
@@ -56,6 +61,27 @@ public final class M3CommandsChecks {
 			m.key(KEY_ENTER, 0, 0);
 			check(!m.isMenuOpen(), "choosing a menu item closes the menu");
 		}
+		m.setMenuOpen(false);
 		check(!m.key(KEY_ESCAPE, 0, 0), "escape without a menu");
+	}
+
+	/** Edges: small third fields, toggle kinds by key, drop-down kinds by pointer (open and close), their paint. */
+	private static void edges(M3CommandsModel m) {
+		m.load("0~Paste~S;0~Cut~L;1~Bold");
+		m.layout(360, 120);
+		m.setKind(1, M3CommandsModel.TOGGLE);
+		m.setKind(2, M3CommandsModel.DROPDOWN);
+		M3WebPaint p = new M3WebPaint();
+		m.setFocus(1);
+		m.key(KEY_ENTER, 0, 0);
+		check(m.is(1, CHECKED), "toggle kind checks");
+		m.paint(p);
+		m.key(KEY_ENTER, 0, 0);
+		check(!m.is(1, CHECKED), "toggle kind unchecks");
+		boolean open = m.isMenuOpen();
+		M3WebChecks.clickItem(m, 2);
+		m.paint(p);
+		M3WebChecks.clickItem(m, 2);
+		check(m.isMenuOpen() == open, "a drop-down kind toggles the menu");
 	}
 }
