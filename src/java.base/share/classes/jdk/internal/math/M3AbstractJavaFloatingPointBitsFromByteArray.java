@@ -68,6 +68,9 @@ abstract class M3AbstractJavaFloatingPointBitsFromByteArray extends M3AbstractFl
     private static final long INFINITY_UTF8_LE = 0x7974696e69666e49L;
     /** Length of Infinity. */
     private static final int INFINITY_CHAR_COUNT = 8;
+    //FLLDCIM: HPCPOP - JIT_ATOMIZE v1: the packed result of parseExponentNumber and parseLiteralTail, named by role
+    //FLLDCIM: M3 - NUMBER-PARSE-PATTERN v1: PACKED_INDEX_SHIFT, ILLEGAL_EXPONENT_BIT and EXPONENT_FIELDS_MASK moved to
+    // M3AbstractFloatValueParser (one owner for both grammar templates); the anchor above stays (CNPCDA: append-only)
 
     /**
      * Skips optional white space in the provided string
@@ -153,6 +156,10 @@ abstract class M3AbstractJavaFloatingPointBitsFromByteArray extends M3AbstractFl
         }
         return exponentBits | (long) skipWhitespace(str, index, endIndex) << PACKED_INDEX_SHIFT;
     }
+
+    //FLLDCIM: HPCPOP - JIT_ATOMIZE v1: decodes the index field of a packed scan result
+    //FLLDCIM: M3 - NUMBER-PARSE-PATTERN v1: packedIndex moved to M3AbstractFloatValueParser (one owner for both
+    // grammar templates); the anchor above stays (CNPCDA: append-only)
 
     /**
      * @return a NaN constant in the specialized type wrapped in a {@code long}
