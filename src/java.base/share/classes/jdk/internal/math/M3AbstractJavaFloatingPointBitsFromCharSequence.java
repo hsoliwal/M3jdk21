@@ -84,13 +84,6 @@ abstract class M3AbstractJavaFloatingPointBitsFromCharSequence extends M3Abstrac
     private static final char INFINITY_CHAR_Y = 'y';
     /** Length of Infinity. */
     private static final int INFINITY_CHAR_COUNT = 8;
-    //FLLDCIM: HPCPOP - JIT_ATOMIZE v1: the packed result of parseExponentNumber and parseLiteralTail, named by role
-    /** Shift of the index field of a packed scan result (the exponent number is the low int). */
-    private static final int PACKED_INDEX_SHIFT = Integer.SIZE;
-    /** Sign bit of a packed scan result: set when no digit follows an exponent indicator. */
-    private static final long ILLEGAL_EXPONENT_BIT = Long.MIN_VALUE;
-    /** The exponent fields of a packed scan result: the sign bit and the exponent number (low int). */
-    private static final long EXPONENT_FIELDS_MASK = ILLEGAL_EXPONENT_BIT | (1L << PACKED_INDEX_SHIFT) - 1;
 
     /**
      * Skips optional white space in the provided string
@@ -118,7 +111,7 @@ abstract class M3AbstractJavaFloatingPointBitsFromCharSequence extends M3Abstrac
      * @param index    index of the exponent indicator
      * @param endIndex end index (exclusive)
      * @return the exponent number (negated after a minus sign) in the low 32 bits, the index after the last
-     * exponent digit in bits 32 to 62 ({@link #packedIndex}), and {@link #ILLEGAL_EXPONENT_BIT} set when no
+     * exponent digit in bits 32 to 62 ({@link M3AbstractFloatValueParser#packedIndex}), and {@link M3AbstractFloatValueParser#ILLEGAL_EXPONENT_BIT} set when no
      * digit follows the indicator and its sign
      */
     private static long parseExponentNumber(CharSequence str, int index, int endIndex) {
@@ -158,7 +151,7 @@ abstract class M3AbstractJavaFloatingPointBitsFromCharSequence extends M3Abstrac
      * @param endIndex    end index (exclusive)
      * @param hasExponent true if {@code ch} is the exponent indicator of the literal's grammar
      * @return the exponent number (0 without an exponent) in the low 32 bits, the index after the trailing white
-     * space in bits 32 to 62 ({@link #packedIndex}), and {@link #ILLEGAL_EXPONENT_BIT} as in
+     * space in bits 32 to 62 ({@link M3AbstractFloatValueParser#packedIndex}), and {@link M3AbstractFloatValueParser#ILLEGAL_EXPONENT_BIT} as in
      * {@link #parseExponentNumber}
      */
     private static long parseLiteralTail(CharSequence str, char ch, int index, int endIndex, boolean hasExponent) {
@@ -175,15 +168,6 @@ abstract class M3AbstractJavaFloatingPointBitsFromCharSequence extends M3Abstrac
             index++;
         }
         return exponentBits | (long) skipWhitespace(str, index, endIndex) << PACKED_INDEX_SHIFT;
-    }
-
-    //FLLDCIM: HPCPOP - JIT_ATOMIZE v1: decodes the index field of a packed scan result
-    /**
-     * @param scanned a {@link #parseExponentNumber} or {@link #parseLiteralTail} result
-     * @return its index field (bits 32 to 62)
-     */
-    private static int packedIndex(long scanned) {
-        return (int) (scanned >>> PACKED_INDEX_SHIFT) & Integer.MAX_VALUE;
     }
 
     /**
