@@ -42,16 +42,23 @@ PATH_RULES = (
     (re.compile(r"(^|[/_.-])synexia-"), r"\1m3-"),
     (re.compile(r"(^|[/_.-])synexia_"), r"\1m3_"),
 )
-# dependencies are removed by the standalone work, never renamed (renaming would hide them from the check): links to
-# the Synexia repository, SYNEXIA_* secrets, and Maven groupIds (mapped in a later phase, not as Java packages)
-KEEP_LINE = re.compile(r"Copyright|SPDX-|hsoliwal/com\.synexia|github\.com/hsoliwal|secrets\.SYNEXIA_"
-                       r"|<groupId>\s*com\.synexia")
+# copyright and SPDX lines are kept whole; dependencies are kept as spans and the rest of their line is renamed
+# (renaming a dependency would hide it from the standalone check): links to the Synexia repository, SYNEXIA_* secrets,
+# and Maven groupIds (mapped in a later phase, not as Java packages). A whole kept line left a one-line
+# <dependency><groupId>com.synexia</groupId><artifactId>synexia-x</artifactId> pointing at a renamed module.
+KEEP_LINE = re.compile(r"Copyright|SPDX-")
+KEEP_SPAN = re.compile(r"<groupId>\s*com\.synexia[\w.]*\s*</groupId>|secrets\.SYNEXIA_\w+"
+                       r"|(?:https?://)?(?:www\.)?(?:github\.com|raw\.githubusercontent\.com|api\.github\.com/repos)"
+                       r"/hsoliwal/com\.synexia[\w./#?=&%~:+-]*|hsoliwal/com\.synexia\b")
+SPAN_TOKEN = re.compile("\x00(\\d+)\x00")
 TEXT_SUFFIXES = {".java", ".yml", ".yaml", ".xml", ".sh", ".py", ".mjs", ".js", ".properties", ".gradle", ".toml",
                  ".cfg", ".ini", ".c", ".h", ".cpp", ".json", ".txt"}
 DOC_SUFFIXES = {".md", ".tsv", ".rst", ".adoc", ".html", ".log", ".patch"}
 DOC_NAMES = {"NOTICE", "LICENSE", "COPYRIGHT", "AUTHORS", "THIRD_PARTY_NOTICES"}
 LINEAGE_HINTS = ("provenance", "evidence", "receipt", "manifest", "SOURCE_SHA256", "FINAL_", "readback")
-SELF = {"m3/tooling/jdk-naming/jdk_naming.py", "m3/tooling/jdk-naming/test_jdk_naming.py"}
+# files that define Synexia patterns on purpose: this recipe and the standalone check (renaming them blinds the check)
+SELF = {"m3/tooling/jdk-naming/jdk_naming.py", "m3/tooling/jdk-naming/test_jdk_naming.py",
+        "m3/release/check_standalone.py", "m3/release/test_check_standalone.py"}
 
 
 def tracked(root: Path) -> list[str]:
@@ -75,10 +82,17 @@ def renamed_path(path: str) -> str:
 def rewrite_line(line: str, counts: dict) -> str:
     if KEEP_LINE.search(line):
         return line
+    spans: list[str] = []
+
+    def stash(match):
+        spans.append(match.group(0))
+        return "\x00%d\x00" % (len(spans) - 1)
+    line = KEEP_SPAN.sub(stash, line)
     for name, rule, replacement in TEXT_RULES:
         line, n = rule.subn(replacement, line)
         if n:
             counts[name] = counts.get(name, 0) + n
+    line = SPAN_TOKEN.sub(lambda m: spans[int(m.group(1))], line)
     return line
 
 
