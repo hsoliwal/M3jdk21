@@ -160,6 +160,36 @@ moved to `R4_UNEMITTED_HOOK` (the `checkSetValue` member recorded as not emitted
 (guard replaced by `return true;`) is caught by the new case. The 10 new classes pass `-Xdoclint:all/protected` and
 the M3JdkStandard plugin; refilling them gives byte-identical files; the 22 v1.4 classes are unchanged.
 
+## v1.6: Unmodifiable map family
+
+v1.6 extends WRAP and ALIAS to the Unmodifiable maps and adds one helper:
+
+- **WRAP over `super.m()`:** `final Set<K> set = super.keySet(); return UnmodifiableSet.unmodifiableSet(set);` (and
+  the inline form) reads as `decorated().keySet()` when the superclass body is the delegate, through the same R6(1)
+  guard as `restDelegate`.
+- **JDK owners:** `UnmodifiableCollection`, `UnmodifiableSortedMap` and `UnmodifiableMap` factories map to
+  `java.util.Collections`; `UnmodifiableEntrySet` on `entrySet()` maps to
+  `Collections.unmodifiableMap(backing).entrySet()`; a `Collections.unmodifiableX(..)` call in the Commons source is
+  kept as is.
+- **ALIAS without an accessor:** UnmodifiableTrie keeps its owner in `delegate`, assigned through a cast local; the
+  only instance field of a class outside the decorator chain is an alias when its assignment is a `requireNonNull`.
+- **UNMODIFIABLE_MAP_ITERATOR (H4):** no JDK type is an unmodifiable `MapIterator`, so a nested
+  `Unmodifiable[Ordered]MapIteratorView` delegates the reads and rejects `remove` and `setValue` with the Commons
+  messages.
+- **Constructor of a K, V owner:** the backing is typed over the class's own type parameters, and the null message is
+  the one of the Commons constructor chain (`"map"`, `"trie"`).
+
+- **INVERSE_CACHE:** a bidi map's inverse view, created once and linked back, over a field of the owned class typed
+  with the type parameters swapped (the scaffold keeps Commons' `synchronized`).
+
+Result: UnmodifiableOrderedMap, UnmodifiableTrie and the three Unmodifiable bidi maps are owned (37 filled); MANUAL
+atoms 209 to 153. TARGETS.tsv has five new rows (backings `linkedmap`, `trie`, `dualhashbidi`, `treebidi`,
+`dualtreebidi`): 49 targets, 0 mismatches, rule checks 13/13, negative controls 16/16. The other Unmodifiable maps
+keep 1 to 3 atoms each (UnmodifiableSortedMap's ordered navigation, UnmodifiableMap's IterableMap branch,
+UnmodifiableMultiValuedMap's keys); they are the next candidates in PATTERNS.tsv. The
+GENERATED block now takes its version from one constant, a comment-only change for the earlier classes (`-g:none`
+class files unchanged).
+
 ## Proof
 
 `M3DecoratorDifferential.java` runs a seeded reflective differential of each owned class against the Commons class,
