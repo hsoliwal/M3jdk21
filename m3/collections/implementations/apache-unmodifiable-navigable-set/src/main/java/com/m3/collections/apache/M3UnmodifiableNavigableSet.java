@@ -8,12 +8,11 @@
 package com.m3.collections.apache;
 
 /**
- * SCAFFOLD, not an owned implementation: declares the public surface of
- * {@code org.apache.commons.collections4.set.UnmodifiableNavigableSet} and every body throws {@link UnsupportedOperationException}.
+ * Owned decorator with the public contract of {@code org.apache.commons.collections4.set.UnmodifiableNavigableSet}.
  *
  * <p>Storage plan (decorator): decorator over one backing owner reference plus int state bits; elements are never copied; predicate/transformer/lock policy applies at the API boundary.
  *
- * <p>Lanes: {@code Object backing}, {@code int state}. No Entry or Node object is stored per element; any
+ * <p>Lanes: {@code backing}. No Entry or Node object is stored per element; any
  * Entry-shaped value the provider API demands is a boundary flyweight created only at that call.
  *
  * <p>The class is final and has no provider implementation superclass or delegate; provider
@@ -29,203 +28,251 @@ public final class M3UnmodifiableNavigableSet<E>
                 java.util.Set<E>,
                 java.util.SortedSet<E>,
                 org.apache.commons.collections4.Unmodifiable {
-    private static final String M3_SCAFFOLD_MESSAGE = "M3 scaffold: org.apache.commons.collections4.set.UnmodifiableNavigableSet not yet owned";
     @java.io.Serial
     private static final long serialVersionUID = 0L;
 
-    // Planned lanes (decorator): arrays, offsets and bit-mask state; no Entry/Node objects.
-    private transient Object backing;
-    private transient int state;
+    /** The decorated owner: one reference, elements are never copied. */
+    @SuppressWarnings("serial")
+    private final java.util.NavigableSet<E> backing;
 
-    private M3UnmodifiableNavigableSet() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+    private M3UnmodifiableNavigableSet(final java.util.NavigableSet<E> arg0) {
+        this.backing = java.util.Objects.requireNonNull(arg0, "collection");
     }
 
     public static <E> java.util.NavigableSet<E> unmodifiableNavigableSet(java.util.NavigableSet<E> arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        if (arg0 instanceof org.apache.commons.collections4.Unmodifiable) {
+            return arg0;
+        }
+        return new M3UnmodifiableNavigableSet<>(arg0);
     }
 
+    @Override
     public boolean add(E arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        throw new UnsupportedOperationException();
     }
 
+    @Override
     public boolean addAll(java.util.Collection<? extends E> arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        throw new UnsupportedOperationException();
     }
 
+    @Override
     public void addFirst(E arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        java.util.NavigableSet.super.addFirst(arg0);
     }
 
+    @Override
     public void addLast(E arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        java.util.NavigableSet.super.addLast(arg0);
     }
 
+    @Override
     public E ceiling(E arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.ceiling(arg0);
     }
 
+    @Override
     public void clear() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        throw new UnsupportedOperationException();
     }
 
+    @Override
     public java.util.Comparator<? super E> comparator() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.comparator();
     }
 
+    @Override
     public boolean contains(Object arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.contains(arg0);
     }
 
+    @Override
     public boolean containsAll(java.util.Collection<?> arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.containsAll(arg0);
     }
 
+    @Override
     public java.util.Iterator<E> descendingIterator() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return java.util.Collections.unmodifiableNavigableSet(backing).descendingIterator();
     }
 
+    @Override
     public java.util.NavigableSet<E> descendingSet() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return M3UnmodifiableNavigableSet.unmodifiableNavigableSet(backing.descendingSet());
     }
 
+    @Override
     public boolean equals(Object arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return arg0 == this || backing.equals(arg0);
     }
 
+    @Override
     public E first() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.first();
     }
 
+    @Override
     public E floor(E arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.floor(arg0);
     }
 
+    @Override
     public void forEach(java.util.function.Consumer<? super E> arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        java.util.NavigableSet.super.forEach(arg0);
     }
 
+    @Override
     public E getFirst() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return java.util.NavigableSet.super.getFirst();
     }
 
+    @Override
     public E getLast() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return java.util.NavigableSet.super.getLast();
     }
 
+    @Override
     public int hashCode() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.hashCode();
     }
 
+    @Override
     public java.util.SortedSet<E> headSet(E arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return java.util.Collections.unmodifiableSortedSet(backing.headSet(arg0));
     }
 
+    @Override
     public java.util.NavigableSet<E> headSet(E arg0, boolean arg1) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return M3UnmodifiableNavigableSet.unmodifiableNavigableSet(backing.headSet(arg0, arg1));
     }
 
+    @Override
     public E higher(E arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.higher(arg0);
     }
 
+    @Override
     public boolean isEmpty() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.isEmpty();
     }
 
+    @Override
     public java.util.Iterator<E> iterator() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return java.util.Collections.unmodifiableCollection(backing).iterator();
     }
 
+    @Override
     public E last() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.last();
     }
 
+    @Override
     public E lower(E arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.lower(arg0);
     }
 
+    @Override
     public java.util.stream.Stream<E> parallelStream() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return java.util.NavigableSet.super.parallelStream();
     }
 
+    @Override
     public E pollFirst() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        throw new UnsupportedOperationException();
     }
 
+    @Override
     public E pollLast() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        throw new UnsupportedOperationException();
     }
 
+    @Override
     public boolean remove(Object arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        throw new UnsupportedOperationException();
     }
 
+    @Override
     public boolean removeAll(java.util.Collection<?> arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        throw new UnsupportedOperationException();
     }
 
+    @Override
     public E removeFirst() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return java.util.NavigableSet.super.removeFirst();
     }
 
+    @Override
     public boolean removeIf(java.util.function.Predicate<? super E> arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        throw new UnsupportedOperationException();
     }
 
+    @Override
     public E removeLast() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return java.util.NavigableSet.super.removeLast();
     }
 
+    @Override
     public boolean retainAll(java.util.Collection<?> arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        throw new UnsupportedOperationException();
     }
 
+    @Override
     public java.util.NavigableSet<E> reversed() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return java.util.NavigableSet.super.reversed();
     }
 
+    @Override
     public int size() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.size();
     }
 
+    @Override
     public java.util.Spliterator<E> spliterator() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return java.util.NavigableSet.super.spliterator();
     }
 
+    @Override
     public java.util.stream.Stream<E> stream() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return java.util.NavigableSet.super.stream();
     }
 
+    @Override
     public java.util.NavigableSet<E> subSet(E arg0, boolean arg1, E arg2, boolean arg3) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return M3UnmodifiableNavigableSet.unmodifiableNavigableSet(backing.subSet(arg0, arg1, arg2, arg3));
     }
 
+    @Override
     public java.util.SortedSet<E> subSet(E arg0, E arg1) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return java.util.Collections.unmodifiableSortedSet(backing.subSet(arg0, arg1));
     }
 
+    @Override
     public java.util.SortedSet<E> tailSet(E arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return java.util.Collections.unmodifiableSortedSet(backing.tailSet(arg0));
     }
 
+    @Override
     public java.util.NavigableSet<E> tailSet(E arg0, boolean arg1) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return M3UnmodifiableNavigableSet.unmodifiableNavigableSet(backing.tailSet(arg0, arg1));
     }
 
+    @Override
     public Object[] toArray() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.toArray();
     }
 
+    @Override
     public <T> T[] toArray(T[] arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.toArray(arg0);
     }
 
+    @Override
     public <T> T[] toArray(java.util.function.IntFunction<T[]> arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return java.util.NavigableSet.super.toArray(arg0);
     }
 
+    @Override
     public String toString() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.toString();
     }
 }
