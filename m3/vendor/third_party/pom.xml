@@ -33,7 +33,6 @@
     <module>commons-compress-1.26.0</module>
     <module>commons-compress-1.27.1</module>
     <module>commons-csv</module>
-    <module>commons-io-2.15.1</module>
     <module>commons-io-2.18.0</module>
     <module>commons-jexl3</module>
     <module>commons-lang3-3.14.0</module>
