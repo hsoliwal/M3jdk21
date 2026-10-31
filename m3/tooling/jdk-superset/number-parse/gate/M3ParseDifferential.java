@@ -3,7 +3,9 @@
 // Gate tool (scratch, not shipped). Deterministic corpus (fixed seed) through Double.parseDouble and Float.parseFloat;
 // one line per input: index, the raw-bits result or the exception class and message. Run once on stock JDK 21 and
 // once with --patch-module java.base=<patch>; the two outputs must be byte-identical. Mode "bench" times both parses.
-// Usage: java M3ParseDifferential diff <count> | bench <count> <rounds> | hexdiff <count>
+// Usage: java M3ParseDifferential diff <count> | bench <count> <rounds> | hexdiff <count> | swardiff <count>
+// Mode swardiff (SWAR_HEX_BORROW v1 discriminator): hex literals whose 8-char groups after the point (the SWAR path)
+// hold hex digits and sometimes one non-hex letter (g G h z ...) at any position.
 // Mode hexdiff (HEX_ROUNDING v1 discriminator): hex literals built around the rounding positions of double and float:
 // 16-digit significands at or above 2^63 (the donor rounded them twice) and truncated significands of more than 16
 // digits with a halfway pattern and a zero or non-zero tail (the donor lost the sticky tail), plus random hex literals.
@@ -26,8 +28,13 @@ public final class M3ParseDifferential {
     };
 
     public static void main(String[] args) {
-        List<String> corpus = args[0].equals("hexdiff") ? hexCorpus(Integer.parseInt(args[1])) : corpus(Integer.parseInt(args[1]));
-        if (args[0].equals("diff") || args[0].equals("hexdiff")) {
+        int count = Integer.parseInt(args[1]);
+        List<String> corpus = switch (args[0]) {
+            case "hexdiff" -> hexCorpus(count);
+            case "swardiff" -> swarCorpus(count);
+            default -> corpus(count);
+        };
+        if (!args[0].equals("bench")) {
             StringBuilder out = new StringBuilder(corpus.size() * 48);
             for (int i = 0; i < corpus.size(); i++) {
                 String s = corpus.get(i);
@@ -114,6 +121,22 @@ public final class M3ParseDifferential {
                             + (r.nextInt(4) == 0 ? "d" : ""));
                 }
             }
+        }
+        return c;
+    }
+
+    private static List<String> swarCorpus(int n) {
+        List<String> c = new ArrayList<>(List.of("0x1.79G60184p0", "0x1.g0000000p0", "0x1.ABCDEFGAp0", "0x1.abcdefgap0",
+                "0x1.G1234567p0", "0x1.12345678Gp0"));
+        SplittableRandom r = new SplittableRandom(20261031L);
+        String letters = "gGhHzZxXpP.+-_ ";
+        while (c.size() < n) {
+            StringBuilder group = new StringBuilder(hexDigits(r, 8));
+            if (r.nextInt(4) != 0) {
+                group.setCharAt(r.nextInt(8), letters.charAt(r.nextInt(r.nextBoolean() ? 2 : letters.length())));
+            }
+            c.add((r.nextInt(4) == 0 ? "-" : "") + "0x" + hexDigits(r, r.nextInt(3)) + "." + group + hexDigits(r, r.nextInt(10))
+                    + (r.nextBoolean() ? "p" : "P") + (r.nextInt(200) - 100));
         }
         return c;
     }
