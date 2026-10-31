@@ -66,6 +66,8 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
         upstream = self.git("rev-parse", "HEAD")
         self.contract = json.loads(Path(__file__).with_name("release-contract.json").read_text())
         self.contract["release"]["upstream_baseline"] = upstream
+        # these fixtures test receipt integrity; the standalone rule has its own fixture below
+        self.contract.setdefault("standalone", {})["required_for_release"] = False
         self.write("m3/release/release-contract.json", json.dumps(self.contract))
         self.write(".gitignore", "/target/\n")
         self.write("m3/release/queue/.gitignore", "/current/\n")
@@ -317,6 +319,19 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
         for mode in (False, True):
             with self.subTest(release=mode):
                 self.assert_blocked(self.result(mode), "git.single_release_commit")
+
+    def test_standalone_rule_refuses_release_while_the_contract_needs_another_repository(self):
+        # the contract still names another repository as the M3_MAVEN_CONTROL_REACTOR owner: not standalone
+        self.contract["standalone"]["required_for_release"] = True
+        self.write("m3/release/release-contract.json", json.dumps(self.contract))
+        self.repin_queue()
+        self.commit("enforce the standalone rule")
+        self.evidence["source_commit"] = self.git("rev-parse", "HEAD")
+        self.evidence["source_tree"] = self.git("rev-parse", "HEAD^{tree}")
+        result = self.result(True)
+        self.assert_blocked(result, "standalone.no_external_repo_dependency")
+        detail = next(b["detail"] for b in result["blockers"] if b["name"] == "standalone.no_external_repo_dependency")
+        self.assertIn("D_REPO_REF=", detail)
 
     def test_cli_distinguishes_policy_pass_from_release_acceptance_and_writes_queue(self):
         report = Path(self.tmp.name) / "reports" / "admission.json"
