@@ -17,7 +17,23 @@ from the parsers, which square only powers of ten); LITERAL_CONSTANTS v1 (no mag
 the 13 source files became 205 private static final constants named by role, each with the literal's own type and
 spelling and a one-line Javadoc giving the role, under one //FLLDCIM anchor comment in each of the 10 classes that
 declare them (nested classes included); javac folds the constants back, so the method bytecode is unchanged
-(m3/tooling/jdk-superset/number-parse/CONSTANTS.tsv, BYTECODE_IDENTITY.tsv). Nothing else was changed.
+(m3/tooling/jdk-superset/number-parse/CONSTANTS.tsv, BYTECODE_IDENTITY.tsv); JIT_ATOMIZE v1: the parse-path
+methods above the HotSpot inlining limit FreqInlineSize (325 bytes) were split, in the same 8 files, into private
+methods with the same behaviour (parseExponentNumber and parseLiteralTail in both grammar templates, returning one
+packed long, with packedIndex; valueOfTruncatedDecFloatLiteral and valueOfTruncatedHexLiteral; isClingerFastPath,
+clingerFastPath and tryDecToDoubleWithEiselLemire / tryDecToFloatWithEiselLemire; jdkConverterValue in the four
+parsers), so parseDecFloatLiteral and parseHexFloatLiteral went from 466-515 to 261-316 bytes and
+tryDecToDoubleWithFastAlgorithm / tryDecToFloatWithFastAlgorithm from 279 / 278 to 35 (JIT_SIZE_PRE.tsv,
+JIT_SIZE.tsv); HEX_ROUNDING v1: a hex significand at or above 2^63 converts through unsignedToDouble /
+unsignedToFloat, rounded once as by the JDK (the donor added 2^64 to the signed conversion and rounded twice), and a
+truncated hex significand takes the fast path only when significand and significand + 1 give the same value, else
+the JDK converter decides (the donor dropped the sticky tail); SWAR_HEX_BORROW v1:
+M3FastDoubleSwar.tryToParseEightHexDigitsUtf8 tests for letters at or below f without a borrow between byte lanes
+(the donor took g and G for hex digits, so Double.parseDouble("0x1.79G60184p0") returned a value where the JDK throws
+NumberFormatException); NUMBER-PARSE-PATTERN v1: packedIndex and its three constants, identical in both grammar
+templates, have one owner, M3AbstractFloatValueParser; CNPCDA v1: the four //FLLDCIM anchor comments removed with
+that move are back in the two template files, each with an anchor naming the new owner (gates: GATES.tsv and
+RECIPE_MEMORY.tsv in m3/tooling/jdk-superset/number-parse). Nothing else was changed.
 
 ### LICENSE
 

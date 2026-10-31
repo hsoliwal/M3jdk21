@@ -96,7 +96,7 @@ class M3FastDoubleSwar {
     private static final long UTF8_LANES_ASCII_MAX = 0x7f_7f_7f_7f_7f_7f_7f_7fL;
     /** 0x20 per byte lane: folds ASCII letters to lower case. */
     private static final long UTF8_LANES_LOWER_CASE_BIT = 0x20_20_20_20_20_20_20_20L;
-    /** 0x66 - 0x30 + 1 per byte lane: lanes at or below hex digit f stay negative. */
+    /** 0x66 - 0x30 + 1 per byte lane: LIMIT + (lane ^ 0x7f) has bit 7 set exactly for lanes at or below hex digit f. */
     private static final long UTF8_LANES_HEX_F_LIMIT = 0x37_37_37_37_37_37_37_37L;
     /** Moves bit 7 of each byte lane to bit 0. */
     private static final int HIGH_BIT_TO_LOW_BIT_SHIFT = 7;
@@ -513,8 +513,12 @@ class M3FastDoubleSwar {
         long ge_a = vec + (UTF8_LANES_ZERO ^ UTF8_LANES_ASCII_MAX);
         ge_a &= UTF8_LANES_HIGH_BITS;
 
-        // Create a predicate for all bytes which are less or equal than 'f'-'0' (0x37).
-        long le_f = vec - UTF8_LANES_HEX_F_LIMIT;
+        // Create a predicate for all bytes which are less or equal than 'f'-'0' (0x36).
+        //FLLDCIM: M3 - SWAR_HEX_BORROW v1: the donor's vec - 0x37.. borrowed across byte lanes, so g or G above a
+        // lane below 'g' passed as a hex digit and Double.parseDouble("0x1.79G60184p0") returned a value where the
+        // JDK throws NumberFormatException; 0x37 + (lane ^ 0x7f) never carries out of a lane: bit 7 is set exactly for
+        // the lanes at or below 0x36
+        long le_f = UTF8_LANES_HEX_F_LIMIT + (vec ^ UTF8_LANES_ASCII_MAX);
         // we don't need to 'and' with 0x80…L here, because we 'and' this with ge_a anyway.
         //le_f &= 0x80_80_80_80_80_80_80_80L;
 

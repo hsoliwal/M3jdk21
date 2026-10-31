@@ -56,7 +56,76 @@ one per jackson-core version).
    reports INDEX_STALE after each commit (`tools/index_free_commit_check.py` checks that), and the GATES.tsv row
    `index_sync` holds the reset: HOLD while H: is under the 350 MB floor.
 
+### number-parse JIT leaf: atomize, test, JIT, patternize (stacked on #2215)
+
+User order: atomize first, then JUnit for every atom and the JIT, then the patternizer passes. Evidence in
+`number-parse/` (GATES.tsv rows `jit_*`, `hex_*`, `swar_*`, `pattern_*`).
+
+1. ATOMIZE: tree-sitter L-Hash atomization of the 13 M3 types and `FloatingDecimal` (atomize_patternize.py:
+   14 files, 249 leaves before, 270 after; the same counts with ATOMIZE v1, the first run, and v1.1, which replaced the
+   shared tool afterwards; GATES.tsv `jit_atomize` names both hashes), and every method sized by `tools/jit_size.py`:
+   the javap length must equal the class-file code_length (JIT_SIZE.tsv, JIT_SIZE_PRE.tsv). HotSpot 21 limits:
+   MaxInlineSize 35, FreqInlineSize 325, HugeMethodLimit 8000. The hot parse methods were too big:
+   `parseDecFloatLiteral` 466 bytes and `parseHexFloatLiteral` 515 bytes ("hot method too big" into
+   `parseFloatingPointLiteral`, 81-82 C2 failures per batch of 3 probe runs). Split in the same files into private
+   atoms (JIT_ATOMIZE v1, `//FLLDCIM: HPCPOP` anchors):
+   - `parseExponentNumber` and `parseLiteralTail` return one packed long (exponent number, end index, illegal bit);
+     `packedIndex` decodes it (one owner in `M3AbstractFloatValueParser` for both templates);
+   - `valueOfTruncatedDecFloatLiteral` / `valueOfTruncatedHexLiteral` (instance atoms: they end in the abstract
+     valueOf*);
+   - the fast-path decision (35 bytes) over `isClingerFastPath`, `clingerFastPath` (25 bytes) and the Eisel-Lemire
+     atom; `jdkConverterValue` for the cold fallback.
+   The body parsers are now 261 / 316 bytes (CharSequence), and the byte[] template the same way. Over the limits in
+   the 13 types remain only cold code, never compiled in the probe: `M3FastDoubleMath.<clinit>` (9997 bytes, the
+   table initializer) and the FFT `fft`, `ifft`, `multiplyFft`.
+2. JUNIT: `M3NumberParseEveryAtomTest`, one dynamic test per method and constructor of the 13 types plus the two
+   wiring entries (197), each differential against FloatingDecimal.readJavaFormatString, a JDK kernel or an
+   independent model; `everyAtomHasATest()` fails when an atom has no test (198/198; with the same class the JIT
+   split scores 173/198 and the pre-image 157/198, the defects below). The existing gates stay: differential sha256
+   233e0f59..., M3NumberParseAtomsTest 11/11, and the JDK's `FloatingDecimal` tests pass on the patched java.base
+   (TestFloatingDecimal 8/8, TestFDBigInteger, ToString).
+3. JIT: `tools/jit_probe.sh` runs `M3NumberParseJitPerf` (decimal, hex, short, long and subnormal literals) with
+   PrintCompilation + PrintInlining into a VM log; `tools/jit_inline.py` de-interleaves it per compiler thread and
+   writes JIT.tsv (tier and C2 inlining failures per atom, before / after, one batch of 3 runs). The stable result:
+   no "hot method too big" after the split (81-82 per batch before, 0 after, in every batch). The total of C2
+   failures with the gated reasons is a sample, so `tools/jit_batches.sh` reports its spread (JIT_BATCHES.tsv):
+   under background compilation 92-109 before and 42-58 after; with -Xbatch (synchronous compiles) it is reproducible
+   and grows after the split, 132 -> 168. In both regimes the call `parseFloatingPointLiteral` ->
+   `parseDecFloatLiteral` / `parseHexFloatLiteral` stays a call: the loop holder is compiled first and its code
+   exceeds InlineSmallCode 2500 ("already compiled into a big method"), as `FloatingDecimal.parseDouble` at the API
+   boundary. The split moved the reason from bytecode size to compiled size. Perf: PERF_JIT.tsv, 16 interleaved
+   rounds of post / split / pre-image / stock at High priority, system CPU load per row: decimal literals 0.876
+   (double) and 0.913 (float) of the pre-image's time, 9 of 10 rows within 1.05 (float long 1.054).
+4. PATTERNIZE: PATTERNS.tsv, NUMBER-PARSE-PATTERN v1 at atom level (`tools/atom_patterns.py`): 197 atoms in 30
+   atom patterns, 0 UNKNOWN_PATTERN, typed residue (PACKED_RESULT, INSTANCE_ATOM, COLD_PATH, FIXED, DONOR_QUIRK,
+   LATENT_DEFECT) and one owner per proven-identical behaviour.
+
+The per-atom tests found three defects of #2215, all inherited from FastDoubleParser 1.0.90, all reachable through
+`Double.parseDouble` / `Float.parseFloat`, now fixed in their own commits (the pre-image differs from stock, post
+equals stock):
+- HEX_ROUNDING v1: hex significands at or above 2^63 were rounded twice ((double) significand + 2^64), truncated hex
+  significands lost the sticky tail: `0x8000000000000BFFp0`, `0x1.00000000000008000000000000001p0` parsed off by one
+  ulp. Gate `M3ParseDifferential hexdiff 200000`: 30672 lines differ before, 0 after.
+- SWAR_HEX_BORROW v1: the SWAR hex check borrowed across byte lanes and took `g`/`G` for a hex digit:
+  `Double.parseDouble("0x1.79G60184p0")` returned a value instead of throwing NumberFormatException. Gate `swardiff
+  200000`: 76582 lines differ before, 0 after.
+Latent FFT defects (no caller reaches them; recorded as FFT_LATENT v1 in RECIPE_MEMORY.tsv for the BigDecimal leaf):
+length-12 mixed radix, multiplyFft / squareFft for small operands, pointwise operations on vector views.
+
+Review fixes (after merging the moved base a5d6cc2a79; RECIPE_MEMORY.tsv rows 20-29):
+- Custody: `fastdoubleparser.md` names JIT_ATOMIZE v1, HEX_ROUNDING v1, SWAR_HEX_BORROW v1, NUMBER-PARSE-PATTERN v1
+  and CNPCDA v1. `tools/custody_names_check.py` (CUSTODY_NAMES v1) checks that the record names the recipe of every
+  commit that changes absorbed files: `custody_check.py` passes on a merge commit alone, because a merge's
+  first-parent diff repeats the base's record change.
+- Anchors: the four `//FLLDCIM` anchors removed with the `packedIndex` move are back, each with an anchor naming the
+  owner (CNPCDA anchors are append-only); `tools/anchor_check.py` checks that no anchor leaves a file.
+- Literals: 0 HOIST holds for the production code. The leaf's test and gate code are not hoisted yet
+  (LITERALS_TEST_SUMMARY.tsv; OPEN).
+
 Next:
+- Remove the last call boundary of the decimal path: the scanner hands its state (significand and packed index) to
+  the caller instead of calling the value chain, so the loop holder stays below InlineSmallCode.
+- Per-atom perf rows for the atoms this leaf created (the composites have rows in PERF_JIT.tsv and PERF.tsv).
 - Point jackson-core's fast path at the JDK (`Double.parseDouble`) by recipe, then drop the three vendored
   FastDoubleParser copies.
 - A LATIN1 byte path straight over String's bytes. Only the JDK can do this; a library cannot.
