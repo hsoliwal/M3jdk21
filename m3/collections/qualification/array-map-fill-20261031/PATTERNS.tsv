@@ -1,0 +1,10 @@
+pattern	shape	catalogue
+POWER_OF_TWO_CAPACITY	smallest power of two at or above a bound (highestOneBit)	LeetCode 231 Power of Two (bit manipulation)
+MAP_HASH_CONTRACT	null-safe hashCode as java.util.Map defines it	java.util.Map#hashCode
+MAP_EQUALITY_CONTRACT	null-safe equals with an identity short cut, lookup key as receiver	java.util.Map#equals
+FIBONACCI_HASHING	multiplicative hashing by 2^32 / golden ratio, high half folded down	Knuth, TAOCP vol. 3, 6.4
+PRIMITIVE_KEY_HASH	a primitive id is its own hash (Long.hashCode)	java.lang.Long#hashCode
+OPEN_ADDRESSING_LINEAR_PROBE	open-addressed int index, linear probing, tombstones	LeetCode 706 Design HashMap
+BIT_SCAN	next and previous set bit by numberOfTrailingZeros / numberOfLeadingZeros	LeetCode 191 / 338 (bit manipulation)
+RANK_SELECT	rank by popcount prefix, select by word popcount then bit clears	LeetCode 307 family; succinct bit vectors
+STABLE_TWO_POINTER_COMPACTION	read and write pointers move live slots to the front in order	LeetCode 283 Move Zeroes, 27 Remove Element

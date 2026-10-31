@@ -53,6 +53,27 @@ Every numeric literal above 2 and every non-empty string is a named `static fina
 `WORD_MASK`, `GOLDEN_RATIO_32`, `FOLD_SHIFT`, `THIS_MAP`, `KEY_VALUE_SEPARATOR` ...). As compile-time constants, the
 strings are interned by the JVM string table (M3 String storage on M3JDK).
 
+## Atom passes: atomize, then JIT, then patternize
+
+Each atom passes three gates, in this order, in the default (blocking) test run.
+
+1. **Atomize.** The kernel is an atom of the shared `Atoms` class. It has a contract, a JUnit test and a
+   performance row (`M3ArrayMapAtomContractTest`, above).
+2. **JIT.** `M3ArrayMapJitTest` runs `M3ArrayMapJitDriver` in a forked HotSpot JVM. The flags are C2 only,
+   `-Xbatch` and `-XX:+PrintInlining`. The driver calls every atom in a hot loop. The rules:
+   - an atom of at most 35 bytecode bytes (HotSpot's `MaxInlineSize`) must be inlined;
+   - a larger atom must be inlined or called as compiled code;
+   - no atom may be refused for its size.
+   The report is `target/jit/ARRAY_MAP_JIT.tsv`. One local run:
+   - 12 atoms are inlined hot;
+   - `find` (75 bytes), `compact` (115) and `compactIds` (105) are compiled calls. Their own C2 code is larger
+     than `InlineSmallCode`, because `String.equals` or reference-store barriers are inlined into them. They are
+     not refusals.
+3. **Patternize.** `M3ArrayMapPatternPassTest` checks that each atom maps to exactly one pattern of the closed
+   catalogue. `PATTERNS.tsv` holds 9 patterns: open addressing, Fibonacci hashing, bit scan, rank/select, stable
+   two-pointer compaction and others, each with its catalogue reference. `ATOM_PATTERNS.tsv` holds the mapping.
+   An unknown pattern, an unclassified atom or an unused catalogue row fails the pass.
+
 ## Id lane (family ID_MAP): M3 keys
 
 An M3 key is an id: the canonical id of an interned M3String, the node id of an M3AST, or any M3 key id. Keyed by
