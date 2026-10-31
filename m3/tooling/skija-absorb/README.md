@@ -107,3 +107,32 @@ and a `jdk.internal` package is not exported unqualified. The ledgers and the re
 Runtime state: the module compiles and its API is complete, but its natives are not built. `M3Library` still looks for
 the donor's native module, and the JNI symbols in the shipped dll carry the old names, so calls into native code fail
 until leaf 2 builds `libm3graphics` under the new names (`ledgers/JNI_RENAME.tsv`).
+
+## Native descriptor intake v2 (2026-10-31)
+
+The native preflight found 17 additional method/array descriptor literals in the pinned
+Skija C++ sources. The earlier count of 51 covered direct class-name literals only.
+The two existing Python recipes now retain complete literals and rename each known
+object-type reference inside them. The regenerated ledgers contain 68 rows with no
+unmapped real inputs; all original 51 rows remain. Unknown referenced types still
+produce `UNMAPPED`. No type, JNI-symbol or ChangeType mapping changed.
+
+Executed CPU checks: 73 inventory assertions and 220 complete-generator assertions,
+including preserved primitive/array/JDK descriptor tokens, nested types, prefix-overlapping
+type names, unknown-type refusal and deterministic replay. See
+`leaf2/DESCRIPTOR_PROOF.json`, `leaf2/GATES.tsv` and `leaf2/RECIPE_MEMORY.tsv`.
+The existing local Java artifact separately accounts for 966 unique native symbols;
+the five donor-undefined declarations remain present and unimplemented in leaf 1.
+The earlier statement that they were dropped is not an implementation claim.
+
+Readiness correction: Windows SDK 10.0.26100.0 and VS Build Tools 2022 toolset
+14.44.35207 are installed; the latter is under `H:/BuildTools/VS2022`.
+The donor build pins SkiaBuild release `m143-da51f0d60e-5`.
+Its Windows Release x64 archive is advertised as 51,009,973 bytes; it was not
+downloaded and its expanded/build-output budget is not yet measured.
+H:/K:/S: remain below the mandatory 8 GiB reserve, so no native build was started.
+
+Native leaf 2 is still pending: integrate the renamed glue, JDK native build and
+`m3graphics` loader, then prove compiled exports, JNI ownership/lifetime and rendering.
+No native, pixel, performance, consumer migration, full-JDK or Maven/OpenRewrite
+runtime qualification is conferred by these CPU checks.
