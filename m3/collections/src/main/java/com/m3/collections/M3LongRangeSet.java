@@ -78,20 +78,29 @@ public final class M3LongRangeSet {
         // Ends are sorted; lowerBound (not upperBound) retains touching-range merges.
         int first = size == 0 || ends[0] >= fromInclusive
                 ? 0 : M3LaneSearch.lowerBound(ends, 1, size, fromInclusive);
+        // Stored ranges never touch, so exactly the ranges starting at or before toExclusive merge. Their end is found by
+        // galloping on the sorted starts (exponential then binary search, LeetCode 702 / 57): O(log k) for k merged ranges
+        // with local probes only, where the guava fork TreeRangeSet.add finds the same right edge with floorEntry(upper).
         int last = first;
-        long start = fromInclusive;
-        long end = toExclusive;
-        while (last < size && starts[last] <= end) {
-            start = Math.min(start, starts[last]);
-            end = Math.max(end, ends[last]);
-            last++;
+        if (last < size && starts[last] <= toExclusive) {
+            int bound = 1;
+            while (bound < size - last && starts[last + bound] <= toExclusive) {
+                last += bound;
+                bound <<= 1;
+            }
+            last = M3LaneSearch.upperBound(starts, last + 1, last + Math.min(bound, size - last), toExclusive);
         }
+        long start = last == first ? fromInclusive : Math.min(fromInclusive, starts[first]);
+        long end = last == first ? toExclusive : Math.max(toExclusive, ends[last - 1]);
         int removed = last - first;
         if (removed == 1 && start == starts[first] && end == ends[first]) return;
         int resulting = size - removed + 1;
-        reserve(resulting);
-        System.arraycopy(starts, last, starts, first + 1, size - last);
-        System.arraycopy(ends, last, ends, first + 1, size - last);
+        if (removed != 1) {
+            // A merge into exactly one stored range is replaced in place (TreeRangeSet put); otherwise the tail moves.
+            reserve(resulting);
+            System.arraycopy(starts, last, starts, first + 1, size - last);
+            System.arraycopy(ends, last, ends, first + 1, size - last);
+        }
         starts[first] = start;
         ends[first] = end;
         size = resulting;
@@ -103,8 +112,17 @@ public final class M3LongRangeSet {
         valid(fromInclusive, toExclusive);
         if (fromInclusive == toExclusive || size == 0) return;
         int first = firstEndingAfter(fromInclusive);
+        // Starts are sorted: the run of ranges starting before toExclusive ends where galloping (exponential then binary
+        // search, LeetCode 702 / 1272) stops; the guava fork TreeRangeSet.remove finds the same right edge with floorEntry.
         int last = first;
-        while (last < size && starts[last] < toExclusive) last++;
+        if (last < size && starts[last] < toExclusive) {
+            int bound = 1;
+            while (bound < size - last && starts[last + bound] < toExclusive) {
+                last += bound;
+                bound <<= 1;
+            }
+            last = M3LaneSearch.lowerBound(starts, last + 1, last + Math.min(bound, size - last), toExclusive);
+        }
         if (first == last) return;
         long oldStart = starts[first];
         long oldEnd = ends[last - 1];
@@ -113,8 +131,11 @@ public final class M3LongRangeSet {
         int kept = (keepLeft ? 1 : 0) + (keepRight ? 1 : 0);
         int resulting = size - (last - first) + kept;
         reserve(resulting);
-        System.arraycopy(starts, last, starts, first + kept, size - last);
-        System.arraycopy(ends, last, ends, first + kept, size - last);
+        if (first + kept != last) {
+            // A trim that keeps the run length moves nothing; otherwise the tail shifts by first + kept - last.
+            System.arraycopy(starts, last, starts, first + kept, size - last);
+            System.arraycopy(ends, last, ends, first + kept, size - last);
+        }
         int slot = first;
         if (keepLeft) {
             starts[slot] = oldStart;
