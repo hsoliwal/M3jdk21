@@ -1,0 +1,712 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< m3.intake:antlr4-runtime-4.13.2 >-------------------
+[INFO] Building antlr4-runtime-4.13.2 4.13.2-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- rewrite:5.23.1:runNoFork (default-cli) @ antlr4-runtime-4.13.2 ---
+[INFO] Using active recipe(s) [com.synexia.m3.intake.Relocate]
+[INFO] Using active styles(s) []
+[INFO] Validating active recipes...
+[INFO] Project [antlr4-runtime-4.13.2] Resolving Poms...
+[INFO] Project [antlr4-runtime-4.13.2] Parsing source files
+[INFO] Running recipe(s)...
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\ANTLRErrorListener.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\ANTLRErrorListener.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.dfa, newPackageName=com.m3.lib.runtime.dfa, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\ANTLRErrorStrategy.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\ANTLRErrorStrategy.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree, newPackageName=com.m3.lib.runtime.tree, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\ANTLRFileStream.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\ANTLRFileStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\ANTLRInputStream.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\ANTLRInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\AbstractPredicateTransition.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\AbstractPredicateTransition.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\ActionTransition.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\ActionTransition.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\AmbiguityInfo.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\AmbiguityInfo.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\ArrayPredictionContext.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\ArrayPredictionContext.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\ATN.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\ATN.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\ATNConfig.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\ATNConfig.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\ATNConfigSet.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\ATNConfigSet.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\ATNDeserializationOptions.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\ATNDeserializationOptions.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\ATNDeserializer.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\ATNDeserializer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\ATNSerializer.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\ATNSerializer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\ATNSimulator.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\ATNSimulator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.dfa, newPackageName=com.m3.lib.runtime.dfa, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\ATNState.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\ATNState.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\ATNType.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\ATNType.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\AtomTransition.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\AtomTransition.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\BasicBlockStartState.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\BasicBlockStartState.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\BasicState.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\BasicState.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\BlockEndState.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\BlockEndState.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\BlockStartState.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\BlockStartState.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\CodePointTransitions.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\CodePointTransitions.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\ContextSensitivityInfo.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\ContextSensitivityInfo.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\DecisionEventInfo.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\DecisionEventInfo.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\DecisionInfo.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\DecisionInfo.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\DecisionState.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\DecisionState.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\EmptyPredictionContext.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\EmptyPredictionContext.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\EpsilonTransition.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\EpsilonTransition.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\ErrorInfo.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\ErrorInfo.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\LexerAction.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\LexerAction.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\LexerActionExecutor.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\LexerActionExecutor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.dfa, newPackageName=com.m3.lib.runtime.dfa, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\LexerActionType.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\LexerActionType.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\LexerATNConfig.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\LexerATNConfig.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\LexerATNSimulator.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\LexerATNSimulator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.dfa, newPackageName=com.m3.lib.runtime.dfa, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\LexerChannelAction.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\LexerChannelAction.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\LexerCustomAction.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\LexerCustomAction.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\LexerIndexedCustomAction.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\LexerIndexedCustomAction.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\LexerModeAction.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\LexerModeAction.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\LexerMoreAction.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\LexerMoreAction.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\LexerPopModeAction.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\LexerPopModeAction.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\LexerPushModeAction.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\LexerPushModeAction.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\LexerSkipAction.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\LexerSkipAction.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\LexerTypeAction.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\LexerTypeAction.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\LL1Analyzer.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\LL1Analyzer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\LookaheadEventInfo.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\LookaheadEventInfo.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\LoopEndState.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\LoopEndState.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\NotSetTransition.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\NotSetTransition.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\OrderedATNConfigSet.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\OrderedATNConfigSet.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\ParseInfo.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\ParseInfo.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.dfa, newPackageName=com.m3.lib.runtime.dfa, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\ParserATNSimulator.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\ParserATNSimulator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.dfa, newPackageName=com.m3.lib.runtime.dfa, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\PlusBlockStartState.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\PlusBlockStartState.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\PlusLoopbackState.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\PlusLoopbackState.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\PrecedencePredicateTransition.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\PrecedencePredicateTransition.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\PredicateEvalInfo.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\PredicateEvalInfo.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\PredicateTransition.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\PredicateTransition.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\PredictionContext.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\PredictionContext.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\PredictionContextCache.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\PredictionContextCache.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\PredictionMode.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\PredictionMode.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\ProfilingATNSimulator.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\ProfilingATNSimulator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.dfa, newPackageName=com.m3.lib.runtime.dfa, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\RangeTransition.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\RangeTransition.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\RuleStartState.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\RuleStartState.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\RuleStopState.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\RuleStopState.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\RuleTransition.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\RuleTransition.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\SemanticContext.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\SemanticContext.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\SetTransition.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\SetTransition.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\SingletonPredictionContext.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\SingletonPredictionContext.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\StarBlockStartState.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\StarBlockStartState.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\StarLoopbackState.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\StarLoopbackState.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\StarLoopEntryState.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\StarLoopEntryState.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.dfa, newPackageName=com.m3.lib.runtime.dfa, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\TokensStartState.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\TokensStartState.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\Transition.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\Transition.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\atn\WildcardTransition.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\WildcardTransition.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\BailErrorStrategy.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\BailErrorStrategy.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\BaseErrorListener.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\BaseErrorListener.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.dfa, newPackageName=com.m3.lib.runtime.dfa, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\BufferedTokenStream.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\BufferedTokenStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\CharStream.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\CharStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\CharStreams.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\CharStreams.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\CodePointBuffer.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\CodePointBuffer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\CodePointCharStream.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\CodePointCharStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\CommonToken.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\CommonToken.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\CommonTokenFactory.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\CommonTokenFactory.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\CommonTokenStream.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\CommonTokenStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\ConsoleErrorListener.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\ConsoleErrorListener.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\DefaultErrorStrategy.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\DefaultErrorStrategy.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\dfa\DFA.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\dfa\DFA.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.dfa, newPackageName=com.m3.lib.runtime.dfa, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\dfa\DFASerializer.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\dfa\DFASerializer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.dfa, newPackageName=com.m3.lib.runtime.dfa, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\dfa\DFAState.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\dfa\DFAState.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.dfa, newPackageName=com.m3.lib.runtime.dfa, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\dfa\LexerDFASerializer.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\dfa\LexerDFASerializer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.dfa, newPackageName=com.m3.lib.runtime.dfa, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\DiagnosticErrorListener.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\DiagnosticErrorListener.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.dfa, newPackageName=com.m3.lib.runtime.dfa, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\FailedPredicateException.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\FailedPredicateException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\InputMismatchException.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\InputMismatchException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\InterpreterRuleContext.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\InterpreterRuleContext.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\IntStream.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\IntStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\Lexer.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\Lexer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\LexerInterpreter.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\LexerInterpreter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.dfa, newPackageName=com.m3.lib.runtime.dfa, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\LexerNoViableAltException.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\LexerNoViableAltException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\ListTokenSource.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\ListTokenSource.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\misc\AbstractEqualityComparator.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\AbstractEqualityComparator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\misc\Array2DHashSet.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\Array2DHashSet.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\misc\DoubleKeyMap.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\DoubleKeyMap.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\misc\EqualityComparator.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\EqualityComparator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\misc\FlexibleHashMap.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\FlexibleHashMap.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\misc\IntegerList.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\IntegerList.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\misc\IntegerStack.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\IntegerStack.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\misc\InterpreterDataReader.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\InterpreterDataReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.dfa, newPackageName=com.m3.lib.runtime.dfa, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\misc\Interval.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\Interval.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\misc\IntervalSet.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\IntervalSet.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\misc\IntSet.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\IntSet.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\misc\LogManager.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\LogManager.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\misc\MultiMap.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\MultiMap.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\misc\MurmurHash.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\MurmurHash.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\misc\NotNull.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\NotNull.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\misc\ObjectEqualityComparator.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\ObjectEqualityComparator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\misc\OrderedHashSet.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\OrderedHashSet.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\misc\Pair.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\Pair.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\misc\ParseCancellationException.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\ParseCancellationException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\misc\Predicate.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\Predicate.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\misc\TestRig.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\TestRig.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\misc\Triple.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\Triple.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\misc\Utils.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\Utils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\NoViableAltException.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\NoViableAltException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\Parser.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\Parser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree.pattern, newPackageName=com.m3.lib.runtime.tree.pattern, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree, newPackageName=com.m3.lib.runtime.tree, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.dfa, newPackageName=com.m3.lib.runtime.dfa, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\ParserInterpreter.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\ParserInterpreter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.dfa, newPackageName=com.m3.lib.runtime.dfa, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\ParserRuleContext.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\ParserRuleContext.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree, newPackageName=com.m3.lib.runtime.tree, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\ProxyErrorListener.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\ProxyErrorListener.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.dfa, newPackageName=com.m3.lib.runtime.dfa, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\RecognitionException.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\RecognitionException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\Recognizer.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\Recognizer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\RuleContext.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\RuleContext.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree, newPackageName=com.m3.lib.runtime.tree, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\RuleContextWithAltNum.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\RuleContextWithAltNum.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\RuntimeMetaData.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\RuntimeMetaData.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\Token.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\Token.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\TokenFactory.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\TokenFactory.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\TokenSource.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\TokenSource.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\TokenStream.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\TokenStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\TokenStreamRewriter.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\TokenStreamRewriter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\AbstractParseTreeVisitor.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\AbstractParseTreeVisitor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree, newPackageName=com.m3.lib.runtime.tree, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\ErrorNode.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\ErrorNode.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree, newPackageName=com.m3.lib.runtime.tree, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\ErrorNodeImpl.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\ErrorNodeImpl.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree, newPackageName=com.m3.lib.runtime.tree, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\IterativeParseTreeWalker.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\IterativeParseTreeWalker.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree, newPackageName=com.m3.lib.runtime.tree, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\ParseTree.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\ParseTree.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree, newPackageName=com.m3.lib.runtime.tree, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\ParseTreeListener.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\ParseTreeListener.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree, newPackageName=com.m3.lib.runtime.tree, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\ParseTreeProperty.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\ParseTreeProperty.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree, newPackageName=com.m3.lib.runtime.tree, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\ParseTreeVisitor.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\ParseTreeVisitor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree, newPackageName=com.m3.lib.runtime.tree, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\ParseTreeWalker.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\ParseTreeWalker.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree, newPackageName=com.m3.lib.runtime.tree, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\pattern\Chunk.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\pattern\Chunk.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree.pattern, newPackageName=com.m3.lib.runtime.tree.pattern, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\pattern\ParseTreeMatch.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\pattern\ParseTreeMatch.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree.pattern, newPackageName=com.m3.lib.runtime.tree.pattern, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree, newPackageName=com.m3.lib.runtime.tree, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\pattern\ParseTreePattern.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\pattern\ParseTreePattern.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree.pattern, newPackageName=com.m3.lib.runtime.tree.pattern, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree.xpath, newPackageName=com.m3.lib.runtime.tree.xpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree, newPackageName=com.m3.lib.runtime.tree, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\pattern\ParseTreePatternMatcher.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\pattern\ParseTreePatternMatcher.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree.pattern, newPackageName=com.m3.lib.runtime.tree.pattern, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree, newPackageName=com.m3.lib.runtime.tree, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\pattern\RuleTagToken.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\pattern\RuleTagToken.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree.pattern, newPackageName=com.m3.lib.runtime.tree.pattern, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\pattern\TagChunk.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\pattern\TagChunk.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree.pattern, newPackageName=com.m3.lib.runtime.tree.pattern, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\pattern\TextChunk.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\pattern\TextChunk.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree.pattern, newPackageName=com.m3.lib.runtime.tree.pattern, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\pattern\TokenTagToken.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\pattern\TokenTagToken.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree.pattern, newPackageName=com.m3.lib.runtime.tree.pattern, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\RuleNode.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\RuleNode.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree, newPackageName=com.m3.lib.runtime.tree, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\SyntaxTree.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\SyntaxTree.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree, newPackageName=com.m3.lib.runtime.tree, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\TerminalNode.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\TerminalNode.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree, newPackageName=com.m3.lib.runtime.tree, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\TerminalNodeImpl.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\TerminalNodeImpl.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree, newPackageName=com.m3.lib.runtime.tree, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\Tree.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\Tree.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree, newPackageName=com.m3.lib.runtime.tree, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\Trees.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\Trees.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree, newPackageName=com.m3.lib.runtime.tree, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\xpath\XPath.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\xpath\XPath.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree.xpath, newPackageName=com.m3.lib.runtime.tree.xpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree, newPackageName=com.m3.lib.runtime.tree, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\xpath\XPathElement.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\xpath\XPathElement.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree.xpath, newPackageName=com.m3.lib.runtime.tree.xpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree, newPackageName=com.m3.lib.runtime.tree, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\xpath\XPathLexer.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\xpath\XPathLexer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree.xpath, newPackageName=com.m3.lib.runtime.tree.xpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.atn, newPackageName=com.m3.lib.runtime.atn, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\xpath\XPathLexerErrorListener.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\xpath\XPathLexerErrorListener.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree.xpath, newPackageName=com.m3.lib.runtime.tree.xpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\xpath\XPathRuleAnywhereElement.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\xpath\XPathRuleAnywhereElement.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree.xpath, newPackageName=com.m3.lib.runtime.tree.xpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree, newPackageName=com.m3.lib.runtime.tree, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\xpath\XPathRuleElement.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\xpath\XPathRuleElement.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree.xpath, newPackageName=com.m3.lib.runtime.tree.xpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree, newPackageName=com.m3.lib.runtime.tree, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\xpath\XPathTokenAnywhereElement.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\xpath\XPathTokenAnywhereElement.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree.xpath, newPackageName=com.m3.lib.runtime.tree.xpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree, newPackageName=com.m3.lib.runtime.tree, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\xpath\XPathTokenElement.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\xpath\XPathTokenElement.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree.xpath, newPackageName=com.m3.lib.runtime.tree.xpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree, newPackageName=com.m3.lib.runtime.tree, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\xpath\XPathWildcardAnywhereElement.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\xpath\XPathWildcardAnywhereElement.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree.xpath, newPackageName=com.m3.lib.runtime.tree.xpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree, newPackageName=com.m3.lib.runtime.tree, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\tree\xpath\XPathWildcardElement.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\xpath\XPathWildcardElement.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree.xpath, newPackageName=com.m3.lib.runtime.tree.xpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.tree, newPackageName=com.m3.lib.runtime.tree, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\UnbufferedCharStream.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\UnbufferedCharStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\UnbufferedTokenStream.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\UnbufferedTokenStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime.misc, newPackageName=com.m3.lib.runtime.misc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\Vocabulary.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\Vocabulary.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\VocabularyImpl.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\VocabularyImpl.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\org\antlr\v4\runtime\WritableToken.java to m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\WritableToken.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.antlr.v4.runtime, newPackageName=com.m3.lib.runtime, recursive=false}
+[WARNING] Please review and commit the results.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  17.413 s
+[INFO] Finished at: 2026-10-31T06:53:26+05:30
+[INFO] ------------------------------------------------------------------------

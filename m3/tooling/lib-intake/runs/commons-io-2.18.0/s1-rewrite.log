@@ -1,0 +1,996 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------< m3.intake:commons-io-2.18.0 >---------------------
+[INFO] Building commons-io-2.18.0 2.18.0-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- rewrite:5.23.1:runNoFork (default-cli) @ commons-io-2.18.0 ---
+[INFO] Using active recipe(s) [com.synexia.m3.intake.Relocate]
+[INFO] Using active styles(s) []
+[INFO] Validating active recipes...
+[INFO] Project [commons-io-2.18.0] Resolving Poms...
+[INFO] Project [commons-io-2.18.0] Parsing source files
+[INFO] Running recipe(s)...
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\build\AbstractOrigin.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\build\AbstractOrigin.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file.spi, newPackageName=com.m3.lib.io.file.spi, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\build\AbstractOriginSupplier.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\build\AbstractOriginSupplier.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\build\AbstractStreamBuilder.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\build\AbstractStreamBuilder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file, newPackageName=com.m3.lib.io.file, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\build\AbstractSupplier.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\build\AbstractSupplier.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\build\package-info.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\build\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\ByteOrderMark.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\ByteOrderMark.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\ByteOrderParser.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\ByteOrderParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\channels\FileChannels.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\channels\FileChannels.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.channels, newPackageName=com.m3.lib.io.channels, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\channels\package-info.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\channels\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.channels, newPackageName=com.m3.lib.io.channels, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\charset\CharsetDecoders.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\charset\CharsetDecoders.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.charset, newPackageName=com.m3.lib.io.charset, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\charset\CharsetEncoders.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\charset\CharsetEncoders.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.charset, newPackageName=com.m3.lib.io.charset, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\charset\package-info.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\charset\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.charset, newPackageName=com.m3.lib.io.charset, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\Charsets.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\Charsets.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\CloseableURLConnection.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\CloseableURLConnection.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\comparator\AbstractFileComparator.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\comparator\AbstractFileComparator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.comparator, newPackageName=com.m3.lib.io.comparator, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\comparator\CompositeFileComparator.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\comparator\CompositeFileComparator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.comparator, newPackageName=com.m3.lib.io.comparator, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\comparator\DefaultFileComparator.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\comparator\DefaultFileComparator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.comparator, newPackageName=com.m3.lib.io.comparator, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\comparator\DirectoryFileComparator.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\comparator\DirectoryFileComparator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.comparator, newPackageName=com.m3.lib.io.comparator, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\comparator\ExtensionFileComparator.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\comparator\ExtensionFileComparator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.comparator, newPackageName=com.m3.lib.io.comparator, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\comparator\LastModifiedFileComparator.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\comparator\LastModifiedFileComparator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.comparator, newPackageName=com.m3.lib.io.comparator, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\comparator\NameFileComparator.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\comparator\NameFileComparator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.comparator, newPackageName=com.m3.lib.io.comparator, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\comparator\package-info.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\comparator\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.comparator, newPackageName=com.m3.lib.io.comparator, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\comparator\PathFileComparator.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\comparator\PathFileComparator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.comparator, newPackageName=com.m3.lib.io.comparator, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\comparator\ReverseFileComparator.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\comparator\ReverseFileComparator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.comparator, newPackageName=com.m3.lib.io.comparator, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\comparator\SizeFileComparator.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\comparator\SizeFileComparator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.comparator, newPackageName=com.m3.lib.io.comparator, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\CopyUtils.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\CopyUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\DirectoryWalker.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\DirectoryWalker.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file, newPackageName=com.m3.lib.io.file, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\EndianUtils.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\EndianUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\file\AccumulatorPathVisitor.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\file\AccumulatorPathVisitor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file, newPackageName=com.m3.lib.io.file, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\file\attribute\FileTimes.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\file\attribute\FileTimes.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file.attribute, newPackageName=com.m3.lib.io.file.attribute, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\file\attribute\package-info.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\file\attribute\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file.attribute, newPackageName=com.m3.lib.io.file.attribute, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\file\CleaningPathVisitor.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\file\CleaningPathVisitor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file, newPackageName=com.m3.lib.io.file, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\file\CopyDirectoryVisitor.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\file\CopyDirectoryVisitor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file, newPackageName=com.m3.lib.io.file, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\file\Counters.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\file\Counters.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file, newPackageName=com.m3.lib.io.file, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\file\CountingPathVisitor.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\file\CountingPathVisitor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file, newPackageName=com.m3.lib.io.file, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\file\DeleteOption.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\file\DeleteOption.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file, newPackageName=com.m3.lib.io.file, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\file\DeletingPathVisitor.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\file\DeletingPathVisitor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file, newPackageName=com.m3.lib.io.file, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\file\DirectoryStreamFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\file\DirectoryStreamFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file, newPackageName=com.m3.lib.io.file, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\file\FilesUncheck.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\file\FilesUncheck.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file, newPackageName=com.m3.lib.io.file, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\file\NoopPathVisitor.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\file\NoopPathVisitor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file, newPackageName=com.m3.lib.io.file, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\file\package-info.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\file\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file, newPackageName=com.m3.lib.io.file, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\file\PathFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\file\PathFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file, newPackageName=com.m3.lib.io.file, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\file\PathUtils.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\file\PathUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file.attribute, newPackageName=com.m3.lib.io.file.attribute, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file, newPackageName=com.m3.lib.io.file, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\file\PathVisitor.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\file\PathVisitor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file, newPackageName=com.m3.lib.io.file, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\file\SimplePathVisitor.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\file\SimplePathVisitor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file, newPackageName=com.m3.lib.io.file, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\file\spi\FileSystemProviders.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\file\spi\FileSystemProviders.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file.spi, newPackageName=com.m3.lib.io.file.spi, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\file\spi\package-info.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\file\spi\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file.spi, newPackageName=com.m3.lib.io.file.spi, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\file\StandardDeleteOption.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\file\StandardDeleteOption.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file, newPackageName=com.m3.lib.io.file, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\FileCleaner.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\FileCleaner.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\FileCleaningTracker.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\FileCleaningTracker.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\FileDeleteStrategy.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\FileDeleteStrategy.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\FileExistsException.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\FileExistsException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\AbstractFileFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\AbstractFileFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file, newPackageName=com.m3.lib.io.file, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\AgeFileFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\AgeFileFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file, newPackageName=com.m3.lib.io.file, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\AndFileFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\AndFileFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\CanExecuteFileFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\CanExecuteFileFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\CanReadFileFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\CanReadFileFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\CanWriteFileFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\CanWriteFileFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\ConditionalFileFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\ConditionalFileFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\DelegateFileFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\DelegateFileFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\DirectoryFileFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\DirectoryFileFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\EmptyFileFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\EmptyFileFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\FalseFileFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\FalseFileFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\FileEqualsFileFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\FileEqualsFileFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\FileFileFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\FileFileFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\FileFilterUtils.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\FileFilterUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\HiddenFileFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\HiddenFileFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\IOFileFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\IOFileFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file, newPackageName=com.m3.lib.io.file, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\MagicNumberFileFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\MagicNumberFileFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\NameFileFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\NameFileFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file, newPackageName=com.m3.lib.io.file, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\NotFileFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\NotFileFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\OrFileFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\OrFileFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\package-info.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\PathEqualsFileFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\PathEqualsFileFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\PathMatcherFileFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\PathMatcherFileFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\PathVisitorFileFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\PathVisitorFileFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file, newPackageName=com.m3.lib.io.file, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\PrefixFileFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\PrefixFileFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file, newPackageName=com.m3.lib.io.file, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\RegexFileFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\RegexFileFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file, newPackageName=com.m3.lib.io.file, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\SizeFileFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\SizeFileFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\SuffixFileFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\SuffixFileFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file, newPackageName=com.m3.lib.io.file, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\SymbolicLinkFileFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\SymbolicLinkFileFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\TrueFileFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\TrueFileFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\WildcardFileFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\WildcardFileFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file, newPackageName=com.m3.lib.io.file, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\filefilter\WildcardFilter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\WildcardFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file, newPackageName=com.m3.lib.io.file, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\FilenameUtils.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\FilenameUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\FileSystem.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\FileSystem.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\FileSystemUtils.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\FileSystemUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\FileUtils.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\FileUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file, newPackageName=com.m3.lib.io.file, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\Constants.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\Constants.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\Erase.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\Erase.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\IOBaseStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\IOBaseStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\IOBaseStreamAdapter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\IOBaseStreamAdapter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\IOBiConsumer.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\IOBiConsumer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\IOBiFunction.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\IOBiFunction.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\IOBinaryOperator.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\IOBinaryOperator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\IOComparator.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\IOComparator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\IOConsumer.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\IOConsumer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\IOFunction.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\IOFunction.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\IOIntConsumer.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\IOIntConsumer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\IOIntSupplier.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\IOIntSupplier.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\IOIterator.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\IOIterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\IOIteratorAdapter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\IOIteratorAdapter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\IOLongSupplier.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\IOLongSupplier.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\IOPredicate.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\IOPredicate.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\IOQuadFunction.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\IOQuadFunction.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\IORunnable.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\IORunnable.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\IOSpliterator.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\IOSpliterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\IOSpliteratorAdapter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\IOSpliteratorAdapter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\IOStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\IOStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\IOStreamAdapter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\IOStreamAdapter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\IOStreams.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\IOStreams.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\IOSupplier.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\IOSupplier.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\IOTriConsumer.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\IOTriConsumer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\IOTriFunction.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\IOTriFunction.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\IOUnaryOperator.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\IOUnaryOperator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\package-info.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\Uncheck.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\Uncheck.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\UncheckedIOBaseStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\UncheckedIOBaseStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\UncheckedIOIterator.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\UncheckedIOIterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\function\UncheckedIOSpliterator.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\UncheckedIOSpliterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\HexDump.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\HexDump.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\AbstractCharacterFilterReader.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\AbstractCharacterFilterReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\AbstractInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\AbstractInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\AutoCloseInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\AutoCloseInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\BOMInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\BOMInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\BoundedInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\BoundedInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\BoundedReader.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\BoundedReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\BrokenInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\BrokenInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\BrokenReader.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\BrokenReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\buffer\CircularBufferInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\buffer\CircularBufferInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input.buffer, newPackageName=com.m3.lib.io.input.buffer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\buffer\CircularByteBuffer.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\buffer\CircularByteBuffer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input.buffer, newPackageName=com.m3.lib.io.input.buffer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\buffer\package-info.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\buffer\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input.buffer, newPackageName=com.m3.lib.io.input.buffer, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\buffer\PeekableInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\buffer\PeekableInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input.buffer, newPackageName=com.m3.lib.io.input.buffer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\BufferedFileChannelInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\BufferedFileChannelInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\ByteBufferCleaner.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\ByteBufferCleaner.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\CharacterFilterReader.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\CharacterFilterReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\CharacterSetFilterReader.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\CharacterSetFilterReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\CharSequenceInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\CharSequenceInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.charset, newPackageName=com.m3.lib.io.charset, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\CharSequenceReader.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\CharSequenceReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\ChecksumInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\ChecksumInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\CircularInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\CircularInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\ClassLoaderObjectInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\ClassLoaderObjectInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\ClosedInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\ClosedInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\ClosedReader.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\ClosedReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\CloseShieldInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\CloseShieldInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\CloseShieldReader.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\CloseShieldReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\CountingInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\CountingInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\DemuxInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\DemuxInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\InfiniteCircularInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\InfiniteCircularInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\Input.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\Input.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\MarkShieldInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\MarkShieldInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\MemoryMappedFileInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\MemoryMappedFileInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\MessageDigestCalculatingInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\MessageDigestCalculatingInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\MessageDigestInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\MessageDigestInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\NullInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\NullInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\NullReader.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\NullReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\ObservableInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\ObservableInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\package-info.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\ProxyInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\ProxyInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\ProxyReader.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\ProxyReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\QueueInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\QueueInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\RandomAccessFileInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\RandomAccessFileInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\ReadAheadInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\ReadAheadInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\ReaderInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\ReaderInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.charset, newPackageName=com.m3.lib.io.charset, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\ReversedLinesFileReader.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\ReversedLinesFileReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\SequenceReader.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\SequenceReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\SwappedDataInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\SwappedDataInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\TaggedInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\TaggedInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\TaggedReader.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\TaggedReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\Tailer.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\Tailer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file.attribute, newPackageName=com.m3.lib.io.file.attribute, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file, newPackageName=com.m3.lib.io.file, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\TailerListener.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\TailerListener.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\TailerListenerAdapter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\TailerListenerAdapter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\TeeInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\TeeInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\TeeReader.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\TeeReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\ThrottledInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\ThrottledInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\TimestampedObserver.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\TimestampedObserver.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\UncheckedBufferedReader.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\UncheckedBufferedReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\UncheckedFilterInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\UncheckedFilterInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\UncheckedFilterReader.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\UncheckedFilterReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\UnixLineEndingInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\UnixLineEndingInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\UnsupportedOperationExceptions.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\UnsupportedOperationExceptions.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\UnsynchronizedBufferedInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\UnsynchronizedBufferedInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\UnsynchronizedBufferedReader.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\UnsynchronizedBufferedReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\UnsynchronizedByteArrayInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\UnsynchronizedByteArrayInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\UnsynchronizedFilterInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\UnsynchronizedFilterInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\UnsynchronizedReader.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\UnsynchronizedReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\WindowsLineEndingInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\WindowsLineEndingInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\XmlStreamReader.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\XmlStreamReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\input\XmlStreamReaderException.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\XmlStreamReaderException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\IO.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\IO.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\IOCase.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\IOCase.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\IOExceptionList.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\IOExceptionList.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\IOExceptionWithCause.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\IOExceptionWithCause.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\IOIndexedException.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\IOIndexedException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\IORandomAccessFile.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\IORandomAccessFile.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\IOUtils.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\IOUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\LineIterator.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\LineIterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\monitor\FileAlterationListener.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\monitor\FileAlterationListener.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.monitor, newPackageName=com.m3.lib.io.monitor, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\monitor\FileAlterationListenerAdaptor.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\monitor\FileAlterationListenerAdaptor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.monitor, newPackageName=com.m3.lib.io.monitor, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\monitor\FileAlterationMonitor.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\monitor\FileAlterationMonitor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.monitor, newPackageName=com.m3.lib.io.monitor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\monitor\FileAlterationObserver.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\monitor\FileAlterationObserver.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.comparator, newPackageName=com.m3.lib.io.comparator, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.filefilter, newPackageName=com.m3.lib.io.filefilter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.monitor, newPackageName=com.m3.lib.io.monitor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\monitor\FileEntry.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\monitor\FileEntry.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file.attribute, newPackageName=com.m3.lib.io.file.attribute, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.monitor, newPackageName=com.m3.lib.io.monitor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\monitor\package-info.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\monitor\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.monitor, newPackageName=com.m3.lib.io.monitor, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\monitor\SerializableFileTime.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\monitor\SerializableFileTime.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file.attribute, newPackageName=com.m3.lib.io.file.attribute, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.monitor, newPackageName=com.m3.lib.io.monitor, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\AbstractByteArrayOutputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\AbstractByteArrayOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\AppendableOutputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\AppendableOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\AppendableWriter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\AppendableWriter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\BrokenOutputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\BrokenOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\BrokenWriter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\BrokenWriter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\ByteArrayOutputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\ByteArrayOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\ChunkedOutputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\ChunkedOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\ChunkedWriter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\ChunkedWriter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\ClosedOutputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\ClosedOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\ClosedWriter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\ClosedWriter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\CloseShieldOutputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\CloseShieldOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\CloseShieldWriter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\CloseShieldWriter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\CountingOutputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\CountingOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\DeferredFileOutputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\DeferredFileOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.file, newPackageName=com.m3.lib.io.file, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\DemuxOutputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\DemuxOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\FileWriterWithEncoding.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\FileWriterWithEncoding.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\FilterCollectionWriter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\FilterCollectionWriter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\LockableFileWriter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\LockableFileWriter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\NullAppendable.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\NullAppendable.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\NullOutputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\NullOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\NullPrintStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\NullPrintStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\NullWriter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\NullWriter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\package-info.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\ProxyCollectionWriter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\ProxyCollectionWriter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\ProxyOutputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\ProxyOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\ProxyWriter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\ProxyWriter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\QueueOutputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\QueueOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\RandomAccessFileOutputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\RandomAccessFileOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\StringBuilderWriter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\StringBuilderWriter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\TaggedOutputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\TaggedOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\TaggedWriter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\TaggedWriter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\TeeOutputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\TeeOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\TeeWriter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\TeeWriter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\ThresholdingOutputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\ThresholdingOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\UncheckedAppendable.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\UncheckedAppendable.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\UncheckedAppendableImpl.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\UncheckedAppendableImpl.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\UncheckedFilterOutputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\UncheckedFilterOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\UncheckedFilterWriter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\UncheckedFilterWriter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\UnsynchronizedByteArrayOutputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\UnsynchronizedByteArrayOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\WriterOutputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\WriterOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.charset, newPackageName=com.m3.lib.io.charset, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\output\XmlStreamWriter.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\XmlStreamWriter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.output, newPackageName=com.m3.lib.io.output, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.input, newPackageName=com.m3.lib.io.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\package-info.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\RandomAccessFileMode.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\RandomAccessFileMode.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\RandomAccessFiles.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\RandomAccessFiles.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.channels, newPackageName=com.m3.lib.io.channels, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.function, newPackageName=com.m3.lib.io.function, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\serialization\ClassNameMatcher.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\serialization\ClassNameMatcher.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.serialization, newPackageName=com.m3.lib.io.serialization, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\serialization\FullClassNameMatcher.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\serialization\FullClassNameMatcher.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.serialization, newPackageName=com.m3.lib.io.serialization, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\serialization\ObjectStreamClassPredicate.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\serialization\ObjectStreamClassPredicate.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.serialization, newPackageName=com.m3.lib.io.serialization, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\serialization\package-info.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\serialization\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.serialization, newPackageName=com.m3.lib.io.serialization, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\serialization\RegexpClassNameMatcher.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\serialization\RegexpClassNameMatcher.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.serialization, newPackageName=com.m3.lib.io.serialization, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\serialization\ValidatingObjectInputStream.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\serialization\ValidatingObjectInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.serialization, newPackageName=com.m3.lib.io.serialization, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.build, newPackageName=com.m3.lib.io.build, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\serialization\WildcardClassNameMatcher.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\serialization\WildcardClassNameMatcher.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io.serialization, newPackageName=com.m3.lib.io.serialization, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\StandardLineSeparator.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\StandardLineSeparator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\StreamIterator.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\StreamIterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\TaggedIOException.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\TaggedIOException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\ThreadMonitor.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\ThreadMonitor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\ThreadUtils.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\ThreadUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\org\apache\commons\io\UncheckedIOExceptions.java to m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\UncheckedIOExceptions.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.io, newPackageName=com.m3.lib.io, recursive=false}
+[WARNING] Please review and commit the results.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  19.138 s
+[INFO] Finished at: 2026-10-31T06:36:43+05:30
+[INFO] ------------------------------------------------------------------------

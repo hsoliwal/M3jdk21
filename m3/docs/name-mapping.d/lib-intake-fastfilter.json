@@ -1,0 +1,79 @@
+{
+  "schema": "M3_LIB_INTAKE_NAME_MAPPING_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors (M3 modifications)",
+  "license": "upstream LICENSE in legal_notice (https://raw.githubusercontent.com/FastFilter/fastfilter_java/fastfilter_java-1.0.3/LICENSE); original notices retained",
+  "product": "M3JDK21",
+  "intake_mode": "LIB_INTAKE_TO_JMOD_V2",
+  "target_module": "jdk.m3.fastfilter",
+  "target_path": "m3/vendor/third_party-m3/relocated/fastfilter",
+  "canonical_recipe": "m3/tooling/lib-intake/lib_intake.sh (pattern LIB_INTAKE_TO_JMOD v2)",
+  "canonical_recipe_owners": [
+    "org.openrewrite.java.ChangePackage (recursive=false, longest first; boundary-checked form of com.synexia M3BoundaryCheckedPackageRenameRecipe)"
+  ],
+  "source_path": "m3/vendor/third_party/fastfilter",
+  "source_coordinate": "io.github.fastfilter:fastfilter:1.0.2-m3-source-1",
+  "source_version": "1.0.2-m3-source-1",
+  "source_license_origin": "https://raw.githubusercontent.com/FastFilter/fastfilter_java/fastfilter_java-1.0.3/LICENSE",
+  "source_packages": [
+    "org.fastfilter"
+  ],
+  "runtime_packages": [
+    "com.m3.lib.fastfilter"
+  ],
+  "intake_dependencies": "-",
+  "qualification_receipt": "m3/tooling/lib-intake/runs/fastfilter/STAGES.tsv",
+  "relocation_map": "m3/tooling/lib-intake/runs/fastfilter/RELOCATION_MAP.tsv",
+  "legal_notice": "m3/vendor/third_party-m3/relocated/fastfilter",
+  "mappings": [
+    {
+      "source": "org.fastfilter and subpackages",
+      "target": "com.m3.lib.fastfilter and subpackages",
+      "role": "relocated donor API in the optional jdk.m3.fastfilter JMOD; type names retained"
+    },
+    {
+      "source": "org.fastfilter.bloom.count",
+      "target": "com.m3.lib.fastfilter.bloom.count",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.fastfilter.xorplus",
+      "target": "com.m3.lib.fastfilter.xorplus",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.fastfilter.cuckoo",
+      "target": "com.m3.lib.fastfilter.cuckoo",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.fastfilter.bloom",
+      "target": "com.m3.lib.fastfilter.bloom",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.fastfilter.tools",
+      "target": "com.m3.lib.fastfilter.tools",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.fastfilter.utils",
+      "target": "com.m3.lib.fastfilter.utils",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.fastfilter.gcs",
+      "target": "com.m3.lib.fastfilter.gcs",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.fastfilter.xor",
+      "target": "com.m3.lib.fastfilter.xor",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.fastfilter",
+      "target": "com.m3.lib.fastfilter",
+      "role": "package (ChangePackage)"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.intake.Relocate
+displayName: LIB_INTAKE relocation of JavaEWAH
+description: Boundary-checked package relocation, one non-recursive ChangePackage per package, longest first.
+recipeList:
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: com.googlecode.javaewah.datastructure
+      newPackageName: com.m3.collections.ewah.datastructure
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: com.googlecode.javaewah32.symmetric
+      newPackageName: com.m3.collections.ewah32.symmetric
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: com.googlecode.javaewah.symmetric
+      newPackageName: com.m3.collections.ewah.symmetric
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: com.googlecode.javaewah32
+      newPackageName: com.m3.collections.ewah32
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: com.googlecode.javaewah
+      newPackageName: com.m3.collections.ewah
+      recursive: false
