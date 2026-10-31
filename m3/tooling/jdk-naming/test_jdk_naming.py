@@ -80,6 +80,11 @@ class JdkNamingTest(unittest.TestCase):
         self.assertIn("env: M3_MODE", workflow)
         self.assertIn('"jdk.internal.m3"', (self.root / "m3/x/Use.java").read_text(encoding="utf-8"))
 
+    def test_a_code_line_naming_a_license_is_still_renamed(self):
+        self.put("m3/x/Rules.java", "import com.synexia.m3.x.LicenseRule;\n")
+        jn.apply(self.root, jn.plan(self.root))
+        self.assertIn("import jdk.internal.m3.x.LicenseRule;", (self.root / "m3/x/Rules.java").read_text(encoding="utf-8"))
+
     def test_collision_refuses_the_plan(self):
         self.put("m3/x/SynexiaBar.java", "class SynexiaBar {}\n")
         self.put("m3/x/M3Bar.java", "class M3Bar {}\n")

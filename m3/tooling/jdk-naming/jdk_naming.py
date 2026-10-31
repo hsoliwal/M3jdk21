@@ -44,7 +44,7 @@ PATH_RULES = (
 )
 # dependencies are removed by the standalone work, never renamed (renaming would hide them from the check): links to
 # the Synexia repository, SYNEXIA_* secrets, and Maven groupIds (mapped in a later phase, not as Java packages)
-KEEP_LINE = re.compile(r"Copyright|SPDX-|License|hsoliwal/com\.synexia|github\.com/hsoliwal|secrets\.SYNEXIA_"
+KEEP_LINE = re.compile(r"Copyright|SPDX-|hsoliwal/com\.synexia|github\.com/hsoliwal|secrets\.SYNEXIA_"
                        r"|<groupId>\s*com\.synexia")
 TEXT_SUFFIXES = {".java", ".yml", ".yaml", ".xml", ".sh", ".py", ".mjs", ".js", ".properties", ".gradle", ".toml",
                  ".cfg", ".ini", ".c", ".h", ".cpp", ".json", ".txt"}
@@ -138,7 +138,7 @@ def apply(root: Path, result: dict) -> None:
         file.write_text(rewrite_text(text)[0], encoding="utf-8", errors="surrogateescape", newline="")
     for path, new in result["moves"]:
         (root / new).parent.mkdir(parents=True, exist_ok=True)
-        subprocess.run(["git", "-C", str(root), "mv", "-k", path, new], check=True)
+        subprocess.run(["git", "-C", str(root), "mv", path, new], check=True)  # a failed move stops the run
 
 
 def write_tsv(result: dict, out: Path) -> None:
