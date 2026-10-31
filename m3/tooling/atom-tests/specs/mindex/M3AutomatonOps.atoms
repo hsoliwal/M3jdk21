@@ -1,0 +1,888 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+// Atoms of M3AutomatonOps.java (automaton algebra, powerset determinization, Hopcroft minimization and their
+// private set/list helpers). Oracles: java.util.regex languages over exhaustive texts (AutomatonOracle),
+// java.util.HashMap/TreeSet/TreeMap/LinkedList models of the private helper structures, BFS reachability.
+#class M3AutomatonOpsAtomTest
+#summary Per-atom contracts of jdk.internal.mindex.M3AutomatonOps against java.util.regex and java.util models
+#build AutomatonOracle
+#import jdk.internal.mindex.M3Automaton jdk.internal.mindex.M3AutomatonOps java.util.ArrayDeque java.util.ArrayList java.util.BitSet java.util.HashMap java.util.LinkedList java.util.List java.util.Map java.util.SplittableRandom java.util.TreeMap java.util.TreeSet
+#helper <<<
+    private static final Class<?> OPS = M3AutomatonOps.class;
+    private static final Class<?> STATE_KEY = M3AtomKit.type("M3AutomatonOps$StateKey");
+    private static final Class<?> FROZEN = M3AtomKit.type("M3AutomatonOps$FrozenSet");
+    private static final Class<?> COUNTING = M3AtomKit.type("M3AutomatonOps$CountingSet");
+    private static final Class<?> TLIST = M3AtomKit.type("M3AutomatonOps$TransitionList");
+    private static final Class<?> POINT = M3AtomKit.type("M3AutomatonOps$PointTransitions");
+    private static final Class<?> POINTS = M3AtomKit.type("M3AutomatonOps$PointTransitionSet");
+    private static final Class<?> SLIST = M3AtomKit.type("M3AutomatonOps$StateList");
+    private static final Class<?> SNODE = M3AtomKit.type("M3AutomatonOps$StateListNode");
+    /** Work limit used by the algebra checks, and a limit too small for the exponential DFA. */
+    private static final int WORK = M3AutomatonOps.DEFAULT_WORK_LIMIT;
+    private static final int TINY_WORK = 10;
+    /** Distinct start points beyond the linear-to-hash cutover of PointTransitionSet (30). */
+    private static final int HASH_CUTOVER = 30;
+    private static final int MANY_POINTS = 40;
+    /** Model sizes of the private helper checks. */
+    private static final int SET_STATES = 64;
+    private static final int MIX_SAMPLES = 100_000;
+    /** fmix32 constants of the documented local mixer (Lucene hppc BitMixer.mix32). */
+    private static final int PHI = 0x9E3779B9;
+    private static final int C1 = 0x85EBCA6B;
+    private static final int C2 = 0xC2B2AE35;
+    private static final int SHIFT_A = 16;
+    private static final int SHIFT_B = 13;
+
+    private static M3Automaton w(String word) {
+        return M3AutomatonOps.makeUnits(word);
+    }
+
+    private static M3Automaton chr(char c) {
+        return M3AutomatonOps.makeUnitRange(c, c);
+    }
+
+    /** (a|b)*a(a|b){n}: its minimal DFA has 2^(n+1) states. */
+    private static M3Automaton exponential(int n) {
+        M3Automaton ab = M3AutomatonOps.union(chr('a'), chr('b'));
+        return M3AutomatonOps.concatenate(M3AutomatonOps.repeat(ab), chr('a'), M3AutomatonOps.repeat(ab, n, n));
+    }
+
+    private static void assertLanguage(M3Automaton a, String regex) {
+        AutomatonOracle.assertLanguage(a, regex, AutomatonOracle.ABC, AutomatonOracle.MAX_LENGTH);
+    }
+
+    private static long fmix(int key) {
+        int h = key * PHI;
+        h ^= h >>> SHIFT_A;
+        h *= C1;
+        h ^= h >>> SHIFT_B;
+        h *= C2;
+        h ^= h >>> SHIFT_A;
+        return h;
+    }
+
+    private static BitSet reachable(M3Automaton a) {
+        BitSet seen = new BitSet();
+        if (a.getNumStates() == 0) return seen;
+        ArrayDeque<Integer> queue = new ArrayDeque<>(List.of(0));
+        seen.set(0);
+        while (!queue.isEmpty()) {
+            for (int[] t : AutomatonOracle.transitions(a, queue.removeFirst())) {
+                if (!seen.get(t[0])) {
+                    seen.set(t[0]);
+                    queue.add(t[0]);
+                }
+            }
+        }
+        return seen;
+    }
+
+    private static BitSet coReachable(M3Automaton a) {
+        BitSet live = new BitSet();
+        for (int s = 0; s < a.getNumStates(); s++) if (a.isAccept(s)) live.set(s);
+        boolean changed = true;
+        while (changed) {
+            changed = false;
+            for (int s = 0; s < a.getNumStates(); s++) {
+                for (int[] t : AutomatonOracle.transitions(a, s)) {
+                    if (live.get(t[0]) && !live.get(s)) {
+                        live.set(s);
+                        changed = true;
+                    }
+                }
+            }
+        }
+        return live;
+    }
+
+    /** NFA with unreachable and dead states for the liveness checks. */
+    private static M3Automaton withDeadStates() {
+        M3Automaton a = new M3Automaton();
+        for (int i = 0; i < 5; i++) a.createState();
+        a.addTransition(0, 1, 'a');
+        a.addTransition(0, 3, 'b');
+        a.addTransition(1, 2, 'b');
+        a.addTransition(4, 2, 'c');
+        a.finishState();
+        a.setAccept(2, true);
+        return a;
+    }
+
+    private static Object counting(int states) throws Throwable {
+        return M3AtomKit.findConstructor(COUNTING, "CountingSet", MethodType.methodType(void.class, int.class)).invoke(states);
+    }
+
+    private static MethodHandle v(Class<?> owner, String name, MethodType type) {
+        return M3AtomKit.findVirtual(owner, name, type);
+    }
+
+    private static M3Automaton.Transition transition(int dest, int min, int max) {
+        M3Automaton.Transition t = new M3Automaton.Transition();
+        t.dest = dest;
+        t.min = min;
+        t.max = max;
+        return t;
+    }
+
+    private static int[] sorted(Map<Integer, Integer> counts) {
+        return new TreeSet<>(counts.keySet()).stream().mapToInt(Integer::intValue).toArray();
+    }
+>>>
+
+@atom M3AutomatonOps.M3AutomatonOps 1 UTILITY_CTOR java.lang.reflect.Modifier
+type = M3AutomatonOps
+
+@atom M3AutomatonOps.TooComplex.TooComplex 1 SCENARIO message+determinize-refusal
+check <<<
+M3AutomatonOps.TooComplex refusal = new M3AutomatonOps.TooComplex(3, 4, 5);
+assertEquals("Determinizing automaton with 3 states and 4 transitions would require more than 5 effort.",
+        refusal.getMessage());
+assertTrue(refusal instanceof RuntimeException);
+M3Automaton nfa = exponential(SHIFT_B);
+M3AutomatonOps.TooComplex thrown = assertThrows(M3AutomatonOps.TooComplex.class,
+        () -> M3AutomatonOps.determinize(nfa, TINY_WORK));
+assertTrue(thrown.getMessage().contains(nfa.getNumStates() + " states"), thrown.getMessage());
+>>>
+
+@atom M3AutomatonOps.makeEmpty 1 LANGUAGE_DIFF java.util.regex
+automaton = M3AutomatonOps.makeEmpty()
+regex = (?!)
+alphabet = AutomatonOracle.EDGES
+max = AutomatonOracle.MAX_LENGTH
+extra = assertTrue(M3AutomatonOps.isEmpty(M3AutomatonOps.makeEmpty()));
+
+@atom M3AutomatonOps.makeEmptyString 1 LANGUAGE_DIFF java.util.regex
+automaton = M3AutomatonOps.makeEmptyString()
+regex =
+alphabet = AutomatonOracle.EDGES
+max = AutomatonOracle.MAX_LENGTH
+extra = assertEquals(1, M3AutomatonOps.makeEmptyString().getNumStates());
+
+@atom M3AutomatonOps.makeAnyString 1 LANGUAGE_DIFF java.util.regex
+automaton = M3AutomatonOps.makeAnyString()
+regex = .*
+alphabet = AutomatonOracle.EDGES
+max = AutomatonOracle.MAX_LENGTH
+extra = assertTrue(M3AutomatonOps.isTotal(M3AutomatonOps.makeAnyString()));
+
+@atom M3AutomatonOps.makeUnitRange 1 SCENARIO java.util.regex(char-class)
+check <<<
+assertLanguage(M3AutomatonOps.makeUnitRange('b', 'c'), "[b-c]");
+assertLanguage(M3AutomatonOps.makeUnitRange('a', 'a'), "a");
+assertLanguage(M3AutomatonOps.makeUnitRange('c', 'b'), "(?!)");
+AutomatonOracle.assertLanguage(M3AutomatonOps.makeUnitRange(0, AutomatonOracle.MAX_LABEL), "[\\x{0}-\\x{ffff}]",
+        AutomatonOracle.EDGES, 2);
+>>>
+
+@atom M3AutomatonOps.makeUnits 1 SCENARIO java.util.regex(quoted)
+check <<<
+for (String word : List.of("", "a", "abc", "dcba", "aaaa")) {
+    assertLanguage(M3AutomatonOps.makeUnits(word), java.util.regex.Pattern.quote(word));
+    assertEquals(word.length() + 1, M3AutomatonOps.makeUnits(word).getNumStates());
+}
+>>>
+
+@atom M3AutomatonOps.concatenate 1 SCENARIO java.util.regex(concatenation)
+check <<<
+assertLanguage(M3AutomatonOps.concatenate(w("ab"), w("c")), "abc");
+assertLanguage(M3AutomatonOps.concatenate(M3AutomatonOps.optional(w("a")), M3AutomatonOps.optional(w("b")), w("c")), "a?b?c");
+assertLanguage(M3AutomatonOps.concatenate(M3AutomatonOps.repeat(chr('a')), M3AutomatonOps.makeEmptyString(), w("b")), "a*b");
+assertLanguage(M3AutomatonOps.concatenate(w("a"), M3AutomatonOps.makeEmpty(), w("b")), "(?!)");
+assertLanguage(M3AutomatonOps.concatenate(), "(?!)");
+assertEquals(1, M3AutomatonOps.concatenate().getNumStates(), "no operands: one non-accepting state (Lucene 9.10 Operations parity)");
+assertLanguage(M3AutomatonOps.concatenate(M3AutomatonOps.optional(w("a")), M3AutomatonOps.optional(w("b"))), "a?b?");
+>>>
+
+@atom M3AutomatonOps.union 1 SCENARIO java.util.regex(alternation)
+check <<<
+assertLanguage(M3AutomatonOps.union(w("ab"), w("c"), w("")), "ab|c|");
+assertLanguage(M3AutomatonOps.union(w("a"), M3AutomatonOps.makeEmpty()), "a");
+assertLanguage(M3AutomatonOps.union(), "(?!)");
+assertLanguage(M3AutomatonOps.union(M3AutomatonOps.repeat(chr('a')), w("bb")), "a*|bb");
+>>>
+
+@atom M3AutomatonOps.optional 1 SCENARIO java.util.regex(?)
+check <<<
+assertLanguage(M3AutomatonOps.optional(w("ab")), "(ab)?");
+assertLanguage(M3AutomatonOps.optional(M3AutomatonOps.makeEmpty()), "");
+assertLanguage(M3AutomatonOps.optional(M3AutomatonOps.repeat(chr('c'))), "c*");
+>>>
+
+@atom M3AutomatonOps.repeat 1 SCENARIO java.util.regex(*)
+check <<<
+assertLanguage(M3AutomatonOps.repeat(w("ab")), "(ab)*");
+assertLanguage(M3AutomatonOps.repeat(M3AutomatonOps.union(w("a"), w("bc"))), "(a|bc)*");
+M3Automaton empty = M3AutomatonOps.makeEmpty();
+assertSame(empty, M3AutomatonOps.repeat(empty), "the empty language is returned as is");
+assertLanguage(M3AutomatonOps.repeat(M3AutomatonOps.optional(w("b"))), "b*");
+>>>
+
+@atom M3AutomatonOps.repeat 2 SCENARIO java.util.regex({min,})
+check <<<
+assertLanguage(M3AutomatonOps.repeat(w("a"), 0), "a*");
+assertLanguage(M3AutomatonOps.repeat(w("a"), 2), "a{2,}");
+assertLanguage(M3AutomatonOps.repeat(w("ab"), 1), "(ab){1,}");
+>>>
+
+@atom M3AutomatonOps.repeat 3 SCENARIO java.util.regex({min,max})
+check <<<
+assertLanguage(M3AutomatonOps.repeat(w("a"), 1, 3), "a{1,3}");
+assertLanguage(M3AutomatonOps.repeat(w("ab"), 0, 2), "(ab){0,2}");
+assertLanguage(M3AutomatonOps.repeat(w("b"), 2, 2), "b{2}");
+assertLanguage(M3AutomatonOps.repeat(w("c"), 3, 1), "(?!)");
+assertLanguage(M3AutomatonOps.repeat(M3AutomatonOps.optional(w("a")), 2, 3), "(?:a?){2,3}");
+>>>
+
+@atom M3AutomatonOps.acceptList 1 SCENARIO java.util.BitSet-iteration+offset
+setup <<<
+MethodHandle atom = M3AtomKit.findStatic(OPS, "acceptList", MethodType.methodType(int[].class, M3Automaton.class, int.class));
+M3Automaton a = new M3Automaton();
+for (int i = 0; i < 6; i++) a.createState();
+a.setAccept(1, true);
+a.setAccept(4, true);
+a.setAccept(5, true);
+>>>
+check <<<
+assertArrayEquals(new int[] {1, 4, 5}, (int[]) atom.invokeExact(a, 0));
+assertArrayEquals(new int[] {11, 14, 15}, (int[]) atom.invokeExact(a, 10));
+assertArrayEquals(new int[0], (int[]) atom.invokeExact(M3AutomatonOps.makeEmpty(), 0));
+>>>
+
+@atom M3AutomatonOps.complement 1 SCENARIO language-negation
+check <<<
+for (M3Automaton a : List.of(w("ab"), M3AutomatonOps.repeat(chr('a')), M3AutomatonOps.makeEmpty(),
+        M3AutomatonOps.makeAnyString(), M3AutomatonOps.union(w(""), w("c")))) {
+    M3Automaton c = M3AutomatonOps.complement(a, WORK);
+    AutomatonOracle.assertWellFormed(c);
+    for (String text : AutomatonOracle.texts(AutomatonOracle.EDGES, 4)) {
+        assertEquals(!AutomatonOracle.accepts(a, text), AutomatonOracle.accepts(c, text), text);
+    }
+}
+assertTrue(M3AutomatonOps.isEmpty(M3AutomatonOps.complement(M3AutomatonOps.makeAnyString(), WORK)));
+>>>
+
+@atom M3AutomatonOps.isEmpty 1 SCENARIO exhaustive-acceptance
+check <<<
+assertTrue(M3AutomatonOps.isEmpty(M3AutomatonOps.makeEmpty()));
+assertTrue(M3AutomatonOps.isEmpty(new M3Automaton()));
+assertFalse(M3AutomatonOps.isEmpty(M3AutomatonOps.makeEmptyString()));
+assertFalse(M3AutomatonOps.isEmpty(w("abc")));
+M3Automaton deadEnd = new M3Automaton();
+deadEnd.createState();
+deadEnd.createState();
+deadEnd.addTransition(0, 1, 'a');
+deadEnd.finishState();
+assertTrue(M3AutomatonOps.isEmpty(deadEnd), "reachable states but none accepts");
+M3Automaton deep = withDeadStates();
+assertFalse(M3AutomatonOps.isEmpty(deep));
+>>>
+
+@atom M3AutomatonOps.isTotal 1 SCENARIO single-full-range-self-loop
+check <<<
+assertTrue(M3AutomatonOps.isTotal(M3AutomatonOps.makeAnyString()));
+assertTrue(M3AutomatonOps.isTotal(M3AutomatonOps.minimize(M3AutomatonOps.complement(M3AutomatonOps.makeEmpty(), WORK), WORK)));
+assertFalse(M3AutomatonOps.isTotal(M3AutomatonOps.repeat(chr('a'))));
+assertFalse(M3AutomatonOps.isTotal(M3AutomatonOps.makeEmpty()));
+assertFalse(M3AutomatonOps.isTotal(M3AutomatonOps.makeUnitRange(0, AutomatonOracle.MAX_LABEL)));
+>>>
+
+@atom M3AutomatonOps.reverse 1 SCENARIO reversed-text-acceptance
+check <<<
+for (M3Automaton a : List.of(w("abc"), M3AutomatonOps.concatenate(M3AutomatonOps.repeat(chr('a')), w("bc")),
+        M3AutomatonOps.union(w("ab"), w("ca"), w("")), withDeadStates())) {
+    M3Automaton r = M3AutomatonOps.reverse(a);
+    for (String text : AutomatonOracle.texts(AutomatonOracle.ABC, 4)) {
+        assertEquals(AutomatonOracle.accepts(a, new StringBuilder(text).reverse()), AutomatonOracle.accepts(r, text), text);
+    }
+}
+assertEquals(0, M3AutomatonOps.reverse(M3AutomatonOps.makeEmpty()).getNumStates());
+>>>
+
+@atom M3AutomatonOps.totalize 1 SCENARIO full-label-coverage+same-language
+setup <<<
+MethodHandle atom = M3AtomKit.findStatic(OPS, "totalize", MethodType.methodType(M3Automaton.class, M3Automaton.class));
+>>>
+check <<<
+for (M3Automaton a : List.of(w("ab"), M3AutomatonOps.makeUnitRange(0, 0), M3AutomatonOps.makeUnitRange(AutomatonOracle.MAX_LABEL, AutomatonOracle.MAX_LABEL), M3AutomatonOps.determinize(withDeadStates(), WORK))) {
+    M3Automaton t = (M3Automaton) atom.invokeExact(a);
+    assertEquals(a.getNumStates() + 1, t.getNumStates(), "one dead state");
+    for (int s = 0; s < t.getNumStates(); s++) {
+        int next = 0;
+        for (int[] tr : AutomatonOracle.transitions(t, s)) {
+            assertEquals(next, tr[1], "contiguous coverage of state " + s);
+            next = tr[2] + 1;
+        }
+        assertEquals(AutomatonOracle.MAX_LABEL + 1, next, "covers every unit");
+    }
+    AutomatonOracle.assertSameLanguage(a, t, AutomatonOracle.EDGES, 3);
+}
+>>>
+
+@atom M3AutomatonOps.removeDeadStates 1 SCENARIO BFS-liveness+same-language
+check <<<
+M3Automaton a = withDeadStates();
+M3Automaton r = M3AutomatonOps.removeDeadStates(a);
+BitSet live = reachable(r);
+live.and(coReachable(r));
+assertEquals(r.getNumStates(), live.cardinality(), "every remaining state is live");
+assertEquals(3, r.getNumStates());
+AutomatonOracle.assertSameLanguage(a, r, AutomatonOracle.ABC, AutomatonOracle.MAX_LENGTH);
+assertEquals(0, M3AutomatonOps.removeDeadStates(M3AutomatonOps.makeEmpty()).getNumStates());
+>>>
+
+@atom M3AutomatonOps.liveFromInitial 1 SCENARIO BFS-reachability
+setup <<<
+MethodHandle atom = M3AtomKit.findStatic(OPS, "liveFromInitial", MethodType.methodType(BitSet.class, M3Automaton.class));
+>>>
+check <<<
+for (M3Automaton a : List.of(withDeadStates(), w("abc"), new M3Automaton(), exponential(2))) {
+    assertEquals(reachable(a), (BitSet) atom.invokeExact(a));
+}
+>>>
+
+@atom M3AutomatonOps.liveToAccept 1 SCENARIO fixed-point-co-reachability
+setup <<<
+MethodHandle atom = M3AtomKit.findStatic(OPS, "liveToAccept", MethodType.methodType(BitSet.class, M3Automaton.class));
+>>>
+check <<<
+for (M3Automaton a : List.of(withDeadStates(), w("abc"), new M3Automaton(), exponential(2))) {
+    assertEquals(coReachable(a), (BitSet) atom.invokeExact(a));
+}
+>>>
+
+@atom M3AutomatonOps.determinize 1 SCENARIO same-language+recomputed-determinism+work-limit
+check <<<
+for (M3Automaton a : List.of(exponential(2), M3AutomatonOps.union(w("ab"), w("ac"), M3AutomatonOps.repeat(chr('a'))), withDeadStates(),
+        M3AutomatonOps.concatenate(M3AutomatonOps.repeat(M3AutomatonOps.makeUnitRange('a', 'c')), w("cb")))) {
+    M3Automaton d = M3AutomatonOps.determinize(a, WORK);
+    assertTrue(d.isDeterministic());
+    assertTrue(AutomatonOracle.computedDeterministic(d));
+    AutomatonOracle.assertSameLanguage(a, d, AutomatonOracle.ABC, AutomatonOracle.MAX_LENGTH);
+}
+M3Automaton dfa = w("abc");
+assertSame(dfa, M3AutomatonOps.determinize(dfa, WORK), "deterministic input is returned as is");
+M3Automaton many = M3AutomatonOps.union(java.util.stream.IntStream.range(0, MANY_POINTS)
+        .mapToObj(i -> M3AutomatonOps.concatenate(chr((char) ('A' + i)), w("x"))).toArray(M3Automaton[]::new));
+M3Automaton manyNfa = M3AutomatonOps.union(many, M3AutomatonOps.concatenate(M3AutomatonOps.makeUnitRange('A', 'z'), w("y")));
+M3Automaton manyDfa = M3AutomatonOps.determinize(manyNfa, WORK);
+for (int i = 0; i < MANY_POINTS; i++) {
+    String head = String.valueOf((char) ('A' + i));
+    assertTrue(AutomatonOracle.accepts(manyDfa, head + "x") && AutomatonOracle.accepts(manyDfa, head + "y"), head);
+}
+assertTrue(manyDfa.isDeterministic());
+assertThrows(M3AutomatonOps.TooComplex.class, () -> M3AutomatonOps.determinize(exponential(SHIFT_B), TINY_WORK));
+>>>
+
+@atom M3AutomatonOps.mix 1 SCENARIO fmix32-reference+bijection
+setup <<<
+MethodHandle atom = M3AtomKit.findStatic(OPS, "mix", MethodType.methodType(long.class, int.class));
+SplittableRandom random = M3AtomKit.random("mix");
+java.util.HashSet<Long> images = new java.util.HashSet<>();
+>>>
+check <<<
+for (int key : M3AtomKit.intDomain("mix", Integer.MIN_VALUE, Integer.MAX_VALUE)) {
+    assertEquals(fmix(key), (long) atom.invokeExact(key), "key " + key);
+}
+for (int i = 0; i < MIX_SAMPLES; i++) images.add((long) atom.invokeExact(i));
+assertEquals(MIX_SAMPLES, images.size(), "fmix32 is a bijection: no collisions");
+assertEquals(0L, (long) atom.invokeExact(0));
+long negative = (long) atom.invokeExact(random.nextInt());
+assertEquals((long) (int) negative, negative, "int image sign-extended to long");
+>>>
+
+@atom M3AutomatonOps.StateKey.array 1 SCENARIO virtual-dispatch(FrozenSet,CountingSet)
+setup <<<
+MethodHandle array = v(STATE_KEY, "array", MethodType.methodType(int[].class));
+MethodHandle incr = v(COUNTING, "incr", MethodType.methodType(void.class, int.class));
+Object frozen = M3AtomKit.findConstructor(FROZEN, MethodType.methodType(void.class, int[].class, long.class, int.class))
+        .invoke(new int[] {2, 5, 9}, 0L, 0);
+Object counting = counting(SET_STATES);
+>>>
+check <<<
+assertArrayEquals(new int[] {2, 5, 9}, (int[]) array.invoke(frozen));
+for (int s : new int[] {9, 2, 5}) incr.invoke(counting, s);
+assertArrayEquals(new int[] {2, 5, 9}, (int[]) array.invoke(counting), "sorted view of the counting set");
+>>>
+
+@atom M3AutomatonOps.StateKey.size 1 SCENARIO virtual-dispatch(FrozenSet,CountingSet)
+setup <<<
+MethodHandle size = v(STATE_KEY, "size", MethodType.methodType(int.class));
+MethodHandle incr = v(COUNTING, "incr", MethodType.methodType(void.class, int.class));
+Object frozen = M3AtomKit.findConstructor(FROZEN, MethodType.methodType(void.class, int[].class, long.class, int.class))
+        .invoke(new int[] {1, 3}, 0L, 0);
+Object counting = counting(SET_STATES);
+>>>
+check <<<
+assertEquals(2, (int) size.invoke(frozen));
+incr.invoke(counting, 4);
+incr.invoke(counting, 4);
+assertEquals(1, (int) size.invoke(counting), "distinct members");
+>>>
+
+@atom M3AutomatonOps.StateKey.longHash 1 SCENARIO size+sum(fmix32)
+setup <<<
+MethodHandle hash = v(STATE_KEY, "longHash", MethodType.methodType(long.class));
+MethodHandle incr = v(COUNTING, "incr", MethodType.methodType(void.class, int.class));
+Object counting = counting(SET_STATES);
+>>>
+check <<<
+for (int s : new int[] {3, 7, 11}) incr.invoke(counting, s);
+assertEquals(3 + fmix(3) + fmix(7) + fmix(11), (long) hash.invoke(counting));
+>>>
+
+@atom M3AutomatonOps.StateKey.hashCode 1 SCENARIO Long.hashCode(longHash)
+setup <<<
+MethodHandle incr = v(COUNTING, "incr", MethodType.methodType(void.class, int.class));
+MethodHandle hash = v(STATE_KEY, "longHash", MethodType.methodType(long.class));
+Object counting = counting(SET_STATES);
+>>>
+check <<<
+for (int s : new int[] {1, 40, 63}) incr.invoke(counting, s);
+assertEquals(Long.hashCode((long) hash.invoke(counting)), counting.hashCode());
+>>>
+
+@atom M3AutomatonOps.StateKey.equals 1 SCENARIO cross-class-equality(java.util.HashMap-key)
+setup <<<
+MethodHandle incr = v(COUNTING, "incr", MethodType.methodType(void.class, int.class));
+MethodHandle freeze = v(COUNTING, "freeze", MethodType.methodType(FROZEN, int.class));
+Object counting = counting(SET_STATES);
+for (int s : new int[] {6, 2, 8}) incr.invoke(counting, s);
+Object frozen = freeze.invoke(counting, 7);
+Object other = counting(SET_STATES);
+incr.invoke(other, 2);
+>>>
+check <<<
+assertTrue(frozen.equals(counting), "frozen copy equals the live set");
+assertTrue(counting.equals(frozen), "symmetric");
+assertTrue(counting.equals(counting), "reflexive");
+assertFalse(frozen.equals(other), "different members");
+assertFalse(frozen.equals("not a key"), "foreign type");
+Map<Object, Integer> index = new HashMap<>();
+index.put(frozen, 7);
+assertEquals(7, index.get(counting), "a live set finds its frozen DFA state");
+>>>
+
+@atom M3AutomatonOps.FrozenSet.FrozenSet 1 SCENARIO field-capture
+setup <<<
+MethodHandle ctor = M3AtomKit.findConstructor(FROZEN, "FrozenSet", MethodType.methodType(void.class, int[].class, long.class, int.class));
+MethodHandle state = M3AtomKit.findGetter(FROZEN, "state", int.class);
+int[] values = {1, 2};
+>>>
+check <<<
+Object frozen = ctor.invoke(values, 42L, 9);
+assertEquals(9, (int) state.invoke(frozen));
+assertSame(values, M3AtomKit.findGetter(FROZEN, "values", int[].class).invoke(frozen), "values are not copied");
+>>>
+
+@atom M3AutomatonOps.FrozenSet.array 1 SCENARIO same-array
+setup <<<
+int[] values = {4, 8};
+Object frozen = M3AtomKit.findConstructor(FROZEN, MethodType.methodType(void.class, int[].class, long.class, int.class))
+        .invoke(values, 0L, 0);
+>>>
+check <<<
+assertSame(values, v(FROZEN, "array", MethodType.methodType(int[].class)).invoke(frozen));
+>>>
+
+@atom M3AutomatonOps.FrozenSet.size 1 SCENARIO values.length
+setup <<<
+Object frozen = M3AtomKit.findConstructor(FROZEN, MethodType.methodType(void.class, int[].class, long.class, int.class))
+        .invoke(new int[] {4, 8, 15}, 0L, 0);
+>>>
+check <<<
+assertEquals(3, (int) v(FROZEN, "size", MethodType.methodType(int.class)).invoke(frozen));
+>>>
+
+@atom M3AutomatonOps.FrozenSet.longHash 1 SCENARIO stored-hash
+setup <<<
+Object frozen = M3AtomKit.findConstructor(FROZEN, MethodType.methodType(void.class, int[].class, long.class, int.class))
+        .invoke(new int[] {0}, 1L + fmix(0), 0);
+>>>
+check <<<
+assertEquals(1L + fmix(0), (long) v(FROZEN, "longHash", MethodType.methodType(long.class)).invoke(frozen));
+>>>
+
+@atom M3AutomatonOps.CountingSet.CountingSet 1 SCENARIO empty-set
+setup <<<
+Object counting = counting(SET_STATES);
+>>>
+check <<<
+assertEquals(0, (int) v(COUNTING, "size", MethodType.methodType(int.class)).invoke(counting));
+assertArrayEquals(new int[0], (int[]) v(COUNTING, "array", MethodType.methodType(int[].class)).invoke(counting));
+assertEquals(0L, (long) v(COUNTING, "longHash", MethodType.methodType(long.class)).invoke(counting));
+>>>
+
+@atom M3AutomatonOps.CountingSet.incr 1 SCENARIO java.util.HashMap-multiset
+setup <<<
+MethodHandle incr = v(COUNTING, "incr", MethodType.methodType(void.class, int.class));
+MethodHandle array = v(COUNTING, "array", MethodType.methodType(int[].class));
+SplittableRandom random = M3AtomKit.random("CountingSet.incr");
+Object counting = counting(SET_STATES);
+Map<Integer, Integer> model = new HashMap<>();
+>>>
+check <<<
+for (int k = 0; k < M3AtomKit.OPERATIONS; k++) {
+    int s = random.nextInt(SET_STATES);
+    incr.invoke(counting, s);
+    model.merge(s, 1, Integer::sum);
+    assertArrayEquals(sorted(model), (int[]) array.invoke(counting));
+}
+>>>
+
+@atom M3AutomatonOps.CountingSet.decr 1 SCENARIO java.util.HashMap-multiset
+setup <<<
+MethodHandle incr = v(COUNTING, "incr", MethodType.methodType(void.class, int.class));
+MethodHandle decr = v(COUNTING, "decr", MethodType.methodType(void.class, int.class));
+MethodHandle array = v(COUNTING, "array", MethodType.methodType(int[].class));
+MethodHandle hash = v(COUNTING, "longHash", MethodType.methodType(long.class));
+SplittableRandom random = M3AtomKit.random("CountingSet.decr");
+Object counting = counting(SET_STATES);
+Map<Integer, Integer> model = new HashMap<>();
+>>>
+check <<<
+for (int k = 0; k < M3AtomKit.OPERATIONS; k++) {
+    int s = random.nextInt(SET_STATES);
+    if (model.getOrDefault(s, 0) > 0 && random.nextBoolean()) {
+        decr.invoke(counting, s);
+        model.computeIfPresent(s, (key, c) -> c == 1 ? null : c - 1);
+    } else {
+        incr.invoke(counting, s);
+        model.merge(s, 1, Integer::sum);
+    }
+    assertArrayEquals(sorted(model), (int[]) array.invoke(counting));
+    long expected = model.size();
+    for (int member : model.keySet()) expected += fmix(member);
+    assertEquals(expected, (long) hash.invoke(counting), "hash tracks swap-removal");
+}
+>>>
+
+@atom M3AutomatonOps.CountingSet.changed 1 SCENARIO cache-invalidation
+setup <<<
+MethodHandle changed = v(COUNTING, "changed", MethodType.methodType(void.class));
+MethodHandle incr = v(COUNTING, "incr", MethodType.methodType(void.class, int.class));
+MethodHandle hashValid = M3AtomKit.findGetter(COUNTING, "hashValid", boolean.class);
+MethodHandle sortedValid = M3AtomKit.findGetter(COUNTING, "sortedValid", boolean.class);
+Object counting = counting(SET_STATES);
+>>>
+check <<<
+incr.invoke(counting, 1);
+v(COUNTING, "longHash", MethodType.methodType(long.class)).invoke(counting);
+v(COUNTING, "array", MethodType.methodType(int[].class)).invoke(counting);
+assertTrue((boolean) hashValid.invoke(counting) && (boolean) sortedValid.invoke(counting));
+changed.invoke(counting);
+assertFalse((boolean) hashValid.invoke(counting), "hash invalidated");
+assertFalse((boolean) sortedValid.invoke(counting), "sorted view invalidated");
+>>>
+
+@atom M3AutomatonOps.CountingSet.freeze 1 SCENARIO snapshot-isolation
+setup <<<
+MethodHandle incr = v(COUNTING, "incr", MethodType.methodType(void.class, int.class));
+MethodHandle freeze = v(COUNTING, "freeze", MethodType.methodType(FROZEN, int.class));
+MethodHandle array = v(FROZEN, "array", MethodType.methodType(int[].class));
+Object counting = counting(SET_STATES);
+>>>
+check <<<
+incr.invoke(counting, 5);
+incr.invoke(counting, 1);
+Object frozen = freeze.invoke(counting, 3);
+incr.invoke(counting, 9);
+assertArrayEquals(new int[] {1, 5}, (int[]) array.invoke(frozen), "later changes do not reach the frozen copy");
+assertEquals(3, (int) M3AtomKit.findGetter(FROZEN, "state", int.class).invoke(frozen));
+>>>
+
+@atom M3AutomatonOps.CountingSet.array 1 SCENARIO java.util.TreeSet-order
+setup <<<
+MethodHandle incr = v(COUNTING, "incr", MethodType.methodType(void.class, int.class));
+MethodHandle array = v(COUNTING, "array", MethodType.methodType(int[].class));
+Object counting = counting(SET_STATES);
+>>>
+check <<<
+for (int s : new int[] {40, 3, 17, 3}) incr.invoke(counting, s);
+int[] first = (int[]) array.invoke(counting);
+assertArrayEquals(new int[] {3, 17, 40}, first);
+assertSame(first, (int[]) array.invoke(counting), "cached until the next change");
+>>>
+
+@atom M3AutomatonOps.CountingSet.size 1 SCENARIO distinct-members
+setup <<<
+MethodHandle incr = v(COUNTING, "incr", MethodType.methodType(void.class, int.class));
+MethodHandle decr = v(COUNTING, "decr", MethodType.methodType(void.class, int.class));
+MethodHandle size = v(COUNTING, "size", MethodType.methodType(int.class));
+Object counting = counting(SET_STATES);
+>>>
+check <<<
+incr.invoke(counting, 1);
+incr.invoke(counting, 1);
+incr.invoke(counting, 2);
+assertEquals(2, (int) size.invoke(counting));
+decr.invoke(counting, 1);
+assertEquals(2, (int) size.invoke(counting), "still referenced once");
+decr.invoke(counting, 1);
+assertEquals(1, (int) size.invoke(counting));
+>>>
+
+@atom M3AutomatonOps.CountingSet.longHash 1 SCENARIO size+sum(fmix32)
+setup <<<
+MethodHandle incr = v(COUNTING, "incr", MethodType.methodType(void.class, int.class));
+MethodHandle hash = v(COUNTING, "longHash", MethodType.methodType(long.class));
+Object counting = counting(SET_STATES);
+>>>
+check <<<
+incr.invoke(counting, 0);
+assertEquals(1L + fmix(0), (long) hash.invoke(counting), "equals the initial frozen set hash mix(0) + 1");
+incr.invoke(counting, 63);
+assertEquals(2L + fmix(0) + fmix(63), (long) hash.invoke(counting));
+>>>
+
+@atom M3AutomatonOps.TransitionList.add 1 SCENARIO java.util.ArrayList-of-triples
+setup <<<
+Object list = M3AtomKit.findConstructor(TLIST, MethodType.methodType(void.class)).invoke();
+MethodHandle add = v(TLIST, "add", MethodType.methodType(void.class, M3Automaton.Transition.class));
+MethodHandle transitions = M3AtomKit.findGetter(TLIST, "transitions", int[].class);
+MethodHandle next = M3AtomKit.findGetter(TLIST, "next", int.class);
+List<int[]> model = new ArrayList<>();
+>>>
+check <<<
+for (int i = 0; i < MANY_POINTS; i++) {
+    add.invoke(list, transition(i, 'a' + i, 'b' + i));
+    model.add(new int[] {i, 'a' + i, 'b' + i});
+}
+assertEquals(3 * MANY_POINTS, (int) next.invoke(list));
+int[] packed = (int[]) transitions.invoke(list);
+for (int i = 0; i < MANY_POINTS; i++) assertArrayEquals(model.get(i), java.util.Arrays.copyOfRange(packed, 3 * i, 3 * i + 3));
+>>>
+
+@atom M3AutomatonOps.PointTransitions.compareTo 1 SCENARIO Integer.compare(point)
+setup <<<
+MethodHandle ctor = M3AtomKit.findConstructor(POINT, MethodType.methodType(void.class));
+MethodHandle reset = v(POINT, "reset", MethodType.methodType(void.class, int.class));
+Object a = ctor.invoke(), b = ctor.invoke();
+>>>
+check <<<
+reset.invoke(a, 3);
+reset.invoke(b, 7);
+assertTrue(((Comparable<Object>) a).compareTo(b) < 0);
+assertTrue(((Comparable<Object>) b).compareTo(a) > 0);
+reset.invoke(b, 3);
+assertEquals(0, ((Comparable<Object>) a).compareTo(b));
+>>>
+
+@atom M3AutomatonOps.PointTransitions.reset 1 SCENARIO clears-lists
+setup <<<
+Object p = M3AtomKit.findConstructor(POINT, MethodType.methodType(void.class)).invoke();
+MethodHandle starts = M3AtomKit.findGetter(POINT, "starts", TLIST);
+MethodHandle next = M3AtomKit.findGetter(TLIST, "next", int.class);
+MethodHandle add = v(TLIST, "add", MethodType.methodType(void.class, M3Automaton.Transition.class));
+>>>
+check <<<
+add.invoke(starts.invoke(p), transition(1, 'a', 'a'));
+v(POINT, "reset", MethodType.methodType(void.class, int.class)).invoke(p, 12);
+assertEquals(12, (int) M3AtomKit.findGetter(POINT, "point", int.class).invoke(p));
+assertEquals(0, (int) next.invoke(starts.invoke(p)), "starts cleared");
+assertEquals(0, (int) next.invoke(M3AtomKit.findGetter(POINT, "ends", TLIST).invoke(p)), "ends cleared");
+>>>
+
+@atom M3AutomatonOps.PointTransitions.equals 1 SCENARIO point-equality
+setup <<<
+MethodHandle ctor = M3AtomKit.findConstructor(POINT, MethodType.methodType(void.class));
+MethodHandle reset = v(POINT, "reset", MethodType.methodType(void.class, int.class));
+Object a = ctor.invoke(), b = ctor.invoke();
+>>>
+check <<<
+reset.invoke(a, 5);
+reset.invoke(b, 5);
+assertTrue(a.equals(b), "same point");
+reset.invoke(b, 6);
+assertFalse(a.equals(b), "different point");
+assertFalse(a.equals(Integer.valueOf(5)), "foreign type");
+>>>
+
+@atom M3AutomatonOps.PointTransitions.hashCode 1 SCENARIO point-hash
+setup <<<
+Object a = M3AtomKit.findConstructor(POINT, MethodType.methodType(void.class)).invoke();
+>>>
+check <<<
+v(POINT, "reset", MethodType.methodType(void.class, int.class)).invoke(a, 77);
+assertEquals(77, a.hashCode());
+>>>
+
+@atom M3AutomatonOps.PointTransitionSet.next 1 SCENARIO append+reuse
+setup <<<
+Object set = M3AtomKit.findConstructor(POINTS, MethodType.methodType(void.class)).invoke();
+MethodHandle next = v(POINTS, "next", MethodType.methodType(POINT, int.class));
+MethodHandle count = M3AtomKit.findGetter(POINTS, "count", int.class);
+>>>
+check <<<
+Object first = next.invoke(set, 4);
+for (int i = 1; i < MANY_POINTS; i++) next.invoke(set, i);
+assertEquals(MANY_POINTS, (int) count.invoke(set), "grows past the initial capacity");
+v(POINTS, "reset", MethodType.methodType(void.class)).invoke(set);
+assertSame(first, next.invoke(set, 9), "slot objects are reused after reset");
+>>>
+
+@atom M3AutomatonOps.PointTransitionSet.find 1 SCENARIO java.util.HashMap(linear-then-hash)
+setup <<<
+Object set = M3AtomKit.findConstructor(POINTS, MethodType.methodType(void.class)).invoke();
+MethodHandle find = v(POINTS, "find", MethodType.methodType(POINT, int.class));
+MethodHandle useHash = M3AtomKit.findGetter(POINTS, "useHash", boolean.class);
+Map<Integer, Object> model = new HashMap<>();
+SplittableRandom random = M3AtomKit.random("PointTransitionSet.find");
+>>>
+check <<<
+for (int k = 0; k < M3AtomKit.OPERATIONS; k++) {
+    int point = random.nextInt(MANY_POINTS * 2);
+    Object found = find.invoke(set, point);
+    Object previous = model.putIfAbsent(point, found);
+    if (previous != null) assertSame(previous, found, "one object per point");
+}
+assertEquals(model.size() >= HASH_CUTOVER, (boolean) useHash.invoke(set), "hash lane past the cutover");
+>>>
+
+@atom M3AutomatonOps.PointTransitionSet.reset 1 SCENARIO empty-after-reset
+setup <<<
+Object set = M3AtomKit.findConstructor(POINTS, MethodType.methodType(void.class)).invoke();
+MethodHandle find = v(POINTS, "find", MethodType.methodType(POINT, int.class));
+>>>
+check <<<
+for (int i = 0; i < MANY_POINTS; i++) find.invoke(set, i);
+v(POINTS, "reset", MethodType.methodType(void.class)).invoke(set);
+assertEquals(0, (int) M3AtomKit.findGetter(POINTS, "count", int.class).invoke(set));
+assertFalse((boolean) M3AtomKit.findGetter(POINTS, "useHash", boolean.class).invoke(set), "back to the linear lane");
+>>>
+
+@atom M3AutomatonOps.PointTransitionSet.sort 1 SCENARIO java.util.TreeSet-order
+setup <<<
+Object set = M3AtomKit.findConstructor(POINTS, MethodType.methodType(void.class)).invoke();
+MethodHandle find = v(POINTS, "find", MethodType.methodType(POINT, int.class));
+MethodHandle points = M3AtomKit.findGetter(POINTS, "points", POINT.arrayType());
+MethodHandle point = M3AtomKit.findGetter(POINT, "point", int.class);
+SplittableRandom random = M3AtomKit.random("PointTransitionSet.sort");
+TreeSet<Integer> model = new TreeSet<>();
+>>>
+check <<<
+for (int i = 0; i < MANY_POINTS; i++) {
+    int p = random.nextInt(AutomatonOracle.MAX_LABEL);
+    find.invoke(set, p);
+    model.add(p);
+}
+v(POINTS, "sort", MethodType.methodType(void.class)).invoke(set);
+Object[] sorted = (Object[]) points.invoke(set);
+int i = 0;
+for (int expected : model) assertEquals(expected, (int) point.invoke(sorted[i++]));
+>>>
+
+@atom M3AutomatonOps.PointTransitionSet.add 1 SCENARIO java.util.TreeMap(starts-at-min,ends-at-max+1)
+setup <<<
+Object set = M3AtomKit.findConstructor(POINTS, MethodType.methodType(void.class)).invoke();
+MethodHandle add = v(POINTS, "add", MethodType.methodType(void.class, M3Automaton.Transition.class));
+MethodHandle find = v(POINTS, "find", MethodType.methodType(POINT, int.class));
+MethodHandle starts = M3AtomKit.findGetter(POINT, "starts", TLIST);
+MethodHandle ends = M3AtomKit.findGetter(POINT, "ends", TLIST);
+MethodHandle next = M3AtomKit.findGetter(TLIST, "next", int.class);
+TreeMap<Integer, Integer> startCount = new TreeMap<>(), endCount = new TreeMap<>();
+SplittableRandom random = M3AtomKit.random("PointTransitionSet.add");
+>>>
+check <<<
+for (int k = 0; k < MANY_POINTS; k++) {
+    int min = random.nextInt(MANY_POINTS), max = min + random.nextInt(3);
+    add.invoke(set, transition(k, min, max));
+    startCount.merge(min, 1, Integer::sum);
+    endCount.merge(max + 1, 1, Integer::sum);
+}
+for (Map.Entry<Integer, Integer> e : startCount.entrySet()) {
+    assertEquals(3 * e.getValue(), (int) next.invoke(starts.invoke(find.invoke(set, e.getKey()))), "starts at " + e.getKey());
+}
+for (Map.Entry<Integer, Integer> e : endCount.entrySet()) {
+    assertEquals(3 * e.getValue(), (int) next.invoke(ends.invoke(find.invoke(set, e.getKey()))), "ends at " + e.getKey());
+}
+>>>
+
+@atom M3AutomatonOps.minimize 1 SCENARIO same-language+canonical-size+idempotent
+check <<<
+List<M3Automaton> inputs = List.of(exponential(2), withDeadStates(), M3AutomatonOps.union(w("ab"), w("ab")),
+        M3AutomatonOps.repeat(M3AutomatonOps.union(chr('a'), chr('b'))), M3AutomatonOps.makeAnyString(), w("abcd"));
+for (M3Automaton a : inputs) {
+    M3Automaton m = M3AutomatonOps.minimize(a, WORK);
+    assertTrue(m.isDeterministic());
+    AutomatonOracle.assertSameLanguage(a, m, AutomatonOracle.ABC, AutomatonOracle.MAX_LENGTH);
+    assertEquals(m.getNumStates(), M3AutomatonOps.minimize(m, WORK).getNumStates(), "idempotent");
+}
+assertEquals(8, M3AutomatonOps.minimize(exponential(2), WORK).getNumStates(), "2^(n+1) states for n = 2");
+assertEquals(5, M3AutomatonOps.minimize(w("abcd"), WORK).getNumStates(), "a word needs |w| + 1 states");
+M3Automaton star1 = M3AutomatonOps.repeat(M3AutomatonOps.union(chr('a'), chr('b')));
+M3Automaton star2 = M3AutomatonOps.repeat(M3AutomatonOps.concatenate(M3AutomatonOps.repeat(chr('a')), M3AutomatonOps.repeat(chr('b'))));
+assertEquals(M3AutomatonOps.minimize(star1, WORK).getNumStates(), M3AutomatonOps.minimize(star2, WORK).getNumStates(),
+        "equal languages minimize to the same size");
+assertEquals(0, M3AutomatonOps.minimize(M3AutomatonOps.makeEmpty(), WORK).getNumStates());
+>>>
+
+@atom M3AutomatonOps.StateList.add 1 SCENARIO java.util.LinkedList-append
+setup <<<
+Object list = M3AtomKit.findConstructor(SLIST, MethodType.methodType(void.class)).invoke();
+MethodHandle add = v(SLIST, "add", MethodType.methodType(SNODE, int.class));
+MethodHandle first = M3AtomKit.findGetter(SLIST, "first", SNODE);
+MethodHandle size = M3AtomKit.findGetter(SLIST, "size", int.class);
+MethodHandle q = M3AtomKit.findGetter(SNODE, "q", int.class);
+MethodHandle next = M3AtomKit.findGetter(SNODE, "next", SNODE);
+LinkedList<Integer> model = new LinkedList<>();
+>>>
+check <<<
+for (int i = 0; i < SET_STATES; i++) {
+    add.invoke(list, i * 3);
+    model.addLast(i * 3);
+}
+assertEquals(model.size(), (int) size.invoke(list));
+Object node = first.invoke(list);
+for (int expected : model) {
+    assertEquals(expected, (int) q.invoke(node));
+    node = next.invoke(node);
+}
+assertNull(node);
+>>>
+
+@atom M3AutomatonOps.StateListNode.StateListNode 1 SCENARIO links-into-list
+setup <<<
+Object list = M3AtomKit.findConstructor(SLIST, MethodType.methodType(void.class)).invoke();
+MethodHandle ctor = M3AtomKit.findConstructor(SNODE, "StateListNode", MethodType.methodType(void.class, int.class, SLIST));
+>>>
+check <<<
+Object a = ctor.invoke(1, list);
+Object b = ctor.invoke(2, list);
+assertSame(a, M3AtomKit.findGetter(SLIST, "first", SNODE).invoke(list));
+assertSame(b, M3AtomKit.findGetter(SLIST, "last", SNODE).invoke(list));
+assertSame(a, M3AtomKit.findGetter(SNODE, "prev", SNODE).invoke(b));
+assertSame(list, M3AtomKit.findGetter(SNODE, "sl", SLIST).invoke(a));
+assertEquals(2, (int) M3AtomKit.findGetter(SLIST, "size", int.class).invoke(list));
+>>>
+
+@atom M3AutomatonOps.StateListNode.remove 1 SCENARIO java.util.LinkedList-remove
+setup <<<
+Object list = M3AtomKit.findConstructor(SLIST, MethodType.methodType(void.class)).invoke();
+MethodHandle add = v(SLIST, "add", MethodType.methodType(SNODE, int.class));
+MethodHandle remove = v(SNODE, "remove", MethodType.methodType(void.class));
+MethodHandle first = M3AtomKit.findGetter(SLIST, "first", SNODE);
+MethodHandle size = M3AtomKit.findGetter(SLIST, "size", int.class);
+MethodHandle q = M3AtomKit.findGetter(SNODE, "q", int.class);
+MethodHandle next = M3AtomKit.findGetter(SNODE, "next", SNODE);
+SplittableRandom random = M3AtomKit.random("StateListNode.remove");
+List<Object> nodes = new ArrayList<>();
+LinkedList<Integer> model = new LinkedList<>();
+>>>
+check <<<
+for (int i = 0; i < SET_STATES; i++) {
+    nodes.add(add.invoke(list, i));
+    model.add(i);
+}
+while (!nodes.isEmpty()) {
+    int at = random.nextInt(nodes.size());
+    remove.invoke(nodes.remove(at));
+    model.remove(at);
+    assertEquals(model.size(), (int) size.invoke(list));
+    Object node = first.invoke(list);
+    for (int expected : model) {
+        assertEquals(expected, (int) q.invoke(node));
+        node = next.invoke(node);
+    }
+    assertNull(node, "list terminated after removal");
+}
+>>>

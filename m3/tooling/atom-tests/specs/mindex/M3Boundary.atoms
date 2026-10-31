@@ -1,0 +1,209 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+// Atoms of M3Boundary.java (weak JVM boundary of a frozen M3CI).
+// Oracle: the class/loader arrays it was built from, java.lang.ref.WeakReference probes (cleared atomically
+// with the boundary's own weak references) and M3CI.compile as the public producer.
+#class M3BoundaryAtomTest
+#summary Per-atom contracts of jdk.internal.mindex.M3Boundary against its source arrays and WeakReference probes
+#import jdk.internal.mindex.M3Boundary jdk.internal.mindex.M3CI java.lang.invoke.MethodHandles java.lang.ref.WeakReference java.util.List java.util.Optional
+#helper <<<
+    private static final Class<?> OWNER = M3AtomKit.type("M3Boundary");
+    private static final MethodHandle OF = M3AtomKit.findStatic(OWNER, "of",
+            MethodType.methodType(OWNER, Class[].class, ClassLoader[].class, boolean.class));
+    /** Collection attempts of the weak-boundary check. */
+    private static final int GC_ATTEMPTS = 20;
+    /** Pause between collection attempts, in milliseconds. */
+    private static final long GC_PAUSE_MILLIS = 50;
+
+    private static final Class<?>[] CLASSES = {String.class, Integer.class, M3BoundaryAtomTest.class};
+    private static final ClassLoader APP = M3BoundaryAtomTest.class.getClassLoader();
+    private static final ClassLoader OTHER = new ClassLoader(APP) { };
+    private static final ClassLoader[] LOADERS = {null, APP, OTHER};
+
+    private static M3Boundary boundaryOf(Class<?>[] classes, ClassLoader[] loaders, boolean retain) throws Throwable {
+        return (M3Boundary) OF.invoke(classes, loaders, retain);
+    }
+
+    private static M3Boundary retainedBoundary() throws Throwable {
+        return boundaryOf(CLASSES, LOADERS, true);
+    }
+
+    private static M3Boundary compactBoundary() throws Throwable {
+        return boundaryOf(CLASSES, LOADERS, false);
+    }
+
+    /** Same minimal top-level class file as M3ClassFlagsAtomTest: a collectable hidden class. */
+    private static Class<?> hiddenClass(String name) throws Exception {
+        java.io.ByteArrayOutputStream bytes = new java.io.ByteArrayOutputStream();
+        java.io.DataOutputStream out = new java.io.DataOutputStream(bytes);
+        final int magic = 0xCAFEBABE, major = 65, pool = 5, utf8 = 1, klass = 7, flags = 0x0011, self = 1, sup = 3;
+        out.writeInt(magic);
+        out.writeShort(0);
+        out.writeShort(major);
+        out.writeShort(pool);
+        out.writeByte(klass);
+        out.writeShort(self + 1);
+        out.writeByte(utf8);
+        out.writeUTF(name);
+        out.writeByte(klass);
+        out.writeShort(sup + 1);
+        out.writeByte(utf8);
+        out.writeUTF("java/lang/Object");
+        out.writeShort(flags);
+        out.writeShort(self);
+        out.writeShort(sup);
+        out.writeShort(0);
+        out.writeShort(0);
+        out.writeShort(0);
+        out.writeShort(0);
+        out.flush();
+        return MethodHandles.lookup().defineHiddenClass(bytes.toByteArray(), false).lookupClass();
+    }
+
+    private static void collect(WeakReference<?> probe) throws InterruptedException {
+        for (int i = 0; i < GC_ATTEMPTS && probe.get() != null; i++) {
+            System.gc();
+            Thread.sleep(GC_PAUSE_MILLIS);
+        }
+    }
+>>>
+
+@atom M3Boundary.M3Boundary 1 SCENARIO private-constructor-fields
+setup <<<
+MethodHandle ctor = M3AtomKit.findConstructor(OWNER, MethodType.methodType(void.class,
+        WeakReference[].class, WeakReference[].class, int.class, int.class));
+WeakReference<?>[] classes = {new WeakReference<>(String.class)};
+WeakReference<?>[] loaders = {new WeakReference<>(null), new WeakReference<>(APP)};
+>>>
+check <<<
+M3Boundary boundary = (M3Boundary) ctor.invoke(classes, loaders, 1, 2);
+assertTrue(boundary.retained());
+assertEquals(1, boundary.classCount());
+assertEquals(2, boundary.loaderSpaceCount());
+assertEquals(Optional.of(String.class), boundary.classAt(0));
+assertEquals(Optional.of(APP), boundary.loaderAt(1));
+M3Boundary detached = (M3Boundary) ctor.invoke(new WeakReference<?>[0], new WeakReference<?>[0], 7, 3);
+assertFalse(detached.retained());
+assertEquals(7, detached.classCount(), "counts are kept without references");
+assertEquals(3, detached.loaderSpaceCount());
+>>>
+
+@atom M3Boundary.of 1 SCENARIO source-arrays+M3CI.compile
+setup <<<
+M3CI standard = M3CI.compile(List.of(String.class, M3BoundaryAtomTest.class), M3CI.Options.standard(), null);
+M3CI compactIndex = M3CI.compile(List.of(String.class, M3BoundaryAtomTest.class), M3CI.Options.compact(), null);
+>>>
+check <<<
+M3Boundary boundary = retainedBoundary();
+for (int row = 0; row < CLASSES.length; row++) assertEquals(Optional.of(CLASSES[row]), boundary.classAt(row));
+assertTrue(compactBoundary().classAt(0).isEmpty(), "compact keeps no class handle");
+assertTrue(standard.boundary().retained());
+assertFalse(compactIndex.boundary().retained());
+assertEquals(standard.size(), standard.boundary().classCount());
+assertEquals(compactIndex.size(), compactIndex.boundary().classCount());
+for (int row = 0; row < standard.size(); row++) {
+    assertEquals(standard.binaryName(row), standard.boundary().classAt(row).orElseThrow().getName());
+}
+M3AtomKit.expectMessage(NullPointerException.class, "classes", () -> boundaryOf(null, LOADERS, true));
+M3AtomKit.expectMessage(NullPointerException.class, "loaders", () -> boundaryOf(CLASSES, null, false));
+M3AtomKit.expectMessage(NullPointerException.class, "classes[1]", () -> boundaryOf(new Class<?>[] {String.class, null}, LOADERS, true));
+assertEquals(2, boundaryOf(new Class<?>[] {String.class, null}, LOADERS, false).classCount(), "compact does not inspect elements");
+>>>
+
+@atom M3Boundary.retained 1 SCENARIO retain-flag
+check <<<
+assertTrue(retainedBoundary().retained());
+assertFalse(compactBoundary().retained());
+assertFalse(boundaryOf(new Class<?>[0], LOADERS, true).retained(), "an empty class lane retains nothing");
+>>>
+
+@atom M3Boundary.classCount 1 SCENARIO source-array-length
+check <<<
+assertEquals(CLASSES.length, retainedBoundary().classCount());
+assertEquals(CLASSES.length, compactBoundary().classCount());
+assertEquals(0, boundaryOf(new Class<?>[0], new ClassLoader[0], true).classCount());
+>>>
+
+@atom M3Boundary.loaderSpaceCount 1 SCENARIO source-array-length
+check <<<
+assertEquals(LOADERS.length, retainedBoundary().loaderSpaceCount());
+assertEquals(LOADERS.length, compactBoundary().loaderSpaceCount());
+>>>
+
+@atom M3Boundary.classAt 1 SCENARIO java.util.Optional+Objects.checkIndex
+setup <<<
+M3Boundary boundary = retainedBoundary();
+M3Boundary compact = compactBoundary();
+>>>
+check <<<
+for (int row = 0; row < CLASSES.length; row++) {
+    assertSame(CLASSES[row], boundary.classAt(row).orElseThrow());
+    assertEquals(Optional.empty(), compact.classAt(row));
+}
+M3AtomKit.expect(IndexOutOfBoundsException.class, () -> boundary.classAt(-1));
+M3AtomKit.expect(IndexOutOfBoundsException.class, () -> boundary.classAt(CLASSES.length));
+M3AtomKit.expect(IndexOutOfBoundsException.class, () -> compact.classAt(CLASSES.length));
+>>>
+
+@atom M3Boundary.loaderAt 1 SCENARIO java.util.Optional+bootstrap-zero
+setup <<<
+M3Boundary boundary = retainedBoundary();
+>>>
+check <<<
+assertEquals(Optional.empty(), boundary.loaderAt(0), "bootstrap space has no loader object");
+assertSame(APP, boundary.loaderAt(1).orElseThrow());
+assertSame(OTHER, boundary.loaderAt(2).orElseThrow());
+assertEquals(Optional.empty(), compactBoundary().loaderAt(1));
+M3AtomKit.expect(IndexOutOfBoundsException.class, () -> boundary.loaderAt(LOADERS.length));
+M3AtomKit.expect(IndexOutOfBoundsException.class, () -> boundary.loaderAt(-1));
+>>>
+
+@atom M3Boundary.loaderSpaceOf 1 SCENARIO identity-search
+setup <<<
+M3Boundary boundary = retainedBoundary();
+ClassLoader stranger = new ClassLoader(APP) { };
+>>>
+check <<<
+assertEquals(0, boundary.loaderSpaceOf(null), "bootstrap is always zero");
+assertEquals(1, boundary.loaderSpaceOf(APP));
+assertEquals(2, boundary.loaderSpaceOf(OTHER));
+assertEquals(-1, boundary.loaderSpaceOf(stranger), "unknown loader");
+assertEquals(-1, compactBoundary().loaderSpaceOf(APP), "detached snapshot");
+assertEquals(0, compactBoundary().loaderSpaceOf(null));
+>>>
+
+@atom M3Boundary.liveClassCount 1 SCENARIO java.lang.ref.WeakReference-atomic-clear
+setup <<<
+Class<?> hidden = hiddenClass("M3BoundaryLiveSeed");
+M3Boundary boundary = boundaryOf(new Class<?>[] {String.class, hidden}, LOADERS, true);
+WeakReference<Class<?>> probe = new WeakReference<>(hidden);
+assertEquals(2, boundary.liveClassCount());
+hidden = null;
+collect(probe);
+>>>
+check <<<
+boolean collected = probe.get() == null;
+assertEquals(collected ? 1 : 2, boundary.liveClassCount(), "boundary references clear with the probe");
+assertEquals(!collected, boundary.classAt(1).isPresent());
+assertEquals(0, compactBoundary().liveClassCount());
+>>>
+
+@atom M3Boundary.liveLoaderCount 1 SCENARIO java.lang.ref.WeakReference-atomic-clear
+setup <<<
+ClassLoader transientLoader = new ClassLoader(APP) { };
+M3Boundary boundary = boundaryOf(CLASSES, new ClassLoader[] {null, APP, transientLoader}, true);
+WeakReference<ClassLoader> probe = new WeakReference<>(transientLoader);
+assertEquals(3, boundary.liveLoaderCount(), "bootstrap counts as live");
+transientLoader = null;
+collect(probe);
+>>>
+check <<<
+assertEquals(probe.get() == null ? 2 : 3, boundary.liveLoaderCount());
+assertEquals(0, compactBoundary().liveLoaderCount());
+>>>
+
+@atom M3Boundary.retainedReferenceCount 1 SCENARIO array-lengths
+check <<<
+assertEquals(CLASSES.length + LOADERS.length, retainedBoundary().retainedReferenceCount());
+assertEquals(0, compactBoundary().retainedReferenceCount());
+>>>

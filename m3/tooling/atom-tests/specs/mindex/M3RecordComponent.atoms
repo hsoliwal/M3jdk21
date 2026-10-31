@@ -1,0 +1,51 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+// CLASS_ONLY atoms of M3RecordComponent.java (record component view; mirrors java.lang.reflect.RecordComponent).
+#class M3RecordComponentAtomTest
+#summary Per-atom contracts of jdk.internal.mindex.M3RecordComponent against java.lang.reflect.RecordComponent
+#build ReflectOracle
+#import jdk.internal.mindex.M3CI jdk.internal.mindex.M3RecordComponent jdk.internal.mindex.M3MemberKind java.util.TreeSet
+#helper <<<
+    private static final M3CI CI = ReflectOracle.snapshot();
+    private static final MethodHandle NEW = M3AtomKit.findConstructor(M3RecordComponent.class, "M3RecordComponent",
+            MethodType.methodType(void.class, M3CI.class, int.class));
+
+    private static M3RecordComponent view(int member) throws Throwable {
+        return (M3RecordComponent) NEW.invoke(CI, member);
+    }
+
+    private static void each(ReflectOracle.MemberCheck check) throws Throwable {
+        assertTrue(ReflectOracle.forEachMember(CI, M3MemberKind.RECORD_COMPONENT, check) > 0);
+    }
+>>>
+
+@atom M3RecordComponent.M3RecordComponent 1 SCENARIO kind-checked-constructor
+setup <<<
+int other = ReflectOracle.firstMember(CI, M3MemberKind.CONSTRUCTOR);
+>>>
+check <<<
+each((member, d) -> {
+    assertEquals(member, view(member).row());
+    assertEquals(d.name(), view(member).getName());
+});
+M3AtomKit.expectMessage(IllegalArgumentException.class, "not a record component", () -> NEW.invoke(CI, other));
+>>>
+
+@atom M3RecordComponent.annotationCount 1 SCENARIO getDeclaredAnnotations
+check <<<
+each((member, d) -> assertEquals(d.element().getDeclaredAnnotations().length, view(member).annotationCount(), d.toString()));
+>>>
+
+@atom M3RecordComponent.annotationTypeNameAt 1 SCENARIO getDeclaredAnnotations(type-names)
+check <<<
+each((member, d) -> {
+    TreeSet<String> got = new TreeSet<>();
+    for (int k = 0; k < view(member).annotationCount(); k++) got.add(view(member).annotationTypeNameAt(k));
+    assertEquals(ReflectOracle.annotationNames(d.element()), got);
+});
+>>>
+
+@atom M3RecordComponent.structuralHash64 1 SCENARIO delegates-to-M3CI
+check <<<
+each((member, d) -> assertEquals(CI.memberStructuralHash64(member), view(member).structuralHash64()));
+>>>

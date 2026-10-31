@@ -1,0 +1,344 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+// CLASS_ONLY atoms of M3Class.java (two-field class view over one frozen M3CI row; mirrors java.lang.Class).
+// Oracle: java.lang.Class differential over every row of the ReflectOracle snapshot.
+#class M3ClassAtomTest
+#summary Per-atom contracts of jdk.internal.mindex.M3Class against java.lang.Class
+#build ReflectOracle
+#import jdk.internal.mindex.M3CI jdk.internal.mindex.M3Class jdk.internal.mindex.M3ClassFlags jdk.internal.mindex.M3Constructor jdk.internal.mindex.M3Field jdk.internal.mindex.M3Method java.lang.annotation.Annotation java.lang.reflect.Field java.util.Arrays java.util.HashSet java.util.List java.util.Map java.util.Optional java.util.Set
+#helper <<<
+    private static final M3CI CI = ReflectOracle.snapshot();
+    private static final Class<?>[] CLASSES = ReflectOracle.classes(CI);
+    private static final Map<Class<?>, Integer> ROWS = ReflectOracle.rows(CI);
+    private static final int[] FLAGS = {M3ClassFlags.INTERFACE, M3ClassFlags.ENUM, M3ClassFlags.ANNOTATION,
+            M3ClassFlags.RECORD, M3ClassFlags.ARRAY, M3ClassFlags.PRIMITIVE, M3ClassFlags.SEALED, M3ClassFlags.HIDDEN,
+            M3ClassFlags.SYNTHETIC, M3ClassFlags.ANONYMOUS, M3ClassFlags.LOCAL, M3ClassFlags.MEMBER};
+    private static final Class<? extends Annotation> TAG = ReflectOracle.Tag.class;
+    private static final Class<? extends Annotation> MARK = ReflectOracle.Mark.class;
+
+    private static M3Class view(int row) {
+        return CI.classAt(row);
+    }
+
+    private static M3Class view(Class<?> c) {
+        return CI.classAt(ROWS.get(c));
+    }
+
+    private static Class<?> classOf(M3Class m) {
+        return CLASSES[m.row()];
+    }
+>>>
+
+@atom M3Class.M3Class 1 SCENARIO package-private-constructor
+setup <<<
+MethodHandle ctor = M3AtomKit.findConstructor(M3Class.class, "M3Class", MethodType.methodType(void.class, M3CI.class, int.class));
+>>>
+check <<<
+M3Class direct = (M3Class) ctor.invoke(CI, 0);
+assertEquals(view(0), direct, "same owner and row");
+assertEquals(view(0).hashCode(), direct.hashCode());
+assertSame(CI, direct.owner());
+M3AtomKit.expect(IndexOutOfBoundsException.class, () -> ctor.invoke(CI, CI.size()));
+M3AtomKit.expectMessage(NullPointerException.class, "owner", () -> ctor.invoke((M3CI) null, 0));
+>>>
+
+@atom M3Class.simpleName 1 SCENARIO java.lang.Class.getSimpleName
+check <<<
+for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].getSimpleName(), view(row).simpleName());
+>>>
+
+@atom M3Class.packageName 1 SCENARIO java.lang.Class.getPackageName
+check <<<
+for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].getPackageName(), view(row).packageName());
+>>>
+
+@atom M3Class.moduleName 1 SCENARIO java.lang.Module.getName
+check <<<
+for (int row = 0; row < CI.size(); row++) assertEquals(Optional.ofNullable(CLASSES[row].getModule().getName()), view(row).moduleName());
+>>>
+
+@atom M3Class.typeName 1 SCENARIO java.lang.Class.getTypeName
+check <<<
+for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].getTypeName(), view(row).typeName());
+>>>
+
+@atom M3Class.flags 1 SCENARIO java.lang.Class.isXxx
+check <<<
+for (int row = 0; row < CI.size(); row++) assertEquals(ReflectOracle.classFlags(CLASSES[row]), view(row).flags());
+>>>
+
+@atom M3Class.hasFlag 1 SCENARIO flag-membership
+check <<<
+for (int row = 0; row < CI.size(); row++) {
+    int expected = ReflectOracle.classFlags(CLASSES[row]);
+    for (int flag : FLAGS) assertEquals((expected & flag) != 0, view(row).hasFlag(flag), CLASSES[row] + " flag " + flag);
+    assertFalse(view(row).hasFlag(0), "no bit, no flag");
+}
+>>>
+
+@atom M3Class.isSynthetic 1 SCENARIO java.lang.Class.isSynthetic
+check <<<
+for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].isSynthetic(), view(row).isSynthetic());
+>>>
+
+@atom M3Class.isMemberClass 1 SCENARIO java.lang.Class.isMemberClass
+check <<<
+for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].isMemberClass(), view(row).isMemberClass());
+assertTrue(view(ReflectOracle.Derived.Inner.class).isMemberClass());
+>>>
+
+@atom M3Class.interfaceCount 1 SCENARIO java.lang.Class.getInterfaces
+check <<<
+for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].getInterfaces().length, view(row).interfaceCount());
+>>>
+
+@atom M3Class.interfaceAt 1 SCENARIO java.lang.Class.getInterfaces(order)
+check <<<
+for (int row = 0; row < CI.size(); row++) {
+    Class<?>[] interfaces = CLASSES[row].getInterfaces();
+    for (int k = 0; k < interfaces.length; k++) assertSame(interfaces[k], classOf(view(row).interfaceAt(k)));
+}
+>>>
+
+@atom M3Class.directSubtypeCount 1 SCENARIO reverse-hierarchy
+check <<<
+for (int row = 0; row < CI.size(); row++) assertEquals(CI.directSubtypeCount(row), view(row).directSubtypeCount());
+assertTrue(view(ReflectOracle.Shape.class).directSubtypeCount() >= 2, "Circle and Square implement Shape");
+>>>
+
+@atom M3Class.directSubtypeAt 1 SCENARIO getSuperclass/getInterfaces-of-subtype
+check <<<
+for (int row = 0; row < CI.size(); row++) {
+    for (int k = 0; k < view(row).directSubtypeCount(); k++) {
+        Class<?> sub = classOf(view(row).directSubtypeAt(k));
+        assertTrue(sub.getSuperclass() == CLASSES[row] || Arrays.asList(sub.getInterfaces()).contains(CLASSES[row]), sub.getName());
+    }
+}
+>>>
+
+@atom M3Class.supertypeCount 1 SCENARIO transitive-closure
+check <<<
+for (int row = 0; row < CI.size(); row++) assertEquals(ReflectOracle.supertypes(ROWS, CLASSES[row]).size(), view(row).supertypeCount());
+>>>
+
+@atom M3Class.supertypeAt 1 SCENARIO Class.isAssignableFrom
+check <<<
+for (int row = 0; row < CI.size(); row++) {
+    for (int k = 0; k < view(row).supertypeCount(); k++) {
+        Class<?> sup = classOf(view(row).supertypeAt(k));
+        assertTrue(sup.isAssignableFrom(CLASSES[row]) || CLASSES[row].isInterface() && sup == Object.class, sup + " of " + CLASSES[row]);
+    }
+}
+>>>
+
+@atom M3Class.annotationCount 1 SCENARIO getDeclaredAnnotations
+check <<<
+for (int row = 0; row < CI.size(); row++) assertEquals(ReflectOracle.annotationNames(CLASSES[row]).size(), view(row).annotationCount());
+>>>
+
+@atom M3Class.annotationTypeNameAt 1 SCENARIO getDeclaredAnnotations(type-names)
+check <<<
+for (int row = 0; row < CI.size(); row++) {
+    Set<String> got = new java.util.TreeSet<>();
+    for (int k = 0; k < view(row).annotationCount(); k++) got.add(view(row).annotationTypeNameAt(k));
+    assertEquals(ReflectOracle.annotationNames(CLASSES[row]), got);
+}
+>>>
+
+@atom M3Class.permittedSubclassCount 1 SCENARIO getPermittedSubclasses
+check <<<
+for (int row = 0; row < CI.size(); row++) {
+    Class<?>[] p = CLASSES[row].getPermittedSubclasses();
+    assertEquals(p == null ? 0 : p.length, view(row).permittedSubclassCount());
+}
+>>>
+
+@atom M3Class.permittedSubclassNameAt 1 SCENARIO getPermittedSubclasses(names)
+check <<<
+Class<?>[] p = ReflectOracle.Shape.class.getPermittedSubclasses();
+for (int k = 0; k < p.length; k++) assertEquals(p[k].getName(), view(ReflectOracle.Shape.class).permittedSubclassNameAt(k));
+M3AtomKit.expect(IndexOutOfBoundsException.class, () -> view(ReflectOracle.Shape.class).permittedSubclassNameAt(p.length));
+>>>
+
+@atom M3Class.getNestMembers 1 SCENARIO java.lang.Class.getNestMembers
+check <<<
+for (int row = 0; row < CI.size(); row++) {
+    Set<Class<?>> expected = new HashSet<>(Arrays.asList(CLASSES[row].getNestMembers()));
+    Set<Class<?>> got = new HashSet<>();
+    for (M3Class m : view(row).getNestMembers()) got.add(classOf(m));
+    assertEquals(expected, got, CLASSES[row].getName());
+}
+>>>
+
+@atom M3Class.memberRows 1 SCENARIO delegates-to-M3CI.memberRows
+check <<<
+for (int row = 0; row < CI.size(); row++) {
+    for (ReflectOracle.Declared d : ReflectOracle.declared(CLASSES[row])) {
+        assertArrayEquals(CI.memberRows(row, d.name()), view(row).memberRows(d.name()));
+    }
+}
+>>>
+
+@atom M3Class.structuralHash64 1 SCENARIO delegates-to-M3CI
+check <<<
+for (int row = 0; row < CI.size(); row++) assertEquals(CI.structuralHash64(row), view(row).structuralHash64());
+>>>
+
+@atom M3Class.getPackage 1 SCENARIO java.lang.Class.getPackage
+check <<<
+for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].getPackage(), view(row).getPackage());
+>>>
+
+@atom M3Class.getProtectionDomain 1 SCENARIO java.lang.Class.getProtectionDomain
+check <<<
+assertSame(ReflectOracle.class.getProtectionDomain(), view(ReflectOracle.class).getProtectionDomain());
+assertSame(Object.class.getProtectionDomain(), view(Object.class).getProtectionDomain());
+>>>
+
+@atom M3Class.desiredAssertionStatus 1 SCENARIO java.lang.Class.desiredAssertionStatus
+check <<<
+for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].desiredAssertionStatus(), view(row).desiredAssertionStatus());
+>>>
+
+@atom M3Class.getResource 1 SCENARIO java.lang.Class.getResource
+check <<<
+assertEquals(ReflectOracle.class.getResource("ReflectOracle.class"), view(ReflectOracle.class).getResource("ReflectOracle.class"));
+assertNotNull(view(ReflectOracle.class).getResource("ReflectOracle.class"));
+assertNull(view(ReflectOracle.class).getResource("no-such-resource.txt"));
+>>>
+
+@atom M3Class.getSigners 1 SCENARIO java.lang.Class.getSigners
+check <<<
+assertArrayEquals(ReflectOracle.class.getSigners(), view(ReflectOracle.class).getSigners());
+assertNull(view(Object.class).getSigners(), "bootstrap classes are unsigned");
+>>>
+
+@atom M3Class.getAnnotation 1 SCENARIO java.lang.Class.getAnnotation
+check <<<
+assertEquals(ReflectOracle.Base.class.getAnnotation(TAG), view(ReflectOracle.Base.class).getAnnotation(TAG));
+assertEquals("base", ((ReflectOracle.Tag) view(ReflectOracle.Base.class).getAnnotation(TAG)).value());
+assertNull(view(ReflectOracle.Square.class).getAnnotation(TAG));
+>>>
+
+@atom M3Class.getAnnotations 1 SCENARIO java.lang.Class.getAnnotations
+check <<<
+for (int row = 0; row < CI.size(); row++) assertEquals(Set.of(CLASSES[row].getAnnotations()), Set.of(view(row).getAnnotations()));
+>>>
+
+@atom M3Class.getDeclaredAnnotations 1 SCENARIO java.lang.Class.getDeclaredAnnotations
+check <<<
+for (int row = 0; row < CI.size(); row++) {
+    assertEquals(Set.of(CLASSES[row].getDeclaredAnnotations()), Set.of(view(row).getDeclaredAnnotations()));
+}
+>>>
+
+@atom M3Class.getAnnotationsByType 1 SCENARIO java.lang.Class.getAnnotationsByType
+check <<<
+assertArrayEquals(ReflectOracle.Base.class.getAnnotationsByType(MARK), view(ReflectOracle.Base.class).getAnnotationsByType(MARK));
+assertEquals(0, view(Object.class).getAnnotationsByType(MARK).length);
+>>>
+
+@atom M3Class.getDeclaredAnnotation 1 SCENARIO java.lang.Class.getDeclaredAnnotation
+check <<<
+assertEquals(ReflectOracle.Base.class.getDeclaredAnnotation(MARK), view(ReflectOracle.Base.class).getDeclaredAnnotation(MARK));
+assertNull(view(ReflectOracle.Derived.class).getDeclaredAnnotation(MARK), "not inherited when declared-only");
+>>>
+
+@atom M3Class.getDeclaredAnnotationsByType 1 SCENARIO java.lang.Class.getDeclaredAnnotationsByType
+check <<<
+assertArrayEquals(ReflectOracle.Base.class.getDeclaredAnnotationsByType(TAG), view(ReflectOracle.Base.class).getDeclaredAnnotationsByType(TAG));
+>>>
+
+@atom M3Class.getDeclaredConstructor 1 SCENARIO java.lang.Class.getDeclaredConstructor
+check <<<
+M3Constructor k = view(ReflectOracle.Base.class).getDeclaredConstructor(int.class, String[].class);
+assertEquals(ReflectOracle.Base.class.getDeclaredConstructor(int.class, String[].class), k.toConstructor());
+assertTrue(k.isVarArgs());
+assertThrows(NoSuchMethodException.class, () -> view(ReflectOracle.Base.class).getDeclaredConstructor(long.class));
+>>>
+
+@atom M3Class.getMethod 1 SCENARIO java.lang.Class.getMethod(inherited)
+check <<<
+M3Method sum = view(ReflectOracle.Derived.class).getMethod("sum", int[].class);
+assertEquals(ReflectOracle.Derived.class.getMethod("sum", int[].class), sum.toMethod());
+assertEquals(ReflectOracle.Base.class, sum.toMethod().getDeclaringClass(), "inherited public method resolves to its declarer");
+assertEquals(Object.class.getMethod("hashCode"), view(ReflectOracle.Derived.class).getMethod("hashCode").toMethod());
+assertThrows(NoSuchMethodException.class, () -> view(ReflectOracle.Derived.class).getMethod("nope"));
+>>>
+
+@atom M3Class.getConstructor 1 SCENARIO java.lang.Class.getConstructor(public)
+check <<<
+assertEquals(ReflectOracle.Base.class.getConstructor(), view(ReflectOracle.Base.class).getConstructor().toConstructor());
+assertThrows(NoSuchMethodException.class, () -> view(ReflectOracle.Base.class).getConstructor(int.class, String[].class),
+        "protected constructor is not public");
+>>>
+
+@atom M3Class.getFields 1 SCENARIO java.lang.Class.getFields
+check <<<
+for (Class<?> c : List.of(ReflectOracle.Base.class, ReflectOracle.Derived.class, ReflectOracle.Color.class)) {
+    Field[] expected = c.getFields();
+    M3Field[] got = view(c).getFields();
+    assertEquals(expected.length, got.length, c.getName());
+    for (int k = 0; k < expected.length; k++) assertEquals(expected[k], got[k].toField());
+}
+>>>
+
+@atom M3Class.getMethods 1 SCENARIO java.lang.Class.getMethods
+check <<<
+for (Class<?> c : List.of(ReflectOracle.Base.class, ReflectOracle.Derived.class, ReflectOracle.Circle.class)) {
+    java.lang.reflect.Method[] expected = c.getMethods();
+    M3Method[] got = view(c).getMethods();
+    assertEquals(expected.length, got.length, c.getName());
+    for (int k = 0; k < expected.length; k++) assertEquals(expected[k], got[k].toMethod());
+}
+>>>
+
+@atom M3Class.getConstructors 1 SCENARIO java.lang.Class.getConstructors
+check <<<
+for (Class<?> c : List.of(ReflectOracle.Base.class, ReflectOracle.Derived.class, ReflectOracle.Circle.class)) {
+    java.lang.reflect.Constructor<?>[] expected = c.getConstructors();
+    M3Constructor[] got = view(c).getConstructors();
+    assertEquals(expected.length, got.length);
+    for (int k = 0; k < expected.length; k++) assertEquals(expected[k], got[k].toConstructor());
+}
+>>>
+
+@atom M3Class.fieldView 1 SCENARIO (name,descriptor)-view+outside-snapshot
+setup <<<
+MethodHandle atom = M3AtomKit.findVirtual(M3Class.class, "fieldView", MethodType.methodType(M3Field.class, Field.class));
+Field count = ReflectOracle.Base.class.getDeclaredField("count");
+>>>
+check <<<
+M3Field f = (M3Field) atom.invoke(view(ReflectOracle.Base.class), count);
+assertEquals("count", f.getName());
+assertEquals("I", f.descriptor());
+assertEquals(count, f.toField());
+M3AtomKit.expectMessage(IllegalStateException.class, "outside M3Class snapshot",
+        () -> atom.invoke(view(ReflectOracle.Base.class), java.util.HashMap.class.getDeclaredField("table")));
+>>>
+
+@atom M3Class.methodView 1 SCENARIO (name,descriptor)-view+outside-snapshot
+setup <<<
+MethodHandle atom = M3AtomKit.findVirtual(M3Class.class, "methodView", MethodType.methodType(M3Method.class, java.lang.reflect.Method.class));
+java.lang.reflect.Method work = ReflectOracle.Base.class.getMethod("work");
+>>>
+check <<<
+M3Method m = (M3Method) atom.invoke(view(ReflectOracle.Base.class), work);
+assertEquals("()V", m.descriptor());
+assertEquals(work, m.toMethod());
+M3AtomKit.expectMessage(IllegalStateException.class, "outside M3Class snapshot",
+        () -> atom.invoke(view(ReflectOracle.Base.class), java.util.HashMap.class.getMethod("size")));
+>>>
+
+@atom M3Class.constructorView 1 SCENARIO (name,descriptor)-view+outside-snapshot
+setup <<<
+MethodHandle atom = M3AtomKit.findVirtual(M3Class.class, "constructorView", MethodType.methodType(M3Constructor.class, java.lang.reflect.Constructor.class));
+java.lang.reflect.Constructor<?> plain = ReflectOracle.Base.class.getConstructor();
+>>>
+check <<<
+M3Constructor k = (M3Constructor) atom.invoke(view(ReflectOracle.Base.class), plain);
+assertEquals("()V", k.descriptor());
+assertEquals(plain, k.toConstructor());
+M3AtomKit.expectMessage(IllegalStateException.class, "outside M3Class snapshot",
+        () -> atom.invoke(view(ReflectOracle.Base.class), java.util.HashMap.class.getConstructor()));
+>>>
