@@ -95,7 +95,7 @@ jobs:
       - name: Install source-built JUnit 5.11.4
         run: >
           mvn -B -ntp -f m3/vendor/third_party/pom.xml
-          -pl junit-jupiter-5.11.4,junit-platform-launcher-1.11.4
+          -pl junit-jupiter-5.10.2,junit-platform-launcher-1.10.2
           -am -DskipTests install
       - name: Execute CPU-only Tornado adapter regression
         run: >
