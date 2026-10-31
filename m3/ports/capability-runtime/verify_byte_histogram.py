@@ -47,15 +47,15 @@ def main():
     classes.mkdir()
     headers.mkdir()
     productions = sorted((root / 'src/main/java').rglob('*.java'))
-    tests = [root / 'src/test/java/com/m3/runtime/capability/ByteHistogram256Checks.java']
+    tests = [root / 'src/test/java/jdk/m3/runtime/capability/ByteHistogram256Checks.java']
     native = [root / 'native/lf_count_jni.c', root / 'native/byte_histogram_jni.c']
     tracked = productions + tests + native
     expected = {path.relative_to(root).as_posix(): sha(path) for path in tracked}
     run(out, 'javac', [javac, '--release', '21', '-Xlint:all,-module', '-Werror',
                        '-h', headers, '-d', classes, *productions, *tests])
-    target = 'com.m3.runtime.capability.ByteHistogram256Checks'
+    target = 'jdk.m3.runtime.capability.ByteHistogram256Checks'
     java_cmd = [java, '-Xmx64m', '-Xcheck:jni', '--module-path', classes,
-                '--module', 'com.m3.runtime.capability/' + target]
+                '--module', 'jdk.m3.runtime.capability/' + target]
     oracle = run(out, 'java', java_cmd)
     if 'M3_BYTE_HISTOGRAM_PASS' not in oracle or 'kernel=JAVA_SOURCE_RANGE' not in oracle:
         raise RuntimeError('Java byte histogram oracle did not execute')
@@ -78,9 +78,9 @@ def main():
             flags += ['-fsanitize=undefined', '-fno-sanitize-recover=all']
         run(out, 'native-cc', [cc, *flags, '-I' + str(jdk / 'include'),
                               '-I' + str(jdk / 'include' / os_header),
-                              '-include', headers / 'com_m3_runtime_capability_LfCount.h',
-                              '-include', headers / 'com_m3_runtime_capability_BytePatternSearch.h',
-                              '-include', headers / 'com_m3_runtime_capability_ByteHistogram256.h',
+                              '-include', headers / 'jdk_m3_runtime_capability_LfCount.h',
+                              '-include', headers / 'jdk_m3_runtime_capability_BytePatternSearch.h',
+                              '-include', headers / 'jdk_m3_runtime_capability_ByteHistogram256.h',
                               *native, '-o', library])
         accelerated = run(out, 'jni', [*java_cmd, library.resolve(), sha(library)])
         if 'M3_BYTE_HISTOGRAM_PASS' not in accelerated or 'kernel=JNI_DIRECT_C11' not in accelerated:
@@ -91,7 +91,7 @@ def main():
     receipt = {'java': oracle, 'jni': accelerated, 'source_sha256': expected,
                'status': 'JAVA_JNI_PARITY_PASS' if not args.java_only else 'JAVA_ONLY_PASS',
                'full_modified_jdk_jtreg': 'NOT_RUN',
-               'synexia_openrewrite_sdk': 'NOT_RUN',
+               'm3_openrewrite_sdk': 'NOT_RUN',
                'setup_inclusive_performance': 'NOT_RUN'}
     (out / 'REPORT.json').write_text(json.dumps(receipt, sort_keys=True, indent=2) + '\n',
                                      encoding='utf-8')

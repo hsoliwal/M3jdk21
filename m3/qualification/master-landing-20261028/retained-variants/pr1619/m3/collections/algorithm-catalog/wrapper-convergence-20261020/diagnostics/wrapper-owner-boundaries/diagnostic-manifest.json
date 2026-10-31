@@ -2,55 +2,55 @@
   "baseline_revision": "2779aba3f98f31c324be43f731be7914e1a05935",
   "canonical_recipe_owner": "hsoliwal/com.synexia:synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
   "executable_diagnostic_sources": {
-    "src/test/java/com/m3/collections/M3CandidateListBoundaryProof.java": "81b782e600c9c78d4f270c82a919bde12e09a90e671833f2944029077df558cb",
-    "src/test/java/com/m3/collections/M3ComparatorBoundaryProof.java": "47ce8f6239a3805303b85529301aeedd756956cee86f1d3210073300bad53e98",
-    "src/test/java/com/m3/collections/M3ListMutationGuardCounterexamples.java": "061621182ed3624162ba712b373ac4ef544503bb721e36e7b2cb22b80c961dab",
-    "src/test/java/com/m3/collections/M3ReadonlyBoundaryProof.java": "217726658fbc3274463dd83e708ec52d841e74edebd5fc9c62f489e91a076b7e"
+    "src/test/java/com/m3/collections/M3CandidateListBoundaryProof.java": "2388506c077c73b24fdb13b280384863580b832bf71bee7efd101fe0784c3530",
+    "src/test/java/com/m3/collections/M3ComparatorBoundaryProof.java": "408f754b2aa9bc915c97bcdf2fdfe6cd12a9ce15a26e21f922772d3cc0f639c8",
+    "src/test/java/com/m3/collections/M3ListMutationGuardCounterexamples.java": "cf7787c48abd2d35fa8e698cd5b707f64db93975d7d885887fa50fe74f08bfae",
+    "src/test/java/com/m3/collections/M3ReadonlyBoundaryProof.java": "bb9d0c8b1eb466e3e8bea50691dae7f80e35cefc8dd5279d2ef3447c1b479dc8"
   },
   "files": {
-    "M3FilteredLists.baseline.java.txt": "032bffd456e67c7568b028489ceec85f24510469b3a0e00571ab36cd17ae3b75",
-    "M3FilteredLists.rejected.java.txt": "a8bfd9e5d38aa378e7dab73fdbc59ef1512ff2782670100712178bd3c7261c88",
-    "M3WrapperConvergenceContract.baseline.java.txt": "2913aeae2f20b80c669398e5727ad9bc000eccf3bb225d85bdd672c17d4fb847",
+    "M3FilteredLists.baseline.java.txt": "bb0ff9a8008521576530b0cea64d00b4f22e6e4b8424b8e5df7f416a6a8b6051",
+    "M3FilteredLists.rejected.java.txt": "8634c87656c031e98f4f594ddcb72454dc6c7558a3dca985ae39ed8aebe8a10a",
+    "M3WrapperConvergenceContract.baseline.java.txt": "989507e15f05f3d931c51e7ae65d65dbc3fac7b80bc94984e4b9922ea17e8335",
     "README.md": "4fbca9a034b2d88305cd1ff03ff404733bce4b3255a5e8488276c6064419eb57",
     "SOURCE_REVIEW.md": "16aa5d235cc32d9b23532d77cc69dd9de6b10d7aa8241e2be7128d8d49c27070",
-    "recorded-replay-layout-amended.json": "92cc382e4343a6c2b3f2abfe86b747ca8ef4bda320ee8eda4734e60939825ac9",
-    "recorded-replay.json": "ee56e19279e1ebd87e996a3d5a60cb68e445b03088200dd112738a53ee3e745b",
-    "run_diagnostics.py": "c400213eaa6aa1f536d602987c12e77b6c612c7b2b30393eebefa9fa954d24cc",
-    "src/test/java/com/m3/collections/M3CandidateListBoundaryProof.java": "81b782e600c9c78d4f270c82a919bde12e09a90e671833f2944029077df558cb",
-    "src/test/java/com/m3/collections/M3ComparatorBoundaryProof.java": "47ce8f6239a3805303b85529301aeedd756956cee86f1d3210073300bad53e98",
-    "src/test/java/com/m3/collections/M3ListMutationGuardCounterexamples.java": "061621182ed3624162ba712b373ac4ef544503bb721e36e7b2cb22b80c961dab",
-    "src/test/java/com/m3/collections/M3ReadonlyBoundaryProof.java": "217726658fbc3274463dd83e708ec52d841e74edebd5fc9c62f489e91a076b7e"
+    "recorded-replay-layout-amended.json": "d38c129dae1e5d4f94dc633a628bf24c9f5b9fc44a867db4173af83ec1ce8a01",
+    "recorded-replay.json": "2e0b0f4ec82795f5ca79c43db8f872ffdd02288ad96214ab389c44598794c878",
+    "run_diagnostics.py": "20f0fa2e5f125eb6e3a2e650af0b699f52c3e3c5456bdca239466ff1a335b02e",
+    "src/test/java/com/m3/collections/M3CandidateListBoundaryProof.java": "2388506c077c73b24fdb13b280384863580b832bf71bee7efd101fe0784c3530",
+    "src/test/java/com/m3/collections/M3ComparatorBoundaryProof.java": "408f754b2aa9bc915c97bcdf2fdfe6cd12a9ce15a26e21f922772d3cc0f639c8",
+    "src/test/java/com/m3/collections/M3ListMutationGuardCounterexamples.java": "cf7787c48abd2d35fa8e698cd5b707f64db93975d7d885887fa50fe74f08bfae",
+    "src/test/java/com/m3/collections/M3ReadonlyBoundaryProof.java": "bb9d0c8b1eb466e3e8bea50691dae7f80e35cefc8dd5279d2ef3447c1b479dc8"
   },
   "independent_review_source_seals": [
     {
-      "baseline_sha256": "8419315c3058bce6add897b7ffa7c6763bbb6b85418bb35e190ba8a4d2dd70c4",
+      "baseline_sha256": "5308017ea910acd0f81252e88fd8e57c2c1b49d8e6f2874bab0728c110526709",
       "disposition": "NO_ADDITIONAL_BLOCKER_FOUND_BY_INDEPENDENT_SOURCE_REVIEW",
       "reviewed_candidate_sha256": "dce9da78508449041db8907ef7bc44e9fcee1117bbe91db880e35c26933f9470",
-      "target": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java"
+      "target": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java"
     },
     {
-      "baseline_sha256": "d13c5c5db3e07e5c66f8857f2c74e07d2ba60babb7d2529bd397e61894881fd0",
+      "baseline_sha256": "5dce16ffebd5d3cfdd7fdf77f509eff6784ffb7453ae76270b3ba39289df6c4a",
       "disposition": "NO_ADDITIONAL_BLOCKER_FOUND_BY_INDEPENDENT_SOURCE_REVIEW",
       "reviewed_candidate_sha256": "a9b51ed9c0859ef27d308ea89e1b41cf3283dfd54478a36b1d89d6ab66711b0c",
-      "target": "m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java"
+      "target": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredNavigableSet.java"
     },
     {
-      "baseline_sha256": "511800d4d79c7d8838ddb497f031e13827decd44c9c2790093f89ea01cdaa349",
+      "baseline_sha256": "90b0ba9467d6cb6741de9a3e7b39f1a6016eef2401da3b3eadfab3cdb0e975c8",
       "disposition": "NO_ADDITIONAL_BLOCKER_FOUND_BY_INDEPENDENT_SOURCE_REVIEW",
-      "reviewed_candidate_sha256": "48d8636ea51c1bf05a1c4747e416916695b6bcbe665467f940e71b07ce2d327a",
-      "target": "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java"
+      "reviewed_candidate_sha256": "e8439b49c9fd771bbbdb788c85a5922a4b45191f0309a8b901a34dd4036ca973",
+      "target": "m3/collections/src/main/java/jdk/m3/collections/M3CollectionViews.java"
     },
     {
-      "baseline_sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545",
+      "baseline_sha256": "6be07c18dbbbe9ae259ff85821bb3f4ec666fddd820b0950f4115c4256f45deb",
       "disposition": "NO_ADDITIONAL_BLOCKER_FOUND_BY_INDEPENDENT_SOURCE_REVIEW",
       "reviewed_candidate_sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e",
-      "target": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java"
+      "target": "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java"
     },
     {
-      "baseline_sha256": "487a54917cbae6ec9802ca75aa04edc1a99dc0b6e9ed2a294b06dca6054c1af3",
+      "baseline_sha256": "0e17afe3cc66283a0e7658f166b84c8bbff1cf64d83c738913bf6a56017cfc35",
       "disposition": "NO_ADDITIONAL_BLOCKER_FOUND_BY_INDEPENDENT_SOURCE_REVIEW",
-      "reviewed_candidate_sha256": "4616405cec600726a31256ba654e25614d963afc8109469d5c8257fa197cc052",
-      "target": "m3/collections/src/main/java/com/m3/collections/M3PrimitiveFilteredSequences.java"
+      "reviewed_candidate_sha256": "a3eaf82eedab424f78ee0b2d4daa789f636903c4c8827ff5dd58a1b919129f73",
+      "target": "m3/collections/src/main/java/jdk/m3/collections/M3PrimitiveFilteredSequences.java"
     },
     {
       "disposition": "NO_ADDITIONAL_BLOCKER_FOUND; BODY_EQUALS_RECONCILED_M3_COLLECTION_VIEWS_AFTER_NAMESPACE_NORMALIZATION",
@@ -200,13 +200,13 @@
     }
   ],
   "snapshot_files": {
-    "M3FilteredLists.baseline.java.txt": "032bffd456e67c7568b028489ceec85f24510469b3a0e00571ab36cd17ae3b75",
-    "M3FilteredLists.rejected.java.txt": "a8bfd9e5d38aa378e7dab73fdbc59ef1512ff2782670100712178bd3c7261c88",
-    "M3WrapperConvergenceContract.baseline.java.txt": "2913aeae2f20b80c669398e5727ad9bc000eccf3bb225d85bdd672c17d4fb847"
+    "M3FilteredLists.baseline.java.txt": "bb0ff9a8008521576530b0cea64d00b4f22e6e4b8424b8e5df7f416a6a8b6051",
+    "M3FilteredLists.rejected.java.txt": "8634c87656c031e98f4f594ddcb72454dc6c7558a3dca985ae39ed8aebe8a10a",
+    "M3WrapperConvergenceContract.baseline.java.txt": "989507e15f05f3d931c51e7ae65d65dbc3fac7b80bc94984e4b9922ea17e8335"
   },
   "snapshot_provenance": {
     "M3FilteredLists.baseline.java.txt": {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java",
       "repository": "hsoliwal/M3JDK21",
       "revision": "2779aba3f98f31c324be43f731be7914e1a05935"
     },
@@ -219,7 +219,7 @@
     },
     "M3WrapperConvergenceContract.baseline.java.txt": {
       "oracle_changes": "NONE",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceContract.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3WrapperConvergenceContract.java",
       "repository": "hsoliwal/M3JDK21",
       "revision": "2779aba3f98f31c324be43f731be7914e1a05935"
     }
@@ -240,28 +240,28 @@
       {
         "current_path": "src/test/java/com/m3/collections/M3CandidateListBoundaryProof.java",
         "previous_path": "M3CandidateListBoundaryProof.java",
-        "sha256_unchanged": "81b782e600c9c78d4f270c82a919bde12e09a90e671833f2944029077df558cb"
+        "sha256_unchanged": "2388506c077c73b24fdb13b280384863580b832bf71bee7efd101fe0784c3530"
       },
       {
         "current_path": "src/test/java/com/m3/collections/M3ComparatorBoundaryProof.java",
         "previous_path": "M3ComparatorBoundaryProof.java",
-        "sha256_unchanged": "47ce8f6239a3805303b85529301aeedd756956cee86f1d3210073300bad53e98"
+        "sha256_unchanged": "408f754b2aa9bc915c97bcdf2fdfe6cd12a9ce15a26e21f922772d3cc0f639c8"
       },
       {
         "current_path": "src/test/java/com/m3/collections/M3ListMutationGuardCounterexamples.java",
         "previous_path": "M3ListMutationGuardCounterexamples.java",
-        "sha256_unchanged": "061621182ed3624162ba712b373ac4ef544503bb721e36e7b2cb22b80c961dab"
+        "sha256_unchanged": "cf7787c48abd2d35fa8e698cd5b707f64db93975d7d885887fa50fe74f08bfae"
       },
       {
         "current_path": "src/test/java/com/m3/collections/M3ReadonlyBoundaryProof.java",
         "previous_path": "M3ReadonlyBoundaryProof.java",
-        "sha256_unchanged": "217726658fbc3274463dd83e708ec52d841e74edebd5fc9c62f489e91a076b7e"
+        "sha256_unchanged": "bb9d0c8b1eb466e3e8bea50691dae7f80e35cefc8dd5279d2ef3447c1b479dc8"
       }
     ],
     "original_record": {
       "disposition": "UNCHANGED_HISTORICAL_EXECUTION_EVIDENCE",
       "path": "recorded-replay.json",
-      "sha256": "ee56e19279e1ebd87e996a3d5a60cb68e445b03088200dd112738a53ee3e745b"
+      "sha256": "2e0b0f4ec82795f5ca79c43db8f872ffdd02288ad96214ab389c44598794c878"
     },
     "reason": "Use the canonical Java engine admitted src/test/java source root without changing the engine."
   }

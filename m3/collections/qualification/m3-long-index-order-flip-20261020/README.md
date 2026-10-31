@@ -2,10 +2,10 @@
 
 Authority: M3JDK21 native parent-owned `long[]` payload, `int[]` physical-index directory, offsets and selection masks. This refines the **existing** M3LongIndexProjection, not a new wrapper or sorted collection owner.
 
-Source refinement: `m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java`; canonical hash-pinned Maven/OpenRewrite source and test recipe: `hsoliwal/com.synexia#12581`, `com.synexia.rewrite.M3LongIndexOrderFlip20261020`.
+Source refinement: `m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java`; canonical hash-pinned Maven/OpenRewrite source and test recipe: `hsoliwal/com.synexia#12581`, `com.synexia.rewrite.M3LongIndexOrderFlip20261020`.
 
-Preimage SHA-256: `77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545`.
-Postimage SHA-256: `de59099f3dc12fc2eecfb5b0d2433c97aa56bca3b86a695762bfbb844be1bf78`.
+Preimage SHA-256: `6be07c18dbbbe9ae259ff85821bb3f4ec666fddd820b0950f4115c4256f45deb`.
+Postimage SHA-256: `60dc7c8e33fd4aebe16f3d75204e5497fe806ece518bd0aa20f637beb1548a6c`.
 
 One meaningful replaceable behavioral atom: ASCENDING↔DESCENDING on an immutable indexed projection. Reverse a freshly copied physical index window, then reverse each contiguous equal-value run. Stable ties retain current encounter order without rewriting the `long[]`, changing prior views, allocating per-element objects or JNI traversals. ENCOUNTER sorting and same-order no-ops continue unchanged.
 

@@ -3,8 +3,8 @@ name: M3 filtered sorted primitive terminal recipe and JNI regression
 on:
   pull_request:
     paths:
-      - "m3/collections/src/main/java/com/m3/collections/M3LongFilteredView.java"
-      - "m3/collections/src/test/java/com/m3/collections/M3FilteredTerminalProof.java"
+      - "m3/collections/src/main/java/jdk/m3/collections/M3LongFilteredView.java"
+      - "m3/collections/src/test/java/jdk/m3/collections/M3FilteredTerminalProof.java"
       - "m3/collections/qualification/filtered-terminal-fusion-20261017/**"
       - ".github/workflows/m3-filtered-terminal-fusion-20261017.yml"
   push:
@@ -51,13 +51,13 @@ jobs:
           find m3/collections/src/main/java -name '*.java' -print0 | sort -z | \
             xargs -0 javac --release 21 -proc:none -Xlint:all,-module -Werror -d proof/classes
           javac --release 21 -proc:none -Xlint:all -Werror -cp proof/classes \
-            -d proof/classes m3/collections/src/test/java/com/m3/collections/M3FilteredTerminalProof.java \
-            m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java
-          java -Xmx256m -cp proof/classes com.m3.collections.M3FilteredTerminalProof \
+            -d proof/classes m3/collections/src/test/java/jdk/m3/collections/M3FilteredTerminalProof.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java
+          java -Xmx256m -cp proof/classes jdk.m3.collections.M3FilteredTerminalProof \
             | tee proof/differential.log
           grep -F "digest=a482d01252a7a235c73734ad9319b0b9c43c34b3bbb603437b23498e6322c008 assertions=642 chars=679300" proof/differential.log
           javac --release 21 -proc:none -h proof/headers -cp proof/classes -d proof/classes \
-            m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java
+            m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java
           gcc -std=c17 -Wall -Wextra -Wpedantic -Werror -fPIC -shared \
             -fsanitize=undefined -fno-sanitize-recover=all \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
@@ -65,7 +65,7 @@ jobs:
             -o proof/native/libm3_collections_mask.so
           UBSAN_OPTIONS=halt_on_error=1 java -Xmx256m -Xcheck:jni \
             -Djava.library.path="$PWD/proof/native" -cp proof/classes \
-            com.m3.collections.M3IndexMaskCompactorSelfTest --native | tee proof/jni.log
+            jdk.m3.collections.M3IndexMaskCompactorSelfTest --native | tee proof/jni.log
           python3 -S m3/collections/qualification/filtered-terminal-fusion-20261017/verify.py
           git diff --exit-code
       - name: Preserve proof and failures

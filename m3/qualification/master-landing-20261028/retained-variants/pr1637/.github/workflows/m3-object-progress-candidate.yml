@@ -54,7 +54,7 @@ jobs:
           set -euxo pipefail
           mkdir -p proof/scheduled-progress
           git rev-parse HEAD > proof/scheduled-progress/head.txt
-          CRATE=m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021
+          CRATE=m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021
           python3 "$CRATE/verify_sources.py" . 2>&1 | tee proof/scheduled-progress/source-readback.log
       - name: Restore only the sealed baseline sources from their original commit
         shell: bash

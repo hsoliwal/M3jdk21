@@ -89,7 +89,7 @@ def main() -> None:
         if len(rows) != 3:
             raise AssertionError("expected three qualified source successors")
         refusals = 0
-        current = root / "m3/collections/src/main/java/com/m3/collections/M3IndexedLiveView.java"
+        current = root / "m3/collections/src/main/java/jdk/m3/collections/M3IndexedLiveView.java"
         refuses(gate, "source drift", current, current.read_bytes() + b"\n// source drift\n")
         refusals += 1
 

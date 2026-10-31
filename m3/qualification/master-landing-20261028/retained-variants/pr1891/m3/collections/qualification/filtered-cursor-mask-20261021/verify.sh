@@ -9,7 +9,7 @@ root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
 manifest="$root/m3/collections/qualification/filtered-cursor-mask-20261021/SOURCE_MANIFEST.tsv"
 successor="$root/m3/compatibility/collection-views/source-successions.tsv"
 [[ -f "$manifest" && ! -L "$manifest" ]] || { echo 'FAIL absent or linked historical manifest' >&2; exit 11; }
-[[ "$(git -C "$root" hash-object "$manifest")" == '4ca33e23eabc23764f7e43f30cba9b753cbd0b1f' ]] || {
+[[ "$(git -C "$root" hash-object "$manifest")" == '5907fcead4a2468a9d31b08b07731876c9d7d954' ]] || {
     echo 'FAIL historical manifest source drift' >&2; exit 18;
 }
 [[ -f "$successor" && ! -L "$successor" ]] || { echo 'FAIL absent or linked successor' >&2; exit 19; }

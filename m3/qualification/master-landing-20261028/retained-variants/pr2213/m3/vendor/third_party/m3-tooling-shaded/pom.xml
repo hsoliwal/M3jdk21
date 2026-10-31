@@ -76,7 +76,7 @@
                 </transformer>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                   <manifestEntries>
-                    <Automatic-Module-Name>com.m3.vendor.tooling.thirdparty</Automatic-Module-Name>
+                    <Automatic-Module-Name>jdk.m3.vendor.tooling.thirdparty</Automatic-Module-Name>
                     <Multi-Release>true</Multi-Release>
                   </manifestEntries>
                 </transformer>

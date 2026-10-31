@@ -43,8 +43,8 @@
       <resource>
         <directory>${project.basedir}/../../../src/main/resources</directory>
         <includes>
-          <include>com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/**</include>
-          <include>com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-regex-memory-workflow/**</include>
+          <include>jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/**</include>
+          <include>jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-regex-memory-workflow/**</include>
           <include>META-INF/rewrite/m3-a3-regex-memory-lab.yml</include>
           <include>META-INF/rewrite/m3-a3-regex-memory-workflow.yml</include>
         </includes>
@@ -54,8 +54,8 @@
       <testResource>
         <directory>${project.basedir}/../../../src/test/resources</directory>
         <includes>
-          <include>com/m3/rewrite/a3-regex-memory-lab/**</include>
-          <include>com/m3/rewrite/a3-regex-memory-workflow/**</include>
+          <include>jdk/m3/rewrite/a3-regex-memory-lab/**</include>
+          <include>jdk/m3/rewrite/a3-regex-memory-workflow/**</include>
         </includes>
       </testResource>
     </testResources>
@@ -66,12 +66,12 @@
         <version>3.13.0</version>
         <configuration>
           <includes>
-            <include>com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java</include>
-            <include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
+            <include>jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java</include>
+            <include>jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
           </includes>
           <testIncludes>
-            <testInclude>com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java</testInclude>
-            <testInclude>com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java</testInclude>
+            <testInclude>jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java</testInclude>
+            <testInclude>jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java</testInclude>
           </testIncludes>
         </configuration>
       </plugin>

@@ -8,28 +8,28 @@
       "CURRENT_SOURCE_PINS.json": "ad4fe5c47ed26878ae18cfc18493236059400af425fa7333b41d5fd9eaebeef8",
       "LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
       "NOTICE": "61acbff125eecb0494b74ad223b8357bd9777d6559b56619c8cf132a147bf561",
-      "OWNER_PINS.json": "3ed7fce72d9c7acedbcab341d0ead0309e61e2deeb3eb886a83eed260cba6069",
+      "OWNER_PINS.json": "7ab7280e184a22300472df610121c65ad7f7e99e8d33310bac06cdec2cbb97e5",
       "README.md": "06bc1795e60f35bfbc694b0d63ea0c15e462180e3cbb7d73f4d4e8239e5ebf47",
       "RECONCILIATION.md": "6bae9b6684e88f01d550474454a15643aba4e3d21bc3e66d768c8f77ef023ceb",
       "SCOPE.tsv": "84cf0a41bfb7883384e79dcfef6d58efe78115eb37afb7456acbab3dc21d457c",
       "TARGET_MAPPING.tsv": "b6b77391886bb0acb6671ee01ccdb8be28dc3063e9a6dd6562216a6ea6491b07",
-      "TOOLING_PINS.json": "9fcd52eb31e2ec558e60cc98ca5c29481e604408ee6a18ef6d839163b93110b7",
+      "TOOLING_PINS.json": "a9d0e46fa128ba830b5cb6d456a497216a78c106a15c5cd44dbf10171a266f17",
       "__pycache__/author.cpython-312.pyc": "dd033d07571c94273c691f1e772214b90ceaae7ea77ed602015ecbd5e69ec9d0",
       "author.py": "a2c22fa59013f884ddd12453215686689fa4d062dfb3dcd064e1c428014e55b1",
-      "before/M3IndexMaskCompactor.java": "ec8b9d2683f5fdb99f6c3e9ad4c79dc60e8ad19cbc3fde2b09e9da2fe3a83f2b",
-      "before/m3_index_mask_compactor.c": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef",
-      "evidence/BUILD_LOGS.md": "0260cd7a2599a29da1de83b232122c283c9254991fdd9c715cbea04a969e95c1",
-      "evidence/RECEIPT.json": "e824054708943f6796ac5eb6e691893f9067d5fb8cf6ca859920b837a438384c",
-      "legacy/m3_index_mask_compactor.c": "cb8e8c66e07cc4651e95a0c28ad834d2c9de48df34dc90c6d7da68443f1da531",
+      "before/M3IndexMaskCompactor.java": "394211113f2e6c875521553700e9060a30906a9aaab4c755405402042832d12e",
+      "before/m3_index_mask_compactor.c": "ed13463a6972bd014a861635987e8aa6214bf7516789c4f41d4ec3d69692fe73",
+      "evidence/BUILD_LOGS.md": "86678ab352ba764cb75e84df10f3e78c8631bd2a1b2e283acfa461765ed35038",
+      "evidence/RECEIPT.json": "243af74d0bb85e4449cc1362be3300777462570bcb2f7607675bdc1456bde7f1",
+      "legacy/m3_index_mask_compactor.c": "a549b92b38eaa337c0e95f32c46607cace9ae46d8240d37bd58a3a48e296990d",
       "memory/LESSONS.md": "1bd72a5806f076e83af9acc8947134940a9fff48566f29df86408f9cb7516cb7",
-      "memory/events/1d82d949bef954c038da5e3f08726634940c65bee35569ac114e373fc100c84f.json": "1d82d949bef954c038da5e3f08726634940c65bee35569ac114e373fc100c84f",
-      "memory/events/5ac55e2fa109d1c46914f09a18d1365848e5d1302607aee6b9814b9ad7e3e62c.json": "5ac55e2fa109d1c46914f09a18d1365848e5d1302607aee6b9814b9ad7e3e62c",
-      "owners/M3LongAddressKernel.java": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
-      "owners/M3LongIndexProjection.java": "3569c0a8ffd94c6e91b87b9316bbaf20583f7dd56810a7bee57a81c8a9975a8d",
+      "memory/events/6c370040922eb26b5be64f1d2d43d93fdf7a6044d48915fbcef1246e9de57a41.json": "6c370040922eb26b5be64f1d2d43d93fdf7a6044d48915fbcef1246e9de57a41",
+      "memory/events/ec3240ca0c51dada1851704898e11a0c51e619af8ab228cb3a25ed3e37d38c21.json": "ec3240ca0c51dada1851704898e11a0c51e619af8ab228cb3a25ed3e37d38c21",
+      "owners/M3LongAddressKernel.java": "8fa3ebd0a31e78aa2c763c9ab99955e419f8573a9687d3e817e913c0ed48d8ed",
+      "owners/M3LongIndexProjection.java": "0019e28bcff8d7dc80bcd82731c7b7f610a3471bf464e8f81edb4224a659c0dc",
       "pom.xml": "803b1d9725d26820d4556e5b403df6732de8b058f35f601b78372d9e80eaebcb",
-      "probes/M3MaskWindowKernelSelfTest.java": "1248b7331f2d2efe4502a6a0d5d68fb74911e368f11f48286eb98966d9931bbd",
-      "probes/native_probe.c": "b6f89e0922a43f061501555df7d8cedaa1a646b75e0ef9ce14c413a6ddf87143",
-      "reconciliation-20261021/FIXTURE_PINS.json": "2f9d1a310aea87b6287e5593e6b974c8cc0774077526a4b88abf26df3686684e",
+      "probes/M3MaskWindowKernelSelfTest.java": "156ecce32247694cdd27b1a9c35b2d4eecb37eaa595a3c67456ff9f8939cd8f5",
+      "probes/native_probe.c": "7e055208b98f35db7e79b31de27c2e34f6471169c6f019e66a5899ac46216e66",
+      "reconciliation-20261021/FIXTURE_PINS.json": "a1f7a4545e8efe13beaa644526226a9db9921be8b50a0654fbc3d1d10231454d",
       "reconciliation-20261021/M3RequiredExcludedLegacyProbe.java": "b7476aabd9fa3768b4267540b69e15ffeddd0dd0a7a552c4345a577d01a6cf7d",
       "reconciliation-20261021/evidence/README.md": "35336fb645f606e15f6b35da6d881a8803f3c35192e157063ed9294e45fa1d96",
       "reconciliation-20261021/evidence/current/00-before-lint-compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -47,9 +47,9 @@
       "reconciliation-20261021/evidence/current/COMMANDS.json": "e2bac4dd53e894baf4ca40d0f7f3763474b5d0bdbb3a98a066a2f43fbc81090e",
       "reconciliation-20261021/evidence/current/PRESERVATION.json": "63de8c7cef304e2e749757a746a25af4a2a01aa8db11ef2ba576f3fbc13160bc",
       "reconciliation-20261021/evidence/current/RAW_LOGS.json": "6ad98f17b70638a0a8d3355e9eb3f1ca848a431a6e3619e4c14792fce5349dae",
-      "reconciliation-20261021/evidence/current/RESULT.json": "9cc427abf49623f024d54e2be815f3d6db2eec987a38139075ee548b1b0b13e1",
-      "reconciliation-20261021/evidence/diagnostic-RESULT.json": "e10f9e11c6a171408dc9cb5efc47655cc4b90f3eeeb1e09d4ac3c79113bd32d5",
-      "reconciliation-20261021/evidence/diagnostic-stale-replay.log": "53cba079bdd0418f96599896b8bef5511def9811835d6b93a261c0da540eb886",
+      "reconciliation-20261021/evidence/current/RESULT.json": "c3ba23accf704c696c02249581730bd4f4f5a6f8593d4905d2fdbafff1b34b0d",
+      "reconciliation-20261021/evidence/diagnostic-RESULT.json": "dd1db548ed86f4ee2f574054379a21c01c2ed5c9d645312bab50ae24b95c8785",
+      "reconciliation-20261021/evidence/diagnostic-stale-replay.log": "1f2a0a4a23918434f1160fc14414bb6bf513415ee3455353c238c9e3d5948762",
       "reconciliation-20261021/evidence/maven-offline.log": "0c30b681bbd6e82df7b31dedd32d78d5ae3eab77eb1ecbd3304e41c3e374c095",
       "reconciliation-20261021/evidence/maven-online.log": "cdca20022dc6fc3fc1b2b76d5c32d020803b8cc785ab0af37ad0933723c025df",
       "reconciliation-20261021/evidence/serial/000-author-check.log": "f15ff8689b42df61c4d2de601db7d6c40b84fe88529e3ebd4de3efbb9023e112",
@@ -80,7 +80,7 @@
       "reconciliation-20261021/evidence/serial/025-recipe-check.log": "13838a89c9f97ae400b1d46379a3e8f5b2a919122748c48cfd9935462e96ce33",
       "reconciliation-20261021/evidence/serial/026-recipe-apply.log": "f79d4afdb7d344727a0f8cfc6dba365b49fef2a0e7158ee80e2fedbbfd6e1384",
       "reconciliation-20261021/evidence/serial/027-recipe-apply.log": "22cd93baca87af0f63d21e2f08f37271480981156dd5a9b872c980eaa57c514c",
-      "reconciliation-20261021/evidence/serial/028-recipe-apply.log": "53cba079bdd0418f96599896b8bef5511def9811835d6b93a261c0da540eb886",
+      "reconciliation-20261021/evidence/serial/028-recipe-apply.log": "1f2a0a4a23918434f1160fc14414bb6bf513415ee3455353c238c9e3d5948762",
       "reconciliation-20261021/evidence/serial/029-recipe-apply.log": "bdfd3b128ab6509bc470d957c286b66a3103a1aebf83606c9278ddf905eb8310",
       "reconciliation-20261021/evidence/serial/030-recipe-apply.log": "f175f9494d9b3207a7ae0f9253a6a3dd859de04366edb31a9245788f61e22c17",
       "reconciliation-20261021/evidence/serial/031-recipe-apply.log": "18f7ec0ae10dbf800d920c390bf91571b8a0c34fa27a72cf8ca4c2023bbec0dd",
@@ -157,28 +157,28 @@
       "reconciliation-20261021/evidence/serial/102-mutant-runtime.log": "b21b7f015b949332b14add5c2c62c6dcabc864dd0761345cf5d6de745ba18314",
       "reconciliation-20261021/evidence/serial/103-recipe-check.log": "13838a89c9f97ae400b1d46379a3e8f5b2a919122748c48cfd9935462e96ce33",
       "reconciliation-20261021/evidence/serial/104-recipe-apply.log": "f79d4afdb7d344727a0f8cfc6dba365b49fef2a0e7158ee80e2fedbbfd6e1384",
-      "reconciliation-20261021/evidence/serial/COMMANDS.json": "fe9431dd9c1557fccb5730728601f60aede7d4ba48422aa10ea3a404fdf1b4bf",
-      "reconciliation-20261021/evidence/serial/EVENTS.json": "024978dd941864c970ced7d01620d05341ab3ff89aa9fc4390222555e2a8ae8d",
-      "reconciliation-20261021/evidence/serial/RAW_LOGS.json": "c1057fb40eb6dd8c5548385c61fb202897785b564196477e9424faddab6652ae",
-      "reconciliation-20261021/evidence/serial/RESULT.json": "878a48a2bbae509e9690135718e8af1f037d595225668a8331d797c0248802d3",
-      "reconciliation-20261021/fixtures/M3RequiredExcludedMaskSelectorContract.java": "549ae933049b3f3925036cf0c188aaf0affea95ecf5c7d6e05c1ee1426325381",
-      "reconciliation-20261021/fixtures/M3RequiredExcludedMaskSelectorNativeContract.java": "89c35701322381e4d958bf6344e2357988c4ad97ce1a0dd42a9a3f698a205c7f",
-      "reconciliation-20261021/fixtures/M3SignalDimensions.java": "f1a6fd89538f0f3c526f50323eb8a43d3bd7e49c49257fe3385c91d600fc5446",
-      "reconciliation-20261021/fixtures/M3SignalOrder.java": "15c85e74a51a716af1b11038c05263b83b1a1ea02f345bc3838d661a158fd80f",
-      "reconciliation-20261021/fixtures/M3SignalOrderNative.java": "eaa37fee096172a200088d80b2b48955d60d602061fba71d715e25f6d395acc8",
+      "reconciliation-20261021/evidence/serial/COMMANDS.json": "bbc5b1d71cd9bd141a3fde5874c367e643b7b9141d880656995ce8a9c164ee97",
+      "reconciliation-20261021/evidence/serial/EVENTS.json": "d1bdd7b3b5dab5ca6f64bceeb901aff8e82542c8f22a896741cce913cb85c142",
+      "reconciliation-20261021/evidence/serial/RAW_LOGS.json": "d58721005825af9abc694832cd92f7d7e301f84642c474037f803ced790baec4",
+      "reconciliation-20261021/evidence/serial/RESULT.json": "8be6d347f5eae22d11b9cd1b9813811c205c55a4ed62d80e98f37a347185feb0",
+      "reconciliation-20261021/fixtures/M3RequiredExcludedMaskSelectorContract.java": "7a39a371185a1d0ebaa222caef7293b861bc1a8fb203f09a30b3eea9041f7c72",
+      "reconciliation-20261021/fixtures/M3RequiredExcludedMaskSelectorNativeContract.java": "7a286b65a23caa3c5ecf2eca579a6bb7758a142f1042fba874cfba7680d78339",
+      "reconciliation-20261021/fixtures/M3SignalDimensions.java": "f918f274dfaad20338713ea7d651778d3a0023768799be467bc6c0e752e707fd",
+      "reconciliation-20261021/fixtures/M3SignalOrder.java": "855447909cacc331ba7c11a413c1405ab4dc2cf7e4376985d5e4ba80481a9bdd",
+      "reconciliation-20261021/fixtures/M3SignalOrderNative.java": "2b8b802a75e2a0268db41e732da6ed3530df6a128ea25fe3e3cbe981fe419172",
       "reconciliation-20261021/verify_current.py": "b70cebae7b3e14c73f68a3f90744d6ef4f38f99afb789f6e0d6c0bded1378105",
-      "src/main/java/com/synexia/rewrite/M3GpuToolJoinManifest.java": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999",
-      "src/main/java/com/synexia/rewrite/SealReplay.java": "777a9181fad3276eca0577ffc97c4cb12fb6f44b6b5fe55f9504d45690839623",
-      "src/main/resources/m3-mask-window/M3IndexMaskCompactor.java.txt": "380612f9332d29493f58a290092293e1c11f1bb1cf0479588f17c8cf08adf89f",
-      "src/main/resources/m3-mask-window/M3MaskWindowKernelSelfTest.java.txt": "1248b7331f2d2efe4502a6a0d5d68fb74911e368f11f48286eb98966d9931bbd",
-      "src/main/resources/m3-mask-window/m3_index_mask_compactor.c.txt": "8ff20c12b94e09168c07d534fc128405b0ee3c3d8250edf76590aa4270552090",
-      "src/main/resources/m3-mask-window/manifest.tsv": "6b06d3e50b1376bc40527ffd5c6d0c2a2f9c75dc5d735a2f4f00962f563c5a4f",
-      "src/main/resources/m3-mask-window/pass-1/M3IndexMaskCompactor.java.txt": "380612f9332d29493f58a290092293e1c11f1bb1cf0479588f17c8cf08adf89f",
-      "src/main/resources/m3-mask-window/pass-1/manifest.tsv": "9e6c47a2d6c7d8b2980991d5547bd99dc419ec7dc634f8f957e4e2328b3a731e",
-      "src/main/resources/m3-mask-window/pass-2/m3_index_mask_compactor.c.txt": "8ff20c12b94e09168c07d534fc128405b0ee3c3d8250edf76590aa4270552090",
-      "src/main/resources/m3-mask-window/pass-2/manifest.tsv": "d3ae3d9d4174745efdef98596a52346cdc90c65f90fce6e8cfca79d6f364ae43",
-      "src/main/resources/m3-mask-window/pass-3/M3MaskWindowKernelSelfTest.java.txt": "1248b7331f2d2efe4502a6a0d5d68fb74911e368f11f48286eb98966d9931bbd",
-      "src/main/resources/m3-mask-window/pass-3/manifest.tsv": "f6a4169a53377176312fdb8af576ec7947ab3a61b3fee0a1485ceac3b674777b",
+      "src/main/java/com/synexia/rewrite/M3GpuToolJoinManifest.java": "c874b5d4b5fe8886d53763ab91d050f431c4b7c09d3fe34d58680231ccb1cf7e",
+      "src/main/java/com/synexia/rewrite/SealReplay.java": "22aa64851ad8ed42c88cfdd134d2ab1af128fff8d7ed7cf7797d2d814321cb67",
+      "src/main/resources/m3-mask-window/M3IndexMaskCompactor.java.txt": "f4c11377a2970618ed01c2e3708e307bbdb83c5ced5217e35cfb0d3cbafd6e56",
+      "src/main/resources/m3-mask-window/M3MaskWindowKernelSelfTest.java.txt": "156ecce32247694cdd27b1a9c35b2d4eecb37eaa595a3c67456ff9f8939cd8f5",
+      "src/main/resources/m3-mask-window/m3_index_mask_compactor.c.txt": "a688c9dde5d8d33df380c9b268fbbffa27046addda056ebc0a26f1fd4b94ac6e",
+      "src/main/resources/m3-mask-window/manifest.tsv": "098245a897c4a8549ec2858a22f7f8aabd928fdc0f1c99233bf0b08a1b47ada9",
+      "src/main/resources/m3-mask-window/pass-1/M3IndexMaskCompactor.java.txt": "f4c11377a2970618ed01c2e3708e307bbdb83c5ced5217e35cfb0d3cbafd6e56",
+      "src/main/resources/m3-mask-window/pass-1/manifest.tsv": "c3a4ce77217695a85aa045dd0723eac57351b65de43eb94e4fe9760dd571e4bf",
+      "src/main/resources/m3-mask-window/pass-2/m3_index_mask_compactor.c.txt": "a688c9dde5d8d33df380c9b268fbbffa27046addda056ebc0a26f1fd4b94ac6e",
+      "src/main/resources/m3-mask-window/pass-2/manifest.tsv": "38f38bbbbe09a71ab5437c362d8bfcf3721140bec76355424bdf4ee9af5744ec",
+      "src/main/resources/m3-mask-window/pass-3/M3MaskWindowKernelSelfTest.java.txt": "156ecce32247694cdd27b1a9c35b2d4eecb37eaa595a3c67456ff9f8939cd8f5",
+      "src/main/resources/m3-mask-window/pass-3/manifest.tsv": "b53f87837cec8e9fa51a7ee85d3d5e8e533aacd164d58752b7184359de7c2e18",
       "verify.py": "7565f7760461fc1fc892dec3f5176c3bc4ec5f3d793a04aed24be8e5ff89aa4c"
     },
     "out_was_absent": true
@@ -200,16 +200,16 @@
     "stage": "PATCH",
     "name": "before",
     "pre": {
-      "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java": "ec8b9d2683f5fdb99f6c3e9ad4c79dc60e8ad19cbc3fde2b09e9da2fe3a83f2b",
-      "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
-      "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java": "3569c0a8ffd94c6e91b87b9316bbaf20583f7dd56810a7bee57a81c8a9975a8d",
-      "m3/collections/src/main/native/collections/m3_index_mask_compactor.c": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef"
+      "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java": "394211113f2e6c875521553700e9060a30906a9aaab4c755405402042832d12e",
+      "m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java": "8fa3ebd0a31e78aa2c763c9ab99955e419f8573a9687d3e817e913c0ed48d8ed",
+      "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java": "0019e28bcff8d7dc80bcd82731c7b7f610a3471bf464e8f81edb4224a659c0dc",
+      "m3/collections/src/main/native/collections/m3_index_mask_compactor.c": "ed13463a6972bd014a861635987e8aa6214bf7516789c4f41d4ec3d69692fe73"
     },
     "post": {
-      "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java": "ec8b9d2683f5fdb99f6c3e9ad4c79dc60e8ad19cbc3fde2b09e9da2fe3a83f2b",
-      "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
-      "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java": "3569c0a8ffd94c6e91b87b9316bbaf20583f7dd56810a7bee57a81c8a9975a8d",
-      "m3/collections/src/main/native/collections/m3_index_mask_compactor.c": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef"
+      "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java": "394211113f2e6c875521553700e9060a30906a9aaab4c755405402042832d12e",
+      "m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java": "8fa3ebd0a31e78aa2c763c9ab99955e419f8573a9687d3e817e913c0ed48d8ed",
+      "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java": "0019e28bcff8d7dc80bcd82731c7b7f610a3471bf464e8f81edb4224a659c0dc",
+      "m3/collections/src/main/native/collections/m3_index_mask_compactor.c": "ed13463a6972bd014a861635987e8aa6214bf7516789c4f41d4ec3d69692fe73"
     }
   },
   {
@@ -241,16 +241,16 @@
     "stage": "PATCH",
     "name": "java",
     "pre": {
-      "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java": "ec8b9d2683f5fdb99f6c3e9ad4c79dc60e8ad19cbc3fde2b09e9da2fe3a83f2b",
-      "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
-      "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java": "3569c0a8ffd94c6e91b87b9316bbaf20583f7dd56810a7bee57a81c8a9975a8d",
-      "m3/collections/src/main/native/collections/m3_index_mask_compactor.c": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef"
+      "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java": "394211113f2e6c875521553700e9060a30906a9aaab4c755405402042832d12e",
+      "m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java": "8fa3ebd0a31e78aa2c763c9ab99955e419f8573a9687d3e817e913c0ed48d8ed",
+      "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java": "0019e28bcff8d7dc80bcd82731c7b7f610a3471bf464e8f81edb4224a659c0dc",
+      "m3/collections/src/main/native/collections/m3_index_mask_compactor.c": "ed13463a6972bd014a861635987e8aa6214bf7516789c4f41d4ec3d69692fe73"
     },
     "post": {
-      "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java": "380612f9332d29493f58a290092293e1c11f1bb1cf0479588f17c8cf08adf89f",
-      "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
-      "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java": "3569c0a8ffd94c6e91b87b9316bbaf20583f7dd56810a7bee57a81c8a9975a8d",
-      "m3/collections/src/main/native/collections/m3_index_mask_compactor.c": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef"
+      "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java": "f4c11377a2970618ed01c2e3708e307bbdb83c5ced5217e35cfb0d3cbafd6e56",
+      "m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java": "8fa3ebd0a31e78aa2c763c9ab99955e419f8573a9687d3e817e913c0ed48d8ed",
+      "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java": "0019e28bcff8d7dc80bcd82731c7b7f610a3471bf464e8f81edb4224a659c0dc",
+      "m3/collections/src/main/native/collections/m3_index_mask_compactor.c": "ed13463a6972bd014a861635987e8aa6214bf7516789c4f41d4ec3d69692fe73"
     }
   },
   {
@@ -282,16 +282,16 @@
     "stage": "PATCH",
     "name": "native",
     "pre": {
-      "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java": "380612f9332d29493f58a290092293e1c11f1bb1cf0479588f17c8cf08adf89f",
-      "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
-      "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java": "3569c0a8ffd94c6e91b87b9316bbaf20583f7dd56810a7bee57a81c8a9975a8d",
-      "m3/collections/src/main/native/collections/m3_index_mask_compactor.c": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef"
+      "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java": "f4c11377a2970618ed01c2e3708e307bbdb83c5ced5217e35cfb0d3cbafd6e56",
+      "m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java": "8fa3ebd0a31e78aa2c763c9ab99955e419f8573a9687d3e817e913c0ed48d8ed",
+      "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java": "0019e28bcff8d7dc80bcd82731c7b7f610a3471bf464e8f81edb4224a659c0dc",
+      "m3/collections/src/main/native/collections/m3_index_mask_compactor.c": "ed13463a6972bd014a861635987e8aa6214bf7516789c4f41d4ec3d69692fe73"
     },
     "post": {
-      "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java": "380612f9332d29493f58a290092293e1c11f1bb1cf0479588f17c8cf08adf89f",
-      "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
-      "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java": "3569c0a8ffd94c6e91b87b9316bbaf20583f7dd56810a7bee57a81c8a9975a8d",
-      "m3/collections/src/main/native/collections/m3_index_mask_compactor.c": "8ff20c12b94e09168c07d534fc128405b0ee3c3d8250edf76590aa4270552090"
+      "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java": "f4c11377a2970618ed01c2e3708e307bbdb83c5ced5217e35cfb0d3cbafd6e56",
+      "m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java": "8fa3ebd0a31e78aa2c763c9ab99955e419f8573a9687d3e817e913c0ed48d8ed",
+      "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java": "0019e28bcff8d7dc80bcd82731c7b7f610a3471bf464e8f81edb4224a659c0dc",
+      "m3/collections/src/main/native/collections/m3_index_mask_compactor.c": "a688c9dde5d8d33df380c9b268fbbffa27046addda056ebc0a26f1fd4b94ac6e"
     }
   },
   {
@@ -323,17 +323,17 @@
     "stage": "PATCH",
     "name": "test",
     "pre": {
-      "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java": "380612f9332d29493f58a290092293e1c11f1bb1cf0479588f17c8cf08adf89f",
-      "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
-      "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java": "3569c0a8ffd94c6e91b87b9316bbaf20583f7dd56810a7bee57a81c8a9975a8d",
-      "m3/collections/src/main/native/collections/m3_index_mask_compactor.c": "8ff20c12b94e09168c07d534fc128405b0ee3c3d8250edf76590aa4270552090"
+      "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java": "f4c11377a2970618ed01c2e3708e307bbdb83c5ced5217e35cfb0d3cbafd6e56",
+      "m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java": "8fa3ebd0a31e78aa2c763c9ab99955e419f8573a9687d3e817e913c0ed48d8ed",
+      "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java": "0019e28bcff8d7dc80bcd82731c7b7f610a3471bf464e8f81edb4224a659c0dc",
+      "m3/collections/src/main/native/collections/m3_index_mask_compactor.c": "a688c9dde5d8d33df380c9b268fbbffa27046addda056ebc0a26f1fd4b94ac6e"
     },
     "post": {
-      "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java": "380612f9332d29493f58a290092293e1c11f1bb1cf0479588f17c8cf08adf89f",
-      "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
-      "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java": "3569c0a8ffd94c6e91b87b9316bbaf20583f7dd56810a7bee57a81c8a9975a8d",
-      "m3/collections/src/main/native/collections/m3_index_mask_compactor.c": "8ff20c12b94e09168c07d534fc128405b0ee3c3d8250edf76590aa4270552090",
-      "m3/collections/src/test/java/com/m3/collections/M3MaskWindowKernelSelfTest.java": "1248b7331f2d2efe4502a6a0d5d68fb74911e368f11f48286eb98966d9931bbd"
+      "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java": "f4c11377a2970618ed01c2e3708e307bbdb83c5ced5217e35cfb0d3cbafd6e56",
+      "m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java": "8fa3ebd0a31e78aa2c763c9ab99955e419f8573a9687d3e817e913c0ed48d8ed",
+      "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java": "0019e28bcff8d7dc80bcd82731c7b7f610a3471bf464e8f81edb4224a659c0dc",
+      "m3/collections/src/main/native/collections/m3_index_mask_compactor.c": "a688c9dde5d8d33df380c9b268fbbffa27046addda056ebc0a26f1fd4b94ac6e",
+      "m3/collections/src/test/java/jdk/m3/collections/M3MaskWindowKernelSelfTest.java": "156ecce32247694cdd27b1a9c35b2d4eecb37eaa595a3c67456ff9f8939cd8f5"
     }
   },
   {
@@ -363,20 +363,20 @@
   {
     "ordinal": 23,
     "stage": "PATCH_TEST_LEGACY",
-    "source": "cb8e8c66e07cc4651e95a0c28ad834d2c9de48df34dc90c6d7da68443f1da531"
+    "source": "a549b92b38eaa337c0e95f32c46607cace9ae46d8240d37bd58a3a48e296990d"
   },
   {
     "ordinal": 24,
     "stage": "PATCH_TEST_MUTANT",
     "name": "state-offset",
-    "before": "8ff20c12b94e09168c07d534fc128405b0ee3c3d8250edf76590aa4270552090",
+    "before": "a688c9dde5d8d33df380c9b268fbbffa27046addda056ebc0a26f1fd4b94ac6e",
     "after": "1e4eee4803fada27b4961a3b799f1a51c3e42dc9f7e2d55e620a4f0c067670a0"
   },
   {
     "ordinal": 25,
     "stage": "PATCH_TEST_MUTANT",
     "name": "long-payload",
-    "before": "8ff20c12b94e09168c07d534fc128405b0ee3c3d8250edf76590aa4270552090",
+    "before": "a688c9dde5d8d33df380c9b268fbbffa27046addda056ebc0a26f1fd4b94ac6e",
     "after": "6bed465d6b2226b66f61890008de8492eab94b0e08db684d9de8cbcca5b469da"
   },
   {

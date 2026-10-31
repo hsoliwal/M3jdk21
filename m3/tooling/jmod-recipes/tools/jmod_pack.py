@@ -158,7 +158,7 @@ def select_runtime(jdk, output, candidates, roots):
     (output / "selection-compile.log").write_text(compiled.stdout + compiled.stderr)
     if compiled.returncode:
         raise ValueError("Module selection kernel compilation failed")
-    command = [jdk / "bin/java", "-cp", classes, "com.m3.tools.modulepack.M3ModuleInventory",
+    command = [jdk / "bin/java", "-cp", classes, "jdk.m3.tools.modulepack.M3ModuleInventory",
                ",".join(roots), jdk / "jmods", candidates]
     inventory = run(*command)
     (output / "MODULES.tsv").write_text(inventory.stdout)
@@ -173,7 +173,7 @@ def select_runtime(jdk, output, candidates, roots):
     destination = output / "jmods"
     destination.mkdir()
     selected = copy_selected_modules(ToolPacks(modules=modules), inventory.stdout, destination)
-    installed = run(jdk / "bin/java", "-cp", classes, "com.m3.tools.modulepack.M3ModuleInventory",
+    installed = run(jdk / "bin/java", "-cp", classes, "jdk.m3.tools.modulepack.M3ModuleInventory",
                     ",".join(roots), jdk / "jmods", destination)
     if installed.returncode or inventory_modules(installed.stdout) != selected:
         raise ValueError("Copied JMOD runtime closure mismatch")
@@ -182,7 +182,7 @@ def select_runtime(jdk, output, candidates, roots):
         "roots": roots, "selected_vendored_modules": names,
         "supplied_candidates": len(modules),
         "candidate_materialization": "ALL_SUPPLIED_MANIFEST_INPUTS_VALIDATED",
-        "resolver": "com.m3.tools.modulepack.M3ModuleGraph",
+        "resolver": "jdk.m3.tools.modulepack.M3ModuleGraph",
     }, indent=2, sort_keys=True) + "\n")
     return destination, names
 

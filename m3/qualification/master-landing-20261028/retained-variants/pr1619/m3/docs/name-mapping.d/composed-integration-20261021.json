@@ -5,7 +5,7 @@
   "mappings": [
     {
       "source": "Existing M3JDK21 donor PR #1633 at d3b610f0603522adb3d28dabd82fbeabb2e49d3d; canonical Synexia recipe crate m3-filtered-deque-query-equality-20261021 at hsoliwal/com.synexia PR #12641",
-      "target": "com.m3.collections.M3FilteredDeques.View.remove; com.m3.collections.M3FilteredDeques.View.removeLastOccurrence",
+      "target": "jdk.m3.collections.M3FilteredDeques.View.remove; jdk.m3.collections.M3FilteredDeques.View.removeLastOccurrence",
       "module": "m3/collections",
       "status": "Explicit existing-contract behavior repair, composed with receiver a115db5; actual combined receiver evidence remains distinct from donor evidence",
       "recipe": "combine-collections21: existing canonical Synexia hash-pinned OpenRewrite engine",
@@ -16,7 +16,7 @@
     },
     {
       "source": "hsoliwal/M3JDK21 PR1636@3b39000f53a886c575686c84e82b0b613296248c; canonical hsoliwal/com.synexia PR12633@a5ecf38c81bcd9f7695e6e6fc9adba33080a6837",
-      "target": "com.m3.collections.M3CollectionViews.SelectionSpliterator;com.m3.collections.M3LongBitmapFilteredSnapshot.VersionedView",
+      "target": "jdk.m3.collections.M3CollectionViews.SelectionSpliterator;jdk.m3.collections.M3LongBitmapFilteredSnapshot.VersionedView",
       "module": "m3/collections",
       "status": "Explicit callback-state/invalidation behavior repair in existing owners",
       "recipe": "combine-views-final21: existing canonical Synexia hash-pinned source engine",
@@ -27,7 +27,7 @@
     },
     {
       "source": "hsoliwal/M3JDK21 PR1636@3b39000f53a886c575686c84e82b0b613296248c; canonical hsoliwal/com.synexia PR12633@a5ecf38c81bcd9f7695e6e6fc9adba33080a6837",
-      "target": "com.m3.collections.M3IndexedListSnapshot.filteredJava;Java_com_m3_collections_M3IndexMaskCompactor_*",
+      "target": "jdk.m3.collections.M3IndexedListSnapshot.filteredJava;Java_jdk_m3_collections_M3IndexMaskCompactor_*",
       "module": "m3/collections",
       "status": "Scoped packed-selection and empty-admission work refinement",
       "recipe": "combine-views-final21: existing canonical Synexia hash-pinned source engine",

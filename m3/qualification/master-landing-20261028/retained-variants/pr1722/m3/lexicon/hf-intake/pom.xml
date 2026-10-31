@@ -40,7 +40,7 @@
               <goal>java</goal>
             </goals>
             <configuration>
-              <mainClass>com.m3.lexicon.hf.M3HfLexiconIntakeProof</mainClass>
+              <mainClass>jdk.m3.lexicon.hf.M3HfLexiconIntakeProof</mainClass>
               <classpathScope>test</classpathScope>
               <arguments></arguments>
             </configuration>

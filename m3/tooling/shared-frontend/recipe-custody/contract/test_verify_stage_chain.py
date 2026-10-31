@@ -43,7 +43,7 @@ class ChainTest(unittest.TestCase):
             stage = f'm3-pass-{i}'
             names.append(stage)
             kind = self.targets[path][2]
-            stage_root = self.resources / 'com/synexia/rewrite' / ('hash-pinned-' + kind) / stage
+            stage_root = self.resources / 'jdk/internal/m3/rewrite' / ('hash-pinned-' + kind) / stage
             stage_root.mkdir(parents=True)
             template = f'{i:04d}-{basename}.txt'
             new = output.encode()
@@ -61,7 +61,7 @@ class ChainTest(unittest.TestCase):
                                                + '\n'.join(rows) + '\n')
         yaml='type: specs.openrewrite.org/v1beta/recipe\nrecipeList:\n'
         for stage in names:
-            yaml+='  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:\n      crateName: '+stage+'\n'
+            yaml+='  - jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe:\n      crateName: '+stage+'\n'
         dest = self.resources / 'META-INF/rewrite'
         dest.mkdir(parents=True)
         (dest / (self.crate+'.yml')).write_text(yaml)
@@ -79,7 +79,7 @@ class ChainTest(unittest.TestCase):
         }))
         (self.data / 'MODES.tsv').write_text(''.join(p+'\t0644\n' for p in sorted(self.targets)))
         for kind in ('java','text'):
-            stage_root = self.resources / 'com/synexia/rewrite' / ('hash-pinned-' + kind) / self.crate
+            stage_root = self.resources / 'jdk/internal/m3/rewrite' / ('hash-pinned-' + kind) / self.crate
             stage_root.mkdir(parents=True)
             manifest = []
             for i,(path,(initial,final,t)) in enumerate(sorted(self.targets.items()),1):
@@ -138,12 +138,12 @@ class ChainTest(unittest.TestCase):
             v.verify(self.root,self.name,False)
 
     def test_stale_intermediate_manifest_refused(self):
-        p=self.resources/'com/synexia/rewrite/hash-pinned-java/m3-pass-2/manifest.tsv'
+        p=self.resources/'jdk/internal/m3/rewrite/hash-pinned-java/m3-pass-2/manifest.tsv'
         p.write_text(p.read_text().replace('a', 'f', 1))
         with self.assertRaises(ValueError):v.verify(self.root,self.name)
 
     def test_stage_output_tamper_refused(self):
-        p=self.resources/'com/synexia/rewrite/hash-pinned-text/m3-pass-3/0003-m3_dispatch.c.txt'
+        p=self.resources/'jdk/internal/m3/rewrite/hash-pinned-text/m3-pass-3/0003-m3_dispatch.c.txt'
         p.write_bytes(b'wrong\n')
         with self.assertRaisesRegex(ValueError,'SHA-256 drift'):
             v.verify(self.root,self.name)
@@ -166,13 +166,13 @@ class ChainTest(unittest.TestCase):
             v.verify(self.root,self.name)
 
     def test_extra_source_in_pass_refused(self):
-        p=self.resources/'com/synexia/rewrite/hash-pinned-text/m3-pass-3/manifest.tsv'
+        p=self.resources/'jdk/internal/m3/rewrite/hash-pinned-text/m3-pass-3/manifest.tsv'
         p.write_text(p.read_text()*2)
         with self.assertRaisesRegex(ValueError,'exactly one'):
             v.verify(self.root,self.name)
 
     def test_absent_input_mismatch_refused(self):
-        p=self.resources/'com/synexia/rewrite/hash-pinned-java/m3-pass-4/manifest.tsv'
+        p=self.resources/'jdk/internal/m3/rewrite/hash-pinned-java/m3-pass-4/manifest.tsv'
         p.write_text(p.read_text().replace('ABSENT', v.digest(b'not absent')))
         with self.assertRaisesRegex(ValueError,'noncontiguous'):
             v.verify(self.root,self.name)
@@ -185,7 +185,7 @@ class ChainTest(unittest.TestCase):
             v.verify(self.root,self.name)
 
     def test_unexpected_kind_refused(self):
-        manifest=self.resources/'com/synexia/rewrite/hash-pinned-java'/self.crate/'manifest.tsv'
+        manifest=self.resources/'jdk/internal/m3/rewrite/hash-pinned-java'/self.crate/'manifest.tsv'
         p=manifest.read_text().replace('src/java.base/share/classes/java/lang/M3String.java',
                                        'src/java.base/share/classes/java/lang/M3String.c')
         manifest.write_text(p)

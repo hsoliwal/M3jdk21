@@ -59,13 +59,13 @@ Before applying or correcting this recipe, read `RECIPE_MEMORY.tsv` and `memory/
 Use existing searchable owners, without creating a new global catalogue framework:
 
 - Canonical `AlgorithmCatalogue.search`, `PinnedAlgorithmDonorCatalog.require/revisions/byKind`, `ProblemCategoryCrosswalk.index` and `SerialProblemReview`; exact source API pins are in INHERITED_LOOKUP_PROVENANCE.tsv.
-- The existing target inspection CLI `make/m3/recipes/src/main/java/org/synexia/m3/recipe/M3ProblemCatalogue.java` directly accepts PROBLEMS_20261020.tsv. Run its `validate`, `stats`, or `find area filtered_views` commands. All rows are metadata links only; separate donor provenance governs any source reuse.
+- The existing target inspection CLI `make/m3/recipes/src/main/java/jdk/internal/m3/recipe/M3ProblemCatalogue.java` directly accepts PROBLEMS_20261020.tsv. Run its `validate`, `stats`, or `find area filtered_views` commands. All rows are metadata links only; separate donor provenance governs any source reuse.
 - `rg -n 'FILTERED_LIVE_VIEW|monitor_callbacks|service_lifetime|JNI_ORDERED_MASK' catalogue` provides bounded TSV lookup with no added runtime.
 
 Example using the unchanged target inspection CLI:
 
 ```sh
-javac --release 21 -encoding UTF-8 -d /tmp/runtime-catalogue-classes /path/to/M3JDK21/make/m3/recipes/src/main/java/org/synexia/m3/recipe/M3ProblemCatalogue.java
+javac --release 21 -encoding UTF-8 -d /tmp/runtime-catalogue-classes /path/to/M3JDK21/make/m3/recipes/src/main/java/jdk/internal/m3/recipe/M3ProblemCatalogue.java
 java -cp /tmp/runtime-catalogue-classes org.synexia.m3.recipe.M3ProblemCatalogue catalogue/PROBLEMS_20261020.tsv validate
 java -cp /tmp/runtime-catalogue-classes org.synexia.m3.recipe.M3ProblemCatalogue catalogue/PROBLEMS_20261020.tsv find area filtered_views
 ```

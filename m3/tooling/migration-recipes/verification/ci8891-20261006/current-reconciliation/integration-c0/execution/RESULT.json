@@ -12,28 +12,28 @@
     {
       "bytes": 1634,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/root-run-v1/verify.json",
-      "sha256": "9ddb0ddbf2b0bd1ec544fede9ff28173a0a1f5bacc0fbfac99c863385d3cc16f"
+      "sha256": "9fbf39c6c8872b75c6e81245865962327c06fa66b2690171a192b492111f988f"
     },
     {
       "bytes": 2041,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/root-run-v1/extract.json",
-      "sha256": "c7e8bdf603ff112623f7a43c991eecb6425f7ee9be8a0ad91e3cb0ce00f8f8aa"
+      "sha256": "01acdf20ddc682f3d7b746bae646eb6c2733678b27466606504c8fcf8aad2ac2"
     },
     {
       "bytes": 1992,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/root-run-v1/readback.json",
-      "sha256": "73f754fc88220e2ec709fe481d485f3ad042a8f9e625900be99931c2c133b2b2"
+      "sha256": "66a9146ef7fdb21ab22d4e9caa2d7517db20d7d569ffc27d6dd17332998abac7"
     }
   ],
   "rootCommand": {
     "bytes": 3012,
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/root-run-v1/COMMAND.json",
-    "sha256": "13f18298ec8594e6c70c8f632cd7184ad8f971dbde6b4c8a265632e565d5cd64"
+    "sha256": "9c6762f1730d178dfb53257942231092ec8ceaca7f436b96fabe7c5cafe500ad"
   },
   "spec": {
     "bytes": 1054690,
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/PACKAGE-SPEC.json",
-    "sha256": "a9124171aa9417d38be38ab8e634f41135126fb4650cce188c071d137c37a1e0"
+    "sha256": "89617ef4b2048025987f397c8bc821c0a6fbfedb1912d5428019fdf3240d2d47"
   },
   "status": "PASS_PACKAGE_VERIFY_EXTRACT_AND_READBACK"
 }

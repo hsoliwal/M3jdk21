@@ -15,28 +15,28 @@
  */
 
 /** Google Guava */
-module com.m3.collections.guava {
+module jdk.m3.collections.guava {
   requires java.logging;
-  requires transitive com.m3.collections.guava.util.concurrent.internal;
+  requires transitive jdk.m3.collections.guava.util.concurrent.internal;
   requires static jdk.unsupported;
   requires static com.google.errorprone.annotations;
   requires static com.google.j2objc.annotations;
   requires static org.jspecify;
 
-  exports com.m3.collections.guava.annotations;
-  exports com.m3.collections.guava.base;
-  exports com.m3.collections.guava.cache;
-  exports com.m3.collections.guava.collect;
-  exports com.m3.collections.guava.escape;
-  exports com.m3.collections.guava.eventbus;
-  exports com.m3.collections.guava.graph;
-  exports com.m3.collections.guava.hash;
-  exports com.m3.collections.guava.html;
-  exports com.m3.collections.guava.io;
-  exports com.m3.collections.guava.math;
-  exports com.m3.collections.guava.net;
-  exports com.m3.collections.guava.primitives;
-  exports com.m3.collections.guava.reflect;
-  exports com.m3.collections.guava.util.concurrent;
-  exports com.m3.collections.guava.xml;
+  exports jdk.m3.collections.guava.annotations;
+  exports jdk.m3.collections.guava.base;
+  exports jdk.m3.collections.guava.cache;
+  exports jdk.m3.collections.guava.collect;
+  exports jdk.m3.collections.guava.escape;
+  exports jdk.m3.collections.guava.eventbus;
+  exports jdk.m3.collections.guava.graph;
+  exports jdk.m3.collections.guava.hash;
+  exports jdk.m3.collections.guava.html;
+  exports jdk.m3.collections.guava.io;
+  exports jdk.m3.collections.guava.math;
+  exports jdk.m3.collections.guava.net;
+  exports jdk.m3.collections.guava.primitives;
+  exports jdk.m3.collections.guava.reflect;
+  exports jdk.m3.collections.guava.util.concurrent;
+  exports jdk.m3.collections.guava.xml;
 }

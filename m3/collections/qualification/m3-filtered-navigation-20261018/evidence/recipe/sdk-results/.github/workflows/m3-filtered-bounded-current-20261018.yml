@@ -6,9 +6,9 @@ on:
     paths:
       - 'm3/collections/qualification/m3-filtered-bounded-current-20261018/**'
       - 'm3/collections/qualification/m3-filtered-navigation-20261018/**'
-      - 'm3/collections/src/main/java/com/m3/collections/M3FilteredViews.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java'
       - 'm3/collections/src/main/native/collections/m3_index_path_masks.c'
       - 'm3/collections/src/main/native/collections/m3_index_mask_compactor.c'
       - 'm3/collections/src/main/native/collections/m3_index_mask_window.c'
@@ -47,7 +47,7 @@ jobs:
           set -eu
           Q=m3/collections/qualification/m3-filtered-bounded-current-20261018/recipe
           awk -F '\t' -v q="$Q" '{print $3 "  " q "/" $4}' "$Q/manifest.tsv" | sha256sum -c -
-          awk -F '\t' '$1 != "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java" {print $3 "  " $1}' \
+          awk -F '\t' '$1 != "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java" {print $3 "  " $1}' \
             "$Q/manifest.tsv" | sha256sum -c -
       - name: Current full core and focused Java/JNI runtime closure
         run: python3 m3/collections/qualification/m3-filtered-navigation-20261018/runtime/verify.py

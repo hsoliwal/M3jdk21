@@ -4,11 +4,11 @@ name: M3JDK21 LC719 pair-distance Java21 JNI proof
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongRankIndex.java'
       - 'm3/collections/src/main/native/collections/m3_long_rank_batch_jni.c'
-      - 'm3/collections/src/test/java/com/m3/collections/M3KthPairDistanceContract.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3KthPairDistanceTest.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3KthPairDistanceContract.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3KthPairDistanceTest.java'
       - '.github/workflows/m3-lc719-pair-distance-jni-20261026.yml'
   workflow_dispatch:
 
@@ -35,11 +35,11 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$EXACT_HEAD"
-          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java)" = '022cefecdee793a8e6ea91b4a4e9496480ca14ac'
-          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java)" = '6ba52962e3fd3c1efb397550ffd72670e9c2a293'
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java)" = '022cefecdee793a8e6ea91b4a4e9496480ca14ac'
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankIndex.java)" = '6ba52962e3fd3c1efb397550ffd72670e9c2a293'
           test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = 'd52ddd76ccc2cb53c7175a3a62155d7e34eb7234'
-          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3KthPairDistanceContract.java)" = 'd36e442bee52c3f69f4df717d694b686e3f9acc1'
-          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3KthPairDistanceTest.java)" = 'df65643e3e909b7b66168cb30c7bd85f93244b10'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3KthPairDistanceContract.java)" = '4c937fd428faf6b20556efd055f82b8443c590d1'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3KthPairDistanceTest.java)" = '0e73f129f9e76540886b9a7bff7b511512351bda'
       - name: Compile original primitive Java/JNI owner and generated native header
         shell: bash
         run: |
@@ -47,12 +47,12 @@ jobs:
           mkdir -p "$RUNNER_TEMP/m3-lc719/classes" "$RUNNER_TEMP/m3-lc719/headers" "$RUNNER_TEMP/m3-lc719/native"
           javac --release 21 -Xlint:all -Werror \
             -h "$RUNNER_TEMP/m3-lc719/headers" -d "$RUNNER_TEMP/m3-lc719/classes" \
-            m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java \
-            m3/collections/src/test/java/com/m3/collections/M3KthPairDistanceContract.java
+            m3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3KthPairDistanceContract.java
           cc -std=c17 -Wall -Wextra -Werror -O2 -fPIC -shared \
             -fsanitize=undefined -fno-sanitize-recover=undefined \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
-            -include "$RUNNER_TEMP/m3-lc719/headers/com_m3_collections_M3LongRankBatchNative.h" \
+            -include "$RUNNER_TEMP/m3-lc719/headers/jdk_m3_collections_M3LongRankBatchNative.h" \
             m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c \
             -o "$RUNNER_TEMP/m3-lc719/native/libm3rankbatch.so"
       - name: Execute Java-only LC719 exhaustive brute-force differential
@@ -60,7 +60,7 @@ jobs:
         run: |
           set -euo pipefail
           java -cp "$RUNNER_TEMP/m3-lc719/classes" \
-            com.m3.collections.M3KthPairDistanceContract \
+            jdk.m3.collections.M3KthPairDistanceContract \
             | tee "$RUNNER_TEMP/m3-lc719/java.txt"
           grep -Fxq 'PASS M3_KTH_PAIR_DISTANCE checks=25053' "$RUNNER_TEMP/m3-lc719/java.txt"
       - name: Execute native-required Java21 and interpreter parity
@@ -70,12 +70,12 @@ jobs:
           java -Xcheck:jni -Dm3.collections.rank.native=true \
             -Djava.library.path="$RUNNER_TEMP/m3-lc719/native" \
             -cp "$RUNNER_TEMP/m3-lc719/classes" \
-            com.m3.collections.M3KthPairDistanceContract --native \
+            jdk.m3.collections.M3KthPairDistanceContract --native \
             | tee "$RUNNER_TEMP/m3-lc719/native.txt"
           java -Xint -Xcheck:jni -Dm3.collections.rank.native=true \
             -Djava.library.path="$RUNNER_TEMP/m3-lc719/native" \
             -cp "$RUNNER_TEMP/m3-lc719/classes" \
-            com.m3.collections.M3KthPairDistanceContract --native \
+            jdk.m3.collections.M3KthPairDistanceContract --native \
             | tee "$RUNNER_TEMP/m3-lc719/interpreter.txt"
           grep -Fxq 'PASS M3_KTH_PAIR_DISTANCE checks=36542' "$RUNNER_TEMP/m3-lc719/native.txt"
           cmp "$RUNNER_TEMP/m3-lc719/native.txt" "$RUNNER_TEMP/m3-lc719/interpreter.txt"

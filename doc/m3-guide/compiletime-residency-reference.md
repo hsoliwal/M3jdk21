@@ -219,21 +219,21 @@ The following are the three primary source identities at the pin above. Dependen
 
 | Owner | Git blob SHA-1 | SHA-256 |
 | --- | --- | --- |
-| [M3BytecodeOffsets](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3BytecodeOffsets.java) | `4cd6f079f22c1800571054aefb6481a478758b36` | `07b105d523774c1ac21f2c8190aa518c502113ffd9423815c8e62b2e2f7ed1ae` |
-| [M3EscapeFlow](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3EscapeFlow.java) | `5e4e63059fc6b1a54ab66636aef2c9e0ae1e65cb` | `7d07697c8211dae24fba49eb8f5011064abc80a850f254d76fb9c56644329894` |
-| [M3ItemReferenceScan](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ItemReferenceScan.java) | `cda993a1cb5654b34e3e339c4306bbb1c28881a4` | `d17344ac9c3488860e1487fe0072427c4a5688fc8a68393f8b782d92bd49a4ae` |
+| [M3BytecodeOffsets](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3BytecodeOffsets.java) | `b2320826fd113910e0871af43e4db11da8149c50` | `480f0cb4a4cd415a19a170739e773efd25362de75b30d516b1644c1f01f8b42d` |
+| [M3EscapeFlow](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3EscapeFlow.java) | `9eda59508ea15cb6ac72fa4cf9c74a08ed84193d` | `7a3a3346f4af222c4122d302b0b07155197dc64b864de2b2944c34a9f391c522` |
+| [M3ItemReferenceScan](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ItemReferenceScan.java) | `d9d94ebf3c1b88a8a09003846526ea77d8d6ae37` | `7fd342dce0e81da0cdb3e0e9e99a3a83d7f07ed10909ec57e7eb6614635dae05` |
 
 [pom]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/pom.xml
 [readme]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/README.md
 [reactor]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/pom.xml
 [design]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/docs/m3-item-residency-metadata.md
-[scanner]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ItemReferenceScan.java
-[escape]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3EscapeFlow.java
-[offsets]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3BytecodeOffsets.java
-[transient-annotation]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/residency/M3Transient.java
-[retains-annotation]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/residency/M3Retains.java
-[behaviour-annotation]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/residency/M3BehaviourOnly.java
-[test]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/test/java/com/m3/compiletime/M3ItemReferenceScanTest.java
-[fake-item]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/test/java/com/m3/compiletime/fixture/FakeItem.java
-[fake-table]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/test/java/com/m3/compiletime/fixture/FakeTable.java
-[item-users]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/test/java/com/m3/compiletime/fixture/ItemUsers.java
+[scanner]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ItemReferenceScan.java
+[escape]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3EscapeFlow.java
+[offsets]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3BytecodeOffsets.java
+[transient-annotation]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/residency/M3Transient.java
+[retains-annotation]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/residency/M3Retains.java
+[behaviour-annotation]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/residency/M3BehaviourOnly.java
+[test]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3ItemReferenceScanTest.java
+[fake-item]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/test/java/jdk/m3/compiletime/fixture/FakeItem.java
+[fake-table]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/test/java/jdk/m3/compiletime/fixture/FakeTable.java
+[item-users]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/test/java/jdk/m3/compiletime/fixture/ItemUsers.java

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
-import com.m3.tools.cpu.M3AhoCorasick;
-import com.m3.tools.cpu.M3BipartiteMatching;
+import jdk.m3.tools.cpu.M3AhoCorasick;
+import jdk.m3.tools.cpu.M3BipartiteMatching;
 import java.util.Arrays;
 import java.util.Random;
 

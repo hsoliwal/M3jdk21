@@ -1,0 +1,154 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "event": {
+        "path": "memory/events/12db3d3bea4b8a5b958ed799934c0bbe33ea8b416a47f45d803495f1e4b11acf.json",
+        "sha256": "12db3d3bea4b8a5b958ed799934c0bbe33ea8b416a47f45d803495f1e4b11acf"
+      },
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "-cp",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/memory-conformance-001/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+        "jdk.internal.m3.rewrite.memory.M3RecoveryMemory",
+        "check",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events/12db3d3bea4b8a5b958ed799934c0bbe33ea8b416a47f45d803495f1e4b11acf.json",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "proof/memory-integrity-003/12db3d3bea4b8a5b958ed799934c0bbe33ea8b416a47f45d803495f1e4b11acf.log",
+        "sha256": "f4e36eff5bbb0c3399c71a44ca1c012dfc300451be00ba6d9683f7707ca30256"
+      }
+    },
+    {
+      "event": {
+        "path": "memory/events/c876494cd3b2b01d905bb5a623ad97981e9ff113ebc0740978b0a4206491de2d.json",
+        "sha256": "c876494cd3b2b01d905bb5a623ad97981e9ff113ebc0740978b0a4206491de2d"
+      },
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "-cp",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/memory-conformance-001/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+        "jdk.internal.m3.rewrite.memory.M3RecoveryMemory",
+        "check",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events/c876494cd3b2b01d905bb5a623ad97981e9ff113ebc0740978b0a4206491de2d.json",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "proof/memory-integrity-003/c876494cd3b2b01d905bb5a623ad97981e9ff113ebc0740978b0a4206491de2d.log",
+        "sha256": "37783e1e7085760ee648c92bea53d980f121d6ab6fca2565eb9a046d38eba922"
+      }
+    },
+    {
+      "event": {
+        "path": "memory/events/f23628de2938b1bb2a2e66ef689a40ab54a4cadca2af9d0c7158a5707f51fbbc.json",
+        "sha256": "f23628de2938b1bb2a2e66ef689a40ab54a4cadca2af9d0c7158a5707f51fbbc"
+      },
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "-cp",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/memory-conformance-001/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+        "jdk.internal.m3.rewrite.memory.M3RecoveryMemory",
+        "check",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events/f23628de2938b1bb2a2e66ef689a40ab54a4cadca2af9d0c7158a5707f51fbbc.json",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "proof/memory-integrity-003/f23628de2938b1bb2a2e66ef689a40ab54a4cadca2af9d0c7158a5707f51fbbc.log",
+        "sha256": "076bb50a7c67b3e3ca07bb2f9eacd59721fa2234fd02c73d28eca6d73174180c"
+      }
+    },
+    {
+      "event": {
+        "path": "memory/events/101b737403729e6eac9106693b5ed4e7e5c38f74499bf45221f8bd67712c6ef9.json",
+        "sha256": "101b737403729e6eac9106693b5ed4e7e5c38f74499bf45221f8bd67712c6ef9"
+      },
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "-cp",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/memory-conformance-001/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+        "jdk.internal.m3.rewrite.memory.M3RecoveryMemory",
+        "check",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events/101b737403729e6eac9106693b5ed4e7e5c38f74499bf45221f8bd67712c6ef9.json",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "proof/memory-integrity-003/101b737403729e6eac9106693b5ed4e7e5c38f74499bf45221f8bd67712c6ef9.log",
+        "sha256": "74245a2b73624936bfa1a6ea7ac67352f9011269fea58fe90f4ee99e625dcb60"
+      }
+    },
+    {
+      "event": {
+        "path": "memory/events/c4be4af96ddd29d4e3d401831a277a76a6057f52696b5e579625eef0bf899eaf.json",
+        "sha256": "c4be4af96ddd29d4e3d401831a277a76a6057f52696b5e579625eef0bf899eaf"
+      },
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "-cp",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/memory-conformance-001/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+        "jdk.internal.m3.rewrite.memory.M3RecoveryMemory",
+        "check",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events/c4be4af96ddd29d4e3d401831a277a76a6057f52696b5e579625eef0bf899eaf.json",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "proof/memory-integrity-003/c4be4af96ddd29d4e3d401831a277a76a6057f52696b5e579625eef0bf899eaf.log",
+        "sha256": "764d710744e15e5ba2fb2f96959a17b9c99bf325f6fdfabbe7960781e842f68e"
+      }
+    },
+    {
+      "event": {
+        "path": "memory/events/0d7c9961287179121cac73d192c05d6d69ae9f53bba54ea6a977205c9b28db7b.json",
+        "sha256": "0d7c9961287179121cac73d192c05d6d69ae9f53bba54ea6a977205c9b28db7b"
+      },
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "-cp",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/memory-conformance-001/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+        "jdk.internal.m3.rewrite.memory.M3RecoveryMemory",
+        "check",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events/0d7c9961287179121cac73d192c05d6d69ae9f53bba54ea6a977205c9b28db7b.json",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "proof/memory-integrity-003/0d7c9961287179121cac73d192c05d6d69ae9f53bba54ea6a977205c9b28db7b.log",
+        "sha256": "eb33edc64e6d5d982584036ed027d96cfadeb5191621d767e2fccf89006c42e6"
+      }
+    },
+    {
+      "event": {
+        "path": "memory/events/5d0e40afa2e14ee0fffb4f19d6d9898a09c0281709621dd72adc897f9fbc9072.json",
+        "sha256": "5d0e40afa2e14ee0fffb4f19d6d9898a09c0281709621dd72adc897f9fbc9072"
+      },
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "-cp",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/memory-conformance-001/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+        "jdk.internal.m3.rewrite.memory.M3RecoveryMemory",
+        "check",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events/5d0e40afa2e14ee0fffb4f19d6d9898a09c0281709621dd72adc897f9fbc9072.json",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "proof/memory-integrity-003/5d0e40afa2e14ee0fffb4f19d6d9898a09c0281709621dd72adc897f9fbc9072.log",
+        "sha256": "118f423ed581376f5fc6843bb441c8bd61192e5752e28832e01f91c15374ca8f"
+      }
+    }
+  ],
+  "unique_event_artifacts_verified": 76,
+  "admission": "PENDING"
+}

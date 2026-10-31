@@ -80,9 +80,9 @@ These support the current-source design map, rather than asserting complete hist
 | Exact source/guidance path | Git blob |
 | --- | --- |
 | [m3/docs/name-mapping.json](https://github.com/hsoliwal/M3jdk21/blob/1de629d26ea82d2729a5993bfc88099f83221923/m3/docs/name-mapping.json) | `288f20575d3f9d106571990f21944e7f46b0cf71` |
-| [m3/docs/m3string-synexia-lineage.md](https://github.com/hsoliwal/M3jdk21/blob/1de629d26ea82d2729a5993bfc88099f83221923/m3/docs/m3string-synexia-lineage.md) | `5cb92182fbfd9fa8a1ef67214a79cf689994d705` |
-| [m3/docs/m3jdk21-porting-invariant.md](https://github.com/hsoliwal/M3jdk21/blob/1de629d26ea82d2729a5993bfc88099f83221923/m3/docs/m3jdk21-porting-invariant.md) | `f65cc98e9088377755c51a447ce974356b28f15c` |
-| [m3/ports/indexstring/src/main/java/com/m3/text/compat/M3Text.java](https://github.com/hsoliwal/M3jdk21/blob/1de629d26ea82d2729a5993bfc88099f83221923/m3/ports/indexstring/src/main/java/com/m3/text/compat/M3Text.java) | `46aecc2fb0b1e5f516c1db8b5e93476eb70444f2` |
+| [m3/docs/m3string-m3-lineage.md](https://github.com/hsoliwal/M3jdk21/blob/1de629d26ea82d2729a5993bfc88099f83221923/m3/docs/m3string-m3-lineage.md) | `55d009e833c294211362d0ab3a618f77cf1a4445` |
+| [m3/docs/m3jdk21-porting-invariant.md](https://github.com/hsoliwal/M3jdk21/blob/1de629d26ea82d2729a5993bfc88099f83221923/m3/docs/m3jdk21-porting-invariant.md) | `d933c7f8a4ba875b318c499214857146724fc4da` |
+| [m3/ports/indexstring/src/main/java/jdk/m3/text/compat/M3Text.java](https://github.com/hsoliwal/M3jdk21/blob/1de629d26ea82d2729a5993bfc88099f83221923/m3/ports/indexstring/src/main/java/jdk/m3/text/compat/M3Text.java) | `e177a3a5e08608dc06ecad85486338305ceb6efd` |
 | [src/java.base/share/classes/java/lang/M3String.java](https://github.com/hsoliwal/M3jdk21/blob/1de629d26ea82d2729a5993bfc88099f83221923/src/java.base/share/classes/java/lang/M3String.java) | `42399d411c1516a56a47dcdb10242960157b4677` |
 | [src/java.base/share/classes/java/lang/M3StringPool.java](https://github.com/hsoliwal/M3jdk21/blob/1de629d26ea82d2729a5993bfc88099f83221923/src/java.base/share/classes/java/lang/M3StringPool.java) | `514247a2e6c3704e03a9b47682f74e481f66585f` |
 | [m3/runtime-integration/README.md](https://github.com/hsoliwal/M3jdk21/blob/1de629d26ea82d2729a5993bfc88099f83221923/m3/runtime-integration/README.md) | `9723ecb01a3b958fd8136f06978bf5056b625b3e` |

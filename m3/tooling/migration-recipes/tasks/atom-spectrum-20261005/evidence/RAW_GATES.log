@@ -15,12 +15,12 @@ END_RAW_FILE initial/02-lint.log
 
 BEGIN_RAW_FILE initial/SOURCE_SHA256.tsv sha256=ca2092998a29278f4ccc9d00c8f871bbb5787ae30d0d4f61c3b2359682c8db05
 path	sha256
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java	8384244946df1f840406aaf71438b4f0dba311dfd7eba7b421a064d63c31bf3b
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java	496624f1f8612f3c39ea20c6f77fa0dc0594fa13c378b2f2a3a06143c739df1c
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java	cd1902340803d122c520f41fe655ad049918213fb2cf2d8c7e7ab799d1604881
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java	27ef95b6300dcda7c8ebfeebdaee62587b60e13d44c6c72bfbb56d8e6435e303
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3FileAtomCandidateTable.java	2765872917a05ca2e71f977484a872bbac626cdf55ca24c71c8c9bc6dff10f24
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3InventoryPureIntAtomCandidates.java	3ca3fb634bd742821a317c47dde7ecb5f5176a1df8e3c2e8248a7873821a832b
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java	2d100ed5d5810232b90b46f55f99c907f54a195b679b58f295dd065c8f03db69
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java	ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java	649239ffdfbfda0465410f47a297f770cfb27311399276b856ee03383a5fb90d
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java	d2f8d2285d8b9b90b30f0906e2373efab8a25d9c84f0eefc252ed7acf2e20719
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java	ba078715aa83969fc6c04fcd0d9d226ff0d0ad7f46f38ebede6f5b312504e534
 m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipeTest.java	05a649e7d3812c0830c219b810413c8ba9e1393cc346860067f8aaf4e2e6f814
 m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3IntRecipeProjectTest.java	004de5f30e2a3c54d439b36493e8733dc73fdae8a288ba18238423ded5afcbed
@@ -158,12 +158,12 @@ END_RAW_FILE round-2/05-comment-regression.log
 
 BEGIN_RAW_FILE round-2/SOURCE_SHA256.tsv sha256=354149e86593d8efea747e8b16e7481f30394bb2b0aa53d305b04bae1497db08
 path	sha256
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java	8384244946df1f840406aaf71438b4f0dba311dfd7eba7b421a064d63c31bf3b
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java	496624f1f8612f3c39ea20c6f77fa0dc0594fa13c378b2f2a3a06143c739df1c
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java	cd1902340803d122c520f41fe655ad049918213fb2cf2d8c7e7ab799d1604881
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java	27ef95b6300dcda7c8ebfeebdaee62587b60e13d44c6c72bfbb56d8e6435e303
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3FileAtomCandidateTable.java	2765872917a05ca2e71f977484a872bbac626cdf55ca24c71c8c9bc6dff10f24
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3InventoryPureIntAtomCandidates.java	3ca3fb634bd742821a317c47dde7ecb5f5176a1df8e3c2e8248a7873821a832b
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java	2d100ed5d5810232b90b46f55f99c907f54a195b679b58f295dd065c8f03db69
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java	ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java	649239ffdfbfda0465410f47a297f770cfb27311399276b856ee03383a5fb90d
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java	d2f8d2285d8b9b90b30f0906e2373efab8a25d9c84f0eefc252ed7acf2e20719
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java	ba078715aa83969fc6c04fcd0d9d226ff0d0ad7f46f38ebede6f5b312504e534
 m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipeTest.java	bd015deb2c5b0c7ccbd8471757513973e94eda4e506995d12da90b8e67cde9eb
 m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3IntRecipeProjectTest.java	004de5f30e2a3c54d439b36493e8733dc73fdae8a288ba18238423ded5afcbed
@@ -308,12 +308,12 @@ END_RAW_FILE bootstrap/05-meta-recipe.log
 
 BEGIN_RAW_FILE bootstrap/SOURCE_SHA256.tsv sha256=8e79fcfacdac8aa3396ecc723bc17c00bf3651d213e4d6220fdf0e6cea3a943e
 path	sha256
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java	8384244946df1f840406aaf71438b4f0dba311dfd7eba7b421a064d63c31bf3b
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java	496624f1f8612f3c39ea20c6f77fa0dc0594fa13c378b2f2a3a06143c739df1c
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java	cd1902340803d122c520f41fe655ad049918213fb2cf2d8c7e7ab799d1604881
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java	27ef95b6300dcda7c8ebfeebdaee62587b60e13d44c6c72bfbb56d8e6435e303
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3FileAtomCandidateTable.java	2765872917a05ca2e71f977484a872bbac626cdf55ca24c71c8c9bc6dff10f24
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3InventoryPureIntAtomCandidates.java	3ca3fb634bd742821a317c47dde7ecb5f5176a1df8e3c2e8248a7873821a832b
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java	2d100ed5d5810232b90b46f55f99c907f54a195b679b58f295dd065c8f03db69
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java	ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java	649239ffdfbfda0465410f47a297f770cfb27311399276b856ee03383a5fb90d
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java	d2f8d2285d8b9b90b30f0906e2373efab8a25d9c84f0eefc252ed7acf2e20719
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java	ba078715aa83969fc6c04fcd0d9d226ff0d0ad7f46f38ebede6f5b312504e534
 m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomCommentRecipeTest.java	2c070cd808c61de301bc07c2e14eae21f5eb744232545414eb15c8e33ab65075
 m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipeTest.java	bd015deb2c5b0c7ccbd8471757513973e94eda4e506995d12da90b8e67cde9eb
@@ -476,12 +476,12 @@ END_RAW_FILE bootstrap-2/06-materialization.diff
 
 BEGIN_RAW_FILE bootstrap-2/SOURCE_SHA256.tsv sha256=d1292a3df057a5f67d11e34a5db9d5e8cc05a9e2af17809630bd66e9ba779e20
 path	sha256
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java	8384244946df1f840406aaf71438b4f0dba311dfd7eba7b421a064d63c31bf3b
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java	496624f1f8612f3c39ea20c6f77fa0dc0594fa13c378b2f2a3a06143c739df1c
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java	cd1902340803d122c520f41fe655ad049918213fb2cf2d8c7e7ab799d1604881
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java	27ef95b6300dcda7c8ebfeebdaee62587b60e13d44c6c72bfbb56d8e6435e303
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3FileAtomCandidateTable.java	2765872917a05ca2e71f977484a872bbac626cdf55ca24c71c8c9bc6dff10f24
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3InventoryPureIntAtomCandidates.java	3ca3fb634bd742821a317c47dde7ecb5f5176a1df8e3c2e8248a7873821a832b
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java	2d100ed5d5810232b90b46f55f99c907f54a195b679b58f295dd065c8f03db69
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java	ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java	649239ffdfbfda0465410f47a297f770cfb27311399276b856ee03383a5fb90d
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java	d2f8d2285d8b9b90b30f0906e2373efab8a25d9c84f0eefc252ed7acf2e20719
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java	ba078715aa83969fc6c04fcd0d9d226ff0d0ad7f46f38ebede6f5b312504e534
 m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomCommentRecipeTest.java	1d38ff27dd160b32368753af09708cc5b083a3b7d3e81a503aada032f70301cf
 m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipeTest.java	bd015deb2c5b0c7ccbd8471757513973e94eda4e506995d12da90b8e67cde9eb
@@ -747,12 +747,12 @@ END_RAW_FILE target-1/06-all-tests.log
 
 BEGIN_RAW_FILE target-1/SOURCE_SHA256.tsv sha256=dcce1400309129d19d28a3455b33f11c6626b4042f331a0375af68c3a0b52985
 path	sha256
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java	cec34964f679c67e38cf946c2b1f7b6fb0dddc1f4ecadd963e7dd998e7ff68ba
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java	496624f1f8612f3c39ea20c6f77fa0dc0594fa13c378b2f2a3a06143c739df1c
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java	6a94a12107d7e49ac03cdbf61b6e730516b6e853f8d6d580f24f4c9471384f6d
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java	27ef95b6300dcda7c8ebfeebdaee62587b60e13d44c6c72bfbb56d8e6435e303
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3FileAtomCandidateTable.java	2765872917a05ca2e71f977484a872bbac626cdf55ca24c71c8c9bc6dff10f24
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3InventoryPureIntAtomCandidates.java	3ca3fb634bd742821a317c47dde7ecb5f5176a1df8e3c2e8248a7873821a832b
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java	2d100ed5d5810232b90b46f55f99c907f54a195b679b58f295dd065c8f03db69
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java	ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java	649239ffdfbfda0465410f47a297f770cfb27311399276b856ee03383a5fb90d
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java	d2f8d2285d8b9b90b30f0906e2373efab8a25d9c84f0eefc252ed7acf2e20719
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java	ba078715aa83969fc6c04fcd0d9d226ff0d0ad7f46f38ebede6f5b312504e534
 m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomCommentRecipeTest.java	1d38ff27dd160b32368753af09708cc5b083a3b7d3e81a503aada032f70301cf
 m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipeTest.java	bd015deb2c5b0c7ccbd8471757513973e94eda4e506995d12da90b8e67cde9eb
@@ -890,12 +890,12 @@ END_RAW_FILE marker-baseline/05-marker-regression.log
 
 BEGIN_RAW_FILE marker-baseline/SOURCE_SHA256.tsv sha256=ba4b03b0904ba038f47c5e5658a2f4a366a0b57108f13818f2843076063ff3b5
 path	sha256
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java	cec34964f679c67e38cf946c2b1f7b6fb0dddc1f4ecadd963e7dd998e7ff68ba
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java	496624f1f8612f3c39ea20c6f77fa0dc0594fa13c378b2f2a3a06143c739df1c
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java	6a94a12107d7e49ac03cdbf61b6e730516b6e853f8d6d580f24f4c9471384f6d
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java	27ef95b6300dcda7c8ebfeebdaee62587b60e13d44c6c72bfbb56d8e6435e303
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3FileAtomCandidateTable.java	2765872917a05ca2e71f977484a872bbac626cdf55ca24c71c8c9bc6dff10f24
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3InventoryPureIntAtomCandidates.java	3ca3fb634bd742821a317c47dde7ecb5f5176a1df8e3c2e8248a7873821a832b
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java	2d100ed5d5810232b90b46f55f99c907f54a195b679b58f295dd065c8f03db69
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java	ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java	649239ffdfbfda0465410f47a297f770cfb27311399276b856ee03383a5fb90d
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java	d2f8d2285d8b9b90b30f0906e2373efab8a25d9c84f0eefc252ed7acf2e20719
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java	ba078715aa83969fc6c04fcd0d9d226ff0d0ad7f46f38ebede6f5b312504e534
 m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomCommentRecipeTest.java	1d38ff27dd160b32368753af09708cc5b083a3b7d3e81a503aada032f70301cf
 m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipeTest.java	bd015deb2c5b0c7ccbd8471757513973e94eda4e506995d12da90b8e67cde9eb
@@ -1036,12 +1036,12 @@ END_RAW_FILE final-bootstrap/06-M3PatternizePureIntAtomRecipe.diff
 
 BEGIN_RAW_FILE final-bootstrap/SOURCE_SHA256.tsv sha256=3358c7108c3a5ef62a4246b1506bd91d3f8b53d32448b1b0928e5b1b81868a99
 path	sha256
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java	cec34964f679c67e38cf946c2b1f7b6fb0dddc1f4ecadd963e7dd998e7ff68ba
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java	496624f1f8612f3c39ea20c6f77fa0dc0594fa13c378b2f2a3a06143c739df1c
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java	6a94a12107d7e49ac03cdbf61b6e730516b6e853f8d6d580f24f4c9471384f6d
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java	27ef95b6300dcda7c8ebfeebdaee62587b60e13d44c6c72bfbb56d8e6435e303
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3FileAtomCandidateTable.java	2765872917a05ca2e71f977484a872bbac626cdf55ca24c71c8c9bc6dff10f24
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3InventoryPureIntAtomCandidates.java	3ca3fb634bd742821a317c47dde7ecb5f5176a1df8e3c2e8248a7873821a832b
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java	2d100ed5d5810232b90b46f55f99c907f54a195b679b58f295dd065c8f03db69
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java	ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java	649239ffdfbfda0465410f47a297f770cfb27311399276b856ee03383a5fb90d
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java	d2f8d2285d8b9b90b30f0906e2373efab8a25d9c84f0eefc252ed7acf2e20719
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java	ba078715aa83969fc6c04fcd0d9d226ff0d0ad7f46f38ebede6f5b312504e534
 m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomCommentRecipeTest.java	120985ef8bec9c99bb1f6103f41aed442c0dfafa13a845ba5007859403bd8b05
 m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipeTest.java	bd015deb2c5b0c7ccbd8471757513973e94eda4e506995d12da90b8e67cde9eb
@@ -1218,11 +1218,11 @@ END_RAW_FILE final-target/RUNTIME_AUDIT.json
 BEGIN_RAW_FILE final-target/SOURCE_SHA256.tsv sha256=b5dd5291dddc3e72cbc327306f1c37fe4e47331018e368173dcaeadca6578de1
 path	sha256
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java	b8cc725c30cdd5c1258d450d039d258bf99546c0d6332c66a55e39cd09264da2
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java	496624f1f8612f3c39ea20c6f77fa0dc0594fa13c378b2f2a3a06143c739df1c
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java	27ef95b6300dcda7c8ebfeebdaee62587b60e13d44c6c72bfbb56d8e6435e303
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3FileAtomCandidateTable.java	2765872917a05ca2e71f977484a872bbac626cdf55ca24c71c8c9bc6dff10f24
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3InventoryPureIntAtomCandidates.java	3ca3fb634bd742821a317c47dde7ecb5f5176a1df8e3c2e8248a7873821a832b
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java	b831177cbaaeca359a0b397eb4c74c0caf86c27666db702ef4492a42c210cd9f
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java	ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java	57f56067965c3cb2aabb5e5bc54e3d61abbdb0f08402ff04dc5f15381b2d8494
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java	d2f8d2285d8b9b90b30f0906e2373efab8a25d9c84f0eefc252ed7acf2e20719
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java	ba078715aa83969fc6c04fcd0d9d226ff0d0ad7f46f38ebede6f5b312504e534
 m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomCommentRecipeTest.java	120985ef8bec9c99bb1f6103f41aed442c0dfafa13a845ba5007859403bd8b05
 m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipeTest.java	bd015deb2c5b0c7ccbd8471757513973e94eda4e506995d12da90b8e67cde9eb
@@ -1388,7 +1388,7 @@ BEGIN_RAW_FILE trailing-comment-baseline/COMMANDS.json sha256=2a568dfba2e463e2ab
       "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
       "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java",
       "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java",
-      "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomCommentRecipeTest.java",
       "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipeTest.java",
       "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3IntRecipeProjectTest.java",
@@ -1451,11 +1451,11 @@ END_RAW_FILE trailing-comment-baseline/COMMANDS.json
 BEGIN_RAW_FILE trailing-comment-baseline/SOURCE_SHA256.tsv sha256=5e2b74c27a3789c3bbf40a8ff5b213c00f9c33a7d9760ac4b5904c47d84bb1b3
 path	sha256
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java	b8cc725c30cdd5c1258d450d039d258bf99546c0d6332c66a55e39cd09264da2
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java	496624f1f8612f3c39ea20c6f77fa0dc0594fa13c378b2f2a3a06143c739df1c
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java	27ef95b6300dcda7c8ebfeebdaee62587b60e13d44c6c72bfbb56d8e6435e303
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3FileAtomCandidateTable.java	2765872917a05ca2e71f977484a872bbac626cdf55ca24c71c8c9bc6dff10f24
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3InventoryPureIntAtomCandidates.java	3ca3fb634bd742821a317c47dde7ecb5f5176a1df8e3c2e8248a7873821a832b
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java	b831177cbaaeca359a0b397eb4c74c0caf86c27666db702ef4492a42c210cd9f
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java	ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java	57f56067965c3cb2aabb5e5bc54e3d61abbdb0f08402ff04dc5f15381b2d8494
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java	d2f8d2285d8b9b90b30f0906e2373efab8a25d9c84f0eefc252ed7acf2e20719
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java	ba078715aa83969fc6c04fcd0d9d226ff0d0ad7f46f38ebede6f5b312504e534
 m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomCommentRecipeTest.java	120985ef8bec9c99bb1f6103f41aed442c0dfafa13a845ba5007859403bd8b05
 m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipeTest.java	bd015deb2c5b0c7ccbd8471757513973e94eda4e506995d12da90b8e67cde9eb
@@ -1626,7 +1626,7 @@ BEGIN_RAW_FILE trailing-bootstrap/COMMANDS.json sha256=011fa00b2c0c64d624e1f5fbe
       "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
       "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java",
       "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java",
-      "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomCommentRecipeTest.java",
       "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipeTest.java",
       "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3IntRecipeProjectTest.java",
@@ -1689,11 +1689,11 @@ END_RAW_FILE trailing-bootstrap/COMMANDS.json
 BEGIN_RAW_FILE trailing-bootstrap/SOURCE_SHA256.tsv sha256=57961e361436d8c9b989b9a4d747423f2abaa911e1942c2ff2c3767b203aaa92
 path	sha256
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java	b8cc725c30cdd5c1258d450d039d258bf99546c0d6332c66a55e39cd09264da2
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java	496624f1f8612f3c39ea20c6f77fa0dc0594fa13c378b2f2a3a06143c739df1c
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java	27ef95b6300dcda7c8ebfeebdaee62587b60e13d44c6c72bfbb56d8e6435e303
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3FileAtomCandidateTable.java	2765872917a05ca2e71f977484a872bbac626cdf55ca24c71c8c9bc6dff10f24
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3InventoryPureIntAtomCandidates.java	3ca3fb634bd742821a317c47dde7ecb5f5176a1df8e3c2e8248a7873821a832b
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java	b831177cbaaeca359a0b397eb4c74c0caf86c27666db702ef4492a42c210cd9f
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java	ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java	57f56067965c3cb2aabb5e5bc54e3d61abbdb0f08402ff04dc5f15381b2d8494
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java	d2f8d2285d8b9b90b30f0906e2373efab8a25d9c84f0eefc252ed7acf2e20719
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java	ba078715aa83969fc6c04fcd0d9d226ff0d0ad7f46f38ebede6f5b312504e534
 m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomCommentRecipeTest.java	120985ef8bec9c99bb1f6103f41aed442c0dfafa13a845ba5007859403bd8b05
 m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipeTest.java	bd015deb2c5b0c7ccbd8471757513973e94eda4e506995d12da90b8e67cde9eb
@@ -1857,7 +1857,7 @@ BEGIN_RAW_FILE final-reviewed/COMMANDS.json sha256=e39a3f62c2488e95e85d497984e3c
         "-c",
         "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/checkstyle.xml",
         "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom",
-        "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
         "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom"
       ]
     ],
@@ -1962,12 +1962,12 @@ END_RAW_FILE final-reviewed/RUNTIME_AUDIT.json
 
 BEGIN_RAW_FILE final-reviewed/SOURCE_SHA256.tsv sha256=fb6d69abdf67b83172d4aca8b244d7147e5eeb0872db03be4ef896cb247c928a
 path	sha256
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java	4f6c17a035e64106f172b488fded9b565d1af48d6a8ecbd4700b3ff0cc2cd1e1
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java	496624f1f8612f3c39ea20c6f77fa0dc0594fa13c378b2f2a3a06143c739df1c
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java	1123debdab4ff219372c7bdd3ecc7b3b48062b23f38ef8b898f7e9c303c7783c
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java	27ef95b6300dcda7c8ebfeebdaee62587b60e13d44c6c72bfbb56d8e6435e303
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3FileAtomCandidateTable.java	2765872917a05ca2e71f977484a872bbac626cdf55ca24c71c8c9bc6dff10f24
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3InventoryPureIntAtomCandidates.java	3ca3fb634bd742821a317c47dde7ecb5f5176a1df8e3c2e8248a7873821a832b
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java	b831177cbaaeca359a0b397eb4c74c0caf86c27666db702ef4492a42c210cd9f
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java	ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java	57f56067965c3cb2aabb5e5bc54e3d61abbdb0f08402ff04dc5f15381b2d8494
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java	d2f8d2285d8b9b90b30f0906e2373efab8a25d9c84f0eefc252ed7acf2e20719
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java	ba078715aa83969fc6c04fcd0d9d226ff0d0ad7f46f38ebede6f5b312504e534
 m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomCommentRecipeTest.java	120985ef8bec9c99bb1f6103f41aed442c0dfafa13a845ba5007859403bd8b05
 m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipeTest.java	bd015deb2c5b0c7ccbd8471757513973e94eda4e506995d12da90b8e67cde9eb
@@ -2504,8 +2504,8 @@ BEGIN_RAW_FILE final-reviewed/surefire-reports/TEST-com.m3.rewrite.atom.M3Reposi
 END_RAW_FILE final-reviewed/surefire-reports/TEST-com.m3.rewrite.atom.M3RepositoryCorpusTest.xml
 
 BEGIN_RAW_FILE final-current/00-baseline-helper.diff sha256=2706d1a2acb83e83ee7fc2bdfc8df115e5191dd35a5cb4b92c69a95443dd0d20
---- initial-master/m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java
-+++ current-master/m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java
+--- initial-master/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java
++++ current-master/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java
 @@ -27,12 +27,15 @@
  import org.openrewrite.TreeVisitor;
  import org.openrewrite.java.JavaParser;
@@ -2634,7 +2634,7 @@ BEGIN_RAW_FILE final-current/00-baseline-integration.json sha256=66efbdb1be8a1c5
   "initial_commit": "e8fdab9a7abc4b0273438ce9e5d0ffd6255b1247",
   "publication_commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
   "publication_root_tree": "548f3d7c434c49c3989fc722f34ebba2ba9f0c5a",
-  "helper_path": "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+  "helper_path": "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
   "before_sha256": "b96894a77e5c310addbda72b248ab56fedf8ceb24e5de81fe6e5d090982a4abc",
   "current_sha256": "9cf77c6e68a534e84b88230ca517fa6c5a76fb3e101ea3a1f68aa5222c3ec4d9",
   "current_git_blob_sha1": "717c3e01f8f0407ce96439e3ecc96190b10c1eed",
@@ -2655,68 +2655,68 @@ BEGIN_RAW_FILE final-current/00-publication-preflight.json sha256=078229832f13d3
     {
       "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
       "operation": "MODIFY",
-      "expected": "94ff41d9a298b671749a69bd8bc7b32005ebf877",
-      "actual": "94ff41d9a298b671749a69bd8bc7b32005ebf877",
+      "expected": "dc306c6bc059b54a1499104e5bcbb7758f484410",
+      "actual": "dc306c6bc059b54a1499104e5bcbb7758f484410",
       "matches": true
     },
     {
       "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
       "operation": "MODIFY",
-      "expected": "6b3b8a126cca230526c66adba36f53f5f9f49f5b",
-      "actual": "6b3b8a126cca230526c66adba36f53f5f9f49f5b",
+      "expected": "3fc283ba8ea7d89f5d6de812a54ee9bbab1dc68b",
+      "actual": "3fc283ba8ea7d89f5d6de812a54ee9bbab1dc68b",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/atom-comment-custody/after.java.txt",
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/atom-comment-custody/after.java.txt",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/atom-comment-custody/before.java.txt",
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/atom-comment-custody/before.java.txt",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/atom-comment-custody/manifest.tsv",
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/atom-comment-custody/manifest.tsv",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/atom-pattern-spectrum/after-atom.java.txt",
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/atom-pattern-spectrum/after-atom.java.txt",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/atom-pattern-spectrum/after-pattern.java.txt",
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/atom-pattern-spectrum/after-pattern.java.txt",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/atom-pattern-spectrum/before-atom.java.txt",
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/atom-pattern-spectrum/before-atom.java.txt",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/atom-pattern-spectrum/before-pattern.java.txt",
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/atom-pattern-spectrum/before-pattern.java.txt",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/atom-pattern-spectrum/manifest.tsv",
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/atom-pattern-spectrum/manifest.tsv",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
@@ -2765,7 +2765,7 @@ BEGIN_RAW_FILE final-current/00-publication-preflight.json sha256=078229832f13d3
       "matches": true
     },
     {
-      "path": "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/atom/spectrum/CORPUS.tsv",
+      "path": "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/atom/spectrum/CORPUS.tsv",
       "operation": "ADD",
       "expected": "ABSENT",
       "actual": "ABSENT",
@@ -2947,7 +2947,7 @@ BEGIN_RAW_FILE final-current/00-publication-preflight.json sha256=078229832f13d3
     "changed_files": [
       {
         "path": ".github/workflows/m3-jep467-markdown-inventory.yml",
-        "sha": "9639e8303d10f39996df9ef3902e95b851389b43",
+        "sha": "bfca74e4188a47f0348594b4d502cb5dd6eb0c20",
         "status": "modified"
       },
       {
@@ -3001,28 +3001,28 @@ BEGIN_RAW_FILE final-current/00-publication-preflight.json sha256=078229832f13d3
         "status": "modified"
       },
       {
-        "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3ScopeInference.java",
-        "sha": "13a5ed9cd0b0923f1f81f799b7bcbe3758dd2ee8",
+        "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3ScopeInference.java",
+        "sha": "72412b503295435163bb3c123a169ae43e97d090",
         "status": "modified"
       },
       {
-        "path": "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "path": "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
         "sha": "717c3e01f8f0407ce96439e3ecc96190b10c1eed",
         "status": "modified"
       },
       {
-        "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/gate-java/04-M3MIndexJniNewStringAdmissionRecipeTest.java.txt",
-        "sha": "0ca2dea3546842083ae55e1be0b32eed65835d6a",
+        "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/gate-java/04-M3MIndexJniNewStringAdmissionRecipeTest.java.txt",
+        "sha": "a3af22c069251154ff3d578d71bda5e8a1101842",
         "status": "modified"
       },
       {
-        "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/gate-java/06-M3MIndexStringBulkCharBoundaryRecipeTest.java.txt",
-        "sha": "4e174a1a7db7403754bfb4e332289eea4f27f733",
+        "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/gate-java/06-M3MIndexStringBulkCharBoundaryRecipeTest.java.txt",
+        "sha": "b682dd8ff33fdb63347d7d9fe8d00f2e51c439d4",
         "status": "modified"
       },
       {
-        "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/gate-java/manifest.tsv",
-        "sha": "400920825bbac788443ab73b5467d50a6e55d3ff",
+        "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/gate-java/manifest.tsv",
+        "sha": "3818c7c2456ff64d85008c208370851a6a6cb95d",
         "status": "modified"
       },
       {
@@ -3036,23 +3036,23 @@ BEGIN_RAW_FILE final-current/00-publication-preflight.json sha256=078229832f13d3
         "status": "added"
       },
       {
-        "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/scope/M3ScopeCoverageClosureTest.java",
-        "sha": "ee5b7b7699b8a89564a843e6846ecf318fbb1891",
+        "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3ScopeCoverageClosureTest.java",
+        "sha": "de9d1dfd025818d5aae8ef2ab3c9381775e356a5",
         "status": "added"
       },
       {
-        "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/scope/M3ScopeDefensiveBranchTest.java",
+        "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3ScopeDefensiveBranchTest.java",
         "sha": "5780dae3964cb143397e2b3d5b5c063f0a261e19",
         "status": "added"
       },
       {
-        "path": "m3/tooling/migration-recipes/src/test/java/com/synexia/rewrite/M3MIndexJniNewStringAdmissionRecipeTest.java",
-        "sha": "0ca2dea3546842083ae55e1be0b32eed65835d6a",
+        "path": "m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3MIndexJniNewStringAdmissionRecipeTest.java",
+        "sha": "a3af22c069251154ff3d578d71bda5e8a1101842",
         "status": "modified"
       },
       {
-        "path": "m3/tooling/migration-recipes/src/test/java/com/synexia/rewrite/M3MIndexStringBulkCharBoundaryRecipeTest.java",
-        "sha": "4e174a1a7db7403754bfb4e332289eea4f27f733",
+        "path": "m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3MIndexStringBulkCharBoundaryRecipeTest.java",
+        "sha": "b682dd8ff33fdb63347d7d9fe8d00f2e51c439d4",
         "status": "modified"
       },
       {
@@ -3063,7 +3063,7 @@ BEGIN_RAW_FILE final-current/00-publication-preflight.json sha256=078229832f13d3
     ]
   },
   "generic": {
-    "path": "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+    "path": "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
     "git_blob": "717c3e01f8f0407ce96439e3ecc96190b10c1eed",
     "sha256": "9cf77c6e68a534e84b88230ca517fa6c5a76fb3e101ea3a1f68aa5222c3ec4d9"
   },
@@ -3140,7 +3140,7 @@ BEGIN_RAW_FILE final-current/COMMANDS.json sha256=0f53b356ab7b0a6ab7ab2f4402ea03
         "-c",
         "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/checkstyle.xml",
         "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom",
-        "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
         "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom"
       ]
     ],
@@ -3206,12 +3206,12 @@ END_RAW_FILE final-current/COMMANDS.json
 
 BEGIN_RAW_FILE final-current/SOURCE_SHA256.tsv sha256=f809d29624a5e54db7e1ba320b4e05714762570a2a74804c8a4d41068379da9b
 path	sha256
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java	4f6c17a035e64106f172b488fded9b565d1af48d6a8ecbd4700b3ff0cc2cd1e1
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java	496624f1f8612f3c39ea20c6f77fa0dc0594fa13c378b2f2a3a06143c739df1c
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java	1123debdab4ff219372c7bdd3ecc7b3b48062b23f38ef8b898f7e9c303c7783c
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java	27ef95b6300dcda7c8ebfeebdaee62587b60e13d44c6c72bfbb56d8e6435e303
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3FileAtomCandidateTable.java	2765872917a05ca2e71f977484a872bbac626cdf55ca24c71c8c9bc6dff10f24
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3InventoryPureIntAtomCandidates.java	3ca3fb634bd742821a317c47dde7ecb5f5176a1df8e3c2e8248a7873821a832b
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java	b831177cbaaeca359a0b397eb4c74c0caf86c27666db702ef4492a42c210cd9f
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java	ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java	57f56067965c3cb2aabb5e5bc54e3d61abbdb0f08402ff04dc5f15381b2d8494
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java	d2f8d2285d8b9b90b30f0906e2373efab8a25d9c84f0eefc252ed7acf2e20719
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java	ba078715aa83969fc6c04fcd0d9d226ff0d0ad7f46f38ebede6f5b312504e534
 m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomCommentRecipeTest.java	120985ef8bec9c99bb1f6103f41aed442c0dfafa13a845ba5007859403bd8b05
 m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomCoverageClosureTest.java	e1d4d4d33502dbcf046ec7c52c2e1c357b37f0b0fbeea58a00a2114073a02dc1
@@ -3423,7 +3423,7 @@ BEGIN_RAW_FILE current-2/COMMANDS.json sha256=6aa496b51a737aff4e56c7a656c9197d4f
         "-c",
         "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/checkstyle.xml",
         "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom",
-        "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
         "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom"
       ]
     ],
@@ -3489,12 +3489,12 @@ END_RAW_FILE current-2/COMMANDS.json
 
 BEGIN_RAW_FILE current-2/SOURCE_SHA256.tsv sha256=abdabad798f1de409d4ad23380f7ff11a8ae9f2d5192d177125af72c2b124c77
 path	sha256
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java	4f6c17a035e64106f172b488fded9b565d1af48d6a8ecbd4700b3ff0cc2cd1e1
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java	496624f1f8612f3c39ea20c6f77fa0dc0594fa13c378b2f2a3a06143c739df1c
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java	1123debdab4ff219372c7bdd3ecc7b3b48062b23f38ef8b898f7e9c303c7783c
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java	27ef95b6300dcda7c8ebfeebdaee62587b60e13d44c6c72bfbb56d8e6435e303
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3FileAtomCandidateTable.java	2765872917a05ca2e71f977484a872bbac626cdf55ca24c71c8c9bc6dff10f24
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3InventoryPureIntAtomCandidates.java	3ca3fb634bd742821a317c47dde7ecb5f5176a1df8e3c2e8248a7873821a832b
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java	b831177cbaaeca359a0b397eb4c74c0caf86c27666db702ef4492a42c210cd9f
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java	ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java	57f56067965c3cb2aabb5e5bc54e3d61abbdb0f08402ff04dc5f15381b2d8494
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java	d2f8d2285d8b9b90b30f0906e2373efab8a25d9c84f0eefc252ed7acf2e20719
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java	ba078715aa83969fc6c04fcd0d9d226ff0d0ad7f46f38ebede6f5b312504e534
 m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomCommentRecipeTest.java	120985ef8bec9c99bb1f6103f41aed442c0dfafa13a845ba5007859403bd8b05
 m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomCoverageClosureTest.java	e1d4d4d33502dbcf046ec7c52c2e1c357b37f0b0fbeea58a00a2114073a02dc1
@@ -3853,7 +3853,7 @@ BEGIN_RAW_FILE current-3/07-runtime-audit.log sha256=157a37474c8d43597ac7e3a2e43
 
 END_RAW_FILE current-3/07-runtime-audit.log
 
-BEGIN_RAW_FILE current-3/COMMANDS.json sha256=7eb20d33a4e58767eaf506f275c50d3d2b8e2181d7af851b77fa525d224fad29
+BEGIN_RAW_FILE current-3/COMMANDS.json sha256=becaf2447cf4a39ff3d705bda16072c55c53698230ae23c9e877791c260861cb
 {
   "environment": {
     "JAVA_HOME": "/workspace/scratch/877d9513c002/toolchains/jdk-21.0.2",
@@ -3881,7 +3881,7 @@ BEGIN_RAW_FILE current-3/COMMANDS.json sha256=7eb20d33a4e58767eaf506f275c50d3d2b
         "-c",
         "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/checkstyle.xml",
         "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom",
-        "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
         "/workspace/scratch/87c30a06d3c7/m3jdk-spectrum/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom"
       ]
     ],
@@ -3999,14 +3999,14 @@ BEGIN_RAW_FILE current-3/RUNTIME_AUDIT.json sha256=07e3b5a46e6c295803f749eca655d
 
 END_RAW_FILE current-3/RUNTIME_AUDIT.json
 
-BEGIN_RAW_FILE current-3/SOURCE_SHA256.tsv sha256=5920ac61c49c7595e557088c1f3cb6bfa39473713a4be99f79a25c4968beaac2
+BEGIN_RAW_FILE current-3/SOURCE_SHA256.tsv sha256=0178436ecb494a0fb1898d1d6dace8aaf9f9a25505fa79721f917a8d31a5b803
 path	sha256
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java	4f6c17a035e64106f172b488fded9b565d1af48d6a8ecbd4700b3ff0cc2cd1e1
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java	496624f1f8612f3c39ea20c6f77fa0dc0594fa13c378b2f2a3a06143c739df1c
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java	1123debdab4ff219372c7bdd3ecc7b3b48062b23f38ef8b898f7e9c303c7783c
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java	27ef95b6300dcda7c8ebfeebdaee62587b60e13d44c6c72bfbb56d8e6435e303
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3FileAtomCandidateTable.java	2765872917a05ca2e71f977484a872bbac626cdf55ca24c71c8c9bc6dff10f24
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3InventoryPureIntAtomCandidates.java	3ca3fb634bd742821a317c47dde7ecb5f5176a1df8e3c2e8248a7873821a832b
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java	b831177cbaaeca359a0b397eb4c74c0caf86c27666db702ef4492a42c210cd9f
-m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java	ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java	57f56067965c3cb2aabb5e5bc54e3d61abbdb0f08402ff04dc5f15381b2d8494
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java	d2f8d2285d8b9b90b30f0906e2373efab8a25d9c84f0eefc252ed7acf2e20719
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java	ba078715aa83969fc6c04fcd0d9d226ff0d0ad7f46f38ebede6f5b312504e534
 m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomCommentRecipeTest.java	120985ef8bec9c99bb1f6103f41aed442c0dfafa13a845ba5007859403bd8b05
 m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomCoverageClosureTest.java	b093aac929d9798cfedea92639ea5753f90af5855f611a793179afafd1cbd605

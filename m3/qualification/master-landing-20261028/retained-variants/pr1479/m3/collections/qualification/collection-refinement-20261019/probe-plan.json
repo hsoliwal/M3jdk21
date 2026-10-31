@@ -111,7 +111,7 @@
       ]
     },
     {
-      "class": "com.m3.collections.M3MaskSpansContract",
+      "class": "jdk.m3.collections.M3MaskSpansContract",
       "args": [
         "native"
       ],

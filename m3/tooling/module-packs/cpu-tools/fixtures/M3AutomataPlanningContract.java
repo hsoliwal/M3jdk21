@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Hitesh Soliwal and contributors
-import com.m3.tools.cpu.M3DfaPartitions;
-import com.m3.tools.cpu.M3KnapsackSelection;
-import com.m3.tools.cpu.M3DominatorLanes;
+import jdk.m3.tools.cpu.M3DfaPartitions;
+import jdk.m3.tools.cpu.M3KnapsackSelection;
+import jdk.m3.tools.cpu.M3DominatorLanes;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;

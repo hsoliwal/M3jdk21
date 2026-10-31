@@ -18,7 +18,7 @@ rs = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(rs)
 jn = rs.jn
 
-JAVA = "package com.synexia.x;\nclass SynexiaFoo {}\n"
+JAVA = "package jdk.internal.m3.x;\nclass M3Foo {}\n"
 JAVA_RENAMED = "package jdk.internal.m3.x;\nclass M3Foo {}\n"
 
 
@@ -61,8 +61,8 @@ class ResealTest(unittest.TestCase):
         return base, jn.apply_tree(self.root, base, "refs/heads/renamed", "rename")
 
     def test_pins_follow_the_renamed_file_through_a_chain_in_dependency_order(self):
-        self.put("m3/x/src/com/synexia/x/SynexiaFoo.java", JAVA)
-        manifest = "path\tbefore\tafter\nm3/x/src/com/synexia/x/SynexiaFoo.java\tABSENT\t%s\n" % sha256(JAVA)
+        self.put("m3/x/src/jdk/internal/m3/x/M3Foo.java", JAVA)
+        manifest = "path\tbefore\tafter\nm3/x/src/jdk/internal/m3/x/M3Foo.java\tABSENT\t%s\n" % sha256(JAVA)
         self.put("m3/x/manifest.tsv", manifest)
         receipt = '{"manifest_sha256": "%s", "path": "./m3/x/manifest.tsv"}\n' % sha256(manifest)
         self.put("m3/x/receipt.json", receipt)
@@ -82,11 +82,11 @@ class ResealTest(unittest.TestCase):
         commit = rs.commit(self.root, renamed, "refs/heads/resealed", "reseal", dict(files, **{rs.LEDGER: rs.ledger(result)}))
         self.assertEqual(rs.reseal(self.root, renamed, commit)["files"], {})
         self.assertIn("SHA256\t%s\t%s" % (sha256(JAVA), sha256(JAVA_RENAMED)), self.show(commit, rs.LEDGER))
-        self.assertIn("PATH\tm3/x/src/com/synexia/x/SynexiaFoo.java\tm3/x/src/jdk/internal/m3/x/M3Foo.java",
+        self.assertIn("PATH\tm3/x/src/jdk/internal/m3/x/M3Foo.java\tm3/x/src/jdk/internal/m3/x/M3Foo.java",
                       self.show(commit, rs.LEDGER))
 
     def test_a_long_hash_chain_is_resealed_in_one_pass(self):
-        self.put("m3/x/src/com/synexia/x/SynexiaFoo.java", JAVA)
+        self.put("m3/x/src/jdk/internal/m3/x/M3Foo.java", JAVA)
         previous = sha256(JAVA)
         for entry in range(1, 13):  # deeper than the 8 rounds of the first version
             text = "history %02d previous %s\n" % (entry, previous)
@@ -116,9 +116,9 @@ class ResealTest(unittest.TestCase):
         self.assertEqual(set(done["new_bytes"]), {x, y})
 
     def test_an_old_digest_that_still_names_bytes_in_the_tree_is_ambiguous_not_guessed(self):
-        kept = "// Synexia-NOTICE applies\nclass SynexiaA {}\n"
-        self.put("m3/a/SynexiaA.java", kept)
-        self.put("m3/a/copy/SynexiaA.java.md", kept)  # lineage copy: not rewritten, keeps the old bytes
+        kept = "// Synexia-NOTICE applies\nclass M3A {}\n"
+        self.put("m3/a/M3A.java", kept)
+        self.put("m3/a/copy/M3A.java.md", kept)  # lineage copy: not rewritten, keeps the old bytes
         self.put("m3/pins.txt", sha256(kept) + "\n")
         base, renamed = self.renamed()
         result = rs.reseal(self.root, base, renamed)
@@ -134,8 +134,8 @@ class ResealTest(unittest.TestCase):
         """A postimage (.txt, renamed) and its lineage copy (.tsv, resealed) hold the same bytes; after the reseal
         carries the moved path in the copy, both hold the renamed bytes, so a pin of the old bytes is no longer
         ambiguous and must follow (M3jdk21: after-028.txt and the manifest.tsv copies)."""
-        self.put("m3/x/src/com/synexia/x/SynexiaFoo.java", JAVA)
-        listing = "m3/x/src/com/synexia/x/SynexiaFoo.java\n"
+        self.put("m3/x/src/jdk/internal/m3/x/M3Foo.java", JAVA)
+        listing = "m3/x/src/jdk/internal/m3/x/M3Foo.java\n"
         self.put("m3/x/after-028.txt", listing)
         self.put("m3/x/copy/manifest.tsv", listing)
         self.put("m3/x/pins.json", '{"after_sha256": "%s"}\n' % sha256(listing))
@@ -153,10 +153,10 @@ class ResealTest(unittest.TestCase):
 
     def test_a_path_token_with_a_prefix_is_carried_and_an_unrelated_one_is_not(self):
         pins = rs.Pins()
-        pins.add("PATH", "m3/x/SynexiaFoo.java", "m3/x/M3Foo.java")
+        pins.add("PATH", "m3/x/M3Foo.java", "m3/x/M3Foo.java")
         pins.clean()
-        self.assertEqual(rs.carried("see repo/m3/x/SynexiaFoo.java and m3/x/SynexiaFoo.java.bak", pins),
-                         "see repo/m3/x/M3Foo.java and m3/x/SynexiaFoo.java.bak")
+        self.assertEqual(rs.carried("see repo/m3/x/M3Foo.java and m3/x/M3Foo.java.bak", pins),
+                         "see repo/m3/x/M3Foo.java and m3/x/M3Foo.java.bak")
 
 
 if __name__ == "__main__":

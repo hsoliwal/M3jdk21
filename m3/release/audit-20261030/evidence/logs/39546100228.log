@@ -235,42 +235,42 @@ source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.5895876Z Writing to /home/ru
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.6491837Z ##[group]Run set -euo pipefail
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.6492141Z [36;1mset -euo pipefail[0m
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.6492384Z [36;1mmkdir -p build/m3file-delta-classes[0m
-source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.6493369Z [36;1mjavac --release 21 -Xlint:all,-module -Werror             -d build/m3file-delta-classes             m3/file/src/main/java/module-info.java             m3/file/src/main/java/com/m3/file/M3File.java             m3/file/src/main/java/com/m3/file/M3FileDeltaLedger.java             m3/file/src/test/java/com/m3/file/M3FileDeltaLedgerContract.java[0m
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.6493369Z [36;1mjavac --release 21 -Xlint:all,-module -Werror             -d build/m3file-delta-classes             m3/file/src/main/java/module-info.java             m3/file/src/main/java/jdk/m3/file/M3File.java             m3/file/src/main/java/jdk/m3/file/M3FileDeltaLedger.java             m3/file/src/test/java/jdk/m3/file/M3FileDeltaLedgerContract.java[0m
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.6494676Z [36;1mjava --module-path build/m3file-delta-classes             -m com.m3.file/com.m3.file.M3FileDeltaLedgerContract[0m
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.7057035Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.7057333Z env:
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.7057603Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.7058053Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.7058352Z ##[endgroup]
-source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.4874660Z m3/file/src/main/java/com/m3/file/M3File.java:69: error: cannot find symbol
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.4874660Z m3/file/src/main/java/jdk/m3/file/M3File.java:69: error: cannot find symbol
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.4878652Z     public InputStream openInputStream(M3StreamProgress progress) throws IOException {
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.4879459Z                                        ^
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.4879950Z   symbol:   class M3StreamProgress
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.4880393Z   location: class M3File
-source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.4880985Z m3/file/src/main/java/com/m3/file/M3File.java:80: error: cannot find symbol
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.4880985Z m3/file/src/main/java/jdk/m3/file/M3File.java:80: error: cannot find symbol
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.4881928Z             int maxRetainedBytes, M3StreamProgress progress) throws IOException {
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.4882529Z                                   ^
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.4882943Z   symbol:   class M3StreamProgress
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.4883367Z   location: class M3File
-source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.5064368Z m3/file/src/main/java/com/m3/file/M3File.java:79: error: package M3ShadowStreams does not exist
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.5064368Z m3/file/src/main/java/jdk/m3/file/M3File.java:79: error: package M3ShadowStreams does not exist
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.5065137Z     public M3ShadowStreams.SharedInput openShadowInputStream(
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.5065582Z                           ^
-source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6492351Z m3/file/src/main/java/com/m3/file/M3File.java:70: error: cannot find symbol
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6492351Z m3/file/src/main/java/jdk/m3/file/M3File.java:70: error: cannot find symbol
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6493593Z         M3StreamProgress.require(progress);
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6494214Z         ^
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6494657Z   symbol:   variable M3StreamProgress
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6495210Z   location: class M3File
-source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6495857Z m3/file/src/main/java/com/m3/file/M3File.java:71: error: cannot find symbol
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6495857Z m3/file/src/main/java/jdk/m3/file/M3File.java:71: error: cannot find symbol
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6496709Z         return M3ShadowStreams.monitoredInput(openInputStream(), progress);
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6497421Z                ^
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6497881Z   symbol:   variable M3ShadowStreams
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6498388Z   location: class M3File
-source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6538473Z m3/file/src/main/java/com/m3/file/M3File.java:82: error: cannot find symbol
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6538473Z m3/file/src/main/java/jdk/m3/file/M3File.java:82: error: cannot find symbol
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6540650Z         M3StreamProgress.require(progress);
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6541456Z         ^
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6541833Z   symbol:   variable M3StreamProgress
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6545701Z   location: class M3File
-source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6546361Z m3/file/src/main/java/com/m3/file/M3File.java:83: error: cannot find symbol
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6546361Z m3/file/src/main/java/jdk/m3/file/M3File.java:83: error: cannot find symbol
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6547223Z         return M3ShadowStreams.input(openInputStream(), maxRetainedBytes, progress);
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6562586Z                ^
 source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6563080Z   symbol:   variable M3ShadowStreams

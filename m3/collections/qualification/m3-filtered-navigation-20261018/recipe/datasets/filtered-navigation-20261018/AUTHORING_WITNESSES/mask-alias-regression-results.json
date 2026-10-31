@@ -8,12 +8,12 @@
       "-Djava.library.path=/workspace/scratch/6b6041146177/native-validation/lib",
       "-cp",
       "/workspace/scratch/6b6041146177/native-validation/classes:/workspace/scratch/6b6041146177/native-validation/baseline-test-classes",
-      "com.m3.collections.M3IndexPathMasksAliasContract",
+      "jdk.m3.collections.M3IndexPathMasksAliasContract",
       "--native"
     ],
     "exit_code": 1,
     "stdout": "",
-    "stderr": "Exception in thread \"main\" java.lang.AssertionError: wrong refusal JAVA\n\tat com.m3.collections.M3IndexPathMasksAliasContract.refuses(M3IndexPathMasksAliasContract.java:86)\n\tat com.m3.collections.M3IndexPathMasksAliasContract.aliasesBeforeAnyWrite(M3IndexPathMasksAliasContract.java:113)\n\tat com.m3.collections.M3IndexPathMasksAliasContract.main(M3IndexPathMasksAliasContract.java:212)\nCaused by: java.util.ConcurrentModificationException: mask stages changed during window\n\tat com.m3.collections.M3IndexPathMasks.scanWindow(M3IndexPathMasks.java:172)\n\tat com.m3.collections.M3IndexPathMasksAliasContract.scan(M3IndexPathMasksAliasContract.java:70)\n\tat com.m3.collections.M3IndexPathMasksAliasContract.refuses(M3IndexPathMasksAliasContract.java:82)\n\t... 2 more\n"
+    "stderr": "Exception in thread \"main\" java.lang.AssertionError: wrong refusal JAVA\n\tat jdk.m3.collections.M3IndexPathMasksAliasContract.refuses(M3IndexPathMasksAliasContract.java:86)\n\tat jdk.m3.collections.M3IndexPathMasksAliasContract.aliasesBeforeAnyWrite(M3IndexPathMasksAliasContract.java:113)\n\tat jdk.m3.collections.M3IndexPathMasksAliasContract.main(M3IndexPathMasksAliasContract.java:212)\nCaused by: java.util.ConcurrentModificationException: mask stages changed during window\n\tat jdk.m3.collections.M3IndexPathMasks.scanWindow(M3IndexPathMasks.java:172)\n\tat jdk.m3.collections.M3IndexPathMasksAliasContract.scan(M3IndexPathMasksAliasContract.java:70)\n\tat jdk.m3.collections.M3IndexPathMasksAliasContract.refuses(M3IndexPathMasksAliasContract.java:82)\n\t... 2 more\n"
   },
   {
     "case": "candidate-java",
@@ -24,7 +24,7 @@
       "-Djava.library.path=/workspace/scratch/6b6041146177/native-validation/empty-lib",
       "-cp",
       "/workspace/scratch/6b6041146177/native-validation/candidate-classes:/workspace/scratch/6b6041146177/native-validation/classes",
-      "com.m3.collections.M3IndexPathMasksAliasContract"
+      "jdk.m3.collections.M3IndexPathMasksAliasContract"
     ],
     "exit_code": 0,
     "stdout": "M3_PATH_MASK_ALIAS_PASS checks=2302 actualJNI=false\n",
@@ -39,7 +39,7 @@
       "-Djava.library.path=/workspace/scratch/6b6041146177/native-validation/lib",
       "-cp",
       "/workspace/scratch/6b6041146177/native-validation/candidate-classes:/workspace/scratch/6b6041146177/native-validation/classes",
-      "com.m3.collections.M3IndexPathMasksAliasContract",
+      "jdk.m3.collections.M3IndexPathMasksAliasContract",
       "--native"
     ],
     "exit_code": 0,

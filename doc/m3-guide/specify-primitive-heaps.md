@@ -189,10 +189,10 @@ as heap coverage. Hashes belong to the inspection revision above.
 
 | Source | Git blob | Inspected scope |
 | --- | --- | --- |
-| [`M3IntPriorityQueue.java`][int-heap] | `3ee7233f27105d326832e212b01b8da17142569e` | All methods, fields, iterator body, capacity and sift helpers |
-| [`M3LongPriorityQueue.java`][long-heap] | `2fb403549f2baf0afe5b04743647c26ebd4cce80` | All methods, fields, iterator body, capacity and sift helpers |
-| [`M3IntLanesTest.java`][int-test] | `b617f579eecc6f48078076c642be33438eea9481` | `priorityQueueMatchesJdkHeadContentsAndRemoval`: finite 20,000-step `PriorityQueue<Integer>` comparison, generated zero/extrema, periodic sorted contents, drain/empty exceptions, negative capacity, initial capacity zero, alias add and invalidation, stream sum; `intLanesRetainOnlyPrimitiveFields`: includes int heap |
-| [`M3JdkShapedPrimitiveCollectionsTest.java`][long-test] | `9a6710e2985676613778895dd42c8bb9d08e8534` | `priorityQueueMatchesJdkHeadContentsAndRemoval`: finite 20,000-step `PriorityQueue<Long>` comparison of offer/head removal/value removal/contains/head, size and sorted content every step; heap case of `iteratorsAreFailFastOnStructuralMutation` |
+| [`M3IntPriorityQueue.java`][int-heap] | `7816135483c11e4c898e9ecd79443ac96085fa99` | All methods, fields, iterator body, capacity and sift helpers |
+| [`M3LongPriorityQueue.java`][long-heap] | `7ea8b9cd3ebe1d582026a98649d8598c72789cc3` | All methods, fields, iterator body, capacity and sift helpers |
+| [`M3IntLanesTest.java`][int-test] | `46c575f60d2c55a6914e6a7fccae6e86a219bd2c` | `priorityQueueMatchesJdkHeadContentsAndRemoval`: finite 20,000-step `PriorityQueue<Integer>` comparison, generated zero/extrema, periodic sorted contents, drain/empty exceptions, negative capacity, initial capacity zero, alias add and invalidation, stream sum; `intLanesRetainOnlyPrimitiveFields`: includes int heap |
+| [`M3JdkShapedPrimitiveCollectionsTest.java`][long-test] | `b731a03eb005d374a973295266d838159eaa1fc6` | `priorityQueueMatchesJdkHeadContentsAndRemoval`: finite 20,000-step `PriorityQueue<Long>` comparison of offer/head removal/value removal/contains/head, size and sorted content every step; heap case of `iteratorsAreFailFastOnStructuralMutation` |
 
 All are **NOT_RUN**, not passing receipts. Source review establishes the API
 differences, capacity formulas, iterator checks and absence of comparator/
@@ -207,9 +207,9 @@ collection/iterator and existing long traversal/factory dependencies are not
 counted again here. Other collection families remain in the
 [coverage ledger](coverage.md).
 
-[int-heap]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/com/m3/collections/M3IntPriorityQueue.java
-[long-heap]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/com/m3/collections/M3LongPriorityQueue.java
-[factory]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/com/m3/collections/M3Collections.java
+[int-heap]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/jdk/m3/collections/M3IntPriorityQueue.java
+[long-heap]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/jdk/m3/collections/M3LongPriorityQueue.java
+[factory]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/jdk/m3/collections/M3Collections.java
 [module]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/module-info.java
-[int-test]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/test/java/com/m3/collections/M3IntLanesTest.java
-[long-test]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/test/java/com/m3/collections/M3JdkShapedPrimitiveCollectionsTest.java
+[int-test]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/test/java/jdk/m3/collections/M3IntLanesTest.java
+[long-test]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/test/java/jdk/m3/collections/M3JdkShapedPrimitiveCollectionsTest.java

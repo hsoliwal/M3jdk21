@@ -70,7 +70,7 @@ def execute(crate, dataset, owner, output):
             domain, relative = label.split("/", 1)
             put(fixture_crate if domain == "crate" else fixture_owner, relative, data)
         build = f"target/{dataset}/"
-        put(fixture_crate, build + "surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml",
+        put(fixture_crate, build + "surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml",
             qualified["report"].read_bytes())
         for name in ("SDK_INPUTS.tsv", "SDK_RESULTS.tsv"):
             put(fixture_crate, build + "candidate/" + name, (qualified["candidate"] / name).read_bytes())
@@ -171,7 +171,7 @@ def execute(crate, dataset, owner, output):
                 assert (bad_target / relative).read_bytes() == data
 
             bad_crate, bad_owner, bad_target = fixture(root / "failed-tests")
-            path = bad_crate / "target" / dataset / "surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+            path = bad_crate / "target" / dataset / "surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml"
             path.write_bytes(path.read_bytes().replace(b'failures="0"', b'failures="1"', 1))
             initial = tree_state(bad_target)
             invoke("failed-sdk-test-refusal", bad_crate, bad_owner, bad_target,

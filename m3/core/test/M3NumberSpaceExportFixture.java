@@ -6,7 +6,7 @@ import java.io.BufferedWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import com.m3.text.M3NumberSpace;
+import jdk.m3.text.M3NumberSpace;
 
 /**
  * Emits the M3NumberSpace owner values used by the offline lexicon-export proof.

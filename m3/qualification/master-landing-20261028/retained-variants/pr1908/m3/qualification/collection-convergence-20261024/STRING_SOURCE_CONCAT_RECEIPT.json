@@ -62,7 +62,7 @@
       "git_blob": "a083b6c12697273fd62c1b3d6c654c0d170c580c"
     },
     {
-      "path": "m3/synexia-import/current-full-borrow/check_string_phase.py",
+      "path": "m3/m3-import/current-full-borrow/check_string_phase.py",
       "sha256": "399ae1c9ea8e05008451596bff4ec224ebdcc1c20059648e8a26a72f0c5cd544",
       "git_blob": "32bb586cb28144accbfb7f1d380a2722b61e7a6d"
     },
@@ -72,7 +72,7 @@
       "git_blob": "4df92868dfe4ebab629a64ff4b293ed6d4aa62ee"
     },
     {
-      "path": "m3/synexia-import/current-full-borrow/test_string_phase_successors.py",
+      "path": "m3/m3-import/current-full-borrow/test_string_phase_successors.py",
       "sha256": "28bb588e1ff69388aa5a11c7f1bb11498e1b5df5a1c27fd326af2cbea068ad2f",
       "git_blob": "d03d3cff2a9c4f3de708f1534e66461d229754e7"
     },

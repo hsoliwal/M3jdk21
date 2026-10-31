@@ -26,10 +26,10 @@ jobs:
         run: |
           set -euo pipefail
           root=m3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson
-          test "$(git hash-object "$root/M3AST.java")" = "8edfc771a04743a507d5f799bd0b41e91180287e"
-          test "$(git hash-object "$root/M3ASTAtom.java")" = "59727364b4d30c55326215b326f5d2763c6cd14f"
-          test "$(git hash-object "$root/M3ASTBuilder.java")" = "0a26b63a780bf303f807e60379864ec905e51f0e"
-          test "$(git hash-object "$root/M3ASTPool.java")" = "66d9bd48d99423dc648dbe72ded5ace2c147c08e"
+          test "$(git hash-object "$root/M3AST.java")" = "75ea01311add41395741adb0d85c2018e1a776f6"
+          test "$(git hash-object "$root/M3ASTAtom.java")" = "bde7dfdb2e05f2df7118a330c2b2a89b3d77f098"
+          test "$(git hash-object "$root/M3ASTBuilder.java")" = "48bf00ce264c542b8f0f2d720af4ae56c5d6360c"
+          test "$(git hash-object "$root/M3ASTPool.java")" = "7d30234d4a87523c4ed72a7c341f222c17e23bf7"
           test "$(git hash-object "$root/M3JsonLimits.java")" = "c08f91664245759463c654f244cdf2bfaf19fbb3"
       - name: Strict Java21 compilation and actual core contracts
         shell: bash

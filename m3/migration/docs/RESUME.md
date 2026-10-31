@@ -65,9 +65,9 @@ mvn -f m3/migration/pom.xml verify
 Exact source-bound prefix replay requires an authorized source checkout at the pinned donor revision and the guarded target files. Paths below are placeholders for those real checkouts, not network fetches:
 
 ```sh
-java m3/migration/src/com/m3/migration/ExactFileRecipe.java check SOURCE_ROOT TARGET_ROOT m3/migration/recipes/prefix-z-v1.tsv
-java m3/migration/src/com/m3/migration/ExactFileRecipe.java apply SOURCE_ROOT TARGET_ROOT m3/migration/recipes/prefix-z-v1.tsv
-java m3/migration/src/com/m3/migration/ExactFileRecipe.java rollback TARGET_ROOT m3/migration/recipes/prefix-z-v1.tsv
+java m3/migration/src/jdk/m3/migration/ExactFileRecipe.java check SOURCE_ROOT TARGET_ROOT m3/migration/recipes/prefix-z-v1.tsv
+java m3/migration/src/jdk/m3/migration/ExactFileRecipe.java apply SOURCE_ROOT TARGET_ROOT m3/migration/recipes/prefix-z-v1.tsv
+java m3/migration/src/jdk/m3/migration/ExactFileRecipe.java rollback TARGET_ROOT m3/migration/recipes/prefix-z-v1.tsv
 ```
 
 Rollback deletes only equal additions owned by that plan receipt. A preexisting equal file is not acquired for deletion. Missing or modified receipt-owned files cause refusal. Review stale locks after a crash; do not automatically delete another invocation's lock.
@@ -75,7 +75,7 @@ Rollback deletes only equal additions owned by that plan receipt. A preexisting 
 The naming extension is replayed from the retained public baseline and the canonical current manifest, without a second migration registry:
 
 ```sh
-python m3/migration/migration.py extend --base m3/migration/recipes/baselines/name-mapping.v1.json --extension m3/docs/name-mapping.json --expected-sha256 a28301f443314e6ece0e918d7d3af655fe127578380f15c9860a0db2702a5601 --output NEW-REVIEW-OUTPUT.json
+python m3/migration/migration.py extend --base m3/migration/recipes/baselines/name-mapping.v1.json --extension m3/docs/name-mapping.json --expected-sha256 991bfb86a4b57e4874aab7dfac4790a9b4d2c1c04453313a0527e5a8a21e73b1 --output NEW-REVIEW-OUTPUT.json
 ```
 
 This creates a review output and refuses modified existing output. Install only a reviewed diff; preserve target adaptations. The foundation recipe manifest's naming-file hash must stay synchronized.

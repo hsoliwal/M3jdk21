@@ -13,11 +13,11 @@ MANIFEST = pathlib.Path(__file__).resolve().parent / "PRODUCT_SOURCE_MANIFEST.ts
 HASH = re.compile(r"[0-9a-f]{64}\Z")
 PREFIX = "m3/collections/"
 EXPECTED = (
-    "src/main/java/com/m3/collections/M3TreeSet.java",
-    "src/main/java/com/m3/collections/M3FilteredViews.java",
-    "src/main/java/com/m3/collections/M3MutableFilteredViews.java",
-    "src/test/java/com/m3/collections/M3FilteredSortedSetSlotSelfTest.java",
-    "src/test/java/com/m3/collections/M3FilteredSortedSetSlotTest.java",
+    "src/main/java/jdk/m3/collections/M3TreeSet.java",
+    "src/main/java/jdk/m3/collections/M3FilteredViews.java",
+    "src/main/java/jdk/m3/collections/M3MutableFilteredViews.java",
+    "src/test/java/jdk/m3/collections/M3FilteredSortedSetSlotSelfTest.java",
+    "src/test/java/jdk/m3/collections/M3FilteredSortedSetSlotTest.java",
 )
 
 

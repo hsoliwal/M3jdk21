@@ -8,8 +8,8 @@ from pathlib import Path
 CRATE = "m3jdk21-five-library-index-views-20261017"
 ROOT = Path(__file__).resolve().parents[5]
 HERE = Path(__file__).resolve().parent
-RES = HERE / "src/main/resources/com/synexia/rewrite/hash-pinned-java" / CRATE
-MIRROR = HERE / "canonical/src/main/resources/com/synexia/rewrite/hash-pinned-java" / CRATE
+RES = HERE / "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java" / CRATE
+MIRROR = HERE / "canonical/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java" / CRATE
 
 
 def digest(path):

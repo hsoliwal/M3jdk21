@@ -7,7 +7,7 @@ on:
       - 'm3/compatibility/M3OrderedConvergenceReceiver.java'
       - 'm3/compatibility/M3OrderedConvergenceReceiverTest.java'
       - 'm3/docs/ordered-convergence-receiving-20261017.md'
-      - 'm3/docs/SYNEXIA_CONVERGENCE_MODEL.md'
+      - 'm3/docs/M3_CONVERGENCE_MODEL.md'
       - '.github/workflows/m3-ordered-convergence-receiver-20261017.yml'
   workflow_dispatch:
 
@@ -53,7 +53,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 -B m3/compatibility/check_synexia_public_target.py
+          python3 -B m3/compatibility/check_m3_public_target.py
 
       - name: 3 - Compile receiver Java 21 with warnings as errors
         shell: bash

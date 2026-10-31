@@ -1,7 +1,7 @@
 {
   "request": {
     "expected_entries": 1028,
-    "path": "synexia-openrewrite-recipes/third_party/jcc-runtime-20261006/mirror",
+    "path": "m3-openrewrite-recipes/third_party/jcc-runtime-20261006/mirror",
     "recursive": true,
     "sha": "9374829a55cad15d6805ab4d8f784407b98918b9",
     "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/9374829a55cad15d6805ab4d8f784407b98918b9?recursive=1"

@@ -39,7 +39,7 @@
               <goal>java</goal>
             </goals>
             <configuration>
-              <mainClass>com.m3.runtime.capability.CapabilityRuntimeChecks</mainClass>
+              <mainClass>jdk.m3.runtime.capability.CapabilityRuntimeChecks</mainClass>
               <classpathScope>test</classpathScope>
             </configuration>
           </execution>
@@ -50,7 +50,7 @@
               <goal>java</goal>
             </goals>
             <configuration>
-              <mainClass>com.m3.runtime.capability.ByteSlidingWindowsChecks</mainClass>
+              <mainClass>jdk.m3.runtime.capability.ByteSlidingWindowsChecks</mainClass>
               <classpathScope>test</classpathScope>
             </configuration>
           </execution>
@@ -61,7 +61,7 @@
               <goal>java</goal>
             </goals>
             <configuration>
-              <mainClass>com.m3.runtime.capability.ByteHistogram256Checks</mainClass>
+              <mainClass>jdk.m3.runtime.capability.ByteHistogram256Checks</mainClass>
               <classpathScope>test</classpathScope>
             </configuration>
           </execution>

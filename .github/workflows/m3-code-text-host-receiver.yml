@@ -11,8 +11,8 @@ on:
       - 'src/java.base/share/classes/java/lang/M3CodeTextSignalBatch.java'
       - 'm3/core/test/java/lang/M3CodeTextFactsReceiverTest.java'
       - 'm3/core/test/java/lang/M3CodeTextSignalBatchTest.java'
-      - 'm3/lexicon/synexia-code-text-precompute-field-map.tsv'
-      - 'm3/lexicon/synexia-code-text-target-receiver-receipt-10124.tsv'
+      - 'm3/lexicon/m3-code-text-precompute-field-map.tsv'
+      - 'm3/lexicon/m3-code-text-target-receiver-receipt-10124.tsv'
       - '.github/workflows/m3-code-text-host-receiver.yml'
   workflow_dispatch:
 
@@ -49,5 +49,5 @@ jobs:
           set -euo pipefail
           java --patch-module java.base=m3/build/m3-code-text-host             -ea java.lang.M3CodeTextFactsReceiverTest
           java --patch-module java.base=m3/build/m3-code-text-host             -ea java.lang.M3CodeTextSignalBatchTest
-          test "$(wc -l < m3/lexicon/synexia-code-text-precompute-field-map.tsv)" -eq 12
-          grep -F $'M3JDK_CODE_TEXT_PRECOMPUTE_TARGET_RECEIVER_V1'             m3/lexicon/synexia-code-text-target-receiver-receipt-10124.tsv
+          test "$(wc -l < m3/lexicon/m3-code-text-precompute-field-map.tsv)" -eq 12
+          grep -F $'M3JDK_CODE_TEXT_PRECOMPUTE_TARGET_RECEIVER_V1'             m3/lexicon/m3-code-text-target-receiver-receipt-10124.tsv

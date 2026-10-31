@@ -7,10 +7,10 @@ import argparse, hashlib, json, os, re, shutil, subprocess, tempfile
 from pathlib import Path
 TASK=Path(__file__).resolve().parent
 ROOT=TASK.parents[3]
-RES=TASK/'src/main/resources/com/synexia/rewrite/native-index-range-20261017'
-JAVA='m3/collections/src/main/java/com/m3/collections/'
+RES=TASK/'src/main/resources/jdk/internal/m3/rewrite/native-index-range-20261017'
+JAVA='m3/collections/src/main/java/jdk/m3/collections/'
 C='m3/collections/src/main/native/collections/m3_index_mask_compactor.c'
-SELF='m3/collections/src/test/java/com/m3/collections/M3NativeIndexRangeSelfTest.java'
+SELF='m3/collections/src/test/java/jdk/m3/collections/M3NativeIndexRangeSelfTest.java'
 EXAMPLE='m3/collections/examples/IndexedMaskPipelineExample.java'
 rows=[line.split('\t') for line in (RES/'manifest.tsv').read_text().splitlines()]
 logs=[]
@@ -39,7 +39,7 @@ def compile_c(src,out):
 
 def java(classes,lib,mode,sharing=False,heap='64m',expected=0,extra=()):
     return run(['java','-Xmx'+heap,'-Xcheck:jni',*extra,'-Djava.library.path='+str(lib),'-cp',classes,
-                'com.m3.collections.M3NativeIndexRangeSelfTest',mode,*(['sharing'] if sharing else [])],expected)
+                'jdk.m3.collections.M3NativeIndexRangeSelfTest',mode,*(['sharing'] if sharing else [])],expected)
 
 def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
 
@@ -49,18 +49,18 @@ def main():
     try:
         with tempfile.TemporaryDirectory(prefix='m3-native-range-') as d:
             tmp=Path(d); engine=tmp/'engine';engine.mkdir()
-            pkg=TASK/'src/main/java/com/synexia/rewrite'
+            pkg=TASK/'src/main/java/jdk/internal/m3/rewrite'
             run(['javac','--release','21','-Xlint:all','-Werror','-d',engine,
                  pkg/'M3GpuToolJoinManifest.java',pkg/'NativeIndexRangeReplay.java'])
             candidate=tmp/'candidate'
-            run(['java','-cp',engine,'com.synexia.rewrite.NativeIndexRangeReplay',ROOT,candidate])
+            run(['java','-cp',engine,'jdk.internal.m3.rewrite.NativeIndexRangeReplay',ROOT,candidate])
             baseline=tmp/'baseline';shutil.copytree(TASK/'before',baseline)
             base_classes=tmp/'base-classes';base_lib=tmp/'base-lib'
             compile_java(baseline,base_classes,candidate);compile_c(baseline/C,base_lib)
             java(base_classes,base_lib,'legacy')
             java(base_classes,base_lib,'legacy',sharing=True,expected=1)
             allocation_before=run(['java','-Xmx128m','-Xcheck:jni','-Djava.library.path='+str(base_lib),
-                 '-cp',base_classes,'com.m3.collections.RangeAllocationProbe'])
+                 '-cp',base_classes,'jdk.m3.collections.RangeAllocationProbe'])
             current=tmp/'serial';shutil.copytree(baseline,current)
             for step,path in enumerate([C,JAVA+'M3IndexMaskCompactor.java',JAVA+'M3LongIndexProjection.java'],1):
                 shutil.copyfile(candidate/path,current/path)
@@ -77,13 +77,13 @@ def main():
             run(['java','-Xcheck:jni','-Djava.library.path='+str(lib),'-cp',classes,'IndexedMaskPipelineExample','native'])
             # Compare the public class/enum surfaces, not private implementation symbols.
             for name in ['M3IndexMaskCompactor','M3IndexMaskCompactor$Backend','M3LongIndexProjection','M3LongIndexProjection$Order']:
-                before=run(['javap','-public','-classpath',base_classes,'com.m3.collections.'+name])
-                after=run(['javap','-public','-classpath',classes,'com.m3.collections.'+name])
+                before=run(['javap','-public','-classpath',base_classes,'jdk.m3.collections.'+name])
+                after=run(['javap','-public','-classpath',classes,'jdk.m3.collections.'+name])
                 if before!=after: raise AssertionError('public ABI changed: '+name)
             # Actual legacy JNI sentinel: a native request must not become a Java fallback.
             sentinel=tmp/'sentinel.c'
             sentinel.write_text('''#include <jni.h>
-JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3IndexMaskCompactor_selectNative(
+JNIEXPORT jintArray JNICALL Java_jdk_m3_collections_M3IndexMaskCompactor_selectNative(
 JNIEnv* e,jclass c,jintArray r,jbyteArray s,jint m){(void)c;(void)r;(void)s;(void)m;
 jclass x=(*e)->FindClass(e,"java/lang/UnsatisfiedLinkError");
 if(x!=NULL){(*e)->ThrowNew(e,x,"legacy-native-witness");(*e)->DeleteLocalRef(e,x);}return NULL;}\n''')
@@ -98,7 +98,7 @@ if(x!=NULL){(*e)->ThrowNew(e,x,"legacy-native-witness");(*e)->DeleteLocalRef(e,x
                 source=tmp/(name+'.c');source.write_text(text);mlib=tmp/(name+'-lib');compile_c(source,mlib)
                 java(classes,mlib,'range',expected=1)
             allocation_after=run(['java','-Xmx128m','-Xcheck:jni','-Djava.library.path='+str(lib),
-                 '-cp',classes,'com.m3.collections.RangeAllocationProbe'])
+                 '-cp',classes,'jdk.m3.collections.RangeAllocationProbe'])
             def values(log): return [tuple(map(int,m)) for m in re.findall(r'nativeFilterBytes=(\d+) repeatedSortBytes=(\d+)',log)]
             old,new=values(allocation_before),values(allocation_after)
             if len(old)!=3 or len(new)!=3 or any(b>=a for (a,_),(b,_) in zip(old,new)) or any(b>=a for (_,a),(_,b) in zip(old,new)):
@@ -120,7 +120,7 @@ if(x!=NULL){(*e)->ThrowNew(e,x,"legacy-native-witness");(*e)->DeleteLocalRef(e,x
                     if template!='KEEP' and (not (ROOT/path).exists() or sha(ROOT/path)!=after):
                         raise AssertionError('generated output not installed: '+path+'; use --apply after template qualification')
             replay=tmp/'fixed-point'
-            run(['java','-cp',engine,'com.synexia.rewrite.NativeIndexRangeReplay',ROOT,replay])
+            run(['java','-cp',engine,'jdk.internal.m3.rewrite.NativeIndexRangeReplay',ROOT,replay])
             for path,before,after,template in rows:
                 if template!='KEEP' and (candidate/path).read_bytes()!=(replay/path).read_bytes():raise AssertionError('nonrepeatable '+path)
             shutil.copyfile(candidate/'GENERATED_SHA256.tsv',evidence/'GENERATED_SHA256.tsv')

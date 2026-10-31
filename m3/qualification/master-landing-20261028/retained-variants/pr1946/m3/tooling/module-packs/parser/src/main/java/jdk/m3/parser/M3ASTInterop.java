@@ -82,7 +82,7 @@ public final class M3ASTInterop {
     /**
      * The exact node facts of a Tree-sitter concrete syntax tree. A provider
      * delegates these operations to its existing TSNode (or equivalent) API;
-     * M3JDK21 does not import a binding, grammar, native library or second AST.
+     * M3JDK 21 does not import a binding, grammar, native library or second AST.
      * In particular, {@code fieldNameForChild} uses the ALL-child ordinal,
      * not the named-child ordinal. Named nodes and anonymous punctuation both
      * remain visible. Parser-owned tree and node lifetimes must cover the

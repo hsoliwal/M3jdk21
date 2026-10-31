@@ -22,7 +22,7 @@
       <configuration>
        <executable>python3</executable>
        <arguments>
-        <argument>${synexia.checkout}/synexia-openrewrite-recipes/recipes/m3jdk21-regex-precompute-20261014/verify.py</argument>
+        <argument>${m3.checkout}/m3-openrewrite-recipes/recipes/m3jdk21-regex-precompute-20261014/verify.py</argument>
         <argument>--quick</argument>
         <argument>--target</argument>
         <argument>${project.basedir}/../../..</argument>

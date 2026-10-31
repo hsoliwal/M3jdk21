@@ -6,11 +6,11 @@
   "scope": "Four private indexed red-black leaves and existing public TreeSortedMap backing substitution; exact current owner source variations preserved.",
   "implementation": "Parallel dynamic key/value/link arrays; integer free chain; live/color bit masks; weakly cached API Entry projections detach before freed slot reuse. No stored primary entry nodes.",
   "sourcePins": {
-    "eclipse-collections/src/main/java/com/m3/collections/eclipse/impl/map/sorted/mutable/IndexedRedBlackMap.java": "07c7f5a64d5c40a729d786412ab46432a6b30ac9791ec71375d243211a37eb16",
-    "eclipse-collections/src/main/java/com/m3/collections/eclipse/impl/map/sorted/mutable/IndexedRedBlackTree.java": "4a2a723c135bc46590069491a8675d8d470c44d8c83f9087048077e90dcc755a",
-    "eclipse-collections/src/main/java/com/m3/collections/eclipse/impl/map/sorted/mutable/IndexedSortedMap.java": "632204c5cc96775dc5809c30a33e6c9f569b3cf90cc0d5260305c18b868405c2",
-    "eclipse-collections/src/main/java/com/m3/collections/eclipse/impl/map/sorted/mutable/IndexedTreeArena.java": "e12c41963cf7dad3a3bda058397de6863e3393443cbbfb74ee8fe26918d97ac3",
-    "eclipse-collections/src/main/java/com/m3/collections/eclipse/impl/map/sorted/mutable/TreeSortedMap.java": "60a96dcbe95c90295e989daf5053401b7f4dcba940e383c2b13f77e17742bd4c"
+    "eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/map/sorted/mutable/IndexedRedBlackMap.java": "ec8a45354a3018570d66500d01874e23be83cb2eda00efaf9a08130f49771fca",
+    "eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/map/sorted/mutable/IndexedRedBlackTree.java": "d1713ea41c71145263dfcba6f36d5df19c095094ec899426df2c00542b0178cc",
+    "eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/map/sorted/mutable/IndexedSortedMap.java": "6443e3aafad12990ee36cd52eed76f11a764bc48acab513388f83e9dcfa62f66",
+    "eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/map/sorted/mutable/IndexedTreeArena.java": "d9134ea7ce756d9325fd1f2ca866578fc3afad68260bf279f2193dc50050467e",
+    "eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/map/sorted/mutable/TreeSortedMap.java": "63cb843672a828811f176cc4d4cd0c88075e56055b02bae535699d722ca6acf3"
   },
   "executed": {
     "runtime": "JDK21.0.9+7-LTS-338",
@@ -99,8 +99,8 @@
       "inverseFixedpointExact": true,
       "unknownStateRefusals": 5,
       "filesystemPublication": false,
-      "recipeSha256": "3be56902188c143e403b753dae5ab798dbbebfeed1578b8b4897969f666c7929",
-      "proofSha256": "27927b38d515c488612a4d742b4cc29325c6f6c1ff032be6b319c81f98385318",
+      "recipeSha256": "ba9a7eb3e8edda6760ed150cfc0317fea83b2433b94c482f4bb0ddb2d843e314",
+      "proofSha256": "63526c34807d5d62c4d3cc79636d3a949113567bfed79a6efc8ce63076001292",
       "publishedProof": "m3/indexed-rb/PURE_RECIPE_PROOF_R3.json"
     },
     "privateRefinementRecipe": {
@@ -172,7 +172,7 @@
     {
       "path": "m3/indexed-rb/PURE_RECIPE_PROOF_R3.json",
       "bytes": 281,
-      "sha256": "27927b38d515c488612a4d742b4cc29325c6f6c1ff032be6b319c81f98385318"
+      "sha256": "63526c34807d5d62c4d3cc79636d3a949113567bfed79a6efc8ce63076001292"
     },
     {
       "path": "ec-comparator-putall-original-first-20261019/V6_BASELINE_RESULT.json.gz",
@@ -198,7 +198,7 @@
   },
   "targetDisposition": {
     "status": "PENDING_SOURCE_CUSTODY_ONLY",
-    "publicOwner": "Existing com.m3.collections.eclipse.impl.map.sorted.mutable.TreeSortedMap in the user fork",
+    "publicOwner": "Existing jdk.m3.collections.eclipse.impl.map.sorted.mutable.TreeSortedMap in the user fork",
     "jdkRuntimePromotion": false,
     "receivingSequenceAdvanced": false,
     "orderedSequence": "String -> arrays -> collections -> AST/compiler -> remaining families",
@@ -212,16 +212,16 @@
     "ownerExactUnchanged": true,
     "changedPathsSinceQualifiedBase": [
       "checkstyle-suppressions.xml",
-      "eclipse-collections/src/test/java/com/m3/collections/eclipse/impl/M3EclipsePackageRelocationProof.java",
-      "eclipse-collections/src/main/java/com/m3/collections/eclipse/impl/list/fixed/ArrayAdapter.java",
-      "eclipse-collections/src/main/java/com/m3/collections/eclipse/impl/list/mutable/FastList.java",
+      "eclipse-collections/src/test/java/jdk/m3/collections/eclipse/impl/M3EclipsePackageRelocationProof.java",
+      "eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/list/fixed/ArrayAdapter.java",
+      "eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/list/mutable/FastList.java",
       "m3/array-operations-20261019/README.md",
       "m3/array-operations-20261019/source-pins.json",
       "m3/array-operations-20261019/verification-receipt.json",
       "m3/array-operations-20261019/verification/ArrayAdapterConcatBenchmark.java",
       "m3/array-operations-20261019/verification/ArrayAdapterConcatContract.java",
-      "unit-tests/src/test/java/com/m3/collections/eclipse/impl/list/mutable/M3FastListArraySpanProof.java",
-      "unit-tests/src/test/java/com/m3/collections/eclipse/impl/list/mutable/M3FastListArraySpanTest.java",
+      "unit-tests/src/test/java/jdk/m3/collections/eclipse/impl/list/mutable/M3FastListArraySpanProof.java",
+      "unit-tests/src/test/java/jdk/m3/collections/eclipse/impl/list/mutable/M3FastListArraySpanTest.java",
       "unit-tests/src/test/resources/m3/array-spans-20261019/original/FastList.java.txt"
     ],
     "commits": 7
@@ -254,11 +254,11 @@
   },
   "currentRecipeProof": {
     "recipePath": "m3/indexed-rb/EC_INDEXED_RB_RECIPE_V1.json",
-    "recipeSha256": "3be56902188c143e403b753dae5ab798dbbebfeed1578b8b4897969f666c7929",
+    "recipeSha256": "ba9a7eb3e8edda6760ed150cfc0317fea83b2433b94c482f4bb0ddb2d843e314",
     "receipt": {
       "path": "m3/indexed-rb/PURE_RECIPE_PROOF_R3.json",
       "bytes": 281,
-      "sha256": "27927b38d515c488612a4d742b4cc29325c6f6c1ff032be6b319c81f98385318"
+      "sha256": "63526c34807d5d62c4d3cc79636d3a949113567bfed79a6efc8ce63076001292"
     }
   },
   "reviewMetadataCorrection": {

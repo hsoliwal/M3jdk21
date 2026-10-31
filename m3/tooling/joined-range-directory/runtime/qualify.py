@@ -17,8 +17,8 @@ SOURCE = Path(os.environ["M3_SOURCE_ROOT"]).resolve()
 PROOF = Path(os.environ["M3_PROOF_ROOT"]).resolve()
 ROOT = PROOF / "joined-range-runtime"
 SDK = HERE.parent / "sdk"
-TARGET = "m3/core/src/com/m3/text/JoinedM3StringPiece.java"
-RESOURCE = "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020"
+TARGET = "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java"
+RESOURCE = "src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020"
 MODES = {"jit": [], "int": ["-Xint"], "nocompact": ["-XX:-CompactStrings"],
          "c2": ["-Xbatch", "-XX:-TieredCompilation"]}
 MARKERS = [
@@ -112,7 +112,7 @@ def original_build(label, directory, java):
         counts[marker] = matched
         if len(matched) != 4:
             failures.append(label + ":missing-original-four-mode-contract:" + marker)
-    jar = directory / "m3/build/com.m3.text.jar"
+    jar = directory / "m3/build/jdk.m3.text.jar"
     require(jar.is_file() and not jar.is_symlink(), "original build must compile the complete module")
     classes = directory / "m3/build/classes"
     compiled = {}
@@ -187,8 +187,8 @@ def qualify():
     require(before == regular(SDK / RESOURCE / "forward/before" / TARGET).read_bytes()
             and after == regular(SDK / RESOURCE / "forward/out" / TARGET).read_bytes(),
             "fresh authentic inverse/forward recipe outputs required")
-    require(ident(before)["gitBlob"] == "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597"
-            and ident(after)["gitBlob"] == "3edc23c22362b08af00f7332ddc445a0274a6dd4",
+    require(ident(before)["gitBlob"] == "5022e9811ce9391671c794446c7772569cfd369f"
+            and ident(after)["gitBlob"] == "367ea06512321bb511fd9bbb772842ce313e69dc",
             "exact admitted range atom required")
     source_values = {}
     for row in metadata["files"]:
@@ -206,9 +206,9 @@ def qualify():
     java = str(regular(java_home / "bin/java"))
     javac = str(regular(java_home / "bin/javac"))
     environment = os.environ.copy()
-    environment["M3_JDK"] = str(java_home)
+    environment["M3JDK"] = str(java_home)
     # The supervised parent sets all temp/cache paths; no fallback path is introduced.
-    os.environ["M3_JDK"] = environment["M3_JDK"]
+    os.environ["M3JDK"] = environment["M3JDK"]
     cohorts = {}
     candidate = source_values[TARGET] if source_values[TARGET] == after else after
     for label, owner in (("baseline", before), ("candidate", candidate)):
@@ -219,15 +219,15 @@ def qualify():
             destination.parent.mkdir(parents=True, exist_ok=True)
             destination.write_bytes(owner if name == TARGET else current)
         build = original_build(label, directory, java)
-        jar = directory / "m3/build/com.m3.text.jar"
+        jar = directory / "m3/build/jdk.m3.text.jar"
         tests = directory / "range-proof-classes"
         compile_argv = [javac, "--release", "21", "-Xlint:all", "-Werror", "--module-path", str(jar),
-                        "--add-modules", "com.m3.text,jdk.management", "-d", str(tests),
+                        "--add-modules", "jdk.m3.text,jdk.management", "-d", str(tests),
                         str(regular(HERE / "M3JoinedRangeProof.java"))]
         compile_code, compile_log = run(label + "-range-compile", compile_argv, directory)
         require(compile_code == 0, "range proof source must compile with original module")
-        base = [java, "-ea", "-esa", "--module-path", str(jar), "--add-modules", "com.m3.text,jdk.management",
-                "--add-opens", "com.m3.text/com.m3.text=ALL-UNNAMED", "-cp", str(tests), "M3JoinedRangeProof"]
+        base = [java, "-ea", "-esa", "--module-path", str(jar), "--add-modules", "jdk.m3.text,jdk.management",
+                "--add-opens", "jdk.m3.text/jdk.m3.text=ALL-UNNAMED", "-cp", str(tests), "M3JoinedRangeProof"]
         contracts = {}
         for mode, flags in MODES.items():
             argv = [java, *flags, *base[1:], "contract"]
@@ -247,7 +247,7 @@ def qualify():
     candidate_classes = cohorts["candidate"]["build"]["classes"]
     require(set(baseline_classes) == set(candidate_classes), "compiled core class inventory differs")
     changed_classes = sorted(name for name in baseline_classes if baseline_classes[name] != candidate_classes[name])
-    require(changed_classes == ["com/m3/text/JoinedM3StringPiece.class"],
+    require(changed_classes == ["jdk/m3/text/JoinedM3StringPiece.class"],
             "only the admitted joined implementation class may differ")
     samples = []
     if not failures:

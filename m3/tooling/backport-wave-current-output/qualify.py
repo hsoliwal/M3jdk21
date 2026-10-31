@@ -17,13 +17,13 @@ ROOT = Path(os.environ["M3_PROOF_ROOT"]).resolve()
 ARTIFACTS = ROOT / "artifacts"
 PREFIX = "m3/tooling/backport-wave-current-output/"
 WORKFLOW = ".github/workflows/m3-backport-wave-current-output.yml"
-SUITE = "com.synexia.rewrite.M3BackportWaveCurrentOutputRecipeTest"
+SUITE = "jdk.internal.m3.rewrite.M3BackportWaveCurrentOutputRecipeTest"
 METHODS = ["bothPartialStatesRoundTripAndReachFixedPointsInBothOrders",
            "everyOwnerRefusesDriftMissingAndDuplicateWithoutMutation",
            "exactCurrentWorkflowPinsPreserveHistoricalReceipt"]
 ENGINES = {
-    "M3GpuToolJoinRecipe": "1c1b1b568d369f688f6953161636bf36b484bf5a",
-    "M3GpuToolJoinManifest": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+    "M3GpuToolJoinRecipe": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
+    "M3GpuToolJoinManifest": "78d5fb68f13872164973a8918cc7886c5f548bca",
 }
 FORBIDDEN = ("originalPrivateModelQualified", "stringDispatchQualified", "fullNativeTargetQualified",
              "windowsQualified", "fullMatchedJdkQualified", "performanceRetentionQualified",
@@ -67,7 +67,7 @@ def write(name, value):
     destination.write_text(json.dumps(value, indent=2) + "\n", encoding="utf-8")
 
 
-TARGET_WORKFLOW = ".github/workflows/m3-jdk21-backport-wave-admission.yml"
+TARGET_WORKFLOW = ".github/workflows/m3jdk21-backport-wave-admission.yml"
 SOURCE_GIT = {
     "m3/backports/test_compatibility_policy.py": "cd7b5a28ce3ec1f5a4475a145b40a3074b1a5c21",
     "m3/backports/compatibility_policy.py": "89673d65b2ad42fc694d809d5c6f4d0eab7adbd8",
@@ -77,10 +77,10 @@ SOURCE_GIT = {
     "m3/backports/test_backport_execution_waves.py": "7a3b961caa4302a2ebd1675360e29e6b1df9697b",
     "m3/backports/backport_execution_waves.py": "cc2a6ceb90b56d3b05d1307e705586c8d7cf1b40",
     "m3/backports/BACKPORT_EXECUTION_WAVES.md": "428d775ca476b187dceb26a012401b11b975bbbb",
-    "m3/compatibility/synexia-wave-admission-pin-20261014.tsv": "60c11d68f482efadeadbbe6f58bfac9ec9aa0090",
-    ".github/workflows/m3-jdk21-backport-wave-admission.yml": "9ba94e55b4c8f468fb0ff5f3cd7c530caa6fdff2"
+    "m3/compatibility/m3-wave-admission-pin-20261014.tsv": "60c11d68f482efadeadbbe6f58bfac9ec9aa0090",
+    ".github/workflows/m3jdk21-backport-wave-admission.yml": "c79022773165a4046a6078363bcb27ef4beb7d1d"
 }
-AFTER_GIT = {**SOURCE_GIT, TARGET_WORKFLOW: "60ab068a3ebe7bab7c568afc405035f1fd15ffd3"}
+AFTER_GIT = {**SOURCE_GIT, TARGET_WORKFLOW: "0eab21184c1b7d90ded858acdeac5c7cc2e1382c"}
 
 def owner_plan(original, post, actual):
     lanes = (original, post, actual)
@@ -207,7 +207,7 @@ def report():
     module = runpy.run_path(str(regular(SDK / "verify.py")), run_name="m3_wave_sdk_reuse")
     pins, pins_data = module["inputs"]()
     if module["SUITES"] != {SUITE: METHODS} or module["RECEIVER_OUTPUTS"] != {
-            TARGET_WORKFLOW: "b64ac1da918bd1b5fd5dd56adc16aeb9705a854cfd262e0793fe79428ac450d6"}:
+            TARGET_WORKFLOW: "942fe1f46b1b4f7c91418ded4c94b045576ec31b52dfed3ce0ac45ed4608ff25"}:
         raise RuntimeError("exact three-method one-workflow recipe contract required")
     expected_custody = {row["path"]: row["sha256"] for row in record["receiverOriginalOwners"]
                         if row["path"] != TARGET_WORKFLOW}
@@ -245,7 +245,7 @@ def report():
     if tuple(module["COMPILED_PROVIDERS"]) != expected_providers:
         raise RuntimeError("exact four Java21 source providers required")
     for name in expected_providers:
-        path = regular(SDK / ("target/classes/com/synexia/rewrite/" + name + ".class"))
+        path = regular(SDK / ("target/classes/jdk/internal/m3/rewrite/" + name + ".class"))
         raw = path.read_bytes()
         item = sdk["compiledProviders"][name]
         if (len(raw) <= 8 or raw[:4] != b"\xca\xfe\xba\xbe" or int.from_bytes(raw[6:8], "big") != 65

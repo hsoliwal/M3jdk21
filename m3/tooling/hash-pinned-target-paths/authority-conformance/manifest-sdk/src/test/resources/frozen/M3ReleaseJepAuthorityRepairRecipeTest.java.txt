@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: Apache-2.0
-package com.m3.rewrite.backport;
+package jdk.m3.rewrite.backport;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.m3.rewrite.scope.M3ContractMode;
-import com.m3.rewrite.scope.M3EditScope;
-import com.m3.rewrite.scope.M3RecipeScopeRegistry;
+import jdk.m3.rewrite.scope.M3ContractMode;
+import jdk.m3.rewrite.scope.M3EditScope;
+import jdk.m3.rewrite.scope.M3RecipeScopeRegistry;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
@@ -26,7 +26,7 @@ import org.openrewrite.text.PlainText;
 
 final class M3ReleaseJepAuthorityRepairRecipeTest {
     private static final String ROOT =
-            "/com/m3/rewrite/backport/jdk21-hash-pinned-text/"
+            "/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/"
                     + "release-jep-authority-repair-20261006/";
 
     @Test
@@ -45,11 +45,11 @@ final class M3ReleaseJepAuthorityRepairRecipeTest {
 
         var activated =
                 Environment.builder()
-                        .scanRuntimeClasspath("com.m3.rewrite")
+                        .scanRuntimeClasspath("jdk.m3.rewrite")
                         .build()
-                        .activateRecipes("com.m3.jdk21.ReleaseJepAuthorityRepair");
+                        .activateRecipes("jdk.m3.jdk21.ReleaseJepAuthorityRepair");
         assertEquals(
-                "com.m3.jdk21.ReleaseJepAuthorityRepair",
+                "jdk.m3.jdk21.ReleaseJepAuthorityRepair",
                 activated.getRecipeList().getFirst().getName());
     }
 

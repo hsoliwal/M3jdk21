@@ -1,5 +1,5 @@
 /* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
-import com.m3.collections.apache.M3CircularFifoQueue;
+import jdk.m3.collections.apache.M3CircularFifoQueue;
 import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Collection;

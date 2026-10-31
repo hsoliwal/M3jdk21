@@ -2,10 +2,10 @@ m3/collections/qualification/jdk-rx7-view-convergence-20261019/proof/Convergence
 m3/collections/qualification/jdk-rx7-view-convergence-20261019/proof/FilteredOwnerIntegration.java: OK
 m3/collections/qualification/jdk-rx7-view-convergence-20261019/proof/MaskWindowConvergence.java: OK
 m3/collections/qualification/jdk-rx7-view-convergence-20261019/proof/MaskWindowWork.c: OK
-m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java: OK
-m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java: OK
-m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java: OK
-m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java: OK
+m3/collections/src/main/java/jdk/m3/collections/M3FilteredNavigableSet.java: OK
+m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java: OK
+m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java: OK
+m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskWindow.java: OK
 m3/collections/src/main/native/collections/m3_index_mask_window.c: OK
 src/java.base/share/classes/java/util/ReverseOrderSortedSetView.java: OK
 src/java.base/share/classes/java/util/SortedSet.java: OK

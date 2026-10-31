@@ -3,7 +3,7 @@
   "capability": "raw source and class content observations",
   "target_module": "com.m3.file",
   "target_owner": "com.m3.file.M3File",
-  "target_path": "m3/file/src/main/java/com/m3/file/M3File.java",
+  "target_path": "m3/file/src/main/java/jdk/m3/file/M3File.java",
   "existing_donor_lineage": "synexia-mindex/resource/src/main/java/com/synexia/mindex/resource/MIndexResourceAccess.java",
   "intake_mode": "INDEPENDENT_APACHE_MODULE",
   "public_jdk_api_changes": false,

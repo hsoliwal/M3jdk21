@@ -10,168 +10,168 @@
   "phaseAdvanced": false,
   "files": [
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/FOSS_REUSE_DECISION.tsv",
+      "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/FOSS_REUSE_DECISION.tsv",
       "targetPath": "m3/tooling/regex-relations-current-owner/sdk/FOSS_REUSE_DECISION.tsv",
-      "gitBlob": "28e788b70820b352ba3639716c192c0bede329ef",
+      "gitBlob": "8f2df6115956754bbb6ad97da5a83af3b4e1af7a",
       "bytes": 6944,
-      "sha256": "5bf13b6073ae652924b2d14674077dff969f72341e3209b9e64ca777b6124258"
+      "sha256": "b30be2a01f7b24b71a6aa0cd1687cdfed9fad002c9cf0452ba8758b7213bba96"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/THIRD_PARTY_NOTICES.md",
+      "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/THIRD_PARTY_NOTICES.md",
       "targetPath": "m3/tooling/regex-relations-current-owner/sdk/THIRD_PARTY_NOTICES.md",
       "gitBlob": "e8f456a849993c5f4b5d8fec69ebc5bf90aeabe5",
       "bytes": 3660,
       "sha256": "9be905c3a3d3e20a38b0a92bde462be4803cecc83b6d9785fdf527581d25af9a"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
-      "targetPath": "m3/tooling/regex-relations-current-owner/sdk/pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
-      "gitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+      "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
+      "targetPath": "m3/tooling/regex-relations-current-owner/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
+      "gitBlob": "78d5fb68f13872164973a8918cc7886c5f548bca",
       "bytes": 10964,
-      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
+      "sha256": "c874b5d4b5fe8886d53763ab91d050f431c4b7c09d3fe34d58680231ccb1cf7e"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
-      "targetPath": "m3/tooling/regex-relations-current-owner/sdk/pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
-      "gitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+      "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
+      "targetPath": "m3/tooling/regex-relations-current-owner/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
+      "gitBlob": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
       "bytes": 5187,
-      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec"
+      "sha256": "300a520ec9d273922d1edbdf5442e5faf825c47e8e3df7febf4baa2f39945401"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/pinned-engine/com/synexia/rewrite/M3RegexRelationsCurrentOwnerRecipe.java",
-      "targetPath": "m3/tooling/regex-relations-current-owner/sdk/pinned-engine/com/synexia/rewrite/M3RegexRelationsCurrentOwnerRecipe.java",
-      "gitBlob": "c82f01cdf2c4524d86161ce3a2cdab68d5b5ad3b",
+      "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/pinned-engine/jdk/internal/m3/rewrite/M3RegexRelationsCurrentOwnerRecipe.java",
+      "targetPath": "m3/tooling/regex-relations-current-owner/sdk/pinned-engine/jdk/internal/m3/rewrite/M3RegexRelationsCurrentOwnerRecipe.java",
+      "gitBlob": "12558533f03ad408b570b71fa3da3489196cf41a",
       "bytes": 815,
-      "sha256": "31cf12a75e4ba6fa8a1edbbe18d91a1de255a82a40777bd83459e92b99677022"
+      "sha256": "78e0bc6f658791eaa0022ab382815934a0efc9fd73ee0e5d54fca7633a3aba5f"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/pins.json",
+      "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/pins.json",
       "targetPath": "m3/tooling/regex-relations-current-owner/sdk/pins.json",
-      "gitBlob": "be67a8b7815abb2174f3d2457032e886b6cc3def",
+      "gitBlob": "7fe960c07f0f28aef5a55c3b1c32b21981e19050",
       "bytes": 5525,
-      "sha256": "efda4774645ac92b7583ef569d4dc21ada3b94cb3871052e95aed2a1ba27de1e"
+      "sha256": "e9f4ef3f278a5d53f74d448e5731e6196a8bbd2c7b2c53dc96fe198740e2c1c5"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/pom.xml",
+      "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/pom.xml",
       "targetPath": "m3/tooling/regex-relations-current-owner/sdk/pom.xml",
       "gitBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f",
       "bytes": 2678,
       "sha256": "f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/META-INF/rewrite/m3-regex-relations-current-owner-20261017.yml",
+      "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/META-INF/rewrite/m3-regex-relations-current-owner-20261017.yml",
       "targetPath": "m3/tooling/regex-relations-current-owner/sdk/src/main/resources/META-INF/rewrite/m3-regex-relations-current-owner-20261017.yml",
-      "gitBlob": "622cd1e9d39e7d2724855a148f2a6866ec1c6a26",
+      "gitBlob": "97e07b77e9358e03732b2dae2e3dd5f5035af668",
       "bytes": 360,
-      "sha256": "b17b32aff512f61f78123a97f301c56d325c65b7531d2b68e04d6bffbbc3723f"
+      "sha256": "968d0625c70a9c42e1652ddd3ff3ab2be912ddcaa636f764d0994268e8925fe6"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/before/M3DotStarRelations.java",
-      "targetPath": "m3/tooling/regex-relations-current-owner/sdk/src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/before/M3DotStarRelations.java",
-      "gitBlob": "780c7887aaa6b0892a76f4eee1dcb17086a60289",
+      "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/before/M3DotStarRelations.java",
+      "targetPath": "m3/tooling/regex-relations-current-owner/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/before/M3DotStarRelations.java",
+      "gitBlob": "d70a152bdedc380ed8b28861ea94ef4c2adbea90",
       "bytes": 8838,
-      "sha256": "bbc2901ebe5b2de9951b672127bd47e9d13c70b5a39482fa0727703d0a2ff757"
+      "sha256": "9d485a1771a30b4229acb5526ca90de5f2df4a03ee5ad8f5388bb128d2c38194"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/before/M3StateRelation.c",
-      "targetPath": "m3/tooling/regex-relations-current-owner/sdk/src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/before/M3StateRelation.c",
-      "gitBlob": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
+      "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/before/M3StateRelation.c",
+      "targetPath": "m3/tooling/regex-relations-current-owner/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/before/M3StateRelation.c",
+      "gitBlob": "89b3127f0f262de3e00ba28a01079a659013dce2",
       "bytes": 5899,
-      "sha256": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16"
+      "sha256": "0df1989292b23b1f185f222db61ad55d5e38b30d5b758436ca9d62b8de277bbd"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/before/M3StateRelation.java",
-      "targetPath": "m3/tooling/regex-relations-current-owner/sdk/src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/before/M3StateRelation.java",
-      "gitBlob": "ea904c0962fb976f43b45575f06f46ad198e29a2",
+      "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/before/M3StateRelation.java",
+      "targetPath": "m3/tooling/regex-relations-current-owner/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/before/M3StateRelation.java",
+      "gitBlob": "30359b57b7b553e78355d3672119c685051ec1da",
       "bytes": 2138,
-      "sha256": "3270f7889a8c94fa15c90e88491b7fbe483d5ad3053ab36d7e07a63c4c734caa"
+      "sha256": "ae1de4b652b474c594d5fa6e8ec2d43aae720d166e885497217688c9fabae49d"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/before/M3StringHierarchicalRegexTest.java",
-      "targetPath": "m3/tooling/regex-relations-current-owner/sdk/src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/before/M3StringHierarchicalRegexTest.java",
+      "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/before/M3StringHierarchicalRegexTest.java",
+      "targetPath": "m3/tooling/regex-relations-current-owner/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/before/M3StringHierarchicalRegexTest.java",
       "gitBlob": "5d47787597630efc70a4e3b173f2e788dfb6aa3a",
       "bytes": 4610,
       "sha256": "1653c23098529c2fc9f7e66e1bfb5c5c2c97adc67c422b0e67cfbd7b5fb121fd"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/before/M3StringRegexDp.java",
-      "targetPath": "m3/tooling/regex-relations-current-owner/sdk/src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/before/M3StringRegexDp.java",
+      "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/before/M3StringRegexDp.java",
+      "targetPath": "m3/tooling/regex-relations-current-owner/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/before/M3StringRegexDp.java",
       "gitBlob": "0f99affbec7a0d995e0a18ac4cf7f2e815da6e3b",
       "bytes": 12888,
       "sha256": "ca679153b93b33214e48c3d7cce4414cf9622ff380ee9aea3334c9a680f37779"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/manifest.tsv",
-      "targetPath": "m3/tooling/regex-relations-current-owner/sdk/src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/manifest.tsv",
-      "gitBlob": "bee28697e6267d75ee0eb7a9c26abd77fbf9a278",
+      "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/manifest.tsv",
+      "targetPath": "m3/tooling/regex-relations-current-owner/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/manifest.tsv",
+      "gitBlob": "7b6e647d5d969a01cd9261708250e4fd17f0154e",
       "bytes": 1103,
-      "sha256": "e105f9a78f102d42ddee319ef51b1aa78b348af6ae477b136dc60669c1eb396d"
+      "sha256": "c48ef38513d29e2077f592541b8fda394101825f523146ec1eb00189786d1ba6"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/out/M3DotStarRelations.java",
-      "targetPath": "m3/tooling/regex-relations-current-owner/sdk/src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/out/M3DotStarRelations.java",
-      "gitBlob": "780c7887aaa6b0892a76f4eee1dcb17086a60289",
+      "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/out/M3DotStarRelations.java",
+      "targetPath": "m3/tooling/regex-relations-current-owner/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/out/M3DotStarRelations.java",
+      "gitBlob": "d70a152bdedc380ed8b28861ea94ef4c2adbea90",
       "bytes": 8838,
-      "sha256": "bbc2901ebe5b2de9951b672127bd47e9d13c70b5a39482fa0727703d0a2ff757"
+      "sha256": "9d485a1771a30b4229acb5526ca90de5f2df4a03ee5ad8f5388bb128d2c38194"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/out/M3StateRelation.c",
-      "targetPath": "m3/tooling/regex-relations-current-owner/sdk/src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/out/M3StateRelation.c",
-      "gitBlob": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
+      "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/out/M3StateRelation.c",
+      "targetPath": "m3/tooling/regex-relations-current-owner/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/out/M3StateRelation.c",
+      "gitBlob": "89b3127f0f262de3e00ba28a01079a659013dce2",
       "bytes": 5899,
-      "sha256": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16"
+      "sha256": "0df1989292b23b1f185f222db61ad55d5e38b30d5b758436ca9d62b8de277bbd"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/out/M3StateRelation.java",
-      "targetPath": "m3/tooling/regex-relations-current-owner/sdk/src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/out/M3StateRelation.java",
-      "gitBlob": "ea904c0962fb976f43b45575f06f46ad198e29a2",
+      "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/out/M3StateRelation.java",
+      "targetPath": "m3/tooling/regex-relations-current-owner/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/out/M3StateRelation.java",
+      "gitBlob": "30359b57b7b553e78355d3672119c685051ec1da",
       "bytes": 2138,
-      "sha256": "3270f7889a8c94fa15c90e88491b7fbe483d5ad3053ab36d7e07a63c4c734caa"
+      "sha256": "ae1de4b652b474c594d5fa6e8ec2d43aae720d166e885497217688c9fabae49d"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/out/M3StringHierarchicalRegexTest.java",
-      "targetPath": "m3/tooling/regex-relations-current-owner/sdk/src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/out/M3StringHierarchicalRegexTest.java",
+      "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/out/M3StringHierarchicalRegexTest.java",
+      "targetPath": "m3/tooling/regex-relations-current-owner/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/out/M3StringHierarchicalRegexTest.java",
       "gitBlob": "5228849e52b921e24731a42b6e3074ba76ac0aba",
       "bytes": 16540,
       "sha256": "69c725cb7cfe13b0a02bd6419cba2566f9c6b6ac30823d336765cbcebabbe601"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/out/M3StringRegexDp.java",
-      "targetPath": "m3/tooling/regex-relations-current-owner/sdk/src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/out/M3StringRegexDp.java",
+      "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/out/M3StringRegexDp.java",
+      "targetPath": "m3/tooling/regex-relations-current-owner/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/out/M3StringRegexDp.java",
       "gitBlob": "3fe2940825734a508967b559664c74bffd673d58",
       "bytes": 16175,
       "sha256": "471ffbf34b6046b5bc811783397e56bd57f94fadd1883680e39192ea08ce486e"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/test/java/com/synexia/rewrite/M3RegexRelationsCurrentOwnerRecipeTest.java",
-      "targetPath": "m3/tooling/regex-relations-current-owner/sdk/src/test/java/com/synexia/rewrite/M3RegexRelationsCurrentOwnerRecipeTest.java",
-      "gitBlob": "ed6c37da522fa59f8f1a68c5f971a6625806af71",
+      "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/test/java/jdk/internal/m3/rewrite/M3RegexRelationsCurrentOwnerRecipeTest.java",
+      "targetPath": "m3/tooling/regex-relations-current-owner/sdk/src/test/java/jdk/internal/m3/rewrite/M3RegexRelationsCurrentOwnerRecipeTest.java",
+      "gitBlob": "53861074f20a1ad6e1c0ca7cb988443c1085826a",
       "bytes": 37056,
-      "sha256": "d4ce25880247e57766ad2580820507c280417fb2d87ad809b19bf986d0d6daf0"
+      "sha256": "914b5e9c1a420f8eec8265628c147649f394b4b0201d251fe522a83536f95e7b"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/verify.py",
+      "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/verify.py",
       "targetPath": "m3/tooling/regex-relations-current-owner/sdk/verify.py",
-      "gitBlob": "649eeae6c2de75629142d7f1b42d998f1abe3fb7",
+      "gitBlob": "1f35127bf21fbc00c9abf66ba7b93d1772984d8c",
       "bytes": 22823,
-      "sha256": "86096d1f473b15b4210353de65f5aa2f00c44bc6e3021b91562e385724caf43f"
+      "sha256": "49046bb5ecfd80d7eb4568057113f5411cad998628121cec08a1ee30df07625d"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/hosted/qualify.py",
+      "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/hosted/qualify.py",
       "targetPath": "m3/tooling/regex-relations-current-owner/qualify.py",
-      "gitBlob": "8c89a9473890d738247bc8e39800b371b30c5b50",
+      "gitBlob": "19638c98b28af580028a94cfa83840f997562e10",
       "bytes": 12777,
-      "sha256": "b103163bc629a2687214588592a537befe417bfe203c708fd66a4947f7ee0b3a"
+      "sha256": "c70a2297fee91ac14b3a7d5ee9f86d2eee43c14cab7f44df5f225bfbfda86e56"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/hosted/qualification.yml",
+      "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/hosted/qualification.yml",
       "targetPath": ".github/workflows/m3-regex-relations-current-owner.yml",
       "gitBlob": "e114945b7c189f90fcc80eb3a978e4d17ccd6def",
       "bytes": 29264,
       "sha256": "73c34b5a251c149a907df998654d849dda435ba044eb591316971789b9ac0007"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/hosted/README.md",
+      "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/hosted/README.md",
       "targetPath": "m3/tooling/regex-relations-current-owner/README.md",
       "gitBlob": "1e44887e1d6ad3a3694f05b170540265a091014f",
       "bytes": 3055,

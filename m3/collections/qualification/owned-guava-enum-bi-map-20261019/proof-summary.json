@@ -1,9 +1,9 @@
 {
-  "owner": "com.m3.collections.guava.M3EnumBiMap",
+  "owner": "jdk.m3.collections.guava.M3EnumBiMap",
   "provider_contract": "com.google.common.collect.EnumBiMap (Guava 33.4.8-jre)",
   "inventory_row": "DONE #1462",
-  "source_sha256": "877f9b49b0b39fbb3531522cc5bf5d73c5c336a82007328f62ec3d992e082a3f",
-  "scaffold_preimage_sha256": "878813d74e5507767849e87a06239d8eed0bc1217d113ab70de7418323f8aaac",
+  "source_sha256": "e41a81a98854ad6692daf2908d9fa11fc585950ad735dfa61972f3101543c017",
+  "scaffold_preimage_sha256": "694b680979293cfe75a153caf6ee464dfc3352dd24ab6ed8230feaa0f4bc5b59",
   "module_tests": {"tests": 15, "failures": 0, "differential_seeds": 8, "differential_operations": 96000, "differential_checks": 960066},
   "coverage": {"tool": "JaCoCo 0.8.12", "classes": 8, "line": "266/266", "branch": "188/188", "gate": "CLASS LINE and BRANCH COVEREDRATIO >= 0.99"},
   "allocation_probe_bytes": 0,

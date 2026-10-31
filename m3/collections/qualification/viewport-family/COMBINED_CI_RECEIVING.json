@@ -2,7 +2,7 @@
   "schema": "M3_VIEWPORT_FAMILY_COMPOSED_WORKFLOW_RECEIVING_V1",
   "canonical_recipe_repo": "hsoliwal/com.synexia",
   "canonical_recipe_commit": "f6c9111f2699cfc675511800795044b2aa7ea341",
-  "canonical_recipe": "com.synexia.m3.ViewportFamilyComposed20261027",
+  "canonical_recipe": "jdk.internal.m3.ViewportFamilyComposed20261027",
   "existing_engine_blob": "14c383724cd3e9dda80d9311e298cc4ed4cf46c7",
   "integrated_original_source_commit": "9fb3ba01c8a20bf42d6a98c634ef2e8d92c63d6a",
   "sdk_execution": {
@@ -20,7 +20,7 @@
     },
     ".github/workflows/m3-viewport-family-composed.yml": {
       "before": "ABSENT",
-      "after": "46aaae839ed91bc65fc4fa3c2af0554a0d94f8b5"
+      "after": "eed7192be9e163bf842a540edaf2453d4e272d2b"
     }
   },
   "qualifying_source_ledger": "Synexia proofs/viewport-family-integration-20261027/SOURCE_LEDGER.tsv (27 donor rows)",

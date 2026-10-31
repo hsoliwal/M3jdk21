@@ -3,21 +3,21 @@
 set -euo pipefail
 crate=$(cd "$(dirname "$0")" && pwd)
 root=$(cd "${1:?exact dependency checkout required}" && pwd)
-res="$crate/../../src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-view-order-sdk-20261020"
-relative=m3/collections/src/main/java/com/m3/collections
+res="$crate/../../src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-view-order-sdk-20261020"
+relative=m3/collections/src/main/java/jdk/m3/collections
 emitted="$crate/target/generated-receiver/$relative/M3LongIndexProjection.java"
 evidence="$crate/target/evidence"
 mkdir -p "$evidence"
 exec > >(tee "$evidence/verification.log") 2>&1
 [[ $(git -C "$root" rev-parse HEAD) == 987f743658055252bdaf056610a3a903eba0bfee ]]
 git -C "$root" diff --exit-code -- m3/collections/src/main src/java.base/share/native/libjava/m3_jni_util.h
-[[ $(git hash-object "$root/$relative/M3LongIndexProjection.java") == 317136e66200db1d8fc72d47ff9f8cf52b4566b5 ]]
-[[ $(git hash-object "$root/$relative/M3IndexMaskCompactor.java") == b81b069fb4815f0c78b17119390d7b204f6179d1 ]]
-[[ $(git hash-object "$root/m3/collections/src/main/native/collections/m3_index_mask_compactor.c") == 8fb2c3fb8e5642deebcfcd482200854ea131912a ]]
-[[ $(git hash-object "$root/m3/collections/src/main/native/collections/m3_long_address_kernel.c") == 821876dfb56d836a0ae23e4bc16a391fd7f97ef2 ]]
+[[ $(git hash-object "$root/$relative/M3LongIndexProjection.java") == 09c10e2b4874f70ece8c1e4392a574db652945f7 ]]
+[[ $(git hash-object "$root/$relative/M3IndexMaskCompactor.java") == 945375ce32080537da2b6544d59f537ee8271644 ]]
+[[ $(git hash-object "$root/m3/collections/src/main/native/collections/m3_index_mask_compactor.c") == e0d7ceaa6c6584123c34d9c5ceb3a1714e1348f3 ]]
+[[ $(git hash-object "$root/m3/collections/src/main/native/collections/m3_long_address_kernel.c") == 9f68bba46827db2cb53bdb597042829358663f91 ]]
 echo "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e  $emitted" | sha256sum -c -
-echo "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545  $res/M3LongIndexProjection.before.java.txt" | sha256sum -c -
-echo "f3c44e00f608aba01171e7ce781a233949686034cb621254ade6af8ebf3bbc54  $crate/proof/M3ProjectionRefinementProbe.java" | sha256sum -c -
+echo "6be07c18dbbbe9ae259ff85821bb3f4ec666fddd820b0950f4115c4256f45deb  $res/M3LongIndexProjection.before.java.txt" | sha256sum -c -
+echo "8475e188b527840dd43464d4e8a064e431b8e70ef7941f37709ac0620a56dce9  $crate/proof/M3ProjectionRefinementProbe.java" | sha256sum -c -
 work=$(mktemp -d)
 trap 'rm -rf "$work"' EXIT
 jdk=$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")
@@ -37,12 +37,12 @@ for variant in before generated; do
     "$root/m3/collections/src/main/native/collections/$source.c" -o "$work/native/lib$library.so"
   done
  fi
- java -ea -Xmx96m -Djava.library.path="$work/absent" -cp "$dir/classes" com.m3.collections.M3ProjectionRefinementProbe java | tee "$evidence/$variant-java.log"
- java -ea -Xmx96m -Xcheck:jni -Djava.library.path="$work/native" -cp "$dir/classes" com.m3.collections.M3ProjectionRefinementProbe native | tee "$evidence/$variant-native.log"
- java -ea -Djava.library.path="$work/absent" -cp "$dir/classes" com.m3.collections.M3ProjectionRefinementProbe absent | tee "$evidence/$variant-absent.log"
- javap -p -s -classpath "$dir/classes" com.m3.collections.M3LongIndexProjection 'com.m3.collections.M3LongIndexProjection$Order' > "$evidence/$variant-api.txt"
+ java -ea -Xmx96m -Djava.library.path="$work/absent" -cp "$dir/classes" jdk.m3.collections.M3ProjectionRefinementProbe java | tee "$evidence/$variant-java.log"
+ java -ea -Xmx96m -Xcheck:jni -Djava.library.path="$work/native" -cp "$dir/classes" jdk.m3.collections.M3ProjectionRefinementProbe native | tee "$evidence/$variant-native.log"
+ java -ea -Djava.library.path="$work/absent" -cp "$dir/classes" jdk.m3.collections.M3ProjectionRefinementProbe absent | tee "$evidence/$variant-absent.log"
+ javap -p -s -classpath "$dir/classes" jdk.m3.collections.M3LongIndexProjection 'jdk.m3.collections.M3LongIndexProjection$Order' > "$evidence/$variant-api.txt"
  for repeat in 1 2 3; do
-  java -ea -Xmx256m -cp "$dir/classes" com.m3.collections.M3ProjectionRefinementProbe measure > "$evidence/$variant-measure-$repeat.json"
+  java -ea -Xmx256m -cp "$dir/classes" jdk.m3.collections.M3ProjectionRefinementProbe measure > "$evidence/$variant-measure-$repeat.json"
  done
 done
 for mode in java native absent; do diff -u "$evidence/before-$mode.log" "$evidence/generated-$mode.log"; done

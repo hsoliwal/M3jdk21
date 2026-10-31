@@ -16,7 +16,7 @@ import re
 DATASET = 'm3-prefix-cursor-20261020'
 CRATE = 'm3-ast-build-reverse-20261017-' + DATASET
 PREFIX = Path('m3/tooling/shared-frontend/recipe-custody/datasets') / DATASET
-RESOURCE = PREFIX / 'resources/com/synexia/rewrite/hash-pinned-java'
+RESOURCE = PREFIX / 'resources/jdk/internal/m3/rewrite/hash-pinned-java'
 DESCRIPTOR = PREFIX / 'resources/META-INF/rewrite' / (CRATE + '.yml')
 PASS_PATHS = (
     'src/java.base/share/classes/java/lang/M3String.java',
@@ -71,7 +71,7 @@ def verify(root: Path) -> dict[str, object]:
     actual_stages = re.findall(r'^\s+crateName:\s+(\S+)\s*$', descriptor, re.M)
     if actual_stages != expected_stages or descriptor.count('M3HashPinnedJavaSnapshotRecipe:') != 3:
         raise ValueError('OpenRewrite ordered stage composition drift')
-    if not descriptor.count('name: com.synexia.m3jdk.AstBuildReverse20261017') == 1:
+    if not descriptor.count('name: jdk.internal.m3.m3jdk.AstBuildReverse20261017') == 1:
         raise ValueError('canonical recipe identity drift')
     if len(manifest) != 3 or [row[0] for row in manifest] != list(PASS_PATHS):
         raise ValueError('aggregate target identity/order drift')

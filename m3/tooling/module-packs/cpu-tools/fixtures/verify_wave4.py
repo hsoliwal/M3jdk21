@@ -34,7 +34,7 @@ def main():
     output = args.out.absolute()
     if (output.exists() or output.is_relative_to(owner) or not output.parent.is_dir()):
         raise ValueError('new external receipt directory required')
-    package = owner / 'src/com.m3.tools.cpu/com/m3/tools/cpu'
+    package = owner / 'src/jdk.m3.tools.cpu/jdk/m3/tools/cpu'
     files = [package / (name + '.java') for name in CLASSES]
     files += [owner / 'fixtures' / (name + '.java') for name in TESTS]
     for file in files:

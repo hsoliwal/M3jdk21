@@ -134,7 +134,7 @@ row of this table, so the table is a fixture, not a description.
 | Recipe fixed point | `python -I m3/tooling/jdk-naming/jdk_naming.py plan --tree HEAD` | `moves=0 rewrites=0 refusals=0` |
 | Recipe tests | `python -I m3/tooling/jdk-naming/test_jdk_naming.py`, `test_reseal.py` | all pass |
 | JUnit conformance | `mvn -B -ntp -f m3/tooling/jdk-naming/conformance/pom.xml test` | `JdkNamingConformanceTest` finds no violation and agrees with the recipe on the shared fixtures |
-| Workflow | `.github/workflows/m3-jdk-naming.yml` | the three gates above, on every pull request |
+| Workflow | `.github/workflows/m3jdk-naming.yml` | the three gates above, on every pull request |
 | Compile-time scheme | javac plugin `M3JdkStandard scheme=m3` (#2188) | package and name scheme of every compiled M3 source |
 
 ## 7. Changing a rule

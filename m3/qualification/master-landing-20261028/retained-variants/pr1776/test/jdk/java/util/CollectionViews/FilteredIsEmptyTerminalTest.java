@@ -4,7 +4,7 @@
  */
 /*
  * @test
- * @summary M3JDK21 filtered isEmpty retains iterator/predicate tape, short circuit and backed mutation contract
+ * @summary M3JDK 21 filtered isEmpty retains iterator/predicate tape, short circuit and backed mutation contract
  * @run main FilteredIsEmptyTerminalTest
  */
 import java.util.AbstractCollection;

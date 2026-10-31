@@ -13,37 +13,37 @@ import tempfile
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parent
-RESOURCE = "src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020"
-SUITE = "com.synexia.rewrite.M3RegexAsciiLiveOwnerCustodyRecipeTest"
+RESOURCE = "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020"
+SUITE = "jdk.internal.m3.rewrite.M3RegexAsciiLiveOwnerCustodyRecipeTest"
 METHODS = ["allEightPartialStatesBothOrdersReachExactFixedPoint","allEightInverseStatesBothOrdersRecoverExactBefore","eachOwnedInputRefusesDriftMissingAndDuplicateOwnership"]
 SUITES = {SUITE: METHODS}
 CHANGE_PATHS = ["m3/tooling/regex-ascii-lexical-receiver/qualify.py","m3/tooling/regex-ascii-lexical-receiver/README.md",".github/workflows/m3-regex-ascii-lexical-receiver.yml"]
 KEEP_PATHS = ["m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json","m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py"]
 TARGET_PATHS = CHANGE_PATHS + KEEP_PATHS
 OWNER_BEFORE_GIT = {
-    "m3/tooling/regex-ascii-lexical-receiver/qualify.py": "ca061246d9e540e953badd0d7b65a17ed0755565",
+    "m3/tooling/regex-ascii-lexical-receiver/qualify.py": "eb47ae9f9343948b0d93e3a01682ff980835587b",
     "m3/tooling/regex-ascii-lexical-receiver/README.md": "28f4187fd8470dc0d036cb77ec24d471eebb3941",
-    ".github/workflows/m3-regex-ascii-lexical-receiver.yml": "7c7ad39526452b51f38b8e7c53ba9eab24b16688",
-    "m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json": "7c719489e46779476b77797b03fc6668f6d72324",
-    "m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py": "b0d0c63653975ee92460dffb30e953bda3c8657b"
+    ".github/workflows/m3-regex-ascii-lexical-receiver.yml": "43282c4c40dfd5f195fa2b6380d69ff4a7ce2d3c",
+    "m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json": "ce9727c7585c8f90f62a23524bf8e8245ea59858",
+    "m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py": "3b388c656fc0af06173735c8d9dc16f641b51de6"
 }
 OWNER_AFTER_GIT = {
-    "m3/tooling/regex-ascii-lexical-receiver/qualify.py": "ec4315ca1f5a90af3f7269d0a923647b6f2bcb94",
+    "m3/tooling/regex-ascii-lexical-receiver/qualify.py": "5b733379de482250fb0ef23f62db4dbc62aab455",
     "m3/tooling/regex-ascii-lexical-receiver/README.md": "d73a374eff026de3557f6163a4094d1c69222355",
     ".github/workflows/m3-regex-ascii-lexical-receiver.yml": "543bed1285bb8903db5fb67ac89f6b6cf4183d93",
-    "m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json": "7c719489e46779476b77797b03fc6668f6d72324",
-    "m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py": "b0d0c63653975ee92460dffb30e953bda3c8657b"
+    "m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json": "ce9727c7585c8f90f62a23524bf8e8245ea59858",
+    "m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py": "3b388c656fc0af06173735c8d9dc16f641b51de6"
 }
 DIRECTIONS = ("forward", "inverse")
 RECEIVER_OUTPUTS: dict[str, str] = {}
 RECEIVER_CUSTODY: dict[str, str] = {}
 DESCRIPTOR = "src/main/resources/META-INF/rewrite/regex-ascii-live-owner-custody-20261020.yml"
-TEST = "src/test/java/com/synexia/rewrite/M3RegexAsciiLiveOwnerCustodyRecipeTest.java"
+TEST = "src/test/java/jdk/internal/m3/rewrite/M3RegexAsciiLiveOwnerCustodyRecipeTest.java"
 REQUIRED_PATHS = sorted([
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
-    "pinned-engine/com/synexia/rewrite/M3RegexAsciiLiveOwnerCustodyRecipe.java",
-    "pinned-engine/com/synexia/rewrite/M3RegexAsciiLiveOwnerCustodyInverseRecipe.java",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
+    "pinned-engine/jdk/internal/m3/rewrite/M3RegexAsciiLiveOwnerCustodyRecipe.java",
+    "pinned-engine/jdk/internal/m3/rewrite/M3RegexAsciiLiveOwnerCustodyInverseRecipe.java",
     "pom.xml", DESCRIPTOR, TEST, "verify.py",
     "FOSS_REUSE_DECISION.tsv", "THIRD_PARTY_NOTICES.md", "README.md",
     *[RESOURCE + "/" + direction + "/manifest.tsv" for direction in DIRECTIONS],
@@ -51,12 +51,12 @@ REQUIRED_PATHS = sorted([
       for direction in DIRECTIONS for stage in ("before", "out") for name in TARGET_PATHS],
 ])
 ORIGINAL_GIT = {
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java": "1c1b1b568d369f688f6953161636bf36b484bf5a",
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java": "78d5fb68f13872164973a8918cc7886c5f548bca",
     "pom.xml": "d79867bcc09ad6329e12418e15907e54b8ab025f",
 }
-PROVIDERS = {"openrewriteAdapter": ORIGINAL_GIT["pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java"],
-             "manifestKernel": ORIGINAL_GIT["pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java"]}
+PROVIDERS = {"openrewriteAdapter": ORIGINAL_GIT["pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java"],
+             "manifestKernel": ORIGINAL_GIT["pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java"]}
 COMPILED_PROVIDERS = ("M3GpuToolJoinRecipe", "M3GpuToolJoinManifest",
                       "M3RegexAsciiLiveOwnerCustodyRecipe", "M3RegexAsciiLiveOwnerCustodyInverseRecipe")
 FALSE_GATES = ("targetJavaCompiled", "originalPrivateOwnerModuleQualified", "originalPrivateModelQualified",
@@ -220,7 +220,7 @@ def validate_marker(xml: bytes, ident: str) -> None:
 def self_test_reports() -> None:
     """Prove exact provider-derived names without stripping parameter signatures."""
     # Independent literal oracle matches the sealed Java methods and pinned provider.
-    expected_suites = {"com.synexia.rewrite.M3RegexAsciiLiveOwnerCustodyRecipeTest":["allEightPartialStatesBothOrdersReachExactFixedPoint","allEightInverseStatesBothOrdersRecoverExactBefore","eachOwnedInputRefusesDriftMissingAndDuplicateOwnership"]}
+    expected_suites = {"jdk.internal.m3.rewrite.M3RegexAsciiLiveOwnerCustodyRecipeTest":["allEightPartialStatesBothOrdersReachExactFixedPoint","allEightInverseStatesBothOrdersRecoverExactBefore","eachOwnedInputRefusesDriftMissingAndDuplicateOwnership"]}
     if SUITES != expected_suites:
         raise AssertionError("sealed SDK report inventory drift")
     refused = 0
@@ -496,7 +496,7 @@ def reports(pins: dict, pins_data: bytes) -> None:
         require(digest(raw) == expected_sha and raw == counterpart, "actual recipe output drift: " + name)
     compiled = {}
     for name in COMPILED_PROVIDERS:
-        relative = "target/classes/com/synexia/rewrite/" + name + ".class"
+        relative = "target/classes/jdk/internal/m3/rewrite/" + name + ".class"
         raw = regular(ROOT / relative).read_bytes()
         require(len(raw) > 8 and raw[:4] == bytes.fromhex("cafebabe")
                 and int.from_bytes(raw[6:8], "big") == 65, "actual Java21 SDK provider class required")

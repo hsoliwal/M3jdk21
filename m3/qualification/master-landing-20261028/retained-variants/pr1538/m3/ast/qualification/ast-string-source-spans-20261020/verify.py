@@ -8,7 +8,7 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[4]
 AST = ROOT / "m3/ast"
-CRATE = ROOT / "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-source-spans-20261020"
+CRATE = ROOT / "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-source-spans-20261020"
 
 def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -41,12 +41,12 @@ if "M3HashPinnedJavaSnapshotRecipe" not in recipe.read_text():
     raise SystemExit("FAIL recipe registration absent")
 with tempfile.TemporaryDirectory(prefix="m3-ast-source-spans-") as temp:
     out = Path(temp)
-    production = sorted(map(str, (AST / "src/main/java/com/m3/ast").glob("M3*.java")))
-    test = AST / "src/test/java/com/m3/ast/M3AstSourceSpansSelfTest.java"
+    production = sorted(map(str, (AST / "src/main/java/jdk/m3/ast").glob("M3*.java")))
+    test = AST / "src/test/java/jdk/m3/ast/M3AstSourceSpansSelfTest.java"
     run(["javac", "--release", "21", "-proc:none", "-Xlint:all", "-Werror",
          "-d", str(out), *production, str(test)])
-    result = run(["java", "-Xmx256m", "-cp", str(out), "com.m3.ast.M3AstSourceSpansSelfTest"])
-    again = run(["java", "-Xmx256m", "-cp", str(out), "com.m3.ast.M3AstSourceSpansSelfTest"])
+    result = run(["java", "-Xmx256m", "-cp", str(out), "jdk.m3.ast.M3AstSourceSpansSelfTest"])
+    again = run(["java", "-Xmx256m", "-cp", str(out), "jdk.m3.ast.M3AstSourceSpansSelfTest"])
     if result != again or not result.startswith("M3_AST_STRING_SPANS_PASS checks="):
         raise SystemExit("FAIL source span nondeterminism: " + result + " / " + again)
     print(result)

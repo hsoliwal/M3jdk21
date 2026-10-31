@@ -25,10 +25,10 @@ import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.EnumHashBiMap;
-import com.m3.collections.guava.M3EnumHashBiMap;
+import jdk.m3.collections.guava.M3EnumHashBiMap;
 
 /**
- * Runnable example for com.m3.collections.guava.M3EnumHashBiMap: the same provider-API calls on com.google.common.collect.EnumHashBiMap and on the owned class,
+ * Runnable example for jdk.m3.collections.guava.M3EnumHashBiMap: the same provider-API calls on com.google.common.collect.EnumHashBiMap and on the owned class,
  * then a local allocation and footprint comparison. Output goes through java.util.logging (a ConsoleHandler).
  *
  * <p>Run from the module directory after {@code mvn package} (or with the module's classes directory):

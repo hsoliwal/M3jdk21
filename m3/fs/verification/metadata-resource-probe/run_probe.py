@@ -77,9 +77,9 @@ def parse_samples(log):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--jdk", type=Path, required=True)
-    parser.add_argument("--donor", type=Path, required=True, help="exact pinned synexia-indexstring checkout")
+    parser.add_argument("--donor", type=Path, required=True, help="exact pinned m3-indexstring checkout")
     parser.add_argument("--receiver", type=Path, action="append", required=True,
-                        help="receiver com/m3/fs source directory; repeat for split staging")
+                        help="receiver jdk/m3/fs source directory; repeat for split staging")
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--rows", type=int, default=50_000)
     args = parser.parse_args()
@@ -89,7 +89,7 @@ def main():
     here = Path(__file__).resolve().parent
     harness = here / "MetadataResourceProbe.java"
     java, javac = args.jdk / "bin/java", args.jdk / "bin/javac"
-    donor_sources = [args.donor / "src/main/java/com/synexia/indexstring/fs" / name
+    donor_sources = [args.donor / "src/main/java/jdk/internal/m3/indexstring/fs" / name
                      for name in ("M3ContentId.java", "M3GenerationRoot.java")]
     receiver_sources = []
     for name in ("M3ContentId.java", "M3GenerationRoot.java", "M3IdTable.java", "M3Columns.java"):
@@ -99,7 +99,7 @@ def main():
         receiver_sources.append(candidates[0])
     # These are authoritative blobs of the donor tree, not expected hashes calculated from this run.
     pinned_blobs = {
-        "M3ContentId.java": "b8dffdfaf6809e130b7c95ae38c79cb2beb937c6",
+        "M3ContentId.java": "275ed0c9b6aecbd002477c5817a11f7e7b60d3d8",
         "M3GenerationRoot.java": "394ef480d165d9c48b5e4f6d9ca6df467147e6c4",
     }
     for path in donor_sources:
@@ -132,8 +132,8 @@ def main():
             "No native filesystem operations, JDBC, Eclipse workload or API enumeration is measured.",
         ], "modes": {},
     }
-    for mode, package, sources in (("donor", "com.synexia.indexstring.fs", donor_sources),
-                                    ("receiver", "com.m3.fs", receiver_sources)):
+    for mode, package, sources in (("donor", "jdk.internal.m3.indexstring.fs", donor_sources),
+                                    ("receiver", "jdk.m3.fs", receiver_sources)):
         classes = work / mode
         classes.mkdir(exist_ok=True)
         compile_command = [javac, "-proc:none", "-Xlint:all", "-Werror", "-d", classes, harness, *sources]

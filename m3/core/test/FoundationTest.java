@@ -1,7 +1,7 @@
 /* Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
  * SPDX-License-Identifier: Apache-2.0
  */
-import com.m3.text.*;
+import jdk.m3.text.*;
 import java.io.*;
 import java.nio.*;
 import java.nio.channels.*;
@@ -103,7 +103,7 @@ public final class FoundationTest {
         String header="shard_id\tfile\tfirst_lexeme\tlast_lexeme\timage_records\tutf16_units\tsha256\n";
         String rows="0\tone.m3lex\ta\t\\uD800\t2\t2\t"+sha256(one)+"\n"
                 +"1\ttwo.m3lex\t\\uD801\t\\uD802\t2\t2\t"+sha256(two)+"\n";
-        Files.writeString(directory.resolve("synexia.shards.tsv"),header+rows,java.nio.charset.StandardCharsets.UTF_8);
+        Files.writeString(directory.resolve("m3.shards.tsv"),header+rows,java.nio.charset.StandardCharsets.UTF_8);
         String mappingHeader="source_id\tsource_path\tsource_kind\tlanguage_tag\trecord_id\tlexeme\tshard_id\timage_row\tmapping_id\tmapping_name\ttranslation_profile\tprecompute_profile\tprecompute_payload\n";
         String mappings=mappingHeader
                 +"source-a\tpath-a\tkind-a\ten\tid-a\ta\t0\t0\tmap-a\tA\tprofile-a\tprofile-a\t{}\n"
@@ -111,13 +111,13 @@ public final class FoundationTest {
                 +"source-high\tpath-high\tkind-high\ten\tid-high\t\\uD800\t0\t1\tmap-high\tHIGH\tprofile-high\tprofile-high\t{}\n"
                 +"source-high2\tpath-high2\tkind-high2\ten\tid-high2\t\\uD801\t1\t0\tmap-high2\tHIGH2\tprofile-high2\tprofile-high2\t{}\n"
                 +"source-high3\tpath-high3\tkind-high3\ten\tid-high3\t\\uD802\t1\t1\tmap-high3\tHIGH3\tprofile-high3\tprofile-high3\t{}\n";
-        Files.writeString(directory.resolve("synexia.records.tsv"),mappings,java.nio.charset.StandardCharsets.UTF_8);
+        Files.writeString(directory.resolve("m3.records.tsv"),mappings,java.nio.charset.StandardCharsets.UTF_8);
         String facts="shard_id\timage_row\tutf16_units\tjava_hash\tcode_points\tunpaired_surrogates\tnon_bmp_code_points\tascii\tlatin1\tcontains_whitespace\tprecompute_profile\n"
                 +"0\t0\t1\t97\t1\t0\t0\tTrue\tTrue\tFalse\tprofile-a + profile-a2\n"
                 +"0\t1\t1\t55296\t1\t1\t0\tFalse\tFalse\tFalse\tprofile-high\n"
                 +"1\t0\t1\t55297\t1\t1\t0\tFalse\tFalse\tFalse\tprofile-high2\n"
                 +"1\t1\t1\t55298\t1\t1\t0\tFalse\tFalse\tFalse\tprofile-high3\n";
-        Files.writeString(directory.resolve("synexia.precompute.tsv"),facts,java.nio.charset.StandardCharsets.UTF_8);
+        Files.writeString(directory.resolve("m3.precompute.tsv"),facts,java.nio.charset.StandardCharsets.UTF_8);
         String profileHeader="precompute_profile\tsource_records\timage_records\tsha256\n";
         String profiles=profileHeader
                 +"profile-a\t1\t1\t"+profileHash("profile-a",1,1)+"\n"
@@ -125,7 +125,7 @@ public final class FoundationTest {
                 +"profile-high\t1\t1\t"+profileHash("profile-high",1,1)+"\n"
                 +"profile-high2\t1\t1\t"+profileHash("profile-high2",1,1)+"\n"
                 +"profile-high3\t1\t1\t"+profileHash("profile-high3",1,1)+"\n";
-        Files.writeString(directory.resolve("synexia.precompute-index.tsv"),profiles,java.nio.charset.StandardCharsets.UTF_8);
+        Files.writeString(directory.resolve("m3.precompute-index.tsv"),profiles,java.nio.charset.StandardCharsets.UTF_8);
         SharedLexiconCatalog catalog=SharedLexiconCatalog.open(directory);catalog.warm();
         check(catalog.shardCount()==2);check(catalog.recordCount()==4);check(catalog.shardFiles().equals(List.of("one.m3lex","two.m3lex")));
         check(catalog.precomputeProfiles().size()==5);
@@ -141,8 +141,8 @@ public final class FoundationTest {
         check(catalog.precomputeAt(new SharedLexiconCatalog.Coordinate(1,0)).javaHash()==55297L);
         check(catalog.find("missing").isEmpty());check(catalog.textAt(new SharedLexiconCatalog.Coordinate(1,1)).equals("\ud802"));
         Path lazyDirectory=Files.createTempDirectory("m3-lazy-");
-        for(String file:List.of("one.m3lex","two.m3lex","synexia.shards.tsv",
-                "synexia.records.tsv","synexia.precompute.tsv","synexia.precompute-index.tsv"))
+        for(String file:List.of("one.m3lex","two.m3lex","m3.shards.tsv",
+                "m3.records.tsv","m3.precompute.tsv","m3.precompute-index.tsv"))
             Files.copy(directory.resolve(file),lazyDirectory.resolve(file));
         SharedLexiconCatalog lazy=SharedLexiconCatalog.openLazy(lazyDirectory);
         check(lazy.find("a").equals(Optional.of(new SharedLexiconCatalog.Coordinate(0,0))));
@@ -164,17 +164,17 @@ public final class FoundationTest {
                 .replace("profile-high\t1\t1\t"+profileHash("profile-high",1,1)+"\n",
                         "profile-high\t2\t2\t"+profileHash("profile-high",2,2)+"\n")
                 .replace("profile-high2\t1\t1\t"+profileHash("profile-high2",1,1)+"\n", "");
-        Files.writeString(directory.resolve("synexia.records.tsv"),overlapMappings,java.nio.charset.StandardCharsets.UTF_8);
-        Files.writeString(directory.resolve("synexia.precompute-index.tsv"),overlapProfiles,java.nio.charset.StandardCharsets.UTF_8);
+        Files.writeString(directory.resolve("m3.records.tsv"),overlapMappings,java.nio.charset.StandardCharsets.UTF_8);
+        Files.writeString(directory.resolve("m3.precompute-index.tsv"),overlapProfiles,java.nio.charset.StandardCharsets.UTF_8);
         expect(IOException.class,()->SharedLexiconCatalog.open(directory));
-        Files.writeString(directory.resolve("synexia.records.tsv"),mappings,java.nio.charset.StandardCharsets.UTF_8);
-        Files.writeString(directory.resolve("synexia.precompute-index.tsv"),profiles,java.nio.charset.StandardCharsets.UTF_8);
-        Files.writeString(directory.resolve("synexia.shards.tsv"),header+"0\t../one.m3lex\ta\tb\t2\t2\t"+sha256(one)+"\n",java.nio.charset.StandardCharsets.UTF_8);
+        Files.writeString(directory.resolve("m3.records.tsv"),mappings,java.nio.charset.StandardCharsets.UTF_8);
+        Files.writeString(directory.resolve("m3.precompute-index.tsv"),profiles,java.nio.charset.StandardCharsets.UTF_8);
+        Files.writeString(directory.resolve("m3.shards.tsv"),header+"0\t../one.m3lex\ta\tb\t2\t2\t"+sha256(one)+"\n",java.nio.charset.StandardCharsets.UTF_8);
         expect(IOException.class,()->SharedLexiconCatalog.open(directory));
-        Files.writeString(directory.resolve("synexia.shards.tsv"),header+rows,java.nio.charset.StandardCharsets.UTF_8);
-        Files.writeString(directory.resolve("synexia.precompute.tsv"),facts.replace("55297", "1"),java.nio.charset.StandardCharsets.UTF_8);
+        Files.writeString(directory.resolve("m3.shards.tsv"),header+rows,java.nio.charset.StandardCharsets.UTF_8);
+        Files.writeString(directory.resolve("m3.precompute.tsv"),facts.replace("55297", "1"),java.nio.charset.StandardCharsets.UTF_8);
         expect(IOException.class,()->SharedLexiconCatalog.open(directory));
-        Files.writeString(directory.resolve("synexia.precompute.tsv"),facts.replace("profile-high3", "dropped-owner"),java.nio.charset.StandardCharsets.UTF_8);
+        Files.writeString(directory.resolve("m3.precompute.tsv"),facts.replace("profile-high3", "dropped-owner"),java.nio.charset.StandardCharsets.UTF_8);
         expect(IOException.class,()->SharedLexiconCatalog.open(directory));
     }
     static void exportedCatalog(Path directory) throws Exception {

@@ -139,7 +139,7 @@ class Jep493GaPolicyTest(unittest.TestCase):
             receiver["canonical_commit"],
         )
         self.assertEqual(
-            "synexia-code-convergence/tools/WorkflowStructureCheck.java",
+            "m3-code-convergence/tools/WorkflowStructureCheck.java",
             receiver["canonical_path"],
         )
         self.assertEqual(

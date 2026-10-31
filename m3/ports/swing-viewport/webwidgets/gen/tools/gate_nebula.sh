@@ -5,7 +5,7 @@
 # test desktop). Usage: gate_nebula.sh <widgets/m3web dir> <out dir> <swt jar> <junit4 jar> <hamcrest jar>
 set -euo pipefail
 src=$1; out=$2; swt=$3; junit=$4; ham=$5
-jdk=${M3_JDK21:-"/c/Program Files/Java/jdk-21"}
+jdk=${M3JDK21:-"/c/Program Files/Java/jdk-21"}
 w() { cygpath -m "$1"; }
 rm -rf "$out"; mkdir -p "$out/main" "$out/test" "$out/snip"
 find "$src/org.eclipse.nebula.widgets.m3web/src" -name '*.java' > "$out/main.txt"

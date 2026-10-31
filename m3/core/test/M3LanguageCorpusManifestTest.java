@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
-import com.m3.text.M3CorpusProjectionDigest;
-import com.m3.text.M3CorpusSourceReceipt;
-import com.m3.text.M3LanguageCorpusManifest;
+import jdk.m3.text.M3CorpusProjectionDigest;
+import jdk.m3.text.M3CorpusSourceReceipt;
+import jdk.m3.text.M3LanguageCorpusManifest;
 import java.io.IOException;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;

@@ -12,7 +12,7 @@ provides documentation context. Implementation review used
 `SOURCE_RECEIPTS.json` binds 13 inspected source, test, LICENSE and NOTICE files to
 their exact Git blobs and SHA-256 bytes. Its M3 preimage is commit
 `677437be295b23f7ccf7409be287008944d0e8b0`, with `M3ArrayList.java` SHA-256
-`ae1092d66bb27e18c0f435d9dc148bd0f46fbc33f9731d9e2d2194142ccc3d32`.
+`78340d2c41e0ade88474171636a02da07ecae0860c6988acaefac5c1fdf0fa03`.
 
 ## Existing ownership and evaluated atom
 

@@ -3,7 +3,7 @@
   "canonical_repository": "hsoliwal/com.synexia",
   "canonical_commit": "05a53325e3f085ac0cb22bff8f1230e6e378c704",
   "canonical_dataset": "vpt-fenwick-doc-20261027",
-  "canonical_recipe": "com.synexia.m3.ViewportFenwickDocumentation20261027",
+  "canonical_recipe": "jdk.internal.m3.ViewportFenwickDocumentation20261027",
   "predecessor_product_commit": "36dd7250b850bd3d73fb35e0a0cda331bdd1ce17",
   "predecessor_source_sha256": "67dfc959f41cc12923ae341b8af323a348c54baf6efeef9289f430aa95467a13",
   "predecessor_source_git_blob": "30da24c981af0ec549d3116d96f3b6ad9dc212b7",

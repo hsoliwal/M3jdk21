@@ -17,9 +17,9 @@ TEST="test/jdk/jdk/internal/misc/M3ObjectMemoryTest.java"
 for SOURCE in "$JAVA" "$NATIVE" "$TEST"; do
   test -s "$SOURCE" || { echo "missing first-party M3JDK21 JVM-native source: $SOURCE" >&2; exit 1; }
 done
-echo "b64f77925ee6cbeb4fc882b237c8eb504919cbbaf99f3b69e4bcd2c97739449c  $JAVA" | sha256sum -c -
+echo "0d3e2d044f8caa26dbcf488992d69e8a29562358330ec4265a65f20fc8dce7b7  $JAVA" | sha256sum -c -
 echo "ff317b645e6b497f40b7b517a1f11a16fb10896ab4e61325dfc3601434b63c03  $NATIVE" | sha256sum -c -
-echo "259b99369196525639d27a1a13e82ac967b69691e3f486ac153fce744a786875  $TEST" | sha256sum -c -
+echo "a484bff774dc11e266ee97513ad78e0ea9588809553f3ec707d8f28bbaaa31eb  $TEST" | sha256sum -c -
 
 JAVA_HOME="${JAVA_HOME:-$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")}"
 WORK="$(mktemp -d)"

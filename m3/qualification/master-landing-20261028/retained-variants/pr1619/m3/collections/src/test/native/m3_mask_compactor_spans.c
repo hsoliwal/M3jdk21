@@ -83,13 +83,13 @@ static void JNICALL put_longs(JNIEnv *env, jlongArray array, jsize start, jsize 
     if (fault == 3) { pending = 1; return; }
     memcpy((jlong *)a->data + start, in, (size_t)n * sizeof(jlong));
 }
-extern jintArray Java_com_m3_collections_M3IndexMaskCompactor_selectNative(
+extern jintArray Java_jdk_m3_collections_M3IndexMaskCompactor_selectNative(
         JNIEnv *, jclass, jintArray, jbyteArray, jint);
-extern jintArray Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative(
+extern jintArray Java_jdk_m3_collections_M3IndexMaskCompactor_selectRangeNative(
         JNIEnv *, jclass, jintArray, jbyteArray, jint, jint, jint);
-extern jintArray Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(
+extern jintArray Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowNative(
         JNIEnv *, jclass, jintArray, jint, jbyteArray, jint, jint, jint);
-extern jlongArray Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
+extern jlongArray Java_jdk_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
         JNIEnv *, jclass, jlongArray, jint, jbyteArray, jint, jint, jint);
 
 static void run(JNIEnv *env, int family, int n, int mask, jint *rows,
@@ -102,13 +102,13 @@ static void run(JNIEnv *env, int family, int n, int mask, jint *rows,
     row_reads = row_elements = state_reads = writes = pending = 0;
     chunks = (n + 255) / 256;
     jobject output;
-    if (family == 0) output = Java_com_m3_collections_M3IndexMaskCompactor_selectNative(
+    if (family == 0) output = Java_jdk_m3_collections_M3IndexMaskCompactor_selectNative(
             env, NULL, (jintArray)&r, (jbyteArray)&s, mask);
-    else if (family == 1) output = Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative(
+    else if (family == 1) output = Java_jdk_m3_collections_M3IndexMaskCompactor_selectRangeNative(
             env, NULL, (jintArray)&r, (jbyteArray)&s, row_offset, n, mask);
-    else if (family == 2) output = Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(
+    else if (family == 2) output = Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowNative(
             env, NULL, (jintArray)&r, row_offset, (jbyteArray)&s, state_offset, n, mask);
-    else output = Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
+    else output = Java_jdk_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
             env, NULL, (jlongArray)&l, row_offset, (jbyteArray)&s, state_offset, n, mask);
     if (fault || drift) {
         require(output == NULL && pending, "failure must propagate");

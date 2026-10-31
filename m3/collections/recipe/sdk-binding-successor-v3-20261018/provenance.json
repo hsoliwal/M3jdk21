@@ -19,7 +19,7 @@
   "before": {
     "authority": "ROOT_SUPPLIED_EXACT_SDK_7020_SOURCE_IMAGE",
     "bytes": 7020,
-    "sha256": "258a4940136bce3998d7c2d717a6f5512f1412fd874580f242d2185be129b85a",
+    "sha256": "e4f05110dd6aaebcfb4f6a6d45d1ff0d8f5b50cc154f6372337d09877b62e83f",
     "template": "M3CollectionSdk.java.before.txt"
   },
   "before_adaptation_gate": {
@@ -46,17 +46,17 @@
       {
         "bytes": 13805,
         "path": "counted-bag/recipe/engine-src/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
-        "sha256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599"
+        "sha256": "9dc65793cb1f4fb20866f99f4e5d0043d54734aa03cf0fe297c0cadbba2d1c37"
       },
       {
         "bytes": 9588,
         "path": "counted-bag/recipe/src/test/java/com/synexia/rewrite/M3CountedBagIteratorRemoveRecipeTest.java",
-        "sha256": "c0085fe219d6bd76da1deef04b87104e3ee2af1fe5c5f472d70f1115e1b335ff"
+        "sha256": "23973e65bb884a85423631032e61b1147c0b2b848a7774bd902e9e11bfb0d42a"
       },
       {
         "bytes": 13503,
         "path": "apache-circular-fifo/recipe/src/test/java/com/synexia/rewrite/M3OwnedApacheCircularFifoQueueRecipeTest.java",
-        "sha256": "0b4212cbf51a63456f1cc127745a1ffa27879bd8a7700e21043d280a38b4c82e"
+        "sha256": "96f402f96eececb15a564072b9b11fad747b73af25a46fcaf421641098434440"
       }
     ],
     "pom_delta": "Only artifactId and the two receiving-test selectors change.",
@@ -66,18 +66,18 @@
   "engine": {
     "bytes": 13805,
     "classification": "DIRECT_IMPORT",
-    "git_blob": "d58ca50dfaeb60f581b64f43545e688aca5c6530",
+    "git_blob": "907f176d32b55d78f13e3756a407f6877f25ca7d",
     "lst": false,
     "modification": "NONE",
     "path": "engine-src/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
     "repository": "hsoliwal/M3jdk21",
-    "sha256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599"
+    "sha256": "9dc65793cb1f4fb20866f99f4e5d0043d54734aa03cf0fe297c0cadbba2d1c37"
   },
   "files_excluding_this_provenance": [
     {
       "bytes": 13805,
       "path": "engine-src/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
-      "sha256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599"
+      "sha256": "9dc65793cb1f4fb20866f99f4e5d0043d54734aa03cf0fe297c0cadbba2d1c37"
     },
     {
       "bytes": 1804,
@@ -87,22 +87,22 @@
     {
       "bytes": 2659,
       "path": "pom.xml",
-      "sha256": "a2b05b17d35fe094bdf9b97041ce5e2992e92451f363b0c7cb6309c76839e4b8"
+      "sha256": "109abd682eefdedfc29c40683d9d5a18d511a11bef1931fdb4478a31e90570ba"
     },
     {
       "bytes": 2017,
       "path": "README.md",
-      "sha256": "6b3fc7d0b5f9ab79e45a113cb43102dc5a9e9045f25c133e2a234b136ee1c0a5"
+      "sha256": "2bc2ab748377edbc01cd9e33fbc088205e3890d60ff863bab2a545d84f20eba0"
     },
     {
       "bytes": 253,
       "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/sdk-binding-successor-v3/engine-receipt.tsv",
-      "sha256": "eb66d087806873f4a00f10e31f8bf31e48d461c6090f077e67e182fd12130a60"
+      "sha256": "4125dd5a2b1307470658b265d31db034ec5173944d255f51b77975979c444c47"
     },
     {
       "bytes": 7020,
       "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/sdk-binding-successor-v3/M3CollectionSdk.java.before.txt",
-      "sha256": "258a4940136bce3998d7c2d717a6f5512f1412fd874580f242d2185be129b85a"
+      "sha256": "e4f05110dd6aaebcfb4f6a6d45d1ff0d8f5b50cc154f6372337d09877b62e83f"
     },
     {
       "bytes": 7589,
@@ -117,22 +117,22 @@
     {
       "bytes": 307,
       "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/sdk-binding-successor-v3/manifest.tsv",
-      "sha256": "a9f0c7156644c4492ccb20cdb2cefe0b82a0382201a8ce19aa88938e6ae00925"
+      "sha256": "95d5cc791185082e6676ea31a49bdb296e429621b1335fc9224b720f00605a6e"
     },
     {
       "bytes": 211,
       "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/sdk-binding-successor-v3/source-receipt.tsv",
-      "sha256": "ba023eb0f093a0476629411d3d4ffd788bdc50f7edf67b1c11597e736917ba34"
+      "sha256": "d6c07aca2ffdb3b2d8dd6e0aeabb55cc2ea08c13809761a61f477bbeef9204c4"
     },
     {
       "bytes": 558,
       "path": "src/main/resources/META-INF/rewrite/m3-sdk-binding-successor-v3.yml",
-      "sha256": "8d83bf7976c58549069bfd662359c97729f8332a813718a0b4e720870660b523"
+      "sha256": "6f88cdbba6b4723217a8b15227115203ad5cc11e526e84499f137888b0a46cde"
     },
     {
       "bytes": 16182,
       "path": "src/test/java/com/synexia/rewrite/M3SdkBindingSuccessorRecipeTest.java",
-      "sha256": "c13d8c143573dc51bfb86c11e45441391d389a51f64bdcc19158f73fb38103ee"
+      "sha256": "f36ba02285f73026fa56e21151d786f7e705cd7d899e6353069eba06858bef32"
     }
   ],
   "license": "Apache-2.0",
@@ -152,7 +152,7 @@
     "official_audit_marker_git_blob": "a23c3a111bcc5db81b65186685ce5c829538cc4b",
     "postimage": {
       "bytes": 16182,
-      "sha256": "c13d8c143573dc51bfb86c11e45441391d389a51f64bdcc19158f73fb38103ee"
+      "sha256": "f36ba02285f73026fa56e21151d786f7e705cd7d899e6353069eba06858bef32"
     },
     "preimage": {
       "bytes": 15482,
@@ -170,5 +170,5 @@
     "receiving_host": "V2_SOURCE_ONLY_AUTHORED_PENDING_PARENT_COMPILE_AND_JUNIT",
     "sdk_runtime_and_guard": "SEPARATE_ROOT_OWNED_PROOFS_NOT_ESTABLISHED_BY_THIS_HOST"
   },
-  "target": "m3/collections/src/main/java/com/m3/collections/M3CollectionSdk.java"
+  "target": "m3/collections/src/main/java/jdk/m3/collections/M3CollectionSdk.java"
 }

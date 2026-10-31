@@ -9,7 +9,7 @@
       "checkout_scope": "exact PR head fetched explicitly",
       "message": "M3ScopeInference.java:[66,37] unclosed character literal",
       "source_paths": [
-        "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3ScopeInference.java"
+        "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3ScopeInference.java"
       ],
       "next_action": "Compare current-master file with the failing head; if still present, repair the character literal through the existing recipe workflow and run the whole module compile.",
       "status": "FAILURE_OBSERVED",
@@ -17,7 +17,7 @@
       "job_url": "https://github.com/hsoliwal/M3jdk21/actions/runs/37355599835/job/111917090577",
       "captured_call": "receiving-head-log-111917090577.json",
       "decoded_log": "receiving-head-job-111917090577.log",
-      "decoded_log_sha256": "8929c5874526e6788210222d3ba1349dd9e5afd6f38ee291940e8b361eb76f70",
+      "decoded_log_sha256": "4ad28563aa67998c75fb5ff070d9068fd1c208e95ca891083c6f6f02aabea99f",
       "evidence": [
         {
           "line": 43,
@@ -29,11 +29,11 @@
         },
         {
           "line": 132,
-          "text": "2026-10-05T18:25:28.0006686Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3ScopeInference.java:[66,37] unclosed character literal"
+          "text": "2026-10-05T18:25:28.0006686Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3ScopeInference.java:[66,37] unclosed character literal"
         },
         {
           "line": 142,
-          "text": "2026-10-05T18:25:28.0035436Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3ScopeInference.java:[66,37] unclosed character literal"
+          "text": "2026-10-05T18:25:28.0035436Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3ScopeInference.java:[66,37] unclosed character literal"
         }
       ]
     },
@@ -47,7 +47,7 @@
       "source_paths": [
         ".github/workflows/m3-foundation.yml"
       ],
-      "next_action": "Check current workflow JDK selection. The captured preparation exports M3_JDK; select the admitted JDK for Maven explicitly and observe Maven's actual Java version before verification.",
+      "next_action": "Check current workflow JDK selection. The captured preparation exports M3JDK; select the admitted JDK for Maven explicitly and observe Maven's actual Java version before verification.",
       "qualification": "The failure proves the compiler rejected release 21. The exact Java version used by Maven is not printed in this log, so no specific lower JDK version is asserted.",
       "status": "FAILURE_OBSERVED",
       "current_master_applicability": "NOT_INSPECTED_BY_THIS_READ_ONLY_CI_TASK",
@@ -70,7 +70,7 @@
         },
         {
           "line": 229,
-          "text": "2026-10-05T18:25:21.6195928Z \u001b[36;1mecho \"M3_JDK=$RUNNER_TEMP/jdk-21+35\" >> \"$GITHUB_ENV\"\u001b[0m"
+          "text": "2026-10-05T18:25:21.6195928Z \u001b[36;1mecho \"M3JDK=$RUNNER_TEMP/jdk-21+35\" >> \"$GITHUB_ENV\"\u001b[0m"
         },
         {
           "line": 271,
@@ -94,8 +94,8 @@
       "checkout_scope": "generated PR merge: head 0483f79 into base 752191c9291f6467110fb8a7badfbdc4c2d41af2",
       "message": "M3A3RegexMemoryLabDeliveryRecipeTest.java:[97,54] and M3A3RegexMemoryWorkflowRecipeTest.java:[100,54] unclosed character literal; the next lines also report semicolon errors",
       "source_paths": [
-        "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java",
-        "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java"
+        "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java",
+        "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java"
       ],
       "next_action": "Compare these exact test preimages with current master; repair the recipe-generated escaping while retaining every test case and assertion.",
       "status": "FAILURE_OBSERVED",
@@ -103,7 +103,7 @@
       "job_url": "https://github.com/hsoliwal/M3jdk21/actions/runs/37355599864/job/111917089229",
       "captured_call": "receiving-head-log-111917089229.json",
       "decoded_log": "receiving-head-job-111917089229.log",
-      "decoded_log_sha256": "4a0a4ed4f914ee70a8ae2721fd145a75630d66dc89efd63797ba37aac9eed6b2",
+      "decoded_log_sha256": "d16b4b485c5a7bd83ff307417107e472fbd5ed68a1603fd96d14c20562ff5668",
       "evidence": [
         {
           "line": 92,
@@ -119,19 +119,19 @@
         },
         {
           "line": 289,
-          "text": "2026-10-05T18:25:52.8938697Z [ERROR] /home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java:[97,54] unclosed character literal"
+          "text": "2026-10-05T18:25:52.8938697Z [ERROR] /home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java:[97,54] unclosed character literal"
         },
         {
           "line": 291,
-          "text": "2026-10-05T18:25:52.8944681Z [ERROR] /home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java:[100,54] unclosed character literal"
+          "text": "2026-10-05T18:25:52.8944681Z [ERROR] /home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java:[100,54] unclosed character literal"
         },
         {
           "line": 307,
-          "text": "2026-10-05T18:25:52.9009513Z [ERROR] /home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java:[97,54] unclosed character literal"
+          "text": "2026-10-05T18:25:52.9009513Z [ERROR] /home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java:[97,54] unclosed character literal"
         },
         {
           "line": 309,
-          "text": "2026-10-05T18:25:52.9013538Z [ERROR] /home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java:[100,54] unclosed character literal"
+          "text": "2026-10-05T18:25:52.9013538Z [ERROR] /home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java:[100,54] unclosed character literal"
         }
       ]
     },

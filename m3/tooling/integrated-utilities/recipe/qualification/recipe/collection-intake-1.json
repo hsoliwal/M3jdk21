@@ -5,7 +5,7 @@
       "path": "m3/runtime-integration/integrated-collections/FOSS_REUSE_DECISION.json",
       "candidate": "/dev/shm/m3jdk21-work/collection-candidates/postimages/m3/runtime-integration/integrated-collections/FOSS_REUSE_DECISION.json",
       "pre_sha256": null,
-      "post_sha256": "9659689fab63ae642eb4b789814f6402108c9d24a9f1b48bf924207992fd6db1"
+      "post_sha256": "3ee2e50f838470732304b728ee7c37a224611dc42fd56148faf687f3c14b1cad"
     },
     {
       "path": "m3/runtime-integration/integrated-collections/README.md",
@@ -23,13 +23,13 @@
       "path": "m3/runtime-integration/integrated-collections/candidate-receiver.json",
       "candidate": "/dev/shm/m3jdk21-work/collection-candidates/postimages/m3/runtime-integration/integrated-collections/candidate-receiver.json",
       "pre_sha256": null,
-      "post_sha256": "0d334e13765b476d851f7b8585f9157dda4e4d3150eb460eec5eb13dcd0d0025"
+      "post_sha256": "afa5b6c927910d003263726dd83898abb99e80011f408915b1cb1931d867c7c8"
     },
     {
       "path": "m3/runtime-integration/integrated-collections/counterexamples.json",
       "candidate": "/dev/shm/m3jdk21-work/collection-candidates/postimages/m3/runtime-integration/integrated-collections/counterexamples.json",
       "pre_sha256": null,
-      "post_sha256": "b481d09450f49bf14dbc40d5bec89c9d6924a5e1893e614f7216e8ef5959c077"
+      "post_sha256": "e24f21e0fa610db3038f420bcc05b9f39cb38278548efadf058d3efa3d58aa27"
     },
     {
       "path": "m3/runtime-integration/integrated-collections/public-api.json",

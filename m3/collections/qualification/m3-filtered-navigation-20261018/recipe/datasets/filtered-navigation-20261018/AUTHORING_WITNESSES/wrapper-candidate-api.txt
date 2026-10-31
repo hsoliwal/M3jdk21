@@ -1,5 +1,5 @@
 Compiled from "M3FilteredViews.java"
-public final class com.m3.collections.M3FilteredViews {
+public final class jdk.m3.collections.M3FilteredViews {
   public static <E> java.util.Collection<E> filter(java.util.Collection<E>, java.util.function.Predicate<? super E>);
     descriptor: (Ljava/util/Collection;Ljava/util/function/Predicate;)Ljava/util/Collection;
 

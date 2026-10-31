@@ -1,22 +1,22 @@
 #!/usr/bin/env bash
 # SPDX-License-Identifier: Apache-2.0
 # Standalone, self-contained build and test of m3/ports/swing-viewport (no Maven, no ~/.m2, nothing outside the
-# M3jdk21 repository but the JDK): javac --release 21 -Xlint:all, then the JUnit Platform and Jupiter engine
+# M3JDK 21 repository but the JDK): javac --release 21 -Xlint:all, then the JUnit Platform and Jupiter engine
 # compiled once from the vendored sources in m3/vendor/third_party, run headless by the port's own launcher
-# com.m3.swing.testkit.M3JUnitLauncher. Usage:
+# jdk.m3.swing.testkit.M3JUnitLauncher. Usage:
 #   run-tests.sh compile                    # vendored JUnit (once) + main + test sources
 #   run-tests.sh test [launcher selectors]  # default: --scan <test classes>; or --select-package <name> ...
 #   run-tests.sh scale <args...>            # M3SwingScale (heap from M3_SCALE_XMX, default 256m)
-# Env: M3_JDK21 (JDK 21 home), OUT (build dir), JUNIT_OUT (vendored JUnit classes, default $OUT.junit).
+# Env: M3JDK 21 (JDK 21 home), OUT (build dir), JUNIT_OUT (vendored JUnit classes, default $OUT.junit).
 set -euo pipefail
 here=$(cd "$(dirname "$0")" && pwd)
 vendor=$(cd "$here/../../vendor/third_party" && pwd)
-jdk=${M3_JDK21:-"/c/Program Files/Java/jdk-21"}
+jdk=${M3JDK21:-"/c/Program Files/Java/jdk-21"}
 out=${OUT:-"$here/target/standalone"}
 junit=${JUNIT_OUT:-"$out.junit"}
 sep=':'; case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) sep=';' ;; esac
 win() { if command -v cygpath >/dev/null 2>&1; then cygpath -m "$1"; else printf '%s' "$1"; fi; }
-# JUnit Platform 1.10.2 + Jupiter 5.10.2 (the family M3jdk21 keeps, M3jdk21 PR 2199) and their API dependencies, as vendored sources (classpath mode).
+# JUnit Platform 1.10.2 + Jupiter 5.10.2 (the family M3JDK 21 keeps, M3jdk21 PR 2199) and their API dependencies, as vendored sources (classpath mode).
 JUNIT_SOURCES="opentest4j apiguardian-api junit-platform-commons-1.10.2 junit-platform-engine-1.10.2
   junit-platform-launcher-1.10.2 junit-jupiter-api-5.10.2 junit-jupiter-engine-5.10.2"
 
@@ -54,10 +54,10 @@ case "${1:-test}" in
     compile; shift || true
     if [ $# -eq 0 ]; then set -- --scan "$(win "$out/test")"; fi
     "$jdk/bin/java" -Xmx768m -Djava.awt.headless=true -cp "$(win "$out/main")$sep$(win "$out/test")$sep$(win "$junit")" \
-      com.m3.swing.testkit.M3JUnitLauncher "$@" ;;
+      jdk.m3.swing.testkit.M3JUnitLauncher "$@" ;;
   scale)
     shift
     "$jdk/bin/java" -Xmx${M3_SCALE_XMX:-256m} -XX:+UseSerialGC -Djava.awt.headless=true \
-      -cp "$(win "$out/main")$sep$(win "$out/test")" com.m3.swing.viewport.scale.M3SwingScale "$@" ;;
+      -cp "$(win "$out/main")$sep$(win "$out/test")" jdk.m3.swing.viewport.scale.M3SwingScale "$@" ;;
   *) echo "usage: $0 compile|test|scale" >&2; exit 2 ;;
 esac

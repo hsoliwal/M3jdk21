@@ -104,9 +104,9 @@ public final class M3DictionaryFrequencyContractTest {
 
     public static void main(String[] args) throws Exception {
         String manifest = Files.readString(
-                Path.of("lexicon/synexia-source-manifest.tsv"), StandardCharsets.UTF_8);
+                Path.of("lexicon/m3-source-manifest.tsv"), StandardCharsets.UTF_8);
         Map<String, String[]> sourceRevisions = parseSourceRevisions(Files.readString(
-                Path.of("lexicon/synexia-word-source-revisions.tsv"), StandardCharsets.UTF_8));
+                Path.of("lexicon/m3-word-source-revisions.tsv"), StandardCharsets.UTF_8));
         check(sourceRevisions.size() == 2
                 && SOURCE_REVISION.equals(sourceRevisions.get("dictlang.dictionary")[1])
                 && DICTIONARY_BLOB_SHA.equals(sourceRevisions.get("dictlang.dictionary")[2])
@@ -151,7 +151,7 @@ public final class M3DictionaryFrequencyContractTest {
                 && !antonyms[5].contains("IndexWordFacts"));
 
         String fieldMap = Files.readString(
-                Path.of("lexicon/synexia-precompute-field-map.tsv"), StandardCharsets.UTF_8);
+                Path.of("lexicon/m3-precompute-field-map.tsv"), StandardCharsets.UTF_8);
         Map<String, Set<String>> fieldRows = parseFieldMap(fieldMap);
         check(fieldRows.get("IndexWordFacts").equals(Set.of(
                 "languageId", "wordCount", "lexiconFingerprint", "totalCorpusTokens",

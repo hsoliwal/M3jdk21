@@ -1,6 +1,6 @@
 /* Copyright 2026 Hitesh Soliwal and contributors; SPDX-License-Identifier: Apache-2.0 */
-import com.m3.arrays.M3Arrays;
-import com.m3.arrays.M3IntArrayView;
+import jdk.m3.arrays.M3Arrays;
+import jdk.m3.arrays.M3IntArrayView;
 import java.lang.management.ManagementFactory;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
@@ -97,7 +97,7 @@ public final class M3ArrayLookupCostProbe {
                     references += length;
                     for (Object element : (Object[]) value) if (element != null) pending.add(element);
                 }
-            } else if (type.getName().startsWith("com.m3.arrays.M3Arrays$")) {
+            } else if (type.getName().startsWith("jdk.m3.arrays.M3Arrays$")) {
                 views++;
                 for (Field field : type.getDeclaredFields()) {
                     if (Modifier.isStatic(field.getModifiers())) continue;

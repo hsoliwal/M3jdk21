@@ -1,0 +1,238 @@
+{
+  "schema": "M3_EXECUTED_POSTIMAGE_RECEIPT_V1",
+  "status": "DRAFT",
+  "license": "Apache-2.0",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "669a949d192345acefcfc5e9bb0b3724174d270c"
+  },
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "qualification_base": "3cda7fa7fb30c9d4d75089265e73bbef3417bba7",
+    "commit": "9bd2c12e0e638446d50a12029a0b3a09fbd694c8",
+    "pull_request": "https://github.com/hsoliwal/com.synexia/pull/14007"
+  },
+  "scope": "Ten executed product postimages: native build/import admission, release-evidence validation and desktop artifact retention.",
+  "recipes": {
+    "native": {
+      "recipe_id": "jdk.internal.m3.VcpuNativePlatform20261029",
+      "task_path": "m3-openrewrite-recipes/recipes/m3-vcpu-native-platform-20261029",
+      "manifest": {
+        "path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-vcpu-native-platform-20261029/manifest.tsv",
+        "sha256": "53d17f9cce7a6ca32d499118de45137d095b63d13053276b64775f8cb6979c7a"
+      },
+      "new_base_execution": {
+        "path": "m3-openrewrite-recipes/recipe-crates/m3-mop-qualification-20261029/evidence/new-base/native/replay-summary.json",
+        "sha256": "aa93687f6a349b09bfcbd5eda94a96c1511d8b5df2623009ca9d75b4772d259e"
+      },
+      "bounded_qualification": {
+        "path": "m3-openrewrite-recipes/recipes/m3-vcpu-native-platform-20261029/evidence/validation-summary.json",
+        "sha256": "64eeb8afb4521893d9f16da67e50c7bef5d1d5c5a2fc111476ec77fbdcd9b86b"
+      }
+    },
+    "release": {
+      "recipe_id": "jdk.internal.m3.rewrite.M3HashPinnedTextSnapshotRecipe",
+      "task_path": "m3-openrewrite-recipes/recipe-crates/m3-release-evidence-20261029",
+      "manifest": {
+        "path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-release-evidence-20261029/manifest.tsv",
+        "sha256": "6bf8a185c8d0ead42f201b9643b4a4453217389d52eb26c41cb90a57098eb394"
+      },
+      "new_base_execution": {
+        "path": "m3-openrewrite-recipes/recipe-crates/m3-mop-qualification-20261029/evidence/new-base/release/replay-summary.json",
+        "sha256": "1b71fc50ef2186730283a762672311b1763974d933cae83ccf97f59e14bb108a"
+      },
+      "crate_name": "m3-release-evidence-20261029"
+    },
+    "retention": {
+      "recipe_id": "jdk.internal.m3.OpenJdkBundleRetention20261029",
+      "task_path": "m3-openrewrite-recipes/recipes/m3-openjdk-artifact-v4-20261027/desktop-retention-20261029",
+      "manifest": {
+        "path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-openjdk-bundle-retention-20261029/manifest.tsv",
+        "sha256": "06760379feb171f61b3c738ebf08bd8bf95bbd2d9d2d6c20195262ee95a47aba"
+      },
+      "new_base_execution": {
+        "path": "m3-openrewrite-recipes/recipe-crates/m3-mop-qualification-20261029/evidence/new-base/retention/replay-summary.json",
+        "sha256": "5e1039bb9fb8125b78445e65bd42175c6d5a4ff6cb2eca2b56744ee86770fb5a"
+      },
+      "bounded_qualification": {
+        "path": "m3-openrewrite-recipes/recipes/m3-openjdk-artifact-v4-20261027/desktop-retention-20261029/evidence/validation-summary.json",
+        "sha256": "863ca8ffb6ff206f0046974d343c2bb95640b3379337133c3a05b68d8644b41a"
+      }
+    }
+  },
+  "files": [
+    {
+      "path": ".github/actions/upload-bundles/action.yml",
+      "recipe": "retention",
+      "before_git_blob": "b35ee3a42e98cbc57d0f467a9b34ad5b58fa4043",
+      "before_sha256": "c1aac32bc122887d5f7f90847887524f9ab874bcd072846e1f86c880a35df604",
+      "sha256": "5f2921cbe9cc53d1246a48696bcdf6dfe6b828aef02fe7f91e0be0614e0ff820",
+      "git_blob": "aa857cc2b443e789c517e4d998e56698c3d430f6",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+    },
+    {
+      "path": ".github/workflows/main.yml",
+      "recipe": "retention",
+      "before_git_blob": "c74626fc82913e6558f86bcc079696869c537bd9",
+      "before_sha256": "077630022be354c322f5c0be3d3f18b2f0d61f15f045195402803d220d34e4a7",
+      "sha256": "2961fab5875f311e01093b1d13f28ff7868f919c498595a305507e3bf2dae2d9",
+      "git_blob": "c62f73cf2a958c26e4441f672a0eb765f2d79a1b",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+    },
+    {
+      "path": "m3/ports/vcpu/native/CMakeLists.txt",
+      "recipe": "native",
+      "before_git_blob": "653ba474c1a5b3ab772c47a6061fbca608f755c7",
+      "before_sha256": "99ab4b6068831402b7a0c65dc3201ec18a5a08a329f06dcb8ae74bdfdd7b2548",
+      "sha256": "90ec9a126a17ae2bba41ff537b1fe9bd0e9fb702f01931e37f1a2f7e6f0ab309",
+      "git_blob": "51b8826cecb9320f7a8132f8be6e0dd6592b3155",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "m3/ports/vcpu/native/cmake/m3vcpu_check_imports.cmake",
+      "recipe": "native",
+      "before_git_blob": "e0660d7e515a5a33bbbd409796703d9f2fcbebc3",
+      "before_sha256": "22dc3a4222b6cbe446de8acd6136a06f4bee6a7ee6b1c42c519b6de7bc73c5f6",
+      "sha256": "6ad45fc2c998ef79d528c911f3d3c4d51d42b10e1b39e12422fafc889a1c0196",
+      "git_blob": "1eaa0ee5172556c5c91ddede323b7c6cfc59a49e",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "m3/ports/vcpu/native/tests/cmake/test_imports.cmake",
+      "recipe": "native",
+      "before_git_blob": "ABSENT",
+      "before_sha256": "ABSENT",
+      "sha256": "9a386d7d0ee9e93d66146af0313b6c279487df91d31445d17657c1ee93bafb30",
+      "git_blob": "6d4b1b21fb6a9d06a328766e94dc7a2495f42daf",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "m3/ports/vcpu/native/tests/import_tool_fixture.c",
+      "recipe": "native",
+      "before_git_blob": "ABSENT",
+      "before_sha256": "ABSENT",
+      "sha256": "6a510aec22e0f01aaf8f75cdebc9d8f68797b9b9cbd3ee144483f79d8fc28584",
+      "git_blob": "c85367b33ea5d9de3d0d80a8b776099e022d1843",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "m3/release/README.md",
+      "recipe": "release",
+      "before_git_blob": "76938bd262feb657642dc28dddc4c1cc413bddb6",
+      "before_sha256": "2251bc015f0f5a5bdf8fbb3a7b22b6bda5d676252e9ec7193252da62291d18f7",
+      "sha256": "959b9feb55eca68d1bc043e2e1ab6de03eee4e2cfbe9a73e85027a1d6ddbe4d1",
+      "git_blob": "84f2b82e8adfa240d4557887ac650af7a5d507af",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "m3/release/release-contract.json",
+      "recipe": "release",
+      "before_git_blob": "3b472614b80a062bcbae97d7b06e2fa7085885e7",
+      "before_sha256": "467c0948c8e53588474551bbc1ef57e91c008f09908afdd0b2ccd2084b348358",
+      "sha256": "20ea1176541fbe849d7c94b42c951068b417c8244446cc6d182120600ceae048",
+      "git_blob": "9642168309390bbebe2b8af364a672f46a218cca",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "m3/release/test_release_admission.py",
+      "recipe": "release",
+      "before_git_blob": "c9aac74aef1aa1a2a99ac836e9c9bf062086b6b3",
+      "before_sha256": "94ec205a3ee4541d46f997af76e28004a56dbad51f0c2039c51230c5ce3fb413",
+      "sha256": "40a4749d9fe25620b8d31f8cbcd217b40e7745eaa05cc62a3ac3077577c55b7a",
+      "git_blob": "d949fc8d3a949a651539e56e70b6f26465e78be2",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "m3/release/verify_release_admission.py",
+      "recipe": "release",
+      "before_git_blob": "5ffa0fbcbce9a3f011e914252900dbd48fea1d8f",
+      "before_sha256": "e64d059cb9751d13fc53ba23bac8461da8c8827383ed13dadbc09b29c03e29be",
+      "sha256": "b52e39dbba77b2d0c4f1fc3da4598550f2ba9c9c83439d723e8277a2c786089f",
+      "git_blob": "045299e2969e4898225a27793aafd2668283ed17",
+      "license": "Apache-2.0"
+    }
+  ],
+  "exercised_gates": {
+    "native_sdk": {
+      "status": "PASS",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "fixedpoint_changes": 0,
+      "source_refusal_and_partial_resume": true
+    },
+    "native_linux_x86_64": {
+      "status": "SCOPED_PASS",
+      "strict_native_build": true,
+      "ctest_passed": 5,
+      "ctest_failed": 0,
+      "ctest_skipped": 1,
+      "skipped_reason": "OpenCL device platform unavailable",
+      "synthetic_import_parser_cases": 35,
+      "configuration_controls": 9,
+      "relocated_jni_smoke_checks": 55,
+      "api_sources_and_defined_export_sets_unchanged": true
+    },
+    "release_sdk": {
+      "status": "PASS",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "fixedpoint_changes": 0,
+      "source_refusal": true
+    },
+    "release_product_unittest": {
+      "status": "PASS",
+      "tests": 28,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "scope": "Verifier behavior and real temporary Git history; synthetic proof packs are not release evidence."
+    },
+    "retention_sdk": {
+      "status": "PASS",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "fixedpoint_changes": 0,
+      "source_refusal_partial_resume_and_yaml_structure": true
+    },
+    "retention_javascript": {
+      "status": "PASS_LOCAL_API_FIXTURES",
+      "baseline_reproduction_cases": 1,
+      "candidate_behavior_cases": 4,
+      "hosted_execution": false
+    },
+    "receiver_identity_audit": {
+      "status": "PASS",
+      "postimages": 10,
+      "existing_preimages": 8,
+      "absent_preimages": 2,
+      "source": "Exact pinned GitHub receiver reads and local executed-output hashing."
+    }
+  },
+  "pending_gates": [
+    "Receiving-commit byte readback and applicable hosted CI.",
+    "Authenticated complete per-platform release proof pack and independent release admission.",
+    "Full M3JDK21 image build, jtreg and installed-image/runtime qualification.",
+    "Actual macOS, Windows, Android and iOS native/device execution and packaging.",
+    "OpenCL device and WebGPU execution.",
+    "Hosted artifact download and retention lifetime; retired runner repair.",
+    "Complete Synexia source-fork SDK/reactor and approved offline dependency mirror."
+  ],
+  "claim_limits": {
+    "release_ready": false,
+    "platform_availability_claimed": false,
+    "full_jdk_or_library_integration_claimed": false,
+    "performance_improvement_claimed": false,
+    "receiving_phase_advanced": false,
+    "added_consumer_runtime_dependencies": [],
+    "synthetic_formats_are_platform_runtime_proof": false,
+    "this_receipt_is_release_proof_pack": false
+  },
+  "custody": "Recipe IDs, canonical paths, hashes and gate results are references only. Recipe code, templates, descriptors, executors and improvement-memory contents remain in Synexia."
+}

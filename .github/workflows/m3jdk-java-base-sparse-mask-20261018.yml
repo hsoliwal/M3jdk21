@@ -33,8 +33,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          SOURCE="$RUNNER_TEMP/m3-jdk-source"
-          CLASSES="$RUNNER_TEMP/m3-jdk-patch"
+          SOURCE="$RUNNER_TEMP/m3jdk-source"
+          CLASSES="$RUNNER_TEMP/m3jdk-patch"
           mkdir -p "$SOURCE/java/util" "$SOURCE/jdk/internal/mindex" "$CLASSES"
           cp src/java.base/share/classes/java/util/ArrayList.java "$SOURCE/java/util/ArrayList.java"
           cp src/java.base/share/classes/java/util/Vector.java "$SOURCE/java/util/Vector.java"
@@ -48,7 +48,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          TESTS="$RUNNER_TEMP/m3-jdk-tests"
+          TESTS="$RUNNER_TEMP/m3jdk-tests"
           mkdir -p "$TESTS"
           javac -proc:none -Xlint:all,-module -Werror \
             --patch-module java.base="$M3_PATCH_CLASSES" \

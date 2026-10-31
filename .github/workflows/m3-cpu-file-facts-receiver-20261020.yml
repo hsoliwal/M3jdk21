@@ -6,7 +6,7 @@ on:
     branches: [m3/cpu-file-facts-20261020]
   pull_request:
     paths:
-      - m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/M3FileCpuFacts.java
+      - m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/M3FileCpuFacts.java
       - m3/tooling/module-packs/cpu-tools/fixtures/M3FileCpuFactsTest.java
       - m3/tooling/module-packs/cpu-tools/build.py
       - .github/workflows/m3-cpu-file-facts-receiver-20261020.yml
@@ -49,7 +49,7 @@ jobs:
           assert '"m3_string_storage_enabled_fixtures": ["M3SourceToolsTest", "M3CpuToolsTest", "M3FileCpuFactsTest"],' in text
           assert 'image-m3-storage-' in text
           for file in (
-              root/"src/com.m3.tools.cpu/com/m3/tools/cpu/M3FileCpuFacts.java",
+              root/"src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/M3FileCpuFacts.java",
               root/"fixtures/M3FileCpuFactsTest.java"):
               assert file.is_file() and file.stat().st_size > 1000
           print("M3_CPU_SOURCE_ADMISSION_PASS fixture=1 no-reparse-owner=1")
@@ -60,7 +60,7 @@ jobs:
           set -euo pipefail
           mkdir -p m3-cpu-facts-receipts
           sha256sum \
-            m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/M3FileCpuFacts.java \
+            m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/M3FileCpuFacts.java \
             m3/tooling/module-packs/cpu-tools/fixtures/M3FileCpuFactsTest.java \
             m3/tooling/module-packs/cpu-tools/build.py \
             > m3-cpu-facts-receipts/SOURCE_SHA256.txt

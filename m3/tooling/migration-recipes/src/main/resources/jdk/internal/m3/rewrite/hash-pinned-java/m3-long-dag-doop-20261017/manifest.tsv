@@ -1,0 +1,5 @@
+m3/collections/src/main/java/jdk/m3/collections/M3LongDag.java	ABSENT	f47bf702d95f84673414821ff7f7b592ba06c5ff092df2f59ad14d36d7042e64	M3LongDag.java.txt
+m3/collections/src/main/java/jdk/m3/collections/M3VirtualAccumulator.java	ABSENT	ec381a4806e3fe44cf292c87fe74433db753f9b68395624da20a66ba5396ded4	M3VirtualAccumulator.java.txt
+m3/collections/src/main/java/jdk/m3/collections/M3VirtualCollector.java	ABSENT	11c798fc574cf0a994b32a266a69e2e0cd7615e3453c391102510666a006768a	M3VirtualCollector.java.txt
+m3/collections/src/test/java/jdk/m3/collections/M3LongDagContract.java	ABSENT	2a3e1ff9568bafdd5da835dfe091c5f269da5e61bd3b68d488a8726dd529f0d6	M3LongDagContract.java.txt
+m3/collections/src/test/java/jdk/m3/collections/M3LongDagJUnitTest.java	ABSENT	ad6b47cf25dd7c38f6f09ef2f355966ccc31255845b79fa57884b28798a0a2c5	M3LongDagJUnitTest.java.txt

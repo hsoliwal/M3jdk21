@@ -117,21 +117,21 @@ body:
       description: Please select all of the packages that are relevant to this feature request.
       multiple: true
       options:
-        - com.m3.collections.guava.annotations
-        - com.m3.collections.guava.base
-        - com.m3.collections.guava.cache
-        - com.m3.collections.guava.collect
-        - com.m3.collections.guava.escape
-        - com.m3.collections.guava.eventbus
-        - com.m3.collections.guava.graph
-        - com.m3.collections.guava.hash
-        - com.m3.collections.guava.io
-        - com.m3.collections.guava.math
-        - com.m3.collections.guava.net
-        - com.m3.collections.guava.primitives
-        - com.m3.collections.guava.reflect
-        - com.m3.collections.guava.testing
-        - com.m3.collections.guava.util.concurrent
+        - jdk.m3.collections.guava.annotations
+        - jdk.m3.collections.guava.base
+        - jdk.m3.collections.guava.cache
+        - jdk.m3.collections.guava.collect
+        - jdk.m3.collections.guava.escape
+        - jdk.m3.collections.guava.eventbus
+        - jdk.m3.collections.guava.graph
+        - jdk.m3.collections.guava.hash
+        - jdk.m3.collections.guava.io
+        - jdk.m3.collections.guava.math
+        - jdk.m3.collections.guava.net
+        - jdk.m3.collections.guava.primitives
+        - jdk.m3.collections.guava.reflect
+        - jdk.m3.collections.guava.testing
+        - jdk.m3.collections.guava.util.concurrent
 
   - type: checkboxes
     attributes:

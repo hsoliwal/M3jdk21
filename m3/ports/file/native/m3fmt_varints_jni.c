@@ -17,7 +17,7 @@ static int encoded_size(uint64_t value) {
 
 /* A primitive batch kernel only: no shared JVM pointers, no cached Java array address. */
 JNIEXPORT jbyteArray JNICALL
-Java_com_m3_file_M3FmtVarints_packNative(
+Java_jdk_m3_file_M3FmtVarints_packNative(
     JNIEnv *env, jclass owner, jlongArray ids) {
   jlong batch[IDS_PER_CHUNK];
   jbyte encoded[BYTES_PER_CHUNK];

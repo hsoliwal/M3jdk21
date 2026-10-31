@@ -2,9 +2,9 @@
   "schema": "spring-owner-v2-current-base-compact-public-packet-v5",
   "status": "ROOT_OWNER_V2_PROOFS_AND_CURRENT_BASE_V5_RUNTIME_PASS_CUSTODY_REPLAY_FOCUSED_REVIEW_PENDING",
   "owner": {
-    "class": "com.m3.collections.spring.M3LinkedCaseInsensitiveMap",
+    "class": "jdk.m3.collections.spring.M3LinkedCaseInsensitiveMap",
     "bytes": 31224,
-    "sha256": "450e3f70be37f0fa0fcee7edd4adc8a2eea4a05a40646fb3e5c531e4ee8447ca"
+    "sha256": "d90b72771ab454aa1dd03eb2c5784d7aaffd612736868a66fbe2682c8ab05f7c"
   },
   "rootExecuted": {
     "protocol": {
@@ -77,8 +77,8 @@
       "maskKernelClassSHA256": "3c56df2cdced6979c30ee482834b00dfa41f5021658b65b07a11e4dfaf4eb763",
       "nativeSourceSHA256": "8610e9fcedcc8eb698acbf3161bca8ea7d16194e61c66915f9e25fe47aae27f7",
       "nativeDllSHA256": "3bb3c78efef58d90cc29160cd4b96b64ea88ef286763e94dd13c47bac7f0258c",
-      "fixtureSHA256": "e7b83f57343e3399865671eab4ec76997eed4953f8607fe8774c8ac9714c3b65",
-      "ownerSHA256": "450e3f70be37f0fa0fcee7edd4adc8a2eea4a05a40646fb3e5c531e4ee8447ca",
+      "fixtureSHA256": "3fa184fa99f7b64ee3f0a964d55ecfd17032f2269074c7671e99ffa39cde1f11",
+      "ownerSHA256": "d90b72771ab454aa1dd03eb2c5784d7aaffd612736868a66fbe2682c8ab05f7c",
       "results": {
         "provider-java": {
           "status": "PASS",
@@ -141,7 +141,7 @@
   "rootReceipts": {
     "proof-owned-v2/OWNED_RECEIPT.json": {
       "bytes": 2632,
-      "sha256": "4ef890bcda14bcbbf58b95509db56088d37c2a0cad52d70fd59f9a8383e58e33"
+      "sha256": "a820920059442cfd0410326e0d106bcc21f38fb62079403b308657060fe31b55"
     },
     "proof-baseline-v1/BASELINE_RECEIPT.json": {
       "bytes": 11410,
@@ -153,27 +153,27 @@
     },
     "supplementals-v2/SUPPLEMENTAL_RECEIPT.json": {
       "bytes": 5511,
-      "sha256": "43d0ff6aa0c620ffa6ce76c993460217a1c92369e52f49a95480eccc50eb13a2"
+      "sha256": "1e74057f47b0fe62fb4b1ce37ab5f1feab35beee678a3053bc350307916464ee"
     },
     "supplementals-v2/CONSTRUCTOR_RECEIPT.json": {
       "bytes": 2494,
-      "sha256": "f782870ae26a91b34126da61483bf16db4588b9dbf53760a9ceeade2a8c9ea93"
+      "sha256": "e2f75998acdbd89b04225823915daf1ba9ece4f3783752882777db66454e5fdd"
     },
     "mask-projection/run-owned-v2/RECEIPT.json": {
       "bytes": 4921,
-      "sha256": "bff2d0f7008dd93e219a71e67150dd6e59d75f24a7e08ebc257603e790cb0fd7"
+      "sha256": "40f3154bf5207e7ee2fb4c6436ba9fb533b3ca8a5dba92394fd17a324c55a421"
     },
     "RECEIVING_PROOF-v2.json": {
       "bytes": 23713,
-      "sha256": "2fcea9cd90862fec5d168dd31534db617f860517d65a8de9eae218e8614bec12"
+      "sha256": "de3dd8bd68f174869fb54b41bca7168a248d04b96912918149a02b00db0b5a2a"
     },
     "CURRENT_BASE_RUNTIME_V3.json": {
       "bytes": 11075,
-      "sha256": "2c76fe6bc703509cd14b75b2125c18e17920334d439dac3576dd7d8e02c4182e"
+      "sha256": "6f6b0ff853c6aa94c299c5e8cb40c9de0d466199e0ef4476e7beae041880a30d"
     },
     "CURRENT_BASE_RUNTIME_V5.json": {
       "bytes": 11075,
-      "sha256": "602494cad7e16cbf6c39fa0f1e6ba0a5889e563195b282d05d11572c349abdb5"
+      "sha256": "4ba523ad8d2e96254d81d5b6d3587ac2118f9fcf196122b64f1afb14dc26cda1"
     }
   },
   "limits": [
@@ -209,11 +209,11 @@
   "algorithmEvaluation": {
     "originalBeforeCodeCatalogue": {
       "bytes": 6079,
-      "sha256": "8270860cc56b0130714da40fd9c24de185b4ed08cae14a8636aad81dd212f7bb"
+      "sha256": "c5712bdd5fdf9e4933aca36b0ddb01c64fc2f6b26e98fa826668f67cfc57e954"
     },
     "actualResultSuccessor": {
       "bytes": 11915,
-      "sha256": "5541bfe699f7d5f9ace00f7016ced8be889b4256623f976e094a7bd94a032be8"
+      "sha256": "e37eac21023cc66c2c797dcd7995bf1f6d40a478710eb627687f52a7ef32a283"
     },
     "rows": 13,
     "scope": "12 retained categories plus15callback-witness row; finite executed proof pins versus source-only alternative rejection distinguished; no new benchmark or allocation-parity claim."
@@ -224,7 +224,7 @@
     "runtimeReceipt": "CURRENT_BASE_RUNTIME_V3.json",
     "runtimeReceiptPin": {
       "bytes": 11075,
-      "sha256": "2c76fe6bc703509cd14b75b2125c18e17920334d439dac3576dd7d8e02c4182e"
+      "sha256": "6f6b0ff853c6aa94c299c5e8cb40c9de0d466199e0ef4476e7beae041880a30d"
     },
     "scope": "Preserved historical executed proof; not the current merge-context qualification"
   },
@@ -233,24 +233,24 @@
     "selectedNativeSources": 1,
     "changedSelectedJavaSources": [
       {
-        "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java",
-        "oldSHA256": "0f0939615884c4d8bbfe2a3c9bbc5072d49faa6c20636c2eadac3104269aefaa",
-        "newSHA256": "0e201b871ca85fa0af306530b6e52cd7fbcdb47207ea0554456abb25e003a61d",
-        "gitBlob": "c1c0bead12632dd42a30961ccf63193de0773c64",
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java",
+        "oldSHA256": "75c8d36856751cbc19d81845606c57daa468b0f6008dbccc1ae009094060c50b",
+        "newSHA256": "5c0da0dba3d711cfd1da6a6013d1df8282eb0106e729b43f6fc0559176720b36",
+        "gitBlob": "3e055e1e8c39b021ac7952a576d26f177028868d",
         "bytes": 10082
       },
       {
-        "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedTable.java",
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexedTable.java",
         "oldSHA256": "9b87cefcc65e295afe516a1d007e3b5acbc87a8035e1f55223d1b2558cf7858c",
         "newSHA256": "3af737a20b7d75273dfe4ee29a34400902e0ad015535c05321898b1f5526aebc",
         "gitBlob": "ef65261a642da8e473763d57905297d3e0dc5c2c",
         "bytes": 21153
       },
       {
-        "path": "m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java",
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongArrayDeque.java",
         "oldSHA256": "cc87514c9499477dd435e512881ecb045356b99f65d212866ee2d32fb3795a84",
-        "newSHA256": "67a1118b2df4cff80430e47700d6243e5135048abfa26ffdeffa66dc8f2e76cc",
-        "gitBlob": "73d90117f3a3b4f1a5a670fb34f5326765627d2c",
+        "newSHA256": "fc855e945a98410c151f6a84d4ba72cd8cb215137faf1174218ffb3e061ba976",
+        "gitBlob": "82fd254e7687e9bdb803d0aa55315448af57d3be",
         "bytes": 10831
       }
     ],

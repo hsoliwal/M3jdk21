@@ -1053,7 +1053,7 @@
       "path": "pom.xml",
       "mode": "100644",
       "type": "blob",
-      "sha": "98889a040aad5cc3c82f782bb4b173d118207988"
+      "sha": "a65f71452613662769dda64100c6d64dd90ae5da"
     },
     {
       "path": "python",
@@ -1104,913 +1104,913 @@
       "sha": "498423475a5a89e6af65947e60f95dbbe2e18802"
     },
     {
-      "path": "synexia-agent",
+      "path": "m3-agent",
       "mode": "040000",
       "type": "tree",
       "sha": "e53598bfeb9bfef195cf8335e44e7123f3551ce4"
     },
     {
-      "path": "synexia-aicore",
+      "path": "m3-aicore",
       "mode": "040000",
       "type": "tree",
       "sha": "ecd1ac28403d47067f250f8cbc8d380c9e51ecba"
     },
     {
-      "path": "synexia-aiop",
+      "path": "m3-aiop",
       "mode": "040000",
       "type": "tree",
       "sha": "db35a88f2f24dad80096c6cd2db57c5b22c78e9e"
     },
     {
-      "path": "synexia-algo",
+      "path": "m3-algo",
       "mode": "040000",
       "type": "tree",
       "sha": "9f550e2b7618e0f15e65a16d68799b8d97b83b7a"
     },
     {
-      "path": "synexia-algorithm-runtime",
+      "path": "m3-algorithm-runtime",
       "mode": "040000",
       "type": "tree",
       "sha": "d5495d319957c19037b156bb96ea12d2d2cf206c"
     },
     {
-      "path": "synexia-anop",
+      "path": "m3-anop",
       "mode": "040000",
       "type": "tree",
       "sha": "8c2c98620e4fba051df2b563ffa2352687c650e9"
     },
     {
-      "path": "synexia-aop",
+      "path": "m3-aop",
       "mode": "040000",
       "type": "tree",
       "sha": "590ddca493f80e806b6251da88b762fcedc2fbc2"
     },
     {
-      "path": "synexia-api-corpus",
+      "path": "m3-api-corpus",
       "mode": "040000",
       "type": "tree",
       "sha": "a4323f8c0830f2746fb1bff40e52945d5f8e86f3"
     },
     {
-      "path": "synexia-appliance-watchdog",
+      "path": "m3-appliance-watchdog",
       "mode": "040000",
       "type": "tree",
       "sha": "b836c8af196983a3acfdf78d3ab5a9dd986354c1"
     },
     {
-      "path": "synexia-archive-mavenizer",
+      "path": "m3-archive-mavenizer",
       "mode": "040000",
       "type": "tree",
       "sha": "ff7400016e764157040ccfda0110f7eb911bbd58"
     },
     {
-      "path": "synexia-artifact-intelligence",
+      "path": "m3-artifact-intelligence",
       "mode": "040000",
       "type": "tree",
       "sha": "a38402f66edcd5116d707f76a07c1364ec99564b"
     },
     {
-      "path": "synexia-beam-cpullm",
+      "path": "m3-beam-cpullm",
       "mode": "040000",
       "type": "tree",
       "sha": "e9cf765d9bf7c54dec0be0b9a55f1d3495a31fdf"
     },
     {
-      "path": "synexia-beam-etl",
+      "path": "m3-beam-etl",
       "mode": "040000",
       "type": "tree",
       "sha": "2a06177acb4829f41812045f5ae80a39a1e3d17e"
     },
     {
-      "path": "synexia-bitop",
+      "path": "m3-bitop",
       "mode": "040000",
       "type": "tree",
       "sha": "7d7a274af6ca55f0f2d9d47f29a0f8d2f39ee1d5"
     },
     {
-      "path": "synexia-bom",
+      "path": "m3-bom",
       "mode": "040000",
       "type": "tree",
       "sha": "a18845b6b185de74056e7475f2719a2ef85b1c2e"
     },
     {
-      "path": "synexia-bop",
+      "path": "m3-bop",
       "mode": "040000",
       "type": "tree",
       "sha": "08bbecb9d6e73cd8dc073032beff1426b0368a7c"
     },
     {
-      "path": "synexia-build-inventory",
+      "path": "m3-build-inventory",
       "mode": "040000",
       "type": "tree",
       "sha": "8f60508b9857671b1ed8cb0a8289da3c702d2420"
     },
     {
-      "path": "synexia-camel-dag-bridge",
+      "path": "m3-camel-dag-bridge",
       "mode": "040000",
       "type": "tree",
       "sha": "7d70a1fea4c56c8bc52481fac143b558d8e7f5b1"
     },
     {
-      "path": "synexia-camel-dag-kie",
+      "path": "m3-camel-dag-kie",
       "mode": "040000",
       "type": "tree",
       "sha": "d40f66993f14d5e1d94d84282696de8d529e3108"
     },
     {
-      "path": "synexia-chat-artifacts",
+      "path": "m3-chat-artifacts",
       "mode": "040000",
       "type": "tree",
       "sha": "451b0554b19b9448425ba333f85d68b38953ecc8"
     },
     {
-      "path": "synexia-chrome-ai",
+      "path": "m3-chrome-ai",
       "mode": "040000",
       "type": "tree",
       "sha": "326bec4f0ce32cb005c4298c67d763656a6da7ab"
     },
     {
-      "path": "synexia-chrome-diffusion",
+      "path": "m3-chrome-diffusion",
       "mode": "040000",
       "type": "tree",
       "sha": "1bc7b2b1bbf26a538e914ac278adece14a0db7c6"
     },
     {
-      "path": "synexia-chromeml-api",
+      "path": "m3-chromeml-api",
       "mode": "040000",
       "type": "tree",
       "sha": "4d319dc870c9975731b2f67e6fd3b9e53ef33ada"
     },
     {
-      "path": "synexia-classic-intelligence",
+      "path": "m3-classic-intelligence",
       "mode": "040000",
       "type": "tree",
       "sha": "8169898b534a591234d7b17e21880eb277e07466"
     },
     {
-      "path": "synexia-classic-tools-jni",
+      "path": "m3-classic-tools-jni",
       "mode": "040000",
       "type": "tree",
       "sha": "98da56c41cdabda65085787222cf0594ae6cb16b"
     },
     {
-      "path": "synexia-classic-tools",
+      "path": "m3-classic-tools",
       "mode": "040000",
       "type": "tree",
       "sha": "20220d3ec69fd2249bf4b9b36faccdf46cdde241"
     },
     {
-      "path": "synexia-cmop",
+      "path": "m3-cmop",
       "mode": "040000",
       "type": "tree",
       "sha": "0b9eccde61ebe1008d6beb70ecff3730301100b3"
     },
     {
-      "path": "synexia-code-convergence-jini",
+      "path": "m3-code-convergence-jini",
       "mode": "040000",
       "type": "tree",
       "sha": "a1dbada9cf320cca376f77e72a07b2dd2459bdfd"
     },
     {
-      "path": "synexia-code-convergence",
+      "path": "m3-code-convergence",
       "mode": "040000",
       "type": "tree",
       "sha": "10481b75998a6cc0f6f1ca8a405943fbe9577ff6"
     },
     {
-      "path": "synexia-common-cache",
+      "path": "m3-common-cache",
       "mode": "040000",
       "type": "tree",
       "sha": "1309dae05f0ec1a18f75ddf3eb9c5e2624ce1413"
     },
     {
-      "path": "synexia-common-core",
+      "path": "m3-common-core",
       "mode": "040000",
       "type": "tree",
       "sha": "0ee2a5813767f9bb68c1a552c6a066cd00b89efb"
     },
     {
-      "path": "synexia-common",
+      "path": "m3-common",
       "mode": "040000",
       "type": "tree",
       "sha": "70d0b0f8dfec5ff8ae277eb2a605128adbcaaa23"
     },
     {
-      "path": "synexia-consolidation-runtime",
+      "path": "m3-consolidation-runtime",
       "mode": "040000",
       "type": "tree",
       "sha": "5a2fcf5cb9dfed6c7d83aab86e2ddbfa66e2dd31"
     },
     {
-      "path": "synexia-cop-bop",
+      "path": "m3-cop-bop",
       "mode": "040000",
       "type": "tree",
       "sha": "05676ad5249f35d8643500357cd438c57e792f10"
     },
     {
-      "path": "synexia-cop",
+      "path": "m3-cop",
       "mode": "040000",
       "type": "tree",
       "sha": "b4500eb5b96c756429a584d9828bccbfc51610b9"
     },
     {
-      "path": "synexia-cpu-camel-fabric",
+      "path": "m3-cpu-camel-fabric",
       "mode": "040000",
       "type": "tree",
       "sha": "b4ca713130b58be9781e51c83c968a156a8196c0"
     },
     {
-      "path": "synexia-cpullm",
+      "path": "m3-cpullm",
       "mode": "040000",
       "type": "tree",
       "sha": "4176db681cf0317a3817b8385baa0f9d1f929e2a"
     },
     {
-      "path": "synexia-dashboard-api",
+      "path": "m3-dashboard-api",
       "mode": "040000",
       "type": "tree",
       "sha": "86af41120a1c7c38acf9d711b231d8cde36ae8f1"
     },
     {
-      "path": "synexia-dawn-jni",
+      "path": "m3-dawn-jni",
       "mode": "040000",
       "type": "tree",
       "sha": "d5f98f9e918f4afd473a83e0a137fd3ccf5370ca"
     },
     {
-      "path": "synexia-dfs",
+      "path": "m3-dfs",
       "mode": "040000",
       "type": "tree",
       "sha": "d8a44fe7dc7124e42dc1cbd6bc303bc98e222160"
     },
     {
-      "path": "synexia-dictlang",
+      "path": "m3-dictlang",
       "mode": "040000",
       "type": "tree",
       "sha": "ab1a651e0d0bb205152bd58a29e73175f5113a94"
     },
     {
-      "path": "synexia-diffusion",
+      "path": "m3-diffusion",
       "mode": "040000",
       "type": "tree",
       "sha": "13582f4781a12995d809971196d32c3b16f39bda"
     },
     {
-      "path": "synexia-docker",
+      "path": "m3-docker",
       "mode": "040000",
       "type": "tree",
       "sha": "29e559614ce163caf00f8169851ff73809a5565f"
     },
     {
-      "path": "synexia-donor-inventory",
+      "path": "m3-donor-inventory",
       "mode": "040000",
       "type": "tree",
       "sha": "c5b779af825e71cb677ecba0b757c053ecffc89b"
     },
     {
-      "path": "synexia-donor-superset-api",
+      "path": "m3-donor-superset-api",
       "mode": "040000",
       "type": "tree",
       "sha": "aa91e8c2f4d30d1fe884016cf5e3e8fc0f015dab"
     },
     {
-      "path": "synexia-donor-superset-bridge-archive",
+      "path": "m3-donor-superset-bridge-archive",
       "mode": "040000",
       "type": "tree",
       "sha": "a5579bca3033c63e6de0f725d668ba98eb7283f2"
     },
     {
-      "path": "synexia-donor-superset-bridge-build",
+      "path": "m3-donor-superset-bridge-build",
       "mode": "040000",
       "type": "tree",
       "sha": "235732e5cd8aaddb91e7445a290419081e494333"
     },
     {
-      "path": "synexia-donor-superset-bridge-git",
+      "path": "m3-donor-superset-bridge-git",
       "mode": "040000",
       "type": "tree",
       "sha": "05636e7d04d869ec49b4d1d912c074db7893d090"
     },
     {
-      "path": "synexia-donor-superset-core",
+      "path": "m3-donor-superset-core",
       "mode": "040000",
       "type": "tree",
       "sha": "751f334fc62a9420263cadb5de3acddb0fe446c4"
     },
     {
-      "path": "synexia-donor-superset-headless",
+      "path": "m3-donor-superset-headless",
       "mode": "040000",
       "type": "tree",
       "sha": "d09f58ab75f94810a1eaba4c974bc9df4f168bdf"
     },
     {
-      "path": "synexia-donor-superset",
+      "path": "m3-donor-superset",
       "mode": "040000",
       "type": "tree",
       "sha": "e9f9f2f8157a79e24e5d07fa0d3908ffc57c8cec"
     },
     {
-      "path": "synexia-edge-ingress",
+      "path": "m3-edge-ingress",
       "mode": "040000",
       "type": "tree",
       "sha": "1e48e5e6d3b1e8476e4879e6f5e9b51578acd8bb"
     },
     {
-      "path": "synexia-enterprise-data-plane",
+      "path": "m3-enterprise-data-plane",
       "mode": "040000",
       "type": "tree",
       "sha": "552c3e1b921497228c6e4e0a900ff05e0ec65c54"
     },
     {
-      "path": "synexia-etl-dfs",
+      "path": "m3-etl-dfs",
       "mode": "040000",
       "type": "tree",
       "sha": "b1ef1f16be726439d3e61d55bd1b3d56f1d6ca09"
     },
     {
-      "path": "synexia-etl",
+      "path": "m3-etl",
       "mode": "040000",
       "type": "tree",
       "sha": "dcd586a26e287671b449fa7bc072ff5558ccd666"
     },
     {
-      "path": "synexia-fastsearch",
+      "path": "m3-fastsearch",
       "mode": "040000",
       "type": "tree",
       "sha": "86dec56588f970051c515bcfcbb39b9a6501f4fa"
     },
     {
-      "path": "synexia-fileindex",
+      "path": "m3-fileindex",
       "mode": "040000",
       "type": "tree",
       "sha": "10e016e92182ae5c4f896138a3eb057de33eceb3"
     },
     {
-      "path": "synexia-flink-cpullm",
+      "path": "m3-flink-cpullm",
       "mode": "040000",
       "type": "tree",
       "sha": "459d85b607d4b739211b1bfe03c0b90a93a414f4"
     },
     {
-      "path": "synexia-flink-datastream",
+      "path": "m3-flink-datastream",
       "mode": "040000",
       "type": "tree",
       "sha": "a659d02270014f6dabfe693af5d7957d79ca9ec1"
     },
     {
-      "path": "synexia-flink-spi",
+      "path": "m3-flink-spi",
       "mode": "040000",
       "type": "tree",
       "sha": "e4dbaac7b9451e1c218e10bca02aa2e440ca99c1"
     },
     {
-      "path": "synexia-flldcim",
+      "path": "m3-flldcim",
       "mode": "040000",
       "type": "tree",
       "sha": "e443758088aa4b7bfaac80b1d812f17c8d2adff4"
     },
     {
-      "path": "synexia-fop",
+      "path": "m3-fop",
       "mode": "040000",
       "type": "tree",
       "sha": "7501ae3a10b82a46bc772f37550d3374d7946821"
     },
     {
-      "path": "synexia-forge",
+      "path": "m3-forge",
       "mode": "040000",
       "type": "tree",
       "sha": "90c3ece29e4cea15c3814ceed0e9558bb8f04754"
     },
     {
-      "path": "synexia-format-fabric",
+      "path": "m3-format-fabric",
       "mode": "040000",
       "type": "tree",
       "sha": "3739cb4fe30a8b525f2be53044f770760bb7ed5f"
     },
     {
-      "path": "synexia-game-kernel",
+      "path": "m3-game-kernel",
       "mode": "040000",
       "type": "tree",
       "sha": "89bab0180eafd8ab684f854e9cd7423f54aefb88"
     },
     {
-      "path": "synexia-hash-pack-parent",
+      "path": "m3-hash-pack-parent",
       "mode": "040000",
       "type": "tree",
       "sha": "6447a3a2fdb848605757b8558f70be5def1c7016"
     },
     {
-      "path": "synexia-hpcpop",
+      "path": "m3-hpcpop",
       "mode": "040000",
       "type": "tree",
       "sha": "68a122dff051c4be42a19e06c888c95a92c32179"
     },
     {
-      "path": "synexia-index-precompute-adapters",
+      "path": "m3-index-precompute-adapters",
       "mode": "040000",
       "type": "tree",
       "sha": "731d84521b5027b3c03b5b21b5329b943234a661"
     },
     {
-      "path": "synexia-index-precompute",
+      "path": "m3-index-precompute",
       "mode": "040000",
       "type": "tree",
       "sha": "527faec803802de6ee9ae737dd46b734293e6727"
     },
     {
-      "path": "synexia-indexstring-compiler",
+      "path": "m3-indexstring-compiler",
       "mode": "040000",
       "type": "tree",
       "sha": "85d2fa3f71e6e1123ffea6d47bcee05a0817f1d5"
     },
     {
-      "path": "synexia-indexstring-jini",
+      "path": "m3-indexstring-jini",
       "mode": "040000",
       "type": "tree",
       "sha": "8010015d18a583757a277819fe1006da477273e0"
     },
     {
-      "path": "synexia-indexstring-maven-plugin",
+      "path": "m3-indexstring-maven-plugin",
       "mode": "040000",
       "type": "tree",
       "sha": "4138ef8507bf46aa61de484306be2f970da74cc7"
     },
     {
-      "path": "synexia-indexstring-tornadovm",
+      "path": "m3-indexstring-tornadovm",
       "mode": "040000",
       "type": "tree",
       "sha": "25f03d1f848dd7ed20b4f21d1227bb5bce512912"
     },
     {
-      "path": "synexia-indexstring",
+      "path": "m3-indexstring",
       "mode": "040000",
       "type": "tree",
       "sha": "6202bc85b16a43f6f02a21b3f3afb9a573ba3755"
     },
     {
-      "path": "synexia-interned-language",
+      "path": "m3-interned-language",
       "mode": "040000",
       "type": "tree",
       "sha": "dfb18ebcc07352acc9a18e96497abb7a19b62bd9"
     },
     {
-      "path": "synexia-ioc",
+      "path": "m3-ioc",
       "mode": "040000",
       "type": "tree",
       "sha": "f09605b582bfae22e00184b601a7ba53ed420558"
     },
     {
-      "path": "synexia-iop",
+      "path": "m3-iop",
       "mode": "040000",
       "type": "tree",
       "sha": "a82744ec82bf8e673582f31f2228a30e2a72d79a"
     },
     {
-      "path": "synexia-java-web-workbench",
+      "path": "m3-java-web-workbench",
       "mode": "040000",
       "type": "tree",
       "sha": "f2f20d4bb648fb375a3fc3c681a1a0d37be0e4c9"
     },
     {
-      "path": "synexia-jev",
+      "path": "m3-jev",
       "mode": "040000",
       "type": "tree",
       "sha": "4d8601936fff2f0efb446950dbe89234efeb8b91"
     },
     {
-      "path": "synexia-job",
+      "path": "m3-job",
       "mode": "040000",
       "type": "tree",
       "sha": "9d81ffe2134a6c37f592cf2567d1203faf920c89"
     },
     {
-      "path": "synexia-kie-policy",
+      "path": "m3-kie-policy",
       "mode": "040000",
       "type": "tree",
       "sha": "836f7c4d775c6cdf8a37ce2fcf0d8db1b39c4f24"
     },
     {
-      "path": "synexia-kubernetes",
+      "path": "m3-kubernetes",
       "mode": "040000",
       "type": "tree",
       "sha": "d3a54486010d20fa44752ed724168eb45d5c3926"
     },
     {
-      "path": "synexia-l2c",
+      "path": "m3-l2c",
       "mode": "040000",
       "type": "tree",
       "sha": "6c806f7744381583b6c2ee63f309f235f73b50b5"
     },
     {
-      "path": "synexia-l2g",
+      "path": "m3-l2g",
       "mode": "040000",
       "type": "tree",
       "sha": "e7e212efa8eab8766dfe7183e79d6dc1a4ce52d2"
     },
     {
-      "path": "synexia-l2v",
+      "path": "m3-l2v",
       "mode": "040000",
       "type": "tree",
       "sha": "721091e79aa6007ccdd138a059145178f80d91b5"
     },
     {
-      "path": "synexia-llmcpp",
+      "path": "m3-llmcpp",
       "mode": "160000",
       "type": "commit",
       "sha": "480d0c8c9aa9f844ad961392c79a5867559d5e9f"
     },
     {
-      "path": "synexia-local-appliance-shell",
+      "path": "m3-local-appliance-shell",
       "mode": "040000",
       "type": "tree",
       "sha": "77ffd8f2471db67ef22f7f58990000644fc311fa"
     },
     {
-      "path": "synexia-local-appliance",
+      "path": "m3-local-appliance",
       "mode": "040000",
       "type": "tree",
       "sha": "e04eb7442f985d707cdd688e24cd79644eca4954"
     },
     {
-      "path": "synexia-local-k3s",
+      "path": "m3-local-k3s",
       "mode": "040000",
       "type": "tree",
       "sha": "9a365e76cc562d7238c63ca8deb050e142a5a5c9"
     },
     {
-      "path": "synexia-m3-api-factory",
+      "path": "m3-api-factory",
       "mode": "040000",
       "type": "tree",
       "sha": "4290badf2b3b5a30f8ac0285553bc4404b8f4281"
     },
     {
-      "path": "synexia-m3-cloner",
+      "path": "m3-cloner",
       "mode": "040000",
       "type": "tree",
       "sha": "98d956d5eeabf2a1661c6006b09716eee77cb776"
     },
     {
-      "path": "synexia-m3-recipe",
+      "path": "m3-recipe",
       "mode": "040000",
       "type": "tree",
       "sha": "5ff39ab4e2f316c8b442e1d3debf8ecb314d8202"
     },
     {
-      "path": "synexia-m3-tooling",
+      "path": "m3-tooling",
       "mode": "040000",
       "type": "tree",
       "sha": "5c9f16e7fc36130d822481cc0d44de9840fbb6b1"
     },
     {
-      "path": "synexia-m3index",
+      "path": "m3-m3index",
       "mode": "040000",
       "type": "tree",
       "sha": "4bee45fa7f9f510ba19a3abe489ed0b12ebd5bce"
     },
     {
-      "path": "synexia-machine",
+      "path": "m3-machine",
       "mode": "040000",
       "type": "tree",
       "sha": "2caf4b64b6b03e654c9838c471cf656e81c87594"
     },
     {
-      "path": "synexia-mat-collections",
+      "path": "m3-mat-collections",
       "mode": "040000",
       "type": "tree",
       "sha": "29ef2cbfae23e07b5634067ea64dc2e12fea200e"
     },
     {
-      "path": "synexia-mat-index-string",
+      "path": "m3-mat-index-string",
       "mode": "040000",
       "type": "tree",
       "sha": "993fa6caae8aa436ce800ee4571c79ae3bc240b6"
     },
     {
-      "path": "synexia-mat-value-maven-plugin",
+      "path": "m3-mat-value-maven-plugin",
       "mode": "040000",
       "type": "tree",
       "sha": "accab6a540caba2b229f9b938c8f3f6ec21712b0"
     },
     {
-      "path": "synexia-mat-value-processor",
+      "path": "m3-mat-value-processor",
       "mode": "040000",
       "type": "tree",
       "sha": "a55308557545b27d077221f1e4c322f37522db11"
     },
     {
-      "path": "synexia-mat-value",
+      "path": "m3-mat-value",
       "mode": "040000",
       "type": "tree",
       "sha": "f40f817770495f97142c57d5a09334a8fbcca588"
     },
     {
-      "path": "synexia-maven-plugin",
+      "path": "m3-maven-plugin",
       "mode": "040000",
       "type": "tree",
       "sha": "e9f4ac467a7d3ff98fc169247b09eb9d03d1579a"
     },
     {
-      "path": "synexia-mindex-indexstring-bridge",
+      "path": "m3-mindex-indexstring-bridge",
       "mode": "040000",
       "type": "tree",
       "sha": "997bf5af5b4a26879b51e047f9123122b33dfd78"
     },
     {
-      "path": "synexia-mindex-vm",
+      "path": "m3-mindex-vm",
       "mode": "040000",
       "type": "tree",
       "sha": "273189d58174201d133a4616fe5b8c68854d6e39"
     },
     {
-      "path": "synexia-mindex",
+      "path": "m3-mindex",
       "mode": "040000",
       "type": "tree",
       "sha": "041a317f87daf727c661acc7c7206398b50f5b4a"
     },
     {
-      "path": "synexia-mllm",
+      "path": "m3-mllm",
       "mode": "040000",
       "type": "tree",
       "sha": "a1cc488e9fcfb3f461523baf96da3e928cdadb54"
     },
     {
-      "path": "synexia-native-interop",
+      "path": "m3-native-interop",
       "mode": "040000",
       "type": "tree",
       "sha": "3865d42cacd6b7dc9c6ca8cc289603af805153be"
     },
     {
-      "path": "synexia-netnet",
+      "path": "m3-netnet",
       "mode": "040000",
       "type": "tree",
       "sha": "79764ff6c67e1a9ae28ddb0f16b9d7e16504a119"
     },
     {
-      "path": "synexia-neural-renderer-jni",
+      "path": "m3-neural-renderer-jni",
       "mode": "040000",
       "type": "tree",
       "sha": "e0bc9d365f82a0ae66a848a7b788ddb6b7d87004"
     },
     {
-      "path": "synexia-neural-rendering",
+      "path": "m3-neural-rendering",
       "mode": "040000",
       "type": "tree",
       "sha": "df6d582b7266fb41da174a58e906d34db4825ad9"
     },
     {
-      "path": "synexia-ngrok",
+      "path": "m3-ngrok",
       "mode": "040000",
       "type": "tree",
       "sha": "4cac29404b2947c47421156a2888aa3c7fb25deb"
     },
     {
-      "path": "synexia-openrewrite-recipes",
+      "path": "m3-openrewrite-recipes",
       "mode": "040000",
       "type": "tree",
       "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
     },
     {
-      "path": "synexia-opsdash",
+      "path": "m3-opsdash",
       "mode": "040000",
       "type": "tree",
       "sha": "fdd571624220332d3bea7d502dc3cb981f3661e2"
     },
     {
-      "path": "synexia-picocli-shell-m3",
+      "path": "m3-picocli-shell-m3",
       "mode": "040000",
       "type": "tree",
       "sha": "244afd28c2dcf0c3ccc7aa6e1bf1cb79737ceb68"
     },
     {
-      "path": "synexia-pluginify-api",
+      "path": "m3-pluginify-api",
       "mode": "040000",
       "type": "tree",
       "sha": "ebd67230394e9d036ab5b33e4dd9c54a1c2fc45b"
     },
     {
-      "path": "synexia-pluginify-bridge-eclipse",
+      "path": "m3-pluginify-bridge-eclipse",
       "mode": "040000",
       "type": "tree",
       "sha": "27b3633f173d596d41a506dd0aa9ee23e384d71c"
     },
     {
-      "path": "synexia-pluginify-bridge-native",
+      "path": "m3-pluginify-bridge-native",
       "mode": "040000",
       "type": "tree",
       "sha": "f4ef33f4b24f443a74acfd134577b65b475814c8"
     },
     {
-      "path": "synexia-pluginify-bridge-teavm",
+      "path": "m3-pluginify-bridge-teavm",
       "mode": "040000",
       "type": "tree",
       "sha": "888d4eafddb4f14d3e2de30b9065184e6d3b39e5"
     },
     {
-      "path": "synexia-pluginify-core",
+      "path": "m3-pluginify-core",
       "mode": "040000",
       "type": "tree",
       "sha": "2d1fa80816bfeed03c950a3c05e275f17de1d515"
     },
     {
-      "path": "synexia-pluginify-headless",
+      "path": "m3-pluginify-headless",
       "mode": "040000",
       "type": "tree",
       "sha": "953153ebf7b8763fd1afed5f0009e9f6e25da819"
     },
     {
-      "path": "synexia-pluginify-maven-plugin",
+      "path": "m3-pluginify-maven-plugin",
       "mode": "040000",
       "type": "tree",
       "sha": "c9ff91c0fe804ccf201c0ee475c88baed241e83e"
     },
     {
-      "path": "synexia-primitives",
+      "path": "m3-primitives",
       "mode": "040000",
       "type": "tree",
       "sha": "e4b4a34dd67d513d7e8a5f9dfc2299faef27c7a1"
     },
     {
-      "path": "synexia-process",
+      "path": "m3-process",
       "mode": "040000",
       "type": "tree",
       "sha": "2a08a5ea477355cedc66a7299f61ced237f634a8"
     },
     {
-      "path": "synexia-repository-java-candidate",
+      "path": "m3-repository-java-candidate",
       "mode": "040000",
       "type": "tree",
       "sha": "0d9542033898268f01b3ca5a2850503e83cffb4c"
     },
     {
-      "path": "synexia-retrieval-fabric",
+      "path": "m3-retrieval-fabric",
       "mode": "040000",
       "type": "tree",
       "sha": "01328ad796ff1811774cd240efb6331ab6d2fba5"
     },
     {
-      "path": "synexia-retrieval-runtime",
+      "path": "m3-retrieval-runtime",
       "mode": "040000",
       "type": "tree",
       "sha": "04500e9c7c585e92a669f2157ee0ccbabf036af4"
     },
     {
-      "path": "synexia-rop-h2",
+      "path": "m3-rop-h2",
       "mode": "040000",
       "type": "tree",
       "sha": "85903554b67ac9a96c3979fe5f85faed50964a25"
     },
     {
-      "path": "synexia-rop",
+      "path": "m3-rop",
       "mode": "040000",
       "type": "tree",
       "sha": "110c06663481a566b547f520c94dacd4e2ae5952"
     },
     {
-      "path": "synexia-route-policy",
+      "path": "m3-route-policy",
       "mode": "040000",
       "type": "tree",
       "sha": "45a569f90642ce9a9a7e30176f23893b83a9aab0"
     },
     {
-      "path": "synexia-runtime",
+      "path": "m3-runtime",
       "mode": "040000",
       "type": "tree",
       "sha": "74d65667b795e014c1ab7902d237917bf566cdbe"
     },
     {
-      "path": "synexia-sap-compat",
+      "path": "m3-sap-compat",
       "mode": "040000",
       "type": "tree",
       "sha": "bdcce5f3a200843f3c31cd3d31439cb757d172f8"
     },
     {
-      "path": "synexia-sap-migration",
+      "path": "m3-sap-migration",
       "mode": "040000",
       "type": "tree",
       "sha": "1a64145df9cb56c69dd5356562b804e91dc96231"
     },
     {
-      "path": "synexia-shape-bridge",
+      "path": "m3-shape-bridge",
       "mode": "040000",
       "type": "tree",
       "sha": "d5af59c0396be68c5dbfcbca8aa3b72efc25b88d"
     },
     {
-      "path": "synexia-shape-compiler",
+      "path": "m3-shape-compiler",
       "mode": "040000",
       "type": "tree",
       "sha": "0dd547e958f43c4d2d93a483a551a0b2cce15488"
     },
     {
-      "path": "synexia-specgrep",
+      "path": "m3-specgrep",
       "mode": "040000",
       "type": "tree",
       "sha": "261637c00009b5d102f71da93d5f3eaf6e8f2867"
     },
     {
-      "path": "synexia-specialist-ai",
+      "path": "m3-specialist-ai",
       "mode": "040000",
       "type": "tree",
       "sha": "ec3da64be363e4572dee730e5b1115c20a064776"
     },
     {
-      "path": "synexia-ssh",
+      "path": "m3-ssh",
       "mode": "040000",
       "type": "tree",
       "sha": "c4bfdce1f73ca75bf84726a24ad12fb6e89b7a18"
     },
     {
-      "path": "synexia-sshd-server",
+      "path": "m3-sshd-server",
       "mode": "040000",
       "type": "tree",
       "sha": "22de36680f9661587b75b9c85b9b7657adbae83c"
     },
     {
-      "path": "synexia-synthesis",
+      "path": "m3-synthesis",
       "mode": "040000",
       "type": "tree",
       "sha": "9a733af767588984030c4f07f08b6d7534789a01"
     },
     {
-      "path": "synexia-tabletree-spring-data",
+      "path": "m3-tabletree-spring-data",
       "mode": "040000",
       "type": "tree",
       "sha": "b14344a34a0d7f92d865d26adff0fe281f25d874"
     },
     {
-      "path": "synexia-tabletree",
+      "path": "m3-tabletree",
       "mode": "040000",
       "type": "tree",
       "sha": "fb54f9ba1fb77a6756d12fe8470a961c1cc2c72d"
     },
     {
-      "path": "synexia-tmop",
+      "path": "m3-tmop",
       "mode": "040000",
       "type": "tree",
       "sha": "d91e9b6d8b462d292da57ee34cc089e962b9dc59"
     },
     {
-      "path": "synexia-top",
+      "path": "m3-top",
       "mode": "040000",
       "type": "tree",
       "sha": "928f7ad8fe14d892aa88630f7efa042446636f26"
     },
     {
-      "path": "synexia-tornadovm-m3",
+      "path": "m3-tornadovm-m3",
       "mode": "040000",
       "type": "tree",
       "sha": "b2fd3e1453a383a219d8871cc5b7d41bed275db7"
     },
     {
-      "path": "synexia-translate",
+      "path": "m3-translate",
       "mode": "040000",
       "type": "tree",
       "sha": "001bbf3628a0a0a1dbd75d357683d61d83046b68"
     },
     {
-      "path": "synexia-truckmate",
+      "path": "m3-truckmate",
       "mode": "040000",
       "type": "tree",
       "sha": "ac195fa6912910f4826c73414070da82f196d8c3"
     },
     {
-      "path": "synexia-tunnel",
+      "path": "m3-tunnel",
       "mode": "040000",
       "type": "tree",
       "sha": "6e13f8fd7cfcb64569da2d2ee7331682858ba408"
     },
     {
-      "path": "synexia-unicodex",
+      "path": "m3-unicodex",
       "mode": "040000",
       "type": "tree",
       "sha": "06c3c178c53478f763cfcb5214528a23dff025a4"
     },
     {
-      "path": "synexia-unix4j-m3",
+      "path": "m3-unix4j-m3",
       "mode": "040000",
       "type": "tree",
       "sha": "8bd1b458309096286ee20b57b55e13d8c2af1cda"
     },
     {
-      "path": "synexia-upwork-pipeline",
+      "path": "m3-upwork-pipeline",
       "mode": "040000",
       "type": "tree",
       "sha": "7ced7b79dbcd15c4d68ed250b010e13f69b4c3c3"
     },
     {
-      "path": "synexia-vdp",
+      "path": "m3-vdp",
       "mode": "040000",
       "type": "tree",
       "sha": "4559cc62be6624ef552b3f6fee2516bb8e6ce883"
     },
     {
-      "path": "synexia-visual-pixel-runtime",
+      "path": "m3-visual-pixel-runtime",
       "mode": "040000",
       "type": "tree",
       "sha": "5106adf6c01e3fedce807c4f5e187edf52225629"
     },
     {
-      "path": "synexia-watchdog-policy",
+      "path": "m3-watchdog-policy",
       "mode": "040000",
       "type": "tree",
       "sha": "16fb77867e89d926b48e355193602b76cd99e11e"
@@ -2073,8 +2073,8 @@
   "root_pom": {
     "body_path": "/workspace/scratch/c0bcaa06df78/m3-mastery/inventory/final-integration/build-declarations/root-pom.xml",
     "bytes": 119981,
-    "sha256": "f01cca4d90bd8fa1b1125474b5178cc80762d934bcb7bf5817f08f3f0dcf6aab",
-    "git_blob_sha1": "98889a040aad5cc3c82f782bb4b173d118207988",
+    "sha256": "1af736d1a28af6e5cdf41a2b4fefa8b9f3c5cb7a6c2f6d16537e0a822f086a7d",
+    "git_blob_sha1": "a65f71452613662769dda64100c6d64dd90ae5da",
     "final_tree_path_chain": [
       {
         "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
@@ -2082,10 +2082,10 @@
         "entry": {
           "mode": "100644",
           "path": "pom.xml",
-          "sha": "98889a040aad5cc3c82f782bb4b173d118207988",
+          "sha": "a65f71452613662769dda64100c6d64dd90ae5da",
           "size": 119981,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/98889a040aad5cc3c82f782bb4b173d118207988"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/a65f71452613662769dda64100c6d64dd90ae5da"
         }
       }
     ]
@@ -2096,7 +2096,7 @@
       "context": "project"
     },
     {
-      "path": "synexia-bom",
+      "path": "m3-bom",
       "context": "project"
     },
     {
@@ -2104,131 +2104,131 @@
       "context": "project"
     },
     {
-      "path": "synexia-anop",
+      "path": "m3-anop",
       "context": "project"
     },
     {
-      "path": "synexia-flldcim",
+      "path": "m3-flldcim",
       "context": "project"
     },
     {
-      "path": "synexia-fop",
+      "path": "m3-fop",
       "context": "project"
     },
     {
-      "path": "synexia-common",
+      "path": "m3-common",
       "context": "project"
     },
     {
-      "path": "synexia-interned-language",
+      "path": "m3-interned-language",
       "context": "project"
     },
     {
-      "path": "synexia-bitop",
+      "path": "m3-bitop",
       "context": "project"
     },
     {
-      "path": "synexia-mat-value",
+      "path": "m3-mat-value",
       "context": "project"
     },
     {
-      "path": "synexia-iop",
+      "path": "m3-iop",
       "context": "project"
     },
     {
-      "path": "synexia-tmop",
+      "path": "m3-tmop",
       "context": "project"
     },
     {
-      "path": "synexia-cop",
+      "path": "m3-cop",
       "context": "project"
     },
     {
-      "path": "synexia-top",
+      "path": "m3-top",
       "context": "project"
     },
     {
-      "path": "synexia-bop",
+      "path": "m3-bop",
       "context": "project"
     },
     {
-      "path": "synexia-cop-bop",
+      "path": "m3-cop-bop",
       "context": "project"
     },
     {
-      "path": "synexia-aop",
+      "path": "m3-aop",
       "context": "project"
     },
     {
-      "path": "synexia-cmop",
+      "path": "m3-cmop",
       "context": "project"
     },
     {
-      "path": "synexia-dictlang",
+      "path": "m3-dictlang",
       "context": "project"
     },
     {
-      "path": "synexia-unicodex",
+      "path": "m3-unicodex",
       "context": "project"
     },
     {
-      "path": "synexia-algo",
+      "path": "m3-algo",
       "context": "project"
     },
     {
-      "path": "synexia-shape-compiler",
+      "path": "m3-shape-compiler",
       "context": "project"
     },
     {
-      "path": "synexia-diffusion",
+      "path": "m3-diffusion",
       "context": "project"
     },
     {
-      "path": "synexia-visual-pixel-runtime",
+      "path": "m3-visual-pixel-runtime",
       "context": "project"
     },
     {
-      "path": "synexia-ioc",
+      "path": "m3-ioc",
       "context": "project"
     },
     {
-      "path": "synexia-specgrep",
+      "path": "m3-specgrep",
       "context": "project"
     },
     {
-      "path": "synexia-format-fabric",
+      "path": "m3-format-fabric",
       "context": "project"
     },
     {
-      "path": "synexia-fileindex",
+      "path": "m3-fileindex",
       "context": "project"
     },
     {
-      "path": "synexia-donor-inventory",
+      "path": "m3-donor-inventory",
       "context": "project"
     },
     {
-      "path": "synexia-donor-superset",
+      "path": "m3-donor-superset",
       "context": "project"
     },
     {
-      "path": "synexia-archive-mavenizer",
+      "path": "m3-archive-mavenizer",
       "context": "project"
     },
     {
-      "path": "synexia-api-corpus",
+      "path": "m3-api-corpus",
       "context": "project"
     },
     {
-      "path": "synexia-m3-api-factory",
+      "path": "m3-api-factory",
       "context": "project"
     },
     {
-      "path": "synexia-m3-recipe",
+      "path": "m3-recipe",
       "context": "project"
     },
     {
-      "path": "synexia-fastsearch",
+      "path": "m3-fastsearch",
       "context": "project"
     },
     {
@@ -2244,179 +2244,179 @@
       "context": "project"
     },
     {
-      "path": "synexia-classic-intelligence",
+      "path": "m3-classic-intelligence",
       "context": "project"
     },
     {
-      "path": "synexia-retrieval-runtime",
+      "path": "m3-retrieval-runtime",
       "context": "project"
     },
     {
-      "path": "synexia-runtime",
+      "path": "m3-runtime",
       "context": "project"
     },
     {
-      "path": "synexia-pluginify-api",
+      "path": "m3-pluginify-api",
       "context": "project"
     },
     {
-      "path": "synexia-pluginify-core",
+      "path": "m3-pluginify-core",
       "context": "project"
     },
     {
-      "path": "synexia-pluginify-bridge-eclipse",
+      "path": "m3-pluginify-bridge-eclipse",
       "context": "project"
     },
     {
-      "path": "synexia-pluginify-bridge-native",
+      "path": "m3-pluginify-bridge-native",
       "context": "project"
     },
     {
-      "path": "synexia-pluginify-headless",
+      "path": "m3-pluginify-headless",
       "context": "project"
     },
     {
-      "path": "synexia-pluginify-maven-plugin",
+      "path": "m3-pluginify-maven-plugin",
       "context": "project"
     },
     {
-      "path": "synexia-dawn-jni",
+      "path": "m3-dawn-jni",
       "context": "project"
     },
     {
-      "path": "synexia-aicore",
+      "path": "m3-aicore",
       "context": "project"
     },
     {
-      "path": "synexia-indexstring",
+      "path": "m3-indexstring",
       "context": "project"
     },
     {
-      "path": "synexia-index-precompute",
+      "path": "m3-index-precompute",
       "context": "project"
     },
     {
-      "path": "synexia-index-precompute-adapters",
+      "path": "m3-index-precompute-adapters",
       "context": "project"
     },
     {
-      "path": "synexia-indexstring/algorithm-bridge",
+      "path": "m3-indexstring/algorithm-bridge",
       "context": "project"
     },
     {
-      "path": "synexia-tabletree",
+      "path": "m3-tabletree",
       "context": "project"
     },
     {
-      "path": "synexia-tabletree-spring-data",
+      "path": "m3-tabletree-spring-data",
       "context": "project"
     },
     {
-      "path": "synexia-indexstring-compiler",
+      "path": "m3-indexstring-compiler",
       "context": "project"
     },
     {
-      "path": "synexia-indexstring-maven-plugin",
+      "path": "m3-indexstring-maven-plugin",
       "context": "project"
     },
     {
-      "path": "synexia-mindex",
+      "path": "m3-mindex",
       "context": "project"
     },
     {
-      "path": "synexia-l2g",
+      "path": "m3-l2g",
       "context": "project"
     },
     {
-      "path": "synexia-l2v",
+      "path": "m3-l2v",
       "context": "project"
     },
     {
-      "path": "synexia-l2c",
+      "path": "m3-l2c",
       "context": "project"
     },
     {
-      "path": "synexia-mindex-indexstring-bridge",
+      "path": "m3-mindex-indexstring-bridge",
       "context": "project"
     },
     {
-      "path": "synexia-m3index",
+      "path": "m3-m3index",
       "context": "project"
     },
     {
-      "path": "synexia-shape-bridge",
+      "path": "m3-shape-bridge",
       "context": "project"
     },
     {
-      "path": "synexia-specialist-ai",
+      "path": "m3-specialist-ai",
       "context": "project"
     },
     {
-      "path": "synexia-flink-spi",
+      "path": "m3-flink-spi",
       "context": "project"
     },
     {
-      "path": "synexia-etl",
+      "path": "m3-etl",
       "context": "project"
     },
     {
-      "path": "synexia-dfs",
+      "path": "m3-dfs",
       "context": "project"
     },
     {
-      "path": "synexia-etl-dfs",
+      "path": "m3-etl-dfs",
       "context": "project"
     },
     {
-      "path": "synexia-flink-datastream",
+      "path": "m3-flink-datastream",
       "context": "project"
     },
     {
-      "path": "synexia-ssh",
+      "path": "m3-ssh",
       "context": "project"
     },
     {
-      "path": "synexia-sshd-server",
+      "path": "m3-sshd-server",
       "context": "project"
     },
     {
-      "path": "synexia-synthesis",
+      "path": "m3-synthesis",
       "context": "project"
     },
     {
-      "path": "synexia-cpullm",
+      "path": "m3-cpullm",
       "context": "project"
     },
     {
-      "path": "synexia-flink-cpullm",
+      "path": "m3-flink-cpullm",
       "context": "project"
     },
     {
-      "path": "synexia-beam-cpullm",
+      "path": "m3-beam-cpullm",
       "context": "project"
     },
     {
-      "path": "synexia-beam-etl",
+      "path": "m3-beam-etl",
       "context": "project"
     },
     {
-      "path": "synexia-code-convergence",
+      "path": "m3-code-convergence",
       "context": "project"
     },
     {
-      "path": "synexia-code-convergence-jini",
+      "path": "m3-code-convergence-jini",
       "context": "project"
     },
     {
-      "path": "synexia-indexstring-jini",
+      "path": "m3-indexstring-jini",
       "context": "project"
     },
     {
-      "path": "synexia-forge",
+      "path": "m3-forge",
       "context": "project"
     },
     {
-      "path": "synexia-chromeml-api",
+      "path": "m3-chromeml-api",
       "context": "project"
     },
     {
@@ -2436,23 +2436,23 @@
       "context": "project"
     },
     {
-      "path": "synexia-mllm",
+      "path": "m3-mllm",
       "context": "project"
     },
     {
-      "path": "synexia-mllm/chrome2api-java",
+      "path": "m3-mllm/chrome2api-java",
       "context": "project"
     },
     {
-      "path": "synexia-mllm/nanobrowser-java",
+      "path": "m3-mllm/nanobrowser-java",
       "context": "project"
     },
     {
-      "path": "synexia-mllm/nanobrowser-java/model-execution/contexts",
+      "path": "m3-mllm/nanobrowser-java/model-execution/contexts",
       "context": "project"
     },
     {
-      "path": "synexia-translate",
+      "path": "m3-translate",
       "context": "project"
     },
     {
@@ -2472,23 +2472,23 @@
       "context": "project"
     },
     {
-      "path": "synexia-enterprise-data-plane",
+      "path": "m3-enterprise-data-plane",
       "context": "project"
     },
     {
-      "path": "synexia-sap-compat",
+      "path": "m3-sap-compat",
       "context": "project"
     },
     {
-      "path": "synexia-sap-migration",
+      "path": "m3-sap-migration",
       "context": "project"
     },
     {
-      "path": "synexia-camel-dag-bridge",
+      "path": "m3-camel-dag-bridge",
       "context": "project"
     },
     {
-      "path": "synexia-camel-dag-kie",
+      "path": "m3-camel-dag-kie",
       "context": "project"
     },
     {
@@ -2612,23 +2612,23 @@
       "context": "project"
     },
     {
-      "path": "synexia-cpu-camel-fabric",
+      "path": "m3-cpu-camel-fabric",
       "context": "project"
     },
     {
-      "path": "synexia-indexstring-tornadovm",
+      "path": "m3-indexstring-tornadovm",
       "context": "project"
     },
     {
-      "path": "synexia-neural-renderer-jni",
+      "path": "m3-neural-renderer-jni",
       "context": "project"
     },
     {
-      "path": "synexia-algorithm-runtime",
+      "path": "m3-algorithm-runtime",
       "context": "project"
     },
     {
-      "path": "synexia-consolidation-runtime",
+      "path": "m3-consolidation-runtime",
       "context": "project"
     },
     {
@@ -2660,7 +2660,7 @@
       "context": "project"
     },
     {
-      "path": "synexia-pluginify-bridge-teavm",
+      "path": "m3-pluginify-bridge-teavm",
       "context": "project"
     },
     {
@@ -2680,99 +2680,99 @@
       "context": "project"
     },
     {
-      "path": "synexia-mat-value-processor",
+      "path": "m3-mat-value-processor",
       "context": "project"
     },
     {
-      "path": "synexia-mat-value-maven-plugin",
+      "path": "m3-mat-value-maven-plugin",
       "context": "project"
     },
     {
-      "path": "synexia-openrewrite-recipes",
+      "path": "m3-openrewrite-recipes",
       "context": "project"
     },
     {
-      "path": "synexia-repository-java-candidate",
+      "path": "m3-repository-java-candidate",
       "context": "project"
     },
     {
-      "path": "synexia-upwork-pipeline",
+      "path": "m3-upwork-pipeline",
       "context": "project"
     },
     {
-      "path": "synexia-maven-plugin",
+      "path": "m3-maven-plugin",
       "context": "project"
     },
     {
-      "path": "synexia-agent",
+      "path": "m3-agent",
       "context": "project"
     },
     {
-      "path": "synexia-rop",
+      "path": "m3-rop",
       "context": "project"
     },
     {
-      "path": "synexia-rop-h2",
+      "path": "m3-rop-h2",
       "context": "project"
     },
     {
-      "path": "synexia-vdp",
+      "path": "m3-vdp",
       "context": "project"
     },
     {
-      "path": "synexia-m3-cloner",
+      "path": "m3-cloner",
       "context": "project"
     },
     {
-      "path": "synexia-ngrok",
+      "path": "m3-ngrok",
       "context": "project"
     },
     {
-      "path": "synexia-docker",
+      "path": "m3-docker",
       "context": "project"
     },
     {
-      "path": "synexia-kubernetes",
+      "path": "m3-kubernetes",
       "context": "project"
     },
     {
-      "path": "synexia-dashboard-api",
+      "path": "m3-dashboard-api",
       "context": "project"
     },
     {
-      "path": "synexia-tunnel",
+      "path": "m3-tunnel",
       "context": "project"
     },
     {
-      "path": "synexia-opsdash",
+      "path": "m3-opsdash",
       "context": "project"
     },
     {
-      "path": "synexia-edge-ingress",
+      "path": "m3-edge-ingress",
       "context": "project"
     },
     {
-      "path": "synexia-local-appliance",
+      "path": "m3-local-appliance",
       "context": "project"
     },
     {
-      "path": "synexia-local-k3s",
+      "path": "m3-local-k3s",
       "context": "project"
     },
     {
-      "path": "synexia-local-appliance-shell",
+      "path": "m3-local-appliance-shell",
       "context": "project"
     },
     {
-      "path": "synexia-route-policy",
+      "path": "m3-route-policy",
       "context": "project"
     },
     {
-      "path": "synexia-kie-policy",
+      "path": "m3-kie-policy",
       "context": "project"
     },
     {
-      "path": "synexia-appliance-watchdog",
+      "path": "m3-appliance-watchdog",
       "context": "project"
     },
     {
@@ -2780,43 +2780,43 @@
       "context": "project"
     },
     {
-      "path": "synexia-aiop",
+      "path": "m3-aiop",
       "context": "project"
     },
     {
-      "path": "synexia-artifact-intelligence",
+      "path": "m3-artifact-intelligence",
       "context": "project"
     },
     {
-      "path": "synexia-build-inventory",
+      "path": "m3-build-inventory",
       "context": "project"
     },
     {
-      "path": "synexia-chat-artifacts",
+      "path": "m3-chat-artifacts",
       "context": "project"
     },
     {
-      "path": "synexia-classic-tools",
+      "path": "m3-classic-tools",
       "context": "project"
     },
     {
-      "path": "synexia-classic-tools-jni",
+      "path": "m3-classic-tools-jni",
       "context": "project"
     },
     {
-      "path": "synexia-hpcpop",
+      "path": "m3-hpcpop",
       "context": "project"
     },
     {
-      "path": "synexia-mat-collections",
+      "path": "m3-mat-collections",
       "context": "project"
     },
     {
-      "path": "synexia-netnet",
+      "path": "m3-netnet",
       "context": "project"
     },
     {
-      "path": "synexia-primitives",
+      "path": "m3-primitives",
       "context": "project"
     },
     {
@@ -2832,59 +2832,59 @@
       "context": "project"
     },
     {
-      "path": "synexia-chrome-diffusion",
+      "path": "m3-chrome-diffusion",
       "context": "project"
     },
     {
-      "path": "synexia-common-cache",
+      "path": "m3-common-cache",
       "context": "project"
     },
     {
-      "path": "synexia-common-core",
+      "path": "m3-common-core",
       "context": "project"
     },
     {
-      "path": "synexia-hash-pack-parent",
+      "path": "m3-hash-pack-parent",
       "context": "project"
     },
     {
-      "path": "synexia-java-web-workbench",
+      "path": "m3-java-web-workbench",
       "context": "project"
     },
     {
-      "path": "synexia-neural-rendering",
+      "path": "m3-neural-rendering",
       "context": "project"
     },
     {
-      "path": "synexia-picocli-shell-m3",
+      "path": "m3-picocli-shell-m3",
       "context": "project"
     },
     {
-      "path": "synexia-process",
+      "path": "m3-process",
       "context": "project"
     },
     {
-      "path": "synexia-retrieval-fabric",
+      "path": "m3-retrieval-fabric",
       "context": "project"
     },
     {
-      "path": "synexia-truckmate",
+      "path": "m3-truckmate",
       "context": "project"
     },
     {
-      "path": "synexia-truckmate/reference",
+      "path": "m3-truckmate/reference",
       "context": "project"
     },
     {
-      "path": "synexia-truckmate/transport",
+      "path": "m3-truckmate/transport",
       "context": "project"
     },
     {
-      "path": "synexia-unix4j-m3",
+      "path": "m3-unix4j-m3",
       "context": "project"
     },
     {
-      "path": "synexia-watchdog-policy",
+      "path": "m3-watchdog-policy",
       "context": "project"
     },
     {
@@ -2892,7 +2892,7 @@
       "context": "project"
     },
     {
-      "path": "synexia-cpu-camel-fabric/providers/tornadovm",
+      "path": "m3-cpu-camel-fabric/providers/tornadovm",
       "context": "profile:m3-tornado"
     }
   ],
@@ -2902,15 +2902,15 @@
   "publication_receipt": {
     "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/PUBLICATION_CUSTODY.json",
     "bytes": 1099619,
-    "sha256": "95f325ce57dadab60031f41514d9a9c5fa3ef6eb29a41e3c9a8c81e2dee996b8",
-    "git_blob_sha1": "0f084555dbbea3ba4c9302386ced30e1e1503dda"
+    "sha256": "91c8df6ab07e3590fecf20de65e2e65943c4b70aebb9f5133901ae6362506c35",
+    "git_blob_sha1": "6389a4301478fd4df74e146f1ae4b8942f675e20"
   },
   "tree_receipts": [
     {
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/BASE_TREE_MODEL.json",
       "bytes": 1372743,
-      "sha256": "877a61dc6d9b4f4fa280faeadbd67db9ee3d56a68768fa06c917d85ab8fbaa80",
-      "git_blob_sha1": "6ee3c1bfd76dc5c0abdba031f163a3d38294f5e9",
+      "sha256": "5a6c06886a4241745d38b6b463a88ace34236a1b0c557ffae596b05d048e1b82",
+      "git_blob_sha1": "97fc934901165fe98f8e2c6c58cf60bc894025fe",
       "scope": "Retained content-addressed base tree bodies; exact objects rehashed."
     },
     {

@@ -74,8 +74,8 @@ def main() -> None:
     if '21' not in execute([java, '-version'], 'version.log') and '21' not in \
             (out / 'version.log').read_text():
         raise RuntimeError('JDK21 required')
-    owner = root / 'm3/ports/capability-runtime/src/main/java/com/m3/runtime/capability'
-    test = root / 'm3/ports/capability-runtime/src/test/java/com/m3/runtime/capability'
+    owner = root / 'm3/ports/capability-runtime/src/main/java/jdk/m3/runtime/capability'
+    test = root / 'm3/ports/capability-runtime/src/test/java/jdk/m3/runtime/capability'
     classes = out / 'classes'
     classes.mkdir()
     execute([javac, '--release', '21', '-Xlint:all,-module', '-Werror',
@@ -84,7 +84,7 @@ def main() -> None:
              str(owner / 'SourceArtifact.java'), str(owner / 'ByteStatistics.java'),
              str(test / 'ByteStatisticsChecks.java')], 'javac.log')
     result = execute([java, '-Xmx40m', '--module-path', str(classes),
-                      '-m', 'com.m3.runtime.capability/com.m3.runtime.capability.ByteStatisticsChecks'],
+                      '-m', 'jdk.m3.runtime.capability/jdk.m3.runtime.capability.ByteStatisticsChecks'],
                      'jdk21-cpu-oracle.log')
     if not result.startswith('M3_BYTE_STATISTICS_PASS assertions=') or \
             'kernel=JAVA_256_BIN_MASK_RLE' not in result:

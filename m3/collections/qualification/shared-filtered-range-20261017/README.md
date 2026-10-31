@@ -13,9 +13,9 @@ Synexia runtime dependency**. All six generated Java/catalogue files
 are byte-for-byte the Git blob IDs from the canonical Synexia crate.
 
 ## Existing Java FILE owner, not obsolete facade
-`m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java`
+`m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java`
 old SHA256:
-`d67a632f63647f033e71360858f8f1be1f93418880178a96437bb0605998ad5b`;
+`5a8fbb97cd9b5d26c7ac7ab9568ff59808ef03ac27bbaa153739dd5ca03a0f8b`;
 new SHA256:
 `87a79889852d1890e6c9483089fa9f0869ca8f26b9cf1a82201e81a789f8e249`.
 Two additive JDK differential JUnit/self-test source files are ABSENT

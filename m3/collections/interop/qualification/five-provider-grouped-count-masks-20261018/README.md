@@ -14,14 +14,14 @@ no direct edits to product master and no rebase of Synexia develop.
 ## Source seam and unchanged public behavior
 Preimage:
 `M3FiveProviderKeyGroups.java` SHA256
-`484a79decdfd5507dbdb4276c6a08df9048d98ddf7756a630f5493cd85e48a4c`,
-Git blob `f546905499583ae209c1bd92f0b3f9e6f7c15699`.
+`a7c4dd4eb8de5d12b08d80e81fcb0c0e94830fd1b242dc6f7adedc50d1fd059a`,
+Git blob `54f2345be366083dac32fc9ca379183fa17fd6f5`.
 Postimage:
-SHA256 `49767629cccbc847c4a66252f86ce18ce57be8aa49a685350624e570a126597f`,
-Git blob `13dd02b3212cb14e7929b964c025f7e5047e5012`.
+SHA256 `0e6314a8f73d66738956278d7b70022f4990b7e49fb4b469dea2fa003ca7e1e0`,
+Git blob `749e8c105cc5d28ec658500af510be1dfcfbf332`.
 New JUnit:
-ABSENT-before, SHA256 `97debdc8af2e48e695191daa9a5ad872b9d16131556b9372441ad75c3185a30a`,
-Git blob `fd29c1cf71f8adc3ce718fc38e03913ac4293ecb`.
+ABSENT-before, SHA256 `8dc2a4a0defb76ac027f83c22a9e8caccf39cee826aad72783656dcbfa1530ea`,
+Git blob `169910504c84fb1c8d615f6e1f1d586be04bd9b6`.
 
 Every existing public method on the M3 group owner retains its name,
 signature and behavior; new methods are additive. Old list-valued

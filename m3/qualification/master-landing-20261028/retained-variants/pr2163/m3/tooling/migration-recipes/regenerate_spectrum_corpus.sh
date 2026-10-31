@@ -2,8 +2,8 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
 #
-# Owning generator for m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/atom/spectrum/CORPUS.tsv
-# (consumed by com.m3.rewrite.synexia.M3SynexiaPureIntRepositoryCorpusTest.verifyPin).
+# Owning generator for m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/atom/spectrum/CORPUS.tsv
+# (consumed by jdk.m3.rewrite.m3.M3PureIntRepositoryCorpusTest.verifyPin).
 #
 # Keeps the pinned path and category columns of the existing CORPUS.tsv and recomputes
 # bytes, git blob SHA-1 and SHA-256 from the working tree at ROOT with CPU tools only.
@@ -12,7 +12,7 @@
 set -euo pipefail
 ROOT="${1:?repository root}"
 COMMIT="${2:-$(git -C "$ROOT" rev-parse HEAD)}"
-PINS="${3:-$ROOT/m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/atom/spectrum/CORPUS.tsv}"
+PINS="${3:-$ROOT/m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/atom/spectrum/CORPUS.tsv}"
 printf '# repository=hsoliwal/M3jdk21\tcommit=%s\n' "$COMMIT"
 printf 'path\tcategory\tbytes\tgit_blob_sha1\tsha256\n'
 awk -F'\t' '!/^#/ && $1!="path" {print $1"\t"$2}' "$PINS" | while IFS=$'\t' read -r path category; do

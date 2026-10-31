@@ -1,85 +1,85 @@
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.intake.Relocate
+name: jdk.internal.m3.intake.Relocate
 displayName: LIB_INTAKE relocation of commons-net
 description: Boundary-checked package relocation, one non-recursive ChangePackage per package, longest first.
 recipeList:
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.apache.commons.net.ftp.parser
-      newPackageName: com.m3.lib.net.ftp.parser
+      newPackageName: jdk.m3.lib.net.ftp.parser
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.apache.commons.net.chargen
-      newPackageName: com.m3.lib.net.chargen
+      newPackageName: jdk.m3.lib.net.chargen
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.apache.commons.net.daytime
-      newPackageName: com.m3.lib.net.daytime
+      newPackageName: jdk.m3.lib.net.daytime
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.apache.commons.net.discard
-      newPackageName: com.m3.lib.net.discard
+      newPackageName: jdk.m3.lib.net.discard
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.apache.commons.net.finger
-      newPackageName: com.m3.lib.net.finger
+      newPackageName: jdk.m3.lib.net.finger
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.apache.commons.net.telnet
-      newPackageName: com.m3.lib.net.telnet
+      newPackageName: jdk.m3.lib.net.telnet
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.apache.commons.net.whois
-      newPackageName: com.m3.lib.net.whois
+      newPackageName: jdk.m3.lib.net.whois
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.apache.commons.net.echo
-      newPackageName: com.m3.lib.net.echo
+      newPackageName: jdk.m3.lib.net.echo
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.apache.commons.net.imap
-      newPackageName: com.m3.lib.net.imap
+      newPackageName: jdk.m3.lib.net.imap
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.apache.commons.net.nntp
-      newPackageName: com.m3.lib.net.nntp
+      newPackageName: jdk.m3.lib.net.nntp
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.apache.commons.net.pop3
-      newPackageName: com.m3.lib.net.pop3
+      newPackageName: jdk.m3.lib.net.pop3
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.apache.commons.net.smtp
-      newPackageName: com.m3.lib.net.smtp
+      newPackageName: jdk.m3.lib.net.smtp
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.apache.commons.net.tftp
-      newPackageName: com.m3.lib.net.tftp
+      newPackageName: jdk.m3.lib.net.tftp
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.apache.commons.net.time
-      newPackageName: com.m3.lib.net.time
+      newPackageName: jdk.m3.lib.net.time
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.apache.commons.net.util
-      newPackageName: com.m3.lib.net.util
+      newPackageName: jdk.m3.lib.net.util
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.apache.commons.net.bsd
-      newPackageName: com.m3.lib.net.bsd
+      newPackageName: jdk.m3.lib.net.bsd
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.apache.commons.net.ftp
-      newPackageName: com.m3.lib.net.ftp
+      newPackageName: jdk.m3.lib.net.ftp
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.apache.commons.net.ntp
-      newPackageName: com.m3.lib.net.ntp
+      newPackageName: jdk.m3.lib.net.ntp
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.apache.commons.net.io
-      newPackageName: com.m3.lib.net.io
+      newPackageName: jdk.m3.lib.net.io
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.apache.commons.net
-      newPackageName: com.m3.lib.net
+      newPackageName: jdk.m3.lib.net
       recursive: false

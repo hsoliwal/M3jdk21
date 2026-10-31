@@ -73,12 +73,12 @@
           </compilerArgs>
           <includes>
             <include>module-info.java</include>
-            <include>com/m3/util/M3PrimitiveIndexView.java</include>
-            <include>com/m3/util/M3PrimitiveSoaStore.java</include>
-            <include>com/m3/util/M3PrimitiveKind.java</include>
-            <include>com/m3/util/M3DenseHash.java</include>
-            <include>com/m3/util/M3SortableTopK.java</include>
-            <include>com/m3/util/M3RuntimeHeap.java</include>
+            <include>jdk/m3/util/M3PrimitiveIndexView.java</include>
+            <include>jdk/m3/util/M3PrimitiveSoaStore.java</include>
+            <include>jdk/m3/util/M3PrimitiveKind.java</include>
+            <include>jdk/m3/util/M3DenseHash.java</include>
+            <include>jdk/m3/util/M3SortableTopK.java</include>
+            <include>jdk/m3/util/M3RuntimeHeap.java</include>
           </includes>
         </configuration>
       </plugin>

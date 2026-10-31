@@ -51,7 +51,7 @@ descriptor or native JNI symbol is overwritten by this transfer.
   20,000-deep-filter check; current image execution PENDING.
 - `CollectionViewsContract.java`: copied original differential suite;
   current JDK image execution PENDING.
-- `m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java`:
+- `m3/collections/src/main/java/jdk/m3/collections/M3CollectionViews.java`:
   CURRENT MASTER UNCHANGED — no destructive restoration of old facade.
 - JNI mask sources and java.util Collections/TreeSet/TreeMap implementations:
   UNCHANGED — no claim of native binary or JDK collection replacement.

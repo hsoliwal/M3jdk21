@@ -5,12 +5,12 @@
   "jdk36": {
     "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-put-validation-independent36-20261019\\RESULT.json",
     "bytes": 48639,
-    "sha256": "0dfe859a530734124cf2f07eef97315fdfcffb16abc8f9588528e11df390873e"
+    "sha256": "375b9a9fd0aa7f91ec20b0a8445eb4c50e34af36352b3c2dcb4ecb35caeb5a0b"
   },
   "ec58": {
     "path": "S:\\codex-work\\m3-collections-next-20261018\\ec-current-owner-public-delta-put-v2-independent-20261019\\RESULT.json",
     "bytes": 14253,
-    "sha256": "372d132781f87d869a1551f950f0bcb8c3a5207c5a4ed4305e549c5ed47901a3"
+    "sha256": "7019d9e07a2bc13decb6f9a23f6be04172a39d6448b653b67245325fa277998e"
   },
   "frozen36StrictStatus": "DIFFERENCES_FROZEN_36 retained unchanged",
   "rootCases": {

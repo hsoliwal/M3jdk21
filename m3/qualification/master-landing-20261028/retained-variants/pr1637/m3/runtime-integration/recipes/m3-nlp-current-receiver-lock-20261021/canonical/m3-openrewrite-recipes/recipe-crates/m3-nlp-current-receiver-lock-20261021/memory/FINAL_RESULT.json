@@ -1,0 +1,52 @@
+{
+  "schema": "M3_NLP_CURRENT_OWNER_CORRECTION_MEMORY_FINAL/1",
+  "status": "PASS",
+  "profile": "m3-nlp-current-receiver-lock-20261021/1.0",
+  "event_count": 5,
+  "events": [
+    "cc6d9b0df41d8d8488b7e22d7ee9c384a88613ad1f5211bc92329faf8a9ae6b7",
+    "8d84814a0f3afd7e77a6d470cba1371b96eeef430eef8fca873dd60f622fc76f",
+    "eb6b38488a707687ba8a5332c6b22b37474c9bc789992c8fafea19d8ed76f19a",
+    "c08db1269a6433383cf955b6a1fbcdc813774d2fcbbdb67879811bf703a2af52",
+    "3d8f25ee043d66b05c75c0652f92182b47c422c7d576f1aaf9ebb8149ff17165"
+  ],
+  "conformance_checks": 129,
+  "control_cases": 32,
+  "actual_event_integrity_checks": 5,
+  "unique_event_artifacts_verified": 38,
+  "admission": "PENDING",
+  "profile_receipt": {
+    "path": "memory/PROFILE.md",
+    "sha256": "d51bf48dc3a6d5a40a0785493436e24d8ef0d16686a31267d4b1b7d67fd89b69"
+  },
+  "retrieval": {
+    "path": "memory/LESSONS.md",
+    "sha256": "1cc027ec0a6c58f9ddc9827fb818fc63730c1cdd97959adc0a1160616d7be45c"
+  },
+  "index": {
+    "path": "memory/INDEX.json",
+    "sha256": "a12b18a8dbe16f723b1a4b8f1c19393928273923b1d540a7493e0d27bcdf6998"
+  },
+  "helper_lineage": {
+    "path": "memory/HELPER_LINEAGE.json",
+    "sha256": "f67b9912cf7121174418ffc483b8b1f7180ce11c425e83f4cf8e92f0e81a33d2"
+  },
+  "profile_conformance": {
+    "path": "proof/memory-conformance-001/RESULT.json",
+    "sha256": "153da88c92b9d05bb5b481f15fa60971d2b9aa52fa32b5025d14cd4f9fcdd164"
+  },
+  "event_integrity": {
+    "path": "proof/memory-integrity-001/RESULT.json",
+    "sha256": "6de4e47e6a79772cdeb5dc9438feaa00b1f20bc9033e86a0b763c2cf0e50f447"
+  },
+  "canonical_sdk": {
+    "path": "proof/sdk-001-offline/RESULT.json",
+    "sha256": "8260a2bb04090e4307080e47d26dffb554a756abcc6d26c0a8afb6e6a6b7125e"
+  },
+  "actual_receiver": {
+    "path": "proof/receiver-runtime-001/combined-receiver-001-receipts/RESULT.json",
+    "sha256": "b0dd0d938a09221a7b222e3476f9fcbc4f896d5d62ac150030c002156dac6ea4"
+  },
+  "qualified_sdk_inputs_unchanged": true,
+  "scope": "Closed-profile conformance and actual evidence integrity only; no inherited event, test-count inflation or product admission."
+}

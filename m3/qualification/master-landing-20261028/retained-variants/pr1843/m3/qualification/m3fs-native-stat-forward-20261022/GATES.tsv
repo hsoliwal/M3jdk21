@@ -1,6 +1,6 @@
 gate	status	evidence_or_remaining_work
-NATIVE_C_PREIMAGE	EXACT_GIT_MATCH	Original JNI C source 7a61719ada663bf8918724debeee270ac34a1dc0
-NATIVE_JAVA_PREIMAGE	EXACT_GIT_MATCH	Original M3FsNative source f6d07841c9623a7141cd219d64179758f18fb88b
+NATIVE_C_PREIMAGE	EXACT_GIT_MATCH	Original JNI C source 3c332245576735c1370605b3154b3f8cfb4ff7ab
+NATIVE_JAVA_PREIMAGE	EXACT_GIT_MATCH	Original M3FsNative source 3f411d60edc49cbbba6c1f7c426b347aed1ce9fe
 M3FS_MASTER_FORWARD	EXACT_SOURCE_MATCH	New original M3FS.java 49.6KiB preimage, only statBatch inserted
 NEW_PACKED_ROW_OWNER	SOURCE_RECEIVED	M3FsStatBatch and owning JUnit exact donor postimages
 FIVE_OUTPUT_GIT_BLOBS	PASS	Exact source readbacks for all five target files

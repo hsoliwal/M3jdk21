@@ -45,7 +45,7 @@ build dependencies, not a required M3 core runtime dependency.
 `M3GuavaListMultimap.java` SHA-256:
 `1e8e1e58e4d1cd3f18574914ec371dcc847a8fb4ec47c55b31923accb178b63f`.
 `M3FiveListFamilies.java` SHA-256:
-`25f4051dcff340507c0e662413104b74a3bbb295bbe6bc78250f1ec7ea92a236`.
+`6b58c11deb0ba2cfcf4e259fe31f5117837a8f77423dfc74f0c523997519749e`.
 Four test postimages, all ABSENT-before, are pinned by
 `hash-pinned-java/m3jdk21-five-list-family-20261018/manifest.tsv`.
 

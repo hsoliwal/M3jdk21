@@ -1,13 +1,13 @@
 # Recipe inputs used by this SDK execution
 crate/ENGINE_SOURCES.tsv	ae731c5780c73a98f6fc81079b5f863613fddea50d2a6c893c6dfd2aa2030b5c
-crate/contract/test_prepare.py	f504f1dcfafb24fd87f8f677643b45eecc74674881e16bf727b76c4e6a4d1856
-crate/contract/verify_receiver.py	a4d82df8b31e707afe7caa5e76524d191f285e2887dbfdfa95cfdc382ae01f7d
-crate/datasets/converged-build-20261018/DATASET.json	c60827bd9057898f9b99aad93c2bc23006a65f4fd4b0e39222f6553d87df3df1
+crate/contract/test_prepare.py	79c4335d02ca2179301d617d9ae447b778f2f12361e379ff04ad77c0237e7933
+crate/contract/verify_receiver.py	a400589821da1c448b3c2354aef91c7a6fd596cf265b2baca097494135126d4c
+crate/datasets/converged-build-20261018/DATASET.json	8effce406383ba22faaadbdac72d1bbeba05588bdda8337989aae26620dc8ce8
 crate/datasets/converged-build-20261018/ENGINE_EFFECTIVE.tsv	80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23
 crate/datasets/converged-build-20261018/MODES.tsv	34ae1bded2cd87f7a397133d1dcb0a8d39c0c3c6e8a2e3446262f3ae601401f1
-crate/datasets/converged-build-20261018/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-converged-build-20261018.yml	859c221551d72973bc80260056bea90848cfd9065263dbf74fecfb911eb39244
+crate/datasets/converged-build-20261018/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-converged-build-20261018.yml	ff5908e1818a3eefffbf89b095b509d46497fca1c4d9a45187a49991854a80c7
 crate/datasets/converged-build-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-converged-build-20261018/0001-PROVENANCE.json.txt	8e1396bcf3bb9065824ba2b9db4aab03d2b4e9bf09c9209c0eb6cc0198effa58
-crate/datasets/converged-build-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-converged-build-20261018/0002-pom.xml.txt	54521e57cf458017c20682a31ad1a4dc1fa08b2847f8fa79091566dc748404d6
+crate/datasets/converged-build-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-converged-build-20261018/0002-pom.xml.txt	e97b7e58eaba1546fd8ab0b2922a7b014b19ef3739cb8efde040c82a74fc8066
 crate/datasets/converged-build-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-converged-build-20261018/0003-verify_source.py.txt	8166b5a9f62367a00ebf90807ba56a1f0118d6fc1cab71fff43d0c7b3ce8e875
 crate/datasets/converged-build-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-converged-build-20261018/0004-verify_source.py.txt	2fd7297f2651f0b57fa28d7b411602de5589554c19875f2159b84617eb3c4a24
 crate/datasets/converged-build-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-converged-build-20261018/0005-verify_source.py.txt	ac6edc1c414abaf625a9b7ffd9ad4a7d4b1c1eaf49730a35538d142a61252f46
@@ -18,9 +18,9 @@ crate/datasets/converged-build-20261018/resources/com/synexia/rewrite/hash-pinne
 crate/datasets/converged-build-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-converged-build-20261018/0010-verify_source.py.txt	62ee079c1c692c657d3ff9dd30120d91702fd93c9b2b6203536865d56bae9d9d
 crate/datasets/converged-build-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-converged-build-20261018/0011-verify_source.py.txt	b1e440965b1b9c7d3ab767be7fc1eba48965736a83a091c7aeb31332a5d01542
 crate/datasets/converged-build-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-converged-build-20261018/0012-verify_source.py.txt	436e34c43641ec5acb1e1c224621cd420a9175f0e9f0b9b74219a45cd1e0ccd5
-crate/datasets/converged-build-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-converged-build-20261018/manifest.tsv	5d4b248dd550d4a21af45b4b7d86602f5f9ec92f54720cae7c6edc801a12935e
+crate/datasets/converged-build-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-converged-build-20261018/manifest.tsv	56b1728ad553d19dc8a8e5d4d1bce508dd616b3719958d377de55eefd260543a
 crate/datasets/converged-build-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-converged-build-20261018/pre/0001-PROVENANCE.json.txt	c03045650d5e792b926dc56c738e52946fb44ff1cc212fbb8c2e61e223802429
-crate/datasets/converged-build-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-converged-build-20261018/pre/0002-pom.xml.txt	0d6c98a7e1d59844d3c64ed1e4c59381c5a46834f2731375a7a6c9642ca62091
+crate/datasets/converged-build-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-converged-build-20261018/pre/0002-pom.xml.txt	e539758ff9c8f9b634d2b111d26b43d575b4329965bb854783c6f59eaa1a3ee1
 crate/datasets/converged-build-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-converged-build-20261018/pre/0003-verify_source.py.txt	130f5a0377e3c87f3d116a8de0a9eea02b4c65429bf71f2c8ccde7d1a55b7a4b
 crate/datasets/converged-build-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-converged-build-20261018/pre/0004-verify_source.py.txt	e6980df7e72c9f516ec9e6a0fd0caff21ef80b8b70038a994cdb7ad0b2edb205
 crate/datasets/converged-build-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-converged-build-20261018/pre/0005-verify_source.py.txt	841ef6d6ffde7c923368b66eca22d84119fc6058ccb3de711bcb5854bec54a0e
@@ -32,9 +32,9 @@ crate/datasets/converged-build-20261018/resources/com/synexia/rewrite/hash-pinne
 crate/datasets/converged-build-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-converged-build-20261018/pre/0011-verify_source.py.txt	1ce4478e363193345dc9bcada6003190050cd30ebbaf78cf3aae6462aacedffb
 crate/datasets/converged-build-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-converged-build-20261018/pre/0012-verify_source.py.txt	ccda49fc1a22f7e504c017f25fce4cf4140065ce1743bbdea86701b2040ab4f4
 crate/pom.xml	4c90faaa9e64aebeeba14fb2196731c6334293781d0fdcafbf190f2f5662eb7d
-crate/prepare.py	9b0b3d93c787c9a56036cddb2b044aef30f6fa8a1fa20fa5a2edae46dfd1e62c
-crate/receive.py	db258f16e1841f6f5191c1c969c20314a8d143bfa6558b60f684bea440cc1712
-crate/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java	74b03a3ac3e445a04b8b15076d3ced667bfae2442bd0968cbe74468e4a499e43
+crate/prepare.py	7c2063fa5aa88d0872fff0157413a1d2fdca4f00d01c787f8650969e8b514014
+crate/receive.py	e81744965f37cb890e00f6c1c7e50f4dae44c68eedafdf46565a7e105bab5474
+crate/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java	fa8a8e63fd445c0fbcd877315044c6e5c36f779db6e8a11797e03ab805e5903f
 owner/src/main/java/com/synexia/rewrite/M3EditScope.java	962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab
 owner/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java	67f7b81126e4736c7b61b444fa6545153a61e23c012975ca796fcee623ab6625
 owner/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java	fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef

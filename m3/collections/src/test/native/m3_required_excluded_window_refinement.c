@@ -101,12 +101,12 @@ static uint64_t total_payload_calls;
 static unsigned char exception_token;
 
 JNIEXPORT jint JNICALL
-Java_com_m3_collections_M3IndexMaskCompactor_windowMasksAbiNative(JNIEnv *, jclass);
+Java_jdk_m3_collections_M3IndexMaskCompactor_windowMasksAbiNative(JNIEnv *, jclass);
 JNIEXPORT jintArray JNICALL
-Java_com_m3_collections_M3IndexMaskCompactor_selectWindowMasksNative(
+Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowMasksNative(
         JNIEnv *, jclass, jintArray, jint, jbyteArray, jint, jint, jint, jint);
 JNIEXPORT jlongArray JNICALL
-Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowMasksNative(
+Java_jdk_m3_collections_M3IndexMaskCompactor_selectLongWindowMasksNative(
         JNIEnv *, jclass, jlongArray, jint, jbyteArray, jint, jint, jint, jint);
 
 static void need(int condition, const char *finding) {
@@ -418,10 +418,10 @@ static void JNICALL put_longs(JNIEnv *env, jlongArray target, jsize start, jsize
 static jobject invoke(JNIEnv *env, jobject rows, jbyteArray states, jint row_offset,
         jint state_offset, jint length, jint required, jint excluded) {
     if (current.width == INT_LANE) {
-        return (jobject)Java_com_m3_collections_M3IndexMaskCompactor_selectWindowMasksNative(
+        return (jobject)Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowMasksNative(
                 env, NULL, (jintArray)rows, row_offset, states, state_offset, length, required, excluded);
     }
-    return (jobject)Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowMasksNative(
+    return (jobject)Java_jdk_m3_collections_M3IndexMaskCompactor_selectLongWindowMasksNative(
             env, NULL, (jlongArray)rows, row_offset, states, state_offset, length, required, excluded);
 }
 
@@ -662,7 +662,7 @@ int main(int argc, char **argv) {
     api.SetLongArrayRegion = put_longs;
     JNIEnv environment = &api;
     JNIEnv *env = &environment;
-    need(Java_com_m3_collections_M3IndexMaskCompactor_windowMasksAbiNative(env, NULL) == 1,
+    need(Java_jdk_m3_collections_M3IndexMaskCompactor_windowMasksAbiNative(env, NULL) == 1,
             "unchanged required/excluded window capability value");
     const jint lengths[] = {0, 1, 2, 127, 128, 129, 255, 256, 257, 511, 512, 513, 1023, 1024, 1025, 4097};
     const jint offsets[][2] = {{0, 0}, {3, 5}, {7, 1}, {1, 9}};

@@ -28,7 +28,7 @@
     },
     {
       "path": "m3/tooling/jmod-recipes/tools/jmod_pack.py",
-      "before_sha256": "a2c1f69f6aaea0de7d5047c14f6f7530fe3231dca97fffdc4defee506daeb454",
+      "before_sha256": "250d98a2789ed8d5018a5b911a14c0a6729e435a9da1513d37a2dac7429ec3d6",
       "after_sha256": "8acdc46eaa0cac0861384d6caf252d1a2f763c80d09b68932177e1dac598bfaf",
       "decision": "Existing owner adds strict ZIP/class/module admission plus release/date/jmods-only options. Existing Jackson runtime CLI remains valid; actual source-built JMOD and linked-image acceptance is required."
     }

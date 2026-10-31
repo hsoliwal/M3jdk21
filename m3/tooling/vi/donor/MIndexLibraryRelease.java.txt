@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
-package com.synexia.mindex.vm;
+package jdk.internal.m3.mindex.vm;
 
-import com.synexia.mindex.MIndexString;
+import jdk.internal.m3.mindex.MIndexString;
 import java.util.Objects;
 
 /**

@@ -26,11 +26,11 @@
   "observed_interop_jar_sha256": "a944183c0eea22b006781a84bfb678009a9d6f8a7b215675501fdb4bd2b89099",
   "public_surface": {"factories": 18, "collectors": 11},
   "files": {
-    "M3LibraryCollections.java": "fa144a8c8617f190cdb1848bc28d3c9f6ae4302666a00c8ea3e904f25afc06fd",
-    "M3LibraryCollectors.java": "8836aaca2113c3d25bffbf1a226394ffa0f6a7c7fbba826715a0aa96c5500a19",
-    "M3SpringMultiValueMap.java": "cfd7a51bdce14f3e8f2b875d529006c3863049d10087a18b14ccad45f0fd669a",
+    "M3LibraryCollections.java": "4135be52f0cc847acc58e747a153c63f242c12c799f821e4d24f1de1bec8dd16",
+    "M3LibraryCollectors.java": "be19e93efdd49ce02cd4209aa274a3ea6779a591d4ce9b313bd5a616c22e0b78",
+    "M3SpringMultiValueMap.java": "6e58eea3bcf3fb0af727236b05da83a344459b6896bcfaa0145440a590b2e0a9",
     "M3LibraryClosureTest.java": "5ece9a369bcf5a223cb163ed0857534600fcd53bcc881f239956be15a4200f40",
-    "M3LibraryCollectionsTest.java": "4bebee17ef96cefd2c779c76a0b190e27de311d136dec2de0fc5c05161ac199a"
+    "M3LibraryCollectionsTest.java": "db377aa16cf2de5a8f49ef273f9b5fc7fb0f1a35ac247339f0556cea086d2d04"
   },
   "limits": [
     "Focused separately built optional Java library, not wholesale JDK replacement or installed M3JDK image.",

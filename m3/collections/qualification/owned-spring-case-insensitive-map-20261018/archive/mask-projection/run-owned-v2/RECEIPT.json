@@ -4,9 +4,9 @@
   "owner": {
     "path": "S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\candidate\\com\\m3\\collections\\spring\\M3LinkedCaseInsensitiveMap.java",
     "bytes": 31224,
-    "sha256": "450e3f70be37f0fa0fcee7edd4adc8a2eea4a05a40646fb3e5c531e4ee8447ca"
+    "sha256": "d90b72771ab454aa1dd03eb2c5784d7aaffd612736868a66fbe2682c8ab05f7c"
   },
-  "fixtureSHA256": "e7b83f57343e3399865671eab4ec76997eed4953f8607fe8774c8ac9714c3b65",
+  "fixtureSHA256": "3fa184fa99f7b64ee3f0a964d55ecfd17032f2269074c7671e99ffa39cde1f11",
   "results": {
     "owned-java": {
       "status": "PASS",

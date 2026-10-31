@@ -1,6 +1,6 @@
 {
   "candidate_materialization": "ALL_SUPPLIED_MANIFEST_INPUTS_VALIDATED",
-  "resolver": "com.m3.tools.modulepack.M3ModuleGraph",
+  "resolver": "jdk.m3.tools.modulepack.M3ModuleGraph",
   "roots": [
     "java.base",
     "jdk.m3fs"

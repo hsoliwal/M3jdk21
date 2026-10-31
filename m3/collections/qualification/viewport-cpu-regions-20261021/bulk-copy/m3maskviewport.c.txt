@@ -35,7 +35,7 @@ static int read_chunk(JNIEnv *env, jintArray offsets, jintArray flags,
 }
 
 JNIEXPORT jint JNICALL
-Java_com_m3_collections_M3MaskViewportNative_project(JNIEnv *env, jclass cls,
+Java_jdk_m3_collections_M3MaskViewportNative_project(JNIEnv *env, jclass cls,
         jintArray offsets, jintArray flags, jint first, jint length,
         jint required, jint forbidden, jintArray target, jint targetOffset) {
     (void) cls;

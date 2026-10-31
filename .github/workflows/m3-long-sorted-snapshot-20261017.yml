@@ -3,11 +3,11 @@ name: M3 long sorted snapshot recipe and Java21 contract
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3LongSortedSnapshot.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3LongSortedSnapshotSelfTest.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongSortedSnapshot.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3LongSortedSnapshotSelfTest.java'
       - 'm3/collections/snapshot-recipe-20261017/**'
       - 'm3/collections/qualification/sorted-snapshot-20261017/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3long-sorted-snapshot-20261017/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3long-sorted-snapshot-20261017/**'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3long-sorted-snapshot-20261017.yml'
       - '.github/workflows/m3-long-sorted-snapshot-20261017.yml'
   workflow_dispatch:
@@ -32,7 +32,7 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           from hashlib import sha256
-          root=Path('m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3long-sorted-snapshot-20261017')
+          root=Path('m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3long-sorted-snapshot-20261017')
           rows=[x.split('\t') for x in (root/'manifest.tsv').read_text().splitlines() if x and not x.startswith('#')]
           assert len(rows)==2
           for path,before,after,template in rows:
@@ -50,10 +50,10 @@ jobs:
           javac --release 21 -proc:none -Xlint:all -Werror \
             -sourcepath m3/collections/src/main/java:m3/collections/src/test/java \
             -d target/m3-snapshot-javac \
-            m3/collections/src/main/java/com/m3/collections/M3LongSortedSnapshot.java \
-            m3/collections/src/test/java/com/m3/collections/M3LongSortedSnapshotSelfTest.java
-          java -cp target/m3-snapshot-javac com.m3.collections.M3LongSortedSnapshotSelfTest
-          java -Xint -cp target/m3-snapshot-javac com.m3.collections.M3LongSortedSnapshotSelfTest
+            m3/collections/src/main/java/jdk/m3/collections/M3LongSortedSnapshot.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3LongSortedSnapshotSelfTest.java
+          java -cp target/m3-snapshot-javac jdk.m3.collections.M3LongSortedSnapshotSelfTest
+          java -Xint -cp target/m3-snapshot-javac jdk.m3.collections.M3LongSortedSnapshotSelfTest
       - name: Execute the actual Maven/OpenRewrite LST recipe and JUnit fixed-point gates
         shell: bash
         run: |

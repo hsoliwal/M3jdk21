@@ -1,5 +1,5 @@
 {
-  "schema": "synexia.public-fork-source-audit.v1",
+  "schema": "m3.public-fork-source-audit.v1",
   "date": "2026-10-19",
   "scope": "Three assigned public collection-related forks under hsoliwal. Root owns the complete account repository inventory.",
   "mode": "read-only source donor audit; candidate-only reuse decisions",

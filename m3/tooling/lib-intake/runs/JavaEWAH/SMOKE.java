@@ -1,5 +1,5 @@
 // expect: 3
-import com.m3.collections.ewah.EWAHCompressedBitmap;
+import jdk.m3.collections.ewah.EWAHCompressedBitmap;
 
 /** LIB_INTAKE smoke: the relocated JMOD is usable from the linked image. */
 public final class SMOKE {

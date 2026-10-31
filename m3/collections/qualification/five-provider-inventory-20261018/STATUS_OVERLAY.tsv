@@ -8,16 +8,16 @@ org.apache.commons.collections4.multimap.HashSetValuedHashMap	DONE master	com.m3
 org.apache.commons.collections4.multiset.UnmodifiableMultiSet	DONE master	com.m3.collections.apache.M3ApacheUnmodifiableMultiSet	master:m3/collections/implementations/apache	-	owned decorator closure of the multivalue packet
 org.apache.commons.collections4.set.UnmodifiableSet	DONE master	com.m3.collections.apache.M3ApacheUnmodifiableSet	master:m3/collections/implementations/apache	-	owned decorator closure of the multivalue packet
 org.springframework.util.LinkedMultiValueMap	DONE master	com.m3.collections.spring.M3MultiValueMap	master:m3/collections/qualification/owned-spring-multivalue-map-20261017	-	owned Spring MultiValueMap
-java.util.ArrayList	EXISTING	com.m3.collections.M3ArrayList	master:m3/collections/src/main/java/com/m3/collections/M3ArrayList.java	-	core generic list owner
-java.util.LinkedHashMap	EXISTING	com.m3.collections.M3LinkedHashMap	master:m3/collections/src/main/java/com/m3/collections/M3LinkedHashMap.java	-	slot lanes + int link lanes
-java.util.LinkedHashSet	EXISTING	com.m3.collections.M3LinkedHashSet	master:m3/collections/src/main/java/com/m3/collections/M3LinkedHashSet.java	-	keyOnly slot table
-java.util.LinkedList	EXISTING	com.m3.collections.M3LinkedList	master:m3/collections/src/main/java/com/m3/collections/M3LinkedList.java	-	slot lanes + int link lanes
-java.util.TreeMap	EXISTING	com.m3.collections.M3TreeMap	master:m3/collections/src/main/java/com/m3/collections/M3TreeMap.java	viewport order-statistic tree (rank queries)	AVL over slot lanes
-java.util.TreeSet	EXISTING	com.m3.collections.M3TreeSet	master:m3/collections/src/main/java/com/m3/collections/M3TreeSet.java	viewport order-statistic tree (rank queries)	AVL over slot lanes
-java.util.WeakHashMap	EXISTING	com.m3.collections.M3WeakHashMap	master:m3/collections/src/main/java/com/m3/collections/M3WeakHashMap.java	-	weak-reference slot owner
-java.util.IdentityHashMap	EXISTING	com.m3.collections.M3ObjectIdentityMap	master:m3/collections/src/main/java/com/m3/collections/M3ObjectIdentityMap.java	-	flat reference lanes
-java.util.concurrent.LinkedTransferQueue	EXISTING	com.m3.collections.M3TransferQueue	master:m3/collections/src/main/java/com/m3/collections/M3TransferQueue.java	-	transfer buffer owner
-java.util.concurrent.LinkedBlockingDeque	EXISTING	com.m3.collections.M3BlockingDeque	master:m3/collections/src/main/java/com/m3/collections/M3BlockingDeque.java	-	blocking ring owner
+java.util.ArrayList	EXISTING	com.m3.collections.M3ArrayList	master:m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java	-	core generic list owner
+java.util.LinkedHashMap	EXISTING	com.m3.collections.M3LinkedHashMap	master:m3/collections/src/main/java/jdk/m3/collections/M3LinkedHashMap.java	-	slot lanes + int link lanes
+java.util.LinkedHashSet	EXISTING	com.m3.collections.M3LinkedHashSet	master:m3/collections/src/main/java/jdk/m3/collections/M3LinkedHashSet.java	-	keyOnly slot table
+java.util.LinkedList	EXISTING	com.m3.collections.M3LinkedList	master:m3/collections/src/main/java/jdk/m3/collections/M3LinkedList.java	-	slot lanes + int link lanes
+java.util.TreeMap	EXISTING	com.m3.collections.M3TreeMap	master:m3/collections/src/main/java/jdk/m3/collections/M3TreeMap.java	viewport order-statistic tree (rank queries)	AVL over slot lanes
+java.util.TreeSet	EXISTING	com.m3.collections.M3TreeSet	master:m3/collections/src/main/java/jdk/m3/collections/M3TreeSet.java	viewport order-statistic tree (rank queries)	AVL over slot lanes
+java.util.WeakHashMap	EXISTING	com.m3.collections.M3WeakHashMap	master:m3/collections/src/main/java/jdk/m3/collections/M3WeakHashMap.java	-	weak-reference slot owner
+java.util.IdentityHashMap	EXISTING	com.m3.collections.M3ObjectIdentityMap	master:m3/collections/src/main/java/jdk/m3/collections/M3ObjectIdentityMap.java	-	flat reference lanes
+java.util.concurrent.LinkedTransferQueue	EXISTING	com.m3.collections.M3TransferQueue	master:m3/collections/src/main/java/jdk/m3/collections/M3TransferQueue.java	-	transfer buffer owner
+java.util.concurrent.LinkedBlockingDeque	EXISTING	com.m3.collections.M3BlockingDeque	master:m3/collections/src/main/java/jdk/m3/collections/M3BlockingDeque.java	-	blocking ring owner
 java.util.ArrayDeque	CLAIMED #1317 #1330	com.m3.collections.M3ArrayDeque	open PR #1317 (direct generic Object[] ArrayDeque) and #1330 (DOOP slot ports)	M3LongArrayDeque	do not duplicate
 java.util.PriorityQueue	CLAIMED #1317 #1330	com.m3.collections.M3PriorityQueue	open PR #1317 and #1330	M3LongPriorityQueue	do not duplicate
 java.util.HashMap	CLAIMED #1355 #1330	com.m3.collections.M3ArrayMap / M3HashMap	open PR #1355 (DOOP array/mask HashMap) and #1330	M3LinkedHashMap	do not duplicate

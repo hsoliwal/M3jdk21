@@ -6,7 +6,7 @@
   "adapter_upgrade_repository": "hsoliwal/com.synexia",
   "adapter_upgrade_pr": 10454,
   "adapter_upgrade_head": "390b802a74b59d27f6b2c57a608d50d7bc67a6ed",
-  "tornado_repository": "hsoliwal/synexia-tornadovm",
+  "tornado_repository": "hsoliwal/m3-tornadovm",
   "tornado_provider_pr": 7,
   "tornado_provider_merge": "3bf826714a48d7fdf346ffde8a0fc25c525572c5",
   "intake_mode": "TARGET_OWNED_PORT",

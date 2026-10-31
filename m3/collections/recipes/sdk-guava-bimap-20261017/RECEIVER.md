@@ -8,12 +8,12 @@
 
 ## Exact source transformations — in serial order
 
-Recipe and provenance precede materialized source. The Maven OpenRewrite SDK class `com.synexia.m3.GuavaBiMapSdk20261017` extends the existing first-party `M3GpuToolJoinRecipe` and reads the **same** sealed 5-target manifest. Its two source-replacement preimages are current M3JDK21 factory `8ca3906e4ca1e502fa65e8a4410f2a225c0a04e0` and factory map `603b0a40b859fd0340e0a88bd20d4955168fc4b2`. New Java source/test paths must be ABSENT. Changed source must be regenerated from Synexia templates; the recipe refuses unrelated owner drift.
+Recipe and provenance precede materialized source. The Maven OpenRewrite SDK class `com.synexia.m3.GuavaBiMapSdk20261017` extends the existing first-party `M3GpuToolJoinRecipe` and reads the **same** sealed 5-target manifest. Its two source-replacement preimages are current M3JDK21 factory `8008c21d6a6b3520dfa26d5ea7b8a63937198fff` and factory map `603b0a40b859fd0340e0a88bd20d4955168fc4b2`. New Java source/test paths must be ABSENT. Changed source must be regenerated from Synexia templates; the recipe refuses unrelated owner drift.
 
-- New implementation: `M3GuavaBiMap.java`, Git blob `50ed7fb7d179ce46d3849de107d0081bdf9d8be2`
-- Standalone 324001-case Java reference oracle: `M3GuavaBiMapSelfTest.java`, blob `238ba78fafe131147dc7c0f079feb95a19441230`
-- Actual provider API/HashBiMap JUnit oracle: `M3GuavaBiMapContractTest.java`, blob `02ff2add2e75121c255452bd05ccf4ca9e771a3d`
-- Appended correctly named factory: `M3LibraryCollections.java`, blob `1bb400a037ac27f6f864f8e47fe15b89328578d6`
+- New implementation: `M3GuavaBiMap.java`, Git blob `217287b49fbada1247a6a49a738cce08cee8a60d`
+- Standalone 324001-case Java reference oracle: `M3GuavaBiMapSelfTest.java`, blob `7bdbf6ed03b263b79d7a4cd0ec01962979da0b26`
+- Actual provider API/HashBiMap JUnit oracle: `M3GuavaBiMapContractTest.java`, blob `b58333fc304529896ceacb46190e60d125df18cb`
+- Appended correctly named factory: `M3LibraryCollections.java`, blob `36f90fd77190a1e7624ddb2a931a092d5d0c0d1e`
 - 23rd mapped provider descriptor: `sdk-family-bindings.tsv`, blob `5455ec167816a66631b6abbe65ec597bf28e793a`
 
 The recipe tests named SDK discovery, deterministic postimages, exact fixed point, and drift refusals. The new product class stores only the two already-existing M3 flat indexed map owners, one forward and one reverse. Iterators/view objects remain API-boundary allocations rather than resident Entry nodes. Mutable ordinary Guava `BiMap` semantics are not substituted with an immutable cached BitSet: live inverse and map-view mutations are preserved.

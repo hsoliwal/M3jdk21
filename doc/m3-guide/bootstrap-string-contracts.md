@@ -25,7 +25,7 @@ All linked test sources were **read, NOT_RUN**. No JDK build, test, recipe,
 policy verifier, benchmark or native library was executed for this documentation.
 The [porting invariant](../../m3/docs/m3jdk21-porting-invariant.md),
 [naming map](../../m3/docs/name-mapping.json),
-[lineage](../../m3/docs/m3string-synexia-lineage.md) and
+[lineage](../../m3/docs/m3string-m3-lineage.md) and
 [runtime integration guide](../../m3/runtime-integration/README.md) retain their
 ownership, licensing and pending qualification boundaries. Documentation does not
 advance the ordered receiving phase or establish universal content interning,

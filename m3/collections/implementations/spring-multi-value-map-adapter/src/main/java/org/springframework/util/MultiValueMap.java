@@ -142,7 +142,7 @@ public interface MultiValueMap<K, V> extends Map<K, List<V>> {
 	 */
 	static <K, V> MultiValueMap<K, V> fromMultiValue(Map<K, List<V>> map) {
 		if (map == null) { throw new IllegalArgumentException("Map must not be null"); }
-		return new com.m3.collections.spring.M3MultiValueMapAdapter<>(map);
+		return new jdk.m3.collections.spring.M3MultiValueMapAdapter<>(map);
 	}
 
 }

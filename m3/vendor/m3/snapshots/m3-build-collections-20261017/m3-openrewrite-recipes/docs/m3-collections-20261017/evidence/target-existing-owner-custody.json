@@ -1,0 +1,48 @@
+{
+  "baseline": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+  "status": "EXACT_GIT_BLOB_VERIFIED",
+  "files": [
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+      "git_blob_sha1": "240bbfb62ca949bfbd8abb0061cccad6630f7888",
+      "sha256": "8c1aaba72372c6caecfa35d4121a0b518888d64933bef428a8e61c15b3a746d9",
+      "bytes": 5949,
+      "crlf": 0
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "git_blob_sha1": "22782ee02b06b4404b5c87fd15f10f4e8e9749ea",
+      "sha256": "ec1091ae700abede90db95bb04924ad2ea0eb53432e4ef91f5049227c3d25dcb",
+      "bytes": 3577,
+      "crlf": 0
+    },
+    {
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java",
+      "git_blob_sha1": "02db2523258c1f1dca676a2612579980321f46c7",
+      "sha256": "86eb2c9a436aac6f6e5b99f5c275636ca272d849dd08aa07f8796271167c63a1",
+      "bytes": 10437,
+      "crlf": 0
+    },
+    {
+      "path": "m3/ports/collections/src/main/java/jdk/m3/util/M3PrimitiveKind.java",
+      "git_blob_sha1": "1210bc9bd208444209e784f19010600acd7cb492",
+      "sha256": "c79b8593917eb455226f5ea4e4f4b583859de33b9ad9446b159d97fffa5d2662",
+      "bytes": 14744,
+      "crlf": 0
+    },
+    {
+      "path": "m3/ports/collections/src/main/java/jdk/m3/util/M3DenseHash.java",
+      "git_blob_sha1": "e82704eaac12ab81a311d566ca5f2b9e22cda499",
+      "sha256": "959d05bebf3003000e2be5a395febe4d9c921cac25d76bd8745174d2635eee6b",
+      "bytes": 1650,
+      "crlf": 0
+    },
+    {
+      "path": "m3/tooling/jmod-recipes/tools/jmod_pack.py",
+      "git_blob_sha1": "83b1483c6c5e6a39c519f82af603382914eed3e5",
+      "sha256": "9f541885c4fd9e9e868c63af44e9d8bc10cb6d5ebcdb663bacc2a47320404b57",
+      "bytes": 5456,
+      "crlf": 0
+    }
+  ]
+}

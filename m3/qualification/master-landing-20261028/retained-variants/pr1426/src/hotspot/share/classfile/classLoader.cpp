@@ -1491,7 +1491,7 @@ jlong ClassLoader::class_link_time_ms() {
 }
 
 int ClassLoader::compute_Object_vtable() {
-  // M3JDK21 Object has six non-final instance methods: hashCode, equals,
+  // M3JDK 21 Object has six non-final instance methods: hashCode, equals,
   // clone, toString, finalize, and toAdapter. Reserve their slots before
   // Object is loaded so early array klass metadata has the same vtable size.
   const int M3_Object_vtable_size = 6;

@@ -1,6 +1,6 @@
 {
   "authority": {
-    "canonical": "com.synexia.rewrite.M3AtomizeRecipe + M3PatternizeRecipe via .m3/atomize-patternize/run.sh",
+    "canonical": "jdk.internal.m3.rewrite.M3AtomizeRecipe + M3PatternizeRecipe via .m3/atomize-patternize/run.sh",
     "projection": "cpu_lhash_treesitter leaf extraction + declared pattern dimensions (candidate evidence, no mutation authority)",
     "status": "PENDING_BUILD_HOST (Maven/OpenRewrite not executed on this host)"
   },

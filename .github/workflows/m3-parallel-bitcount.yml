@@ -3,12 +3,12 @@ name: M3 Parallel Bitcount Provider
 on:
   pull_request:
     paths:
-      - 'm3/ports/parallel-bulk/src/main/java/com/m3/parallel/bulk/M3ParallelBitCountProvider.java'
-      - 'm3/ports/parallel-bulk/src/test/java/com/m3/parallel/bulk/M3ParallelBitCount*.java'
+      - 'm3/ports/parallel-bulk/src/main/java/jdk/m3/parallel/bulk/M3ParallelBitCountProvider.java'
+      - 'm3/ports/parallel-bulk/src/test/java/jdk/m3/parallel/bulk/M3ParallelBitCount*.java'
       - 'm3/ports/parallel-bulk/verification/*bitcount*'
       - 'm3/ports/parallel-bulk/verification/BITCOUNT.md'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/m3-bulk-bitcount-20261014/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bulk-bitcount-20261014/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-bulk-bitcount-20261014/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bulk-bitcount-20261014/**'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-parallel-bitcount.yml'
       - '.github/workflows/m3-parallel-bitcount.yml'
   workflow_dispatch:

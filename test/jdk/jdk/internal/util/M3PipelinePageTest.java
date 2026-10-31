@@ -1,6 +1,6 @@
 /*
  * @test
- * @summary M3JDK21 primitive-mask paged pipeline retains immutable prefixes and stage semantics
+ * @summary M3JDK 21 primitive-mask paged pipeline retains immutable prefixes and stage semantics
  * @modules java.base/jdk.internal.util
  * @run main/othervm -Xss256k M3PipelinePageTest
  */

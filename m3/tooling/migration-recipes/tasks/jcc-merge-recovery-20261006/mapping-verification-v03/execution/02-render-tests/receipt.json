@@ -16,5 +16,5 @@
   "exit_code": 0,
   "name": "02-render-tests",
   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-  "stdout_sha256": "348dff2530eb8679059bfcf8bdb97b2959a5647f977966e20e12de444521adb5"
+  "stdout_sha256": "b13eda14062c039303d3654e509bfd02d12176c388a772ec6c0543c370a6d7ad"
 }

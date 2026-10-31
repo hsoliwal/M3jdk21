@@ -8,7 +8,7 @@ import subprocess
 from pathlib import Path
 
 REVISION = "8c8dd70e659b99c23a2d0e7daeb2adadf95429c2"
-PREFIX = "m3/collections/src/main/java/com/m3/collections/"
+PREFIX = "m3/collections/src/main/java/jdk/m3/collections/"
 INVENTORY = Path("m3/collections/algorithm-catalogue/all-collections-20261029/SOURCE_INVENTORY.tsv")
 FIELDS = ("path", "git_blob_sha1", "size_bytes", "name_family",
           "algorithm_review_cue", "open_pr_numbers", "inventory_status")

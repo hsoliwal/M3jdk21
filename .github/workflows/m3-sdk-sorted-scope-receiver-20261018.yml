@@ -3,7 +3,7 @@ name: M3 SDK Sorted Scope Recipe Receiver Java21
 on:
   pull_request:
     paths:
-      - 'm3/collections/qualification/m3-sdk-families-20261017/recipe-v3/src/main/java/com/synexia/m3/M3SdkSortedContractRecipe.java'
+      - 'm3/collections/qualification/m3-sdk-families-20261017/recipe-v3/src/main/java/jdk/internal/m3/M3SdkSortedContractRecipe.java'
       - 'm3/docs/m3-sdk-sorted-scope-receiving-20261018.md'
       - '.github/workflows/m3-sdk-sorted-scope-receiver-20261018.yml'
   push:
@@ -36,7 +36,7 @@ jobs:
           python3 - <<'PY'
           import subprocess
           from pathlib import Path
-          p = "m3/collections/qualification/m3-sdk-families-20261017/recipe-v3/src/main/java/com/synexia/m3/M3SdkSortedContractRecipe.java"
+          p = "m3/collections/qualification/m3-sdk-families-20261017/recipe-v3/src/main/java/jdk/internal/m3/M3SdkSortedContractRecipe.java"
           original = subprocess.check_output(["git", "show", "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49:" + p])
           actual = Path(p).read_bytes()
           old = b"for (Path p = file.getParent(); !p.equals(root); p = p.getParent()) {"
@@ -50,8 +50,8 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p /tmp/m3-sdk-sorted-scope-classes
-          javac --release 21 -Xlint:all -Werror -d /tmp/m3-sdk-sorted-scope-classes m3/collections/qualification/m3-sdk-families-20261017/recipe-v3/src/main/java/com/synexia/m3/M3SdkSortedContractRecipe.java
-          java -cp /tmp/m3-sdk-sorted-scope-classes com.synexia.m3.M3SdkSortedContractRecipe --selftest
+          javac --release 21 -Xlint:all -Werror -d /tmp/m3-sdk-sorted-scope-classes m3/collections/qualification/m3-sdk-families-20261017/recipe-v3/src/main/java/jdk/internal/m3/M3SdkSortedContractRecipe.java
+          java -cp /tmp/m3-sdk-sorted-scope-classes jdk.internal.m3.M3SdkSortedContractRecipe --selftest
       - name: Retain all product sources unchanged
         shell: bash
         run: |

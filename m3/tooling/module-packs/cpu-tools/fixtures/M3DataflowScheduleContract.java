@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
-import com.m3.tools.cpu.M3DataflowLiveness;
-import com.m3.tools.cpu.M3CriticalPath;
+import jdk.m3.tools.cpu.M3DataflowLiveness;
+import jdk.m3.tools.cpu.M3CriticalPath;
 import java.util.Arrays;
 import java.util.Random;
 

@@ -21,7 +21,7 @@ def main():
     pack, output = args.pack.resolve(strict=True), args.output.absolute()
     if output.exists() or output.is_relative_to(pack):
         raise ValueError("fresh output directory outside source required")
-    owner = pack / "src/com.m3.tools.cpu/com/m3/tools/cpu"
+    owner = pack / "src/jdk.m3.tools.cpu/jdk/m3/tools/cpu"
     fixtures = pack / "fixtures"
     source = [owner / (name + ".java") for name in CLASSES]
     source += [fixtures / (name + ".java") for name in EXPECTED]

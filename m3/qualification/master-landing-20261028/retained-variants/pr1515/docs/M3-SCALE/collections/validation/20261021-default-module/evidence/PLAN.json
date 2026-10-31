@@ -12,7 +12,7 @@
   "source_manifest": {
     "path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-current-module-materialization-k-v1\\SOURCE_MANIFEST.tsv",
     "bytes": 97733,
-    "sha256": "66558ebc244b9e8b3be082920f160151042579dae765796f2038d15e5a54a3ba"
+    "sha256": "1c855115d28413df7bef607f1aeb624998bb8d606300adc33f21bc6fef9554af"
   },
   "materialization_result": {
     "path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-current-module-materialization-k-v1\\evidence\\RESULT.json",
@@ -53,7 +53,7 @@
     {
       "path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-owning-module-execution-prep-k-v1\\SOURCE_EFFECTS.json",
       "bytes": 19800,
-      "sha256": "c0db73d08e6ad5f4521d242164b6fcffc7d1fbbf6bd53ce4aa0f26f0f3199b78"
+      "sha256": "297d8b6cadd87e6deb98a048fe2ed965632646d05b019ed370e07f6f1af1ed5c"
     },
     {
       "path": "C:\\Program Files\\Java\\jdk-21\\lib\\src.zip",
@@ -203,17 +203,17 @@
     {
       "path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-current-policy-inputs-k-v1\\AGENTS.md",
       "bytes": 6710,
-      "sha256": "f8296f067bdf3b6da5526f33b480588c6c082689bf7c9b99614030bde960b143"
+      "sha256": "df950d97a2ee886d0a0c5fabe65b9b4d20974b400b7e565f323d78ab7697ac39"
     },
     {
       "path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-current-policy-inputs-k-v1\\m3\\docs\\m3jdk21-porting-invariant.md",
       "bytes": 37648,
-      "sha256": "6cd1bd243f216a3210433525e3742c0fc1ab02cbf02bbc40225c40c5be80a01f"
+      "sha256": "95a5d111f0d9b2467bcc84828adc5b0efcfd1091e35a1b5c1bf1c484a2066b03"
     },
     {
       "path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-current-policy-inputs-k-v1\\m3\\docs\\name-mapping.json",
       "bytes": 451339,
-      "sha256": "1085c259e66bff017137e0c63bb86fc0b8daf436865f6378075cf4c920035ef4"
+      "sha256": "ac0b133afdfedcf68727332c91e82390a951f3a03350a6cffa9de0e6edcb77f0"
     }
   ],
   "stage": [
@@ -470,7 +470,7 @@
   "source_effects": {
     "path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-owning-module-execution-prep-k-v1\\SOURCE_EFFECTS.json",
     "bytes": 19800,
-    "sha256": "c0db73d08e6ad5f4521d242164b6fcffc7d1fbbf6bd53ce4aa0f26f0f3199b78"
+    "sha256": "297d8b6cadd87e6deb98a048fe2ed965632646d05b019ed370e07f6f1af1ed5c"
   },
   "limits": [
     "One independently licensed Apache module functional test lane; no JNI/jtreg/JCK/fullSDK/JIT/performance/family/live merge promotion.",

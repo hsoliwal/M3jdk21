@@ -1,7 +1,7 @@
 /* Copyright 2026 Hitesh Soliwal and contributors.
  * SPDX-License-Identifier: Apache-2.0
  */
-import com.m3.text.*;
+import jdk.m3.text.*;
 import java.util.*;
 import java.util.regex.*;
 

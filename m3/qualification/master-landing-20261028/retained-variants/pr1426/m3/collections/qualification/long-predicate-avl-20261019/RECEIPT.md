@@ -5,7 +5,7 @@ Status: DRAFT; contract-preserving atom candidate, not completed M3JDK21 or JDK2
 
 ## Direct runtime owner, no integration facade
 
-Refined the existing `m3/collections/src/main/java/com/m3/collections/M3LongPredicates.java` persistent conjunction implementation. It is consumed by the same `M3LongFilteredView` and `M3LongSortedViews` owners, with the same Java callback, comparator, logical index, mask and native boundaries. No public API, storage representation, JNI exports, mmap ownership, or java.lang.String semantics are changed. Synexia is a source/recipe workspace, **not a runtime layer**.
+Refined the existing `m3/collections/src/main/java/jdk/m3/collections/M3LongPredicates.java` persistent conjunction implementation. It is consumed by the same `M3LongFilteredView` and `M3LongSortedViews` owners, with the same Java callback, comparator, logical index, mask and native boundaries. No public API, storage representation, JNI exports, mmap ownership, or java.lang.String semantics are changed. Synexia is a source/recipe workspace, **not a runtime layer**.
 
 Canonical first-party Apache-2.0 recipe and catalogue: https://github.com/hsoliwal/com.synexia/pull/12408
 Source-lock canonical commit: `91c87e3345c1c4e3becaa63f07763e1f1cbf7d79`
@@ -18,8 +18,8 @@ No external competitor's implementation body was imported.
 
 | Existing file | SHA-256 original | SHA-256 receiver |
 | --- | --- | --- |
-| `M3LongPredicates.java` | `e5d9d7fca94c4eef0843bb7eb7929c2baba05892207f9336a6da3a089bc882ad` | `59a20296306197c2c9d5878dc118716f36d94bd0e825fd430aba656f4dfe2667` |
-| `M3LongDeepFilterSelfTest.java` | `a5df095ddaf792e8dacdb93d674e1dd90294786684af5ca5851951d9d0a9fd6a` | `7cb605353030c09dcb048b7cc44c304a24151faea325e2bd1f41f758b5cdc2bf` |
+| `M3LongPredicates.java` | `e5d9d7fca94c4eef0843bb7eb7929c2baba05892207f9336a6da3a089bc882ad` | `7f4531b36c0749a3b9a174f5de88e236492bd054d5c11237d9616eb148cfd6c8` |
+| `M3LongDeepFilterSelfTest.java` | `a5df095ddaf792e8dacdb93d674e1dd90294786684af5ca5851951d9d0a9fd6a` | `6c6dae298f7a43f89b2ec5e621dc9ef6960b2f8b848f5e3e6dc65c8fcdf1d61a` |
 
 Both Java files are byte-for-byte the reviewed canonical recipe's sealed templates at the pinned commit. The existing `.github/workflows/m3-long-filter-balanced-20261017.yml` is unchanged and includes both files in the path trigger, compiles their closure with Java 21 `-Xlint:all -Werror`, and invokes the changed selftest in both JIT/default and `-Xint` modes.
 

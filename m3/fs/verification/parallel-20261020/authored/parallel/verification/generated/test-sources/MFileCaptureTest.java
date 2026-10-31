@@ -1,5 +1,5 @@
 /* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
-package com.m3.fs;
+package jdk.m3.fs;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -219,7 +219,7 @@ class MFileCaptureTest {
         RecordingContent provider = provider("abc");
         List<Object> captures = new ArrayList<>();
         AtomicInteger shadowCompletions = new AtomicInteger();
-        Class<?> shadowType = Class.forName("com.m3.fs.MFileShadow");
+        Class<?> shadowType = Class.forName("jdk.m3.fs.MFileShadow");
         Object shadow = Proxy.newProxyInstance(shadowType.getClassLoader(), new Class<?>[] {shadowType},
                 (proxy, method, arguments) -> {
                     if (method.getName().equals("onComplete")) {
@@ -332,15 +332,15 @@ class MFileCaptureTest {
     }
 
     private static Object completion(String kind, long count, String hash) throws Exception {
-        Class<?> type = Class.forName("com.m3.fs.MFileStreams$Completion");
-        Class<?> kinds = Class.forName("com.m3.fs.MFileStreams$CompletionKind");
+        Class<?> type = Class.forName("jdk.m3.fs.MFileStreams$Completion");
+        Class<?> kinds = Class.forName("jdk.m3.fs.MFileStreams$CompletionKind");
         Object value = List.of(kinds.getEnumConstants()).stream().filter(item -> item.toString().equals(kind)).findFirst().orElseThrow();
         return type.getConstructor(String.class, long.class, M3ContentId.class, kinds)
                 .newInstance("selected-file-layer", count, M3ContentId.parse(hash), value);
     }
 
     private static Object fromInput(MFileObservation sample, long time, Object completion) throws Exception {
-        return invoke(Class.forName("com.m3.fs.MFileCapture"), null, "fromInput",
+        return invoke(Class.forName("jdk.m3.fs.MFileCapture"), null, "fromInput",
                 new Class<?>[] {MFileObservation.class, long.class, completion.getClass()}, sample, time, completion);
     }
 

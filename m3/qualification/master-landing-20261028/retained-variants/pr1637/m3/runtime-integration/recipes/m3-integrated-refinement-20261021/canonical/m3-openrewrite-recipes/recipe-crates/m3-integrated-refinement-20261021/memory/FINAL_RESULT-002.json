@@ -1,0 +1,46 @@
+{
+  "schema": "M3_INTEGRATED_CORRECTION_MEMORY_FINAL/1",
+  "status": "PASS",
+  "profile": "m3-integrated-refinement-20261021/1.0",
+  "events": [
+    "12db3d3bea4b8a5b958ed799934c0bbe33ea8b416a47f45d803495f1e4b11acf",
+    "c876494cd3b2b01d905bb5a623ad97981e9ff113ebc0740978b0a4206491de2d",
+    "f23628de2938b1bb2a2e66ef689a40ab54a4cadca2af9d0c7158a5707f51fbbc",
+    "101b737403729e6eac9106693b5ed4e7e5c38f74499bf45221f8bd67712c6ef9",
+    "c4be4af96ddd29d4e3d401831a277a76a6057f52696b5e579625eef0bf899eaf",
+    "0d7c9961287179121cac73d192c05d6d69ae9f53bba54ea6a977205c9b28db7b"
+  ],
+  "event_count": 6,
+  "conformance_checks": 129,
+  "actual_event_integrity_checks": 6,
+  "unique_event_artifacts_verified": 71,
+  "admission": "PENDING",
+  "predecessor_checkpoint": {
+    "path": "memory/FINAL_RESULT.json",
+    "sha256": "82cd4961849f3106d10d9b09f4e3d51e3badf401e391f4c6ecfd82c278f09b0e"
+  },
+  "profile_receipt": {
+    "path": "memory/PROFILE.md",
+    "sha256": "49807fc9611675b89429da43d59af52bf92568aa3bcffd7e97555d3f3cfeea1a"
+  },
+  "retrieval": {
+    "path": "memory/LESSONS-002.md",
+    "sha256": "1ab826969c72b9e8710e6ee7a2eda729e9f892bc68602f1311884d6c235d53b3"
+  },
+  "index": {
+    "path": "memory/INDEX-002.json",
+    "sha256": "631611b8d7a7763d9b7a311eae5127ef5f44b6fa4ed6a952a31e4b39b29976f4"
+  },
+  "verification": [
+    {
+      "path": "proof/sdk-003-workflow-successor-offline/RESULT.json",
+      "sha256": "c7edd6e3cc89d93b7fd6fce6bb98b9c0d204531fd8bbfa47d9abcb9bf2dfa818"
+    },
+    {
+      "path": "proof/memory-integrity-002/RESULT.json",
+      "sha256": "88960af48a625d22bbae5174928f3c555a3077367e37034d966f85e88f17455e"
+    }
+  ],
+  "scope": "Appended sixth correction event; original five-event checkpoint and all original test/source snapshots remain byte-identical.",
+  "publication": "Separate current-base provenance and remote state; no product admission granted."
+}

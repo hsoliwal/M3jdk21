@@ -13,8 +13,8 @@ from m3_object_state_offset_receipt import (
 
 # Exact immutable successor receipt; this unit test does not admit current owners.
 HISTORICAL_SUCCESSOR = (
-    ('m3/collections/src/main/java/com/m3/collections/M3ObjectStateSlots28.java', 'c56b6a29fd7da6ab1a1c3ac4b59cd0b6a15fc2b14a20c7c41975c12b57085c79', 'c8c8b273da8d20ace83148230c62f63e03f92efa2cf880f935f9fae8dcdd3bc2'),
-    ('m3/collections/src/test/java/com/m3/collections/M3ObjectStateSlots28SelfTest.java', 'e28893fb6734437cee712554f350fa173a3189a500feb64c80c678ca046e2f7b', 'd2e750f4b3102c4269038ebd78318efc68f721ead906522f225a915c62808c26'),
+    ('m3/collections/src/main/java/jdk/m3/collections/M3ObjectStateSlots28.java', '8e1f38cace3a7e96e94707e06a25fc8fe2bf4a7315ac0ed11de1e8249a3e3c88', 'c8c8b273da8d20ace83148230c62f63e03f92efa2cf880f935f9fae8dcdd3bc2'),
+    ('m3/collections/src/test/java/jdk/m3/collections/M3ObjectStateSlots28SelfTest.java', 'e28893fb6734437cee712554f350fa173a3189a500feb64c80c678ca046e2f7b', '450df1026701f89ed870536e9284c766a3bd99409c0ac54d5f22462c2da4ca89'),
 )
 
 
@@ -24,7 +24,7 @@ class ObjectStateOffsetReceivingTest(unittest.TestCase):
         self.assertEqual(2, len(approved))
         self.assertEqual(HISTORICAL_SUCCESSOR, EXPECTED)
         self.assertEqual(
-            "f371b00237b1219cad8d131703929c32a06a56df567943411c40549e2351d4d5",
+            "de3504abbbefb2c67cf94c0ad61974ffbce3339ac4f4f530443e1af82635f9a4",
             sha256(RECEIPT))
         older = [("m3/collections/old.java", "a" * 64)]
         result = include_successor(older)

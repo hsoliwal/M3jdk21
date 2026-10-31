@@ -59,7 +59,7 @@
    <resource>
     <directory>${project.basedir}/src/main/resources</directory>
     <includes>
-     <include>com/synexia/rewrite/hash-pinned-java/m3jdk21-five-provider-key-ranges-20261018/**</include>
+     <include>jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-five-provider-key-ranges-20261018/**</include>
      <include>META-INF/rewrite/m3jdk21-five-provider-key-ranges-20261018.yml</include>
     </includes>
    </resource>
@@ -72,9 +72,9 @@
     <configuration>
      <release>21</release>
      <includes>
-      <include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
-      <include>com/synexia/rewrite/M3ScopeInference.java</include>
-      <include>com/synexia/rewrite/M3EditScope.java</include>
+      <include>jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
+      <include>jdk/internal/m3/rewrite/M3ScopeInference.java</include>
+      <include>jdk/internal/m3/rewrite/M3EditScope.java</include>
      </includes>
      <compilerArgs>
       <arg>-Xlint:all,-processing</arg>

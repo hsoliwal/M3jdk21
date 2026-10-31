@@ -3,7 +3,7 @@
   "status": "PREPARED_AND_UNCHANGED_CHECKER_FUNCTIONS_VALIDATED_NOT_COMMITTED_CLI_GATE",
   "syn_base_revision": "408373f4101fdca2fb3625bec8af1234e5fd3e26",
   "publication_branch": "aix/integrated-collections-refinement-20261021",
-  "plan_sha256": "a54cd043e9191eab17becfc0b8c282d08465ebc60cbfe31f0cf70fc59b9f5645",
+  "plan_sha256": "f4c46312a0a070618e6759adc07596d2f2225558a91e4d6e24924e0b303b1a55",
   "delta_manifest_sha256": "a91999ed4392e1c54c24c72da3325debfba58fee67bbadb760f2fa86f0a8a676",
   "checker_sha256": "55e8183c58e4bf3608355e650e3be18609feab70f7baa75c935716b396d24900",
   "policy_sha256": "4a3bbc60b2960774058c8a822999e8668239c9192571633480463d47d31381dc",
@@ -16,7 +16,7 @@
   "reused_existing_rows": [
     "synexia-openrewrite-recipes/CANONICAL_RECIPE_HOME.tsv"
   ],
-  "append_tsv_sha256": "b1f1ecdce6cf6532b3a56df36f4d5f91d2fbf6f3fcbd2f9588f2626631e5415c",
+  "append_tsv_sha256": "5a6d8c1a5303d05ee5a6a1af350028780dc5eb3778ffa228dfafb3d441793d0b",
   "preparation_violations": [],
   "files": [
     {
@@ -152,8 +152,8 @@
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/catalogue/candidate-catalogue.tsv",
       "status": "A",
-      "sha256": "4006e28e896de0b3b1b5f7bdb5848c705c0203381f2f860c45deb8f45ed8e384",
-      "git_blob": "136a7b1f004fc4db311921562a9adec0488a9f9b",
+      "sha256": "b6c60e2a9e43bd416fa0d5a5cfafb6baaf1cb9761924e0e46c7d1da81f030fb5",
+      "git_blob": "3d55f324533fa744afab7f4eab3eb98453f1296a",
       "bytes": 20493,
       "classification": "FIRST_PARTY_NO_HEADER",
       "disposition": "FIRST_PARTY_METADATA",
@@ -172,8 +172,8 @@
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/catalogue/source-coverage.tsv",
       "status": "A",
-      "sha256": "f39f29d789ba0d940d2024169f54196f549cd1c61854bedb8b58bde7ec9c9384",
-      "git_blob": "70b089d5443b83fab58f625f2ff5d61015cc3e18",
+      "sha256": "d73e9579522293bfccac2e06dd0ad81e477f9eb892179be3330d93f2f05b710f",
+      "git_blob": "1d8364d77c93c1c1491053f7acc2f01d0d80e620",
       "bytes": 162971,
       "classification": "FIRST_PARTY_NO_HEADER",
       "disposition": "FIRST_PARTY_METADATA",
@@ -232,8 +232,8 @@
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/MEASUREMENT_PARTS.json",
       "status": "A",
-      "sha256": "4eecd3fb45d0efdf4a9a87c3ceb9b126a7114b02bfa1142a84bbb0cfb9b8a256",
-      "git_blob": "a5bab882f3b9a5d89c718243521a148457cce76f",
+      "sha256": "16296aa7a0d197715a7b8e624267edcba39b4f745632a0f1347764f61cc221e4",
+      "git_blob": "78590457581236459b030c745ab77d660e04702e",
       "bytes": 2094,
       "classification": "FIRST_PARTY_NO_HEADER",
       "disposition": "FIRST_PARTY_METADATA",
@@ -262,8 +262,8 @@
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/measurement-evidence.part-001.jsonl",
       "status": "A",
-      "sha256": "14f2b2260f5b7b07577387f2f3bdbffc3e5a7663bc30712536b11123ad2a7496",
-      "git_blob": "c2607560d705eb8325334d4f96913ad116147def",
+      "sha256": "826cc1bc79dee13773786e10529b25fa87fb781d091448dcb6add792dfeb1751",
+      "git_blob": "5c7e7ae57dcca46cf0c232de2a0e1868cb8b24a2",
       "bytes": 5614883,
       "classification": "FIRST_PARTY_NO_HEADER",
       "disposition": "FIRST_PARTY_METADATA",
@@ -272,8 +272,8 @@
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/measurement-evidence.part-002.jsonl",
       "status": "A",
-      "sha256": "34a3e643b8595f453227d1f7339d0a441a44fc130048c331dae7b968e3084239",
-      "git_blob": "1c37aff275cc05dfba19cca4062be3cdb3f1e1df",
+      "sha256": "94d09cc5fe322331ad88895fe7d047a0d5f7f3530fb21d6a51533824a59a4b37",
+      "git_blob": "99c5e2c4ba90cc7169deb6d46cc8657aace4c16a",
       "bytes": 6135617,
       "classification": "FIRST_PARTY_NO_HEADER",
       "disposition": "FIRST_PARTY_METADATA",
@@ -282,8 +282,8 @@
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/measurement-evidence.part-003.jsonl",
       "status": "A",
-      "sha256": "cfd350e3f9f31193ca71d654f5c641bf13de0713bfea1bb36622449d7210a273",
-      "git_blob": "b9363588e5ea0fb6e07cb21e2df97de8ad4039ad",
+      "sha256": "3aff7533aa1ecb6591ae838cbfc338c832ded993d88b61926c9b9c99d6d91995",
+      "git_blob": "c412b0da0b53054778e9798778f618f159c0adf3",
       "bytes": 6288247,
       "classification": "FIRST_PARTY_NO_HEADER",
       "disposition": "FIRST_PARTY_METADATA",
@@ -292,8 +292,8 @@
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/measurement-evidence.part-004.jsonl",
       "status": "A",
-      "sha256": "d6fce994d8bd536106567c8fad694537f5afd4c5f29d7d7fc323ece5eca1551c",
-      "git_blob": "10e30e95f8cddcf49d409b044d2875d9c66345d8",
+      "sha256": "d640c4ff4b8918f66fd7b32dbe9f388182a87d84c432bb7522f62b1674ef4b99",
+      "git_blob": "571f2c995653210ccb885e39d490873c1dbe0d9b",
       "bytes": 5624854,
       "classification": "FIRST_PARTY_NO_HEADER",
       "disposition": "FIRST_PARTY_METADATA",
@@ -302,8 +302,8 @@
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/measurement-evidence.part-005.jsonl",
       "status": "A",
-      "sha256": "e3198fa77f5f5b2cd0cb59977a071cd8e8ca311e36d7a26f5faddfad10906e10",
-      "git_blob": "a518f1adc4626bf1adc8be0fa3b8ca341d4b03e3",
+      "sha256": "4eae507f79d20be83281dba6511621068138f06707898b6efa071c4b147dc8c4",
+      "git_blob": "666d449f478dafa099f06f490bb985e573bb1979",
       "bytes": 4043804,
       "classification": "FIRST_PARTY_NO_HEADER",
       "disposition": "FIRST_PARTY_METADATA",
@@ -452,8 +452,8 @@
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/qualification/DISK_FIXEDPOINT_RECEIPT.tsv",
       "status": "A",
-      "sha256": "43fe0ca79fda32cc0286ea5e0027ed172e6b5fb9967511692ec5406051329cb3",
-      "git_blob": "06f2763a7f1070db6b52a7157eb36bff17050b15",
+      "sha256": "250c7f478428ce768841673a7eeacde734525e05d06704c7211489ffe3b8e614",
+      "git_blob": "70064fda68aaced4ec5ce3448aee7e2e41723218",
       "bytes": 6218,
       "classification": "GENERATED",
       "disposition": "EXACT_EXECUTION_EVIDENCE",
@@ -462,8 +462,8 @@
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/qualification/DISK_FIXEDPOINT_RUN.json",
       "status": "A",
-      "sha256": "4ed9e7ea451d06951d279bcaeec80406737e92bdc625b76e41f46c74cacd8607",
-      "git_blob": "5d93c10a46c92b29b50bc0545f68062e6eabade9",
+      "sha256": "713990db1c84a05fd8316870c20088fc8532c9207c094ee3f9ec4f91739ca640",
+      "git_blob": "1c71529523dae109a24aee97e45904d4e7f6466c",
       "bytes": 783,
       "classification": "GENERATED",
       "disposition": "EXACT_EXECUTION_EVIDENCE",
@@ -482,8 +482,8 @@
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/qualification/PUBLICATION_PAYLOAD_CUSTODY.json",
       "status": "A",
-      "sha256": "05de02bb796a3dbf0bab3b09f29d76e5eb0d46a4252b533fca9b363eb0eab81f",
-      "git_blob": "62d5a944141a12bd63a36468f3f396607747981d",
+      "sha256": "6cf5db0601309dfb27da086a136d56f1fdbd3fb759c842643cda55f8270e52d2",
+      "git_blob": "bc6810eddca165b7f305b580a9ef7826536cbc8a",
       "bytes": 1457,
       "classification": "GENERATED",
       "disposition": "EXACT_EXECUTION_EVIDENCE",
@@ -492,8 +492,8 @@
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/qualification/PUBLICATION_TRANSPORT.json",
       "status": "A",
-      "sha256": "066efe270bfb33a1399b0d7337d8032923287d74022d8a600aa7abcac680b691",
-      "git_blob": "069b02f3c66137e6480e813d89f9bf4b3ecea89b",
+      "sha256": "395aae021481fde597bcbae9d2400d929d5016e1b9fa4c97dedd3c17d57ceea2",
+      "git_blob": "3cc5b21d44a4f0e0ecab1fce69c4131ed4b90aaf",
       "bytes": 3701,
       "classification": "FIRST_PARTY_NO_HEADER",
       "disposition": "FIRST_PARTY_METADATA",
@@ -502,8 +502,8 @@
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/qualification/SDK_FINAL_V3_COMPARISON.json",
       "status": "A",
-      "sha256": "e8a2e65ae35ce57619e2e6cc5f724ab5d7cb406bafc1576a0df65b827bf1696c",
-      "git_blob": "725c1423a588a94413a38bc2fbc69aad0d2a5676",
+      "sha256": "9cf2b08180ef95e29d0d1aaccb48c4cd71f612ba002c36021dff37a392e43f3b",
+      "git_blob": "7ea2d992587b10604088c0f8f09c04e9b1927af0",
       "bytes": 8063,
       "classification": "GENERATED",
       "disposition": "EXACT_EXECUTION_EVIDENCE",
@@ -512,8 +512,8 @@
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/qualification/SDK_RECEIPT.tsv",
       "status": "A",
-      "sha256": "d75fca594a063fbceed1bf38c0db91d04315dd6a793823f7938f4dd71921b26b",
-      "git_blob": "178c3d893427288cd18357eb735b65a6e5b02feb",
+      "sha256": "5fea140d411e7b3dec67bf0c062e2aea3941ebec3cf5ae81612b5e92ef2c6105",
+      "git_blob": "28b3229021e6831e1cdea383ddafe723e6892fe3",
       "bytes": 5742,
       "classification": "GENERATED",
       "disposition": "EXACT_EXECUTION_EVIDENCE",
@@ -522,8 +522,8 @@
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/qualification/SDK_RUN.json",
       "status": "A",
-      "sha256": "2ca85c6cb2f9d4b08810ac9bee2e18734f0d2ed165cecb625dba0201dde59d1b",
-      "git_blob": "875e45233fe9cb8688be42d35b58764a5f9d7f67",
+      "sha256": "82f8f661bf237c4d898eb4c5251a0703f61332fff5c036e53a2adb1f775247dc",
+      "git_blob": "6a8866cd8186dc4397ba95bfa8a5ff3a2918d17e",
       "bytes": 763,
       "classification": "GENERATED",
       "disposition": "EXACT_EXECUTION_EVIDENCE",
@@ -532,8 +532,8 @@
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/qualification/TARGET_FRESHNESS_FINAL.json",
       "status": "A",
-      "sha256": "83c47cab90a300130e6184052e03b8a5321ed2fc2f7da54d8d10ea1f93c00c29",
-      "git_blob": "e9656bbd5d0635b726b3d29ed79c18ce8b85f347",
+      "sha256": "ad7f0af0a46359c134b047a4d196f4251de72c408c24e59f0a7a5924218ee47b",
+      "git_blob": "79b2b56be5d7ac0a7b38222629114a4e24ca94a2",
       "bytes": 8414,
       "classification": "GENERATED",
       "disposition": "EXACT_EXECUTION_EVIDENCE",
@@ -592,8 +592,8 @@
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/qualification/native-resource-v2/ADMISSION_RECOMMENDATION.json",
       "status": "A",
-      "sha256": "97c73dee7d57743d085b52f9259f2b6a4c406cfa863351e42e98604bcfa2b524",
-      "git_blob": "8f547165703260c00f6b876f9046405673298262",
+      "sha256": "8e7cca4df644783da2c6c588d7bcaa7635b03398d221623bf2f99bcd394b5595",
+      "git_blob": "b5fce444bdb902ca676f0e3cff33f28d15225436",
       "bytes": 42457,
       "classification": "GENERATED",
       "disposition": "EXACT_EXECUTION_EVIDENCE",
@@ -602,8 +602,8 @@
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/qualification/native-resource-v2/RESOURCE_REVIEW.md",
       "status": "A",
-      "sha256": "137dbd8c4985c64bfbdfea90eaa7569ace378ebf36b22681576e2625ff820033",
-      "git_blob": "58e341eb76182249c454b073eb7941d76b55c652",
+      "sha256": "667544aa877704f5a53411e11f89488a57d44735d9f2077b91c8a009a350e432",
+      "git_blob": "811b5368672dedc319d943a0a13cfd9db7ac6b2d",
       "bytes": 16812,
       "classification": "GENERATED",
       "disposition": "EXACT_EXECUTION_EVIDENCE",
@@ -612,8 +612,8 @@
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/qualification/native-resource/ADMISSION_RECOMMENDATION.json",
       "status": "A",
-      "sha256": "b80c850409bb3193eb86eac7368ad8c23599d1d8747c82d2e16386db89de6ed4",
-      "git_blob": "4f2a9b39a517c1ed5eabcf10f218019c5b9fdd3d",
+      "sha256": "e3f03725b5e59587fdcde1107dfa339cb81e3e39b28a54fb85e5324c47ab7c3f",
+      "git_blob": "42a82886e3d3de3f459a8dbc4f97118e2fe32dd6",
       "bytes": 24731,
       "classification": "GENERATED",
       "disposition": "EXACT_EXECUTION_EVIDENCE",
@@ -622,8 +622,8 @@
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/qualification/recipe-v3/PASS.json",
       "status": "A",
-      "sha256": "03cdf348e958338feb78a5237fed523d25287cd2d491977084ae142f39e5cfb4",
-      "git_blob": "5b5bff06327b43ae2a945f6f96e84361bb894ebb",
+      "sha256": "744c6c4a04a747f1ef9d9e970d2e026c34ad8a73bec4d293b1561eac351607a9",
+      "git_blob": "6802e2727e88ca3a4f6d63f0443433a0de5bcf0b",
       "bytes": 1906,
       "classification": "GENERATED",
       "disposition": "EXACT_EXECUTION_EVIDENCE",
@@ -690,7 +690,7 @@
       "row_action": "APPEND"
     },
     {
-      "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/com/m3/collections/M3ArrayifiedIndexOps.java",
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/jdk/m3/collections/M3ArrayifiedIndexOps.java",
       "status": "A",
       "sha256": "42b3d760c9dfcf30eba72da193159e0ac6bd7ee06a3de292b132f49bd955ea77",
       "git_blob": "26c8f2fa2645d94fbf1b5561321b74b09dded877",
@@ -700,7 +700,7 @@
       "row_action": "APPEND"
     },
     {
-      "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
       "status": "A",
       "sha256": "5620c3deda4ec196ef9f2fe9702e410df74e348913ec94d15f816356b231b61c",
       "git_blob": "f464b17228ca22ed2e84bce15e510447c2347ff5",
@@ -710,37 +710,37 @@
       "row_action": "APPEND"
     },
     {
-      "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java",
       "status": "A",
-      "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
-      "git_blob": "9ac6c5a1e121affd28e6503d922927f6c91c3a66",
+      "sha256": "8fa3ebd0a31e78aa2c763c9ab99955e419f8573a9687d3e817e913c0ed48d8ed",
+      "git_blob": "fe30e94f5e66e2f4d43365bddb58dfdbb4f25207",
       "bytes": 5865,
       "classification": "PRESERVED_HISTORY",
       "disposition": "PRESERVED_EXACT_SOURCE",
       "row_action": "APPEND"
     },
     {
-      "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java",
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/jdk/m3/collections/M3LongBitmapFilteredSnapshot.java",
       "status": "A",
-      "sha256": "5e6340e15741b1e34c830ec69ab0f74eac1522a0b23a47238cf69ceb51fb206d",
-      "git_blob": "385d800b0dff1eb7f437e9d7958602f81339aee3",
+      "sha256": "0a9391c208f3abe7e99f8b4d7a5730b597688b4d23a4b735128247a0b78b1c01",
+      "git_blob": "53780ab4a64394b8113c6b5e69d99d0ada8e6571",
       "bytes": 14617,
       "classification": "PRESERVED_HISTORY",
       "disposition": "PRESERVED_EXACT_SOURCE",
       "row_action": "APPEND"
     },
     {
-      "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/com/m3/collections/M3LongCollection.java",
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/jdk/m3/collections/M3LongCollection.java",
       "status": "A",
-      "sha256": "ea0c1aa0957f7bafd5cf2892cbe483c98d5772192f81cc3c467d53ab5c1c7531",
-      "git_blob": "d0b389681ade738e97426d950b6291c746912cf0",
+      "sha256": "10a4309fb0be8401f2d32a33a777f339b9bd3118f698d5e74eaaf89c087f42f1",
+      "git_blob": "a2cf7fb8a1635eb0360cdc3f40052e3565dce23b",
       "bytes": 2310,
       "classification": "PRESERVED_HISTORY",
       "disposition": "PRESERVED_EXACT_SOURCE",
       "row_action": "APPEND"
     },
     {
-      "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
       "status": "A",
       "sha256": "546bc46416b146a9a5c132c078dbb73683f27293892a38fea89131de16c85ab2",
       "git_blob": "bf58cc5e711383e05034193d7347b062490ab9c6",
@@ -750,10 +750,10 @@
       "row_action": "APPEND"
     },
     {
-      "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/com/m3/collections/M3LongIterator.java",
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/jdk/m3/collections/M3LongIterator.java",
       "status": "A",
-      "sha256": "9d10e476f5d1664a1028fe52406ab05421758961c6d3d5cf163241e058a3f201",
-      "git_blob": "44778a63d99c5b1f99adee536b954a4ebb8c64f3",
+      "sha256": "524ddc82c953ec7e205687fe8b6a1be9c343d41e1a70d221c1d20cba31843402",
+      "git_blob": "3027524899d7280b43d24ac41ba9bdd237c4ff0d",
       "bytes": 554,
       "classification": "PRESERVED_HISTORY",
       "disposition": "PRESERVED_EXACT_SOURCE",
@@ -772,8 +772,8 @@
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/native/collections/m3_index_mask_window.c",
       "status": "A",
-      "sha256": "8107ba8ba5f9d7519563eba9d20e76932dd077b2359f056b05ccd0a2d7d62e18",
-      "git_blob": "bd300c90d54ede9b7f238efe8a18c918d2fcef9e",
+      "sha256": "9ed1244ef90a72845d580b8919c670760434a81cf6dfc48f3aecbc8483726c02",
+      "git_blob": "baa23467163a0e9344fe3c1d78dcc87cb707fd56",
       "bytes": 6433,
       "classification": "PRESERVED_HISTORY",
       "disposition": "PRESERVED_EXACT_SOURCE",
@@ -782,8 +782,8 @@
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/native/include/m3_jni_core.h",
       "status": "A",
-      "sha256": "0df5c1391c159a036620d0b03a1c67898be8351da5a173775ffd57e15d14933e",
-      "git_blob": "a1bd5aab67eaed2db6fdc3851d85312f24bfc63d",
+      "sha256": "e479955a398c6e1db3b626ef87f5023fa490b4971bbcf8fee9b295c3dac06a34",
+      "git_blob": "5a3d6adde420d5c9d33279376384cd4a74825a02",
       "bytes": 2262,
       "classification": "PRESERVED_HISTORY",
       "disposition": "PRESERVED_EXACT_SOURCE",
@@ -802,8 +802,8 @@
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java",
       "status": "A",
-      "sha256": "d43e7096433b24372c4ced54143d321554d6db234e86224d6d6d29946d94cb61",
-      "git_blob": "2ce544751b8783f76d66aaab9e9fecbde01fb6ed",
+      "sha256": "98da3772abcda6def4a06d6eb90a6456972b1fd71c309fe00b791c5bc157e715",
+      "git_blob": "6ee27f9c4b77733e798f79049790f0b5fdd0d3a9",
       "bytes": 13351,
       "classification": "PRESERVED_HISTORY",
       "disposition": "PRESERVED_EXACT_SOURCE",
@@ -860,47 +860,47 @@
       "row_action": "APPEND"
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/arrayification-20261018/integrated-wrappers-20261021/templates/m3/collections/src/main/java/com/m3/collections/M3ArrayifiedIndexOps.java",
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/arrayification-20261018/integrated-wrappers-20261021/templates/m3/collections/src/main/java/jdk/m3/collections/M3ArrayifiedIndexOps.java",
       "status": "A",
-      "sha256": "32c98a947abe7622767f15a2bdbf04b124953d6660c09e013457391f50b731c0",
-      "git_blob": "51eb75c877ecf4781bf0eaa90b0e970fe171fa6a",
+      "sha256": "417e9915c2b63945ede9a1f8d2deba9296be638fcddac9fe76b5c33ca35104f4",
+      "git_blob": "c32d222a996506c2dfa55bf32c27fda14d7d708d",
       "bytes": 8706,
       "classification": "UPSTREAM_MODIFIED",
       "disposition": "MODIFIED_UPSTREAM",
       "row_action": "APPEND"
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/arrayification-20261018/integrated-wrappers-20261021/templates/m3/collections/src/test/java/com/m3/collections/M3ArrayifiedIndexContract.java",
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/arrayification-20261018/integrated-wrappers-20261021/templates/m3/collections/src/test/java/jdk/m3/collections/M3ArrayifiedIndexContract.java",
       "status": "A",
-      "sha256": "b9f5b9f559a09189fe39e3bebec0380e8e1c487d5cf7ba7a59707c7992a2a133",
-      "git_blob": "b6343fdc9ae572ae73163029adcd47d3ebce8aa9",
+      "sha256": "e34baf55390d673448920cd62e52e53cc4c6a45bf519fb9127bca850183a057d",
+      "git_blob": "2ac53eff5696660e58159f47e848383922f22086",
       "bytes": 12894,
       "classification": "PRESERVED_HISTORY",
       "disposition": "PRESERVED_EXACT_SOURCE",
       "row_action": "APPEND"
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/arrayification-20261018/integrated-wrappers-20261021/templates/m3/collections/src/test/java/com/m3/collections/M3ArrayifiedIndexContractTest.java",
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/arrayification-20261018/integrated-wrappers-20261021/templates/m3/collections/src/test/java/jdk/m3/collections/M3ArrayifiedIndexContractTest.java",
       "status": "A",
-      "sha256": "6d5d09c8b73c74bb0988c1059016628b20a9f399e125b7ba141248638d6d7d81",
-      "git_blob": "9f3dd83b0dc45230abf815c11f6853c3146cd643",
+      "sha256": "37bcafb98cda6d234182ec8e3f30fa3f20dc9fcd4ae8362713c1d4b40ee75d9f",
+      "git_blob": "a937dc0c70e45aa994f21ba7e4c9233de04030e0",
       "bytes": 381,
       "classification": "PRESERVED_HISTORY",
       "disposition": "PRESERVED_EXACT_SOURCE",
       "row_action": "APPEND"
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/arrayification-20261018/integrated-wrappers-20261021/templates/m3/collections/src/test/java/com/m3/collections/M3ArrayifiedIndexResourceProbe.java",
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/arrayification-20261018/integrated-wrappers-20261021/templates/m3/collections/src/test/java/jdk/m3/collections/M3ArrayifiedIndexResourceProbe.java",
       "status": "A",
-      "sha256": "20f00638d0d7c48e44f722b6908950549e37741353e450d0c05ef7a42ceb7c88",
-      "git_blob": "4134bcd8c54f93a487f705fdbad831ea8af50f89",
+      "sha256": "fbd6738db90d9395dc51ccba5299d37a15be103031b5d7ee314ea90f4df146ee",
+      "git_blob": "ae4c57150b0321eb37a201bc798b2ed3396fb83e",
       "bytes": 3540,
       "classification": "PRESERVED_HISTORY",
       "disposition": "PRESERVED_EXACT_SOURCE",
       "row_action": "APPEND"
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/arrayification-20261018/integrated-wrappers-20261021/templates/m3/collections/src/test/java/com/m3/collections/M3BitmapOccurrenceRefinementProbe.java",
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/arrayification-20261018/integrated-wrappers-20261021/templates/m3/collections/src/test/java/jdk/m3/collections/M3BitmapOccurrenceRefinementProbe.java",
       "status": "A",
       "sha256": "787e0d81e6520f2cffb2821e1976299570c03b315e413f2a05e45381dc12bac3",
       "git_blob": "439e0a943e53c628c9b622d141a4c8988ca14f3a",
@@ -910,7 +910,7 @@
       "row_action": "APPEND"
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/arrayification-20261018/integrated-wrappers-20261021/templates/m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedWindowRefinementContract.java",
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/arrayification-20261018/integrated-wrappers-20261021/templates/m3/collections/src/test/java/jdk/m3/collections/M3RequiredExcludedWindowRefinementContract.java",
       "status": "A",
       "sha256": "ac1016f6e2d362d425604557fbc9663275983fc48494d8410b45288dc7f816e3",
       "git_blob": "be7b1d08105510a7b247eb9820d9e4cad80d9832",
@@ -952,8 +952,8 @@
     {
       "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/arrayification-20261018/integrated-wrappers-20261021/templates/src/java.base/share/classes/jdk/internal/m3/M3IntAlgorithms.java",
       "status": "A",
-      "sha256": "765135a735a4651eb4ebf4dbefd87e0c5527bcff77f79444a918b1d579c32518",
-      "git_blob": "7fa5314e86ccdd15bb6fce567d2358e627a31ea7",
+      "sha256": "4033758bd26f7ec22460bbdeaf6a46dcbdb5554189ba4f198e02d3a8c6a49ea1",
+      "git_blob": "6b2f9e2eb02eeda6f0b0d66b1ea84bd67162f888",
       "bytes": 7453,
       "classification": "UPSTREAM_MODIFIED",
       "disposition": "MODIFIED_UPSTREAM",

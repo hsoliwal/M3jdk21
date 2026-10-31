@@ -11,7 +11,7 @@ Fix the earliest owning compile error and rerun the same strict gate; a parse fi
 
 **Guard:** Refuse a changed preimage, unknown owner contract, mismatched source/class evidence, or unsupported backend claim; retain HOLD/failure instead of promoting it.
 
-**Immutable record:** [event](events/ee071b4132782516cdd5ee304bc869f299cb52cfa881ec9c8f0beac83e16d072.json).
+**Immutable record:** [event](events/3c1b0b057c2266d6ee0fffcccb070acebe13238477219b5ea8bd867710e6e672.json).
 
 ## I02 — java/api-resolution/strict-compilation
 
@@ -21,7 +21,7 @@ Resolve against the compiled current public owner before proposing a missing run
 
 **Guard:** Refuse a changed preimage, unknown owner contract, mismatched source/class evidence, or unsupported backend claim; retain HOLD/failure instead of promoting it.
 
-**Immutable record:** [event](events/24786c8b590bde6fe94dcb865e78fd4242f322c44b985bd50a3efda3a7ee1a09.json).
+**Immutable record:** [event](events/ae0edb78925263b8788ef38dd21d54aca0ac63210cb52c5deb360dd0e5a74cbe.json).
 
 ## I03 — test-oracle/stability-backend-and-owner-metadata
 
@@ -31,7 +31,7 @@ Classify a discrepancy against the exact owner contract and environment before c
 
 **Guard:** Refuse a changed preimage, unknown owner contract, mismatched source/class evidence, or unsupported backend claim; retain HOLD/failure instead of promoting it.
 
-**Immutable record:** [event](events/f7b209f68864cdd7417cfeeec0b0901c88db14903c622eac40bb16136892935a.json).
+**Immutable record:** [event](events/7ee3fbcd70be1435c1d2784bf46dc90a7314260b1be2a62b3a163acb2f07ebf5.json).
 
 ## I04 — differential-testing/exception-and-borrowed-list-contract
 
@@ -41,7 +41,7 @@ Retain failed and superseded fixture designs even when a narrower observation he
 
 **Guard:** Refuse a changed preimage, unknown owner contract, mismatched source/class evidence, or unsupported backend claim; retain HOLD/failure instead of promoting it.
 
-**Immutable record:** [event](events/f77b630374999e2d50c9a49939e961dd7cdf09dde34707ec110443ba2e809d23.json).
+**Immutable record:** [event](events/869ff821d01fc74f06c7615620a61185b133fc376025b6a21240c13ecd2c6076.json).
 
 ## I05 — differential-testing/minimal-exception-observer
 
@@ -51,7 +51,7 @@ Minimize the changed behavioral atom after the contract is understood; exception
 
 **Guard:** Refuse a changed preimage, unknown owner contract, mismatched source/class evidence, or unsupported backend claim; retain HOLD/failure instead of promoting it.
 
-**Immutable record:** [event](events/1065322ea5b699008100f642ac18dd8df0b83ffc0f5543241ccbd4207f95cc16.json).
+**Immutable record:** [event](events/f5be5a978d542fa908c3af6648b84b46757649ffa2e513b26021f5767c305aca.json).
 
 ## I06 — multiset/retention-cardinality/independent-oracle
 
@@ -61,7 +61,7 @@ A donor is a candidate whose compatibility must be checked; preserve the establi
 
 **Guard:** Refuse a changed preimage, unknown owner contract, mismatched source/class evidence, or unsupported backend claim; retain HOLD/failure instead of promoting it.
 
-**Immutable record:** [event](events/cca3fb58337b1ac29879a1af19196da2da0a1c9d2a2b5df7f5301f3d7b153a4c.json).
+**Immutable record:** [event](events/37fde9c09a879de805574f56096f9c3f93412470dbe2a92dabfbe0cd95eb5452.json).
 
 ## I07 — verification/source-class-custody
 
@@ -71,7 +71,7 @@ A clean-build banner is insufficient when artifact evidence conflicts; source an
 
 **Guard:** Refuse a changed preimage, unknown owner contract, mismatched source/class evidence, or unsupported backend claim; retain HOLD/failure instead of promoting it.
 
-**Immutable record:** [event](events/16a2d3f22742d2b42770033a3cbdceccf972869fbeda533566f36c28127ed311.json).
+**Immutable record:** [event](events/fb7aae912864759767fa699a3cc2522109dda9aa371dfbd4ad5c674956d4219f.json).
 
 ## I08 — verification/fresh-compiler-output
 
@@ -81,7 +81,7 @@ State the scope of each successful gate precisely; compile-only success cannot e
 
 **Guard:** Refuse a changed preimage, unknown owner contract, mismatched source/class evidence, or unsupported backend claim; retain HOLD/failure instead of promoting it.
 
-**Immutable record:** [event](events/e8a398c2bb8b7cf896582c3161f55b55aa534d80bf047492833aacb9e428cc22.json).
+**Immutable record:** [event](events/1a71bca3b347a12e2204ba45c8de35d3e5f926471a08931716dc30d258b7a21d.json).
 
 ## I09 — verification/capacity-refusal-and-isolated-output
 
@@ -91,7 +91,7 @@ A pre-execution capacity refusal is not a Java test failure or a successful muta
 
 **Guard:** Refuse a changed preimage, unknown owner contract, mismatched source/class evidence, or unsupported backend claim; retain HOLD/failure instead of promoting it.
 
-**Immutable record:** [event](events/0d7e6963d17810602eb1e2e28b4713294281cd2a7837b006957bcaedd6762d6b.json).
+**Immutable record:** [event](events/9a7f972a7e6e27939e2b5767d17804f0b9d31e81ed8fe8975d300676752d5eec.json).
 
 ## I10 — verification/fresh-java-jni-corpus
 
@@ -101,7 +101,7 @@ Freeze exact source inputs and verify actual backend availability before qualify
 
 **Guard:** Refuse a changed preimage, unknown owner contract, mismatched source/class evidence, or unsupported backend claim; retain HOLD/failure instead of promoting it.
 
-**Immutable record:** [event](events/466fe49c5acfd687b4bd1c4ff2fcc4307c090e06e6effee91a6d89de963789ce.json).
+**Immutable record:** [event](events/5fb40a533f04f7316e9661bb307c7ed1dc6f1c51e377e01d1422536a66e8af52.json).
 
 ## I11 — metadata/factory-owner-source-consistency
 
@@ -111,7 +111,7 @@ A passing test set does not make an incorrect owner description true; record the
 
 **Guard:** Refuse a changed preimage, unknown owner contract, mismatched source/class evidence, or unsupported backend claim; retain HOLD/failure instead of promoting it.
 
-**Immutable record:** [event](events/57fdf2fd940bdafb762fffc4256cc8adbdba6f8314a85c4c4db916e24dd3e2b4.json).
+**Immutable record:** [event](events/8b44344534e75c43097affa31b267eb87b5db7ee54f4f00417bad7e852376d70.json).
 
 ## I12 — metadata/factory-owner-source-consistency
 
@@ -121,7 +121,7 @@ Correct factual source metadata mechanically; never add a new owner or change ru
 
 **Guard:** Refuse a changed preimage, unknown owner contract, mismatched source/class evidence, or unsupported backend claim; retain HOLD/failure instead of promoting it.
 
-**Immutable record:** [event](events/f4166594d561051d0e47cd8f85e23785ad7300c0cee0f997664dd6835da0f003.json).
+**Immutable record:** [event](events/b96fc57ef307acdbd610d3fdadbe6d3f7543885f0504c366f3be9d0a8f0e2fde.json).
 
 ## I13 — verification/exact-expanded-closure
 
@@ -131,7 +131,7 @@ A metadata successor must carry its own exact closure and receipts, even when al
 
 **Guard:** Refuse a changed preimage, unknown owner contract, mismatched source/class evidence, or unsupported backend claim; retain HOLD/failure instead of promoting it.
 
-**Immutable record:** [event](events/670bfcaa612ce3ca81d23be02b7c3701fd4695857e3d5410209222dd4f806ab0.json).
+**Immutable record:** [event](events/4f25af9c5aa586862e7a419c0063db8c33af9923905d911abd6aa315636e52c0.json).
 
 ## Shared claim limits
 

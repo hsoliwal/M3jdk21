@@ -1,19 +1,19 @@
 /* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
 package org.m3jdk.tooling.jdt;
 
-import com.m3.compiletime.M3ASTLeafIndex;
-import com.synexia.cognix.eclipse.selective.api.AstProjection;
-import com.synexia.cognix.eclipse.selective.api.ParseProfile;
-import com.synexia.cognix.eclipse.selective.api.ParseRequest;
-import com.synexia.cognix.eclipse.selective.api.ParseScope;
-import com.synexia.cognix.eclipse.selective.api.Range;
-import com.synexia.cognix.eclipse.selective.bridge.JdtContractTest;
-import com.synexia.cognix.eclipse.selective.bridge.JdtRewriteNormalizationTest;
-import com.synexia.cognix.eclipse.selective.bridge.JdtSelectiveParser;
-import com.synexia.cognix.eclipse.selective.core.CoreContractTest;
-import com.synexia.cognix.eclipse.selective.core.JdkGateContractTest;
-import com.synexia.cognix.eclipse.selective.core.Utf8Snapshot;
-import com.synexia.job.IProgressMonitor;
+import jdk.m3.compiletime.M3ASTLeafIndex;
+import jdk.internal.m3.cognix.eclipse.selective.api.AstProjection;
+import jdk.internal.m3.cognix.eclipse.selective.api.ParseProfile;
+import jdk.internal.m3.cognix.eclipse.selective.api.ParseRequest;
+import jdk.internal.m3.cognix.eclipse.selective.api.ParseScope;
+import jdk.internal.m3.cognix.eclipse.selective.api.Range;
+import jdk.internal.m3.cognix.eclipse.selective.bridge.JdtContractTest;
+import jdk.internal.m3.cognix.eclipse.selective.bridge.JdtRewriteNormalizationTest;
+import jdk.internal.m3.cognix.eclipse.selective.bridge.JdtSelectiveParser;
+import jdk.internal.m3.cognix.eclipse.selective.core.CoreContractTest;
+import jdk.internal.m3.cognix.eclipse.selective.core.JdkGateContractTest;
+import jdk.internal.m3.cognix.eclipse.selective.core.Utf8Snapshot;
+import jdk.internal.m3.job.IProgressMonitor;
 import java.util.Arrays;
 import java.util.stream.IntStream;
 import org.junit.jupiter.api.Test;

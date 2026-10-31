@@ -508,64 +508,64 @@ commit. Git blob IDs identify bytes, not executed behavior.
 
 | Complete production body | Git blob |
 | --- | --- |
-| [SharedLexiconCatalog][CAT] | `aa8cf83bbc8349a2ed5a0a7dad818c2d7240f577` |
-| [SharedLexiconFamilySidecarCatalog][FAM] | `e991a6ba84d7074e9bd260cce331d5092e7ad9f5` |
-| [SharedLexiconPrecomputeCatalog][PC] | `b952a245b2724140904bb666669c2880ce32cd64` |
-| [SharedRelatedLexemeCatalog][REL] | `182042dfc5115a683449622dcdc6055e916f4e4c` |
-| [SynexiaPrecomputePayload][PAY] | `682e7f2abd59efd2adf30fb039616c61a16aa029` |
-| [M3LexiconPrecompute][VAL] | `edec2ae3a82bde34159abd9a4d1c670ad59f031f` |
+| [SharedLexiconCatalog][CAT] | `df137d5b2a52e9ad58f276132099b47692720ed2` |
+| [SharedLexiconFamilySidecarCatalog][FAM] | `8dd76c1d5911dbf4b4b786098c1223fcdbb57b63` |
+| [SharedLexiconPrecomputeCatalog][PC] | `ce34ac405c41b3980e558efc688a5ebc1f37b47b` |
+| [SharedRelatedLexemeCatalog][REL] | `bb8931eeb17563238c92f6c1ee200fb1905595c3` |
+| [SynexiaPrecomputePayload][PAY] | `5896894dec303b94847de9755033189e2112010e` |
+| [M3LexiconPrecompute][VAL] | `4ea2db8d3b2bfec5f720ef499b8b697186718cb9` |
 
 `SharedLexiconImage` is a rechecked dependency boundary (blob
-`7d0dd69b3f92bc6e589eed4024d22686020b421c`), already described in the foundation
+`364eecefcb3822918c849606ddb177c0ceaa30d5`), already described in the foundation
 reference. This is six additional owner files, not six packages and not completion
 of all 17 non-descriptor `com.m3.text` files. The package denominator and other
 unreviewed APIs retain their [open status](coverage.md).
 
-[CAT]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/SharedLexiconCatalog.java
-[FAM]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/SharedLexiconFamilySidecarCatalog.java
-[PC]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java
-[REL]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/SharedRelatedLexemeCatalog.java
-[PAY]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/SynexiaPrecomputePayload.java
-[VAL]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/M3LexiconPrecompute.java
-[IMAGE]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/SharedLexiconImage.java
-[CAT-open]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/SharedLexiconCatalog.java#L93-L137
-[CAT-records]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/SharedLexiconCatalog.java#L139-L159
-[CAT-lookups]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/SharedLexiconCatalog.java#L161-L204
-[CAT-lifecycle]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/SharedLexiconCatalog.java#L206-L244
-[CAT-search]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/SharedLexiconCatalog.java#L246-L308
-[CAT-payload]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/SharedLexiconCatalog.java#L310-L374
-[CAT-si]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/SharedLexiconCatalog.java#L376-L400
-[CAT-admission]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/SharedLexiconCatalog.java#L401-L489
-[CAT-sidecars]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/SharedLexiconCatalog.java#L490-L784
-[FAM-keys]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/SharedLexiconFamilySidecarCatalog.java#L36-L116
-[FAM-open]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/SharedLexiconFamilySidecarCatalog.java#L140-L194
-[FAM-lookups]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/SharedLexiconFamilySidecarCatalog.java#L196-L211
-[FAM-parser]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/SharedLexiconFamilySidecarCatalog.java#L213-L477
-[PC-keys]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java#L23-L90
-[PC-lookup]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java#L110-L134
-[PC-build]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java#L136-L205
-[REL-record]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/SharedRelatedLexemeCatalog.java#L39-L54
-[REL-open]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/SharedRelatedLexemeCatalog.java#L56-L112
-[REL-methods]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/SharedRelatedLexemeCatalog.java#L114-L149
-[PAY-field]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/SynexiaPrecomputePayload.java#L28-L76
-[PAY-access]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/SynexiaPrecomputePayload.java#L87-L153
-[PAY-parser]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/SynexiaPrecomputePayload.java#L192-L372
-[VAL-si]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/M3LexiconPrecompute.java#L24-L33
-[VAL-translation]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/M3LexiconPrecompute.java#L35-L99
-[VAL-spell]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/M3LexiconPrecompute.java#L101-L172
-[VAL-wordfacts]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/M3LexiconPrecompute.java#L175-L260
-[VAL-wordsignal]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/M3LexiconPrecompute.java#L262-L334
-[VAL-token]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/M3LexiconPrecompute.java#L336-L391
-[VAL-prefix]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/M3LexiconPrecompute.java#L393-L419
-[VAL-frequency]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/com/m3/text/M3LexiconPrecompute.java#L421-L445
+[CAT]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/SharedLexiconCatalog.java
+[FAM]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/SharedLexiconFamilySidecarCatalog.java
+[PC]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java
+[REL]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/SharedRelatedLexemeCatalog.java
+[PAY]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/M3PrecomputePayload.java
+[VAL]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/M3LexiconPrecompute.java
+[IMAGE]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/SharedLexiconImage.java
+[CAT-open]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/SharedLexiconCatalog.java#L93-L137
+[CAT-records]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/SharedLexiconCatalog.java#L139-L159
+[CAT-lookups]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/SharedLexiconCatalog.java#L161-L204
+[CAT-lifecycle]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/SharedLexiconCatalog.java#L206-L244
+[CAT-search]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/SharedLexiconCatalog.java#L246-L308
+[CAT-payload]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/SharedLexiconCatalog.java#L310-L374
+[CAT-si]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/SharedLexiconCatalog.java#L376-L400
+[CAT-admission]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/SharedLexiconCatalog.java#L401-L489
+[CAT-sidecars]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/SharedLexiconCatalog.java#L490-L784
+[FAM-keys]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/SharedLexiconFamilySidecarCatalog.java#L36-L116
+[FAM-open]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/SharedLexiconFamilySidecarCatalog.java#L140-L194
+[FAM-lookups]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/SharedLexiconFamilySidecarCatalog.java#L196-L211
+[FAM-parser]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/SharedLexiconFamilySidecarCatalog.java#L213-L477
+[PC-keys]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java#L23-L90
+[PC-lookup]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java#L110-L134
+[PC-build]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java#L136-L205
+[REL-record]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/SharedRelatedLexemeCatalog.java#L39-L54
+[REL-open]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/SharedRelatedLexemeCatalog.java#L56-L112
+[REL-methods]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/SharedRelatedLexemeCatalog.java#L114-L149
+[PAY-field]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/M3PrecomputePayload.java#L28-L76
+[PAY-access]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/M3PrecomputePayload.java#L87-L153
+[PAY-parser]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/M3PrecomputePayload.java#L192-L372
+[VAL-si]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/M3LexiconPrecompute.java#L24-L33
+[VAL-translation]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/M3LexiconPrecompute.java#L35-L99
+[VAL-spell]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/M3LexiconPrecompute.java#L101-L172
+[VAL-wordfacts]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/M3LexiconPrecompute.java#L175-L260
+[VAL-wordsignal]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/M3LexiconPrecompute.java#L262-L334
+[VAL-token]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/M3LexiconPrecompute.java#L336-L391
+[VAL-prefix]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/M3LexiconPrecompute.java#L393-L419
+[VAL-frequency]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/src/jdk/m3/text/M3LexiconPrecompute.java#L421-L445
 [T-foundation]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/test/FoundationTest.java
 [T-admission]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/test/SharedLexiconCatalogFamilyAdmissionTest.java
 [T-family]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/test/SharedLexiconFamilySidecarCatalogTest.java
-[T-receiver]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/test/SynexiaPrecomputeReceiverTest.java
+[T-receiver]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/test/M3PrecomputeReceiverTest.java
 [T-contract]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/test/SharedLexiconFamilyContractTest.java
-[T-si]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/test/SynexiaSiUnitDecoderTest.java
-[T-payload]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/test/SynexiaPrecomputePayloadTest.java
+[T-si]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/test/M3SiUnitDecoderTest.java
+[T-payload]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/test/M3PrecomputePayloadTest.java
 [T-typed]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/test/M3LexiconPrecomputeTest.java
 [T-translation]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/test/M3TranslationReceiverMapTest.java
 [T-dictionary]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/core/test/M3DictionaryFrequencyContractTest.java
-[T-python]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/runtime-integration/tests/test_synexia_export.py
+[T-python]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/runtime-integration/tests/test_m3_export.py

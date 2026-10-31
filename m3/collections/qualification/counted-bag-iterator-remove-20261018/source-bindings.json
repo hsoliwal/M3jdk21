@@ -1,52 +1,52 @@
 [
   {
-    "path": "m3/collections/src/main/java/com/m3/collections/M3CountedBag.java",
+    "path": "m3/collections/src/main/java/jdk/m3/collections/M3CountedBag.java",
     "bytes": 13962,
-    "sha256": "020b91ae24ab2bb991146861dbaecf6e7fa9836811804645722190b972c4e311"
+    "sha256": "c62a23be9e5b89c3d013f8dc0ed5351c3bf7ecc2bc809c8503a777a152d6b447"
   },
   {
     "path": "m3/collections/qualification/counted-bag-iterator-remove-20261018/CountedBagIteratorProof.java",
     "bytes": 9742,
-    "sha256": "3a8c85dceee242fe2f93e31190aa8aebb6066809df7c5db9acaf57d0cdab2778"
+    "sha256": "6f1b69a047a9decafcdd5b5d92ac518669a44076ee870e94a23584e61e6d1039"
   },
   {
     "path": "m3/collections/qualification/counted-bag-iterator-remove-20261018/RecipeTestLauncher.java",
     "bytes": 1214,
-    "sha256": "a2470c51a90801b9d60e5acca6369854f65523e65c10701efd8089b3f2e374b2"
+    "sha256": "22b88ac2178e758fd22566cd358667260907a5c9c72fe6c2ee0895bec9ed2dd7"
   },
   {
     "path": "m3/collections/qualification/counted-bag-iterator-remove-20261018/M3CountedBag.java.before.txt",
     "bytes": 13854,
-    "sha256": "c04ed48de6b24bb4a86f97c4aa6187e2ce11e43b082e05ef3189c618ddf1143b"
+    "sha256": "583e6b5dce178ee02c2efdb919271c81a00ad60771abd06f7c942330fdfc60d1"
   },
   {
-    "path": "m3/collections/recipe/counted-bag-iterator-remove-20261018/engine-src/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+    "path": "m3/collections/recipe/counted-bag-iterator-remove-20261018/engine-src/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
     "bytes": 13805,
-    "sha256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599"
+    "sha256": "9dc65793cb1f4fb20866f99f4e5d0043d54734aa03cf0fe297c0cadbba2d1c37"
   },
   {
-    "path": "m3/collections/recipe/counted-bag-iterator-remove-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/counted-bag-iterator-remove/M3CountedBag.java.before.txt",
+    "path": "m3/collections/recipe/counted-bag-iterator-remove-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/counted-bag-iterator-remove/M3CountedBag.java.before.txt",
     "bytes": 13854,
-    "sha256": "c04ed48de6b24bb4a86f97c4aa6187e2ce11e43b082e05ef3189c618ddf1143b"
+    "sha256": "583e6b5dce178ee02c2efdb919271c81a00ad60771abd06f7c942330fdfc60d1"
   },
   {
-    "path": "m3/collections/recipe/counted-bag-iterator-remove-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/counted-bag-iterator-remove/M3CountedBag.java.txt",
+    "path": "m3/collections/recipe/counted-bag-iterator-remove-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/counted-bag-iterator-remove/M3CountedBag.java.txt",
     "bytes": 13962,
-    "sha256": "020b91ae24ab2bb991146861dbaecf6e7fa9836811804645722190b972c4e311"
+    "sha256": "c62a23be9e5b89c3d013f8dc0ed5351c3bf7ecc2bc809c8503a777a152d6b447"
   },
   {
-    "path": "m3/collections/recipe/counted-bag-iterator-remove-20261018/src/test/java/com/synexia/rewrite/M3CountedBagIteratorRemoveRecipeTest.java",
+    "path": "m3/collections/recipe/counted-bag-iterator-remove-20261018/src/test/java/jdk/internal/m3/rewrite/M3CountedBagIteratorRemoveRecipeTest.java",
     "bytes": 9588,
-    "sha256": "c0085fe219d6bd76da1deef04b87104e3ee2af1fe5c5f472d70f1115e1b335ff"
+    "sha256": "23973e65bb884a85423631032e61b1147c0b2b848a7774bd902e9e11bfb0d42a"
   },
   {
-    "path": "m3/collections/src/test/java/com/m3/collections/M3CountedBagSelfTest.java",
+    "path": "m3/collections/src/test/java/jdk/m3/collections/M3CountedBagSelfTest.java",
     "bytes": 7554,
-    "sha256": "2dc6452230f5b760e97076aaec10319c83b183887d05a0e4ff65172c809a5087"
+    "sha256": "44461bcb78fc6f2ba8af6d7ecfb39c5a4c325307d43bfb1926ef2b49af8e6e22"
   },
   {
     "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
     "bytes": 11744,
-    "sha256": "cb8e8c66e07cc4651e95a0c28ad834d2c9de48df34dc90c6d7da68443f1da531"
+    "sha256": "a549b92b38eaa337c0e95f32c46607cace9ae46d8240d37bd58a3a48e296990d"
   }
 ]

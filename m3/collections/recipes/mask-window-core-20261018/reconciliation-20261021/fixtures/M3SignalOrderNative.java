@@ -2,7 +2,7 @@
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
  */
-package com.m3.collections;
+package jdk.m3.collections;
 
 /** Optional explicit JNI acceleration over primitive key/row lanes; Java remains default. */
 public final class M3SignalOrderNative {

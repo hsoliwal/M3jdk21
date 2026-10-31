@@ -1,4 +1,0 @@
-# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
-# SPDX-License-Identifier: Apache-2.0
-# path	before-sha256	after-sha256	template
-m3/docs/m3jdk21-porting-invariant.md	fa84270f09a42fe4dbeb245812e7b710297825e2bfd461bce99bb64056e1399d	6cd1bd243f216a3210433525e3742c0fc1ab02cbf02bbc40225c40c5be80a01f	m3jdk21-porting-invariant.md.txt

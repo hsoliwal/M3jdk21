@@ -62,7 +62,7 @@ Run the six installer tests against a complete before-image workspace:
 
     python3 m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/test_installer.py \
       --repo /absolute/before-workspace \
-      --plan m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/plan.json \
+      --plan m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/plan.json \
       --out /absolute/fresh/installer-proof
 
 Use the retained installer for the actual reviewed transition:

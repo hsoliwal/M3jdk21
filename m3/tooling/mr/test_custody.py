@@ -15,7 +15,7 @@ function = next(node for node in tree.body if isinstance(node, ast.FunctionDef) 
 namespace = {'copy': copy}
 exec(compile(ast.Module(body=[function], type_ignores=[]), str(source), 'exec'), namespace)
 retain = namespace['retained_mapping']
-resource = CRATE / 'src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-mr'
+resource = CRATE / 'src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-mr'
 before = json.loads((resource / 'name-mapping.json.txt.before').read_text())
 after = json.loads((resource / 'name-mapping.json.txt').read_text())
 

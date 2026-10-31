@@ -3,7 +3,7 @@
   "command": [
     "python",
     "-B",
-    "/workspace/scratch/7846804a0074/M3jdk21-f29/m3/compatibility/check_synexia_full_borrow_receiver.py"
+    "/workspace/scratch/7846804a0074/M3jdk21-f29/m3/compatibility/check_m3_full_borrow_receiver.py"
   ],
   "exit": 0,
   "elapsed_seconds": 0.10223727700031304,

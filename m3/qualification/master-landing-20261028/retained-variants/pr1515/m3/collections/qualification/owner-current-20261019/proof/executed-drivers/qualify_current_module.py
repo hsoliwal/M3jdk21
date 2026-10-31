@@ -19,7 +19,7 @@ for s in seals:
     else:assert not original.exists(),path+' occupied current target'
 module=repo/'m3/collections'
 shutil.copytree(module/'src',out/'src')
-for name in ['pom.xml','LICENSE','NOTICE','provenance.json','synexia-donation.json','name-mapping.json','SYNEXIA-DONATION-NOTICE.txt','NETBEANS-NOTICE.txt']:
+for name in ['pom.xml','LICENSE','NOTICE','provenance.json','m3-donation.json','name-mapping.json','M3-DONATION-NOTICE.txt','NETBEANS-NOTICE.txt']:
     if (module/name).is_file():shutil.copy2(module/name,out/name)
 for s in seals:
     relative=Path(s['target']).relative_to('m3/collections');dst=out/relative

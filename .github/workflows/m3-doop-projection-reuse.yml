@@ -3,8 +3,8 @@ name: M3 DOOP verified projection reuse contract
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3ObjectResidency.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3ObjectResidencyReuseTest.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3ObjectResidency.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3ObjectResidencyReuseTest.java'
       - '.github/workflows/m3-doop-projection-reuse.yml'
   workflow_dispatch:
 
@@ -41,8 +41,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          MAIN="m3/collections/src/main/java/com/m3/collections"
-          TEST="m3/collections/src/test/java/com/m3/collections"
+          MAIN="m3/collections/src/main/java/jdk/m3/collections"
+          TEST="m3/collections/src/test/java/jdk/m3/collections"
           OUT="$RUNNER_TEMP/m3-doop-reuse"
           mkdir -p "$OUT/main" "$OUT/test"
           javac --release 21 -Xlint:all -Werror -d "$OUT/main" \
@@ -66,6 +66,6 @@ jobs:
           java -ea -Xms16m -Xmx128m -jar "$RUNNER_TEMP/m3-junit-console.jar" \
             execute --disable-banner --fail-if-no-tests \
             --class-path "$OUT/main:$OUT/test" \
-            --select-class com.m3.collections.M3ObjectResidencyTest \
-            --select-class com.m3.collections.M3ObjectResidencyBorrowTest \
-            --select-class com.m3.collections.M3ObjectResidencyReuseTest
+            --select-class jdk.m3.collections.M3ObjectResidencyTest \
+            --select-class jdk.m3.collections.M3ObjectResidencyBorrowTest \
+            --select-class jdk.m3.collections.M3ObjectResidencyReuseTest

@@ -57,10 +57,10 @@
           <release>21</release>
           <proc>none</proc>
           <includes>
-            <include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
+            <include>jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
           </includes>
           <testIncludes>
-            <testInclude>com/synexia/rewrite/M3FiveProviderCountedBagsRecipeTest.java</testInclude>
+            <testInclude>jdk/internal/m3/rewrite/M3FiveProviderCountedBagsRecipeTest.java</testInclude>
           </testIncludes>
           <compilerArgs>
             <arg>-Xlint:all</arg>

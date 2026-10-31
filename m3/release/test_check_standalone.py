@@ -96,6 +96,30 @@ class StandaloneCheckTest(unittest.TestCase):
         self.put(".github/workflows/ok.yml", "name: ok\n")
         self.assertEqual(cs.verdict(cs.scan(self.root), None, False)[0], "BLOCK")
 
+    def test_tree_mode_scans_files_that_are_not_checked_out(self):
+        self.put(".github/workflows/planted.yml", WORKFLOW)
+        self.put("m3/x/pom.xml", POM.format(group="com.m3", artifact="x",
+                 deps=DEP.format(group="com.synexia.m3", artifact="ext")))
+        subprocess.run(["git", "-C", str(self.root), "-c", "user.name=t", "-c", "user.email=t@example.com",
+                        "commit", "-q", "-m", "fixture"], check=True)
+        (self.root / ".github/workflows/planted.yml").unlink()
+        (self.root / "m3/x/pom.xml").unlink()
+        worktree = cs.scan(self.root)
+        self.assertEqual((worktree["unscanned"], worktree["counts"]["D_CHECKOUT"]), (2, 0))
+        tree = cs.scan(self.root, "HEAD")
+        self.assertEqual(tree["unscanned"], 0)
+        self.assertEqual((tree["counts"]["D_CHECKOUT"], tree["counts"]["D_SECRET"], tree["counts"]["D_MAVEN"]), (1, 1, 1))
+        self.assertIsNone(cs.read_baseline(self.root, "HEAD"))
+        cs.write_baseline(self.root, tree)  # in the working tree only: the revision's own ratchet is what counts
+        self.assertIsNotNone(cs.read_baseline(self.root))
+        self.assertIsNone(cs.read_baseline(self.root, "HEAD"))
+        self.assertEqual(cs.verdict(tree, cs.read_baseline(self.root, "HEAD"), False)[0], "BLOCK")
+
+    def test_the_naming_recipe_crate_is_not_counted(self):
+        self.put("m3/tooling/jdk-naming/reseal.py", "PATTERN = 'com.synexia.m3 SynexiaFoo SYNEXIA_X'\n")
+        self.put("m3/tooling/jdk-naming/conformance/pom.xml", POM.format(group="com.synexia.m3", artifact="m3-x", deps=""))
+        self.assertEqual(sum(self.counts().values()), 0)
+
     def test_unscanned_scoped_file_holds_release(self):
         self.put("m3/x/run.sh", "echo ok\n")
         result = cs.scan(self.root)

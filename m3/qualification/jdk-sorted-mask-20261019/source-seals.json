@@ -1,7 +1,7 @@
 {
   "target_base": "a3e88976ee8664d1ef5d0cade96aec1206b2133d",
-  "synexia_base": "6291b100548f7850279f49e693621d6460be25f9",
-  "kernel_blob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+  "m3_base": "6291b100548f7850279f49e693621d6460be25f9",
+  "kernel_blob": "78d5fb68f13872164973a8918cc7886c5f548bca",
   "sources": [
     {
       "path": "src/java.base/share/classes/java/util/ReverseOrderSortedSetView.java",
@@ -46,7 +46,7 @@
     },
     {
       "path": "test/jdk/jdk/internal/mindex/M3BitLane28Checks.java",
-      "sha256": "143b3566bb78bfde48aa2c8d1ea750969b52a3697c77fb783d2600c7c9564798"
+      "sha256": "25b9c4ea91c41c2f00d729a0648511fbe9f007a009559ae2863d80e7a92130b2"
     }
   ]
 }

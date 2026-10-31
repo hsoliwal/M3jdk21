@@ -1,18 +1,18 @@
 {
-  "engine_source_pins": "f6f6586f4e1239bfbe958188ad59777e03db516ab2afe07209d0a62c8ebe65fc",
+  "engine_source_pins": "2bee3207d684c16b9b9c502ecb4966b76bd501ee8efbd926811d6620a3acfd8e",
   "status": "PASS",
   "targets": {
     "catalogue-candidates": {
       "path": "m3/collections/algorithm-catalog/stable-order-restoration-20261020/CANDIDATES.tsv",
-      "sha256": "352040d9ef90a9cee8b072add45aea4e903069246dd2b5b0df2ecc1fbca4b2f4"
+      "sha256": "4c665ab69a525cf0f289053989adc8fac1dbf78c527631dfe60e6b9e695bf6c8"
     },
     "catalogue-discovery": {
       "path": "m3/collections/algorithm-catalog/stable-order-restoration-20261020/DISCOVERY.json",
-      "sha256": "145547bd412ec5e3e1ffe6e45b9ade39a0a05bab1d43c7b8ad0c11b065f1c256"
+      "sha256": "9919c3a227026a3038ad4d568878eb5559ace640de205914867fabb226152fca"
     },
     "catalogue-pins": {
       "path": "m3/collections/algorithm-catalog/stable-order-restoration-20261020/SOURCE_PINS.json",
-      "sha256": "56a7affeefa0c2e732fedcb60a770c6de57f83291feef457783d6eaf891b8847"
+      "sha256": "4371fbd746b3f584a625c09110897a5c5855c8c7f869a5edcd20d7f1d5fcf60b"
     },
     "catalogue-readme": {
       "path": "m3/collections/algorithm-catalog/stable-order-restoration-20261020/README.md",

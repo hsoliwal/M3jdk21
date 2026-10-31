@@ -95,7 +95,7 @@ def main():
     headers, classes = OUT / "jni-headers", OUT / "jni-header-classes"
     headers.mkdir()
     classes.mkdir()
-    java_sources = [MODULE / "src/main/java/com/m3/fs" / (name + ".java")
+    java_sources = [MODULE / "src/main/java/jdk/m3/fs" / (name + ".java")
                     for name in ("M3FsNative", "M3NativeContent")]
     run("jni-headers", [JDK / "bin/javac", "--release", "21", "-Xlint:all", "-Werror",
                         "-implicit:none", "-sourcepath", "", "-cp", B / "qualification-capture/classes",
@@ -105,7 +105,7 @@ def main():
     expected = set()
     per_header = {}
     for java_name, c_name in (("M3FsNative", "m3fs_jni.c"), ("M3NativeContent", "m3_fs_jni.c")):
-        header = headers / ("com_m3_fs_" + java_name + ".h")
+        header = headers / ("jdk_m3_fs_" + java_name + ".h")
         names = set(re.findall(r"JNICALL\s+(Java_[A-Za-z0-9_]+)", header.read_text()))
         expected.update(names)
         per_header[java_name] = sorted(names)

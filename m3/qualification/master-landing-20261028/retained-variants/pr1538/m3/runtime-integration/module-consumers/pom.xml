@@ -26,8 +26,8 @@
       <executions><execution><id>stage-source-owners</id><phase>generate-sources</phase><goals><goal>copy-resources</goal></goals>
         <configuration><outputDirectory>${project.build.directory}/generated-sources/m3-owners</outputDirectory>
           <resources>
-            <resource><directory>${m3.resource.source.root}</directory><includes><include>com/m3/file/M3ModuleResources.java</include></includes><filtering>false</filtering></resource>
-            <resource><directory>${m3.collections.source.root}</directory><includes><include>com/m3/collections/**/*.java</include></includes><filtering>false</filtering></resource>
+            <resource><directory>${m3.resource.source.root}</directory><includes><include>jdk/m3/file/M3ModuleResources.java</include></includes><filtering>false</filtering></resource>
+            <resource><directory>${m3.collections.source.root}</directory><includes><include>jdk/m3/collections/**/*.java</include></includes><filtering>false</filtering></resource>
           </resources>
         </configuration>
       </execution></executions>
@@ -52,8 +52,8 @@
       <groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>
       <configuration><release>21</release><useModulePath>false</useModulePath><includes>
         <include>org/springframework/core/io/support/PathMatchingResourcePatternResolver.java</include>
-        <include>com/m3/runtime/spring/**/*.java</include><include>com/m3/eclipse/connect/**/*.java</include>
-        <include>com/m3/file/M3ModuleResources.java</include><include>com/m3/collections/**/*.java</include>
+        <include>jdk/m3/runtime/spring/**/*.java</include><include>jdk/m3/eclipse/connect/**/*.java</include>
+        <include>jdk/m3/file/M3ModuleResources.java</include><include>jdk/m3/collections/**/*.java</include>
       </includes></configuration>
     </plugin>
     <plugin>

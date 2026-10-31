@@ -41,9 +41,9 @@ archive_writer = read("src/hotspot/share/cds/archiveHeapWriter.cpp")
 dedup = read("src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp")
 stringtable = read("src/hotspot/share/classfile/stringTable.cpp")
 mapping = read("m3/docs/name-mapping.json")
-port_map = read("m3/docs/synexia-string-precompute-port-map.tsv")
-recipe_authority = read("m3/docs/synexia-string-recipe-authority.tsv")
-precompute_inventory = read("m3/docs/synexia-mindex-precompute-inventory.tsv")
+port_map = read("m3/docs/m3-string-precompute-port-map.tsv")
+recipe_authority = read("m3/docs/m3-string-recipe-authority.tsv")
+precompute_inventory = read("m3/docs/m3-mindex-precompute-inventory.tsv")
 completeness = read("m3/docs/string-precompute-completeness.tsv")
 workflow = read(".github/workflows/mindex-string-backing.yml")
 native_string = read("src/java.base/share/native/libjava/String.c")
@@ -1623,9 +1623,9 @@ check_pool_precompute(pool, frozen_index)
 
 
 for required_mechanical_name_mapping in [
-    '"source": "com.synexia.indexstring.precompute.MIndexRe2MechanicalFacts"',
-    '"source": "com.synexia.indexstring.precompute.MIndexLucenePostingPlan"',
-    '"source": "com.synexia.indexstring.precompute.MIndexTweetyGraphQueryIndex"',
+    '"source": "jdk.internal.m3.indexstring.precompute.MIndexRe2MechanicalFacts"',
+    '"source": "jdk.internal.m3.indexstring.precompute.MIndexLucenePostingPlan"',
+    '"source": "jdk.internal.m3.indexstring.precompute.MIndexTweetyGraphQueryIndex"',
     '"source_revision": "f07aa85ba83749bbb2b6fa4a7a169b38aaac8ba2"',
     '"status": "selective internal mapping; no RE2/J runtime dependency"',
     '"status": "do not port to java.lang.String"',
@@ -1760,7 +1760,7 @@ check_critical_surface_refinements(m3, string, precompute_bridge)
 
 # Mapping authority must preserve donor->target lineage and shadow names.
 required_mapping_fragments = [
-    '"source": "com.synexia.indexstring.MIndexString"',
+    '"source": "jdk.internal.m3.indexstring.MIndexString"',
     '"target": "java.lang.M3String"',
     '"target": "java.lang.M3StringOwner / java.lang.M3StringAtom / java.lang.M3StringTuple"',
     '"target": "java.lang.M3StringFacts plus owner-internal bounded range facts"',
@@ -1771,13 +1771,13 @@ for fragment in required_mapping_fragments:
         fail(f"name mapping missing: {fragment}")
 
 for fragment in [
-    '"recipe_id": "synexia.m3jdk.string.canonical-dag.20261006"',
+    '"recipe_id": "m3.m3jdk.string.canonical-dag.20261006"',
     '"source_repo": "hsoliwal/com.synexia"',
-    '"source_path": "synexia-indexstring/recipes/m3jdk-string-canonical-dag-20261006"',
+    '"source_path": "m3-indexstring/recipes/m3jdk-string-canonical-dag-20261006"',
     '"target_packet_role": "generated executable/hash-pinned application copy"',
     '"portable_semantics_owner": "Synexia"',
-    '"executable_verifier_recipe": "com.synexia.rewrite.M3StringCanonicalDagInvariant"',
-    '"executable_verifier_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3StringCanonicalDagInvariantRecipe.java"',
+    '"executable_verifier_recipe": "jdk.internal.m3.rewrite.M3StringCanonicalDagInvariant"',
+    '"executable_verifier_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3StringCanonicalDagInvariantRecipe.java"',
     '"source_lock_commit": "5fb52a051fa0e2722c2f69f2e22ac7f330c91ce2"',
     '"source_lock_blob": "0230b1a0864266d9243c161f7541c01492c9626e"',
     '"executable_verifier_implementation_blob": "5129fe4f7367486496f028a4d0339b84998cf7a0"',
@@ -1797,29 +1797,29 @@ for fragment in [
     "authority_source_lock_path\tsynexia-indexstring/recipes/m3jdk-string-canonical-dag-20261006/source-lock.json",
     "authority_source_lock_commit\t5fb52a051fa0e2722c2f69f2e22ac7f330c91ce2",
     "authority_source_lock_blob\t0230b1a0864266d9243c161f7541c01492c9626e",
-    "executable_verifier_recipe\tcom.synexia.rewrite.M3StringCanonicalDagInvariant",
-    "executable_verifier_path\tsynexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3StringCanonicalDagInvariantRecipe.java",
+    "executable_verifier_recipe\tjdk.internal.m3.rewrite.M3StringCanonicalDagInvariant",
+    "executable_verifier_path\tsynexia-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3StringCanonicalDagInvariantRecipe.java",
     "executable_verifier_pr\thsoliwal/com.synexia#9524",
 ]:
     if fragment not in recipe_authority:
         fail(f"Synexia String recipe authority receipt missing: {fragment}")
 
-# Reusable M3 String history-convergence recipe custody is Synexia-only. M3JDK21 is a
+# Reusable M3 String history-convergence recipe custody is Synexia-only. M3JDK 21 is a
 # thin receiver/runtime owner and must not recreate a second local recipe descriptor, crate or test.
 for forbidden_recipe_path in [
     "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-string-history-convergence.yml",
-    "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3StringHistoryConvergenceRecipeTest.java",
-    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence",
-    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-history-convergence",
+    "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3StringHistoryConvergenceRecipeTest.java",
+    "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence",
+    "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-history-convergence",
 ]:
     if (ROOT / forbidden_recipe_path).exists():
         fail(f"duplicate Synexia-owned M3 String history recipe reappeared: {forbidden_recipe_path}")
 
 # Synexia is the full qualified donor/convergence workspace. Recipes/postimages/tests are
 # first-class donor candidates, but licensing/provenance follows every copied artifact and
-# M3JDK21 retains target/runtime ownership.
+# M3JDK 21 retains target/runtime ownership.
 for fragment in [
-    '"id": "M3-JDK-DONOR-ARTIFACTS-1"',
+    '"id": "M3JDK-DONOR-ARTIFACTS-1"',
     '"candidate_source": "whole qualified hsoliwal/com.synexia workspace"',
     '"recipe"',
     '"generated-postimage"',
@@ -1955,10 +1955,10 @@ for required_gate in [
         fail(f"M3 String workflow lost verification gate: {required_gate}")
 
 
-if "STRING_RECIPE_EXECUTABLE_VERIFIER_IS_SYNEXIA_OPENREWRITE" not in read("m3/docs/m3-runtime-invariants.tsv"):
+if "STRING_RECIPE_EXECUTABLE_VERIFIER_IS_M3_OPENREWRITE" not in read("m3/docs/m3-runtime-invariants.tsv"):
     fail("M3 String runtime invariant lost Synexia executable verifier binding")
 
-if "SYNEXIA_PORTABLE_HISTORY_CONVERGENCE_RECIPE_AUTHORITY" not in read("m3/docs/m3-runtime-invariants.tsv"):
+if "M3_PORTABLE_HISTORY_CONVERGENCE_RECIPE_AUTHORITY" not in read("m3/docs/m3-runtime-invariants.tsv"):
     fail("M3 String runtime invariant lost Synexia history-convergence authority binding")
 
 print("M3_STRING_SOURCE_INVARIANTS_PASS")

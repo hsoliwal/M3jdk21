@@ -14,11 +14,11 @@ LEX = ROOT / "m3/lexicon/receiver"
 RESOURCES = ROOT / "m3/tooling/migration-recipes/src/main/resources"
 JAVA_CRATE = (
     RESOURCES
-    / "com/synexia/rewrite/hash-pinned-java/m3-static-language-affect-20261020"
+    / "jdk/internal/m3/rewrite/hash-pinned-java/m3-static-language-affect-20261020"
 )
 TEXT_CRATE = (
     RESOURCES
-    / "com/m3/rewrite/backport/jdk21-hash-pinned-text"
+    / "jdk/m3/rewrite/backport/jdk21-hash-pinned-text"
     / "m3-static-language-affect-text-20261020"
 )
 
@@ -71,10 +71,10 @@ if "crateName: m3-static-language-affect-20261020" not in java_yaml.read_text(en
 if "crateName: m3-static-language-affect-text-20261020" not in text_yaml.read_text(encoding="utf-8"):
     raise SystemExit("FAIL text recipe registration")
 
-ast_sources = sorted((AST / "src/main/java/com/m3/ast").glob("M3*.java"))
-ast_test = AST / "src/test/java/com/m3/ast/M3AffectGeometrySelfTest.java"
-lex_sources = sorted((LEX / "src/main/java/com/m3/lexicon").glob("M3*.java"))
-lex_test = LEX / "src/test/java/com/m3/lexicon/M3StaticLanguageGeometryProof.java"
+ast_sources = sorted((AST / "src/main/java/jdk/m3/ast").glob("M3*.java"))
+ast_test = AST / "src/test/java/jdk/m3/ast/M3AffectGeometrySelfTest.java"
+lex_sources = sorted((LEX / "src/main/java/jdk/m3/lexicon").glob("M3*.java"))
+lex_test = LEX / "src/test/java/jdk/m3/lexicon/M3StaticLanguageGeometryProof.java"
 
 with tempfile.TemporaryDirectory(prefix="m3-language-affect-") as directory:
     out = Path(directory)
@@ -89,7 +89,7 @@ with tempfile.TemporaryDirectory(prefix="m3-language-affect-") as directory:
     ])
     affect = run([
         "java", "-Xmx256m", "-cp", str(ast_out),
-        "com.m3.ast.M3AffectGeometrySelfTest"
+        "jdk.m3.ast.M3AffectGeometrySelfTest"
     ])
     if not affect.startswith("M3_AFFECT_GEOMETRY_PASS"):
         raise SystemExit("FAIL affect proof: " + affect)
@@ -100,7 +100,7 @@ with tempfile.TemporaryDirectory(prefix="m3-language-affect-") as directory:
     ])
     pure = run([
         "java", "-Xmx256m", "-cp", str(lex_out),
-        "com.m3.lexicon.M3StaticLanguageGeometryProof"
+        "jdk.m3.lexicon.M3StaticLanguageGeometryProof"
     ])
     if not pure.startswith("M3_STATIC_LANGUAGE_PASS"):
         raise SystemExit("FAIL Java language proof: " + pure)
@@ -116,7 +116,7 @@ with tempfile.TemporaryDirectory(prefix="m3-language-affect-") as directory:
     library_path = os.pathsep.join(str(value) for value in library_dirs)
     native = run([
         "java", "-Xcheck:jni", "-Xmx256m", f"-Djava.library.path={library_path}",
-        "-cp", str(lex_out), "com.m3.lexicon.M3StaticLanguageGeometryProof",
+        "-cp", str(lex_out), "jdk.m3.lexicon.M3StaticLanguageGeometryProof",
         "--native-required"
     ])
     if "native=true" not in native:

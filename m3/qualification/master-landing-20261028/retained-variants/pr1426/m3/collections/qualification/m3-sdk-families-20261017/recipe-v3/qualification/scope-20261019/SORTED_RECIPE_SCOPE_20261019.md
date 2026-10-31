@@ -12,7 +12,7 @@ The correction moves only that declaration immediately before `try`. The public 
 | M3JDK21 receiver baseline | `hsoliwal/M3jdk21@a3e88976ee8664d1ef5d0cade96aec1206b2133d` |
 | Original Java Git blob | `0ea9e8bca2a3522d037e675a1ae298f35e59a440` |
 | Original Java SHA-256 | `4871d83f3c0da5d1bbf0f5157c1a73d5335a8508027d2a69b5e5096ce62673ff` |
-| Corrected Java SHA-256 | `fa29e6edd44510564f00e5759f31ab97d595823857a8841f30ae2a1c58bed8b2` |
+| Corrected Java SHA-256 | `b5c94cad3b1414b5005aaf910bcc3981e37e73d5c63ef4b758cf2dfb8b9e6fff` |
 | Existing Java recipe owner | `M3HashPinnedJavaSnapshotRecipe`, Git blob `3bdeeaea9a212fe0c7d1f544510f87c4cd49eb40` |
 
 The existing `synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017` proof host owns two separate serial datasets: `sorted-recipe-canonical` and `sorted-recipe-receiver`. Each binds one complete Java source, its original preimage, exact postimage, and unchanged canonical engine sources. Both execute the existing class-backed recipe through Maven/OpenRewrite 8.17.1. Candidate source is retained from actual SDK Results.

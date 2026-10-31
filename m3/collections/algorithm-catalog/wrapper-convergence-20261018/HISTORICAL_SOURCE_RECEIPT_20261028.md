@@ -22,7 +22,7 @@ This is **historical algorithm evidence**, not a statement that the old
 qualification receipts apply to current `master`. Some files contain
 old parser/build status, failed attempts or candidate records; they remain
 dated historical records. The current original README
-(Git blob `b2904c6006b372e8a2e4d1573528a2c9ef462f8e`)
+(Git blob `8ee473f739d79aaa88af522eb70fe1a042123971`)
 and its existing master facts are untouched. No recipe, test, runtime Java,
 JNI C, Maven module, vendor source, JNI exports or API is modified.
 

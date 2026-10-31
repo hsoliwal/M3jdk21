@@ -1,7 +1,7 @@
 /* Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
  * SPDX-License-Identifier: Apache-2.0 */
-import com.m3.collections.M3Address28;
-import com.m3.collections.M3BitLane28;
+import jdk.m3.collections.M3Address28;
+import jdk.m3.collections.M3BitLane28;
 import java.util.Random;
 
 /** Explicit native runtime gate; run with -Xcheck:jni and an absolute library argument. */

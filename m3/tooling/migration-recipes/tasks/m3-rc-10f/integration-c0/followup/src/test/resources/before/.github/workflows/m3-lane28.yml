@@ -66,7 +66,7 @@ jobs:
         run: |
           python3 m3/tooling/lane28/verify-plan.py
           python3 m3/tooling/tq/verify-plan.py
-          python3 m3/migration/migration.py validate . --previous m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/name-mapping.json.txt.before
+          python3 m3/migration/migration.py validate . --previous m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/name-mapping.json.txt.before
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:

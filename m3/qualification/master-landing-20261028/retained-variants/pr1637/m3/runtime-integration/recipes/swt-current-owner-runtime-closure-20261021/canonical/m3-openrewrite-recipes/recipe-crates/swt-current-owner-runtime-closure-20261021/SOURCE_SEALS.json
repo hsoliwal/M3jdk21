@@ -1,0 +1,25 @@
+{
+  "schema": "SWT_CURRENT_OWNER_RUNTIME_CLOSURE_SOURCE_SEALS/1",
+  "task": "swt-current-owner-runtime-closure-20261021",
+  "recipe": "jdk.internal.m3.swt.CurrentOwnerRuntimeClosure20261021",
+  "canonical_source_revision": "a2b50cfe926c5c5f400c7f659a947a5020fb8d4d",
+  "receiving_repository": "hsoliwal/eclipse.platform.swt",
+  "receiving_revision": "c0ffa6d76338ed1b06cfe0158b0e04d8930df546",
+  "files": [
+    {
+      "target_path": "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml",
+      "before_sha256": "ff8b2c1db5fffa1a9013fc863a1f5dac337b2cb633c07d513339b57fcce40b80",
+      "after_sha256": "4b864a178251e0f853cc8d2fe8027962bf831f950d9b83a9d095496ae60be158",
+      "kind": "text",
+      "phase": "swt-current-owner-runtime-closure-20261021-001",
+      "resource": "postimage.txt"
+    }
+  ],
+  "input_handoffs": [
+    {
+      "name": "HANDOFF.json",
+      "sha256": "9492cf6948b4b200e2d8c300f1624b3896ea01756f0ee1032cbab2255dbedfbe"
+    }
+  ],
+  "qualification": "NOT_RUN; source custody is not recipe or runtime proof"
+}

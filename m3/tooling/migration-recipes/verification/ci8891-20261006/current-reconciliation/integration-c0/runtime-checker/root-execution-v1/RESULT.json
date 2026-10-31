@@ -1,15 +1,15 @@
 {
-  "schema": "synexia.root-package-execution/1",
+  "schema": "m3.root-package-execution/1",
   "status": "PASS",
   "spec": {
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/ROOT-COMMANDS.json",
-    "sha256": "f73e870cefbd17a6bbefae2988a686be6c44617c5cf36af804b65433f7af1ccf",
+    "sha256": "f86a236dffa5e20e487c1cd4c9dda530c95d5f213f7e37a2749b5993fb48f2cf",
     "bytes": 8276
   },
   "commands": [
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/root-packaging-v1/select.json",
-      "sha256": "6d5d1be98b7d8985db29bf8318690f4c8e1862700ed5af3bf5100a83bc8ad78e",
+      "sha256": "89ba9636fb1a01270f5495f55724555271e05d189bd41e9f93c8b20fcfcf762e",
       "bytes": 2011
     },
     {
@@ -19,17 +19,17 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/root-packaging-v1/verify.json",
-      "sha256": "5635365883fb1503fa1f0b00fe35eb5824cb38bfa6b3ded8248752ac835acf27",
+      "sha256": "d2285698a2044fa4e4e2c960121898a841aeff5dfd0ff9619762f17a1961ed06",
       "bytes": 1384
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/root-packaging-v1/extract.json",
-      "sha256": "9d943db002704dabc5f2d19e0cd1d7159946c218ece0a64a5b6e8beab3fdd460",
+      "sha256": "6710ecdced1973b852e3a1ec2e1101b3c91e21fd8f61672a7df12e69082bc4cf",
       "bytes": 1541
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/root-packaging-v1/finish.json",
-      "sha256": "d68a4e4484e9915b55034c644ca9b81345468f2bbb3bdc85ce8212cb87243ec6",
+      "sha256": "81af3d04d7eac5eab04b23aa66e7554bb664f055c0d465b6dcc5f9c493678dba",
       "bytes": 1207
     }
   ]

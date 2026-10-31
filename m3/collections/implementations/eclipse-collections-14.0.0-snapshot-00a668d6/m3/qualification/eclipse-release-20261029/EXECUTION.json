@@ -1,17 +1,17 @@
 {
-  "schema": "SYNEXIA_QUALIFIED_PRODUCT_RESULTS_V1",
+  "schema": "M3_QUALIFIED_PRODUCT_RESULTS_V1",
   "repository": "hsoliwal/eclipse-collections",
   "baseline_commit": "bceaaa8c1be1c27bed6b4a7517ff788075283397",
   "source_authority": {
     "repository": "hsoliwal/com.synexia",
     "commit": "60f0f54df25ba0950171adff4d2d0c9ef61998b3",
     "review": "https://github.com/hsoliwal/com.synexia/pull/13950",
-    "evidence_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/eclipse-release-20261029"
+    "evidence_path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/eclipse-release-20261029"
   },
   "recipe_executions": [
     {
       "dataset": "collections-release-20261029",
-      "recipe": "com.synexia.m3jdk.AstBuildReverse20261017",
+      "recipe": "jdk.internal.m3.m3jdk.AstBuildReverse20261017",
       "sdk_tests": 5,
       "input_sealing_tests": 12,
       "receiver_cases": 15,
@@ -21,7 +21,7 @@
     },
     {
       "dataset": "collections-ser-release-20261029",
-      "recipe": "com.synexia.m3jdk.AstBuildReverse20261017",
+      "recipe": "jdk.internal.m3.m3jdk.AstBuildReverse20261017",
       "sdk_tests": 5,
       "input_sealing_tests": 12,
       "receiver_cases": 15,
@@ -31,7 +31,7 @@
     },
     {
       "dataset": "collections-ser-compat-20261029",
-      "recipe": "com.synexia.m3jdk.AstBuildReverse20261017",
+      "recipe": "jdk.internal.m3.m3jdk.AstBuildReverse20261017",
       "sdk_tests": 5,
       "input_sealing_tests": 12,
       "receiver_cases": 15,
@@ -42,9 +42,9 @@
   ],
   "files": [
     {
-      "path": "eclipse-collections-testutils/src/main/java/com/m3/collections/eclipse/impl/test/Verify.java",
+      "path": "eclipse-collections-testutils/src/main/java/jdk/m3/collections/eclipse/impl/test/Verify.java",
       "source_sha256": "2b2cb8e4d200648bd511e1c966971f4e3f794b4e1a23eab4e9fb1f4e08008c18",
-      "postimage_sha256": "871e1db8ea53621614d7d919643487a576376ba1a118a8984b1ad5fd9d6373ac",
+      "postimage_sha256": "2dc650599a1235bc61da394caf0de5501967a609aa6fca41d464c3104e56c1fc",
       "mode": "100644",
       "datasets": [
         "collections-ser-release-20261029",
@@ -52,9 +52,9 @@
       ]
     },
     {
-      "path": "eclipse-collections-testutils/src/test/java/com/m3/collections/eclipse/impl/test/VerifyTest.java",
+      "path": "eclipse-collections-testutils/src/test/java/jdk/m3/collections/eclipse/impl/test/VerifyTest.java",
       "source_sha256": "60cb08ea9c4869d7bf84e0ca1a6fcf582617243b98528997d3e9e72547b8707c",
-      "postimage_sha256": "69678f6c6ffd20d91d1e5a9a906f00a1ecb9e03c497a2ba2ce456b59a037f25c",
+      "postimage_sha256": "a30674c1165d66e7ed8bf15a73082542152d5cdf7ee97fc28665ea15f33b0d1d",
       "mode": "100644",
       "datasets": [
         "collections-ser-release-20261029",
@@ -62,9 +62,9 @@
       ]
     },
     {
-      "path": "unit-tests/src/test/java/com/m3/collections/eclipse/impl/list/mutable/FastListTest.java",
+      "path": "unit-tests/src/test/java/jdk/m3/collections/eclipse/impl/list/mutable/FastListTest.java",
       "source_sha256": "8b68106a6aeedbbfd39aa2583d72cd625cfd95fcc6a75acdb175f40a201215c9",
-      "postimage_sha256": "3f7846c273096e8046d861ec6a8189d56b4dd0e5abbbf8aeb6b20531dd0e5d71",
+      "postimage_sha256": "109ff98d5b1509b1724e6bb02dc15c8299f5384ab4acca7d6db80f9c60f5c5b4",
       "mode": "100644",
       "datasets": [
         "collections-release-20261029"

@@ -36,8 +36,8 @@
   "preserved_owners": [
     {
       "path": "src/java.base/share/classes/java/util/ChangeJournal.java",
-      "sha256": "7fb5c5c9a2be3ba14f1946a2a1c000b61010b93f0fd8894cd3e8b52fecaec203",
-      "git_blob_sha1": "7819788e326c0a833984186af9b4a91f3d156cdf"
+      "sha256": "2d9c2589aee071b66eb069bf421664b8d0a6794673f0f3050cbab19cf99f9ae5",
+      "git_blob_sha1": "380667b18341d3b3405eff966e9b19bdacb233db"
     },
     {
       "path": "src/java.base/share/classes/java/util/CollectionViews.java",
@@ -76,8 +76,8 @@
     },
     {
       "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java",
-      "sha256": "0c79f59b111bc1669a626c4a45598b7205319522b0c00c56ef009a8b9ea660e5",
-      "git_blob_sha1": "e6059aeb9b2e7f332fb0baea2684395c268a5414"
+      "sha256": "5617cf2586a2c0b4f8ae9f710e86e4f39f4b880a9fb1fe3deadc04a3f6c58fa9",
+      "git_blob_sha1": "135f13b0c4478659aa3395bdeaa740b4438f649d"
     },
     {
       "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java",
@@ -86,8 +86,8 @@
     },
     {
       "path": "src/java.base/share/native/libjava/M3IndexMaskWindow.c",
-      "sha256": "881a1f4afb97cefe7eb8f2b5d6eba6bb777d537fb3ba5a2b011df3158ba714a7",
-      "git_blob_sha1": "69e6cb5c540934ca35b9c36b5c9fe2592f0f86d7"
+      "sha256": "79f8e521fe31721142ea8c126a34c6b2e90a2f4bb6add49083cf44d4c2b702de",
+      "git_blob_sha1": "157d0e3f9d4063e7a4f31097e374409b863d071c"
     },
     {
       "path": "src/java.base/share/classes/java/lang/String.java",

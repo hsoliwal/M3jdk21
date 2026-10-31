@@ -11,7 +11,7 @@
   "canonical_host_receipt_blob": "698d2eff42138acabb141970654bbf56d308ec4d",
   "canonical_raw_log_blob": "8af8a28120a2ff9e67a6e0278dbf60560679b33e",
   "raw_log_entries": 103,
-  "review_diff_sha256": "108bdf0102c62b0d0331e915231429fc58ff091baaec97abf2f146f5c335adef",
+  "review_diff_sha256": "b7a20014f9dd3aaa56ae84d445eb52e088acbcbc292ef96dba0bb5d0658260be",
   "diff_role": "inert three-owner refinement versus previous candidate; not a runtime application patch",
   "new_target_count": 9,
   "host_exit": 0,

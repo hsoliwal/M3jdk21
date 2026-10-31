@@ -24,7 +24,7 @@ static jint population(uint64_t word) {
 }
 
 JNIEXPORT jint JNICALL
-Java_com_m3_collections_M3BitLane28_cardinality0(
+Java_jdk_m3_collections_M3BitLane28_cardinality0(
         JNIEnv *env, jclass type, jobjectArray regions, jint from, jint to) {
     (void)type;
     if (regions == NULL || from < 0 || to < from || to > (1 << 28)) {

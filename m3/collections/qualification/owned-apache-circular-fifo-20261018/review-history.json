@@ -3,7 +3,7 @@
     "findings": [
       {
         "title": "[P1] Configure the module to compile the queue source",
-        "body": "This POM uses Maven's default source root (`implementation/src/main/java`), but the only production source in the bundle is `implementation/M3CircularFifoQueue.java`. Consequently `mvn package` produces a JAR without `com/m3/collections/apache/M3CircularFifoQueue.class`, and the module verifier's class lookup fails. Move the source under the standard source tree or configure `sourceDirectory` explicitly.",
+        "body": "This POM uses Maven's default source root (`implementation/src/main/java`), but the only production source in the bundle is `implementation/M3CircularFifoQueue.java`. Consequently `mvn package` produces a JAR without `jdk/m3/collections/apache/M3CircularFifoQueue.class`, and the module verifier's class lookup fails. Move the source under the standard source tree or configure `sourceDirectory` explicitly.",
         "priority": "P1",
         "confidence": 0.99,
         "category": "bug",

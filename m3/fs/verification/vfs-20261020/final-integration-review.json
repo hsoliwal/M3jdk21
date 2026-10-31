@@ -11,7 +11,7 @@
   "fresh_qualification_receipts": {
     "java_command": {
       "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-capture/command-receipt.json",
-      "sha256": "79a12e18fca640a639d71c56b044ec14a1fd8ebe181f955acf8a2dac9b2ae55a"
+      "sha256": "bf1dedc43c1451ba1183274d01925e66829614d24dc247a9a8ae238ec08dbf78"
     },
     "java_vfs_image": {
       "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-capture/qualification.json",
@@ -19,15 +19,15 @@
     },
     "native_c_and_abi": {
       "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/native-capture/qualification.json",
-      "sha256": "8ad787af5db84327867a88b48343beaad501c0f84751fc4ee15ccc5b378de4ac"
+      "sha256": "479d40bacee86af3ed6fddacc52d91eac53d100b430413b563fbe94c1a2e1bde"
     },
     "native_runtime_image": {
       "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-native-capture-receipts/runtime-proof.json",
-      "sha256": "5e3694f765ea6fb5890c3e111a3faaf723f40d6865d6f500f71d9358e5b817a2"
+      "sha256": "acd4cfeeab293409e76c37e8a3d2725a8a30bef0cd4624d8629fea6c850d02e4"
     },
     "same_image_vfs_and_native": {
       "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-native-capture-receipts/combined-image-proof.json",
-      "sha256": "709f013ad75a8a32ed87460318c7cd3377f29dff7bbf9d1c74b22c603cf54b8b"
+      "sha256": "cb7d5624aabe334d1889dcefc2316a57e782dc40acf029e3adb79b98af016289"
     }
   },
   "generated_only_receipt_review": {
@@ -61,13 +61,13 @@
     }
   },
   "inspected_generated_sources": {
-    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/com/m3/fs/MFile.java": "2cc3a1ef93ac7d208f50a9e6f2a878334b30aec6522c87ee505336c3dfc9cd5c",
-    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/com/m3/fs/MFileCapture.java": "63e5e0e0d5edebfc8e6913fb3b76b6245490ce89b53125f43040f6912a874344",
-    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/com/m3/fs/MFileContent.java": "44de25cf6ea3799ad0ecbdc44fc9284cc47a18f277bf77db4e2f92d13d7c5659",
-    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/com/m3/fs/MFileContentView.java": "4ab8a28c58f993603392a3c0b54c52e0ce71769a0a716124ca4744f0de004c3a",
-    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/com/m3/fs/MFileShadow.java": "ffbe1900d68dfcd190bb151a1fb2fab32547b461a476f74f84f0ca89e471a7f8",
-    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/com/m3/fs/MFileStreams.java": "b7083747af91c4bc4bfea41ea80ef8f74a1f63d157cbd72da54b489daa3004a5",
-    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/com/m3/fs/MFiles.java": "b881c356f46fd5bed68d1e6d78a704b6fae7012c1fd0e576e043ea53bc8468b4"
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/MFile.java": "5e18898cf0d50b2d60234dc326520010d9c883f313cfbeb59c23b5f3c7d55935",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/MFileCapture.java": "bacc2e0d55bd125dcdc1129fce329e09a4e25f2e2655ca053d7233b922868664",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/MFileContent.java": "44de25cf6ea3799ad0ecbdc44fc9284cc47a18f277bf77db4e2f92d13d7c5659",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/MFileContentView.java": "c4e81610709255b2390cdd6cd516c2ef2a2cec4dccb737fd3cd3e12e20984243",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/MFileShadow.java": "672a45a3903d1dba269f89d58e4c43e8f76f4c27c3e13246d8f4d2e6a6deb04d",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/MFileStreams.java": "b7083747af91c4bc4bfea41ea80ef8f74a1f63d157cbd72da54b489daa3004a5",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/MFiles.java": "b881c356f46fd5bed68d1e6d78a704b6fae7012c1fd0e576e043ea53bc8468b4"
   },
   "qualification_results": {
     "generated_owned_java_sources": 62,
@@ -97,6 +97,6 @@
     "input_files": 389,
     "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/SOURCE_LOCK.capture.tsv",
     "receiver_base": "73f59218dc4ef1a3ef79aad990e77273db2a2d60",
-    "sha256": "c0de3ce42ee865bef48a037b1734fb606f4bb5acc206154826bb9102b07b9ec1"
+    "sha256": "ebacc3085d2404f3378ee5751321e82435fc91829bcd73d8ab19b47229ac835b"
   }
 }

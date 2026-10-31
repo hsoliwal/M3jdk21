@@ -4,11 +4,11 @@ name: M3 JNI rank-run LeetCode Java 21
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongRankIndex.java'
       - 'm3/collections/src/main/native/collections/m3_long_rank_batch_jni.c'
-      - 'm3/collections/src/test/java/com/m3/collections/M3LongRunStatisticsContract.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3LongRunStatisticsTest.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3LongRunStatisticsContract.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3LongRunStatisticsTest.java'
       - 'm3/collections/qualification/rank-run-jni-20261026/**'
       - '.github/workflows/m3-rank-run-jni-java21.yml'
 
@@ -35,18 +35,18 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$M3_EXPECTED_HEAD"
-          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java)" = '3617962b12e314cc60670171c923b4bbca78da48'
-          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java)" = '6a8cf91eb78b6e77fb53b73d55cea0a214a33dd7'
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java)" = '3617962b12e314cc60670171c923b4bbca78da48'
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankIndex.java)" = '6a8cf91eb78b6e77fb53b73d55cea0a214a33dd7'
           test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = 'fab1b17dc529b81a401dd1d3d77fcb8035dc33c7'
-          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongRunStatisticsContract.java)" = 'c2b46e696d6a55b03632651d4d43d4f05e398bb2'
-          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongRunStatisticsTest.java)" = '7d1083709ae5a7107003752157c002295908b53a'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRunStatisticsContract.java)" = 'fcca9bc86c908767057c3baa740aad5a2c762063'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRunStatisticsTest.java)" = 'a22c6601e25972699927c2f5fe65635f6c3e43a2'
       - name: Compile actual original rank source and source-owned executable differential
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/m3-rank-run/classes" "$RUNNER_TEMP/m3-rank-run/native"
-          src=m3/collections/src/main/java/com/m3/collections
-          tests=m3/collections/src/test/java/com/m3/collections
+          src=m3/collections/src/main/java/jdk/m3/collections
+          tests=m3/collections/src/test/java/jdk/m3/collections
           javac --release 21 -Xlint:all,-module -Werror -d "$RUNNER_TEMP/m3-rank-run/classes" \
             "$src/M3LongCollection.java" "$src/M3LongIterator.java" \
             "$src/M3LaneSearch.java" "$src/M3LongRankBatchNative.java" \
@@ -61,7 +61,7 @@ jobs:
             m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c \
             -o "$RUNNER_TEMP/m3-rank-run/native/libm3rankbatch.so"
           nm -D "$RUNNER_TEMP/m3-rank-run/native/libm3rankbatch.so" \
-            | grep -Fq 'Java_com_m3_collections_M3LongRankBatchNative_runStatistics0'
+            | grep -Fq 'Java_jdk_m3_collections_M3LongRankBatchNative_runStatistics0'
       - name: Java fallback and native required parity, ordinary and interpreted JVM
         shell: bash
         run: |
@@ -69,17 +69,17 @@ jobs:
           classes="$RUNNER_TEMP/m3-rank-run/classes"
           lib="$RUNNER_TEMP/m3-rank-run/native"
           java -ea -cp "$classes" \
-            com.m3.collections.M3LongRunStatisticsContract \
+            jdk.m3.collections.M3LongRunStatisticsContract \
             | tee "$RUNNER_TEMP/m3-rank-run/java.txt"
           grep -Fxq 'PASS M3_LONG_RUN_STATISTICS checks=9792 nativeRequired=false' \
             "$RUNNER_TEMP/m3-rank-run/java.txt"
           java -ea -Xcheck:jni -Dm3.collections.rank.native=true \
             -Djava.library.path="$lib" -cp "$classes" \
-            com.m3.collections.M3LongRunStatisticsContract --native-required \
+            jdk.m3.collections.M3LongRunStatisticsContract --native-required \
             | tee "$RUNNER_TEMP/m3-rank-run/native.txt"
           java -ea -Xint -Xcheck:jni -Dm3.collections.rank.native=true \
             -Djava.library.path="$lib" -cp "$classes" \
-            com.m3.collections.M3LongRunStatisticsContract --native-required \
+            jdk.m3.collections.M3LongRunStatisticsContract --native-required \
             | tee "$RUNNER_TEMP/m3-rank-run/interpreted.txt"
           grep -Fxq 'PASS M3_LONG_RUN_STATISTICS checks=11031 nativeRequired=true' \
             "$RUNNER_TEMP/m3-rank-run/native.txt"

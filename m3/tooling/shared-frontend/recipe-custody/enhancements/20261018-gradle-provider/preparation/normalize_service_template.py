@@ -5,7 +5,7 @@ import hashlib
 import json
 
 root = Path(__file__).resolve().parent
-lane = root / "canonical/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/gradle-provider-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-gradle-provider-20261018"
+lane = root / "canonical/m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/gradle-provider-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-gradle-provider-20261018"
 manifest = lane / "manifest.tsv"
 before = manifest.read_bytes()
 rows = [line.split("\t") for line in before.decode().splitlines()]

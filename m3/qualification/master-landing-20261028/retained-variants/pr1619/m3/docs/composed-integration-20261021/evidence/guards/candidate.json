@@ -3,7 +3,7 @@
     "argv": [
       "python3",
       "-B",
-      "m3/compatibility/test_synexia_string_phase_checker_successor.py",
+      "m3/compatibility/test_m3_string_phase_checker_successor.py",
       "-v"
     ],
     "exit": 0,
@@ -17,7 +17,7 @@
     "argv": [
       "python3",
       "-B",
-      "m3/compatibility/test_synexia_string_concat_dag_successor.py",
+      "m3/compatibility/test_m3_string_concat_dag_successor.py",
       "-v"
     ],
     "exit": 0,
@@ -30,11 +30,11 @@
   {
     "argv": [
       "python3",
-      "m3/synexia-import/current-full-borrow/check_string_phase.py"
+      "m3/m3-import/current-full-borrow/check_string_phase.py"
     ],
     "exit": 1,
     "tail": [
-      "  File \"${M3_WORK}/M3jdk21/m3/synexia-import/current-full-borrow/check_string_phase.py\", line 269, in current_successor_blobs",
+      "  File \"${M3_WORK}/M3jdk21/m3/m3-import/current-full-borrow/check_string_phase.py\", line 269, in current_successor_blobs",
       "    raise ValueError(\"String successor chain length drift\")",
       "ValueError: String successor chain length drift"
     ]
@@ -42,7 +42,7 @@
   {
     "argv": [
       "python3",
-      "m3/synexia-import/current-full-borrow/check_string_phase_closure.py"
+      "m3/m3-import/current-full-borrow/check_string_phase_closure.py"
     ],
     "exit": 0,
     "tail": [

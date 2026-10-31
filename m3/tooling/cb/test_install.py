@@ -82,8 +82,8 @@ class InstallTest(unittest.TestCase):
 
     def test_jtreg_sources_are_recipe_outputs(self):
         for name in ('CBProbe', 'VmFixture'):
-            generated = CRATE / ('target/generated/src/test/java/com/m3/cb/' + name + '.java')
-            actual = ROOT / ('test/jdk/jdk/internal/mindex/cb/com/m3/cb/' + name + '.java')
+            generated = CRATE / ('target/generated/src/test/java/jdk/m3/cb/' + name + '.java')
+            actual = ROOT / ('test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/' + name + '.java')
             self.assertEqual(generated.read_bytes(), actual.read_bytes())
 
 

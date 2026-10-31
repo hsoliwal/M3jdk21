@@ -24,9 +24,9 @@ OLD_RECEIVE = '          python3 "$Q/recipe/receive.py" --dataset filtered-navig
 NEW_RECEIVE = '          python3 m3/collections/qualification/filtered-current/verify_shadow.py --crate "$Q/recipe" --dataset filtered-navigation-20261018 --target "$PWD"'
 # Postimages of newer product work, NOT invented replacements for historical SDK results.
 EVOLVED_GIT_BLOBS = {
-    "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java":
+    "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java":
         "25e1ba23e0269cd6226e9f0b76fd9a43c6bb1d59",
-    "m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java":
+    "m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java":
         "8c7c19eac9338bbc1a6f82a9e339cfb4952ad0c6",
     PREFIX + "/runtime/pom.xml":
         "ea72015355e7fdc7534775192af94c22ea468c64",
@@ -60,7 +60,7 @@ def checked(root: Path, relative: str) -> Path:
 
 
 def manifests(crate: Path, dataset: str) -> list[tuple[str, str, str, bytes, bytes | None]]:
-    lane_root = crate / "datasets" / dataset / "resources/com/synexia/rewrite"
+    lane_root = crate / "datasets" / dataset / "resources/jdk/internal/m3/rewrite"
     meta = json.loads((crate / "datasets" / dataset / "DATASET.json").read_text())
     if (dataset != RECIPE_NAME or meta["dataset"] != RECIPE_NAME
             or meta["targets"] != TARGET_COUNT or meta["java_targets"] != 5
@@ -92,9 +92,9 @@ def manifests(crate: Path, dataset: str) -> list[tuple[str, str, str, bytes, byt
             records.append((relative, before, after, output, original))
     if len(records) != TARGET_COUNT or {item[0] for item in records} != (
             set(EVOLVED_GIT_BLOBS) | {WORKFLOW} | {
-                "m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationReconciliationContract.java",
-                "m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationReconciliationTest.java",
-                "m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksAliasContract.java",
+                "m3/collections/src/test/java/jdk/m3/collections/M3FilteredNavigationReconciliationContract.java",
+                "m3/collections/src/test/java/jdk/m3/collections/M3FilteredNavigationReconciliationTest.java",
+                "m3/collections/src/test/java/jdk/m3/collections/M3IndexPathMasksAliasContract.java",
                 PREFIX + "/README.md",
                 PREFIX + "/runtime/verify.py",
             }):

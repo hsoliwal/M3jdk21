@@ -7,13 +7,13 @@
     "archiveIndex": {
       "bytes": 123241,
       "path": "bundle/BUNDLE.json",
-      "sha256": "af4f16e7c63ea8adb004de897bb3cfb1b089bac346c9360e438ae2969e36039e"
+      "sha256": "a13fea2b9340daf792af3960b7d98666064f28525e146a480381cf46e1fa8956"
     },
     "archiveOnlyProjectFiles": 0,
     "execution": {
       "bytes": 1797,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/root-execution-v1/RESULT.json",
-      "sha256": "892345dd1a120e86f3a11d6a62ed3a9c4fdba1734fa83917783f3dce4cfb8b2c"
+      "sha256": "5bb129c19cc5d4acb0b6426880e3118952e0daf7f057fff51081570eb89272db"
     },
     "flatMirrorMavenReady": true,
     "flatProjectFiles": 20,
@@ -22,12 +22,12 @@
     "projectReady": {
       "bytes": 14331,
       "path": "PROJECT-READY.json",
-      "sha256": "0d4e7b4726d4f1c598a8ccdb75357418e21ebbf67d6be6607089f7c9004d8062"
+      "sha256": "4e99f141b6069e8bbdcac7ca4d746bbf07bc46e089d75e63aea17687ac15c1ff"
     },
     "readback": {
       "bytes": 384272,
       "path": "READBACK.json",
-      "sha256": "3f1a568c9846f6b2b627aa6cfe287693e2be26c13cd2ba2052afea9443a0e0f1"
+      "sha256": "0478407e5a003ca49cf1734d9c1a302924a59d4925f59d140d947163a41e13b0"
     },
     "selectedLogicalBodies": 810,
     "status": "PASS_SELECT_PACK_VERIFY_EXTRACT_FINISH"
@@ -84,7 +84,7 @@
     },
     "errorMessage": "target is not a Java compilation unit: src/java.base/share/classes/java/util/regex/Pattern.java",
     "erroredMethods": [
-      "com.m3.rewrite.backport.M3StringHistoryConvergenceRecipeTest.javaPostimagesAreFixedPointAndMissingOrWrongTreeRefuse"
+      "jdk.m3.rewrite.backport.M3StringHistoryConvergenceRecipeTest.javaPostimagesAreFixedPointAndMissingOrWrongTreeRefuse"
     ],
     "fullOpenJdkBuildQualified": false,
     "hostedWorkflowExecuted": false,

@@ -1,8 +1,8 @@
-diff --git a/m3/collections/src/test/java/com/m3/collections/M3DequeSpanCopyTest.java b/m3/collections/src/test/java/com/m3/collections/M3DequeSpanCopyTest.java
+diff --git a/m3/collections/src/test/java/jdk/m3/collections/M3DequeSpanCopyTest.java b/m3/collections/src/test/java/jdk/m3/collections/M3DequeSpanCopyTest.java
 new file mode 100644
 index 0000000..5d6e820
 --- /dev/null
-+++ b/m3/collections/src/test/java/com/m3/collections/M3DequeSpanCopyTest.java
++++ b/m3/collections/src/test/java/jdk/m3/collections/M3DequeSpanCopyTest.java
 @@ -0,0 +1,88 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +/* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
 +package com.m3.collections;
@@ -92,11 +92,11 @@ index 0000000..5d6e820
 +        assertEquals(1008, layouts, "both growth ends at every bounded head");
 +    }
 +}
-diff --git a/m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationReconciliationContract.java b/m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationReconciliationContract.java
+diff --git a/m3/collections/src/test/java/jdk/m3/collections/M3FilteredNavigationReconciliationContract.java b/m3/collections/src/test/java/jdk/m3/collections/M3FilteredNavigationReconciliationContract.java
 new file mode 100644
 index 0000000..dcc512d
 --- /dev/null
-+++ b/m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationReconciliationContract.java
++++ b/m3/collections/src/test/java/jdk/m3/collections/M3FilteredNavigationReconciliationContract.java
 @@ -0,0 +1,390 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +/*
 + * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
@@ -488,11 +488,11 @@ index 0000000..dcc512d
 +        if (scopeFirst == null) scopeFirst = message;
 +    }
 +}
-diff --git a/m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationReconciliationTest.java b/m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationReconciliationTest.java
+diff --git a/m3/collections/src/test/java/jdk/m3/collections/M3FilteredNavigationReconciliationTest.java b/m3/collections/src/test/java/jdk/m3/collections/M3FilteredNavigationReconciliationTest.java
 new file mode 100644
 index 0000000..6197b82
 --- /dev/null
-+++ b/m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationReconciliationTest.java
++++ b/m3/collections/src/test/java/jdk/m3/collections/M3FilteredNavigationReconciliationTest.java
 @@ -0,0 +1,21 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +/*
 + * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
@@ -515,11 +515,11 @@ index 0000000..6197b82
 +                ? new String[] {"--native"} : new String[0]);
 +    }
 +}
-diff --git a/m3/collections/src/test/java/com/m3/collections/M3FilteredSetNullContract.java b/m3/collections/src/test/java/com/m3/collections/M3FilteredSetNullContract.java
+diff --git a/m3/collections/src/test/java/jdk/m3/collections/M3FilteredSetNullContract.java b/m3/collections/src/test/java/jdk/m3/collections/M3FilteredSetNullContract.java
 new file mode 100644
 index 0000000..daef307
 --- /dev/null
-+++ b/m3/collections/src/test/java/com/m3/collections/M3FilteredSetNullContract.java
++++ b/m3/collections/src/test/java/jdk/m3/collections/M3FilteredSetNullContract.java
 @@ -0,0 +1,515 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +/*
 + * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
@@ -1036,11 +1036,11 @@ index 0000000..daef307
 +        System.out.println("PASS readonly-set-null mode=" + mode + " checks=" + checks);
 +    }
 +}
-diff --git a/m3/collections/src/test/java/com/m3/collections/M3FilteredSetNullTest.java b/m3/collections/src/test/java/com/m3/collections/M3FilteredSetNullTest.java
+diff --git a/m3/collections/src/test/java/jdk/m3/collections/M3FilteredSetNullTest.java b/m3/collections/src/test/java/jdk/m3/collections/M3FilteredSetNullTest.java
 new file mode 100644
 index 0000000..1df4e7a
 --- /dev/null
-+++ b/m3/collections/src/test/java/com/m3/collections/M3FilteredSetNullTest.java
++++ b/m3/collections/src/test/java/jdk/m3/collections/M3FilteredSetNullTest.java
 @@ -0,0 +1,14 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +/*
 + * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
@@ -1056,11 +1056,11 @@ index 0000000..1df4e7a
 +        M3FilteredSetNullContract.runAll();
 +    }
 +}
-diff --git a/m3/collections/src/test/java/com/m3/collections/M3FilteredSplitContract.java b/m3/collections/src/test/java/com/m3/collections/M3FilteredSplitContract.java
+diff --git a/m3/collections/src/test/java/jdk/m3/collections/M3FilteredSplitContract.java b/m3/collections/src/test/java/jdk/m3/collections/M3FilteredSplitContract.java
 new file mode 100644
 index 0000000..5a5d3be
 --- /dev/null
-+++ b/m3/collections/src/test/java/com/m3/collections/M3FilteredSplitContract.java
++++ b/m3/collections/src/test/java/jdk/m3/collections/M3FilteredSplitContract.java
 @@ -0,0 +1,152 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +/* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
 +package com.m3.collections;
@@ -1214,11 +1214,11 @@ index 0000000..5a5d3be
 +        System.out.println("FILTERED_SPLITS_PASS checks=" + checks);
 +    }
 +}
-diff --git a/m3/collections/src/test/java/com/m3/collections/M3FilteredSplitsMaskSpansTest.java b/m3/collections/src/test/java/com/m3/collections/M3FilteredSplitsMaskSpansTest.java
+diff --git a/m3/collections/src/test/java/jdk/m3/collections/M3FilteredSplitsMaskSpansTest.java b/m3/collections/src/test/java/jdk/m3/collections/M3FilteredSplitsMaskSpansTest.java
 new file mode 100644
 index 0000000..d31bc74
 --- /dev/null
-+++ b/m3/collections/src/test/java/com/m3/collections/M3FilteredSplitsMaskSpansTest.java
++++ b/m3/collections/src/test/java/jdk/m3/collections/M3FilteredSplitsMaskSpansTest.java
 @@ -0,0 +1,31 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +/* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
 +package com.m3.collections;
@@ -1251,11 +1251,11 @@ index 0000000..d31bc74
 +        org.junit.jupiter.api.Assertions.assertEquals(lane.cardinality(0, 4097), lane.cardinalityNative(0, 4097));
 +    }
 +}
-diff --git a/m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksAliasContract.java b/m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksAliasContract.java
+diff --git a/m3/collections/src/test/java/jdk/m3/collections/M3IndexPathMasksAliasContract.java b/m3/collections/src/test/java/jdk/m3/collections/M3IndexPathMasksAliasContract.java
 new file mode 100644
 index 0000000..932f0ca
 --- /dev/null
-+++ b/m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksAliasContract.java
++++ b/m3/collections/src/test/java/jdk/m3/collections/M3IndexPathMasksAliasContract.java
 @@ -0,0 +1,230 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +/*
 + * Copyright 2026 Hitesh Soliwal and contributors
@@ -1487,11 +1487,11 @@ index 0000000..932f0ca
 +        System.out.println("M3_PATH_MASK_ALIAS_PASS checks=" + checks + " actualJNI=" + nativeRun);
 +    }
 +}
-diff --git a/m3/collections/src/test/java/com/m3/collections/M3IndexedReadOnlyNoopProof.java b/m3/collections/src/test/java/com/m3/collections/M3IndexedReadOnlyNoopProof.java
+diff --git a/m3/collections/src/test/java/jdk/m3/collections/M3IndexedReadOnlyNoopProof.java b/m3/collections/src/test/java/jdk/m3/collections/M3IndexedReadOnlyNoopProof.java
 new file mode 100644
 index 0000000..b2027fe
 --- /dev/null
-+++ b/m3/collections/src/test/java/com/m3/collections/M3IndexedReadOnlyNoopProof.java
++++ b/m3/collections/src/test/java/jdk/m3/collections/M3IndexedReadOnlyNoopProof.java
 @@ -0,0 +1,163 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +/*
 + * Copyright 2026 Hitesh Soliwal and contributors
@@ -1656,11 +1656,11 @@ index 0000000..b2027fe
 +        System.out.println("PASS M3IndexedReadOnlyNoopProof checks=" + checks);
 +    }
 +}
-diff --git a/m3/collections/src/test/java/com/m3/collections/M3IndexedReadOnlyNoopTest.java b/m3/collections/src/test/java/com/m3/collections/M3IndexedReadOnlyNoopTest.java
+diff --git a/m3/collections/src/test/java/jdk/m3/collections/M3IndexedReadOnlyNoopTest.java b/m3/collections/src/test/java/jdk/m3/collections/M3IndexedReadOnlyNoopTest.java
 new file mode 100644
 index 0000000..e4a1517
 --- /dev/null
-+++ b/m3/collections/src/test/java/com/m3/collections/M3IndexedReadOnlyNoopTest.java
++++ b/m3/collections/src/test/java/jdk/m3/collections/M3IndexedReadOnlyNoopTest.java
 @@ -0,0 +1,13 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +/*
 + * Copyright 2026 Hitesh Soliwal and contributors
@@ -1675,11 +1675,11 @@ index 0000000..e4a1517
 +        M3IndexedReadOnlyNoopProof.main(new String[0]);
 +    }
 +}
-diff --git a/m3/collections/src/test/java/com/m3/collections/M3IndexedSetAlgebraSeekProof.java b/m3/collections/src/test/java/com/m3/collections/M3IndexedSetAlgebraSeekProof.java
+diff --git a/m3/collections/src/test/java/jdk/m3/collections/M3IndexedSetAlgebraSeekProof.java b/m3/collections/src/test/java/jdk/m3/collections/M3IndexedSetAlgebraSeekProof.java
 new file mode 100644
 index 0000000..f366673
 --- /dev/null
-+++ b/m3/collections/src/test/java/com/m3/collections/M3IndexedSetAlgebraSeekProof.java
++++ b/m3/collections/src/test/java/jdk/m3/collections/M3IndexedSetAlgebraSeekProof.java
 @@ -0,0 +1,117 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// SPDX-License-Identifier: Apache-2.0
 +package com.m3.collections;
@@ -1798,11 +1798,11 @@ index 0000000..f366673
 +        System.out.println("PASS M3IndexedSetAlgebraSeekProof checks=" + checks);
 +    }
 +}
-diff --git a/m3/collections/src/test/java/com/m3/collections/M3IndexedSetAlgebraSeekTest.java b/m3/collections/src/test/java/com/m3/collections/M3IndexedSetAlgebraSeekTest.java
+diff --git a/m3/collections/src/test/java/jdk/m3/collections/M3IndexedSetAlgebraSeekTest.java b/m3/collections/src/test/java/jdk/m3/collections/M3IndexedSetAlgebraSeekTest.java
 new file mode 100644
 index 0000000..ceb20d5
 --- /dev/null
-+++ b/m3/collections/src/test/java/com/m3/collections/M3IndexedSetAlgebraSeekTest.java
++++ b/m3/collections/src/test/java/jdk/m3/collections/M3IndexedSetAlgebraSeekTest.java
 @@ -0,0 +1,11 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// SPDX-License-Identifier: Apache-2.0
 +package com.m3.collections;
@@ -1815,11 +1815,11 @@ index 0000000..ceb20d5
 +        M3IndexedSetAlgebraSeekProof.main(new String[0]);
 +    }
 +}
-diff --git a/m3/collections/src/test/java/com/m3/collections/M3MaskSpansContract.java b/m3/collections/src/test/java/com/m3/collections/M3MaskSpansContract.java
+diff --git a/m3/collections/src/test/java/jdk/m3/collections/M3MaskSpansContract.java b/m3/collections/src/test/java/jdk/m3/collections/M3MaskSpansContract.java
 new file mode 100644
 index 0000000..fa45d7b
 --- /dev/null
-+++ b/m3/collections/src/test/java/com/m3/collections/M3MaskSpansContract.java
++++ b/m3/collections/src/test/java/jdk/m3/collections/M3MaskSpansContract.java
 @@ -0,0 +1,45 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +/* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
 +package com.m3.collections;
@@ -1866,11 +1866,11 @@ index 0000000..fa45d7b
 +        System.out.println("MASK_SPANS_PASS cases=" + checks + " backend=" + backend);
 +    }
 +}
-diff --git a/m3/collections/src/test/java/com/m3/collections/M3PathMaskAliasContract.java b/m3/collections/src/test/java/com/m3/collections/M3PathMaskAliasContract.java
+diff --git a/m3/collections/src/test/java/jdk/m3/collections/M3PathMaskAliasContract.java b/m3/collections/src/test/java/jdk/m3/collections/M3PathMaskAliasContract.java
 new file mode 100644
 index 0000000..ea3860e
 --- /dev/null
-+++ b/m3/collections/src/test/java/com/m3/collections/M3PathMaskAliasContract.java
++++ b/m3/collections/src/test/java/jdk/m3/collections/M3PathMaskAliasContract.java
 @@ -0,0 +1,213 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +/*
 + * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
@@ -2085,11 +2085,11 @@ index 0000000..ea3860e
 +        System.out.println("PASS M3_PATH_MASK_ALIAS mode=" + mode + " checks=" + checks);
 +    }
 +}
-diff --git a/m3/collections/src/test/java/com/m3/collections/M3PathMaskAliasTest.java b/m3/collections/src/test/java/com/m3/collections/M3PathMaskAliasTest.java
+diff --git a/m3/collections/src/test/java/jdk/m3/collections/M3PathMaskAliasTest.java b/m3/collections/src/test/java/jdk/m3/collections/M3PathMaskAliasTest.java
 new file mode 100644
 index 0000000..1b35be6
 --- /dev/null
-+++ b/m3/collections/src/test/java/com/m3/collections/M3PathMaskAliasTest.java
++++ b/m3/collections/src/test/java/jdk/m3/collections/M3PathMaskAliasTest.java
 @@ -0,0 +1,10 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +/* SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project. SPDX-License-Identifier: Apache-2.0 */
 +package com.m3.collections;
@@ -2101,10 +2101,10 @@ index 0000000..1b35be6
 +        M3PathMaskAliasContract.run(M3IndexPathMasks.Backend.JAVA);
 +    }
 +}
-diff --git a/m3/collections/src/test/java/com/m3/collections/M3SignalDimensionsContract.java b/m3/collections/src/test/java/com/m3/collections/M3SignalDimensionsContract.java
+diff --git a/m3/collections/src/test/java/jdk/m3/collections/M3SignalDimensionsContract.java b/m3/collections/src/test/java/jdk/m3/collections/M3SignalDimensionsContract.java
 index 85dcf68..5335fdf 100644
---- a/m3/collections/src/test/java/com/m3/collections/M3SignalDimensionsContract.java
-+++ b/m3/collections/src/test/java/com/m3/collections/M3SignalDimensionsContract.java
+--- a/m3/collections/src/test/java/jdk/m3/collections/M3SignalDimensionsContract.java
++++ b/m3/collections/src/test/java/jdk/m3/collections/M3SignalDimensionsContract.java
 @@ -1,3 +1,4 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Modified 2026 by Hitesh Soliwal and contributors: qualify loaded and missing JNI independently.
  /*
@@ -2131,10 +2131,10 @@ index 85dcf68..5335fdf 100644
      }
  
      private static int[] oracle(double[][] columns, boolean[] descending,
-diff --git a/m3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeContract.java b/m3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeContract.java
+diff --git a/m3/collections/src/test/java/jdk/m3/collections/M3StoredRepresentativeContract.java b/m3/collections/src/test/java/jdk/m3/collections/M3StoredRepresentativeContract.java
 index 5dfe903..dacd7a5 100644
---- a/m3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeContract.java
-+++ b/m3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeContract.java
+--- a/m3/collections/src/test/java/jdk/m3/collections/M3StoredRepresentativeContract.java
++++ b/m3/collections/src/test/java/jdk/m3/collections/M3StoredRepresentativeContract.java
 @@ -1,9 +1,11 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
  /*
   * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
@@ -2356,11 +2356,11 @@ index 5dfe903..dacd7a5 100644
          mutableSet();
          mutableMap();
          collidingNewBulkKeys();
-diff --git a/m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceContract.java b/m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceContract.java
+diff --git a/m3/collections/src/test/java/jdk/m3/collections/M3WrapperConvergenceContract.java b/m3/collections/src/test/java/jdk/m3/collections/M3WrapperConvergenceContract.java
 new file mode 100644
 index 0000000..b551b7b
 --- /dev/null
-+++ b/m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceContract.java
++++ b/m3/collections/src/test/java/jdk/m3/collections/M3WrapperConvergenceContract.java
 @@ -0,0 +1,384 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 +// SPDX-License-Identifier: Apache-2.0
@@ -2746,11 +2746,11 @@ index 0000000..b551b7b
 +
 +    public static void main(String[] args) { run(args.length == 0 ? "readonly" : args[0]); }
 +}
-diff --git a/m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceTest.java b/m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceTest.java
+diff --git a/m3/collections/src/test/java/jdk/m3/collections/M3WrapperConvergenceTest.java b/m3/collections/src/test/java/jdk/m3/collections/M3WrapperConvergenceTest.java
 new file mode 100644
 index 0000000..0a6e1b0
 --- /dev/null
-+++ b/m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceTest.java
++++ b/m3/collections/src/test/java/jdk/m3/collections/M3WrapperConvergenceTest.java
 @@ -0,0 +1,13 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 +// SPDX-License-Identifier: Apache-2.0

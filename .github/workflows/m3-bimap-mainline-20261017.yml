@@ -3,8 +3,8 @@ name: M3 BiMap mainline Java/JNI SDK receiver
 on:
   pull_request:
     paths:
-      - 'm3/collections/interop/src/main/java/com/m3/collections/interop/M3BiMap*.java'
-      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3BiMapTest.java'
+      - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3BiMap*.java'
+      - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3BiMapTest.java'
       - 'm3/collections/qualification/bimap-mainline-20261017/**'
       - 'm3/collections/src/test/native/collections/m3_bimap_consumer.c'
       - '.github/workflows/m3-bimap-mainline-20261017.yml'

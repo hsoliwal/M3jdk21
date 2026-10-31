@@ -213,14 +213,14 @@ negative bounded result. Large-capacity overflow/OOME, callback exception
 precedence, every reentrant mutation sequence, concurrent use and whole-JDK
 interface compatibility are not established by these finite assertions.
 
-Exact blobs: map `18f9277389f7fa5ab8ddbff9971bb0f941659750`,
-set `6f20a64f8d7e9dc6bbc9880396c502349e2e3d7a`,
-test `a2ea451fd5724e212df4c43e20776d3882d13254`.
+Exact blobs: map `3ce45a6f05500530856d587d933abcbce22d57b9`,
+set `0267aeb9a81c0a59c92827f615a697969428bc08`,
+test `25341463f46f83cd80b27ed510c38b270384a981`.
 
-[map]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3ObjectIdentityMap.java
-[set]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3ObjectIdentitySet.java
-[test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/com/m3/collections/M3ObjectIdentityTest.java
-[factory]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3Collections.java
+[map]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3ObjectIdentityMap.java
+[set]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3ObjectIdentitySet.java
+[test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/jdk/m3/collections/M3ObjectIdentityTest.java
+[factory]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3Collections.java
 [module]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/module-info.java
 [pom]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/pom.xml
 [family-map]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/JDK_FAMILY_MAP.tsv

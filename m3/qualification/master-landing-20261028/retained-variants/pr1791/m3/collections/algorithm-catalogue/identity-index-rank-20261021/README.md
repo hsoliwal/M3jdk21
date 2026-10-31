@@ -42,7 +42,7 @@ it is not an empirically measured performance result.
 ```sh
 mkdir -p /tmp/m3-identity-rank
 javac --release 21 -Xlint:all -Werror -d /tmp/m3-identity-rank \
-  m3/collections/src/main/java/com/m3/collections/M3IndexPathRank.java \
+  m3/collections/src/main/java/jdk/m3/collections/M3IndexPathRank.java \
   m3/collections/src/test/java/com/m3/collections/M3IndexPathIdentitySelfTest.java
 java -cp /tmp/m3-identity-rank com.m3.collections.M3IndexPathIdentitySelfTest
 mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3IndexPathIdentityTest,M3LongStateArrayTest test

@@ -111,7 +111,7 @@ verify-recipes	UNKNOWN STEP	2026-10-21T13:12:46.9118526Z 100  198M  100  198M   
 verify-recipes	UNKNOWN STEP	2026-10-21T13:12:47.3223679Z /home/runner/work/_temp/jdk21.tar.gz: OK
 verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3125603Z ##[group]Run set -euo pipefail
 verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3125921Z [36;1mset -euo pipefail[0m
-verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3126272Z [36;1mpython3 "$REPO/m3/compatibility/check_synexia_recipe_ownership.py"[0m
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3126272Z [36;1mpython3 "$REPO/m3/compatibility/check_m3_recipe_ownership.py"[0m
 verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3126607Z [36;1mpython3 -m unittest discover \[0m
 verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3126774Z [36;1m  -s "$REPO/m3/compatibility" \[0m
 verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3126959Z [36;1m  -p 'test_synexia_recipe_home_policy.py' \[0m
@@ -122,12 +122,12 @@ verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3147222Z   REPO: /home/runner/wo
 verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3147396Z   JAVA_HOME: /home/runner/work/_temp/jdk-21+35
 verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3147565Z ##[endgroup]
 verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3682653Z Traceback (most recent call last):
-verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3683176Z   File "/home/runner/work/_temp/repo/m3/compatibility/check_synexia_recipe_ownership.py", line 264, in <module>
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3683176Z   File "/home/runner/work/_temp/repo/m3/compatibility/check_m3_recipe_ownership.py", line 264, in <module>
 verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3683610Z     raise SystemExit(main(sys.argv))
-verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3684049Z   File "/home/runner/work/_temp/repo/m3/compatibility/check_synexia_recipe_ownership.py", line 248, in main
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3684049Z   File "/home/runner/work/_temp/repo/m3/compatibility/check_m3_recipe_ownership.py", line 248, in main
 verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3684701Z     rows = load()
-verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3685215Z   File "/home/runner/work/_temp/repo/m3/compatibility/check_synexia_recipe_ownership.py", line 141, in load
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3685215Z   File "/home/runner/work/_temp/repo/m3/compatibility/check_m3_recipe_ownership.py", line 141, in load
 verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3685758Z     raise ValueError(f"frozen legacy recipe drift: {row['legacy_path']}")
-verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3686435Z ValueError: frozen legacy recipe drift: m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic/M3SemanticHasher.java
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3686435Z ValueError: frozen legacy recipe drift: m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/semantic/M3SemanticHasher.java
 verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3771480Z ##[error]Process completed with exit code 1.
 verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3852960Z Cleaning up orphan processes

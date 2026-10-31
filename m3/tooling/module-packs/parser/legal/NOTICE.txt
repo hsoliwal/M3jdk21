@@ -3,7 +3,7 @@ Copyright 2026 Hitesh Soliwal and contributors
 Licensed under the Apache License, Version 2.0.
 
 The grammar runtime is adapted from hsoliwal/com.synexia,
-synexia-indexstring/src/main/java/com/synexia/indexstring/grammar,
+m3-indexstring/src/main/java/jdk/internal/m3/indexstring/grammar,
 revision 50f48cbbe11f17fb8dc209bac3812f8940a1e267.
 Changes: explicit target package/type mappings, bounded immutable source admission,
 per-grammar decision ownership, nullable-completion repair, and M3JDK source/AST adapters.

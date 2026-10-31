@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "mode": "CHECK",
+  "recipe_proof_sha256": "d52b41311724936f0f8eee9eae0a42cc7fcc974436e95296930fae5ce374e3d8",
+  "receiver_root": "4515e9cf273b74f575d55175240a4a088f4fb3647585d322087e196aa15441ae",
+  "repository": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source",
+  "files": [
+    {
+      "path": "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml",
+      "before_sha256": "ff8b2c1db5fffa1a9013fc863a1f5dac337b2cb633c07d513339b57fcce40b80",
+      "after_sha256": "4b864a178251e0f853cc8d2fe8027962bf831f950d9b83a9d095496ae60be158",
+      "action": "WRITE"
+    }
+  ]
+}

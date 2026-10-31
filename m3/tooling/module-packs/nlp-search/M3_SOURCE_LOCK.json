@@ -3,7 +3,7 @@
   "compiler-src/jdk.m3.search.compiler/module-info.java": "3d9824739a7f60839eedda318fb4cde2d009fffbdd8dc5adad10b0674102c290",
   "fixtures/src/test/java/M3ASTSearchChecks.java": "03881ca7ad91608330bc7f4721c53945e9bfe28ed0f1b9e5d2a2c7a1c576c448",
   "fixtures/src/test/java/M3SourceSearchChecks.java": "a72c8fff35fc04763be548d1af19bb107bb96f34646ac7ea7b39c5a20927016e",
-  "fixtures/src/test/java/OpenNlpCompositeIntegrationChecks.java": "040bb64d9ef124055c8a4f7283f150c42313ee8b5319afc94b409cddb9187c85",
+  "fixtures/src/test/java/OpenNlpCompositeIntegrationChecks.java": "6ad7cf722c6bd0b3fc18c30d45d46428c04a000b4f2ed800c4d2ba6195bb733c",
   "fixtures/src/test/java/SyntheticModelsProbe.java": "aa7adf521a7e7a3fae7d602dc0fd712d8080083a075221ae0dec7345d71d0a47",
   "fixtures/src/test/java/ToolsProbe.java": "715cb6fd86acf622ce69ae2fbbe3392b1e37ab54eb3f2018fb3f2f7d4d844e73",
   "src/jdk.m3.search/jdk/m3/search/M3File.java": "8aac8a2357fd7c4d742f723b89ad9dfcac1f63a2af52062ae3a07312664f808a",

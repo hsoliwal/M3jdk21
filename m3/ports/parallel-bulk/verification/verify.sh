@@ -19,7 +19,7 @@ javac -source 21 -target 21 -proc:none -Xlint:all,-module -Werror \
   --patch-module "java.base=$BUILD/patch" \
   --add-exports java.base/jdk.internal.vm.parallel=ALL-UNNAMED \
   -cp "$BUILD/classes" -d "$BUILD/classes" \
-  "$MODULE/src/main/java/com/m3/parallel/bulk/M3ParallelIntAddProvider.java" \
+  "$MODULE/src/main/java/jdk/m3/parallel/bulk/M3ParallelIntAddProvider.java" \
   "$MODULE/verification/M3ParallelIntAddProof.java"
 java --patch-module "java.base=$BUILD/patch" \
   --add-exports java.base/jdk.internal.vm.parallel=ALL-UNNAMED \

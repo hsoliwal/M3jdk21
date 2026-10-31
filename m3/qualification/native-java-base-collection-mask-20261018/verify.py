@@ -12,9 +12,9 @@ expected={
     "src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java":
         "6d26934bab87d6bc68a0c38f0c8ceeec72dc5817e5fca12cfafbc276bafb133d",
     "test/jdk/java/util/ArrayList/M3MaskCompactionDifferential.java":
-        "84f7a259016ddcaf68fdc2fabb8bf6beb567b2c9ca38144386a03ae4f31c7091",
+        "ffdb72420c74539be2026e622787aad111867e5398fae49bd4774dbafd09f0f8",
     "test/jdk/java/util/ArrayList/M3JdkRemoveIfMaskContracts.java":
-        "afb109a5f6a1543f17cd972a091c45ccfc6ad784a849761d8bec4441cfbdd18f",
+        "a5295f64593a7f982827b84a697f3e5443ccca36c4e4768a2c374f15b3bc3c1f",
 }
 for name,digest in expected.items():
     p=root/name

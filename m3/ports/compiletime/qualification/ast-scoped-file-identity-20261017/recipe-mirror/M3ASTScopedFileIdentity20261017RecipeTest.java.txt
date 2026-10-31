@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 // SPDX-License-Identifier: Apache-2.0
-package com.synexia.rewrite;
+package jdk.internal.m3.rewrite;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -23,18 +23,18 @@ import org.openrewrite.java.JavaParser;
 
 /** Exact source preimage -> postimage, contract-preserving AST owner repair. */
 final class M3ASTScopedFileIdentity20261017RecipeTest {
-    private static final String ROOT = "/com/synexia/rewrite/hash-pinned-java/";
+    private static final String ROOT = "/jdk/internal/m3/rewrite/hash-pinned-java/";
     private record Case(String crate, String source, String oracle,
             String sourceName, String oracleName) { }
 
     private static final List<Case> CASES = List.of(
-            new Case("m3-ast-scoped-file-identity-synexia-20261017",
-                    "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/MIndexASTLeafIndex.java",
-                    "synexia-mindex/runtime/src/test/java/com/synexia/mindex/ast/MIndexASTLeafIndexSelfTest.java",
+            new Case("m3-ast-scoped-file-identity-m3-20261017",
+                    "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/ast/MIndexASTLeafIndex.java",
+                    "m3-mindex/runtime/src/test/java/jdk/internal/m3/mindex/ast/MIndexASTLeafIndexSelfTest.java",
                     "MIndexASTLeafIndex.java", "MIndexASTLeafIndexSelfTest.java"),
             new Case("m3-ast-scoped-file-identity-jdk21-20261017",
-                    "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ASTLeafIndex.java",
-                    "m3/ports/compiletime/src/test/java/com/m3/compiletime/M3ASTLeafIndexSelfTest.java",
+                    "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ASTLeafIndex.java",
+                    "m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3ASTLeafIndexSelfTest.java",
                     "M3ASTLeafIndex.java", "M3ASTLeafIndexSelfTest.java"));
 
     private static String resource(Case entry, String name, boolean before) {

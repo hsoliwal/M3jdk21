@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+    "-ea",
+    "-Xmx512m",
+    "-XX:ActiveProcessorCount=2",
+    "-XX:-UsePerfData",
+    "-cp",
+    "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/tooling/target/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+    "jdk.internal.m3.rewrite.memory.M3RecoveryMemory",
+    "check",
+    "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/events/3d8f25ee043d66b05c75c0652f92182b47c422c7d576f1aaf9ebb8149ff17165.json",
+    "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021",
+    "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/events"
+  ],
+  "exit_code": 0,
+  "log": {
+    "path": "proof/memory-integrity-001/005-check.log",
+    "sha256": "770edd5d5cfb18b00854600e321598e31139a54b71dbf1d8f987e87202c8f953"
+  }
+}

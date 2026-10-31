@@ -25,8 +25,8 @@
   "production_changes": [
     {
       "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
-      "before": "a5cefed03d9db9429048a218945a8af71b5b7acc862e089f6cc8a451a172e212",
-      "after": "8107ba8ba5f9d7519563eba9d20e76932dd077b2359f056b05ccd0a2d7d62e18",
+      "before": "e57a418a183326d17cd117bcb81c2ddd49202b8195778f38a06b970c1058f16d",
+      "after": "9ed1244ef90a72845d580b8919c670760434a81cf6dfc48f3aecbc8483726c02",
       "kind": "TEXT"
     },
     {

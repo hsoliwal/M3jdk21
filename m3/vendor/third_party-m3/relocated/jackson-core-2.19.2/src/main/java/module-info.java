@@ -5,23 +5,23 @@
 
 /**
  * Defines the {@code jackson-core-2.19.2} library,
- * relocated into M3JDK21 by LIB_INTAKE_TO_JMOD.
+ * relocated into M3JDK 21 by LIB_INTAKE_TO_JMOD.
  */
 module jdk.m3.core {
     requires jdk.m3.fastdoubleparser;
-    exports com.m3.lib.core;
-    exports com.m3.lib.core.async;
-    exports com.m3.lib.core.base;
-    exports com.m3.lib.core.exc;
-    exports com.m3.lib.core.filter;
-    exports com.m3.lib.core.format;
-    exports com.m3.lib.core.io;
-    exports com.m3.lib.core.io.schubfach;
-    exports com.m3.lib.core.json;
-    exports com.m3.lib.core.json.async;
-    exports com.m3.lib.core.sym;
-    exports com.m3.lib.core.type;
-    exports com.m3.lib.core.util;
-    uses com.m3.lib.core.ObjectCodec;
-    provides com.m3.lib.core.JsonFactory with com.m3.lib.core.JsonFactory;
+    exports jdk.m3.lib.core;
+    exports jdk.m3.lib.core.async;
+    exports jdk.m3.lib.core.base;
+    exports jdk.m3.lib.core.exc;
+    exports jdk.m3.lib.core.filter;
+    exports jdk.m3.lib.core.format;
+    exports jdk.m3.lib.core.io;
+    exports jdk.m3.lib.core.io.schubfach;
+    exports jdk.m3.lib.core.json;
+    exports jdk.m3.lib.core.json.async;
+    exports jdk.m3.lib.core.sym;
+    exports jdk.m3.lib.core.type;
+    exports jdk.m3.lib.core.util;
+    uses jdk.m3.lib.core.ObjectCodec;
+    provides jdk.m3.lib.core.JsonFactory with jdk.m3.lib.core.JsonFactory;
 }

@@ -5,7 +5,7 @@
   "source_commit": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
   "target_repo": "hsoliwal/M3jdk21",
   "target_parent": "b68391863561ce80169663cd2b49c2845e084b74",
-  "producer_recipe": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/m3-lane28",
+  "producer_recipe": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/m3-lane28",
   "producer_crate": "m3/tooling/lane28",
   "environment": {
     "java": "Temurin 21.0.8+9",
@@ -25,13 +25,13 @@
     }
   },
   "candidate_inputs": {
-    "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/M3Address28.java.txt": "dd14fe5384ff92db5c0232ef1fbc68da731ee305dda5b7c22777a3fa4c5e90fa",
-    "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/M3BitLane28.java.txt": "025556c17d0ce7879f63b75d04c30a3b16b6338ff73fa33f4ee49fdb1e196bb8",
-    "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/M3Bits.java.txt": "c5d9d2797966a56b9c2ec97908f6b76a0ad370a72cb05edc2a55b62775ba22ab",
-    "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/M3IntLane28.java.txt": "b7860a525d753b02d146040271481044b8d6bc7bf4a9fbbeb0bcfc72d181ff19",
-    "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/M3Lane28Cost.java.txt": "2296066665b8e54238daf2db46329cb0bf29c9ded0182f05bbb8ca2365da99ca",
-    "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/M3Lane28Test.java.txt": "a64c0dceb51627a7e4ca1a1a65bfc8bf388a9b8f1b622afca5cf84f320740aa3",
-    "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/M3LongLane28.java.txt": "8364c9faa878c4be96bf36fd2ea18171670f9c45904551f7d18dbccff3d1a094"
+    "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/M3Address28.java.txt": "dd14fe5384ff92db5c0232ef1fbc68da731ee305dda5b7c22777a3fa4c5e90fa",
+    "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/M3BitLane28.java.txt": "025556c17d0ce7879f63b75d04c30a3b16b6338ff73fa33f4ee49fdb1e196bb8",
+    "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/M3Bits.java.txt": "c5d9d2797966a56b9c2ec97908f6b76a0ad370a72cb05edc2a55b62775ba22ab",
+    "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/M3IntLane28.java.txt": "b7860a525d753b02d146040271481044b8d6bc7bf4a9fbbeb0bcfc72d181ff19",
+    "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/M3Lane28Cost.java.txt": "2296066665b8e54238daf2db46329cb0bf29c9ded0182f05bbb8ca2365da99ca",
+    "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/M3Lane28Test.java.txt": "a64c0dceb51627a7e4ca1a1a65bfc8bf388a9b8f1b622afca5cf84f320740aa3",
+    "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/M3LongLane28.java.txt": "8364c9faa878c4be96bf36fd2ea18171670f9c45904551f7d18dbccff3d1a094"
   },
   "native_candidate_sha256": "7cce5d9e56e5308f130e4dfaa191c663c27afb3e35ed206347447cc925dec89f",
   "observations": [

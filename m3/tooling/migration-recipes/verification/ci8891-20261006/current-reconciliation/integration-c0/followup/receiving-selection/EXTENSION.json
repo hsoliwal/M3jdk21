@@ -1,5 +1,5 @@
 {
-  "schema": "synexia.fc0.receiving-selection-extension/1",
+  "schema": "m3.fc0.receiving-selection-extension/1",
   "parent": {
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/receiving-selection-v1/RECEIVING-SELECTION.json",
     "sha256": "b17fdfb979a86086ae8b860f933163b24ccde175c97880adb7fd71cc146deb6b",
@@ -7,7 +7,7 @@
   },
   "selected": {
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/receiving-selection-v3/RECEIVING-SELECTION.json",
-    "sha256": "6483d4a75236aaa6f4231bd3c509c14de950a75f03537e565170138a1f0e70cb",
+    "sha256": "03c985249010fdf14d3e8425731a12183be92fa26c364f76e4ec481acb10934c",
     "bytes": 45711
   },
   "originalRowsRetainedExactly": 129,

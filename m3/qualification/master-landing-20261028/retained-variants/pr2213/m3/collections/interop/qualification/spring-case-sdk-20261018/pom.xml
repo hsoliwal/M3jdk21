@@ -63,8 +63,8 @@
           <release>21</release>
           <proc>none</proc>
           <includes>
-            <include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
-            <include>com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java</include>
+            <include>jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
+            <include>jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java</include>
           </includes>
           <compilerArgs>
             <arg>-Xlint:all</arg>

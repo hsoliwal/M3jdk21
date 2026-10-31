@@ -20,12 +20,12 @@ import xml.etree.ElementTree as ET
 
 sys.dont_write_bytecode = True
 CRATE = "m3-program-escape-precompute-20261017"
-RECIPE = "com.synexia.m3jdk.ProgramEscapePrecompute20261017"
+RECIPE = "jdk.internal.m3.m3jdk.ProgramEscapePrecompute20261017"
 PIN = "d47a4b4fdb8e3794ec56768b06aa9e23730c6b8e"
-FLOW = "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3EscapeFlow.java"
-SCAN = "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ItemReferenceScan.java"
-GVAS = "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3GvasLiteralHarvester.java"
-GVAS_TEST = "m3/ports/compiletime/src/test/java/com/m3/compiletime/M3GvasLiteralHarvesterTest.java"
+FLOW = "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3EscapeFlow.java"
+SCAN = "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ItemReferenceScan.java"
+GVAS = "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3GvasLiteralHarvester.java"
+GVAS_TEST = "m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3GvasLiteralHarvesterTest.java"
 COMPILE_FAILURE = "variable destination is already defined in method main(String[])"
 SWAP_FAILURE = "SWAP_REFERENCE_ESCAPE_LOST expected=1 actual=0"
 CUSTODY_FAILURE = "crate targets differ from port sources (re-run seal_crate.py)"
@@ -70,7 +70,7 @@ def admit(target, crate):
     seals = json.loads(read(crate, "contract/input-seals.json"))
     if seals["target_revision"] != PIN or seals["manifest_counts"] != {"java": 4, "text": 1}:
         raise ValueError("wrong qualified scope")
-    xml = read(crate, "target/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml")
+    xml = read(crate, "target/surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml")
     suite = ET.fromstring(xml)
     if ({key: int(suite.get(key, "-1")) for key in ("tests", "failures", "errors", "skipped")}
             != {"tests": 5, "failures": 0, "errors": 0, "skipped": 0}
@@ -82,7 +82,7 @@ def admit(target, crate):
         raise ValueError("SDK test identity or Java baseline mismatch")
     owner = Path(properties["m3.recipe.owner.root"]).resolve(strict=True)
     for name, expected in seals["owners"].items():
-        if sha(read(owner, "src/main/java/com/synexia/rewrite/" + name)) != expected:
+        if sha(read(owner, "src/main/java/jdk/internal/m3/rewrite/" + name)) != expected:
             raise ValueError("canonical SDK owner drift: " + name)
     binding = dict(rows(read(crate, "target/candidate/SDK_INPUTS.tsv"), 2))
     expected_binding = {"crate/" + p: sha(read(crate, p)) for p in ("pom.xml", "receive.py")}
@@ -92,7 +92,7 @@ def admit(target, crate):
                 relative = path.relative_to(crate).as_posix()
                 expected_binding["crate/" + relative] = sha(read(crate, relative))
     for name, expected in seals["owners"].items():
-        expected_binding["owner/src/main/java/com/synexia/rewrite/" + name] = expected
+        expected_binding["owner/src/main/java/jdk/internal/m3/rewrite/" + name] = expected
     if binding != expected_binding:
         raise ValueError("recipe inputs changed after SDK execution; rerun its five tests")
     if read(crate, "contract/verify_sdk_results.py") != Path(__file__).read_bytes():
@@ -113,7 +113,7 @@ def admit(target, crate):
         target_state[path] = expected
     sdk_rows = []
     for kind in ("java", "text"):
-        resource = "src/main/resources/com/synexia/rewrite/hash-pinned-" + kind + "/" + CRATE
+        resource = "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-" + kind + "/" + CRATE
         manifest = read(crate, resource + "/manifest.tsv")
         lane = rows(manifest, 4)
         if sha(manifest) != seals["manifest_hashes"][kind] or len(lane) != seals["manifest_counts"][kind]:
@@ -299,7 +299,7 @@ def execute(target, crate, output, java_home, maven, repository):
                                          "-d", witness_classes, support / "SwapFailureProbe.java"])
         run("baseline-swap-escape-failure", [java / "java", "-Xmx512m", "-cp",
                                              os.pathsep.join(map(str, [witness_classes, old_classes, dependencies])),
-                                             "com.m3.compiletime.SwapFailureProbe"], SWAP_FAILURE)
+                                             "jdk.m3.compiletime.SwapFailureProbe"], SWAP_FAILURE)
         new_classes = build / "candidate-classes"
         compile_port("candidate-full-compile", candidate, new_classes)
         port_tests("candidate-full-tests", new_classes, 30)
@@ -310,19 +310,19 @@ def execute(target, crate, output, java_home, maven, repository):
                                "-d", helper_classes, *sorted(support.glob("*.java"))])
         runtime_cp = os.pathsep.join(map(str, [helper_classes, new_classes, dependencies] + junit))
         run("candidate-swap-escape-pass", [java / "java", "-Xmx512m", "-cp", runtime_cp,
-                                          "com.m3.compiletime.SwapFailureProbe"])
+                                          "jdk.m3.compiletime.SwapFailureProbe"])
         manifest = build / "heap-agent-manifest.mf"
-        manifest.write_text("Manifest-Version: 1.0\nPremain-Class: com.m3.compiletime.HeapAgent\n\n")
+        manifest.write_text("Manifest-Version: 1.0\nPremain-Class: jdk.m3.compiletime.HeapAgent\n\n")
         agent = build / "heap-agent.jar"
         run("package-vm-size-agent", [java / "jar", "--create", "--file", agent, "--manifest", manifest,
-                                      "-C", helper_classes, "com/m3/compiletime/HeapAgent.class"])
+                                      "-C", helper_classes, "jdk/m3/compiletime/HeapAgent.class"])
         benchmark, unused = run("cold-warm-work-and-vm-heap", [java / "java", "-Xmx512m", "-javaagent:" + str(agent),
-                                                            "-cp", runtime_cp, "com.m3.compiletime.EscapeWorkProbe"])
+                                                            "-cp", runtime_cp, "jdk.m3.compiletime.EscapeWorkProbe"])
         record["work_and_memory"] = json.loads(benchmark)
         old_api, unused = run("baseline-public-api", [java / "javap", "-public", "-classpath", old_classes,
-                                                       "com.m3.compiletime.M3ItemReferenceScan"])
+                                                       "jdk.m3.compiletime.M3ItemReferenceScan"])
         new_api, unused = run("candidate-public-api", [java / "javap", "-public", "-classpath", new_classes,
-                                                        "com.m3.compiletime.M3ItemReferenceScan"])
+                                                        "jdk.m3.compiletime.M3ItemReferenceScan"])
         if old_api != new_api:
             raise ValueError("public scanner API changed")
         for path, expected in before_state.items():

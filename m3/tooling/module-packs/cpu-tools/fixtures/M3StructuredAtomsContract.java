@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Hitesh Soliwal and contributors
-import com.m3.tools.cpu.M3CnfSat;
-import com.m3.tools.cpu.M3ArrayGraph;
-import com.m3.tools.cpu.M3StreamMath;
-import com.m3.tools.cpu.M3EvidenceMath;
+import jdk.m3.tools.cpu.M3CnfSat;
+import jdk.m3.tools.cpu.M3ArrayGraph;
+import jdk.m3.tools.cpu.M3StreamMath;
+import jdk.m3.tools.cpu.M3EvidenceMath;
 
 import java.util.Arrays;
 import java.util.Random;

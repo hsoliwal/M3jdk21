@@ -10,10 +10,10 @@ collapse entries by donor name.
 
 The original 47-record/45-other-record/17-mapping expectations remain frozen in
 `candidate/mapping/java-template/TEMPLATE_PACKET.json`, SHA-256
-`5fe25ca79a45bd4e499fd6171dfe5375390f91f2331330797b93aec3c5eec142`.
+`a5a81bee6c69a796e0cf7632746dff3be5ac56bb11fbaac3424dcba325fcd94b`.
 The receiving input advance did not change that historical oracle. The current
 input epoch is `candidate/mapping-v02/input-epoch/INPUT_EPOCH.json`, SHA-256
-`fb413e58be72aaffa1e91149479ac159c6d4b961101eed4ab10f1c99df0b6711`.
+`2ea3ffe30ac6824bcc6d708c431b848a4c7997bdb4cdeaaddea1a62640734718`.
 
 The Java file remains an unresolved template. Its eleven publication/output pins
 contain explicit unresolved tokens. It carries no synthetic source commit/root,
@@ -70,8 +70,8 @@ also includes these two existing historical resources from
 
 | Resource | Contents | SHA-256 |
 | --- | --- | --- |
-| `history-0014.txt` | Complete prior map | `eb42442866c73c38027b481a84c0473bea422e4628d0794fa31fc61d9f1a818e` |
-| `history-0016.txt` | Complete prior bindings | `f8b27e3582eb494af2c8dd47225976f974be6edc2f6c26313975064d48739497` |
+| `history-0014.txt` | Complete prior map | `abfc59de62d46f6442b95717ac367461ab057cd74ed9dfffc6515d7fb0a1574c` |
+| `history-0016.txt` | Complete prior bindings | `59b1491a232e3eabfd0530cbf47b01265603e6f493e382aa3c394c629b0516b6` |
 
 From the execution workspace's repository root:
 

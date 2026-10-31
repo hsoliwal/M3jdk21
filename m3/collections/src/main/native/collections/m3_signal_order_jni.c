@@ -11,7 +11,7 @@ static void raise(JNIEnv *env, const char *type, const char *message) {
 }
 
 /* JNI arrays are copied into private native buffers. No Java heap address or pin survives. */
-JNIEXPORT void JNICALL Java_com_m3_collections_M3SignalOrderNative_sort0(
+JNIEXPORT void JNICALL Java_jdk_m3_collections_M3SignalOrderNative_sort0(
         JNIEnv *env, jclass owner, jlongArray javaKeys, jintArray javaRows) {
     (void) owner;
     if (javaKeys == NULL || javaRows == NULL) {

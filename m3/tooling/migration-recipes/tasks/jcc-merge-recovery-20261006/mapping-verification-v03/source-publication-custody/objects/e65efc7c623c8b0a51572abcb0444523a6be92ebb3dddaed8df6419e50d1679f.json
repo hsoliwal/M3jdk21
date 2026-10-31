@@ -1,7 +1,7 @@
 {
   "request": {
     "expected_entries": 5,
-    "path": "synexia-openrewrite-recipes/recipes/iop-mechanical-compatibility-20261006/library-object-upload-v01",
+    "path": "m3-openrewrite-recipes/recipes/iop-mechanical-compatibility-20261006/library-object-upload-v01",
     "recursive": true,
     "sha": "d50128e2f5764b1ce6224b18fb84ce1440128ded",
     "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/d50128e2f5764b1ce6224b18fb84ce1440128ded?recursive=1"

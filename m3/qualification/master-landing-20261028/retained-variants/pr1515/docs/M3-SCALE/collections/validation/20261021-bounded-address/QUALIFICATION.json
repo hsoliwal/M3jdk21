@@ -1,13 +1,13 @@
 {
-  "schema": "synexia.data.address.public-qualification.v1",
+  "schema": "m3.data.address.public-qualification.v1",
   "status": "PASS_SOURCE_BOUND_STANDALONE_WINDOWS_JAVA_JNI",
   "source_ref": "087e9bca5bd38a3606ac2ce1ced73bfb38916564",
   "native_library": "m3_collections_address",
-  "JNI_symbol": "Java_com_m3_collections_M3LongAddressKernel_gatherNative",
+  "JNI_symbol": "Java_jdk_m3_collections_M3LongAddressKernel_gatherNative",
   "JNI_descriptor": "([J[III[JI)V",
   "source_contract": "Public gatherInto guard order, no aliasing, no required-native fallback, and valid-prefix writes before a physical-address error remain unchanged.",
-  "existing_test": "m3/collections/src/test/java/com/m3/collections/M3LongAddressBoundedSelfTest.java",
-  "existing_main": "com.m3.collections.M3LongAddressBoundedSelfTest",
+  "existing_test": "m3/collections/src/test/java/jdk/m3/collections/M3LongAddressBoundedSelfTest.java",
+  "existing_main": "jdk.m3.collections.M3LongAddressBoundedSelfTest",
   "coverage": [
     "11 lengths:0,1,2,255,256,257,511,512,513,4097,65537; four affine/reverse/duplicate/scattered shapes",
     "addressFrom3/outputFrom5; invalid out-of-window values ignored; input arrays unchanged and detached output",

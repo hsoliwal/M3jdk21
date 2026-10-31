@@ -7,18 +7,18 @@
     "hosted_ci": "PENDING_NEW_HEAD",
     "publication": "PREPARED"
   },
-  "target": "m3/collections/src/main/java/com/m3/collections/M3CountedBag.java",
+  "target": "m3/collections/src/main/java/jdk/m3/collections/M3CountedBag.java",
   "before": {
     "repository": "hsoliwal/M3jdk21",
     "commit": "0efc1719ca5766aead09f4f7c49f5067975bd946",
-    "git_blob": "9f5cc4ba6c189b4b8dd476b999ba82d93922d74a",
-    "sha256": "c04ed48de6b24bb4a86f97c4aa6187e2ce11e43b082e05ef3189c618ddf1143b",
+    "git_blob": "b29db809d55ba7fe6fc96e3b273253a5a21dcb82",
+    "sha256": "583e6b5dce178ee02c2efdb919271c81a00ad60771abd06f7c942330fdfc60d1",
     "bytes": 13854,
     "template": "M3CountedBag.java.before.txt",
     "measurement_authority": "root"
   },
   "after": {
-    "sha256": "020b91ae24ab2bb991146861dbaecf6e7fa9836811804645722190b972c4e311",
+    "sha256": "c62a23be9e5b89c3d013f8dc0ed5351c3bf7ecc2bc809c8503a777a152d6b447",
     "bytes": 13962,
     "template": "M3CountedBag.java.txt",
     "measurement_authority": "root",
@@ -27,8 +27,8 @@
   "engine": {
     "classification": "DIRECT_IMPORT",
     "repository": "hsoliwal/M3jdk21",
-    "git_blob": "d58ca50dfaeb60f581b64f43545e688aca5c6530",
-    "sha256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599",
+    "git_blob": "907f176d32b55d78f13e3756a407f6877f25ca7d",
+    "sha256": "9dc65793cb1f4fb20866f99f4e5d0043d54734aa03cf0fe297c0cadbba2d1c37",
     "path": "engine-src/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
     "copy_authority": "root",
     "copy_status": "EXACT_SHA256_VERIFIED",
@@ -46,11 +46,11 @@
       },
       {
         "path": "m3/collections/recipe/owned-apache-multivalue-20261018/src/main/resources/META-INF/rewrite/m3-sdk-duplicate-sorted-factories.yml",
-        "git_blob": "ee769339f02886e84d868500d5b235010b0768bf"
+        "git_blob": "b826fd1deba761eaab090643d9491189f7aff6a5"
       },
       {
-        "path": "m3/collections/recipe/owned-apache-multivalue-20261018/src/test/java/com/synexia/rewrite/M3OwnedApacheMultiValueV2RecipeTest.java",
-        "git_blob": "3c883867d6b5832a9416d1f19d14eab3e940c875",
+        "path": "m3/collections/recipe/owned-apache-multivalue-20261018/src/test/java/jdk/internal/m3/rewrite/M3OwnedApacheMultiValueV2RecipeTest.java",
+        "git_blob": "6fc3032396642da34c11a1b6ac18baf847165f6a",
         "member": "exactCorePrerequisiteTransitionFixedPointAndThreeRefusals"
       }
     ]

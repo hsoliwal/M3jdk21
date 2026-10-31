@@ -1,7 +1,7 @@
 {
   "catalogue_output_sha256": "5c10bbe5a1a36c7614e7008d714494438e16250bea84c27e36ceb29fb91399ff",
   "cli_replay": "EXACT_OUTPUT_MATCH",
-  "commands_sha256": "0a51a9e063fc0b80bcb3c9b5d65f67b3d9007ece20aa6940e6c47ffcc9aaf361",
+  "commands_sha256": "8bf340d6a1063ea1938b64ff14d847738f201502548990edfbab926a00edee6c",
   "fixture_classes": [
     "M3DonorToolsTest",
     "M3SourceToolsTest",
@@ -21,7 +21,7 @@
   ],
   "legal_notice_sha256": {
     "cpu-tools/LICENSE.txt": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
-    "cpu-tools/NOTICE.txt": "c604114272abd52e2c4d36c35258c75040e6672e1f9cd9f562aa868641e99508",
+    "cpu-tools/NOTICE.txt": "10a7216cbfc22f3ba250e402f1c7f0ecd78e42eb79e5d1c66fdfa48f12c73243",
     "text-tools/LICENSE.txt": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
     "text-tools/NOTICE.txt": "73bc2b626f41cc6fcd30f2b4b21be4f263ca91297686305acd532d309b378836"
   },
@@ -120,7 +120,7 @@
   ],
   "schema": "M3_CPU_TOOLS_BUILD_V1",
   "self-test_output_sha256": "fdd1a2ea5477a12f4be68be120a982f8cc8fc400e703d3c3cb7ce0f1fabbe28b",
-  "source_inputs_sha256": "952575fd2712a541a7be504095378604a4ade171edd32f48a021f61deb2f5cc4",
+  "source_inputs_sha256": "25aae2b26d067e8dd58d37657148ac4ba371966959e61890f9419de9995c1ad3",
   "source_jdk_linked_modules": [
     "java.base",
     "java.compiler",

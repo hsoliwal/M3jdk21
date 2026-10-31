@@ -6,8 +6,8 @@
   "result": "PASS_NARROW_SOURCE_REVIEW_NO_CONCRETE_ISSUE_FOUND",
   "scope": "Only latest adapter donor/copy/inherited origin branches and associated finite map custody; no adapter or test execution.",
   "adapter_sha256": "7bba9ed3f8551a933ffc047c7dc97f0b771cac0028c765b92e8832ecb57a3be2",
-  "origin_map_sha256": "e7ecb0584835a0df0e2cd8b05bf120b7cc3716f838fa9b0f003a808d239f7c2b",
-  "inherited_map_sha256": "4466293bf68e40f9ebff09258f38687ba3cdf0346d7211f025737f221ad0c2fd",
+  "origin_map_sha256": "28f6f0ae2d17be6c56a08a7edf10f1630c953842ec7f7f7083159d4742111b0d",
+  "inherited_map_sha256": "6f5ddda4760b5faffd11db89a57011708cc8029c0a81c557bf663003ae8f0644",
   "owners": [
     {
       "path": "evidence/interop-correction/apache-review/M3ApacheBag.java",
@@ -89,19 +89,19 @@
     },
     {
       "path": "provenance/inherited/PUBLIC_ENGINE_PREEXISTENCE.json",
-      "sha256": "112a5be772cf92c9b5b219e6a6f5aa211ee57dcf217590bdcaaf1adb674f8cf1",
+      "sha256": "dfac5a34a9d55cc6915ec521d57510008468175955d0a5188c7044299681cc31",
       "matches_main_canonical_source": true,
       "classification": "PRESERVED_HISTORY"
     },
     {
       "path": "catalogue/inherited/PROBLEMS_20261020.tsv",
-      "sha256": "08fd0118e0a3f1225846e52ac07d1c0ef1bce99704806af791f8dc165d020ea9",
+      "sha256": "6b69a71d8ac21a4764ccbb594574ecee0cc2c8c63aa67242b92c9cf56e14b3cf",
       "matches_main_canonical_source": true,
       "classification": "PRESERVED_HISTORY"
     },
     {
       "path": "catalogue/inherited/INHERITED_LOOKUP_PROVENANCE.tsv",
-      "sha256": "e50ed945f9d64519744945895af73b0df57039d3079d603d59f4929c963997cf",
+      "sha256": "15783211d8ccd539aa70d5559cf29cccfa8ad24e4260e02e2a80819bdc7637ec",
       "matches_main_canonical_source": true,
       "classification": "PRESERVED_HISTORY"
     }

@@ -24,28 +24,28 @@ Nine Java owners, two C owners, six target test sources and the historical passi
 
 | Product path | SHA-256 |
 |---|---|
-| `m3/collections/qualification/array-growth-20261029/RECEIPT.md` | `5f1cdbd9830abe1a0103ded48a456d7e9f2a01adcbcc2eb6223cade6ce9983df` |
-| `m3/collections/src/main/java/com/m3/collections/M3ArrayDeque.java` | `c67e58ade928f25f5add7b374701fd33417890a59b324bbc2df220de5c23312b` |
-| `m3/collections/src/main/java/com/m3/collections/M3ColumnarLanes.java` | `f20ebe2b3f6877a830f4cb8670be646dd38ea496d7e1d3223340e0ec1e6fc266` |
-| `m3/collections/src/main/java/com/m3/collections/M3IntIntHashMap.java` | `63e82b9468fbeebba2293e926f018309b2e87dbf412d1d2260672934ac2142f5` |
-| `m3/collections/src/main/java/com/m3/collections/M3IntLongHashMap.java` | `3f8bdfee2a06ef4ef2a4a779dab9e67ac633c6acdf1b2c1314c9e760c2cd0e65` |
-| `m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java` | `2f228e876a5b57700ecb513bc19775735774858017b6c15fcad7b5ea44469e27` |
-| `m3/collections/src/main/java/com/m3/collections/M3LongLongTreeMap.java` | `eacd37b550d085e7ced690f7715b643572ca35781b330e93eb728f3d78b6a0a5` |
-| `m3/collections/src/main/java/com/m3/collections/M3LongPatriciaTrie.java` | `6820e55c8f144952924caced009346ca24c0a21001716285b2514ac0e11cd64a` |
-| `m3/collections/src/main/java/com/m3/collections/M3LongTreeSet.java` | `de261efba2f10d1b9ac35d641a0810b281d5d1bc43d5b0242366840421097bf9` |
-| `m3/collections/src/main/java/com/m3/collections/M3ObjectIdentityMap.java` | `21316d56804687d9a2af137db0b68ad8110fdb294dc505b4b5fd735238218224` |
-| `m3/collections/src/main/native/collections/m3_index_mask_compactor.c` | `382e93d8cc033b07da14537d2bf6c0d70405a8ce6a5eb318afc3005368bbf062` |
-| `m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c` | `1b7559066296c96b0177cd770ca34d5c66b15ac715b66c0f0fcc2d54a3800de5` |
-| `m3/collections/src/test/java/com/m3/collections/M3ArrayDequeGrowthContract.java` | `ceb6e333dfdf640a12560b3c00e3bdc200a5d89a52b8d6594b39edd137d5e56e` |
-| `m3/collections/src/test/java/com/m3/collections/M3ArrayExpansionTest.java` | `76d8968b8e53b8d00f82dc2d205f1f304e220b7c4c83b08cabedb1b25dcac1e1` |
-| `m3/collections/src/test/java/com/m3/collections/M3ColumnarGrowthContract.java` | `ebf942a8bacd4426e00973fc0a7c4912db858bec480c230e5f8c0de91d2d194a` |
-| `m3/collections/src/test/java/com/m3/collections/M3StagedLaneBehaviorContract.java` | `4e3682064d0ba71a52cd6cd189ee6b095d78591f98b7b4811b7aad329a96dbad` |
-| `m3/collections/src/test/java/com/m3/collections/M3StagedLaneBehaviorTest.java` | `fa015c38e7cd23b009dcf4d8eafc29488af33cd08d81e5789a00ceef8ae4f14a` |
-| `m3/collections/src/test/java/com/m3/collections/M3StagedLaneOrderDifferential.java` | `b5a44c618accdae7e156c0af4f254bf8782a3d3be31244db76ac0f14c84d101d` |
+| `m3/collections/qualification/array-growth-20261029/RECEIPT.md` | `1dea3c58d781b817e931f83ae1f2fa5e1ed974fb342b609ea7faca5a7b0a8b4d` |
+| `m3/collections/src/main/java/jdk/m3/collections/M3ArrayDeque.java` | `55be5f7d9747f88c751987e69f9c2587559d27f55ece13c0e8aef84506f04108` |
+| `m3/collections/src/main/java/jdk/m3/collections/M3ColumnarLanes.java` | `fb44d6095f7107a6f8407d290b5fa5a2e91f68e96921e7d259167bbbbe0cc49f` |
+| `m3/collections/src/main/java/jdk/m3/collections/M3IntIntHashMap.java` | `9fb476f33f85532d0e8809cc107dcf270d38ff9381fb155a4d1131f13b0bbf5e` |
+| `m3/collections/src/main/java/jdk/m3/collections/M3IntLongHashMap.java` | `37310ceb33c4671b7f8b2620427d07fcd94b9d9fde9fb9f822eabd35c31079f8` |
+| `m3/collections/src/main/java/jdk/m3/collections/M3LongLongHashMap.java` | `2f228e876a5b57700ecb513bc19775735774858017b6c15fcad7b5ea44469e27` |
+| `m3/collections/src/main/java/jdk/m3/collections/M3LongLongTreeMap.java` | `fa5d80161a84fe8c1e244586a1e6003646413f4f98a9c8e1368699d530c9a965` |
+| `m3/collections/src/main/java/jdk/m3/collections/M3LongPatriciaTrie.java` | `73ba60be2b315964613264ef900b89938055ec8bdbbaede7abf11459d6633ef6` |
+| `m3/collections/src/main/java/jdk/m3/collections/M3LongTreeSet.java` | `846004dfb6e7640963960654ebf3d7602d3e154757659f166c97dfa7b5e3ed20` |
+| `m3/collections/src/main/java/jdk/m3/collections/M3ObjectIdentityMap.java` | `c89c1fded953c52f6f7d417f83bccc6ac88d644be10281160190f2b6c293fc76` |
+| `m3/collections/src/main/native/collections/m3_index_mask_compactor.c` | `dd0f0811904b0e53d12f4148b13d7abdc73b235f44f4956474c695a6c6e8f6e5` |
+| `m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c` | `b8502c2f15b752b539282b0bdefd3f38eb1dbfe022bcae796d99df1e55b3158f` |
+| `m3/collections/src/test/java/jdk/m3/collections/M3ArrayDequeGrowthContract.java` | `576840364559d3c6e3a467b1e9f22b18cf2bb8c81e459039ac0ed7cb5663a312` |
+| `m3/collections/src/test/java/jdk/m3/collections/M3ArrayExpansionTest.java` | `a127595d7eb71525ddd0d73ebe8c783cda60316bedecbdf9297e0cf9653f036c` |
+| `m3/collections/src/test/java/jdk/m3/collections/M3ColumnarGrowthContract.java` | `ff82a42cd66551c00ff12fb7bbcdc0583f4914d686b571024cbf10c3f74fb74a` |
+| `m3/collections/src/test/java/jdk/m3/collections/M3StagedLaneBehaviorContract.java` | `4335032879ee2b6c9345e779a2aefb2c3d3a9b57deff019f6cc289619a6a3bd2` |
+| `m3/collections/src/test/java/jdk/m3/collections/M3StagedLaneBehaviorTest.java` | `bfad22b130466186139316b65be6346b6db92f976c4ae0e01459475cc130cec7` |
+| `m3/collections/src/test/java/jdk/m3/collections/M3StagedLaneOrderDifferential.java` | `80dff35b1b92ea3060b846d1e113401f69ffd0de6c83b727b95bdd673cdcddc0` |
 
 ## Final formatting derivation
 
-After the immutable behavioral packets were published, a complete baseline-to-candidate patch check found eight trailing spaces on blank line 136 of the emitted `M3StagedLaneBehaviorContract.java`. The existing typed Java snapshot engine, with resource key `m3-array-growth-oracle-whitespace-20261029`, removes only those eight spaces. It preserves every token and line number. Original source SHA-256 `d02f977c4e4ed95e67d876049142f0feee76ac4100f4ee0f15c218dee9fe24eb` becomes `4e3682064d0ba71a52cd6cd189ee6b095d78591f98b7b4811b7aad329a96dbad`.
+After the immutable behavioral packets were published, a complete baseline-to-candidate patch check found eight trailing spaces on blank line 136 of the emitted `M3StagedLaneBehaviorContract.java`. The existing typed Java snapshot engine, with resource key `m3-array-growth-oracle-whitespace-20261029`, removes only those eight spaces. It preserves every token and line number. Original source SHA-256 `d02f977c4e4ed95e67d876049142f0feee76ac4100f4ee0f15c218dee9fe24eb` becomes `4335032879ee2b6c9345e779a2aefb2c3d3a9b57deff019f6cc289619a6a3bd2`.
 
 Strict Java 21 compilation with debug information produces four byte-identical class files from the original and cleaned sources. The 701-test comparison below used the original frozen oracle source; this separately retained compiler identity establishes the final source's identical compiled test implementation. The independent original oracle, all runtime source images and their recorded proof results remain unchanged. Formatting resources, compilation/classpath seals, actual typed-recipe receiving, schedules and JUnit evidence are retained additively under the rank crate's `closeout/` in PR #13986. Their exact content identities do not claim that these later formatting files already existed in the earlier immutable behavioral commits.
 

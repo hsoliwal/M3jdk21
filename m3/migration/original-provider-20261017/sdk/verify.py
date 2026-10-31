@@ -8,10 +8,10 @@ from pathlib import Path, PurePosixPath
 import xml.etree.ElementTree as ET
 ROOT = Path(os.path.abspath(__file__)).parent
 CRATE = "m3-original-mapping-provider-20261017"
-RESOURCE = "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/" + CRATE + "/"
-SUITE = "com.m3.rewrite.backport.M3OriginalCliProviderRecipeTest"
+RESOURCE = "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/" + CRATE + "/"
+SUITE = "jdk.m3.rewrite.backport.M3OriginalCliProviderRecipeTest"
 BASELINE_MANIFEST = RESOURCE + "baseline-pre.tsv"
-BASELINE_MANIFEST_SHA = "11d69c05d4e4dd0ef27c8a2195827c62b5dd48a49bef34943f4c6a11fbc4899c"
+BASELINE_MANIFEST_SHA = "e0ec50d7f1608180e1fe831d137e26d51e691606b85379a1a38c12d064c702f5"
 BASELINE_FILES, BASELINE_BYTES = 55, 795620
 METHODS = ["allMutableStatesBothOrdersAndFixedPoint","exactRecipeResultsDeliveredToDeclaredOutput","everyUnknownTargetRefusesAfterItsPositiveBaseline","everyDuplicateTargetRefusesAfterItsPositiveBaseline","everyRequiredTargetMissingRefusesAfterItsPositiveBaseline","everyNonPlainTextTargetRefusesAfterItsPositiveBaseline","everyChangedAfterScanTargetRefusesAfterItsPositiveBaseline","sealedManifestPathSafetyAndConvergedIdentity","deliveryPrechecksForeignContentsAndAllSymlinkComponents","currentMappingReconciliationPreservesNewFieldsAndReviewedMigration","frozenPreBaselineRemainsIndependentOfInstalledPost"]
 def digest(data):
@@ -53,7 +53,7 @@ def workflow_contexts(data):
         if "runner." in line and len(line)-len(line.lstrip(" "))<10:
             raise ValueError("runner context outside the supported step scope")
 def validate_packet(pins, files):
-    if pins.get("schema")!="M3_ORIGINAL_MAPPING_PROVIDER_SDK_V1" or pins.get("snapshotProviderGitBlob")!="4a38e39d0755462d40c2b22548b87abde938ea0b":
+    if pins.get("schema")!="M3_ORIGINAL_MAPPING_PROVIDER_SDK_V1" or pins.get("snapshotProviderGitBlob")!="73779dee8c80a0913b88fff17637ed3f44b33ea3":
         raise ValueError("SDK authority drift")
     rows=pins.get("files",[])
     names=[r["path"] for r in rows]
@@ -64,9 +64,9 @@ def validate_packet(pins, files):
         if len(data)!=row["bytes"] or digest(data)!=row["sha256"] or git_blob(data)!=row["gitBlob"]:
             raise ValueError("SDK source drift: "+name)
     if "pins.json" in names: raise ValueError("self-pinning cycle")
-    for required in ["pom.xml","verify.py","src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java","src/test/java/com/m3/rewrite/backport/M3OriginalCliProviderRecipeTest.java",RESOURCE+"manifest.tsv",BASELINE_MANIFEST]:
+    for required in ["pom.xml","verify.py","src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java","src/test/java/jdk/m3/rewrite/backport/M3OriginalCliProviderRecipeTest.java",RESOURCE+"manifest.tsv",BASELINE_MANIFEST]:
         if required not in files: raise ValueError("required SDK input absent")
-    provider=next(r for r in rows if r["path"]=="src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java")
+    provider=next(r for r in rows if r["path"]=="src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java")
     if provider["gitBlob"]!=pins["snapshotProviderGitBlob"]: raise ValueError("provider replacement")
     manifest=[]
     for line in files[RESOURCE+"manifest.tsv"].decode("utf-8",errors="strict").splitlines():
@@ -88,7 +88,7 @@ def validate_packet(pins, files):
     if sum(r["before"]=="ABSENT" for r in manifest)!=4 or sum(r["before"] not in ("ABSENT",r["after"]) for r in manifest)!=2:
         raise ValueError("expected four additions and two exact changes")
     workflow=next(row for row in manifest if row["path"]==".github/workflows/m3-original-mapping-provider-qualification.yml")
-    if workflow["before"]!="faf6a553557508404de8b644ae7ff17ffaf45c74d5b0cb6f3df86c583a0b2bc0":
+    if workflow["before"]!="426f85c348a3bbff2ac767980e1cba3a205f624d3f2ca5b85cdcb52dc68b8751":
         raise ValueError("workflow must change from its exact qualified preimage")
     workflow_contexts(files[RESOURCE+workflow["resource"]])
     frozen_pre(files)
@@ -243,7 +243,7 @@ def self_test(pins,files):
     refuses(lambda:workflow_contexts(invalid_scope))
     # Bind the real provider path even when an earlier shadow has its exact old blob.
     changed=copy.deepcopy(pins);values=dict(files)
-    real="src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java"
+    real="src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java"
     shadow="shadow/M3Jdk21HashPinnedTextSnapshotRecipe.java"
     old=next(r for r in changed["files"] if r["path"]==real)
     changed["files"].insert(0,{**old,"path":shadow});values[shadow]=values[real]

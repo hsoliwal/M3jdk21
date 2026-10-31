@@ -6,5 +6,5 @@ displayName: Restore the exact predecessor TQ fixture manifest
 description: >-
   Restore only the exact historical manifest through the existing hash-pinned text engine.
 recipeList:
-  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+  - jdk.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
       crateName: m3-tq-manifest-consistency-20261019-inverse

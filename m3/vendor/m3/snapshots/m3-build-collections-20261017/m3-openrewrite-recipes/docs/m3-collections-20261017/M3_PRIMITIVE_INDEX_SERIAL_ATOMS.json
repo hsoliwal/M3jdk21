@@ -1,0 +1,38 @@
+{
+  "status": "CANDIDATE_PAYLOAD_NOT_TARGET_APPLICATION",
+  "baselineCommit": "11c94feb18155a53cc213708c353791132edc4a7",
+  "engine": "jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe",
+  "steps": [
+    {
+      "crate": "primitive-index-filter-lane-exact-fit-20261017",
+      "target": "m3-primitives/src/main/java/jdk/internal/m3/primitives/PrimitiveIndexView.java",
+      "beforeSha256": "65578015acc4fc5ec8152ecfaadceb06f00f4bb15adc68483e05d63af9482d1c",
+      "afterSha256": "192c8c020dded1b6cdbd772290748b4640487feb74e46652cf56860a25745c5b",
+      "manifest": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/primitive-index-filter-lane-exact-fit-20261017/manifest.tsv",
+      "template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/primitive-index-filter-lane-exact-fit-20261017/template-00.txt",
+      "parseContextManifestSha256": "a6bc4730467fb7fbeb8bfbd8caae06389314ae326cbe184961d6da5b672683ed"
+    },
+    {
+      "crate": "primitive-index-filter-mask-exact-fit-20261017",
+      "target": "m3-primitives/src/main/java/jdk/internal/m3/primitives/PrimitiveIndexView.java",
+      "beforeSha256": "192c8c020dded1b6cdbd772290748b4640487feb74e46652cf56860a25745c5b",
+      "afterSha256": "b7938e14c342196e74bc506020ecf58f7180fa5332c813a46d5f5aefbafef47a",
+      "manifest": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/primitive-index-filter-mask-exact-fit-20261017/manifest.tsv",
+      "template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/primitive-index-filter-mask-exact-fit-20261017/template-00.txt",
+      "parseContextManifestSha256": "a6bc4730467fb7fbeb8bfbd8caae06389314ae326cbe184961d6da5b672683ed"
+    }
+  ],
+  "delivery": {
+    "crate": "primitive-index-filter-exact-fit-20261017",
+    "target": "m3-primitives/src/main/java/jdk/internal/m3/primitives/PrimitiveIndexView.java",
+    "beforeSha256": "65578015acc4fc5ec8152ecfaadceb06f00f4bb15adc68483e05d63af9482d1c",
+    "afterSha256": "b7938e14c342196e74bc506020ecf58f7180fa5332c813a46d5f5aefbafef47a",
+    "manifest": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/primitive-index-filter-exact-fit-20261017/manifest.tsv",
+    "template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/primitive-index-filter-exact-fit-20261017/template-00.txt",
+    "parseContextManifestSha256": "a6bc4730467fb7fbeb8bfbd8caae06389314ae326cbe184961d6da5b672683ed"
+  },
+  "frozenContract": "evidence/frozen-primitive-test-inputs.json",
+  "contract": "Preserve eager row projection, all callbacks and version checks, exception order, and defensive exports. Reuse only newly call-local selected[] when count equals its length.",
+  "convergence": "Intermediate per-atom exact-hash resources are isolated qualification units. Only baseline-to-final crate is named delivery; accepts its own final postimage unchanged.",
+  "parserContexts": "Five exact original closure sources are immutable attribution co-inputs, never generated targets."
+}

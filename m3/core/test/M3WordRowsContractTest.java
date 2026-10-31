@@ -1,8 +1,8 @@
 /* Copyright 2026 Hitesh Soliwal and contributors.
  * SPDX-License-Identifier: Apache-2.0
  */
-import com.m3.text.M3WordRows;
-import com.m3.text.M3WordRowsNative;
+import jdk.m3.text.M3WordRows;
+import jdk.m3.text.M3WordRowsNative;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.file.Files;

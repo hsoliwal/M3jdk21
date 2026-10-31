@@ -3,8 +3,8 @@ name: M3 primitive composite lazy streams and unchanged JNI
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3LongCompositeViews.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3LongCompositeLateBind*'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongCompositeViews.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3LongCompositeLateBind*'
       - 'm3/collections/qualification/composite-latebind-20261017/**'
       - '.github/workflows/m3-composite-latebind-20261017.yml'
   workflow_dispatch:
@@ -36,12 +36,12 @@ jobs:
           mkdir -p /tmp/m3-composite-classes
           find m3/collections/src/main/java -name '*.java' -print | LC_ALL=C sort > /tmp/m3-composite-sources.txt
           javac --release 21 -proc:none -Xlint:all,-module -Werror -d /tmp/m3-composite-classes @/tmp/m3-composite-sources.txt
-          javac --release 21 -proc:none -Xlint:all -Werror -cp /tmp/m3-composite-classes -d /tmp/m3-composite-classes m3/collections/src/test/java/com/m3/collections/M3LongCompositeLateBindSelfTest.java
-          java -ea -cp /tmp/m3-composite-classes com.m3.collections.M3LongCompositeLateBindSelfTest
+          javac --release 21 -proc:none -Xlint:all -Werror -cp /tmp/m3-composite-classes -d /tmp/m3-composite-classes m3/collections/src/test/java/jdk/m3/collections/M3LongCompositeLateBindSelfTest.java
+          java -ea -cp /tmp/m3-composite-classes jdk.m3.collections.M3LongCompositeLateBindSelfTest
       - name: Real JNI native parity for existing unchanged mask kernel
         shell: bash
         run: |
           set -euo pipefail
           gcc -std=c17 -O2 -fPIC -shared -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" m3/collections/src/main/native/collections/m3_index_mask_compactor.c -o /tmp/libm3_collections_mask.so
-          javac --release 21 -proc:none -Xlint:all -Werror -cp /tmp/m3-composite-classes -d /tmp/m3-composite-classes m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java
-          java -Xcheck:jni -Djava.library.path=/tmp -cp /tmp/m3-composite-classes com.m3.collections.M3IndexMaskCompactorSelfTest --native
+          javac --release 21 -proc:none -Xlint:all -Werror -cp /tmp/m3-composite-classes -d /tmp/m3-composite-classes m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java
+          java -Xcheck:jni -Djava.library.path=/tmp -cp /tmp/m3-composite-classes jdk.m3.collections.M3IndexMaskCompactorSelfTest --native
