@@ -50,6 +50,8 @@ import jdk.internal.m3.hash.M3LongTupleHashFunction;
 public class M3HashAtomsPerf {
     private static final int WARMUP = 6;
     private static final int ROUNDS = 9;
+    /** The median of the sorted measured rounds. */
+    private static final int MEDIAN_ROUND = ROUNDS / 2;
     private static final int CORPUS = 2048;
     private static final long WORK_PER_ROUND = 1L << 28;
     private static final int MICRO_OPS_PER_ROUND = 1 << 24;
@@ -62,6 +64,23 @@ public class M3HashAtomsPerf {
     private static final int KERNEL_VALUES = 4096;
     private static final long CORPUS_SEED = 20261031L;
     private static final int UTF16_BOUND = Character.MAX_VALUE + 1;
+    /** The low byte of an int: the byte view of a char. */
+    private static final int BYTE_MASK = 0xFF;
+    //FLLDCIM: M3 - LITERAL_CONSTANTS (tests): the input-length classes of the xxHash reference, one bound per name
+    /** First and last input length of each XXH3 length-class row (XXH3_len_0to16 .. XXH3_len_129to240). */
+    private static final int LEN_0 = 0;
+    private static final int LEN_1TO3_MIN = 1;
+    private static final int LEN_1TO3_MAX = 3;
+    private static final int LEN_4TO8_MIN = 4;
+    private static final int LEN_4TO8_MAX = 8;
+    private static final int LEN_9TO16_MIN = 9;
+    private static final int LEN_9TO16_MAX = 16;
+    private static final int LEN_17TO128_MIN = 17;
+    private static final int LEN_17TO128_MAX = 128;
+    private static final int LEN_129TO240_MIN = 129;
+    private static final int LEN_129TO240_MAX = 240;
+    /** The first input length XXH3_hashLong serves (XXH3_MIDSIZE_MAX + 1). */
+    private static final int LONG_LEN_MIN = LEN_129TO240_MAX + 1;
     private static final double PERCENT = 100.0;
     private static final String NA = "NA";
     private static final String SLACK_PROPERTY = "M3_PERF_SLACK";
@@ -261,8 +280,8 @@ public class M3HashAtomsPerf {
         }
         Arrays.sort(a);
         Arrays.sort(v);
-        double am = a[ROUNDS / 2];
-        double vm = v[ROUNDS / 2];
+        double am = a[MEDIAN_ROUND];
+        double vm = v[MEDIAN_ROUND];
         String loadPct = loadSamples == 0 ? NA : String.format("%.0f", PERCENT * loadSum / loadSamples);
         String line = String.format("%s\t%s\t%s\t%s\t%s\t%.2f\t%.2f\t%.2f\t%.2f\t%.2f\t%.2f\t%d\t%s",
                 System.getProperty(RUN_PROPERTY, DEFAULT_RUN), group, atom, form, lengths, am, vm, vm / am,
@@ -372,8 +391,9 @@ public class M3HashAtomsPerf {
 
     /** [lo, hi] per XXH3 atom: len_0, len_1to3, len_4to8, len_9to16, len_17to128, len_129to240, hashLong (0 or 1
      *  full block of 1024 bytes), hashLong (1 to 4 blocks). */
-    private static final int[][] XXH3_CLASSES = {{0, 0}, {1, 3}, {4, 8}, {9, 16}, {17, 128}, {129, 240},
-            {241, LONG_MIN}, {LONG_MIN, LONG_MAX}};
+    private static final int[][] XXH3_CLASSES = {{LEN_0, LEN_0}, {LEN_1TO3_MIN, LEN_1TO3_MAX},
+            {LEN_4TO8_MIN, LEN_4TO8_MAX}, {LEN_9TO16_MIN, LEN_9TO16_MAX}, {LEN_17TO128_MIN, LEN_17TO128_MAX},
+            {LEN_129TO240_MIN, LEN_129TO240_MAX}, {LONG_LEN_MIN, LONG_MIN}, {LONG_MIN, LONG_MAX}};
     private static final String[] XXH3_ATOMS_64 = {"XXH3_len_0to16_64b (len 0)", "XXH3_len_1to3_64b",
             "XXH3_len_4to8_64b", "XXH3_len_9to16_64b", "XXH3_len_17to128_64b", "XXH3_len_129to240_64b",
             "XXH3_hashLong (64-bit)", "XXH3_hashLong (64-bit, blocks)"};
@@ -412,7 +432,7 @@ public class M3HashAtomsPerf {
         for (int i = 0; i < CORPUS; i++) {
             byte[] b = new byte[r.nextInt(MAX_LENGTH + 1)];
             r.nextBytes(b);
-            char[] c = new char[b.length / 2];
+            char[] c = new char[b.length / Character.BYTES];
             for (int k = 0; k < c.length; k++) {
                 c[k] = (char) r.nextInt(UTF16_BOUND);
             }
@@ -421,9 +441,9 @@ public class M3HashAtomsPerf {
             builders[i] = new StringBuilder(utf16[i]);
             chars += c.length;
         }
-        int p = passes(2 * chars);
+        int p = passes(Character.BYTES * chars);
         int ops = CORPUS * p;
-        String n = "0.." + MAX_LENGTH / 2 + " chars";
+        String n = "0.." + MAX_LENGTH / Character.BYTES + " chars";
         row(STRING_GROUP, "M3CharSequenceAccess", "xx3() hashChars(Latin-1 String)", n, ops,
                 () -> { long s = 0; for (int k = 0; k < p; k++) for (String x : latin1) s += (long) M_XX3_STRING.invokeExact(x); return s; },
                 () -> { long s = 0; for (int k = 0; k < p; k++) for (String x : latin1) s += (long) O_XX3_STRING.invokeExact(x); return s; }, false);
@@ -473,9 +493,9 @@ public class M3HashAtomsPerf {
         new SplittableRandom(CORPUS_SEED).nextBytes(b);
         long base = M3HashOracleBase.byteBase();
         ByteBuffer direct = ByteBuffer.allocateDirect(b.length).put(0, b);
-        char[] c = new char[b.length / 2];
+        char[] c = new char[b.length / Character.BYTES];
         for (int i = 0; i < c.length; i++) {
-            c[i] = (char) ((b[2 * i] & 0xFF) | (b[2 * i + 1] << 8));
+            c[i] = (char) ((b[Character.BYTES * i] & BYTE_MASK) | (b[Character.BYTES * i + 1] << Byte.SIZE));
         }
         String s16 = new String(c);
         int p = Math.max(MIN_PASSES, MICRO_OPS_PER_ROUND / ACCESS_BYTES);

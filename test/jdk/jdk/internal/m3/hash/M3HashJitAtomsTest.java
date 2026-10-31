@@ -45,6 +45,7 @@ import jdk.internal.m3.hash.M3Access;
 import jdk.internal.m3.hash.M3LongHashFunction;
 import jdk.internal.m3.hash.M3LongTupleHashFunction;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 public class M3HashJitAtomsTest {
     private static final String M3 = "jdk.internal.m3.hash.";
@@ -63,17 +64,48 @@ public class M3HashJitAtomsTest {
     private static final int LONG_STRIDE = 7;
     private static final int BLOCK = 1024;
     private static final int EDGE_REACH = 1;
+    //FLLDCIM: M3 - LITERAL_CONSTANTS (tests): the input-length classes of the xxHash reference, one bound per name
+    /** First and last input length of each XXH3 length-class atom (XXH3_len_0to16 .. XXH3_len_129to240). */
+    private static final int LEN_0TO16_MIN = 0;
+    private static final int LEN_0TO16_MAX = 16;
+    private static final int LEN_1TO3_MIN = 1;
+    private static final int LEN_1TO3_MAX = 3;
+    private static final int LEN_4TO8_MIN = 4;
+    private static final int LEN_4TO8_MAX = 8;
+    private static final int LEN_9TO16_MIN = 9;
+    private static final int LEN_9TO16_MAX = 16;
+    private static final int LEN_17TO128_MIN = 17;
+    private static final int LEN_17TO128_MAX = 128;
+    private static final int LEN_129TO240_MIN = 129;
+    private static final int LEN_129TO240_MAX = 240;
+    /** The first input length XXH3_hashLong serves (XXH3_MIDSIZE_MAX + 1). */
+    private static final int LONG_LEN_MIN = LEN_129TO240_MAX + 1;
     private static final int SECRET_BYTES = 192;
     private static final int MERGE_SAMPLES = 100_000;
-    private static final int MERGE_SPAN = SECRET_BYTES - 64;
     private static final int LANES = 8;
+    /** XXH_STRIPE_LEN: one stripe is the eight 8-byte lanes; a merge reads one stripe of the secret. */
+    private static final int STRIPE_BYTES = LANES * Long.BYTES;
+    private static final int MERGE_SPAN = SECRET_BYTES - STRIPE_BYTES;
+    /** XXH3_mergeAccs folds the lanes in pairs. */
+    private static final int LANES_PER_PAIR = 2;
     private static final int LANE_PAIR_BYTES = 16;
+    /** The merge alternates the default secret (even rounds) and a seed's custom secret (odd rounds). */
+    private static final int SECRET_KINDS = 2;
     private static final int TUPLE_LONGS = 2;
     private static final int READ_BYTES = 4096;
     private static final int ENTRY_BYTES = 64;
     private static final int ENTRY_STRIDE = 7;
     private static final int PROOF_DENSE = 1100;
-    private static final long[] MERGE_OFFSETS = {11L, SECRET_BYTES - 64 - 11};
+    /** The seeds of the seeded functions of the bounds proof (the two-seed functions take both). */
+    private static final long PROOF_SEED = 1L;
+    private static final long PROOF_SEED_2 = 2L;
+    /** The low merge's secret offset (XXH_SECRET_MERGEACCS_START); the high merge's is MERGE_SPAN less it. */
+    private static final long MERGE_ACCS_START = 11L;
+    private static final long[] MERGE_OFFSETS = {MERGE_ACCS_START, MERGE_SPAN - MERGE_ACCS_START};
+    /** The first rounds of the merge test take the fixed offsets, MERGE_OFFSETS in turn. */
+    private static final int MERGE_EDGE_ROUNDS = MERGE_OFFSETS.length * SECRET_KINDS;
+    /** The low byte of an int: the byte view of a char. */
+    private static final int BYTE_MASK = 0xFF;
     private static final Class<?>[] ONE_LONG = {long.class};
     private static final Class<?> XXH3 = type("M3XXH3");
     private static final MethodHandles.Lookup L = lookup(XXH3);
@@ -88,7 +120,8 @@ public class M3HashJitAtomsTest {
     private static final MethodType MERGE = MethodType.methodType(long.class, long.class, long.class, long.class,
             long.class, long.class, long.class, long.class, long.class, byte[].class, long.class, long.class);
     private static final MethodHandle HASH_LONG = find("XXH3_hashLong", LONG);
-    private static final MethodHandle MERGE_ACCS = find("XXH3_mergeAccs", MERGE);
+    /** XXH3_mergeAccs with its eight accumulators spread from one long[LANES]: (long[], byte[], long, long)long. */
+    private static final MethodHandle MERGE_ACCS = find("XXH3_mergeAccs", MERGE).asSpreader(0, long[].class, LANES);
     private static final MethodHandle INIT_SECRET =
             find("XXH3_initCustomSecret", MethodType.methodType(void.class, byte[].class, long.class));
     private static final byte[] K_SECRET = kSecret();
@@ -118,64 +151,64 @@ public class M3HashJitAtomsTest {
 
     @Test
     void xxh3Len0to16_64b() throws Throwable {
-        short64("XXH3_len_0to16_64b", 0, 16);
+        short64("XXH3_len_0to16_64b", LEN_0TO16_MIN, LEN_0TO16_MAX);
     }
 
     @Test
     void xxh3Len9to16_64b() throws Throwable {
-        short64("XXH3_len_9to16_64b", 9, 16);
+        short64("XXH3_len_9to16_64b", LEN_9TO16_MIN, LEN_9TO16_MAX);
     }
 
     @Test
     void xxh3Len4to8_64b() throws Throwable {
-        short64("XXH3_len_4to8_64b", 4, 8);
+        short64("XXH3_len_4to8_64b", LEN_4TO8_MIN, LEN_4TO8_MAX);
     }
 
     @Test
     void xxh3Len1to3_64b() throws Throwable {
-        short64("XXH3_len_1to3_64b", 1, 3);
+        short64("XXH3_len_1to3_64b", LEN_1TO3_MIN, LEN_1TO3_MAX);
     }
 
     @Test
     void xxh3Len17to128_64b() throws Throwable {
-        short64("XXH3_len_17to128_64b", 17, 128);
+        short64("XXH3_len_17to128_64b", LEN_17TO128_MIN, LEN_17TO128_MAX);
     }
 
     @Test
     void xxh3Len129to240_64b() throws Throwable {
-        short64("XXH3_len_129to240_64b", 129, 240);
+        short64("XXH3_len_129to240_64b", LEN_129TO240_MIN, LEN_129TO240_MAX);
     }
 
     // ---- the length-class atoms, 128 bit --------------------------------------------------------------------------
 
     @Test
     void xxh3Len0to16_128b() throws Throwable {
-        short128("XXH3_len_0to16_128b", 0, 16);
+        short128("XXH3_len_0to16_128b", LEN_0TO16_MIN, LEN_0TO16_MAX);
     }
 
     @Test
     void xxh3Len9to16_128b() throws Throwable {
-        short128("XXH3_len_9to16_128b", 9, 16);
+        short128("XXH3_len_9to16_128b", LEN_9TO16_MIN, LEN_9TO16_MAX);
     }
 
     @Test
     void xxh3Len4to8_128b() throws Throwable {
-        short128("XXH3_len_4to8_128b", 4, 8);
+        short128("XXH3_len_4to8_128b", LEN_4TO8_MIN, LEN_4TO8_MAX);
     }
 
     @Test
     void xxh3Len1to3_128b() throws Throwable {
-        short128("XXH3_len_1to3_128b", 1, 3);
+        short128("XXH3_len_1to3_128b", LEN_1TO3_MIN, LEN_1TO3_MAX);
     }
 
     @Test
     void xxh3Len17to128_128b() throws Throwable {
-        short128("XXH3_len_17to128_128b", 17, 128);
+        short128("XXH3_len_17to128_128b", LEN_17TO128_MIN, LEN_17TO128_MAX);
     }
 
     @Test
     void xxh3Len129to240_128b() throws Throwable {
-        short128("XXH3_len_129to240_128b", 129, 240);
+        short128("XXH3_len_129to240_128b", LEN_129TO240_MIN, LEN_129TO240_MAX);
     }
 
     // ---- the shared hashLong atom and its merge -------------------------------------------------------------------
@@ -203,7 +236,7 @@ public class M3HashJitAtomsTest {
                 }
             }
         }
-        for (int len : new int[] {241, BLOCK, BLOCK + 1, LONG_MAX}) {
+        for (int len : new int[] {LONG_LEN_MIN, BLOCK, BLOCK + 1, LONG_MAX}) {
             outOfRange(len, (b, l) -> {
                 long ignored = (long) HASH_LONG.invokeExact(K_SECRET, (Object) b, (M3Access<?>) CHECKED, 0L, (long) l,
                         (long[]) null);
@@ -220,18 +253,18 @@ public class M3HashJitAtomsTest {
             for (int lane = 0; lane < LANES; lane++) {
                 acc[lane] = i < EDGE_VALUES.length ? EDGE_VALUES[(i + lane) % EDGE_VALUES.length] : r.nextLong();
             }
-            byte[] secret = i % 2 == 0 ? K_SECRET : secret(r.nextLong());
-            long offSec = i < MERGE_OFFSETS.length * 2 ? MERGE_OFFSETS[i % MERGE_OFFSETS.length] : r.nextInt(MERGE_SPAN + 1);
+            byte[] secret = i % SECRET_KINDS == 0 ? K_SECRET : secret(r.nextLong());
+            long offSec = i < MERGE_EDGE_ROUNDS ? MERGE_OFFSETS[i % MERGE_OFFSETS.length] : r.nextInt(MERGE_SPAN + 1);
             long start = r.nextLong();
             long want = start;
             ByteBuffer le = ByteBuffer.wrap(secret).order(ByteOrder.LITTLE_ENDIAN);
-            for (int pair = 0; pair < LANES / 2; pair++) {
-                long x = acc[2 * pair] ^ le.getLong((int) offSec + LANE_PAIR_BYTES * pair);
-                long y = acc[2 * pair + 1] ^ le.getLong((int) offSec + LANE_PAIR_BYTES * pair + Long.BYTES);
+            for (int pair = 0; pair < LANES / LANES_PER_PAIR; pair++) {
+                long x = acc[LANES_PER_PAIR * pair] ^ le.getLong((int) offSec + LANE_PAIR_BYTES * pair);
+                long y = acc[LANES_PER_PAIR * pair + 1]
+                        ^ le.getLong((int) offSec + LANE_PAIR_BYTES * pair + Long.BYTES);
                 want += (x * y) ^ Math.unsignedMultiplyHigh(x, y);
             }
-            long got = (long) MERGE_ACCS.invokeExact(acc[0], acc[1], acc[2], acc[3], acc[4], acc[5], acc[6], acc[7],
-                    secret, offSec, start);
+            long got = (long) MERGE_ACCS.invokeExact(acc, secret, offSec, start);
             eq(want, got, "XXH3_mergeAccs", i);
         }
         report("XXH3_mergeAccs");
@@ -299,10 +332,10 @@ public class M3HashJitAtomsTest {
             eq(BYTE_ACCESS.getByte(b, i), BYTE_ACCESS.i8(b, i), "i8 vs getByte", i);
         }
         // the getters keep their checks: the exception ByteArrayLittleEndian throws
-        assertThrows(ArrayIndexOutOfBoundsException.class, () -> BYTE_ACCESS.getLong(b, b.length - Long.BYTES + 1));
-        assertThrows(ArrayIndexOutOfBoundsException.class, () -> BYTE_ACCESS.getInt(b, -1));
-        assertThrows(ArrayIndexOutOfBoundsException.class, () -> BYTE_ACCESS.getShort(b, b.length - 1));
-        checks += 3;
+        assertThrowsCounted(ArrayIndexOutOfBoundsException.class,
+                () -> BYTE_ACCESS.getLong(b, b.length - Long.BYTES + 1));
+        assertThrowsCounted(ArrayIndexOutOfBoundsException.class, () -> BYTE_ACCESS.getInt(b, -1));
+        assertThrowsCounted(ArrayIndexOutOfBoundsException.class, () -> BYTE_ACCESS.getShort(b, b.length - 1));
         report("M3ByteArrayAccess read atom");
     }
 
@@ -357,15 +390,18 @@ public class M3HashJitAtomsTest {
     @Test
     void boundsProof() {
         SplittableRandom r = new SplittableRandom(CORPUS_SEED);
-        List<M3LongHashFunction> single = List.of(M3LongHashFunction.xx(), M3LongHashFunction.xx(1L),
-                M3LongHashFunction.xx3(), M3LongHashFunction.xx3(1L), M3LongHashFunction.xx128low(),
-                M3LongHashFunction.xx128low(1L), M3LongHashFunction.wy_3(), M3LongHashFunction.wy_3(1L),
-                M3LongHashFunction.murmur_3(), M3LongHashFunction.murmur_3(1L), M3LongHashFunction.city_1_1(),
-                M3LongHashFunction.city_1_1(1L, 2L), M3LongHashFunction.farmNa(), M3LongHashFunction.farmNa(1L, 2L),
-                M3LongHashFunction.farmUo(), M3LongHashFunction.farmUo(1L, 2L), M3LongHashFunction.metro(),
-                M3LongHashFunction.metro(1L));
+        List<M3LongHashFunction> single = List.of(M3LongHashFunction.xx(), M3LongHashFunction.xx(PROOF_SEED),
+                M3LongHashFunction.xx3(), M3LongHashFunction.xx3(PROOF_SEED), M3LongHashFunction.xx128low(),
+                M3LongHashFunction.xx128low(PROOF_SEED), M3LongHashFunction.wy_3(),
+                M3LongHashFunction.wy_3(PROOF_SEED), M3LongHashFunction.murmur_3(),
+                M3LongHashFunction.murmur_3(PROOF_SEED), M3LongHashFunction.city_1_1(),
+                M3LongHashFunction.city_1_1(PROOF_SEED, PROOF_SEED_2), M3LongHashFunction.farmNa(),
+                M3LongHashFunction.farmNa(PROOF_SEED, PROOF_SEED_2), M3LongHashFunction.farmUo(),
+                M3LongHashFunction.farmUo(PROOF_SEED, PROOF_SEED_2), M3LongHashFunction.metro(),
+                M3LongHashFunction.metro(PROOF_SEED));
         List<M3LongTupleHashFunction> tuples = List.of(M3LongTupleHashFunction.xx128(),
-                M3LongTupleHashFunction.xx128(1L), M3LongTupleHashFunction.murmur_3(), M3LongTupleHashFunction.murmur_3(1L));
+                M3LongTupleHashFunction.xx128(PROOF_SEED), M3LongTupleHashFunction.murmur_3(),
+                M3LongTupleHashFunction.murmur_3(PROOF_SEED));
         int[] lengths = IntStream.concat(IntStream.rangeClosed(0, PROOF_DENSE),
                 IntStream.iterate(PROOF_DENSE + 1, n -> n <= LONG_MAX, n -> n + LONG_STRIDE)).toArray();
         for (int len : lengths) {
@@ -502,8 +538,14 @@ public class M3HashJitAtomsTest {
     private static void outOfRange(int len, Read call) throws Throwable {
         byte[] exact = new byte[len];
         call.run(exact, len);
-        assertThrows(IndexOutOfBoundsException.class, () -> call.run(new byte[len - EDGE_REACH], len));
-        checks += 2;
+        checks++;
+        assertThrowsCounted(IndexOutOfBoundsException.class, () -> call.run(new byte[len - EDGE_REACH], len));
+    }
+
+    /** assertThrows that counts as one comparison. */
+    private static void assertThrowsCounted(Class<? extends Throwable> type, Executable call) {
+        assertThrows(type, call);
+        checks++;
     }
 
     /**
@@ -514,17 +556,17 @@ public class M3HashJitAtomsTest {
         int off = 1 + k % (PAD - 1);
         byte[] padded = new byte[len + PAD + off];
         r.nextBytes(padded);
-        char[] c = new char[(padded.length + 1) / 2];
+        char[] c = new char[(padded.length + 1) / Character.BYTES];
         for (int i = 0; i < c.length; i++) {
-            int lo = padded[2 * i] & 0xFF;
-            int hi = 2 * i + 1 < padded.length ? padded[2 * i + 1] & 0xFF : 0;
+            int lo = padded[Character.BYTES * i] & BYTE_MASK;
+            int hi = Character.BYTES * i + 1 < padded.length ? padded[Character.BYTES * i + 1] & BYTE_MASK : 0;
             c[i] = (char) (lo | hi << Byte.SIZE);
         }
         return new Input(padded, off, len, new StringBuilder().append(c));
     }
 
     private static int[] longLengths() {
-        int[] dense = IntStream.rangeClosed(241, LONG_DENSE).toArray();
+        int[] dense = IntStream.rangeClosed(LONG_LEN_MIN, LONG_DENSE).toArray();
         int[] strided = IntStream.iterate(LONG_DENSE + 1, n -> n <= LONG_MAX, n -> n + LONG_STRIDE).toArray();
         int[] edges = IntStream.rangeClosed(1, LONG_MAX / BLOCK)
                 .flatMap(b -> IntStream.of(b * BLOCK - 1, b * BLOCK, b * BLOCK + 1)).toArray();
@@ -533,7 +575,7 @@ public class M3HashJitAtomsTest {
     }
 
     private static int[] allLengths() {
-        return IntStream.concat(IntStream.rangeClosed(0, 240),
+        return IntStream.concat(IntStream.rangeClosed(LEN_0TO16_MIN, LEN_129TO240_MAX),
                 Arrays.stream(longLengths())).toArray();
     }
 

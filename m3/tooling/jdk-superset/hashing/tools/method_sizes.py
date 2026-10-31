@@ -1,13 +1,14 @@
 # SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
 # Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
-"""method_sizes.py <javap> <classes dir> <sources dir> <ATOMS.tsv.gz> <out tsv>
+"""method_sizes.py <variant> <javap> <classes dir> <sources dir> <ATOMS.tsv.gz> <out tsv>
 
 Bytecode size of every method of jdk.internal.m3.hash against the HotSpot 21 inlining limits. The size is the
 Code attribute's code_length read from the class file; `javap -c -p` lists the same methods and its last
 instruction offset is the cross-check (it must be below code_length). Each method is joined to its tree-sitter atom
 (atomize_patternize.py ATOMS.tsv.gz) by the source lines of its LineNumberTable (classes compiled with -g); the line
 span is recomputed from the atom's byte span, because the ATOMS line columns are not reliable under tree-sitter 0.26.
-Writes one row per method, sorted by class then source line then name.
+Appends one row per method to <out tsv>, sorted by class then source line then name, under <variant> (before, after:
+one table holds both); a new table starts with the SPDX lines ('#') and the column header.
 """
 import csv
 import gzip
@@ -32,7 +33,9 @@ TWO_SLOT_TAGS = (5, 6)
 FIXED_TAG_SIZES = {3: 4, 4: 4, 5: 8, 6: 8, 7: 2, 8: 2, 9: 4, 10: 4, 11: 4, 12: 4, 15: 3, 16: 2, 17: 4, 18: 4,
                    19: 2, 20: 2}
 UTF8_TAG = 1
-HEADER = ("class", "method", "descriptor", "flags", "bytecode_bytes", "javap_last_offset", "source_file",
+SPDX_LINES = ("# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0",
+              "# Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others")
+HEADER = ("variant", "class", "method", "descriptor", "flags", "bytecode_bytes", "javap_last_offset", "source_file",
           "start_line", "end_line", "source_lines", "atom_id", "gt_MaxInlineSize_35", "gt_FreqInlineSize_325",
           "gt_HugeMethodLimit_8000")
 JAVAP_METHOD = re.compile(r"^  (?:.*? )?([\w$.<>]+)\((.*)\)(?: throws .*)?;$")
@@ -155,7 +158,7 @@ def flag_names(flags):
 
 
 def main():
-    javap, classes, sources, atoms_gz, out = sys.argv[1:6]
+    variant, javap, classes, sources, atoms_gz, out = sys.argv[1:7]
     spans = atom_spans(atoms_gz, sources)
     rows = []
     root = os.path.join(classes, PACKAGE)
@@ -187,8 +190,11 @@ def main():
                          "yes" if length > MAX_INLINE_SIZE else "no", "yes" if length > FREQ_INLINE_SIZE else "no",
                          "yes" if length > HUGE_METHOD_LIMIT else "no"))
     rows.sort(key=lambda r: (r[0], int(r[7]), r[1], r[2]))
-    with open(out, "w", encoding="utf-8", newline=NL) as w:
-        w.write(TAB.join(HEADER) + NL + "".join(TAB.join(r) + NL for r in rows))
+    new = not os.path.exists(out)
+    with open(out, "a", encoding="utf-8", newline=NL) as w:
+        if new:
+            w.write(NL.join(SPDX_LINES) + NL + TAB.join(HEADER) + NL)
+        w.write("".join(TAB.join((variant,) + r) + NL for r in rows))
     big = [r for r in rows if r[12] == "yes"]
     print(f"methods={len(rows)} gt_MaxInlineSize={sum(r[11] == 'yes' for r in rows)} "
           f"gt_FreqInlineSize={len(big)} gt_HugeMethodLimit={sum(r[13] == 'yes' for r in rows)}")

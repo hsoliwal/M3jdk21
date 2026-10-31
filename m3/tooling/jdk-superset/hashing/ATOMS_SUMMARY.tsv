@@ -1,3 +1,37 @@
-variant	source	java_files	parse_errors	leaves	methods	types	worker_faults	ATOMS.tsv.gz_sha256	tools
-before	32f8e561b29 (the absorption before its review) src/java.base/share/classes/jdk/internal/m3/hash	16	0	411	370	41	0	b793b5a4426abd154b419db90b839e172117a6e8e930e20bd16879cd24689d24	atomize_patternize.py sha256 141a29d995d0992b, cpu_lhash_treesitter.py sha256 a5d270b105b7dcd5 (worker faults are batches the tool re-ran in halves; every file is in the table)
-after	this change merged with the review commits (827c4b65f73), same path	16	0	452	411	41	7	7eaf846b18292b96dd52686eaf3b33b31c3bb465a278157a02f03c0def4ed449	atomize_patternize.py sha256 141a29d995d0992b, cpu_lhash_treesitter.py sha256 a5d270b105b7dcd5 (worker faults are batches the tool re-ran in halves; every file is in the table)
+# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+# Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+variant	scope	source	java_files	parse_errors	leaves	methods	types	worker_faults	ATOMS.tsv_sha256	tools
+before	run	827c4b65f73 (the leaf's base: the absorption with its review) src/java.base/share/classes/jdk/internal/m3/hash	16	0	411	370	41	5+0+1	e6bb96eef4cafbfc0b7ad820e8bb5609cd5469485519b897e4dd34da19c30e91	atomize_patternize.py sha256 491d265282a6847e, cpu_lhash_treesitter.py sha256 175b15e875032ae2, tree_sitter 0.26.0, tree_sitter_language_pack 1.12.5, python 3.12.6
+after	run	fedf72fcda0 (this leaf) same path	16	0	452	411	41	0	57e06d59643b211d0405a19e6505e87ea6cd8e71adcf01a9e6a53f716c2e2741	atomize_patternize.py sha256 491d265282a6847e, cpu_lhash_treesitter.py sha256 175b15e875032ae2, tree_sitter 0.26.0, tree_sitter_language_pack 1.12.5, python 3.12.6
+before	file	M3Access.java	1	0	34	32	2	-	-	-
+after	file	M3Access.java	1	0	41	39	2	-	-	-
+before	file	M3ByteArrayAccess.java	1	0	11	10	1	-	-	-
+after	file	M3ByteArrayAccess.java	1	0	17	16	1	-	-	-
+before	file	M3ByteBufferAccess.java	1	0	11	10	1	-	-	-
+after	file	M3ByteBufferAccess.java	1	0	18	17	1	-	-	-
+before	file	M3CharSequenceAccess.java	1	0	28	25	3	-	-	-
+after	file	M3CharSequenceAccess.java	1	0	35	32	3	-	-	-
+before	file	M3CityAndFarmHash_1_1.java	1	0	56	48	8	-	-	-
+after	file	M3CityAndFarmHash_1_1.java	1	0	56	48	8	-	-	-
+before	file	M3DualHashFunction.java	1	0	25	24	1	-	-	-
+after	file	M3DualHashFunction.java	1	0	25	24	1	-	-	-
+before	file	M3LongHashFunction.java	1	0	42	41	1	-	-	-
+after	file	M3LongHashFunction.java	1	0	42	41	1	-	-	-
+before	file	M3LongTupleHashFunction.java	1	0	41	40	1	-	-	-
+after	file	M3LongTupleHashFunction.java	1	0	41	40	1	-	-	-
+before	file	M3Maths.java	1	0	8	6	2	-	-	-
+after	file	M3Maths.java	1	0	8	6	2	-	-	-
+before	file	M3MetroHash.java	1	0	19	16	3	-	-	-
+after	file	M3MetroHash.java	1	0	19	16	3	-	-	-
+before	file	M3MurmurHash_3.java	1	0	28	25	3	-	-	-
+after	file	M3MurmurHash_3.java	1	0	28	25	3	-	-	-
+before	file	M3Primitives.java	1	0	23	20	3	-	-	-
+after	file	M3Primitives.java	1	0	23	20	3	-	-	-
+before	file	M3Util.java	1	0	2	1	1	-	-	-
+after	file	M3Util.java	1	0	2	1	1	-	-	-
+before	file	M3WyHash.java	1	0	20	17	3	-	-	-
+after	file	M3WyHash.java	1	0	20	17	3	-	-	-
+before	file	M3XXH3.java	1	0	44	39	5	-	-	-
+after	file	M3XXH3.java	1	0	58	53	5	-	-	-
+before	file	M3XxHash.java	1	0	19	16	3	-	-	-
+after	file	M3XxHash.java	1	0	19	16	3	-	-	-

@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
 # Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
-"""hash_patterns.py <jdk.internal.m3.hash sources dir> <METHOD_SIZES.tsv> <PATTERNS.tsv>
+"""hash_patterns.py <jdk.internal.m3.hash sources dir> <METHOD_SIZES.tsv> <variant> <PATTERNS.tsv>
 
-The patternize stage of the hashing leaf: every atom (every method method_sizes.py found in the compiled classes,
-less the compiler's bridge methods) and every read site (each call of a short-name read in an algorithm file, each
+The patternize stage of the hashing leaf: every atom (every method method_sizes.py found in the compiled classes of
+<variant>, less the compiler's bridge methods) and every read site (each call of a short-name read in an algorithm file, each
 backing read in an access file) is classified into the closed set HASH-PATTERN v1 below, with a typed residue (what
 the pattern does not say). An atom no rule matches is UNKNOWN_PATTERN; the stage passes only with none. Owners: an
 atom that JUnit proved to serve two donor computations names them (keep one owner).
@@ -42,6 +42,8 @@ NL = "\n"
 TAB = "\t"
 VERSION = "HASH-PATTERN v1"
 MASK = re.compile(r'//[^\n]*|/\*.*?\*/|"(?:\\.|[^"\\\n])*"|\'(?:\\.|[^\'\\\n])*\'', re.S)
+SPDX_LINES = ("# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0",
+              "# Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others")
 HEADER = ("kind", "file", "line", "owner", "member", "role", "pattern", "residue", "version")
 ACCESS_TYPES = ("M3Access", "M3ByteArrayAccess", "M3ByteBufferAccess", "M3CharSequenceAccess")
 FACADE_TYPES = ("M3LongHashFunction", "M3LongTupleHashFunction", "M3DualHashFunction")
@@ -202,10 +204,12 @@ def read_sites(src, spans):
 
 
 def main():
-    src, sizes, out = sys.argv[1:4]
+    src, sizes, variant, out = sys.argv[1:5]
     atoms, spans, unknown = [], {}, []
     with open(sizes, encoding="utf-8") as f:
-        for r in csv.DictReader(f, delimiter=TAB):
+        for r in csv.DictReader((line for line in f if not line.startswith("#")), delimiter=TAB):
+            if r["variant"] != variant:
+                continue
             spans.setdefault(r["source_file"], []).append((int(r["start_line"]), int(r["end_line"]), r["method"]))
             if "bridge" in r["flags"]:
                 continue
@@ -215,8 +219,10 @@ def main():
                 hit = ("?", "UNKNOWN_PATTERN", "NONE")
             atoms.append(("ATOM", r["source_file"], r["start_line"], r["class"], r["method"]) + hit + (VERSION,))
     rows = atoms + read_sites(src, spans)
+    if not atoms:
+        raise SystemExit(f"no {variant} rows in {sizes}")
     with open(out, "w", encoding="utf-8", newline=NL) as w:
-        w.write(TAB.join(HEADER) + NL + "".join(TAB.join(r) + NL for r in rows))
+        w.write(NL.join(SPDX_LINES) + NL + TAB.join(HEADER) + NL + "".join(TAB.join(r) + NL for r in rows))
     counts = {}
     for r in rows:
         counts[(r[0], r[6])] = counts.get((r[0], r[6]), 0) + 1

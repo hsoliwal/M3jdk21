@@ -1,12 +1,15 @@
 # SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
 # Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
-"""mutation_gate.py <java bin dir> <absorbed src dir> <test classes dirs> <junit classpath> <oracle classes> <work dir>
+"""mutation_gate.py <java bin dir> <absorbed src dir> <test classes dirs> <junit console jar> <oracle classes> <work dir>
 
 Discriminator gate of the zero-allocation-hashing absorption: each mutant is a plausible wrong java.base form (a
 recipe slip). It is compiled into its own patch of java.base and the tests run against it (<test classes dirs>: one
 or more comma-separated class roots, each run on its own: M3HashAtomsTest, and M3HashJitAtomsTest for the JIT
-leaf's mutants); the gate passes only when every mutant fails a test (KILLED). Prints and writes
-<work dir>/MUTANTS.tsv: mutant, file, result, failing tests (Class.method beyond M3HashAtomsTest)."""
+leaf's mutants); the gate passes only when every mutant fails a test (KILLED). The tests run on the stock JUnit
+Platform ConsoleLauncher of <junit console jar> (junit-platform-console-standalone 1.10.1 or later): a run counts
+only when it found tests (an empty or broken run is ERROR, never KILLED), and the failing tests are read from its
+failure list (JUnit Jupiter:Class:method()). Prints and writes <work dir>/MUTANTS.tsv: mutant, file, result,
+failing tests (Class.method beyond M3HashAtomsTest)."""
 import os
 import re
 import shutil
@@ -88,7 +91,10 @@ MUTANTS = [
      "        f.hash(input, OBJECT_ACCESS,"),
 ]
 FAILED = re.compile(r"(M3Hash\w*Test):(\w+)\(\)")
+FOUND = re.compile(r"\[\s*(\d+) tests found\s*\]")
 BASE_TEST = "M3HashAtomsTest"
+LAUNCHER = ["org.junit.platform.console.ConsoleLauncher", "execute", "--disable-banner", "--disable-ansi-colors",
+            "--details=summary", "--fail-if-no-tests"]
 
 
 def run(cmd):
@@ -114,16 +120,19 @@ def main():
         if c.returncode:
             rows.append((name, f, "COMPILE_ERROR", c.stderr.strip().splitlines()[0]))
             continue
-        killed, failed = False, set()
+        killed, empty, failed = False, False, set()
         for testc in roots.split(","):
             t = run([java, "-Xmx1g", "-XX:ErrorFile=" + os.path.join(root, "hs_err_%p.log"),
                      "--patch-module", "java.base=" + patch,
                      "--add-opens", "java.base/jdk.internal.m3.hash=ALL-UNNAMED",
                      "--add-exports", "java.base/sun.nio.ch=ALL-UNNAMED", "-Dm3.hash.oracle=" + oracle,
-                     "-cp", os.pathsep.join([testc, junit]), "M3GateJUnitRun", testc])
-            killed |= t.returncode != 0
+                     "-cp", os.pathsep.join([testc, junit])] + LAUNCHER + ["--scan-class-path=" + testc])
+            found = sum(int(n) for n in FOUND.findall(t.stdout))
+            empty |= found == 0
+            killed |= t.returncode != 0 and found > 0
             failed |= {m if c == BASE_TEST else c + "." + m for c, m in FAILED.findall(t.stdout)}
-        rows.append((name, f, "KILLED" if killed else "SURVIVED", ",".join(sorted(failed))))
+        result = "ERROR_NO_TESTS" if empty else "KILLED" if killed else "SURVIVED"
+        rows.append((name, f, result, ",".join(sorted(failed))))
         print(TAB.join(rows[-1]), flush=True)
     with open(os.path.join(work, "MUTANTS.tsv"), "w", encoding="utf-8", newline=NL) as w:
         w.write("mutant\tfile\tresult\tfailing_tests\n" + "".join(TAB.join(r) + NL for r in rows))
