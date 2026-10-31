@@ -45,18 +45,21 @@ RENAME_MAP = "m3/tooling/jdk-naming/RENAME_MAP.tsv"
 
 
 def load_rules(path: Path = RULES_FILE) -> tuple:
+    """TEXT rules (every line), PROSE rules (whole comment lines only), and the keep patterns."""
     rows = [line.split("\t") for line in path.read_text(encoding="utf-8").splitlines()[1:] if line.strip()]
-    text_rules = tuple((name, re.compile(pattern), replacement) for kind, name, pattern, replacement, _note in rows
-                       if kind == "TEXT")
+    rules = tuple(tuple((name, re.compile(pattern), replacement) for kind, name, pattern, replacement, _note in rows
+                        if kind == wanted) for wanted in ("TEXT", "PROSE"))
     keeps = tuple(re.compile("|".join(pattern for k, _n, pattern, _r, _note in rows if k == kind))
                   for kind in ("KEEP_LINE", "KEEP_SPAN", "KEEP_PATH"))
-    return (text_rules, *keeps)
+    return (*rules, *keeps)
 
 
-TEXT_RULES, KEEP_LINE, KEEP_SPAN, KEEP_PATH = load_rules()
+TEXT_RULES, PROSE_RULES, KEEP_LINE, KEEP_SPAN, KEEP_PATH = load_rules()
 SPAN_TOKEN = re.compile("\x00(\\d+)\x00")
+# a whole comment line: the PROSE rules apply only here, so string literals and data keep their exact text
+COMMENT_LINE = re.compile(r"^\s*(?://|/\*|\*|#|<!--)")
 # every rule's pattern contains one of these, so a line without them is never rewritten (skips most of 1.1 GB of text)
-QUICK = re.compile(r"(?i)synexia|com[./_]{1,2}m3[./_]|m3([-_./])m3\1")
+QUICK = re.compile(r"(?i)synexia|com[./_]{1,2}m3[./_]|m3([-_./])m3\1|m3[ _-]?jdk")
 TEXT_SUFFIXES = {".java", ".yml", ".yaml", ".xml", ".sh", ".py", ".mjs", ".js", ".properties", ".gradle", ".toml",
                  ".cfg", ".ini", ".c", ".h", ".cpp", ".json", ".txt"}
 DOC_SUFFIXES = {".md", ".tsv", ".rst", ".adoc", ".html", ".log", ".patch"}
@@ -97,8 +100,9 @@ def rewrite_line(line: str, counts: dict) -> str:
     def stash(match):
         spans.append(match.group(0))
         return "\x00%d\x00" % (len(spans) - 1)
+    comment = COMMENT_LINE.match(line) is not None
     line = KEEP_SPAN.sub(stash, line)
-    for name, rule, replacement in TEXT_RULES:
+    for name, rule, replacement in TEXT_RULES + (PROSE_RULES if comment else ()):
         line, n = rule.subn(replacement, line)
         if n:
             counts[name] = counts.get(name, 0) + n

@@ -42,7 +42,8 @@ class JdkNamingConformanceTest {
     void theTableLoadsInOrder() {
         List<String> names = rules.textRules().stream().map(NamingRules.Rule::name).toList();
         assertEquals("PKG_M3", names.get(0));
-        assertEquals("DOUBLE", names.get(names.size() - 1));
+        assertEquals("PRODUCT_ID", names.get(names.size() - 1));
+        assertEquals(List.of("PROSE_PRODUCT_VERSION", "PROSE_PRODUCT"), rules.proseRules().stream().map(NamingRules.Rule::name).toList());
         assertTrue(names.indexOf("TYPE_M3") < names.indexOf("TYPE"), "the specific rule precedes the general one");
         assertEquals("$1", NamingRules.replacement("\\1"));
         assertEquals("jdk.m3.", NamingRules.replacement("jdk.m3."));
@@ -102,6 +103,20 @@ class JdkNamingConformanceTest {
                 + "\\njdk.m3.z.W ${m3.version} m3-tq/synexia.md.txt.before Java_jdk_internal_m3_recipe_X_f",
                 rewritten("package org.synexia.m3.recipe; lab_com.synexia.rewrite.X recipe\\tcom.synexia.rewrite.Y"
                         + "\\ncom.m3.z.W ${m3.synexia.version} m3-tq/synexia.md.txt.before Java_org_synexia_m3_recipe_X_f"));
+    }
+
+    @Test
+    void theProductNameFollowsThePerKindJdkStyle() {
+        assertEquals("// Adapted for the M3JDK 21 M3FS runtime", rewritten("// Adapted for the M3JDK21 M3FS runtime"));
+        assertEquals("# built in M3JDK 21; see hsoliwal/M3jdk21 and M3jdk21 #2216",
+                rewritten("# built in M3jdk21; see hsoliwal/M3jdk21 and M3jdk21 #2216"));
+        assertEquals(" * M3JDK is standalone; the M3JDK image", rewritten(" * M3jdk is standalone; the M3 JDK image"));
+        assertEquals("throw new X(\"M3JDK21 libjava\")", rewritten("throw new X(\"M3JDK21 libjava\")"));
+        assertEquals("env: M3JDK21_REFUSE M3JDK", rewritten("env: M3_JDK21_REFUSE M3_JDK"));
+        assertEquals("run: tar xf m3jdk21.tar.gz m3jdk-proof.yml", rewritten("run: tar xf m3-jdk21.tar.gz m3-jdk-proof.yml"));
+        assertEquals("id: M3JDK-PORT-1", rewritten("id: M3-JDK-PORT-1"));
+        assertEquals("class M3Jdk21Handoff", rewritten("class M3Jdk21Handoff"));
+        assertEquals(".github/workflows/m3jdk21-backports.yml", rules.renamedPath(".github/workflows/m3-jdk21-backports.yml"));
     }
 
     @Test

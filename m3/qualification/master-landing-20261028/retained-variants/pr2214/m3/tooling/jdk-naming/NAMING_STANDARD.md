@@ -35,6 +35,11 @@ the M3 classes under `src/**` and `test/**`. Text is in scope by suffix (`.java 
 | Invariant and ledger id | `M3-<NAME>-<N>` (was `SYNEXIA-<NAME>-<N>`) | `M3-LLM-FIRST-2` |
 | Maven groupId | unchanged (`com.m3`, `com.synexia.*`): a coordinate, not a package; mapped by the artifact phase | `<groupId>com.m3</groupId>` |
 | Maven artifactId | kebab `m3-<name>` | `m3-jdk-naming-conformance` |
+| Product name, prose | `M3JDK`, with its version `M3JDK 21` (comment lines; the `PROSE` rules) | `// Adapted for M3JDK 21` |
+| Product name, type prefix | `M3Jdk` | `M3Jdk21Handoff` |
+| Product name, constant and id | `M3JDK` | `M3JDK21_REFUSE`, `M3JDK-PORT-1` |
+| Product name, file, artifact and kebab | `m3jdk` | `m3jdk21.tar.gz`, `m3jdk-proof.yml` |
+| Repository | `hsoliwal/M3jdk21`, unchanged in every link and PR reference | `hsoliwal/M3jdk21#2216` |
 
 The word `Synexia` on its own stays where it names the donor project in prose: "Adapted from Synexia
 MIndexRegexTrigramQuery", "No Synexia runtime dependency", a GPL modification notice. Renaming it would make the
@@ -107,6 +112,15 @@ one example per rule.
 | `JNI_COM_M3` | `Java_com_m3_fs_M3FsNative_open` | `Java_jdk_m3_fs_M3FsNative_open` |
 | `PKG_DUNDER_COM_M3` | `java__com__m3__collections` | `java__jdk__m3__collections` |
 | `DOUBLE` | `m3-m3-x`, `M3_M3_MODE`, `jdk.m3.m3.importer`, `jdk/m3/m3/importer` | `m3-x`, `M3_MODE`, `jdk.m3.importer`, `jdk/m3/importer` |
+| `PRODUCT_CONST` | `M3_JDK21_REFUSE` | `M3JDK21_REFUSE` |
+| `PRODUCT_KEBAB` | `m3-jdk21.tar.gz` | `m3jdk21.tar.gz` |
+| `PRODUCT_ID` | `M3-JDK-PORT-1` | `M3JDK-PORT-1` |
+| `PROSE_PRODUCT_VERSION` | `// built for M3jdk21` | `// built for M3JDK 21` |
+| `PROSE_PRODUCT` | `# the M3 JDK image` | `# the M3JDK image` |
+
+Rows of kind `PROSE` apply only to whole comment lines (`//`, `/*`, `*`, `#`, `<!--`), so a string literal or a data
+value with the product name keeps its exact text. The product-name rules follow the user's decision of 2026-10-31
+(per-kind JDK style).
 
 `DOUBLE` repairs the `m3-m3-x` that `synexia-m3-x` becomes and the `jdk.m3.m3.x` that `com.m3.synexia.x` becomes
 (no doubled prefix or segment existed before the rename). Paths are
