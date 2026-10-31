@@ -1,0 +1,91 @@
+test_class	owner	atom	pattern	params
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	M3ComparisonSorts	PRIVATE_UTILITY_CONSTRUCTOR	{}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	sort	SORT_DISPATCH	{}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	quick	SORT_RANGE	{"algorithm": "QUICK"}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	intro	SORT_RANGE_DEPTH	{"algorithm": "INTRO"}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	dualPivotQuick	SORT_RANGE_DEPTH	{"algorithm": "DUAL_PIVOT_QUICK"}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	depthLimit	DEPTH_LIMIT	{}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	medianPivot	MEDIAN_OF_THREE	{}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	partitionThreeWay	PARTITION_THREE_WAY	{}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	mergeSort	SORT_BUFFERED_RANGE	{"algorithm": "MERGE"}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	bottomUpMerge	SORT_FULL	{"algorithm": "BOTTOM_UP_MERGE"}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	naturalMerge	SORT_FULL	{"algorithm": "NATURAL_MERGE"}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	ascendingRun	RUN_ASCENDING	{"run_result": "end", "single_result": "n", "run_measure": "end index"}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	mergeAdjacent	MERGE_RUNS_BUFFERED	{}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	inPlaceMergeSort	SORT_RANGE	{"algorithm": "IN_PLACE_MERGE"}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	rotateMerge	MERGE_RUNS_IN_PLACE	{}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	lowerBound	BOUND	{"bound_relation": ">=", "bound_advance": "keys[a[expected]] < keys[value]"}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	upperBound	BOUND	{"bound_relation": ">", "bound_advance": "keys[a[expected]] <= keys[value]"}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	heap	SORT_RANGE	{"algorithm": "HEAP"}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	siftMaximum	HEAP_SIFT_MAX	{}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	shell	SORT_FULL	{"algorithm": "SHELL"}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	insertion	SORT_RANGE	{"algorithm": "INSERTION"}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	binaryInsertion	SORT_RANGE	{"algorithm": "BINARY_INSERTION"}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	selection	SORT_FULL	{"algorithm": "SELECTION"}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	doubleSelection	SORT_FULL	{"algorithm": "DOUBLE_SELECTION"}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	bubble	SORT_FULL	{"algorithm": "BUBBLE"}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	cocktail	SORT_FULL	{"algorithm": "COCKTAIL"}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	comb	SORT_FULL	{"algorithm": "COMB"}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	gnome	SORT_FULL	{"algorithm": "GNOME"}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	oddEven	SORT_FULL	{"algorithm": "ODD_EVEN"}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	cycle	SORT_FULL	{"algorithm": "CYCLE"}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	cycleRank	CYCLE_RANK	{}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	skipCycleEquals	CYCLE_SKIP_EQUALS	{}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	pancake	SORT_FULL	{"algorithm": "PANCAKE"}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	bingo	SORT_FULL	{"algorithm": "BINGO"}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	tree	SORT_FULL	{"algorithm": "TREE"}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	rebalance	AVL_REBALANCE	{}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	rotateTreeLeft	AVL_ROTATE	{"rotate_side": "right", "rotate_build": "left[x] = outerA + 1;\n        right[x] = y + 1;\n        left[y] = innerB + 1;\n        right[y] = outerC + 1;"}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	rotateTreeRight	AVL_ROTATE	{"rotate_side": "left", "rotate_build": "right[x] = outerA + 1;\n        left[x] = y + 1;\n        right[y] = innerB + 1;\n        left[y] = outerC + 1;"}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	childHeight	AVL_CHILD_HEIGHT	{}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	updateHeight	AVL_UPDATE_HEIGHT	{}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	tournament	SORT_FULL	{"algorithm": "TOURNAMENT"}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	winnerAt	TOURNAMENT_WIRE	{}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	tournamentWinner	TOURNAMENT_WINNER	{}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	patience	SORT_FULL	{"algorithm": "PATIENCE"}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	siftPile	PILE_SIFT	{}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	comparePiles	PILE_COMPARE	{}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	strand	SORT_FULL	{"algorithm": "STRAND"}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	mergeStrand	MERGE_STRAND	{}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	bitonicSort	BITONIC_SORT	{}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	bitonicMerge	BITONIC_MERGE	{}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	oddEvenMergeSort	ODD_EVEN_MERGE_SORT	{}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	oddEvenNetworkMerge	ODD_EVEN_NETWORK_MERGE	{}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	compareExchange	COMPARE_EXCHANGE	{}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	rotate	PERMUTE_ROTATE	{}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	reverse	PERMUTE_REVERSE	{}
+M3ComparisonSortsAtomsTest	java.util.M3ComparisonSorts	swap	PERMUTE_SWAP	{}
+M3TimSortAtomsTest	java.util.M3TimSort	M3TimSort	TIM_CONSTRUCTOR	{}
+M3TimSortAtomsTest	java.util.M3TimSort	sort	TIM_SORT	{}
+M3TimSortAtomsTest	java.util.M3TimSort	binarySort	TIM_BINARY_SORT	{}
+M3TimSortAtomsTest	java.util.M3TimSort	countRunAndMakeAscending	RUN_ASCENDING	{"run_result": "end - lo", "single_result": "1", "run_measure": "length"}
+M3TimSortAtomsTest	java.util.M3TimSort	reverseRange	PERMUTE_REVERSE	{}
+M3TimSortAtomsTest	java.util.M3TimSort	minRunLength	TIM_MIN_RUN	{}
+M3TimSortAtomsTest	java.util.M3TimSort	pushRun	TIM_PUSH_RUN	{}
+M3TimSortAtomsTest	java.util.M3TimSort	mergeCollapse	TIM_MERGE_COLLAPSE	{}
+M3TimSortAtomsTest	java.util.M3TimSort	mergeForceCollapse	TIM_FORCE_COLLAPSE	{}
+M3TimSortAtomsTest	java.util.M3TimSort	mergeAt	TIM_MERGE_AT	{}
+M3TimSortAtomsTest	java.util.M3TimSort	gallopLeft	GALLOP	{"gallop_side": "left", "gallop_advance": "keys[a[base + expected]] < keys[key]"}
+M3TimSortAtomsTest	java.util.M3TimSort	gallopRight	GALLOP	{"gallop_side": "right", "gallop_advance": "keys[a[base + expected]] <= keys[key]"}
+M3TimSortAtomsTest	java.util.M3TimSort	mergeLo	TIM_MERGE_LO_HI	{"merge_side": "low", "merge_lengths": "{{1, 5}, {5, 5}, {8, 40}, {33, 70}}"}
+M3TimSortAtomsTest	java.util.M3TimSort	mergeHi	TIM_MERGE_LO_HI	{"merge_side": "high", "merge_lengths": "{{5, 1}, {5, 5}, {40, 8}, {70, 33}}"}
+M3TimSortAtomsTest	java.util.M3TimSort	ensureCapacity	TIM_ENSURE_CAPACITY	{}
+M3DistributionSortsAtomsTest	java.util.M3DistributionSorts	M3DistributionSorts	PRIVATE_UTILITY_CONSTRUCTOR	{}
+M3DistributionSortsAtomsTest	java.util.M3DistributionSorts	sort	DIST_DISPATCH	{}
+M3DistributionSortsAtomsTest	java.util.M3DistributionSorts	minimum	DIST_EXTREMUM	{"stream_op": "min"}
+M3DistributionSortsAtomsTest	java.util.M3DistributionSorts	maximum	DIST_EXTREMUM	{"stream_op": "max"}
+M3DistributionSortsAtomsTest	java.util.M3DistributionSorts	histogramSpan	DIST_HISTOGRAM_SPAN	{}
+M3DistributionSortsAtomsTest	java.util.M3DistributionSorts	counting	DIST_KERNEL	{"algorithm": "COUNTING", "narrow": "true"}
+M3DistributionSortsAtomsTest	java.util.M3DistributionSorts	pigeonhole	DIST_KERNEL	{"algorithm": "PIGEONHOLE", "narrow": "true"}
+M3DistributionSortsAtomsTest	java.util.M3DistributionSorts	bucket	DIST_KERNEL	{"algorithm": "BUCKET", "narrow": "false"}
+M3DistributionSortsAtomsTest	java.util.M3DistributionSorts	digit	DIST_DIGIT	{}
+M3DistributionSortsAtomsTest	java.util.M3DistributionSorts	boundaries	DIST_BOUNDARIES	{}
+M3DistributionSortsAtomsTest	java.util.M3DistributionSorts	histogram	DIST_HISTOGRAM	{}
+M3DistributionSortsAtomsTest	java.util.M3DistributionSorts	lsd	DIST_KERNEL	{"algorithm": "LSD_RADIX", "narrow": "false"}
+M3DistributionSortsAtomsTest	java.util.M3DistributionSorts	msd	DIST_KERNEL_RANGE_SHIFT	{"algorithm": "MSD_RADIX", "arity": "8", "scratch_arg": "scratch, ", "scratch_value": "new int[n], "}
+M3DistributionSortsAtomsTest	java.util.M3DistributionSorts	americanFlag	DIST_KERNEL_RANGE_SHIFT	{"algorithm": "AMERICAN_FLAG", "arity": "7", "scratch_arg": "", "scratch_value": ""}
+M3SortContextAtomsTest	java.util.M3SortContext	M3SortContext	CONTEXT_CONSTRUCTOR	{}
+M3SortContextAtomsTest	java.util.M3SortContext	compare	CONTEXT_COMPARE	{}
+M3SortContextAtomsTest	java.util.M3SortContext	step	CONTEXT_STEP	{}
+M3SortContextAtomsTest	java.util.M3SortContext	finish	CONTEXT_FINISH	{}
+M3SortContextAtomsTest	java.util.M3SortContext	flush	CONTEXT_FLUSH	{}

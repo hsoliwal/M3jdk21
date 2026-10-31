@@ -1,0 +1,44 @@
+test_class	owner	atom	pattern	params
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	*	CLASS	{"summary": "Per-atom contracts of java.lang.M3ObjectRuntime and M3Object observation (generated, template objects)", "modules": "java.base/java.lang:open java.base/jdk.internal.misc", "run_options": " -Djdk.m3.objectEvents.enabled=true"}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	M3ObjectRuntime	PRIVATE_UTILITY_CONSTRUCTOR	{}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	enabled	OBJ_ENABLED	{}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	of	OBJ_OF	{}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	findLocked	OBJ_FIND_LOCKED	{}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	ofLocked	OBJ_OF_LOCKED	{}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	plan	OBJ_PLAN	{}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	set	OBJ_SET	{}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	compareAndSet	OBJ_COMPARE_AND_SET	{}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	fieldChangedLocked	OBJ_FIELD_CHANGED_LOCKED	{}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	contentChanged	OBJ_CONTENT_CHANGED	{}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	notifyContentChanged	OBJ_NOTIFY_CONTENT	{}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	notifyFieldChanged	OBJ_NOTIFY_FIELD	{}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	listen	OBJ_LISTEN	{}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	close	OBJ_CLOSE	{}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	stateLocked	OBJ_STATE_LOCKED	{}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	publishLocked	OBJ_PUBLISH_LOCKED	{}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	captureLocked	OBJ_CAPTURE_LOCKED	{}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	enqueueLocked	OBJ_ENQUEUE_LOCKED	{}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	removeIfCleanLocked	OBJ_REMOVE_IF_CLEAN	{}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	ensureWorkerLocked	OBJ_ENSURE_WORKER	{}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	dispatch	OBJ_DISPATCH	{}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	drain	OBJ_DRAIN	{}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	detachLocked	OBJ_FOLLOW_EDGE	{"follow_doc": "detaching removes the follow edge from both the parent slot and the child parent lanes.", "follow_body": "locked(() -> OWNER.method(\"detachLocked\", 2).invoke(parentState, slot));\n            assertEquals(0, (int) STATE.field(\"parentCount\").get(childState), \"detachLocked unlinks the child\");\n            assertEquals(null, ((Object[]) STATE.field(\"children\").get(parentState))[slot]);"}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	rebindLocked	OBJ_FOLLOW_EDGE	{"test": "rebindLockedFollowing", "follow_doc": "rebinding moves the follow edge to the slot's current referent.", "follow_body": "parent.ref = other;\n            locked(() -> OWNER.method(\"rebindLocked\", \"State,int,boolean\").invoke(parentState, slot, false));\n            assertEquals(0, (int) STATE.field(\"parentCount\").get(childState), \"the old child is released\");\n            assertSame(state(other), ((Object[]) STATE.field(\"children\").get(parentState))[slot]);\n            assertEquals(1, (int) STATE.field(\"parentCount\").get(state(other)));"}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	rebindLocked	OBJ_FOLLOW_EDGE	{"test": "rebindLockedExplicit", "follow_doc": "rebinding with follows=false only detaches the slot.", "follow_body": "locked(() -> OWNER.method(\"rebindLocked\", \"State,int,boolean,boolean\").invoke(parentState, slot, false, false));\n            assertEquals(null, ((Object[]) STATE.field(\"children\").get(parentState))[slot], \"no new edge\");\n            assertEquals(0, (int) STATE.field(\"parentCount\").get(childState));"}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	State	STATE_CONSTRUCTOR	{"test": "state_State"}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	interested	STATE_INTERESTED	{"test": "state_interested"}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	subscriberSlot	STATE_SUBSCRIBER_SLOT	{"test": "state_subscriberSlot"}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	findField	STATE_FIND_FIELD	{"test": "state_findField"}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	fieldSlot	STATE_FIELD_SLOT	{"test": "state_fieldSlot"}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	ensureParentCapacity	STATE_ENSURE_PARENT_CAPACITY	{"test": "state_ensureParentCapacity"}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	addParent	STATE_ADD_PARENT	{"test": "state_addParent"}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	clearPending	STATE_CLEAR_PENDING	{"test": "state_clearPending"}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	AccessPlan	PLAN_CONSTRUCTOR	{"test": "plan_AccessPlan"}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	matches	PLAN_MATCHES	{"test": "plan_matches"}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	resolve	PLAN_RESOLVE	{"test": "plan_resolve"}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	checkValue	PLAN_CHECK_VALUE	{"test": "plan_checkValue"}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	same	PLAN_SAME	{"test": "plan_same"}
+M3ObjectRuntimeAtomsTest	java.lang.M3ObjectRuntime	bits	PLAN_BITS	{"test": "plan_bits"}
+M3ObjectRuntimeAtomsTest	java.lang.M3Object	M3Object	M3OBJECT_CONSTRUCTOR	{"test": "m3object_constructor"}
+M3ObjectRuntimeAtomsTest	java.lang.M3Object	Field	FIELD_CONSTRUCTOR	{"test": "field_constructor"}
+M3ObjectRuntimeAtomsTest	java.lang.M3Object	declaringType	FIELD_DECLARING_TYPE	{"test": "field_declaringType"}

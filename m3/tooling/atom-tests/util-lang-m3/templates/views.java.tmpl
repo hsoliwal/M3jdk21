@@ -1,0 +1,892 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+//@@ IMPORTS
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.ConcurrentModificationException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Spliterator;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+
+import jdk.internal.m3.M3IndexedArray;
+//@@ CONSTANTS
+    /** Backing size, rank alphabet and the deterministic rank stride of the fixture. */
+    private static final int ITEMS = 40;
+    private static final int RANKS = 7;
+    private static final int RANK_STRIDE = 5;
+    /** Items whose rank is a multiple of this are filtered out by KEEP. */
+    private static final int KEEP_MODULUS = 3;
+    /** Every LEASE_PERIOD-th item (offset 1) holds one lease; item SHARED_ITEM holds two. */
+    private static final int LEASE_PERIOD = 4;
+    private static final int SHARED_ITEM = 5;
+    private static final int QUARTER = 4;
+    private static final Comparator<Item> BY_RANK = Comparator.comparingInt(Item::rank);
+    private static final Predicate<Item> KEEP = item -> item.rank() % KEEP_MODULUS != 0;
+    private static final String READ_ONLY = "read-only M3 view";
+//@@ HELPERS
+    record Item(int rank, int id) { }
+
+    /** The seven view factories of M3IndexedArray: predicate, comparator and state-mask selection. */
+    enum Kind {
+        FILTERED(true, false, false), SORTED(false, true, false), FILTERED_SORTED(true, true, false),
+        MASKED(false, false, true), MASKED_SORTED(false, true, true), FILTERED_MASKED(true, false, true),
+        FILTERED_MASKED_SORTED(true, true, true);
+
+        final boolean filtered;
+        final boolean sorted;
+        final boolean stateAware;
+
+        Kind(boolean filtered, boolean sorted, boolean stateAware) {
+            this.filtered = filtered;
+            this.sorted = sorted;
+            this.stateAware = stateAware;
+        }
+    }
+
+    /** A backing store and its java.util.ArrayList model with lease counts: the oracle for every view. */
+    static final class Fixture {
+        final M3IndexedArray<Item> backing = new M3IndexedArray<>();
+        final List<Item> model = new ArrayList<>();
+        final List<Long> handles = new ArrayList<>();
+        final Map<Long, Integer> leases = new HashMap<>();
+
+        Fixture() {
+            for (int i = 0; i < ITEMS; i++) {
+                append(new Item(i * RANK_STRIDE % RANKS, i));
+            }
+            for (int i = 1; i < ITEMS; i += LEASE_PERIOD) {
+                lease(i);
+            }
+            lease(SHARED_ITEM);
+        }
+
+        void append(Item item) {
+            handles.add(backing.append(item));
+            model.add(item);
+        }
+
+        void lease(int index) {
+            long handle = handles.get(index);
+            backing.retain(handle);
+            leases.merge(handle, 1, Integer::sum);
+        }
+
+        List<Item> view(Kind kind) {
+            int live = M3IndexedArray.LIVE;
+            int leased = M3IndexedArray.LEASED;
+            return switch (kind) {
+                case FILTERED -> backing.filtered(KEEP);
+                case SORTED -> backing.sorted(BY_RANK);
+                case FILTERED_SORTED -> backing.filteredSorted(KEEP, BY_RANK);
+                case MASKED -> backing.maskedStates(live, leased);
+                case MASKED_SORTED -> backing.maskedSortedStates(live, leased, BY_RANK);
+                case FILTERED_MASKED -> backing.filteredMaskedStates(KEEP, live, leased);
+                case FILTERED_MASKED_SORTED -> backing.filteredMaskedSortedStates(KEEP, live, leased, BY_RANK);
+            };
+        }
+
+        /** Logical order, then predicate and unleased-state selection, then a stable sort (List.sort). */
+        List<Item> expected(Kind kind) {
+            List<Item> out = new ArrayList<>();
+            for (int i = 0; i < model.size(); i++) {
+                Item item = model.get(i);
+                boolean unleased = leases.getOrDefault(handles.get(i), 0) == 0;
+                if ((!kind.filtered || KEEP.test(item)) && (!kind.stateAware || unleased)) {
+                    out.add(item);
+                }
+            }
+            if (kind.sorted) {
+                out.sort(BY_RANK);
+            }
+            return out;
+        }
+    }
+
+    interface KindCheck {
+        void check(Fixture f, Kind kind, List<Item> view, List<Item> expected) throws Throwable;
+    }
+
+    static void forEachKind(KindCheck check) throws Throwable {
+        for (Kind kind : Kind.values()) {
+            Fixture f = new Fixture();
+            check.check(f, kind, f.view(kind), f.expected(kind));
+        }
+    }
+
+    /** The class or "none" of the first throwable raised by {@code action}. */
+    static String thrown(Supplier<?> action) {
+        try {
+            action.get();
+            return "none";
+        } catch (RuntimeException e) {
+            return e.getClass().getName();
+        }
+    }
+
+    /** Scripted forward-then-backward walk recording only the focused ListIterator method. */
+    static List<Object> trace(ListIterator<Item> it, String focus) {
+        List<Object> out = new ArrayList<>();
+        while (true) {
+            observe(it, focus, out);
+            if (!it.hasNext()) {
+                break;
+            }
+            Item value = it.next();
+            if (focus.equals("next")) {
+                out.add(value);
+            }
+        }
+        if (focus.equals("next")) {
+            out.add(thrown(it::next));
+        }
+        while (true) {
+            observe(it, focus, out);
+            if (!it.hasPrevious()) {
+                break;
+            }
+            Item value = it.previous();
+            if (focus.equals("previous")) {
+                out.add(value);
+            }
+        }
+        if (focus.equals("previous")) {
+            out.add(thrown(it::previous));
+        }
+        return out;
+    }
+
+    private static void observe(ListIterator<Item> it, String focus, List<Object> out) {
+        switch (focus) {
+            case "hasNext" -> out.add(it.hasNext());
+            case "hasPrevious" -> out.add(it.hasPrevious());
+            case "nextIndex" -> out.add(it.nextIndex());
+            case "previousIndex" -> out.add(it.previousIndex());
+            default -> { }
+        }
+    }
+
+    /** All elements of a spliterator, splitting recursively; split sizes are part of the record. */
+    static List<Object> splitTrace(Spliterator<Item> s) {
+        List<Object> out = new ArrayList<>();
+        Spliterator<Item> prefix = s.trySplit();
+        if (prefix != null) {
+            out.add("split" + prefix.estimateSize() + "/" + s.estimateSize());
+            out.addAll(splitTrace(prefix));
+            out.addAll(splitTrace(s));
+        } else {
+            s.forEachRemaining(out::add);
+        }
+        return out;
+    }
+
+    static long version(Fixture f, Kind kind) {
+        return kind.stateAware ? stateVersion(f) : f.backing.version();
+    }
+
+    static long stateVersion(Fixture f) {
+        try {
+            return (long) new Access("jdk.internal.m3.M3IndexedArray").method("stateVersion", 0).invoke(f.backing);
+        } catch (Throwable e) {
+            throw new AssertionError(e);
+        }
+    }
+
+    static int[] indexes(List<Item> view) {
+        return (int[]) OWNER.field("indexes").get(view);
+    }
+//@@ PATTERN VIEW_CONSTRUCTOR | uses= | oracle=ArrayList model filtered and stably sorted
+    /** ${atom}(backing, predicate, comparator${ctor_doc}) builds a lazy ${ctor_mode} view; a null backing is rejected. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle ctor = OWNER.constructor("${atom}", ${arity});
+        forEachKind((f, kind, view, expected) -> {
+            if (kind.stateAware != ${state_aware}) {
+                return;
+            }
+            assertEquals("${atom}", view.getClass().getSimpleName(), "factories return the view type");
+            Predicate<Item> p = kind.filtered ? KEEP : null;
+            Comparator<Item> c = kind.sorted ? BY_RANK : null;
+            @SuppressWarnings("unchecked")
+            List<Item> direct = (List<Item>) ctor.invoke(${ctor_args});
+            assertEquals(expected, direct, "${atom} " + kind);
+            assertEquals(expected, view, "factory view " + kind);
+        });
+        assertThrows(NullPointerException.class, () -> ctor.invoke(${null_backing_args}));
+    }
+//@@ PATTERN VIEW_SIZE | uses= | oracle=ArrayList model size, live after append
+    /** ${atom}() equals the model selection size and follows later appends (live view). */
+    @Test
+    void ${test}() throws Throwable {
+        forEachKind((f, kind, view, expected) -> {
+            assertEquals(expected.size(), view.${atom}(), "${atom} " + kind);
+            f.append(new Item(1, ITEMS));
+            assertEquals(f.expected(kind).size(), view.${atom}(), "${atom} after append " + kind);
+        });
+    }
+//@@ PATTERN VIEW_GET | uses= | oracle=ArrayList.get values and IndexOutOfBoundsException
+    /** ${atom}(i) matches the model selection at every index; out-of-range indexes throw like ArrayList. */
+    @Test
+    void ${test}() throws Throwable {
+        forEachKind((f, kind, view, expected) -> {
+            for (int i = 0; i < expected.size(); i++) {
+                assertSame(expected.get(i), view.${atom}(i), "${atom}(" + i + ") " + kind);
+            }
+            for (int bad : new int[] {-1, expected.size()}) {
+                assertEquals(thrown(() -> expected.get(bad)), thrown(() -> view.${atom}(bad)), "${atom}(" + bad + ")");
+            }
+        });
+    }
+//@@ PATTERN VIEW_SUBLIST | uses= | oracle=ArrayList.subList contents and exception classes
+    /** ${atom}(from, to) is an IndexRange equal to ArrayList.subList, with the same range exceptions. */
+    @Test
+    void ${test}() throws Throwable {
+        forEachKind((f, kind, view, expected) -> {
+            int n = expected.size();
+            List<Item> sub = view.${atom}(n / QUARTER, n - n / QUARTER);
+            assertEquals("IndexRange", sub.getClass().getSimpleName(), "${atom} is a window, not a copy");
+            assertEquals(expected.subList(n / QUARTER, n - n / QUARTER), sub, "${atom} " + kind);
+            int[][] bad = {{-1, n}, {0, n + 1}, {n, 0}};
+            for (int[] r : bad) {
+                assertEquals(thrown(() -> expected.subList(r[0], r[1])), thrown(() -> view.${atom}(r[0], r[1])),
+                        "${atom}(" + r[0] + ", " + r[1] + ")");
+            }
+        });
+    }
+//@@ PATTERN VIEW_SPLITERATOR | uses= | oracle=ArrayList.spliterator late binding and split shape
+    /** ${atom}() is a late-binding IndexSpliterator with ArrayList's split shape. */
+    @Test
+    void ${test}() throws Throwable {
+        forEachKind((f, kind, view, expected) -> {
+            Spliterator<Item> s = view.${atom}();
+            assertEquals("IndexSpliterator", s.getClass().getSimpleName());
+            f.append(new Item(2, ITEMS));
+            List<Item> rebound = f.expected(kind);
+            assertEquals(splitTrace(new ArrayList<>(rebound).spliterator()), splitTrace(s),
+                    "${atom} binds at first use " + kind);
+        });
+    }
+//@@ PATTERN VIEW_ITERATOR | uses= | oracle=ArrayList iteration order and ConcurrentModificationException
+    /** ${atom}() visits the model selection in order and fails fast after a backing change. */
+    @Test
+    void ${test}() throws Throwable {
+        forEachKind((f, kind, view, expected) -> {
+            List<Item> seen = new ArrayList<>();
+            view.${atom}().forEachRemaining(seen::add);
+            assertEquals(expected, seen, "${atom} " + kind);
+            Iterator<Item> it = view.${atom}();
+            f.append(new Item(0, ITEMS));
+            assertThrows(ConcurrentModificationException.class, it::hasNext, "${atom} fails fast " + kind);
+        });
+    }
+//@@ PATTERN VIEW_LIST_ITERATOR | uses= | oracle=ArrayList.listIterator protocol trace
+    /** ${atom}(i) follows ArrayList.listIterator(i) for every start, including the range check. */
+    @Test
+    void ${test}() throws Throwable {
+        forEachKind((f, kind, view, expected) -> {
+            int n = expected.size();
+            for (int start = 0; start <= n; start++) {
+                for (String focus : new String[] {"next", "previous", "nextIndex"}) {
+                    assertEquals(trace(expected.listIterator(start), focus), trace(view.${atom}(start), focus),
+                            "${atom}(" + start + ") " + focus + " " + kind);
+                }
+            }
+            for (int bad : new int[] {-1, n + 1}) {
+                assertEquals(thrown(() -> expected.listIterator(bad)), thrown(() -> view.${atom}(bad)));
+            }
+        });
+    }
+//@@ PATTERN VIEW_ITERATOR_FOR | uses= | oracle=ArrayList.subList(origin, origin + count).listIterator(index)
+    /** ${atom}(expected, origin, count, index) iterates the root directory window [origin, origin + count). */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 4);
+        forEachKind((f, kind, view, expected) -> {
+            int n = view.size();
+            int origin = n / QUARTER;
+            int count = n - 2 * origin;
+            for (int index : new int[] {0, count / 2, count}) {
+                @SuppressWarnings("unchecked")
+                ListIterator<Item> it = (ListIterator<Item>) atom.invoke(view, version(f, kind), origin, count, index);
+                assertEquals(trace(expected.subList(origin, origin + count).listIterator(index), "next"),
+                        trace(it, "next"), "${atom} index=" + index + " " + kind);
+            }
+        });
+    }
+//@@ PATTERN VIEW_RANGE | uses= | oracle=ArrayList.subList contents; exact range messages
+    /** ${atom}(expected, origin, count, from, to) windows absolute coordinates and validates the range. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 5);
+        forEachKind((f, kind, view, expected) -> {
+            int n = view.size();
+            long v = version(f, kind);
+            int origin = n / QUARTER;
+            int count = n - origin;
+            @SuppressWarnings("unchecked")
+            List<Item> window = (List<Item>) atom.invoke(view, v, origin, count, 1, count);
+            assertEquals(expected.subList(origin + 1, origin + count), window, "${atom} " + kind);
+            assertEquals("fromIndex = -1",
+                    assertThrows(IndexOutOfBoundsException.class, () -> atom.invoke(view, v, origin, count, -1, 0))
+                            .getMessage());
+            assertEquals("toIndex = " + (count + 1),
+                    assertThrows(IndexOutOfBoundsException.class, () -> atom.invoke(view, v, origin, count, 0, count + 1))
+                            .getMessage());
+            assertEquals("fromIndex(1) > toIndex(0)",
+                    assertThrows(IllegalArgumentException.class, () -> atom.invoke(view, v, origin, count, 1, 0))
+                            .getMessage());
+        });
+    }
+//@@ PATTERN VIEW_CURRENT_VERSION | uses= | oracle=M3IndexedArray.version / stateVersion epochs
+    /** ${atom}() is the value epoch for plain views and the state epoch for state-aware views. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 0);
+        forEachKind((f, kind, view, expected) -> {
+            assertEquals(version(f, kind), (long) atom.invoke(view), "${atom} " + kind);
+            long before = (long) atom.invoke(view);
+            f.lease(0);
+            assertEquals(kind.stateAware, before != (long) atom.invoke(view), "a lease moves only the state epoch");
+            f.append(new Item(1, ITEMS));
+            assertEquals(version(f, kind), (long) atom.invoke(view), "${atom} after append " + kind);
+        });
+    }
+//@@ PATTERN VIEW_VIEW_VALUE | uses= | oracle=slot values of the refreshed directory; stale epoch rejected
+    /** ${atom}(expected, slot) reads the slot under the expected epoch and rejects a stale one. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 2);
+        forEachKind((f, kind, view, expected) -> {
+            view.size();
+            int[] slots = indexes(view);
+            long v = version(f, kind);
+            for (int i = 0; i < slots.length; i++) {
+                assertSame(expected.get(i), atom.invoke(view, v, slots[i]), "${atom} slot " + slots[i]);
+            }
+            assertThrows(ConcurrentModificationException.class, () -> atom.invoke(view, v - 1, slots[0]));
+        });
+    }
+//@@ PATTERN VIEW_CHECK_VERSION | uses= | oracle=ConcurrentModificationException message
+    /** ${atom}(expected) passes on the current epoch and throws ConcurrentModificationException otherwise. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 1);
+        forEachKind((f, kind, view, expected) -> {
+            long v = version(f, kind);
+            atom.invoke(view, v);
+            assertEquals("M3 view backing changed",
+                    assertThrows(ConcurrentModificationException.class, () -> atom.invoke(view, v + 1)).getMessage());
+        });
+    }
+//@@ PATTERN VIEW_REFRESH | uses= | oracle=lazy directory identity and AbstractList.modCount
+    /** ${atom}() selects lazily, reuses the directory while the epoch is unchanged and rebuilds after a change. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 0);
+        VarHandle indexedVersion = OWNER.field("indexedVersion");
+        VarHandle modCount = new Access("java.util.AbstractList").field("modCount");
+        forEachKind((f, kind, view, expected) -> {
+            assertEquals(Long.MIN_VALUE, (long) indexedVersion.get(view), "nothing selected before use");
+            assertEquals(0, indexes(view).length);
+            atom.invoke(view);
+            int[] first = indexes(view);
+            assertEquals(version(f, kind), (long) indexedVersion.get(view));
+            assertEquals(expected.size(), first.length, "${atom} selection size " + kind);
+            int mods = (int) modCount.get(view);
+            atom.invoke(view);
+            assertSame(first, indexes(view), "unchanged epoch keeps the directory");
+            assertEquals(mods, (int) modCount.get(view));
+            f.append(new Item(1, ITEMS));
+            atom.invoke(view);
+            assertNotSame(first, indexes(view), "a new epoch rebuilds the directory");
+            assertEquals(mods + 1, (int) modCount.get(view), "each rebuild bumps modCount");
+            assertEquals(f.expected(kind), view);
+        });
+    }
+//@@ PATTERN RANGE_CONSTRUCTOR | uses= | oracle=nested ArrayList.subList windows
+    /** ${atom}(expected, origin, count) windows retain absolute coordinates, also when nested. */
+    @Test
+    void ${test}() throws Throwable {
+        forEachKind((f, kind, view, expected) -> {
+            int n = expected.size();
+            List<Item> outer = view.subList(1, n);
+            List<Item> inner = outer.subList(1, n - 2);
+            assertEquals("${atom}", outer.getClass().getSimpleName());
+            assertEquals("${atom}", inner.getClass().getSimpleName());
+            assertEquals(expected.subList(1, n).subList(1, n - 2), inner, "${atom} nested " + kind);
+            assertEquals(1 + 1, (int) new Access(inner.getClass().getName()).field("origin").get(inner),
+                    "nested ranges keep root coordinates");
+        });
+    }
+//@@ PATTERN RANGE_SIZE | uses= | oracle=ArrayList.subList size and ConcurrentModificationException
+    /** ${atom}() is the window length and fails fast once the backing epoch moves. */
+    @Test
+    void ${test}() throws Throwable {
+        forEachKind((f, kind, view, expected) -> {
+            int n = expected.size();
+            List<Item> sub = view.subList(n / QUARTER, n);
+            assertEquals(n - n / QUARTER, sub.${atom}(), "${atom} " + kind);
+            f.append(new Item(1, ITEMS));
+            assertThrows(ConcurrentModificationException.class, sub::${atom});
+        });
+    }
+//@@ PATTERN RANGE_GET | uses= | oracle=ArrayList.subList get values and exception classes
+    /** ${atom}(i) matches ArrayList.subList(...).get(i), index checks included. */
+    @Test
+    void ${test}() throws Throwable {
+        forEachKind((f, kind, view, expected) -> {
+            int n = expected.size();
+            List<Item> sub = view.subList(n / QUARTER, n);
+            List<Item> oracle = expected.subList(n / QUARTER, n);
+            for (int i = 0; i < oracle.size(); i++) {
+                assertSame(oracle.get(i), sub.${atom}(i), "${atom}(" + i + ") " + kind);
+            }
+            for (int bad : new int[] {-1, oracle.size()}) {
+                assertEquals(thrown(() -> oracle.get(bad)), thrown(() -> sub.${atom}(bad)));
+            }
+        });
+    }
+//@@ PATTERN RANGE_READ_ONLY_INDEXED | uses= | oracle=index check first, then UnsupportedOperationException
+    /** ${atom}(${range_args_doc}) checks the index first, then rejects the read-only write. */
+    @Test
+    void ${test}() throws Throwable {
+        forEachKind((f, kind, view, expected) -> {
+            int n = expected.size();
+            List<Item> sub = view.subList(n / QUARTER, n);
+            int count = sub.size();
+            Item probe = new Item(0, -1);
+            assertThrows(IndexOutOfBoundsException.class, () -> sub.${call_bad});
+            assertThrows(UnsupportedOperationException.class, () -> sub.${call_ok});
+            assertEquals(expected, view, "${atom} leaves the view unchanged " + kind);
+        });
+    }
+//@@ PATTERN RANGE_ADD_ALL | uses= | oracle=empty batch is a no-op; non-empty batch is read-only
+    /** ${atom}(${range_args_doc}): an empty batch returns false without mutation; otherwise read-only. */
+    @Test
+    void ${test}() throws Throwable {
+        forEachKind((f, kind, view, expected) -> {
+            int n = expected.size();
+            List<Item> sub = view.subList(n / QUARTER, n);
+            int count = sub.size();
+            long before = f.backing.version();
+            assertFalse(sub.${call_empty}, "${atom} empty batch");
+            assertEquals(before, f.backing.version());
+            assertThrows(UnsupportedOperationException.class, () -> sub.${call_full});
+            ${extra_check}
+            assertEquals(expected, view, "${atom} leaves the view unchanged " + kind);
+        });
+    }
+//@@ PATTERN RANGE_REMOVE_RANGE | uses= | oracle=AbstractList.clear contract on a read-only window
+    /** ${atom}(from, to): an empty range is a no-op; a non-empty range is read-only (also through clear()). */
+    @Test
+    void ${test}() throws Throwable {
+        forEachKind((f, kind, view, expected) -> {
+            int n = expected.size();
+            List<Item> sub = view.subList(n / QUARTER, n);
+            MethodHandle atom = new Access(sub.getClass().getName()).method("${atom}", 2);
+            atom.invoke(sub, 0, 0);
+            assertThrows(UnsupportedOperationException.class, () -> atom.invoke(sub, 0, 1));
+            assertThrows(UnsupportedOperationException.class, sub::clear);
+            view.subList(0, 0).clear();
+            assertEquals(expected, view, "${atom} leaves the view unchanged " + kind);
+        });
+    }
+//@@ PATTERN RANGE_CHECK_ADD_INDEX | uses= | oracle=exact IndexOutOfBoundsException message
+    /** ${atom}(i) accepts 0..count and reports "Index: i, Size: count" otherwise. */
+    @Test
+    void ${test}() throws Throwable {
+        forEachKind((f, kind, view, expected) -> {
+            int n = expected.size();
+            List<Item> sub = view.subList(n / QUARTER, n);
+            int count = sub.size();
+            MethodHandle atom = new Access(sub.getClass().getName()).method("${atom}", 1);
+            atom.invoke(sub, 0);
+            atom.invoke(sub, count);
+            for (int bad : new int[] {-1, count + 1}) {
+                assertEquals("Index: " + bad + ", Size: " + count,
+                        assertThrows(IndexOutOfBoundsException.class, () -> atom.invoke(sub, bad)).getMessage());
+            }
+        });
+    }
+//@@ PATTERN RANGE_ITERATOR | uses= | oracle=ArrayList.subList iteration order
+    /** ${atom}() visits exactly the window, in order. */
+    @Test
+    void ${test}() throws Throwable {
+        forEachKind((f, kind, view, expected) -> {
+            int n = expected.size();
+            List<Item> seen = new ArrayList<>();
+            view.subList(n / QUARTER, n - 1).${atom}().forEachRemaining(seen::add);
+            assertEquals(expected.subList(n / QUARTER, n - 1), seen, "${atom} " + kind);
+        });
+    }
+//@@ PATTERN RANGE_LIST_ITERATOR | uses= | oracle=ArrayList.subList listIterator protocol trace
+    /** ${atom}(i) follows ArrayList.subList(...).listIterator(i), including the add-index check. */
+    @Test
+    void ${test}() throws Throwable {
+        forEachKind((f, kind, view, expected) -> {
+            int n = expected.size();
+            List<Item> sub = view.subList(n / QUARTER, n);
+            List<Item> oracle = expected.subList(n / QUARTER, n);
+            for (int start = 0; start <= oracle.size(); start++) {
+                assertEquals(trace(oracle.listIterator(start), "previous"), trace(sub.${atom}(start), "previous"),
+                        "${atom}(" + start + ") " + kind);
+            }
+            assertEquals(thrown(() -> oracle.listIterator(-1)), thrown(() -> sub.${atom}(-1)));
+        });
+    }
+//@@ PATTERN RANGE_SUBLIST | uses= | oracle=nested ArrayList.subList and exception classes
+    /** ${atom}(from, to) nests windows like ArrayList.subList, with the same range exceptions. */
+    @Test
+    void ${test}() throws Throwable {
+        forEachKind((f, kind, view, expected) -> {
+            int n = expected.size();
+            List<Item> sub = view.subList(1, n);
+            List<Item> oracle = expected.subList(1, n);
+            int m = oracle.size();
+            assertEquals(oracle.subList(m / QUARTER, m), sub.${atom}(m / QUARTER, m), "${atom} " + kind);
+            int[][] bad = {{-1, m}, {0, m + 1}, {m, 0}};
+            for (int[] r : bad) {
+                assertEquals(thrown(() -> oracle.subList(r[0], r[1])), thrown(() -> sub.${atom}(r[0], r[1])));
+            }
+        });
+    }
+//@@ PATTERN RANGE_SPLITERATOR | uses= | oracle=ArrayList.subList spliterator split shape; bound epoch
+    /** ${atom}() is bound to the window's epoch: same split shape as ArrayList, then fail-fast. */
+    @Test
+    void ${test}() throws Throwable {
+        forEachKind((f, kind, view, expected) -> {
+            int n = expected.size();
+            List<Item> sub = view.subList(n / QUARTER, n);
+            assertEquals(splitTrace(new ArrayList<>(expected.subList(n / QUARTER, n)).spliterator()),
+                    splitTrace(sub.${atom}()), "${atom} " + kind);
+            Spliterator<Item> stale = sub.${atom}();
+            f.append(new Item(1, ITEMS));
+            assertThrows(ConcurrentModificationException.class, () -> stale.tryAdvance(item -> { }));
+        });
+    }
+//@@ PATTERN SPLIT_CONSTRUCTOR | uses= | oracle=late (end = -1) versus bound (end = origin + count) cursors
+    /** ${atom}(${split_args_doc}) creates a ${split_mode} cursor. */
+    @Test
+    void ${test}() throws Throwable {
+        forEachKind((f, kind, view, expected) -> {
+            int n = expected.size();
+            Spliterator<Item> s = ${split_source};
+            assertEquals("${atom}", s.getClass().getSimpleName());
+            Access a = new Access(s.getClass().getName());
+            assertEquals(${split_end_before}, (int) a.field("end").get(s), "${atom} end before use " + kind);
+            assertEquals(${split_size}, s.estimateSize(), "${atom} size " + kind);
+            assertEquals(${split_end_after}, (int) a.field("end").get(s), "${atom} end after use " + kind);
+        });
+    }
+//@@ PATTERN SPLIT_BIND | uses= | oracle=late binding to the current directory, then epoch check
+    /** ${atom}() binds a late cursor to the refreshed directory once, then checks the bound epoch. */
+    @Test
+    void ${test}() throws Throwable {
+        forEachKind((f, kind, view, expected) -> {
+            Spliterator<Item> s = view.spliterator();
+            Access a = new Access(s.getClass().getName());
+            MethodHandle atom = a.method("${atom}", 0);
+            f.append(new Item(1, ITEMS));
+            synchronized (f.backing) {
+                atom.invoke(s);
+            }
+            assertEquals(f.expected(kind).size(), (int) a.field("end").get(s), "${atom} binds after the append");
+            assertEquals(version(f, kind), (long) a.field("expected").get(s));
+            f.append(new Item(2, ITEMS + 1));
+            synchronized (f.backing) {
+                assertThrows(ConcurrentModificationException.class, () -> atom.invoke(s));
+            }
+        });
+    }
+//@@ PATTERN SPLIT_TRY_SPLIT | uses= | oracle=ArrayList spliterator split shape
+    /** ${atom}() halves at the midpoint, prefix first, until single elements, like ArrayList. */
+    @Test
+    void ${test}() throws Throwable {
+        forEachKind((f, kind, view, expected) -> {
+            assertEquals(splitTrace(new ArrayList<>(expected).spliterator()), splitTrace(view.spliterator()),
+                    "${atom} " + kind);
+            Spliterator<Item> one = view.subList(0, 1).spliterator();
+            assertEquals(null, one.${atom}(), "a single element does not split");
+        });
+    }
+//@@ PATTERN SPLIT_TRY_ADVANCE | uses= | oracle=ArrayList spliterator order; NPE; fail-fast after the action
+    /** ${atom}(action) delivers in order, ends with false, rejects null and fails fast after a mutating action. */
+    @Test
+    void ${test}() throws Throwable {
+        forEachKind((f, kind, view, expected) -> {
+            Spliterator<Item> s = view.spliterator();
+            List<Item> seen = new ArrayList<>();
+            while (s.${atom}(seen::add)) {
+                assertTrue(seen.size() <= expected.size(), "${atom} terminates");
+            }
+            assertEquals(expected, seen, "${atom} " + kind);
+            assertFalse(s.${atom}(seen::add), "${atom} stays exhausted");
+            assertThrows(NullPointerException.class, () -> view.spliterator().${atom}(null));
+            Spliterator<Item> mutating = view.spliterator();
+            List<Item> delivered = new ArrayList<>();
+            assertThrows(ConcurrentModificationException.class, () -> mutating.${atom}(item -> {
+                delivered.add(item);
+                f.append(new Item(1, ITEMS));
+            }));
+            assertEquals(List.of(expected.get(0)), delivered, "the value is delivered before the epoch check");
+        });
+    }
+//@@ PATTERN SPLIT_ESTIMATE_SIZE | uses= | oracle=remaining count of the ArrayList spliterator
+    /** ${atom}() is the exact remaining count and shrinks with each advance. */
+    @Test
+    void ${test}() throws Throwable {
+        forEachKind((f, kind, view, expected) -> {
+            Spliterator<Item> s = view.spliterator();
+            Spliterator<Item> oracle = new ArrayList<>(expected).spliterator();
+            assertEquals(oracle.${atom}(), s.${atom}(), "${atom} " + kind);
+            for (int i = 0; i < expected.size(); i++) {
+                s.tryAdvance(item -> { });
+                oracle.tryAdvance(item -> { });
+                assertEquals(oracle.${atom}(), s.${atom}(), "${atom} after " + (i + 1));
+            }
+        });
+    }
+//@@ PATTERN SPLIT_CHARACTERISTICS | uses= | oracle=ArrayList spliterator characteristics plus SORTED for sorted views
+    /** ${atom}() is ORDERED | SIZED | SUBSIZED, plus SORTED exactly for sorted views. */
+    @Test
+    void ${test}() throws Throwable {
+        forEachKind((f, kind, view, expected) -> {
+            int jdk = new ArrayList<>(expected).spliterator().${atom}();
+            int sorted = kind.sorted ? Spliterator.SORTED : 0;
+            assertEquals(jdk | sorted, view.spliterator().${atom}(), "${atom} " + kind);
+            assertEquals(jdk | sorted, view.subList(0, 1).spliterator().${atom}(), "${atom} range " + kind);
+        });
+    }
+//@@ PATTERN SPLIT_GET_COMPARATOR | uses= | oracle=Spliterator.getComparator contract (ISE when unsorted)
+    /** ${atom}() returns the view comparator; an unsorted view throws IllegalStateException. */
+    @Test
+    void ${test}() throws Throwable {
+        forEachKind((f, kind, view, expected) -> {
+            Spliterator<Item> s = view.spliterator();
+            if (kind.sorted) {
+                assertSame(BY_RANK, s.${atom}(), "${atom} " + kind);
+            } else {
+                assertEquals("M3 indexed view is not sorted",
+                        assertThrows(IllegalStateException.class, s::${atom}).getMessage());
+            }
+        });
+    }
+//@@ PATTERN ITER_CHECK | uses= | oracle=epoch selection: value epoch for plain, state epoch for state-aware views
+    /** ${atom}() passes while the iterator's epoch is current; leases invalidate only state-aware iterators. */
+    @Test
+    void ${test}() throws Throwable {
+        forEachKind((f, kind, view, expected) -> {
+            ListIterator<Item> it = view.listIterator();
+            MethodHandle atom = new Access(it.getClass().getName()).method("${atom}", 0);
+            atom.invoke(it);
+            f.lease(0);
+            if (kind.stateAware) {
+                assertThrows(ConcurrentModificationException.class, () -> atom.invoke(it), "${atom} " + kind);
+            } else {
+                atom.invoke(it);
+                f.append(new Item(1, ITEMS));
+                assertThrows(ConcurrentModificationException.class, () -> atom.invoke(it), "${atom} " + kind);
+            }
+        });
+    }
+//@@ PATTERN ITER_WALK | uses= | oracle=ArrayList.listIterator protocol trace (focused method)
+    /** ${atom}() follows ArrayList's ListIterator on views and windows, at every start position. */
+    @Test
+    void ${test}() throws Throwable {
+        forEachKind((f, kind, view, expected) -> {
+            int n = expected.size();
+            for (int start : new int[] {0, n / 2, n}) {
+                assertEquals(trace(expected.listIterator(start), "${atom}"), trace(view.listIterator(start), "${atom}"),
+                        "${atom} from " + start + " " + kind);
+            }
+            List<Item> oracle = expected.subList(1, n - 1);
+            List<Item> window = view.subList(1, n - 1);
+            assertEquals(trace(oracle.listIterator(1), "${atom}"), trace(window.listIterator(1), "${atom}"),
+                    "${atom} window " + kind);
+        });
+    }
+//@@ PATTERN ITER_READ_ONLY | uses= | oracle=Collections.unmodifiableList iterator exception class
+    /** ${atom}(...) is rejected like an unmodifiable list iterator, with the M3 message. */
+    @Test
+    void ${test}() throws Throwable {
+        forEachKind((f, kind, view, expected) -> {
+            ListIterator<Item> it = view.listIterator();
+            it.next();
+            ListIterator<Item> oracle = Collections.unmodifiableList(expected).listIterator();
+            oracle.next();
+            Item probe = new Item(0, -1);
+            assertEquals(thrown(() -> { oracle.${iter_call}; return null; }),
+                    thrown(() -> { it.${iter_call}; return null; }), "${atom} " + kind);
+            assertEquals(READ_ONLY, assertThrows(UnsupportedOperationException.class, () -> it.${iter_call}).getMessage());
+            assertEquals(expected, view);
+        });
+    }
+//@@ SUPPORT SLOT_VALUES
+    /** Values of a slot directory, read through the valueAtSlot atom of the owner. */
+    private static List<Item> slotValues(Fixture f, int[] slots) throws Throwable {
+        MethodHandle valueAt = OWNER.method("valueAtSlot", 1);
+        List<Item> out = new ArrayList<>();
+        for (int slot : slots) {
+            out.add((Item) valueAt.invoke(f.backing, slot));
+        }
+        return out;
+    }
+//@@ PATTERN ARRAY_CHECK_MASKS | uses= | oracle=IllegalArgumentException on overlapping bits
+    /** ${atom}(required, forbidden) rejects overlapping state bits and accepts disjoint ones. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 2);
+        atom.invoke(M3IndexedArray.LIVE, M3IndexedArray.LEASED | M3IndexedArray.RETIRED);
+        atom.invoke(0, 0);
+        assertEquals("overlapping required/forbidden M3 state bits", assertThrows(IllegalArgumentException.class,
+                () -> atom.invoke(M3IndexedArray.LEASED, M3IndexedArray.LEASED | M3IndexedArray.SHARED)).getMessage());
+    }
+//@@ PATTERN ARRAY_SELECT | uses=SLOT_VALUES | oracle=ArrayList model filtered, state-selected and stably sorted
+    /** ${atom}(${select_doc}) returns the slot directory of the model selection; mutating callbacks are rejected. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", ${arity});
+        forEachKind((f, kind, view, expected) -> {
+            if (kind.stateAware && !${state_capable}) {
+                return;
+            }
+            Predicate<Item> p = kind.filtered ? KEEP : null;
+            Comparator<Item> c = kind.sorted ? BY_RANK : null;
+            int[] slots = (int[]) atom.invoke(${select_args});
+            assertEquals(expected, slotValues(f, slots), "${atom} " + kind);
+        });
+        Fixture f = new Fixture();
+        Predicate<Item> p = item -> {
+            f.append(new Item(0, ITEMS));
+            return true;
+        };
+        Comparator<Item> c = null;
+        Kind kind = Kind.FILTERED_MASKED;
+        assertThrows(ConcurrentModificationException.class, () -> atom.invoke(${select_args}), "${atom} rejects reentrancy");
+    }
+//@@ PATTERN ARRAY_ALLOCATE_SLOT | uses= | oracle=LIFO free-list reuse; fresh slots start at generation 1
+    /** ${atom}() reuses the most recently freed slot first, else allocates the next slot at generation 1. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 0);
+        Fixture f = new Fixture();
+        int allocated = (int) OWNER.field("allocated").get(f.backing);
+        long first = f.handles.get(0);
+        long second = f.handles.get(2);
+        assertTrue(f.backing.remove(first));
+        assertTrue(f.backing.remove(second));
+        assertEquals((int) second, (int) atom.invoke(f.backing), "the last freed slot is reused first");
+        assertEquals((int) first, (int) atom.invoke(f.backing));
+        int fresh = (int) atom.invoke(f.backing);
+        assertEquals(allocated, fresh, "then a new slot");
+        assertEquals(1, ((int[]) OWNER.field("generations").get(f.backing))[fresh]);
+    }
+//@@ PATTERN ARRAY_VALID_SLOT | uses= | oracle=generation-qualified handle validation
+    /** ${atom}(handle) accepts live handles and rejects stale, forged or out-of-range ones. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 1);
+        Fixture f = new Fixture();
+        long live = f.handles.get(0);
+        assertEquals((int) live, (int) atom.invoke(f.backing, live));
+        long removable = f.handles.get(2);
+        assertTrue(f.backing.remove(removable));
+        long recycled = f.backing.append(new Item(1, ITEMS));
+        assertEquals((int) removable, (int) recycled, "the slot is reused under a new generation");
+        String stale = "stale or invalid M3 handle";
+        for (long bad : new long[] {removable, (int) live, live + ((long) ITEMS << Integer.SIZE), (long) ITEMS * ITEMS, -1L}) {
+            assertEquals(stale, assertThrows(IllegalArgumentException.class, () -> atom.invoke(f.backing, bad)).getMessage(),
+                    "${atom} rejects " + Long.toHexString(bad));
+        }
+    }
+//@@ PATTERN ARRAY_UPDATE_LEASE_MASK | uses= | oracle=LIVE, plus LEASED when count > 0 and SHARED when count > 1; state epoch bump
+    /** ${atom}(slot) derives the state bits from the lease count and bumps only the state epoch. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 1);
+        Fixture f = new Fixture();
+        int slot = (int) (long) f.handles.get(0);
+        int[] leases = (int[]) OWNER.field("leaseCounts").get(f.backing);
+        int[] expectedStates = {M3IndexedArray.LIVE, M3IndexedArray.LIVE | M3IndexedArray.LEASED,
+                M3IndexedArray.LIVE | M3IndexedArray.LEASED | M3IndexedArray.SHARED};
+        for (int owners = 0; owners < expectedStates.length; owners++) {
+            leases[slot] = owners;
+            long version = f.backing.version();
+            long epoch = stateVersion(f);
+            atom.invoke(f.backing, slot);
+            assertEquals(expectedStates[owners], ((int[]) OWNER.field("states").get(f.backing))[slot], "owners=" + owners);
+            assertEquals(version, f.backing.version(), "values unchanged");
+            assertEquals(epoch + 1, stateVersion(f), "${atom} bumps the state epoch");
+        }
+        leases[slot] = 0;
+        atom.invoke(f.backing, slot);
+    }
+//@@ PATTERN ARRAY_VALUE_AT_SLOT | uses= | oracle=payload of the slot of each logical index
+    /** ${atom}(slot) is the payload stored in that physical slot. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 1);
+        Fixture f = new Fixture();
+        for (int i = 0; i < f.model.size(); i++) {
+            assertSame(f.model.get(i), atom.invoke(f.backing, (int) f.backing.handleAt(i)), "${atom} index " + i);
+        }
+    }
+//@@ PATTERN ARRAY_PACK | uses= | oracle=handle bit layout: generation high, unsigned slot low
+    /** ${atom}(slot, generation) packs the generation into the high and the unsigned slot into the low 32 bits. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 2);
+        Fixture f = new Fixture();
+        int[] generations = (int[]) OWNER.field("generations").get(f.backing);
+        for (long handle : f.handles) {
+            assertEquals(handle, (long) atom.invoke((int) handle, generations[(int) handle]), "${atom} round trip");
+        }
+        assertEquals(0xFFFF_FFFFL | (1L << Integer.SIZE), (long) atom.invoke(-1, 1), "the slot is unsigned");
+        assertEquals((long) Integer.MAX_VALUE << Integer.SIZE, (long) atom.invoke(0, Integer.MAX_VALUE));
+    }
+//@@ PATTERN ARRAY_REJECT_REENTRANT | uses= | oracle=ConcurrentModificationException once the epoch moved
+    /** ${atom}(${reject_doc}) throws once the ${epoch_doc} epoch moved past the initial one. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", ${arity});
+        Fixture f = new Fixture();
+        long initial = ${initial};
+        atom.invoke(${reject_args});
+        ${move}
+        assertEquals("M3 predicate/comparator mutated the backing store",
+                assertThrows(ConcurrentModificationException.class, () -> atom.invoke(${reject_args})).getMessage());
+    }
+//@@ PATTERN ARRAY_STABLE_SORT | uses=SLOT_VALUES | oracle=List.sort stable order; bulk-copy runs; reentrancy rejected
+    /** ${atom}(indexes, comparator, version, stateAware) stably sorts slot indexes by their payloads. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 4);
+        Fixture f = new Fixture();
+        for (int i = 0; i < ITEMS * QUARTER; i++) {
+            f.append(new Item(i < ITEMS * 2 ? 0 : i % RANKS, ITEMS + i));
+        }
+        int[] slots = new int[f.model.size()];
+        for (int i = 0; i < slots.length; i++) {
+            slots[i] = (int) f.backing.handleAt(i);
+        }
+        List<Item> expected = new ArrayList<>(f.model);
+        expected.sort(BY_RANK);
+        atom.invoke(f.backing, slots, BY_RANK, f.backing.version(), false);
+        assertEquals(expected, slotValues(f, slots), "${atom} matches List.sort");
+        Comparator<Item> mutating = (x, y) -> {
+            f.append(new Item(0, -1));
+            return 0;
+        };
+        int[] again = slots.clone();
+        assertThrows(ConcurrentModificationException.class,
+                () -> atom.invoke(f.backing, again, mutating, f.backing.version(), false));
+        int[] single = {slots[0]};
+        atom.invoke(f.backing, single, mutating, f.backing.version(), false);
+        assertEquals(slots[0], single[0], "fewer than two slots never compare");
+    }
