@@ -112,6 +112,27 @@ The v1.1 MANUAL atoms grouped into these families:
 | FIXED_SIZE | 24 |
 | other shapes | 238 |
 
+## v1.4: JDK standard
+
+M3JDK21 keeps the source standard of the JDK itself. v1.4 adds a JDK_STANDARD pass to the generator, run on every owned
+class after classification, so the emitted code meets `javac -Xdoclint:all/protected` and the M3JdkStandard javac plugin
+(`m3/compiler/jdk-standard`). The fixes live in the recipe, not in the 22 outputs:
+
+- **Parameter names:** the names the API declares replace the reflection names `arg0`, `arg1`, ... (576 in v1.3). Donors
+  are parsed with javac's own API: the decorated Commons class and its supertypes first, then `src.zip`. A donor name
+  that is not lowerCamel is lowered (Commons declares `predicatedQueue(final Queue<E> Queue, ...)`). An unmatched name
+  is residue and fails the run.
+- **Imports:** explicit single-type imports replace qualified names wherever the simple name is unambiguous; the two
+  `Predicate` types stay qualified where both are used.
+- **Javadoc:** `@param` tags for type parameters in java.util wording, and Javadoc on every public factory.
+- **Layout:** 100 columns, 8-space continuation, breaks at the outermost fitting level. A long string literal is split
+  as a fallback; text blocks and trailing line comments are never touched.
+
+Proof: the 22 owned classes compiled with `-g:none` are byte-identical to v1.3, so behaviour is unchanged; two runs are
+byte-identical; differential 30/0, probes 28/0, negative controls 16/16 (seven spec rows moved to the v1.4 text, same
+planted defects). The generator meets the standard itself: its own layout was applied by the same pass and its classes
+compiled with `-g:none` are byte-identical before and after.
+
 ## Proof
 
 `M3DecoratorDifferential.java` runs a seeded reflective differential of each owned class against the Commons class,
@@ -131,7 +152,7 @@ Results:
 - `RULE_CHECKS.tsv`: 12 classifier side-condition checks, all PASS.
 - `NEGATIVE_CONTROLS.tsv`: 16 planted defects from `NEGATIVE_CONTROLS_SPEC.tsv`, applied by `M3Mutant.java`, all CAUGHT.
 - `MISMATCHES.tsv`: empty.
-- All 22 generated classes compile with `-Xlint:all -Werror`.
+- All 22 generated classes compile with `-Xlint:all -Werror`, `-Xdoclint:all/protected` and `-Xplugin:M3JdkStandard`.
 - Earlier negative control: a planted defect (`removeIf` delegating instead of throwing) gives 50 mismatches.
 
 `CONVERGE_LEDGER.tsv` lists every fork class, using the columns agreed between the convergence lanes: fork, fork_rev,
