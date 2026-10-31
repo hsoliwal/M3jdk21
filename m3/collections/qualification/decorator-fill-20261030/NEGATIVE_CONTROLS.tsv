@@ -4,7 +4,7 @@ NC02_H4_HEADSET_RAW	R1	M3PredicatedNavigableSet	probe	treeset	both	CAUGHT	exit=4
 NC03_H2_REMOVE_KEEPS_ENTRY	R2	M3PredicatedMap	probe	hashmap	both	CAUGHT	exit=4 mismatches=23; first: MAP_ITERATOR 11:getKey oracle=EX:java.lang.IllegalStateException m3=0
 NC04_H2_RESET_CLEARS_ENTRY	R2	M3PredicatedMap	probe	hashmap	both	CAUGHT	exit=4 mismatches=16; first: MAP_ITERATOR 17:getKey oracle=1 m3=EX:java.lang.IllegalStateException
 NC05_CTOR_NULL_CHECK_ORDER	R3	M3PredicatedList	differential	list	both	CAUGHT	exit=4 mismatches=1; first: factory(null mask 11) oracle=EX:java.lang.NullPointerException:collection m3=EX:java.lang.NullPointerException:predicate
-NC06_CHECKSETVALUE_SHAPE_IGNORED	R4	GENERATOR	rulecheck	-	-	CAUGHT	R4_TRANSFORMING_HOOK expected=MANUAL actual=CHECKED_ENTRY_SET FAIL
+NC06_CHECKSETVALUE_SHAPE_IGNORED	R4	GENERATOR	rulecheck	-	-	CAUGHT	R4_UNEMITTED_HOOK expected=MANUAL actual=CHECKED_ENTRY_SET FAIL
 NC07_ENTRYSET_LANE_SWAPPED	R4	M3PredicatedMap	probe	treemap	keynull	CAUGHT	exit=4 mismatches=56; first: VIEW_SWEEP entrySet[] v0 oracle=C<0100000100000000000>6[0=2, 1=3, 3=5, 5=7, 6=8, 8=0] m3=C<0100000000000000000>6[0=2, 1=3, 3=5, 5=7, 6=8, 8=0]
 NC08_CTOR_VALUE_NOT_PARAMETER	R5	GENERATOR	rulecheck	-	-	CAUGHT	R5_SELF_LOCK expected=MANUAL actual=LANES_CONSTRUCTOR FAIL
 NC09_SUPER_NOT_DELEGATE_ACCEPTED	R6	GENERATOR	rulecheck	-	-	CAUGHT	R6_SUPER_NOT_DELEGATE expected=MANUAL actual=GUARD_DELEGATE/elem FAIL

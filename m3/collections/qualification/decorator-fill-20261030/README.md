@@ -85,7 +85,7 @@ the check catches (`NEGATIVE_CONTROLS.tsv`, 16 of 16 caught):
 | R1 a wrong sibling helper passes | `M3PredicatedProbe` VIEW_SWEEP: every method of every view within two hops | NC01 helper addAll without validation, NC02 helper headSet raw |
 | R2 MapIterator state machine unchecked | MAP_ITERATOR script (before next, after remove, after reset) | NC03 remove keeps entry, NC04 reset clears entry |
 | R3 null-check order untested | differential: every null combination of factory arguments, with messages | NC05 requireNonNull order swapped |
-| R4 CHECKED_ENTRY_SET side conditions | rule checks R4_* (TransformedMap stays MANUAL) + view sweep | NC06 checkSetValue guard removed, NC07 lane swapped |
+| R4 CHECKED_ENTRY_SET side conditions | rule checks R4_* (v1.3: TransformedMap stays MANUAL; v1.5: an unemitted hook stays MANUAL) + view sweep | NC06 checkSetValue guard removed, NC07 lane swapped |
 | R5 `this.F = X` accepted `this.lock = this` | rule checks R5_* | NC08 parameter guard removed |
 | R6 super, alias, sibling and lane-order guards | rule checks R6_* | NC09, NC10, NC11, NC12 (one per guard) |
 | R7 serialization field order | probe SERIAL: NotSerializableException culprit with non-serializable lanes and/or proxy backing | NC13 default field order |
@@ -132,6 +132,33 @@ Proof: the 22 owned classes compiled with `-g:none` are byte-identical to v1.3, 
 byte-identical; differential 30/0, probes 28/0, negative controls 16/16 (seven spec rows moved to the v1.4 text, same
 planted defects). The generator meets the standard itself: its own layout was applied by the same pass and its classes
 compiled with `-g:none` are byte-identical before and after.
+
+## v1.5: Transformed family
+
+v1.5 fills the Transformed decorators. The policy lane is a transformer (`Transformer<..>` in Commons, the
+`java.util.function.Function<..>` lane type in the owned class), and the recipe gained five categories:
+
+- **TRANSFORM_LANE:** the Commons hook `return valueTransformer.transform(value);` is a lane member, emitted as
+  `return valueTransformer.apply(value);`. With it `checkSetValue` is emittable, so TransformedMap's `entrySet()` is
+  CHECKED_ENTRY_SET like PredicatedMap's.
+- **TRANSFORM_DELEGATE:** `decorated().m(transform(x))` and the key, value, collection and map forms become
+  `backing.m(..)` over the same lane members.
+- **TRANSFORM_MEMBERS:** the `transform`, `transformKey`, `transformValue` and `transformMap` members the class calls,
+  emitted once per class (identity when a lane is null; maps copy into a `java.util.LinkedHashMap` in iteration order).
+- **TRANSFORMED_FACTORY:** `transformedX(owner, lanes)` decorates first, then transforms the existing contents.
+- **LANE_VIEW over a plain factory:** a view returned through `transformingX(..)` of the class itself, a same-package
+  sibling, or a sibling imported by the Commons source that declares the method (`bag.TransformedBag.uniqueSet()`
+  returns `set.TransformedSet.transformingSet(..)`; TransformedSortedBag inherits that body).
+
+Result: 10 more owned classes (Collection, List, Set, SortedSet, NavigableSet, Queue, Bag, SortedBag, Map, SortedMap),
+32 filled in all. TARGETS.tsv has 14 new rows, one per class and lane policy (`both`; maps also `keynull` and
+`valuenull`): 44 targets, 0 mismatches. MANUAL atoms 211 to 209 overall; TransformedMultiValuedMap keeps 4 (three
+`putAll` loops and its copying factory), recorded as the next candidate in PATTERNS.tsv.
+
+Rule check R4 changed with the pattern: `R4_TRANSFORMING_HOOK` now expects CHECKED_ENTRY_SET, and the negative side
+moved to `R4_UNEMITTED_HOOK` (the `checkSetValue` member recorded as not emitted must keep `entrySet()` MANUAL). NC06
+(guard replaced by `return true;`) is caught by the new case. The 10 new classes pass `-Xdoclint:all/protected` and
+the M3JdkStandard plugin; refilling them gives byte-identical files; the 22 v1.4 classes are unchanged.
 
 ## Proof
 

@@ -6,7 +6,7 @@ NC02_H4_HEADSET_RAW	R1	M3PredicatedNavigableSet	headSet(E toElement) {\n        
 NC03_H2_REMOVE_KEEPS_ENTRY	R2	M3PredicatedMap	iterator.remove();\n            entry = null;	iterator.remove();	probe	hashmap	both	-
 NC04_H2_RESET_CLEARS_ENTRY	R2	M3PredicatedMap	iterator = entrySet.iterator();\n        }	iterator = entrySet.iterator();\n            entry = null;\n        }	probe	hashmap	both	-
 NC05_CTOR_NULL_CHECK_ORDER	R3	M3PredicatedList	this.backing = Objects.requireNonNull(list, "collection");\n        this.predicate = Objects.requireNonNull(predicate, "predicate");	this.predicate = Objects.requireNonNull(predicate, "predicate");\n        this.backing = Objects.requireNonNull(list, "collection");	differential	list	both	-
-NC06_CHECKSETVALUE_SHAPE_IGNORED	R4	GENERATOR	        return laneMember("checkSetValue", 1);	        return true;	rulecheck	-	-	R4_TRANSFORMING_HOOK
+NC06_CHECKSETVALUE_SHAPE_IGNORED	R4	GENERATOR	        return laneMember("checkSetValue", 1);	        return true;	rulecheck	-	-	R4_UNEMITTED_HOOK
 NC07_ENTRYSET_LANE_SWAPPED	R4	M3PredicatedMap	return valuePredicate != null ? new CheckedEntrySet	return keyPredicate != null ? new CheckedEntrySet	probe	treemap	keynull	-
 NC08_CTOR_VALUE_NOT_PARAMETER	R5	GENERATOR	        return names.contains(x);	        return true;	rulecheck	-	-	R5_SELF_LOCK
 NC09_SUPER_NOT_DELEGATE_ACCEPTED	R6	GENERATOR	        return superShape.category.equals("DELEGATE");	        return true;	rulecheck	-	-	R6_SUPER_NOT_DELEGATE
