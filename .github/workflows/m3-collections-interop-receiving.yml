@@ -207,6 +207,16 @@ jobs:
             --historical-product historical-product \
             --reports m3/collections/interop/target/surefire-reports \
             | tee proof/junit-complete-source-method-census.log
+          # Replay ALL original 167 JUnit identities and their historical
+          # negative controls on the real approved checkout, not the 50-file current tree.
+          # The projection copies exact executed XML, excluding ONLY the two new suites.
+          python3 m3/collections/interop/qualification/current-junit-census-v5-20261031/replay_original_v4.py \
+            --product . \
+            --approved-product approved-interop-20261029 \
+            --before-product before-interop-20261026 \
+            --historical-product historical-product \
+            --reports m3/collections/interop/target/surefire-reports \
+            | tee proof/junit-actual-historical-v4-negative-controls.log
           javap -classpath m3/collections/interop/target/m3-collections-interop-0.1.0-SNAPSHOT.jar \
             com.m3.collections.interop.M3LibraryCollections \
             com.m3.collections.interop.M3LibraryCollectors \
