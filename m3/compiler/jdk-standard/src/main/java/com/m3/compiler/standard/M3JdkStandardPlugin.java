@@ -45,14 +45,16 @@ import javax.tools.Diagnostic;
  * own {@code -Xdoclint:all/protected}, which is how the JDK build checks them. Each finding is a
  * compiler diagnostic tagged {@code [M3JdkStandard RULE]}; the option {@code report=<path>} also
  * writes every finding as a TSV row (file, line, column, rule, message) and {@code mode=warning}
- * lowers the diagnostics from errors to warnings.
+ * lowers the diagnostics from errors to warnings. The option {@code scheme=m3} adds the M3JDK21
+ * naming scheme: packages {@code jdk.m3.<area>} or {@code jdk.internal.m3.<area>}, and no name
+ * carried over from Synexia ({@code Synexia*}, {@code SYNEXIA_*} become {@code M3*}, {@code M3_*}).
  */
 public final class M3JdkStandardPlugin implements Plugin {
 
     /** The checked rules; every diagnostic names exactly one. */
     enum Rule {
         WHITESPACE, LINE_LENGTH, WILDCARD_IMPORT, PACKAGE_NAME, TYPE_NAME, METHOD_NAME,
-        CONSTANT_NAME, FIELD_NAME, PARAMETER_NAME, LOCAL_NAME, TYPE_PARAMETER_NAME
+        CONSTANT_NAME, FIELD_NAME, PARAMETER_NAME, LOCAL_NAME, TYPE_PARAMETER_NAME, NAME_SCHEME
     }
 
     private static final int MAX_COLUMNS = 100;
@@ -64,8 +66,14 @@ public final class M3JdkStandardPlugin implements Plugin {
     private static final Pattern REFLECTION_NAME = Pattern.compile("arg[0-9]+");
     private static final Set<String> SERIAL_FIELDS =
             Set.of("serialVersionUID", "serialPersistentFields");
+    /** M3JDK21 scheme: exported packages jdk.m3.area, internal packages jdk.internal.m3.area. */
+    private static final Pattern M3_PACKAGE =
+            Pattern.compile("jdk\\.(internal\\.)?m3(\\.[a-z][a-z0-9]*)*");
+    /** Names carried over from Synexia: Synexia*, synexia-*, SYNEXIA_* become M3*, m3-*, M3_*. */
+    private static final Pattern LEGACY_NAME = Pattern.compile("(?i).*synexia.*");
 
     private final List<String> rows = new ArrayList<>();
+    private boolean m3Scheme;
     private Diagnostic.Kind kind = Diagnostic.Kind.ERROR;
     private Optional<Path> report = Optional.empty();
     private Trees trees;
@@ -98,6 +106,8 @@ public final class M3JdkStandardPlugin implements Plugin {
     private void option(String arg) {
         if (arg.equals("mode=warning")) {
             kind = Diagnostic.Kind.WARNING;
+        } else if (arg.equals("scheme=m3")) {
+            m3Scheme = true;
         } else if (arg.startsWith("report=")) {
             report = Optional.of(Path.of(arg.substring("report=".length())));
         } else {
@@ -133,6 +143,10 @@ public final class M3JdkStandardPlugin implements Plugin {
                     .filter(name -> !PACKAGE.matcher(name).matches())
                     .ifPresent(name ->
                             flag(Rule.PACKAGE_NAME, root.getPackage(), "package " + name));
+            Optional.ofNullable(root.getPackageName()).map(Object::toString)
+                    .filter(name -> m3Scheme && !M3_PACKAGE.matcher(name).matches())
+                    .ifPresent(name -> flag(Rule.NAME_SCHEME, root.getPackage(), "package " + name
+                            + ": M3JDK21 packages are jdk.m3.<area> or jdk.internal.m3.<area>"));
             scan(new TreePath(root), null);
             String[] lines = text().split("\n", -1);
             IntStream.range(0, lines.length).forEach(i -> checkLine(i + 1L, lines[i]));
@@ -218,6 +232,10 @@ public final class M3JdkStandardPlugin implements Plugin {
         private void name(Rule rule, Pattern pattern, String name, Tree tree) {
             if (!pattern.matcher(name).matches()) {
                 flag(rule, tree, name + " does not match " + pattern.pattern());
+            }
+            if (m3Scheme && LEGACY_NAME.matcher(name).matches()) {
+                flag(Rule.NAME_SCHEME, tree,
+                        name + ": Synexia names become M3 names (M3*, m3-*, M3_*)");
             }
         }
 

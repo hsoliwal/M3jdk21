@@ -12,6 +12,7 @@ module holds M3-owned Java to that standard inside the compile that already runs
 | Imports | `M3JdkStandard` | every type imported by name, no `*` |
 | Layout | `M3JdkStandard` | 100 columns (package/import lines and URLs exempt) |
 | Whitespace | `M3JdkStandard`, same rules as `.jcheck/conf` | no tab, no trailing whitespace, no carriage return |
+| Naming scheme (opt-in `scheme=m3`) | `M3JdkStandard` | packages `jdk.m3.<area>` or `jdk.internal.m3.<area>`; no name carried over from Synexia (`Synexia*`, `SYNEXIA_*` become `M3*`, `M3_*`) |
 
 `serialVersionUID` and `serialPersistentFields` keep their Java serialization names.
 
@@ -19,7 +20,7 @@ module holds M3-owned Java to that standard inside the compile that already runs
 
 ```
 javac -Xdoclint:all/protected -processorpath <plugin classes or jar> \
-      -Xplugin:"M3JdkStandard [mode=warning] [report=<file.tsv>]" ...
+      -Xplugin:"M3JdkStandard [mode=warning] [scheme=m3] [report=<file.tsv>]" ...
 ```
 
 Findings are compiler errors tagged `[M3JdkStandard RULE] line L:C message` (or warnings with

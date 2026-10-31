@@ -78,6 +78,32 @@ public final class M3JdkStandardPluginSelfTest {
             Map.entry("METHOD_NAME", 1), Map.entry("PARAMETER_NAME", 1),
             Map.entry("LOCAL_NAME", 1), Map.entry("WHITESPACE", 3), Map.entry("LINE_LENGTH", 1)));
 
+    private static final String LEGACY = """
+            package com.synexia.legacy;
+
+            /** A fixture that keeps Synexia names. */
+            public final class SynexiaThing {
+                /** A legacy constant. */
+                public static final int SYNEXIA_LIMIT = 1;
+
+                private SynexiaThing() {
+                }
+            }
+            """;
+
+    private static final String SCHEMED = """
+            package jdk.internal.m3.example;
+
+            /** A fixture in the M3JDK21 naming scheme. */
+            public final class M3Thing {
+                /** A constant. */
+                public static final int M3_LIMIT = 1;
+
+                private M3Thing() {
+                }
+            }
+            """;
+
     private M3JdkStandardPluginSelfTest() {
     }
 
@@ -101,11 +127,24 @@ public final class M3JdkStandardPluginSelfTest {
         check(rows == findings, "report rows " + rows + ", findings " + findings);
         check(!compile(work, "bad_type", DIRTY).success()
                 && compile(work, "CleanType", CLEAN).success(), "error mode must fail only dirty");
+        schemeChecks(work);
         LOG.log(System.Logger.Level.INFO, "M3_JDK_STANDARD_SELFTEST PASS rules="
                 + DIRTY_RULES.size() + " findings=" + rows);
     }
 
     private record Run(boolean success, List<Diagnostic<? extends JavaFileObject>> diagnostics) {
+    }
+
+    /** scheme=m3: the Synexia fixture breaks it three times, the M3 fixture never; opt-in. */
+    private static void schemeChecks(Path work) {
+        Map<String, Integer> legacy =
+                rules(compile(work, "SynexiaThing", LEGACY, "mode=warning", "scheme=m3"));
+        check(legacy.equals(Map.of("NAME_SCHEME", 3)), "scheme=m3 over Synexia names " + legacy);
+        Map<String, Integer> schemed =
+                rules(compile(work, "M3Thing", SCHEMED, "mode=warning", "scheme=m3"));
+        check(schemed.isEmpty(), "scheme=m3 flagged M3 names " + schemed);
+        Map<String, Integer> off = rules(compile(work, "SynexiaThing", LEGACY, "mode=warning"));
+        check(off.isEmpty(), "the scheme must be opt-in " + off);
     }
 
     private static Run compile(Path work, String name, String source, String... options) {
