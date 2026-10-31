@@ -240,7 +240,7 @@ M3FixedSizeList$FixedSizeListIterator	int previousIndex()	DELEGATE	return backin
 M3FixedSizeList$FixedSizeListIterator	void add(java.lang.Object arg0)	MANUAL	throw unsupportedOperationException();
 M3FixedSizeList$FixedSizeListIterator	void remove()	MANUAL	throw unsupportedOperationException();
 M3FixedSizeList$FixedSizeListIterator	void set(E arg0)	DELEGATE	backing.set(arg0);
-M3FixedSizeMap	M3FixedSizeMap()	CONSTRUCTOR	this.backing = (java.util.Map<E>) java.util.Objects.requireNonNull(arg0, "collection"); java.util.Map<K, V>
+M3FixedSizeMap	M3FixedSizeMap()	CONSTRUCTOR	this.backing = java.util.Objects.requireNonNull(arg0, "map"); java.util.Map<K, V>
 M3FixedSizeMap	String toString()	DELEGATE	return backing.toString();
 M3FixedSizeMap	V compute(K arg0, java.util.function.BiFunction<? super K, ? super V, ? extends V> arg1)	DEFAULT	return org.apache.commons.collections4.BoundedMap.super.compute(arg0, arg1);
 M3FixedSizeMap	V computeIfAbsent(K arg0, java.util.function.Function<? super K, ? extends V> arg1)	DEFAULT	return org.apache.commons.collections4.BoundedMap.super.computeIfAbsent(arg0, arg1);
@@ -262,7 +262,7 @@ M3FixedSizeMap	boolean replace(K arg0, V arg1, V arg2)	DEFAULT	return org.apache
 M3FixedSizeMap	int hashCode()	DELEGATE	return backing.hashCode();
 M3FixedSizeMap	int maxSize()	SELF_CALL	return size();
 M3FixedSizeMap	int size()	DELEGATE	return backing.size();
-M3FixedSizeMap	java.util.Collection<V> values()	MANUAL	final Collection<V> coll = decorated().values(); return UnmodifiableCollection.unmodifiableCollection(coll);
+M3FixedSizeMap	java.util.Collection<V> values()	WRAP	return java.util.Collections.unmodifiableCollection(backing.values());
 M3FixedSizeMap	java.util.Set<K> keySet()	WRAP	return java.util.Collections.unmodifiableSet(backing.keySet());
 M3FixedSizeMap	java.util.Set<java.util.Map.Entry<K, V>> entrySet()	WRAP	return java.util.Collections.unmodifiableSet(backing.entrySet());
 M3FixedSizeMap	org.apache.commons.collections4.MapIterator<K, V> mapIterator()	MAP_ITERATOR_ADAPTER	return new EntrySetMapIterator<>(entrySet());
@@ -275,7 +275,7 @@ M3FixedSizeSortedMap	K firstKey()	DELEGATE	return backing.firstKey();
 M3FixedSizeSortedMap	K lastKey()	DELEGATE	return backing.lastKey();
 M3FixedSizeSortedMap	K nextKey(K arg0)	MANUAL	final Iterator<K> it = tailMap(key).keySet().iterator(); it.next(); return it.hasNext() ? it.next() : null;
 M3FixedSizeSortedMap	K previousKey(K arg0)	MANUAL	final SortedMap<K, V> headMap = headMap(key); return headMap.isEmpty() ? null : headMap.lastKey();
-M3FixedSizeSortedMap	M3FixedSizeSortedMap()	CONSTRUCTOR	this.backing = (java.util.SortedMap<E>) java.util.Objects.requireNonNull(arg0, "collection"); java.util.SortedMap<K, V>
+M3FixedSizeSortedMap	M3FixedSizeSortedMap()	CONSTRUCTOR	this.backing = java.util.Objects.requireNonNull(arg0, "map"); java.util.SortedMap<K, V>
 M3FixedSizeSortedMap	String toString()	DELEGATE	return backing.toString();
 M3FixedSizeSortedMap	V compute(K arg0, java.util.function.BiFunction<? super K, ? super V, ? extends V> arg1)	DEFAULT	return org.apache.commons.collections4.IterableSortedMap.super.compute(arg0, arg1);
 M3FixedSizeSortedMap	V computeIfAbsent(K arg0, java.util.function.Function<? super K, ? extends V> arg1)	DEFAULT	return org.apache.commons.collections4.IterableSortedMap.super.computeIfAbsent(arg0, arg1);
@@ -299,7 +299,7 @@ M3FixedSizeSortedMap	boolean replace(K arg0, V arg1, V arg2)	DEFAULT	return org.
 M3FixedSizeSortedMap	int hashCode()	DELEGATE	return backing.hashCode();
 M3FixedSizeSortedMap	int maxSize()	SELF_CALL	return size();
 M3FixedSizeSortedMap	int size()	DELEGATE	return backing.size();
-M3FixedSizeSortedMap	java.util.Collection<V> values()	MANUAL	return UnmodifiableCollection.unmodifiableCollection(decorated().values());
+M3FixedSizeSortedMap	java.util.Collection<V> values()	WRAP	return java.util.Collections.unmodifiableCollection(backing.values());
 M3FixedSizeSortedMap	java.util.Comparator<? super K> comparator()	DELEGATE	return backing.comparator();
 M3FixedSizeSortedMap	java.util.Map.Entry<K, V> firstEntry()	DEFAULT	return org.apache.commons.collections4.IterableSortedMap.super.firstEntry();
 M3FixedSizeSortedMap	java.util.Map.Entry<K, V> lastEntry()	DEFAULT	return org.apache.commons.collections4.IterableSortedMap.super.lastEntry();
@@ -1573,7 +1573,7 @@ M3UnmodifiableBag	void clear()	THROW	throw new UnsupportedOperationException();
 M3UnmodifiableBag	void forEach(java.util.function.Consumer<? super E> arg0)	DEFAULT	org.apache.commons.collections4.Bag.super.forEach(arg0);
 M3UnmodifiableBidiMap	K getKey(Object arg0)	DELEGATE	return backing.getKey(arg0);
 M3UnmodifiableBidiMap	K removeValue(Object arg0)	THROW	throw new UnsupportedOperationException();
-M3UnmodifiableBidiMap	M3UnmodifiableBidiMap()	CONSTRUCTOR	this.backing = (org.apache.commons.collections4.BidiMap<E>) java.util.Objects.requireNonNull(arg0, "collection"); org.apache.commons.collections4.BidiMap<? extends K, ? extends V>
+M3UnmodifiableBidiMap	M3UnmodifiableBidiMap()	CONSTRUCTOR	this.backing = (org.apache.commons.collections4.BidiMap<K, V>) java.util.Objects.requireNonNull(arg0, "map"); org.apache.commons.collections4.BidiMap<? extends K, ? extends V>
 M3UnmodifiableBidiMap	String toString()	DELEGATE	return backing.toString();
 M3UnmodifiableBidiMap	V compute(K arg0, java.util.function.BiFunction<? super K, ? super V, ? extends V> arg1)	DEFAULT	return org.apache.commons.collections4.BidiMap.super.compute(arg0, arg1);
 M3UnmodifiableBidiMap	V computeIfAbsent(K arg0, java.util.function.Function<? super K, ? extends V> arg1)	DEFAULT	return org.apache.commons.collections4.BidiMap.super.computeIfAbsent(arg0, arg1);
@@ -1593,11 +1593,11 @@ M3UnmodifiableBidiMap	boolean remove(Object arg0, Object arg1)	DEFAULT	return or
 M3UnmodifiableBidiMap	boolean replace(K arg0, V arg1, V arg2)	DEFAULT	return org.apache.commons.collections4.BidiMap.super.replace(arg0, arg1, arg2);
 M3UnmodifiableBidiMap	int hashCode()	DELEGATE	return backing.hashCode();
 M3UnmodifiableBidiMap	int size()	DELEGATE	return backing.size();
-M3UnmodifiableBidiMap	java.util.Set<K> keySet()	MANUAL	final Set<K> set = super.keySet(); return UnmodifiableSet.unmodifiableSet(set);
-M3UnmodifiableBidiMap	java.util.Set<V> values()	MANUAL	final Set<V> set = super.values(); return UnmodifiableSet.unmodifiableSet(set);
-M3UnmodifiableBidiMap	java.util.Set<java.util.Map.Entry<K, V>> entrySet()	MANUAL	final Set<Map.Entry<K, V>> set = super.entrySet(); return UnmodifiableEntrySet.unmodifiableEntrySet(set);
+M3UnmodifiableBidiMap	java.util.Set<K> keySet()	WRAP	return java.util.Collections.unmodifiableSet(backing.keySet());
+M3UnmodifiableBidiMap	java.util.Set<V> values()	WRAP	return java.util.Collections.unmodifiableSet(backing.values());
+M3UnmodifiableBidiMap	java.util.Set<java.util.Map.Entry<K, V>> entrySet()	WRAP	return java.util.Collections.unmodifiableMap(backing).entrySet();
 M3UnmodifiableBidiMap	org.apache.commons.collections4.BidiMap<V, K> inverseBidiMap()	MANUAL	if (inverse == null) { inverse = new UnmodifiableBidiMap<>(decorated().inverseBidiMap()); inverse.inverse = this; } return inverse;
-M3UnmodifiableBidiMap	org.apache.commons.collections4.MapIterator<K, V> mapIterator()	MANUAL	final MapIterator<K, V> it = decorated().mapIterator(); return UnmodifiableMapIterator.unmodifiableMapIterator(it);
+M3UnmodifiableBidiMap	org.apache.commons.collections4.MapIterator<K, V> mapIterator()	UNMODIFIABLE_MAP_ITERATOR	return new UnmodifiableMapIteratorView<>(backing.mapIterator());
 M3UnmodifiableBidiMap	static <K, V> org.apache.commons.collections4.BidiMap<K, V> unmodifiableBidiMap(org.apache.commons.collections4.BidiMap<? extends K, ? extends V> arg0)	FACTORY	if (arg0 instanceof org.apache.commons.collections4.Unmodifiable) {             return (org.apache.commons.collections4.BidiMap<K, V>) arg0;         }         return new M3UnmodifiableBidiMap<>(arg0);
 M3UnmodifiableBidiMap	void clear()	THROW	throw new UnsupportedOperationException();
 M3UnmodifiableBidiMap	void forEach(java.util.function.BiConsumer<? super K, ? super V> arg0)	DEFAULT	org.apache.commons.collections4.BidiMap.super.forEach(arg0);
@@ -1652,7 +1652,7 @@ M3UnmodifiableCollection	void clear()	THROW	throw new UnsupportedOperationExcept
 M3UnmodifiableCollection	void forEach(java.util.function.Consumer<? super E> arg0)	DEFAULT	java.util.Collection.super.forEach(arg0);
 M3UnmodifiableEntrySet	<T> T[] toArray(T[] arg0)	MANUAL	Object[] result = array; if (array.length > 0) { result = (Object[]) Array.newInstance(array.getClass().getComponentType(), 0); } result = decorated().toArray(result); for (int i = 0; i < result.length; i++) { result[i] = new UnmodifiableEntry((Map.Entry<K, V>) result[i]); } if (result.length > array.length) { return (T[]) result; } System.arraycopy(result, 0, array, 0, result.length); if (array.length > result.length) { array[result.length] = null; } return array;
 M3UnmodifiableEntrySet	<T> T[] toArray(java.util.function.IntFunction<T[]> arg0)	DEFAULT	return java.util.Set.super.toArray(arg0);
-M3UnmodifiableEntrySet	M3UnmodifiableEntrySet()	CONSTRUCTOR	this.backing = (java.util.Set<E>) java.util.Objects.requireNonNull(arg0, "collection"); java.util.Set<java.util.Map.Entry<K, V>>
+M3UnmodifiableEntrySet	M3UnmodifiableEntrySet()	CONSTRUCTOR	this.backing = (java.util.Set<K, V>) java.util.Objects.requireNonNull(arg0, "collection"); java.util.Set<java.util.Map.Entry<K, V>>
 M3UnmodifiableEntrySet	Object[] toArray()	MANUAL	final Object[] array = decorated().toArray(); for (int i = 0; i < array.length; i++) { array[i] = new UnmodifiableEntry((Map.Entry<K, V>) array[i]); } return array;
 M3UnmodifiableEntrySet	String toString()	DELEGATE	return backing.toString();
 M3UnmodifiableEntrySet	boolean add(java.util.Map.Entry<K, V> arg0)	MANUAL	unresolved in org.apache.commons.collections4.map.UnmodifiableEntrySet
@@ -1721,7 +1721,7 @@ M3UnmodifiableList	void clear()	THROW	throw new UnsupportedOperationException();
 M3UnmodifiableList	void forEach(java.util.function.Consumer<? super E> arg0)	DEFAULT	java.util.List.super.forEach(arg0);
 M3UnmodifiableList	void replaceAll(java.util.function.UnaryOperator<E> arg0)	DEFAULT	java.util.List.super.replaceAll(arg0);
 M3UnmodifiableList	void sort(java.util.Comparator<? super E> arg0)	DEFAULT	java.util.List.super.sort(arg0);
-M3UnmodifiableMap	M3UnmodifiableMap()	CONSTRUCTOR	this.backing = (java.util.Map<E>) java.util.Objects.requireNonNull(arg0, "collection"); java.util.Map<? extends K, ? extends V>
+M3UnmodifiableMap	M3UnmodifiableMap()	CONSTRUCTOR	this.backing = (java.util.Map<K, V>) java.util.Objects.requireNonNull(arg0, "map"); java.util.Map<? extends K, ? extends V>
 M3UnmodifiableMap	String toString()	DELEGATE	return backing.toString();
 M3UnmodifiableMap	V compute(K arg0, java.util.function.BiFunction<? super K, ? super V, ? extends V> arg1)	DEFAULT	return org.apache.commons.collections4.IterableMap.super.compute(arg0, arg1);
 M3UnmodifiableMap	V computeIfAbsent(K arg0, java.util.function.Function<? super K, ? extends V> arg1)	DEFAULT	return org.apache.commons.collections4.IterableMap.super.computeIfAbsent(arg0, arg1);
@@ -1741,16 +1741,16 @@ M3UnmodifiableMap	boolean remove(Object arg0, Object arg1)	DEFAULT	return org.ap
 M3UnmodifiableMap	boolean replace(K arg0, V arg1, V arg2)	DEFAULT	return org.apache.commons.collections4.IterableMap.super.replace(arg0, arg1, arg2);
 M3UnmodifiableMap	int hashCode()	DELEGATE	return backing.hashCode();
 M3UnmodifiableMap	int size()	DELEGATE	return backing.size();
-M3UnmodifiableMap	java.util.Collection<V> values()	MANUAL	final Collection<V> coll = super.values(); return UnmodifiableCollection.unmodifiableCollection(coll);
-M3UnmodifiableMap	java.util.Set<K> keySet()	MANUAL	final Set<K> set = super.keySet(); return UnmodifiableSet.unmodifiableSet(set);
-M3UnmodifiableMap	java.util.Set<java.util.Map.Entry<K, V>> entrySet()	MANUAL	final Set<Map.Entry<K, V>> set = super.entrySet(); return UnmodifiableEntrySet.unmodifiableEntrySet(set);
+M3UnmodifiableMap	java.util.Collection<V> values()	WRAP	return java.util.Collections.unmodifiableCollection(backing.values());
+M3UnmodifiableMap	java.util.Set<K> keySet()	WRAP	return java.util.Collections.unmodifiableSet(backing.keySet());
+M3UnmodifiableMap	java.util.Set<java.util.Map.Entry<K, V>> entrySet()	WRAP	return java.util.Collections.unmodifiableMap(backing).entrySet();
 M3UnmodifiableMap	org.apache.commons.collections4.MapIterator<K, V> mapIterator()	MANUAL	if (map instanceof IterableMap) { final MapIterator<K, V> it = ((IterableMap<K, V>) map).mapIterator(); return UnmodifiableMapIterator.unmodifiableMapIterator(it); } final MapIterator<K, V> it = new EntrySetMapIterator<>(map); return UnmodifiableMapIterator.unmodifiableMapIterator(it);
 M3UnmodifiableMap	static <K, V> java.util.Map<K, V> unmodifiableMap(java.util.Map<? extends K, ? extends V> arg0)	FACTORY	if (arg0 instanceof org.apache.commons.collections4.Unmodifiable) {             return (java.util.Map<K, V>) arg0;         }         return new M3UnmodifiableMap<>(arg0);
 M3UnmodifiableMap	void clear()	THROW	throw new UnsupportedOperationException();
 M3UnmodifiableMap	void forEach(java.util.function.BiConsumer<? super K, ? super V> arg0)	DEFAULT	org.apache.commons.collections4.IterableMap.super.forEach(arg0);
 M3UnmodifiableMap	void putAll(java.util.Map<? extends K, ? extends V> arg0)	THROW	throw new UnsupportedOperationException();
 M3UnmodifiableMap	void replaceAll(java.util.function.BiFunction<? super K, ? super V, ? extends V> arg0)	DEFAULT	org.apache.commons.collections4.IterableMap.super.replaceAll(arg0);
-M3UnmodifiableMultiValuedMap	M3UnmodifiableMultiValuedMap()	CONSTRUCTOR	this.backing = (org.apache.commons.collections4.MultiValuedMap<E>) java.util.Objects.requireNonNull(arg0, "collection"); org.apache.commons.collections4.MultiValuedMap<? extends K, ? extends V>
+M3UnmodifiableMultiValuedMap	M3UnmodifiableMultiValuedMap()	CONSTRUCTOR	this.backing = (org.apache.commons.collections4.MultiValuedMap<K, V>) java.util.Objects.requireNonNull(arg0, "map"); org.apache.commons.collections4.MultiValuedMap<? extends K, ? extends V>
 M3UnmodifiableMultiValuedMap	String toString()	DELEGATE	return backing.toString();
 M3UnmodifiableMultiValuedMap	boolean containsKey(Object arg0)	DELEGATE	return backing.containsKey(arg0);
 M3UnmodifiableMultiValuedMap	boolean containsMapping(Object arg0, Object arg1)	DELEGATE	return backing.containsMapping(arg0, arg1);
@@ -1764,13 +1764,13 @@ M3UnmodifiableMultiValuedMap	boolean putAll(org.apache.commons.collections4.Mult
 M3UnmodifiableMultiValuedMap	boolean removeMapping(Object arg0, Object arg1)	THROW	throw new UnsupportedOperationException();
 M3UnmodifiableMultiValuedMap	int hashCode()	DELEGATE	return backing.hashCode();
 M3UnmodifiableMultiValuedMap	int size()	DELEGATE	return backing.size();
-M3UnmodifiableMultiValuedMap	java.util.Collection<V> get(K arg0)	MANUAL	return UnmodifiableCollection.unmodifiableCollection(decorated().get(key));
+M3UnmodifiableMultiValuedMap	java.util.Collection<V> get(K arg0)	WRAP	return java.util.Collections.unmodifiableCollection(backing.get(arg0));
 M3UnmodifiableMultiValuedMap	java.util.Collection<V> remove(Object arg0)	THROW	throw new UnsupportedOperationException();
-M3UnmodifiableMultiValuedMap	java.util.Collection<V> values()	MANUAL	return UnmodifiableCollection.unmodifiableCollection(decorated().values());
-M3UnmodifiableMultiValuedMap	java.util.Collection<java.util.Map.Entry<K, V>> entries()	MANUAL	return UnmodifiableCollection.unmodifiableCollection(decorated().entries());
-M3UnmodifiableMultiValuedMap	java.util.Map<K, java.util.Collection<V>> asMap()	MANUAL	return UnmodifiableMap.unmodifiableMap(decorated().asMap());
+M3UnmodifiableMultiValuedMap	java.util.Collection<V> values()	WRAP	return java.util.Collections.unmodifiableCollection(backing.values());
+M3UnmodifiableMultiValuedMap	java.util.Collection<java.util.Map.Entry<K, V>> entries()	WRAP	return java.util.Collections.unmodifiableCollection(backing.entries());
+M3UnmodifiableMultiValuedMap	java.util.Map<K, java.util.Collection<V>> asMap()	WRAP	return java.util.Collections.unmodifiableMap(backing.asMap());
 M3UnmodifiableMultiValuedMap	java.util.Set<K> keySet()	WRAP	return java.util.Collections.unmodifiableSet(backing.keySet());
-M3UnmodifiableMultiValuedMap	org.apache.commons.collections4.MapIterator<K, V> mapIterator()	MANUAL	return UnmodifiableMapIterator.unmodifiableMapIterator(decorated().mapIterator());
+M3UnmodifiableMultiValuedMap	org.apache.commons.collections4.MapIterator<K, V> mapIterator()	UNMODIFIABLE_MAP_ITERATOR	return new UnmodifiableMapIteratorView<>(backing.mapIterator());
 M3UnmodifiableMultiValuedMap	org.apache.commons.collections4.MultiSet<K> keys()	MANUAL	return UnmodifiableMultiSet.unmodifiableMultiSet(decorated().keys());
 M3UnmodifiableMultiValuedMap	static <K, V> M3UnmodifiableMultiValuedMap<K, V> unmodifiableMultiValuedMap(org.apache.commons.collections4.MultiValuedMap<? extends K, ? extends V> arg0)	FACTORY	if (arg0 instanceof org.apache.commons.collections4.Unmodifiable) {             return (M3UnmodifiableMultiValuedMap<K, V>) arg0;         }         return new M3UnmodifiableMultiValuedMap<>(arg0);
 M3UnmodifiableMultiValuedMap	void clear()	THROW	throw new UnsupportedOperationException();
@@ -1828,7 +1828,7 @@ M3UnmodifiableOrderedBidiMap	K lastKey()	DELEGATE	return backing.lastKey();
 M3UnmodifiableOrderedBidiMap	K nextKey(K arg0)	DELEGATE	return backing.nextKey(arg0);
 M3UnmodifiableOrderedBidiMap	K previousKey(K arg0)	DELEGATE	return backing.previousKey(arg0);
 M3UnmodifiableOrderedBidiMap	K removeValue(Object arg0)	THROW	throw new UnsupportedOperationException();
-M3UnmodifiableOrderedBidiMap	M3UnmodifiableOrderedBidiMap()	CONSTRUCTOR	this.backing = (org.apache.commons.collections4.OrderedBidiMap<E>) java.util.Objects.requireNonNull(arg0, "collection"); org.apache.commons.collections4.OrderedBidiMap<? extends K, ? extends V>
+M3UnmodifiableOrderedBidiMap	M3UnmodifiableOrderedBidiMap()	CONSTRUCTOR	this.backing = (org.apache.commons.collections4.OrderedBidiMap<K, V>) java.util.Objects.requireNonNull(arg0, "map"); org.apache.commons.collections4.OrderedBidiMap<? extends K, ? extends V>
 M3UnmodifiableOrderedBidiMap	String toString()	DELEGATE	return backing.toString();
 M3UnmodifiableOrderedBidiMap	V compute(K arg0, java.util.function.BiFunction<? super K, ? super V, ? extends V> arg1)	DEFAULT	return org.apache.commons.collections4.OrderedBidiMap.super.compute(arg0, arg1);
 M3UnmodifiableOrderedBidiMap	V computeIfAbsent(K arg0, java.util.function.Function<? super K, ? extends V> arg1)	DEFAULT	return org.apache.commons.collections4.OrderedBidiMap.super.computeIfAbsent(arg0, arg1);
@@ -1848,12 +1848,12 @@ M3UnmodifiableOrderedBidiMap	boolean remove(Object arg0, Object arg1)	DEFAULT	re
 M3UnmodifiableOrderedBidiMap	boolean replace(K arg0, V arg1, V arg2)	DEFAULT	return org.apache.commons.collections4.OrderedBidiMap.super.replace(arg0, arg1, arg2);
 M3UnmodifiableOrderedBidiMap	int hashCode()	DELEGATE	return backing.hashCode();
 M3UnmodifiableOrderedBidiMap	int size()	DELEGATE	return backing.size();
-M3UnmodifiableOrderedBidiMap	java.util.Set<K> keySet()	MANUAL	final Set<K> set = super.keySet(); return UnmodifiableSet.unmodifiableSet(set);
-M3UnmodifiableOrderedBidiMap	java.util.Set<V> values()	MANUAL	final Set<V> set = super.values(); return UnmodifiableSet.unmodifiableSet(set);
-M3UnmodifiableOrderedBidiMap	java.util.Set<java.util.Map.Entry<K, V>> entrySet()	MANUAL	final Set<Map.Entry<K, V>> set = super.entrySet(); return UnmodifiableEntrySet.unmodifiableEntrySet(set);
+M3UnmodifiableOrderedBidiMap	java.util.Set<K> keySet()	WRAP	return java.util.Collections.unmodifiableSet(backing.keySet());
+M3UnmodifiableOrderedBidiMap	java.util.Set<V> values()	WRAP	return java.util.Collections.unmodifiableSet(backing.values());
+M3UnmodifiableOrderedBidiMap	java.util.Set<java.util.Map.Entry<K, V>> entrySet()	WRAP	return java.util.Collections.unmodifiableMap(backing).entrySet();
 M3UnmodifiableOrderedBidiMap	org.apache.commons.collections4.OrderedBidiMap<V, K> inverseBidiMap()	SELF_CALL	return inverseOrderedBidiMap();
 M3UnmodifiableOrderedBidiMap	org.apache.commons.collections4.OrderedBidiMap<V, K> inverseOrderedBidiMap()	MANUAL	if (inverse == null) { inverse = new UnmodifiableOrderedBidiMap<>(decorated().inverseBidiMap()); inverse.inverse = this; } return inverse;
-M3UnmodifiableOrderedBidiMap	org.apache.commons.collections4.OrderedMapIterator<K, V> mapIterator()	MANUAL	final OrderedMapIterator<K, V> it = decorated().mapIterator(); return UnmodifiableOrderedMapIterator.unmodifiableOrderedMapIterator(it);
+M3UnmodifiableOrderedBidiMap	org.apache.commons.collections4.OrderedMapIterator<K, V> mapIterator()	UNMODIFIABLE_MAP_ITERATOR	return new UnmodifiableOrderedMapIteratorView<>(backing.mapIterator());
 M3UnmodifiableOrderedBidiMap	static <K, V> org.apache.commons.collections4.OrderedBidiMap<K, V> unmodifiableOrderedBidiMap(org.apache.commons.collections4.OrderedBidiMap<? extends K, ? extends V> arg0)	FACTORY	if (arg0 instanceof org.apache.commons.collections4.Unmodifiable) {             return (org.apache.commons.collections4.OrderedBidiMap<K, V>) arg0;         }         return new M3UnmodifiableOrderedBidiMap<>(arg0);
 M3UnmodifiableOrderedBidiMap	void clear()	THROW	throw new UnsupportedOperationException();
 M3UnmodifiableOrderedBidiMap	void forEach(java.util.function.BiConsumer<? super K, ? super V> arg0)	DEFAULT	org.apache.commons.collections4.OrderedBidiMap.super.forEach(arg0);
@@ -1863,7 +1863,7 @@ M3UnmodifiableOrderedMap	K firstKey()	DELEGATE	return backing.firstKey();
 M3UnmodifiableOrderedMap	K lastKey()	DELEGATE	return backing.lastKey();
 M3UnmodifiableOrderedMap	K nextKey(K arg0)	DELEGATE	return backing.nextKey(arg0);
 M3UnmodifiableOrderedMap	K previousKey(K arg0)	DELEGATE	return backing.previousKey(arg0);
-M3UnmodifiableOrderedMap	M3UnmodifiableOrderedMap()	CONSTRUCTOR	this.backing = (org.apache.commons.collections4.OrderedMap<E>) java.util.Objects.requireNonNull(arg0, "collection"); org.apache.commons.collections4.OrderedMap<? extends K, ? extends V>
+M3UnmodifiableOrderedMap	M3UnmodifiableOrderedMap()	CONSTRUCTOR	this.backing = (org.apache.commons.collections4.OrderedMap<K, V>) java.util.Objects.requireNonNull(arg0, "map"); org.apache.commons.collections4.OrderedMap<? extends K, ? extends V>
 M3UnmodifiableOrderedMap	String toString()	DELEGATE	return backing.toString();
 M3UnmodifiableOrderedMap	V compute(K arg0, java.util.function.BiFunction<? super K, ? super V, ? extends V> arg1)	DEFAULT	return org.apache.commons.collections4.OrderedMap.super.compute(arg0, arg1);
 M3UnmodifiableOrderedMap	V computeIfAbsent(K arg0, java.util.function.Function<? super K, ? extends V> arg1)	DEFAULT	return org.apache.commons.collections4.OrderedMap.super.computeIfAbsent(arg0, arg1);
@@ -1883,10 +1883,10 @@ M3UnmodifiableOrderedMap	boolean remove(Object arg0, Object arg1)	DEFAULT	return
 M3UnmodifiableOrderedMap	boolean replace(K arg0, V arg1, V arg2)	DEFAULT	return org.apache.commons.collections4.OrderedMap.super.replace(arg0, arg1, arg2);
 M3UnmodifiableOrderedMap	int hashCode()	DELEGATE	return backing.hashCode();
 M3UnmodifiableOrderedMap	int size()	DELEGATE	return backing.size();
-M3UnmodifiableOrderedMap	java.util.Collection<V> values()	MANUAL	final Collection<V> coll = super.values(); return UnmodifiableCollection.unmodifiableCollection(coll);
-M3UnmodifiableOrderedMap	java.util.Set<K> keySet()	MANUAL	final Set<K> set = super.keySet(); return UnmodifiableSet.unmodifiableSet(set);
-M3UnmodifiableOrderedMap	java.util.Set<java.util.Map.Entry<K, V>> entrySet()	MANUAL	final Set<Map.Entry<K, V>> set = super.entrySet(); return UnmodifiableEntrySet.unmodifiableEntrySet(set);
-M3UnmodifiableOrderedMap	org.apache.commons.collections4.OrderedMapIterator<K, V> mapIterator()	MANUAL	final OrderedMapIterator<K, V> it = decorated().mapIterator(); return UnmodifiableOrderedMapIterator.unmodifiableOrderedMapIterator(it);
+M3UnmodifiableOrderedMap	java.util.Collection<V> values()	WRAP	return java.util.Collections.unmodifiableCollection(backing.values());
+M3UnmodifiableOrderedMap	java.util.Set<K> keySet()	WRAP	return java.util.Collections.unmodifiableSet(backing.keySet());
+M3UnmodifiableOrderedMap	java.util.Set<java.util.Map.Entry<K, V>> entrySet()	WRAP	return java.util.Collections.unmodifiableMap(backing).entrySet();
+M3UnmodifiableOrderedMap	org.apache.commons.collections4.OrderedMapIterator<K, V> mapIterator()	UNMODIFIABLE_MAP_ITERATOR	return new UnmodifiableOrderedMapIteratorView<>(backing.mapIterator());
 M3UnmodifiableOrderedMap	static <K, V> org.apache.commons.collections4.OrderedMap<K, V> unmodifiableOrderedMap(org.apache.commons.collections4.OrderedMap<? extends K, ? extends V> arg0)	FACTORY	if (arg0 instanceof org.apache.commons.collections4.Unmodifiable) {             return (org.apache.commons.collections4.OrderedMap<K, V>) arg0;         }         return new M3UnmodifiableOrderedMap<>(arg0);
 M3UnmodifiableOrderedMap	void clear()	THROW	throw new UnsupportedOperationException();
 M3UnmodifiableOrderedMap	void forEach(java.util.function.BiConsumer<? super K, ? super V> arg0)	DEFAULT	org.apache.commons.collections4.OrderedMap.super.forEach(arg0);
@@ -1956,7 +1956,7 @@ M3UnmodifiableSortedBidiMap	K lastKey()	DELEGATE	return backing.lastKey();
 M3UnmodifiableSortedBidiMap	K nextKey(K arg0)	DELEGATE	return backing.nextKey(arg0);
 M3UnmodifiableSortedBidiMap	K previousKey(K arg0)	DELEGATE	return backing.previousKey(arg0);
 M3UnmodifiableSortedBidiMap	K removeValue(Object arg0)	THROW	throw new UnsupportedOperationException();
-M3UnmodifiableSortedBidiMap	M3UnmodifiableSortedBidiMap()	CONSTRUCTOR	this.backing = (org.apache.commons.collections4.SortedBidiMap<E>) java.util.Objects.requireNonNull(arg0, "collection"); org.apache.commons.collections4.SortedBidiMap<K, ? extends V>
+M3UnmodifiableSortedBidiMap	M3UnmodifiableSortedBidiMap()	CONSTRUCTOR	this.backing = (org.apache.commons.collections4.SortedBidiMap<K, V>) java.util.Objects.requireNonNull(arg0, "map"); org.apache.commons.collections4.SortedBidiMap<K, ? extends V>
 M3UnmodifiableSortedBidiMap	String toString()	DELEGATE	return backing.toString();
 M3UnmodifiableSortedBidiMap	V compute(K arg0, java.util.function.BiFunction<? super K, ? super V, ? extends V> arg1)	DEFAULT	return org.apache.commons.collections4.SortedBidiMap.super.compute(arg0, arg1);
 M3UnmodifiableSortedBidiMap	V computeIfAbsent(K arg0, java.util.function.Function<? super K, ? extends V> arg1)	DEFAULT	return org.apache.commons.collections4.SortedBidiMap.super.computeIfAbsent(arg0, arg1);
@@ -1987,14 +1987,14 @@ M3UnmodifiableSortedBidiMap	java.util.Map.Entry<K, V> pollLastEntry()	DEFAULT	re
 M3UnmodifiableSortedBidiMap	java.util.SequencedCollection<V> sequencedValues()	DEFAULT	return org.apache.commons.collections4.SortedBidiMap.super.sequencedValues();
 M3UnmodifiableSortedBidiMap	java.util.SequencedSet<K> sequencedKeySet()	DEFAULT	return org.apache.commons.collections4.SortedBidiMap.super.sequencedKeySet();
 M3UnmodifiableSortedBidiMap	java.util.SequencedSet<java.util.Map.Entry<K, V>> sequencedEntrySet()	DEFAULT	return org.apache.commons.collections4.SortedBidiMap.super.sequencedEntrySet();
-M3UnmodifiableSortedBidiMap	java.util.Set<K> keySet()	MANUAL	final Set<K> set = super.keySet(); return UnmodifiableSet.unmodifiableSet(set);
-M3UnmodifiableSortedBidiMap	java.util.Set<V> values()	MANUAL	final Set<V> set = super.values(); return UnmodifiableSet.unmodifiableSet(set);
-M3UnmodifiableSortedBidiMap	java.util.Set<java.util.Map.Entry<K, V>> entrySet()	MANUAL	final Set<Map.Entry<K, V>> set = super.entrySet(); return UnmodifiableEntrySet.unmodifiableEntrySet(set);
-M3UnmodifiableSortedBidiMap	java.util.SortedMap<K, V> headMap(K arg0)	MANUAL	final SortedMap<K, V> sm = decorated().headMap(toKey); return UnmodifiableSortedMap.unmodifiableSortedMap(sm);
+M3UnmodifiableSortedBidiMap	java.util.Set<K> keySet()	WRAP	return java.util.Collections.unmodifiableSet(backing.keySet());
+M3UnmodifiableSortedBidiMap	java.util.Set<V> values()	WRAP	return java.util.Collections.unmodifiableSet(backing.values());
+M3UnmodifiableSortedBidiMap	java.util.Set<java.util.Map.Entry<K, V>> entrySet()	WRAP	return java.util.Collections.unmodifiableMap(backing).entrySet();
+M3UnmodifiableSortedBidiMap	java.util.SortedMap<K, V> headMap(K arg0)	WRAP	return java.util.Collections.unmodifiableSortedMap(backing.headMap(arg0));
 M3UnmodifiableSortedBidiMap	java.util.SortedMap<K, V> reversed()	DEFAULT	return org.apache.commons.collections4.SortedBidiMap.super.reversed();
-M3UnmodifiableSortedBidiMap	java.util.SortedMap<K, V> subMap(K arg0, K arg1)	MANUAL	final SortedMap<K, V> sm = decorated().subMap(fromKey, toKey); return UnmodifiableSortedMap.unmodifiableSortedMap(sm);
-M3UnmodifiableSortedBidiMap	java.util.SortedMap<K, V> tailMap(K arg0)	MANUAL	final SortedMap<K, V> sm = decorated().tailMap(fromKey); return UnmodifiableSortedMap.unmodifiableSortedMap(sm);
-M3UnmodifiableSortedBidiMap	org.apache.commons.collections4.OrderedMapIterator<K, V> mapIterator()	MANUAL	final OrderedMapIterator<K, V> it = decorated().mapIterator(); return UnmodifiableOrderedMapIterator.unmodifiableOrderedMapIterator(it);
+M3UnmodifiableSortedBidiMap	java.util.SortedMap<K, V> subMap(K arg0, K arg1)	WRAP	return java.util.Collections.unmodifiableSortedMap(backing.subMap(arg0, arg1));
+M3UnmodifiableSortedBidiMap	java.util.SortedMap<K, V> tailMap(K arg0)	WRAP	return java.util.Collections.unmodifiableSortedMap(backing.tailMap(arg0));
+M3UnmodifiableSortedBidiMap	org.apache.commons.collections4.OrderedMapIterator<K, V> mapIterator()	UNMODIFIABLE_MAP_ITERATOR	return new UnmodifiableOrderedMapIteratorView<>(backing.mapIterator());
 M3UnmodifiableSortedBidiMap	org.apache.commons.collections4.SortedBidiMap<V, K> inverseBidiMap()	MANUAL	if (inverse == null) { inverse = new UnmodifiableSortedBidiMap<>(decorated().inverseBidiMap()); inverse.inverse = this; } return inverse;
 M3UnmodifiableSortedBidiMap	static <K, V> org.apache.commons.collections4.SortedBidiMap<K, V> unmodifiableSortedBidiMap(org.apache.commons.collections4.SortedBidiMap<K, ? extends V> arg0)	FACTORY	if (arg0 instanceof org.apache.commons.collections4.Unmodifiable) {             return (org.apache.commons.collections4.SortedBidiMap<K, V>) arg0;         }         return new M3UnmodifiableSortedBidiMap<>(arg0);
 M3UnmodifiableSortedBidiMap	void clear()	THROW	throw new UnsupportedOperationException();
@@ -2005,7 +2005,7 @@ M3UnmodifiableSortedMap	K firstKey()	DELEGATE	return backing.firstKey();
 M3UnmodifiableSortedMap	K lastKey()	DELEGATE	return backing.lastKey();
 M3UnmodifiableSortedMap	K nextKey(K arg0)	MANUAL	final Iterator<K> it = tailMap(key).keySet().iterator(); it.next(); return it.hasNext() ? it.next() : null;
 M3UnmodifiableSortedMap	K previousKey(K arg0)	MANUAL	final SortedMap<K, V> headMap = headMap(key); return headMap.isEmpty() ? null : headMap.lastKey();
-M3UnmodifiableSortedMap	M3UnmodifiableSortedMap()	CONSTRUCTOR	this.backing = (java.util.SortedMap<E>) java.util.Objects.requireNonNull(arg0, "collection"); java.util.SortedMap<K, ? extends V>
+M3UnmodifiableSortedMap	M3UnmodifiableSortedMap()	CONSTRUCTOR	this.backing = (java.util.SortedMap<K, V>) java.util.Objects.requireNonNull(arg0, "map"); java.util.SortedMap<K, ? extends V>
 M3UnmodifiableSortedMap	String toString()	DELEGATE	return backing.toString();
 M3UnmodifiableSortedMap	V compute(K arg0, java.util.function.BiFunction<? super K, ? super V, ? extends V> arg1)	DEFAULT	return org.apache.commons.collections4.IterableSortedMap.super.compute(arg0, arg1);
 M3UnmodifiableSortedMap	V computeIfAbsent(K arg0, java.util.function.Function<? super K, ? extends V> arg1)	DEFAULT	return org.apache.commons.collections4.IterableSortedMap.super.computeIfAbsent(arg0, arg1);
@@ -2027,7 +2027,7 @@ M3UnmodifiableSortedMap	boolean remove(Object arg0, Object arg1)	DEFAULT	return 
 M3UnmodifiableSortedMap	boolean replace(K arg0, V arg1, V arg2)	DEFAULT	return org.apache.commons.collections4.IterableSortedMap.super.replace(arg0, arg1, arg2);
 M3UnmodifiableSortedMap	int hashCode()	DELEGATE	return backing.hashCode();
 M3UnmodifiableSortedMap	int size()	DELEGATE	return backing.size();
-M3UnmodifiableSortedMap	java.util.Collection<V> values()	MANUAL	return UnmodifiableCollection.unmodifiableCollection(super.values());
+M3UnmodifiableSortedMap	java.util.Collection<V> values()	WRAP	return java.util.Collections.unmodifiableCollection(backing.values());
 M3UnmodifiableSortedMap	java.util.Comparator<? super K> comparator()	DELEGATE	return backing.comparator();
 M3UnmodifiableSortedMap	java.util.Map.Entry<K, V> firstEntry()	DEFAULT	return org.apache.commons.collections4.IterableSortedMap.super.firstEntry();
 M3UnmodifiableSortedMap	java.util.Map.Entry<K, V> lastEntry()	DEFAULT	return org.apache.commons.collections4.IterableSortedMap.super.lastEntry();
@@ -2036,8 +2036,8 @@ M3UnmodifiableSortedMap	java.util.Map.Entry<K, V> pollLastEntry()	DEFAULT	return
 M3UnmodifiableSortedMap	java.util.SequencedCollection<V> sequencedValues()	DEFAULT	return org.apache.commons.collections4.IterableSortedMap.super.sequencedValues();
 M3UnmodifiableSortedMap	java.util.SequencedSet<K> sequencedKeySet()	DEFAULT	return org.apache.commons.collections4.IterableSortedMap.super.sequencedKeySet();
 M3UnmodifiableSortedMap	java.util.SequencedSet<java.util.Map.Entry<K, V>> sequencedEntrySet()	DEFAULT	return org.apache.commons.collections4.IterableSortedMap.super.sequencedEntrySet();
-M3UnmodifiableSortedMap	java.util.Set<K> keySet()	MANUAL	return UnmodifiableSet.unmodifiableSet(super.keySet());
-M3UnmodifiableSortedMap	java.util.Set<java.util.Map.Entry<K, V>> entrySet()	MANUAL	return UnmodifiableEntrySet.unmodifiableEntrySet(super.entrySet());
+M3UnmodifiableSortedMap	java.util.Set<K> keySet()	WRAP	return java.util.Collections.unmodifiableSet(backing.keySet());
+M3UnmodifiableSortedMap	java.util.Set<java.util.Map.Entry<K, V>> entrySet()	WRAP	return java.util.Collections.unmodifiableMap(backing).entrySet();
 M3UnmodifiableSortedMap	java.util.SortedMap<K, V> headMap(K arg0)	WRAP	return new M3UnmodifiableSortedMap<>(backing.headMap(arg0));
 M3UnmodifiableSortedMap	java.util.SortedMap<K, V> reversed()	DEFAULT	return org.apache.commons.collections4.IterableSortedMap.super.reversed();
 M3UnmodifiableSortedMap	java.util.SortedMap<K, V> subMap(K arg0, K arg1)	WRAP	return new M3UnmodifiableSortedMap<>(backing.subMap(arg0, arg1));
@@ -2085,16 +2085,16 @@ M3UnmodifiableSortedSet	void addFirst(E arg0)	DEFAULT	java.util.SortedSet.super.
 M3UnmodifiableSortedSet	void addLast(E arg0)	DEFAULT	java.util.SortedSet.super.addLast(arg0);
 M3UnmodifiableSortedSet	void clear()	THROW	throw new UnsupportedOperationException();
 M3UnmodifiableSortedSet	void forEach(java.util.function.Consumer<? super E> arg0)	DEFAULT	java.util.SortedSet.super.forEach(arg0);
-M3UnmodifiableTrie	K firstKey()	MANUAL	return delegate.firstKey();
-M3UnmodifiableTrie	K lastKey()	MANUAL	return delegate.lastKey();
-M3UnmodifiableTrie	K nextKey(K arg0)	MANUAL	return delegate.nextKey(key);
-M3UnmodifiableTrie	K previousKey(K arg0)	MANUAL	return delegate.previousKey(key);
-M3UnmodifiableTrie	M3UnmodifiableTrie(org.apache.commons.collections4.Trie<K, ? extends V> arg0)	CONSTRUCTOR	this.backing = (org.apache.commons.collections4.Trie<E>) java.util.Objects.requireNonNull(arg0, "collection"); org.apache.commons.collections4.Trie<K, ? extends V>
-M3UnmodifiableTrie	String toString()	MANUAL	return delegate.toString();
+M3UnmodifiableTrie	K firstKey()	DELEGATE	return backing.firstKey();
+M3UnmodifiableTrie	K lastKey()	DELEGATE	return backing.lastKey();
+M3UnmodifiableTrie	K nextKey(K arg0)	DELEGATE	return backing.nextKey(arg0);
+M3UnmodifiableTrie	K previousKey(K arg0)	DELEGATE	return backing.previousKey(arg0);
+M3UnmodifiableTrie	M3UnmodifiableTrie(org.apache.commons.collections4.Trie<K, ? extends V> arg0)	CONSTRUCTOR	this.backing = (org.apache.commons.collections4.Trie<K, V>) java.util.Objects.requireNonNull(arg0, "trie"); org.apache.commons.collections4.Trie<K, ? extends V>
+M3UnmodifiableTrie	String toString()	DELEGATE	return backing.toString();
 M3UnmodifiableTrie	V compute(K arg0, java.util.function.BiFunction<? super K, ? super V, ? extends V> arg1)	DEFAULT	return org.apache.commons.collections4.Trie.super.compute(arg0, arg1);
 M3UnmodifiableTrie	V computeIfAbsent(K arg0, java.util.function.Function<? super K, ? extends V> arg1)	DEFAULT	return org.apache.commons.collections4.Trie.super.computeIfAbsent(arg0, arg1);
 M3UnmodifiableTrie	V computeIfPresent(K arg0, java.util.function.BiFunction<? super K, ? super V, ? extends V> arg1)	DEFAULT	return org.apache.commons.collections4.Trie.super.computeIfPresent(arg0, arg1);
-M3UnmodifiableTrie	V get(Object arg0)	MANUAL	return delegate.get(key);
+M3UnmodifiableTrie	V get(Object arg0)	DELEGATE	return backing.get(arg0);
 M3UnmodifiableTrie	V getOrDefault(Object arg0, V arg1)	DEFAULT	return org.apache.commons.collections4.Trie.super.getOrDefault(arg0, arg1);
 M3UnmodifiableTrie	V merge(K arg0, V arg1, java.util.function.BiFunction<? super V, ? super V, ? extends V> arg2)	DEFAULT	return org.apache.commons.collections4.Trie.super.merge(arg0, arg1, arg2);
 M3UnmodifiableTrie	V put(K arg0, V arg1)	THROW	throw new UnsupportedOperationException();
@@ -2103,16 +2103,16 @@ M3UnmodifiableTrie	V putIfAbsent(K arg0, V arg1)	DEFAULT	return org.apache.commo
 M3UnmodifiableTrie	V putLast(K arg0, V arg1)	DEFAULT	return org.apache.commons.collections4.Trie.super.putLast(arg0, arg1);
 M3UnmodifiableTrie	V remove(Object arg0)	THROW	throw new UnsupportedOperationException();
 M3UnmodifiableTrie	V replace(K arg0, V arg1)	DEFAULT	return org.apache.commons.collections4.Trie.super.replace(arg0, arg1);
-M3UnmodifiableTrie	boolean containsKey(Object arg0)	MANUAL	return delegate.containsKey(key);
-M3UnmodifiableTrie	boolean containsValue(Object arg0)	MANUAL	return delegate.containsValue(value);
-M3UnmodifiableTrie	boolean equals(Object arg0)	MANUAL	return delegate.equals(obj);
-M3UnmodifiableTrie	boolean isEmpty()	MANUAL	return delegate.isEmpty();
+M3UnmodifiableTrie	boolean containsKey(Object arg0)	DELEGATE	return backing.containsKey(arg0);
+M3UnmodifiableTrie	boolean containsValue(Object arg0)	DELEGATE	return backing.containsValue(arg0);
+M3UnmodifiableTrie	boolean equals(Object arg0)	DELEGATE	return backing.equals(arg0);
+M3UnmodifiableTrie	boolean isEmpty()	DELEGATE	return backing.isEmpty();
 M3UnmodifiableTrie	boolean remove(Object arg0, Object arg1)	DEFAULT	return org.apache.commons.collections4.Trie.super.remove(arg0, arg1);
 M3UnmodifiableTrie	boolean replace(K arg0, V arg1, V arg2)	DEFAULT	return org.apache.commons.collections4.Trie.super.replace(arg0, arg1, arg2);
-M3UnmodifiableTrie	int hashCode()	MANUAL	return delegate.hashCode();
-M3UnmodifiableTrie	int size()	MANUAL	return delegate.size();
-M3UnmodifiableTrie	java.util.Collection<V> values()	MANUAL	return Collections.unmodifiableCollection(delegate.values());
-M3UnmodifiableTrie	java.util.Comparator<? super K> comparator()	MANUAL	return delegate.comparator();
+M3UnmodifiableTrie	int hashCode()	DELEGATE	return backing.hashCode();
+M3UnmodifiableTrie	int size()	DELEGATE	return backing.size();
+M3UnmodifiableTrie	java.util.Collection<V> values()	WRAP	return java.util.Collections.unmodifiableCollection(backing.values());
+M3UnmodifiableTrie	java.util.Comparator<? super K> comparator()	DELEGATE	return backing.comparator();
 M3UnmodifiableTrie	java.util.Map.Entry<K, V> firstEntry()	DEFAULT	return org.apache.commons.collections4.Trie.super.firstEntry();
 M3UnmodifiableTrie	java.util.Map.Entry<K, V> lastEntry()	DEFAULT	return org.apache.commons.collections4.Trie.super.lastEntry();
 M3UnmodifiableTrie	java.util.Map.Entry<K, V> pollFirstEntry()	DEFAULT	return org.apache.commons.collections4.Trie.super.pollFirstEntry();
@@ -2120,14 +2120,14 @@ M3UnmodifiableTrie	java.util.Map.Entry<K, V> pollLastEntry()	DEFAULT	return org.
 M3UnmodifiableTrie	java.util.SequencedCollection<V> sequencedValues()	DEFAULT	return org.apache.commons.collections4.Trie.super.sequencedValues();
 M3UnmodifiableTrie	java.util.SequencedSet<K> sequencedKeySet()	DEFAULT	return org.apache.commons.collections4.Trie.super.sequencedKeySet();
 M3UnmodifiableTrie	java.util.SequencedSet<java.util.Map.Entry<K, V>> sequencedEntrySet()	DEFAULT	return org.apache.commons.collections4.Trie.super.sequencedEntrySet();
-M3UnmodifiableTrie	java.util.Set<K> keySet()	MANUAL	return Collections.unmodifiableSet(delegate.keySet());
-M3UnmodifiableTrie	java.util.Set<java.util.Map.Entry<K, V>> entrySet()	MANUAL	return Collections.unmodifiableSet(delegate.entrySet());
-M3UnmodifiableTrie	java.util.SortedMap<K, V> headMap(K arg0)	MANUAL	return Collections.unmodifiableSortedMap(delegate.headMap(toKey));
-M3UnmodifiableTrie	java.util.SortedMap<K, V> prefixMap(K arg0)	MANUAL	return Collections.unmodifiableSortedMap(delegate.prefixMap(key));
+M3UnmodifiableTrie	java.util.Set<K> keySet()	WRAP	return java.util.Collections.unmodifiableSet(backing.keySet());
+M3UnmodifiableTrie	java.util.Set<java.util.Map.Entry<K, V>> entrySet()	WRAP	return java.util.Collections.unmodifiableSet(backing.entrySet());
+M3UnmodifiableTrie	java.util.SortedMap<K, V> headMap(K arg0)	WRAP	return java.util.Collections.unmodifiableSortedMap(backing.headMap(arg0));
+M3UnmodifiableTrie	java.util.SortedMap<K, V> prefixMap(K arg0)	WRAP	return java.util.Collections.unmodifiableSortedMap(backing.prefixMap(arg0));
 M3UnmodifiableTrie	java.util.SortedMap<K, V> reversed()	DEFAULT	return org.apache.commons.collections4.Trie.super.reversed();
-M3UnmodifiableTrie	java.util.SortedMap<K, V> subMap(K arg0, K arg1)	MANUAL	return Collections.unmodifiableSortedMap(delegate.subMap(fromKey, toKey));
-M3UnmodifiableTrie	java.util.SortedMap<K, V> tailMap(K arg0)	MANUAL	return Collections.unmodifiableSortedMap(delegate.tailMap(fromKey));
-M3UnmodifiableTrie	org.apache.commons.collections4.OrderedMapIterator<K, V> mapIterator()	MANUAL	final OrderedMapIterator<K, V> it = delegate.mapIterator(); return UnmodifiableOrderedMapIterator.unmodifiableOrderedMapIterator(it);
+M3UnmodifiableTrie	java.util.SortedMap<K, V> subMap(K arg0, K arg1)	WRAP	return java.util.Collections.unmodifiableSortedMap(backing.subMap(arg0, arg1));
+M3UnmodifiableTrie	java.util.SortedMap<K, V> tailMap(K arg0)	WRAP	return java.util.Collections.unmodifiableSortedMap(backing.tailMap(arg0));
+M3UnmodifiableTrie	org.apache.commons.collections4.OrderedMapIterator<K, V> mapIterator()	UNMODIFIABLE_MAP_ITERATOR	return new UnmodifiableOrderedMapIteratorView<>(backing.mapIterator());
 M3UnmodifiableTrie	static <K, V> org.apache.commons.collections4.Trie<K, V> unmodifiableTrie(org.apache.commons.collections4.Trie<K, ? extends V> arg0)	FACTORY	if (arg0 instanceof org.apache.commons.collections4.Unmodifiable) {             return (org.apache.commons.collections4.Trie<K, V>) arg0;         }         return new M3UnmodifiableTrie<>(arg0);
 M3UnmodifiableTrie	void clear()	THROW	throw new UnsupportedOperationException();
 M3UnmodifiableTrie	void forEach(java.util.function.BiConsumer<? super K, ? super V> arg0)	DEFAULT	org.apache.commons.collections4.Trie.super.forEach(arg0);

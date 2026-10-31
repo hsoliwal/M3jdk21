@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others.
 # SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
-# Pattern DECORATOR_FILL v1.5 driver: regenerate every five-provider decorator scaffold through M3DecoratorFill and
+# Pattern DECORATOR_FILL v1.6 driver: regenerate every five-provider decorator scaffold through M3DecoratorFill and
 # write the fully classified ones back into their modules (MANUAL atoms keep the scaffold). Then compile them with
 # -Xlint:all -Werror and run M3DecoratorDifferential against Apache Commons Collections 4.5.0 for each TARGETS.tsv row,
 # plus the probes named in its probe column (sync: M3SyncProbe + M3LockTraceProbe; predicated: M3PredicatedProbe).
@@ -23,7 +23,7 @@ Q=m3/collections/qualification/decorator-fill-20261030; I=m3/collections/impleme
 S=m3/collections/qualification/five-provider-inventory-20261018/SCAFFOLD_SURFACE.tsv
 BIN="$JAVA_HOME/bin"; SEP=":"; case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) SEP=";";; esac
 readme() {
-	version=v1.5
+	version=v1.6
 	probe=$(awk -F'\t' -v m="$3" '$1 == m { print $5; exit }' "$Q/TARGETS.tsv" | tr -d '\r')
 	# a LANES class (Predicated and Transformed families) is the one whose header lists its categories
 	if grep -q '^ \* Categories:' "$I/$1/src/main/java/${3//.//}.java"; then

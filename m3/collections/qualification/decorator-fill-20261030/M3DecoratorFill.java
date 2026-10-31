@@ -38,7 +38,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
- * Pattern DECORATOR_FILL v1.3 (TmOP generator): turns one five-provider decorator scaffold into an
+ * Pattern DECORATOR_FILL v1.6 (TmOP generator): turns one five-provider decorator scaffold into an
  * owned decorator.
  * Every scaffold method is one atom. The atom is classified against Apache Commons Collections
  * 4.5.0, which must be
@@ -73,6 +73,8 @@ public final class M3DecoratorFill {
     private static final String UNMOD = "org.apache.commons.collections4.Unmodifiable";
     private static final String GENERATOR =
             "m3/collections/qualification/decorator-fill-20261030/M3DecoratorFill.java";
+    /** The pattern version the GENERATED block of every owned class names. */
+    private static final String VERSION = "1.6";
     private static final Pattern METHOD = Pattern.compile(
             "(?m)^    (public|private) (.+) \\{\\R        throw new " +
                     "UnsupportedOperationException\\(M3_SCAFFOLD_MESSAGE\\);\\R    }\\R");
@@ -80,19 +82,30 @@ public final class M3DecoratorFill {
      * WRAP table: Commons wrapper factory -> owner expression; %s is the delegated call, %b the
      * backing.
      */
-    private static final Map<String, String> WRAP = Map.of(
-            "UnmodifiableIterator.unmodifiableIterator:iterator",
-                    "java.util.Collections.unmodifiableCollection(%b).iterator()",
-            "UnmodifiableIterator.unmodifiableIterator:descendingIterator",
-            "java.util.Collections.unmodifiableNavigableSet(%b).descendingIterator()",
-            "UnmodifiableListIterator.unmodifiableListIterator:listIterator",
-                    "java.util.Collections.unmodifiableList(%b).%c",
-            "UnmodifiableSortedSet.unmodifiableSortedSet",
-                    "java.util.Collections.unmodifiableSortedSet(%s)",
-            "UnmodifiableNavigableSet.unmodifiableNavigableSet",
-                    "java.util.Collections.unmodifiableNavigableSet(%s)",
-            "UnmodifiableSet.unmodifiableSet", "java.util.Collections.unmodifiableSet(%s)",
-            "UnmodifiableList.unmodifiableList", "java.util.Collections.unmodifiableList(%s)");
+    private static final Map<String, String> WRAP = Map.ofEntries(
+            Map.entry("UnmodifiableIterator.unmodifiableIterator:iterator",
+                    "java.util.Collections.unmodifiableCollection(%b).iterator()"),
+            Map.entry("UnmodifiableIterator.unmodifiableIterator:descendingIterator",
+                    "java.util.Collections.unmodifiableNavigableSet(%b).descendingIterator()"),
+            Map.entry("UnmodifiableListIterator.unmodifiableListIterator:listIterator",
+                    "java.util.Collections.unmodifiableList(%b).%c"),
+            Map.entry("UnmodifiableSortedSet.unmodifiableSortedSet",
+                    "java.util.Collections.unmodifiableSortedSet(%s)"),
+            Map.entry("UnmodifiableNavigableSet.unmodifiableNavigableSet",
+                    "java.util.Collections.unmodifiableNavigableSet(%s)"),
+            Map.entry("UnmodifiableSet.unmodifiableSet",
+                    "java.util.Collections.unmodifiableSet(%s)"),
+            Map.entry("UnmodifiableList.unmodifiableList",
+                    "java.util.Collections.unmodifiableList(%s)"),
+            // v1.6: the Unmodifiable map family
+            Map.entry("UnmodifiableCollection.unmodifiableCollection",
+                    "java.util.Collections.unmodifiableCollection(%s)"),
+            Map.entry("UnmodifiableEntrySet.unmodifiableEntrySet:entrySet",
+                    "java.util.Collections.unmodifiableMap(%b).entrySet()"),
+            Map.entry("UnmodifiableSortedMap.unmodifiableSortedMap",
+                    "java.util.Collections.unmodifiableSortedMap(%s)"),
+            Map.entry("UnmodifiableMap.unmodifiableMap",
+                    "java.util.Collections.unmodifiableMap(%s)"));
     /** SFA: a Java string literal (data, never rewritten). */
     private static final String LIT = "\"(?:[^\"\\\\]|\\\\.)*\"";
     private static final Pattern LITERAL = Pattern.compile(LIT);
@@ -632,6 +645,14 @@ public final class M3DecoratorFill {
                 }
             }
         }
+        // v1.6 ALIAS without an accessor: a class outside the decorator chain whose only instance
+        // field is a backing field (UnmodifiableTrie.delegate)
+        List<java.lang.reflect.Field> own = Arrays.stream(commons.getDeclaredFields()).filter(
+                x -> !Modifier.isStatic(x.getModifiers()) && !x.isSynthetic()).toList();
+        if (aliases.isEmpty() && commons.getSuperclass() == Object.class && own.size() == 1
+                && backingField(own.get(0).getName())) {
+            aliases.add(own.get(0).getName());
+        }
         for (Class<?> c = commons; c != null && c != Object.class; c = c.getSuperclass()) {
             for (Method m : c.getDeclaredMethods()) {
                 Optional<String> b = accessorBody(c, m);
@@ -667,8 +688,12 @@ public final class M3DecoratorFill {
                     && !Modifier.isStatic(x.getModifiers()))) {
                 Optional<String> text = source(c);
                 int[] scope = text.isPresent() ? scope(text.get(), c) : new int[0];
+                // v1.6: also through one local, 'final T t = (T) Objects.requireNonNull(..);
+                // this.F = t;' (UnmodifiableTrie)
                 return scope.length == 2
-                        && Pattern.compile("this\\." + f + " = Objects\\.requireNonNull\\(")
+                        && Pattern.compile("this\\." + f + " = Objects\\.requireNonNull\\("
+                        + "|(\\w+) = (\\([\\w.<>, ?]+\\) )?Objects\\.requireNonNull\\([^;]*\\);"
+                        + "\\s*this\\." + f + " = \\1;")
                         .matcher(text.get().substring(scope[0], scope[1])).find();
             }
         }
@@ -795,7 +820,18 @@ public final class M3DecoratorFill {
 
     private Emit wrap(Atom a, String body, List<String> names) {
         String wrapper = "(new \\w+<>|\\w+\\.\\w+|\\w+)";
-        String inlined = body.replaceAll(
+        // v1.6: super.m() of this no-argument atom reads as decorated().m() when the superclass
+        // body of m is the delegate (R6(1) guard)
+        String superCall = "super." + a.name + "()";
+        String source = body;
+        try {
+            if (names.isEmpty() && body.contains(superCall) && superDelegates(a)) {
+                source = body.replace(superCall, "decorated()." + a.name + "()");
+            }
+        } catch (IOException e) {
+            return new Emit("MANUAL", body + " (" + e + ")");
+        }
+        String inlined = source.replaceAll(
                 "^final [\\w.]+(<[^=]*?>)? (\\w+) = (decorated\\(\\)\\.\\w+\\([^;]*\\)); return "
                 + wrapper
                 + "\\(\\2((?:, \\w+)*)\\);$", "return $4($3$5);");
@@ -814,12 +850,49 @@ public final class M3DecoratorFill {
         String template = own ? m3Simple + "." + m3Factory() + "(%s)"
                 : m.group(1).equals("new " + self + "<>") ? "new " + m3Simple + "<>(%s)"
                 : WRAP.getOrDefault(m.group(1) + ":" + m.group(2), WRAP.get(m.group(1)));
+        if (template == null && m.group(1).matches("Collections\\.unmodifiable\\w+")
+                && importsJdkCollections()) {
+            // v1.6: the Commons class already wraps with the JDK owner itself
+            template = "java.util." + m.group(1) + "(%s)";
+        }
+        Matcher iterator = Pattern.compile("^Unmodifiable((?:Ordered)?MapIterator)"
+                + "\\.unmodifiable\\1$").matcher(m.group(1));
+        boolean view = template == null && iterator.matches()
+                && resolvesTo("Unmodifiable" + iterator.group(1),
+                "org.apache.commons.collections4.iterators.Unmodifiable" + iterator.group(1));
+        if (view) {
+            // v1.6 H4: no JDK owner for an unmodifiable MapIterator; the helper is emitted once
+            String kind = iterator.group(1);
+            helpers.put("Unmodifiable" + kind + "View",
+                    UNMODIFIABLE_MAP_ITERATOR_HELPER.formatted(kind,
+                    kind.startsWith("Ordered") ? ORDERED_MAP_ITERATOR_MEMBERS : ""));
+            template = "new Unmodifiable" + kind + "View<>(%s)";
+        }
         if (template == null) {
             return new Emit("MANUAL", body);
         }
         String expr = template.replace("%s", delegated).replace("%b", "backing").replace("%c",
                 a.name + "(" + args(a) + ")");
-        return new Emit("WRAP", "return " + expr + ";");
+        return new Emit(view ? "UNMODIFIABLE_MAP_ITERATOR" : "WRAP", "return " + expr + ";");
+    }
+
+    /** Whether the simple name resolves, as the declaring Commons source sees it, to fqn. */
+    private boolean resolvesTo(String simple, String fqn) {
+        try {
+            return imported(simple).filter(c -> c.getName().equals(fqn)).isPresent();
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
+    /** Whether the Commons source of the current atom imports {@code java.util.Collections}. */
+    private boolean importsJdkCollections() {
+        try {
+            return source(declaringNow == null ? commons : declaringNow).filter(
+                    s -> s.contains("\nimport java.util.Collections;")).isPresent();
+        } catch (IOException e) {
+            return false;
+        }
     }
 
     private String m3Factory() {
@@ -852,6 +925,15 @@ public final class M3DecoratorFill {
                     "no single-argument static factory: constructor shape outside DECORATOR_FILL " +
                     "v1");
         }
+        if (typeParamNames().length > 1) {
+            // v1.6: a K, V owner (Unmodifiable map family): the factory parameter type as declared
+            // and the null message of the Commons constructor chain
+            String backing = backingType();
+            String cast = factoryParamType.equals(backing) ? "" : "(" + backing + ") ";
+            return new Emit("CONSTRUCTOR", "this.backing = " + cast
+                    + "java.util.Objects.requireNonNull(arg0, " + nullMessage() + ");\u0000"
+                    + factoryParamType);
+        }
         String typeVar = factoryParamType.replaceAll(".*<(\\? extends )?([A-Z]\\w*)>.*", "$2");
         String param = factoryParamType.replace("<"
                 + (factoryParamType.contains("? extends") ? "? extends " : "") + typeVar + ">",
@@ -863,7 +945,34 @@ public final class M3DecoratorFill {
     }
 
     private String backingType() {
-        return factoryParamType.replaceAll("<.*>", "") + "<E>";
+        String[] tp = typeParamNames();
+        return factoryParamType.replaceAll("<.*>", "")
+                + (tp.length > 1 ? "<" + String.join(", ", tp) + ">" : "<E>");
+    }
+
+    /**
+     * v1.6: the message literal of the first {@code Objects.requireNonNull(p, MSG)} in a
+     * constructor of the Commons class chain ({@code "map"}, {@code "trie"}); SFA: the literal is
+     * data, copied unchanged.
+     */
+    private String nullMessage() {
+        try {
+            for (Class<?> c = commons; c != null && c != Object.class; c = c.getSuperclass()) {
+                Optional<String> text = source(c);
+                int[] scope = text.isPresent() ? scope(text.get(), c) : new int[0];
+                if (scope.length == 2) {
+                    Matcher m = Pattern.compile("\\b" + c.getSimpleName()
+                            + "\\([^)]*\\)\\s*\\{[^}]*?Objects\\.requireNonNull\\(\\w+, (" + LIT
+                            + ")\\)").matcher(text.get().substring(scope[0], scope[1]));
+                    if (m.find()) {
+                        return m.group(1);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            LOG.fine(() -> "no constructor source: " + e);
+        }
+        return "\"collection\"";
     }
 
     private String render(Atom a, Emit e) {
@@ -920,7 +1029,7 @@ public final class M3DecoratorFill {
      */
     private String generated(String how, String extra) {
         return "/*\n * GENERATED by " + GENERATOR
-                + " (pattern DECORATOR_FILL v1.4) from the five-provider scaffold;\n"
+                + " (pattern DECORATOR_FILL v" + VERSION + ") from the five-provider scaffold;\n"
                 + " * regenerate, do not hand-edit. Behaviour mirrors " + commons.getName() + "\n"
                 + " * from Apache Commons Collections 4.5.0 (Apache-2.0): " + how + "\n"
                 + (extra.isEmpty() ? "" : " * " + extra + "\n") + " */";
@@ -932,8 +1041,8 @@ public final class M3DecoratorFill {
         }
         String generated = generated(
                 "each method atom is classified as THROW, DELEGATE, EQUALS, WRAP, DEFAULT, FACTORY,"
-                + " FACTORY_NEW, SYNC, GUARD or VIEW and emitted from a template; no provider " +
-                        "implementation code is copied.", "");
+                + " FACTORY_NEW, SYNC, GUARD, VIEW or UNMODIFIABLE_MAP_ITERATOR and emitted from a"
+                + " template; no provider implementation code is copied.", "");
         return text.replaceFirst(GENERATED_BLOCK, Matcher.quoteReplacement(generated))
                 .replaceFirst(
                         "(?s) \\* SCAFFOLD, not an owned implementation: declares the public " +
@@ -1469,6 +1578,16 @@ public final class M3DecoratorFill {
                 || !sup.group(3).equals(String.join(", ", names))) {
             return direct;
         }
+        return superDelegates(a)
+                ? new Emit("DELEGATE", ret(a) + "backing." + a.name + "(" + args(a) + ");") :
+                        new Emit("MANUAL", rest);
+    }
+
+    /**
+     * Whether {@code super.m(..)} of atom a is the delegate: the nearest superclass body of m,
+     * classified in its own class, passes the R6(1) guard.
+     */
+    private boolean superDelegates(Atom a) throws IOException {
         Class<?> here = declaringNow;
         Optional<Emit> superShape = Optional.empty();
         for (Class<?> c = here.getSuperclass(); c != null && c != Object.class
@@ -1480,9 +1599,7 @@ public final class M3DecoratorFill {
             }
         }
         declaringNow = here;
-        return superShape.filter(this::superIsDelegate).isPresent()
-                ? new Emit("DELEGATE", ret(a) + "backing." + a.name + "(" + args(a) + ");") :
-                        new Emit("MANUAL", rest);
+        return superShape.filter(this::superIsDelegate).isPresent();
     }
 
     /**
@@ -2140,6 +2257,75 @@ public final class M3DecoratorFill {
                         return current().setValue(value);
                     }
                 }
+            """;
+
+    /**
+     * v1.6 H4 template (UNMODIFIABLE_MAP_ITERATOR): the UnmodifiableMapIterator contract, or with
+     * {@code %1$s = OrderedMapIterator} and the previous-direction members in {@code %2$s}, the
+     * UnmodifiableOrderedMapIterator contract. Reads delegate; remove and setValue are rejected.
+     */
+    private static final String UNMODIFIABLE_MAP_ITERATOR_HELPER = """
+
+                /**
+                 * UNMODIFIABLE_MAP_ITERATOR helper (no JDK owner): a %1$s that delegates reads \
+            and rejects
+                 * remove and setValue, the Unmodifiable%1$s contract.
+                 */
+                private static final class Unmodifiable%1$sView<K, V>
+                        implements org.apache.commons.collections4.%1$s<K, V> {
+                    private final org.apache.commons.collections4.%1$s<? extends K, ? extends V> \
+            iterator;
+
+                    Unmodifiable%1$sView(
+                            final org.apache.commons.collections4.%1$s<? extends K, ? extends V> \
+            iterator) {
+                        this.iterator = java.util.Objects.requireNonNull(iterator, "iterator");
+                    }
+
+                    @Override
+                    public K getKey() {
+                        return iterator.getKey();
+                    }
+
+                    @Override
+                    public V getValue() {
+                        return iterator.getValue();
+                    }
+
+                    @Override
+                    public boolean hasNext() {
+                        return iterator.hasNext();
+                    }
+            %2$s
+                    @Override
+                    public K next() {
+                        return iterator.next();
+                    }
+
+                    @Override
+                    public void remove() {
+                        throw new UnsupportedOperationException("remove() is not supported");
+                    }
+
+                    @Override
+                    public V setValue(final V value) {
+                        throw new UnsupportedOperationException("setValue() is not supported");
+                    }
+                }
+            """;
+
+    /** The previous-direction members of the ordered H4 helper. */
+    private static final String ORDERED_MAP_ITERATOR_MEMBERS = """
+
+                    @Override
+                    public boolean hasPrevious() {
+                        return iterator.hasPrevious();
+                    }
+
+                    @Override
+                    public K previous() {
+                        return iterator.previous();
+                    }
             """;
 
     /**
