@@ -6,6 +6,7 @@ plan after apply is empty (fixed point)."""
 from __future__ import annotations
 
 import importlib.util
+import re
 import subprocess
 import tempfile
 import unittest
@@ -90,6 +91,114 @@ class JdkNamingTest(unittest.TestCase):
         self.assertIn("https://github.com/hsoliwal/com.synexia/blob/x/SynexiaFoo.java", note)
         self.assertIn("use M3Bar", note)
 
+    def test_second_pass_folders_uppercase_words_and_com_m3(self):
+        self.put("m3/vendor/synexia/lib/Tool.java", "// the Synexia tool, see vendor/synexia/lib and Synexia-NOTICE\n")
+        self.put("m3/inv/SYNEXIA-LLM-FIRST-2.json", '{"id": "SYNEXIA-LLM-FIRST-2"}\n')
+        self.put("Synexia-NOTICE", "notice\n")
+        self.put("M3-SYNEXIA-NOTICE.md", "notice\n")
+        self.put("m3/collections/src/com/m3/collections/A.java", "package com.m3.collections;\nimport com.m3.arrays.B;\n")
+        self.put("m3/collections/pom.xml", "<project><groupId>com.m3.tooling</groupId></project>\n")
+        jn.apply(self.root, jn.plan(self.root))
+        tool = (self.root / "m3/vendor/m3/lib/Tool.java").read_text(encoding="utf-8")
+        self.assertIn("// the Synexia tool, see vendor/m3/lib and Synexia-NOTICE", tool)
+        self.assertIn('"M3-LLM-FIRST-2"', (self.root / "m3/inv/M3-LLM-FIRST-2.json").read_text(encoding="utf-8"))
+        self.assertTrue((self.root / "Synexia-NOTICE").is_file())
+        self.assertTrue((self.root / "M3-SYNEXIA-NOTICE.md").is_file())
+        self.assertEqual(jn.target_path("m3/x/synexia-openrewrite-recipes/licenses/Synexia-LICENSE"),
+                         "m3/x/m3-openrewrite-recipes/licenses/Synexia-LICENSE")
+        self.assertEqual(jn.rewrite_line("python3 m3/compatibility/check-synexia.py; dependency_on_synexia", {}),
+                         "python3 m3/compatibility/check-m3.py; dependency_on_synexia")
+        moved = (self.root / "m3/collections/src/jdk/m3/collections/A.java").read_text(encoding="utf-8")
+        self.assertIn("package jdk.m3.collections;", moved)
+        self.assertIn("import jdk.m3.arrays.B;", moved)
+        self.assertIn("<groupId>com.m3.tooling</groupId>", (self.root / "m3/collections/pom.xml").read_text(encoding="utf-8"))
+        again = jn.plan(self.root)
+        self.assertEqual((again["moves"], again["rewrites"]), ([], []))
+
+    def test_doubled_m3_prefixes_from_pass_one_collapse(self):
+        self.put(".github/workflows/m3-m3-family.yml", "run: python check_m3_m3_family.py M3_M3_MODE m3-m3-m3-x\n")
+        self.put("m3/x/Note.java", "// the Synexia M3 family, SynexiaM3Owner\n")
+        jn.apply(self.root, jn.plan(self.root))
+        workflow = (self.root / ".github/workflows/m3-family.yml").read_text(encoding="utf-8")
+        self.assertEqual(workflow, "run: python check_m3_family.py M3_MODE m3-x\n")
+        self.assertIn("// the Synexia M3 family, M3Owner", (self.root / "m3/x/Note.java").read_text(encoding="utf-8"))
+        again = jn.plan(self.root)
+        self.assertEqual((again["moves"], again["rewrites"]), ([], []))
+
+    def test_a_moved_file_and_every_reference_to_it_agree(self):
+        self.put("m3/compatibility/check_synexia_full_family.py", "print('ok')\n")
+        self.put("m3/x/AcmeSynexiaOwner.java", "class AcmeSynexiaOwner {}\n")
+        self.put(".github/workflows/w.yml", "run: python m3/compatibility/check_synexia_full_family.py "
+                 "m3/x/AcmeSynexiaOwner.java\n")
+        jn.apply(self.root, jn.plan(self.root))
+        workflow = (self.root / ".github/workflows/w.yml").read_text(encoding="utf-8")
+        for reference in workflow.split()[2:]:
+            self.assertTrue((self.root / reference).is_file(), reference)
+        self.assertIn("class AcmeM3Owner", (self.root / "m3/x/AcmeM3Owner.java").read_text(encoding="utf-8"))
+
+    def test_jni_symbols_headers_and_flattened_paths_follow_the_package(self):
+        line = ("JNIEXPORT jint JNICALL Java_com_synexia_common_collections_SegmentedBits_rank(JNIEnv *env, jclass c);"
+                " #include \"com_synexia_mindex_TextMetadata.h\" Java_com_m3_fs_M3FsNative_open "
+                "diffs/m3-fast-search__src__main__java__com__synexia__m3__search__Problem.java.diff "
+                "no_runtime_dependency_on_com_synexia_repository")
+        self.assertEqual(jn.rewrite_line(line, {}),
+                         "JNIEXPORT jint JNICALL Java_jdk_internal_m3_common_collections_SegmentedBits_rank(JNIEnv *env,"
+                         " jclass c); #include \"jdk_internal_m3_mindex_TextMetadata.h\" Java_jdk_m3_fs_M3FsNative_open "
+                         "diffs/m3-fast-search__src__main__java__jdk__internal__m3__search__Problem.java.diff "
+                         "no_runtime_dependency_on_com_m3_repository")
+
+    def test_the_standard_documents_every_rule_with_a_true_example(self):
+        """Section 5 of NAMING_STANDARD.md is a fixture: each `RULE` | before | after row rewrites as documented, the
+        rule named is among those that fired, and QUICK (the prefilter) admits every documented input."""
+        standard = Path(__file__).with_name("NAMING_STANDARD.md").read_text(encoding="utf-8")
+        section = standard[standard.index("## 5. The rules"):standard.index("## 6.")]
+        rows = re.findall(r"^\| `([A-Z0-9_]+)` \| (.+?) \| (.+?) \|$", section, re.M)
+        documented = {name for name, _b, _a in rows}
+        self.assertEqual(documented, {name for name, _r, _x in jn.TEXT_RULES})
+        for name, befores, afters in rows:
+            for before, after in zip(befores.split(", "), afters.split(", ")):
+                before, after = before.strip("`"), after.strip("`")
+                counts: dict = {}
+                self.assertTrue(jn.QUICK.search(before), (name, before))
+                self.assertEqual(jn.rewrite_line(before, counts), after, name)
+                self.assertIn(name, counts, (name, before))
+
+    def test_dotted_segments_types_in_the_root_package_prefix_literals_and_record_keys(self):
+        line = ('package com.m3.synexia.importer; import com.synexia.M3Planner; p.startsWith("com.synexia.") '
+                'row["synexiaState"] legal/synexia.md "schema": "synexia.recipe-source-custody/1" https://synexia.com/x')
+        self.assertEqual(jn.rewrite_line(line, {}),
+                         'package jdk.m3.importer; import jdk.internal.m3.M3Planner; p.startsWith("com.synexia.") '
+                         'row["synexiaState"] legal/synexia.md "schema": "m3.recipe-source-custody/1" https://synexia.com/x')
+        self.assertEqual(jn.renamed_path("m3/synexia-import/src/main/java/com/m3/synexia/importer/M3ImportPlan.java"),
+                         "m3/m3-import/src/main/java/jdk/m3/importer/M3ImportPlan.java")
+        glued = ("package org.synexia.m3.recipe; lab_com.synexia.rewrite.X recipe\\tcom.synexia.rewrite.Y\\ncom.m3.z.W "
+                 "${m3.synexia.version} m3-tq/synexia.md.txt.before Java_org_synexia_m3_recipe_X_f")
+        self.assertEqual(jn.rewrite_line(glued, {}),
+                         "package jdk.internal.m3.recipe; lab_jdk.internal.m3.rewrite.X recipe\\tjdk.internal.m3.rewrite.Y"
+                         "\\njdk.m3.z.W ${m3.version} m3-tq/synexia.md.txt.before Java_jdk_internal_m3_recipe_X_f")
+        self.assertEqual(jn.renamed_path("src/java.base/share/legal/synexia.md"), "src/java.base/share/legal/synexia.md")
+        self.assertTrue(jn.KEEP_PATH.search("src/java.base/share/legal/synexia.md"))
+
+    def test_recipe_memory_rows_name_a_recipe_and_a_fixture_that_exist(self):
+        """RECIPE_MEMORY.tsv: eight non-empty fields, an ISO-8601 UTC time, a recipe file next to the ledger, and
+        every guard `file#method` resolving to a test method (the memory gate of the com.synexia stack recipes)."""
+        here = Path(__file__).parent
+        lines = (here / "RECIPE_MEMORY.tsv").read_text(encoding="utf-8").splitlines()
+        self.assertEqual(lines[0], "utc\trecipe\ttrigger\tobserved\tcorrection\tcorrected_by\tguard\tlesson")
+        for line in lines[1:]:
+            fields = line.split("\t")
+            self.assertEqual(len(fields), 8, line[:60])
+            self.assertTrue(all(fields), line[:60])
+            self.assertRegex(fields[0], r"^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ$")
+            self.assertTrue((here / fields[1]).is_file(), fields[1])
+            self.assertTrue(fields[2].startswith("PATTERN:"), fields[2])
+            for guard in fields[6].split("; "):
+                file, method = guard.split("#")
+                sources = {"test_jdk_naming.py": here / file, "test_reseal.py": here / file,
+                           "JdkNamingConformanceTest": here / "conformance/src/test/java/jdk/m3/tooling/naming/"
+                           "JdkNamingConformanceTest.java"}
+                self.assertIn(method, sources[file].read_text(encoding="utf-8"), guard)
+
     def test_a_code_line_naming_a_license_is_still_renamed(self):
         self.put("m3/x/Rules.java", "import com.synexia.m3.x.LicenseRule;\n")
         jn.apply(self.root, jn.plan(self.root))
@@ -102,6 +211,60 @@ class JdkNamingTest(unittest.TestCase):
         self.assertEqual([r[0] for r in result["refusals"]], ["COLLISION"])
         with self.assertRaises(SystemExit):
             jn.apply(self.root, result)
+
+    def test_colliding_lineage_files_follow_their_directory_and_keep_their_names(self):
+        image = "m3/vendor/synexia/snapshots/image/"
+        self.put(image + "com.m3.x-jar.log.txt", "built com.m3.x\n")
+        self.put(image + "jdk.m3.x-jar.log.txt", "built jdk.m3.x\n")
+        self.put(image + "com.m3.x-notes.txt", "notes on com.m3.x\n")
+        result = jn.plan(self.root)
+        self.assertEqual(result["refusals"], [])
+        self.assertEqual(sorted(result["moves"]), [
+            (image + "com.m3.x-jar.log.txt", "m3/vendor/m3/snapshots/image/com.m3.x-jar.log.txt"),
+            (image + "com.m3.x-notes.txt", "m3/vendor/m3/snapshots/image/jdk.m3.x-notes.txt"),
+            (image + "jdk.m3.x-jar.log.txt", "m3/vendor/m3/snapshots/image/jdk.m3.x-jar.log.txt")])
+        self.assertEqual([p for p, _c in result["rewrites"]], [image + "com.m3.x-notes.txt"])
+        jn.apply(self.root, result)
+        again = jn.plan(self.root)
+        self.assertEqual((again["moves"], again["rewrites"], again["refusals"]), ([], [], []))
+
+    def commit(self):
+        run = ["git", "-C", str(self.root), "-c", "user.name=t", "-c", "user.email=t@example.com"]
+        subprocess.run(run + ["commit", "-q", "-m", "fixture"], check=True)
+        return subprocess.run(run + ["rev-parse", "HEAD"], check=True, capture_output=True, text=True).stdout.strip()
+
+    def show(self, rev, path):
+        return subprocess.run(["git", "-C", str(self.root), "show", f"{rev}:{path}"], check=True,
+                              capture_output=True).stdout
+
+    def test_a_file_outside_the_checkout_is_absent_even_without_a_synexia_path(self):
+        self.put("m3/x/Use.java", "import com.synexia.util.A;\n")
+        self.commit()
+        subprocess.run(["git", "-C", str(self.root), "update-index", "--skip-worktree", "m3/x/Use.java"], check=True)
+        (self.root / "m3/x/Use.java").unlink()
+        self.assertEqual(jn.plan(self.root)["absent"], ["m3/x/Use.java"])
+
+    def test_tree_mode_renames_blobs_outside_the_checkout_and_keeps_bytes_and_modes(self):
+        self.put("m3/x/Use.java", "import com.synexia.util.A;\r\nclass Use {}\r\n")
+        self.put("m3/synexia-tool/run it.sh", "export SYNEXIA_HOME=/opt\n")
+        subprocess.run(["git", "-C", str(self.root), "update-index", "--chmod=+x", "m3/synexia-tool/run it.sh"], check=True)
+        self.put("m3/x/Plain.java", "class Plain {}\n")
+        base = self.commit()
+        (self.root / "m3/x/Use.java").unlink()  # not checked out: tree mode reads the blob
+        for key, value in (("user.name", "t"), ("user.email", "t@example.com")):
+            subprocess.run(["git", "-C", str(self.root), "config", key, value], check=True)
+        commit = jn.apply_tree(self.root, base, "refs/heads/renamed", "rename")
+        self.assertEqual(self.show(commit, "m3/x/Use.java"), b"import jdk.internal.m3.util.A;\r\nclass Use {}\r\n")
+        self.assertEqual(self.show(commit, "m3/m3-tool/run it.sh"), b"export M3_HOME=/opt\n")
+        tree = subprocess.run(["git", "-C", str(self.root), "ls-tree", "-r", commit], check=True, capture_output=True,
+                              text=True).stdout
+        self.assertIn("100755 blob", next(line for line in tree.splitlines() if line.endswith("run it.sh")))
+        self.assertNotIn("synexia-tool", tree)
+        self.assertIn("m3/x/Plain.java", tree)
+        self.assertEqual(self.show(commit, jn.RENAME_MAP),
+                         b"path_before\tpath_after\nm3/synexia-tool/run it.sh\tm3/m3-tool/run it.sh\n")
+        again = jn.plan_tree(self.root, commit)
+        self.assertEqual((again["moves"], again["rewrites"]), ([], []))
 
     def test_only_limits_the_plan_to_a_prefix(self):
         self.put("m3/a/SynexiaA.java", "class SynexiaA {}\n")

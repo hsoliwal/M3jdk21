@@ -1,0 +1,30 @@
+kind	name	pattern	replacement	note
+TEXT	PKG_M3	(?:(?<![A-Za-z0-9])|(?<=\\[tnr]))(?:com|org)\.synexia\.m3\b	jdk.internal.m3	internal package root (com.synexia.m3, org.synexia.m3); a bare com.synexia.m3 is the root itself, never jdk.internal.m3.m3; a word boundary is also a TSV or newline escape (backslash-t, backslash-n) or an underscore before com
+TEXT	PKG	(?:(?<![A-Za-z0-9])|(?<=\\[tnr]))(?:com|org)\.synexia\.(?=[A-Za-z])	jdk.internal.m3.	every other com.synexia / org.synexia package, and a type directly in it (com.synexia.M3Planner); a bare prefix literal "com.synexia." is a check, not a name, and stays
+TEXT	PKG_PATH_M3	(?:(?<![A-Za-z0-9])|(?<=\\[tnr]))(?:com|org)/synexia/m3/	jdk/internal/m3/	package root as a path
+TEXT	PKG_PATH	(?:(?<![A-Za-z0-9])|(?<=\\[tnr]))(?:com|org)/synexia/(?=[a-z])	jdk/internal/m3/	package as a path
+TEXT	JNI_M3	(?:(?<=Java_)|(?<![A-Za-z0-9_]))(?:com|org)_synexia_m3_	jdk_internal_m3_	JNI symbol and javah header name of the package root (Java_com_synexia_m3_X_f, com_synexia_m3_X.h)
+TEXT	JNI	(?:(?<=Java_)|(?<![A-Za-z0-9_]))(?:com|org)_synexia_	jdk_internal_m3_	JNI symbol and javah header name of any com.synexia package
+TEXT	PKG_DUNDER_M3	(?<![A-Za-z0-9])(?:com|org)__synexia__m3__	jdk__internal__m3__	package path flattened with __ for a slash (diff and image file names)
+TEXT	PKG_DUNDER	(?<![A-Za-z0-9])(?:com|org)__synexia__	jdk__internal__m3__	flattened package path
+TEXT	TYPE_M3	(?:M3Synexia|SynexiaM3)(?=[A-Z0-9_])	M3	a type already carrying M3 keeps one M3
+TEXT	TYPE	Synexia(?=[A-Z0-9_])	M3	type, member and constant prefix (also inside a name: canonicalSynexiaOwner)
+TEXT	CONST	(?<![A-Za-z0-9])SYNEXIA_(?=[A-Z0-9])	M3_	constant, environment and secret names (a workflow's secrets.SYNEXIA_* span is kept)
+TEXT	KEBAB	(?<![A-Za-z0-9])synexia-(?=[a-z0-9])	m3-	module, artifact, crate and file names
+TEXT	SNAKE	(?<![A-Za-z0-9])synexia_(?=[a-z0-9])	m3_	script, function and key names (check_synexia_x.py, reviewed_synexia_commit)
+TEXT	KEBAB_SUFFIX	(?<=[A-Za-z0-9]-)synexia(?![A-Za-z0-9_])	m3	a kebab name ending in the word (check-synexia.py); a snake suffix (dependency_on_synexia) is a statement about the donor and stays
+TEXT	CONST_KEBAB	(?<![A-Za-z0-9])SYNEXIA-(?=[A-Z0-9])	M3-	invariant and ledger ids (SYNEXIA-LLM-FIRST-2)
+TEXT	SEGMENT	(?<![^/])synexia(?=/)	m3	a whole path segment (m3/vendor/synexia/)
+TEXT	SEGMENT_DOT	(?<![A-Za-z0-9_-])synexia(?=\.[A-Za-z])(?!\.(?:com|io|org|net|dev|ai)\b)	m3	a whole dotted segment (com.m3.synexia.importer, schema id synexia.recipe-source-custody); never a domain name
+TEXT	PKG_COM_M3	(?:(?<![A-Za-z0-9])|(?<=\\[tnr]))com\.m3\.(?=[a-z])	jdk.m3.	exported M3 packages take the JDK module prefix (Maven groupId spans are kept)
+TEXT	PKG_PATH_COM_M3	(?:(?<![A-Za-z0-9])|(?<=\\[tnr]))com/m3/(?=[a-z])	jdk/m3/	exported package as a path
+TEXT	JNI_COM_M3	(?:(?<=Java_)|(?<![A-Za-z0-9_]))com_m3_(?=[a-z])	jdk_m3_	JNI symbol and header name of an exported package
+TEXT	PKG_DUNDER_COM_M3	(?<![A-Za-z0-9])com__m3__(?=[a-z])	jdk__m3__	flattened exported package path
+TEXT	DOUBLE	(?<![A-Za-z0-9])(m3[-_./]|M3[-_./])(?:\1)+	\1	synexia-m3-x renamed once gives m3-m3-x, com.m3.synexia.x gives jdk.m3.m3.x: one prefix or segment (no m3-m3-, m3.m3. or m3/m3/ existed before the rename)
+KEEP_LINE	COPYRIGHT	Copyright|SPDX-		copyright and SPDX lines are kept whole
+KEEP_SPAN	GROUP_ID	<groupId>\s*com\.(?:synexia|m3)[\w.]*\s*</groupId>		Maven coordinates are not packages; mapped by the artifact phase
+KEEP_SPAN	SECRET	secrets\.SYNEXIA_\w+		a repository secret is a dependency the standalone check must still see
+KEEP_SPAN	LEGAL_FILE	\bSynexia-(?:NOTICE|LICENSE|RIGHTS|AUTHORS)\b|M3-SYNEXIA-[A-Z]+(?:\.md)?		attribution file names are release-boundary files
+KEEP_SPAN	REPOSITORY	(?:https?://)?(?:www\.)?(?:github\.com|raw\.githubusercontent\.com|api\.github\.com/repos)/hsoliwal/com\.synexia[\w./#?=&%~:+-]*|hsoliwal/com\.synexia\b		links to the donor repository stay true links (the standalone check removes dependencies, the rename does not hide them)
+KEEP_SPAN	LEGAL_MD	(?<![A-Za-z0-9_-])synexia\.md\b		the JDK legal file src/java.base/share/legal/synexia.md is named after the donor, as every legal/<component>.md is
+KEEP_PATH	LEGAL	(?i)synexia-(?:notice|license|rights|authors)|legal/synexia\.md$		legal and attribution files keep their names
