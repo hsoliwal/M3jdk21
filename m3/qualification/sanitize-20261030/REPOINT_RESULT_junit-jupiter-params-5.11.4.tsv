@@ -1,0 +1,2 @@
+consumer	before	after	gate	javac_errors	javac_warnings	module_gate	files_dropped	bytes_dropped	proof_mentions	proof_blocking	verdict
+m3/vendor/third_party/junit-jupiter-5.11.4	junit-jupiter-params-5.11.4 (5.11.4-m3-source-1)	junit-jupiter-params-5.10.2 (5.10.2-m3-source-1)	javac --release 21 -Xlint:all: junit-jupiter-params-5.10.2 then junit-jupiter-5.11.4 src/main/java + versions overlays on its classes	2	374	NOT_RUN	76	276014	10	0	PASS

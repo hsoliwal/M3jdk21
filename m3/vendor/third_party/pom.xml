@@ -80,19 +80,12 @@
     <module>jspecify-1.0.1</module>
     <module>jsr305</module>
     <module>junit-jupiter-5.10.2</module>
-    <module>junit-jupiter-5.11.4</module>
     <module>junit-jupiter-api-5.10.2</module>
-    <module>junit-jupiter-api-5.11.4</module>
     <module>junit-jupiter-engine-5.10.2</module>
-    <module>junit-jupiter-engine-5.11.4</module>
     <module>junit-jupiter-params-5.10.2</module>
-    <module>junit-jupiter-params-5.11.4</module>
     <module>junit-platform-commons-1.10.2</module>
-    <module>junit-platform-commons-1.11.4</module>
     <module>junit-platform-engine-1.10.2</module>
-    <module>junit-platform-engine-1.11.4</module>
     <module>junit-platform-launcher-1.10.2</module>
-    <module>junit-platform-launcher-1.11.4</module>
     <module>lucene-analysis-common</module>
     <module>lucene-core</module>
     <module>lucene-queries</module>
