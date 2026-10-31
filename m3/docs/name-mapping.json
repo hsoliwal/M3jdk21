@@ -10272,6 +10272,118 @@
         }
       },
       {
+        "id": "synexia.collections.long-long-add-to",
+        "kind": "specialization",
+        "status": "pending",
+        "reason": "Recipe-executed existing-owner candidate with bounded Java21 evidence; installed M3JDK21 and broader collection admission remain open.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "59c6cf1defa8d407a3c6876af3fe3198a777a90d",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-long-receiver-20261029/templates/M3LongLongHashMap.java",
+            "symbol": "com.m3.collections.M3LongLongHashMap",
+            "signatures": [
+              "long addTo(long,long)"
+            ],
+            "sha256": "12908066ef748db4eb5191a511964234c8c1e3f33f8ea2c0d945a1300660cd56",
+            "git_blob_sha1": "5e460e6e025109aee046dc28adc8e0063e4bbeb1",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "com.m3.collections",
+            "path": "m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java",
+            "symbol": "com.m3.collections.M3LongLongHashMap",
+            "signatures": [
+              "long addTo(long,long)"
+            ],
+            "sha256": "12908066ef748db4eb5191a511964234c8c1e3f33f8ea2c0d945a1300660cd56",
+            "git_blob_sha1": "5e460e6e025109aee046dc28adc8e0063e4bbeb1",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "com.m3.collections.M3LongLongHashMap",
+        "identity": {
+          "namespace": "Existing M3 owner and package retained; public java.util names remain unchanged.",
+          "generation": "Existing primitive payload/state arrays and modification epoch; no new retained per-entry objects."
+        },
+        "contract": {
+          "differences": [
+            "Additive addTo(long,long): absence starts at zero, zero delta inserts, Java long overflow wraps."
+          ],
+          "compatibility_obligations": [
+            "Preserve every pre-existing public/protected descriptor and class/package identity.",
+            "Preserve capacity, ordering, tombstone/occupancy or ring-head semantics and iterator epochs.",
+            "No runtime dependency, new JNI symbol, new storage hierarchy or public Java SE replacement."
+          ],
+          "public_surface": [
+            "long addTo(long,long)"
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "Existing Java descriptors retained; one additive map method.",
+          "bootstrap": "Existing com.m3.collections proving module; installed JDK admission is not claimed."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Execute sealed FILE recipes in private Synexia.",
+          "joins": "Reuse existing primitive arrays and indexes.",
+          "outputs": "Exact executed product source and independent target acceptance tests.",
+          "cached_facts": "No additional cache or payload owner."
+        },
+        "recipe": {
+          "id": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+          "version": "m3-long-receiver-map-20261029",
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-long-receiver-20261029/resources/com/synexia/rewrite/hash-pinned-java/m3-long-receiver-map-20261029/manifest.tsv",
+          "sha256": "2f8d7076176277c2b372f8b238f3058b4ba86b8736feedf72baf5e33a243595d",
+          "preconditions": [
+            "Exact target preimage and closure seals",
+            "SDK fixed point, refusal and serial compiler/behavior evidence"
+          ],
+          "rollback": "Restore the exact preimage through a separately reviewed sealed recipe; preserve unrelated edits."
+        },
+        "tests": [
+          {
+            "id": "long-collection-component-acceptance",
+            "receipt": "m3/collections/qualification/long-consolidation-20261029/RECEIPT.json"
+          }
+        ],
+        "provenance": {
+          "license": "Apache-2.0; original Hitesh Soliwal and contributors headers retained.",
+          "publication": "Routine refinement of already-public primitive owners; public problem-pattern references, no challenge solution bodies.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": "59c6cf1defa8d407a3c6876af3fe3198a777a90d",
+          "target_revision": "669a949d192345acefcfc5e9bb0b3724174d270c",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Adapt LongLongHashMap operation to the existing target owner; do not transplant its full storage contract."
+          ],
+          "pending": [
+            "Installed M3JDK21 acceptance",
+            "Whole-module/reactor and all-platform qualification",
+            "Representative production performance",
+            "String -> arrays -> collections phase remains unchanged"
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "partial",
+        "observation": "Finite component proofs and diagnostic timing do not establish estate-wide collection parity or universal superiority."
+      },
+      {
         "id": "m3.arrays.packed.signed",
         "kind": "adapter",
         "status": "implemented-unverified",
