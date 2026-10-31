@@ -12,9 +12,9 @@ Reproducer:
 
 ```sh
 javac --release 21 -proc:none -Xlint:all -Werror -d /tmp/m3-scope \
-  m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ASTLeafIndex.java \
-  m3/ports/compiletime/src/test/java/com/m3/compiletime/M3ASTLeafIndexSelfTest.java \
-  m3/ports/compiletime/src/test/java/com/m3/compiletime/M3ASTScopeDispatchProof.java
+  m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ASTLeafIndex.java \
+  m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3ASTLeafIndexSelfTest.java \
+  m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3ASTScopeDispatchProof.java
 java -cp /tmp/m3-scope com.m3.compiletime.M3ASTLeafIndexSelfTest
 java -cp /tmp/m3-scope com.m3.compiletime.M3ASTScopeDispatchProof
 ```

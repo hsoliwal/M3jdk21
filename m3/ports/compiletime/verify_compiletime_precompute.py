@@ -13,7 +13,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 PORT = ROOT / "m3/ports/compiletime"
-CRATE = ROOT / ("m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/"
+CRATE = ROOT / ("m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/"
                 "jdk21-hash-pinned/m3-compiletime-regex-precompute")
 LEDGER_COLUMNS = ["capability", "candidate_repo", "commit", "source_paths", "license",
                   "contract_fit", "decision", "rejected_reason", "adapted_hashes", "notice_path"]

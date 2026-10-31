@@ -6,7 +6,7 @@
  */
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import com.m3.collections.guava.M3HashBiMap;
+import jdk.m3.collections.guava.M3HashBiMap;
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
 import java.util.Iterator;

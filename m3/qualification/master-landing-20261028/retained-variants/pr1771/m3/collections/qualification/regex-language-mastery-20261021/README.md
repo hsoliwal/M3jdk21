@@ -30,9 +30,9 @@ Each of those four stages has an actual Maven verify result with **five SDK, eig
 | --- | --- | --- |
 | `src/java.base/share/classes/java/lang/M3StringFacts.java` | runtime_owner | `0cc1b4726cb2637b184184a60c75964180d58790530101fcf46900f74f1dc72a` |
 | `src/java.base/share/classes/java/lang/M3StringRegexDp.java` | runtime_owner | `faa373f77eef1d2dd3457bfe8c5d65d2dff819bb606e00f7c269e7b08a37cf25` |
-| `src/java.base/share/classes/java/util/ChangeJournal.java` | documentation_companion | `2fd9384a9df26ed038bd6663e083586425228815dc7b4d43205af769d3c2544e` |
+| `src/java.base/share/classes/java/util/ChangeJournal.java` | documentation_companion | `ffad7d1b3fdb044fe970f4014348e2f1518705613ffb03f6e770ab3169eeb97f` |
 | `src/java.base/share/classes/java/util/regex/M3PatternQuery.java` | runtime_owner | `190d541c497c344ba5015f38edadf6d6fb359e10010afbb88729905e04b1c1d7` |
-| `src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java` | runtime_owner | `e5b9b0cafa6edb66697783250271fa165c9ccee7ccbf661b7b23843e7e1d7a43` |
+| `src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java` | runtime_owner | `ee23709b19fb37a1d43bd9c5f2f2e038e22b47bd21804b59beb0ad99a8eeeb06` |
 | `src/java.base/share/classes/jdk/internal/mindex/M3TokenPredicateCache.java` | runtime_owner | `1aa4e472110c2ca9432efc68cf7bea09c22ade8af670017fa4fe473bebfade88` |
 | `test/jdk/java/lang/String/M3CommonRegexFactsHostTest.java` | test_source | `683b84ace57ad7fb606de36946cd5b242821601ebf540387de321bf22534f2a5` |
 | `test/jdk/java/lang/String/M3CommonRegexPreparedClasses.java` | test_source | `cb3672f43cf4625e19759424df94158f95882bdb7e753d33ce2ffa3503a36738` |

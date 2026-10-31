@@ -18,17 +18,17 @@ import xml.etree.ElementTree as ET
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 OWNER = Path("m3/pom.xml")
-PRE_BLOB = "693156006961717eccfc649585e724d67682b3df"
+PRE_BLOB = "e01cddcbac3751bfa79368c3727343754c7e3b21"
 ANCHOR = "  </profiles>\n\n  <build>\n"
 PROFILE = """    <profile>
-      <id>m3-synexia-atomlogic-readonly</id>
+      <id>m3-atomlogic-readonly</id>
       <build><plugins><plugin>
         <groupId>org.openrewrite.maven</groupId>
         <artifactId>rewrite-maven-plugin</artifactId>
         <version>5.23.1</version>
         <dependencies><dependency>
           <groupId>com.synexia</groupId>
-          <artifactId>synexia-openrewrite-recipes</artifactId>
+          <artifactId>m3-openrewrite-recipes</artifactId>
           <version>1.0.0-SNAPSHOT</version>
         </dependency></dependencies>
         <executions><execution>
@@ -37,7 +37,7 @@ PROFILE = """    <profile>
         </execution></executions>
         <configuration>
           <activeRecipes>
-            <recipe>com.synexia.rewrite.M3AtomLogicClusterRecipe</recipe>
+            <recipe>jdk.internal.m3.rewrite.M3AtomLogicClusterRecipe</recipe>
           </activeRecipes>
           <exportDatatables>true</exportDatatables>
           <runPerSubmodule>false</runPerSubmodule>
@@ -58,7 +58,7 @@ def generate(before: bytes) -> bytes:
     if git_blob(before) != PRE_BLOB:
         raise ValueError("refused: baseline POM changed")
     source = before.decode("utf-8", errors="strict")
-    if source.count(ANCHOR) != 1 or "m3-synexia-atomlogic-readonly" in source:
+    if source.count(ANCHOR) != 1 or "m3-atomlogic-readonly" in source:
         raise ValueError("refused: missing/nonunique anchor or duplicate profile")
     output = source.replace(ANCHOR, PROFILE + ANCHOR, 1).encode("utf-8")
     validate_xml(output)
@@ -71,12 +71,12 @@ def validate_xml(post: bytes) -> None:
     ns = {"m": "http://maven.apache.org/POM/4.0.0"}
     profiles = root.findall(".//m:profiles/m:profile", ns)
     matches = [p for p in profiles if p.findtext("m:id", namespaces=ns)
-               == "m3-synexia-atomlogic-readonly"]
+               == "m3-atomlogic-readonly"]
     if len(matches) != 1:
         raise AssertionError("atom logic profile not unique")
     p = matches[0]
     recipes = p.findall(".//m:activeRecipes/m:recipe", ns)
-    if [recipe.text for recipe in recipes] != ["com.synexia.rewrite.M3AtomLogicClusterRecipe"]:
+    if [recipe.text for recipe in recipes] != ["jdk.internal.m3.rewrite.M3AtomLogicClusterRecipe"]:
         raise AssertionError("must use canonical read-only Synexia recipe only")
     if p.find(".//m:goal", ns).text != "dryRun":
         raise AssertionError("mutation-capable rewrite goal refused")
@@ -90,7 +90,7 @@ def self_test(before: bytes) -> bytes:
     for candidate in (before + b"\n<!-- drift -->\n",
                       before.replace(ANCHOR.encode(), b"  </profiles>\n", 1),
                       before.replace(b"<id>m3-extended</id>",
-                                     b"<id>m3-synexia-atomlogic-readonly</id>", 1)):
+                                     b"<id>m3-atomlogic-readonly</id>", 1)):
         try:
             generate(candidate)
         except ValueError:

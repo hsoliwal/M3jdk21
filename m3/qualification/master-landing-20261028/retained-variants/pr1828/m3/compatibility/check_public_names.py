@@ -28,8 +28,8 @@ JDK_SOURCE = re.compile(r"^src/[^/]+/(?:share|unix|linux|windows|macosx|bsd)/cla
 
 
 RECIPE_ROOTS = (
-    "synexia-openrewrite-recipes/",
-    "synexia-m3-recipe/",
+    "m3-openrewrite-recipes/",
+    "m3-recipe/",
     "m3/tooling/migration-recipes/",
 )
 RECIPE_DESCRIPTOR = re.compile(r"(?:^|/)META-INF/rewrite/[^/]+\.ya?ml$")

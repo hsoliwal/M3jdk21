@@ -15,7 +15,7 @@
         "-Werror",
         "-d",
         "wrapper-audit/candidate/classes",
-        "wrapper-audit/candidate/src/com/m3/collections/M3FilteredViews.java"
+        "wrapper-audit/candidate/src/jdk/m3/collections/M3FilteredViews.java"
       ],
       "exit_code": 0
     },
@@ -43,7 +43,7 @@
         "-Xmx256m",
         "-cp",
         "wrapper-audit/candidate/classes:wrapper-audit/test-classes",
-        "com.m3.collections.M3FilteredNavigationReconciliationContract"
+        "jdk.m3.collections.M3FilteredNavigationReconciliationContract"
       ],
       "exit_code": 0,
       "checks": 154239,
@@ -59,7 +59,7 @@
         "-Xint",
         "-cp",
         "wrapper-audit/candidate/classes:wrapper-audit/test-classes",
-        "com.m3.collections.M3FilteredNavigationReconciliationContract"
+        "jdk.m3.collections.M3FilteredNavigationReconciliationContract"
       ],
       "exit_code": 0,
       "checks": 154239,
@@ -74,7 +74,7 @@
         "-Xmx256m",
         "-cp",
         "wrapper-audit/classes:wrapper-audit/test-classes",
-        "com.m3.collections.M3FilteredNavigationReconciliationContract"
+        "jdk.m3.collections.M3FilteredNavigationReconciliationContract"
       ],
       "exit_code": 1,
       "expected_failed_witness": true,
@@ -101,7 +101,7 @@
   "tape_excludes": "Both repaired entrySet.contains callback behavior and the null-sentinel comparator-demand branch. The latter can add one comparison with an actual opposite stored boundary; first/last lookup order is retained. No universal comparator callback identity or whole-contract equivalence is claimed.",
   "public_api": {
     "tool": "javap -public -s",
-    "class": "com.m3.collections.M3FilteredViews",
+    "class": "jdk.m3.collections.M3FilteredViews",
     "baseline_classpath": "wrapper-audit/classes",
     "candidate_classpath": "wrapper-audit/candidate/classes",
     "files": [

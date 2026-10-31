@@ -3,8 +3,8 @@ name: M3 FLLDCIM documentation receiver Java21
 on:
   pull_request:
     paths:
-      - 'm3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HierarchicalDocumentation*.java'
-      - 'm3/tooling/migration-recipes/src/test/java/com/synexia/rewrite/M3HierarchicalDocumentation*.java'
+      - 'm3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HierarchicalDocumentation*.java'
+      - 'm3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3HierarchicalDocumentation*.java'
       - 'm3/docs/m3-flldcim-receiver-*'
       - '.github/workflows/m3-flldcim-documentation-receiver.yml'
   workflow_dispatch:
@@ -32,9 +32,9 @@ jobs:
           git diff --check
           mkdir -p "$RUNNER_TEMP/m3-doc"
           javac --release 21 -Xlint:all -Werror -d "$RUNNER_TEMP/m3-doc" \
-            m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HierarchicalDocumentation.java \
-            m3/tooling/migration-recipes/src/test/java/com/synexia/rewrite/M3HierarchicalDocumentationSelfTest.java
-          java -cp "$RUNNER_TEMP/m3-doc" com.synexia.rewrite.M3HierarchicalDocumentationSelfTest
+            m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HierarchicalDocumentation.java \
+            m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3HierarchicalDocumentationSelfTest.java
+          java -cp "$RUNNER_TEMP/m3-doc" jdk.internal.m3.rewrite.M3HierarchicalDocumentationSelfTest
       - name: Real Maven OpenRewrite recipe and JUnit fixed-point/refusal
         run: >
           mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml

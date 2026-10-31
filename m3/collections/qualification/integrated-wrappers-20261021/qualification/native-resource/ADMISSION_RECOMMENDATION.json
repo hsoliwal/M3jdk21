@@ -806,7 +806,7 @@
       "sha256": "028871e85e025b5b413dc8d7d34241bb9d6f588ecc067075b0932f846c1c33de"
     },
     {
-      "path": "input/m3/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "path": "input/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
       "bytes": 21506,
       "sha256": "c1e6205563921072f7ac86be79862e4e16c69cdf5951057331d4ca8a83025052"
     },

@@ -1,7 +1,7 @@
 {
   "schema": "synexia.m3jdk21.exact-mask-jni-result.v1",
   "status": "PASS_EXACT_WINDOWS_JAVA_JNI_MISSING_AND_EXPORTS",
-  "approved_plan_sha256": "ccd04ed4f435f51e431e0b846a75c0bc944af357db2a62079b0ead40d0d4f3e8",
+  "approved_plan_sha256": "3946577b3ba71f14e74ac5ad7924434325348f20b55939395a02921e85185fd5",
   "platform": "Windows x64, provisioned JDK21 and MinGW GCC",
   "storage_protection": "ACTIVE",
   "new_product_source_code": false,

@@ -38,7 +38,7 @@
     }
   ],
   "donorBlobIndependentlyMatched": true,
-  "sourceCoverageSha256": "4de42cfe0c4ce70e0b9b3bcbf0d861795d2194998cc257e247794540c7bd8bb1",
+  "sourceCoverageSha256": "7a6894dd02eb07a590fd6a2ba91d9744e75e5066a6e4e7064ed5e5f282c769f8",
   "pendingFindings": [
     "Serviceability m3OwnerCharAt lacks Immediate kind3 decoder",
     "CodeUnitCursor does not implement existing M3ChunkCursor interface",

@@ -1,0 +1,2 @@
+# path	before-sha256	after-sha256	template
+m3/collections/src/test/native/m3_mask_window_regions.c	0b56e30eeda0022644fd6dd9448ccc3689aa7f05e515d5a4087dc0ed02fb4ec2	3b1de8c0e8d046841425289aa8c0b244b1497ef8033508c0d5fe59ad64b86141	m3_mask_window_regions.c.txt

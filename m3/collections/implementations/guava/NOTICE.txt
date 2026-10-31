@@ -30,7 +30,7 @@ and a captured predecessor is rebased after swap-last deletion. These
 bounded changes preserve the storage form and ordinary valid behavior;
 they intentionally do not reproduce the donor's broken iteration states.
 The package and
-class name change to com.m3.collections.guava.M3HashBiMap. The implementation
+class name change to jdk.m3.collections.guava.M3HashBiMap. The implementation
 directly implements the public Guava BiMap API and extends JDK AbstractMap;
 views extend JDK AbstractSet. There is no Guava collection implementation
 superclass or delegated collection owner.

@@ -11,291 +11,291 @@
   "phaseAdvanced": false,
   "files": [
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/integration/hosted/qualification.yml",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/integration/hosted/qualification.yml",
       "targetPath": ".github/workflows/m3-joined-range-directory.yml",
       "bytes": 40911,
       "sha256": "849d51f8ddcb6a9696a11199827e6359e3e363f27276ab635c235729fd34b51b",
       "gitBlob": "56e9c85aef568ffda0168f250858abf05425480f"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/integration/hosted/M3JoinedFreshRangeWorkload.java",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/integration/hosted/M3JoinedFreshRangeWorkload.java",
       "targetPath": "m3/tooling/joined-range-directory/fresh-owned/M3JoinedFreshRangeWorkload.java",
       "bytes": 3600,
-      "sha256": "b4b9486ec5d2c6262c73f77655046b5af21fd773848024f04808b6d46d1dad6a",
-      "gitBlob": "ca8dfd1646918e8b87952a67e10e60d5e431fe45"
+      "sha256": "c6511678c81380a0a8f9c1b5e4563e75030c5016e51a406303b06627f6108ed7",
+      "gitBlob": "8554ba51d52449dbf92def6ab18c53b990cab20f"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/integration/hosted/QUALIFICATION_PLAN.json",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/integration/hosted/QUALIFICATION_PLAN.json",
       "targetPath": "m3/tooling/joined-range-directory/fresh-owned/QUALIFICATION_PLAN.json",
       "bytes": 5936,
-      "sha256": "df1923bd20cdb3cf2757203ba41a6db87fa40a5d1ac35fdc998692958a6f6a2a",
-      "gitBlob": "91a5e17276a1e16dff87a62faf58dc4fe35ae8f2"
+      "sha256": "857ce353e89e9f570db7ecaf0f3bec72cb3ed8aedf45b20fc7b0200d70520909",
+      "gitBlob": "68ba4e8241e46cfd652f4ba62da52b5844930fc0"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/integration/hosted/SOURCE_STATUS.json",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/integration/hosted/SOURCE_STATUS.json",
       "targetPath": "m3/tooling/joined-range-directory/fresh-owned/SOURCE_STATUS.json",
       "bytes": 4855,
-      "sha256": "a6ba1097f092fa2162f49bc307c8fd06e0657416e95fb4a94dbf1307280197f4",
-      "gitBlob": "e4be7819e216ccbc3ca6de3254bf0f1131be462b"
+      "sha256": "0994a2270aca24aa4ac0c1049ccd68e2872126e1aafd5e5978da42929ad5c307",
+      "gitBlob": "94f7c2803704a0692587b5118ffb4f5cc4627768"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/integration/hosted/qualify.py",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/integration/hosted/qualify.py",
       "targetPath": "m3/tooling/joined-range-directory/fresh-owned/qualify.py",
       "bytes": 96049,
-      "sha256": "8a6324254578e5faf5dcdb82e0c5d30c983f983e2b327b3e9dae85d3cd08e394",
-      "gitBlob": "00cf575ac099c079f97bb0898259e48e89733aa3"
+      "sha256": "9bd0e42214c7836fbe3b8a5604d84cc554e60f9b76ce37d3ceec9e5f0ec957b0",
+      "gitBlob": "d1fb4b294bdeefd17055a5ff0025b7795639396c"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/FOSS_REUSE_DECISION.tsv",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/FOSS_REUSE_DECISION.tsv",
       "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/FOSS_REUSE_DECISION.tsv",
-      "gitBlob": "39e6a213f1e03b491a7dfbaa4f4cf3d8b397bc65",
+      "gitBlob": "9b316759508ba751b1a661b55f02fd2efe510e42",
       "bytes": 1564,
-      "sha256": "e8104b89f703ef35bc726bb1000744e2a80b8a0bf4196853251243d115db3c53"
+      "sha256": "78dbac72e2e58d7a1db197e689bd39a707787bec9c726591b4e38cd6b68df4ec"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/README.md",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/README.md",
       "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/README.md",
       "gitBlob": "04d4034742a583784f118541b275d45bcdde0f1c",
       "bytes": 2959,
       "sha256": "8061a80a44e09f7749bdd33ae32abee22accac7d5c95685e0e52d5a46d7f5bd1"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/THIRD_PARTY_NOTICES.md",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/THIRD_PARTY_NOTICES.md",
       "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/THIRD_PARTY_NOTICES.md",
       "gitBlob": "e33a0ce6c98280a816dbb51413d358628c680453",
       "bytes": 1383,
       "sha256": "8471c914183472440b5e91f887efd2b061a512e2516442e007bf2513efdc5b03"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
-      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
-      "gitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
+      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
+      "gitBlob": "78d5fb68f13872164973a8918cc7886c5f548bca",
       "bytes": 10964,
-      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
+      "sha256": "c874b5d4b5fe8886d53763ab91d050f431c4b7c09d3fe34d58680231ccb1cf7e"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
-      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
-      "gitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
+      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
+      "gitBlob": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
       "bytes": 5187,
-      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec"
+      "sha256": "300a520ec9d273922d1edbdf5442e5faf825c47e8e3df7febf4baa2f39945401"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/pinned-engine/com/synexia/rewrite/M3JoinedRangeDirectoryInverseRecipe.java",
-      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/pinned-engine/com/synexia/rewrite/M3JoinedRangeDirectoryInverseRecipe.java",
-      "gitBlob": "0fbb61ead7047e0b2ab0627bd381967113d99db1",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/pinned-engine/jdk/internal/m3/rewrite/M3JoinedRangeDirectoryInverseRecipe.java",
+      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/pinned-engine/jdk/internal/m3/rewrite/M3JoinedRangeDirectoryInverseRecipe.java",
+      "gitBlob": "b240cab07421e29e5a043ceec160bb135bf37830",
       "bytes": 766,
-      "sha256": "3a621135ee30d294cb86539604e245684084dc11f4fb44be0129c3f3214120f7"
+      "sha256": "daa3f280095188b6adf0ccb0d2bf50b8d19ad37537f0d95af2e89126a04c31e8"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/pinned-engine/com/synexia/rewrite/M3JoinedRangeDirectoryRecipe.java",
-      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/pinned-engine/com/synexia/rewrite/M3JoinedRangeDirectoryRecipe.java",
-      "gitBlob": "f1bafb2c8e156e2a0ad8479d3996bf139a6977df",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/pinned-engine/jdk/internal/m3/rewrite/M3JoinedRangeDirectoryRecipe.java",
+      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/pinned-engine/jdk/internal/m3/rewrite/M3JoinedRangeDirectoryRecipe.java",
+      "gitBlob": "438822c0ff4d65f640736813369f2b01e60a1716",
       "bytes": 755,
-      "sha256": "75ea82b2c12b7680c7dbd61f6334b053522f918a72045b61e03be408409f2600"
+      "sha256": "a79157d717eff4b6245f429631403d486985c61ba213feb4f0080351993bc23d"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/pins.json",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/pins.json",
       "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/pins.json",
-      "gitBlob": "329efb21b5878910ff3db1277bae25a948d62e13",
+      "gitBlob": "e934d8aff6f42b151eb61294bd50d6acf7f68107",
       "bytes": 10316,
-      "sha256": "72274d3e0dbdaf86d8cadd8a41c696bcd7a43ba3ab729f0fb0da8c018547db9e"
+      "sha256": "569e786a33993d45780352e9d799dbc75834f7b5c33f3f4389d5a350468f5cc5"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/pom.xml",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/pom.xml",
       "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/pom.xml",
       "gitBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f",
       "bytes": 2678,
       "sha256": "f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/META-INF/rewrite/joined-range-directory-20261020.yml",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/META-INF/rewrite/joined-range-directory-20261020.yml",
       "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/META-INF/rewrite/joined-range-directory-20261020.yml",
-      "gitBlob": "e1c6c89d97f90f16a7f3a6660f3f86b6e36340b0",
+      "gitBlob": "d474c6e10789ccdce4fbbd6ff2b6e88123778510",
       "bytes": 698,
-      "sha256": "632f935ee7bc550dd3814ea3d0cb3d18cb0b74216fd65bfe274313e5f22a3f72"
+      "sha256": "1af81d3fab3c7a48265f89b40843f305fac624787e38dc747ebfbe52dd046d04"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/com/m3/text/JoinedM3StringPiece.java",
-      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/com/m3/text/JoinedM3StringPiece.java",
-      "gitBlob": "3edc23c22362b08af00f7332ddc445a0274a6dd4",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
+      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
+      "gitBlob": "367ea06512321bb511fd9bbb772842ce313e69dc",
       "bytes": 2919,
-      "sha256": "10ddd082c142420c29985a85d8b2f77507fdbcde2552b8bfc154e658f3b2a9e3"
+      "sha256": "c1c2ed959d7dff0cc2625b2008a55438a6a1313b4c58943f596e2ab7f44836a8"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/com/m3/text/LocalM3Arena.java",
-      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/com/m3/text/LocalM3Arena.java",
-      "gitBlob": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/jdk/m3/text/LocalM3Arena.java",
+      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/jdk/m3/text/LocalM3Arena.java",
+      "gitBlob": "025ce8014cba8a36a9e496bb0a56faef57cf0968",
       "bytes": 1975,
-      "sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d"
+      "sha256": "e9573e7f04a875eb7bda7d3554a57653ebd655f66ac67be724b366092e76afc4"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/com/m3/text/LocalM3StringPiece.java",
-      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/com/m3/text/LocalM3StringPiece.java",
-      "gitBlob": "6b745c9472144ad6de01de4d06a533974e558fb1",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
+      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
+      "gitBlob": "387ae5e0c656177f1df663fd5029d4b31ba2fa00",
       "bytes": 2115,
-      "sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51"
+      "sha256": "77fd1cbeae4dc20a4c23497102cb7c44ec14adbdd6bbf328326957515a7858ad"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/com/m3/text/M3StringPiece.java",
-      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/com/m3/text/M3StringPiece.java",
-      "gitBlob": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/jdk/m3/text/M3StringPiece.java",
+      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/jdk/m3/text/M3StringPiece.java",
+      "gitBlob": "62506fb9b3cff0e6f24e856648528db58c45b92b",
       "bytes": 767,
-      "sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479"
+      "sha256": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/com/m3/text/StorageIdentity.java",
-      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/com/m3/text/StorageIdentity.java",
-      "gitBlob": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/jdk/m3/text/StorageIdentity.java",
+      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/jdk/m3/text/StorageIdentity.java",
+      "gitBlob": "8cd2ae86bee8f04f0d69709eed12897ff5c6a71c",
       "bytes": 494,
-      "sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417"
+      "sha256": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/manifest.tsv",
-      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/manifest.tsv",
-      "gitBlob": "87a12624563e4c8af45ac7ea4a82efd90f9d59a4",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/manifest.tsv",
+      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/manifest.tsv",
+      "gitBlob": "422b534d1077c3e5a142fbc509025f4191eabb76",
       "bytes": 950,
-      "sha256": "13541b4fc43566e2c84ed77e6e38a114fa0a7cb5a26ffaffd7256cdd12fe2ca4"
+      "sha256": "6e534ce68bbb2b08529316b0e3b54cc7416547bdce652c4b07d099dd8e2f6963"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/com/m3/text/JoinedM3StringPiece.java",
-      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/com/m3/text/JoinedM3StringPiece.java",
-      "gitBlob": "4f88f794266375ad8174fa56e952c30d32689877",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
+      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
+      "gitBlob": "765d43267bb22a3650b622c01cb29b550e1deb01",
       "bytes": 3377,
-      "sha256": "d69ef5cc0e4bd5d95808978b4a0d73982322230a623d897074840b58fab1993e"
+      "sha256": "c715036aa450d3e46e22bcdd0cae9d34d593b18db79953438d988a6b2be390b2"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/com/m3/text/LocalM3Arena.java",
-      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/com/m3/text/LocalM3Arena.java",
-      "gitBlob": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/jdk/m3/text/LocalM3Arena.java",
+      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/jdk/m3/text/LocalM3Arena.java",
+      "gitBlob": "025ce8014cba8a36a9e496bb0a56faef57cf0968",
       "bytes": 1975,
-      "sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d"
+      "sha256": "e9573e7f04a875eb7bda7d3554a57653ebd655f66ac67be724b366092e76afc4"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/com/m3/text/LocalM3StringPiece.java",
-      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/com/m3/text/LocalM3StringPiece.java",
-      "gitBlob": "6b745c9472144ad6de01de4d06a533974e558fb1",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
+      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
+      "gitBlob": "387ae5e0c656177f1df663fd5029d4b31ba2fa00",
       "bytes": 2115,
-      "sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51"
+      "sha256": "77fd1cbeae4dc20a4c23497102cb7c44ec14adbdd6bbf328326957515a7858ad"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/com/m3/text/M3StringPiece.java",
-      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/com/m3/text/M3StringPiece.java",
-      "gitBlob": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/jdk/m3/text/M3StringPiece.java",
+      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/jdk/m3/text/M3StringPiece.java",
+      "gitBlob": "62506fb9b3cff0e6f24e856648528db58c45b92b",
       "bytes": 767,
-      "sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479"
+      "sha256": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/com/m3/text/StorageIdentity.java",
-      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/com/m3/text/StorageIdentity.java",
-      "gitBlob": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/jdk/m3/text/StorageIdentity.java",
+      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/jdk/m3/text/StorageIdentity.java",
+      "gitBlob": "8cd2ae86bee8f04f0d69709eed12897ff5c6a71c",
       "bytes": 494,
-      "sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417"
+      "sha256": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/com/m3/text/JoinedM3StringPiece.java",
-      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/com/m3/text/JoinedM3StringPiece.java",
-      "gitBlob": "4f88f794266375ad8174fa56e952c30d32689877",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
+      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
+      "gitBlob": "765d43267bb22a3650b622c01cb29b550e1deb01",
       "bytes": 3377,
-      "sha256": "d69ef5cc0e4bd5d95808978b4a0d73982322230a623d897074840b58fab1993e"
+      "sha256": "c715036aa450d3e46e22bcdd0cae9d34d593b18db79953438d988a6b2be390b2"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/com/m3/text/LocalM3Arena.java",
-      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/com/m3/text/LocalM3Arena.java",
-      "gitBlob": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/jdk/m3/text/LocalM3Arena.java",
+      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/jdk/m3/text/LocalM3Arena.java",
+      "gitBlob": "025ce8014cba8a36a9e496bb0a56faef57cf0968",
       "bytes": 1975,
-      "sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d"
+      "sha256": "e9573e7f04a875eb7bda7d3554a57653ebd655f66ac67be724b366092e76afc4"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/com/m3/text/LocalM3StringPiece.java",
-      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/com/m3/text/LocalM3StringPiece.java",
-      "gitBlob": "6b745c9472144ad6de01de4d06a533974e558fb1",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
+      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
+      "gitBlob": "387ae5e0c656177f1df663fd5029d4b31ba2fa00",
       "bytes": 2115,
-      "sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51"
+      "sha256": "77fd1cbeae4dc20a4c23497102cb7c44ec14adbdd6bbf328326957515a7858ad"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/com/m3/text/M3StringPiece.java",
-      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/com/m3/text/M3StringPiece.java",
-      "gitBlob": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/jdk/m3/text/M3StringPiece.java",
+      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/jdk/m3/text/M3StringPiece.java",
+      "gitBlob": "62506fb9b3cff0e6f24e856648528db58c45b92b",
       "bytes": 767,
-      "sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479"
+      "sha256": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/com/m3/text/StorageIdentity.java",
-      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/com/m3/text/StorageIdentity.java",
-      "gitBlob": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/jdk/m3/text/StorageIdentity.java",
+      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/jdk/m3/text/StorageIdentity.java",
+      "gitBlob": "8cd2ae86bee8f04f0d69709eed12897ff5c6a71c",
       "bytes": 494,
-      "sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417"
+      "sha256": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/manifest.tsv",
-      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/manifest.tsv",
-      "gitBlob": "3f1f1fc694c4dd28cdbac948b7f639d87a8cf708",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/manifest.tsv",
+      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/manifest.tsv",
+      "gitBlob": "ff833f47fbbb85d0710e0701b4ca34479eec6223",
       "bytes": 950,
-      "sha256": "90c2fdfebb9c2d3997515bb0d5f75ad2f3c7a25202e14b5f372501068491bf74"
+      "sha256": "e6aa74a3673efca46dee4f772e601ad111b9f724809fd10471a94efbbf177300"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/com/m3/text/JoinedM3StringPiece.java",
-      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/com/m3/text/JoinedM3StringPiece.java",
-      "gitBlob": "3edc23c22362b08af00f7332ddc445a0274a6dd4",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
+      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
+      "gitBlob": "367ea06512321bb511fd9bbb772842ce313e69dc",
       "bytes": 2919,
-      "sha256": "10ddd082c142420c29985a85d8b2f77507fdbcde2552b8bfc154e658f3b2a9e3"
+      "sha256": "c1c2ed959d7dff0cc2625b2008a55438a6a1313b4c58943f596e2ab7f44836a8"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/com/m3/text/LocalM3Arena.java",
-      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/com/m3/text/LocalM3Arena.java",
-      "gitBlob": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/jdk/m3/text/LocalM3Arena.java",
+      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/jdk/m3/text/LocalM3Arena.java",
+      "gitBlob": "025ce8014cba8a36a9e496bb0a56faef57cf0968",
       "bytes": 1975,
-      "sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d"
+      "sha256": "e9573e7f04a875eb7bda7d3554a57653ebd655f66ac67be724b366092e76afc4"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/com/m3/text/LocalM3StringPiece.java",
-      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/com/m3/text/LocalM3StringPiece.java",
-      "gitBlob": "6b745c9472144ad6de01de4d06a533974e558fb1",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
+      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
+      "gitBlob": "387ae5e0c656177f1df663fd5029d4b31ba2fa00",
       "bytes": 2115,
-      "sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51"
+      "sha256": "77fd1cbeae4dc20a4c23497102cb7c44ec14adbdd6bbf328326957515a7858ad"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/com/m3/text/M3StringPiece.java",
-      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/com/m3/text/M3StringPiece.java",
-      "gitBlob": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/jdk/m3/text/M3StringPiece.java",
+      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/jdk/m3/text/M3StringPiece.java",
+      "gitBlob": "62506fb9b3cff0e6f24e856648528db58c45b92b",
       "bytes": 767,
-      "sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479"
+      "sha256": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/com/m3/text/StorageIdentity.java",
-      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/com/m3/text/StorageIdentity.java",
-      "gitBlob": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/jdk/m3/text/StorageIdentity.java",
+      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/jdk/m3/text/StorageIdentity.java",
+      "gitBlob": "8cd2ae86bee8f04f0d69709eed12897ff5c6a71c",
       "bytes": 494,
-      "sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417"
+      "sha256": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/test/java/com/synexia/rewrite/M3JoinedRangeDirectoryRecipeTest.java",
-      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/test/java/com/synexia/rewrite/M3JoinedRangeDirectoryRecipeTest.java",
-      "gitBlob": "73471b80d618b4ab2b016d097459dd5cb390ef93",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/test/java/jdk/internal/m3/rewrite/M3JoinedRangeDirectoryRecipeTest.java",
+      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/test/java/jdk/internal/m3/rewrite/M3JoinedRangeDirectoryRecipeTest.java",
+      "gitBlob": "add685ff1aefe81a12159603a8de460800620c12",
       "bytes": 22058,
-      "sha256": "a36dd62e6d2cb03614473e90e77298971bb8203eeeefcf1f11689f3d128ec61f"
+      "sha256": "b0c9eecbf6210508bad4f8843381a758d938bf2b9a4df6471b362bbfa27c93f2"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/test/resources/com/synexia/rewrite/joined-range-directory-20261020/proof/M3JoinedFreshRangeProof.java.txt",
-      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/test/resources/com/synexia/rewrite/joined-range-directory-20261020/proof/M3JoinedFreshRangeProof.java.txt",
-      "gitBlob": "fa35d3170995ad74f6d7363d6e3fe85dd0b2449c",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/test/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/proof/M3JoinedFreshRangeProof.java.txt",
+      "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/src/test/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/proof/M3JoinedFreshRangeProof.java.txt",
+      "gitBlob": "b96411a4c613a9476bab4e8bcd3b94989cb67c43",
       "bytes": 14816,
-      "sha256": "8194f210675ff2da605989cf885687549a77ac6037757ac0a8fabcea307cee1f"
+      "sha256": "d36d33efd6dff29c3566be0c35727a50bb39bab61902f7466aa966314b0be2fd"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/verify.py",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/verify.py",
       "targetPath": "m3/tooling/joined-range-directory/fresh-owned/sdk/verify.py",
-      "gitBlob": "40c2e4a35315e953500ec3a3942bdc584db2f2b7",
+      "gitBlob": "c1687dec6070a5af3dcf1fa7ae467de60632caa9",
       "bytes": 25785,
-      "sha256": "b1cf55f585929b49f6ffeea0f4e5c93314c0e1bf3e89976c1ddc95fa070236d3"
+      "sha256": "6a35c27ec3e7ea4e1b5195fff0014a4da8a9c7bcb605ba27ccadfd54e4daf071"
     },
     {
-      "sourcePath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/integration/bindings/parent-source-binding.json",
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/integration/bindings/parent-source-binding.json",
       "targetPath": "m3/tooling/joined-range-directory/source-binding.json",
-      "gitBlob": "4992e91a630eb4ca6af7755c3bf17c3b6997c925",
+      "gitBlob": "1507e87c0853e0cd397620930e8f1f6648d61e3f",
       "bytes": 21504,
-      "sha256": "aca82fa30b8c91cf78efd1e32208634268cc8e6feb9fab19d4d99815e478cd23"
+      "sha256": "805fb0cd1f893381a3124147471185a4e374e9facc55f8dd825ed4cc225516ce"
     }
   ]
 }

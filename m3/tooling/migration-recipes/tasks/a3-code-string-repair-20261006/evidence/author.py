@@ -5,7 +5,7 @@ import json,hashlib,difflib
 HERE=Path(__file__).resolve().parent;ROOT=HERE.parents[1]
 PRIOR=ROOT/'current-ci/a3-behavior-v01';OLD=PRIOR/'workspace'
 CRATE='a3-code-string-repair-20261006';BASE='m3/tooling/migration-recipes';OVER=HERE/'candidate/overlay';RES=OVER/BASE/'src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text'/CRATE
-JAVA='m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java'
+JAVA='m3/tooling/a3/src/main/java/jdk/m3/a3/A3RegexMatrix.java'
 TEMPLATE=BASE+'/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after'
 MANIFEST=BASE+'/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv'
 def sha(b):return hashlib.sha256(b).hexdigest()

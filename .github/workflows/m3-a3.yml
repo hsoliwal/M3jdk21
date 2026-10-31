@@ -46,7 +46,7 @@ jobs:
     runs-on: ubuntu-22.04
     timeout-minutes: 35
     env:
-      SYNEXIA_A3_COMMIT: a062661e91e769a00c2d027e1f04a7a0c8f9dc28
+      M3_A3_COMMIT: a062661e91e769a00c2d027e1f04a7a0c8f9dc28
     steps:
       - name: Fetch exact workflow head
         shell: bash
@@ -75,14 +75,14 @@ jobs:
       # reachable (ancestor of develop); fetch exactly it with a read token and only the
       # sealed A3 export closure, then verify the closure bytes before building.
       # Successor pin record: hsoliwal/com.synexia
-      # synexia-openrewrite-recipes/recipes/m3jdk21-a3-export-pin-20261030/PIN_SUCCESSOR.tsv
+      # m3-openrewrite-recipes/recipes/m3jdk21-a3-export-pin-20261030/PIN_SUCCESSOR.tsv
       - name: Fetch pinned Synexia canonical A3 recipe export closure
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           repository: hsoliwal/com.synexia
-          ref: ${{ env.SYNEXIA_A3_COMMIT }}
+          ref: ${{ env.M3_A3_COMMIT }}
           token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
-          path: synexia-a3
+          path: m3-a3
           fetch-depth: 1
           fetch-tags: false
           lfs: false
@@ -90,53 +90,53 @@ jobs:
           persist-credentials: false
           sparse-checkout-cone-mode: false
           sparse-checkout: |
-            /synexia-openrewrite-recipes/pom-jdk-a3-export.xml
-            /synexia-openrewrite-recipes/src/main/resources/META-INF/m3/jdk-a3-recipe-export.tsv
-            /synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryPortableReceipt.java
-            /synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/atom/M3AtomizePureIntReturnRecipe.java
-            /synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/atom/M3DocumentPureIntAtomRecipe.java
-            /synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/atom/M3FileAtomCandidateTable.java
-            /synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/atom/M3InventoryPureIntAtomCandidates.java
-            /synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/atom/M3PatternizePureIntAtomRecipe.java
-            /synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/atom/M3PureIntAtomEligibility.java
-            /synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/atom/M3PureIntConvergenceRecipe.java
-            /synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3JdkA3RecipeExportTest.java
-            /synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3RecipeMasteryPortableReceiptTest.java
-            /synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/atom/M3AtomCoverageClosureTest.java
-            /synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/atom/M3AtomDefensiveBranchTest.java
-            /synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/atom/M3AtomizePureIntReturnRecipeTest.java
-            /synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/atom/M3InventoryPureIntAtomCandidatesTest.java
-            /synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/atom/M3PureIntConvergenceRecipeTest.java
+            /m3-openrewrite-recipes/pom-jdk-a3-export.xml
+            /m3-openrewrite-recipes/src/main/resources/META-INF/m3/jdk-a3-recipe-export.tsv
+            /m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeMasteryPortableReceipt.java
+            /m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java
+            /m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java
+            /m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/atom/M3FileAtomCandidateTable.java
+            /m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/atom/M3InventoryPureIntAtomCandidates.java
+            /m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java
+            /m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/atom/M3PureIntAtomEligibility.java
+            /m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/atom/M3PureIntConvergenceRecipe.java
+            /m3-openrewrite-recipes/src/test/java/jdk/internal/m3/rewrite/M3JdkA3RecipeExportTest.java
+            /m3-openrewrite-recipes/src/test/java/jdk/internal/m3/rewrite/M3RecipeMasteryPortableReceiptTest.java
+            /m3-openrewrite-recipes/src/test/java/jdk/internal/m3/rewrite/atom/M3AtomCoverageClosureTest.java
+            /m3-openrewrite-recipes/src/test/java/jdk/internal/m3/rewrite/atom/M3AtomDefensiveBranchTest.java
+            /m3-openrewrite-recipes/src/test/java/jdk/internal/m3/rewrite/atom/M3AtomizePureIntReturnRecipeTest.java
+            /m3-openrewrite-recipes/src/test/java/jdk/internal/m3/rewrite/atom/M3InventoryPureIntAtomCandidatesTest.java
+            /m3-openrewrite-recipes/src/test/java/jdk/internal/m3/rewrite/atom/M3PureIntConvergenceRecipeTest.java
 
       - name: Verify and install pinned Synexia canonical A3 recipe export
         shell: bash
-        working-directory: synexia-a3
+        working-directory: m3-a3
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD)" = "$SYNEXIA_A3_COMMIT"
-          # Sealed closure of SYNEXIA_A3_COMMIT (17 files, 102164 bytes); manifest sha256
+          test "$(git rev-parse HEAD)" = "$M3_A3_COMMIT"
+          # Sealed closure of M3_A3_COMMIT (17 files, 102164 bytes); manifest sha256
           # eb71d2b0169458cea295c3052cf04a6b9a6ef6fc20da8b44c78965def51204e0.
           sha256sum --check --strict - <<'CLOSURE'
-          c3be01bc3d5391e36c9e9982471029cc10b66a2adf6ceaf30a8cb8307568ad67  synexia-openrewrite-recipes/pom-jdk-a3-export.xml
-          0c8b6e58942bb3ba5739e7fa060b20237c056ef36ffd1a84b25016314e9f0dca  synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryPortableReceipt.java
-          ee74b358c97ab2dadb899df3b9c342ff80a78ccb44b8dda73be4937397e9e712  synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/atom/M3AtomizePureIntReturnRecipe.java
-          a0b5d68d2f08fea262e8e5fd234ab7223641192e93d04e70c86eead1a9005b9f  synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/atom/M3DocumentPureIntAtomRecipe.java
-          7419befbae77f9d3c400149bd0913d978c16d02a2cd76dd080f7988fc92c519d  synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/atom/M3FileAtomCandidateTable.java
-          9bf408c86263311669209189ae39a177ee99a8711c215bae42cfabea00223c0f  synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/atom/M3InventoryPureIntAtomCandidates.java
-          4e80e3d733bd89d91c3b673446f46da4ccdd171725489bdbe89700eaea118dd2  synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/atom/M3PatternizePureIntAtomRecipe.java
-          89c62be14f9e2d49c372cf490a186e0c9ca88e82ac5f8f14fd76515a25a5e1e0  synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/atom/M3PureIntAtomEligibility.java
-          8f261fa815f20bc60362bb2c416aad864ea8f6f041f7ffb292c1591f141454e2  synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/atom/M3PureIntConvergenceRecipe.java
-          19c68d1684fc8011f5d6b8ed1afaf91398c444e7b7d469dae9003f270e9c3905  synexia-openrewrite-recipes/src/main/resources/META-INF/m3/jdk-a3-recipe-export.tsv
-          e0bd1341a8c39871cbf9713a8f2e099d908c355b4663fc817440c4186953cc90  synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3JdkA3RecipeExportTest.java
-          1004fd03646ea42477fcf52416969023014f97e98c69a98f55bb12d0adc220e5  synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3RecipeMasteryPortableReceiptTest.java
-          0e7a04b5007e26aae4a3fe16b77110eadcef0d84ef27eefe2056ddbee0163e64  synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/atom/M3AtomCoverageClosureTest.java
-          febb034719ae311bca587dac84a7d3fa69e1d571db2b8b0d97adc0bf60814304  synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/atom/M3AtomDefensiveBranchTest.java
-          15e43fbcce124a3f8575161a82e5431f281ad40000c79dbd4424c0244f7fea1f  synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/atom/M3AtomizePureIntReturnRecipeTest.java
-          e38f88b619a00774873b575f180ebd525645c6891934d04909a46dd4560b05b9  synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/atom/M3InventoryPureIntAtomCandidatesTest.java
-          3d847226ad678800e0896c46a5b4c0556f70ef22f6101e3ddb6cf55e44c48326  synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/atom/M3PureIntConvergenceRecipeTest.java
+          c3be01bc3d5391e36c9e9982471029cc10b66a2adf6ceaf30a8cb8307568ad67  m3-openrewrite-recipes/pom-jdk-a3-export.xml
+          69104cee94e06e9d87aadac208140eddf585e0404385e9ee7ca40bc635a8eeba  m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeMasteryPortableReceipt.java
+          4367a662ef19efd9193934778dae9ef6a58c31f45e76e9c8f3607e6f7dfa962e  m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java
+          c8b90be60cace5aba0e00d438be09cb6348273a8229adf7b5df490a5c3ec6a50  m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java
+          3f11b266e4bf7bb9a08cf43f6692ce3209f310059462dfe70eca56048809b01f  m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/atom/M3FileAtomCandidateTable.java
+          923f15cef4b6b0ecc575cf1ad95a1fac3607f77bb111b9b87bd924b76d4b2c06  m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/atom/M3InventoryPureIntAtomCandidates.java
+          eabca39453edaebc5b7f0e9aaaf12b900ba181e21dc5c8a08640abc7f0d0b6f7  m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java
+          32b98c2eafaa8e4231dcded464a88f1560cebc71fb39d5d28934482af61b0043  m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/atom/M3PureIntAtomEligibility.java
+          a6587bcc76d05b006757f8ded6da2c7d46bb23b521e2030b8b9d657b6a31cdf8  m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/atom/M3PureIntConvergenceRecipe.java
+          11c3ddd89c939a0689eda812d497b279d6f792326fcd82096ea0317f10721ea8  m3-openrewrite-recipes/src/main/resources/META-INF/m3/jdk-a3-recipe-export.tsv
+          e0bd1341a8c39871cbf9713a8f2e099d908c355b4663fc817440c4186953cc90  m3-openrewrite-recipes/src/test/java/jdk/internal/m3/rewrite/M3JdkA3RecipeExportTest.java
+          1004fd03646ea42477fcf52416969023014f97e98c69a98f55bb12d0adc220e5  m3-openrewrite-recipes/src/test/java/jdk/internal/m3/rewrite/M3RecipeMasteryPortableReceiptTest.java
+          0e7a04b5007e26aae4a3fe16b77110eadcef0d84ef27eefe2056ddbee0163e64  m3-openrewrite-recipes/src/test/java/jdk/internal/m3/rewrite/atom/M3AtomCoverageClosureTest.java
+          febb034719ae311bca587dac84a7d3fa69e1d571db2b8b0d97adc0bf60814304  m3-openrewrite-recipes/src/test/java/jdk/internal/m3/rewrite/atom/M3AtomDefensiveBranchTest.java
+          15e43fbcce124a3f8575161a82e5431f281ad40000c79dbd4424c0244f7fea1f  m3-openrewrite-recipes/src/test/java/jdk/internal/m3/rewrite/atom/M3AtomizePureIntReturnRecipeTest.java
+          e38f88b619a00774873b575f180ebd525645c6891934d04909a46dd4560b05b9  m3-openrewrite-recipes/src/test/java/jdk/internal/m3/rewrite/atom/M3InventoryPureIntAtomCandidatesTest.java
+          3d847226ad678800e0896c46a5b4c0556f70ef22f6101e3ddb6cf55e44c48326  m3-openrewrite-recipes/src/test/java/jdk/internal/m3/rewrite/atom/M3PureIntConvergenceRecipeTest.java
           CLOSURE
           mvn -B -ntp \
-            -f synexia-openrewrite-recipes/pom-jdk-a3-export.xml \
+            -f m3-openrewrite-recipes/pom-jdk-a3-export.xml \
             install
 
       - name: Compile and install retained A3 recipe dependencies
@@ -165,7 +165,7 @@ jobs:
         run: |
           set -euo pipefail
           mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java \
-            -Dexec.mainClass=com.m3.a3.A3 \
+            -Dexec.mainClass=jdk.m3.a3.A3 \
             -Dexec.args="lab --root $REPO --out m3/build/a3/lab"
           LAB="$REPO/m3/build/a3/lab/results.tsv"
           test -s "$LAB"
@@ -187,7 +187,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=com.m3.a3.A3             -Dexec.args="inv --root $REPO --out m3/build/a3/inventory.tsv"
+          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=jdk.m3.a3.A3             -Dexec.args="inv --root $REPO --out m3/build/a3/inventory.tsv"
           test -s "$REPO/m3/build/a3/inventory.tsv"
           JAVA_ROWS="$(awk -F '\t' 'NR > 1 && $5 == "JAVA" {n++} END {print n+0}' "$REPO/m3/build/a3/inventory.tsv")"
           NATIVE_ROWS="$(awk -F '\t' 'NR > 1 && $5 == "NATIVE" {n++} END {print n+0}' "$REPO/m3/build/a3/inventory.tsv")"
@@ -199,7 +199,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=com.m3.a3.A3             -Dexec.args="alg --root $REPO --out m3/build/a3/algorithms.tsv"
+          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=jdk.m3.a3.A3             -Dexec.args="alg --root $REPO --out m3/build/a3/algorithms.tsv"
           ALG="$REPO/m3/build/a3/algorithms.tsv"
           test -s "$ALG"
           ALG_ROWS="$(awk -F '\t' 'NR > 1 {n++} END {print n+0}' "$ALG")"
@@ -214,7 +214,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=com.m3.a3.A3             -Dexec.args="plan --root $REPO --out m3/build/a3/plan.tsv"
+          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=jdk.m3.a3.A3             -Dexec.args="plan --root $REPO --out m3/build/a3/plan.tsv"
           PLAN="$REPO/m3/build/a3/plan.tsv"
           test -s "$PLAN"
           JEP_ROWS="$(awk -F '\t' 'NR > 1 && $1 == "JEP" {n++} END {print n+0}' "$PLAN")"
@@ -239,7 +239,7 @@ jobs:
           TSV
 
           mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java \
-            -Dexec.mainClass=com.m3.a3.A3 \
+            -Dexec.mainClass=jdk.m3.a3.A3 \
             -Dexec.args="work --root $REPO --inventory m3/build/a3/inventory.tsv --queue m3/build/a3/work-queue.tsv --out m3/build/a3/work.tsv"
 
           test -s "$WORK"
@@ -268,7 +268,7 @@ jobs:
           JAVA
           cp "$SRC" "$RUNNER_TEMP/Sample.before"
 
-          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=com.m3.a3.A3             -Dexec.args="apply --root $FIX --out m3/build/a3/apply --file src/java.base/share/classes/example/Sample.java"
+          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=jdk.m3.a3.A3             -Dexec.args="apply --root $FIX --out m3/build/a3/apply --file src/java.base/share/classes/example/Sample.java"
 
           cmp "$SRC" "$RUNNER_TEMP/Sample.before"
           CANDIDATE="$FIX/m3/build/a3/apply/candidate/src/java.base/share/classes/example/Sample.java"

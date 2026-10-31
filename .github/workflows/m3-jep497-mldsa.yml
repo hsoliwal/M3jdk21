@@ -15,13 +15,13 @@ on:
       - 'm3/backports/recipes/j497/**'
       - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
       - 'm3/backports/test_jep_residue.py'
-      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jep497MlDsaBackportRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jep497MlDsaBackportRecipeTest.java'
+      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep497MlDsaBackportRecipe.java'
+      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep497MlDsaBackportRecipeTest.java'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jep497-mldsa.yml'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep497-mldsa/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk24-jep497-mldsa-vectors/**'
-      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3RecipeScopeRegistry.java'
-      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/scope/M3RecipeScopeDeclarationTest.java'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep497-mldsa/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jdk24-jep497-mldsa-vectors/**'
+      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3RecipeScopeRegistry.java'
+      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3RecipeScopeDeclarationTest.java'
       - 'm3/tooling/recipe-catalogue.tsv'
       - '.github/workflows/m3-jep497-mldsa.yml'
   pull_request:
@@ -72,7 +72,7 @@ jobs:
       - name: 3 - Released JEP residue stays derived
         run: python3 -m unittest m3/backports/test_jep_residue.py
 
-  synexia-file-convergence:
+  m3-file-convergence:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
@@ -87,14 +87,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test -f m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3Java21FileConvergenceRecipe.java
-          test -f m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/synexia/M3SynexiaJava21ConvergenceConsumerTest.java
+          test -f m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3Java21FileConvergenceRecipe.java
+          test -f m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/m3/M3Java21ConvergenceConsumerTest.java
 
       - name: Prove canonical Synexia consumer and scope
         run: >-
           mvn -B -ntp
           -f m3/tooling/migration-recipes/pom.xml
-          -Dtest=M3SynexiaJava21ConvergenceConsumerTest,M3RecipeScopeDeclarationTest
+          -Dtest=M3Java21ConvergenceConsumerTest,M3RecipeScopeDeclarationTest
           -Dsurefire.failIfNoSpecifiedTests=false
           test
 

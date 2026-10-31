@@ -7,10 +7,10 @@
   "installed_independent_roots": 457,
   "inherited_without_source_edits": 30,
   "excluded": 148,
-  "canonical_recipe": "com.synexia.m3.bootstrap.M3InstallBootRecipe",
+  "canonical_recipe": "jdk.internal.m3.bootstrap.M3InstallBootRecipe",
   "recipe_sha256": "425d60c050a5cc9f184167341402dd7bbbda9bf1deaa6d123370357e3592f926",
   "runner_sha256": "d8f82c7aaae634f98d2c0fd04b3d6345d294622663979dd7b9d1ac94e6f45965",
-  "tool_gav": "com.synexia.m3:m3-pr-stack-preservation:1.0.0-m3boot20261021",
+  "tool_gav": "jdk.internal.m3:m3-pr-stack-preservation:1.0.0-m3boot20261021",
   "exec_plugin": "org.codehaus.mojo:exec-maven-plugin:3.5.0",
   "checks": {
     "exact_git_blob_inputs": 635,
@@ -22,8 +22,8 @@
     "actual_maven_exec_fixture_cases": 7,
     "no_installed_global_property_overrides": 457
   },
-  "coverage_sha256": "0d81f0427e22806ec1054346f2dc8d12d8a1fdd559331f6831dc3bc576971120",
-  "semantic_installation_sha256": "2e0397cf9ed988740e17e74e1f977e1719a129449c3dea01e40070dce39e0461",
+  "coverage_sha256": "f8abec7131c07f605e041aa2d15e3c9dff98d394a5aa914b787ecb2e06a0701b",
+  "semantic_installation_sha256": "a89cfc3b496f95a8b815018fcad1c44a88fe7e56a9ee3257e5305d0383c9dbdd",
   "maven": "3.9.9",
   "java": "21.0.12.1",
   "source_mutation": "Semantic Recipe.run wrote task candidate templates only. Exact3055 source POM retrieval hydrated a sparse receiving workspace separately; canonical hash-pinned product receipt remains a separate gate.",
@@ -37,7 +37,7 @@
   "model_runner_sha256": "01f452c62e593d5f966bd505ed604cb553509b2684dd4115ef68b0f780492d4d",
   "lifecycle_marker": "Three local CLI arguments; no JVM system property overrides in generated profile",
   "source_tree": "6b980f5e6be744d2ea0449f12731e9d3c040fd89",
-  "topology_sha256": "79937e74fc223275cbe200214291b4b8bb0e098d87442bfe43572ed26c30e80f",
+  "topology_sha256": "7b2d64f0b74cc98883119c9b636f9bb61d90ef2d5f941baca524a8163f40b023",
   "inventory_reconciliation": {
     "original_source_commit": "a4415af418a9b0f21a06cd5801d238577fbb6eb7",
     "unchanged_existing_generated_postimages": 439,

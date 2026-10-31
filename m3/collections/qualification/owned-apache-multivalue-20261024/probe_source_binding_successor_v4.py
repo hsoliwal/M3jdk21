@@ -20,8 +20,8 @@ import sys
 HERE = Path(__file__).resolve().parent
 PREFIX = "m3/collections/qualification/owned-apache-multivalue-20261024/"
 VERIFIER = PREFIX + "verify_source_binding_successor_v4.py"
-TEMPLATES = "m3/collections/recipe/owned-apache-multivalue-20261024/src/main/resources/com/synexia/rewrite/hash-pinned-java/apache-multivalue-v2-to-v3/"
-SEALED = "3360d65da5075cee73e8c74a7aa863ce6dffa5faf0e7e8f5741526a301825646"
+TEMPLATES = "m3/collections/recipe/owned-apache-multivalue-20261024/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/apache-multivalue-v2-to-v3/"
+SEALED = "7ec6b01fdf2a5651edf5c6fe8235881363f1398559c6072de2a9ea9d149baf82"
 RESERVE = 256 * 1024**2
 
 def main() -> None:

@@ -16,13 +16,13 @@
     {
       "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
       "before": {
-        "git_blob_sha1": "15024c40ba9b92fd50fb7823ecfa9543aba22be1",
-        "sha256": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef",
+        "git_blob_sha1": "f6471f52b0c001def6319542f01729620b0600ee",
+        "sha256": "ed13463a6972bd014a861635987e8aa6214bf7516789c4f41d4ec3d69692fe73",
         "bytes": 16830
       },
       "after": {
-        "git_blob_sha1": "8fb2c3fb8e5642deebcfcd482200854ea131912a",
-        "sha256": "3fea7150a748804b47384f75b98a21f86b3db1def6249887c7508d4c749a165d",
+        "git_blob_sha1": "e0d7ceaa6c6584123c34d9c5ceb3a1714e1348f3",
+        "sha256": "82c8cc524cf8305baf114bfb011ddb3eed51eccba202332dbe605706d5849002",
         "bytes": 16166
       },
       "source_license": "Apache-2.0",
@@ -34,13 +34,13 @@
     {
       "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
       "before": {
-        "git_blob_sha1": "bd300c90d54ede9b7f238efe8a18c918d2fcef9e",
-        "sha256": "8107ba8ba5f9d7519563eba9d20e76932dd077b2359f056b05ccd0a2d7d62e18",
+        "git_blob_sha1": "baa23467163a0e9344fe3c1d78dcc87cb707fd56",
+        "sha256": "9ed1244ef90a72845d580b8919c670760434a81cf6dfc48f3aecbc8483726c02",
         "bytes": 6433
       },
       "after": {
-        "git_blob_sha1": "8f3048b8614457795376b65e06dc306bfdd827ef",
-        "sha256": "3f3c222275ebd45b8a40846c758f8333e86f68b118707acb9f1a088fe3ae6ba6",
+        "git_blob_sha1": "d2f1bb3dd77ce5c41bd3776439297ed8644446db",
+        "sha256": "91eae74d61e934156e6186bd56bf67cb97316ff2835992ebc043907533b82e01",
         "bytes": 6390
       },
       "source_license": "Apache-2.0",
@@ -52,13 +52,13 @@
     {
       "path": "m3/collections/src/main/native/collections/m3_index_path_masks.c",
       "before": {
-        "git_blob_sha1": "086b49293257fd17cc7fbd1ebbb98460aa677e35",
-        "sha256": "3f5a760e633762469fad5a9dcd531cb39c33d11752d79ad241e506800b26e7cb",
+        "git_blob_sha1": "69aef883c09997bae30825d7ad8757bc2358bf69",
+        "sha256": "072e6c3d30b1fd54d8ce883ed18fde75aa6c1809a1dc0c9a2de7b7e5f571f824",
         "bytes": 5772
       },
       "after": {
-        "git_blob_sha1": "30fd8eb84dd28b932a842643b6d4b5ef53991667",
-        "sha256": "5a5f4d260f0368a5a3f08c6b04ceb432e670b713230118162e7d62ae595a402f",
+        "git_blob_sha1": "704265c60b32edb9801448baa71f716aab78710d",
+        "sha256": "67f421805809e051f4a106224fd3a192be7088940c2188cfe69c91e640c6a55e",
         "bytes": 5703
       },
       "source_license": "Apache-2.0",
@@ -70,13 +70,13 @@
     {
       "path": "m3/collections/src/main/native/collections/m3_long_index_path_masks_jni.c",
       "before": {
-        "git_blob_sha1": "941f77d7261fd27cca9977575585f6278fcb0d31",
-        "sha256": "c5971bd4bb6ee01a5385cc9ae22a2d7bc2bedd2163a1e39dd24cf76ec5f5e512",
+        "git_blob_sha1": "21e8eb690c5618c8521fc13def91d32e563381d8",
+        "sha256": "95a8ee0c924b570ef19a8403ac9f5ee2d970e9d27d1df562cb87d40b5e5b2ba4",
         "bytes": 11105
       },
       "after": {
-        "git_blob_sha1": "244e2e250d8e35c3467260a85c2f44580102f399",
-        "sha256": "c75732ddf8c2d562b917bf015d58d1b726bb7e3cabd481cd4dfd1ae7b60e9cfa",
+        "git_blob_sha1": "c7aa55b7af4df3f16e42b1769232d337178234d1",
+        "sha256": "dbb4de2bd2e67fb71eecbd5e959bbebf98199d4b04417e8ccb2e747caf8e0b84",
         "bytes": 11060
       },
       "source_license": "Apache-2.0",
@@ -88,13 +88,13 @@
     {
       "path": "m3/collections/src/main/native/collections/m3_residency_state_mask.c",
       "before": {
-        "git_blob_sha1": "f6015cf4f9d760a649d37124d9d5219d6052164b",
-        "sha256": "07076627c4cdca856ead90d400c467d7259b65a7970dfbea114ffd66a9bb54e4",
+        "git_blob_sha1": "7fc64faa35977cd87f19dacea23cb60d48f88107",
+        "sha256": "0b066dda6e0014781ace525347db3d9de6ecfb45bbd717a92240846ac4ac8fbd",
         "bytes": 4443
       },
       "after": {
-        "git_blob_sha1": "178fad51766479d666af3b4a18101748c977f47b",
-        "sha256": "f893e18b9ca2dff10aa07a1217e925c0e282ab01d6d485ade94a3eb5098acc41",
+        "git_blob_sha1": "23a6c53b778e6735801092c4d5efea0d903493f8",
+        "sha256": "6e03009126b39b9f0b8100d70e94be99cf4c06b8461608d8d5ea98524b697bcd",
         "bytes": 4401
       },
       "source_license": "Apache-2.0",
@@ -106,13 +106,13 @@
     {
       "path": "m3/collections/src/main/native/collections/m3_state_mask_histogram.c",
       "before": {
-        "git_blob_sha1": "f7099d5e06db8c76fe5d6549f8d167f965569c35",
-        "sha256": "21ff3a8dade438a819d411fba96a6cb4ee8ddbd4c568409686137c42524e41bf",
+        "git_blob_sha1": "ee5fe3adb1320c7879170028c852498d90ad935c",
+        "sha256": "05b9dd651f4c4b8c6759bd06bb3bf3107199be0d39c6c86daebd5e1e4fd8c111",
         "bytes": 4065
       },
       "after": {
-        "git_blob_sha1": "5591de6b1826d29dd4cdbc67ca3f2c87f9eb56e5",
-        "sha256": "4ab0d28d827916c7aae1852ef2d961f8bbfffde8b216ce52f6a7d9301fbd351d",
+        "git_blob_sha1": "2816b895fcd3fae45e87601226b58952179b9de3",
+        "sha256": "dcb83d3432ff342b05dbee2f011e244e39d4a711e4972b7cac3a879b3aa5b500",
         "bytes": 4022
       },
       "source_license": "Apache-2.0",
@@ -124,13 +124,13 @@
     {
       "path": "m3/collections/src/main/native/collections/segmented_bit_lane.c",
       "before": {
-        "git_blob_sha1": "011b847f0d22ea96e4b136547083904ac50b1440",
-        "sha256": "4ff7fb4557c58cc59de7fbb24498f3df2a197083a5cd467670dc24b9441f1210",
+        "git_blob_sha1": "0d1a6f61897a6a5f3a600df0b426100156364e57",
+        "sha256": "3567f3eed5ab042b5d88574da8f77cce967c3f35bcaf1b99d2c373af4d4ef674",
         "bytes": 3458
       },
       "after": {
-        "git_blob_sha1": "4dabc33b4f2e0156ce245ca22ce0421a954d90d1",
-        "sha256": "1246ffa52b1867fb1a41f4c70689dc661a808c4b1790bd4a09cd6cd9fa2e8aa2",
+        "git_blob_sha1": "c0243f63d68e12de6948e93bc495fc1c6051f120",
+        "sha256": "02bae66e64cc0c16040a33cc11a5efe28ec520e27f8448d24b56f4569054211b",
         "bytes": 3415
       },
       "source_license": "Apache-2.0",
@@ -160,13 +160,13 @@
     {
       "path": "src/java.base/share/native/libjava/M3RX7.c",
       "before": {
-        "git_blob_sha1": "5b78633b2c4904506fbb47035eabb54611586b39",
-        "sha256": "441c6de3577b56d15134f8048c1eeaab3baa982517309ca8d3e7fc9c65006d1a",
+        "git_blob_sha1": "41eb222a837b5c2ebed944e49b9a6a32d357186b",
+        "sha256": "7cbd0a016975704d1b3f9777421dcf02848ac14c8bebbd7aeefd41e9c46712c6",
         "bytes": 4163
       },
       "after": {
-        "git_blob_sha1": "3a97c5b4c596f6c02fe3a82edeeb4413ba42b10a",
-        "sha256": "63f42202be6ce83f72e70854051dffd261125d686ee52ffe6de97540c3957524",
+        "git_blob_sha1": "60ecc0751efead8e6027423becb9077e618b9b3d",
+        "sha256": "163a893017a913005cb612a811bbb6ae5cdf0c16efdf92ce2b38ad2e1273ffb8",
         "bytes": 4063
       },
       "source_license": "GPL-2.0-only WITH Classpath-exception-2.0",
@@ -196,13 +196,13 @@
     {
       "path": "src/java.base/share/native/libjava/M3StateRelation.c",
       "before": {
-        "git_blob_sha1": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
-        "sha256": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16",
+        "git_blob_sha1": "89b3127f0f262de3e00ba28a01079a659013dce2",
+        "sha256": "0df1989292b23b1f185f222db61ad55d5e38b30d5b758436ca9d62b8de277bbd",
         "bytes": 5899
       },
       "after": {
-        "git_blob_sha1": "fd24b54be45d6679ea1d746487216bc99efccc2f",
-        "sha256": "42ce45bf2d2584b3dd22799389b2fa43971e2355608c744e59eabb039434444c",
+        "git_blob_sha1": "87402dcf2b2c99f2b691e24f99b53194b5555ea9",
+        "sha256": "a8a69de511c4e5df57ef86bd3918ceee845faccc1ced09617791cd27b92a2ab5",
         "bytes": 5788
       },
       "source_license": "Apache-2.0",
@@ -290,7 +290,7 @@
       "repository": "hsoliwal/M3jdk21",
       "ref": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
       "path": "m3/collections/src/main/native/collections/m3_index_path_masks.c",
-      "blob": "086b49293257fd17cc7fbd1ebbb98460aa677e35",
+      "blob": "69aef883c09997bae30825d7ad8757bc2358bf69",
       "role": "Existing independently licensed Region selector exception behavior; original source notices retained",
       "license": "Apache-2.0"
     }
@@ -415,7 +415,7 @@
     },
     {
       "path": "m3/collections/algorithm-catalog/native-index-range-20261017.tsv",
-      "blob": "46172e8ceef9b6d58329f5d37931f8b559c5295c",
+      "blob": "00b3edc048bde992de68c7ce9cc1084d95e468a0",
       "role": "Existing 10-column searchable candidate evaluation schema reused."
     },
     {
@@ -425,7 +425,7 @@
     },
     {
       "path": "m3/docs/m3jdk21-porting-invariant.md",
-      "blob": "291eec22b13d01baecf2c3acef24c3749e19cc24",
+      "blob": "a05cbc0a2fe41df08dd71797fb530e57765ef08b",
       "role": "Canonical recipe-first, per-file source, license, proof and ordered phase authority."
     }
   ],
@@ -504,8 +504,8 @@
     {
       "path": "src/java.base/share/native/libjava/M3ObjectMetrics.c",
       "identity": {
-        "git_blob_sha1": "1e7505f9d87ea9d8f6c7def62efc293515eeb0bf",
-        "sha256": "ce18bcccd3014f83e899c0d0b878f1b221f654096600c5b2d21bfa95285a7edc",
+        "git_blob_sha1": "5d84fd42d312786924190a02d77039e98deb5c03",
+        "sha256": "68fb2fbc9ec26831fb3b97a7c093ceba2872b7d29ef3644f9c95ff8efdaca511",
         "bytes": 1477
       },
       "status": "UNCHANGED_DIFFERENT_LIFETIME_ATOM",
@@ -516,8 +516,8 @@
     {
       "path": "m3/collections/src/main/native/collections/m3_long_address_kernel.c",
       "identity": {
-        "git_blob_sha1": "821876dfb56d836a0ae23e4bc16a391fd7f97ef2",
-        "sha256": "49a3e45262ee764c37746c323ae0def76adfff5f27a4cace6ab7416587ca544f",
+        "git_blob_sha1": "9f68bba46827db2cb53bdb597042829358663f91",
+        "sha256": "ba2e8a66c23bffa52e1b9e20eb9f1e890fb41ee13891dae0ed8d48cd6069f5ba",
         "bytes": 3458
       },
       "status": "UNCHANGED_DIFFERENT_LIFETIME_ATOM",
@@ -528,8 +528,8 @@
     {
       "path": "m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c",
       "identity": {
-        "git_blob_sha1": "f5660370d94503888d31adfb9b6f04796ebc426f",
-        "sha256": "50c741073d6ef0b4efbd4a90c1f336f42945fa3bcd5824455f213f7509a52388",
+        "git_blob_sha1": "eacc444a737a797a43a1a559f936c55fc29bb5e1",
+        "sha256": "75fca9fea6741cb1b13e1b96fcc34d560a5e3bba3ee59b3b485d1ca69b72aee0",
         "bytes": 2278
       },
       "status": "UNCHANGED_DIFFERENT_LIFETIME_ATOM",

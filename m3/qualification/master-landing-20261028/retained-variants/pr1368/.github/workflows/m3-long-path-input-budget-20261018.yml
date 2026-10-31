@@ -3,8 +3,8 @@ on:
   pull_request:
     paths:
       - 'm3/collections/qualification/m3-long-path-input-budget-20261018/**'
-      - 'm3/collections/src/main/java/com/m3/collections/M3LongIndexPathBudget.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3LongIndexPathBudgetSelfTest.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongIndexPathBudget.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3LongIndexPathBudgetSelfTest.java'
       - '.github/workflows/m3-long-path-input-budget-20261018.yml'
   workflow_dispatch:
 permissions:
@@ -24,19 +24,19 @@ jobs:
           set -euo pipefail
           ROOT=m3/collections/qualification/m3-long-path-input-budget-20261018/recipe
           mvn -B -ntp -f "$ROOT/pom.xml" package
-          java -cp "$ROOT/target/classes" com.synexia.m3.M3LongPathInputBudgetRecipeSelfTest "$ROOT/templates"
-          java -cp "$ROOT/target/classes" com.synexia.m3.M3LongPathInputBudgetRecipe --check . "$ROOT/templates"
+          java -cp "$ROOT/target/classes" jdk.internal.m3.M3LongPathInputBudgetRecipeSelfTest "$ROOT/templates"
+          java -cp "$ROOT/target/classes" jdk.internal.m3.M3LongPathInputBudgetRecipe --check . "$ROOT/templates"
       - name: Strict Java21 Java-only contract
         run: |
           set -euo pipefail
           OUT="$RUNNER_TEMP/m3-budget-proof"
           mkdir -p "$OUT/classes" "$OUT/native"
-          PKG=m3/collections/src/main/java/com/m3/collections
-          TEST=m3/collections/src/test/java/com/m3/collections
+          PKG=m3/collections/src/main/java/jdk/m3/collections
+          TEST=m3/collections/src/test/java/jdk/m3/collections
           javac --release 21 -proc:none -Xlint:all -Werror -d "$OUT/classes" \
             "$PKG/M3LongIndexPathMasks.java" "$PKG/M3LongIndexPathMasksJNI.java" \
             "$PKG/M3LongIndexPathBudget.java" "$TEST/M3LongIndexPathBudgetSelfTest.java"
-          java -cp "$OUT/classes" com.m3.collections.M3LongIndexPathBudgetSelfTest
+          java -cp "$OUT/classes" jdk.m3.collections.M3LongIndexPathBudgetSelfTest
       - name: Actual JNI Region parity and undefined-behavior sanitizer
         run: |
           set -euo pipefail
@@ -52,5 +52,5 @@ jobs:
               -fPIC -shared $FLAGS -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
               -o "$OUT/native/libm3_collections_long_path_masks.so" "$SRC"
             java -Xcheck:jni -Djava.library.path="$OUT/native" -cp "$OUT/classes" \
-              com.m3.collections.M3LongIndexPathBudgetSelfTest --native
+              jdk.m3.collections.M3LongIndexPathBudgetSelfTest --native
           done

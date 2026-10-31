@@ -5,8 +5,8 @@ on:
     branches: ["m3/residency-state-mask-java-jni-20261017"]
   pull_request:
     paths:
-      - "m3/collections/src/main/java/com/m3/collections/M3ResidencyStateMaskIndex.java"
-      - "m3/collections/src/test/java/com/m3/collections/M3ResidencyStateMask*"
+      - "m3/collections/src/main/java/jdk/m3/collections/M3ResidencyStateMaskIndex.java"
+      - "m3/collections/src/test/java/jdk/m3/collections/M3ResidencyStateMask*"
       - "m3/collections/src/main/native/collections/m3_residency_state_mask.c"
       - "m3/collections/qualification/residency-state-mask-20261017/**"
       - ".github/workflows/m3-residency-state-mask-20261017.yml"

@@ -30,5 +30,5 @@ jobs:
           find m3/collections/src/main/java -name '*.java' | sort > "$M3_TASK_OUT/core.args"
           javac --release 21 -encoding UTF-8 -proc:none -Xlint:all,-module -Werror -d "$M3_TASK_OUT/core" @"$M3_TASK_OUT/core.args"
           javac --release 21 -encoding UTF-8 -proc:none -Xlint:all,-module -Werror -cp "$M3_TASK_OUT/core:$M3_PROVIDER" -d "$M3_TASK_OUT/classes" @"$M3_TASK_OUT/owned.args"
-          java -Xmx512m -cp "$M3_TASK_OUT/classes:$M3_TASK_OUT/core:$M3_PROVIDER" com.m3.collections.apache.M3MultiValuedMapSelfTest
+          java -Xmx512m -cp "$M3_TASK_OUT/classes:$M3_TASK_OUT/core:$M3_PROVIDER" jdk.m3.collections.apache.M3MultiValuedMapSelfTest
           java -Xmx512m -cp "$M3_TASK_OUT/classes:$M3_TASK_OUT/core:$M3_PROVIDER" ApacheM3MultiValueCandidateProbe

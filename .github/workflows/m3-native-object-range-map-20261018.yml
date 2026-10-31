@@ -2,8 +2,8 @@ name: M3 Native Object RangeMap Java JNI
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3ObjectRangeMap.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3ObjectRangeMap*'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3ObjectRangeMap.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3ObjectRangeMap*'
       - 'm3/collections/qualification/m3-native-object-range-map-20261018/**'
       - '.github/workflows/m3-native-object-range-map-20261018.yml'
   workflow_dispatch:
@@ -28,15 +28,15 @@ jobs:
           javac --release 21 -proc:none -Xlint:all,-serial,-processing,-module -Werror \
             -sourcepath m3/collections/src/main/java:m3/collections/src/test/java \
             -d "$RUNNER_TEMP/classes" \
-            m3/collections/src/main/java/com/m3/collections/M3ObjectRangeMap.java \
-            m3/collections/src/main/java/com/m3/collections/M3SlotArrays.java \
-            m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java \
-            m3/collections/src/test/java/com/m3/collections/M3ObjectRangeMapSelfTest.java \
-            m3/collections/src/test/java/com/m3/collections/M3ObjectRangeMapNativeProof.java
+            m3/collections/src/main/java/jdk/m3/collections/M3ObjectRangeMap.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3SlotArrays.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3ObjectRangeMapSelfTest.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3ObjectRangeMapNativeProof.java
       - name: Actual M3 Java owner reference-ranged differential corpus
         run: |
-          java -cp "$RUNNER_TEMP/classes" com.m3.collections.M3ObjectRangeMapSelfTest
-          java -Xint -cp "$RUNNER_TEMP/classes" com.m3.collections.M3ObjectRangeMapSelfTest
+          java -cp "$RUNNER_TEMP/classes" jdk.m3.collections.M3ObjectRangeMapSelfTest
+          java -Xint -cp "$RUNNER_TEMP/classes" jdk.m3.collections.M3ObjectRangeMapSelfTest
       - name: Compile incumbent C17 full32 state path mask JNI
         run: |
           JDK_HOME="$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")"
@@ -48,8 +48,8 @@ jobs:
       - name: Actual JNI 32-bit selection and Java reference identity parity
         run: |
           java -Xcheck:jni -Djava.library.path="$RUNNER_TEMP" -cp "$RUNNER_TEMP/classes" \
-            com.m3.collections.M3ObjectRangeMapNativeProof --native
+            jdk.m3.collections.M3ObjectRangeMapNativeProof --native
           java -Xcheck:jni -Xint -Djava.library.path="$RUNNER_TEMP" -cp "$RUNNER_TEMP/classes" \
-            com.m3.collections.M3ObjectRangeMapNativeProof --native
+            jdk.m3.collections.M3ObjectRangeMapNativeProof --native
       - name: Maven owning M3 JUnit compatibility
         run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3ObjectRangeMapTest test

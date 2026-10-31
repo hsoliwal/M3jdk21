@@ -1,0 +1,30 @@
+{
+  "schema": "M3_MAVEN4_MEMORY_HELPER_LINEAGE/1",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_pull_request": "https://github.com/hsoliwal/com.synexia/pull/12648",
+  "sources": [
+    {
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/jdk/internal/m3/rewrite/memory/M3RecoveryMemory.java",
+      "source_revision": "a2b50cfe926c5c5f400c7f659a947a5020fb8d4d",
+      "git_blob": "b6b2c4576830a684a7487db33c2c4cd61c79853d",
+      "sha256": "88696555f28134225ecd731c5c81065dd53912361d46bfe3f79f60d877c62936",
+      "exact_published_readback": true
+    },
+    {
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/jdk/internal/m3/rewrite/memory/M3RecoveryMemoryTest.java",
+      "source_revision": "a2b50cfe926c5c5f400c7f659a947a5020fb8d4d",
+      "git_blob": "c260c8ea6c8015f40d15aab0536bf6818ecced55",
+      "sha256": "b27e96e73af86cb12cf453a0b4f27b49bdae24073aa9e435061b177d02969a78",
+      "exact_published_readback": true
+    },
+    {
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/jdk/internal/m3/rewrite/sealed/SealHash.java",
+      "source_revision": "a2b50cfe926c5c5f400c7f659a947a5020fb8d4d",
+      "git_blob": "6537fba62de8d37e7aad39259b5bbba06c3aa36b",
+      "sha256": "316da9bf8b642f9d8ad9e055328aec0f70ddfe0f63c4649d5dc35d062fd7a11c",
+      "exact_published_readback": true
+    }
+  ],
+  "modification": "Only the Maven4 profile identity and dated comment change in M3RecoveryMemory; independent conformance test and SealHash source are exact.",
+  "event_history": "No integrated task event history is inherited."
+}

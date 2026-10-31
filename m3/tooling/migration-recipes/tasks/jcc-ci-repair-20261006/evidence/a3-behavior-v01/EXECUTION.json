@@ -20,8 +20,8 @@
     "inputs": {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/INPUTS.json",
       "bytes": 20813,
-      "sha256": "08cae19f92f61251e4c4fc9f37478e87745403685845a7029b29f62913cce0b9",
-      "git_blob": "ada2700a3a782c0a8d7a3cae46253359fc6a443c"
+      "sha256": "96c283ba0648634120824bc74a250253de73bf53151f3535a68a446f85d8de70",
+      "git_blob": "94c0d045139a94aa3d71cafb67286dc63bb32b68"
     },
     "runner": {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/run.py",

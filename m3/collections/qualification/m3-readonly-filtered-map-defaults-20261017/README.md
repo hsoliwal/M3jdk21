@@ -37,10 +37,10 @@ only in Java.
 ## Source and exact replay
 
 - `M3FilteredViews.java`: original Git blob
-  `10bc8328c0aef2cab69ba0d55f7f566fc4e60df3`,
-  SHA-256 `d67a632f63647f033e71360858f8f1be1f93418880178a96437bb0605998ad5b`.
+  `940de9e148adab4948aa9e53be1c45174511446f`,
+  SHA-256 `5a8fbb97cd9b5d26c7ac7ab9568ff59808ef03ac27bbaa153739dd5ca03a0f8b`.
   Expected generated SHA-256
-  `3657695ea56c3c01e53d332e37aede2a126efbf718378d217b72d844a4192f86`.
+  `f96f5d027ce046fd69e4220ad48d2848b915ab572ca9e11526bcd5522207e10f`.
 - Two new Java sources: dependency-free main oracle and Maven/JUnit
   adapter with source hashes in `SOURCE_RECEIPT.tsv`.
 - The `recipe-mirror/` source payloads are byte-identical to the

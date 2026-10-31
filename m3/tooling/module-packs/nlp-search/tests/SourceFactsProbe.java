@@ -3,7 +3,7 @@
  */
 package jdk.m3.nlp.search.test;
 
-import com.m3.compiletime.ast.M3FileSourceFacts;
+import jdk.m3.compiletime.ast.M3FileSourceFacts;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Random;

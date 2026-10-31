@@ -2,7 +2,7 @@
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
  *
- * M3JDK21: one JNI contract for primitive owner offsets, windows and masks.
+ * M3JDK 21: one JNI contract for primitive owner offsets, windows and masks.
  * Header-only C11 atoms: no retained Java handles, native heap or JVM pins.
  * JNIEnv must belong to the invoking thread and is never stored.
  */

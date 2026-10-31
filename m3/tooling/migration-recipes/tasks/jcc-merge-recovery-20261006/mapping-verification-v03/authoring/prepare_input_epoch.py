@@ -27,7 +27,7 @@ def main():
     spec.loader.exec_module(verifier)
     prior_root = AUDIT / "candidate/mapping-v02/input-epoch"
     prior_file = prior_root / "INPUT_EPOCH.json"
-    assert sha(prior_file) == "fb413e58be72aaffa1e91149479ac159c6d4b961101eed4ab10f1c99df0b6711"
+    assert sha(prior_file) == "2ea3ffe30ac6824bcc6d708c431b848a4c7997bdb4cdeaaddea1a62640734718"
     prior = json.loads(prior_file.read_bytes())
     capture_names = ["COMMIT", "ROOT", "M3", "GITHUB"]
     captures = [ROOT / ("publication/M3_FINAL_CURRENT_" + name + ".json") for name in capture_names]
@@ -57,7 +57,7 @@ def main():
     old_records, new_records = [m["migration"]["records"] for m in (old_map, current_map)]
     assert [row["id"] for row in old_records] == [row["id"] for row in new_records]
     changed = [i for i, pair in enumerate(zip(old_records, new_records)) if pair[0] != pair[1]]
-    assert changed == [46] and new_records[46]["id"] == "synexia.counterpart.MIndexRegexTrigramQuery"
+    assert changed == [46] and new_records[46]["id"] == "m3.counterpart.MIndexRegexTrigramQuery"
     for key in current_map:
         if key != "migration":
             assert current_map[key] == old_map[key]

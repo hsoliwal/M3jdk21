@@ -30,7 +30,7 @@ The accepted-atoms table gives full pre/post SHA-256 values and the exact source
 
 ## Donor reuse and refused substitutions
 
-The selected stable-group donor is the public [M3 #1164 history](https://github.com/hsoliwal/M3jdk21/pull/1164), with [projection blob at `9b7620f5`](https://github.com/hsoliwal/M3jdk21/blob/9b7620f592248e858628c2489866ec73227d519c/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java). [HISTORY.tsv](index-candidates/HISTORY.tsv) records its equality with the historical canonical Synexia template, while [DONOR_NOTES.md](index-candidates/DONOR_NOTES.md) explains the contract comparison.
+The selected stable-group donor is the public [M3 #1164 history](https://github.com/hsoliwal/M3jdk21/pull/1164), with [projection blob at `9b7620f5`](https://github.com/hsoliwal/M3jdk21/blob/9b7620f592248e858628c2489866ec73227d519c/m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java). [HISTORY.tsv](index-candidates/HISTORY.tsv) records its equality with the historical canonical Synexia template, while [DONOR_NOTES.md](index-candidates/DONOR_NOTES.md) explains the contract comparison.
 
 Historical two-word native compaction was refused because it loses the current cross-region output batching and predates the bounded surface. Guava, Eclipse Collections, Commons Collections, Spring and Boost remain pinned comparison references; no external implementation body was copied for these changes. LeetCode, HackerRank and GeeksforGeeks supplied problem categories, with their problem/editorial material treated as non-code references. Applicable notices are retained in the [series attribution](../../qualification/wrapper-convergence-20261018/THIRD_PARTY_NOTICES.md).
 

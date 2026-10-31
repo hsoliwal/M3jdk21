@@ -11,8 +11,8 @@ match the **exact committed Git blob identities**:
 
 | Reviewed branch file | Exact SHA-1 Git blob |
 | --- | --- |
-| `M3AtomicLeafReceiverVerifier.java` | `96052c0d0bb51542ac6ad40073bd56068b64931c` |
-| `m3-four-leaf-candidate-20261017.tsv` | `c5386fc4699c1ed75c28dc956a5d3f3a80f305e3` |
+| `M3AtomicLeafReceiverVerifier.java` | `c7a1498ebcf53fcfab8e57837e9e8a1dc751ec34` |
+| `m3-four-leaf-candidate-20261017.tsv` | `54dce562e6bf868f4ad7d872ca11f8f5ed0477a2` |
 | `m3-filtered-wrapper-candidates-20261017.tsv` | `7ce3b59216c18a86b26224b0ffb38959eef06d53` |
 
 Executed using the exact files:

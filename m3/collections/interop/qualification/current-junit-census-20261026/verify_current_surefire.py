@@ -15,19 +15,19 @@ from pathlib import Path
 import re
 import xml.etree.ElementTree as ET
 
-SRC = 'm3/collections/interop/src/test/java/com/m3/collections/interop/'
+SRC = 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/'
 BASE = 'm3/collections/interop/qualification/runtime-junit-census-20261022/'
 CURRENT = 'm3/collections/interop/qualification/current-junit-census-20261026/'
 HISTORY = BASE + 'verify_surefire.py'
 RECEIPT = CURRENT + 'CURRENT_JUNIT_METHOD_SUCCESSION.tsv'
-HISTORY_VERIFIER_GIT_BLOB = '91a438127d48fac9b32104a1e98f1a3eb18bdc5d'
+HISTORY_VERIFIER_GIT_BLOB = '0f8f6c50854d53672c3a07d26473b8457d439cbf'
 HISTORY_SHARD_GIT_BLOBS = (
-    '56bca22881cd0e8ad6b90c3b5582ddbd5ae0ef7d',
-    'e1e57850ac92df6e36743561044e134375aa128f',
-    'b3c2fd2ffd2c71543950e9f788ecce7e875a03e3',
-    '5a3e8a287f14898dfc3b6ba7da5f3e5443b87ad2',
+    'c34283d303f06188d021c58a8556bdf13f884a5f',
+    'da78d98b21c3a1ad26ba6c7724e37730e8788b50',
+    '90c39dcd40c8b682c849845f5b8912ddddf11d3f',
+    'a9e1b9ba0ffbc2beff2c0152df3430d4a823d2d3',
 )
-CURRENT_RECEIPT_SHA256 = '10e9488a22dea3aa7ad2e0c3037be44b1aebbb953469df52018bc75472a9db2e'
+CURRENT_RECEIPT_SHA256 = '319af78cef83f8e4d4dd0028d8b234a6b2237d40fca1b4f24e035b079c83774e'
 NEW_SOURCE_NAMES = frozenset((
     'M3ApacheStreamsTest.java', 'M3EclipseStreamsTest.java',
     'M3GuavaStreamsTest.java', 'M3SpringStreamsTest.java',
@@ -143,7 +143,7 @@ def expected_methods(product: Path) -> set[str]:
                 raise ValueError('unreviewed original JUnit source change: ' + relative)
         names = declared_methods(relative, data, methods)
         for name in names:
-            ident = 'com.m3.collections.interop.' + Path(relative).stem + '#' + name
+            ident = 'jdk.m3.collections.interop.' + Path(relative).stem + '#' + name
             if ident in expected:
                 raise ValueError('duplicate JUnit source method identity: ' + ident)
             expected.add(ident)

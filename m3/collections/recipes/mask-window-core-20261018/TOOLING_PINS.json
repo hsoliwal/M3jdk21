@@ -1,16 +1,16 @@
 [
   {
-    "path": "src/main/java/com/synexia/rewrite/M3GpuToolJoinManifest.java",
-    "git_blob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
-    "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999",
+    "path": "src/main/java/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
+    "git_blob": "78d5fb68f13872164973a8918cc7886c5f548bca",
+    "sha256": "c874b5d4b5fe8886d53763ab91d050f431c4b7c09d3fe34d58680231ccb1cf7e",
     "donor_commit": "98368e107f4a205d852ef958cd48c1ee633219b1",
     "mode": "VERBATIM_EXISTING_SOURCE_SEAL_TOOL",
     "license": "Apache-2.0"
   },
   {
-    "path": "src/main/java/com/synexia/rewrite/SealReplay.java",
-    "git_blob": "358fc809fc6f780f4ef86f3c0afacc721c2113a6",
-    "sha256": "777a9181fad3276eca0577ffc97c4cb12fb6f44b6b5fe55f9504d45690839623",
+    "path": "src/main/java/jdk/internal/m3/rewrite/SealReplay.java",
+    "git_blob": "4b0ecdb91f890392626d44bbc931a73837508347",
+    "sha256": "22aa64851ad8ed42c88cfdd134d2ab1af128fff8d7ed7cf7797d2d814321cb67",
     "donor_commit": "98368e107f4a205d852ef958cd48c1ee633219b1",
     "mode": "VERBATIM_EXISTING_SOURCE_SEAL_TOOL",
     "license": "Apache-2.0"

@@ -109,8 +109,8 @@
       "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/bound-inputs-v3/BOUND_INPUTS_REVIEW_PACKET.json",
       "snapshot": "inputs/BOUND_INPUTS_REVIEW_PACKET.json",
       "bytes": 5435,
-      "sha256": "e0ae5375e313a8547f5cdb8f607d2fe1c04efe91d3d43c86d1a5878329beaf59",
-      "git_blob_sha1": "57f638e23a27f660fb2d3534df9f4d04113ae280",
+      "sha256": "867e7a054af6dcadf81d7a71c6cbe822695f3b5be3fd1fefe5d6df7919cfbb2c",
+      "git_blob_sha1": "b4efdc6a9ef0709b2063cb334a041a2f01922d4a",
       "mode": "100644"
     },
     {
@@ -133,16 +133,16 @@
       "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/CUSTODY_EVIDENCE_INDEX.json",
       "snapshot": "inputs/CUSTODY_EVIDENCE_INDEX.json",
       "bytes": 260154,
-      "sha256": "8e478debeac87c46d01d57cf1038b2195005f9f6af249b25d97f1074ef26b38b",
-      "git_blob_sha1": "8d97bf818a71fd3d8bd63441d45e2de8b6666a6a",
+      "sha256": "7876e0828731f3e4687c67162156788e7bde001406d5d723dd9acd8433fb36ee",
+      "git_blob_sha1": "1838dbfdb07e182f193f78916e10cde3adeae7d8",
       "mode": "100644"
     },
     {
       "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/ADDITIONAL_RECEIPTS.json",
       "snapshot": "inputs/ADDITIONAL_RECEIPTS.json",
       "bytes": 60890,
-      "sha256": "30cc1c07b3aac8f1a6662c494c0cbbc76c22bc6a4fdbcbb04770236fd2384907",
-      "git_blob_sha1": "26df20d4c962ae1e0b6ef43f095c70868140dada",
+      "sha256": "082d12dd79e70bb747441fc8b221ab5ddeea5fd8174629b068c137c4682e1b5a",
+      "git_blob_sha1": "eaf3b002942e0fcf16aece8a2a4459f3cf9010f3",
       "mode": "100644"
     },
     {
@@ -157,16 +157,16 @@
       "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/ROOT_POM_RESTORATION.json",
       "snapshot": "inputs/ROOT_POM_RESTORATION.json",
       "bytes": 922,
-      "sha256": "34a6cf995296ed929c2209d34480245473150601f8a556945aa1d8c2947fda6d",
-      "git_blob_sha1": "56764ea7b60d04d7050310f7355280fe2ee9eed6",
+      "sha256": "eed0f1fcb8ec04e05ae3f402a464ce130fb3e9e3eaaa0278cc49992dc3806845",
+      "git_blob_sha1": "5f8950c8e2e33970a8990aaa8652b39e665f7034",
       "mode": "100644"
     },
     {
       "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/ROOT_POM_RECOVERY_CALL.json",
       "snapshot": "inputs/ROOT_POM_RECOVERY_CALL.json",
       "bytes": 165921,
-      "sha256": "f647efbec6809523678b640b0dfbdf495f494bfc5c3e84a8a5e6e8a473e89d41",
-      "git_blob_sha1": "ed2dd05bc146884c7fbe88357966ba8b5a5e9236",
+      "sha256": "207669143fe8087284323adee24e69f738fe9517eebbb0bbd5da530369ce536b",
+      "git_blob_sha1": "e8a59ab5874846398047561c629065834a9dd8c6",
       "mode": "100644"
     }
   ],
@@ -311,8 +311,8 @@
       "name": "custody-v3/source-publisher/BASE_TREE_MODEL.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/BASE_TREE_MODEL.json",
       "bytes": 1372743,
-      "sha256": "877a61dc6d9b4f4fa280faeadbd67db9ee3d56a68768fa06c917d85ab8fbaa80",
-      "git_blob_sha1": "6ee3c1bfd76dc5c0abdba031f163a3d38294f5e9",
+      "sha256": "5a6c06886a4241745d38b6b463a88ace34236a1b0c557ffae596b05d048e1b82",
+      "git_blob_sha1": "97fc934901165fe98f8e2c6c58cf60bc894025fe",
       "mode": "100644"
     },
     {
@@ -327,8 +327,8 @@
       "name": "custody-v3/source-publisher/RAW_VERIFICATION_TREE_PLAN.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/RAW_VERIFICATION_TREE_PLAN.json",
       "bytes": 95189,
-      "sha256": "00fa5b9e4e99621ed6b5aac3c0da4c6506f82e921a3da42fdd4645285653e319",
-      "git_blob_sha1": "27c92ae8d02f1fc6fc3f19a74a5982601d142179",
+      "sha256": "7b2b3526fec60ea3fd6d53261ab1f509c7dcf37b9193d044f215e913ee9fbf90",
+      "git_blob_sha1": "555221e70d2524c095a850cd8e9512b37b10e8aa",
       "mode": "100644"
     },
     {
@@ -343,16 +343,16 @@
       "name": "custody-v3/source-publisher/epoch-01/BEFORE_BRANCH_CUSTODY.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/BEFORE_BRANCH_CUSTODY.json",
       "bytes": 6403,
-      "sha256": "266c17d435d47c58129349e721eec1eee849ceaa28dd5c302eb6030cc02e978e",
-      "git_blob_sha1": "bf253346d4bbba4776f03d5f40f1907eb9365158",
+      "sha256": "e347ce74d2e2c9a3252260215f9a4cd3c3a2aa791219095675ae67df8f135f23",
+      "git_blob_sha1": "3d29582bd7ae56a38c5e7d15bea3a587be7832c3",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/epoch-01/BEFORE_BRANCH_EXECUTION.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/BEFORE_BRANCH_EXECUTION.json",
       "bytes": 563,
-      "sha256": "caf3292d305a0f4e8dcae60d9b2bc9e6690bc25f32830f3be505db07ff04a281",
-      "git_blob_sha1": "b9ad7eaa3e580f8e52bdbda740778870d25a59b4",
+      "sha256": "a49305f07d6e6f172fcaffb296f5f2d4be23f6798827ceffc201fb1d8de76fc7",
+      "git_blob_sha1": "e6785ac00ae6d9deeca65144165986cabca95df5",
       "mode": "100644"
     },
     {
@@ -415,8 +415,8 @@
       "name": "custody-v3/source-publisher/epoch-01/FINAL_PUBLICATION_EXECUTION.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/FINAL_PUBLICATION_EXECUTION.json",
       "bytes": 541,
-      "sha256": "cdeabfd468399b28d8dbba993f1b56bbfb6d63150eff52029dfd7eeae504a307",
-      "git_blob_sha1": "d4b55c38cf8b9f92785e885ba84a8680a284b876",
+      "sha256": "8288a2009cdf92b117ad7ada704da4ebe27f8c67b451b3c779263819374a63f3",
+      "git_blob_sha1": "951520a6c91ccf2a1fc5c04f662bac678e65380a",
       "mode": "100644"
     },
     {
@@ -431,8 +431,8 @@
       "name": "custody-v3/source-publisher/epoch-01/PREFLIGHT.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/PREFLIGHT.json",
       "bytes": 4201003,
-      "sha256": "13e56b17314e89370fb8ce3f8417b405b89b34db8a1868d968589550975db84f",
-      "git_blob_sha1": "0365b81ad1f8b3cef95993f23a84488c87f1c2ab",
+      "sha256": "4a8e0c7647a9a6549ffc797de28d01a7806aa7757fedb2096bf35ecb0bba62c7",
+      "git_blob_sha1": "2ce90c4b5891e73a43eea7df14886fb15f2ffe59",
       "mode": "100644"
     },
     {
@@ -447,192 +447,192 @@
       "name": "custody-v3/source-publisher/epoch-01/PUBLICATION_CUSTODY.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/PUBLICATION_CUSTODY.json",
       "bytes": 1099619,
-      "sha256": "95f325ce57dadab60031f41514d9a9c5fa3ef6eb29a41e3c9a8c81e2dee996b8",
-      "git_blob_sha1": "0f084555dbbea3ba4c9302386ced30e1e1503dda",
+      "sha256": "91c8df6ab07e3590fecf20de65e2e65943c4b70aebb9f5133901ae6362506c35",
+      "git_blob_sha1": "6389a4301478fd4df74e146f1ae4b8942f675e20",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-00.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/final-file-calls/call-00.json",
       "bytes": 59299,
-      "sha256": "5f9e682afec61bf2c2cd8883ba2533927c5317dc2409fc43fd85e3b112b00f08",
-      "git_blob_sha1": "d55b6ebb698182d37e384dfafc7e788fe7462059",
+      "sha256": "fe0a243205dce5a70fddd2533bf438307bed1346dd29167a2776b6bea769302e",
+      "git_blob_sha1": "1181f241d0473acac25fe102c1dced930b210c93",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-01.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/final-file-calls/call-01.json",
       "bytes": 14703,
-      "sha256": "e2f25989522f89098bc62bf552938de6f9e97385fee166907e5b053cc311d474",
-      "git_blob_sha1": "c90b283fcdc8b8ad47a9967fc3a713e13673c230",
+      "sha256": "4762fc0b12cddea21451c352e4a66addb72be131a33cc0e7a79f6b3d2b125eb0",
+      "git_blob_sha1": "3674074d2161f2fa7b772ab027dbfe712d028fc4",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-02.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/final-file-calls/call-02.json",
       "bytes": 32873,
-      "sha256": "651dd383a98b0b6587f214aa8041257e41b1b01c4bf93018a0de4cae6054979f",
-      "git_blob_sha1": "fb79558e088476b9cfc64bea47249e30c8c65dda",
+      "sha256": "aff46dcc7016fcbeff7f2d90d2f2aeca0bec637172ac9905aeab8cf512f55e4c",
+      "git_blob_sha1": "6c50fbb3646658b4f30a729def3ab7dfeb2b25e0",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-03.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/final-file-calls/call-03.json",
       "bytes": 9454,
-      "sha256": "6b4d2e9f1e02b5ab466a898724df1f4bde2e8b2495f8198c8d3aac36dd2836ba",
-      "git_blob_sha1": "ee9333be3798433dcfbcee14c7cadfec3e050e60",
+      "sha256": "f8b8d4be2e598c0b967b450cc30f47139bdedc0cd500893f0ac371933521f949",
+      "git_blob_sha1": "ffa7def23cabfb0f98c7d9298943e2f7c41ee5fc",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-04.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/final-file-calls/call-04.json",
       "bytes": 38458,
-      "sha256": "b0fe9bc72bc8c63f5394d068395612478301c1c34ab3440e0a516782676847e2",
-      "git_blob_sha1": "b28ba9938f4333d3ca6ccf07623a1e336509ac68",
+      "sha256": "ba5e24a071db5ba65af97c4d556fb83e64cee9fd1a0d238bb034a3307a126440",
+      "git_blob_sha1": "f8996e4f11c1d656dace1e1303697b28ffc238b6",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-05.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/final-file-calls/call-05.json",
       "bytes": 33870,
-      "sha256": "9c8ca761372671f98263d9dc341cf6eb83c870c2894849ad096522af955412cb",
-      "git_blob_sha1": "ac243452ac65c890dd212c55e2caa13b5de70841",
+      "sha256": "b954a6ccba75f852ab5c9fbac9eac488e814c696b5aa1b9b9b8ab63bb8f8b32c",
+      "git_blob_sha1": "afb5ddde3474188e1937d97f7c87b2f74e5df060",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-06.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/final-file-calls/call-06.json",
       "bytes": 51434,
-      "sha256": "b5fb7d882960f20a2bfa0517d9b9d908761cf3fcf241b6dde31c8485c92e9440",
-      "git_blob_sha1": "8dfca328ca7a73b5fe3e379b1da909f8aedf52ec",
+      "sha256": "6ff11dc8e1f435ccfede6784c791741a436c0201f929751464529856f6c667d0",
+      "git_blob_sha1": "57344ce4ef07b3c6fd50ae5b9e5634734b71f781",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-07.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/final-file-calls/call-07.json",
       "bytes": 1576,
-      "sha256": "d59b1e109ce61bd49881ffa232de3689dbedb2329f62b63675445bb31f822511",
-      "git_blob_sha1": "2f3c00a66f5533ea8230cf5e895be775a5503b4b",
+      "sha256": "56572ae4327b534f9791aa6eedc87afb9fec4624f803eeffdc956edab2f7a04e",
+      "git_blob_sha1": "b758e186c2076cfcd88e664fc2608ab370c015e8",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-08.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/final-file-calls/call-08.json",
       "bytes": 2856,
-      "sha256": "431ed2a5df0f5101a590fba5279cb1a06661cebac99150884d714d01c0534e60",
-      "git_blob_sha1": "9c79c7cc4784b63410a6f68a9670bbab8fa3ab67",
+      "sha256": "876f6f1515b936c67283d018204f44acd6d34676fcaa14ef814af763033720fb",
+      "git_blob_sha1": "6a997bdfda847710221e36e0e6a6d122b89f62f7",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-09.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/final-file-calls/call-09.json",
       "bytes": 6028,
-      "sha256": "f42c51a6383836cffb05e723743dd06545d0917696742670e70c393975f144cb",
-      "git_blob_sha1": "21d84335fd0b256eeddc27938581b3be738c8ca9",
+      "sha256": "c1fe9bfcff17ade86f09d4e91964b145e7dc718529fba3859bfdfed21ee3af47",
+      "git_blob_sha1": "8522efd4688fde5605a4c72917345d9533b7ce8c",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-10.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/final-file-calls/call-10.json",
       "bytes": 5335,
-      "sha256": "ba773cfa1b16a5079c70c5e79f9663b529f568e7c3599a97b66addf8a8414130",
-      "git_blob_sha1": "66f77c3efc8e51b78e7ae4cf8a9b8d721d44ad37",
+      "sha256": "daf1c54de8b6548a0c9e82d349aaf39f6138d0e512780c814eea773d3021b00c",
+      "git_blob_sha1": "60d469695cdafd510b4e1b11bf960c98a1eca477",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-11.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/final-file-calls/call-11.json",
       "bytes": 4361,
-      "sha256": "8053df3ad2ec58b19a0ac2c86585ab922e93a873db3fc800972b4d497d5c1941",
-      "git_blob_sha1": "46b4d799d6d02822c87cf6c2b3345fa8296d41ab",
+      "sha256": "491b6bbcfecd78053f3b9f7996675e3ca39d11a0aa1e5fe57d1296e1432820ad",
+      "git_blob_sha1": "0001c4b4b8bcde83f12df45757d126cbee0187bf",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-12.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/final-file-calls/call-12.json",
       "bytes": 12577,
-      "sha256": "38dcbd14e3307d0e4fe6e99e72fb01ca13606eb4b2667cb9639bafa05d1a4292",
-      "git_blob_sha1": "a0bc5d23fb5468406ee5cca9068b2f32fabb4bd4",
+      "sha256": "be6e2a17eaf9f45990b7a4a901d656afe0dce0d386d1c7793c6911cf12ab9d9b",
+      "git_blob_sha1": "ea0409a54d10ced7a8e972e45668b5b31a6b5ce3",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-13.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/final-file-calls/call-13.json",
       "bytes": 100413,
-      "sha256": "a05bda83bcf3a7d8f59a5e3dc794a9ba03483af9a2475a630c819a2fc1d4be6d",
-      "git_blob_sha1": "16cf3b4209fce925710537b24a714ab8fce6bfe2",
+      "sha256": "76b766b7233189b45fc9e1cc62bf8c2dc38e0c9f46be91c84befb6cd264d86a6",
+      "git_blob_sha1": "a7083d176ef1e24aa0b42c4d401f41df2b375628",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-14.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/final-file-calls/call-14.json",
       "bytes": 42506,
-      "sha256": "06aca18820078bedfed28d2ff8aafa034fb6ff75c11a3397bf86fb8f0338e154",
-      "git_blob_sha1": "996dc73fb4671f3f63a93cafb7c8d86286fb2c0d",
+      "sha256": "aea9af2113a255355adac8da00cb7e78538d1fa0049f950c2848f73a6cf8a376",
+      "git_blob_sha1": "ee5d8642348da1e59b07d4709221b927b5c73379",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-15.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/final-file-calls/call-15.json",
       "bytes": 67153,
-      "sha256": "9351543516c7a3a190420731b804380ecee3c12e547e45747c3551dd2536a0d8",
-      "git_blob_sha1": "1580b38f72083ae5df15620f3550b73ba6aa4df0",
+      "sha256": "f15d082658950fae5926431bccf39e3abbfec1f379b58c4a48d84d302207a929",
+      "git_blob_sha1": "ab72ae1cca9d46c12ebc1418ab72ca8e10f6079d",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-16.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/final-file-calls/call-16.json",
       "bytes": 46441,
-      "sha256": "ec6ff31e12a7c478f8cbf47bb21c4e33add7340bbbec7a55d235e903fe88defc",
-      "git_blob_sha1": "53fa40290492500a76f6eb9adbdb71d6c6f0a133",
+      "sha256": "87d952642304d9160df8ce7eaaf36069633092a61edcf9d4190159c583c5fefe",
+      "git_blob_sha1": "f17ea6d1bac2c55c9145f127a5cf361afc53ac5d",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-17.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/final-file-calls/call-17.json",
       "bytes": 24915,
-      "sha256": "d7fe5f167d72b2b4ae340f142410e114db79b58cd10e10190775a838f4864cb5",
-      "git_blob_sha1": "9690c9bd2ce37feadce62d5402cab4e9a26e4b30",
+      "sha256": "c6dedbd4859541e174534bdc70ca77d8184ab4d549c899a517e576f476a47f42",
+      "git_blob_sha1": "2cd9e1ca24a3ddb0f731952c9510ad2d5cb4f080",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-18.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/final-file-calls/call-18.json",
       "bytes": 28716,
-      "sha256": "8b4c874062ffb16b7c1aed6a9083805442cb78bb88eaccba2def92e5708c1580",
-      "git_blob_sha1": "dabfcc7a35f90a00d620c531097dff229138690f",
+      "sha256": "cb40a90753c5665a1a644f372d22c2e86bd669aa01f8bbd0044117cec59b0b5f",
+      "git_blob_sha1": "4faeafa3ded726ca866428b5fe823f6cb81c9ff2",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-19.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/final-file-calls/call-19.json",
       "bytes": 1239,
-      "sha256": "7da6c3d541b2cb97717996d12b13a4ddbfa355ce8dc87c545e3aa480c57f6e17",
-      "git_blob_sha1": "a46217db3494b7fb4560bb8c849c3ff436777bb9",
+      "sha256": "888614c7c0c19153dbefd0ab8dd87da6adb42ed99cd5b9fc1a8f1a21d034fa34",
+      "git_blob_sha1": "9be483091d9d50da1cc0306644fddc8cdc2137e1",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-20.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/final-file-calls/call-20.json",
       "bytes": 1077,
-      "sha256": "91ada336fd5462edc80519398132f663450a1da3820472bd4f49ecc13d838749",
-      "git_blob_sha1": "955243589d6a94d96c31359a582410621472d49b",
+      "sha256": "df01f7bd84faa295f6dd8d888fc58c218053a1cb96d95828dfd0c8b9709980aa",
+      "git_blob_sha1": "71cf17af27c97030e7ca65aa17166ae4bd543867",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-21.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/final-file-calls/call-21.json",
       "bytes": 1189,
-      "sha256": "9c7a7a546385f054b1039b535f19b14ab1701e0cc1d3d736baaa2a938ab32801",
-      "git_blob_sha1": "2d7fcc5f4c958280d82ef07492fa0aff7f121bc4",
+      "sha256": "b4d4534344f2c73a00c01c315a87037f44eba99ed87584cb3746ef66023b55d7",
+      "git_blob_sha1": "bb7369f95a381d01479fedc36976c58dec983d86",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/epoch-01/final-file-calls/call-22.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/final-file-calls/call-22.json",
       "bytes": 1071,
-      "sha256": "97183d3d4517cdbb7472afe1291a8c503d864159ef6cf1aabd70cd15a66eca18",
-      "git_blob_sha1": "9b0d97579e80e55a370d20fea4d3112dc612ab38",
+      "sha256": "f99f5427d7c667af63abce029d9f18dfe5a7c3713a1c5f225c960155872a3152",
+      "git_blob_sha1": "513160433d36dbcf6b601db94d13f895d1b525b5",
       "mode": "100644"
     },
     {
@@ -671,32 +671,32 @@
       "name": "custody-v3/source-publisher/prepare_publication.py",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/prepare_publication.py",
       "bytes": 15683,
-      "sha256": "3cd42b4b5c4ba1e0eb01cace40bff7cb2fe967d65ac4e9a646b70d7daf4404fd",
-      "git_blob_sha1": "6b32bbff9f9221ddf8c5c4f3eb10ee27bed7d70a",
+      "sha256": "9c35afe184b437b5668019f2c8702875d4fed6c3ef2b8232ec845bacc2be2bb2",
+      "git_blob_sha1": "e8afb39d7900d0ec284a695326a41cd472288d60",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/raw-custody-v3/CUSTODY_INPUT.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/CUSTODY_INPUT.json",
       "bytes": 14641,
-      "sha256": "22b58a9e97fd6bb4ebebc6a89dc13e368107c10429bff59191914a5e639c81df",
-      "git_blob_sha1": "aab1f868d992a08d865918b3cef7a99fdf299173",
+      "sha256": "384ce843f2e4545ad1c40d7ee58abbc471b5a6d1cbed89bea82dcff0479ce6a5",
+      "git_blob_sha1": "24e1d059396ed8f46f0a146f93cca483261a6d1e",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/raw-custody-v3/PROBE_CUSTODY_RESULT.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/PROBE_CUSTODY_RESULT.json",
       "bytes": 1542,
-      "sha256": "074e9dcec6275f05bc8ac93d6d92e36b5adaeaa4c6503ace2dbf047b49916705",
-      "git_blob_sha1": "98e64dd614928ae710eb03e66d0dacce1be8b132",
+      "sha256": "3be2658241c3ebb336ae712268cbbd54c3d65969467d729f8a41c88e75bb98a8",
+      "git_blob_sha1": "1608150423fee65581d82475283a6f43bbaae311",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/raw-custody-v3/PROBE_EXECUTION.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/PROBE_EXECUTION.json",
       "bytes": 670,
-      "sha256": "90c9f648768fde6d74bc416d5a52076c7b29581a5df42e21f80da62e983a9be6",
-      "git_blob_sha1": "7fa37f2114d172ad33e0f43e5c0b46af6c7ec099",
+      "sha256": "bfe83dd12307c0cddaba605d01c4d97c306201a44b16db6bd9c6cf6a7523979d",
+      "git_blob_sha1": "cc84771f49e8ab56b8862bacad1c33014d45d51b",
       "mode": "100644"
     },
     {
@@ -743,16 +743,16 @@
       "name": "custody-v3/source-publisher/raw-custody-v3/draft-T01/raw_custody_v3.py",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/draft-T01/raw_custody_v3.py",
       "bytes": 12671,
-      "sha256": "a96f1aec811774467092a09cd750d47785fd4dd5482ce792ffac93c38deb9f5b",
-      "git_blob_sha1": "ccdbb23cf2bddffc543517e4662bd7b069a2876a",
+      "sha256": "80f45f4a1d2e0cd49199e6885c62beff39a326aef5739e8890da5e9d991e2412",
+      "git_blob_sha1": "2be2d948daf6ce63c62ed0725efe68c565941c56",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/raw-custody-v3/draft-T01/verify_publication_v3.py",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/draft-T01/verify_publication_v3.py",
       "bytes": 13831,
-      "sha256": "7138709c360728c17c701391f303a02e21e6e1334b29bc3f67f6c9702f7440f4",
-      "git_blob_sha1": "4ad5c54d4d6109067c40ca82c2d5031df31e99d6",
+      "sha256": "4cc60517ad06d1c3590059e43f353c59ad751cb74601bc65735a7df9259edcbf",
+      "git_blob_sha1": "a97eb63ae09d9341a55f901f6a43342896a3fe82",
       "mode": "100644"
     },
     {
@@ -847,8 +847,8 @@
       "name": "custody-v3/source-publisher/raw-custody-v3/trees/bf2b8fe43cda47f0c6363c8d376f61419e647e4d.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/bf2b8fe43cda47f0c6363c8d376f61419e647e4d.json",
       "bytes": 167271,
-      "sha256": "f6852b552a509cd63b6f3622a21124215fb4c584d9b0b35fb4fd66dc6631f5d3",
-      "git_blob_sha1": "4a6439ecc558aa0fb82f410f7f1aeffe30d5a4ae",
+      "sha256": "7ddfde58c17d7c791af60b93f97606bc0e6437db69fb70a82cb33a8397126d6f",
+      "git_blob_sha1": "9702aedd88a4986eb25537f83761fd0cd78a276b",
       "mode": "100644"
     },
     {
@@ -895,32 +895,32 @@
       "name": "custody-v3/source-publisher/raw-custody-v3/verification-file-reads.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/verification-file-reads.json",
       "bytes": 5076,
-      "sha256": "5f992ea5fa2a618093909b3ba7b063a8972de84f2af4b00ed44b323597538a87",
-      "git_blob_sha1": "805234c233d3bb741a35ced6c80d15f13da35a6c",
+      "sha256": "89d82f0e4e538ba730afbac23e2daf1c9dc12caa9abdec8eb9df9575fe8d59b0",
+      "git_blob_sha1": "f467f0e975099c6269e0e6f916b010b8c0a02723",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/raw_custody_v3.py",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw_custody_v3.py",
       "bytes": 12912,
-      "sha256": "45fe2a39cc936f94e20cf0051f3844e6d6b5ba59b87b2d3ca175bb60917603be",
-      "git_blob_sha1": "25a836990c02625c79f44492eb43b7ffca13b07f",
+      "sha256": "203f44729f860620949ec9e6aa7c5f2c7d766de2e406548ceb6797797bfdcc33",
+      "git_blob_sha1": "735bd8f585d45b8f0956bd027d9227de12d29302",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/readback-static-review/custody-v3/COMPANION_BINDING.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/custody-v3/COMPANION_BINDING.json",
       "bytes": 2857,
-      "sha256": "e5d6703bbeaebb2f6718c7b7f9cefd7dfd723f1b3cead9c50e397ce96e26b791",
-      "git_blob_sha1": "6ff36dbc6f5a3b2b2682ca89917411a65755ff14",
+      "sha256": "5464af87aec22c84a053e7c21d611b4583cb137aaecb27d419f846581c977f0d",
+      "git_blob_sha1": "59754a53c7312108ca72c09f5f490f7181cd6a21",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/readback-static-review/custody-v3/FILE_SEALS.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/custody-v3/FILE_SEALS.json",
       "bytes": 4661,
-      "sha256": "da5f48a847613be5599132af53755f677cc579da75d302bfea66d36da643232d",
-      "git_blob_sha1": "f7ac549808395cdfc6d4bec1705f38ada86e1077",
+      "sha256": "d1315cc7cf474bb4409ffa1423a228a175cbef1eb0a1cae2b70fe025d9c7ec92",
+      "git_blob_sha1": "06ea155cedfe75c7bbe4bd8cba71fd976f79c442",
       "mode": "100644"
     },
     {
@@ -943,8 +943,8 @@
       "name": "custody-v3/source-publisher/readback-static-review/custody-v3/REVIEW.md",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/custody-v3/REVIEW.md",
       "bytes": 10550,
-      "sha256": "6578850848d5e69f454b06c55c898da3811c9607f395c485aafe586178cfa8ee",
-      "git_blob_sha1": "d68306dd759322baab6f4154a8856e4d5ec87406",
+      "sha256": "b23f8008088a5ae382b10d40560dd57d7fe560838f864603b325f10d7c477fe0",
+      "git_blob_sha1": "5f637453062b3d33c445e020f0ae11ba4c4efe05",
       "mode": "100644"
     },
     {
@@ -959,8 +959,8 @@
       "name": "custody-v3/source-publisher/readback-static-review/custody-v3/inputs/prepare_publication.py",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/custody-v3/inputs/prepare_publication.py",
       "bytes": 15683,
-      "sha256": "3cd42b4b5c4ba1e0eb01cace40bff7cb2fe967d65ac4e9a646b70d7daf4404fd",
-      "git_blob_sha1": "6b32bbff9f9221ddf8c5c4f3eb10ee27bed7d70a",
+      "sha256": "9c35afe184b437b5668019f2c8702875d4fed6c3ef2b8232ec845bacc2be2bb2",
+      "git_blob_sha1": "e8afb39d7900d0ec284a695326a41cd472288d60",
       "mode": "100644"
     },
     {
@@ -975,48 +975,48 @@
       "name": "custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/raw_custody_v3.py",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/raw_custody_v3.py",
       "bytes": 12671,
-      "sha256": "a96f1aec811774467092a09cd750d47785fd4dd5482ce792ffac93c38deb9f5b",
-      "git_blob_sha1": "ccdbb23cf2bddffc543517e4662bd7b069a2876a",
+      "sha256": "80f45f4a1d2e0cd49199e6885c62beff39a326aef5739e8890da5e9d991e2412",
+      "git_blob_sha1": "2be2d948daf6ce63c62ed0725efe68c565941c56",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/verify_publication_v3.py",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/verify_publication_v3.py",
       "bytes": 13831,
-      "sha256": "7138709c360728c17c701391f303a02e21e6e1334b29bc3f67f6c9702f7440f4",
-      "git_blob_sha1": "4ad5c54d4d6109067c40ca82c2d5031df31e99d6",
+      "sha256": "4cc60517ad06d1c3590059e43f353c59ad751cb74601bc65735a7df9259edcbf",
+      "git_blob_sha1": "a97eb63ae09d9341a55f901f6a43342896a3fe82",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw_custody_v3.py",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/custody-v3/inputs/raw_custody_v3.py",
       "bytes": 12912,
-      "sha256": "45fe2a39cc936f94e20cf0051f3844e6d6b5ba59b87b2d3ca175bb60917603be",
-      "git_blob_sha1": "25a836990c02625c79f44492eb43b7ffca13b07f",
+      "sha256": "203f44729f860620949ec9e6aa7c5f2c7d766de2e406548ceb6797797bfdcc33",
+      "git_blob_sha1": "735bd8f585d45b8f0956bd027d9227de12d29302",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/readback-static-review/custody-v3/inputs/verify_publication.py",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/custody-v3/inputs/verify_publication.py",
       "bytes": 9623,
-      "sha256": "8cc5fd5c5df99ae8f48d0fbbf4618ada99be429af9cb39839511940192bd8639",
-      "git_blob_sha1": "a4e9bdad2fc2394f84a4593460c7eeab5e94f4e3",
+      "sha256": "fa327277439825eb5870f67063833dec3495448d03a70f2d9222acc48e4f9226",
+      "git_blob_sha1": "b1ff5da2bae6e6b7eb391b06370d5f7d0cc41329",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/readback-static-review/custody-v3/inputs/verify_publication_v3.py",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/custody-v3/inputs/verify_publication_v3.py",
       "bytes": 13831,
-      "sha256": "45d1e83ba81dfaed9434fddb7df9f4962b7fbbb8cb1c9b29f90754c8fcf38baa",
-      "git_blob_sha1": "c5efacc8212e97a74770db0c70bcbd80d24ec232",
+      "sha256": "904a2105f04a12454a2d97c13a5bef6764e18ae28a2fe680e06ca0e6e14a6e93",
+      "git_blob_sha1": "8c3bbe7815a13e5da510c080bf9bb1ed0da02a08",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/readback-static-review/custody-v3/inspect_inputs.py",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/custody-v3/inspect_inputs.py",
       "bytes": 14398,
-      "sha256": "ef55ea26a4df72e09416ffcec9eff75798a4c126378149cf2c667071446f27d2",
-      "git_blob_sha1": "0e0635f7a7fb4c1c0f2443d7040cc811056e699e",
+      "sha256": "8f4b7b8b4b3e1886bea907fde673fbd70924a84359e02cd7591c1665945aeef4",
+      "git_blob_sha1": "0df30b1828b16d0a3740ca7891a444d18bc68c6e",
       "mode": "100644"
     },
     {
@@ -1031,16 +1031,16 @@
       "name": "custody-v3/source-publisher/readback-static-review/custody-v3/verify_publication_v3.py.T01-T02.diff",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/custody-v3/verify_publication_v3.py.T01-T02.diff",
       "bytes": 829,
-      "sha256": "2905e58d2d063a419abc99cb52bcb46db1dae3c3655a135497630cb2218154d6",
-      "git_blob_sha1": "694c31083f1029eaf98e895213c1e0d6be7914a9",
+      "sha256": "76805bce4e9a37563e0e824b195b57a746985540379edb4755fd8a3adea3b20c",
+      "git_blob_sha1": "8100d4ec7e3b9b036dfed96ec9ef6adde788f2eb",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/readback-static-review/raw-readback-failure/FILE_SEALS.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/raw-readback-failure/FILE_SEALS.json",
       "bytes": 1587,
-      "sha256": "30556460d63d575f1b18b098fcbd2019239e4634c6067ab319b348c40d39f581",
-      "git_blob_sha1": "7906eaaf1e5cecc3d034c67018956b535418720b",
+      "sha256": "1658d2031a4da1dd020cd420ff4e28d5e607830e455842977b172ad5beedd406",
+      "git_blob_sha1": "3c67f6ae509144259af6686fed72f12708fe5515",
       "mode": "100644"
     },
     {
@@ -1079,8 +1079,8 @@
       "name": "custody-v3/source-publisher/readback-static-review/raw-readback-failure/inspect.py",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/raw-readback-failure/inspect.py",
       "bytes": 7385,
-      "sha256": "67dba07d875c0f9a9bc9e18522bed9fc71b1aeb16787e869fbc75ee9650b8640",
-      "git_blob_sha1": "c5c060782a26968a79608c2124c47cdd6c606b2a",
+      "sha256": "96e49e953ee10ad2f4a583d9008e4669bf5763d588f7a9fc1edb8c9e702fba4e",
+      "git_blob_sha1": "d94ccbe403e0c63e498b01c63fc6614498235f30",
       "mode": "100644"
     },
     {
@@ -1095,8 +1095,8 @@
       "name": "custody-v3/source-publisher/readback-static-review/raw-transport-adapter/FILE_SEALS.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/raw-transport-adapter/FILE_SEALS.json",
       "bytes": 1600,
-      "sha256": "2102f85bd93143fd60431fd26a8069bdff2a5e4a2e6616deb6d6f934dc5191f8",
-      "git_blob_sha1": "c740b48213371899e883453a4484cfb69ed84f16",
+      "sha256": "57191a4d26a67022fb1a27d064ca082e0fc7bb5771827edf5e1d2ea3b7aaeda4",
+      "git_blob_sha1": "1a6bce3680fb58aa4c9be97de0709948c6044c2e",
       "mode": "100644"
     },
     {
@@ -1119,40 +1119,40 @@
       "name": "custody-v3/source-publisher/readback-static-review/raw-transport-adapter/REVIEW.md",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/raw-transport-adapter/REVIEW.md",
       "bytes": 7280,
-      "sha256": "03f15a70c1ac11b52005af86f2bc193599709427f39ae250234fbf9bfbf8b626",
-      "git_blob_sha1": "80241c4f951f7f19cda306219c066088e9c53e8e",
+      "sha256": "efc6261b3307e553dd2bf0a8fc531f6b727d2e46f624efd10549b8d7d744e184",
+      "git_blob_sha1": "2e5791d94ae0067b89e9067ed44e6f5b9bf45662",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/readback-static-review/raw-transport-adapter/inspect.py",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/raw-transport-adapter/inspect.py",
       "bytes": 10963,
-      "sha256": "c80763ab3a3796d4f7dc8a22596dc96c060bef801b9a8fa845109ce044d36d97",
-      "git_blob_sha1": "a97614be485737c0c7abb0c754e838e4dfc2b312",
+      "sha256": "535579cb58258353f91986d5e16bcb0e3a0e860d5c9ea30c17f552787a8b32f6",
+      "git_blob_sha1": "9dc5990a5a916dae1d23243c1c5d22bde35d4059",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/readback-static-review/v2/FILE_SEALS.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/v2/FILE_SEALS.json",
       "bytes": 986,
-      "sha256": "efbdfa191409f225d814662a744003070f3bf4ce2bd7a4e331cb022abd607696",
-      "git_blob_sha1": "ffcfc63bdc314201c7bb982c6b6cffea1d45924a",
+      "sha256": "eade73d5622724d9ceda521647c3bf5e91ff47e094ca80a284ad6526401c7c2a",
+      "git_blob_sha1": "51c411c67b5c29e6375fc68a2f2d3696ed41ba20",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/readback-static-review/v2/INPUT_SEALS.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/v2/INPUT_SEALS.json",
       "bytes": 1321,
-      "sha256": "5a26d9913a9b18f97b68aa8bf3eac6855d954f5d4e1c7c7805a16f1589f0a881",
-      "git_blob_sha1": "8d796747695178148b77cabcd485be1ee3d825c5",
+      "sha256": "ae107674f7b8b1df4f6aa0c6ef78294a24ec750f71ff5cbd258f1dd819b3e5e3",
+      "git_blob_sha1": "0f6f3a8eaa763316280962a3df4a9df6eb00f703",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/readback-static-review/v2/REVIEW.md",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/v2/REVIEW.md",
       "bytes": 4985,
-      "sha256": "f84ae9ee896eaadd79ae00c3c1747decd0f928872baecbec56166f363f675b59",
-      "git_blob_sha1": "160fd1d62c645aeb201cf5eee2dfe555079474a6",
+      "sha256": "8ce0a7b133520776d314b101b8280baa48552e9306a4f6ebd69b9e42bcdc2ae7",
+      "git_blob_sha1": "53ef93078572248a97bfbf70bae15eb82a3ddd6e",
       "mode": "100644"
     },
     {
@@ -1167,104 +1167,104 @@
       "name": "custody-v3/source-publisher/readback-static-review/v2/prepare_publication.py.txt",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/v2/prepare_publication.py.txt",
       "bytes": 15683,
-      "sha256": "3cd42b4b5c4ba1e0eb01cace40bff7cb2fe967d65ac4e9a646b70d7daf4404fd",
-      "git_blob_sha1": "6b32bbff9f9221ddf8c5c4f3eb10ee27bed7d70a",
+      "sha256": "9c35afe184b437b5668019f2c8702875d4fed6c3ef2b8232ec845bacc2be2bb2",
+      "git_blob_sha1": "e8afb39d7900d0ec284a695326a41cd472288d60",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/readback-static-review/v2/v1-v2.diff",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/v2/v1-v2.diff",
       "bytes": 4471,
-      "sha256": "dcb1f09d1b221eb10837874bf62e82093813eb102229567ac19ed4a9c56831d9",
-      "git_blob_sha1": "7453be80777b2306476a407d7406f146c6d5a7d7",
+      "sha256": "bb1aa496541a23e2b8c34e9262fcdab2227688526c458f35638622d47c9fb6db",
+      "git_blob_sha1": "e8c206e836b8495aaec2de72341a5ab006e4e8ab",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/readback-static-review/v2/verify_publication.py.txt",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/v2/verify_publication.py.txt",
       "bytes": 9623,
-      "sha256": "8cc5fd5c5df99ae8f48d0fbbf4618ada99be429af9cb39839511940192bd8639",
-      "git_blob_sha1": "a4e9bdad2fc2394f84a4593460c7eeab5e94f4e3",
+      "sha256": "fa327277439825eb5870f67063833dec3495448d03a70f2d9222acc48e4f9226",
+      "git_blob_sha1": "b1ff5da2bae6e6b7eb391b06370d5f7d0cc41329",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/FILE_SEALS.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/execution-static-review/current-owner-upstream-review/custody-v3-verifier-static-review/FILE_SEALS.json",
       "bytes": 1028,
-      "sha256": "2322e736246e2fd11d94bc4c9c5d1a5717e0bd5be6179f7e4509a9242606d43c",
-      "git_blob_sha1": "0b8a0cd492e07e48cb396d54827ffcc7f1f75fcd",
+      "sha256": "ca55cfa097bac969aabcda4d410e6e6b2aae563e41dcce17bfcd5a9d61a79006",
+      "git_blob_sha1": "6e8951c0021a941a29bc93ea80b925fd4f5864d9",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/INPUT_SEALS.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/execution-static-review/current-owner-upstream-review/custody-v3-verifier-static-review/INPUT_SEALS.json",
       "bytes": 1442,
-      "sha256": "793b5cfb897b0e0b7471f5f0c85adf3d6520b11c2077d669bbb8a1b48f647120",
-      "git_blob_sha1": "b5f13db8c6c74e053f57ea470c5802dd1cfc438c",
+      "sha256": "71f0be66903961ff974b6cbbbe27db8ab03cc16097c06476f58549db9d02b261",
+      "git_blob_sha1": "c7b0756a6e678ea2798261fdb83e9c86bd5bde7f",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/REVIEW.md",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/execution-static-review/current-owner-upstream-review/custody-v3-verifier-static-review/REVIEW.md",
       "bytes": 6622,
-      "sha256": "9fba35c03ee7d13a7ace7ef8f760f48186c0a8caf73e5dd5cd5d227815f1d693",
-      "git_blob_sha1": "f7bbb6cda696cb686270c7d7f3d7f17f77cae2a8",
+      "sha256": "02e50b35c0a4c749f9fef36d44998e8f6733de61a8e7f4d46c760bf5cb12ae52",
+      "git_blob_sha1": "d6c64f2b73f4c48e6f8e6e3cafe176a7e5ab911a",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/FILE_SEALS.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/execution-static-review/current-owner-upstream-review/custody-v3-verifier-static-review/T02-delta/FILE_SEALS.json",
       "bytes": 1060,
-      "sha256": "05242c715b5d63567d13c26c801e9a2c96ca4e27f14434e3a96020cdcd374a97",
-      "git_blob_sha1": "100e5d3cdd839136fd94346074337a0ab7866d9f",
+      "sha256": "df0e4f6c48aee658e68eb93792ec748c6b2a6953241fe8c554a6cebc8df22b6f",
+      "git_blob_sha1": "27c96cf2c25533c8dc22462e9778e2d1f411e1ae",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/INPUT_SEALS.json",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/execution-static-review/current-owner-upstream-review/custody-v3-verifier-static-review/T02-delta/INPUT_SEALS.json",
       "bytes": 1763,
-      "sha256": "beb5b6f452c2f1f6356136b5ae236bfd23fb2c7313228765357a3f46e50f3f4b",
-      "git_blob_sha1": "0c4a7a328cc621884baf4b61a12d68e773c0a6e2",
+      "sha256": "c84ce157e3c48664121769c2f878824bce2a6a97bdd60b53c38103fa3e33ec26",
+      "git_blob_sha1": "c2fdbbe5e8a617571b25ce39920bfdbb36ff22ac",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/REVIEW.md",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/execution-static-review/current-owner-upstream-review/custody-v3-verifier-static-review/T02-delta/REVIEW.md",
       "bytes": 2881,
-      "sha256": "c7c575b882732681c3b5f1435f70063a765435f9e6137e10151fb2f8fa2ef2df",
-      "git_blob_sha1": "9b470e7720fce97aad75e811e34291df25617902",
+      "sha256": "1ea4731fd6cf1c2c164f32970a646ef86e4750723e787544a10b504219bc0b74",
+      "git_blob_sha1": "18703f18dabb562da3ccfc2af7bb1e9be5b20786",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/T01_T02.diff",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/execution-static-review/current-owner-upstream-review/custody-v3-verifier-static-review/T02-delta/T01_T02.diff",
       "bytes": 2015,
-      "sha256": "5f5c5f9c2b9d82607b8e3e30e9027ee8032f4d9fde812c2617343cb934049745",
-      "git_blob_sha1": "577a92ee28f87b5ec157750521b768e91ea021f6",
+      "sha256": "96412d20751cc5fe76c1965c0140d4256eea39158e1d81c90174c1e70f7a4414",
+      "git_blob_sha1": "c15103cfb4cb0befa796589ca6d9a5711ef3d0d8",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/V2_V3.diff",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/execution-static-review/current-owner-upstream-review/custody-v3-verifier-static-review/V2_V3.diff",
       "bytes": 7930,
-      "sha256": "e487f83f318b61c01515549e588b66a384d0d281a0bc5d3a4ace5f1ca6cd8803",
-      "git_blob_sha1": "36995c07b0a120a99e603b62fac2e4055e29597d",
+      "sha256": "6658b586655c0eb9e7d4841c175031aaae87527cac498c8bbedacf8682d46fcd",
+      "git_blob_sha1": "6f2662aaab11da16dd2a792c1890a2af742971ed",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/verify_publication.py",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/verify_publication.py",
       "bytes": 9623,
-      "sha256": "8cc5fd5c5df99ae8f48d0fbbf4618ada99be429af9cb39839511940192bd8639",
-      "git_blob_sha1": "a4e9bdad2fc2394f84a4593460c7eeab5e94f4e3",
+      "sha256": "fa327277439825eb5870f67063833dec3495448d03a70f2d9222acc48e4f9226",
+      "git_blob_sha1": "b1ff5da2bae6e6b7eb391b06370d5f7d0cc41329",
       "mode": "100644"
     },
     {
       "name": "custody-v3/source-publisher/verify_publication_v3.py",
       "source_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/verify_publication_v3.py",
       "bytes": 13831,
-      "sha256": "45d1e83ba81dfaed9434fddb7df9f4962b7fbbb8cb1c9b29f90754c8fcf38baa",
-      "git_blob_sha1": "c5efacc8212e97a74770db0c70bcbd80d24ec232",
+      "sha256": "904a2105f04a12454a2d97c13a5bef6764e18ae28a2fe680e06ca0e6e14a6e93",
+      "git_blob_sha1": "8c3bbe7815a13e5da510c080bf9bb1ed0da02a08",
       "mode": "100644"
     },
     {

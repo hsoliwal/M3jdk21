@@ -13,65 +13,65 @@
     "repository": "hsoliwal/com.synexia",
     "code_qualification_commit": "8e6a01014c5217a4582d419f7ad1a9eaf7509f17",
     "canonical_recipe_engine_commit": "8e6a01014c5217a4582d419f7ad1a9eaf7509f17",
-    "code_proof_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-receive-20261029/swing-column-header/QUALIFICATION.json",
+    "code_proof_path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-receive-20261029/swing-column-header/QUALIFICATION.json",
     "execution_evidence": [
       {
-        "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-followup-20261029/seal-replay/header/SDK_INPUTS.tsv",
+        "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-followup-20261029/seal-replay/header/SDK_INPUTS.tsv",
         "sha256": "9e156ec2c0b69130f00f355069ea94acb65ba8e75e10599f2927f92fc6b55198",
         "git_blob": "78b0ea75e90d68554ffc56eaa2292b67df3f2d78",
         "bytes": 3688
       },
       {
-        "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-followup-20261029/seal-replay/header/SDK_RESULTS.tsv",
+        "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-followup-20261029/seal-replay/header/SDK_RESULTS.tsv",
         "sha256": "95d5d9c2babfbbda21db2d606a02d0e4348468cfec9e9881f07940410ae77812",
         "git_blob": "897509298a58d8c1fb3b51103537f9c17c8d6379",
         "bytes": 827
       },
       {
-        "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-followup-20261029/seal-replay/header/SDK_JUNIT.xml",
+        "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-followup-20261029/seal-replay/header/SDK_JUNIT.xml",
         "sha256": "7835aee1167bfd840f1438ebe9aac8dab7d9905bccd2080f04b84ecb934e3d40",
         "git_blob": "333050b1fad37f6a2a6c00517fc3baa38b586ddf",
         "bytes": 15873
       },
       {
-        "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-followup-20261029/seal-replay/header/RECEIVER_RECEIPT.json",
+        "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-followup-20261029/seal-replay/header/RECEIVER_RECEIPT.json",
         "sha256": "f6bcf06b1b2ace0e74a3929bfb2954cdc04032b59c61280b987c9c109f129902",
         "git_blob": "06941cdc8ea5333cef460e93afc7e695578a23ba",
         "bytes": 2581
       }
     ],
-    "final_seal_replay_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-followup-20261029/seal-replay/header"
+    "final_seal_replay_path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-followup-20261029/seal-replay/header"
   },
   "files": [
     {
-      "path": "m3/ports/swing-viewport/src/main/java/com/m3/swing/viewport/M3DesktopViewportAdapters.java",
-      "before_sha256": "624d8cf045a2060f78b695f10de8c48a7276bb6aa8f362b08999f85ab3353708",
-      "after_sha256": "5ced9523fa6e70d87198dbef9cb3aaac5c71ea6cb8d61ce7623ebfb3e1ac1df5",
-      "git_blob": "40f491af6f3a37dfda6d10b22cbddfe357cb156c",
+      "path": "m3/ports/swing-viewport/src/main/java/jdk/m3/swing/viewport/M3DesktopViewportAdapters.java",
+      "before_sha256": "9245dc521c421ec81b4545434633eef4fc2dac5f3f6782442d6bb32329ca02bc",
+      "after_sha256": "5d56af347d7b3f4f8ba511133915030d6d8c8ae8a5d52576396031d8cec5d0a0",
+      "git_blob": "6d9a2491c7d1de69c5025f423f41584a10372d8a",
       "dataset": "swing-column-header-20261029",
       "kind": "GENERATED_SOURCE"
     },
     {
-      "path": "m3/ports/swing-viewport/src/test/java/com/m3/swing/viewport/M3DesktopViewportColumnsTest.java",
-      "before_sha256": "a76800ad141c2c7623e3a8325284f50323025221fb89e414822663b644985ec1",
-      "after_sha256": "d7a50598105eed08f074c5ce8468c8817d70ad905fcfa809bb0f9b6bd30424cc",
-      "git_blob": "5f17541aba80e35e56aca02090888870c98720e7",
+      "path": "m3/ports/swing-viewport/src/test/java/jdk/m3/swing/viewport/M3DesktopViewportColumnsTest.java",
+      "before_sha256": "77ca82b521ad15d2f20ac05c0cd2a419221316d27fdd74f77f5a66c1c2e9ce90",
+      "after_sha256": "d53dbc5d7f43cfb5891772e90f701e7384e116cf67fc565252224c00918e2062",
+      "git_blob": "0174777e4df22afaa820500ecf333fda538452fe",
       "dataset": "swing-column-header-20261029",
       "kind": "GENERATED_TEST"
     },
     {
-      "path": "m3/ports/swing-viewport/src/test/java/com/m3/swing/viewport/M3DesktopViewportHeaderTest.java",
+      "path": "m3/ports/swing-viewport/src/test/java/jdk/m3/swing/viewport/M3DesktopViewportHeaderTest.java",
       "before_sha256": "ABSENT",
-      "after_sha256": "8b4939ba593eb4129ab89308517f37e22756165a429f438e428d463b1bd3dd9d",
-      "git_blob": "95e259a48078a7cfeae3123b8ae7f63a91138c10",
+      "after_sha256": "9da0a91ff93d22cacd8234bd4741a03830398270aa883c6965eb78c42eea8198",
+      "git_blob": "9b8b4e16afbc87ddecc7d508db77d6e86dbf8622",
       "dataset": "swing-column-header-20261029",
       "kind": "GENERATED_TEST"
     },
     {
-      "path": "m3/ports/swing-viewport/src/test/java/com/m3/swing/viewport/M3SwingXHeaderProof.java",
+      "path": "m3/ports/swing-viewport/src/test/java/jdk/m3/swing/viewport/M3SwingXHeaderProof.java",
       "before_sha256": "ABSENT",
-      "after_sha256": "ad5f39c3cae98ff97b9fb051bcae7d7e88174af9075b3f6254ab386ff04566a0",
-      "git_blob": "1fe7fe5b908d4f35ff85a4acfabb54a11872a9fc",
+      "after_sha256": "56162f8cdc6c0aa784f8742ca81d26bc22b5bf49890106c007facda7a00c62b6",
+      "git_blob": "0e9a66017001b7d5ffe7349683d649f427eaa9c5",
       "dataset": "swing-column-header-20261029",
       "kind": "GENERATED_TEST"
     }
@@ -89,12 +89,12 @@
   ],
   "receipt_generation": {
     "dataset": "ui-header-receipt-20261029",
-    "recipe_identity": "com.synexia.m3jdk.AstBuildReverse20261017",
+    "recipe_identity": "jdk.internal.m3.m3jdk.AstBuildReverse20261017",
     "target_path": "m3/ports/swing-viewport/qualification/column-header-20261029.json",
     "execution_lane": "MAVEN_OPENREWRITE_SDK",
     "template_and_execution_evidence": "successor additions to the immutable code qualification commit; their content is not asserted to be present in that earlier commit",
     "successor_commit": "resolved by the private publication that records these artifacts; deliberately no self-referential hash",
-    "proof_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-public-receipts-20261029/header"
+    "proof_path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-public-receipts-20261029/header"
   },
   "promotion": "Draft review only; bounded evidence does not constitute full platform or release qualification."
 }

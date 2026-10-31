@@ -29,14 +29,14 @@ coordinates = [
 ]
 jars = [B / 'm2' / p / v / (Path(p).name + '-' + v + '.jar') for p, v in coordinates]
 cp = os.pathsep.join(map(str, [Q, *jars]))
-sources = [R / 'src/test/java/com/m3/fs' / name for name in ('MFileObservationSelfTest.java', 'MFileObservationTest.java')]
+sources = [R / 'src/test/java/jdk/m3/fs' / name for name in ('MFileObservationSelfTest.java', 'MFileObservationTest.java')]
 sources.append(B / 'authored/facade/verification/FacadeTestLauncher.java')
-assert (Q / 'com/m3/fs/MFileDelta.class').is_file()
+assert (Q / 'jdk/m3/fs/MFileDelta.class').is_file()
 compile_command = [str(J / 'javac'), '--release', '21', '-Xlint:all', '-Werror', '-sourcepath', '', '-cp', cp, '-d', str(T), *map(str, sources)]
 runtime_cp = str(T) + os.pathsep + cp
 commands = [compile_command,
-            [str(J / 'java'), '-cp', runtime_cp, 'FacadeTestLauncher', 'com.m3.fs.MFileObservationTest'],
-            [str(J / 'java'), '-ea', '-cp', runtime_cp, 'com.m3.fs.MFileObservationSelfTest']]
+            [str(J / 'java'), '-cp', runtime_cp, 'FacadeTestLauncher', 'jdk.m3.fs.MFileObservationTest'],
+            [str(J / 'java'), '-ea', '-cp', runtime_cp, 'jdk.m3.fs.MFileObservationSelfTest']]
 receipts = []
 for name, command in zip(('compile', 'junit', 'consumer'), commands):
     result = subprocess.run(command, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)

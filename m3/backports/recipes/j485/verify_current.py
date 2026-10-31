@@ -58,7 +58,7 @@ def verify(
     root = repo.resolve(strict=True)
     resource_root = root / (
         "m3/tooling/migration-recipes/src/main/resources/"
-        "com/m3/rewrite/backport/jdk21-hash-pinned"
+        "jdk/m3/rewrite/backport/jdk21-hash-pinned"
     )
     catalogue = resource_root / "j485-current-catalogue.tsv"
     rows = read_rows(catalogue)

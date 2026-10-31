@@ -6,9 +6,9 @@ Status: candidate authoring for the canonical Synexia recipe; no product promoti
 
 Baseline repository: `hsoliwal/M3jdk21`.
 Baseline commit: `a4415af418a9b0f21a06cd5801d238577fbb6eb7`.
-Owner: `m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java`.
-Baseline SHA-256: `7bf939ea374ce6c0b13c403f5e154c0f8d376f9cddb8e623cf00ef299183a77e`.
-Baseline Git blob: `d18055008f6eabbd6603e080ff32f8d5a1da8b60`.
+Owner: `m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java`.
+Baseline SHA-256: `bf601d711667e1078ca30246da6fa89b43d7ed951a3179e0a161365526581959`.
+Baseline Git blob: `d98d8a45725f102292a63180a44e6054bf9b57c8`.
 
 ## Existing contract and bounded change
 

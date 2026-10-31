@@ -8,7 +8,7 @@
   "conflict_resolutions": [
     {
       "path": "src/java.base/share/classes/java/lang/M3StringImmediate.java",
-      "chosen_git_blob": "74c9a849c0124e1be77374cc8b97b7102ed0848f",
+      "chosen_git_blob": "99ecf2189b2e0c2eaec16d41487e44988dc3e51a",
       "resolution": "Preserve current master byte-for-byte; it already contains the equivalent comment/doc-only compiler correction."
     },
     {
@@ -30,18 +30,18 @@
     "before_sha256": "900bb2f7f8d709f9ed23109b74aec6bfd1ee52f89addd2ccad060e535aa7382d"
   },
   "source_delta_paths": [
-    "m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java",
-    "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
-    "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
-    "m3/collections/src/main/java/com/m3/collections/M3SignalOrder.java",
+    "m3/collections/src/main/java/jdk/m3/collections/M3FilteredNavigableSet.java",
+    "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
+    "m3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java",
+    "m3/collections/src/main/java/jdk/m3/collections/M3SignalOrder.java",
     "m3/collections/src/main/native/collections/m3_signal_order_jni.c",
-    "m3/collections/src/test/java/com/m3/collections/M3FilteredCursorExceptionContract.java",
-    "m3/collections/src/test/java/com/m3/collections/M3FilteredCursorExceptionTest.java",
-    "m3/collections/src/test/java/com/m3/collections/M3FilteredFacadeEndpointContract.java",
-    "m3/collections/src/test/java/com/m3/collections/M3FilteredFacadeEndpointTest.java",
-    "m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformBench.java",
-    "m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformContract.java",
-    "m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformTest.java",
+    "m3/collections/src/test/java/jdk/m3/collections/M3FilteredCursorExceptionContract.java",
+    "m3/collections/src/test/java/jdk/m3/collections/M3FilteredCursorExceptionTest.java",
+    "m3/collections/src/test/java/jdk/m3/collections/M3FilteredFacadeEndpointContract.java",
+    "m3/collections/src/test/java/jdk/m3/collections/M3FilteredFacadeEndpointTest.java",
+    "m3/collections/src/test/java/jdk/m3/collections/M3SignalRadixUniformBench.java",
+    "m3/collections/src/test/java/jdk/m3/collections/M3SignalRadixUniformContract.java",
+    "m3/collections/src/test/java/jdk/m3/collections/M3SignalRadixUniformTest.java",
     "m3/qualification/string-array-collection-20261021/README.md",
     "m3/qualification/string-array-collection-20261021/RECEIPT.json",
     "m3/qualification/string-array-collection-20261021/TARGET_FILES.tsv",

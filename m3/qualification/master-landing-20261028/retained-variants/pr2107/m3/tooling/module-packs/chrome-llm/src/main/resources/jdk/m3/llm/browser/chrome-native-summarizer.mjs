@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-// M3JDK21 migration source: hsoliwal/com.synexia@c26433b5856192807616c9fb09741de0b1bdd93c
+// M3JDK 21 migration source: hsoliwal/com.synexia@c26433b5856192807616c9fb09741de0b1bdd93c
 // aix-chrome-ai-studio/mechanical/browser/chrome-native-summarizer.mjs
 import { availabilityOf, bytes, canonical, check, enumValue, fail, keys, language, languages,
   measure, openSession, receipt, sha256, text, wait } from './native-ai-session.mjs';

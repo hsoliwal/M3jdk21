@@ -204,7 +204,7 @@ mkdir -p "$M3_RECEIVER_NATIVE/headers" "$M3_RECEIVER_NATIVE/classes" \
   -proc:none -implicit:none -Xlint:all,-module -Werror -sourcepath '' \
   -classpath m3/collections/target/classes \
   -h "$M3_RECEIVER_NATIVE/headers" -d "$M3_RECEIVER_NATIVE/classes" \
-  m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java
+  m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java
 gcc -std=c17 -O2 -g -Wall -Wextra -Werror -Wconversion \
   -Wsign-conversion -Wshadow -pedantic -fPIC -fsanitize=undefined \
   -fno-sanitize-recover=all -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
@@ -273,7 +273,7 @@ rg -n 'FILTERED_NAVIGATION|ROW_MASK_FILTER|JNI_OBJECT_PREDICATE' m3/collections/
 ```
 
 The separate public challenge/fork catalogue packet is sealed by manifest SHA-256
-`5c0c71817c392c6b79d0536c4aa4c927e9142aad2c5a390f3e8518b1b7b3d36c`.
+`3a8b36fe47266a7b4460bad200264ded602450c4e360d3b1cb38d43a847446ca`.
 The catalogue is reviewable in [PR #1323](https://github.com/hsoliwal/M3jdk21/pull/1323) at
 head `08181cf261f3b9224ec6916e352435ed0494a9a7`. Its
 [immutable public tree](https://github.com/hsoliwal/M3jdk21/tree/08181cf261f3b9224ec6916e352435ed0494a9a7/m3/collections/algorithm-catalog/challenge-forks-20261018)

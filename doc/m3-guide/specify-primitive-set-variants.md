@@ -337,19 +337,19 @@ as another M3 collection owner. Hashes identify source bytes, not passing tests.
 
 | Primary source | Git blob |
 | --- | --- |
-| [`M3IntCollection.java`][int-collection] | `bd6aff905cf47e64ccd76bc19acc899ef93742af` |
-| [`M3IntIterator.java`][int-iterator] | `366f92e9da842e00e346872f386ecfede38c5cb6` |
-| [`M3IntHashSet.java`][ints] | `e4272ab154175d115873d38f305a8fdf380d1f7d` |
-| [`M3LongHashSet.java`][longs] | `1fe9ac1bfa11cf6a626a749c37d64ccec0ed09df` |
-| [`M3LongLinkedHashSet.java`][linked] | `28c864a69a384dbfe6fbc499eff7da4015264a3f` |
-| [`M3ConcurrentLongSet.java`][concurrent] | `1dd5331b42efa855a51ba31d40380b0064231983` |
+| [`M3IntCollection.java`][int-collection] | `e0242a99ee9a7039a297d7312fbcccec0f6af131` |
+| [`M3IntIterator.java`][int-iterator] | `e7e8deda81aea3130615ca420734047bb5c34aed` |
+| [`M3IntHashSet.java`][ints] | `764e435a38821b8295fcc750d3502cb724af4822` |
+| [`M3LongHashSet.java`][longs] | `e2e4d1fe15fab3d407a28f4291be7fe51a98dfeb` |
+| [`M3LongLinkedHashSet.java`][linked] | `2ecca7cdfbdb8564ba0714abed92af1b881c4efc` |
+| [`M3ConcurrentLongSet.java`][concurrent] | `9f1bda51b120ce2e02252d877d07c008ea9f5795` |
 
 | Test file / Git blob | Relevant assertions read, all NOT_RUN |
 | --- | --- |
-| [`M3IntLanesTest`][int-test] / `b617f579eecc6f48078076c642be33438eea9481` | `hashSetMatchesJdkAcrossChurnIncludingZeroAndRehash`: finite 30,000-step `HashSet<Integer>` comparison, zero/extrema, snapshots, sorted stream and payload formula; `hashSetEdgeContractsAndFailFast`: sizing, negative input, duplicate zero, exhaustion, invalidation and 10,000-key growth/removal; `intLanesRetainOnlyPrimitiveFields`: int-set/map/heap field-type predicate |
-| [`M3JdkShapedPrimitiveCollectionsTest`][shaped-test] / `9a6710e2985676613778895dd42c8bb9d08e8534` | `hashSetMatchesJdkAcrossCollisionsDeletionAndRehash`: finite 30,000-step long-set comparison and periodic content exports; set case of `duplicateSetAddAndMapValueReplacementAreNonStructural`; set case of `iteratorsAreFailFastOnStructuralMutation` |
-| [`M3LongLinkedHashSetTest`][linked-test] / `a4202b54eeb03aa662101a8c3d3c57e0c9a96e2e` | `matchesJdkSequencedSetAcrossChurnIncludingMovesAndRehash`: 40,000-step JDK `LinkedHashSet` comparison, moves/endpoints, periodic forward/reverse exports, final stream and payload; `edgeContractsFailFastAndSizing`: empty endpoints, negative sizing, extrema/moves, exhaustion, removal invalidation, 10,000 insertions followed by two-thirds deletion, surviving order and retained 16,384 capacity; `retainsOnlyPrimitiveLanes`: exact instance-field types |
-| [`M3ConcurrentLaneContractTest`][concurrent-test] / `86f5ae48e363b14a00e62ed6fd6d74fe572cc2c3` | `concurrentCollectionStreamsPreserveCapturedSnapshotsAndIndexOrder`: add 2,001 descending nonnegative members, capture a parallel set stream, clear the owner and compare stream output with ascending `0..2000` |
+| [`M3IntLanesTest`][int-test] / `46c575f60d2c55a6914e6a7fccae6e86a219bd2c` | `hashSetMatchesJdkAcrossChurnIncludingZeroAndRehash`: finite 30,000-step `HashSet<Integer>` comparison, zero/extrema, snapshots, sorted stream and payload formula; `hashSetEdgeContractsAndFailFast`: sizing, negative input, duplicate zero, exhaustion, invalidation and 10,000-key growth/removal; `intLanesRetainOnlyPrimitiveFields`: int-set/map/heap field-type predicate |
+| [`M3JdkShapedPrimitiveCollectionsTest`][shaped-test] / `b731a03eb005d374a973295266d838159eaa1fc6` | `hashSetMatchesJdkAcrossCollisionsDeletionAndRehash`: finite 30,000-step long-set comparison and periodic content exports; set case of `duplicateSetAddAndMapValueReplacementAreNonStructural`; set case of `iteratorsAreFailFastOnStructuralMutation` |
+| [`M3LongLinkedHashSetTest`][linked-test] / `3d2a4f46c94035fdf783e250f96840862f28016c` | `matchesJdkSequencedSetAcrossChurnIncludingMovesAndRehash`: 40,000-step JDK `LinkedHashSet` comparison, moves/endpoints, periodic forward/reverse exports, final stream and payload; `edgeContractsFailFastAndSizing`: empty endpoints, negative sizing, extrema/moves, exhaustion, removal invalidation, 10,000 insertions followed by two-thirds deletion, surviving order and retained 16,384 capacity; `retainsOnlyPrimitiveLanes`: exact instance-field types |
+| [`M3ConcurrentLaneContractTest`][concurrent-test] / `9eaa65e25f4384e540129f2d7483ac491482aa24` | `concurrentCollectionStreamsPreserveCapturedSnapshotsAndIndexOrder`: add 2,001 descending nonnegative members, capture a parallel set stream, clear the owner and compare stream output with ascending `0..2000` |
 
 The concurrent test's multithreaded `race` helper is used for atomic lane
 tests, not the long set. It is not evidence of competing set writers,
@@ -365,19 +365,19 @@ serialization parity, package-wide acceptance or runtime delivery follows.
 See the [heap reference](specify-primitive-heaps.md) for the other int-collection
 owner and the [coverage ledger](coverage.md) for the wider collection work.
 
-[int-collection]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/com/m3/collections/M3IntCollection.java
-[int-iterator]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/com/m3/collections/M3IntIterator.java
-[ints]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/com/m3/collections/M3IntHashSet.java
-[longs]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/com/m3/collections/M3LongHashSet.java
-[linked]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/com/m3/collections/M3LongLinkedHashSet.java
-[concurrent]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/com/m3/collections/M3ConcurrentLongSet.java
-[long-collection]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/com/m3/collections/M3LongCollection.java
-[long-iterator]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/com/m3/collections/M3LongIterator.java
-[factory]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/com/m3/collections/M3Collections.java
+[int-collection]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/jdk/m3/collections/M3IntCollection.java
+[int-iterator]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/jdk/m3/collections/M3IntIterator.java
+[ints]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/jdk/m3/collections/M3IntHashSet.java
+[longs]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/jdk/m3/collections/M3LongHashSet.java
+[linked]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/jdk/m3/collections/M3LongLinkedHashSet.java
+[concurrent]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/jdk/m3/collections/M3ConcurrentLongSet.java
+[long-collection]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/jdk/m3/collections/M3LongCollection.java
+[long-iterator]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/jdk/m3/collections/M3LongIterator.java
+[factory]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/jdk/m3/collections/M3Collections.java
 [module]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/module-info.java
 [pom]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/pom.xml
 [jdk-spliterators]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/src/java.base/share/classes/java/util/Spliterators.java#L1161-L1256
-[int-test]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/test/java/com/m3/collections/M3IntLanesTest.java
-[shaped-test]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/test/java/com/m3/collections/M3JdkShapedPrimitiveCollectionsTest.java
-[linked-test]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/test/java/com/m3/collections/M3LongLinkedHashSetTest.java
-[concurrent-test]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/test/java/com/m3/collections/M3ConcurrentLaneContractTest.java
+[int-test]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/test/java/jdk/m3/collections/M3IntLanesTest.java
+[shaped-test]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/test/java/jdk/m3/collections/M3JdkShapedPrimitiveCollectionsTest.java
+[linked-test]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/test/java/jdk/m3/collections/M3LongLinkedHashSetTest.java
+[concurrent-test]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/test/java/jdk/m3/collections/M3ConcurrentLaneContractTest.java

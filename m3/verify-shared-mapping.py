@@ -4,9 +4,9 @@
 """Linux evidence that two warmed JVMs map the same read-only image inode."""
 import json,os,pathlib,subprocess
 root=pathlib.Path(__file__).resolve().parent
-jdk=pathlib.Path(os.environ['M3_JDK'])
+jdk=pathlib.Path(os.environ['M3JDK'])
 image=(root/(root/'build/english-image-path.txt').read_text().strip()).resolve()
-command=[str(jdk/'bin/java'),'--module-path',str(root/'build/com.m3.text.jar'),'-m','com.m3.text/com.m3.text.LexiconTool','map',str(image),'5000']
+command=[str(jdk/'bin/java'),'--module-path',str(root/'build/jdk.m3.text.jar'),'-m','jdk.m3.text/jdk.m3.text.LexiconTool','map',str(image),'5000']
 processes=[];evidence=[]
 try:
     for _ in range(2):

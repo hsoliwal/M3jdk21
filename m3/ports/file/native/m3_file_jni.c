@@ -21,7 +21,7 @@ static jint mindex_read_mapped_handle(
 }
 
 JNIEXPORT jint JNICALL
-Java_com_m3_file_M3FileNative_nativeMappedFileTokenIndexOf(
+Java_jdk_m3_file_M3FileNative_nativeMappedFileTokenIndexOf(
     JNIEnv *env,
     jclass clazz,
     jobject data_buffer,

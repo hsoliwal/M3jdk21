@@ -16,7 +16,7 @@ For widgets, viewport behavior belongs inside the widget's existing contract. CP
 
 ## Existing recipe and provenance
 
-The unchanged Apache-2.0 owner is [M3Jdk21HashPinnedTextSnapshotRecipe.java](https://github.com/hsoliwal/M3JDK21/blob/c831c4a77f0e3e10aac94178217efda882ba4be5/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java), Git blob `4a38e39d0755462d40c2b22548b87abde938ea0b`. Its SPDX notice is retained in the existing owner. The crate-local `FOSS_REUSE_DECISION.tsv` records reuse before materialization. No external algorithm implementation is copied by this packet.
+The unchanged Apache-2.0 owner is [M3Jdk21HashPinnedTextSnapshotRecipe.java](https://github.com/hsoliwal/M3JDK21/blob/c831c4a77f0e3e10aac94178217efda882ba4be5/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java), Git blob `73779dee8c80a0913b88fff17637ed3f44b33ea3`. Its SPDX notice is retained in the existing owner. The crate-local `FOSS_REUSE_DECISION.tsv` records reuse before materialization. No external algorithm implementation is copied by this packet.
 
 Classpath crate: `com/m3/rewrite/backport/jdk21-hash-pinned-text/capability-contracts-20261021/`.
 

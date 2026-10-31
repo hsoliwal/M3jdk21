@@ -15,14 +15,14 @@
   <name>M3 A3 absorption tooling</name>
 
   <properties>
-    <m3.synexia.a3.version>1.0.0-SNAPSHOT</m3.synexia.a3.version>
+    <m3.a3.version>1.0.0-SNAPSHOT</m3.a3.version>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>com.synexia</groupId>
-      <artifactId>synexia-jdk-a3-recipes</artifactId>
-      <version>${m3.synexia.a3.version}</version>
+      <artifactId>m3jdk-a3-recipes</artifactId>
+      <version>${m3.a3.version}</version>
     </dependency>
     <dependency>
       <groupId>com.m3.tooling</groupId>
@@ -83,7 +83,7 @@
                 <phase>verify</phase>
                 <goals><goal>java</goal></goals>
                 <configuration>
-                  <mainClass>com.m3.a3.A3</mainClass>
+                  <mainClass>jdk.m3.a3.A3</mainClass>
                   <arguments>
                     <argument>inv</argument>
                     <argument>--root</argument>
@@ -98,7 +98,7 @@
                 <phase>verify</phase>
                 <goals><goal>java</goal></goals>
                 <configuration>
-                  <mainClass>com.m3.a3.A3</mainClass>
+                  <mainClass>jdk.m3.a3.A3</mainClass>
                   <arguments>
                     <argument>complete</argument>
                     <argument>--root</argument>
@@ -134,7 +134,7 @@
             </dependencies>
             <configuration>
               <activeRecipes>
-                <recipe>com.m3.a3.AlgorithmCatalogue</recipe>
+                <recipe>jdk.m3.a3.AlgorithmCatalogue</recipe>
               </activeRecipes>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
               <failOnDryRunResults>false</failOnDryRunResults>
@@ -160,7 +160,7 @@
             </dependencies>
             <configuration>
               <activeRecipes>
-                <recipe>com.m3.a3.SerialFileWork</recipe>
+                <recipe>jdk.m3.a3.SerialFileWork</recipe>
               </activeRecipes>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
               <failOnDryRunResults>false</failOnDryRunResults>
@@ -170,7 +170,7 @@
       </build>
     </profile>
       <profile>
-      <id>m3-synexia-atom-pattern</id>
+      <id>m3-atom-pattern</id>
       <build>
         <plugins>
           <plugin>
@@ -180,19 +180,19 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
               </dependency>
             </dependencies>
             <executions>
               <execution>
-                <id>m3-synexia-atom-pattern-verify</id>
+                <id>m3-atom-pattern-verify</id>
                 <phase>verify</phase>
                 <goals><goal>dryRun</goal></goals>
               </execution>
             </executions>
             <configuration>
-              <activeRecipes><recipe>com.synexia.m3.EveryModuleAtomPatternApplication</recipe></activeRecipes>
+              <activeRecipes><recipe>jdk.internal.m3.EveryModuleAtomPatternApplication</recipe></activeRecipes>
               <exportDatatables>true</exportDatatables>
               <runPerSubmodule>false</runPerSubmodule>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
@@ -254,7 +254,7 @@
       </build>
     </profile>
     <profile>
-      <id>m3-synexia-atom-pattern-mastery</id>
+      <id>m3-atom-pattern-mastery</id>
       <build>
         <plugins>
           <plugin>
@@ -264,19 +264,19 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
               </dependency>
             </dependencies>
             <executions>
               <execution>
-                <id>m3-synexia-atom-pattern-mastery-verify</id>
+                <id>m3-atom-pattern-mastery-verify</id>
                 <phase>verify</phase>
                 <goals><goal>dryRun</goal></goals>
               </execution>
             </executions>
             <configuration>
-              <activeRecipes><recipe>com.synexia.m3.EveryModuleAtomPatternMastery</recipe></activeRecipes>
+              <activeRecipes><recipe>jdk.internal.m3.EveryModuleAtomPatternMastery</recipe></activeRecipes>
               <exportDatatables>true</exportDatatables>
               <runPerSubmodule>false</runPerSubmodule>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>

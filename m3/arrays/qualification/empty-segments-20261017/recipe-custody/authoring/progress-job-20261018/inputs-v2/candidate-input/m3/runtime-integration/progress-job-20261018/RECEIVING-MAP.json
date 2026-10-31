@@ -13,9 +13,9 @@
     "Callable.call():V throws Exception",
     "MonitoredCallable.callMonitored(ProgressMonitor):V throws Exception"
   ],
-  "canonical_recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+  "canonical_recipe": "jdk.internal.m3.m3jdk.CollectionsContractRefinement20261017",
   "dataset": "m3jdk21-progress-job",
-  "recipe_owner": "hsoliwal/com.synexia:synexia-openrewrite-recipes",
+  "recipe_owner": "hsoliwal/com.synexia:m3-openrewrite-recipes",
   "source_sha256": "d2734bcc607b1af8a593387040da53886530a310685a26965a5aa77609aaefc8",
   "status_result": "S is returned unchanged; no IStatus/IJobResult dependency or conversion in java.base.",
   "executor": "Existing FutureTask and ExecutorService.submitMonitored compose with this Callable; no new scheduler or capture rule.",

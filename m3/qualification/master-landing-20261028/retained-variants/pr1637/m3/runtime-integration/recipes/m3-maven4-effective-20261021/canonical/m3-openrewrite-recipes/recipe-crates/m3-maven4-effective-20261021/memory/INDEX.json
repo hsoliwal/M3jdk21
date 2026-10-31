@@ -1,0 +1,11 @@
+{
+  "schema": "M3_PENDING_CORRECTION_INDEX/1",
+  "events": [
+    "7e90af9173edceb152fde014b5b74cceb30c07a62c6af7293e0b2065b628bd2b"
+  ],
+  "admission": "PENDING",
+  "conformance_receipt": {
+    "path": "proof/memory-conformance-001/RESULT.json",
+    "sha256": "47ee4cb235fc9e4e2ede51c26e2e824fbe4479654e9b49df9a564d316a08b678"
+  }
+}

@@ -119,8 +119,8 @@
         "-cp",
         "S:\\codex-work\\m3-collections-next-20261018\\m3-avl-insertion-frontier-20261018\\qualification-property-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\m3-tree-map-entry-protocol-20261018\\qualification-compile-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\current-base-runtime-v5\\core130-classes",
         "AvlGrowthFrontierProof",
-        "com.m3.collections.M3TreeMap",
-        "com.m3.collections.M3TreeSet"
+        "jdk.m3.collections.M3TreeMap",
+        "jdk.m3.collections.M3TreeSet"
       ],
       "returncode": 0,
       "reason": "completed",
@@ -150,8 +150,8 @@
         "-cp",
         "S:\\codex-work\\m3-collections-next-20261018\\m3-avl-insertion-frontier-20261018\\qualification-property-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\m3-avl-insertion-frontier-20261018\\qualification-compile-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\m3-tree-map-entry-protocol-20261018\\qualification-compile-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\current-base-runtime-v5\\core130-classes",
         "AvlGrowthFrontierProof",
-        "com.m3.collections.M3TreeMap",
-        "com.m3.collections.M3TreeSet"
+        "jdk.m3.collections.M3TreeMap",
+        "jdk.m3.collections.M3TreeSet"
       ],
       "returncode": 0,
       "reason": "completed",

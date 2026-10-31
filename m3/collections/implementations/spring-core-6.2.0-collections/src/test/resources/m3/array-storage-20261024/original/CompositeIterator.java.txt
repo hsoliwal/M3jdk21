@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.m3.collections.spring;
+package jdk.m3.collections.spring;
 
 import java.util.Iterator;
 import java.util.LinkedHashSet;

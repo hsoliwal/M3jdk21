@@ -11,7 +11,7 @@
   "result": {
     "path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-sdk-resources-recipe-resume-proof-k-v1\\RESULT.json",
     "bytes": 6542,
-    "sha256": "97efd6debad36ccaa5a4fda4553f9f5a41e2494a42dcbc96cdf6c78eecf13be9"
+    "sha256": "dc06a2c0636db024b2f92aa25f65ddff5d57da5db0d6a4ee20012c7f44e64c14"
   },
   "phase_evidence": {
     "path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-sdk-resources-recipe-resume-proof-k-v1\\PHASE_EVIDENCE.json",
@@ -76,7 +76,7 @@
   "postimage": {
     "path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-sdk-resources-recipe-resume-proof-k-v1\\project\\m3\\collections\\pom.xml",
     "bytes": 12031,
-    "sha256": "31b3f083fd171e698ef3f4e07ad2e2fcca82250b157971afe7e5388c8bcd0923"
+    "sha256": "e7711e602ede487d05a8bc5454e4ef028af67effa9f77a3bd1263ad1f577844c"
   },
   "dryrun_patch": {
     "path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-sdk-resources-recipe-resume-proof-k-v1\\dryrun-before.patch",

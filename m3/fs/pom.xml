@@ -24,7 +24,7 @@
     <m3.fs.native.prefix></m3.fs.native.prefix>
   </properties>
   <dependencies>
-    <!-- Original M3File stream is a direct first-class M3JDK21 module owner. -->
+    <!-- Original M3File stream is a direct first-class M3JDK 21 module owner. -->
     <dependency>
       <groupId>com.m3</groupId>
       <artifactId>m3-file</artifactId>
@@ -103,7 +103,7 @@
             <arg>-implicit:none</arg>
           </compilerArgs>
           <excludes>
-            <exclude>com/m3/fs/vfs/**/*.java</exclude>
+            <exclude>jdk/m3/fs/vfs/**/*.java</exclude>
             <exclude>org/apache/commons/logging/**/*.java</exclude>
           </excludes>
         </configuration>
@@ -213,11 +213,11 @@
           <archive>
             <manifestEntries>
               <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
-              <Bundle-SymbolicName>com.m3.fs</Bundle-SymbolicName>
+              <Bundle-SymbolicName>jdk.m3.fs</Bundle-SymbolicName>
               <Bundle-Version>0.1.0</Bundle-Version>
               <Bundle-Name>M3FS</Bundle-Name>
               <Bundle-RequiredExecutionEnvironment>JavaSE-21</Bundle-RequiredExecutionEnvironment>
-              <Export-Package>com.m3.fs;version="0.1.0",com.m3.fs.vfs;version="0.1.0",com.m3.fs.vfs.auth;version="0.1.0",com.m3.fs.vfs.cache;version="0.1.0",com.m3.fs.vfs.events;version="0.1.0",com.m3.fs.vfs.filter;version="0.1.0",com.m3.fs.vfs.function;version="0.1.0",com.m3.fs.vfs.impl;version="0.1.0",com.m3.fs.vfs.operations;version="0.1.0",com.m3.fs.vfs.operations.vcs;version="0.1.0",com.m3.fs.vfs.provider;version="0.1.0",com.m3.fs.vfs.provider.bzip2;version="0.1.0",com.m3.fs.vfs.provider.compressed;version="0.1.0",com.m3.fs.vfs.provider.gzip;version="0.1.0",com.m3.fs.vfs.provider.jar;version="0.1.0",com.m3.fs.vfs.provider.local;version="0.1.0",com.m3.fs.vfs.provider.ram;version="0.1.0",com.m3.fs.vfs.provider.res;version="0.1.0",com.m3.fs.vfs.provider.tar;version="0.1.0",com.m3.fs.vfs.provider.temp;version="0.1.0",com.m3.fs.vfs.provider.url;version="0.1.0",com.m3.fs.vfs.provider.zip;version="0.1.0",com.m3.fs.vfs.util;version="0.1.0",org.apache.commons.logging;version="1.2.0",org.apache.commons.logging.impl;version="1.2.0"</Export-Package>
+              <Export-Package>jdk.m3.fs;version="0.1.0",jdk.m3.fs.vfs;version="0.1.0",jdk.m3.fs.vfs.auth;version="0.1.0",jdk.m3.fs.vfs.cache;version="0.1.0",jdk.m3.fs.vfs.events;version="0.1.0",jdk.m3.fs.vfs.filter;version="0.1.0",jdk.m3.fs.vfs.function;version="0.1.0",jdk.m3.fs.vfs.impl;version="0.1.0",jdk.m3.fs.vfs.operations;version="0.1.0",jdk.m3.fs.vfs.operations.vcs;version="0.1.0",jdk.m3.fs.vfs.provider;version="0.1.0",jdk.m3.fs.vfs.provider.bzip2;version="0.1.0",jdk.m3.fs.vfs.provider.compressed;version="0.1.0",jdk.m3.fs.vfs.provider.gzip;version="0.1.0",jdk.m3.fs.vfs.provider.jar;version="0.1.0",jdk.m3.fs.vfs.provider.local;version="0.1.0",jdk.m3.fs.vfs.provider.ram;version="0.1.0",jdk.m3.fs.vfs.provider.res;version="0.1.0",jdk.m3.fs.vfs.provider.tar;version="0.1.0",jdk.m3.fs.vfs.provider.temp;version="0.1.0",jdk.m3.fs.vfs.provider.url;version="0.1.0",jdk.m3.fs.vfs.provider.zip;version="0.1.0",jdk.m3.fs.vfs.util;version="0.1.0",org.apache.commons.logging;version="1.2.0",org.apache.commons.logging.impl;version="1.2.0"</Export-Package>
               <Import-Package>javax.crypto,javax.crypto.spec,javax.xml.parsers,org.w3c.dom,org.apache.commons.compress.archivers,org.apache.commons.compress.archivers.tar,org.apache.commons.compress.compressors.bzip2,org.apache.commons.io,org.apache.commons.io.file,org.apache.commons.io.function,org.apache.commons.lang3,org.apache.commons.lang3.concurrent,org.apache.commons.lang3.reflect,org.apache.commons.lang3.time,org.apache.commons.lang3.util</Import-Package>
             </manifestEntries>
           </archive>
@@ -271,21 +271,21 @@
                 </goals>
                 <configuration>
                   <includes>
-                    <include>com/m3/fs/vfs/**/*.java</include>
+                    <include>jdk/m3/fs/vfs/**/*.java</include>
                   </includes>
                   <excludes combine.self="override">
-                    <exclude>com/m3/fs/vfs/provider/ftp/**/*.java</exclude>
-                    <exclude>com/m3/fs/vfs/provider/ftps/**/*.java</exclude>
-                    <exclude>com/m3/fs/vfs/provider/http/**/*.java</exclude>
-                    <exclude>com/m3/fs/vfs/provider/https/**/*.java</exclude>
-                    <exclude>com/m3/fs/vfs/provider/http4/**/*.java</exclude>
-                    <exclude>com/m3/fs/vfs/provider/http4s/**/*.java</exclude>
-                    <exclude>com/m3/fs/vfs/provider/http5/**/*.java</exclude>
-                    <exclude>com/m3/fs/vfs/provider/http5s/**/*.java</exclude>
-                    <exclude>com/m3/fs/vfs/provider/sftp/**/*.java</exclude>
-                    <exclude>com/m3/fs/vfs/cache/LRUFilesCache.java</exclude>
-                    <exclude>com/m3/fs/vfs/provider/URLFileName.java</exclude>
-                    <exclude>com/m3/fs/vfs/provider/URLFileNameParser.java</exclude>
+                    <exclude>jdk/m3/fs/vfs/provider/ftp/**/*.java</exclude>
+                    <exclude>jdk/m3/fs/vfs/provider/ftps/**/*.java</exclude>
+                    <exclude>jdk/m3/fs/vfs/provider/http/**/*.java</exclude>
+                    <exclude>jdk/m3/fs/vfs/provider/https/**/*.java</exclude>
+                    <exclude>jdk/m3/fs/vfs/provider/http4/**/*.java</exclude>
+                    <exclude>jdk/m3/fs/vfs/provider/http4s/**/*.java</exclude>
+                    <exclude>jdk/m3/fs/vfs/provider/http5/**/*.java</exclude>
+                    <exclude>jdk/m3/fs/vfs/provider/http5s/**/*.java</exclude>
+                    <exclude>jdk/m3/fs/vfs/provider/sftp/**/*.java</exclude>
+                    <exclude>jdk/m3/fs/vfs/cache/LRUFilesCache.java</exclude>
+                    <exclude>jdk/m3/fs/vfs/provider/URLFileName.java</exclude>
+                    <exclude>jdk/m3/fs/vfs/provider/URLFileNameParser.java</exclude>
                   </excludes>
                   <!-- Preserve imported upstream diagnostics without turning historical warnings into M3 source errors. -->
                   <compilerArgs combine.self="override">
@@ -334,7 +334,7 @@
                 </goals>
                 <configuration>
                   <skip>${m3.recipe.boot.skip}</skip>
-                  <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+                  <mainClass>jdk.internal.m3.prstack.M3RecipeBoot</mainClass>
                   <includeProjectDependencies>false</includeProjectDependencies>
                   <includePluginDependencies>true</includePluginDependencies>
                   <arguments>

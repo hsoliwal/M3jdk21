@@ -47,7 +47,7 @@
               <goal>java</goal>
             </goals>
             <configuration>
-              <mainClass>com.m3.collections.sortable.SortableProcessorSelfTest</mainClass>
+              <mainClass>jdk.m3.collections.sortable.SortableProcessorSelfTest</mainClass>
               <classpathScope>test</classpathScope>
             </configuration>
           </execution>
@@ -89,7 +89,7 @@
                 </goals>
                 <configuration>
                   <skip>${m3.recipe.boot.skip}</skip>
-                  <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+                  <mainClass>jdk.internal.m3.prstack.M3RecipeBoot</mainClass>
                   <includeProjectDependencies>false</includeProjectDependencies>
                   <includePluginDependencies>true</includePluginDependencies>
                   <arguments>

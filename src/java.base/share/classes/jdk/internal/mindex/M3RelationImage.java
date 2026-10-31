@@ -1,4 +1,4 @@
-// M3JDK21 adaptation: package/type/scope/progress boundary mapping; Synexia owns the source.
+// M3JDK 21 adaptation: package/type/scope/progress boundary mapping; Synexia owns the source.
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Hitesh Soliwal and contributors.
 package jdk.internal.mindex;

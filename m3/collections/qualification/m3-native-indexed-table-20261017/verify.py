@@ -9,11 +9,11 @@ HERE = Path(__file__).resolve().parent
 REPOSITORY = HERE.parents[3]
 RECIPE = HERE / "recipe-mirror"
 EXPECTED = {
-    "m3/collections/src/main/java/com/m3/collections/M3IndexedTable.java":
+    "m3/collections/src/main/java/jdk/m3/collections/M3IndexedTable.java":
         ("M3IndexedTable.java.tpl", "9b87cefcc65e295afe516a1d007e3b5acbc87a8035e1f55223d1b2558cf7858c"),
-    "m3/collections/src/test/java/com/m3/collections/M3IndexedTableSelfTest.java":
+    "m3/collections/src/test/java/jdk/m3/collections/M3IndexedTableSelfTest.java":
         ("M3IndexedTableSelfTest.java.tpl", "b6a5ea9b9105b15856af1833026cbe665bc060faccefe7a63973a306de7980ca"),
-    "m3/collections/src/test/java/com/m3/collections/M3IndexedTableTest.java":
+    "m3/collections/src/test/java/jdk/m3/collections/M3IndexedTableTest.java":
         ("M3IndexedTableTest.java.tpl", "136b8859525e7a10e10e9fd5184fb6e02f056eb8b85f41a04867079aa1c4ee11"),
 }
 def exact(path):

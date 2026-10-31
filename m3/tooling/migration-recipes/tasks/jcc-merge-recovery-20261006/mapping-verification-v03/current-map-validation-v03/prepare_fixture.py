@@ -151,7 +151,7 @@ def main():
             shutil.copyfile(capture_path, destination)
             origin = old_commit["sha"]
         else:
-            require(relative == "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv", "unreviewed changed artifact")
+            require(relative == "m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv", "unreviewed changed artifact")
             destination = HERE / "calls/changed-tq-manifest.json"
             origin = CURRENT
         envelope = json.loads(destination.read_bytes())

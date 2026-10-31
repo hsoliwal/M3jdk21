@@ -51,7 +51,7 @@ a second registry. Preserve earlier lineage when packages/classes move.
 | Public Class/reflection | `java.lang.Class`, `java.lang.reflect.*`; `M3Class` is internal | `src/java.base/share/classes/java/lang/**`; `jdk/internal/mindex/**` |
 | Internal string/array/index owners | Reuse already mapped `java.lang.M3String`, `jdk.internal.mindex.M3*`, qualified array/mask/lane owners | Owner module's `src/<module>/share/classes/<qualified-name>.java` |
 | Compiler/AST internals | `com.sun.tools.javac.*` or mapped compiler module owner; no `jdk.compiler` dependency leaking into `java.base` | `src/jdk.compiler/share/classes/**` |
-| Optional public M3 companion | Existing `com.m3.*` static operations or owner-sharing typed views; standard Java owner remains unchanged | Existing owner/module, initially `m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java` in `com.m3.arrays` |
+| Optional public M3 companion | Existing `com.m3.*` static operations or owner-sharing typed views; standard Java owner remains unchanged | Existing owner/module, initially `m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java` in `com.m3.arrays` |
 | Isolated SDK/port candidate | Source presence or a `com.m3.*` name does not establish installed-image admission or standard-API equivalence | Existing `m3/<family>/**` source layout |
 | JNI/HotSpot implementation | Target-owned symbols/headers in owning module; no stale heap pointer; preserve ABI | `src/<module>/share/native/**`, `src/hotspot/**` where applicable |
 | Recipe and evidence | Canonical reusable Maven/OpenRewrite implementation remains in Synexia; M3JDK target-only receiver, tests, jtreg and receipts here | Synexia `synexia-openrewrite-recipes/**`; target `m3/tooling/**` |

@@ -46,7 +46,7 @@ section requires a third-party notice.
 
 | Path | Covers | License | Status |
 | --- | --- | --- | --- |
-| `m3/vendor/synexia/third-party/mapbox-jni-ownership/LICENSE.txt` | the external `jni/ownership.hpp` wrapper referenced by the mirrored `shared_arrays.cpp` | ISC (Copyright 2016, Mapbox) | License text kept; the header itself is **referenced, not copied** (see `m3/vendor/synexia/README.md`, "Third-party JNI ownership license") |
+| `m3/vendor/m3/third-party/mapbox-jni-ownership/LICENSE.txt` | the external `jni/ownership.hpp` wrapper referenced by the mirrored `shared_arrays.cpp` | ISC (Copyright 2016, Mapbox) | License text kept; the header itself is **referenced, not copied** (see `m3/vendor/m3/README.md`, "Third-party JNI ownership license") |
 
 ## 4. Donor dependencies deliberately never pulled
 

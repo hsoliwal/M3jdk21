@@ -76,7 +76,7 @@ class MigrationTest(unittest.TestCase):
         r = self.root / 'inventory-receipt.json'
         r.write_text(json.dumps({'repo': 'hsoliwal/com.synexia', 'commit': 'd' * 40,
             'inventory_sha256': sha(p.read_bytes()), 'scope_complete': complete,
-            'producer': 'com.synexia.m3.inventory.InventoryWriter'}))
+            'producer': 'jdk.internal.m3.inventory.InventoryWriter'}))
         return migration.read_inventory(p, r)
 
     def test_valid_partial_is_not_complete(self):

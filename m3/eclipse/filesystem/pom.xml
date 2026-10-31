@@ -170,7 +170,7 @@
             </goals>
             <configuration>
               <includes>
-                <include>com/m3/eclipse/filesystem/it/**</include>
+                <include>jdk/m3/eclipse/filesystem/it/**</include>
               </includes>
               <archive>
                 <manifestFile>${project.basedir}/osgi/TEST-MANIFEST.MF</manifestFile>
@@ -256,7 +256,7 @@
                 </goals>
                 <configuration>
                   <skip>${m3.recipe.boot.skip}</skip>
-                  <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+                  <mainClass>jdk.internal.m3.prstack.M3RecipeBoot</mainClass>
                   <includeProjectDependencies>false</includeProjectDependencies>
                   <includePluginDependencies>true</includePluginDependencies>
                   <arguments>

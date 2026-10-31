@@ -1,9 +1,9 @@
 {
   "stage": "COMPILE",
   "generated_headers_identical": {
-    "com_m3_collections_M3IndexMaskCompactor.h": "1f67a3bca5682e3d4b392bb04d6f27479a16fdaccb935463a9dbf026f13faf8c",
-    "com_m3_collections_M3IndexMaskWindow.h": "26d6f1302b888bbebde68d4d911f7b74d91c1fe5f90871928af0220829dc9866",
-    "com_m3_collections_M3LongAddressKernel.h": "dffaa88fa278c69424c6879ddbe2b6d741e37dd48e123e97ebb86043b6b59df7"
+    "com_m3_collections_M3IndexMaskCompactor.h": "60284925265d8ec7300dcb1a97436db82ca29b18e902f8fb5835f0a9b933537e",
+    "com_m3_collections_M3IndexMaskWindow.h": "8a98ee9e6da71b86ffe84223fc0c09ab2e206f1f4ae1e49320e234206d172c11",
+    "com_m3_collections_M3LongAddressKernel.h": "688b0b0ff74d311c1f805e64bfc408bac33e21fd42512daae4d12355406c8279"
   },
   "exported_JNI_names_and_symbol_types_unchanged": true
 }

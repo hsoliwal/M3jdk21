@@ -20,7 +20,7 @@ public final class M3EclipseFactoryNamespaceProbe {
     private M3EclipseFactoryNamespaceProbe() { }
     public static void main(String[] args) throws ReflectiveOperationException {
         if (args.length != 0) throw new IllegalArgumentException("No arguments");
-        String prefix = "com.m3.collections.eclipse.";
+        String prefix = "jdk.m3.collections.eclipse.";
         Class<?> owner = Class.forName(prefix + "api.factory.ServiceLoaderUtils");
         Field field = owner.getDeclaredField("FACTORY_IMPL");
         field.setAccessible(true);

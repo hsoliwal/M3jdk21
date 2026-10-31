@@ -4,7 +4,7 @@
  */
 /*
  * @test
- * @summary M3JDK21 filtered CopyOnWrite bulk operations preserve backing membership and order
+ * @summary M3JDK 21 filtered CopyOnWrite bulk operations preserve backing membership and order
  * @run main/othervm FilteredCopyOnWriteBulkTest
  */
 import java.util.ArrayList;

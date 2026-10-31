@@ -2,7 +2,7 @@
  * Copyright (c) 2026.
  * SPDX-License-Identifier: GPL-2.0-only WITH Classpath-exception-2.0
  *
- * Proposed M3JDK21 internal implementation; not copied from donor source.
+ * Proposed M3JDK 21 internal implementation; not copied from donor source.
  */
 package jdk.internal.m3;
 

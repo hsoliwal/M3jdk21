@@ -5,10 +5,10 @@ on:
   pull_request:
     paths:
       - '.github/workflows/m3-span-batch-into-jni-20261027.yml'
-      - 'm3/collections/src/main/java/com/m3/collections/M3SpanIndex.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3SpanIndex.java'
       - 'm3/collections/src/main/native/collections/m3_span_index_jni.c'
-      - 'm3/collections/src/test/java/com/m3/collections/M3SpanBatchIntoContract.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3SpanBatchIntoTest.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3SpanBatchIntoContract.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3SpanBatchIntoTest.java'
       - 'm3/collections/qualification/span-batch-into-20261027/**'
 
 permissions:

@@ -6,14 +6,14 @@ from pathlib import Path
 import re
 
 REPO = Path(__file__).resolve().parents[4]
-CRATE = (REPO / 'm3/tooling/migration-recipes/src/main/resources/com/synexia/'
+CRATE = (REPO / 'm3/tooling/migration-recipes/src/main/resources/com/m3/'
          'rewrite/hash-pinned-java/m3-index-path-rank-20261017')
 MANIFEST = CRATE / 'manifest.tsv'
 EXPECTED = {
-    'm3/collections/src/main/java/com/m3/collections/M3IndexPathRank.java',
-    'm3/collections/src/test/java/com/m3/collections/M3IndexPathRankNativeSelfTest.java',
-    'm3/collections/src/test/java/com/m3/collections/M3IndexPathRankSelfTest.java',
-    'm3/collections/src/test/java/com/m3/collections/M3IndexPathRankTest.java',
+    'm3/collections/src/main/java/jdk/m3/collections/M3IndexPathRank.java',
+    'm3/collections/src/test/java/jdk/m3/collections/M3IndexPathRankNativeSelfTest.java',
+    'm3/collections/src/test/java/jdk/m3/collections/M3IndexPathRankSelfTest.java',
+    'm3/collections/src/test/java/jdk/m3/collections/M3IndexPathRankTest.java',
 }
 
 def main() -> None:

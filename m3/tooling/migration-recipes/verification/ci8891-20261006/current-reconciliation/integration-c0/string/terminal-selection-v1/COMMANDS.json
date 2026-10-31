@@ -3,7 +3,7 @@
   "archiveOwner": {
     "bytes": 33814,
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/m3-checkout/m3/migration/intake-20261005/current-752-ci/cih-producer-portable/package_evidence.py",
-    "sha256": "89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574"
+    "sha256": "93a1c116c197854b0167c172581cd768d0f9098067bf0f1296607ca6ba855556"
   },
   "automaticProofRerun": false,
   "commands": [
@@ -110,17 +110,17 @@
     {
       "bytes": 28933,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/prepare_package.py",
-      "sha256": "7d80b09d2f22520697ef990826f8d55ab240126d4c17f6056201d3f37e79da6c"
+      "sha256": "f92fc8d812a953cd089bcf145fb2497ad83009a8b037c05359b0d66e202c49d7"
     },
     {
       "bytes": 8236,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/finish_package.py",
-      "sha256": "c010f606de8291a64736f286c1ed1de3a66f5b0f97e8019c13cbb8018c967b2d"
+      "sha256": "a23496665fd649df5040864f9c8e44049bbfd5112c4d661857bec808437c1f43"
     },
     {
       "bytes": 1860,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/reconstruct.py",
-      "sha256": "068e02410b1161be1cfed85c3a98de00da6560f043cf9d24671c263064930879"
+      "sha256": "1f2aea22146165a1c8cdf703a04e6fbd48771f637b629116d2772dfc60742e42"
     },
     {
       "bytes": 18636,
@@ -155,18 +155,18 @@
   "receivingSelection": {
     "bytes": 74585,
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string-preparation/receiving-selection-v1/RECEIVING-SELECTION.json",
-    "sha256": "de8f5754b18391d8e3768d2a7a2ee0073884427eb09e45093cc1a44bf709aa8d"
+    "sha256": "ee018354430dd4a256f88b09ad93adbcc91139adc6c2d6c83a050acd24030a2a"
   },
   "receivingStatus": "PRIMARY_ONLY_STOP",
   "receivingStopPreserved": true,
   "rootMustCaptureActualCommandsAndStreams": true,
   "rootReviewRequiredBeforeExecution": true,
   "runNextOnlyAfterActualPriorSuccess": true,
-  "schema": "synexia.sc0.terminal-bound-packaging-plan/1",
+  "schema": "m3.sc0.terminal-bound-packaging-plan/1",
   "selectionReadback": {
     "bytes": 7504,
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/terminal-selection-v1/SELECTION-READBACK.json",
-    "sha256": "e0b86dae5c91684615cd9a23c8469cd4e68f57f18032763a767bffcdd5c3b728"
+    "sha256": "7589a0107031bc02f4542714d1f03071ecbc3256d50a0040347a287c1385824e"
   },
   "semanticOutcomeSeparateFromPrimary": true,
   "semanticPrerequisite": {

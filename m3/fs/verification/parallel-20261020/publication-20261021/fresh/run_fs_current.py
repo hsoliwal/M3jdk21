@@ -70,7 +70,7 @@ def main():
     dependency_cp = os.pathsep.join(map(str, runtime_jars))
     sources = sorted((MODULE / "src/main/java").rglob("*.java"))
     vfs = [p for p in sources if selected_vfs_source(p.relative_to(MODULE).as_posix())]
-    owned = [p for p in sources if "/com/m3/fs/vfs/" not in str(p)]
+    owned = [p for p in sources if "/jdk/m3/fs/vfs/" not in str(p)]
     receipt["production_sources"] = {str(p.relative_to(RECEIVER)): digest(p) for p in vfs + owned}
     receipt["compiled_sources"] = {"vfs": len(vfs), "m3fs": len(owned)}
     run("java-version", [JDK / "bin/java", "-version"])
@@ -85,11 +85,11 @@ def main():
     harness = OUT / "FacadeTestLauncher.java"
     shutil.copyfile(harness_source, harness)
     names = ["MFilesParallelTest", "MFilesBehaviorTest", "MFilesProviderTest", "MFileCaptureTest", "MFileStreamsTest"]
-    tests = [MODULE / ("src/test/java/com/m3/fs/" + n + ".java") for n in names]
+    tests = [MODULE / ("src/test/java/jdk/m3/fs/" + n + ".java") for n in names]
     receipt["test_sources"] = {str(p.relative_to(RECEIVER)): digest(p) for p in tests}
     compile_cp = os.pathsep.join(map(str, [classes, *jars, resources]))
     run("compile-tests", [JDK / "bin/javac", "--release", "21", "-Xlint:all", "-Werror", "-implicit:none", "-sourcepath", "", "-cp", compile_cp, "-d", proof, *tests, harness])
-    result = run("junit", [JDK / "bin/java", "-Xcheck:jni", "-cp", str(proof)+os.pathsep+compile_cp, "FacadeTestLauncher", *("com.m3.fs."+n for n in names)])
+    result = run("junit", [JDK / "bin/java", "-Xcheck:jni", "-cp", str(proof)+os.pathsep+compile_cp, "FacadeTestLauncher", *("jdk.m3.fs."+n for n in names)])
     counts = {m.group(2): int(m.group(1)) for m in re.finditer(r"\[\s*(\d+)\s+tests\s+(found|skipped|started|aborted|successful|failed)\s*\]", result)}
     if counts != {"found":136,"skipped":0,"started":136,"aborted":0,"successful":136,"failed":0}:
         raise RuntimeError("Unexpected test inventory/results: " + repr(counts))

@@ -1,5 +1,5 @@
 {
-  "schema": "synexia.coding-agent.maven-invocation.v1",
+  "schema": "m3.coding-agent.maven-invocation.v1",
   "artifact": "org.openrewrite.maven:rewrite-maven-plugin:5.23.1",
   "plugin_source_commit": "f4e1ac2af034603f8ffdf86e0731c99e02cc64a8",
   "engine": "Plugin POM pins rewrite.version8.17.1",

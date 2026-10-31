@@ -1,0 +1,12 @@
+{
+  "schema": "jcc-actual-raw-custody-probe-execution/1",
+  "helper_sha256": "203f44729f860620949ec9e6aa7c5f2c7d766de2e406548ceb6797797bfdcc33",
+  "custody_input_sha256": "384ce843f2e4545ad1c40d7ee58abbc471b5a6d1cbed89bea82dcff0479ce6a5",
+  "result": {
+    "chunk_id": "4af819",
+    "wall_time_seconds": 0.010447342,
+    "exit_code": 0,
+    "original_token_count": 66,
+    "output": "{\"status\": \"GIT_OBJECT_CUSTODY_VERIFIED_BODY_READBACK_FAILED_FOR_TWO\", \"raw_creation_calls\": 4, \"verification_trees\": 17, \"direct_body_reads\": 2, \"failed_utf8_body_reads\": 2, \"receipt_sha256\": \"3be2658241c3ebb336ae712268cbbd54c3d65969467d729f8a41c88e75bb98a8\"}\n"
+  }
+}

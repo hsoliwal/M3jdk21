@@ -6,7 +6,7 @@ The actual execution receipt is `verification-v3/receipt.json`, SHA256 `1f4ac982
 
 ## Actual invocation and stage observations
 
-The invocation capture binds runner SHA256 `496e1877914e15f4342111c37020a2d58790038516b62872680427e585b21f50`, final input `df6713ad19ce80daad0383fbd5c3716412e2dca133e1db7e0150b88e141313b5`, and the prior resource-admission report `df198e3ccda995d5d40fe9e17aca02507b3cb6b5077314c05b3c06b3eeb2cd28`. It records an ordinary `python -B` invocation, exit zero, empty invocation stderr, and all ten expected child exit outcomes. The input freeze precedes all child commands; the actual stage times are ordered within the invocation interval on 2026-10-05, 17:40:48–17:40:56 UTC.
+The invocation capture binds runner SHA256 `c779f94023b3914bca1558a35d39ab11aaedd00a18cf5b74e2a30bf1205de6b6`, final input `df6713ad19ce80daad0383fbd5c3716412e2dca133e1db7e0150b88e141313b5`, and the prior resource-admission report `7ece8d5be7df1a1080e2b8c6c86663dad44afe874404efe3a772484ad391c0bb`. It records an ordinary `python -B` invocation, exit zero, empty invocation stderr, and all ten expected child exit outcomes. The input freeze precedes all child commands; the actual stage times are ordered within the invocation interval on 2026-10-05, 17:40:48–17:40:56 UTC.
 
 The exact per-stage JSON records, stdout and stderr identities were checked against the aggregate receipt. Their commands and working directory match the admitted runner and receiving overlay. No owner or resource edit was needed to pass this epoch.
 
@@ -27,7 +27,7 @@ Every installer response reports the same admitted plan seal. The separate compl
 
 ## Actual Java and Python evidence
 
-The copied Surefire XML is SHA256 `09d606a9675a7aa17a64945e499c8f8062bd75a42cce2ed53851309aa3efd001`; it equals the actual generated Surefire report byte-for-byte. Its twelve distinct case names equal the twelve methods in the admitted `JccSourceRecoveryHandoffTest.java`. The XML has exactly twelve testcase nodes, zero failure/error/skipped nodes, and twelve/zero/zero/zero suite counts. It reports Java 21.0.2 at the configured JDK path and UTF-8 encoding. Maven stdout independently reports the same test counts and `BUILD SUCCESS`.
+The copied Surefire XML is SHA256 `3f1f895d21c58e9d4b100b8e2cffef28126ad7b1b61c65521e622ffa0a896752`; it equals the actual generated Surefire report byte-for-byte. Its twelve distinct case names equal the twelve methods in the admitted `JccSourceRecoveryHandoffTest.java`. The XML has exactly twelve testcase nodes, zero failure/error/skipped nodes, and twelve/zero/zero/zero suite counts. It reports Java 21.0.2 at the configured JDK path and UTF-8 encoding. Maven stdout independently reports the same test counts and `BUILD SUCCESS`.
 
 The Maven command uses offline mode, the exact existing local repository, empty explicit user settings and the admitted verification POM. The log shows compilation of one retained recipe owner and one test source with javac release 21, and twelve copied resources. The POM retains its strict warnings/fail-on-warning configuration. Maven stderr contains only the retained SLF4J missing-binding/NOP-logger diagnostic; it contains no compilation or test failure. This is the focused verification project, not an entire owning-module or JDK build.
 
@@ -37,7 +37,7 @@ These results exercise the actual canonical text recipe, named entrypoint/serial
 
 ## Frozen inputs and materialized outputs
 
-`verification-v3/inputs.json`, SHA256 `6367c7d343ece1f1547e4db7873180f4dfae6dda83212edadf0564e0a93bc341`, records **391 fixed receiving inputs plus 617 external inputs**, totaling **1,008 unique paths**. The reviewer independently re-read and rehashed every one, including byte count, SHA256, Git blob identity and permission mode; all still exactly match the pre-run freeze. No frozen file is missing.
+`verification-v3/inputs.json`, SHA256 `3747257e4df289cbc09ce34309683cb18c9c66caedab191379d0370a07057902`, records **391 fixed receiving inputs plus 617 external inputs**, totaling **1,008 unique paths**. The reviewer independently re-read and rehashed every one, including byte count, SHA256, Git blob identity and permission mode; all still exactly match the pre-run freeze. No frozen file is missing.
 
 This explicitly includes all 527 declared current be92 bodies, the ten receiving current-context receipt copies, the two exact malformed-UTF8 fixture bodies added by the corrected V3 freeze, all nineteen selected current source bodies and all fifty-five proof bodies. Declared current-context identities and modes also match their original authority. The prior source custody object in the run receipt equals the admitted input, including the two raw-body/SHA256-readback false flags and recorded failed reads.
 

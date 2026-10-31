@@ -14,22 +14,22 @@
   "files": [
     {
       "path": ".github/workflows/m3-tq.yml",
-      "before_sha256": "ed5bb9a6a3bcd32eb13dabf7cfc60ac406fe89b1eb34c0fe01286fc4327ae894",
+      "before_sha256": "923c89b5626d73ac4fd053cea7b60e57ed7c7ae1217938926679feeeebe84bd8",
       "proposed_sha256": "67573f9e38b1ccd595e8c4be07b68f38a4cbe3d44eb81484d6f18d5e476ac60a",
       "mode": "0644",
       "license": "Apache-2.0"
     },
     {
-      "path": "m3/synexia-import/pure-int-recipe-custody/install.sh",
-      "before_sha256": "11a1ad7e0c6bd1109c079a7b923aeed7ac5e7e76904d4ffb879f0a98a0e47a26",
-      "proposed_sha256": "d5f2079557bfb0fb8376e8189c1b6eb1c39a8241124e4649e47690dc4ba5c054",
+      "path": "m3/m3-import/pure-int-recipe-custody/install.sh",
+      "before_sha256": "61b67bac95b840de971cd6985116b63d44f8f17fb3d55c8c76ba091d1ec94271",
+      "proposed_sha256": "9f2111aebd42a1ff4f36e7ef9f1b5cec47948bacb361c346ae0e12ac5df19e0e",
       "mode": "0644",
       "license": "Apache-2.0"
     },
     {
-      "path": "m3/synexia-import/pure-int-recipe-custody/test_source_bootstrap.py",
-      "before_sha256": "99ddad6427b24067d656da6dc9019449afeaaee5148cd1be8efe7407334adb3c",
-      "proposed_sha256": "3f27e24b4a1973d0918f36643deff9deac64cde8115064f8065f3dbe530f1431",
+      "path": "m3/m3-import/pure-int-recipe-custody/test_source_bootstrap.py",
+      "before_sha256": "2c6591cf50c94ebedb238bffce4d0993039d63f6933ebe677be94afd971d347a",
+      "proposed_sha256": "3a9ff4ec03451f207b4abce77f71fcf2e9117159eb4729166308902439336687",
       "mode": "0644",
       "license": "Apache-2.0"
     },
@@ -41,37 +41,37 @@
       "license": "Apache-2.0"
     },
     {
-      "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/01-m3-tq.yml.txt",
-      "before_sha256": "ed5bb9a6a3bcd32eb13dabf7cfc60ac406fe89b1eb34c0fe01286fc4327ae894",
+      "path": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/01-m3-tq.yml.txt",
+      "before_sha256": "923c89b5626d73ac4fd053cea7b60e57ed7c7ae1217938926679feeeebe84bd8",
       "proposed_sha256": "67573f9e38b1ccd595e8c4be07b68f38a4cbe3d44eb81484d6f18d5e476ac60a",
       "mode": "0644",
       "license": "Apache-2.0"
     },
     {
-      "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/11-plan.json.txt",
+      "path": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/11-plan.json.txt",
       "before_sha256": "8e6db1b290e9ee55bc028ce51e4aae85773cb8be167b7193ee721b031f46be4b",
       "proposed_sha256": "50d583d5ff9f0975e8d1970eaaf9613c9694ccc0e9664f9c2f92f5e901ba0a39",
       "mode": "0644",
       "license": "Apache-2.0"
     },
     {
-      "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/12-manifest.tsv.txt",
+      "path": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/12-manifest.tsv.txt",
       "before_sha256": "61f9431a2426d37e910d64fdf337d604d3cc5af31bb25bb546acdc0d07a1fd38",
       "proposed_sha256": "d4748d025cf93a35fb50695d7ca85728a1b9a8b319beed4f55a4d4ca64070595",
       "mode": "0644",
       "license": "Apache-2.0"
     },
     {
-      "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/16-workflow.yml.txt.txt",
-      "before_sha256": "ed5bb9a6a3bcd32eb13dabf7cfc60ac406fe89b1eb34c0fe01286fc4327ae894",
+      "path": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/16-workflow.yml.txt.txt",
+      "before_sha256": "923c89b5626d73ac4fd053cea7b60e57ed7c7ae1217938926679feeeebe84bd8",
       "proposed_sha256": "67573f9e38b1ccd595e8c4be07b68f38a4cbe3d44eb81484d6f18d5e476ac60a",
       "mode": "0644",
       "license": "Apache-2.0"
     },
     {
-      "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/manifest.tsv",
-      "before_sha256": "415d3a8fe282c705dc387761af853bead2740ad43403487f013fd9d9553a6e2e",
-      "proposed_sha256": "5fede1e09fb5ff23319605a6e986ebfb11ba213685f5a8df980534bd5ba40407",
+      "path": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/manifest.tsv",
+      "before_sha256": "b40e5e2fd6cbf8ad487f10ecd60bfdb9f893da88578194a1d8ad1221d7815740",
+      "proposed_sha256": "5b4e8a514d7c44dd46447e76fde8bbf9a8cec9f2a1dacdc9e2a9d3bfe814d525",
       "mode": "0644",
       "license": "Apache-2.0"
     },
@@ -83,15 +83,15 @@
       "license": "Apache-2.0"
     },
     {
-      "path": "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/manifest.tsv",
+      "path": "m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/manifest.tsv",
       "before_sha256": "61f9431a2426d37e910d64fdf337d604d3cc5af31bb25bb546acdc0d07a1fd38",
       "proposed_sha256": "d4748d025cf93a35fb50695d7ca85728a1b9a8b319beed4f55a4d4ca64070595",
       "mode": "0644",
       "license": "Apache-2.0"
     },
     {
-      "path": "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/workflow.yml.txt",
-      "before_sha256": "ed5bb9a6a3bcd32eb13dabf7cfc60ac406fe89b1eb34c0fe01286fc4327ae894",
+      "path": "m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/workflow.yml.txt",
+      "before_sha256": "923c89b5626d73ac4fd053cea7b60e57ed7c7ae1217938926679feeeebe84bd8",
       "proposed_sha256": "67573f9e38b1ccd595e8c4be07b68f38a4cbe3d44eb81484d6f18d5e476ac60a",
       "mode": "0644",
       "license": "Apache-2.0"

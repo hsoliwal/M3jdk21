@@ -144,7 +144,7 @@ def verify_image(jdk, out):
     tests.mkdir()
     services = tests / "META-INF/services"
     services.mkdir(parents=True)
-    (services / "com.synexia.mindex.MIndexTensorBackend").write_text(
+    (services / "jdk.internal.m3.mindex.MIndexTensorBackend").write_text(
         "jdk.m3.nlp.search.test.SourceIntegrationProbe$ExternalBackend\n", encoding="utf-8")
     run([image / "bin/javac", "-source", "21", "-target", "21", "--enable-preview",
          "-Xlint:all,-preview", "-Werror", "--add-modules", MODULE,
@@ -206,7 +206,7 @@ def build(args):
             command += ["--maven-settings", args.maven_settings.resolve()]
     run(command, out / "lucene-build.log", env=environment)
     donor_receipts["lucene"] = collect_jmods(out / "lucene", out / "jars", out / "legal", owners)
-    for module in ("com.m3.text", "jdk.m3.compiletime", MODULE):
+    for module in ("jdk.m3.text", "jdk.m3.compiletime", MODULE):
         compile_owner(jdk, root, out, module, lock["modules"][module])
     with (out / "IMAGE.tsv").open("w", newline="", encoding="utf-8") as handle:
         writer = csv.writer(handle, delimiter="\t", lineterminator="\n")
@@ -223,7 +223,7 @@ def build(args):
     report = {"schema": "M3_CURRENT_FORK_NLP_SEARCH_1", "receiver": lock["receiver"],
               "source_lock_sha256": sha256(HERE / "current-source-lock.json"),
               "java_release": 21, "preview_required": True,
-              "runtime_dependency_on_com_synexia_repository": False,
+              "runtime_dependency_on_com_m3_repository": False,
               "donor_jmods": donor_receipts,
               "module_jars": {p.stem: sha256(p) for p in sorted((out / "jars").glob("*.jar"))},
               "tests": tests}

@@ -11,15 +11,15 @@
   "release_ready": false,
   "outputs": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongRangeSet.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongRangeSet.java",
       "before_sha256": "8aa30b4b23c638b53f5fe9e6f895bb3205a51af1df0bf2afdefb38d4c21ab090",
-      "after_sha256": "5f27cf511fc15614be6cb9776c632688fb270e1a6acdf99cd1360791244500dd",
+      "after_sha256": "eb9a06156bc0b8da63aaf27c24d86ec43acb44a15c21b0f6fb7e68d010b6a9fc",
       "kind": "GENERATED_SOURCE"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3LongRangeSetInsertionContractTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3LongRangeSetInsertionContractTest.java",
       "before_sha256": "ABSENT",
-      "after_sha256": "8cf7d3e258dde75780f7bda881f694cbbc6b84b48f01980df3141cfc15ee6b36",
+      "after_sha256": "f34720c7dd0139c5ab55733fe99da9e3fa1418586c73afe34cb48218d0a09d0f",
       "kind": "GENERATED_TEST"
     }
   ],

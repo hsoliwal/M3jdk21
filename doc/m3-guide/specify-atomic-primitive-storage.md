@@ -205,23 +205,23 @@ behavior and resource/latency measurements remain separate unexecuted gates.
 
 | Source | Git blob at the pinned revision |
 | --- | --- |
-| [M3ConcurrentIntLane28.java][int] | `bc2004e2c4802c3338c0099d537b94fb49dc4363` |
-| [M3ConcurrentLongLane28.java][long] | `176991710420d96aace2774c59fe0137d2b1ba4e` |
-| [M3ConcurrentBitSet.java][bits] | `feb93280cbc1481c40c52156ffc50e2be5e35b54` |
-| [M3Address28.java][address] (dependency) | `2dda612d7cfdc39d8138c17a85308dc9d084b28b` |
-| [M3ConcurrentLaneContractTest.java][test] | `86f5ae48e363b14a00e62ed6fd6d74fe572cc2c3` |
+| [M3ConcurrentIntLane28.java][int] | `c1ec6d7a13943ea937ba457580605588c96dc41f` |
+| [M3ConcurrentLongLane28.java][long] | `baa2c6e3beab9d29d054e2707d2f6e1adca0deee` |
+| [M3ConcurrentBitSet.java][bits] | `e6ddbdfc21f48995d00f3a940a78d34fe30a743a` |
+| [M3Address28.java][address] (dependency) | `ae1e43c52351d205ebfc7e57ca5a230a49410399` |
+| [M3ConcurrentLaneContractTest.java][test] | `9eaa65e25f4384e540129f2d7483ac491482aa24` |
 
 Only the first three owners are primary coverage here. Address/factory/build
 inspection and the existing map reference do not count again as new primary
 owners. Source review, local editorial checks, exact-head hosted CI, and target
 runtime qualification are distinct evidence levels.
 
-[int]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/com/m3/collections/M3ConcurrentIntLane28.java
-[long]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/com/m3/collections/M3ConcurrentLongLane28.java
-[bits]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/com/m3/collections/M3ConcurrentBitSet.java
-[address]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/com/m3/collections/M3Address28.java
-[factory]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/com/m3/collections/M3Collections.java
-[test]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/test/java/com/m3/collections/M3ConcurrentLaneContractTest.java
+[int]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/jdk/m3/collections/M3ConcurrentIntLane28.java
+[long]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/jdk/m3/collections/M3ConcurrentLongLane28.java
+[bits]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/jdk/m3/collections/M3ConcurrentBitSet.java
+[address]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/jdk/m3/collections/M3Address28.java
+[factory]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/jdk/m3/collections/M3Collections.java
+[test]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/test/java/jdk/m3/collections/M3ConcurrentLaneContractTest.java
 [module]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/module-info.java
 [pom]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/pom.xml
 [policy]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/docs/m3jdk21-porting-invariant.md

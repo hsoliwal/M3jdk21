@@ -13,8 +13,8 @@ endif()
 find_package(Java 21 REQUIRED COMPONENTS Development)
 find_package(JNI REQUIRED COMPONENTS JVM)
 set(owner "${CMAKE_CURRENT_LIST_DIR}/../src/main/c/m3maskviewport.c")
-set(declaration "${CMAKE_CURRENT_LIST_DIR}/../src/main/java/com/m3/collections/M3MaskViewportNative.java")
-set(header "${CMAKE_CURRENT_BINARY_DIR}/jni/com_m3_collections_M3MaskViewportNative.h")
+set(declaration "${CMAKE_CURRENT_LIST_DIR}/../src/main/java/jdk/m3/collections/M3MaskViewportNative.java")
+set(header "${CMAKE_CURRENT_BINARY_DIR}/jni/jdk_m3_collections_M3MaskViewportNative.h")
 add_custom_command(OUTPUT "${header}"
   COMMAND "${CMAKE_COMMAND}" -E make_directory
     "${CMAKE_CURRENT_BINARY_DIR}/jni" "${CMAKE_CURRENT_BINARY_DIR}/jni-classes"

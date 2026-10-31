@@ -2,7 +2,7 @@
   "schema": "M3_MINDEX_STRING_PROJECTION_PASSIVE_RECEIPT_V1",
   "canonical_repository": "https://github.com/hsoliwal/com.synexia",
   "canonical_revision": "0074acbbd70862be08e2d85dc72c3135e7a614de",
-  "canonical_path_root": "synexia-openrewrite-recipes/recipe-crates/m3-doop-reuse-20261030/refinement-20261030/",
+  "canonical_path_root": "m3-openrewrite-recipes/recipe-crates/m3-doop-reuse-20261030/refinement-20261030/",
   "reference_rule": "Evidence and recipe references are relative to canonical_path_root at canonical_revision; target paths are repository-relative.",
   "target_repository": "hsoliwal/M3jdk21",
   "receipt_role": "PASSIVE_COMPONENT_EVIDENCE_ONLY",
@@ -38,43 +38,43 @@
   "manifests": [
     {
       "crate": "m3-m3member-string-projection-20261030",
-      "recipe": "com.synexia.m3.M3MemberStringProjection20261030",
-      "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-m3member-string-projection-20261030/manifest.tsv",
+      "recipe": "jdk.internal.m3.M3MemberStringProjection20261030",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-m3member-string-projection-20261030/manifest.tsv",
       "sha256": "ad38ba94fcd5ea8ef1628047e68acfef54e1052a50edf06913018788ac74c39b",
       "git_blob_sha1": "286d059f1544f0935a79ac71f604ec8890736bfe"
     },
     {
       "crate": "m3-m3field-string-projection-20261030",
-      "recipe": "com.synexia.m3.M3FieldStringProjection20261030",
-      "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-m3field-string-projection-20261030/manifest.tsv",
+      "recipe": "jdk.internal.m3.M3FieldStringProjection20261030",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-m3field-string-projection-20261030/manifest.tsv",
       "sha256": "a623c8aab219b4aec1f2ad2e282c86919b9f58519ffe0f99001c7a97bcfb4cc6",
       "git_blob_sha1": "68d3da7c708edc1b27e0984552e11b72ce277ff5"
     },
     {
       "crate": "m3-m3method-string-projection-20261030",
-      "recipe": "com.synexia.m3.M3MethodStringProjection20261030",
-      "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-m3method-string-projection-20261030/manifest.tsv",
+      "recipe": "jdk.internal.m3.M3MethodStringProjection20261030",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-m3method-string-projection-20261030/manifest.tsv",
       "sha256": "4ccd5ab727b2156f654c1f3e4f5c46fed25ec578144cb64bb4140709f2731ed3",
       "git_blob_sha1": "874566244f93ef48c5cb8db68d4758a2f292c073"
     },
     {
       "crate": "m3-m3recordcomponent-string-projection-20261030",
-      "recipe": "com.synexia.m3.M3RecordComponentStringProjection20261030",
-      "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-m3recordcomponent-string-projection-20261030/manifest.tsv",
+      "recipe": "jdk.internal.m3.M3RecordComponentStringProjection20261030",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-m3recordcomponent-string-projection-20261030/manifest.tsv",
       "sha256": "00485b34e310f4dcac121c345499cb2065ca60f4270037f7137be1640289db70",
       "git_blob_sha1": "291182b89f6741fe2f5d83c11f6342e5a2c45408"
     },
     {
       "crate": "m3-member-string-projection-oracle-20261030",
-      "recipe": "com.synexia.m3.MemberStringProjectionOracle20261030",
-      "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-member-string-projection-oracle-20261030/manifest.tsv",
+      "recipe": "jdk.internal.m3.MemberStringProjectionOracle20261030",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-member-string-projection-oracle-20261030/manifest.tsv",
       "sha256": "56481875e63c1464506d8e08a7c55135916e0a25d5477027048e59abe1a9fd35",
       "git_blob_sha1": "7a089387335bff10e1cddf95c58a5c8dfe5754d3"
     },
     {
       "crate": "m3-mindex-string-naming-20261030",
-      "recipe": "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe",
-      "path": "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-mindex-string-naming-20261030/manifest.tsv",
+      "recipe": "jdk.internal.m3.rewrite.M3HashPinnedTextSnapshotRecipe",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-mindex-string-naming-20261030/manifest.tsv",
       "sha256": "f3762ee054ca71073721c0334281fa65b7ae703a1187ff04643a2125bac02260",
       "git_blob_sha1": "225b34bb8ae1ffe040a73eb96f2662b20bd822f3"
     }
@@ -148,8 +148,8 @@
         "git_blob_sha1": "e65bff35122d02dfa6be4662ceeab65cc6f96a62"
       },
       "after": {
-        "sha256": "406cefb62b79fc677972e9d76a77342c3999b41ef6594f9faf5bd06795235dc3",
-        "git_blob_sha1": "c46790d3c7c89581b0e19e4f58d6532c042744ac"
+        "sha256": "1e1bd3ed76421adf48881af75f2fceed00c99dcb00bc08b8d7d6549a279a26c0",
+        "git_blob_sha1": "a715c17073eab73545d38dc64da0b8da868e5285"
       }
     },
     {
@@ -160,8 +160,8 @@
         "git_blob_sha1": "e4320d6941d2a409d8cc79c48bccf7a4f6b463d3"
       },
       "after": {
-        "sha256": "3f51a4975e9f423196a4ee5c715d4edc2c2e937c34d9d5a1e3d2276dcd47752e",
-        "git_blob_sha1": "062f50d0e0fa13282640c82880723ba7f50a362c"
+        "sha256": "d8007cddc19ffe1c7fdbeb012cef36fe20e695452487d582896f6b041f8d0c72",
+        "git_blob_sha1": "6a94923497d0341beda99fb41aa0ba185e9b3fbc"
       }
     }
   ],

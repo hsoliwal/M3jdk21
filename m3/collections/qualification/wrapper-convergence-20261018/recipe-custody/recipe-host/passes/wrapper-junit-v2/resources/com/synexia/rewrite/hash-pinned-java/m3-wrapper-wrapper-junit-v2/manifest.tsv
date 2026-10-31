@@ -1,4 +1,0 @@
-# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
-# SPDX-License-Identifier: Apache-2.0
-# path	before-sha256	after-sha256	template
-m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceTest.java	ABSENT	fe071ef7e801a9bb1d57501512f0dd606f0c08652e100e6132dc7c4e4a8f6327	M3WrapperConvergenceTest.java.txt

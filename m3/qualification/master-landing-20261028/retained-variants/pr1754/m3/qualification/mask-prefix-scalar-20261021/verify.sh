@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-# This bounded tool builds patched Java21 class sources; it does NOT build the full M3JDK21 image.
+# This bounded tool builds patched Java21 class sources; it does NOT build the full M3JDK 21 image.
 set -euo pipefail
 
 root="$(cd "$(dirname "$0")/../../.." && pwd)"
@@ -24,7 +24,7 @@ if [[ "$(git -C "$root" hash-object "$src/jdk/internal/mindex/M3CollectionMaskCo
   exit 1
 fi
 if [[ "$(git -C "$root" hash-object "$test/jdk/internal/mindex/M3CollectionMaskCompactorPrefixTest.java")" \
-       != "d720912f0f57bcde9fc07a05f31869a19f3452eb" ]]; then
+       != "6f3113ad8624004dbe617aa52c96b7a04dfc5ce4" ]]; then
   echo "HOLD: original jtreg oracle source drift" >&2
   exit 1
 fi
@@ -46,12 +46,12 @@ if [[ "$(git -C "$root" hash-object "$test/java/util/ArrayList/M3ArrayMaskCaller
 fi
 # Existing, previously qualified original JDK array-mask and subList/Vector donor tests.
 if [[ "$(git -C "$root" hash-object "$test/java/util/ArrayList/M3MaskCompactionDifferential.java")" \
-       != "c505b5604e978f215e4aeb93eadfd9f933ffc743" ]]; then
+       != "7e2e2b28e86e0c96caba9db7570cde15778eb194" ]]; then
   echo "HOLD: original JDK compaction differential changed" >&2
   exit 1
 fi
 if [[ "$(git -C "$root" hash-object "$test/java/util/ArrayList/M3JdkRemoveIfMaskContracts.java")" \
-       != "2dc2fb6494f008fb7166dabfb97000d282a5f9af" ]]; then
+       != "69acba92678b0c1fce6c232b20df22bb7e959190" ]]; then
   echo "HOLD: original JDK removeIf/sublist contract changed" >&2
   exit 1
 fi
@@ -94,7 +94,7 @@ javap -p -c "$tmp/classes/java/util/Vector.class" > "$tmp/vector-bytecode.txt"
 grep -Fq "jdk/internal/mindex/M3CollectionMaskCompactor.compact" "$tmp/arraylist-bytecode.txt"
 grep -Fq "jdk/internal/mindex/M3CollectionMaskCompactor.compact" "$tmp/vector-bytecode.txt"
 
-# Execute actual M3JDK21 java.util.ArrayList and Vector under mixed and interpreted VM modes.
+# Execute actual M3JDK 21 java.util.ArrayList and Vector under mixed and interpreted VM modes.
 java --patch-module "java.base=$tmp/classes" \
   --add-opens "java.base/java.util=ALL-UNNAMED" \
   -cp "$tmp/tests" M3ArrayMaskCallersContract

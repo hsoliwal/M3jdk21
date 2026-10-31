@@ -2,14 +2,14 @@
   "actual_source": {
     "bytes": 6349,
     "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\current-native-composition-v1\\actual-sdk-v1\\src\\main\\native\\m3_arrays_jni.c",
-    "sha256": "da4ba8620a190e07f08446d4a1cc6081d860dcd6d98f94ab2633b87643ddcfb7"
+    "sha256": "582b7499a902a58f9ce28b063d0ab29e2edcb5cfe2fc053101cb3243b2822100"
   },
-  "candidate_git_blob": "5c11ec1f5db5dd25c05233f3ad9c5a38631c4b2f",
+  "candidate_git_blob": "05f9ec1ad3b65d32808c74b26bdad3ba1d82c2ce",
   "canonical_engines": [
     {
       "bytes": 16480,
       "copied_byte_exact": true,
-      "donor_path": "C:\\m3-work-c\\wt\\synexia-visibility-gate\\synexia-openrewrite-recipes\\src\\main\\java\\com\\synexia\\rewrite\\M3HashPinnedTextSnapshotRecipe.java",
+      "donor_path": "C:\\m3-work-c\\wt\\m3-visibility-gate\\m3-openrewrite-recipes\\src\\main\\java\\com\\synexia\\rewrite\\M3HashPinnedTextSnapshotRecipe.java",
       "git_blob": "5ba8b897b07283920f6f5dcada5238568db0feb6",
       "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\native-recipe-v1\\engine-src\\com\\synexia\\rewrite\\M3HashPinnedTextSnapshotRecipe.java",
       "sha256": "5bb309bd9e53760ea8f310bcacbf77fdc9668068a781e21cd88fb9cd9ec418a1"
@@ -40,7 +40,7 @@
   },
   "report": {
     "bytes": 16708,
-    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\current-native-composition-v1\\sdk-output-v1\\surefire-reports\\TEST-com.synexia.rewrite.M3JniBackingNativeRecipeTest.xml",
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\current-native-composition-v1\\sdk-output-v1\\surefire-reports\\TEST-jdk.internal.m3.rewrite.M3JniBackingNativeRecipeTest.xml",
     "sha256": "59b1fe85c22096197205bffb10e02fa1913a17f0dc65300a49216c55d1c6fb77"
   },
   "schema": "M3_CURRENT_ARRAY_COMPOSITION_ACTUAL_SDK_V1",

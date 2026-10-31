@@ -17,15 +17,15 @@
     "git_blob": "93c309fcc39274583baf882c9e1d114165bc1d93"
   },
   "outputs": {
-    "m3/collections/src/main/java/com/m3/collections/M3IndexedLongList.java": {
+    "m3/collections/src/main/java/jdk/m3/collections/M3IndexedLongList.java": {
       "bytes": 10592,
-      "sha256": "43e66907574c5ed29fb94bf9595def76c24b940908e8afd56997b4d81ddf1363",
-      "git_blob": "aa76911f0a18c47e412a017ae00d09d847dfd1cd"
+      "sha256": "4c7f10cab7b30ba5ca0a6473058c237b6b3d4d0a4444386e4ed2de0d067d53e4",
+      "git_blob": "e2c2695fdad8a70438e3d56f97e3c84bf4170a87"
     },
-    "m3/collections/src/test/java/com/m3/collections/M3IndexedLongListContractTest.java": {
+    "m3/collections/src/test/java/jdk/m3/collections/M3IndexedLongListContractTest.java": {
       "bytes": 10140,
-      "sha256": "52684d1879d6afe54f4fb08bc7893c6b7f15304b750418c70101d731c0db2ed6",
-      "git_blob": "0b2e20299b71584371c4ace227f7172b27996303"
+      "sha256": "8d4430453af8af263ca4e751b8e43014545fe55d91f21fa0d693f38bc11d0c83",
+      "git_blob": "01c34ae0bdd14dfd6fb9a2e88718bcd7485f8914"
     }
   },
   "qualification": {
@@ -72,7 +72,7 @@
   "canonical_evidence_path": "synexia-openrewrite-recipes/recipe-crates/m3-indexed-long-list-avl-20261029/corrections/capacity-widening",
   "historical_receiver_receipt": {
     "path": "m3/qualification/indexed-long-list-avl/original-receiver-receipt.md",
-    "git_blob": "1f8ed5eb77d7d6a70c311d767887037b0af20917",
+    "git_blob": "b493b3a9a89fad9c2237122bfe8ea6fc40386c86",
     "original_path": "m3/collections/qualification/indexed-long-list-avl-20261029/RECEIPT.md",
     "original_commit": "354cca3d8cefed3b2cf79aa11d44eb3a7a052064",
     "status": "preserved verbatim; historical qualification limitations remain historical"
@@ -81,7 +81,7 @@
   "admission": "no gate changes; source-first ordinary merge; all historical evidence retained in ancestry and stable path",
   "canonical_source_url": "https://github.com/hsoliwal/com.synexia/commit/05b3921126b5e276a4fbc008726f5ec962b5ce93",
   "canonical_template_paths": {
-    "m3/collections/src/main/java/com/m3/collections/M3IndexedLongList.java": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-indexed-long-list-avl-20261029/M3IndexedLongList.java.txt",
-    "m3/collections/src/test/java/com/m3/collections/M3IndexedLongListContractTest.java": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-indexed-long-list-avl-20261029/M3IndexedLongListContractTest.java.txt"
+    "m3/collections/src/main/java/jdk/m3/collections/M3IndexedLongList.java": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-indexed-long-list-avl-20261029/M3IndexedLongList.java.txt",
+    "m3/collections/src/test/java/jdk/m3/collections/M3IndexedLongListContractTest.java": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-indexed-long-list-avl-20261029/M3IndexedLongListContractTest.java.txt"
   }
 }

@@ -1,0 +1,2275 @@
+{
+  "distinct_paths": 109,
+  "earlier_list_limit": "PARENT_DECLARED_CONTEXT.json contains107 explicit compiler paths plus newRXMTest. This map also includes the existingMastery test, resolving both currentSurefire selectors.",
+  "main_sources": 88,
+  "outside_original503": 11,
+  "pom": {
+    "bytes": 16380,
+    "git_blob": "003b0c646fcc697e0d951411d32248689c1a89c2",
+    "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/pom.xml",
+    "sha256": "2f2763afa6bb183889b416013dae95761458442313c79753fabb081f8beb63ff"
+  },
+  "qualification": "Declarations and exact current bodies only. No Maven model resolution, compiler execution, test execution or native acceptance.",
+  "release8_vendor_sources": 19,
+  "rows": [
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 3041,
+        "git_blob": "775bba154353a5d9eb4e7af6269f558f3aafaa3e",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-algo/src/main/java/jdk/internal/m3/algorithms/shapes/AlgorithmShape.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "2c71acd9c451ed3fff967ad9d1bcfb575ca8f5d7a5d74dfd3831285ff2a3c212"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "AlgorithmShape.java",
+        "sha": "775bba154353a5d9eb4e7af6269f558f3aafaa3e",
+        "size": 3041,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/775bba154353a5d9eb4e7af6269f558f3aafaa3e"
+      },
+      "original503": true,
+      "path": "m3-algo/src/main/java/jdk/internal/m3/algorithms/shapes/AlgorithmShape.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 5527,
+        "git_blob": "3909723ae02d81a27e5a6056fe8cfacd82042840",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-common/src/main/java/jdk/internal/m3/common/progress/ChildProgressMonitor.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "397bcfc5e8eaa4d516f6fccd1d3c238be4432f6f6a49f77a425ae21fd7d969ff"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "ChildProgressMonitor.java",
+        "sha": "3909723ae02d81a27e5a6056fe8cfacd82042840",
+        "size": 5527,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/3909723ae02d81a27e5a6056fe8cfacd82042840"
+      },
+      "original503": true,
+      "path": "m3-common/src/main/java/jdk/internal/m3/common/progress/ChildProgressMonitor.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 906,
+        "git_blob": "7457acbf97423af4d8405ebd3efabd224f7373fa",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-common/src/main/java/jdk/internal/m3/common/progress/ProgressMonitor.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "a6ea4f264fd771e52bfe575baa35b96de8d06abec723dab7eac712d5843524de"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "ProgressMonitor.java",
+        "sha": "7457acbf97423af4d8405ebd3efabd224f7373fa",
+        "size": 906,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/7457acbf97423af4d8405ebd3efabd224f7373fa"
+      },
+      "original503": true,
+      "path": "m3-common/src/main/java/jdk/internal/m3/common/progress/ProgressMonitor.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 952,
+        "git_blob": "87b14cb9a32f6d6c0f53441aaeedfab9333826cf",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-common/src/main/java/jdk/internal/m3/common/progress/ProgressState.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "29cde61a192e454dd2ffde25e5a142cdc2a25e806ce91f7f01e6d5d7f6bf6960"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "ProgressState.java",
+        "sha": "87b14cb9a32f6d6c0f53441aaeedfab9333826cf",
+        "size": 952,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/87b14cb9a32f6d6c0f53441aaeedfab9333826cf"
+      },
+      "original503": true,
+      "path": "m3-common/src/main/java/jdk/internal/m3/common/progress/ProgressState.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 1359,
+        "git_blob": "c7dce4ec029be9e91f23da0e1b21e12539b42807",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/DictionaryProvenance.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "bdbf8b7779d25fe7875623093ced5ae08935326da9f9cc935339d1fd2df3555c"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "DictionaryProvenance.java",
+        "sha": "c7dce4ec029be9e91f23da0e1b21e12539b42807",
+        "size": 1359,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/c7dce4ec029be9e91f23da0e1b21e12539b42807"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/DictionaryProvenance.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 668,
+        "git_blob": "b1ea4d16ee5cf9910fdedf35f25c7ee18304f4e6",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/LexicalRange.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "205166f4a7c1166cd55dac02dd4be2045dec52a11a260b522295981af6fb92cf"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "LexicalRange.java",
+        "sha": "b1ea4d16ee5cf9910fdedf35f25c7ee18304f4e6",
+        "size": 668,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/b1ea4d16ee5cf9910fdedf35f25c7ee18304f4e6"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/LexicalRange.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 3020,
+        "git_blob": "927c5c589b11a557e3395cfce8c8c8e125d4f7a0",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/LexicalRef.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "d33a2c40fa51f5351f3230b5421023e9e527e3ac189c58d0ce115f645d0136ef"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "LexicalRef.java",
+        "sha": "927c5c589b11a557e3395cfce8c8c8e125d4f7a0",
+        "size": 3020,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/927c5c589b11a557e3395cfce8c8c8e125d4f7a0"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/LexicalRef.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 1952,
+        "git_blob": "8a00d6e53d2a59b78dd9e302b200b1064dcea936",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexAddress.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "0dbfaaa987261fee854cc7be12fd207a08a419fb078098056bf38637d7dc13d0"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexAddress.java",
+        "sha": "8a00d6e53d2a59b78dd9e302b200b1064dcea936",
+        "size": 1952,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/8a00d6e53d2a59b78dd9e302b200b1064dcea936"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexAddress.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 3135,
+        "git_blob": "5b306515afff3d83214d95b6a9c683270664864c",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexAnnotatedString.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "e91a8dd5b74dbf7eb41a5dd13b9d3db6b80113a85929dfb59f351a36f4a8aaac"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexAnnotatedString.java",
+        "sha": "5b306515afff3d83214d95b6a9c683270664864c",
+        "size": 3135,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/5b306515afff3d83214d95b6a9c683270664864c"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexAnnotatedString.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 2589,
+        "git_blob": "874307e6392e53103b02edb48bc79f8f98708057",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexAtomRef.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "10923b071bad1f7439b001a6b90ff924bbe4bf1fd6069334b0ba9f74bdbc7759"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexAtomRef.java",
+        "sha": "874307e6392e53103b02edb48bc79f8f98708057",
+        "size": 2589,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/874307e6392e53103b02edb48bc79f8f98708057"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexAtomRef.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 15815,
+        "git_blob": "73da4f13cb797fd528dd858084d6626b7741fddb",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexByteSequence.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "387fee0fad04c8e7f4f0da138847b09af9b7ac2dafe2eaac8cfc7d9fae7c285a"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexByteSequence.java",
+        "sha": "73da4f13cb797fd528dd858084d6626b7741fddb",
+        "size": 15815,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/73da4f13cb797fd528dd858084d6626b7741fddb"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexByteSequence.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 8683,
+        "git_blob": "67cabb73156bf4cf4ff1d38172c6badf80e2eb60",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexCharSequence.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "70915da319ed46101c53dd20e4f8715c4e2e0b5f385e6b6e5c78aa84a33eba6c"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexCharSequence.java",
+        "sha": "67cabb73156bf4cf4ff1d38172c6badf80e2eb60",
+        "size": 8683,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/67cabb73156bf4cf4ff1d38172c6badf80e2eb60"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexCharSequence.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 10463,
+        "git_blob": "fd9b07541b7f8a576b20dea759b5457c52a5dac2",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexCompositeLiteralSummary.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "52563679c6cfa35565a157f74eca64d16ed0005def8986df1660786eb71b4851"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexCompositeLiteralSummary.java",
+        "sha": "fd9b07541b7f8a576b20dea759b5457c52a5dac2",
+        "size": 10463,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/fd9b07541b7f8a576b20dea759b5457c52a5dac2"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexCompositeLiteralSummary.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 12074,
+        "git_blob": "ae0c809fb60df096358a63a9ba118cab75c8667a",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexCompositeSearchImage.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "ef65eadaaf1383fca066b9b458d8188e6e030498f4d0fad0ddaed37b48f9be74"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexCompositeSearchImage.java",
+        "sha": "ae0c809fb60df096358a63a9ba118cab75c8667a",
+        "size": 12074,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/ae0c809fb60df096358a63a9ba118cab75c8667a"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexCompositeSearchImage.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 21141,
+        "git_blob": "f11e2f30a5edc918aff4cb1c94f95710dbe534c5",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexCompositeString.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "60de8cb3a9cb6c95d5c0ceecd782bd26d9749d70bdbe0cb8d62b0970da5c859f"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexCompositeString.java",
+        "sha": "f11e2f30a5edc918aff4cb1c94f95710dbe534c5",
+        "size": 21141,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/f11e2f30a5edc918aff4cb1c94f95710dbe534c5"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexCompositeString.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 34100,
+        "git_blob": "9cbda46d1b60ab5758a442e8d305a94aa0fedee6",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexDictionary.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "37ee7073cfddab79cb4994c9d1e01d0cd0019f986ca2c843f9ce59fc2319469e"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexDictionary.java",
+        "sha": "9cbda46d1b60ab5758a442e8d305a94aa0fedee6",
+        "size": 34100,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/9cbda46d1b60ab5758a442e8d305a94aa0fedee6"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexDictionary.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "acquisition_receipt": {
+          "bytes": 21912,
+          "git_blob": "a23e62739f88175407d2056c2bd08dfecc0d71c3",
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/897714786289519ea8cb3da9cdeb2334231d4897.json",
+          "sha256": "d9b592b20ecf510e7ebd486592db17556f429c1889a0ab0ae8173c7581611b5b"
+        },
+        "bytes": 10001,
+        "git_blob": "897714786289519ea8cb3da9cdeb2334231d4897",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexDictionaryGramIndex.java",
+        "origin": "fresh_current_contents_acquisition",
+        "sha256": "454856ea97080ec088e2f66b04092da0608bce4f8d41dcb76f4539786df7184a"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexDictionaryGramIndex.java",
+        "sha": "897714786289519ea8cb3da9cdeb2334231d4897",
+        "size": 10001,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/897714786289519ea8cb3da9cdeb2334231d4897"
+      },
+      "original503": false,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexDictionaryGramIndex.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 16953,
+        "git_blob": "180138a2d2ff57294bbc859792462135216c226d",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexDirectInlineKey32.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "349b5caefc739a87b9e22bf603d67c02b0151de970f1798baa7982066078744b"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexDirectInlineKey32.java",
+        "sha": "180138a2d2ff57294bbc859792462135216c226d",
+        "size": 16953,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/180138a2d2ff57294bbc859792462135216c226d"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexDirectInlineKey32.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 5484,
+        "git_blob": "89ccd977e2f8b8e813749350a78ada619a987ec0",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexDynamicLiteralPool.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "29d56c99539da15b5b0e436b3f43c9e17f4500768c6f19ec1cc99479fbcce4fb"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexDynamicLiteralPool.java",
+        "sha": "89ccd977e2f8b8e813749350a78ada619a987ec0",
+        "size": 5484,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/89ccd977e2f8b8e813749350a78ada619a987ec0"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexDynamicLiteralPool.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 11272,
+        "git_blob": "08908a03ec0bf522e68e6445a551ef686d8714e1",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexExactLookup.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "9878b342fc6c26f0199137408ebbd9fccb626dbfd8a1c31719ea3a9834624a97"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexExactLookup.java",
+        "sha": "08908a03ec0bf522e68e6445a551ef686d8714e1",
+        "size": 11272,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/08908a03ec0bf522e68e6445a551ef686d8714e1"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexExactLookup.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 4882,
+        "git_blob": "87895f37b0498583187ccdae5406d33b84289a6e",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexHybridCodec.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "6c34dc4fd84f0d6767b463c1c56cb49e1b7ee645747c73b528bc1e027698fefc"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexHybridCodec.java",
+        "sha": "87895f37b0498583187ccdae5406d33b84289a6e",
+        "size": 4882,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/87895f37b0498583187ccdae5406d33b84289a6e"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexHybridCodec.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 7403,
+        "git_blob": "bc0a0b19af92a542b23a2891ab8d1e098c43512e",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexInt8MatmulPlan.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "a3a0bd6ed10efa595fc581aa5fba49a433b333d711748c08c94d2f9d978c9789"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexInt8MatmulPlan.java",
+        "sha": "bc0a0b19af92a542b23a2891ab8d1e098c43512e",
+        "size": 7403,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/bc0a0b19af92a542b23a2891ab8d1e098c43512e"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexInt8MatmulPlan.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 10180,
+        "git_blob": "b4e4eaadf71c8ad1b1af00a72ef596bcf36abada",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexLexemeCodec.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "46049b9e731d2b96b05f2740fcd63197c531e6a07027cf5a484bd08588230528"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexLexemeCodec.java",
+        "sha": "b4e4eaadf71c8ad1b1af00a72ef596bcf36abada",
+        "size": 10180,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/b4e4eaadf71c8ad1b1af00a72ef596bcf36abada"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexLexemeCodec.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 3561,
+        "git_blob": "c10b0ccf781fd2079c94df22fb06dff11179bb9b",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexLexemeKey128.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "1d36c4806e202f305921bd73eae8845568c2ae93064d31df19b600f973da368a"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexLexemeKey128.java",
+        "sha": "c10b0ccf781fd2079c94df22fb06dff11179bb9b",
+        "size": 3561,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/c10b0ccf781fd2079c94df22fb06dff11179bb9b"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexLexemeKey128.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 12164,
+        "git_blob": "5d4ac93540d5f146fddc48225e6bfcdcf36c9df3",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexLexemeMatrixIndex.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "3691ff40325fd4f9704b2ba94ba497a22bc8f7735a9100bc28317806791d4ec1"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexLexemeMatrixIndex.java",
+        "sha": "5d4ac93540d5f146fddc48225e6bfcdcf36c9df3",
+        "size": 12164,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/5d4ac93540d5f146fddc48225e6bfcdcf36c9df3"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexLexemeMatrixIndex.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 10574,
+        "git_blob": "79a2fa8d2a1ae733017a9d1e978194fd6994f775",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexLexemePattern128.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "2ad7d1a43026f751388956f22c2f98089d9e61f3d8017ea6184a844c0a6c72db"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexLexemePattern128.java",
+        "sha": "79a2fa8d2a1ae733017a9d1e978194fd6994f775",
+        "size": 10574,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/79a2fa8d2a1ae733017a9d1e978194fd6994f775"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexLexemePattern128.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 1232,
+        "git_blob": "10f6f2c4c9ee22cab16054d4574e9e51d500e084",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexLexicalClass.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "641c3544c1787732f02917319ee8b9973400f56ec9715036062eabf6505d44ff"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexLexicalClass.java",
+        "sha": "10f6f2c4c9ee22cab16054d4574e9e51d500e084",
+        "size": 1232,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/10f6f2c4c9ee22cab16054d4574e9e51d500e084"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexLexicalClass.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 2321,
+        "git_blob": "0d9090f0f10506d836203deb83a701520865b21e",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexLexicalView.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "1e286d6c1fbb16fff3f2147d55a4c975b19f1167776fe1a865b3f312665a4f26"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexLexicalView.java",
+        "sha": "0d9090f0f10506d836203deb83a701520865b21e",
+        "size": 2321,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/0d9090f0f10506d836203deb83a701520865b21e"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexLexicalView.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 7055,
+        "git_blob": "0b586ab55ddc604ed90c3435c90e898c5ec5e680",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexLexicon.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "456083ba1a447b23cdc2666adedc0be8c70caeeedeb82fd03bee25d727fb0df5"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexLexicon.java",
+        "sha": "0b586ab55ddc604ed90c3435c90e898c5ec5e680",
+        "size": 7055,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/0b586ab55ddc604ed90c3435c90e898c5ec5e680"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexLexicon.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 663,
+        "git_blob": "daa2796ec70e1c18895250dd9620cec86fdd5ddb",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexLexiconKind.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "33fb2892cf46811ea70e281cd961051b1665f1d6f3cafd7ee883f185050329ff"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexLexiconKind.java",
+        "sha": "daa2796ec70e1c18895250dd9620cec86fdd5ddb",
+        "size": 663,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/daa2796ec70e1c18895250dd9620cec86fdd5ddb"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexLexiconKind.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 9095,
+        "git_blob": "85496af04fea2302f0258373a3acab616d549516",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexLexiconSpace.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "b7ae16fa14b7d59a8473698ddf57f386c226cfaf305d356d2383b342f936f050"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexLexiconSpace.java",
+        "sha": "85496af04fea2302f0258373a3acab616d549516",
+        "size": 9095,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/85496af04fea2302f0258373a3acab616d549516"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexLexiconSpace.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 13498,
+        "git_blob": "dd76c0fc6677631013ccff801890963487f74b26",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexLiteralTransitionImage.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "9ab67462b79261316ce9c846c1fa3c57410d4f487b5872c4c21bf90c68c37aa4"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexLiteralTransitionImage.java",
+        "sha": "dd76c0fc6677631013ccff801890963487f74b26",
+        "size": 13498,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/dd76c0fc6677631013ccff801890963487f74b26"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexLiteralTransitionImage.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 10588,
+        "git_blob": "d9e203a66e0fdd80b12072a521fe7d4527c41417",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexLiteralTransitionPrecompute.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "8a8e5c499153a89a0b9f60549542c4ddf9c9ee5eedc21817877f49260e76494d"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexLiteralTransitionPrecompute.java",
+        "sha": "d9e203a66e0fdd80b12072a521fe7d4527c41417",
+        "size": 10588,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/d9e203a66e0fdd80b12072a521fe7d4527c41417"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexLiteralTransitionPrecompute.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 1020,
+        "git_blob": "7b9d544c6c5060a0471599c4527ecec4a8f28d49",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexNamespace.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "029797597fbd685407de6f9bafc1fe6d92e3d1ffab8985f69f721af4ae3faa48"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexNamespace.java",
+        "sha": "7b9d544c6c5060a0471599c4527ecec4a8f28d49",
+        "size": 1020,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/7b9d544c6c5060a0471599c4527ecec4a8f28d49"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexNamespace.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 7030,
+        "git_blob": "c26773ec9c2761e6661def206e3fd5d3a35f786a",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexNamespaceRegistry.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "f1110d2c9b29df80d6626975c189b8cd8d245bbdb407ae8dc645abe6051ad0c7"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexNamespaceRegistry.java",
+        "sha": "c26773ec9c2761e6661def206e3fd5d3a35f786a",
+        "size": 7030,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/c26773ec9c2761e6661def206e3fd5d3a35f786a"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexNamespaceRegistry.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 22301,
+        "git_blob": "d3cc4b42d0eeb59eef9801bf9ce2291968237cc8",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexNativeOps.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "103e5b8e959d8d1c237345025bed9f3e73bb3bd22ef3593482ec12a54128cce2"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexNativeOps.java",
+        "sha": "d3cc4b42d0eeb59eef9801bf9ce2291968237cc8",
+        "size": 22301,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/d3cc4b42d0eeb59eef9801bf9ce2291968237cc8"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexNativeOps.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 3343,
+        "git_blob": "ada4c6551d908aca3ab27b19473534bc4950415f",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexPackedLexemeImageFormat.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "3e4f60a58f96cab91a2f05fc33eecf0d43f75610866dfbd4d7ab6da50a9f416f"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexPackedLexemeImageFormat.java",
+        "sha": "ada4c6551d908aca3ab27b19473534bc4950415f",
+        "size": 3343,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/ada4c6551d908aca3ab27b19473534bc4950415f"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexPackedLexemeImageFormat.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 14780,
+        "git_blob": "81ecf508e61db86c54b35d9ce73848ddf54613aa",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexPackedLexemeIndex.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "d8268d369806726e1319a2e3654c049d3abd3a83eb34e8212f982b6c8a24e7ec"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexPackedLexemeIndex.java",
+        "sha": "81ecf508e61db86c54b35d9ce73848ddf54613aa",
+        "size": 14780,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/81ecf508e61db86c54b35d9ce73848ddf54613aa"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexPackedLexemeIndex.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 539,
+        "git_blob": "33a2e766e3eb5e66cd158a7d66b339bf1644cd6b",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexPackedLexemeKeySource.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "5078363cdadf455cb87d825c37eb4ddf559e1017547490678ce818a895a5175f"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexPackedLexemeKeySource.java",
+        "sha": "33a2e766e3eb5e66cd158a7d66b339bf1644cd6b",
+        "size": 539,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/33a2e766e3eb5e66cd158a7d66b339bf1644cd6b"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexPackedLexemeKeySource.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 865,
+        "git_blob": "2a387a4d8c7cabfb2ce75b6bae9210281f01c867",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexProgressMonitor.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "cfa9de0db35c2a404aebb376cd5fe8929d57a58d3d605839d3e9cf9bb169c243"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexProgressMonitor.java",
+        "sha": "2a387a4d8c7cabfb2ce75b6bae9210281f01c867",
+        "size": 865,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/2a387a4d8c7cabfb2ce75b6bae9210281f01c867"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexProgressMonitor.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 1345,
+        "git_blob": "2c8c1ed4ad34007bad6f444ad6cca37476406566",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexRef.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "f4ad7e7a03dca7cf0d524844734670decfe3ccee3a22732835026cd155686988"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexRef.java",
+        "sha": "2c8c1ed4ad34007bad6f444ad6cca37476406566",
+        "size": 1345,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/2c8c1ed4ad34007bad6f444ad6cca37476406566"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexRef.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 491,
+        "git_blob": "315356df82e0c93c319341b33b649110e27b153c",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexReferenceDomain.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "25336619badd8e3bfd2f4d255780da427325ab928709b1f1827ed46cb20f52a2"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexReferenceDomain.java",
+        "sha": "315356df82e0c93c319341b33b649110e27b153c",
+        "size": 491,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/315356df82e0c93c319341b33b649110e27b153c"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexReferenceDomain.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 38472,
+        "git_blob": "aac6f890298d39bda367ff35055093bf3f52cf93",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexRegexAutomaton.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "13da3873c1c7e5b03f5c52bb1d7a837ccfbe5a3ccda3cf58ac38bdfca1429921"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexRegexAutomaton.java",
+        "sha": "aac6f890298d39bda367ff35055093bf3f52cf93",
+        "size": 38472,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/aac6f890298d39bda367ff35055093bf3f52cf93"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexRegexAutomaton.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "acquisition_receipt": {
+          "bytes": 8131,
+          "git_blob": "37d886a154fd22dd56b0556236ec2af9d4a8e52e",
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/e1e0418a422db24f0f477a89b6ce15cdeee1bee1.json",
+          "sha256": "76f782067cd63d476c8ef469b8be4fb30c4cc46f2c00713a8edfc461f745a747"
+        },
+        "bytes": 3277,
+        "git_blob": "e1e0418a422db24f0f477a89b6ce15cdeee1bee1",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexRegexDictionaryPlan.java",
+        "origin": "fresh_current_contents_acquisition",
+        "sha256": "7bbf143dfa90c7c282f45fb87342ad2a2432429194f397eb2e978af9a3d6aeeb"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexRegexDictionaryPlan.java",
+        "sha": "e1e0418a422db24f0f477a89b6ce15cdeee1bee1",
+        "size": 3277,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/e1e0418a422db24f0f477a89b6ce15cdeee1bee1"
+      },
+      "original503": false,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexRegexDictionaryPlan.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "acquisition_receipt": {
+          "bytes": 50315,
+          "git_blob": "2aa96c4fccae585153ec2c18b1d0930ea967bd94",
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/c69d5f50c3e527bbb85e759a663a02987c9174d1.json",
+          "sha256": "14b88192dac66d77d18e2436fb7886513c04fa6f47b0a109d1743a73b9f8bc5f"
+        },
+        "bytes": 23848,
+        "git_blob": "c69d5f50c3e527bbb85e759a663a02987c9174d1",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexRegexGrammar.java",
+        "origin": "fresh_current_contents_acquisition",
+        "sha256": "de54266762643748cf706c3a8bc485daf1923e18fb0d8ece66472b5bae53b6ae"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexRegexGrammar.java",
+        "sha": "c69d5f50c3e527bbb85e759a663a02987c9174d1",
+        "size": 23848,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/c69d5f50c3e527bbb85e759a663a02987c9174d1"
+      },
+      "original503": false,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexRegexGrammar.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "acquisition_receipt": {
+          "bytes": 34008,
+          "git_blob": "de88dd91e51fd3f8f0e7cb605c4d931b8f373a15",
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/ea154f28926a19ba411027897c806ff3873abcd8.json",
+          "sha256": "b13526d7f82222470326ca745c71fc74d244a8e1d425a93e74264df50c2002ba"
+        },
+        "bytes": 15928,
+        "git_blob": "ea154f28926a19ba411027897c806ff3873abcd8",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexRegexSearch.java",
+        "origin": "fresh_current_contents_acquisition",
+        "sha256": "9a4053c382e5f4bc04562410bf32fd10013295350699e95c7caa5c92077acce5"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexRegexSearch.java",
+        "sha": "ea154f28926a19ba411027897c806ff3873abcd8",
+        "size": 15928,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/ea154f28926a19ba411027897c806ff3873abcd8"
+      },
+      "original503": false,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexRegexSearch.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 529,
+        "git_blob": "b12de0c48e7fd738875bd60cf46f4e76ff6c849e",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexRegionIds.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "f93ee555513f05a458a9d977f5a5019a6fb6428bddd66e386e7f77b3523de94a"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexRegionIds.java",
+        "sha": "b12de0c48e7fd738875bd60cf46f4e76ff6c849e",
+        "size": 529,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/b12de0c48e7fd738875bd60cf46f4e76ff6c849e"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexRegionIds.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 16156,
+        "git_blob": "0c2a25df9a937908f46f6d336831bf7b94834d98",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexString.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "9a345b499ab492cb46f484767fcbae37b499d5083319f5e49bb362538d4c66dd"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexString.java",
+        "sha": "0c2a25df9a937908f46f6d336831bf7b94834d98",
+        "size": 16156,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/0c2a25df9a937908f46f6d336831bf7b94834d98"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexString.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 13222,
+        "git_blob": "1cc5aba1ff63d01f1103429525f2fc2a5c58aaf2",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexStringMetadata.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "3b9d1dbf5c7342fd921c4aae7319dd3cab39a52ee65f25a2bf0decf9cc3dbd99"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexStringMetadata.java",
+        "sha": "1cc5aba1ff63d01f1103429525f2fc2a5c58aaf2",
+        "size": 13222,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/1cc5aba1ff63d01f1103429525f2fc2a5c58aaf2"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexStringMetadata.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 49377,
+        "git_blob": "e7426c7b465d0ec217aa7b154b685a9f695a4288",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexStringPool.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "9ad6fe68d34ebedc32d29b762902b02eed9a498c9b6741462a0d7b3e025cf509"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexStringPool.java",
+        "sha": "e7426c7b465d0ec217aa7b154b685a9f695a4288",
+        "size": 49377,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/e7426c7b465d0ec217aa7b154b685a9f695a4288"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexStringPool.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 29567,
+        "git_blob": "bb287e04cb0e57d3069fc42ed24f6fc6140fad55",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexStringPrecomputeBridge.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "206abc5088d70c8e673383aa0463c278e10b22789ef4829c378ea55b2d81bce8"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexStringPrecomputeBridge.java",
+        "sha": "bb287e04cb0e57d3069fc42ed24f6fc6140fad55",
+        "size": 29567,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/bb287e04cb0e57d3069fc42ed24f6fc6140fad55"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexStringPrecomputeBridge.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 7119,
+        "git_blob": "0e777d4fe11e169aab7c495e334316e443142f16",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexStringPrecomputeCache.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "f53401222aad48acc5813a42bb73646d49499aa3dcdec542853a2647be1ff013"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexStringPrecomputeCache.java",
+        "sha": "0e777d4fe11e169aab7c495e334316e443142f16",
+        "size": 7119,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/0e777d4fe11e169aab7c495e334316e443142f16"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexStringPrecomputeCache.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 34742,
+        "git_blob": "7897b60ea11548bcefc56e9f346f0b49de778c62",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexStringPrecomputeImage.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "b7acbc9285b062c68ea950fb67d4723dba14cf697cbd1249c1769537fefaa469"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexStringPrecomputeImage.java",
+        "sha": "7897b60ea11548bcefc56e9f346f0b49de778c62",
+        "size": 34742,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/7897b60ea11548bcefc56e9f346f0b49de778c62"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexStringPrecomputeImage.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 2335,
+        "git_blob": "52c4fcb571e385ac679a88021d6eaf26c5103ff8",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexStringPrecomputeProfile.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "bbaa79dba22a454e8ded4c602229aa53eb5f8602a2ec50c4846f55656c97a707"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexStringPrecomputeProfile.java",
+        "sha": "52c4fcb571e385ac679a88021d6eaf26c5103ff8",
+        "size": 2335,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/52c4fcb571e385ac679a88021d6eaf26c5103ff8"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexStringPrecomputeProfile.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 9146,
+        "git_blob": "32ac2edf265059ea950541cd034f96ce9ac6697f",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexStringRelationImage.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "36a2db2679a725896206903b229b3e692fd624dfd05d0598964688e5b3932a06"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexStringRelationImage.java",
+        "sha": "32ac2edf265059ea950541cd034f96ce9ac6697f",
+        "size": 9146,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/32ac2edf265059ea950541cd034f96ce9ac6697f"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexStringRelationImage.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 9993,
+        "git_blob": "c230e2590145db94a9e1fa9bfa7d7a2d1d20a91e",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexStringRelationPrecompute.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "b7ebd8c0ca385d2bbb6d066efdabff15a405696989d413838550772ad12aa41a"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexStringRelationPrecompute.java",
+        "sha": "c230e2590145db94a9e1fa9bfa7d7a2d1d20a91e",
+        "size": 9993,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/c230e2590145db94a9e1fa9bfa7d7a2d1d20a91e"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexStringRelationPrecompute.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 11360,
+        "git_blob": "093219acb032cbe9988566b42649805c5e7a507f",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexStringUnaryProjectionPrecompute.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "7f4334ba2a66d4e8c0116340697eec24deee2a01966d1abc77eea8f5b6cc95ff"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexStringUnaryProjectionPrecompute.java",
+        "sha": "093219acb032cbe9988566b42649805c5e7a507f",
+        "size": 11360,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/093219acb032cbe9988566b42649805c5e7a507f"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexStringUnaryProjectionPrecompute.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 984,
+        "git_blob": "c1524d57b7791b4afef40fd6d68e463316920807",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexSymbolLexicon.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "1bdaaa86de600c5962f4ae36a8e9c8b5a3dcfd23a815e07a0e04153cf6b6fb06"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexSymbolLexicon.java",
+        "sha": "c1524d57b7791b4afef40fd6d68e463316920807",
+        "size": 984,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/c1524d57b7791b4afef40fd6d68e463316920807"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexSymbolLexicon.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 1728,
+        "git_blob": "954f834eb2d19899057e59c247b19a026503f52b",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexSymbolRef.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "fb051feeb21f1b277d6a46e479af07366a72de965fc98015bb82b7353783b5d4"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexSymbolRef.java",
+        "sha": "954f834eb2d19899057e59c247b19a026503f52b",
+        "size": 1728,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/954f834eb2d19899057e59c247b19a026503f52b"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexSymbolRef.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 422,
+        "git_blob": "50279f12922b84a23ea9e1ebef23f139f4828698",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexSymbolReference.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "4e95950670aa5e02a5c9343d2d2b91499b15e659011a8195da5abbc608856816"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexSymbolReference.java",
+        "sha": "50279f12922b84a23ea9e1ebef23f139f4828698",
+        "size": 422,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/50279f12922b84a23ea9e1ebef23f139f4828698"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexSymbolReference.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 4913,
+        "git_blob": "c75781c37ccfd46d5eaaa42f4f86712f7ce8a65c",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexSymbolTable.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "3b1cbb91bf17b5a625249832bc406f973b3a66c7c42471fe49ba35a4224c20b7"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexSymbolTable.java",
+        "sha": "c75781c37ccfd46d5eaaa42f4f86712f7ce8a65c",
+        "size": 4913,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/c75781c37ccfd46d5eaaa42f4f86712f7ce8a65c"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexSymbolTable.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 869,
+        "git_blob": "1fa1ff055d98e0a10e13121f478ce8f1753fabe1",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexTensorBackend.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "b39bc36b97fee4129de6bf0d53156fa3e79602524965b8b2497ca561edaa9294"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexTensorBackend.java",
+        "sha": "1fa1ff055d98e0a10e13121f478ce8f1753fabe1",
+        "size": 869,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/1fa1ff055d98e0a10e13121f478ce8f1753fabe1"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexTensorBackend.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 5125,
+        "git_blob": "d9ce000528cffca45990816e9af01590b1912703",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexTensorRuntime.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "3fbbed424418a1eff2215a26eb4aa93fbcebbe2f285dadacfbe1953589461ca6"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexTensorRuntime.java",
+        "sha": "d9ce000528cffca45990816e9af01590b1912703",
+        "size": 5125,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/d9ce000528cffca45990816e9af01590b1912703"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexTensorRuntime.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 1192,
+        "git_blob": "71b15aaaf6bc0fa9bc1b8fa09e9084b7047078c1",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexText.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "f4f28513e4362b1a5e5f65f5dd464ebb1c46c221a523047afaea4b500d812db1"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexText.java",
+        "sha": "71b15aaaf6bc0fa9bc1b8fa09e9084b7047078c1",
+        "size": 1192,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/71b15aaaf6bc0fa9bc1b8fa09e9084b7047078c1"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexText.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 7612,
+        "git_blob": "7811b9834b358c21f4b0cbc45a169af1f1ad5974",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexTextSearch.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "c381cf9b289601ffcbafd85d1cf6c995a556d83695b19978793edf3749768bc2"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexTextSearch.java",
+        "sha": "7811b9834b358c21f4b0cbc45a169af1f1ad5974",
+        "size": 7612,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/7811b9834b358c21f4b0cbc45a169af1f1ad5974"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexTextSearch.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "acquisition_receipt": {
+          "bytes": 27431,
+          "git_blob": "9e4e1612195255842e00610c13dc4ba6c748f127",
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/1f8e6d1945be6919d0070576632cb0384d5495ac.json",
+          "sha256": "b8659dd31bac845d9ed1ca0df1d6de875a06986be7ad5de54915560eb5c0736f"
+        },
+        "bytes": 12682,
+        "git_blob": "1f8e6d1945be6919d0070576632cb0384d5495ac",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexTextSubstringIndex.java",
+        "origin": "fresh_current_contents_acquisition",
+        "sha256": "995e5436922838b61c4eaf03edeef2907d58892d63fd82e7dd0daf51abb63550"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexTextSubstringIndex.java",
+        "sha": "1f8e6d1945be6919d0070576632cb0384d5495ac",
+        "size": 12682,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/1f8e6d1945be6919d0070576632cb0384d5495ac"
+      },
+      "original503": false,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexTextSubstringIndex.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "acquisition_receipt": {
+          "bytes": 4494,
+          "git_blob": "9222cb00968b25f6a410ac678ef28fac1af5ed26",
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/6999647741cd7b643d20710f52da37e3ae3f669a.json",
+          "sha256": "35053a13b77e064fbcd9dac44dff5b719366a9f5323f21daf1b1b3cb0659278b"
+        },
+        "bytes": 1523,
+        "git_blob": "6999647741cd7b643d20710f52da37e3ae3f669a",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexUtf16TransitionIndex.java",
+        "origin": "fresh_current_contents_acquisition",
+        "sha256": "b2b312f7a844f177e6c243a8408dc4bd81b0705ab012a39c8d9475edc2ef26c8"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexUtf16TransitionIndex.java",
+        "sha": "6999647741cd7b643d20710f52da37e3ae3f669a",
+        "size": 1523,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/6999647741cd7b643d20710f52da37e3ae3f669a"
+      },
+      "original503": false,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexUtf16TransitionIndex.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 14886,
+        "git_blob": "82220bdecd32d93991666d4dfa7775c5f8c560e1",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MappedMIndexPackedLexemeIndex.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "c5fc25a45b2b6d4485a399e3456d06c39b0b880b084da1a1c0022304f6955d50"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MappedMIndexPackedLexemeIndex.java",
+        "sha": "82220bdecd32d93991666d4dfa7775c5f8c560e1",
+        "size": 14886,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/82220bdecd32d93991666d4dfa7775c5f8c560e1"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MappedMIndexPackedLexemeIndex.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 1999,
+        "git_blob": "e5981f437ed0ff8d3d09f43e714cf3fc435f5338",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/SemanticRef.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "1f9fd748becef312615ff45ac3f91e5d007d135ccb633859e3464ba055ae7990"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "SemanticRef.java",
+        "sha": "e5981f437ed0ff8d3d09f43e714cf3fc435f5338",
+        "size": 1999,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/e5981f437ed0ff8d3d09f43e714cf3fc435f5338"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/SemanticRef.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 2084,
+        "git_blob": "e496de56671d3bfcf56cb18bf060b9ed8a14131a",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/SubMIndexCompositeString.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "3a7e8223ce8a2f7862ec7e039add6c970b183d9c9fe8bc80afd4592f1f070387"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "SubMIndexCompositeString.java",
+        "sha": "e496de56671d3bfcf56cb18bf060b9ed8a14131a",
+        "size": 2084,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/e496de56671d3bfcf56cb18bf060b9ed8a14131a"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/SubMIndexCompositeString.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 5219,
+        "git_blob": "cb7df37438bb3e50f0a42b42d59ed1644b8fc96e",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/SubMIndexString.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "e1467db80e4a1071a60961b7b5cdcb8e29de315e062a37dd36002e1c807b5028"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "SubMIndexString.java",
+        "sha": "cb7df37438bb3e50f0a42b42d59ed1644b8fc96e",
+        "size": 5219,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/cb7df37438bb3e50f0a42b42d59ed1644b8fc96e"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/SubMIndexString.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 765,
+        "git_blob": "d4453e0ded40503a0ed6f1fa54eb0785adb0c47b",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/TextMetadata.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "cea493500bc4a26ae084644211fddc951f3b8147e0758bf28e709e8744d1cdec"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "TextMetadata.java",
+        "sha": "d4453e0ded40503a0ed6f1fa54eb0785adb0c47b",
+        "size": 765,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/d4453e0ded40503a0ed6f1fa54eb0785adb0c47b"
+      },
+      "original503": true,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/TextMetadata.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "acquisition_receipt": {
+          "bytes": 23782,
+          "git_blob": "c99dbcc1a99f81cc019937b2a822db36f1b078f4",
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/20c22c81316b48314c1c7c3d6e173e688f3b787d.json",
+          "sha256": "777f48eb0eb5eb7f105d6eb703c2c7b4e0880625df73339bc75baa9931837746"
+        },
+        "bytes": 10936,
+        "git_blob": "20c22c81316b48314c1c7c3d6e173e688f3b787d",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/regex/MIndexCompositeRegexIndex.java",
+        "origin": "fresh_current_contents_acquisition",
+        "sha256": "2e4da7b5b4519c4b4dc8231231dcc9b2b2e408e2524ae6ca142b1cd56622ae6c"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexCompositeRegexIndex.java",
+        "sha": "20c22c81316b48314c1c7c3d6e173e688f3b787d",
+        "size": 10936,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/20c22c81316b48314c1c7c3d6e173e688f3b787d"
+      },
+      "original503": false,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/regex/MIndexCompositeRegexIndex.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "acquisition_receipt": {
+          "bytes": 21367,
+          "git_blob": "ab5faa8c09543311a5a10fdfe75c151058e865d4",
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/f27ea055dc7bac355f8c5c145b727f0309c73b80.json",
+          "sha256": "fe0b232555f213b052a8d46635237a05a307fb0eb6d6202336895eca96693661"
+        },
+        "bytes": 9804,
+        "git_blob": "f27ea055dc7bac355f8c5c145b727f0309c73b80",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/regex/MIndexRegex.java",
+        "origin": "fresh_current_contents_acquisition",
+        "sha256": "0442c5be444b841b03d3bfb24989a7bc0a8bc5d1c68065729848bd7fa6878165"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexRegex.java",
+        "sha": "f27ea055dc7bac355f8c5c145b727f0309c73b80",
+        "size": 9804,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/f27ea055dc7bac355f8c5c145b727f0309c73b80"
+      },
+      "original503": false,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/regex/MIndexRegex.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "acquisition_receipt": {
+          "bytes": 4388,
+          "git_blob": "6cbe7ef9c2942d658ee98505c7dfa47954ab31ef",
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/c3bd20071c22a044c00660578c1038a0a3a69d6e.json",
+          "sha256": "33d1972b233ab801fe4a98e404784b8b84de2868003b635634f924bffdfb504b"
+        },
+        "bytes": 1483,
+        "git_blob": "c3bd20071c22a044c00660578c1038a0a3a69d6e",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/regex/MIndexRegexInputView.java",
+        "origin": "fresh_current_contents_acquisition",
+        "sha256": "461b6531c995f6757355e042958fd2235770c9c0ce156842de74e3aeffc70190"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexRegexInputView.java",
+        "sha": "c3bd20071c22a044c00660578c1038a0a3a69d6e",
+        "size": 1483,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/c3bd20071c22a044c00660578c1038a0a3a69d6e"
+      },
+      "original503": false,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/regex/MIndexRegexInputView.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "acquisition_receipt": {
+          "bytes": 12586,
+          "git_blob": "23b81dbea82611e823296b2b0347da4a2e8815e9",
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/4e48418d2cc96e2b8cd39204a8d26f83f46d3739.json",
+          "sha256": "2b860ea03849d495100f59d4a24a27ad908365ceb68e34af79005ed2115ac219"
+        },
+        "bytes": 5496,
+        "git_blob": "4e48418d2cc96e2b8cd39204a8d26f83f46d3739",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/regex/MIndexRegexMatcher.java",
+        "origin": "fresh_current_contents_acquisition",
+        "sha256": "2c199d71769d4f9232855723233914a3c201c4b851f162290afb387477ec1141"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MIndexRegexMatcher.java",
+        "sha": "4e48418d2cc96e2b8cd39204a8d26f83f46d3739",
+        "size": 5496,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/4e48418d2cc96e2b8cd39204a8d26f83f46d3739"
+      },
+      "original503": false,
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/regex/MIndexRegexMatcher.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 72231,
+        "git_blob": "09df87a872817787fc8607bf11805cfa26c53aed",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3AtomPatternSignalChainRecipe.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "876929d5e8caa03ea1e3af6d8d1d4d575d15aee3014a5f2ca425f4786eda5e98"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "M3AtomPatternSignalChainRecipe.java",
+        "sha": "09df87a872817787fc8607bf11805cfa26c53aed",
+        "size": 72231,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/09df87a872817787fc8607bf11805cfa26c53aed"
+      },
+      "original503": true,
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3AtomPatternSignalChainRecipe.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 30230,
+        "git_blob": "2ecb4c0548f8864f4a71936531e0cd1a4cf0b2b6",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3CodeSignalChain.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "a15825aef2a00641d74fba761c4858f449d6924a1286aa1eb71b1d81932351fa"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "M3CodeSignalChain.java",
+        "sha": "2ecb4c0548f8864f4a71936531e0cd1a4cf0b2b6",
+        "size": 30230,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/2ecb4c0548f8864f4a71936531e0cd1a4cf0b2b6"
+      },
+      "original503": true,
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3CodeSignalChain.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 507,
+        "git_blob": "ebd14b1fa14a733103884df9bef5012b103893dc",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3CodeSignalThresholds.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "e1fc51e13acdd3c0389e7f499c295ba93d5cfa307f570b6a934ada796024a438"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "M3CodeSignalThresholds.java",
+        "sha": "ebd14b1fa14a733103884df9bef5012b103893dc",
+        "size": 507,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/ebd14b1fa14a733103884df9bef5012b103893dc"
+      },
+      "original503": true,
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3CodeSignalThresholds.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 18700,
+        "git_blob": "655a1fcbadeee2ff17b705d66e53e0fc3046f959",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3CodeSignalTriggerRecipe.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "07b5cf720b3db686e21b03dec472e5193440f22b2000362de8ea14dfbf176988"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "M3CodeSignalTriggerRecipe.java",
+        "sha": "655a1fcbadeee2ff17b705d66e53e0fc3046f959",
+        "size": 18700,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/655a1fcbadeee2ff17b705d66e53e0fc3046f959"
+      },
+      "original503": true,
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3CodeSignalTriggerRecipe.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 6052,
+        "git_blob": "60a401e0ff6540b9d3e9f104ee5771a7a26e4683",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3JavaLexicalMask.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "9ae306f7f05ba7519d0dc3353092e84d415c0164d59db5a908320656226bfa1b"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "M3JavaLexicalMask.java",
+        "sha": "60a401e0ff6540b9d3e9f104ee5771a7a26e4683",
+        "size": 6052,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/60a401e0ff6540b9d3e9f104ee5771a7a26e4683"
+      },
+      "original503": true,
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3JavaLexicalMask.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 4258,
+        "git_blob": "aebf97cadf36f8fbcaea4fefdeb91b388f597d71",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3JavaMask.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "c48fbb6ecec8303f9a7083c61a73ef7cdcaa7e39f376b0daf254e6fb04ced263"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "M3JavaMask.java",
+        "sha": "aebf97cadf36f8fbcaea4fefdeb91b388f597d71",
+        "size": 4258,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/aebf97cadf36f8fbcaea4fefdeb91b388f597d71"
+      },
+      "original503": true,
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3JavaMask.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 12299,
+        "git_blob": "4df18817aa0d7c7beceaf625171feb075d37a3c8",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ProblemSignature.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "864ee8beabd2492a40f22333c73454595fe506365c00002036f230a6145222e8"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "M3ProblemSignature.java",
+        "sha": "4df18817aa0d7c7beceaf625171feb075d37a3c8",
+        "size": 12299,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/4df18817aa0d7c7beceaf625171feb075d37a3c8"
+      },
+      "original503": true,
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ProblemSignature.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 16536,
+        "git_blob": "403a96de8d37aa1c9b5740f0bac2176d3a4c7d16",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeFirstJavaAtomInventoryRecipe.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "ad891bcb419217e2b9625a6b8faf8896a5b9428e9290a0f42e3d12aea6e8d98a"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "M3RecipeFirstJavaAtomInventoryRecipe.java",
+        "sha": "403a96de8d37aa1c9b5740f0bac2176d3a4c7d16",
+        "size": 16536,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/403a96de8d37aa1c9b5740f0bac2176d3a4c7d16"
+      },
+      "original503": true,
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeFirstJavaAtomInventoryRecipe.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 1883,
+        "git_blob": "1a3cc22080536c61c698acf0bfdde7a51dcebde0",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeFirstJavaAtomInventoryTable.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "74179b8ae1a816b573d9337d6abad4ddd03ffc7e9865eb58f726e7182b1a5515"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "M3RecipeFirstJavaAtomInventoryTable.java",
+        "sha": "1a3cc22080536c61c698acf0bfdde7a51dcebde0",
+        "size": 1883,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/1a3cc22080536c61c698acf0bfdde7a51dcebde0"
+      },
+      "original503": true,
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeFirstJavaAtomInventoryTable.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 10248,
+        "git_blob": "24a4e1706c6a3a3e861cac1d7fe0377476e0e4c8",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeFirstSourceCoverageTable.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "3a4ebf3d6582c48a73390a9891f54a6f86f3e26c995fa08803e52c8f7f612b45"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "M3RecipeFirstSourceCoverageTable.java",
+        "sha": "24a4e1706c6a3a3e861cac1d7fe0377476e0e4c8",
+        "size": 10248,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/24a4e1706c6a3a3e861cac1d7fe0377476e0e4c8"
+      },
+      "original503": true,
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeFirstSourceCoverageTable.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 3323,
+        "git_blob": "59a17bacf94f6d6769cb1a0ccb787ca2c3c9f5e0",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3SourceKind.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "27dc3e9e91de02e2f651adfd454a3367a5dae9a0f1ea4eb557537b639aa43c18"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "M3SourceKind.java",
+        "sha": "59a17bacf94f6d6769cb1a0ccb787ca2c3c9f5e0",
+        "size": 3323,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/59a17bacf94f6d6769cb1a0ccb787ca2c3c9f5e0"
+      },
+      "original503": true,
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3SourceKind.java"
+    },
+    {
+      "build_role": "current_parent_main",
+      "current_body": {
+        "bytes": 1859,
+        "git_blob": "6537fba62de8d37e7aad39259b5bbba06c3aa36b",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/sealed/SealHash.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "316da9bf8b642f9d8ad9e055328aec0f70ddfe0f63c4649d5dc35d062fd7a11c"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "SealHash.java",
+        "sha": "6537fba62de8d37e7aad39259b5bbba06c3aa36b",
+        "size": 1859,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/6537fba62de8d37e7aad39259b5bbba06c3aa36b"
+      },
+      "original503": true,
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/sealed/SealHash.java"
+    },
+    {
+      "build_role": "current_parent_release8_vendor",
+      "current_body": {
+        "bytes": 10782,
+        "git_blob": "cdd6ad6f86f15507eec14aaa897fee4b54c1d826",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/third_party/re2j/src/main/java/com/google/re2j/CharClass.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "404a651e617554a6e47f0070a9b0006591f2f2bfe5f2a95ff0a7858290e7ceba"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "CharClass.java",
+        "sha": "cdd6ad6f86f15507eec14aaa897fee4b54c1d826",
+        "size": 10782,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/cdd6ad6f86f15507eec14aaa897fee4b54c1d826"
+      },
+      "original503": true,
+      "path": "third_party/re2j/src/main/java/com/google/re2j/CharClass.java"
+    },
+    {
+      "build_role": "current_parent_release8_vendor",
+      "current_body": {
+        "bytes": 4323,
+        "git_blob": "ed08a47c301510b4897f9ccacbe4d2db9e19662e",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/third_party/re2j/src/main/java/com/google/re2j/CharGroup.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "153577d6ed39fa0d740ea98c4b7abab0bb3cc51b48e1ae06a35b67d09dc9c565"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "CharGroup.java",
+        "sha": "ed08a47c301510b4897f9ccacbe4d2db9e19662e",
+        "size": 4323,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/ed08a47c301510b4897f9ccacbe4d2db9e19662e"
+      },
+      "original503": true,
+      "path": "third_party/re2j/src/main/java/com/google/re2j/CharGroup.java"
+    },
+    {
+      "build_role": "current_parent_release8_vendor",
+      "current_body": {
+        "bytes": 493,
+        "git_blob": "942afe0b27a1a82be9ad170af5bafe2bd8dceee5",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/third_party/re2j/src/main/java/com/google/re2j/Characters.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "63578c3e57b4d7e861bcd0281f77077c72c9d5d88e322c595a7edec3f9afd62c"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "Characters.java",
+        "sha": "942afe0b27a1a82be9ad170af5bafe2bd8dceee5",
+        "size": 493,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/942afe0b27a1a82be9ad170af5bafe2bd8dceee5"
+      },
+      "original503": true,
+      "path": "third_party/re2j/src/main/java/com/google/re2j/Characters.java"
+    },
+    {
+      "build_role": "current_parent_release8_vendor",
+      "current_body": {
+        "bytes": 7899,
+        "git_blob": "ce056dfab14ffaabf0904cfc733b75a9c4d329a5",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/third_party/re2j/src/main/java/com/google/re2j/Compiler.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "44ff94d6a052c59ba2d03b697a8c74c8501642b32333e86c14335bfec7921fef"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "Compiler.java",
+        "sha": "ce056dfab14ffaabf0904cfc733b75a9c4d329a5",
+        "size": 7899,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/ce056dfab14ffaabf0904cfc733b75a9c4d329a5"
+      },
+      "original503": true,
+      "path": "third_party/re2j/src/main/java/com/google/re2j/Compiler.java"
+    },
+    {
+      "build_role": "current_parent_release8_vendor",
+      "current_body": {
+        "bytes": 3956,
+        "git_blob": "a9e8fb9f90de4c234d828edd3170506e453865a3",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/third_party/re2j/src/main/java/com/google/re2j/Inst.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "e718facb35222816ca50716a8358476e91131f30daca09743e0d993f10078a74"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "Inst.java",
+        "sha": "a9e8fb9f90de4c234d828edd3170506e453865a3",
+        "size": 3956,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/a9e8fb9f90de4c234d828edd3170506e453865a3"
+      },
+      "original503": true,
+      "path": "third_party/re2j/src/main/java/com/google/re2j/Inst.java"
+    },
+    {
+      "build_role": "current_parent_release8_vendor",
+      "current_body": {
+        "bytes": 11571,
+        "git_blob": "ba78591799ca10e35ad3acb98daa1c9176d892fe",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/third_party/re2j/src/main/java/com/google/re2j/Machine.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "3f0a6cda8feea6e4d3ca7556908d36a55fb2ebdea992a47545d83c4275cb8721"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "Machine.java",
+        "sha": "ba78591799ca10e35ad3acb98daa1c9176d892fe",
+        "size": 11571,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/ba78591799ca10e35ad3acb98daa1c9176d892fe"
+      },
+      "original503": true,
+      "path": "third_party/re2j/src/main/java/com/google/re2j/Machine.java"
+    },
+    {
+      "build_role": "current_parent_release8_vendor",
+      "current_body": {
+        "bytes": 7142,
+        "git_blob": "f69ba043bce2313b1304e92be24979ab508a3579",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/third_party/re2j/src/main/java/com/google/re2j/MachineInput.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "d77d3c1d7896c084599bf37f6014c5cb9788383537d468e191dee815f8a4a210"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MachineInput.java",
+        "sha": "f69ba043bce2313b1304e92be24979ab508a3579",
+        "size": 7142,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/f69ba043bce2313b1304e92be24979ab508a3579"
+      },
+      "original503": true,
+      "path": "third_party/re2j/src/main/java/com/google/re2j/MachineInput.java"
+    },
+    {
+      "build_role": "current_parent_release8_vendor",
+      "current_body": {
+        "bytes": 19238,
+        "git_blob": "678186d0739e7e3a40ae5693d59ccdc2ae68062b",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/third_party/re2j/src/main/java/com/google/re2j/Matcher.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "b1d580732a737219d3f5647c859f112e9baaf5c2eaf123747cd53dbbd99ff508"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "Matcher.java",
+        "sha": "678186d0739e7e3a40ae5693d59ccdc2ae68062b",
+        "size": 19238,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/678186d0739e7e3a40ae5693d59ccdc2ae68062b"
+      },
+      "original503": true,
+      "path": "third_party/re2j/src/main/java/com/google/re2j/Matcher.java"
+    },
+    {
+      "build_role": "current_parent_release8_vendor",
+      "current_body": {
+        "bytes": 2117,
+        "git_blob": "8af494ba1f03c71440d177ae87b02dd62da4628d",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/third_party/re2j/src/main/java/com/google/re2j/MatcherInput.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "9214886873e122df71f83cb3829b588f84c483e7979efec008e9eaca0637e794"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "MatcherInput.java",
+        "sha": "8af494ba1f03c71440d177ae87b02dd62da4628d",
+        "size": 2117,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/8af494ba1f03c71440d177ae87b02dd62da4628d"
+      },
+      "original503": true,
+      "path": "third_party/re2j/src/main/java/com/google/re2j/MatcherInput.java"
+    },
+    {
+      "build_role": "current_parent_release8_vendor",
+      "current_body": {
+        "bytes": 53608,
+        "git_blob": "0e73e701dc83ea996031563a7f74156150ad5c81",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/third_party/re2j/src/main/java/com/google/re2j/Parser.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "238c07b246d9eaa167eae0c79afb51c67ef5258e8519fecd93e36797fd1afa31"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "Parser.java",
+        "sha": "0e73e701dc83ea996031563a7f74156150ad5c81",
+        "size": 53608,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/0e73e701dc83ea996031563a7f74156150ad5c81"
+      },
+      "original503": true,
+      "path": "third_party/re2j/src/main/java/com/google/re2j/Parser.java"
+    },
+    {
+      "build_role": "current_parent_release8_vendor",
+      "current_body": {
+        "bytes": 10464,
+        "git_blob": "dfe1bf1809386524046373185fe212543ce3d19d",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/third_party/re2j/src/main/java/com/google/re2j/Pattern.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "1b98dfb91581757be82dec2e14b6ba97a97f03d833bdf40eabdb3489e00063c2"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "Pattern.java",
+        "sha": "dfe1bf1809386524046373185fe212543ce3d19d",
+        "size": 10464,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/dfe1bf1809386524046373185fe212543ce3d19d"
+      },
+      "original503": true,
+      "path": "third_party/re2j/src/main/java/com/google/re2j/Pattern.java"
+    },
+    {
+      "build_role": "current_parent_release8_vendor",
+      "current_body": {
+        "bytes": 1420,
+        "git_blob": "17101df3edd0bb1520764563d70b5e569b717544",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/third_party/re2j/src/main/java/com/google/re2j/PatternSyntaxException.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "88deae711135ed75f72901b2509b90c89dc5903de549eeac1e813699e1399001"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "PatternSyntaxException.java",
+        "sha": "17101df3edd0bb1520764563d70b5e569b717544",
+        "size": 1420,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/17101df3edd0bb1520764563d70b5e569b717544"
+      },
+      "original503": true,
+      "path": "third_party/re2j/src/main/java/com/google/re2j/PatternSyntaxException.java"
+    },
+    {
+      "build_role": "current_parent_release8_vendor",
+      "current_body": {
+        "bytes": 4665,
+        "git_blob": "3df44f968d6fe05d7588dc4386e34bbe14e9ed33",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/third_party/re2j/src/main/java/com/google/re2j/Prog.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "095d0de6f5a51a05de6fa7be93c4bb23de9ace8a1d2c6ea1899f7a8e6f239cbd"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "Prog.java",
+        "sha": "3df44f968d6fe05d7588dc4386e34bbe14e9ed33",
+        "size": 4665,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/3df44f968d6fe05d7588dc4386e34bbe14e9ed33"
+      },
+      "original503": true,
+      "path": "third_party/re2j/src/main/java/com/google/re2j/Prog.java"
+    },
+    {
+      "build_role": "current_parent_release8_vendor",
+      "current_body": {
+        "bytes": 33147,
+        "git_blob": "4683735402c5f1d99bc9e54478fcd275e456f10e",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/third_party/re2j/src/main/java/com/google/re2j/RE2.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "284bca25f5ec26f8d2659029d60f3b141890b26e1f0c8745a0a1c4b750439bb7"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "RE2.java",
+        "sha": "4683735402c5f1d99bc9e54478fcd275e456f10e",
+        "size": 33147,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/4683735402c5f1d99bc9e54478fcd275e456f10e"
+      },
+      "original503": true,
+      "path": "third_party/re2j/src/main/java/com/google/re2j/RE2.java"
+    },
+    {
+      "build_role": "current_parent_release8_vendor",
+      "current_body": {
+        "bytes": 10266,
+        "git_blob": "612b8900bf6349c6710c646fb7c57d86490de41f",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/third_party/re2j/src/main/java/com/google/re2j/Regexp.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "74310991c3dad2a89eab920c0be27b4cb21c034b92b20bfa2623e5ce51fe2989"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "Regexp.java",
+        "sha": "612b8900bf6349c6710c646fb7c57d86490de41f",
+        "size": 10266,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/612b8900bf6349c6710c646fb7c57d86490de41f"
+      },
+      "original503": true,
+      "path": "third_party/re2j/src/main/java/com/google/re2j/Regexp.java"
+    },
+    {
+      "build_role": "current_parent_release8_vendor",
+      "current_body": {
+        "bytes": 5945,
+        "git_blob": "dc5a7765a82ecf84fabddb632211833e9dc42f1e",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/third_party/re2j/src/main/java/com/google/re2j/Simplify.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "c6282dae0f436ab082fb9da8ae7c87cf7d7adbf469dc12474026e5ebf15f69bc"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "Simplify.java",
+        "sha": "dc5a7765a82ecf84fabddb632211833e9dc42f1e",
+        "size": 5945,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/dc5a7765a82ecf84fabddb632211833e9dc42f1e"
+      },
+      "original503": true,
+      "path": "third_party/re2j/src/main/java/com/google/re2j/Simplify.java"
+    },
+    {
+      "build_role": "current_parent_release8_vendor",
+      "current_body": {
+        "bytes": 4913,
+        "git_blob": "8ec0288a3acbadf1a820589740f088c0def5cb02",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/third_party/re2j/src/main/java/com/google/re2j/Unicode.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "965e77ac74b8396b4b32fc5e15161b55a9949e3f5707b77393b58048e26e276b"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "Unicode.java",
+        "sha": "8ec0288a3acbadf1a820589740f088c0def5cb02",
+        "size": 4913,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/8ec0288a3acbadf1a820589740f088c0def5cb02"
+      },
+      "original503": true,
+      "path": "third_party/re2j/src/main/java/com/google/re2j/Unicode.java"
+    },
+    {
+      "build_role": "current_parent_release8_vendor",
+      "current_body": {
+        "bytes": 112713,
+        "git_blob": "8bd827fbf95095f0a8cfeb9da42f404848704efa",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/third_party/re2j/src/main/java/com/google/re2j/UnicodeTables.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "c87c1b5ec28c0353b4d852a46f92d0b8ea217c3c8f7f415fb5feca5c00977559"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "UnicodeTables.java",
+        "sha": "8bd827fbf95095f0a8cfeb9da42f404848704efa",
+        "size": 112713,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/8bd827fbf95095f0a8cfeb9da42f404848704efa"
+      },
+      "original503": true,
+      "path": "third_party/re2j/src/main/java/com/google/re2j/UnicodeTables.java"
+    },
+    {
+      "build_role": "current_parent_release8_vendor",
+      "current_body": {
+        "bytes": 5619,
+        "git_blob": "8cdd0343fde5881ef3fb9a877028556d880f52ff",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/third_party/re2j/src/main/java/com/google/re2j/Utils.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "7f6556ea3d892bd81fab565edcbcbfe6451b0895ca88ccb0399750454d325932"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "Utils.java",
+        "sha": "8cdd0343fde5881ef3fb9a877028556d880f52ff",
+        "size": 5619,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/8cdd0343fde5881ef3fb9a877028556d880f52ff"
+      },
+      "original503": true,
+      "path": "third_party/re2j/src/main/java/com/google/re2j/Utils.java"
+    },
+    {
+      "build_role": "current_parent_named_surefire_suite",
+      "current_body": {
+        "acquisition_receipt": {
+          "bytes": 129038,
+          "git_blob": "ddb40673db652a98b9baae5e39a10d2b1b4f7fdf",
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/08c4206efdae7f522b317beca0be0d0e111aff86.json",
+          "sha256": "39f45edb81adb6dbd3bb2674365e0ef73118c2408c1bdac6f640a336eb0284f0"
+        },
+        "bytes": 61816,
+        "git_blob": "08c4206efdae7f522b317beca0be0d0e111aff86",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/src/test/java/jdk/internal/m3/rewrite/M3AtomPatternMasteryConvergenceTest.java",
+        "origin": "fresh_current_contents_acquisition",
+        "sha256": "4edb8a528de1e285f8cef4733952874ab66638ef4eb9c9295d12fba250555dd5"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "M3AtomPatternMasteryConvergenceTest.java",
+        "sha": "08c4206efdae7f522b317beca0be0d0e111aff86",
+        "size": 61816,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/08c4206efdae7f522b317beca0be0d0e111aff86"
+      },
+      "original503": true,
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/src/test/java/jdk/internal/m3/rewrite/M3AtomPatternMasteryConvergenceTest.java",
+      "selector": "**/M3AtomPatternMasteryConvergenceTest.java"
+    },
+    {
+      "build_role": "current_parent_named_surefire_suite",
+      "current_body": {
+        "acquisition_receipt": {
+          "bytes": 39972,
+          "git_blob": "bf491dda61d0b84378a2ab831d7e456ffa7b470b",
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/4b9a426858e8f67960bb1dfb331ab2ae423b77dd.json",
+          "sha256": "a1317675bb3e59ef6495769e21af530f918a4e5ae44ffb5c48360dbb8d5d02ff"
+        },
+        "bytes": 18492,
+        "git_blob": "4b9a426858e8f67960bb1dfb331ab2ae423b77dd",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/src/test/java/jdk/internal/m3/mindex/regex/RXMTest.java",
+        "origin": "fresh_current_contents_acquisition",
+        "sha256": "34c1142320828df5047c004c56df157a37c193dbbb671db3835dd18cbaa9d1f2"
+      },
+      "current_tree_entry": {
+        "mode": "100644",
+        "path": "RXMTest.java",
+        "sha": "4b9a426858e8f67960bb1dfb331ab2ae423b77dd",
+        "size": 18492,
+        "type": "blob",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/4b9a426858e8f67960bb1dfb331ab2ae423b77dd"
+      },
+      "original503": false,
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/src/test/java/jdk/internal/m3/mindex/regex/RXMTest.java",
+      "selector": "**/RXMTest.java"
+    }
+  ],
+  "schema": "M3_CURRENT_PARENT_BUILD_CONTEXT/1",
+  "source_commit": "be92c62ece9023b5c33676716a1076d00e26120a",
+  "source_tree": "3c4f32b66633a251ba2c117090830252a7e2da03",
+  "test_classes": 2,
+  "within_original503": 98
+}

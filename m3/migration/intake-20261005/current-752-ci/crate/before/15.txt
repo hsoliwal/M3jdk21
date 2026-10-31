@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package com.m3.a3;
+package jdk.m3.a3;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -47,7 +47,7 @@ class A3PlanTest {
                 backports.resolve("ALGORITHM_CATALOGUE.tsv"),
                 """
                 atom_id	category	technique	disposition	scope	target_owner	leetcode_ref	hackerrank_ref	geeksforgeeks_ref	github_ref	github_license	reuse_policy	next_proof
-                ALG-PREFIX-Z	STRING_SEARCH	Z_PREFIX	candidate-adapted	FILE	m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java	https://leetcode.com/problems/sum-of-scores-of-built-strings/	https://www.hackerrank.com/challenges/string-similarity/problem	https://www.geeksforgeeks.org/dsa/z-algorithm-linear-time-pattern-searching-algorithm/	https://github.com/hsoliwal/com.synexia	Apache-2.0	ADAPT_PERMISSIVE	prove UTF-16 owner reuse
+                ALG-PREFIX-Z	STRING_SEARCH	Z_PREFIX	candidate-adapted	FILE	m3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java	https://leetcode.com/problems/sum-of-scores-of-built-strings/	https://www.hackerrank.com/challenges/string-similarity/problem	https://www.geeksforgeeks.org/dsa/z-algorithm-linear-time-pattern-searching-algorithm/	https://github.com/hsoliwal/com.synexia	Apache-2.0	ADAPT_PERMISSIVE	prove UTF-16 owner reuse
                 """);
 
         List<A3Plan.Row> rows = A3Plan.load(root);

@@ -33,7 +33,7 @@
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/original-baseline/classes",
       "-d",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/original-baseline/tests",
-      "/tmp/m3-current-source-20261019/m3/collections/src/test/java/com/m3/collections/M3StrictFilteredSequencedContract.java"
+      "/tmp/m3-current-source-20261019/m3/collections/src/test/java/jdk/m3/collections/M3StrictFilteredSequencedContract.java"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -46,7 +46,7 @@
       "-Xmx256m",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/original-baseline/tests:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/original-baseline/classes",
-      "com.m3.collections.M3StrictFilteredSequencedContract"
+      "jdk.m3.collections.M3StrictFilteredSequencedContract"
     ],
     "exit": 1,
     "expected_exit": 1,
@@ -92,7 +92,7 @@
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
       "-protected",
       "-s",
-      "com.m3.collections.M3FilteredLists"
+      "jdk.m3.collections.M3FilteredLists"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -106,7 +106,7 @@
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
       "-protected",
       "-s",
-      "com.m3.collections.M3FilteredViews"
+      "jdk.m3.collections.M3FilteredViews"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -120,7 +120,7 @@
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
       "-protected",
       "-s",
-      "com.m3.collections.M3LongIndexProjection"
+      "jdk.m3.collections.M3LongIndexProjection"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -134,7 +134,7 @@
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
       "-protected",
       "-s",
-      "com.m3.collections.M3SlotMap"
+      "jdk.m3.collections.M3SlotMap"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -148,7 +148,7 @@
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
       "-protected",
       "-s",
-      "com.m3.collections.M3LinkedHashMap"
+      "jdk.m3.collections.M3LinkedHashMap"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -162,7 +162,7 @@
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
       "-protected",
       "-s",
-      "com.m3.collections.M3TreeMap"
+      "jdk.m3.collections.M3TreeMap"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -176,7 +176,7 @@
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
       "-protected",
       "-s",
-      "com.m3.collections.M3WeakHashMap"
+      "jdk.m3.collections.M3WeakHashMap"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -222,7 +222,7 @@
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
       "-protected",
       "-s",
-      "com.m3.collections.M3FilteredLists"
+      "jdk.m3.collections.M3FilteredLists"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -236,7 +236,7 @@
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
       "-protected",
       "-s",
-      "com.m3.collections.M3FilteredViews"
+      "jdk.m3.collections.M3FilteredViews"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -250,7 +250,7 @@
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
       "-protected",
       "-s",
-      "com.m3.collections.M3LongIndexProjection"
+      "jdk.m3.collections.M3LongIndexProjection"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -264,7 +264,7 @@
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
       "-protected",
       "-s",
-      "com.m3.collections.M3SlotMap"
+      "jdk.m3.collections.M3SlotMap"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -278,7 +278,7 @@
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
       "-protected",
       "-s",
-      "com.m3.collections.M3LinkedHashMap"
+      "jdk.m3.collections.M3LinkedHashMap"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -292,7 +292,7 @@
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
       "-protected",
       "-s",
-      "com.m3.collections.M3TreeMap"
+      "jdk.m3.collections.M3TreeMap"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -306,7 +306,7 @@
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
       "-protected",
       "-s",
-      "com.m3.collections.M3WeakHashMap"
+      "jdk.m3.collections.M3WeakHashMap"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -339,9 +339,9 @@
       "-I/tmp/m3-collections-tools-20261019/jdk-21.0.12.1+1/include",
       "-I/tmp/m3-collections-tools-20261019/jdk-21.0.12.1+1/include/linux",
       "-include",
-      "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/headers/com_m3_collections_M3IndexMaskCompactor.h",
+      "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/headers/jdk_m3_collections_M3IndexMaskCompactor.h",
       "-include",
-      "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/headers/com_m3_collections_M3IndexMaskWindow.h",
+      "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/headers/jdk_m3_collections_M3IndexMaskWindow.h",
       "/tmp/m3-current-source-20261019/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
       "/tmp/m3-current-source-20261019/m3/collections/src/main/native/collections/m3_index_mask_window.c",
       "-o",
@@ -368,7 +368,7 @@
       "-I/tmp/m3-collections-tools-20261019/jdk-21.0.12.1+1/include",
       "-I/tmp/m3-collections-tools-20261019/jdk-21.0.12.1+1/include/linux",
       "-include",
-      "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/headers/com_m3_collections_M3LongAddressKernel.h",
+      "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/headers/jdk_m3_collections_M3LongAddressKernel.h",
       "/tmp/m3-current-source-20261019/m3/collections/src/main/native/collections/m3_long_address_kernel.c",
       "-o",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/native/libm3_collections_address.so"
@@ -398,7 +398,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
-      "com.m3.collections.M3FilteredListMutationProof"
+      "jdk.m3.collections.M3FilteredListMutationProof"
     ],
     "exit": 1,
     "expected_exit": 1,
@@ -413,7 +413,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
-      "com.m3.collections.M3FilteredListMutationWitness",
+      "jdk.m3.collections.M3FilteredListMutationWitness",
       "--expect-broken"
     ],
     "exit": 0,
@@ -429,7 +429,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3FilteredListMutationWitness",
+      "jdk.m3.collections.M3FilteredListMutationWitness",
       "--expect-fixed"
     ],
     "exit": 0,
@@ -445,7 +445,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
-      "com.m3.collections.M3FilteredListsContract"
+      "jdk.m3.collections.M3FilteredListsContract"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -460,7 +460,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3FilteredListsContract"
+      "jdk.m3.collections.M3FilteredListsContract"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -475,7 +475,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
-      "com.m3.collections.M3FilteredListsEdges"
+      "jdk.m3.collections.M3FilteredListsEdges"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -490,7 +490,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3FilteredListsEdges"
+      "jdk.m3.collections.M3FilteredListsEdges"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -505,7 +505,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
-      "com.m3.collections.M3FilteredListsDeepCompositionProof"
+      "jdk.m3.collections.M3FilteredListsDeepCompositionProof"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -520,7 +520,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3FilteredListsDeepCompositionProof"
+      "jdk.m3.collections.M3FilteredListsDeepCompositionProof"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -535,7 +535,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
-      "com.m3.collections.M3FilteredListsReadonlyDepthProof"
+      "jdk.m3.collections.M3FilteredListsReadonlyDepthProof"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -550,7 +550,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3FilteredListsReadonlyDepthProof"
+      "jdk.m3.collections.M3FilteredListsReadonlyDepthProof"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -565,7 +565,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
-      "com.m3.collections.M3FilteredListsMaskBridgeProof"
+      "jdk.m3.collections.M3FilteredListsMaskBridgeProof"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -580,7 +580,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3FilteredListsMaskBridgeProof"
+      "jdk.m3.collections.M3FilteredListsMaskBridgeProof"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -595,7 +595,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
-      "com.m3.collections.M3FilteredViewsContract"
+      "jdk.m3.collections.M3FilteredViewsContract"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -610,7 +610,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3FilteredViewsContract"
+      "jdk.m3.collections.M3FilteredViewsContract"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -625,7 +625,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
-      "com.m3.collections.M3StoredRepresentativeContract"
+      "jdk.m3.collections.M3StoredRepresentativeContract"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -640,7 +640,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3StoredRepresentativeContract"
+      "jdk.m3.collections.M3StoredRepresentativeContract"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -655,7 +655,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
-      "com.m3.collections.M3FilteredSetIdentityContract"
+      "jdk.m3.collections.M3FilteredSetIdentityContract"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -670,7 +670,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3FilteredSetIdentityContract"
+      "jdk.m3.collections.M3FilteredSetIdentityContract"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -685,7 +685,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
-      "com.m3.collections.M3BoundedFilteredNavigationContract"
+      "jdk.m3.collections.M3BoundedFilteredNavigationContract"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -700,7 +700,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3BoundedFilteredNavigationContract"
+      "jdk.m3.collections.M3BoundedFilteredNavigationContract"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -715,7 +715,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
-      "com.m3.collections.M3FilteredNavigableSetRangeContract"
+      "jdk.m3.collections.M3FilteredNavigableSetRangeContract"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -730,7 +730,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3FilteredNavigableSetRangeContract"
+      "jdk.m3.collections.M3FilteredNavigableSetRangeContract"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -745,7 +745,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
-      "com.m3.collections.M3FilteredNavigationReconciliationContract"
+      "jdk.m3.collections.M3FilteredNavigationReconciliationContract"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -760,7 +760,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3FilteredNavigationReconciliationContract"
+      "jdk.m3.collections.M3FilteredNavigationReconciliationContract"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -775,7 +775,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
-      "com.m3.collections.M3MutableFilteredViewsContract"
+      "jdk.m3.collections.M3MutableFilteredViewsContract"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -790,7 +790,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3MutableFilteredViewsContract"
+      "jdk.m3.collections.M3MutableFilteredViewsContract"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -805,7 +805,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
-      "com.m3.collections.M3StrictFilteredSequencedContract"
+      "jdk.m3.collections.M3StrictFilteredSequencedContract"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -820,7 +820,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3StrictFilteredSequencedContract"
+      "jdk.m3.collections.M3StrictFilteredSequencedContract"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -835,7 +835,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
-      "com.m3.collections.M3FilteredMergedSequencedContract"
+      "jdk.m3.collections.M3FilteredMergedSequencedContract"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -850,7 +850,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3FilteredMergedSequencedContract"
+      "jdk.m3.collections.M3FilteredMergedSequencedContract"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -865,7 +865,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
-      "com.m3.collections.M3FilteredSplitContract"
+      "jdk.m3.collections.M3FilteredSplitContract"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -880,7 +880,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3FilteredSplitContract"
+      "jdk.m3.collections.M3FilteredSplitContract"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -895,7 +895,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
-      "com.m3.collections.M3IndexedMultiValueOccurrenceSelfTest"
+      "jdk.m3.collections.M3IndexedMultiValueOccurrenceSelfTest"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -910,7 +910,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3IndexedMultiValueOccurrenceSelfTest"
+      "jdk.m3.collections.M3IndexedMultiValueOccurrenceSelfTest"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -925,7 +925,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
-      "com.m3.collections.M3LongIndexProjectionSelfTest"
+      "jdk.m3.collections.M3LongIndexProjectionSelfTest"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -940,7 +940,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3LongIndexProjectionSelfTest"
+      "jdk.m3.collections.M3LongIndexProjectionSelfTest"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -955,7 +955,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
-      "com.m3.collections.M3LongIndexProjectionMaskOffsetProof"
+      "jdk.m3.collections.M3LongIndexProjectionMaskOffsetProof"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -970,7 +970,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3LongIndexProjectionMaskOffsetProof"
+      "jdk.m3.collections.M3LongIndexProjectionMaskOffsetProof"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -985,7 +985,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
-      "com.m3.collections.M3IndexMaskCompactorSelfTest"
+      "jdk.m3.collections.M3IndexMaskCompactorSelfTest"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -1000,7 +1000,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3IndexMaskCompactorSelfTest"
+      "jdk.m3.collections.M3IndexMaskCompactorSelfTest"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -1015,7 +1015,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
-      "com.m3.collections.M3NativeIndexRangeSelfTest"
+      "jdk.m3.collections.M3NativeIndexRangeSelfTest"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -1030,7 +1030,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3NativeIndexRangeSelfTest"
+      "jdk.m3.collections.M3NativeIndexRangeSelfTest"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -1045,7 +1045,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
-      "com.m3.collections.M3RequiredExcludedMaskSelectorContract"
+      "jdk.m3.collections.M3RequiredExcludedMaskSelectorContract"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -1060,7 +1060,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3RequiredExcludedMaskSelectorContract"
+      "jdk.m3.collections.M3RequiredExcludedMaskSelectorContract"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -1075,7 +1075,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
-      "com.m3.collections.M3IndexOrderWindowContract",
+      "jdk.m3.collections.M3IndexOrderWindowContract",
       "--java"
     ],
     "exit": 0,
@@ -1091,7 +1091,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
-      "com.m3.collections.M3IndexOrderWindowContract",
+      "jdk.m3.collections.M3IndexOrderWindowContract",
       "--native"
     ],
     "exit": 0,
@@ -1107,7 +1107,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
-      "com.m3.collections.M3IndexOrderWindowContract",
+      "jdk.m3.collections.M3IndexOrderWindowContract",
       "--missing"
     ],
     "exit": 0,
@@ -1123,7 +1123,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3IndexOrderWindowContract",
+      "jdk.m3.collections.M3IndexOrderWindowContract",
       "--java"
     ],
     "exit": 0,
@@ -1139,7 +1139,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3IndexOrderWindowContract",
+      "jdk.m3.collections.M3IndexOrderWindowContract",
       "--native"
     ],
     "exit": 0,
@@ -1155,7 +1155,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3IndexOrderWindowContract",
+      "jdk.m3.collections.M3IndexOrderWindowContract",
       "--missing"
     ],
     "exit": 0,
@@ -1171,7 +1171,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3FilteredListsMaskBridgeProof",
+      "jdk.m3.collections.M3FilteredListsMaskBridgeProof",
       "--native"
     ],
     "exit": 0,
@@ -1187,7 +1187,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3LongIndexProjectionSelfTest"
+      "jdk.m3.collections.M3LongIndexProjectionSelfTest"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -1202,7 +1202,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3LongIndexProjectionMaskOffsetProof"
+      "jdk.m3.collections.M3LongIndexProjectionMaskOffsetProof"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -1217,7 +1217,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3NativeIndexRangeSelfTest",
+      "jdk.m3.collections.M3NativeIndexRangeSelfTest",
       "native"
     ],
     "exit": 0,
@@ -1233,7 +1233,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3RequiredExcludedMaskSelectorNativeContract"
+      "jdk.m3.collections.M3RequiredExcludedMaskSelectorNativeContract"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -1248,7 +1248,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3IndexedMultiValueOccurrenceSelfTest"
+      "jdk.m3.collections.M3IndexedMultiValueOccurrenceSelfTest"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -1263,7 +1263,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3IndexMaskCompactorSelfTest",
+      "jdk.m3.collections.M3IndexMaskCompactorSelfTest",
       "--native"
     ],
     "exit": 0,
@@ -1279,7 +1279,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3FilteredListMutationProof"
+      "jdk.m3.collections.M3FilteredListMutationProof"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -1295,7 +1295,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3FilteredListMutationProof"
+      "jdk.m3.collections.M3FilteredListMutationProof"
     ],
     "exit": 0,
     "expected_exit": 0,
@@ -1310,7 +1310,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control/main-classes",
-      "com.m3.collections.M3IndexOrderWindowResourceProbe",
+      "jdk.m3.collections.M3IndexOrderWindowResourceProbe",
       "sort",
       "32768",
       "100"
@@ -1328,7 +1328,7 @@
       "-Djava.library.path=/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/missing-native",
       "-cp",
       "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/test-classes:/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
-      "com.m3.collections.M3IndexOrderWindowResourceProbe",
+      "jdk.m3.collections.M3IndexOrderWindowResourceProbe",
       "sort",
       "32768",
       "100"

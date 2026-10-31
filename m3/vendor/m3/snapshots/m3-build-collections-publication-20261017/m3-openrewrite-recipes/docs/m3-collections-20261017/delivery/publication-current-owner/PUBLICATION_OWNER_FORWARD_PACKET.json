@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "recipe": "jdk.internal.m3.M3JdkCollectionPublicationOwners20261017",
+  "baseCommit": "b42ab7605b862a5157997f1787c5032db2831f46",
+  "candidate": "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/delivery/publication-forward-candidate",
+  "resources": "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/delivery/publication-forward-recipe-payload/m3-openrewrite-recipes/src/main/resources",
+  "input": "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/delivery/publication-current-base/M3jdk21",
+  "beforeSha256": "9ec03f9f01b6bfdfbc6f76ce320422d8599f56119a0e317a21904452a615e256",
+  "afterSha256": "e5728a9629b11305553a645b428744dc0b2a04ab8545975cebd2270ae875041e",
+  "canonicalCurrentSourceSha256": "4cf5d18fc6076193ce85c16df4ad431a37939aec81bacc64d22af6a3ee4f145a",
+  "packageOnlyBytesExact": true,
+  "crates": [
+    {
+      "crate": "m3jdk-collection-publication-owner-java-20261017",
+      "kind": "java",
+      "target": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
+      "manifestSha256": "a29b2a7a533726d6e123f9a266488fbf96751e42f7bad0cd182ca56640190a60"
+    },
+    {
+      "crate": "m3jdk-collection-publication-assets-20261017",
+      "kind": "text",
+      "targets": 10,
+      "manifestSha256": "2d161623e1e1508c0d9d70b664d8b8007cbaea85104af680fcf951d9120df50a"
+    }
+  ],
+  "unchangedJavaCrates": [
+    "m3jdk-collection-current-owners-java-01-20261017",
+    "m3jdk-collection-current-owners-java-02-20261017",
+    "m3jdk-collection-current-owners-java-03-20261017",
+    "m3jdk-collection-current-owners-java-04-20261017",
+    "m3jdk-collection-current-owners-java-05-20261017",
+    "m3jdk-collection-current-owners-java-06-20261017",
+    "m3jdk-collection-current-owners-java-07-20261017",
+    "m3jdk-collection-current-owners-java-08-20261017",
+    "m3jdk-collection-current-owners-java-09-20261017"
+  ],
+  "assets": [
+    {
+      "path": "m3/docs/name-mapping.d/m3-filtered-collection-pack-20261017.json",
+      "sha256": "6a575515c17f7861b8cb9d49815184bb06e909f79321a7076ad98d2e94fed85e",
+      "before": "ABSENT"
+    },
+    {
+      "path": "m3/docs/name-mapping.json",
+      "sha256": "4868443bf93eaa0b16584b218bb80f4f9a095dfbe83f97902354a2c37819556a",
+      "before": "03434d125f8d758a5da24f55adfdc399f6cc828f8fa5b214f1cfe8777d635283"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/PROJECTION_SOURCE_IDENTITY.json",
+      "sha256": "5ae0993cac743402b2ef1ba5d5dde38835dd4d6450517e9fc8419363adcc4e6f",
+      "before": "ABSENT"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/README.md",
+      "sha256": "b275c2f37284133ee12bdd99fc6e1b23f630a2f79a75027b575d75c1dc069290",
+      "before": "ABSENT"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/build.py",
+      "sha256": "7df7f538bdb2f759406421eaae1d60b5ad0b497c6d0c2c44d1b39ee836ca42ad",
+      "before": "ABSENT"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/legal/LICENSE.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "before": "ABSENT"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/legal/M3_COLLECTIONS_NOTICE.txt",
+      "sha256": "81138f9994f4afa899c22904debf7cf8277803cf21b53536108ac7e254b0a5bb",
+      "before": "ABSENT"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/legal/NOTICE.txt",
+      "sha256": "06ccebb09017bce1e11a9be0dc0ed5e9dbf471b482ccb6f15cf72940488095b9",
+      "before": "ABSENT"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/pom.xml",
+      "sha256": "d7c9f2d737f776009dd8ed10a72b5c7d0a253600a84337937ec3c4e2952d051a",
+      "before": "ABSENT"
+    },
+    {
+      "path": "m3/tooling/module-packs/pom.xml",
+      "sha256": "d246473f6eeb784f53dac6c1dff4add147fed42020382c8c9e27818a69784489",
+      "before": "3f09ef2205f1d22b2fd82e84c21697a506813d379dfe61f393d7b1a3ee2989bb"
+    }
+  ],
+  "priorImageProofNotRelabeled": true,
+  "historicEngineMutation": false
+}

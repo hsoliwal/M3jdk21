@@ -51,9 +51,9 @@
       ],
       "postimages": [
         {
-          "path": "m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceContract.java",
+          "path": "m3/collections/src/test/java/jdk/m3/collections/M3WrapperConvergenceContract.java",
           "preimage_sha256": "ABSENT",
-          "postimage_sha256": "2913aeae2f20b80c669398e5727ad9bc000eccf3bb225d85bdd672c17d4fb847"
+          "postimage_sha256": "989507e15f05f3d931c51e7ae65d65dbc3fac7b80bc94984e4b9922ea17e8335"
         }
       ],
       "sdk_input_rows": 338,
@@ -61,22 +61,22 @@
         {
           "case": "duplicate-source",
           "diagnostic_sha256": "c56f35244b0c2a9c7bcc407faf06a5f730738a3ffb1b1ef73f5f193d7868a506",
-          "diagnostic": "java.lang.IllegalStateException: duplicate target: m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceContract.java\\n"
+          "diagnostic": "java.lang.IllegalStateException: duplicate target: m3/collections/src/test/java/jdk/m3/collections/M3WrapperConvergenceContract.java\\n"
         },
         {
           "case": "post-scan-drift",
           "diagnostic_sha256": "a692baaa0bae2457406c8af040ac5e286aa2b37cd109e26db7424cf0c5e303c2",
-          "diagnostic": "org.openrewrite.internal.RecipeRunException: java.lang.IllegalStateException: target changed after scan: m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceContract.java\\njava.lang.IllegalStateException: target changed after scan: m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceContract.java\\n"
+          "diagnostic": "org.openrewrite.internal.RecipeRunException: java.lang.IllegalStateException: target changed after scan: m3/collections/src/test/java/jdk/m3/collections/M3WrapperConvergenceContract.java\\njava.lang.IllegalStateException: target changed after scan: m3/collections/src/test/java/jdk/m3/collections/M3WrapperConvergenceContract.java\\n"
         },
         {
           "case": "source-drift",
           "diagnostic_sha256": "752ec6022cbbae95979249bfb576e4cd93f37b40c0f1494222cdf9e18641d6d2",
-          "diagnostic": "java.lang.IllegalStateException: source drift: m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceContract.java\\n"
+          "diagnostic": "java.lang.IllegalStateException: source drift: m3/collections/src/test/java/jdk/m3/collections/M3WrapperConvergenceContract.java\\n"
         },
         {
           "case": "wrong-java-representation",
           "diagnostic_sha256": "c27bf1f3438ecd9bbcdf2c9fc7e1d44b86733f032dde428842224d256b8f9c1a",
-          "diagnostic": "java.lang.IllegalStateException: target is not a Java compilation unit: m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceContract.java\\n"
+          "diagnostic": "java.lang.IllegalStateException: target is not a Java compilation unit: m3/collections/src/test/java/jdk/m3/collections/M3WrapperConvergenceContract.java\\n"
         }
       ],
       "candidate_files": {
@@ -84,7 +84,7 @@
         "synexia-work/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/target/candidate/wrapper-contract-v2/SDK_REFUSALS.tsv": "5a736950c1a1b1245cdb9dd69eb8b183d2cdd271d34d99e5a45b50259b174b8f",
         "synexia-work/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/target/candidate/wrapper-contract-v2/SDK_RESULTS.tsv": "8fa49ebc60b6cac046d5346d91dd64bab1428a5db72e43895335a8343cb1c121",
         "synexia-work/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/target/candidate/wrapper-contract-v2/java.patch": "4a5106ec737365fb36bf667cefca36c7949854b4ca9ec9db032a435af442fa41",
-        "synexia-work/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/target/candidate/wrapper-contract-v2/m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceContract.java": "2913aeae2f20b80c669398e5727ad9bc000eccf3bb225d85bdd672c17d4fb847"
+        "synexia-work/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/target/candidate/wrapper-contract-v2/m3/collections/src/test/java/jdk/m3/collections/M3WrapperConvergenceContract.java": "989507e15f05f3d931c51e7ae65d65dbc3fac7b80bc94984e4b9922ea17e8335"
       }
     },
     {
@@ -130,9 +130,9 @@
       ],
       "postimages": [
         {
-          "path": "m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceTest.java",
+          "path": "m3/collections/src/test/java/jdk/m3/collections/M3WrapperConvergenceTest.java",
           "preimage_sha256": "ABSENT",
-          "postimage_sha256": "fe071ef7e801a9bb1d57501512f0dd606f0c08652e100e6132dc7c4e4a8f6327"
+          "postimage_sha256": "37373c5fe47db51de219365a602737b278feb9b2ca34bc888dd0c0a1661e4e89"
         }
       ],
       "sdk_input_rows": 345,
@@ -140,22 +140,22 @@
         {
           "case": "duplicate-source",
           "diagnostic_sha256": "5d7153ddea3b2afb0f56fb956d0c036a8a7a04c5ded71836fbe3f69941007392",
-          "diagnostic": "java.lang.IllegalStateException: duplicate target: m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceTest.java\\n"
+          "diagnostic": "java.lang.IllegalStateException: duplicate target: m3/collections/src/test/java/jdk/m3/collections/M3WrapperConvergenceTest.java\\n"
         },
         {
           "case": "post-scan-drift",
           "diagnostic_sha256": "4cfb5d72cc1c9a56b6267ab86c28d5bb6c30ef0c4c87d7fd5f9df91ec450f6f7",
-          "diagnostic": "org.openrewrite.internal.RecipeRunException: java.lang.IllegalStateException: target changed after scan: m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceTest.java\\njava.lang.IllegalStateException: target changed after scan: m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceTest.java\\n"
+          "diagnostic": "org.openrewrite.internal.RecipeRunException: java.lang.IllegalStateException: target changed after scan: m3/collections/src/test/java/jdk/m3/collections/M3WrapperConvergenceTest.java\\njava.lang.IllegalStateException: target changed after scan: m3/collections/src/test/java/jdk/m3/collections/M3WrapperConvergenceTest.java\\n"
         },
         {
           "case": "source-drift",
           "diagnostic_sha256": "c420c455c56241b86dfc8fe46671d5a9a6a77805574d15708d47e5f6e477b27a",
-          "diagnostic": "java.lang.IllegalStateException: source drift: m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceTest.java\\n"
+          "diagnostic": "java.lang.IllegalStateException: source drift: m3/collections/src/test/java/jdk/m3/collections/M3WrapperConvergenceTest.java\\n"
         },
         {
           "case": "wrong-java-representation",
           "diagnostic_sha256": "4fbd22abd5eb267e816002f27811c2ac9000e4e5a2bdb5141246b44ff6b1d00e",
-          "diagnostic": "java.lang.IllegalStateException: target is not a Java compilation unit: m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceTest.java\\n"
+          "diagnostic": "java.lang.IllegalStateException: target is not a Java compilation unit: m3/collections/src/test/java/jdk/m3/collections/M3WrapperConvergenceTest.java\\n"
         }
       ],
       "candidate_files": {
@@ -163,7 +163,7 @@
         "synexia-work/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/target/candidate/wrapper-junit-v2/SDK_REFUSALS.tsv": "9b28956e890432983a086d748c2ffbd95fb83d06b33fa6d3cb645964c0de3148",
         "synexia-work/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/target/candidate/wrapper-junit-v2/SDK_RESULTS.tsv": "4cabde4e5a4d73936354113b33805d91795ef93480b2c4479c5088bdd5e97195",
         "synexia-work/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/target/candidate/wrapper-junit-v2/java.patch": "88950077a760d6cb34f23f3a4e50eafc440d98834314bb561959716c300b5fd5",
-        "synexia-work/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/target/candidate/wrapper-junit-v2/m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceTest.java": "fe071ef7e801a9bb1d57501512f0dd606f0c08652e100e6132dc7c4e4a8f6327"
+        "synexia-work/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/target/candidate/wrapper-junit-v2/m3/collections/src/test/java/jdk/m3/collections/M3WrapperConvergenceTest.java": "37373c5fe47db51de219365a602737b278feb9b2ca34bc888dd0c0a1661e4e89"
       }
     },
     {
@@ -210,8 +210,8 @@
       "postimages": [
         {
           "path": "m3/docs/m3jdk21-porting-invariant.md",
-          "preimage_sha256": "fa84270f09a42fe4dbeb245812e7b710297825e2bfd461bce99bb64056e1399d",
-          "postimage_sha256": "6cd1bd243f216a3210433525e3742c0fc1ab02cbf02bbc40225c40c5be80a01f"
+          "preimage_sha256": "604ef82225fdb9e6ecf00e14f7630fb0956b85ec89e5c9241537733d4054f39a",
+          "postimage_sha256": "95a5d111f0d9b2467bcc84828adc5b0efcfd1091e35a1b5c1bf1c484a2066b03"
         }
       ],
       "sdk_input_rows": 15,
@@ -241,7 +241,7 @@
         "synexia-work/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/target/candidate/invariant-policy/SDK_INPUTS.tsv": "2f60e7f4db165bd60e6657f229deb96b44cf351da3a00c8d2ccd59c32e6594f7",
         "synexia-work/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/target/candidate/invariant-policy/SDK_REFUSALS.tsv": "8f302aaeb5f2a809dcb38a34df8d6208e6b994340f8fa8a83bcc28fc237fe41d",
         "synexia-work/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/target/candidate/invariant-policy/SDK_RESULTS.tsv": "5025f1651d5dbbb33cf5e92af14faaafff994fa6fdaee9f3831576f6350891e6",
-        "synexia-work/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/target/candidate/invariant-policy/m3/docs/m3jdk21-porting-invariant.md": "6cd1bd243f216a3210433525e3742c0fc1ab02cbf02bbc40225c40c5be80a01f",
+        "synexia-work/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/target/candidate/invariant-policy/m3/docs/m3jdk21-porting-invariant.md": "95a5d111f0d9b2467bcc84828adc5b0efcfd1091e35a1b5c1bf1c484a2066b03",
         "synexia-work/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/target/candidate/invariant-policy/text.patch": "761c068841efaf74006d853a0d8dec48bcbfafd64f65a0da20a546158f23bec7"
       }
     }

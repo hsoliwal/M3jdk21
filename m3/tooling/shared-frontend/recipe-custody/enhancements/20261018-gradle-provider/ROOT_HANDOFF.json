@@ -1,6 +1,6 @@
 {
   "schema": "M3_GRADLE_PROVIDER_ROOT_HANDOFF_V1",
-  "current_cwd": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017",
+  "current_cwd": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017",
   "commands": [
     {
       "purpose": "Read-only receiving check",
@@ -12,7 +12,7 @@
         "--target",
         "/workspace/scratch/65626af64474/m3-ast-shared-20261018/M3jdk21",
         "--recipe-owner",
-        "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/synexia-openrewrite-recipes",
+        "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/m3-openrewrite-recipes",
         "--check"
       ],
       "expected_changes": 9
@@ -27,7 +27,7 @@
         "--target",
         "/workspace/scratch/65626af64474/m3-ast-shared-20261018/M3jdk21",
         "--recipe-owner",
-        "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/synexia-openrewrite-recipes"
+        "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/m3-openrewrite-recipes"
       ],
       "expected_changes": 9
     },
@@ -41,12 +41,12 @@
         "--target",
         "/workspace/scratch/65626af64474/m3-ast-shared-20261018/M3jdk21",
         "--recipe-owner",
-        "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/synexia-openrewrite-recipes"
+        "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/m3-openrewrite-recipes"
       ],
       "expected_changes": 0
     }
   ],
-  "sdk_directory": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/target/gradle-provider-20261018",
+  "sdk_directory": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/target/gradle-provider-20261018",
   "final_receiving_files": [
     {
       "path": "m3/tooling/module-packs/build-support/gradle-provider/LICENSE.txt",
@@ -105,19 +105,19 @@
   ],
   "canonical_additions": [
     {
-      "source": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/gradle-provider-20261018",
-      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/gradle-provider-20261018",
+      "source": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/gradle-provider-20261018",
+      "repository_path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/gradle-provider-20261018",
       "mirror_path": "m3/tooling/shared-frontend/recipe-custody/datasets/gradle-provider-20261018",
       "file_count": 16
     },
     {
-      "source": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/enhancements/20261018-gradle-provider",
-      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/enhancements/20261018-gradle-provider",
+      "source": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/enhancements/20261018-gradle-provider",
+      "repository_path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/enhancements/20261018-gradle-provider",
       "mirror_path": "m3/tooling/shared-frontend/recipe-custody/enhancements/20261018-gradle-provider"
     }
   ],
   "engine_changes": 0,
   "receiving_checkout_mutations_by_this_agent": 0,
   "remote_mutations_by_this_agent": 0,
-  "qualification_receipt_sha256": "75a655ad9b8461dfe9f525761e78899c7d9a2747b943ab8362cf6adbc655fe64"
+  "qualification_receipt_sha256": "3660a856ddd12cb2f2efccd17e06ec68991771adc08258ebfe46ff42fe357367"
 }

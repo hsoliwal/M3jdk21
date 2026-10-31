@@ -17,7 +17,7 @@ Full-width bit 31, required/forbidden contradictions, partial `subList` index wi
 set -eu
 mkdir -p build/m3-physical-mask
 src=m3/collections/src/main/java/com/m3/collections
-proof=m3/collections/src/test/java/com/m3/collections/M3PhysicalStateSnapshotProof.java
+proof=m3/collections/src/test/java/jdk/m3/collections/M3PhysicalStateSnapshotProof.java
 javac --release 21 -Xlint:all -Werror -d build/m3-physical-mask \
   "$src/M3IndexMaskCompactor.java" \
   "$src/M3IndexPathMasks.java" \

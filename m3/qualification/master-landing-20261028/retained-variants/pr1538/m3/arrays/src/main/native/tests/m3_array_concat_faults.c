@@ -129,7 +129,7 @@ static void JNICALL put_chars(JNIEnv *env, jcharArray array, jsize start, jsize 
     memcpy(output.units + start, in, (size_t)count * sizeof(jchar));
 }
 
-extern jcharArray Java_com_m3_arrays_M3ArrayNative_nativeConcatenateUtf16(
+extern jcharArray Java_jdk_m3_arrays_M3ArrayNative_nativeConcatenateUtf16(
         JNIEnv *, jclass, jobjectArray);
 
 static void configure(jsize count, int injected_call, int with_pending) {
@@ -177,7 +177,7 @@ int main(void) {
         configure(count, 0, 0);
         jchar original[SEGMENTS][SOURCE_CAPACITY];
         memcpy(original, source_units, sizeof original);
-        jcharArray value = Java_com_m3_arrays_M3ArrayNative_nativeConcatenateUtf16(
+        jcharArray value = Java_jdk_m3_arrays_M3ArrayNative_nativeConcatenateUtf16(
                 &env, NULL, (jobjectArray)&segments_identity);
         require(value == (jcharArray)&output && pending == NONE, "normal work returns independent output");
         require(allocations == 1 && object_reads == 2 * count, "unchanged two-pass materialization work");
@@ -199,7 +199,7 @@ int main(void) {
     for (int with_pending = 0; with_pending <= 1; with_pending++) {
         for (int call = 1; call <= 2 * SEGMENTS; call++) {
             configure(SEGMENTS, call, with_pending);
-            jcharArray value = Java_com_m3_arrays_M3ArrayNative_nativeConcatenateUtf16(
+            jcharArray value = Java_jdk_m3_arrays_M3ArrayNative_nativeConcatenateUtf16(
                     &env, NULL, (jobjectArray)&segments_identity);
             require(value == NULL, "failed lookup publishes no output");
             require(pending == (with_pending ? ORIGINAL_EXCEPTION : ILLEGAL_EXCEPTION),

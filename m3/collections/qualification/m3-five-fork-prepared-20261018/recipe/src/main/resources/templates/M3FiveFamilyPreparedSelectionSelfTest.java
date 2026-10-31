@@ -1,8 +1,8 @@
 /* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
-package com.m3.collections.interop;
+package jdk.m3.collections.interop;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import com.m3.collections.M3IndexMaskCompactor;
+import jdk.m3.collections.M3IndexMaskCompactor;
 public final class M3FiveFamilyPreparedSelectionSelfTest {
 private static int checks;
 private static void check(boolean b){checks++;if(!b)throw new AssertionError("check="+checks);}

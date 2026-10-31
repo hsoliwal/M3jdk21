@@ -1,10 +1,10 @@
 path	git_blob	status	pr	note
-.github/workflows/m3-first-release-admission.yml	d579c1935a532b74a6c948a3cfa73259580f6be7	modified	2116	PR version, not live; the git blob id is its content address
-README.md	3fc0309cef8352298db642e10c19e52f36c601e8	modified	2116	PR version, not live; the git blob id is its content address
-m3/docs/m3jdk21-porting-invariant.md	d05d361696fd6b8d1b1d7ea24ba23ab70cfa9599	modified	2116	PR version, not live; the git blob id is its content address
+.github/workflows/m3-first-release-admission.yml	a0fb1edfd301d3e111b2039e826b584f21d959fc	modified	2116	PR version, not live; the git blob id is its content address
+README.md	3bd9e67fd3d7afd19ed65806d7da881421a9db84	modified	2116	PR version, not live; the git blob id is its content address
+m3/docs/m3jdk21-porting-invariant.md	41a3c8e5911fe7f87742b89de37e85051c2dd8dd	modified	2116	PR version, not live; the git blob id is its content address
 m3/release/QUEUE.md	2f01ef191099f5aaf9c57ac6c6cf1b654129c55f	added	2116	PR version, not live; the git blob id is its content address
 m3/release/README.md	f05d0f40d8faaf48feccb9dd13b648e29f4b12db	modified	2116	PR version, not live; the git blob id is its content address
-m3/release/queue.json	7d50a6b260219dfabcd780e37e1c89cb34b6150c	added	2116	PR version, not live; the git blob id is its content address
+m3/release/queue.json	b4e4ef85a35647172e44e661d0100621d7038091	added	2116	PR version, not live; the git blob id is its content address
 m3/release/release-contract.json	a2b9dbf33ea49075151d9cd576107091631e7e6f	modified	2116	PR version, not live; the git blob id is its content address
 m3/release/test_release_admission.py	177b011494fde9d4c588e7790007aab875b608ce	modified	2116	PR version, not live; the git blob id is its content address
-m3/release/verify_release_admission.py	5b61f2fe2a4b64d1dd451b848184e2cb83aa0368	modified	2116	PR version, not live; the git blob id is its content address
+m3/release/verify_release_admission.py	d5a8754b553f6cbc0c3f71d7e407fd10e746ed11	modified	2116	PR version, not live; the git blob id is its content address

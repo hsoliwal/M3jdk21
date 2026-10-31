@@ -1,0 +1,4 @@
+# path	before	after	template
+m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskWindow.java	ABSENT	99d274532f99816ca2038ba9f3d564415380981358a83824efaa46432d4114cc	M3IndexMaskWindow.java.txt
+m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskWindowSelfTest.java	ABSENT	1992ce76877dee09bc449b7adb6e0f429b7286c446caa47b02b4c29e62c4eddc	M3IndexMaskWindowSelfTest.java.txt
+m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskWindowTest.java	ABSENT	d337b99e5925874f8599fc284fe6d4560e08beb48bb9afd89223f751c4a9dcb7	M3IndexMaskWindowTest.java.txt

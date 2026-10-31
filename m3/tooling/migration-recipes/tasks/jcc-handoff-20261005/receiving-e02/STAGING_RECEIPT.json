@@ -10,32 +10,32 @@
     {
       "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java",
       "role": "retained_destination_owner",
-      "sha256": "ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb",
-      "git_blob_sha1": "0041adab5913304874f5063fc2b982ff3cc1e065",
+      "sha256": "d2f8d2285d8b9b90b30f0906e2373efab8a25d9c84f0eefc252ed7acf2e20719",
+      "git_blob_sha1": "44935f75d9736744fbe0653774e324b140eea0be",
       "bytes": 7151,
       "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/sources/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java"
     },
     {
       "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
       "role": "retained_destination_owner",
-      "sha256": "8384244946df1f840406aaf71438b4f0dba311dfd7eba7b421a064d63c31bf3b",
-      "git_blob_sha1": "94ff41d9a298b671749a69bd8bc7b32005ebf877",
+      "sha256": "cd1902340803d122c520f41fe655ad049918213fb2cf2d8c7e7ab799d1604881",
+      "git_blob_sha1": "dc306c6bc059b54a1499104e5bcbb7758f484410",
       "bytes": 3058,
       "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/sources/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java"
     },
     {
       "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
       "role": "retained_destination_owner",
-      "sha256": "2d100ed5d5810232b90b46f55f99c907f54a195b679b58f295dd065c8f03db69",
-      "git_blob_sha1": "6b3b8a126cca230526c66adba36f53f5f9f49f5b",
+      "sha256": "649239ffdfbfda0465410f47a297f770cfb27311399276b856ee03383a5fb90d",
+      "git_blob_sha1": "3fc283ba8ea7d89f5d6de812a54ee9bbab1dc68b",
       "bytes": 2700,
       "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/sources/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java"
     },
     {
       "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java",
       "role": "retained_destination_owner",
-      "sha256": "496624f1f8612f3c39ea20c6f77fa0dc0594fa13c378b2f2a3a06143c739df1c",
-      "git_blob_sha1": "4954825bdb4b5193c59f24ec66f95d2bd3fc8658",
+      "sha256": "27ef95b6300dcda7c8ebfeebdaee62587b60e13d44c6c72bfbb56d8e6435e303",
+      "git_blob_sha1": "d254057774ac0943a7a6b00ded7d8c90653cc716",
       "bytes": 3073,
       "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/sources/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java"
     },

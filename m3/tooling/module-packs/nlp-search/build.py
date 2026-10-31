@@ -81,8 +81,8 @@ def main():
     if "com.sun.source.util.M3AST" not in run("m3-compiler-api", [jdk / "bin/javap", "--module",
                                                                 "jdk.compiler", "com.sun.source.util.M3AST"]):
         raise ValueError("The supplied JDK must contain the M3AST compiler API")
-    source_owner = root / "m3/vendor/synexia/nlp-search"
-    spec = importlib.util.spec_from_file_location("synexia_source_build", source_owner / "build.py")
+    source_owner = root / "m3/vendor/m3/nlp-search"
+    spec = importlib.util.spec_from_file_location("m3_source_build", source_owner / "build.py")
     source_build = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(source_build)
     view = out / "donor"

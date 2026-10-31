@@ -146,7 +146,7 @@
   "output_warning_policy": "Strict production/new proof code: -Xlint:all -Werror. No warning suppression by changing sealed source.",
   "schema": "M3_CLASS_INSTANCE_ORIGINAL_UPSTREAM_SUITE_PREPARATION_V1",
   "status": "PREPARED_NOT_EXECUTED",
-  "existing_qualification_manifest_sha256": "1c09e59544196a1d1e06f1a3b91fb0525f321045dff5f865d5054b3e25407bb2",
+  "existing_qualification_manifest_sha256": "b2ca9084ef83c242d7b4413012aff4c0d27d7c22da70ed9161304d0c67171d66",
   "donor_source_pins": [
     {
       "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\class-instance-next-upstream\\fixtures\\com\\google\\common\\collect\\ImmutableClassToInstanceMapTest.java",

@@ -25,7 +25,7 @@ That draft inventories the target's existing recipe-source surface, not yet migr
 
 ## Source-first implementation gate
 
-1. Compare each candidate against `synexia-openrewrite-recipes/CANONICAL_RECIPE_HOME.tsv`,
+1. Compare each candidate against `m3-openrewrite-recipes/CANONICAL_RECIPE_HOME.tsv`,
    `.m3/recipe-ownership.tsv`, legacy migration status and relevant active PR heads.
    Existing canonical recipes win; keep historical target-local mirrors frozen.
 2. For a genuine portable gap, qualify and commit recipe implementation, Maven POM,
@@ -39,7 +39,7 @@ That draft inventories the target's existing recipe-source surface, not yet migr
 4. Keep earlier optimizations and stacked PR evidence; never force-push, rewrite
    an active head, or silently merge this or any qualifying receiver.
 
-**Product-specific constraints:** M3JDK21 owns Java 21/public JDK API, String/arrays/collections/AST phase, native symbol/ABI, HotSpot, JIT/GC/CDS and jtreg acceptance. Keep exact target-native OpenJDK backports/adapters locally. Do not silently promote a copied Synexia mirror as canonical or rewrite OpenJDK files without their own contracts and receipts.
+**Product-specific constraints:** M3JDK 21 owns Java 21/public JDK API, String/arrays/collections/AST phase, native symbol/ABI, HotSpot, JIT/GC/CDS and jtreg acceptance. Keep exact target-native OpenJDK backports/adapters locally. Do not silently promote a copied Synexia mirror as canonical or rewrite OpenJDK files without their own contracts and receipts.
 
 **License gate:** Apache-2.0 only for M3-owned source; OpenJDK original terms on OpenJDK sources.
 

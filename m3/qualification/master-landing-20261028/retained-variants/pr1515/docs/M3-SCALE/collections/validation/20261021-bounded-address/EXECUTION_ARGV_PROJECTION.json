@@ -1,5 +1,5 @@
 {
-  "schema": "synexia.data.address.observed-argv-projection.v1",
+  "schema": "m3.data.address.observed-argv-projection.v1",
   "status": "SOURCE_BOUND_OBSERVED_ARGUMENTS_DATA_ONLY",
   "registered_generic_executor": false,
   "native_execution_requested_by_this_file": false,
@@ -18,8 +18,8 @@
   "token_replacement": "Only fixed root prefixes were replaced; argument order, flags, filenames, property values and expected exits are preserved. Raw launch-claim hashes bind the originals. No shell command string is constructed.",
   "source_to_repository_mapping": [
     {
-      "retained_path": "${retained_root}/src/com/m3/collections/M3IndexMaskCompactor.java",
-      "repository_path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "retained_path": "${retained_root}/src/jdk/m3/collections/M3IndexMaskCompactor.java",
+      "repository_path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
       "source_ref": "087e9bca5bd38a3606ac2ce1ced73bfb38916564",
       "bytes": 17626,
       "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924",
@@ -27,8 +27,8 @@
       "access": "IMMUTABLE_INPUT"
     },
     {
-      "retained_path": "${retained_root}/src/com/m3/collections/M3LongIndexProjection.java",
-      "repository_path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "retained_path": "${retained_root}/src/jdk/m3/collections/M3LongIndexProjection.java",
+      "repository_path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
       "source_ref": "087e9bca5bd38a3606ac2ce1ced73bfb38916564",
       "bytes": 9493,
       "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e",
@@ -36,17 +36,17 @@
       "access": "IMMUTABLE_INPUT"
     },
     {
-      "retained_path": "${retained_root}/src/com/m3/collections/M3LongAddressKernel.java",
-      "repository_path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+      "retained_path": "${retained_root}/src/jdk/m3/collections/M3LongAddressKernel.java",
+      "repository_path": "m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java",
       "source_ref": "087e9bca5bd38a3606ac2ce1ced73bfb38916564",
       "bytes": 5865,
-      "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
-      "git_blob": "9ac6c5a1e121affd28e6503d922927f6c91c3a66",
+      "sha256": "8fa3ebd0a31e78aa2c763c9ab99955e419f8573a9687d3e817e913c0ed48d8ed",
+      "git_blob": "fe30e94f5e66e2f4d43365bddb58dfdbb4f25207",
       "access": "IMMUTABLE_INPUT"
     },
     {
-      "retained_path": "${retained_root}/src/com/m3/collections/M3LongAddressBoundedSelfTest.java",
-      "repository_path": "m3/collections/src/test/java/com/m3/collections/M3LongAddressBoundedSelfTest.java",
+      "retained_path": "${retained_root}/src/jdk/m3/collections/M3LongAddressBoundedSelfTest.java",
+      "repository_path": "m3/collections/src/test/java/jdk/m3/collections/M3LongAddressBoundedSelfTest.java",
       "source_ref": "087e9bca5bd38a3606ac2ce1ced73bfb38916564",
       "bytes": 8569,
       "sha256": "0e590e67416010c433b82eb263ddc55f162c099eed13b7fb1606b2c868d83c5d",
@@ -58,14 +58,14 @@
       "repository_path": "m3/collections/src/main/native/collections/m3_long_address_kernel.c",
       "source_ref": "087e9bca5bd38a3606ac2ce1ced73bfb38916564",
       "bytes": 3458,
-      "sha256": "49a3e45262ee764c37746c323ae0def76adfff5f27a4cace6ab7416587ca544f",
-      "git_blob": "821876dfb56d836a0ae23e4bc16a391fd7f97ef2",
+      "sha256": "ba2e8a66c23bffa52e1b9e20eb9f1e890fb41ee13891dae0ed8d48cd6069f5ba",
+      "git_blob": "9f68bba46827db2cb53bdb597042829358663f91",
       "access": "IMMUTABLE_INPUT"
     }
   ],
   "generated_artifacts": {
     "headers": "${retained_root}/headers; exact2 files in COMPILE_OUTPUTS.json",
-    "forced_address_header": "${retained_root}/headers/com_m3_collections_M3LongAddressKernel.h",
+    "forced_address_header": "${retained_root}/headers/jdk_m3_collections_M3LongAddressKernel.h",
     "JNI_descriptor": "([J[III[JI)V",
     "classes": "${retained_root}/classes; exact11 major65 files in COMPILE_OUTPUTS.json",
     "native_C": "${retained_root}/native-src/m3_long_address_kernel.c",
@@ -115,10 +115,10 @@
         "${retained_root}/classes",
         "-h",
         "${retained_root}/headers",
-        "${retained_root}/src/com/m3/collections/M3IndexMaskCompactor.java",
-        "${retained_root}/src/com/m3/collections/M3LongIndexProjection.java",
-        "${retained_root}/src/com/m3/collections/M3LongAddressKernel.java",
-        "${retained_root}/src/com/m3/collections/M3LongAddressBoundedSelfTest.java"
+        "${retained_root}/src/jdk/m3/collections/M3IndexMaskCompactor.java",
+        "${retained_root}/src/jdk/m3/collections/M3LongIndexProjection.java",
+        "${retained_root}/src/jdk/m3/collections/M3LongAddressKernel.java",
+        "${retained_root}/src/jdk/m3/collections/M3LongAddressBoundedSelfTest.java"
       ],
       "cwd": "${retained_root}",
       "expected_exit": 0,
@@ -151,7 +151,7 @@
         "-I",
         "${jdk}/include/win32",
         "-include",
-        "${retained_root}/headers/com_m3_collections_M3LongAddressKernel.h",
+        "${retained_root}/headers/jdk_m3_collections_M3LongAddressKernel.h",
         "${retained_root}/native-src/m3_long_address_kernel.c",
         "-o",
         "${fixture}/native/m3_collections_address.dll"
@@ -217,7 +217,7 @@
         "-Djava.library.path=${fixture}/empty-native",
         "-cp",
         "${retained_root}/classes",
-        "com.m3.collections.M3LongAddressBoundedSelfTest"
+        "jdk.m3.collections.M3LongAddressBoundedSelfTest"
       ],
       "cwd": "${fixture}",
       "expected_exit": 1,
@@ -262,7 +262,7 @@
         "-Djava.library.path=${fixture}/empty-native",
         "-cp",
         "${retained_root}/classes",
-        "com.m3.collections.M3LongAddressBoundedSelfTest"
+        "jdk.m3.collections.M3LongAddressBoundedSelfTest"
       ],
       "cwd": "${fixture}",
       "expected_exit": 0,
@@ -307,7 +307,7 @@
         "-Djava.library.path=${fixture}/native",
         "-cp",
         "${retained_root}/classes",
-        "com.m3.collections.M3LongAddressBoundedSelfTest"
+        "jdk.m3.collections.M3LongAddressBoundedSelfTest"
       ],
       "cwd": "${fixture}",
       "expected_exit": 0,

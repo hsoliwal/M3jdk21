@@ -18,11 +18,11 @@
   },
   "files": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java",
-      "before_git_blob_sha1": "bb41516a28fc653c9b2f42d26b991cfeaaf34999",
-      "after_git_blob_sha1": "01b301c99ebb114fa69d3d341d27823250ee8429",
-      "before_sha256": "888b22b7615d170fff078bdc06780de07a7dfdef2025406b7f4134429db37503",
-      "after_sha256": "e580548398c8c9632c639c9dd94b4f8dc9bcd00d7e676f980d65a2b38aebffb0",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java",
+      "before_git_blob_sha1": "076f655b96a09be7cbf3ef38d47fe8d2a2d0d2c5",
+      "after_git_blob_sha1": "b15bcbac7b8a3274078956db78b30f823e7944d9",
+      "before_sha256": "a1a7e24982504e08ded4c156a3d54606ebb1c5f29cdc3cd195a0a5852a475fa1",
+      "after_sha256": "f2a6deb5fb57420c79dbc5e31a8765c5750d930fc763f3bcf0918c268a84fd01",
       "role": "primitive_array_native_window_commit",
       "previous_draft_postimage": {
         "git_blob_sha1": "4e5089656f7187773054026e93d82f08ced148db",
@@ -33,9 +33,9 @@
     {
       "path": "m3/collections/src/test/java/com/m3/collections/M3TreeCommitAtomicityTest.java",
       "before_git_blob_sha1": null,
-      "after_git_blob_sha1": "404498b830456217a0960d25d52574d5d7f35229",
+      "after_git_blob_sha1": "506b31ef17ef78df8d506436a2b1a7bf1e4b51ba",
       "before_sha256": "ABSENT",
-      "after_sha256": "0e3b20ea0a58442bb0de3fe22bab4d854a676a028593e72bf5605b54711ec8d6",
+      "after_sha256": "8f91bbc7904be8d3a961b85de28182065828186fe210225f585bbced084042af",
       "role": "JUnit regression postimage",
       "previous_draft_postimage": {
         "git_blob_sha1": "03135f67029a6467a109bab9624897622a41bd68",
@@ -45,14 +45,14 @@
   ],
   "catalogue": {
     "path": "m3/collections/algorithm-catalog/tree-commit-atomic-20261025.tsv",
-    "git_blob_sha1": "5cd79f36594e142ea9f4611787b10d4875f847a6",
+    "git_blob_sha1": "69efacfb44cbecc9cc88c04d7279585aeaac922f",
     "rows": 4
   },
   "history": {
     "parent_pr": "https://github.com/hsoliwal/M3jdk21/pull/1881",
     "previous_receiver": "m3/collections/qualification/arraylist-dual-word-20261023/RECEIVER_RECEIPT.json",
-    "previous_receiver_blob_sha1": "127012e84205b84911dd2b77b73f095ae4de0ff9",
-    "previous_source_postimage_git_blob_sha1": "bb41516a28fc653c9b2f42d26b991cfeaaf34999",
+    "previous_receiver_blob_sha1": "bb8e02d267a00b121a08162dacfcad64807bbdae",
+    "previous_source_postimage_git_blob_sha1": "076f655b96a09be7cbf3ef38d47fe8d2a2d0d2c5",
     "historical_preimage_preserved": true
   },
   "atom": {

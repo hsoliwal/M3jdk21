@@ -10,7 +10,7 @@ from pathlib import Path
 import re
 
 BASE = "m3/tooling/migration-recipes"
-PACKAGE = "com.synexia.rewrite.atom"
+PACKAGE = "jdk.internal.m3.rewrite.atom"
 DESCRIPTORS = {
     "m3-atom-pattern.yml": ("M3AtomizePureIntReturnRecipe",),
     "m3-file-inventory.yml": ("M3InventoryPureIntAtomCandidates",),
@@ -21,10 +21,10 @@ DESCRIPTORS = {
         "M3DocumentPureIntAtomRecipe",
     ),
 }
-OWNER_DIR = f"{BASE}/src/main/java/com/synexia/rewrite/atom"
-REGISTRY = f"{BASE}/src/main/java/com/m3/rewrite/scope/M3RecipeScopeRegistry.java"
-CONSUMER = f"{BASE}/src/main/java/com/m3/rewrite/M3Java21ConvergenceRecipe.java"
-CONSUMER_TEST = f"{BASE}/src/test/java/com/m3/rewrite/M3Java21ConvergenceRecipeTest.java"
+OWNER_DIR = f"{BASE}/src/main/java/jdk/internal/m3/rewrite/atom"
+REGISTRY = f"{BASE}/src/main/java/jdk/m3/rewrite/scope/M3RecipeScopeRegistry.java"
+CONSUMER = f"{BASE}/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceRecipe.java"
+CONSUMER_TEST = f"{BASE}/src/test/java/jdk/m3/rewrite/M3Java21ConvergenceRecipeTest.java"
 DESCRIPTOR_DIR = f"{BASE}/src/main/resources/META-INF/rewrite"
 STRING_WORKFLOW = ".github/workflows/mindex-string-backing.yml"
 TOOLING_WORKFLOW = ".github/workflows/m3-tooling-recipes.yml"
@@ -60,7 +60,7 @@ def verify(root: Path) -> tuple[int, int, int]:
         raise ValueError("descriptor directory missing")
     # Inspect all installed YAML descriptors, not only the three positive witnesses.
     for source in sorted(descriptor_dir.glob("*.yml")):
-        if "com.m3.rewrite.atom." in source.read_text(encoding="utf-8"):
+        if "jdk.m3.rewrite.atom." in source.read_text(encoding="utf-8"):
             raise ValueError("obsolete recipe package in " + source.name)
 
     refs = []
@@ -89,7 +89,7 @@ def verify(root: Path) -> tuple[int, int, int]:
         if f"import {qualified};" not in production or f"import {qualified};" not in test:
             raise ValueError("Java convergence consumer import drift: " + qualified)
     for name, text in ((CONSUMER, production), (CONSUMER_TEST, test)):
-        if "import com.m3.rewrite.atom." in text:
+        if "import jdk.m3.rewrite.atom." in text:
             raise ValueError("legacy Java import: " + name)
 
     expected_order = DESCRIPTORS["m3-java21-convergence.yml"]

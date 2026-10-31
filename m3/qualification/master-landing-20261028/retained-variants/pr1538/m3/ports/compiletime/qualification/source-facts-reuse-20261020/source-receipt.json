@@ -45,32 +45,32 @@
       },
       "source_files": [
         {
-          "path": "m3/collections/src/main/java/com/m3/collections/M3PrimitiveFilteredSequences.java",
-          "preimage_sha256": "487a54917cbae6ec9802ca75aa04edc1a99dc0b6e9ed2a294b06dca6054c1af3",
-          "postimage_sha256": "4616405cec600726a31256ba654e25614d963afc8109469d5c8257fa197cc052",
-          "parent_git_blob_sha1": "2c70b653b38c467998de97c0f84e4c0cdfdda6c8",
-          "postimage_git_blob_sha1": "204688dfc6202390c3bedbd4619c6c267fa8b3df"
+          "path": "m3/collections/src/main/java/jdk/m3/collections/M3PrimitiveFilteredSequences.java",
+          "preimage_sha256": "0e17afe3cc66283a0e7658f166b84c8bbff1cf64d83c738913bf6a56017cfc35",
+          "postimage_sha256": "a3eaf82eedab424f78ee0b2d4daa789f636903c4c8827ff5dd58a1b919129f73",
+          "parent_git_blob_sha1": "58b78619659b8f24426f24d0e5c5a26c873805a9",
+          "postimage_git_blob_sha1": "225de465054bf40e36299d4a26ed0e3688d99edd"
         },
         {
           "path": "m3/collections/src/test/java/com/m3/collections/M3PrimitiveFilteredTraversalContract.java",
           "preimage_sha256": "ABSENT",
-          "postimage_sha256": "b9070b45fdef12d4446fd9c80706b34c05fa0ad30b734f11e126483be510dc66",
+          "postimage_sha256": "748e786f6656810e2610ccd37f1583e4da0fe66240e4480cca3199da683b824b",
           "parent_git_blob_sha1": null,
-          "postimage_git_blob_sha1": "cba3216da886de8e9ffdd7265e61befb9e18928e"
+          "postimage_git_blob_sha1": "3cb66f7c8f6a4d1692a45ea6b2ed2c8fcfe7d4d2"
         },
         {
           "path": "m3/collections/src/test/java/com/m3/collections/M3PrimitiveFilteredTraversalTest.java",
           "preimage_sha256": "ABSENT",
-          "postimage_sha256": "9865850c1a171f441331b0c78cd837e6febf38b2a33d595fc678cbd009f2e68b",
+          "postimage_sha256": "a52295c99c4537e83255fc37b438be30aff24da64a7b7d5fb9c28f8dba9cabf0",
           "parent_git_blob_sha1": null,
-          "postimage_git_blob_sha1": "764cc508e7af4c0dfb74ef6ce2737c130f44e965"
+          "postimage_git_blob_sha1": "fbe4d391924b68a80bc3bb8f6a5658a96369d169"
         },
         {
           "path": "m3/collections/algorithm-catalog/primitive-filter-traversal-20261020.tsv",
           "preimage_sha256": "ABSENT",
-          "postimage_sha256": "813d3b874fe2fbe211bdf77d9ec6406013de3e0fd6ef5f77a2c8a6104e03159b",
+          "postimage_sha256": "a0ba1695c7b30102d5de40bec476d557b457b820be682e4ecc039779acfa5ae2",
           "parent_git_blob_sha1": null,
-          "postimage_git_blob_sha1": "28e1d74c583b0d920dfe37069519aae7ce20fc41"
+          "postimage_git_blob_sha1": "ccd9d7984041460cd291de29f531859e90452566"
         }
       ]
     },
@@ -86,39 +86,39 @@
       },
       "source_files": [
         {
-          "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/ast/M3File.java",
-          "preimage_sha256": "da2925fa912753fcd2cb69fd9c348c6fc1c2fc235a2ce1be006360597dd8565c",
-          "postimage_sha256": "84117469ccf69b3ded59a31c237f19c475ffb589e320eaf7c284e6bf2afb406d",
-          "parent_git_blob_sha1": "c6107ac0c651793ef2882c244c902509bcb2edbb",
-          "postimage_git_blob_sha1": "88673c8b3c94b6fb801f1f77d7ff6266cdea0822"
+          "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3File.java",
+          "preimage_sha256": "3d9ba8e8daa00d141e7d162f44d04d30b385d4949eb1b9c0f803c972dcf8e4b5",
+          "postimage_sha256": "a6b3804aa09cf5e8194b58dddbaa43696e94bb015ece141b4fd283557b897bd4",
+          "parent_git_blob_sha1": "ad784c0aff5fffc06a6ad1d8f4f8864197889abf",
+          "postimage_git_blob_sha1": "60b53543ef8d73a13a90549973cd9769b1d251e9"
         },
         {
-          "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/ast/M3FileSourceFacts.java",
-          "preimage_sha256": "567eb8f73133d05583964ed66b036cfe0ba8a5c8829d63a611072fbaffc86efa",
-          "postimage_sha256": "a930b51536cf5fe528f0198a8d82f2a75b13a20dfccdc74fc9d6497264971706",
-          "parent_git_blob_sha1": "abbb15e6fdfa0a7804b41ef226173f4a3e726c2a",
-          "postimage_git_blob_sha1": "ca468bac6e7f8a55e4e3b4281bc9b72205c688c6"
+          "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3FileSourceFacts.java",
+          "preimage_sha256": "defa4c14489bc8eb7e1e6ea954743f28e7bb73364977bfef8159d8827d1f0259",
+          "postimage_sha256": "8a59fcac39bbd44b567d09c265a3d6878fcac730a90f30498959e10ff1c523fc",
+          "parent_git_blob_sha1": "e4e56d34d764877f0112481bf7e7c74150e12cb2",
+          "postimage_git_blob_sha1": "eb31a57ee8d58f62bef89162287e8b0d4b1618b6"
         },
         {
-          "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/ast/M3JavacASTIndex.java",
-          "preimage_sha256": "e381f163515d46ad8e2032622e9eb581a6a028a3b3d04fe37fa75430fe9336b5",
-          "postimage_sha256": "c2bf3774ca3c8123cce0321bde3c01b58fda8a798fe9faa933c157a35bb8876b",
-          "parent_git_blob_sha1": "356f7b38010d9d63888d59ba6b3544ba50ad7897",
-          "postimage_git_blob_sha1": "7ba4fa891b23ddb445ae6df7d58301f81bb7046f"
+          "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3JavacASTIndex.java",
+          "preimage_sha256": "7250c9b5d7c92ed26e2931937af45cf05b91e59810294c48ebb5faa383b39045",
+          "postimage_sha256": "68355f1f5bcec15a5039c1cadf139acb64120afe7c6d8e2882f8950d38396b75",
+          "parent_git_blob_sha1": "a258e1e5066bac1784a2a2e1c5ccd0755fc6a735",
+          "postimage_git_blob_sha1": "cb867305b4f9be16afa4e2c7c6186fab47df4a88"
         },
         {
           "path": "m3/ports/compiletime/src/test/java/com/m3/compiletime/ast/M3SourceFactsReuseProof.java",
           "preimage_sha256": "ABSENT",
-          "postimage_sha256": "5d5cbf34a1155e0bf7de0e583b4ea0c1787aa2612f20be4f0e857238122dea41",
+          "postimage_sha256": "ad9a46a3e6df5a89368321376fefbfe6bf792dbb914095295fb94f68c746f44b",
           "parent_git_blob_sha1": null,
-          "postimage_git_blob_sha1": "4e269bcb6f7c9b0cec0336ad958be46fc9afaec0"
+          "postimage_git_blob_sha1": "dbf233ff320c6c314f90308209a5545bbdfdaf21"
         },
         {
           "path": "m3/ports/compiletime/qualification/source-facts-reuse-20261020/run-proof.sh",
           "preimage_sha256": "ABSENT",
-          "postimage_sha256": "249e0f6d7123d1e999103a774b9b61d492ffc1f129ca7f9d236ff1ea61da81e0",
+          "postimage_sha256": "f53306f14c2bc1b35432c841ec4f0403165938917526156cee0f56af6f411366",
           "parent_git_blob_sha1": null,
-          "postimage_git_blob_sha1": "723374fd1a3949d0e32abfb27f908cb98e5b3ff9"
+          "postimage_git_blob_sha1": "eda4c2cd1b251c663204bc0a97ce7f8f44f0dc89"
         }
       ]
     },
@@ -136,16 +136,16 @@
         {
           "path": "m3/ports/compiletime/qualification/source-facts-reuse-20261020/src/test/java/M3NativeSourceSnapshotContract.java",
           "preimage_sha256": "ABSENT",
-          "postimage_sha256": "2dbc42560bb38bbb6fe8fc2b59a25706ca12b4576a557b6ed7f573796a97eb93",
+          "postimage_sha256": "d382d70d4d69d71c30965577578251283ef360d13cfd258f5cd18f5cf145c36a",
           "parent_git_blob_sha1": null,
-          "postimage_git_blob_sha1": "884be013013079213ee3a4b7fdeec5600afbd515"
+          "postimage_git_blob_sha1": "a735da2c8ab0e3d7c5f499c4906c9dceb6c1ba30"
         },
         {
           "path": "m3/ports/compiletime/qualification/source-facts-reuse-20261020/verify-native.sh",
           "preimage_sha256": "ABSENT",
-          "postimage_sha256": "8fe84e2121a93148fc232bfa0479a67eed173e369f0dcbdc0d6de8829cfe5774",
+          "postimage_sha256": "50d92606a5b61b41ece6e1a2eb2f18f1a74c0d7af61ecd59edadeb0f0f08752b",
           "parent_git_blob_sha1": null,
-          "postimage_git_blob_sha1": "41b0b8c58a2c543a517323e5936bc04825b56c41"
+          "postimage_git_blob_sha1": "3a7187be93f197f6d6b6b953b4dbcbffd565c541"
         }
       ]
     },
@@ -162,24 +162,24 @@
       "source_files": [
         {
           "path": "m3/arrays/src/main/native/m3_arrays_jni.c",
-          "preimage_sha256": "d5dd8f71a86e5f527941886a5358eeec5596a0f6a5735c82db8c10b72a129d1a",
-          "postimage_sha256": "2ad8e1c289578e8768cd5654a509889c5d80f40bff47a6e826a2a93a035fc383",
-          "parent_git_blob_sha1": "78bb0a19eb8afd0abfd02f30b42063723312cbbf",
-          "postimage_git_blob_sha1": "f01218c2e40aaab89f4e09b949745534c51ea4b2"
+          "preimage_sha256": "95d9416f28aa21401afba0e24e074ed459ccf8839f6f8b00226717932ad8f00c",
+          "postimage_sha256": "57877aede32e8ddad6cec13b07dbba6f1c6cd8b90e2388475e92f70e298371df",
+          "parent_git_blob_sha1": "e2f87dfb68e533ed4934274ac0592aba71cb03c4",
+          "postimage_git_blob_sha1": "e257a73a650f4528479b04fd3e35675919c0b4ec"
         },
         {
           "path": "m3/arrays/src/main/native/tests/m3_array_concat_faults.c",
           "preimage_sha256": "ABSENT",
-          "postimage_sha256": "f6f99784ecbe9ee64264fd2ccc4d482da390b82b46d93bb34810f1bf8949b03b",
+          "postimage_sha256": "420a938d0bd8efb98decec683d5b3797c2b7527f91655bb1be1b3e1343264fea",
           "parent_git_blob_sha1": null,
-          "postimage_git_blob_sha1": "8cb05b6f4c2036d268282ead99bf7d88cd213d93"
+          "postimage_git_blob_sha1": "283f301048820b7912395e945a73d1f9c17b774a"
         },
         {
           "path": "m3/ports/compiletime/qualification/source-facts-reuse-20261020/verify-jni-failures.sh",
           "preimage_sha256": "ABSENT",
-          "postimage_sha256": "3a34f97721012a3ca2e29ab7bcf5b4665d4f9d662441aa02379ca02f700e3695",
+          "postimage_sha256": "cecf566019a59264d7187c2edb460c9b9c422aa9e4a6cd8c395b703bcc88191a",
           "parent_git_blob_sha1": null,
-          "postimage_git_blob_sha1": "441c35bb6a80f698f4e280f6ec4e82afb9d8153c"
+          "postimage_git_blob_sha1": "4495552871cd2b6d57fbb1359b0aa82434cc4f71"
         }
       ]
     },
@@ -197,16 +197,16 @@
         {
           "path": ".github/workflows/m3-compiletime-precompute.yml",
           "preimage_sha256": "1e5b2e4fede0326274041eb4422b88f09d275b4c6722e3903a676f5b72b764de",
-          "postimage_sha256": "7af6dc10bb531a6a9950bf16ed0084db0df23da936db1ba4ae115ab284dadb55",
+          "postimage_sha256": "d130ff42a90d8b1e72f5aa90205d4be0229a34c3976afe6ee9196062560f5595",
           "parent_git_blob_sha1": "cb827a5cc04f0f8c164c44bd8dcb1bc84871e371",
-          "postimage_git_blob_sha1": "bb134aa0b51ccaf7f8e60c669db0107d0e294509"
+          "postimage_git_blob_sha1": "346e1a9db34fc78ce79f6bf9e7b37ae938333bb4"
         },
         {
           "path": "m3/docs/name-mapping.d/m3-source-facts-filter-traversal-20261020.json",
           "preimage_sha256": "ABSENT",
-          "postimage_sha256": "2ed36ffee270aa210e7a438ea446d1a849a4b6649f86362f442d7aca41b3a404",
+          "postimage_sha256": "f0e612398d6bd19048ede62f7c277f26ad9959c1e334d90f0e6cd0dd036058c7",
           "parent_git_blob_sha1": null,
-          "postimage_git_blob_sha1": "15eaa615c0bcbbc6c8d4c17856c3624d1d16ee62"
+          "postimage_git_blob_sha1": "aad01cdb1b699954905e080243cd217fa7de5606"
         },
         {
           "path": "m3/tooling/recipe-catalogue.tsv",
@@ -218,9 +218,9 @@
         {
           "path": "m3/tooling/shared-frontend/algorithm-catalogue.tsv",
           "preimage_sha256": "b406448c1b7a74872104c5ae26c211556058ac4e4458f5d8e94bcc9dd49f9e3e",
-          "postimage_sha256": "82ad7239b7a190f26823038a696816b48e25903122fe43a148624bef9b509092",
+          "postimage_sha256": "52d0379886da30b9d90e4e9a16eb75255ebc6753a85319ab2119f7ef1c6e65f3",
           "parent_git_blob_sha1": "d78123800e627ab64f4e2c6215188e2f8b520eba",
-          "postimage_git_blob_sha1": "730610606996b0b4af819d98813d7d4cb55bfed9"
+          "postimage_git_blob_sha1": "ab0672381cd76629c6e263fbafddd545a56d4188"
         }
       ]
     }

@@ -23,14 +23,14 @@ import java.util.logging.ConsoleHandler;
 import java.util.logging.Formatter;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
-import com.m3.collections.spring.M3MultiValueMapAdapter;
+import jdk.m3.collections.spring.M3MultiValueMapAdapter;
 import java.util.LinkedHashMap;
 import java.util.List;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.MultiValueMapAdapter;
 
 /**
- * Runnable example for com.m3.collections.spring.M3MultiValueMapAdapter: the same provider-API calls on org.springframework.util.MultiValueMapAdapter and on the owned class,
+ * Runnable example for jdk.m3.collections.spring.M3MultiValueMapAdapter: the same provider-API calls on org.springframework.util.MultiValueMapAdapter and on the owned class,
  * then a local allocation and footprint comparison. Output goes through java.util.logging (a ConsoleHandler).
  *
  * <p>Run from the module directory after {@code mvn package} (or with the module's classes directory):

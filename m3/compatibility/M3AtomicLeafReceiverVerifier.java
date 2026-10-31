@@ -18,7 +18,7 @@ public final class M3AtomicLeafReceiverVerifier {
             + "\tcompatibility_gate";
     private static final String WRAPPER_HEADER = "id\tproblem_category"
             + "\tsynexia_source_pr\treceiving_plane\trequired_semantics\tdecision";
-    private static final String SYNEXIA_PR =
+    private static final String M3_PR =
             "https://github.com/hsoliwal/com.synexia/pull/11925";
     // SHA-1 Git blobs and SHA-256 exact file bytes on the committed Synexia candidate.
     private static final Map<String, List<String>> PINS = Map.of(
@@ -33,14 +33,14 @@ public final class M3AtomicLeafReceiverVerifier {
             "3fec840596457437c3f3fc8cd542a4f74f7c18d1ea3bc0f003cd92ac93c020f5",
             "74ab7e50597d288e3401379c6c307dacf5791aab685a9146fc4af672032bdc98"),
         "MEMBER_KIND", List.of(
-            "9ba32db4528c74535a68c656b891d08924b75dc0",
+            "f68a9ce030ace43d20c626c3c6f6bf8c54a0ece0",
             "e3cf6410aa8f17c9ce9351fe3e1aa28c31008a10",
-            "76c8a68d9f1bafa36df848da02c1b00c4d738e7ff09c63d6761d6c8f892e20cb",
+            "196619a117a3783ad02487a3b05d8f22066a3b1667cabbd3cb17d63bba9dd4dc",
             "7cf7130665f9b4f5872d27c7e41580655f5490ba72fa4d4d48615d7217bf6b70"),
         "CLASS_FLAGS", List.of(
-            "d8131ebce1c01a014a9320e2ec771673f2d06b5c",
+            "33d406046f18d71c255e3ef130edb7a464260782",
             "e4f9dc223c4c0a424a42c5fedae0d54a6107a252",
-            "bc3fcc4bc3f582e6565c1c8509038217e7a7360dbb0e290c66b03090c0f6961e",
+            "08f2e889d5e35db1a18600db4a9abbd8b6cae0ba67978363d7b1f675c4f38853",
             "43e85b0f935fc8e511b59f2d3a3aff79dfe54dc2a727b50178f178626ec7066d")
     );
 
@@ -75,7 +75,7 @@ public final class M3AtomicLeafReceiverVerifier {
     }
 
     private static void path(String value, String ownerName) {
-        require(value.startsWith("synexia-mindex/") && value.endsWith(".java")
+        require(value.startsWith("m3-mindex/") && value.endsWith(".java")
                 && !value.contains("\\") && !value.contains("//")
                 && !value.contains("/../") && !value.contains("/./")
                 && !Path.of(value).isAbsolute(), "unapproved source path");
@@ -106,7 +106,7 @@ public final class M3AtomicLeafReceiverVerifier {
                 require(row[6 + slot].equals(pins.get(slot)),
                         "content-addressed pin mismatch: " + id + " slot " + slot);
             }
-            require(row[11].equals(SYNEXIA_PR), "unapproved source PR");
+            require(row[11].equals(M3_PR), "unapproved source PR");
             require(row[12].equals("EVIDENCE_ONLY")
                     && row[13].equals("false"), "unproved JDK runtime admission");
             require(row[10].startsWith("M3_") && !row[10].contains("java.base")

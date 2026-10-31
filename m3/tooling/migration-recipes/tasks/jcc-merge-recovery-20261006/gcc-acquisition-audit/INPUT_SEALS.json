@@ -29,7 +29,7 @@
     {
       "path": "receiving-merge-audit/calls/current_refresh_github_tree.json",
       "bytes": 30108,
-      "sha256": "e245ce94a52bf1cc38e43568ef122164e519deef0efb7c759c98bcfdaf30b813"
+      "sha256": "c0e15a3a59178248aca45aceb935c49e074416ebbb7b602f809d21e1964f7520"
     },
     {
       "path": "gcc-acquisition-audit/ARCHIVE_CALLS.json",
@@ -49,7 +49,7 @@
     {
       "path": "gcc-acquisition-audit/SUMMARY.json",
       "bytes": 10008,
-      "sha256": "2e2e28b298c8e7c8b5d6e977709bcfcccfee13a37391a734822288fe9a246017"
+      "sha256": "effa5211689bffb9b6438ecfe21a813e51ddb1f4138ccfdb2012d0c865286531"
     },
     {
       "path": "gcc-acquisition-audit/WEB_PRIMARY_SOURCES.json",

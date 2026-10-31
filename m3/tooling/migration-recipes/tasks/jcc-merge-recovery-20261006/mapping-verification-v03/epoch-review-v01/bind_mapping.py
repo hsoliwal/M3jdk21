@@ -24,20 +24,20 @@ DESTINATION_ROOT = "491bbd80a51483d0710fc12c1bad3a037b385ba0"
 SOURCE_HISTORY = "becb01f90bda8302b25592c3705fc35c7a250676"
 RECEIVER_HISTORY = "946fd922c1d878e3f32309c83d132057a7ef8451"
 CRATE = "jcc-merge-recovery-20261006-mapping-v03"
-LAB = "synexia.jcc-recipe-laboratory"
-JNI = "synexia.jcc-java-jni-regression"
+LAB = "m3.jcc-recipe-laboratory"
+JNI = "m3.jcc-java-jni-regression"
 IDS = (LAB, JNI)
-IOP = "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3IopPatternMechanicalPasses.java"
+IOP = "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3IopPatternMechanicalPasses.java"
 PATHS = (
     "m3/docs/name-mapping.json",
     "m3/docs/jcc-source-handoff.md",
     "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
     "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
 )
-RESOURCE_ROOT = "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text"
+RESOURCE_ROOT = "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text"
 TASK_ROOT = "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006"
-TEXT_OWNER = "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java"
-TEXT_OWNER_HASH = "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
+TEXT_OWNER = "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java"
+TEXT_OWNER_HASH = "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795"
 OID = re.compile(r"[0-9a-f]{40}\Z")
 SHA = re.compile(r"[0-9a-f]{64}\Z")
 INPUT_EPOCH_SHA256 = "2a4878ce5eeeeeccfe216dae36e62faa3e5da06c7baa654e7a43ce3d823c5139"
@@ -145,7 +145,7 @@ def validate_source(packet, prior_map, *, allow_fixture=False):
     prior = {row["id"]: row for row in prior_map["migration"]["records"] if row["id"] in IDS}
     expected = {source["path"]: (record_id, source) for record_id, record in prior.items() for source in record["sources"]}
     require(len(expected) == 19, "expected prior19-owner source set")
-    expected[IOP] = (LAB, {"path": IOP, "symbol": "com.synexia.rewrite.M3IopPatternMechanicalPasses", "module": "synexia-openrewrite-recipes"})
+    expected[IOP] = (LAB, {"path": IOP, "symbol": "jdk.internal.m3.rewrite.M3IopPatternMechanicalPasses", "module": "m3-openrewrite-recipes"})
     artifacts = packet.get("artifacts")
     require(isinstance(artifacts, list) and len(artifacts) == 20, "exact current 20-owner source set required")
     actual = {}
@@ -177,8 +177,8 @@ def validate_build_components(packet):
     require(isinstance(components, list) and len(components) == 1, "exact module-POM source component required")
     row = components[0]
     require(row.get("kind") == "module-pom-compile-edge"
-            and row.get("path") == "synexia-openrewrite-recipes/pom.xml"
-            and row.get("module") == "synexia-openrewrite-recipes", "source build component owner mismatch")
+            and row.get("path") == "m3-openrewrite-recipes/pom.xml"
+            and row.get("module") == "m3-openrewrite-recipes", "source build component owner mismatch")
     require(row.get("repository") == SOURCE_REPO and row.get("commit") == packet["commit"], "mixed source build revision")
     decode_body(row)
     require(row.get("sha256") == "7846d9447016ab714a4d1c82d7f3814efa7a94049cb99bb59ba09f6f6d8c7a80"
@@ -289,7 +289,7 @@ def compose(current_files, prior_files, packet, *, allow_fixture=False):
         record["tests"] = []
         record["reason"] = ("Current 20-owner source publication is bound after exact readback; historical source and receiving work is retained. "
                              "Source export, whole owning-module coverage and applicable M3JDK21 runtime/JNI/platform gates remain unadmitted.")
-        record["recipe"] = {"id": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/" + CRATE,
+        record["recipe"] = {"id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/" + CRATE,
                             "version": "0.1.0-SNAPSHOT", "path": TEXT_OWNER, "sha256": TEXT_OWNER_HASH,
                             "preconditions": ["Four exact reviewed current mapping preimages at " + DESTINATION + ".",
                                 "Preserve all 52 ordered IDs, 50 non-JCC records, all 25 current top-level mapping objects, precompute ownership and 20 existing gates.",
@@ -337,7 +337,7 @@ def compose(current_files, prior_files, packet, *, allow_fixture=False):
     bindings["merge_recovery"] = {
         "current_input": DESTINATION, "current_input_root": DESTINATION_ROOT,
         "current_input_epoch": TASK_ROOT + "/mapping-input-epoch.json",
-        "intermediate_reviewed_input": {"commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2", "root_tree": "0812573f02908d8078d13f5f49346865cdf1c0e0", "input_epoch_sha256": "fb413e58be72aaffa1e91149479ac159c6d4b961101eed4ab10f1c99df0b6711", "scope": "Prior 52-record fixture and inherited TQ validation failures retained; current TQ record is preserved from exact C0 input."}, "current_input_epoch_sha256": INPUT_EPOCH_SHA256,
+        "intermediate_reviewed_input": {"commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2", "root_tree": "0812573f02908d8078d13f5f49346865cdf1c0e0", "input_epoch_sha256": "2ea3ffe30ac6824bcc6d708c431b848a4c7997bdb4cdeaaddea1a62640734718", "scope": "Prior 52-record fixture and inherited TQ validation failures retained; current TQ record is preserved from exact C0 input."}, "current_input_epoch_sha256": INPUT_EPOCH_SHA256,
         "earlier_reviewed_input": {"commit": "87590cb96fb0e2dc0f88fae8e01957f7179cd255", "ordered_records": 47, "non_jcc_records": 45, "top_level_mappings": 17, "gates": 20, "scope": "Earlier fixture and refused map input retained as history; current preimages come from the separately frozen C0 epoch."},
         "source_history_publication": SOURCE_HISTORY, "source_history_pr": 9427,
         "receiving_history_publication": RECEIVER_HISTORY, "receiving_history_pr": 189,
@@ -415,7 +415,7 @@ def main():
             {row["path"]: row["sha256"] for row in before_audit["guards"]}, "canonical guards drifted from frozen current epoch")
     for guard in before_audit["guards"]:
         require(digest((epoch_root / guard["file"]).read_bytes()) == guard["sha256"], "frozen canonical guard body drift")
-    plan = {"schema": "m3.sealed-install/1", "recipe_id": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/" + CRATE,
+    plan = {"schema": "m3.sealed-install/1", "recipe_id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/" + CRATE,
             "version": 1, "source_commit": packet["commit"], "destination_base": DESTINATION,
             "scope": "FIXTURE_ONLY_UNPUBLISHABLE" if args.fixture_only else "Exact current 20-owner mapping metadata; source and destination acceptance remain blocked",
             "outputs": sorted(plan_rows, key=lambda row: row["path"]), "guards": guard_plan["guards"]}

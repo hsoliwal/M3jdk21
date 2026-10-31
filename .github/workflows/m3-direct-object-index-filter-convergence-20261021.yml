@@ -4,10 +4,10 @@ on:
   pull_request:
     paths:
       - 'm3/qualification/direct-object-index-filter-20261021/**'
-      - 'm3/collections/src/main/java/com/m3/collections/M3CollectionViews.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3FilteredIsEmptyContract.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3LongIndexNaturalRunContract.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3CollectionViews.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3FilteredIsEmptyContract.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3LongIndexNaturalRunContract.java'
       - 'm3/collections/qualification/filtered-isempty-20261021/**'
       - 'm3/collections/qualification/natural-run-20261021/**'
       - 'src/java.base/share/classes/jdk/internal/misc/M3ObjectMemory.java'

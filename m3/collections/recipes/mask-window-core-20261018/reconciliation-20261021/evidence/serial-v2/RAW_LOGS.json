@@ -108,23 +108,23 @@
     "sha256": "f79d4afdb7d344727a0f8cfc6dba365b49fef2a0e7158ee80e2fedbbfd6e1384"
   },
   "027-recipe-apply.log": {
-    "content": "Exception in thread \"main\" java.lang.IllegalStateException: required source missing: m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java\n\tat com.synexia.rewrite.M3GpuToolJoinManifest$Scan.requireNoFailure(M3GpuToolJoinManifest.java:163)\n\tat com.synexia.rewrite.M3GpuToolJoinManifest$Scan.requireAdmissible(M3GpuToolJoinManifest.java:133)\n\tat com.synexia.rewrite.SealReplay.main(SealReplay.java:39)\n",
+    "content": "Exception in thread \"main\" java.lang.IllegalStateException: required source missing: m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java\n\tat com.synexia.rewrite.M3GpuToolJoinManifest$Scan.requireNoFailure(M3GpuToolJoinManifest.java:163)\n\tat com.synexia.rewrite.M3GpuToolJoinManifest$Scan.requireAdmissible(M3GpuToolJoinManifest.java:133)\n\tat com.synexia.rewrite.SealReplay.main(SealReplay.java:39)\n",
     "sha256": "22cd93baca87af0f63d21e2f08f37271480981156dd5a9b872c980eaa57c514c"
   },
   "028-recipe-apply.log": {
-    "content": "Exception in thread \"main\" java.lang.IllegalStateException: source drift: m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java\n\tat com.synexia.rewrite.M3GpuToolJoinManifest$Scan.requireNoFailure(M3GpuToolJoinManifest.java:163)\n\tat com.synexia.rewrite.M3GpuToolJoinManifest$Scan.requireAdmissible(M3GpuToolJoinManifest.java:133)\n\tat com.synexia.rewrite.SealReplay.main(SealReplay.java:39)\n",
-    "sha256": "53cba079bdd0418f96599896b8bef5511def9811835d6b93a261c0da540eb886"
+    "content": "Exception in thread \"main\" java.lang.IllegalStateException: source drift: m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java\n\tat com.synexia.rewrite.M3GpuToolJoinManifest$Scan.requireNoFailure(M3GpuToolJoinManifest.java:163)\n\tat com.synexia.rewrite.M3GpuToolJoinManifest$Scan.requireAdmissible(M3GpuToolJoinManifest.java:133)\n\tat com.synexia.rewrite.SealReplay.main(SealReplay.java:39)\n",
+    "sha256": "1f2a0a4a23918434f1160fc14414bb6bf513415ee3455353c238c9e3d5948762"
   },
   "029-recipe-apply.log": {
-    "content": "Exception in thread \"main\" java.lang.IllegalStateException: source drift: m3/collections/src/test/java/com/m3/collections/M3MaskWindowKernelSelfTest.java\n\tat com.synexia.rewrite.M3GpuToolJoinManifest$Scan.requireNoFailure(M3GpuToolJoinManifest.java:163)\n\tat com.synexia.rewrite.M3GpuToolJoinManifest$Scan.requireAdmissible(M3GpuToolJoinManifest.java:133)\n\tat com.synexia.rewrite.SealReplay.main(SealReplay.java:39)\n",
+    "content": "Exception in thread \"main\" java.lang.IllegalStateException: source drift: m3/collections/src/test/java/jdk/m3/collections/M3MaskWindowKernelSelfTest.java\n\tat com.synexia.rewrite.M3GpuToolJoinManifest$Scan.requireNoFailure(M3GpuToolJoinManifest.java:163)\n\tat com.synexia.rewrite.M3GpuToolJoinManifest$Scan.requireAdmissible(M3GpuToolJoinManifest.java:133)\n\tat com.synexia.rewrite.SealReplay.main(SealReplay.java:39)\n",
     "sha256": "bdfd3b128ab6509bc470d957c286b66a3103a1aebf83606c9278ddf905eb8310"
   },
   "030-recipe-apply.log": {
-    "content": "Exception in thread \"main\" java.lang.IllegalStateException: template hash mismatch: m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java\n\tat com.synexia.rewrite.M3GpuToolJoinManifest.load(M3GpuToolJoinManifest.java:92)\n\tat com.synexia.rewrite.SealReplay.main(SealReplay.java:25)\n",
+    "content": "Exception in thread \"main\" java.lang.IllegalStateException: template hash mismatch: m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java\n\tat com.synexia.rewrite.M3GpuToolJoinManifest.load(M3GpuToolJoinManifest.java:92)\n\tat com.synexia.rewrite.SealReplay.main(SealReplay.java:25)\n",
     "sha256": "f175f9494d9b3207a7ae0f9253a6a3dd859de04366edb31a9245788f61e22c17"
   },
   "031-recipe-apply.log": {
-    "content": "Exception in thread \"main\" java.lang.IllegalStateException: duplicate template target: m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java\n\tat com.synexia.rewrite.M3GpuToolJoinManifest.load(M3GpuToolJoinManifest.java:72)\n\tat com.synexia.rewrite.SealReplay.main(SealReplay.java:25)\n",
+    "content": "Exception in thread \"main\" java.lang.IllegalStateException: duplicate template target: m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java\n\tat com.synexia.rewrite.M3GpuToolJoinManifest.load(M3GpuToolJoinManifest.java:72)\n\tat com.synexia.rewrite.SealReplay.main(SealReplay.java:25)\n",
     "sha256": "18f7ec0ae10dbf800d920c390bf91571b8a0c34fa27a72cf8ca4c2023bbec0dd"
   },
   "032-recipe-apply.log": {

@@ -25,17 +25,17 @@
 [INFO] -------------------------------------------------------------
 [WARNING] COMPILATION WARNING : 
 [INFO] -------------------------------------------------------------
-[WARNING] /workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java:[21,26] org.apache.commons.collections4.Predicate in org.apache.commons.collections4 has been deprecated
+[WARNING] /workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3ApacheCollectionsTest.java:[21,26] org.apache.commons.collections4.Predicate in org.apache.commons.collections4 has been deprecated
 [INFO] 1 warning
 [INFO] -------------------------------------------------------------
 [INFO] -------------------------------------------------------------
 [ERROR] COMPILATION ERROR : 
 [INFO] -------------------------------------------------------------
-[ERROR] /workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java: warnings found and -Werror specified
-[ERROR] /workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryKeyRangesTest.java:[37,22] cannot find symbol
+[ERROR] /workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3ApacheCollectionsTest.java: warnings found and -Werror specified
+[ERROR] /workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryKeyRangesTest.java:[37,22] cannot find symbol
   symbol:   variable Map
   location: class com.m3.collections.interop.M3FiveLibraryKeyRangesTest
-[ERROR] /workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderFlagSelectionTest.java:[100,49] cannot find symbol
+[ERROR] /workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveProviderFlagSelectionTest.java:[100,49] cannot find symbol
   symbol:   variable M3FiveProviderDirectSdk
   location: class com.m3.collections.interop.M3FiveProviderFlagSelectionTest
 [INFO] 3 errors 
@@ -47,11 +47,11 @@
 [INFO] Finished at: 2026-10-20T15:12:27+01:00
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile (default-testCompile) on project m3-collections-interop: Compilation failure: Compilation failure: 
-[ERROR] /workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java: warnings found and -Werror specified
-[ERROR] /workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryKeyRangesTest.java:[37,22] cannot find symbol
+[ERROR] /workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3ApacheCollectionsTest.java: warnings found and -Werror specified
+[ERROR] /workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryKeyRangesTest.java:[37,22] cannot find symbol
 [ERROR]   symbol:   variable Map
 [ERROR]   location: class com.m3.collections.interop.M3FiveLibraryKeyRangesTest
-[ERROR] /workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderFlagSelectionTest.java:[100,49] cannot find symbol
+[ERROR] /workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveProviderFlagSelectionTest.java:[100,49] cannot find symbol
 [ERROR]   symbol:   variable M3FiveProviderDirectSdk
 [ERROR]   location: class com.m3.collections.interop.M3FiveProviderFlagSelectionTest
 [ERROR] -> [Help 1]

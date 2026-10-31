@@ -38,12 +38,12 @@ class ThreeCompilerRevisionTest(unittest.TestCase):
     def test_forged_source_hash_or_blob_refused(self):
         content = self.ledger.read_text()
         self.ledger.write_text(content.replace(
-            '218516ad3d49f471a20c8b5dcfbdcb88ea8e278b0466dcaf900247ff7398c8d7',
+            'b98412cfcc7965c0de8398b5b743f920ac3b704f0374a03c4c4f5ae50700dff9',
             'f' * 64), encoding='utf-8')
         with self.assertRaisesRegex(ValueError, 'blob drift'):
             self.admitted()
         self.ledger.write_text(content.replace(
-            'c2307832df8ef7e1f429af6a2532dc8f7ec04596',
+            '24b2228d9f38401eeade649ec8473e0033b23bbb',
             '0' * 40), encoding='utf-8')
         with self.assertRaisesRegex(ValueError, 'blob drift'):
             self.admitted()

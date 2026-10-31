@@ -2,7 +2,7 @@
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
  * @test
- * @summary M3JDK21 array-offset deletion bitmask prefix-safe compaction
+ * @summary M3JDK 21 array-offset deletion bitmask prefix-safe compaction
  * @modules java.base/jdk.internal.mindex
  * @run main/othervm M3CollectionMaskCompactorPrefixTest
  * @run main/othervm -Xint M3CollectionMaskCompactorPrefixTest

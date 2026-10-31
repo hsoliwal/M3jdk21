@@ -50,7 +50,7 @@ def main():
         run([JAVA_HOME / 'bin/javac', '--release', '21', '-d', fixture,
              OLD / 'CanonicalPutAllCalibration3.java', OLD / 'EmptyRootLookupOracle.java'],
             OUT / 'oracle-compile.log')
-    for provider, name in [('java.util.TreeMap', 'jdk'), ('com.m3.collections.M3TreeMap', 'm3')]:
+    for provider, name in [('java.util.TreeMap', 'jdk'), ('jdk.m3.collections.M3TreeMap', 'm3')]:
         origin = 'jrt:/java.base' if name == 'jdk' else 'file:' + str(CLASSES) + '/'
         run([JAVA_HOME / 'bin/java', '-Xmx256m', '-Duser.language=en',
              '-DexpectedJavaHome=' + str(JAVA_HOME), '-DexpectedProviderOrigin=' + origin,

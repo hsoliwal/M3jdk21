@@ -4,30 +4,30 @@
   "canonical_repository": "hsoliwal/com.synexia",
   "canonical_commit": "0ff2ee68607e02b0ec2d1bc699e93653a740ab87",
   "canonical_pr": 11676,
-  "canonical_crate": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/collections-library-interop",
+  "canonical_crate": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/collections-library-interop",
   "receiver_baseline": "ed0d5435eb8796cfd4c9375edfc05b72bb16c8c6",
   "receiver_destination": "m3/collections/interop",
-  "receiver_engine_path": "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
-  "receiver_engine_git_blob": "d58ca50dfaeb60f581b64f43545e688aca5c6530",
+  "receiver_engine_path": "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+  "receiver_engine_git_blob": "907f176d32b55d78f13e3756a407f6877f25ca7d",
   "mirror_stage": "RECIPE_INPUTS_ONLY",
   "runtime_source_installed": false,
   "installed_image_qualified": false,
-  "canonical_test_source": "synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3CollectionsLibraryInteropTest.java",
+  "canonical_test_source": "m3-openrewrite-recipes/src/test/java/jdk/internal/m3/rewrite/M3CollectionsLibraryInteropTest.java",
   "recipe_test_git_blob": "9855772a291d38563ede396447ffc92741cdbdb7",
   "recipe_test_sha256": "4f96067468c460bf5308c2383c1e59803a909693fe968ce6afe5718dc44f180b",
   "template_git_blobs": {
-    "M3LibraryCollections.java.txt": "35d419cc78f4fe583ea97cab3026d1dbf037f795",
-    "M3LibraryCollectors.java.txt": "1c358f17cf8bc90024669b74f969c6d798c2b31f",
-    "M3SpringMultiValueMap.java.txt": "baf64557424e17a2650d44f697f6dd6253edb55a",
+    "M3LibraryCollections.java.txt": "ad108e2972e9e55c8d0a0b308e5b80d9720a532f",
+    "M3LibraryCollectors.java.txt": "eaf5277e8b94678157ed52111b8e05da1129b112",
+    "M3SpringMultiValueMap.java.txt": "69f8b79e24573a7a937d6ca01121a7fbb66a3ed4",
     "M3LibraryClosureTest.java.txt": "4ece3c07abfeca67d4674b6b4cd39302b4b10ddc",
-    "M3LibraryCollectionsTest.java.txt": "aa1a5ebf5903ea2296a427d1b1d1be45d13552b5"
+    "M3LibraryCollectionsTest.java.txt": "45b15de90a18ad4d144322f75a44bc7f12722173"
   },
   "template_sha256": {
-    "M3LibraryCollections.java.txt": "fa144a8c8617f190cdb1848bc28d3c9f6ae4302666a00c8ea3e904f25afc06fd",
-    "M3LibraryCollectors.java.txt": "8836aaca2113c3d25bffbf1a226394ffa0f6a7c7fbba826715a0aa96c5500a19",
-    "M3SpringMultiValueMap.java.txt": "cfd7a51bdce14f3e8f2b875d529006c3863049d10087a18b14ccad45f0fd669a",
+    "M3LibraryCollections.java.txt": "4135be52f0cc847acc58e747a153c63f242c12c799f821e4d24f1de1bec8dd16",
+    "M3LibraryCollectors.java.txt": "be19e93efdd49ce02cd4209aa274a3ea6779a591d4ce9b313bd5a616c22e0b78",
+    "M3SpringMultiValueMap.java.txt": "6e58eea3bcf3fb0af727236b05da83a344459b6896bcfaa0145440a590b2e0a9",
     "M3LibraryClosureTest.java.txt": "1e690f4620b9c829074d5d77758ae99933f1bde46b8f90329229f853a7f612a1",
-    "M3LibraryCollectionsTest.java.txt": "4bebee17ef96cefd2c779c76a0b190e27de311d136dec2de0fc5c05161ac199a"
+    "M3LibraryCollectionsTest.java.txt": "db377aa16cf2de5a8f49ef273f9b5fc7fb0f1a35ac247339f0556cea086d2d04"
   },
   "gate_status_at_preparation": {
     "actual_receiver_recipe_execution": "PENDING",

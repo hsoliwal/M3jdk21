@@ -9,9 +9,9 @@
 
 | Original path | Original blob | Received blob |
 | --- | --- | --- |
-| `m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java` | `27c56be2bd960ea9de139766ab40960bdbe91b0a` | `b366564de9ca7d9a6a2bac938ff9d73b308b0e12` |
-| `m3/collections/src/test/java/com/m3/collections/M3StableGroupReversalSelfTest.java` | ABSENT | `826f841999480cabdd0a777d201718dc06a60bb9` |
-| `m3/collections/src/test/java/com/m3/collections/M3StableGroupReversalTest.java` | ABSENT | `c8bcdbbdbfe0f009920a55eccdcfe6faec8e5657` |
+| `m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java` | `192a2022eaa1d6bc07ba1a7a8faa38f34ed6ae68` | `a37be73bdcf947d8c7f5cc0b3033714a69c67733` |
+| `m3/collections/src/test/java/com/m3/collections/M3StableGroupReversalSelfTest.java` | ABSENT | `800088d543376ed9558b622bd2a95c1e1660c23b` |
+| `m3/collections/src/test/java/com/m3/collections/M3StableGroupReversalTest.java` | ABSENT | `9cf44e8350072104939e4e9a80b70e467d112df4` |
 
 All three received Git blobs were compared against the canonical generated Synexia recipe resources. The source preimage also matched the original `master` owner when this branch was created.
 
@@ -36,10 +36,10 @@ Then, within M3JDK21:
 mkdir -p m3/collections/target/stable-run-proof
 javac --release 21 -Xlint:all -Werror \
   -d m3/collections/target/stable-run-proof \
-  m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java \
-  m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java \
-  m3/collections/src/main/java/com/m3/collections/M3IndexSort.java \
-  m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java \
+  m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java \
+  m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java \
+  m3/collections/src/main/java/jdk/m3/collections/M3IndexSort.java \
+  m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java \
   m3/collections/src/test/java/com/m3/collections/M3StableGroupReversalSelfTest.java
 java -cp m3/collections/target/stable-run-proof \
   com.m3.collections.M3StableGroupReversalSelfTest

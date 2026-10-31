@@ -21,7 +21,7 @@ static int checked_range(jint start, jint count, jsize length) {
 }
 
 JNIEXPORT jint JNICALL
-Java_com_m3_arrays_M3ArrayNative_nativeCompareUtf16(
+Java_jdk_m3_arrays_M3ArrayNative_nativeCompareUtf16(
     JNIEnv *env,
     jclass type,
     jcharArray left_array,
@@ -61,7 +61,7 @@ Java_com_m3_arrays_M3ArrayNative_nativeCompareUtf16(
 }
 
 JNIEXPORT jcharArray JNICALL
-Java_com_m3_arrays_M3ArrayNative_nativeConcatenateUtf16(
+Java_jdk_m3_arrays_M3ArrayNative_nativeConcatenateUtf16(
     JNIEnv *env,
     jclass type,
     jobjectArray segments) {

@@ -1,0 +1,200 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "bash",
+        "m3/run-rope-proof.sh"
+      ],
+      "elapsed_seconds": 2.204,
+      "exit": 1,
+      "log": "source-lock-correction/rope-owner-001/command-01.log",
+      "log_bytes": 436,
+      "log_sha256": "36024174295e13b3b4dd65b39a6c2353242612b520315b8948e4f941f86c053f"
+    }
+  ],
+  "driver_sha256": "ee680061df4e9494c3d3a9817ea4d39e4f138a0b2e29a3355b4ab6014980a277",
+  "elapsed_seconds": 2.204,
+  "gate_inputs": [
+    {
+      "bytes": 2634,
+      "git_blob": "5022e9811ce9391671c794446c7772569cfd369f",
+      "path": "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
+      "sha256": "1655c02a61577f8aebed59b94c92701be835c4c7ebaf80efa3c71271a4bd75d7"
+    },
+    {
+      "bytes": 1093,
+      "git_blob": "daee29e96b6a6b5906b4603358a1ebd03a802337",
+      "path": "m3/core/src/jdk/m3/text/LexiconTool.java",
+      "sha256": "fb3b3a4db8bb699a326d9e2b1114ed04089400294349f97bde0ce6b73e1aa51c"
+    },
+    {
+      "bytes": 1975,
+      "git_blob": "025ce8014cba8a36a9e496bb0a56faef57cf0968",
+      "path": "m3/core/src/jdk/m3/text/LocalM3Arena.java",
+      "sha256": "e9573e7f04a875eb7bda7d3554a57653ebd655f66ac67be724b366092e76afc4"
+    },
+    {
+      "bytes": 2115,
+      "git_blob": "387ae5e0c656177f1df663fd5029d4b31ba2fa00",
+      "path": "m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
+      "sha256": "77fd1cbeae4dc20a4c23497102cb7c44ec14adbdd6bbf328326957515a7858ad"
+    },
+    {
+      "bytes": 33365,
+      "git_blob": "46e79d724bf6fdb8228bde6cee4132c36b2094e1",
+      "path": "m3/core/src/jdk/m3/text/M3BigString.java",
+      "sha256": "ec7142df904511f455e07650081db9eb6518a1fab138ea7ae44be15192cde343"
+    },
+    {
+      "bytes": 1320,
+      "git_blob": "9bcb58b3c095385833f2e119187fe3aa4441a7c9",
+      "path": "m3/core/src/jdk/m3/text/M3CorpusProjectionDigest.java",
+      "sha256": "ae0220e4bb05d7cadb660e2b2ac1fe0dc53b1d0cdce9bcc7b1d38254be2be920"
+    },
+    {
+      "bytes": 1849,
+      "git_blob": "ede467da0e7b2e06f74642cd3932263144bdc82d",
+      "path": "m3/core/src/jdk/m3/text/M3CorpusSourceReceipt.java",
+      "sha256": "355b97daf18ff3e65ca686ab7a952f075510ad7154c7ba865173f8161fcac0f1"
+    },
+    {
+      "bytes": 6571,
+      "git_blob": "8a0e8184feae600477a992512388c559ec10ee11",
+      "path": "m3/core/src/jdk/m3/text/M3FixedAddressMapping.java",
+      "sha256": "03fe4ef99c923172301d287db953b59d1aa23c5f8480ddd79c64e4485a14b863"
+    },
+    {
+      "bytes": 11215,
+      "git_blob": "10f0f669d5658e088e8835702df0676535c1f01d",
+      "path": "m3/core/src/jdk/m3/text/M3GvasLiteralImage.java",
+      "sha256": "b05c40b8999993dfec75afa646ba4fac421258f0b611ab01956b878226574a3f"
+    },
+    {
+      "bytes": 9693,
+      "git_blob": "c4a499d6ef46e38ed5f12b0789683cae53309964",
+      "path": "m3/core/src/jdk/m3/text/M3InstanceIndexPrecompute.java",
+      "sha256": "2be8634db1d545bce03ba34cab2569b2adbb869b19544acd2f42bb4e02a7b5f1"
+    },
+    {
+      "bytes": 13840,
+      "git_blob": "6b69503a79fb084d1143c8c11519853f1f596ec1",
+      "path": "m3/core/src/jdk/m3/text/M3LanguageCorpusManifest.java",
+      "sha256": "c642619a95a3454f04df71335f2992a59a49f177e515c1e2688af7c514016867"
+    },
+    {
+      "bytes": 1245,
+      "git_blob": "0ac0ecb7d4abe99f5c3b7a21e0099e05a92bb168",
+      "path": "m3/core/src/jdk/m3/text/M3LanguageGrammarSupport.java",
+      "sha256": "f2f6f8dcb6b0a0c91569a9eee0ea199c0e77a24594033534351408b2c8ccfff3"
+    },
+    {
+      "bytes": 23035,
+      "git_blob": "4ea2db8d3b2bfec5f720ef499b8b697186718cb9",
+      "path": "m3/core/src/jdk/m3/text/M3LexiconPrecompute.java",
+      "sha256": "6211294287120ca3135e76f39313125e6c846f64b005e2cea7afa39503256ed1"
+    },
+    {
+      "bytes": 4563,
+      "git_blob": "69f517474f58e756f770fc59dc2ea1ab982fbaef",
+      "path": "m3/core/src/jdk/m3/text/M3NumberSpace.java",
+      "sha256": "6c70f843dca2bc099c99de24fb21987986e6f0ed03a79677ad88f65d27f0273e"
+    },
+    {
+      "bytes": 9740,
+      "git_blob": "73d7ae9ec7fa3680d1389aabf4e65beb0018ef15",
+      "path": "m3/core/src/jdk/m3/text/M3RopeTextIndex.java",
+      "sha256": "d78d4f2f7d23c0a1927d86c8f059749cbb7d3a11e7d5152aae26135effb9f34a"
+    },
+    {
+      "bytes": 767,
+      "git_blob": "62506fb9b3cff0e6f24e856648528db58c45b92b",
+      "path": "m3/core/src/jdk/m3/text/M3StringPiece.java",
+      "sha256": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755"
+    },
+    {
+      "bytes": 17149,
+      "git_blob": "651c03f6b1a1e672ac97e2d0830473bcfc06207b",
+      "path": "m3/core/src/jdk/m3/text/M3WordRows.java",
+      "sha256": "d79d6ab8396271548b4adc2ef5393425ff8b98f5b9b7fc8a7a39d4fc0294c765"
+    },
+    {
+      "bytes": 1721,
+      "git_blob": "a68f0d75eaae64707cf6d073a2b50f89c5dfdc78",
+      "path": "m3/core/src/jdk/m3/text/M3WordRowsNative.java",
+      "sha256": "b81a8520792794a5256137c1c47960b10930237904907d4c8d0a4980386a00e5"
+    },
+    {
+      "bytes": 40020,
+      "git_blob": "df137d5b2a52e9ad58f276132099b47692720ed2",
+      "path": "m3/core/src/jdk/m3/text/SharedLexiconCatalog.java",
+      "sha256": "bc04f014808aafaddd3a1bef661c094386a5a20e9f5e4e7e0ffc8c51ddbb153b"
+    },
+    {
+      "bytes": 28182,
+      "git_blob": "8dd76c1d5911dbf4b4b786098c1223fcdbb57b63",
+      "path": "m3/core/src/jdk/m3/text/SharedLexiconFamilySidecarCatalog.java",
+      "sha256": "c6dbfb86e076388c923f8aa2c05b37b799474bb51bb84da0e26dea477edbadc8"
+    },
+    {
+      "bytes": 11400,
+      "git_blob": "364eecefcb3822918c849606ddb177c0ceaa30d5",
+      "path": "m3/core/src/jdk/m3/text/SharedLexiconImage.java",
+      "sha256": "d4fcdb58e6a33d82fa18526bd4cd380869661e03f6a2beb721030b13e1789401"
+    },
+    {
+      "bytes": 11009,
+      "git_blob": "ce34ac405c41b3980e558efc688a5ebc1f37b47b",
+      "path": "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java",
+      "sha256": "a273220cdd1a2b20857ccba086394c0a0a726cc3f2711e9eb7fdadbaffb08256"
+    },
+    {
+      "bytes": 13436,
+      "git_blob": "bb8931eeb17563238c92f6c1ee200fb1905595c3",
+      "path": "m3/core/src/jdk/m3/text/SharedRelatedLexemeCatalog.java",
+      "sha256": "bcf6d9216b549a4bf1c4c7a6bdb414c54f659be2567fcb99cdbadaafc964f049"
+    },
+    {
+      "bytes": 494,
+      "git_blob": "8cd2ae86bee8f04f0d69709eed12897ff5c6a71c",
+      "path": "m3/core/src/jdk/m3/text/StorageIdentity.java",
+      "sha256": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354"
+    },
+    {
+      "bytes": 9495,
+      "git_blob": "b3f2291429429c62825a292bd5b7f618046bed27",
+      "path": "m3/core/src/jdk/m3/text/M3LangDexSourceEnvelope.java",
+      "sha256": "7093a00bd467cd4a477512eaae58546588e5881a6cf3dd081fdc843c88b7120d"
+    },
+    {
+      "bytes": 17908,
+      "git_blob": "5896894dec303b94847de9755033189e2112010e",
+      "path": "m3/core/src/jdk/m3/text/M3PrecomputePayload.java",
+      "sha256": "0839cd6529f9328407cb711f2d03593131ebc07f7e0bbe23c97ddb26b1c5b446"
+    },
+    {
+      "bytes": 227,
+      "git_blob": "bdd278210a498e2665620c02413b1e658c79370e",
+      "path": "m3/core/src/module-info.java",
+      "sha256": "7a6e9eecdc3153219b6e222332e00b4cffb2a9e3b55bfaeb9c87e9a29ba009f2"
+    },
+    {
+      "bytes": 8903,
+      "git_blob": "3b0178d24606074195a5524844fc9954fdf25fe6",
+      "path": "m3/core/test/M3RopeTextIndexTest.java",
+      "sha256": "98d34219367796a53690d4f276523ee0f0f8d0b4a4127be2b806a3f177f1c74a"
+    },
+    {
+      "bytes": 1401,
+      "git_blob": "3f1138c864b17b82d6490a52bf766403cffb49fc",
+      "path": "m3/run-rope-proof.sh",
+      "sha256": "532b673bffdc69632c6dc48e2ed5dd6aa404b0f671a87abc0a82b1db5d6e1d18"
+    }
+  ],
+  "jdk": "/tmp/m3-build-tools/jdk-21.0.12.1+1",
+  "owner": "rope",
+  "receiver_head": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "receiver_root": "/workspace/scratch/206049dfb270/nlp-work/receiver-source",
+  "schema": "M3_NLP_RECEIVER_TEXT_OWNER_GATE_1",
+  "scope": "Unchanged existing source owner tests on pinned receiving sources; no full M3JDK or HotSpot admission.",
+  "state": "FAIL"
+}

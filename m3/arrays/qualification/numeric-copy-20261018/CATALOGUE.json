@@ -6,9 +6,9 @@
     "IMMUTABLE_NUMERIC_RANGE_COPY"
   ],
   "target_revision": "4b24824c3aa09d802121447f8970d442a855f064",
-  "target_file": "m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java",
-  "target_before_sha256": "8d6afc24c677adb7ba612071d34453c8a7d8b9e1a81ac27fb06bc3f62c673edd",
-  "target_candidate_sha256": "3221d674ac9947c97d50967659176aa5bdf3db6a51e7e3574daa3d0792a6d83d",
+  "target_file": "m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java",
+  "target_before_sha256": "87b3f76e04880c80a5bbf31e2cfe66fc7567d9b96ec5139cdf31536442ba58c7",
+  "target_candidate_sha256": "a7f4c973aa2a29fd457365bad5faeb421f559b19a3a419694e86642edacf4bd4",
   "serial_pass": "six existing private numeric copy owners, then two type-specific internal run helpers",
   "public_interfaces": "unchanged",
   "instance_fields_added": 0,
@@ -31,7 +31,7 @@
     {
       "category": "IMMUTABLE_NUMERIC_RANGE_COPY",
       "candidate": "M3Arrays existing snapshot/slice/join owners",
-      "revision_or_identity": "hsoliwal/M3jdk21@4b24824c3aa09d802121447f8970d442a855f064:m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java:bce79ff1c8f1bbb7dcb5a76c7e355b12f408c996",
+      "revision_or_identity": "hsoliwal/M3jdk21@4b24824c3aa09d802121447f8970d442a855f064:m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java:8558298aebd074adbc36e2d9ff5e21e9c68ba2a8",
       "disposition": "ADAPT",
       "correctness_and_contract": "Preserve six private numeric owners, public interfaces, source admission, cached ends and accessor behavior",
       "cost_and_selection": "Reuse payload and descriptor arrays; no added fields or per-copy allocation",
@@ -40,7 +40,7 @@
     {
       "category": "IMMUTABLE_NUMERIC_RANGE_COPY",
       "candidate": "M3ArrayNative existing Java concatenation loop",
-      "revision_or_identity": "hsoliwal/M3jdk21@4b24824c3aa09d802121447f8970d442a855f064:m3/arrays/src/main/java/com/m3/arrays/M3ArrayNative.java:440694e15ba340e0e98d669269beed32f09c31da",
+      "revision_or_identity": "hsoliwal/M3jdk21@4b24824c3aa09d802121447f8970d442a855f064:m3/arrays/src/main/java/jdk/m3/arrays/M3ArrayNative.java:a0d6c3e85e35697b2eb7d3bc2d4d2d411fafdb35",
       "disposition": "ADAPT",
       "correctness_and_contract": "Same destination-offset bulk primitive copy pattern; original UTF-16/JNI owner unchanged",
       "cost_and_selection": "Apply only to private proven immutable numeric array owners",

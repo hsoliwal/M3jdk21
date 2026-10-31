@@ -3,7 +3,7 @@
   "authorizedScope": "User requested package-first renaming across collection sources",
   "mapping": {
     "source": "org.springframework.util",
-    "target": "com.m3.collections.spring",
+    "target": "jdk.m3.collections.spring",
     "selection": "27 selected collection/dependency sources; donor JDK interfaces remain java.util"
   },
   "inventory": "FULL_SOURCE_BINDINGS.tsv",

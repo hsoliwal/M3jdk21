@@ -16,7 +16,7 @@ static void illegal(JNIEnv *env, const char *message) {
     }
 }
 
-JNIEXPORT jint JNICALL Java_com_m3_tools_model_quantize_BlockInt8Quantizer_nativeAbi(
+JNIEXPORT jint JNICALL Java_jdk_m3_tools_model_quantize_BlockInt8Quantizer_nativeAbi(
         JNIEnv *env, jclass type) {
     (void)env;
     (void)type;
@@ -29,7 +29,7 @@ JNIEXPORT jint JNICALL Java_com_m3_tools_model_quantize_BlockInt8Quantizer_nativ
  * Java validates input and compares every output bit independently before
  * returning any JNI-produced answer. No JNI access to files or GPU devices.
  */
-JNIEXPORT jobjectArray JNICALL Java_com_m3_tools_model_quantize_BlockInt8Quantizer_packNative(
+JNIEXPORT jobjectArray JNICALL Java_jdk_m3_tools_model_quantize_BlockInt8Quantizer_packNative(
         JNIEnv *env, jclass type, jfloatArray values, jint block_size) {
     (void)type;
     if (values == NULL || block_size < 32 || block_size > M3_BLOCK_MAX

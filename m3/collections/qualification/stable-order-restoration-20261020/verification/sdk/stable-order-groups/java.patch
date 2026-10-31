@@ -1,7 +1,7 @@
-diff --git a/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java b/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java
+diff --git a/m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java b/m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java
 index 317136e..d180550 100644
---- a/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java
-+++ b/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java
+--- a/m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java
++++ b/m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java
 @@ -21,7 +21,8 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
   * <p>Unlike M3's live collection wrappers this class is a detached snapshot.
   * Its methods never refresh when a mutable source changes. It does not replace

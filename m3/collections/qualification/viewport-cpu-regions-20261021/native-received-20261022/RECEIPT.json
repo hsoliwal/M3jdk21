@@ -66,7 +66,7 @@
   "original_product_java_blobs": {
     "M3MaskViewportKernel.java": "5966bffacc730b3ef7102d615a2331a42ae4a22b",
     "M3MaskViewportNative.java": "ba569ea957d3f02a41e1d4a6ff700737ad7d791c",
-    "M3MaskViewportPageContract.java": "bff901c3674649d1ad6eacfb8bd5ba1ecc76816d"
+    "M3MaskViewportPageContract.java": "2638b251089a1a3452db032de86290298db592f0"
   },
   "native_project_callable_from_original_java": true,
   "native_page_wired_into_product_java": false,

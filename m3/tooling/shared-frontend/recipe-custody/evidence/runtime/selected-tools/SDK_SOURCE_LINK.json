@@ -1,7 +1,7 @@
 {
   "schema": "M3_SELECTED_TOOLS_SDK_PRODUCT_LINK_V1",
   "status": "PASS",
-  "selected_receipt_sha256": "a215edc13ebd547a0a8905f0e9b97b050b59a898da17d21e6f7875a4dff28132",
+  "selected_receipt_sha256": "45dc1574882bbb51e7c4b770298883b50b126f8d95a4613c1bd3242824c7f397",
   "installed_framework_receipt_sha256": "077cfb35402caf3e9644d0b8e105bf9d59796f5c56483e72d25a9f1fa844559b",
   "source_dependency_commit": "4c69d0bad1ea3714509c185922c40f339d08073b",
   "receiving_source_commit": "f0bba76b44d3a7f12c80e5b30a7bb47337436137",
@@ -57,7 +57,7 @@
       "repository": "hsoliwal/M3JDK21",
       "baseline_commit": "c0f992009f7045c9f0d8ef4f734b3f1113c7a3f6",
       "source_files": {
-        "m3/tooling/jmod-recipes/tools/jmod_pack.py": "a2c1f69f6aaea0de7d5047c14f6f7530fe3231dca97fffdc4defee506daeb454",
+        "m3/tooling/jmod-recipes/tools/jmod_pack.py": "250d98a2789ed8d5018a5b911a14c0a6729e435a9da1513d37a2dac7429ec3d6",
         "m3/tooling/module-packs/build-tools/README.md": "7793bb9e194b22813f8af94333147fa463f4c9d256649714fbb488be367b8a09",
         "m3/tooling/module-packs/build-tools/config/ant-m3ast.xml": "609cef3e53e6895f2eff31ae7cac7c52c3d8c47033068319feeed5783ccb1b9a",
         "m3/tooling/module-packs/build-tools/config/gradle-m3ast.init.gradle": "d0d938186a2ace2ed702790de23cfd257b15438efb9fa9fc4b21486b26ffc790",
@@ -69,13 +69,13 @@
         "m3/tooling/module-packs/build-tools/launchers/m3-mvn": "798678a5f5882282afd2e8e53ed99533c3127b979afb1818f829d946d02da9c3",
         "m3/tooling/module-packs/build-tools/launchers/m3-mvn.cmd": "b0c6a7d3d5b8e6da5391cb80177d0e70dbf1a8a953b0adcebb38496a27149113",
         "m3/tooling/module-packs/build-tools/verify_maven.py": "36e82de3e0f24b4b1004e9d4b15ae09e4bda739ab01cac096e38e797b403f806",
-        "m3/tooling/module-packs/build_pack.py": "46ae225a30f007c480338618969eb87928aeb812f6974c9b6bf7b9d5124a6614",
+        "m3/tooling/module-packs/build_pack.py": "0e620dac3cbc986ac448739e721d399d84d76a284ac72b3793880c740538fc43",
         "m3/tooling/module-packs/lock_tool_distribution.py": "ee0a50592064d8ba5bdb9f9ca9f412e036c9d5e60c062a6985b3062ee1192d4c",
         "m3/tooling/module-packs/test_tool_packs.py": "ba28752dfdcedb66165de9f0d202749c2a848d2c555632c1f846b2f4a724b199",
         "m3/tooling/module-packs/tool_packs.py": "24edd66788009d00eddcae9b2ba1bc61fd492b28aefb5f34c1439eff9e6b5acf"
       },
-      "sdk_inputs_sha256": "e9c694f1c68f5f1b987865e2bc21c33d7b1f8943994e43e4ad9e4119376f4f1c",
-      "sdk_results_sha256": "b2a8da0d7375dc2e35102f2d6085662b719cc4b595c5674568bcfa85805f1a87"
+      "sdk_inputs_sha256": "4ca037b3876fbeb90842ed63ac7ab258c687fff9e032fd16607ac05d6d03e13e",
+      "sdk_results_sha256": "29f5a7da639086ceaefa93293dcb80e8cff5ad2f004bd88af03ece65ef2fd050"
     },
     {
       "dataset": "m3jdk21-compiler",
@@ -84,7 +84,7 @@
       "source_files": {
         "m3/docs/name-mapping.d/m3-shared-frontend.json": "463102c3c23c7f1e3d7ee483421d15cff6def4c9a6c020d0e71423dab6e7fabe",
         "m3/tooling/shared-frontend/README.md": "8f076c768f832ebcad3e9e25b4e99b0a24f3b2e6a072865d449bf216203c642c",
-        "m3/tooling/shared-frontend/algorithm-catalogue.tsv": "05952a2bfce357b72b25fdd5dba5f570ff5ae3ee29425773e9882b8427e0ab10",
+        "m3/tooling/shared-frontend/algorithm-catalogue.tsv": "a9b61bf5d96072144f0e229a48011e573dd7125572edb6e6599ebf4a71003faa",
         "m3/tooling/shared-frontend/openrewrite/pom.xml": "f6dd1edf87821933d42e0adf549c7c180506455c52526a2d3e46471b58a17382",
         "m3/tooling/shared-frontend/openrewrite/src/main/java/org/m3jdk/tooling/rewrite/M3RewriteFrontend.java": "533ffc0c12992f9a9c5c5232104590f7171b20959145f9fe4acd8da6a30e918f",
         "m3/tooling/shared-frontend/openrewrite/src/test/java/org/m3jdk/tooling/rewrite/M3RewriteFrontendTest.java": "e7b1ac45e0d23a6dc308b19a4618323303eb4e335fe3a8c8ea549a747cbdf1cf",
@@ -96,8 +96,8 @@
         "src/jdk.compiler/share/classes/module-info.java": "ae52d1734570fee7404aeb68b65ef86ea23ad322b72ff0b137c9039c71aafb09",
         "test/langtools/tools/javac/m3/M3ASTSharedFrontendTest.java": "47349ef82633f724f3ca694521250048ba70486b094b069fc51c13b5e64978a5"
       },
-      "sdk_inputs_sha256": "e3c644114f3833cabefdb9d85f5bc98b282ea6cbd3f71844019623de9f2f5b7b",
-      "sdk_results_sha256": "eb706d53b554e60da748b145833af93655c3914634edb3adeb16892ef5086a1b"
+      "sdk_inputs_sha256": "3d2e6a69e1b00ff9f2f91e4f417c9eae9cbddf75422fcfec22915e12b8680379",
+      "sdk_results_sha256": "219fa25b975746f57797d4a7399ce8cd1e96e372a277b117379190ef76276dc2"
     },
     {
       "dataset": "m3jdk21-openrewrite-tool",
@@ -109,7 +109,7 @@
         "m3/tooling/shared-frontend/openrewrite-tool/src/main/java/org/m3jdk/tooling/rewrite/M3RewriteTool.java": "5ff61fe56b750096da8b9972a9cb4d9f4c318d6c2f73863f26b9c49404ad2976",
         "m3/tooling/shared-frontend/openrewrite-tool/src/test/java/org/m3jdk/tooling/rewrite/M3RewriteToolTest.java": "53c807cf46d1b7dd14c3031b3bc9fef84349488cef4d7a0b43d9643c2aaffa86"
       },
-      "sdk_inputs_sha256": "c1d8e796545116c89eb758feeff8c62776b82259a68a6368a262ecf9f204d0c7",
+      "sdk_inputs_sha256": "d3d1fe5477955801468dde7990a6e2bdf39166a45f0d0e99fb05b8bc8877f0a9",
       "sdk_results_sha256": "59f30112a2e467c316cff159400f6b8c4df743d3b929072b36cfff243e1216c8"
     },
     {
@@ -123,7 +123,7 @@
         "m3/tooling/shared-frontend/openrewrite-runtime/pom.xml": "f90996fcfa174a0c95225e45248e9c6f2d372ef09c835f1df08cf3727dac4a35",
         "m3/tooling/shared-frontend/openrewrite-runtime/src/test/java/org/m3jdk/tooling/rewrite/M3RewriteRuntimeTest.java": "f962ad41a3bd6f559a51da0c1aca5488ce17e3828b5a771f8a5e0b77a7769666"
       },
-      "sdk_inputs_sha256": "302bc990b544e2570f03c67ef54b34578c3faa933e8d6f347e2b74a18b0c44b1",
+      "sdk_inputs_sha256": "34cca5e88956e9371a26435d389c2d511e7917db167ab05a50d10b615c7fbf98",
       "sdk_results_sha256": "c39df2ca690e7c177059dec0f66b2fcf03804c90279cfd4dcdf211e952a9109e"
     },
     {
@@ -134,7 +134,7 @@
         "m3/tooling/module-packs/lock_tool_distribution.py": "ec090eda4c5376f387d66e43e0e744e6883f59385008df939757471c6c879b71",
         "m3/tooling/module-packs/test_tool_packs.py": "0c2cc1a09f2f298cdf1e43d59a27df568b5914eafe513dfffb0c00365ed7f686"
       },
-      "sdk_inputs_sha256": "77ee7b358d615f5ad4fb0c1fa5e1e669ca7b259b60ca7dbeed32e4355e464641",
+      "sdk_inputs_sha256": "8f1c3129876308fb534b15eb3cc9f551700880d674bcab03c5bc033404a05ca6",
       "sdk_results_sha256": "d998f5aec0cc01249d674e1c90c2805794356a7c1b26454389c20eb8e282a50e"
     },
     {
@@ -144,7 +144,7 @@
       "source_files": {
         "m3/tooling/module-packs/verify_combined_selection.py": "1f97567d361e9bbf130a7b3c7817664b778246e913322b36483c77798782ce2e"
       },
-      "sdk_inputs_sha256": "117c07497316590832bb493f7fae30acb25e32ac252066d10d1452864198ad59",
+      "sdk_inputs_sha256": "1a4972fdb75b0116987a307ad7ffb76fa5d8d4a945b021266e76fe964a8ee648",
       "sdk_results_sha256": "8e4a93104d10ac8284659a04237414e7c004cfae3cb740b6dee53360ff6acf29"
     }
   ],

@@ -14,11 +14,11 @@
   "retained_original_suites": 72,
   "original_test_counts_unchanged": true,
   "new_suites": [
-    "com.m3.collections.M3ProgressAdaptersPercentageTest"
+    "jdk.m3.collections.M3ProgressAdaptersPercentageTest"
   ],
   "new_suite_reason": "separately qualified M3 progress percentage regression",
   "affected_suites": {
-    "com.m3.collections.M3StoredRepresentativeTest": {
+    "jdk.m3.collections.M3StoredRepresentativeTest": {
       "before": {
         "tests": 1,
         "failures": 1,
@@ -32,7 +32,7 @@
         "skipped": 0
       }
     },
-    "com.m3.collections.M3LongTreeSetTest": {
+    "jdk.m3.collections.M3LongTreeSetTest": {
       "before": {
         "tests": 7,
         "failures": 3,
@@ -48,15 +48,15 @@
     }
   },
   "production_owners_unchanged": {
-    "m3/collections/src/main/java/com/m3/collections/M3LongTreeSet.java": "141b90d104cf9d8715e97b6a805314fd2a8fcc9fe10d3c81b1894cf744141d42",
-    "m3/collections/src/main/java/com/m3/collections/M3LongSortedViews.java": "7a42630fbffd2c5875d8a7e4258540454879117a52bd6fe52c3cde4ce07b4d99",
-    "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java": "4a109baf88457d625fa8fc259ee8e7908340f5436cfea77dc5ac554924045b8d"
+    "m3/collections/src/main/java/jdk/m3/collections/M3LongTreeSet.java": "557f860336582b3f38e4179a3d22c77f41cb17251334fc74fed993c0b1b9fb0c",
+    "m3/collections/src/main/java/jdk/m3/collections/M3LongSortedViews.java": "61ab2775b943a40d393a1f553b667a5463f2755a1c5697c60499e5c3cbaeee8e",
+    "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java": "372e40bf4e12f0dd7a614388786ed7c9c7d92d848bdd63de099b9f7176657dba"
   },
-  "owning_pom_unchanged_sha256": "d216e3da4ac02615ef46f8b48803174e24c11939ad5b826be9ca9d7df6bbebf6",
-  "sdk_input_sha256": "cc088a0eb1665c481ac221cf55ac8ccf85bd7e12faafb73cb19e0d7f9924e221",
-  "sdk_result_sha256": "47b9fed8ef0992b851c646398b8030ea37ab6e83211d1874e23ec050d2782ca0",
+  "owning_pom_unchanged_sha256": "98f6315a27af070fba3d372427b74cec51812ee096940a02d8a4d679eb508064",
+  "sdk_input_sha256": "7994125b72e94a5b1dc90bfad98f9bed9ad8b3ec6aac6df742c4a5428f8e5d77",
+  "sdk_result_sha256": "bb8b783d2d5c56ba2d02ac75a47e85ce404a5ddd3270f3baa16c64e07c9e31c5",
   "scope": "three M3 collection owners retained exactly; percentage owner is a separate recipe and is identified in the module receipt",
-  "module_receipt_sha256": "ae59b78fa51afdb8293dc886f4e40ad520cd4ec913395b5a79ead1e4a6cba68f",
+  "module_receipt_sha256": "c2c812459b403fb15deee4545a88d8078c07d0b6f1f153d7b0debcf31bc6611f",
   "original_failure_receipt_sha256": "206aae4a4174909e897c445a7b4cdb5347cc5e9dfb04c2c6698efaf9364305bc",
   "status": "PASS"
 }

@@ -1,5 +1,5 @@
 {
-  "schema": "synexia.data.address.public-static-tool-pins.v1",
+  "schema": "m3.data.address.public-static-tool-pins.v1",
   "platform": "Windows x86-64",
   "tool_roots": {
     "gcc": "MinGW-w64 GCC15.2.0 installation",

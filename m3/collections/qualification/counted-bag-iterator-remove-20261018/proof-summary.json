@@ -1,8 +1,8 @@
 {
   "baseCommit": "0efc1719ca5766aead09f4f7c49f5067975bd946",
-  "beforeGitBlob": "9f5cc4ba6c189b4b8dd476b999ba82d93922d74a",
-  "beforeSHA256": "c04ed48de6b24bb4a86f97c4aa6187e2ce11e43b082e05ef3189c618ddf1143b",
-  "afterSHA256": "020b91ae24ab2bb991146861dbaecf6e7fa9836811804645722190b972c4e311",
+  "beforeGitBlob": "b29db809d55ba7fe6fc96e3b273253a5a21dcb82",
+  "beforeSHA256": "583e6b5dce178ee02c2efdb919271c81a00ad60771abd06f7c942330fdfc60d1",
+  "afterSHA256": "c62a23be9e5b89c3d013f8dc0ed5351c3bf7ecc2bc809c8503a777a152d6b447",
   "beforeBytes": 13854,
   "afterBytes": 13962,
   "preimageWitness": {
@@ -53,7 +53,7 @@
     },
     "unchangedExistingSelfTest": {
       "checksPerMode": 165184,
-      "gitBlob": "bbe01fc1cc62f5b6ac1f18c37e02a9c30af2657f"
+      "gitBlob": "5c6711122c23d09869a810e01265c9b396ab078a"
     }
   },
   "receiving": {
@@ -63,8 +63,8 @@
     "validStates": 4,
     "refusalInputs": 5,
     "refusalFamilies": 3,
-    "engineSHA256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599",
-    "testSHA256": "c0085fe219d6bd76da1deef04b87104e3ee2af1fe5c5f472d70f1115e1b335ff"
+    "engineSHA256": "9dc65793cb1f4fb20866f99f4e5d0043d54734aa03cf0fe297c0cadbba2d1c37",
+    "testSHA256": "23973e65bb884a85423631032e61b1147c0b2b848a7774bd902e9e11bfb0d42a"
   },
   "review": {
     "command": "python -I -B autoreview --mode local --engine codex --no-web-search",

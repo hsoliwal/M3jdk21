@@ -279,7 +279,7 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
         self.write("m3/release/release-contract.json", json.dumps(self.contract))
         self.assert_blocked(self.result(), "contract.mandatory_gates")
 
-    def test_synexia_recipe_owner_and_identity_are_required(self):
+    def test_m3_recipe_owner_and_identity_are_required(self):
         entry = next(g for g in self.evidence["gates"] if g["id"] == "M3_MAVEN_CONTROL_REACTOR")
         entry["owner_repository"] = "hsoliwal/M3jdk21"
         self.assert_blocked(self.result(), "gate:M3_MAVEN_CONTROL_REACTOR")

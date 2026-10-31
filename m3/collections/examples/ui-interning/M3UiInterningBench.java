@@ -12,12 +12,12 @@
  * Contributors:
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
-package com.m3.collections.examples;
+package jdk.m3.collections.examples;
 
-import com.m3.collections.M3LabelLanes;
-import com.m3.collections.M3LabelPool;
-import com.m3.collections.M3TextExtentCache;
-import com.m3.collections.M3TreePathTrie;
+import jdk.m3.collections.M3LabelLanes;
+import jdk.m3.collections.M3LabelPool;
+import jdk.m3.collections.M3TextExtentCache;
+import jdk.m3.collections.M3TreePathTrie;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
@@ -44,7 +44,7 @@ import java.util.Random;
  * against String paths for 10^6 file-system nodes. Output: a TSV. Logging goes
  * through {@link System.Logger} (JUL in the JDK).</p>
  *
- * <pre>java -Xmx3g com.m3.collections.examples.M3UiInterningBench out.tsv</pre>
+ * <pre>java -Xmx3g jdk.m3.collections.examples.M3UiInterningBench out.tsv</pre>
  */
 public final class M3UiInterningBench {
 	private static final System.Logger LOG = System.getLogger (M3UiInterningBench.class.getName ());

@@ -1,5 +1,5 @@
 {
-  "schema": "synexia.data.address.public-independent-review.v1",
+  "schema": "m3.data.address.public-independent-review.v1",
   "status": "PASS_SOURCE_BOUND_RETAINED_COMPILE_AND_FIVE_NEW_NATIVE_PHASES",
   "source_ref": "087e9bca5bd38a3606ac2ce1ced73bfb38916564",
   "retained_file_pins_verified": 25,

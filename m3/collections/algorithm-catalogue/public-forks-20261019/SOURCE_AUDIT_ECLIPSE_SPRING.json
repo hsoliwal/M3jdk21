@@ -1,5 +1,5 @@
 {
-  "schema": "synexia.public-fork-source-audit.v1",
+  "schema": "m3.public-fork-source-audit.v1",
   "client_date": "2026-10-19",
   "status": "CANDIDATE_SOURCE_INVENTORY_ONLY",
   "scope": {
@@ -39,7 +39,7 @@
         "notice_blob": "c5d0cd1eb0d4b15b2affbb2ab1dde5f988209876",
         "reuse_requirement": "Before adaptation, preserve applicable copyright, license and notices; record exact donor commit and paths. This inventory does not make a legal compatibility determination."
       },
-      "namespace_observation": "The three selected source files exist under com/m3/collections/eclipse at this commit; original org/eclipse/collections paths for UnifiedMap and FastList returned 404. A package rename does not establish an array conversion or whole-repository completeness.",
+      "namespace_observation": "The three selected source files exist under jdk/m3/collections/eclipse at this commit; original org/eclipse/collections paths for UnifiedMap and FastList returned 404. A package rename does not establish an array conversion or whole-repository completeness.",
       "root_test_and_performance_directories_listed": ["unit-tests", "unit-tests-java8", "unit-tests-thread-safety", "serialization-tests", "acceptance-tests", "jmh-tests", "jmh-scala-tests", "performance-tests", "jcstress-tests", "test-coverage"],
       "test_directory_limit": "Only root directory entries observed. No suite content, runnable closure, results or performance claims inferred.",
       "branches": [
@@ -58,10 +58,10 @@
         {
           "id": "EC_UNIFIED_MAP_ARRAY_HASH",
           "problem_category": "Hash maps; interleaved array storage; collision resolution; masked indexing",
-          "path": "eclipse-collections/src/main/java/com/m3/collections/eclipse/impl/map/mutable/UnifiedMap.java",
-          "git_blob": "8bab18c3e7a9d8c02eaa24be9f1634f708cb2541",
+          "path": "eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/map/mutable/UnifiedMap.java",
+          "git_blob": "5e504f52d76162877378d7f3d472c52dac4d48fd",
           "inspected_lines": {"first": 1, "last": 360},
-          "url": "https://github.com/hsoliwal/eclipse-collections/blob/489c8e63b973aaf52eb87f08f5908a152a4b8f22/eclipse-collections/src/main/java/com/m3/collections/eclipse/impl/map/mutable/UnifiedMap.java",
+          "url": "https://github.com/hsoliwal/eclipse-collections/blob/489c8e63b973aaf52eb87f08f5908a152a4b8f22/eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/map/mutable/UnifiedMap.java",
           "mechanisms": [
             "Owns transient Object[] table and occupied count; adjacent slots hold each key and value.",
             "Null keys and collision buckets use special sentinel objects.",
@@ -77,10 +77,10 @@
         {
           "id": "EC_FAST_LIST_DYNAMIC_ARRAY",
           "problem_category": "Dynamic arrays; contiguous range compaction; direct indexed traversal",
-          "path": "eclipse-collections/src/main/java/com/m3/collections/eclipse/impl/list/mutable/FastList.java",
-          "git_blob": "4fe22de19c2bd4bd5c51d363bed3e5d490bbf5bf",
+          "path": "eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/list/mutable/FastList.java",
+          "git_blob": "1c2da2b4667688b12f71616cc4f6f47230c8bede",
           "inspected_lines": {"first": 1, "last": 320},
-          "url": "https://github.com/hsoliwal/eclipse-collections/blob/489c8e63b973aaf52eb87f08f5908a152a4b8f22/eclipse-collections/src/main/java/com/m3/collections/eclipse/impl/list/mutable/FastList.java",
+          "url": "https://github.com/hsoliwal/eclipse-collections/blob/489c8e63b973aaf52eb87f08f5908a152a4b8f22/eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/list/mutable/FastList.java",
           "mechanisms": [
             "Owns protected int size and transient T[] items.",
             "Separate shared empty-array sentinels distinguish default construction from explicit zero capacity.",
@@ -96,11 +96,11 @@
         {
           "id": "EC_TREE_SORTED_MAP_BACKING_GAP",
           "problem_category": "Sorted maps; range views; ordering and copy contracts",
-          "path": "eclipse-collections/src/main/java/com/m3/collections/eclipse/impl/map/sorted/mutable/TreeSortedMap.java",
+          "path": "eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/map/sorted/mutable/TreeSortedMap.java",
           "git_blob": "5bd0fc5ac4e972c031d3e72b7fd5597dce9df660",
           "inspected_lines": {"first": 1, "last": 220},
-          "url": "https://github.com/hsoliwal/eclipse-collections/blob/489c8e63b973aaf52eb87f08f5908a152a4b8f22/eclipse-collections/src/main/java/com/m3/collections/eclipse/impl/map/sorted/mutable/TreeSortedMap.java",
-          "mechanisms": ["Package is relocated to com.m3.collections.eclipse.impl.map.sorted.mutable.", "Backing field remains private java.util.TreeMap<K,V> treeMap.", "The six inspected constructors allocate JDK TreeMap instances; comparator-plus-map construction creates a TreeMap then calls putAll."],
+          "url": "https://github.com/hsoliwal/eclipse-collections/blob/489c8e63b973aaf52eb87f08f5908a152a4b8f22/eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/map/sorted/mutable/TreeSortedMap.java",
+          "mechanisms": ["Package is relocated to jdk.m3.collections.eclipse.impl.map.sorted.mutable.", "Backing field remains private java.util.TreeMap<K,V> treeMap.", "The six inspected constructors allocate JDK TreeMap instances; comparator-plus-map construction creates a TreeMap then calls putAll."],
           "entry_storage_assessment": "Current owner still delegates storage to the JDK node-backed TreeMap; relocation alone is not array conversion.",
           "candidate_classification": "ADAPT_CONTRACT_ONLY",
           "selection_rationale": "Use the existing public and behavioral surface as donor contract while replacing backing storage with separately qualified arrays/indexes.",
@@ -177,8 +177,8 @@
     }
   ],
   "failed_reads_preserved_as_observations": [
-    {"repository": "hsoliwal/eclipse-collections", "commit": "489c8e63b973aaf52eb87f08f5908a152a4b8f22", "path": "eclipse-collections/src/main/java/org/eclipse/collections/impl/map/mutable/UnifiedMap.java", "result": "GitHub NOT_FOUND 404", "resolution": "Read matching com/m3/collections/eclipse path at the same immutable commit"},
-    {"repository": "hsoliwal/eclipse-collections", "commit": "489c8e63b973aaf52eb87f08f5908a152a4b8f22", "path": "eclipse-collections/src/main/java/org/eclipse/collections/impl/list/mutable/FastList.java", "result": "GitHub NOT_FOUND 404", "resolution": "Read matching com/m3/collections/eclipse path at the same immutable commit"}
+    {"repository": "hsoliwal/eclipse-collections", "commit": "489c8e63b973aaf52eb87f08f5908a152a4b8f22", "path": "eclipse-collections/src/main/java/org/eclipse/collections/impl/map/mutable/UnifiedMap.java", "result": "GitHub NOT_FOUND 404", "resolution": "Read matching jdk/m3/collections/eclipse path at the same immutable commit"},
+    {"repository": "hsoliwal/eclipse-collections", "commit": "489c8e63b973aaf52eb87f08f5908a152a4b8f22", "path": "eclipse-collections/src/main/java/org/eclipse/collections/impl/list/mutable/FastList.java", "result": "GitHub NOT_FOUND 404", "resolution": "Read matching jdk/m3/collections/eclipse path at the same immutable commit"}
   ],
   "overall_limits": [
     "This unit audits only two assigned forks and six selected source files; parent owns the broader public-fork inventory.",

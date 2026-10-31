@@ -14,37 +14,37 @@
     {
       "path": "m3/collections/src/main/c/m3maskviewport.c",
       "master_blob": "205f93c2fad9fe234fc87980ba89ef1a45cef0a8",
-      "received_feature_blob": "f29d081e28ba8ccc4516bd28c09e738b7a408a76",
+      "received_feature_blob": "b0d387f2612a315c6b53a50a814432c916ca61c8",
       "operation": "modify"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3MaskViewportNative.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3MaskViewportNative.java",
       "master_blob": "760f572442bbd4145a1e24daadae267bffae56df",
-      "received_feature_blob": "9cdfab35cf719ccf26f61ee61e1ae10fa98eb9ad",
+      "received_feature_blob": "4f73ddb9aae36dadb8003257d3a6988536a18066",
       "operation": "modify"
     },
     {
       "path": "m3/collections/viewport-proof/verify.py",
       "master_blob": "1f55d3d2292ebf03d2fc6cf5bda77cd455e58aa9",
-      "received_feature_blob": "9614892a7257c9948716c2b49d80732183fce772",
+      "received_feature_blob": "53ae1ca30b7ce2526babd53331a61d3e3ec5eeae",
       "operation": "modify"
     },
     {
       "path": "m3/collections/viewport-proof/fixtures/M3FrameRegionContract.txt",
       "master_blob": "ABSENT",
-      "received_feature_blob": "3e7fc02f1935fcf91981d37d2e734ab564cdfa1a",
+      "received_feature_blob": "20657d986071462c1511e855161dd7257432aac5",
       "operation": "add"
     },
     {
       "path": "m3/collections/viewport-proof/fixtures/M3NativePageDirectContract.txt",
       "master_blob": "ABSENT",
-      "received_feature_blob": "fc61136966adfc5c8d839854230296ede6992db6",
+      "received_feature_blob": "3b59f72d01db754775aef7d02eb6bb21f06fb0f1",
       "operation": "add"
     },
     {
       "path": "m3/collections/qualification/viewport-frame/RECEIVING.json",
       "master_blob": "ABSENT",
-      "received_feature_blob": "71af8dc5dc39ec5551567c4c27a6cf1c1bea93ac",
+      "received_feature_blob": "332bd1167194c58d28fd67dad41d489db6f020b3",
       "operation": "add"
     }
   ],

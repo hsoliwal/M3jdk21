@@ -1,0 +1,58 @@
+{
+  "build_report_sha256": "7e5eea1fc09f741971a89692bf6ea1c72e02132425145820ca93cd280cb64343",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/candidate-receiver/m3/tooling/module-packs/nlp-search/current_forks.py",
+    "--receiver",
+    "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/candidate-receiver",
+    "--jdk-home",
+    "/tmp/m3-build-tools/jdk-21.0.12.1+1",
+    "--out",
+    "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-candidate-001",
+    "--opennlp-source",
+    "/workspace/scratch/206049dfb270/nlp-work/forks/opennlp",
+    "--lucene-source",
+    "/workspace/scratch/206049dfb270/nlp-work/forks/lucene",
+    "--recipe-runner",
+    "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/vendor/m3/m3-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018/run_recipe.py",
+    "--recipe-resources",
+    "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/vendor/synexia/synexia-openrewrite-recipes/src/main/resources",
+    "--opennlp-dependencies",
+    "/workspace/scratch/206049dfb270/nlp-work/dependencies/opennlp",
+    "--lucene-dependencies",
+    "/workspace/scratch/206049dfb270/nlp-work/dependencies/lucene"
+  ],
+  "driver_sha256": "2af38b31aef1c27c5a44430f650963131df6d42197f20218d26aef7530c9da1d",
+  "driver_unchanged": true,
+  "elapsed_seconds": 204.887,
+  "environment": {
+    "JAVA_HOME": "/tmp/m3-build-tools/jdk-21.0.12.1+1",
+    "JAVA_TOOL_OPTIONS": "-Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "exit_code": 0,
+  "forks_tracked_clean": {
+    "lucene": true,
+    "opennlp": true
+  },
+  "historical_bigstring_template_mismatch": "Retained separately; this gate binds the actual received source pinned by its manifest/workflow, not the differing original canonical head template.",
+  "input_count": 11372,
+  "inputs_sha256": "4497159b2e16e3ddc2461f487afefa045149c106de6b40e8f047bd958a93f3de",
+  "inputs_unchanged": true,
+  "log_bytes": 147,
+  "log_sha256": "22fc0fb84926fc6b8687f394ac0d785bcda7cb7599b8f8b081fc7e5530c68d9e",
+  "module_count": 62,
+  "readback_sha256": "4497159b2e16e3ddc2461f487afefa045149c106de6b40e8f047bd958a93f3de",
+  "receiver_base": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "runtime_dependency_resolution": "Exact prequalified SHA-locked dependency directories; original source build gates invoke no Maven or network dependency fetch.",
+  "schema": "M3_NLP_COMBINED_CANDIDATE_GATE_1",
+  "scope": "Existing full Java21 combined source/JMOD/image gate, isolated two-file candidate; no product application yet.",
+  "source_lock_sha256": "271a532810591e94f5ceaab443820fdb08f96d1288e9ba5c1ce55c09d3444c8b",
+  "state": "PASS",
+  "tests": {
+    "ModelSourceProbe": "Picked up JAVA_TOOL_OPTIONS: -Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData\nModelSourceProbe PASS: real token/sentence model train/serialize/reload; immutable source offsets and probability parity",
+    "SourceFactsProbe": "Picked up JAVA_TOOL_OPTIONS: -Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData\nSourceFactsProbe PASS: 2000 raw UTF-16 digest oracles; snapshot/null contracts",
+    "SourceIntegrationProbe": "Picked up JAVA_TOOL_OPTIONS: -Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData\nOct 21, 2026 3:32:26 AM org.apache.lucene.util.HotspotVMOptions <clinit>\nWARNING: Lucene cannot access JVM internals to optimize algorithms or calculate object sizes, unless the 'jdk.management' Java module is readable [please add 'jdk.management' to modular application either by command line or its module descriptor].\nWARNING: A restricted method in java.lang.foreign.Linker has been called\nWARNING: java.lang.foreign.Linker::downcallHandle has been called by module org.apache.lucene.core\nWARNING: Use --enable-native-access=org.apache.lucene.core to avoid a warning for this module\n\nSourceIntegrationProbe PASS: M3File/M3String/M3AST sharing; 2000 AST span oracles; 300 Unicode token oracles; disk indexing/query/term-vector offsets"
+  }
+}

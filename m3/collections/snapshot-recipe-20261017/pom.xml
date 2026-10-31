@@ -45,7 +45,7 @@
       <resource>
         <directory>${repo.root}/m3/tooling/migration-recipes/src/main/resources</directory>
         <includes>
-          <include>com/synexia/rewrite/hash-pinned-java/m3long-sorted-snapshot-20261017/**</include>
+          <include>jdk/internal/m3/rewrite/hash-pinned-java/m3long-sorted-snapshot-20261017/**</include>
           <include>META-INF/rewrite/m3long-sorted-snapshot-20261017.yml</include>
         </includes>
       </resource>
@@ -62,7 +62,7 @@
             <arg>-Werror</arg>
           </compilerArgs>
           <includes>
-            <include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
+            <include>jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
           </includes>
         </configuration>
       </plugin>
@@ -110,7 +110,7 @@
                 </goals>
                 <configuration>
                   <skip>${m3.recipe.boot.skip}</skip>
-                  <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+                  <mainClass>jdk.internal.m3.prstack.M3RecipeBoot</mainClass>
                   <includeProjectDependencies>false</includeProjectDependencies>
                   <includePluginDependencies>true</includePluginDependencies>
                   <arguments>

@@ -87,7 +87,7 @@
   "full_superset_complete": false,
   "new_owner_created": false,
   "next_family": "com.google.common.collect.HashBiMap concrete",
-  "owner_factory": "com.m3.collections.interop.M3GuavaClassToInstanceMaps",
+  "owner_factory": "jdk.m3.collections.interop.M3GuavaClassToInstanceMaps",
   "predecessor_drafts": {
     "canonical": "https://github.com/hsoliwal/com.synexia/pull/12312",
     "receiver": "https://github.com/hsoliwal/M3jdk21/pull/1304"
@@ -103,7 +103,7 @@
     "after_row": [
       "com.google.common.collect.ClassToInstanceMap",
       "GUAVA",
-      "com.m3.collections.interop.M3GuavaClassToInstanceMaps",
+      "jdk.m3.collections.interop.M3GuavaClassToInstanceMaps",
       "M3ClassIndexMap",
       "OPTIONAL_ADAPTER",
       "class-token-key"
@@ -115,7 +115,7 @@
       "disposition"
     ],
     "fixed_points": "PASS BOTH",
-    "generated_java_sha256": "53d845fb4289c5d856d8eccc86235cdea0d5d3182c62d5956140c4d3d9e46b48",
+    "generated_java_sha256": "a5e9298f47f26c015a6caf8f0e6ef5bdca20be2a0d48d0edb44141d6f0d1bd3c",
     "generator": "Unchanged original pure parse/render helpers and template; historical installers/seals preserved. BiMap actual emitted predecessor is exact preimage.",
     "java_changed_lines": 2,
     "other_rows_byte_identical": 106,
@@ -131,7 +131,7 @@
   },
   "review": {
     "configured_autoreview": "NO_VERDICT: original bundled helper refusal retained under mandatory no-tools mode; no retry or bypass",
-    "independent_source_review_sha256": "7a53855e86fc09d837c1f40ed1ac0221cc3f8c93b64b25d5a89099fb5450caa3",
+    "independent_source_review_sha256": "8e023fa062bb6ed17db540dc82d9569d1f4297bec5431bff92354c423c39a78e",
     "source_findings": []
   },
   "schema": "M3_EXISTING_CLASS_INSTANCE_INTERFACE_AND_CATALOGUE_QUALIFICATION_V1",
@@ -139,32 +139,32 @@
     {
       "bytes": 711,
       "commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
-      "git_blob": "d812004a11374b6c361a16634d4a3062cb60e995",
+      "git_blob": "a71226d4af40b018cd419bae4b9e72887d373458",
       "license": "Apache-2.0",
       "modified": false,
       "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\class-instance-next\\src\\main\\java\\com\\m3\\collections\\interop\\M3GuavaClassToInstanceMaps.java",
       "repository": "hsoliwal/M3jdk21",
-      "sha256": "8e149744d798e19f217f324553ef8373d0b761c47585380918d15f96a511af95"
+      "sha256": "379fc843df711dc887bd4bf11fb9d90373bac6842c531280da8f165c031a7078"
     },
     {
       "bytes": 389,
       "commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
-      "git_blob": "a861afe830b672b4cf6970735e6a1d192077c911",
+      "git_blob": "5325e81e2cc06f90927fc17975b1ab4b0e9929d7",
       "license": "Apache-2.0",
       "modified": false,
       "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\class-instance-next\\src\\test\\java\\com\\m3\\collections\\interop\\M3GuavaClassToInstanceMapsTest.java",
       "repository": "hsoliwal/M3jdk21",
-      "sha256": "8c2cf570d004f7b3e8d1ab4476b3e7075de6a3f31c09ef6a1617eb78fd8c48d3"
+      "sha256": "af0dc1700993ea21bedb6f41d7cea33f077a8983bdb0bc7a012914e7494bfc3a"
     },
     {
       "bytes": 2396,
       "commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
-      "git_blob": "bfe2afc128fdda8ca32854df0ad4f9911374fe7a",
+      "git_blob": "3f02a6a572b25886e6696738346a652d888ab2dc",
       "license": "Apache-2.0",
       "modified": false,
       "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\class-instance-next\\src\\test\\java\\com\\m3\\collections\\interop\\M3GuavaClassToInstanceMapsSelfTest.java",
       "repository": "hsoliwal/M3jdk21",
-      "sha256": "c247f3c0a1b923b22cbbd693265d0960f5b062608fbe2827728f242a60cab22c"
+      "sha256": "6e8321438661cd07d24a4f82f27b45e0cb3705dcdf04eaa496c85f4ed8bc3964"
     }
   ],
   "status": "QUALIFIED_SOURCE_AND_REGISTRATION_READY_FOR_DRAFT_PUBLICATION",

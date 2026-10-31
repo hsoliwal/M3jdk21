@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 */
-import com.m3.migration.ExactFileRecipe;
+import jdk.m3.migration.ExactFileRecipe;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;

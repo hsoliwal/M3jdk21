@@ -22,27 +22,27 @@
   ],
   "source_postimages": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java",
       "before_git_blob": "c43ca5578521b8f0a2ab1305f5d4becdeabc772e",
-      "after_git_blob": "b1135dc23d04d4654cedab2e8b62684e1e7d4471",
+      "after_git_blob": "3926a5970d61913304ffa7f24a32ad2740ea1a6b",
       "before_sha256": "884c9078022f64eb3c1f4aa8c306d852521be6089164c7e99b08e17c318d8282",
-      "after_sha256": "2168db105fe700ea1a8022ad362ee41d8f181180deba8404ea87d9c70f46d134",
+      "after_sha256": "9a950e6d94ccac369dff45499d1eb3b7ebcc4412d60034be69dedf1e6623a9e5",
       "role": "array-backed source atom"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3ArrayListShortWordMaskContract.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3ArrayListShortWordMaskContract.java",
       "before_git_blob": "3412d8c46d326e8a6bba2b674a8db18fde7a277f",
-      "after_git_blob": "e87326da9e8d59e36cd84fd1413a0f55087200aa",
+      "after_git_blob": "483e35170f7378d39eae4a0c7d47cb3e27d1a87f",
       "before_sha256": "054bcf36dfcc6915a4ced91264bbe005c183df2be4f93bf709ab0f8c42e928a7",
-      "after_sha256": "aadabb968ad9d9483d02aa67a353d9a6fec402d90c9522325342a8ca8d1d07f1",
+      "after_sha256": "1bb84e8f779096092aef0b6f821d45372c5f028648f36ecb8030abaf22ca8bb8",
       "role": "expanded current JDK differential"
     },
     {
       "path": "m3/arrays/pom.xml",
       "before_git_blob": "45b090e6c6003a21db08884379678b3ba410754c",
-      "after_git_blob": "668fab1d24bbebd407ed920664487db848db464e",
+      "after_git_blob": "b08fa91b81074f319e4dbe3c13aa55f49be1901a",
       "before_sha256": "1448e9b9597df4648c3469ef1c49a57086df58de246e25b946e10b5c04906dd5",
-      "after_sha256": "12b02965bdb4058068885e5acd109334d0f1f827ea2176e3d3e111db320a65e7",
+      "after_sha256": "ab3f5a305116d9c748c3b4659aad10cb398b55253a88c1363b212ced82a6efbe",
       "role": "test-only released JUnit dependency"
     }
   ],
@@ -53,12 +53,12 @@
     },
     {
       "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
-      "git_blob": "bd300c90d54ede9b7f238efe8a18c918d2fcef9e"
+      "git_blob": "baa23467163a0e9344fe3c1d78dcc87cb707fd56"
     }
   ],
   "catalogue": {
     "path": "m3/collections/algorithm-catalog/arraylist-dual-word-current-20261025.tsv",
-    "git_blob": "cb3c21e2da0508ed8af9ed3df6863b5a76d9ef59",
+    "git_blob": "eadc95fdbe963efe4434a9af594585da22188532",
     "category_count": 11
   },
   "evidence": {

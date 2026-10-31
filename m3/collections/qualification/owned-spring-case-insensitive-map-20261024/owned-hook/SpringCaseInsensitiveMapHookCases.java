@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import com.m3.collections.spring.M3LinkedCaseInsensitiveMap;
+import jdk.m3.collections.spring.M3LinkedCaseInsensitiveMap;
 
 /** Baseline binding only; no collection implementation is introduced by this file. */
 public final class SpringCaseInsensitiveMapHookCases {

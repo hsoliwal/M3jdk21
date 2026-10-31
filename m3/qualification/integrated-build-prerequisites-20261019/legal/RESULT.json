@@ -21,8 +21,8 @@
     "canonical_source_payload_count": 193,
     "new_receiver_metadata_count": 14,
     "apache_handoff_rows": 125,
-    "ledger_sha256": "a49dbe43fe9ac11edb01a951874a179f4124d7257315c5310d5d8a6b0d6f0df7",
-    "packet_sha256": "89d402fc68c6b6134ebd2735353cad445a01fc9a03ff2a9cef1d99de74308b5a"
+    "ledger_sha256": "54240a4f6044fc3a4de122b4c15833169bdd73c26e2b60febaaacba13bc31c31",
+    "packet_sha256": "9cb1e5fda0ec7f07a052f811c675daae12c0c346fd1b02f8ff714d3b39a12c4b"
   },
   "source_A_ledger": {
     "path": "docs/M3-SCALE/provenance/M3_FILE_PROVENANCE.tsv",
@@ -37,43 +37,43 @@
   "new_metadata_notice": "These six legal receipt files are new first-party Apache metadata or exact generated gate output. They describe the selected 207/290 inputs and are intentionally outside that input ledger, avoiding self-referential hashes. Scoped licence/NOTICE paths are recorded per reviewed input.",
   "policy_owner_seals": [
     {
-      "path": "m3/compatibility/check_synexia_public_target.py",
-      "sha256": "7ece6e41605bbd118af789b18be1e0b6458a41ae7327f68f48caf8512c92db50",
-      "git_blob": "00f08f3115f37632604670ac1eb2b91fce06d906",
+      "path": "m3/compatibility/check_m3_public_target.py",
+      "sha256": "bc2d6ac8e6f2c2ef31f39a90f24cf1f1e064e50b16f31083d8583c425b66ca10",
+      "git_blob": "cb8242ca0be52a81d6790ddd5d980ab96ab863c1",
       "bytes": 7784
     },
     {
-      "path": "m3/compatibility/synexia-public-target-policy.tsv",
+      "path": "m3/compatibility/m3-public-target-policy.tsv",
       "sha256": "27f9efe7c5018b3415a34ca75ebcb9f37641e5b47c8781c771d4008fae826b8a",
       "git_blob": "28d492ac7a243116203aa04609d5b9573c2447c1",
       "bytes": 529
     },
     {
-      "path": "m3/compatibility/synexia-apache-handoff-pin.tsv",
+      "path": "m3/compatibility/m3-apache-handoff-pin.tsv",
       "sha256": "4e7f0913f46cf1f9f0ae18d294565a32ff371c906f94c89aaa018847f8f8a49c",
       "git_blob": "58b26a6e6c00e4351c38f405d8a67f7ab0e3fdbf",
       "bytes": 585
     },
     {
-      "path": "m3/runtime-integration/verify-synexia-intake.py",
-      "sha256": "d3c6e016fb79a03e1bbeb726fe9dc7ee0b20fa4f0f612b48096926dc66311c97",
-      "git_blob": "bd5429024db9e958d6b043c5befb4d9b60194f4d",
+      "path": "m3/runtime-integration/verify-m3-intake.py",
+      "sha256": "6f16a12a564589cb6055699f70a41e7de99716d55900efc70ed4601dafe9e3c5",
+      "git_blob": "6567fdd037bdc1944afc2694101fb6eff3780f3b",
       "bytes": 4750
     },
     {
-      "path": "m3/docs/synexia-intake-policy.tsv",
+      "path": "m3/docs/m3-intake-policy.tsv",
       "sha256": "519c6e3152fac4d5d06b77c859f8f5a6a6b7e54a1e3dbb5fdd999c4e100a69c7",
       "git_blob": "516d5374f3bea79ef9720caa6cdf0c2217ffbc4f",
       "bytes": 1035
     },
     {
-      "path": "m3/compatibility/synexia-recipe-home-policy.tsv",
-      "sha256": "2f529274bd63bed4d6ca3f1035e40c8fc2323a44cf1e43f14671c8b2464b392b",
-      "git_blob": "ac14256f695ea2757c3005380db48487c7406003",
+      "path": "m3/compatibility/m3-recipe-home-policy.tsv",
+      "sha256": "dbad0b1e16411668d1edc25f550a9a7c9485c8f6c546ade8a56124bd9e30fa29",
+      "git_blob": "84dc0a45de8a3ce22d92144436d601df6ab248f6",
       "bytes": 5536
     },
     {
-      "path": "m3/docs/synexia-apache-reuse-policy.properties",
+      "path": "m3/docs/m3-apache-reuse-policy.properties",
       "sha256": "dc56c10461d8910e3d2f36ea137237f309983c91bea56526cade6956ca4bde5e",
       "git_blob": "c5cd06b5d7661ae04625e04cccc7bbb74c45e59a",
       "bytes": 1127
@@ -82,7 +82,7 @@
   "commands": [
     {
       "name": "policy",
-      "cmd": "python3 m3/compatibility/check_synexia_public_target.py",
+      "cmd": "python3 m3/compatibility/check_m3_public_target.py",
       "result": {
         "status": "fulfilled",
         "value": {
@@ -90,13 +90,13 @@
           "wall_time_seconds": 0.337397968,
           "exit_code": 0,
           "original_token_count": 21,
-          "output": "SYNEXIA_PUBLIC_TARGET_POLICY_PASS policy=checked apache_handoff=qualification-only\n"
+          "output": "M3_PUBLIC_TARGET_POLICY_PASS policy=checked apache_handoff=qualification-only\n"
         }
       }
     },
     {
       "name": "intake",
-      "cmd": "python3 m3/runtime-integration/verify-synexia-intake.py --repo .",
+      "cmd": "python3 m3/runtime-integration/verify-m3-intake.py --repo .",
       "result": {
         "status": "fulfilled",
         "value": {
@@ -104,13 +104,13 @@
           "wall_time_seconds": 0.302685837,
           "exit_code": 0,
           "original_token_count": 19,
-          "output": "SYNEXIA_INTAKE_POLICY_PASS modes=6 direct_copy_reviews=23 foss_synexia=13\n"
+          "output": "M3_INTAKE_POLICY_PASS modes=6 direct_copy_reviews=23 foss_synexia=13\n"
         }
       }
     },
     {
       "name": "prerequisites_handoff",
-      "cmd": "python3 m3/compatibility/check_synexia_public_target.py m3/qualification/integrated-build-prerequisites-20261019/legal/APACHE_HANDOFF.tsv",
+      "cmd": "python3 m3/compatibility/check_m3_public_target.py m3/qualification/integrated-build-prerequisites-20261019/legal/APACHE_HANDOFF.tsv",
       "result": {
         "status": "fulfilled",
         "value": {
@@ -118,7 +118,7 @@
           "wall_time_seconds": 0.178600731,
           "exit_code": 0,
           "original_token_count": 16,
-          "output": "SYNEXIA_PUBLIC_TARGET_POLICY_PASS rows=125 license=Apache-2.0\n"
+          "output": "M3_PUBLIC_TARGET_POLICY_PASS rows=125 license=Apache-2.0\n"
         }
       }
     }
@@ -126,13 +126,13 @@
   "command_cwd": "/workspace/scratch/87fb3604f641/m3-implementation/M3jdk21",
   "evidence_files": {
     "LICENSE_LEDGER.tsv": {
-      "sha256": "a49dbe43fe9ac11edb01a951874a179f4124d7257315c5310d5d8a6b0d6f0df7",
-      "git_blob": "fa6e3c968675ff8a6e501453e62c5fcf6e36e3b9",
+      "sha256": "54240a4f6044fc3a4de122b4c15833169bdd73c26e2b60febaaacba13bc31c31",
+      "git_blob": "2bcc1c3a4fa8fa4a46f061b5cca4dc332f2ef30d",
       "bytes": 127903
     },
     "APACHE_HANDOFF.tsv": {
-      "sha256": "89d402fc68c6b6134ebd2735353cad445a01fc9a03ff2a9cef1d99de74308b5a",
-      "git_blob": "c5df1dae9ff86225832618bc14c1d3a4783a09a9",
+      "sha256": "9cb1e5fda0ec7f07a052f811c675daae12c0c346fd1b02f8ff714d3b39a12c4b",
+      "git_blob": "329f7dc72429b69e6cdc5785510c112e3676a699",
       "bytes": 95220
     },
     "POLICY_GATE.log": {

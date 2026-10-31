@@ -6,10 +6,10 @@ on:
     paths:
       - '.github/workflows/m3-current-nlp-search-jmods-20261018.yml'
       - 'm3/core/src/**'
-      - 'm3/ports/compiletime/src/main/java/com/m3/compiletime/ast/**'
-      - 'm3/vendor/synexia/synexia-mindex/**'
-      - 'm3/vendor/synexia/synexia-native-interop/**'
-      - 'm3/vendor/synexia/synexia-openrewrite-recipes/**'
+      - 'm3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/**'
+      - 'm3/vendor/m3/m3-mindex/**'
+      - 'm3/vendor/m3/m3-native-interop/**'
+      - 'm3/vendor/m3/m3-openrewrite-recipes/**'
       - 'm3/tooling/jmod-recipes/tools/**'
       - 'm3/tooling/module-packs/nlp-search/**'
 
@@ -33,10 +33,10 @@ jobs:
         with:
           sparse-checkout: |
             m3/core/src
-            m3/ports/compiletime/src/main/java/com/m3/compiletime/ast
-            m3/vendor/synexia/synexia-mindex
-            m3/vendor/synexia/synexia-native-interop
-            m3/vendor/synexia/synexia-openrewrite-recipes
+            m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast
+            m3/vendor/m3/m3-mindex
+            m3/vendor/m3/m3-native-interop
+            m3/vendor/m3/m3-openrewrite-recipes
             m3/tooling/jmod-recipes/tools
             m3/tooling/module-packs/nlp-search
       - name: Select Java 21
@@ -77,7 +77,7 @@ jobs:
         run: |
           mvn -version
           mvn -B -ntp \
-            -f m3/vendor/synexia/synexia-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018/pom.xml \
+            -f m3/vendor/m3/m3-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018/pom.xml \
             test org.apache.maven.plugins:maven-dependency-plugin:3.11.0:build-classpath \
             -Dmdep.outputFile=target/sdk-classpath.txt
       - name: Build the source JMODs and combined image
@@ -87,8 +87,8 @@ jobs:
             --jdk-home "$JAVA_HOME" \
             --lucene-source donors/lucene \
             --opennlp-source donors/opennlp \
-            --recipe-runner m3/vendor/synexia/synexia-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018/run_recipe.py \
-            --recipe-resources m3/vendor/synexia/synexia-openrewrite-recipes/src/main/resources \
+            --recipe-runner m3/vendor/m3/m3-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018/run_recipe.py \
+            --recipe-resources m3/vendor/m3/m3-openrewrite-recipes/src/main/resources \
             --out out/current-nlp-search
       - name: Retain JMODs and build evidence
         if: always()

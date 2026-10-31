@@ -444,27 +444,27 @@ their blobs also match the earlier audit pin. Hashes identify bytes, not tests.
 
 | Primary Java file under `m3/collections/src/main/java/com/m3/collections/` | Git blob SHA |
 | --- | --- |
-| [M3Address28.java][address] | `2dda612d7cfdc39d8138c17a85308dc9d084b28b` |
-| [M3BitLane28.java][bits] | `bf44fbf34b893f3919fa1919064869c5aac7d0c3` |
-| [M3IntLane28.java][ints] | `4e1e7eb7f2212493eecd544c3e7174ac1ca33232` |
-| [M3LongLane28.java][longs] | `8616ab397be434e947a3148ea7b02e946c710e99` |
-| [M3SlotAllocator28.java][slots] | `3aa639f8fa88c948babfacb5b34511dd2f18442d` |
-| [M3LongArena28.java][arena] | `b265551ff952606326e25c0361bc6f35c72adedf` |
-| [M3LongLaneStore28.java][rows] | `bc67c1f6d4da60c330c2d130cfa69b9c05d5b814` |
-| [M3LongLinkedList28.java][list] | `f92fd3b564b53ee7bee422db4ce7b6b63a0860eb` |
+| [M3Address28.java][address] | `ae1e43c52351d205ebfc7e57ca5a230a49410399` |
+| [M3BitLane28.java][bits] | `8c0ede05cb02ef87fb052090fa14f05db079acfc` |
+| [M3IntLane28.java][ints] | `08f1ac25be41f517f91052ef2e5289854c50f0e3` |
+| [M3LongLane28.java][longs] | `1aa4b6452f3f2be307c60b14c4843bef7999e9e2` |
+| [M3SlotAllocator28.java][slots] | `cbd0a33b1bc3fbbd25fc9a724998dddfc27b57c8` |
+| [M3LongArena28.java][arena] | `6dc6137c55c290dd8c618f1588c84d98b1d853e6` |
+| [M3LongLaneStore28.java][rows] | `25d020f16a6c519b3ed65d9796a68abea61bf312` |
+| [M3LongLinkedList28.java][list] | `261754cd670fd1e34ef67c5a4363f31729c4279f` |
 
 | Supporting source | Git blob SHA / scope |
 | --- | --- |
-| [SegmentedPrimitiveStorageTest.java][storage-test] | `fd14c6e5e0e56b634592a3eb0ef46e3136091c4a`; seven tests, full body read |
-| [SegmentedLaneBulkContractTest.java][bulk-test] | `050fea92fd02950e5cdc653d55234e829d0a7ab3`; six tests, full body read |
-| [segmented_bit_lane.c][native] | `011b847f0d22ea96e4b136547083904ac50b1440`; complete JNI body and two static helpers |
-| [SegmentedLaneNativeProbe.java][native-probe] | `babb33e8570d4cf455e4ad8665a5d5f3e4a468d0`; complete probe |
-| [PreparedLaneAllocationProbe.java][allocation-probe] | `abd09daee4742abc1ff0b182691e9c918c568522`; complete bounded measurement probe |
-| [M3Collections.java][factory] | `3d2f5aa53bda55293b3254bed3d526b896cbd044`; seven relevant delegates only in this pass |
-| [module-info.java][module] | `e6ca30e5a04a0b7c0f1ada4f0659342cd863d78d` |
-| [collections/pom.xml][pom] | `3c408446a3841282754f06d82819c285a23acd8a` |
+| [SegmentedPrimitiveStorageTest.java][storage-test] | `0b2b7a97b35e1c867d7858a098d52945bd2e49f1`; seven tests, full body read |
+| [SegmentedLaneBulkContractTest.java][bulk-test] | `d7e791b04684063739432bc727bf0339043d02f9`; six tests, full body read |
+| [segmented_bit_lane.c][native] | `0d1a6f61897a6a5f3a600df0b426100156364e57`; complete JNI body and two static helpers |
+| [SegmentedLaneNativeProbe.java][native-probe] | `c2a0f571b791f2279b631772a2e43b483aa2e931`; complete probe |
+| [PreparedLaneAllocationProbe.java][allocation-probe] | `7c5af983dcd1b7a8bedcacd998419ace943f62f2`; complete bounded measurement probe |
+| [M3Collections.java][factory] | `9b49f723dfa91628978e26db2564e0282a3e78a9`; seven relevant delegates only in this pass |
+| [module-info.java][module] | `bcb0af11a4d6038bc79ec582e71c63f218468a6e` |
+| [collections/pom.xml][pom] | `e82f308c1bc1e05807a6e6bf3104fe2d14664fa2` |
 | [collections/README.md][module-readme] | `622b61d4b719fd6879ef8df72ffbcfbaa7e54918`; source instructions, historical outcomes not rerun |
-| [verify.py][historical-verifier] | `55ba6f5c73922881e712850d9bfb9a78bc4a5dcc`; historical build/JNI orchestration read only |
+| [verify.py][historical-verifier] | `9911d369c3ef6022f4f450c3891ce2fe6856a9bf`; historical build/JNI orchestration read only |
 | [verify_donation.py][donation-verifier] | `be9a75e665683014c21e2a884a9ec8bf43636fbd`; relevant current source-set/compile/test/JNI gates read only |
 
 The [porting invariant][policy], [naming map][naming] and
@@ -474,20 +474,20 @@ changes no implementation, recipe, policy, manifest, source denominator or
 receiving phase. Hosted CI, if reported elsewhere, is separate exact-head
 evidence and is neither claimed nor erased by this pass's NOT_RUN status.
 
-[address]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/com/m3/collections/M3Address28.java
-[bits]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/com/m3/collections/M3BitLane28.java
-[ints]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/com/m3/collections/M3IntLane28.java
-[longs]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/com/m3/collections/M3LongLane28.java
-[slots]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/com/m3/collections/M3SlotAllocator28.java
-[arena]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/com/m3/collections/M3LongArena28.java
-[rows]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/com/m3/collections/M3LongLaneStore28.java
-[list]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/com/m3/collections/M3LongLinkedList28.java
-[storage-test]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/test/java/com/m3/collections/SegmentedPrimitiveStorageTest.java
-[bulk-test]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/test/java/com/m3/collections/SegmentedLaneBulkContractTest.java
+[address]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/jdk/m3/collections/M3Address28.java
+[bits]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/jdk/m3/collections/M3BitLane28.java
+[ints]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/jdk/m3/collections/M3IntLane28.java
+[longs]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/jdk/m3/collections/M3LongLane28.java
+[slots]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/jdk/m3/collections/M3SlotAllocator28.java
+[arena]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/jdk/m3/collections/M3LongArena28.java
+[rows]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/jdk/m3/collections/M3LongLaneStore28.java
+[list]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/jdk/m3/collections/M3LongLinkedList28.java
+[storage-test]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/test/java/jdk/m3/collections/SegmentedPrimitiveStorageTest.java
+[bulk-test]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/test/java/jdk/m3/collections/SegmentedLaneBulkContractTest.java
 [native]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/native/collections/segmented_bit_lane.c
 [native-probe]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/verification/SegmentedLaneNativeProbe.java
 [allocation-probe]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/verification/PreparedLaneAllocationProbe.java
-[factory]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/com/m3/collections/M3Collections.java
+[factory]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/jdk/m3/collections/M3Collections.java
 [module]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/module-info.java
 [pom]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/pom.xml
 [reactor]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/pom.xml

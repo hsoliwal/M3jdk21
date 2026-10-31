@@ -6,13 +6,13 @@ on:
     paths:
       - 'm3/collections/qualification/m3-filtered-bounded-current-20261018/**'
       - 'm3/collections/qualification/m3-filtered-navigation-20261018/**'
-      - 'm3/collections/src/main/java/com/m3/collections/M3FilteredViews.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java'
       - 'm3/collections/src/main/native/collections/m3_index_path_masks.c'
       - 'm3/collections/src/main/native/collections/m3_index_mask_compactor.c'
       - 'm3/collections/src/main/native/collections/m3_index_mask_window.c'
-      - 'm3/collections/src/test/java/com/m3/collections/**'
+      - 'm3/collections/src/test/java/jdk/m3/collections/**'
       - '.github/workflows/m3-filtered-bounded-current-20261018.yml'
   workflow_dispatch:
 permissions:
@@ -50,7 +50,7 @@ jobs:
           sha=lambda data:hashlib.sha256(data).hexdigest()
           total=0
           for kind in ("java","text"):
-              lane=dataset/"resources/com/synexia/rewrite"/("hash-pinned-"+kind)/crate
+              lane=dataset/"resources/jdk/internal/m3/rewrite"/("hash-pinned-"+kind)/crate
               manifest=lane/"manifest.tsv"
               for line in manifest.read_text().splitlines():
                   if not line or line.startswith("#"):continue
@@ -98,14 +98,14 @@ jobs:
           # These are reviewed current supersets, not snapshots interchangeable
           # with the historical source. Exact Git object identity is mandatory.
           evolved={
-              "m3/collections/qualification/m3-filtered-navigation-20261018/runtime/pom.xml":"ea72015355e7fdc7534775192af94c22ea468c64",
-              "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java":"25e1ba23e0269cd6226e9f0b76fd9a43c6bb1d59",
-              "m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java":"8c7c19eac9338bbc1a6f82a9e339cfb4952ad0c6",
+              "m3/collections/qualification/m3-filtered-navigation-20261018/runtime/pom.xml":"73633ae3043b72af000323449bfa052bc2b10b05",
+              "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java":"25e1ba23e0269cd6226e9f0b76fd9a43c6bb1d59",
+              "m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java":"8c7c19eac9338bbc1a6f82a9e339cfb4952ad0c6",
           }
           workflow=".github/workflows/m3-filtered-bounded-current-20261018.yml"
           total=kept=reviewed=0
           for kind in ("java","text"):
-              lane=dataset/"resources/com/synexia/rewrite"/("hash-pinned-"+kind)/crate
+              lane=dataset/"resources/jdk/internal/m3/rewrite"/("hash-pinned-"+kind)/crate
               for line in (lane/"manifest.tsv").read_text().splitlines():
                   if not line or line.startswith("#"):continue
                   path,original,post,filename=line.split("\t")
@@ -138,8 +138,8 @@ jobs:
           root=Path("m3/collections/qualification/m3-filtered-bounded-current-20261018/recipe")
           manifest=root/"manifest.tsv"
           reviewed={
-              "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java":"25e1ba23e0269cd6226e9f0b76fd9a43c6bb1d59",
-              "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java":"ac193ba399e9b4709999d629874e56909b75da8d"
+              "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java":"25e1ba23e0269cd6226e9f0b76fd9a43c6bb1d59",
+              "m3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java":"ac193ba399e9b4709999d629874e56909b75da8d"
           }
           total=kept=evolved=0
           for line in manifest.read_text().splitlines():
@@ -192,8 +192,8 @@ jobs:
         run: |
           set -euo pipefail
           mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
-          ARRAYS_JAR="$HOME/.m2/repository/com/m3/m3-arrays/0.1.0-SNAPSHOT/m3-arrays-0.1.0-SNAPSHOT.jar"
+          ARRAYS_JAR="$HOME/.m2/repository/jdk/m3/m3-arrays/0.1.0-SNAPSHOT/m3-arrays-0.1.0-SNAPSHOT.jar"
           test -s "$ARRAYS_JAR"
-          jar --describe-module --file "$ARRAYS_JAR" | grep -q '^com.m3.arrays'
+          jar --describe-module --file "$ARRAYS_JAR" | grep -q '^jdk.m3.arrays'
       - name: Original owning Maven JUnit gate (must be green before promotion)
         run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3BoundedFilteredNavigationTest,M3FilteredNavigationReconciliationTest test

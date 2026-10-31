@@ -13,19 +13,19 @@
  */
 
 /** Guava Testlib */
-module com.m3.collections.guava.testlib {
+module jdk.m3.collections.guava.testlib {
   requires java.logging;
-  requires transitive com.m3.collections.guava;
+  requires transitive jdk.m3.collections.guava;
   requires transitive junit;
   requires static com.google.errorprone.annotations;
   requires static com.google.j2objc.annotations;
   requires static org.jspecify;
 
-  exports com.m3.collections.guava.collect.testing;
-  exports com.m3.collections.guava.collect.testing.features;
-  exports com.m3.collections.guava.collect.testing.google;
-  exports com.m3.collections.guava.collect.testing.testers;
-  exports com.m3.collections.guava.escape.testing;
-  exports com.m3.collections.guava.testing;
-  exports com.m3.collections.guava.util.concurrent.testing;
+  exports jdk.m3.collections.guava.collect.testing;
+  exports jdk.m3.collections.guava.collect.testing.features;
+  exports jdk.m3.collections.guava.collect.testing.google;
+  exports jdk.m3.collections.guava.collect.testing.testers;
+  exports jdk.m3.collections.guava.escape.testing;
+  exports jdk.m3.collections.guava.testing;
+  exports jdk.m3.collections.guava.util.concurrent.testing;
 }

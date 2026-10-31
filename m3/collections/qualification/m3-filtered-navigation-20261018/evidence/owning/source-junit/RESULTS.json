@@ -221,7 +221,7 @@
       "coordinate": "org.apiguardian:apiguardian-api:1.1.2-m3-source-1",
       "jar": "/tmp/m3-source-junit-m2/org/apiguardian/apiguardian-api/1.1.2-m3-source-1/apiguardian-api-1.1.2-m3-source-1.jar",
       "jar_sha256": "f4cb4830147a72e2e905102239e0a693f44e0e13da91e9a57449fcd06036a37b",
-      "installed_pom_sha256": "0d6c98a7e1d59844d3c64ed1e4c59381c5a46834f2731375a7a6c9642ca62091",
+      "installed_pom_sha256": "e539758ff9c8f9b634d2b111d26b43d575b4329965bb854783c6f59eaa1a3ee1",
       "class_count": 3,
       "root_module_descriptor": true,
       "packaged_legal_resources_verified": [

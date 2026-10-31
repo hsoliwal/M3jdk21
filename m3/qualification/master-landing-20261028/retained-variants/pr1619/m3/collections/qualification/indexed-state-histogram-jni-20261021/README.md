@@ -44,8 +44,8 @@ OUT=/tmp/m3jdk21-indexed-hist-proof
 mkdir -p "$OUT/classes" "$OUT/headers" "$OUT/native"
 JDK_HOME="${JAVA_HOME:-$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")}"
 javac -Xlint:all,-serial -Werror --release 21 -h "$OUT/headers" -d "$OUT/classes" \
-  m3/collections/src/main/java/com/m3/collections/M3StateMaskHistogram.java \
-  m3/collections/src/test/java/com/m3/collections/M3StateMaskHistogramIndexedNativeContract.java
+  m3/collections/src/main/java/jdk/m3/collections/M3StateMaskHistogram.java \
+  m3/collections/src/test/java/jdk/m3/collections/M3StateMaskHistogramIndexedNativeContract.java
 cc -std=c17 -Wall -Wextra -Werror -fPIC -shared \
   -I"$JDK_HOME/include" -I"$JDK_HOME/include/linux" \
   m3/collections/src/main/native/collections/m3_state_mask_histogram.c \

@@ -8,7 +8,7 @@ its duplicated validated selection loop with the existing shared
 `M3IndexPathMasks.selectLongJava` kernel.
 
 The candidate is
-`candidates/m3/collections/src/main/java/com/m3/collections/M3LongIndexPathMasks.java`.
+`candidates/m3/collections/src/main/java/jdk/m3/collections/M3LongIndexPathMasks.java`.
 Its exact source bindings are recorded in `SOURCE_BINDINGS.json`. The existing
 `m3-collections-contract-refinement-20261017` crate owns dataset
 `m3jdk21-long-bridge-20261018`; no recipe engine or harness is added or changed.
@@ -39,7 +39,7 @@ this pass does not claim to qualify behavior for racing input mutation.
 The shared-kernel dependency is the corrected wrapper r2 source:
 
 - Owner: `M3IndexPathMasks.java`
-- SHA-256: `e91152a0bb34178995835266ff7c52ae22d87ec6324d171415aed28e293794d1`
+- SHA-256: `db88aef334eadb9a40f34a6ca4077ff96d6af29f75d30c090b55bc76b45e567f`
 - Dataset: `m3jdk21-wrappers-r2-20261018`
 
 The isolated receiver must first contain that qualified dependency. The one-file

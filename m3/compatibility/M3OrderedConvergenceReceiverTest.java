@@ -7,7 +7,7 @@ import java.util.List;
 
 public final class M3OrderedConvergenceReceiverTest {
     private static int assertions;
-    private static final String SOURCE_FILE = "src/synexia/Example.java";
+    private static final String SOURCE_FILE = "src/m3/Example.java";
     private static final String TARGET_FILE = "src/java.base/share/classes/java/lang/M3Example.java";
     private static final String SOURCE = "package synexia; public class Example { int f() { return 1; } }\n";
     private static final String CANDIDATE = "package synexia; public class Example { int f() { return 1 + 0; } }\n";

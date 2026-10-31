@@ -16,7 +16,7 @@ Allowed target-local content:
 - JUnit/jtreg/proof harnesses.
 
 Historical reusable implementations under `scope/`, `semantic/` and `a3/` remain migration residue. The former local `com.m3.rewrite.atom` pure-int implementation layer has been retired; the target proof corpus now executes the qualified `com.synexia.rewrite.atom` mirror. Their reusable authority is mapped by
-`m3/compatibility/synexia-recipe-home-policy.tsv` and
+`m3/compatibility/m3-recipe-home-policy.tsv` and
 `.m3/m3jdk21-synexia-borrowing.tsv` in the canonical Synexia repository.
 
 Any reusable improvement discovered here must first be authored/proved in Synexia and then

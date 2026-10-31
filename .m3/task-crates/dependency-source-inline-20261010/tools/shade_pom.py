@@ -3,7 +3,7 @@
 """DEPENDENCY-SOURCE-INLINE (M3jdk21): maven-shade-plugin aggregator over the vendored source modules.
 
 Writes m3/vendor/third_party/m3-tooling-shaded/pom.xml: one self-contained jar
-(com.m3.vendor:m3-tooling-third-party) built only from the in-repo source modules (<version>-m3-source-1) the
+(jdk.m3.vendor:m3-tooling-third-party) built only from the in-repo source modules (<version>-m3-source-1) the
 tooling consumes, so the tooling can run from a single artifact that the JDK repository builds itself.
 Shade configuration:
   * ServicesResourceTransformer (META-INF/services merged), ApacheLicense/ApacheNotice transformers (legal texts
@@ -51,7 +51,7 @@ def main() -> int:
               <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
               <transformer implementation="org.apache.maven.plugins.shade.resource.ApacheLicenseResourceTransformer"/>
               <transformer implementation="org.apache.maven.plugins.shade.resource.ApacheNoticeResourceTransformer"><addHeader>false</addHeader></transformer>
-              <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"><manifestEntries><Automatic-Module-Name>com.m3.vendor.tooling.thirdparty</Automatic-Module-Name><Multi-Release>true</Multi-Release></manifestEntries></transformer>
+              <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"><manifestEntries><Automatic-Module-Name>jdk.m3.vendor.tooling.thirdparty</Automatic-Module-Name><Multi-Release>true</Multi-Release></manifestEntries></transformer>
             </transformers>
           </configuration>
         </execution></executions>

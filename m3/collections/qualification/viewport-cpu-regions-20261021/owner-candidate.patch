@@ -137,8 +137,8 @@
 -    (*env)->ReleaseIntArrayElements(env, offsets, src, JNI_ABORT);
 -    return 0;
  }
---- a/m3/collections/src/main/java/com/m3/collections/M3MaskViewportKernel.java
-+++ b/m3/collections/src/main/java/com/m3/collections/M3MaskViewportKernel.java
+--- a/m3/collections/src/main/java/jdk/m3/collections/M3MaskViewportKernel.java
++++ b/m3/collections/src/main/java/jdk/m3/collections/M3MaskViewportKernel.java
 @@ -103,8 +103,21 @@
          if (skipVisible < 0 || maxVisible < 0) {
              throw new IndexOutOfBoundsException("negative visible page bounds");

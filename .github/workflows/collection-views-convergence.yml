@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-# Direct product verification: M3JDK21 is the JDK, not a library atop the JDK.
+# Direct product verification: M3JDK 21 is the JDK, not a library atop the JDK.
 name: Collection views contracts
 on:
   pull_request:
@@ -98,5 +98,5 @@ jobs:
         run: |
           set -euo pipefail
           test "$(grep -c 'package java.util;' src/java.base/share/classes/java/util/CollectionViews.java)" -eq 1
-          ! grep -q 'com.m3.collections' src/java.base/share/classes/java/util/CollectionViews.java
+          ! grep -q 'jdk.m3.collections' src/java.base/share/classes/java/util/CollectionViews.java
           sha256sum src/java.base/share/classes/java/util/CollectionViews.java

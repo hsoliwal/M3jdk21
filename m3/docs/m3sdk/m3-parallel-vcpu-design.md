@@ -181,7 +181,7 @@ VCRUNTIME140). Rule 1 holds: Dawn loads D3D12 and Vulkan at run time.
 
 ## 4. Where it lives
 
-| Path | Content | Policy (`m3/docs/synexia-intake-policy.tsv`) |
+| Path | Content | Policy (`m3/docs/m3-intake-policy.tsv`) |
 |---|---|---|
 | `m3/ports/parallel/` | `m3.parallel` Java API + CPU reference + tests | INDEPENDENT_APACHE_MODULE |
 | `m3/ports/vcpu/` | RV32IM: Java oracle (from cpu-gpu, ported, Apache-2.0 provenance kept), kernel C source, JNI glue, HAL core, backends, CMake `-Pnative` | INDEPENDENT_APACHE_MODULE (+ native under the same licence) |

@@ -33,7 +33,7 @@ jobs:
           git diff --check
           test "$(sha256sum src/java.base/share/classes/java/util/CollectionViews.java | cut -d' ' -f1)" = 4fc81eda7a7b1831f36abc20fca52f9ba898fa7a767f2c1b62f8eab872ec056f
           test "$(sha256sum test/jdk/java/util/CollectionViews/FilteredOnePassCowSupersetTest.java | cut -d' ' -f1)" = a948973df45ca9247c3811f6aad7dbbc5969091602e93a7fae2c2c9248c8113f
-          test "$(sha256sum test/jdk/java/util/CollectionViews/FilteredSortedSpliteratorMetadataTest.java | cut -d' ' -f1)" = e3d8f4208b2f8d3f0b05f512d39e30e276ad4496632f917376f3ebb8e37957ad
+          test "$(sha256sum test/jdk/java/util/CollectionViews/FilteredSortedSpliteratorMetadataTest.java | cut -d' ' -f1)" = 253432540a994554e635b89ce52059328cbde1d56361bc23d7ce5fcf55b49045
       - name: Compile real java.base class via patched Java21
         shell: bash
         run: |

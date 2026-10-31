@@ -2,7 +2,7 @@ import hashlib,json,sys,zipfile
 from pathlib import Path
 spec=json.loads((Path(__file__).resolve().parent/'source-bindings.json').read_text())
 with zipfile.ZipFile(sys.argv[1]) as jar:
-    code=jar.read('com/m3/collections/apache/M3CircularFifoQueue.class')
+    code=jar.read('jdk/m3/collections/apache/M3CircularFifoQueue.class')
     if code[:4]!=bytes.fromhex('cafebabe') or int.from_bytes(code[6:8],'big')!=65:raise SystemExit('owned Java21 class missing')
     for name in ['LICENSE.txt','NOTICE.txt']:
         expected=next(row for row in spec['sources'] if row['path'].endswith('apache-circular-fifo/'+name))

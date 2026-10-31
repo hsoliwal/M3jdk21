@@ -5,10 +5,10 @@
 #   run-tests.sh compile                 # main + test sources only
 #   run-tests.sh test [junit selector]   # default: --scan-classpath
 #   run-tests.sh scale <args...>         # M3SwingScale (heap from M3_SCALE_XMX, default 256m)
-# Env: M3_JDK21 (JDK 21 home), JUNIT_JAR (junit-platform-console-standalone 1.11.x), OUT (build dir).
+# Env: M3JDK 21 (JDK 21 home), JUNIT_JAR (junit-platform-console-standalone 1.11.x), OUT (build dir).
 set -euo pipefail
 here=$(cd "$(dirname "$0")" && pwd)
-jdk=${M3_JDK21:-"/c/Program Files/Java/jdk-21"}
+jdk=${M3JDK21:-"/c/Program Files/Java/jdk-21"}
 junit=${JUNIT_JAR:-"$HOME/.m2/repository/org/junit/platform/junit-platform-console-standalone/1.11.4/junit-platform-console-standalone-1.11.4.jar"}
 out=${OUT:-"$here/target/standalone"}
 sep=':'; case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) sep=';' ;; esac
@@ -35,6 +35,6 @@ case "${1:-test}" in
   scale)
     shift
     "$jdk/bin/java" -Xmx${M3_SCALE_XMX:-256m} -XX:+UseSerialGC -Djava.awt.headless=true \
-      -cp "$(win "$out/main")$sep$(win "$out/test")" com.m3.swing.viewport.scale.M3SwingScale "$@" ;;
+      -cp "$(win "$out/main")$sep$(win "$out/test")" jdk.m3.swing.viewport.scale.M3SwingScale "$@" ;;
   *) echo "usage: $0 compile|test|scale" >&2; exit 2 ;;
 esac

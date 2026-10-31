@@ -1,0 +1,16 @@
+{
+  "schema": "M3_PENDING_CORRECTION_INDEX/1",
+  "profile": "m3-nlp-current-receiver-lock-20261021/1.0",
+  "events": [
+    "817062c6c85ca447ea7e08b39d283ca7c582725b6e062ab60b25548c7a77f072",
+    "dadf222e78614055d14654f2036f72754a49ecd01b35bddf22ebc2159149f8e5",
+    "437390987c6d83a77d5b943e71baad1b20402c22658eca47342114140f699d6d",
+    "562d19b551dc56e05a57625680fed470a0fe6ae9a9022c9420115f711e67ae6f",
+    "2ee702aaa0d163282b56c1b24dd5b24557cb20bf2c871397057f7588c31bb890"
+  ],
+  "admission": "PENDING",
+  "retrieval": {
+    "path": "memory/LESSONS.md",
+    "sha256": "1cc027ec0a6c58f9ddc9827fb818fc63730c1cdd97959adc0a1160616d7be45c"
+  }
+}

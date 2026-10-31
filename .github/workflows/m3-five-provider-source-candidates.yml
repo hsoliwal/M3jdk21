@@ -4,7 +4,7 @@ name: M3 five-provider full source candidate execution
 on:
   pull_request:
     paths:
-      - 'synexia-openrewrite-recipes/recipe-crates/five-provider-package-relocation-20261018/**'
+      - 'm3-openrewrite-recipes/recipe-crates/five-provider-package-relocation-20261018/**'
       - 'm3/collections/relocation/five-provider-20261018/**'
       - '.github/workflows/m3-five-provider-source-candidates.yml'
   workflow_dispatch:
@@ -25,25 +25,25 @@ jobs:
             pin: dfd9dca629d44faf71846b1f85acd38556f4854d
             source_root: guava/src/com/google/common/collect
             source_tree: bdba90884fefae61cd8bf56092b8c97eb4539d85
-            recipe: com.synexia.m3.RelocateGuavaFork20261018
+            recipe: jdk.internal.m3.RelocateGuavaFork20261018
           - family: ECLIPSE
             repository: hsoliwal/eclipse-collections
             pin: fbaa8605dad1a84900fd38a1f6954de31b733f07
             source_root: eclipse-collections/src/main/java/org/eclipse/collections/impl
             source_tree: 7585fe79da3edb6c2ccd79be7ec32759dcc43422
-            recipe: com.synexia.m3.RelocateEclipseFork20261018
+            recipe: jdk.internal.m3.RelocateEclipseFork20261018
           - family: APACHE
             repository: hsoliwal/commons-collections
             pin: 6404dfdfe553097bb934e044034abcec5a4dbdd
             source_root: src/main/java/org/apache/commons/collections4
             source_tree: 56171a20ba5c365a2c70777dcaa619520cdf4a57
-            recipe: com.synexia.m3.RelocateApacheCommonsFork20261018
+            recipe: jdk.internal.m3.RelocateApacheCommonsFork20261018
           - family: SPRING
             repository: spring-projects/spring-framework
             pin: 49adc91c7e41eaafb52fc11e1210989894bda1f3
             source_root: spring-core/src/main/java/org/springframework/util
             source_tree: cfd3640d24b8d2dde3610396a1d1c8f6baf896ac
-            recipe: com.synexia.m3.RelocateSpringFork20261018
+            recipe: jdk.internal.m3.RelocateSpringFork20261018
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:

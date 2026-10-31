@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.SplitLiteral
+name: jdk.internal.m3.SplitLiteral
 displayName: M3JDK21 String.split literal lane
 description: >-
   java.lang.String.split and splitWithDelimiters take an M3 literal lane for a regex that is a
@@ -10,7 +10,7 @@ description: >-
   postimages; String.java is carried as text because the pinned Java parser cannot convert its
   Javadoc.
 recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+  - jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe:
       crateName: m3-split-literal
-  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+  - jdk.internal.m3.rewrite.M3HashPinnedTextSnapshotRecipe:
       crateName: m3-split-literal

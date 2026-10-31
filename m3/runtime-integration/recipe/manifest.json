@@ -3,7 +3,7 @@
   "base_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
   "upstream_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
   "target_commit": "e5869d9ffbd9fe65c03450e017e6691721ae2d9a",
-  "patch_sha256": "bfc58c6eb3c7540808839e937a0f64788d65eb64097d10407ecccf899560d0eb",
+  "patch_sha256": "668fa7fcfa81a5d043fce7d0ef2981cfe08166c8af9a0c8f5ad083f6a6266ad5",
   "scope": "M3 String runtime integration: every src/** file whose upstream->master delta carries M3/mindex tokens plus the four token-free String-runtime hooks; JEP/backport files owned by other hash-pinned crates are excluded",
   "files": {
     "src/hotspot/share/cds/archiveHeapWriter.cpp": {
@@ -392,9 +392,9 @@
     },
     "src/java.base/share/legal/synexia.md": {
       "before": null,
-      "after": "2d1d742093ddfd2424442ff27db87af57c9c2b7eb73e68670a05fc5f7d91860a",
+      "after": "220244d43ce48a57a56f594b843c1a458a08cabcaa618ad162f2d679e2f39141",
       "superseded": [
-        "2d1d742093ddfd2424442ff27db87af57c9c2b7eb73e68670a05fc5f7d91860a"
+        "220244d43ce48a57a56f594b843c1a458a08cabcaa618ad162f2d679e2f39141"
       ]
     },
     "src/java.base/share/native/libjava/M3BitLane28.c": {

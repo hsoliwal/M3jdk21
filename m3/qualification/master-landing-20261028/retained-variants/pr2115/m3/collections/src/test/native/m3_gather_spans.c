@@ -51,11 +51,11 @@ static const struct JNINativeInterface_ table = {
     .GetIntArrayRegion=get_int, .GetLongArrayRegion=get_long, .SetLongArrayRegion=set_long,
     .GetPrimitiveArrayCritical=critical, .ReleasePrimitiveArrayCritical=release
 };
-extern void Java_com_m3_collections_M3LongAddressKernel_gatherNative(
+extern void Java_jdk_m3_collections_M3LongAddressKernel_gatherNative(
     JNIEnv *, jclass, jlongArray, jintArray, jint, jint, jlongArray, jint);
 static void invoke(Array *payload, Array *ids, int start, int length, Array *output, int to) {
     JNIEnv env = &table;
-    Java_com_m3_collections_M3LongAddressKernel_gatherNative(&env, NULL,
+    Java_jdk_m3_collections_M3LongAddressKernel_gatherNative(&env, NULL,
         (jlongArray)(void *)payload, (jintArray)(void *)ids, start, length,
         (jlongArray)(void *)output, to);
     CHECK(pinned == 0);

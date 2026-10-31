@@ -1,5 +1,5 @@
---- before/m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheBagContractTest.java
-+++ after/m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheBagContractTest.java
+--- before/m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3ApacheBagContractTest.java
++++ after/m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3ApacheBagContractTest.java
 @@ -7,15 +7,16 @@
  import com.m3.collections.M3IndexMaskCompactor;
  import java.util.ArrayList;

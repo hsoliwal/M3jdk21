@@ -54,6 +54,6 @@ public final class M3MaskCompactionDifferential {
             for(int i=0;i<b;i++)check(actual[i]==expected[i],"identity and ordering");
             for(int i=to;i<actual.length;i++)check(actual[i]==expected[i],"outside window");
         }
-        System.out.println("M3_JDK_ARRAY_MASK_DIFF_PASS checks="+checks);
+        System.out.println("M3JDK_ARRAY_MASK_DIFF_PASS checks="+checks);
     }
 }

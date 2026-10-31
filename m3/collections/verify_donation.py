@@ -39,7 +39,7 @@ def unique_json_object(pairs):
     return result
 
 
-def read_donation_packet(path=HERE / 'synexia-donation.json'):
+def read_donation_packet(path=HERE / 'm3-donation.json'):
     """Read all nested objects without silently accepting duplicate JSON keys."""
     return json.loads(path.read_text(), object_pairs_hook=unique_json_object)
 
@@ -48,12 +48,12 @@ def read_donation_packet(path=HERE / 'synexia-donation.json'):
 # The next exact successor applies the validated stored-representative atom
 # without rewriting the six original filtered/sorted receiver source receipts.
 _REPRESENTATIVE_RECEIPT = HERE / 'recipe/stored-representative-20261017/manifest.tsv'
-_REPRESENTATIVE_SHA256 = 'a62827ffafc18bd6d710d7898741d2114a0068b8ac9ee63aac02e55038e1f293'
+_REPRESENTATIVE_SHA256 = '4558799d12aa2ac5dd8789af591beb8789da632c93ad9020681062d10e664931'
 _REPRESENTATIVE_PATHS = (
-    'm3/collections/src/main/java/com/m3/collections/M3FilteredViews.java',
-    'm3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java',
-    'm3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeContract.java',
-    'm3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeTest.java',
+    'm3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java',
+    'm3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java',
+    'm3/collections/src/test/java/jdk/m3/collections/M3StoredRepresentativeContract.java',
+    'm3/collections/src/test/java/jdk/m3/collections/M3StoredRepresentativeTest.java',
 )
 
 
@@ -98,14 +98,14 @@ def include_stored_representative_successor(previous_rows,
 # The historical installed-source receipt remains immutable. This optional
 # additive overlay is authored by the Synexia OpenRewrite collection receiver.
 _FILTERED_VIEW_RECEIPT = HERE / 'recipe/filtered-sorted-views-20261017/manifest.tsv'
-_FILTERED_VIEW_SHA256 = '828e24b44e4d0b98c6819bb9dd983d71084ae0661e1d81fe90bd0dd286c50ede'
+_FILTERED_VIEW_SHA256 = 'e6e70eb2d1ec267edb8bf6647881d157453350702f32f36828c13e82c178454b'
 _FILTERED_VIEW_PATHS = (
-    'm3/collections/src/main/java/com/m3/collections/M3FilteredViews.java',
-    'm3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java',
-    'm3/collections/src/test/java/com/m3/collections/M3FilteredViewsContract.java',
-    'm3/collections/src/test/java/com/m3/collections/M3FilteredViewsTest.java',
-    'm3/collections/src/test/java/com/m3/collections/M3MutableFilteredViewsContract.java',
-    'm3/collections/src/test/java/com/m3/collections/M3MutableFilteredViewsTest.java',
+    'm3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java',
+    'm3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java',
+    'm3/collections/src/test/java/jdk/m3/collections/M3FilteredViewsContract.java',
+    'm3/collections/src/test/java/jdk/m3/collections/M3FilteredViewsTest.java',
+    'm3/collections/src/test/java/jdk/m3/collections/M3MutableFilteredViewsContract.java',
+    'm3/collections/src/test/java/jdk/m3/collections/M3MutableFilteredViewsTest.java',
 )
 
 
@@ -138,12 +138,12 @@ def include_filtered_view_successor(historical_rows, receipt=_FILTERED_VIEW_RECE
 # Additive M3IndexPathMasks receiving overlay. The pre-existing source manifest
 # and filtered/sorted receiver seal are immutable; this successor is exact and opt-in.
 _PATH_MASK_RECEIPT = HERE / 'recipe/index-path-masks-20261017/manifest.tsv'
-_PATH_MASK_SHA256 = '1cba7c9ed681fbe65653b75949558640ea5aa31a1e3c8f5d83d27f9197518020'
+_PATH_MASK_SHA256 = 'c3af2d443d0c79ee375f6ac0399a874fd5662123e4ef1af52b358c2a6f8ea28f'
 _PATH_MASK_PATHS = (
-    'm3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java',
+    'm3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java',
     'm3/collections/src/main/native/collections/m3_index_path_masks.c',
-    'm3/collections/src/test/java/com/m3/collections/M3IndexPathMasksSelfTest.java',
-    'm3/collections/src/test/java/com/m3/collections/M3IndexPathMasksTest.java',
+    'm3/collections/src/test/java/jdk/m3/collections/M3IndexPathMasksSelfTest.java',
+    'm3/collections/src/test/java/jdk/m3/collections/M3IndexPathMasksTest.java',
 )
 
 
@@ -170,7 +170,7 @@ def include_path_mask_successor(historical_rows, receipt=_PATH_MASK_RECEIPT):
 
 # Exact successor of the four unchanged historical receiving receipts.
 _TOOLS4J_RECEIPT = HERE / 'qualification/tools4j-unix-source-successor-20261019.tsv'
-_TOOLS4J_RECEIPT_SHA256 = 'a802b36b031d2280c72e148baf93e0977a422ef1f07525f349526a2e2b31e46b'
+_TOOLS4J_RECEIPT_SHA256 = '9a1c2d3d93fa07dda84bd5b4e464204f4432448387c9359ac5c149d30cb38ec9'
 _TOOLS4J_PREDECESSOR_SHA256 = '104bd2f6582f4ce496ff13524a7a8f33e7f4c10fb18981ae9e3229c6da5ba7b9'
 
 
@@ -229,7 +229,7 @@ def include_tools4j_refinement_successor(previous_rows, receipt=_TOOLS4J_RECEIPT
 
 # Exact successor sealing the superset source set after the Tools4j refinement.
 _SUPERSET_RECEIPT = HERE / 'qualification/superset-source-successor-20261030.tsv'
-_SUPERSET_RECEIPT_SHA256 = '086b8000624fba0c38779a230dfd7fa41d79d3195a3d0bda67466cceb45bd116'
+_SUPERSET_RECEIPT_SHA256 = '1e0aacf50fa456c0f05fbae3302ad5aebbc4d74fbc5d0df3c6135cfb527b2184'
 _SUPERSET_PREDECESSOR_SHA256 = '6283ee8df10e7d2e4b2a0d47635ef57775fb476c1cae9545cfe1692fa59c176e'
 _SUPERSET_TRANSITIONS = 428
 _SUPERSET_RESULT_ROWS = 772
@@ -373,10 +373,10 @@ def main():
         raise SystemExit('JUnit acceptance requires nonzero tests and no failures/errors/skips: ' + repr(totals))
     for name in ('M3LazyTreeMapSelfTest', 'M3LazyValueStateSelfTest'):
         run('04-' + name, [java_home / 'bin/java', '-ea', '-cp', runtime_classpath,
-                           'com.m3.collections.' + name])
+                           'jdk.m3.collections.' + name])
     resources = target / 'module-resources/META-INF'
     resources.mkdir(parents=True)
-    names = ('LICENSE', 'NOTICE', 'provenance.json', 'synexia-donation.json', 'SYNEXIA-DONATION-NOTICE.txt', 'name-mapping.json')
+    names = ('LICENSE', 'NOTICE', 'provenance.json', 'm3-donation.json', 'M3-DONATION-NOTICE.txt', 'name-mapping.json')
     for name in names:
         shutil.copyfile(HERE / name, resources / name)
     jar = target / 'm3-collections.jar'
@@ -403,7 +403,7 @@ def main():
                                   'PreparedLaneAllocationProbe'])
     if args.cost_probe:
         cost = run('11-collection-cost-probe', [java_home / 'bin/java', '-Xbatch', '-cp', runtime_classpath,
-                                               'com.m3.collections.M3CollectionCostProbe'])
+                                               'jdk.m3.collections.M3CollectionCostProbe'])
         (evidence / 'collection-cost.csv').write_text(cost)
     receipt = {'copyright': 'Copyright 2026 Hitesh Soliwal and contributors', 'license': 'Apache-2.0', 'schema': 'M3_COLLECTION_RECEIVING_QUALIFICATION_V1',
                'scope': 'SEPARATELY_BUILT_COLLECTION_MODULE',

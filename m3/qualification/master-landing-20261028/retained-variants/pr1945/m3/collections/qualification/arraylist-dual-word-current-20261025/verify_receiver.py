@@ -14,20 +14,20 @@ import sys
 ROOT = Path(__file__).resolve().parents[4]
 RECEIPT = Path(__file__).with_name("RECEIVER_RECEIPT.json")
 FILES = {
-    "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java":
-        "b1135dc23d04d4654cedab2e8b62684e1e7d4471",
-    "m3/collections/src/test/java/com/m3/collections/M3ArrayListShortWordMaskContract.java":
-        "e87326da9e8d59e36cd84fd1413a0f55087200aa",
-    "m3/arrays/pom.xml": "668fab1d24bbebd407ed920664487db848db464e",
+    "m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java":
+        "3926a5970d61913304ffa7f24a32ad2740ea1a6b",
+    "m3/collections/src/test/java/jdk/m3/collections/M3ArrayListShortWordMaskContract.java":
+        "483e35170f7378d39eae4a0c7d47cb3e27d1a87f",
+    "m3/arrays/pom.xml": "b08fa91b81074f319e4dbe3c13aa55f49be1901a",
 }
 NATIVE = {
     "m3/collections/src/main/native/collections/m3_index_mask_compactor.c":
         "bedd442346de5b7dd9d5f1965c510950e0c45ea1",
     "m3/collections/src/main/native/collections/m3_index_mask_window.c":
-        "bd300c90d54ede9b7f238efe8a18c918d2fcef9e",
+        "baa23467163a0e9344fe3c1d78dcc87cb707fd56",
 }
 CATALOGUE = "m3/collections/algorithm-catalog/arraylist-dual-word-current-20261025.tsv"
-CATALOGUE_BLOB = "cb3c21e2da0508ed8af9ed3df6863b5a76d9ef59"
+CATALOGUE_BLOB = "eadc95fdbe963efe4434a9af594585da22188532"
 HEX40 = re.compile(r"[0-9a-f]{40}\Z")
 HEX64 = re.compile(r"[0-9a-f]{64}\Z")
 
@@ -65,7 +65,7 @@ def verify(root: Path, receipt: dict) -> dict:
     if receipt.get("source_master") != "882ebe18891c719c0e26b6ee42558e50e96fe33e":
         refuse("current source custody base drift")
     convergence = receipt.get("synexia", {})
-    if convergence.get("recipe") != "com.synexia.rewrite.M3ArrayListDualWordCurrentRecipe":
+    if convergence.get("recipe") != "jdk.internal.m3.rewrite.M3ArrayListDualWordCurrentRecipe":
         refuse("no canonical Synexia recipe linkage")
     rows = receipt.get("source_postimages")
     if not isinstance(rows, list) or len(rows) != len(FILES):

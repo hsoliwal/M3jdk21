@@ -43,7 +43,7 @@
       <resource>
         <directory>${project.basedir}/../../../src/main/resources</directory>
         <includes>
-          <include>com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/**</include>
+          <include>jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/**</include>
           <include>META-INF/rewrite/m3-jcc-ci-repair.yml</include>
         </includes>
       </resource>
@@ -55,11 +55,11 @@
         <version>3.13.0</version>
         <configuration>
           <includes>
-            <include>com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java</include>
-            <include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
+            <include>jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java</include>
+            <include>jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
           </includes>
           <testIncludes>
-            <testInclude>com/m3/rewrite/backport/JccCiRepairTest.java</testInclude>
+            <testInclude>jdk/m3/rewrite/backport/JccCiRepairTest.java</testInclude>
           </testIncludes>
         </configuration>
       </plugin>
@@ -108,7 +108,7 @@
                 </goals>
                 <configuration>
                   <skip>${m3.recipe.boot.skip}</skip>
-                  <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+                  <mainClass>jdk.internal.m3.prstack.M3RecipeBoot</mainClass>
                   <includeProjectDependencies>false</includeProjectDependencies>
                   <includePluginDependencies>true</includePluginDependencies>
                   <arguments>

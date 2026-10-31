@@ -124,32 +124,32 @@ static jlongArray decode_extended(JNIEnv *env, jbyteArray source,
     return (*env)->ExceptionCheck(env) ? NULL : result;
 }
 
-JNIEXPORT jbyteArray JNICALL Java_com_m3_arrays_M3ArrayNative_nativeEncodePacked(
+JNIEXPORT jbyteArray JNICALL Java_jdk_m3_arrays_M3ArrayNative_nativeEncodePacked(
         JNIEnv *env, jclass clazz, jlongArray source, jint bits) {
     (void)clazz;
     return encode_extended(env, source, M3_MODE_PACKED, bits);
 }
-JNIEXPORT jlongArray JNICALL Java_com_m3_arrays_M3ArrayNative_nativeDecodePacked(
+JNIEXPORT jlongArray JNICALL Java_jdk_m3_arrays_M3ArrayNative_nativeDecodePacked(
         JNIEnv *env, jclass clazz, jbyteArray source, jint bits) {
     (void)clazz;
     return decode_extended(env, source, M3_MODE_PACKED, bits);
 }
-JNIEXPORT jbyteArray JNICALL Java_com_m3_arrays_M3ArrayNative_nativeEncodeUnsigned64(
+JNIEXPORT jbyteArray JNICALL Java_jdk_m3_arrays_M3ArrayNative_nativeEncodeUnsigned64(
         JNIEnv *env, jclass clazz, jlongArray source) {
     (void)clazz;
     return encode_extended(env, source, M3_MODE_UNSIGNED64, 0);
 }
-JNIEXPORT jlongArray JNICALL Java_com_m3_arrays_M3ArrayNative_nativeDecodeUnsigned64(
+JNIEXPORT jlongArray JNICALL Java_jdk_m3_arrays_M3ArrayNative_nativeDecodeUnsigned64(
         JNIEnv *env, jclass clazz, jbyteArray source) {
     (void)clazz;
     return decode_extended(env, source, M3_MODE_UNSIGNED64, 0);
 }
-JNIEXPORT jbyteArray JNICALL Java_com_m3_arrays_M3ArrayNative_nativeEncodeZigZag64(
+JNIEXPORT jbyteArray JNICALL Java_jdk_m3_arrays_M3ArrayNative_nativeEncodeZigZag64(
         JNIEnv *env, jclass clazz, jlongArray source) {
     (void)clazz;
     return encode_extended(env, source, M3_MODE_ZIGZAG64, 0);
 }
-JNIEXPORT jlongArray JNICALL Java_com_m3_arrays_M3ArrayNative_nativeDecodeZigZag64(
+JNIEXPORT jlongArray JNICALL Java_jdk_m3_arrays_M3ArrayNative_nativeDecodeZigZag64(
         JNIEnv *env, jclass clazz, jbyteArray source) {
     (void)clazz;
     return decode_extended(env, source, M3_MODE_ZIGZAG64, 0);

@@ -9,4 +9,4 @@ description: >-
   build-time harvester and the differential driver. Stock java.util.regex remains the oracle; no
   java.base promotion occurs here.
 recipeList:
-  - com.m3.rewrite.backport.M3CompileTimeRegexPrecomputeRecipe
+  - jdk.m3.rewrite.backport.M3CompileTimeRegexPrecomputeRecipe

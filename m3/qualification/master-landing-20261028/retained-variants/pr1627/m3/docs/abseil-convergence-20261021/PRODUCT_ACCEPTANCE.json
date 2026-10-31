@@ -103,18 +103,18 @@
     "full_report": "MODULE_REPORT.json",
     "nonpassing": [
       {
-        "class": "com.m3.collections.M3FilteredSplitsMaskSpansTest",
+        "class": "jdk.m3.collections.M3FilteredSplitsMaskSpansTest",
         "message": null,
         "method": "allNativeBackendsAreRequiredByTheFullLane",
         "status": "skipped",
-        "text": "org.opentest4j.TestAbortedException: Assumption failed: all-native qualification is an explicit, isolated lane\n\tat org.junit.jupiter.api.Assumptions.throwAssumptionFailed(Assumptions.java:316)\n\tat org.junit.jupiter.api.Assumptions.assumeTrue(Assumptions.java:115)\n\tat com.m3.collections.M3FilteredSplitsMaskSpansTest.allNativeBackendsAreRequiredByTheFullLane(M3FilteredSplitsMaskSpansTest.java:15)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:580)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1597)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1597)\n"
+        "text": "org.opentest4j.TestAbortedException: Assumption failed: all-native qualification is an explicit, isolated lane\n\tat org.junit.jupiter.api.Assumptions.throwAssumptionFailed(Assumptions.java:316)\n\tat org.junit.jupiter.api.Assumptions.assumeTrue(Assumptions.java:115)\n\tat jdk.m3.collections.M3FilteredSplitsMaskSpansTest.allNativeBackendsAreRequiredByTheFullLane(M3FilteredSplitsMaskSpansTest.java:15)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:580)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1597)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1597)\n"
       },
       {
-        "class": "com.m3.collections.M3FilteredSplitsMaskSpansTest",
+        "class": "jdk.m3.collections.M3FilteredSplitsMaskSpansTest",
         "message": null,
         "method": "maskSpanCheckedJniOracle",
         "status": "skipped",
-        "text": "org.opentest4j.TestAbortedException: Assumption failed: native proof requires the explicit checked-JNI runner\n\tat org.junit.jupiter.api.Assumptions.throwAssumptionFailed(Assumptions.java:316)\n\tat org.junit.jupiter.api.Assumptions.assumeTrue(Assumptions.java:115)\n\tat com.m3.collections.M3FilteredSplitsMaskSpansTest.maskSpanCheckedJniOracle(M3FilteredSplitsMaskSpansTest.java:10)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:580)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1597)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1597)\n"
+        "text": "org.opentest4j.TestAbortedException: Assumption failed: native proof requires the explicit checked-JNI runner\n\tat org.junit.jupiter.api.Assumptions.throwAssumptionFailed(Assumptions.java:316)\n\tat org.junit.jupiter.api.Assumptions.assumeTrue(Assumptions.java:115)\n\tat jdk.m3.collections.M3FilteredSplitsMaskSpansTest.maskSpanCheckedJniOracle(M3FilteredSplitsMaskSpansTest.java:10)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:580)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1597)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1597)\n"
       }
     ],
     "source_built_junit_coordinate": "5.10.2-m3-source-1",
@@ -205,11 +205,11 @@
     "The checked-JNI fixture exercises the actual changed compactor shared library only.",
     "The UBSan executable uses an instrumented JNI function table and is not a real JVM; the checked-JNI run is the separate real JVM evidence.",
     "The com.m3 proving-ground module is independently built with this product JDK; this does not establish its installation as a product module or universal java.util replacement.",
-    "The existing com.m3.collections.M3CollectionViews identity defects remain outside this repair.",
+    "The existing jdk.m3.collections.M3CollectionViews identity defects remain outside this repair.",
     "No receiving-phase advancement, full jtreg, GC/JMM/CDS/JVMTI, retained-heap or native/process-memory qualification is claimed.",
     "Finite fixtures do not establish full jtreg, JMM, GC, CDS, JVMTI, retained-heap, native/process-memory, or general comparative performance qualification.",
     "Identity provenance is limited to the explicit known JDK owners and wrappers; custom equality policies and automatic synchronization are not inferred.",
-    "The independent com.m3.collections.M3CollectionViews identity defects remain excluded.",
+    "The independent jdk.m3.collections.M3CollectionViews identity defects remain excluded.",
     "CollectionViewsContract --native and its historical RunSearchJni provider are NOT_RUN.",
     "The additive java.util.CollectionViews API and its Apache-origin java.base source retain the separate public-API and target-license review gates.",
     "No receiving phase is advanced; the pre-existing String successor-chain policy failure is not repaired or overridden by these fixtures.",

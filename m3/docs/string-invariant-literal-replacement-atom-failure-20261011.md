@@ -38,6 +38,6 @@ overload.
 ## Other failures are separate
 
 The same workflow batch also reports a missing
-`m3/compatibility/synexia-string-representation-consumers-receipt.json`,
+`m3/compatibility/m3-string-representation-consumers-receipt.json`,
 a full-borrow self-promotion refusal, and broad migration-recipe failures.
 Do not weaken those gates or bundle them into this atom-boundary repair.

@@ -13,8 +13,8 @@ introducing a new payload owner, runtime reflection, per-element wrappers or JNI
 Canonical recipe: [Synexia PR #12464](https://github.com/hsoliwal/com.synexia/pull/12464),
 `com.synexia.M3Jdk21SortableDistanceNormalization20261019`.
 Target file before blob: `532f3078f9125e526882a3ae0367bbb32b784589`.
-Target file after blob: `e3fe7865fd7a05459ae842b1af85ccaacb84d065`.
-Added standalone Java21 contract blob: `8742c9cde89bf432773806b5194bf91aec41c692`.
+Target file after blob: `0db8efab0bdaaf623f79182aee261b5f99fd2b51`.
+Added standalone Java21 contract blob: `31cc5f70eea3b63a34b9f57e1fcb775e0a6b1a18`.
 The target implementation/test were received **byte-identically** from the canonical
 recipe templates; their target SHA-256 values are checked by the workflow.
 

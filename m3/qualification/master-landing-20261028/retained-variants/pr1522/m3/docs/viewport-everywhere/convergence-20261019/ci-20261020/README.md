@@ -26,7 +26,7 @@ that dependency. Every workflow job and consumer assertion stays unchanged.
 ## Physical-state source admission
 
 The current-owner workflow still pinned the snapshot preimage. Advance that one
-literal to the qualified receiver Git blob `2caf4faf78ea20ccb41de9a61b08790855b4edd4`.
+literal to the qualified receiver Git blob `eeec5ff32acd33d898e515bd3f53d117e5a34763`.
 All six exact-source guards now match the received owners; the other five pins,
 Java proof mains and strict native commands are unchanged. The original preimage
 is retained in the canonical recipe fixture. The published qualification already

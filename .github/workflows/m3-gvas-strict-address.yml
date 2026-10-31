@@ -2,8 +2,8 @@ name: M3-GVAS strict same-address JNI
 on:
   pull_request:
     paths:
-      - 'm3/core/src/com/m3/text/M3FixedAddressMapping.java'
-      - 'm3/core/test/com/m3/text/M3FixedAddressMappingContractTest.java'
+      - 'm3/core/src/jdk/m3/text/M3FixedAddressMapping.java'
+      - 'm3/core/test/jdk/m3/text/M3FixedAddressMappingContractTest.java'
       - 'm3/lexicon/native/m3_fixed_address_mapping_jni.c'
       - 'm3/verify-fixed-address-jni.py'
       - '.github/workflows/m3-gvas-strict-address.yml'
@@ -24,4 +24,4 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Compile Java 21/JNI and prove identical address in two JVMs
-        run: M3_JDK="$JAVA_HOME" python3 m3/verify-fixed-address-jni.py
+        run: M3JDK="$JAVA_HOME" python3 m3/verify-fixed-address-jni.py

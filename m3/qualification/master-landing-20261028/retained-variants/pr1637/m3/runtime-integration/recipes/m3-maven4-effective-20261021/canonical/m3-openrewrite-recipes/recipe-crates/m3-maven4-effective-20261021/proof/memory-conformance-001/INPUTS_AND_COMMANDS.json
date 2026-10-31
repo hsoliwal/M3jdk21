@@ -1,0 +1,54 @@
+{
+  "schema": "M3_MEMORY_PROFILE_INPUTS/1",
+  "profile": "m3-maven4-effective-20261021/1.0",
+  "sources": [
+    {
+      "source_path": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/jdk/internal/m3/rewrite/memory/M3RecoveryMemory.java",
+      "source_sha256": "88696555f28134225ecd731c5c81065dd53912361d46bfe3f79f60d877c62936",
+      "path": "memory/tooling/src/jdk/internal/m3/rewrite/memory/M3RecoveryMemory.java",
+      "sha256": "0a9b8bfbd7f2c5ed59f1be423b7cdaea818ad22d1feb015eb9b2b22c78b0192f",
+      "modification": "Profile identity and dated comment only"
+    },
+    {
+      "source_path": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/jdk/internal/m3/rewrite/memory/M3RecoveryMemoryTest.java",
+      "source_sha256": "b27e96e73af86cb12cf453a0b4f27b49bdae24073aa9e435061b177d02969a78",
+      "path": "memory/tooling/src/jdk/internal/m3/rewrite/memory/M3RecoveryMemoryTest.java",
+      "sha256": "b27e96e73af86cb12cf453a0b4f27b49bdae24073aa9e435061b177d02969a78",
+      "modification": "Exact unchanged source"
+    },
+    {
+      "source_path": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/jdk/internal/m3/rewrite/sealed/SealHash.java",
+      "source_sha256": "316da9bf8b642f9d8ad9e055328aec0f70ddfe0f63c4649d5dc35d062fd7a11c",
+      "path": "memory/tooling/src/jdk/internal/m3/rewrite/sealed/SealHash.java",
+      "sha256": "316da9bf8b642f9d8ad9e055328aec0f70ddfe0f63c4649d5dc35d062fd7a11c",
+      "modification": "Exact unchanged source"
+    }
+  ],
+  "commands": [
+    [
+      "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/javac",
+      "--release",
+      "21",
+      "-Xlint:all",
+      "-Werror",
+      "-cp",
+      "/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+      "-d",
+      "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/tooling/target/classes",
+      "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/tooling/src/jdk/internal/m3/rewrite/memory/M3RecoveryMemory.java",
+      "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/tooling/src/jdk/internal/m3/rewrite/memory/M3RecoveryMemoryTest.java",
+      "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/tooling/src/jdk/internal/m3/rewrite/sealed/SealHash.java"
+    ],
+    [
+      "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+      "-ea",
+      "-cp",
+      "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/tooling/target/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+      "jdk.internal.m3.rewrite.memory.M3RecoveryMemoryTest"
+    ]
+  ],
+  "cwd": "/workspace/scratch/206049dfb270",
+  "java_release_sha256": "e5a4248b028f6ecd6d43fb1a57fff0f900ef62e026501e95875a60b0cf904338",
+  "jackson_sha256": "f5f8ef90609e64fec82eb908e497dc7d81b2eb983fe509b870292a193cde4dfb",
+  "sdk_source_inputs_modified": false
+}

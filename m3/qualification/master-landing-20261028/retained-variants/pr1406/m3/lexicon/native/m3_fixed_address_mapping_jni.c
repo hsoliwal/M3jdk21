@@ -81,7 +81,7 @@ static int valid_range(jlong base, jlong length) {
 }
 
 JNIEXPORT jobject JNICALL
-Java_com_m3_text_M3FixedAddressMapping_mapExact0(JNIEnv *env, jclass klass,
+Java_jdk_m3_text_M3FixedAddressMapping_mapExact0(JNIEnv *env, jclass klass,
         jstring path, jlong base, jlong length) {
     (void)klass;
     if (path == NULL || !valid_range(base, length)) {
@@ -189,7 +189,7 @@ Java_com_m3_text_M3FixedAddressMapping_mapExact0(JNIEnv *env, jclass klass,
 }
 
 JNIEXPORT jlong JNICALL
-Java_com_m3_text_M3FixedAddressMapping_directAddress0(JNIEnv *env, jclass klass,
+Java_jdk_m3_text_M3FixedAddressMapping_directAddress0(JNIEnv *env, jclass klass,
         jobject buffer) {
     (void)klass;
     if (buffer == NULL) return 0;
@@ -197,7 +197,7 @@ Java_com_m3_text_M3FixedAddressMapping_directAddress0(JNIEnv *env, jclass klass,
 }
 
 JNIEXPORT void JNICALL
-Java_com_m3_text_M3FixedAddressMapping_unmapRejected0(JNIEnv *env, jclass klass,
+Java_jdk_m3_text_M3FixedAddressMapping_unmapRejected0(JNIEnv *env, jclass klass,
         jlong base, jlong length) {
     (void)klass;
     if (!valid_range(base, length)) {
@@ -219,7 +219,7 @@ Java_com_m3_text_M3FixedAddressMapping_unmapRejected0(JNIEnv *env, jclass klass,
 }
 
 JNIEXPORT void JNICALL
-Java_com_m3_text_M3FixedAddressMapping_reserveCollision0(JNIEnv *env, jclass klass,
+Java_jdk_m3_text_M3FixedAddressMapping_reserveCollision0(JNIEnv *env, jclass klass,
         jlong base, jlong length) {
     (void)klass;
     if (!valid_range(base, length)) {
