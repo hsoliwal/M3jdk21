@@ -1,0 +1,59 @@
+{
+  "schema": "M3_STRING_STRUCTURAL_RECOVERY_RECEIPT_V1",
+  "date": "2026-10-31",
+  "license": "Apache-2.0",
+  "copyright": "2026 Hitesh Soliwal and contributors",
+  "status": "SCOPED_STRUCTURAL_REPAIR; FULL_STRING_RUNTIME_HOLD",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "c3655189fe32412bce1d6e034178e3d596d26494",
+  "canonical_pr": "https://github.com/hsoliwal/com.synexia/pull/14732",
+  "canonical_base": "b027dd093682ccc1cb0b11c90c2aa8141292d08d",
+  "recipe_id": "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe",
+  "task_id": "m3-string-structural-recovery-20261030",
+  "execution_plane": "OPENREWRITE_SDK_EXECUTION",
+  "manifest_sha256": "eec74e2846aa8254794257bdb5093bd5e8d64dbb8ed14bfd04ce7a2fce5e6e85",
+  "target_base": "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136",
+  "outputs": [
+    {
+      "path": "m3/runtime-integration/check-m3string-invariants.py",
+      "before_sha256": "16d78a045be8fea93dfd665568fe747db35e3dbc43264192b4446ccaf97ed688",
+      "before_git_blob": "75b10f957f8004bb780a9befa4f1910a372524e5",
+      "after_sha256": "d4582743bd7808d2d2fb18664371118c155b2ff7f75f783de1043fc93032a234",
+      "after_git_blob": "3ca0dbcbd1abfa81d86763be0b598e5eab44c588"
+    },
+    {
+      "path": "m3/runtime-integration/test_string_layout.py",
+      "before_sha256": "1eb253a2d5350af9f8d6ace012ac2628f1908615e2eb32edf837d9f41aba14fb",
+      "before_git_blob": "0451ca1ca3ff5e5113b4d482d855f46fd7a4e454",
+      "after_sha256": "b9de683cf94eb59f050d3b1343980eb0971c0ce581377eaab19faec8f08a24dd",
+      "after_git_blob": "31d0b1f06117f9e8c1bd1071cec486427bc1f08c"
+    }
+  ],
+  "verification": {
+    "sdk_tests": 6,
+    "sdk_failures": 0,
+    "sdk_errors": 0,
+    "sdk_skipped": 0,
+    "all_mixed_states": 8,
+    "input_orders_per_state": 2,
+    "layout_path_tests": 14,
+    "guard_removal_cases": 26,
+    "replacement_route_tests": 22,
+    "historical_tests_restored": 5,
+    "sdk_product_postimages_exact": true,
+    "independent_review": "No critical or important introduced defects; draft only. Canonical current-base registry reconciliation verified separately with six SDK tests."
+  },
+  "qualification_holds": {
+    "full_string_invariants": "Later equality gate fails; not a full invariant pass",
+    "strict_source_build": "24 ASCII encoding errors in existing comments; no new source-built image; remaining make work interrupted",
+    "naming": "Existing Arrays.java companion hash drift",
+    "overflow": "Existing test module import failure",
+    "full_borrow": "Ancestry prerequisite unqualified in depth-1 checkout",
+    "canonical_provenance": "Candidate ledger validated separately; authoritative index registration/full hydration pending",
+    "runtime": "No current Java/JNI/jtreg/GC/CDS/JCK or performance qualification"
+  },
+  "runtime_java_jni_modified": false,
+  "public_contract_changed": false,
+  "receiving_sequence_advanced": false,
+  "automatic_merge": false
+}
