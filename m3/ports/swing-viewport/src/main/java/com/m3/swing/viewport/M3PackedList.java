@@ -16,7 +16,8 @@ import javax.swing.plaf.basic.BasicListUI;
  * {@link M3PackedListUI#paintCell} binds the packed renderer to the row index directly.
  */
 //FLLDCIM: L6 — paint never materializes (OH23); L7 — no all-rows measure (OH24)
-public class M3PackedList<E> extends JList<E> {
+//FLLDCIM: MRL — final: no subclass can override a method the constructor calls (this-escape)
+public final class M3PackedList<E> extends JList<E> {
 	private static final long serialVersionUID = 1L;
 
 	private final M3PackedCellRenderer packed;
