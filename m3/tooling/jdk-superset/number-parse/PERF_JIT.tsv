@@ -1,0 +1,11 @@
+atom	rounds	post_ns	post_ref_ns	post_speedup	pre_ns	pre_ref_ns	pre_speedup	split_ns	split_ref_ns	split_speedup	stock_ns	stock_ref_ns	stock_speedup	after_vs_pre	after_vs_split	after_vs_stock	load_median	load_max	verdict
+Double.parseDouble decimal (wiring)	16	49.22	329.32	6.691	55.91	333.75	5.969	47.35	340.29	7.187	328.65	338.19	1.029	0.876	1.024	0.145	0.252	1.000	PASS
+Float.parseFloat decimal (wiring)	16	36.45	145.95	4.004	40.27	146.31	3.634	35.23	144.48	4.101	116.93	117.03	1.001	0.913	1.010	0.308	0.432	0.715	PASS
+Double.parseDouble hex (wiring)	16	68.92	428.95	6.224	69.39	427.02	6.154	67.15	408.71	6.087	391.34	401.03	1.025	1.011	1.016	0.180	0.452	0.740	PASS
+Float.parseFloat hex (wiring)	16	85.41	374.50	4.385	85.38	374.50	4.386	87.45	366.70	4.193	361.29	361.02	0.999	0.989	0.985	0.229	0.441	0.740	PASS
+Double.parseDouble short (wiring)	16	16.26	28.33	1.742	14.89	27.98	1.879	16.37	28.73	1.755	24.34	26.08	1.071	1.025	1.006	0.592	0.441	0.740	PASS
+Float.parseFloat short (wiring)	16	17.98	26.66	1.483	16.48	26.42	1.604	17.38	26.88	1.546	24.05	25.48	1.060	0.987	1.035	0.730	0.441	0.740	PASS
+Double.parseDouble long (wiring)	16	129.19	427.50	3.309	131.19	422.79	3.223	126.00	419.17	3.327	427.47	414.52	0.970	0.988	1.035	0.315	0.429	0.840	PASS
+Float.parseFloat long (wiring)	16	150.92	296.28	1.963	143.94	285.75	1.985	141.81	280.88	1.981	284.88	281.00	0.986	1.054	1.027	0.518	0.404	0.734	FAIL
+Double.parseDouble subnormal (wiring)	16	295.50	250.39	0.847	299.43	262.68	0.877	278.03	249.20	0.896	252.69	259.46	1.027	0.979	1.040	1.152	0.404	0.734	PASS
+Float.parseFloat subnormal (wiring)	16	121.48	94.00	0.774	127.38	99.37	0.780	123.26	94.25	0.765	97.25	95.41	0.981	0.970	1.002	1.248	0.404	0.734	PASS

@@ -49,7 +49,58 @@ one per jackson-core version).
    - Strings: no M3 interner is reachable from `jdk.internal.math`, so the 4 strings are compile-time constants, which
      the JVM interns. The gap is recorded in `RECIPE_MEMORY.tsv`.
 
+### number-parse JIT leaf: atomize, test, JIT, patternize (stacked on #2215)
+
+User order: atomize first, then JUnit for every atom and the JIT, then the patternizer passes. Evidence in
+`number-parse/` (GATES.tsv rows `jit_*`, `hex_*`, `swar_*`, `pattern_*`).
+
+1. ATOMIZE: tree-sitter L-Hash atomization of the 13 M3 types and `FloatingDecimal` (atomize_patternize.py:
+   14 files, 249 leaves before, 270 after), and every method sized by `tools/jit_size.py`: the javap length must equal
+   the class-file code_length (JIT_SIZE.tsv, JIT_SIZE_PRE.tsv). HotSpot 21 limits: MaxInlineSize 35, FreqInlineSize
+   325, HugeMethodLimit 8000. The hot parse methods were too big: `parseDecFloatLiteral` 466 bytes and
+   `parseHexFloatLiteral` 515 bytes ("hot method too big" into `parseFloatingPointLiteral`, 81 C2 failures in 3 probe
+   runs). Split in the same files into private atoms (JIT_ATOMIZE v1, `//FLLDCIM: HPCPOP` anchors):
+   - `parseExponentNumber` and `parseLiteralTail` return one packed long (exponent number, end index, illegal bit);
+     `packedIndex` decodes it (one owner in `M3AbstractFloatValueParser` for both templates);
+   - `valueOfTruncatedDecFloatLiteral` / `valueOfTruncatedHexLiteral` (instance atoms: they end in the abstract
+     valueOf*);
+   - the fast-path decision (35 bytes) over `isClingerFastPath`, `clingerFastPath` (25 bytes) and the Eisel-Lemire
+     atom; `jdkConverterValue` for the cold fallback.
+   The body parsers are now 261 / 316 bytes (CharSequence), and the byte[] template the same way. Over the limits in
+   the 13 types remain only cold code, never compiled in the probe: `M3FastDoubleMath.<clinit>` (9997 bytes, the
+   table initializer) and the FFT `fft`, `ifft`, `multiplyFft`.
+2. JUNIT: `M3NumberParseEveryAtomTest`, one dynamic test per method and constructor of the 13 types plus the two
+   wiring entries (197), each differential against FloatingDecimal.readJavaFormatString, a JDK kernel or an
+   independent model; `everyAtomHasATest()` fails when an atom has no test (198/198). The existing gates stay: differential sha256 233e0f59...,
+   M3NumberParseAtomsTest 11/11.
+3. JIT: `tools/jit_probe.sh` runs `M3NumberParseJitPerf` (decimal, hex, short, long and subnormal literals) with
+   PrintCompilation + PrintInlining into a VM log; `tools/jit_inline.py` de-interleaves it per compiler thread and
+   writes JIT.tsv (tier and C2 inlining failures per atom, before / after). C2 failures with the gated reasons:
+   98 before (81 hot method too big), 58 after (0 hot method too big; 41 "already compiled into a big method": the
+   loop holder `parseDecFloatLiteral` is compiled first and its code exceeds InlineSmallCode 2500, also
+   `FloatingDecimal.parseDouble` at the API boundary; 17 at cold call sites). Perf: PERF_JIT.tsv, 16 interleaved
+   rounds of post / split / pre-image / stock at High priority, system CPU load per row: decimal literals 0.876
+   (double) and 0.913 (float) of the pre-image's time, 9 of 10 rows within 1.05 (float long 1.054).
+4. PATTERNIZE: PATTERNS.tsv, NUMBER-PARSE-PATTERN v1 at atom level (`tools/atom_patterns.py`): 197 atoms in 30
+   atom patterns, 0 UNKNOWN_PATTERN, typed residue (PACKED_RESULT, INSTANCE_ATOM, COLD_PATH, FIXED, DONOR_QUIRK,
+   LATENT_DEFECT) and one owner per proven-identical behaviour.
+
+The per-atom tests found three defects of #2215, all inherited from FastDoubleParser 1.0.90, all reachable through
+`Double.parseDouble` / `Float.parseFloat`, now fixed in their own commits (the pre-image differs from stock, post
+equals stock):
+- HEX_ROUNDING v1: hex significands at or above 2^63 were rounded twice ((double) significand + 2^64), truncated hex
+  significands lost the sticky tail: `0x8000000000000BFFp0`, `0x1.00000000000008000000000000001p0` parsed off by one
+  ulp. Gate `M3ParseDifferential hexdiff 200000`: 30672 lines differ before, 0 after.
+- SWAR_HEX_BORROW v1: the SWAR hex check borrowed across byte lanes and took `g`/`G` for a hex digit:
+  `Double.parseDouble("0x1.79G60184p0")` returned a value instead of throwing NumberFormatException. Gate `swardiff
+  200000`: 76582 lines differ before, 0 after.
+Latent FFT defects (no caller reaches them; recorded as FFT_LATENT v1 in RECIPE_MEMORY.tsv for the BigDecimal leaf):
+length-12 mixed radix, multiplyFft / squareFft for small operands, pointwise operations on vector views.
+
 Next:
+- Remove the last call boundary of the decimal path: the scanner hands its state (significand and packed index) to
+  the caller instead of calling the value chain, so the loop holder stays below InlineSmallCode.
+- Per-atom perf rows for the atoms this leaf created (the composites have rows in PERF_JIT.tsv and PERF.tsv).
 - Point jackson-core's fast path at the JDK (`Double.parseDouble`) by recipe, then drop the three vendored
   FastDoubleParser copies.
 - A LATIN1 byte path straight over String's bytes. Only the JDK can do this; a library cannot.

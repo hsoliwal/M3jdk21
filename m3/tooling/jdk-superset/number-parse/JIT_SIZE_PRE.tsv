@@ -1,0 +1,248 @@
+class	member	descriptor	bytecode_bytes	size_check	first_line	source_lines	atom_id	jit_class
+FloatingDecimal$1	jdk.internal.math.FloatingDecimal$1();	()V	5	OK	998	-	-	TRIVIAL_INLINE
+FloatingDecimal$1	protected jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer initialValue();	()Ljdk/internal/math/FloatingDecimal$BinaryToASCIIBuffer;	8	OK	1001	4	jdk/internal/math/FloatingDecimal.java@41226-41370	TRIVIAL_INLINE
+FloatingDecimal$1	protected java.lang.Object initialValue();	()Ljava/lang/Object;	5	OK	998	-	-	TRIVIAL_INLINE
+FloatingDecimal$ASCIIToBinaryBuffer	jdk.internal.math.FloatingDecimal$ASCIIToBinaryBuffer(boolean, int, char[], int);	(ZI[CI)V	26	OK	1061	7	jdk/internal/math/FloatingDecimal.java@43384-43627	TRIVIAL_INLINE
+FloatingDecimal$ASCIIToBinaryBuffer	public double doubleValue();	()D	1194	OK	1078	337	jdk/internal/math/FloatingDecimal.java@43975-59534	TOO_BIG_TO_INLINE
+FloatingDecimal$ASCIIToBinaryBuffer	public float floatValue();	()F	1084	OK	1425	296	jdk/internal/math/FloatingDecimal.java@60062-73830	TOO_BIG_TO_INLINE
+FloatingDecimal$ASCIIToBinaryBuffer	static {};	()V	333	OK	1054	-	-	TOO_BIG_TO_INLINE
+FloatingDecimal$ASCIIToBinaryConverter	public abstract double doubleValue();	()D	-	OK	-	-	-	ABSTRACT
+FloatingDecimal$ASCIIToBinaryConverter	public abstract float floatValue();	()F	-	OK	-	-	-	ABSTRACT
+FloatingDecimal$BinaryToASCIIBuffer	jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer();	()V	31	OK	285	3	jdk/internal/math/FloatingDecimal.java@11990-12062	TRIVIAL_INLINE
+FloatingDecimal$BinaryToASCIIBuffer	jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer(boolean, char[]);	(Z[C)V	49	OK	285	7	jdk/internal/math/FloatingDecimal.java@12166-12422	HOT_INLINE
+FloatingDecimal$BinaryToASCIIBuffer	public java.lang.String toJavaFormatString();	()Ljava/lang/String;	23	OK	321	5	jdk/internal/math/FloatingDecimal.java@12432-12583	TRIVIAL_INLINE
+FloatingDecimal$BinaryToASCIIBuffer	public void appendTo(java.lang.Appendable);	(Ljava/lang/Appendable;)V	72	OK	327	11	jdk/internal/math/FloatingDecimal.java@12593-12989	HOT_INLINE
+FloatingDecimal$BinaryToASCIIBuffer	public int getDecimalExponent();	()I	5	OK	339	4	jdk/internal/math/FloatingDecimal.java@12999-13092	TRIVIAL_INLINE
+FloatingDecimal$BinaryToASCIIBuffer	public int getDigits(char[]);	([C)I	22	OK	344	5	jdk/internal/math/FloatingDecimal.java@13102-13285	TRIVIAL_INLINE
+FloatingDecimal$BinaryToASCIIBuffer	public boolean isNegative();	()Z	5	OK	350	4	jdk/internal/math/FloatingDecimal.java@13295-13383	TRIVIAL_INLINE
+FloatingDecimal$BinaryToASCIIBuffer	public boolean isExceptional();	()Z	2	OK	355	4	jdk/internal/math/FloatingDecimal.java@13393-13479	TRIVIAL_INLINE
+FloatingDecimal$BinaryToASCIIBuffer	public boolean digitsRoundedUp();	()Z	5	OK	360	4	jdk/internal/math/FloatingDecimal.java@13489-13594	TRIVIAL_INLINE
+FloatingDecimal$BinaryToASCIIBuffer	public boolean decimalDigitsExact();	()Z	5	OK	365	4	jdk/internal/math/FloatingDecimal.java@13604-13712	TRIVIAL_INLINE
+FloatingDecimal$BinaryToASCIIBuffer	private void setSign(boolean);	(Z)V	6	OK	369	3	jdk/internal/math/FloatingDecimal.java@13722-13816	TRIVIAL_INLINE
+FloatingDecimal$BinaryToASCIIBuffer	private void developLongDigits(int, long, int);	(IJI)V	304	OK	388	56	jdk/internal/math/FloatingDecimal.java@14551-16846	HOT_INLINE
+FloatingDecimal$BinaryToASCIIBuffer	private void dtoa(int, long, int, boolean);	(IJIZ)V	1509	OK	446	358	jdk/internal/math/FloatingDecimal.java@16856-33878	TOO_BIG_TO_INLINE
+FloatingDecimal$BinaryToASCIIBuffer	private void roundup();	()V	104	OK	809	19	jdk/internal/math/FloatingDecimal.java@34140-34806	HOT_INLINE
+FloatingDecimal$BinaryToASCIIBuffer	static int estimateDecExp(long, int);	(JI)I	182	OK	840	17	jdk/internal/math/FloatingDecimal.java@35249-36376	HOT_INLINE
+FloatingDecimal$BinaryToASCIIBuffer	private static int insignificantDigits(long);	(J)I	24	OK	859	7	jdk/internal/math/FloatingDecimal.java@36386-36604	TRIVIAL_INLINE
+FloatingDecimal$BinaryToASCIIBuffer	private static int insignificantDigitsForPow2(int);	(I)I	21	OK	872	6	jdk/internal/math/FloatingDecimal.java@36766-36988	TRIVIAL_INLINE
+FloatingDecimal$BinaryToASCIIBuffer	private int getChars(char[]);	([C)I	502	OK	926	69	jdk/internal/math/FloatingDecimal.java@38259-41057	TOO_BIG_TO_INLINE
+FloatingDecimal$BinaryToASCIIBuffer	static {};	()V	542	OK	279	-	-	TOO_BIG_TO_INLINE
+FloatingDecimal$BinaryToASCIIConverter	public abstract java.lang.String toJavaFormatString();	()Ljava/lang/String;	-	OK	-	-	-	ABSTRACT
+FloatingDecimal$BinaryToASCIIConverter	public abstract void appendTo(java.lang.Appendable);	(Ljava/lang/Appendable;)V	-	OK	-	-	-	ABSTRACT
+FloatingDecimal$BinaryToASCIIConverter	public abstract int getDecimalExponent();	()I	-	OK	-	-	-	ABSTRACT
+FloatingDecimal$BinaryToASCIIConverter	public abstract int getDigits(char[]);	([C)I	-	OK	-	-	-	ABSTRACT
+FloatingDecimal$BinaryToASCIIConverter	public abstract boolean isNegative();	()Z	-	OK	-	-	-	ABSTRACT
+FloatingDecimal$BinaryToASCIIConverter	public abstract boolean isExceptional();	()Z	-	OK	-	-	-	ABSTRACT
+FloatingDecimal$BinaryToASCIIConverter	public abstract boolean digitsRoundedUp();	()Z	-	OK	-	-	-	ABSTRACT
+FloatingDecimal$BinaryToASCIIConverter	public abstract boolean decimalDigitsExact();	()Z	-	OK	-	-	-	ABSTRACT
+FloatingDecimal$ExceptionalBinaryToASCIIBuffer	public jdk.internal.math.FloatingDecimal$ExceptionalBinaryToASCIIBuffer(java.lang.String, boolean);	(Ljava/lang/String;Z)V	15	OK	213	4	jdk/internal/math/FloatingDecimal.java@8528-8685	TRIVIAL_INLINE
+FloatingDecimal$ExceptionalBinaryToASCIIBuffer	public java.lang.String toJavaFormatString();	()Ljava/lang/String;	5	OK	220	4	jdk/internal/math/FloatingDecimal.java@8695-8785	TRIVIAL_INLINE
+FloatingDecimal$ExceptionalBinaryToASCIIBuffer	public void appendTo(java.lang.Appendable);	(Ljava/lang/Appendable;)V	59	OK	225	10	jdk/internal/math/FloatingDecimal.java@8795-9133	HOT_INLINE
+FloatingDecimal$ExceptionalBinaryToASCIIBuffer	public int getDecimalExponent();	()I	10	OK	236	4	jdk/internal/math/FloatingDecimal.java@9143-9299	TRIVIAL_INLINE
+FloatingDecimal$ExceptionalBinaryToASCIIBuffer	public int getDigits(char[]);	([C)I	10	OK	241	4	jdk/internal/math/FloatingDecimal.java@9309-9464	TRIVIAL_INLINE
+FloatingDecimal$ExceptionalBinaryToASCIIBuffer	public boolean isNegative();	()Z	5	OK	246	4	jdk/internal/math/FloatingDecimal.java@9474-9562	TRIVIAL_INLINE
+FloatingDecimal$ExceptionalBinaryToASCIIBuffer	public boolean isExceptional();	()Z	2	OK	251	4	jdk/internal/math/FloatingDecimal.java@9572-9657	TRIVIAL_INLINE
+FloatingDecimal$ExceptionalBinaryToASCIIBuffer	public boolean digitsRoundedUp();	()Z	10	OK	256	4	jdk/internal/math/FloatingDecimal.java@9667-9813	TRIVIAL_INLINE
+FloatingDecimal$ExceptionalBinaryToASCIIBuffer	public boolean decimalDigitsExact();	()Z	10	OK	261	4	jdk/internal/math/FloatingDecimal.java@9823-9970	TRIVIAL_INLINE
+FloatingDecimal$ExceptionalBinaryToASCIIBuffer	static {};	()V	17	OK	209	-	-	TRIVIAL_INLINE
+FloatingDecimal$HexFloatPattern	private jdk.internal.math.FloatingDecimal$HexFloatPattern();	()V	5	OK	2077	-	-	TRIVIAL_INLINE
+FloatingDecimal$HexFloatPattern	static {};	()V	9	OK	2082	-	-	TRIVIAL_INLINE
+FloatingDecimal$PreparedASCIIToBinaryBuffer	public jdk.internal.math.FloatingDecimal$PreparedASCIIToBinaryBuffer(double, float);	(DF)V	15	OK	1029	4	jdk/internal/math/FloatingDecimal.java@42102-42260	TRIVIAL_INLINE
+FloatingDecimal$PreparedASCIIToBinaryBuffer	public double doubleValue();	()D	5	OK	1036	4	jdk/internal/math/FloatingDecimal.java@42270-42357	TRIVIAL_INLINE
+FloatingDecimal$PreparedASCIIToBinaryBuffer	public float floatValue();	()F	5	OK	1041	4	jdk/internal/math/FloatingDecimal.java@42367-42451	TRIVIAL_INLINE
+FloatingDecimal	public jdk.internal.math.FloatingDecimal();	()V	5	OK	37	-	-	TRIVIAL_INLINE
+FloatingDecimal	public static java.lang.String toJavaFormatString(double);	(D)Ljava/lang/String;	10	OK	70	3	jdk/internal/math/FloatingDecimal.java@3032-3155	TRIVIAL_INLINE
+FloatingDecimal	public static java.lang.String toJavaFormatString(float);	(F)Ljava/lang/String;	10	OK	80	3	jdk/internal/math/FloatingDecimal.java@3371-3493	TRIVIAL_INLINE
+FloatingDecimal	public static void appendTo(double, java.lang.Appendable);	(DLjava/lang/Appendable;)V	11	OK	89	3	jdk/internal/math/FloatingDecimal.java@3716-3829	TRIVIAL_INLINE
+FloatingDecimal	public static void appendTo(float, java.lang.Appendable);	(FLjava/lang/Appendable;)V	11	OK	98	3	jdk/internal/math/FloatingDecimal.java@4052-4164	TRIVIAL_INLINE
+FloatingDecimal	public static double parseDouble(java.lang.String) throws java.lang.NumberFormatException;	(Ljava/lang/String;)D	31	OK	112	12	jdk/internal/math/FloatingDecimal.java@4505-5199	TRIVIAL_INLINE
+FloatingDecimal	public static float parseFloat(java.lang.String) throws java.lang.NumberFormatException;	(Ljava/lang/String;)F	32	OK	135	11	jdk/internal/math/FloatingDecimal.java@5758-6328	TRIVIAL_INLINE
+FloatingDecimal	private static jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer getBinaryToASCIIBuffer();	()Ljdk/internal/math/FloatingDecimal$BinaryToASCIIBuffer;	10	OK	1006	3	jdk/internal/math/FloatingDecimal.java@41391-41511	TRIVIAL_INLINE
+FloatingDecimal	public static jdk.internal.math.FloatingDecimal$BinaryToASCIIConverter getBinaryToASCIIConverter(double);	(D)Ljdk/internal/math/FloatingDecimal$BinaryToASCIIConverter;	6	OK	1758	3	jdk/internal/math/FloatingDecimal.java@75111-75242	TRIVIAL_INLINE
+FloatingDecimal	static jdk.internal.math.FloatingDecimal$BinaryToASCIIConverter getBinaryToASCIIConverter(double, boolean);	(DZ)Ljdk/internal/math/FloatingDecimal$BinaryToASCIIConverter;	183	OK	1770	39	jdk/internal/math/FloatingDecimal.java@75550-77348	HOT_INLINE
+FloatingDecimal	private static jdk.internal.math.FloatingDecimal$BinaryToASCIIConverter getBinaryToASCIIConverter(float);	(F)Ljdk/internal/math/FloatingDecimal$BinaryToASCIIConverter;	163	OK	1810	39	jdk/internal/math/FloatingDecimal.java@77354-79152	HOT_INLINE
+FloatingDecimal	static jdk.internal.math.FloatingDecimal$ASCIIToBinaryConverter readJavaFormatString(java.lang.String) throws java.lang.NumberFormatException;	(Ljava/lang/String;)Ljdk/internal/math/FloatingDecimal$ASCIIToBinaryConverter;	808	OK	1851	227	jdk/internal/math/FloatingDecimal.java@79158-88602	TOO_BIG_TO_INLINE
+FloatingDecimal	static jdk.internal.math.FloatingDecimal$ASCIIToBinaryConverter parseHexString(java.lang.String);	(Ljava/lang/String;)Ljdk/internal/math/FloatingDecimal$ASCIIToBinaryConverter;	1373	OK	2098	448	jdk/internal/math/FloatingDecimal.java@89397-111790	TOO_BIG_TO_INLINE
+FloatingDecimal	static java.lang.String stripLeadingZeros(java.lang.String);	(Ljava/lang/String;)Ljava/lang/String;	54	OK	2548	11	jdk/internal/math/FloatingDecimal.java@111874-112181	HOT_INLINE
+FloatingDecimal	static int getHexDigit(java.lang.String, int);	(Ljava/lang/String;I)I	42	OK	2564	8	jdk/internal/math/FloatingDecimal.java@112308-112639	HOT_INLINE
+FloatingDecimal	static {};	()V	217	OK	37	-	-	HOT_INLINE
+M3AbstractFloatValueParser	jdk.internal.math.M3AbstractFloatValueParser();	()V	5	OK	25	-	-	TRIVIAL_INLINE
+M3AbstractJavaFloatingPointBitsFromByteArray	jdk.internal.math.M3AbstractJavaFloatingPointBitsFromByteArray();	()V	5	OK	17	-	-	TRIVIAL_INLINE
+M3AbstractJavaFloatingPointBitsFromByteArray	private static int skipWhitespace(byte[], int, int);	([BII)I	25	OK	81	6	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromByteArray.java@3793-4005	TRIVIAL_INLINE
+M3AbstractJavaFloatingPointBitsFromByteArray	abstract long nan();	()J	-	OK	-	-	-	ABSTRACT
+M3AbstractJavaFloatingPointBitsFromByteArray	abstract long negativeInfinity();	()J	-	OK	-	-	-	ABSTRACT
+M3AbstractJavaFloatingPointBitsFromByteArray	private long parseDecFloatLiteral(byte[], int, int, int, boolean, boolean);	([BIIIZZ)J	497	OK	126	111	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromByteArray.java@5326-10216	TOO_BIG_TO_INLINE
+M3AbstractJavaFloatingPointBitsFromByteArray	public long parseFloatingPointLiteral(byte[], int, int);	([BII)J	186	OK	253	39	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromByteArray.java@11020-12453	HOT_INLINE
+M3AbstractJavaFloatingPointBitsFromByteArray	private long parseHexFloatingPointLiteral(byte[], int, int, int, boolean);	([BIIIZ)J	466	OK	320	115	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromByteArray.java@13312-18322	TOO_BIG_TO_INLINE
+M3AbstractJavaFloatingPointBitsFromByteArray	private long parseNaNOrInfinity(byte[], int, int, boolean);	([BIIZ)J	116	OK	433	24	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromByteArray.java@18329-19350	HOT_INLINE
+M3AbstractJavaFloatingPointBitsFromByteArray	abstract long positiveInfinity();	()J	-	OK	-	-	-	ABSTRACT
+M3AbstractJavaFloatingPointBitsFromByteArray	abstract long valueOfFloatLiteral(byte[], int, int, boolean, long, int, boolean, int);	([BIIZJIZI)J	-	OK	-	-	-	ABSTRACT
+M3AbstractJavaFloatingPointBitsFromByteArray	abstract long valueOfHexLiteral(byte[], int, int, boolean, long, int, boolean, int);	([BIIZJIZI)J	-	OK	-	-	-	ABSTRACT
+M3AbstractJavaFloatingPointBitsFromCharSequence	jdk.internal.math.M3AbstractJavaFloatingPointBitsFromCharSequence();	()V	5	OK	17	-	-	TRIVIAL_INLINE
+M3AbstractJavaFloatingPointBitsFromCharSequence	private static int skipWhitespace(java.lang.CharSequence, int, int);	(Ljava/lang/CharSequence;II)I	25	OK	97	6	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromCharSequence.java@4498-4709	TRIVIAL_INLINE
+M3AbstractJavaFloatingPointBitsFromCharSequence	abstract long nan();	()J	-	OK	-	-	-	ABSTRACT
+M3AbstractJavaFloatingPointBitsFromCharSequence	abstract long negativeInfinity();	()J	-	OK	-	-	-	ABSTRACT
+M3AbstractJavaFloatingPointBitsFromCharSequence	private long parseDecFloatLiteral(java.lang.CharSequence, int, int, int, boolean, boolean);	(Ljava/lang/CharSequence;IIIZZ)J	466	OK	142	112	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromCharSequence.java@6076-11014	TOO_BIG_TO_INLINE
+M3AbstractJavaFloatingPointBitsFromCharSequence	public final long parseFloatingPointLiteral(java.lang.CharSequence, int, int);	(Ljava/lang/CharSequence;II)J	194	OK	269	39	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromCharSequence.java@11817-13284	HOT_INLINE
+M3AbstractJavaFloatingPointBitsFromCharSequence	private long parseHexFloatLiteral(java.lang.CharSequence, int, int, int, boolean);	(Ljava/lang/CharSequence;IIIZ)J	515	OK	336	113	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromCharSequence.java@14143-19196	TOO_BIG_TO_INLINE
+M3AbstractJavaFloatingPointBitsFromCharSequence	private long parseNaNOrInfinity(java.lang.CharSequence, int, int, boolean);	(Ljava/lang/CharSequence;IIZ)J	228	OK	447	31	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromCharSequence.java@19203-20798	HOT_INLINE
+M3AbstractJavaFloatingPointBitsFromCharSequence	abstract long positiveInfinity();	()J	-	OK	-	-	-	ABSTRACT
+M3AbstractJavaFloatingPointBitsFromCharSequence	abstract long valueOfFloatLiteral(java.lang.CharSequence, int, int, boolean, long, int, boolean, int);	(Ljava/lang/CharSequence;IIZJIZI)J	-	OK	-	-	-	ABSTRACT
+M3AbstractJavaFloatingPointBitsFromCharSequence	abstract long valueOfHexLiteral(java.lang.CharSequence, int, int, boolean, long, int, boolean, int);	(Ljava/lang/CharSequence;IIZJIZI)J	-	OK	-	-	-	ABSTRACT
+M3AbstractNumberParser	jdk.internal.math.M3AbstractNumberParser();	()V	5	OK	9	-	-	TRIVIAL_INLINE
+M3AbstractNumberParser	protected static byte charAt(byte[], int, int);	([BII)B	13	OK	88	3	jdk/internal/math/M3AbstractNumberParser.java@3381-3492	TRIVIAL_INLINE
+M3AbstractNumberParser	protected static char charAt(char[], int, int);	([CII)C	13	OK	101	3	jdk/internal/math/M3AbstractNumberParser.java@3766-3877	TRIVIAL_INLINE
+M3AbstractNumberParser	protected static char charAt(java.lang.CharSequence, int, int);	(Ljava/lang/CharSequence;II)C	17	OK	114	3	jdk/internal/math/M3AbstractNumberParser.java@4151-4275	TRIVIAL_INLINE
+M3AbstractNumberParser	protected static int lookupHex(byte);	(B)I	10	OK	127	3	jdk/internal/math/M3AbstractNumberParser.java@4575-4670	TRIVIAL_INLINE
+M3AbstractNumberParser	protected static int lookupHex(char);	(C)I	17	OK	146	7	jdk/internal/math/M3AbstractNumberParser.java@5034-5441	TRIVIAL_INLINE
+M3AbstractNumberParser	protected static int checkBounds(int, int, int, int);	(IIII)I	22	OK	160	6	jdk/internal/math/M3AbstractNumberParser.java@6067-6350	TRIVIAL_INLINE
+M3AbstractNumberParser	protected static int checkBounds(int, int, int);	(III)I	26	OK	176	6	jdk/internal/math/M3AbstractNumberParser.java@6865-7183	TRIVIAL_INLINE
+M3AbstractNumberParser	static {};	()V	111	OK	62	-	-	HOT_INLINE
+M3FastDoubleMath	private jdk.internal.math.M3FastDoubleMath();	()V	5	OK	777	3	jdk/internal/math/M3FastDoubleMath.java@39909-39944	TRIVIAL_INLINE
+M3FastDoubleMath	static double tryDecFloatToDoubleTruncated(boolean, long, int, boolean, int);	(ZJIZI)D	119	OK	797	32	jdk/internal/math/M3FastDoubleMath.java@40642-42265	HOT_INLINE
+M3FastDoubleMath	static double tryDecToDoubleWithFastAlgorithm(boolean, long, int);	(ZJI)D	279	OK	851	130	jdk/internal/math/M3FastDoubleMath.java@43274-49429	HOT_INLINE
+M3FastDoubleMath	static double tryHexFloatToDoubleTruncated(boolean, long, long, boolean, long);	(ZJJZJ)D	75	OK	994	19	jdk/internal/math/M3FastDoubleMath.java@50150-51261	HOT_INLINE
+M3FastDoubleMath	static double fastScalb(double, long);	(DJ)D	14	OK	1023	3	jdk/internal/math/M3FastDoubleMath.java@51700-51885	TRIVIAL_INLINE
+M3FastDoubleMath	static {};	()V	9997	OK	114	-	-	HUGE
+M3FastDoubleSwar	jdk.internal.math.M3FastDoubleSwar();	()V	5	OK	31	-	-	TRIVIAL_INLINE
+M3FastDoubleSwar	protected static boolean isDigit(char);	(C)Z	16	OK	142	5	jdk/internal/math/M3FastDoubleSwar.java@7284-7510	TRIVIAL_INLINE
+M3FastDoubleSwar	protected static boolean isDigit(byte);	(B)Z	16	OK	155	6	jdk/internal/math/M3FastDoubleSwar.java@7642-7913	TRIVIAL_INLINE
+M3FastDoubleSwar	public static boolean isEightDigits(byte[], int);	([BI)Z	12	OK	159	3	jdk/internal/math/M3FastDoubleSwar.java@7919-8052	TRIVIAL_INLINE
+M3FastDoubleSwar	public static boolean isEightDigits(char[], int);	([CI)Z	82	OK	172	11	jdk/internal/math/M3FastDoubleSwar.java@8341-8957	HOT_INLINE
+M3FastDoubleSwar	public static boolean isEightDigits(java.lang.CharSequence, int);	(Ljava/lang/CharSequence;I)Z	37	OK	184	8	jdk/internal/math/M3FastDoubleSwar.java@8963-9233	HOT_INLINE
+M3FastDoubleSwar	public static boolean isEightDigitsUtf16(long, long);	(JJ)Z	54	OK	193	12	jdk/internal/math/M3FastDoubleSwar.java@9239-9853	HOT_INLINE
+M3FastDoubleSwar	public static boolean isEightDigitsUtf8(long);	(J)Z	32	OK	206	5	jdk/internal/math/M3FastDoubleSwar.java@9859-10086	TRIVIAL_INLINE
+M3FastDoubleSwar	public static boolean isEightZeroes(byte[], int);	([BI)Z	12	OK	212	3	jdk/internal/math/M3FastDoubleSwar.java@10092-10225	TRIVIAL_INLINE
+M3FastDoubleSwar	public static boolean isEightZeroes(java.lang.CharSequence, int);	(Ljava/lang/CharSequence;I)Z	40	OK	216	7	jdk/internal/math/M3FastDoubleSwar.java@10231-10480	HOT_INLINE
+M3FastDoubleSwar	public static boolean isEightZeroes(char[], int);	([CI)Z	82	OK	233	11	jdk/internal/math/M3FastDoubleSwar.java@10769-11385	HOT_INLINE
+M3FastDoubleSwar	public static boolean isEightZeroesUtf16(long, long);	(JJ)Z	22	OK	245	4	jdk/internal/math/M3FastDoubleSwar.java@11391-11552	TRIVIAL_INLINE
+M3FastDoubleSwar	public static boolean isEightZeroesUtf8(long);	(J)Z	14	OK	250	3	jdk/internal/math/M3FastDoubleSwar.java@11558-11658	TRIVIAL_INLINE
+M3FastDoubleSwar	public static int readIntBE(byte[], int);	([BI)I	9	OK	254	3	jdk/internal/math/M3FastDoubleSwar.java@11664-11768	TRIVIAL_INLINE
+M3FastDoubleSwar	public static long readLongBE(byte[], int);	([BI)J	9	OK	258	3	jdk/internal/math/M3FastDoubleSwar.java@11774-11882	TRIVIAL_INLINE
+M3FastDoubleSwar	public static long readLongLE(byte[], int);	([BI)J	9	OK	262	3	jdk/internal/math/M3FastDoubleSwar.java@11888-11996	TRIVIAL_INLINE
+M3FastDoubleSwar	public static int tryToParseEightDigits(char[], int);	([CI)I	82	OK	277	11	jdk/internal/math/M3FastDoubleSwar.java@12445-13090	HOT_INLINE
+M3FastDoubleSwar	public static int tryToParseEightDigits(byte[], int);	([BI)I	12	OK	289	3	jdk/internal/math/M3FastDoubleSwar.java@13096-13258	TRIVIAL_INLINE
+M3FastDoubleSwar	public static int tryToParseEightDigits(java.lang.CharSequence, int);	(Ljava/lang/CharSequence;I)I	114	OK	301	11	jdk/internal/math/M3FastDoubleSwar.java@13551-14276	HOT_INLINE
+M3FastDoubleSwar	public static int tryToParseEightDigitsUtf16(long, long);	(JJ)I	76	OK	327	17	jdk/internal/math/M3FastDoubleSwar.java@14813-15642	HOT_INLINE
+M3FastDoubleSwar	public static int tryToParseEightDigitsUtf8(byte[], int);	([BI)I	12	OK	354	3	jdk/internal/math/M3FastDoubleSwar.java@16018-16167	TRIVIAL_INLINE
+M3FastDoubleSwar	public static int tryToParseEightDigitsUtf8(long);	(J)I	79	OK	379	19	jdk/internal/math/M3FastDoubleSwar.java@16886-17840	HOT_INLINE
+M3FastDoubleSwar	public static long tryToParseEightHexDigits(java.lang.CharSequence, int);	(Ljava/lang/CharSequence;I)J	114	OK	406	11	jdk/internal/math/M3FastDoubleSwar.java@18133-18879	HOT_INLINE
+M3FastDoubleSwar	public static long tryToParseEightHexDigits(char[], int);	([CI)J	82	OK	427	11	jdk/internal/math/M3FastDoubleSwar.java@19254-19956	HOT_INLINE
+M3FastDoubleSwar	public static long tryToParseEightHexDigits(byte[], int);	([BI)J	12	OK	447	3	jdk/internal/math/M3FastDoubleSwar.java@20308-20460	TRIVIAL_INLINE
+M3FastDoubleSwar	public static long tryToParseEightHexDigitsUtf16(long, long);	(JJ)J	74	OK	473	12	jdk/internal/math/M3FastDoubleSwar.java@21263-21864	HOT_INLINE
+M3FastDoubleSwar	public static long tryToParseEightHexDigitsUtf8(long);	(J)J	159	OK	500	47	jdk/internal/math/M3FastDoubleSwar.java@22177-24468	HOT_INLINE
+M3FastDoubleSwar	public static int tryToParseFourDigits(char[], int);	([CI)I	40	OK	543	7	jdk/internal/math/M3FastDoubleSwar.java@24475-24846	HOT_INLINE
+M3FastDoubleSwar	public static int tryToParseFourDigits(java.lang.CharSequence, int);	(Ljava/lang/CharSequence;I)I	56	OK	551	8	jdk/internal/math/M3FastDoubleSwar.java@24852-25268	HOT_INLINE
+M3FastDoubleSwar	public static int tryToParseFourDigits(byte[], int);	([BI)I	12	OK	560	3	jdk/internal/math/M3FastDoubleSwar.java@25274-25415	TRIVIAL_INLINE
+M3FastDoubleSwar	public static int tryToParseFourDigitsUtf16(long);	(J)I	38	OK	564	14	jdk/internal/math/M3FastDoubleSwar.java@25421-26021	HOT_INLINE
+M3FastDoubleSwar	public static int tryToParseFourDigitsUtf8(int);	(I)I	52	OK	581	14	jdk/internal/math/M3FastDoubleSwar.java@26027-26763	HOT_INLINE
+M3FastDoubleSwar	public static int tryToParseUpTo7Digits(byte[], int, int);	([BII)I	53	OK	594	10	jdk/internal/math/M3FastDoubleSwar.java@26769-27120	HOT_INLINE
+M3FastDoubleSwar	public static int tryToParseUpTo7Digits(char[], int, int);	([CII)I	53	OK	605	10	jdk/internal/math/M3FastDoubleSwar.java@27126-27477	HOT_INLINE
+M3FastDoubleSwar	public static int tryToParseUpTo7Digits(java.lang.CharSequence, int, int);	(Ljava/lang/CharSequence;II)I	57	OK	616	10	jdk/internal/math/M3FastDoubleSwar.java@27483-27847	HOT_INLINE
+M3FastDoubleSwar	public static void writeIntBE(byte[], int, int);	([BII)V	10	OK	627	3	jdk/internal/math/M3FastDoubleSwar.java@27853-27964	TRIVIAL_INLINE
+M3FastDoubleSwar	public static void writeLongBE(byte[], int, long);	([BIJ)V	10	OK	631	3	jdk/internal/math/M3FastDoubleSwar.java@27970-28084	TRIVIAL_INLINE
+M3FastDoubleSwar	public static double fma(double, double, double);	(DDD)D	8	OK	635	3	jdk/internal/math/M3FastDoubleSwar.java@28090-28186	TRIVIAL_INLINE
+M3FastDoubleSwar	static {};	()V	45	OK	124	-	-	HOT_INLINE
+M3FastFloatMath	private jdk.internal.math.M3FastFloatMath();	()V	5	OK	69	3	jdk/internal/math/M3FastFloatMath.java@3191-3225	TRIVIAL_INLINE
+M3FastFloatMath	static float tryDecFloatToFloatTruncated(boolean, long, int, boolean, int);	(ZJIZI)F	112	OK	76	35	jdk/internal/math/M3FastFloatMath.java@3231-4889	HOT_INLINE
+M3FastFloatMath	static float tryHexFloatToFloatTruncated(boolean, long, int, boolean, int);	(ZJIZI)F	69	OK	125	20	jdk/internal/math/M3FastFloatMath.java@5610-6755	HOT_INLINE
+M3FastFloatMath	static float tryDecToFloatWithFastAlgorithm(boolean, long, int);	(ZJI)F	278	OK	168	132	jdk/internal/math/M3FastFloatMath.java@7773-13922	HOT_INLINE
+M3FastFloatMath	static float fastScalb(float, int);	(FI)F	13	OK	309	3	jdk/internal/math/M3FastFloatMath.java@14358-14535	TRIVIAL_INLINE
+M3FastFloatMath	static {};	()V	67	OK	63	-	-	HOT_INLINE
+M3FastIntegerMath	private jdk.internal.math.M3FastIntegerMath();	()V	5	OK	63	3	jdk/internal/math/M3FastIntegerMath.java@2864-2900	TRIVIAL_INLINE
+M3FastIntegerMath	static java.math.BigInteger computePowerOfTen(java.util.NavigableMap<java.lang.Integer, java.math.BigInteger>, int);	(Ljava/util/NavigableMap;I)Ljava/math/BigInteger;	92	OK	75	15	jdk/internal/math/M3FastIntegerMath.java@3109-3752	HOT_INLINE
+M3FastIntegerMath	static java.math.BigInteger computeTenRaisedByNFloor16Recursive(java.util.NavigableMap<java.lang.Integer, java.math.BigInteger>, int);	(Ljava/util/NavigableMap;I)Ljava/math/BigInteger;	104	OK	94	16	jdk/internal/math/M3FastIntegerMath.java@3810-4541	HOT_INLINE
+M3FastIntegerMath	static java.util.NavigableMap<java.lang.Integer, java.math.BigInteger> createPowersOfTenFloor16Map();	()Ljava/util/NavigableMap;	39	OK	112	7	jdk/internal/math/M3FastIntegerMath.java@4547-4845	HOT_INLINE
+M3FastIntegerMath	public static long estimateNumBits(long);	(J)J	11	OK	123	7	jdk/internal/math/M3FastIntegerMath.java@4851-5245	TRIVIAL_INLINE
+M3FastIntegerMath	static java.util.NavigableMap<java.lang.Integer, java.math.BigInteger> fillPowersOf10Floor16(int, int);	(II)Ljava/util/NavigableMap;	117	OK	135	15	jdk/internal/math/M3FastIntegerMath.java@5521-6232	HOT_INLINE
+M3FastIntegerMath	static void fillPowersOfNFloor16Recursive(java.util.NavigableMap<java.lang.Integer, java.math.BigInteger>, int, int);	(Ljava/util/NavigableMap;II)V	71	OK	150	15	jdk/internal/math/M3FastIntegerMath.java@6238-6858	HOT_INLINE
+M3FastIntegerMath	static long unsignedMultiplyHigh(long, long);	(JJ)J	86	OK	182	12	jdk/internal/math/M3FastIntegerMath.java@7473-8022	HOT_INLINE
+M3FastIntegerMath	static int splitFloor16(int, int);	(II)I	15	OK	203	5	jdk/internal/math/M3FastIntegerMath.java@8304-8579	TRIVIAL_INLINE
+M3FastIntegerMath	static {};	()V	184	OK	38	-	-	HOT_INLINE
+M3FftMultiplier$ComplexVector	jdk.internal.math.M3FftMultiplier$ComplexVector(int);	(I)V	24	OK	872	5	jdk/internal/math/M3FftMultiplier.java@39730-39893	TRIVIAL_INLINE
+M3FftMultiplier$ComplexVector	jdk.internal.math.M3FftMultiplier$ComplexVector(jdk.internal.math.M3FftMultiplier$ComplexVector, int, int);	(Ljdk/internal/math/M3FftMultiplier$ComplexVector;II)V	27	OK	885	5	jdk/internal/math/M3FftMultiplier.java@40115-40275	TRIVIAL_INLINE
+M3FftMultiplier$ComplexVector	void add(int, jdk.internal.math.M3FftMultiplier$MutableComplex);	(ILjdk/internal/math/M3FftMultiplier$MutableComplex;)V	35	OK	892	4	jdk/internal/math/M3FftMultiplier.java@40285-40413	TRIVIAL_INLINE
+M3FftMultiplier$ComplexVector	void addInto(int, jdk.internal.math.M3FftMultiplier$ComplexVector, int, jdk.internal.math.M3FftMultiplier$MutableComplex);	(ILjdk/internal/math/M3FftMultiplier$ComplexVector;ILjdk/internal/math/M3FftMultiplier$MutableComplex;)V	43	OK	897	4	jdk/internal/math/M3FftMultiplier.java@40423-40640	HOT_INLINE
+M3FftMultiplier$ComplexVector	void addTimesIInto(int, jdk.internal.math.M3FftMultiplier$ComplexVector, int, jdk.internal.math.M3FftMultiplier$MutableComplex);	(ILjdk/internal/math/M3FftMultiplier$ComplexVector;ILjdk/internal/math/M3FftMultiplier$MutableComplex;)V	43	OK	902	4	jdk/internal/math/M3FftMultiplier.java@40650-40873	HOT_INLINE
+M3FftMultiplier$ComplexVector	void applyInverseWeights(jdk.internal.math.M3FftMultiplier$ComplexVector);	(Ljdk/internal/math/M3FftMultiplier$ComplexVector;)V	121	OK	911	14	jdk/internal/math/M3FftMultiplier.java@41021-41669	HOT_INLINE
+M3FftMultiplier$ComplexVector	void applyWeights(jdk.internal.math.M3FftMultiplier$ComplexVector);	(Ljdk/internal/math/M3FftMultiplier$ComplexVector;)V	91	OK	933	14	jdk/internal/math/M3FftMultiplier.java@41848-42480	HOT_INLINE
+M3FftMultiplier$ComplexVector	void copyInto(int, jdk.internal.math.M3FftMultiplier$MutableComplex);	(ILjdk/internal/math/M3FftMultiplier$MutableComplex;)V	29	OK	945	4	jdk/internal/math/M3FftMultiplier.java@42490-42651	TRIVIAL_INLINE
+M3FftMultiplier$ComplexVector	double imag(int);	(I)D	16	OK	950	3	jdk/internal/math/M3FftMultiplier.java@42661-42762	TRIVIAL_INLINE
+M3FftMultiplier$ComplexVector	void imag(int, double);	(ID)V	17	OK	954	3	jdk/internal/math/M3FftMultiplier.java@42772-42886	TRIVIAL_INLINE
+M3FftMultiplier$ComplexVector	private int imagIdx(int);	(I)I	11	OK	958	3	jdk/internal/math/M3FftMultiplier.java@42896-43002	TRIVIAL_INLINE
+M3FftMultiplier$ComplexVector	void multiply(int, jdk.internal.math.M3FftMultiplier$MutableComplex);	(ILjdk/internal/math/M3FftMultiplier$MutableComplex;)V	77	OK	966	8	jdk/internal/math/M3FftMultiplier.java@43135-43436	HOT_INLINE
+M3FftMultiplier$ComplexVector	void multiplyByIAnd(int, jdk.internal.math.M3FftMultiplier$MutableComplex);	(ILjdk/internal/math/M3FftMultiplier$MutableComplex;)V	79	OK	979	8	jdk/internal/math/M3FftMultiplier.java@43586-43894	HOT_INLINE
+M3FftMultiplier$ComplexVector	void multiplyConjugate(int, jdk.internal.math.M3FftMultiplier$MutableComplex);	(ILjdk/internal/math/M3FftMultiplier$MutableComplex;)V	77	OK	992	8	jdk/internal/math/M3FftMultiplier.java@44040-44351	HOT_INLINE
+M3FftMultiplier$ComplexVector	void multiplyConjugateInto(int, jdk.internal.math.M3FftMultiplier$MutableComplex, jdk.internal.math.M3FftMultiplier$MutableComplex);	(ILjdk/internal/math/M3FftMultiplier$MutableComplex;Ljdk/internal/math/M3FftMultiplier$MutableComplex;)V	66	OK	1001	6	jdk/internal/math/M3FftMultiplier.java@44361-44676	HOT_INLINE
+M3FftMultiplier$ComplexVector	void multiplyConjugateTimesI(int, jdk.internal.math.M3FftMultiplier$MutableComplex);	(ILjdk/internal/math/M3FftMultiplier$MutableComplex;)V	79	OK	1013	8	jdk/internal/math/M3FftMultiplier.java@44877-45195	HOT_INLINE
+M3FftMultiplier$ComplexVector	void multiplyInto(int, jdk.internal.math.M3FftMultiplier$MutableComplex, jdk.internal.math.M3FftMultiplier$MutableComplex);	(ILjdk/internal/math/M3FftMultiplier$MutableComplex;Ljdk/internal/math/M3FftMultiplier$MutableComplex;)V	66	OK	1022	6	jdk/internal/math/M3FftMultiplier.java@45205-45510	HOT_INLINE
+M3FftMultiplier$ComplexVector	void multiplyPointwise(jdk.internal.math.M3FftMultiplier$ComplexVector);	(Ljdk/internal/math/M3FftMultiplier$ComplexVector;)V	125	OK	1031	17	jdk/internal/math/M3FftMultiplier.java@45520-46329	HOT_INLINE
+M3FftMultiplier$ComplexVector	double part(int, int);	(II)D	11	OK	1047	3	jdk/internal/math/M3FftMultiplier.java@46339-46441	TRIVIAL_INLINE
+M3FftMultiplier$ComplexVector	double real(int);	(I)D	14	OK	1051	3	jdk/internal/math/M3FftMultiplier.java@46451-46545	TRIVIAL_INLINE
+M3FftMultiplier$ComplexVector	void real(int, double);	(ID)V	15	OK	1055	3	jdk/internal/math/M3FftMultiplier.java@46555-46662	TRIVIAL_INLINE
+M3FftMultiplier$ComplexVector	private int realIdx(int);	(I)I	9	OK	1059	3	jdk/internal/math/M3FftMultiplier.java@46672-46771	TRIVIAL_INLINE
+M3FftMultiplier$ComplexVector	void set(int, double, double);	(IDD)V	27	OK	1063	5	jdk/internal/math/M3FftMultiplier.java@46781-46935	TRIVIAL_INLINE
+M3FftMultiplier$ComplexVector	void squarePointwise();	()V	83	OK	1074	11	jdk/internal/math/M3FftMultiplier.java@47017-47516	HOT_INLINE
+M3FftMultiplier$ComplexVector	void subtractInto(int, jdk.internal.math.M3FftMultiplier$ComplexVector, int, jdk.internal.math.M3FftMultiplier$MutableComplex);	(ILjdk/internal/math/M3FftMultiplier$ComplexVector;ILjdk/internal/math/M3FftMultiplier$MutableComplex;)V	43	OK	1084	4	jdk/internal/math/M3FftMultiplier.java@47526-47748	HOT_INLINE
+M3FftMultiplier$ComplexVector	void subtractTimesIInto(int, jdk.internal.math.M3FftMultiplier$ComplexVector, int, jdk.internal.math.M3FftMultiplier$MutableComplex);	(ILjdk/internal/math/M3FftMultiplier$ComplexVector;ILjdk/internal/math/M3FftMultiplier$MutableComplex;)V	43	OK	1089	4	jdk/internal/math/M3FftMultiplier.java@47758-47986	HOT_INLINE
+M3FftMultiplier$ComplexVector	void timesTwoToThe(int, int);	(II)V	58	OK	1094	8	jdk/internal/math/M3FftMultiplier.java@47996-48261	HOT_INLINE
+M3FftMultiplier$MutableComplex	jdk.internal.math.M3FftMultiplier$MutableComplex();	()V	5	OK	1110	2	jdk/internal/math/M3FftMultiplier.java@48616-48644	TRIVIAL_INLINE
+M3FftMultiplier$MutableComplex	void add(jdk.internal.math.M3FftMultiplier$MutableComplex);	(Ljdk/internal/math/M3FftMultiplier$MutableComplex;)V	27	OK	1114	4	jdk/internal/math/M3FftMultiplier.java@48654-48748	TRIVIAL_INLINE
+M3FftMultiplier$MutableComplex	void add(jdk.internal.math.M3FftMultiplier$ComplexVector, int);	(Ljdk/internal/math/M3FftMultiplier$ComplexVector;I)V	29	OK	1119	4	jdk/internal/math/M3FftMultiplier.java@48758-48873	TRIVIAL_INLINE
+M3FftMultiplier$MutableComplex	void addInto(jdk.internal.math.M3FftMultiplier$MutableComplex, jdk.internal.math.M3FftMultiplier$MutableComplex);	(Ljdk/internal/math/M3FftMultiplier$MutableComplex;Ljdk/internal/math/M3FftMultiplier$MutableComplex;)V	27	OK	1128	4	jdk/internal/math/M3FftMultiplier.java@49020-49182	TRIVIAL_INLINE
+M3FftMultiplier$MutableComplex	void addTimesI(jdk.internal.math.M3FftMultiplier$MutableComplex);	(Ljdk/internal/math/M3FftMultiplier$MutableComplex;)V	27	OK	1136	4	jdk/internal/math/M3FftMultiplier.java@49252-49352	TRIVIAL_INLINE
+M3FftMultiplier$MutableComplex	void addTimesI(jdk.internal.math.M3FftMultiplier$ComplexVector, int);	(Ljdk/internal/math/M3FftMultiplier$ComplexVector;I)V	29	OK	1141	4	jdk/internal/math/M3FftMultiplier.java@49362-49483	TRIVIAL_INLINE
+M3FftMultiplier$MutableComplex	void addTimesIInto(jdk.internal.math.M3FftMultiplier$MutableComplex, jdk.internal.math.M3FftMultiplier$MutableComplex);	(Ljdk/internal/math/M3FftMultiplier$MutableComplex;Ljdk/internal/math/M3FftMultiplier$MutableComplex;)V	27	OK	1150	4	jdk/internal/math/M3FftMultiplier.java@49632-49800	TRIVIAL_INLINE
+M3FftMultiplier$MutableComplex	void copyInto(jdk.internal.math.M3FftMultiplier$ComplexVector, int);	(Ljdk/internal/math/M3FftMultiplier$ComplexVector;I)V	19	OK	1155	4	jdk/internal/math/M3FftMultiplier.java@49810-49926	TRIVIAL_INLINE
+M3FftMultiplier$MutableComplex	void multiply(jdk.internal.math.M3FftMultiplier$MutableComplex);	(Ljdk/internal/math/M3FftMultiplier$MutableComplex;)V	49	OK	1160	5	jdk/internal/math/M3FftMultiplier.java@49936-50118	HOT_INLINE
+M3FftMultiplier$MutableComplex	void multiplyConjugate(jdk.internal.math.M3FftMultiplier$MutableComplex);	(Ljdk/internal/math/M3FftMultiplier$MutableComplex;)V	49	OK	1169	5	jdk/internal/math/M3FftMultiplier.java@50209-50400	HOT_INLINE
+M3FftMultiplier$MutableComplex	void set(jdk.internal.math.M3FftMultiplier$ComplexVector, int);	(Ljdk/internal/math/M3FftMultiplier$ComplexVector;I)V	19	OK	1175	4	jdk/internal/math/M3FftMultiplier.java@50410-50523	TRIVIAL_INLINE
+M3FftMultiplier$MutableComplex	void squareInto(jdk.internal.math.M3FftMultiplier$MutableComplex);	(Ljdk/internal/math/M3FftMultiplier$MutableComplex;)V	43	OK	1180	4	jdk/internal/math/M3FftMultiplier.java@50533-50716	HOT_INLINE
+M3FftMultiplier$MutableComplex	void subtract(jdk.internal.math.M3FftMultiplier$MutableComplex);	(Ljdk/internal/math/M3FftMultiplier$MutableComplex;)V	27	OK	1185	4	jdk/internal/math/M3FftMultiplier.java@50726-50825	TRIVIAL_INLINE
+M3FftMultiplier$MutableComplex	void subtract(jdk.internal.math.M3FftMultiplier$ComplexVector, int);	(Ljdk/internal/math/M3FftMultiplier$ComplexVector;I)V	29	OK	1190	4	jdk/internal/math/M3FftMultiplier.java@50835-50955	TRIVIAL_INLINE
+M3FftMultiplier$MutableComplex	void subtractInto(jdk.internal.math.M3FftMultiplier$MutableComplex, jdk.internal.math.M3FftMultiplier$MutableComplex);	(Ljdk/internal/math/M3FftMultiplier$MutableComplex;Ljdk/internal/math/M3FftMultiplier$MutableComplex;)V	27	OK	1195	4	jdk/internal/math/M3FftMultiplier.java@50965-51132	TRIVIAL_INLINE
+M3FftMultiplier$MutableComplex	void subtractInto(jdk.internal.math.M3FftMultiplier$MutableComplex, jdk.internal.math.M3FftMultiplier$ComplexVector, int);	(Ljdk/internal/math/M3FftMultiplier$MutableComplex;Ljdk/internal/math/M3FftMultiplier$ComplexVector;I)V	29	OK	1200	4	jdk/internal/math/M3FftMultiplier.java@51142-51328	TRIVIAL_INLINE
+M3FftMultiplier$MutableComplex	void subtractTimesI(jdk.internal.math.M3FftMultiplier$MutableComplex);	(Ljdk/internal/math/M3FftMultiplier$MutableComplex;)V	27	OK	1205	4	jdk/internal/math/M3FftMultiplier.java@51338-51443	TRIVIAL_INLINE
+M3FftMultiplier$MutableComplex	void subtractTimesI(jdk.internal.math.M3FftMultiplier$ComplexVector, int);	(Ljdk/internal/math/M3FftMultiplier$ComplexVector;I)V	29	OK	1210	4	jdk/internal/math/M3FftMultiplier.java@51453-51579	TRIVIAL_INLINE
+M3FftMultiplier$MutableComplex	void subtractTimesIInto(jdk.internal.math.M3FftMultiplier$MutableComplex, jdk.internal.math.M3FftMultiplier$MutableComplex);	(Ljdk/internal/math/M3FftMultiplier$MutableComplex;Ljdk/internal/math/M3FftMultiplier$MutableComplex;)V	27	OK	1215	4	jdk/internal/math/M3FftMultiplier.java@51589-51762	TRIVIAL_INLINE
+M3FftMultiplier	jdk.internal.math.M3FftMultiplier();	()V	5	OK	27	-	-	TRIVIAL_INLINE
+M3FftMultiplier	static int bitsPerFftPoint(int);	(I)I	104	OK	180	36	jdk/internal/math/M3FftMultiplier.java@8634-10037	HOT_INLINE
+M3FftMultiplier	private static jdk.internal.math.M3FftMultiplier$ComplexVector calculateRootsOfUnity(int);	(I)Ljdk/internal/math/M3FftMultiplier$ComplexVector;	131	OK	223	22	jdk/internal/math/M3FftMultiplier.java@10295-11045	HOT_INLINE
+M3FftMultiplier	private static void fft(jdk.internal.math.M3FftMultiplier$ComplexVector, jdk.internal.math.M3FftMultiplier$ComplexVector[]);	(Ljdk/internal/math/M3FftMultiplier$ComplexVector;[Ljdk/internal/math/M3FftMultiplier$ComplexVector;)V	414	OK	257	77	jdk/internal/math/M3FftMultiplier.java@11618-15000	TOO_BIG_TO_INLINE
+M3FftMultiplier	private static void fft3(jdk.internal.math.M3FftMultiplier$ComplexVector, jdk.internal.math.M3FftMultiplier$ComplexVector, jdk.internal.math.M3FftMultiplier$ComplexVector, int, double);	(Ljdk/internal/math/M3FftMultiplier$ComplexVector;Ljdk/internal/math/M3FftMultiplier$ComplexVector;Ljdk/internal/math/M3FftMultiplier$ComplexVector;ID)V	274	OK	345	21	jdk/internal/math/M3FftMultiplier.java@15524-16631	HOT_INLINE
+M3FftMultiplier	private static void fftMixedRadix(jdk.internal.math.M3FftMultiplier$ComplexVector, jdk.internal.math.M3FftMultiplier$ComplexVector[], jdk.internal.math.M3FftMultiplier$ComplexVector);	(Ljdk/internal/math/M3FftMultiplier$ComplexVector;[Ljdk/internal/math/M3FftMultiplier$ComplexVector;Ljdk/internal/math/M3FftMultiplier$ComplexVector;)V	206	OK	383	33	jdk/internal/math/M3FftMultiplier.java@17595-19026	HOT_INLINE
+M3FftMultiplier	static java.math.BigInteger fromFftVector(jdk.internal.math.M3FftMultiplier$ComplexVector, int, int);	(Ljdk/internal/math/M3FftMultiplier$ComplexVector;II)Ljava/math/BigInteger;	265	OK	417	31	jdk/internal/math/M3FftMultiplier.java@19032-20667	HOT_INLINE
+M3FftMultiplier	private static jdk.internal.math.M3FftMultiplier$ComplexVector[] getRootsOfUnity2(int);	(I)[Ljdk/internal/math/M3FftMultiplier$ComplexVector;	66	OK	455	14	jdk/internal/math/M3FftMultiplier.java@20896-21424	HOT_INLINE
+M3FftMultiplier	private static jdk.internal.math.M3FftMultiplier$ComplexVector getRootsOfUnity3(int);	(I)Ljdk/internal/math/M3FftMultiplier$ComplexVector;	38	OK	476	10	jdk/internal/math/M3FftMultiplier.java@21655-22020	HOT_INLINE
+M3FftMultiplier	private static void ifft(jdk.internal.math.M3FftMultiplier$ComplexVector, jdk.internal.math.M3FftMultiplier$ComplexVector[]);	(Ljdk/internal/math/M3FftMultiplier$ComplexVector;[Ljdk/internal/math/M3FftMultiplier$ComplexVector;)V	480	OK	498	84	jdk/internal/math/M3FftMultiplier.java@22596-26154	TOO_BIG_TO_INLINE
+M3FftMultiplier	private static void ifftMixedRadix(jdk.internal.math.M3FftMultiplier$ComplexVector, jdk.internal.math.M3FftMultiplier$ComplexVector[], jdk.internal.math.M3FftMultiplier$ComplexVector);	(Ljdk/internal/math/M3FftMultiplier$ComplexVector;[Ljdk/internal/math/M3FftMultiplier$ComplexVector;Ljdk/internal/math/M3FftMultiplier$ComplexVector;)V	208	OK	599	33	jdk/internal/math/M3FftMultiplier.java@27126-28526	HOT_INLINE
+M3FftMultiplier	static java.math.BigInteger multiply(java.math.BigInteger, java.math.BigInteger);	(Ljava/math/BigInteger;Ljava/math/BigInteger;)Ljava/math/BigInteger;	141	OK	642	26	jdk/internal/math/M3FftMultiplier.java@28801-29723	HOT_INLINE
+M3FftMultiplier	static java.math.BigInteger multiplyFft(java.math.BigInteger, java.math.BigInteger);	(Ljava/math/BigInteger;Ljava/math/BigInteger;)Ljava/math/BigInteger;	329	OK	711	40	jdk/internal/math/M3FftMultiplier.java@32068-34383	TOO_BIG_TO_INLINE
+M3FftMultiplier	static java.math.BigInteger square(java.math.BigInteger);	(Ljava/math/BigInteger;)Ljava/math/BigInteger;	34	OK	757	6	jdk/internal/math/M3FftMultiplier.java@34523-34723	TRIVIAL_INLINE
+M3FftMultiplier	static java.math.BigInteger squareFft(java.math.BigInteger);	(Ljava/math/BigInteger;)Ljava/math/BigInteger;	226	OK	765	35	jdk/internal/math/M3FftMultiplier.java@34729-36657	HOT_INLINE
+M3FftMultiplier	static jdk.internal.math.M3FftMultiplier$ComplexVector toFftVector(byte[], int, int);	([BII)Ljdk/internal/math/M3FftMultiplier$ComplexVector;	219	OK	804	38	jdk/internal/math/M3FftMultiplier.java@36835-38575	HOT_INLINE
+M3FftMultiplier	static {};	()V	51	OK	27	-	-	HOT_INLINE
+M3JavaDoubleBitsFromByteArray	public jdk.internal.math.M3JavaDoubleBitsFromByteArray();	()V	5	OK	17	3	jdk/internal/math/M3JavaDoubleBitsFromByteArray.java@397-444	TRIVIAL_INLINE
+M3JavaDoubleBitsFromByteArray	long nan();	()J	7	OK	23	4	jdk/internal/math/M3JavaDoubleBitsFromByteArray.java@450-537	TRIVIAL_INLINE
+M3JavaDoubleBitsFromByteArray	long negativeInfinity();	()J	7	OK	28	4	jdk/internal/math/M3JavaDoubleBitsFromByteArray.java@543-657	TRIVIAL_INLINE
+M3JavaDoubleBitsFromByteArray	long positiveInfinity();	()J	7	OK	33	4	jdk/internal/math/M3JavaDoubleBitsFromByteArray.java@663-777	TRIVIAL_INLINE
+M3JavaDoubleBitsFromByteArray	long valueOfFloatLiteral(byte[], int, int, boolean, long, int, boolean, int);	([BIIZJIZI)J	55	OK	40	19	jdk/internal/math/M3JavaDoubleBitsFromByteArray.java@783-2086	HOT_INLINE
+M3JavaDoubleBitsFromByteArray	long valueOfHexLiteral(byte[], int, int, boolean, long, int, boolean, int);	([BIIZJIZI)J	57	OK	60	8	jdk/internal/math/M3JavaDoubleBitsFromByteArray.java@2092-2694	HOT_INLINE
+M3JavaDoubleBitsFromCharSequence	public jdk.internal.math.M3JavaDoubleBitsFromCharSequence();	()V	5	OK	15	3	jdk/internal/math/M3JavaDoubleBitsFromCharSequence.java@365-415	TRIVIAL_INLINE
+M3JavaDoubleBitsFromCharSequence	long nan();	()J	7	OK	21	4	jdk/internal/math/M3JavaDoubleBitsFromCharSequence.java@421-508	TRIVIAL_INLINE
+M3JavaDoubleBitsFromCharSequence	long negativeInfinity();	()J	7	OK	26	4	jdk/internal/math/M3JavaDoubleBitsFromCharSequence.java@514-628	TRIVIAL_INLINE
+M3JavaDoubleBitsFromCharSequence	long positiveInfinity();	()J	7	OK	31	4	jdk/internal/math/M3JavaDoubleBitsFromCharSequence.java@634-748	TRIVIAL_INLINE
+M3JavaDoubleBitsFromCharSequence	long valueOfFloatLiteral(java.lang.CharSequence, int, int, boolean, long, int, boolean, int);	(Ljava/lang/CharSequence;IIZJIZI)J	53	OK	38	10	jdk/internal/math/M3JavaDoubleBitsFromCharSequence.java@754-1398	HOT_INLINE
+M3JavaDoubleBitsFromCharSequence	long valueOfHexLiteral(java.lang.CharSequence, int, int, boolean, long, int, boolean, int);	(Ljava/lang/CharSequence;IIZJIZI)J	55	OK	49	10	jdk/internal/math/M3JavaDoubleBitsFromCharSequence.java@1404-2013	HOT_INLINE
+M3JavaFloatBitsFromByteArray	public jdk.internal.math.M3JavaFloatBitsFromByteArray();	()V	5	OK	18	3	jdk/internal/math/M3JavaFloatBitsFromByteArray.java@395-441	TRIVIAL_INLINE
+M3JavaFloatBitsFromByteArray	long nan();	()J	7	OK	24	4	jdk/internal/math/M3JavaFloatBitsFromByteArray.java@447-530	TRIVIAL_INLINE
+M3JavaFloatBitsFromByteArray	long negativeInfinity();	()J	7	OK	29	4	jdk/internal/math/M3JavaFloatBitsFromByteArray.java@536-646	TRIVIAL_INLINE
+M3JavaFloatBitsFromByteArray	long positiveInfinity();	()J	7	OK	34	4	jdk/internal/math/M3JavaFloatBitsFromByteArray.java@652-762	TRIVIAL_INLINE
+M3JavaFloatBitsFromByteArray	long valueOfFloatLiteral(byte[], int, int, boolean, long, int, boolean, int);	([BIIZJIZI)J	56	OK	41	8	jdk/internal/math/M3JavaFloatBitsFromByteArray.java@768-1413	HOT_INLINE
+M3JavaFloatBitsFromByteArray	long valueOfHexLiteral(byte[], int, int, boolean, long, int, boolean, int);	([BIIZJIZI)J	56	OK	50	7	jdk/internal/math/M3JavaFloatBitsFromByteArray.java@1419-1997	HOT_INLINE
+M3JavaFloatBitsFromCharSequence	public jdk.internal.math.M3JavaFloatBitsFromCharSequence();	()V	5	OK	16	3	jdk/internal/math/M3JavaFloatBitsFromCharSequence.java@363-412	TRIVIAL_INLINE
+M3JavaFloatBitsFromCharSequence	long nan();	()J	7	OK	22	4	jdk/internal/math/M3JavaFloatBitsFromCharSequence.java@418-501	TRIVIAL_INLINE
+M3JavaFloatBitsFromCharSequence	long negativeInfinity();	()J	7	OK	27	4	jdk/internal/math/M3JavaFloatBitsFromCharSequence.java@507-617	TRIVIAL_INLINE
+M3JavaFloatBitsFromCharSequence	long positiveInfinity();	()J	7	OK	32	4	jdk/internal/math/M3JavaFloatBitsFromCharSequence.java@623-733	TRIVIAL_INLINE
+M3JavaFloatBitsFromCharSequence	long valueOfFloatLiteral(java.lang.CharSequence, int, int, boolean, long, int, boolean, int);	(Ljava/lang/CharSequence;IIZJIZI)J	54	OK	39	7	jdk/internal/math/M3JavaFloatBitsFromCharSequence.java@739-1327	HOT_INLINE
+M3JavaFloatBitsFromCharSequence	long valueOfHexLiteral(java.lang.CharSequence, int, int, boolean, long, int, boolean, int);	(Ljava/lang/CharSequence;IIZJIZI)J	54	OK	47	7	jdk/internal/math/M3JavaFloatBitsFromCharSequence.java@1333-1886	HOT_INLINE
