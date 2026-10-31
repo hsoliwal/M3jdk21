@@ -1,0 +1,9 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.intake.Relocate
+displayName: LIB_INTAKE relocation of dec
+description: Boundary-checked package relocation, one non-recursive ChangePackage per package, longest first.
+recipeList:
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.brotli.dec
+      newPackageName: com.m3.lib.dec
+      recursive: false

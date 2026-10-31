@@ -1,0 +1,567 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------------< m3.intake:jsoup-1.23.2 >-----------------------
+[INFO] Building jsoup-1.23.2 1.23.2-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- rewrite:5.23.1:runNoFork (default-cli) @ jsoup-1.23.2 ---
+[INFO] Using active recipe(s) [com.synexia.m3.intake.Relocate]
+[INFO] Using active styles(s) []
+[INFO] Validating active recipes...
+[INFO] Project [jsoup-1.23.2] Resolving Poms...
+[WARNING] Unable to initialize RocksdbMavenPomCache, falling back to InMemoryMavenPomCache
+[INFO] Project [jsoup-1.23.2] Parsing source files
+java.io.IOException: There is not enough space on the disk
+	at java.base/java.io.FileOutputStream.writeBytes(Native Method)
+	at java.base/java.io.FileOutputStream.write(FileOutputStream.java:367)
+	at org.xerial.snappy.SnappyLoader.extractLibraryFile(SnappyLoader.java:247)
+	at org.xerial.snappy.SnappyLoader.findNativeLibrary(SnappyLoader.java:358)
+	at org.xerial.snappy.SnappyLoader.loadNativeLibrary(SnappyLoader.java:179)
+	at org.xerial.snappy.SnappyLoader.loadSnappyApi(SnappyLoader.java:157)
+	at org.xerial.snappy.Snappy.init(Snappy.java:70)
+	at org.xerial.snappy.Snappy.<clinit>(Snappy.java:47)
+	at org.openrewrite.java.internal.JavaTypeCache.key(JavaTypeCache.java:58)
+	at org.openrewrite.java.internal.JavaTypeCache.get(JavaTypeCache.java:45)
+	at org.openrewrite.java.isolated.ReloadableJava17TypeMapping.methodDeclarationType(ReloadableJava17TypeMapping.java:561)
+	at org.openrewrite.java.isolated.ReloadableJava17TypeMapping.classType(ReloadableJava17TypeMapping.java:290)
+	at org.openrewrite.java.isolated.ReloadableJava17TypeMapping.type(ReloadableJava17TypeMapping.java:63)
+	at org.openrewrite.java.isolated.ReloadableJava17TypeMapping.classType(ReloadableJava17TypeMapping.java:246)
+	at org.openrewrite.java.isolated.ReloadableJava17TypeMapping.type(ReloadableJava17TypeMapping.java:63)
+	at org.openrewrite.java.isolated.ReloadableJava17TypeMapping.type(ReloadableJava17TypeMapping.java:364)
+	at org.openrewrite.java.isolated.ReloadableJava17TypeMapping.type(ReloadableJava17TypeMapping.java:356)
+	at org.openrewrite.java.isolated.ReloadableJava17ParserVisitor.visitMemberSelect(ReloadableJava17ParserVisitor.java:893)
+	at org.openrewrite.java.isolated.ReloadableJava17ParserVisitor.visitMemberSelect(ReloadableJava17ParserVisitor.java:73)
+	at com.sun.tools.javac.tree.JCTree$JCFieldAccess.accept(JCTree.java:2589)
+	at com.sun.source.util.TreePathScanner.scan(TreePathScanner.java:92)
+	at org.openrewrite.java.isolated.ReloadableJava17ParserVisitor.convert(ReloadableJava17ParserVisitor.java:1668)
+	at org.openrewrite.java.isolated.ReloadableJava17ParserVisitor.visitImport(ReloadableJava17ParserVisitor.java:740)
+	at org.openrewrite.java.isolated.ReloadableJava17ParserVisitor.visitImport(ReloadableJava17ParserVisitor.java:73)
+	at com.sun.tools.javac.tree.JCTree$JCImport.accept(JCTree.java:692)
+	at com.sun.source.util.TreePathScanner.scan(TreePathScanner.java:92)
+	at org.openrewrite.java.isolated.ReloadableJava17ParserVisitor.convert(ReloadableJava17ParserVisitor.java:1668)
+	at org.openrewrite.java.isolated.ReloadableJava17ParserVisitor.convert(ReloadableJava17ParserVisitor.java:1697)
+	at org.openrewrite.java.isolated.ReloadableJava17ParserVisitor.convertAll(ReloadableJava17ParserVisitor.java:1735)
+	at org.openrewrite.java.isolated.ReloadableJava17ParserVisitor.visitCompilationUnit(ReloadableJava17ParserVisitor.java:550)
+	at org.openrewrite.java.isolated.ReloadableJava17ParserVisitor.visitCompilationUnit(ReloadableJava17ParserVisitor.java:73)
+	at com.sun.tools.javac.tree.JCTree$JCCompilationUnit.accept(JCTree.java:623)
+	at com.sun.source.util.TreePathScanner.scan(TreePathScanner.java:92)
+	at org.openrewrite.java.isolated.ReloadableJava17Parser.lambda$parseInputs$0(ReloadableJava17Parser.java:166)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1939)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:310)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:310)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:735)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:310)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at java.base/java.util.stream.ReferencePipeline$7$1.accept(ReferencePipeline.java:276)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1708)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:921)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:682)
+	at org.openrewrite.maven.AbstractRewriteMojo.sourcesWithAutoDetectedStyles(AbstractRewriteMojo.java:286)
+	at org.openrewrite.maven.AbstractRewriteMojo.loadSourceSet(AbstractRewriteMojo.java:255)
+	at org.openrewrite.maven.AbstractRewriteMojo.listResults(AbstractRewriteMojo.java:236)
+	at org.openrewrite.maven.AbstractRewriteRunMojo.execute(AbstractRewriteRunMojo.java:62)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:126)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute2(MojoExecutor.java:328)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute(MojoExecutor.java:316)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:212)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:174)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.access$000(MojoExecutor.java:75)
+	at org.apache.maven.lifecycle.internal.MojoExecutor$1.run(MojoExecutor.java:162)
+	at org.apache.maven.plugin.DefaultMojosExecutionStrategy.execute(DefaultMojosExecutionStrategy.java:39)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:159)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:105)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:73)
+	at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build(SingleThreadedBuilder.java:53)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:118)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:261)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:173)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:101)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:919)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:285)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:207)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:255)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:201)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:361)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:314)
+[WARNING] There were problems parsing some source files, run with --errors to see full stack traces
+[WARNING] There were problems parsing m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\Connection.java
+[INFO] Running recipe(s)...
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\helper\AuthenticationHandler.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\helper\AuthenticationHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\helper\CookieUtil.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\helper\CookieUtil.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup, newPackageName=com.m3.lib.jsoup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\helper\DataUtil.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\helper\DataUtil.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.select, newPackageName=com.m3.lib.jsoup.select, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup, newPackageName=com.m3.lib.jsoup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\helper\HttpClientExecutor.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\helper\HttpClientExecutor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup, newPackageName=com.m3.lib.jsoup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\helper\HttpConnection.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\helper\HttpConnection.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup, newPackageName=com.m3.lib.jsoup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\helper\package-info.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\helper\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\helper\Re2jRegex.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\helper\Re2jRegex.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\helper\Regex.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\helper\Regex.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\helper\RequestAuthenticator.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\helper\RequestAuthenticator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup, newPackageName=com.m3.lib.jsoup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\helper\RequestAuthHandler.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\helper\RequestAuthHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\helper\RequestDispatch.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\helper\RequestDispatch.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\helper\RequestExecutor.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\helper\RequestExecutor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\helper\UrlBuilder.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\helper\UrlBuilder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup, newPackageName=com.m3.lib.jsoup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\helper\UrlConnectionExecutor.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\helper\UrlConnectionExecutor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup, newPackageName=com.m3.lib.jsoup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\helper\Validate.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\helper\Validate.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\helper\ValidationException.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\helper\ValidationException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\helper\W3CDom.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\helper\W3CDom.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.select, newPackageName=com.m3.lib.jsoup.select, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\HttpStatusException.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\HttpStatusException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup, newPackageName=com.m3.lib.jsoup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\internal\ControllableInputStream.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\internal\ControllableInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup, newPackageName=com.m3.lib.jsoup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\internal\Functions.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\internal\Functions.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\internal\LineMap.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\internal\LineMap.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\internal\NamespaceBindings.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\internal\NamespaceBindings.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\internal\Normalizer.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\internal\Normalizer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\internal\package-info.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\internal\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\internal\QuietAppendable.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\internal\QuietAppendable.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup, newPackageName=com.m3.lib.jsoup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\internal\SharedConstants.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\internal\SharedConstants.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\internal\SimpleBufferedInput.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\internal\SimpleBufferedInput.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\internal\SimpleStreamReader.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\internal\SimpleStreamReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\internal\SoftPool.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\internal\SoftPool.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\internal\StringUtil.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\internal\StringUtil.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\Jsoup.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\Jsoup.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.safety, newPackageName=com.m3.lib.jsoup.safety, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup, newPackageName=com.m3.lib.jsoup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\nodes\Attribute.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Attribute.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\nodes\Attributes.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Attributes.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\nodes\CDataNode.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\CDataNode.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\nodes\Comment.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Comment.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\nodes\DataNode.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\DataNode.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\nodes\Document.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Document.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.select, newPackageName=com.m3.lib.jsoup.select, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup, newPackageName=com.m3.lib.jsoup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\nodes\DocumentType.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\DocumentType.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\nodes\Element.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Element.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.select, newPackageName=com.m3.lib.jsoup.select, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup, newPackageName=com.m3.lib.jsoup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\nodes\Entities.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Entities.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\nodes\EntitiesData.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\EntitiesData.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\nodes\FormElement.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\FormElement.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.select, newPackageName=com.m3.lib.jsoup.select, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup, newPackageName=com.m3.lib.jsoup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\nodes\LeafNode.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\LeafNode.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\nodes\Node.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Node.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.select, newPackageName=com.m3.lib.jsoup.select, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup, newPackageName=com.m3.lib.jsoup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\nodes\NodeInternals.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\NodeInternals.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\nodes\NodeIterator.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\NodeIterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.select, newPackageName=com.m3.lib.jsoup.select, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\nodes\NodeUtils.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\NodeUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\nodes\package-info.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\nodes\Printer.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Printer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.select, newPackageName=com.m3.lib.jsoup.select, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\nodes\PseudoTextElement.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\PseudoTextElement.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.select, newPackageName=com.m3.lib.jsoup.select, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\nodes\Range.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Range.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\nodes\TextNode.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\TextNode.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\nodes\XmlDeclaration.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\XmlDeclaration.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\package-info.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup, newPackageName=com.m3.lib.jsoup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\parser\CharacterReader.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\CharacterReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\parser\HtmlTagOptions.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\HtmlTagOptions.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\parser\HtmlTreeBuilder.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\HtmlTreeBuilder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\parser\HtmlTreeBuilderState.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\HtmlTreeBuilderState.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\parser\package-info.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\parser\ParseError.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\ParseError.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\parser\ParseErrorList.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\ParseErrorList.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\parser\Parser.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\Parser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup, newPackageName=com.m3.lib.jsoup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\parser\ParseSettings.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\ParseSettings.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\parser\StreamParser.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\StreamParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.select, newPackageName=com.m3.lib.jsoup.select, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup, newPackageName=com.m3.lib.jsoup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\parser\Tag.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\Tag.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\parser\TagSet.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\TagSet.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\parser\Token.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\Token.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\parser\TokenData.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\TokenData.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\parser\Tokeniser.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\Tokeniser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\parser\TokeniserState.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\TokeniserState.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\parser\TokenQueue.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\TokenQueue.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\parser\TreeBuilder.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\TreeBuilder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.select, newPackageName=com.m3.lib.jsoup.select, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\parser\XmlTreeBuilder.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\XmlTreeBuilder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.select, newPackageName=com.m3.lib.jsoup.select, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\Progress.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\Progress.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup, newPackageName=com.m3.lib.jsoup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\safety\Cleaner.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\safety\Cleaner.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.safety, newPackageName=com.m3.lib.jsoup.safety, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.select, newPackageName=com.m3.lib.jsoup.select, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup, newPackageName=com.m3.lib.jsoup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\safety\package-info.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\safety\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.safety, newPackageName=com.m3.lib.jsoup.safety, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\safety\Safelist.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\safety\Safelist.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.safety, newPackageName=com.m3.lib.jsoup.safety, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup, newPackageName=com.m3.lib.jsoup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\select\Collector.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\select\Collector.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.select, newPackageName=com.m3.lib.jsoup.select, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\select\CombiningEvaluator.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\select\CombiningEvaluator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.select, newPackageName=com.m3.lib.jsoup.select, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\select\Elements.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\select\Elements.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.safety, newPackageName=com.m3.lib.jsoup.safety, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.select, newPackageName=com.m3.lib.jsoup.select, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\select\Evaluator.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\select\Evaluator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.select, newPackageName=com.m3.lib.jsoup.select, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\select\NodeEvaluator.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\select\NodeEvaluator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.select, newPackageName=com.m3.lib.jsoup.select, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\select\NodeFilter.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\select\NodeFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.select, newPackageName=com.m3.lib.jsoup.select, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\select\Nodes.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\select\Nodes.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.safety, newPackageName=com.m3.lib.jsoup.safety, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.select, newPackageName=com.m3.lib.jsoup.select, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\select\NodeTraversor.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\select\NodeTraversor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.select, newPackageName=com.m3.lib.jsoup.select, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\select\NodeVisitor.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\select\NodeVisitor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.select, newPackageName=com.m3.lib.jsoup.select, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\select\package-info.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\select\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.select, newPackageName=com.m3.lib.jsoup.select, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\select\QueryParser.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\select\QueryParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.select, newPackageName=com.m3.lib.jsoup.select, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\select\Selector.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\select\Selector.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.helper, newPackageName=com.m3.lib.jsoup.helper, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.parser, newPackageName=com.m3.lib.jsoup.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.select, newPackageName=com.m3.lib.jsoup.select, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\select\StructuralEvaluator.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\select\StructuralEvaluator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.internal, newPackageName=com.m3.lib.jsoup.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.select, newPackageName=com.m3.lib.jsoup.select, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup.nodes, newPackageName=com.m3.lib.jsoup.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\SerializationException.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\SerializationException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup, newPackageName=com.m3.lib.jsoup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\org\jsoup\UnsupportedMimeTypeException.java to m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\UnsupportedMimeTypeException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.jsoup, newPackageName=com.m3.lib.jsoup, recursive=false}
+[WARNING] Please review and commit the results.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  14.065 s
+[INFO] Finished at: 2026-10-31T06:06:02+05:30
+[INFO] ------------------------------------------------------------------------

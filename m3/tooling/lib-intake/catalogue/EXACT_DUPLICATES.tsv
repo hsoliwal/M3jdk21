@@ -1,0 +1,5 @@
+role	libraries	atoms	key	state	libs	sample	m3_owner_sample
+ACCESSOR	2	17	303bbaef5096986fb040cdb9d820a89da8199a69ee31573aacc7ad019a7a0f77	DUPLICATE	commonmark,commons-codec-1.22.1	commonmark:HtmlRenderer.builder;commonmark:MarkdownRenderer.builder;commonmark:Parser.builder;commonmark:TextContentRenderer.builder;commons-codec-1.22.1:Base16.builder;commons-codec-1.22.1:Base16InputStream.builder	
+ACCESSOR	2	2	2cd5bcfe19a4a9554aca80a4307a6b773b8d7cda0fbccb3fb3ce582d4b72f118	DUPLICATE	commons-codec-1.22.1,xz	commons-codec-1.22.1:HmacAlgorithms.getName;xz:Check.getName	
+ACCESSOR	2	2	9b046f4344266f0e8527b8f2a4b55255cd658fdc6ca78e183acab76a03788630	DUPLICATE	HdrHistogram,re2j	HdrHistogram:AbstractPackedArrayContext.length;re2j:MatcherInput.length	
+ACCESSOR	2	2	b95cde68c9d40fafa6bdd8057155ad10e0db0c36208c6b5c576caeb4e5a55574	DUPLICATE	HdrHistogram,commonmark	HdrHistogram:ConcurrentHistogram$ConcurrentArrayWithNormalizingOffset.length;commonmark:DelimiterRun.length	

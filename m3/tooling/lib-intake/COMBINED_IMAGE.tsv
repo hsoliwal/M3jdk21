@@ -1,0 +1,12 @@
+step	result
+jlink	PASS modules=9
+validate-modules	PASS
+module jdk.m3.ewah	PRESENT
+module jdk.m3.re2j	PRESENT
+module jdk.m3.fastfilter	PRESENT
+module jdk.m3.pcollections	PRESENT
+module jdk.m3.hdrhistogram	PRESENT
+module jdk.m3.dec	PRESENT
+module jdk.m3.xz	PRESENT
+module jdk.m3.commonmark	PRESENT
+module jdk.m3.codec	PRESENT

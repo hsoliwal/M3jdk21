@@ -1,0 +1,3 @@
+lib	reason	needs
+zero-allocation-hashing	uses JDK-internal sun.nio.ch.DirectBuffer (javac: package sun.nio.ch is not visible); a jdk.m3 module needs a qualified export from java.base	M3JDK21 java.base module-info: exports sun.nio.ch to jdk.m3.hashing (JDK-level change), then re-run the row
+jsoup-1.23.2	optional dependency on re2j (helper/Re2jRegex.java imports com.google.re2j), which this batch relocates to jdk.m3.re2j; the recipe has no intake-to-intake dependency yet	INTAKE column intake_deps (map com.google.re2j -> com.m3.lib.re2j in the name map, compile against the relocated re2j classes, requires static jdk.m3.re2j), then re-run the row

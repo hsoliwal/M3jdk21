@@ -1,0 +1,11 @@
+LIB_INTAKE HdrHistogram S0_VIEW PASS java=53 packages=2 resources=0 overlays=none upstream_descriptor=no
+LIB_INTAKE HdrHistogram S1_RELOCATE PASS map=org.HdrHistogram=com.m3.lib.hdrhistogram packages_moved=2 old_dirs_left=0 text_completed_files=1 parse_fallback_files=0 resources_moved=0 meta_mapped=0
+LIB_INTAKE HdrHistogram S1b_BCP PASS java_equal_after_name_map=53 resources_byte_equal=0 differing=0
+LIB_INTAKE HdrHistogram S2_RESIDUE PASS residue=0 (every kind) slash_form_files=0
+LIB_INTAKE HdrHistogram S3_ATOMIZE PASS atoms=1379 KNOWN_PATTERN=265 UNPROVEN_LEAF=776 UNKNOWN_PATTERN=338
+LIB_INTAKE HdrHistogram S4_CONSOLIDATE PASS owner_contract_atoms=87 (proposal queue)
+LIB_INTAKE HdrHistogram S5_REFACTOR_BASELINE PASS METHOD_15=101 LOOP=71 CONST_HOIST=34 (ratchet: MOP passes may only lower these)
+LIB_INTAKE HdrHistogram S6_MODULE PASS module=jdk.m3.hdrhistogram requires=java.base exports=2 javac_warnings=72
+LIB_INTAKE HdrHistogram S7_JMOD_IMAGE PASS jmod=150125B image_modules=6 smoke='loaded=87 failed=0'
+LIB_INTAKE HdrHistogram S8_LAYER PASS files=58 layer=m3/vendor/third_party-m3/relocated/HdrHistogram
+LIB_INTAKE_DONE HdrHistogram jdk.m3.hdrhistogram H:/m3-scratch/lib-intake/batch/HdrHistogram/jmods/jdk.m3.hdrhistogram.jmod

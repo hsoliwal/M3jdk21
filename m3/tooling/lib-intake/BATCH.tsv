@@ -1,0 +1,11 @@
+lib	module	result	last_stage
+JavaEWAH	jdk.m3.ewah	PASS	S8_LAYER PASS
+re2j	jdk.m3.re2j	PASS	S8_LAYER PASS
+fastfilter	jdk.m3.fastfilter	PASS	S8_LAYER PASS
+pcollections	jdk.m3.pcollections	PASS	S8_LAYER PASS
+HdrHistogram	jdk.m3.hdrhistogram	PASS	S8_LAYER PASS
+dec	jdk.m3.dec	PASS	S8_LAYER PASS
+xz	jdk.m3.xz	PASS	S8_LAYER PASS
+commonmark	jdk.m3.commonmark	PASS	S8_LAYER PASS
+jsoup-1.23.2	jdk.m3.jsoup	FAIL	S6_MODULE FAIL
+commons-codec-1.22.1	jdk.m3.codec	PASS	S8_LAYER PASS

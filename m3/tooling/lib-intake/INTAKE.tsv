@@ -1,0 +1,10 @@
+lib	source_dir	mappings	module	version	layer_dir	mop_classes	owner_atoms	compile_deps	main_class
+JavaEWAH	m3/vendor/third_party/JavaEWAH	com.googlecode.javaewah=com.m3.collections.ewah;com.googlecode.javaewah32=com.m3.collections.ewah32	jdk.m3.ewah	1.1.13-m3-source-1	m3/vendor/third_party-m3/relocated/JavaEWAH	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-
+re2j	m3/vendor/third_party/re2j	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-
+fastfilter	m3/vendor/third_party/fastfilter	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-
+pcollections	m3/vendor/third_party/pcollections	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-
+HdrHistogram	m3/vendor/third_party/HdrHistogram	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	org.HdrHistogram.HistogramLogProcessor
+dec	m3/vendor/third_party/dec	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-
+xz	m3/vendor/third_party/xz	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-
+commonmark	m3/vendor/third_party/commonmark	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-
+commons-codec-1.22.1	m3/vendor/third_party/commons-codec-1.22.1	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-

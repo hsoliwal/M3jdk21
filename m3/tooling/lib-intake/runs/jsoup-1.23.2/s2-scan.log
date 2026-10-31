@@ -1,0 +1,14 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< org.apache.maven:standalone-pom >-------------------
+[INFO] Building Maven Stub Project (No POM) 1
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- m3work:0.1.1:relocation-scan (default-cli) @ standalone-pom ---
+[INFO] [RELOCATION] hits=0 {} -> H:\m3-scratch\converge-commons\m3\m3\tooling\lib-intake\runs\jsoup-1.23.2\relocation
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.244 s
+[INFO] Finished at: 2026-10-31T06:06:54+05:30
+[INFO] ------------------------------------------------------------------------
