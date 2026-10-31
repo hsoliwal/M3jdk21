@@ -1,0 +1,15 @@
+# host: Windows 11, JDK 21.0.9 + patched java.base (--patch-module); static final MethodHandles (invokeExact), warm-up 6, best of 7
+# M3FastIntegerMath.unsignedMultiplyHigh: 0.00 ns = the JIT folded the atom loop; NOT MEASURABLE here, not a speedup
+atom	ns_per_op_atom	ns_per_op_reference	speedup
+M3JavaDoubleBitsFromCharSequence	35.45	176.82	4.99
+M3JavaFloatBitsFromCharSequence	71.26	79.70	1.12
+M3JavaDoubleBitsFromByteArray	28.04	176.82	6.30
+M3JavaFloatBitsFromByteArray	60.78	79.70	1.31
+Double.parseDouble (wiring)	32.36	176.82	5.46
+Float.parseFloat (wiring)	67.39	79.70	1.18
+M3FastDoubleSwar.isEightDigits	0.78	1.52	1.95
+M3FastDoubleSwar.readLongBE	2.97	2.86	0.96
+M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.10	Infinity
+M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	3.49	85.03	24.39
+M3FastFloatMath.tryDecToFloatWithFastAlgorithm	4.10	50.74	12.36
+M3FftMultiplier.multiply (400k-bit operands)	2277200.00	4487400.00	1.97

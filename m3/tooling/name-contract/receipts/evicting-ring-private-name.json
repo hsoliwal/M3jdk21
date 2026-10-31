@@ -1,9 +1,9 @@
 {
   "schema": "M3JDK21_SOURCE_SEALED_PRIVATE_ATOM_POSTIMAGE_V1",
   "mapping_id": "m3.collections.evicting-queue.owner-naming",
-  "source": "m3/collections/implementations/guava-evicting-queue/src/main/java/com/m3/collections/guava/M3EvictingQueue.java",
-  "before_sha256": "8afe356324bdaa51953933f2213b573175b64e2921df4c0df7c4a16161274840",
-  "after_sha256": "3fb021a20b4c356283f2b8444647333a4399e9b00528a2bf519787e602dd1166",
+  "source": "m3/collections/implementations/guava-evicting-queue/src/main/java/jdk/m3/collections/guava/M3EvictingQueue.java",
+  "before_sha256": "12e10948c33dedf38961027f23c01a3a912889d2585dfe8181f35ecb43426dfb",
+  "after_sha256": "91c5044456cf3841d857dd5069ef7e5d61055ea154880ad5fed3984e15f686b7",
   "synexia_recipe": "com.synexia.rewrite.M3Jdk21EvictingRingPrivateNaming",
   "synexia_recipe_crate": "m3jdk21-evicting-ring-private-name",
   "synexia_review_pr": "https://github.com/hsoliwal/com.synexia/pull/13213",

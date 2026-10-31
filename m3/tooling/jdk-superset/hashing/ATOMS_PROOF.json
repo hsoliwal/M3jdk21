@@ -1,0 +1,78 @@
+{
+  "authority": {
+    "canonical": "jdk.internal.m3.rewrite.M3AtomizeRecipe + M3PatternizeRecipe via .m3/atomize-patternize/run.sh",
+    "projection": "cpu_lhash_treesitter leaf extraction + declared pattern dimensions (candidate evidence, no mutation authority)",
+    "status": "PENDING_BUILD_HOST (Maven/OpenRewrite not executed on this host)"
+  },
+  "counts": {
+    "cross_donor_exact_classes": 0,
+    "cross_donor_structural_classes": 0,
+    "errors": 0,
+    "exact_classes": 377,
+    "exact_classes_size_ge2": 47,
+    "hashed_leaves_min8_tokens": 471,
+    "java_files": 23,
+    "lambdas": 0,
+    "leaves": 483,
+    "leaves_in_exact_dup_class": 141,
+    "leaves_in_structural_class": 339,
+    "methods": 434,
+    "parse_errors": 0,
+    "parsed_files": 23,
+    "structural_classes": 177,
+    "structural_classes_size_ge2": 45,
+    "types": 49,
+    "worker_faults": 0
+  },
+  "declared_rules": {
+    "algorithm": "NOT PROJECTED: requires M3PatternizeRecipe problem catalogues; keyword detectors are not admitted as algorithm identity",
+    "carrier": "REGEX if Pattern.compile/matches/quote or String.replaceAll/replaceFirst/matches is invoked; else TEXT_BLOCK if a text_block literal occurs; else STRING if a string_literal occurs; else NONE",
+    "classes": "leaves with fewer than 8 normalized tokens are not entered into pattern classes",
+    "complexity": "normalized token count: <16 TRIVIAL, <64 SIMPLE, <256 ORDINARY, <1024 COMPLEX, <4096 HOSTILE, else PATHOLOGICAL",
+    "composition": "LOCAL_ANON if a local class declaration or anonymous class body occurs; else LAMBDA_STREAM if a lambda, method reference or stream()/parallelStream() invocation occurs; else PLAIN",
+    "control": "STRAIGHT: no control statement; NESTED: control nesting depth >= 2; SWITCH: a switch occurs at depth <= 1; BRANCH: otherwise",
+    "language": "sorted '|'-joined flags among RECORD_GENERIC (record or type parameters), SEALED_PATTERN (sealed/non-sealed/permits, instanceof type/record pattern, switch pattern label), METHOD_REFERENCE, TRY_RESOURCE, RECURSIVE (unqualified or this-qualified self invocation); BASELINE when none",
+    "native": "DECLARATION if the native modifier is present; OVERLOAD if another method of the same owner shares the name; else NONE",
+    "visibility": "modifier keyword public/protected/private, else package (interface-implicit public is not inferred)"
+  },
+  "donors": [
+    {
+      "commit": "vendored",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 483,
+        "methods": 434,
+        "types": 49
+      },
+      "donor": "zah",
+      "errors": 0,
+      "image": "H:/m3-scratch/hash-absorb/image/zah",
+      "java_files": 23,
+      "parse_errors": 0
+    }
+  ],
+  "root_sha256": "43eef0ee3d4511afc5179b7b2b102188a51e37a66ff04699f5cfcf62cf5a213e",
+  "schema": "m3.java-corpus-atomize-patternize.v1",
+  "self_validation_guard": {
+    "zah": {
+      "all_equal": true,
+      "checked_leaves": 64
+    }
+  },
+  "tables": {
+    "PATTERNS_EXACT.tsv": "212c84d451a333a2eb00f71ff46e9f24e219d73200d571b8054657599a64cb8d",
+    "PATTERNS_STRUCTURAL.tsv": "f78ce525dc0ab75d4767d20d9f676dded479475502858b1bc17331cf1465e577",
+    "SPECTRUM.tsv": "d49f1a41fcd2c8f3bef6dc190790082833b6cb203c73029f7ccdd619f7c143f9",
+    "zah/ATOMS.tsv.gz": "ba86c8027fc2dd49863d11753d1101139c404eb7bdb9166e7296056b7956b6db",
+    "zah/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "zah/FILES.tsv": "174546044dbde5010e7ed9deaa3b2e14de1a144399db5b8e645dd647df113f02"
+  },
+  "tools": {
+    "lhash_module": "cpu_lhash_treesitter.py",
+    "lhash_module_sha256": "a5d270b105b7dcd530e66e7223efbd2fef5401b393ca9480598745c1bea332a6",
+    "projector_sha256": "141a29d995d0992b1f731056652ea2c1e1887aec2685a2faf0074c6a45cdaca6",
+    "python": "3.12.6",
+    "tree_sitter": "0.26.0",
+    "tree_sitter_language_pack": "1.12.5"
+  }
+}

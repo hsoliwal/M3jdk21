@@ -4,10 +4,10 @@ name: M3 JNI LeetCode 349 350 signed-long windows Java21
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java'
       - 'm3/collections/src/main/native/collections/m3_long_rank_batch_jni.c'
-      - 'm3/collections/src/test/java/com/m3/collections/M3LongRankWindowIntersectionContract.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3LongRankWindowIntersectionTest.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3LongRankWindowIntersectionContract.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3LongRankWindowIntersectionTest.java'
       - '.github/workflows/m3-leetcode349-350-jni-window-java21.yml'
 
 permissions:
@@ -33,18 +33,18 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
-          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java)" = '99872c10902c15cbbf143dd158a6bcf6736465e1'
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java)" = '99872c10902c15cbbf143dd158a6bcf6736465e1'
           test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = 'e7ed7e9a3a9eb71e1970d8b4f023147afb8e7543'
-          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongRankWindowIntersectionContract.java)" = 'd5e611897131123061c5e40886be1cb672c58f0a'
-          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongRankWindowIntersectionTest.java)" = 'c147f3f3c2376407bd95fe138c5eb7f2d07b1458'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankWindowIntersectionContract.java)" = '22754302e4dccd581a6a55b5718482d92dbe3362'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankWindowIntersectionTest.java)" = 'a3ceef59e5bbd72ca791dcba128381095c2d9286'
       - name: Compile existing Java rank owner plus independent LeetCode oracle
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/m3rank/classes" "$RUNNER_TEMP/m3rank/native"
           javac --release 21 -Xlint:all -Werror -d "$RUNNER_TEMP/m3rank/classes" \
-            m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java \
-            m3/collections/src/test/java/com/m3/collections/M3LongRankWindowIntersectionContract.java
+            m3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3LongRankWindowIntersectionContract.java
       - name: Compile complete original JNI rank batch library C17
         shell: bash
         run: |
@@ -58,17 +58,17 @@ jobs:
         run: |
           set -euo pipefail
           java -cp "$RUNNER_TEMP/m3rank/classes" \
-            com.m3.collections.M3LongRankWindowIntersectionContract --java \
+            jdk.m3.collections.M3LongRankWindowIntersectionContract --java \
             | tee "$RUNNER_TEMP/m3rank/java.txt"
           java -Xcheck:jni -Dm3.collections.rank.native=true \
             -Djava.library.path="$RUNNER_TEMP/m3rank/native" \
             -cp "$RUNNER_TEMP/m3rank/classes" \
-            com.m3.collections.M3LongRankWindowIntersectionContract --native \
+            jdk.m3.collections.M3LongRankWindowIntersectionContract --native \
             | tee "$RUNNER_TEMP/m3rank/native.txt"
           java -Xint -Xcheck:jni -Dm3.collections.rank.native=true \
             -Djava.library.path="$RUNNER_TEMP/m3rank/native" \
             -cp "$RUNNER_TEMP/m3rank/classes" \
-            com.m3.collections.M3LongRankWindowIntersectionContract --native \
+            jdk.m3.collections.M3LongRankWindowIntersectionContract --native \
             | tee "$RUNNER_TEMP/m3rank/interpreter.txt"
           grep -Fxq 'PASS M3_LEETCODE349_350_JNI_WINDOW checks=6037 native=false' "$RUNNER_TEMP/m3rank/java.txt"
           grep -Fxq 'PASS M3_LEETCODE349_350_JNI_WINDOW checks=10059 native=true' "$RUNNER_TEMP/m3rank/native.txt"

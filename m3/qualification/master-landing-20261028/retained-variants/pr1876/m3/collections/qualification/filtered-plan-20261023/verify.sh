@@ -12,28 +12,28 @@ check_blob() {
     exit 1
   }
 }
-check_blob 39934ff9b7ca849204e6a95b530c09f7646a642f m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java
-check_blob d84e5ab508002adfc79198c6741a090bb1fda55e m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java
-check_blob 2fe08d8728732e5f53e75d9feb34c9c6ffc74a8d m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java
-check_blob a2adc60332d2983d5a830bdcd07ceb2c34984691 m3/collections/src/test/java/com/m3/collections/M3FilteredNavigableFacadeSelfTest.java
+check_blob df618603df0d88bb6bab5270e0e0891671224e14 m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java
+check_blob 4f416b849012c273f5d2c8adcbcd850f4c9e0df3 m3/collections/src/main/java/jdk/m3/collections/M3FilteredNavigableSet.java
+check_blob f6606e83e016baa889692ac05826cdd14ee2b5d3 m3/collections/src/main/java/jdk/m3/collections/M3SlotSpliterators.java
+check_blob 129be6264889d79e93913aaae1815c9155748c60 m3/collections/src/test/java/jdk/m3/collections/M3FilteredNavigableFacadeSelfTest.java
 
 # Keep the inherited JNI owner and its region oracle precisely pinned.
 check_blob 521eb6170fd89f3bc62eb810aa6202236a2708e2 m3/collections/src/main/c/m3maskviewport.c
-check_blob f54a9d1cecffe1049815f80be664937a7f03067f m3/collections/src/test/native/m3_mask_viewport_regions.c
+check_blob 22f8eaf891304f2fd35b6198003c5f57ab73e444 m3/collections/src/test/native/m3_mask_viewport_regions.c
 
 build=$(mktemp -d)
 trap 'rm -rf -- "$build"' EXIT
 javac --release 21 -proc:none -Xlint:all -Werror -d "$build" \
-  m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java \
-  m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java \
-  m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java \
-  m3/collections/src/test/java/com/m3/collections/M3FilteredViewsContract.java \
-  m3/collections/src/test/java/com/m3/collections/M3FilteredNavigableFacadeSelfTest.java \
-  m3/collections/src/test/java/com/m3/collections/M3FilteredSortedIteratorPlanSelfTest.java
+  m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java \
+  m3/collections/src/main/java/jdk/m3/collections/M3FilteredNavigableSet.java \
+  m3/collections/src/main/java/jdk/m3/collections/M3SlotSpliterators.java \
+  m3/collections/src/test/java/jdk/m3/collections/M3FilteredViewsContract.java \
+  m3/collections/src/test/java/jdk/m3/collections/M3FilteredNavigableFacadeSelfTest.java \
+  m3/collections/src/test/java/jdk/m3/collections/M3FilteredSortedIteratorPlanSelfTest.java
 
-java -cp "$build" com.m3.collections.M3FilteredViewsContract
-java -cp "$build" com.m3.collections.M3FilteredNavigableFacadeSelfTest
-java -cp "$build" com.m3.collections.M3FilteredSortedIteratorPlanSelfTest
+java -cp "$build" jdk.m3.collections.M3FilteredViewsContract
+java -cp "$build" jdk.m3.collections.M3FilteredNavigableFacadeSelfTest
+java -cp "$build" jdk.m3.collections.M3FilteredSortedIteratorPlanSelfTest
 # JNI instrumentation verifies bounded region transfers, aliases and late-invalid writes.
 # It is a C test harness, not a full checked-JVM JNI parity run.
 cc -std=c11 -O1 -Wall -Wextra -Werror -Wpedantic \

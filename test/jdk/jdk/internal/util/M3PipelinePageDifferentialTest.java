@@ -1,6 +1,6 @@
 /*
  * @test
- * @summary M3JDK21 paged pipeline matches stock Java 21 sequential stream transformations
+ * @summary M3JDK 21 paged pipeline matches stock Java 21 sequential stream transformations
  * @modules java.base/jdk.internal.util
  * @run main/othervm M3PipelinePageDifferentialTest
  */

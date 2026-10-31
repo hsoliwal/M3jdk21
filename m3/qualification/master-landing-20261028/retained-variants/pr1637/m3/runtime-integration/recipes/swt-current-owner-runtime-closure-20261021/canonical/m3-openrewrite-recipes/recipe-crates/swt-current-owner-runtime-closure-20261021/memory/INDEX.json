@@ -1,0 +1,18 @@
+{
+  "schema": "M3_PENDING_CORRECTION_INDEX/1",
+  "profile": "swt-current-owner-runtime-closure-20261021/1.0",
+  "events": [
+    "0caf3684e3ee2386ed73d5d30e7c43a7b08ec48c3ff6c6c62ce61d66ad936a61",
+    "d686c3a1da8b46543cf1c5ff2142b14f99d3810eb7442a2372035659d798ab21",
+    "7b26a9bcf80b50a3ec76e0db1277d37e5d4bf66d57fe7551c3568dc4482a9836"
+  ],
+  "admission": "PENDING",
+  "lessons": {
+    "path": "memory/LESSONS.md",
+    "sha256": "404b262ebcf676951801a69131b5cbdeac7ef8a18aaefe8796e457b0aee5e621"
+  },
+  "conformance_receipt": {
+    "path": "proof/memory-conformance-001/RESULT.json",
+    "sha256": "f0bc06066dc862757dba754f14eeb5901afecd8439b79e4854490a6dab61ecad"
+  }
+}

@@ -1,5 +1,5 @@
---- before/m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringArrayContractTest.java
-+++ after/m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringArrayContractTest.java
+--- before/m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3SpringArrayContractTest.java
++++ after/m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3SpringArrayContractTest.java
 @@ -14,6 +14,7 @@
  import java.util.List;
  import java.util.Map;

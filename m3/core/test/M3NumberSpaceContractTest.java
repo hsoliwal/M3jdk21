@@ -5,8 +5,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
-import com.m3.text.M3NumberSpace;
-import com.m3.text.LocalM3StringPiece;
+import jdk.m3.text.M3NumberSpace;
+import jdk.m3.text.LocalM3StringPiece;
 
 /** Contract proof for the source-manifest to M3NumberSpace owner mapping. */
 public final class M3NumberSpaceContractTest {
@@ -45,14 +45,14 @@ public final class M3NumberSpaceContractTest {
         expect(NumberFormatException.class, () -> space.parse(new View("10001")));
 
         String manifest = Files.readString(
-                Path.of("lexicon/synexia-source-manifest.tsv"), StandardCharsets.UTF_8);
+                Path.of("lexicon/m3-source-manifest.tsv"), StandardCharsets.UTF_8);
         String row = Arrays.stream(manifest.split("\\n", -1))
                 .filter(line -> line.startsWith(M3NumberSpace.SOURCE_ID + "\t"))
                 .findFirst()
                 .orElseThrow(() -> new AssertionError("number manifest row missing"));
         String[] columns = row.split("\\t", -1);
         check(columns.length == 9);
-        check(columns[2].equals("synexia-dictlang/src/main/java/com/dictlang/values/NumberValue.java"));
+        check(columns[2].equals("m3-dictlang/src/main/java/com/dictlang/values/NumberValue.java"));
         check(columns[3].equals(M3NumberSpace.SOURCE_RECORD_ID_FIELD));
         check(columns[4].equals("value"));
         check(columns[7].contains("M3 generates the inclusive 0..10000 domain"));
@@ -73,7 +73,7 @@ public final class M3NumberSpaceContractTest {
                 "source_revision"
         }));
         String targetMap = Files.readString(
-                Path.of("lexicon/synexia-number-target-map.tsv"), StandardCharsets.UTF_8);
+                Path.of("lexicon/m3-number-target-map.tsv"), StandardCharsets.UTF_8);
         String[] targetLines = targetMap.split("\\n", -1);
         String[] targetHeader = targetLines[0].split("\\t", -1);
         check(targetHeader.length == 11 && targetHeader[0].equals("schema")
@@ -88,12 +88,12 @@ public final class M3NumberSpaceContractTest {
         check(targetColumns[2].equals(columns[2]));
         check(targetColumns[3].equals(M3NumberSpace.SOURCE_RECORD_ID_FIELD));
         check(targetColumns[4].equals("value"));
-        check(targetColumns[6].contains("com.m3.text.M3NumberSpace"));
+        check(targetColumns[6].contains("jdk.m3.text.M3NumberSpace"));
         check(targetColumns[7].contains("sourceRecordId(value)"));
         check(targetColumns[9].equals("ADMITTED_TYPED_RECEIVER"));
         check(targetColumns[10].equals(M3NumberSpace.SOURCE_REVISION));
         String fieldMap = Files.readString(
-                Path.of("lexicon/synexia-precompute-field-map.tsv"), StandardCharsets.UTF_8);
+                Path.of("lexicon/m3-precompute-field-map.tsv"), StandardCharsets.UTF_8);
         String recordIdMap = Arrays.stream(fieldMap.split("\\n", -1))
                 .filter(line -> line.startsWith("M3NumberSpace\tsourceRecordId(value)\t"))
                 .findFirst()

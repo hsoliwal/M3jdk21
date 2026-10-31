@@ -11,7 +11,7 @@ Canonical source/recipe packet: hsoliwal/com.synexia PR #12442, exact commit
 `synexia-openrewrite-recipes/recipes/jdk-sorted-mask-20261019`.
 The complete canonical contract, category evaluations, preimages/postimages, replay
 fixtures, Maven/SDK tests and evidence remain there. `verify.py` is its exact Apache-2.0
-proof-tool mirror (Git blob ae38bd39b85d8afb881758cee5d302d5dbd631dc), not a runtime layer.
+proof-tool mirror (Git blob 2e87d4d43b6efd174ca3004cc49977e287741387), not a runtime layer.
 
 ## Production behavior
 

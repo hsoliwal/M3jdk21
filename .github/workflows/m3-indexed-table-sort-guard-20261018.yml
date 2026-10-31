@@ -3,8 +3,8 @@ name: M3 IndexedTable reentrant comparator sort
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3IndexedTable.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3IndexedTableReentrantSort*'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3IndexedTable.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3IndexedTableReentrantSort*'
       - 'm3/collections/qualification/m3jdk21-table-sort-guard-20261018/**'
       - '.github/workflows/m3-indexed-table-sort-guard-20261018.yml'
   workflow_dispatch:
@@ -43,15 +43,15 @@ jobs:
           javac --release 21 -proc:none -Xlint:all,-serial,-module -Werror \
             -sourcepath m3/collections/src/main/java \
             -d "$RUNNER_TEMP/m3-classes" \
-            m3/collections/src/main/java/com/m3/collections/M3IndexedTable.java \
-            m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java \
-            m3/collections/src/test/java/com/m3/collections/M3IndexedTableSelfTest.java \
-            m3/collections/src/test/java/com/m3/collections/M3IndexedTableReentrantSortContract.java
+            m3/collections/src/main/java/jdk/m3/collections/M3IndexedTable.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3IndexedTableSelfTest.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3IndexedTableReentrantSortContract.java
       - name: Existing table randomized proof plus new reentrant-sort contract
         run: |
-          java -cp "$RUNNER_TEMP/m3-classes" com.m3.collections.M3IndexedTableSelfTest
-          java -cp "$RUNNER_TEMP/m3-classes" com.m3.collections.M3IndexedTableReentrantSortContract
-          java -Xint -cp "$RUNNER_TEMP/m3-classes" com.m3.collections.M3IndexedTableReentrantSortContract
+          java -cp "$RUNNER_TEMP/m3-classes" jdk.m3.collections.M3IndexedTableSelfTest
+          java -cp "$RUNNER_TEMP/m3-classes" jdk.m3.collections.M3IndexedTableReentrantSortContract
+          java -Xint -cp "$RUNNER_TEMP/m3-classes" jdk.m3.collections.M3IndexedTableReentrantSortContract
       - name: Unchanged original C17 JNI backend with checked native parity
         run: |
           JDK_HOME="$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")"
@@ -61,6 +61,6 @@ jobs:
             m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
             -o "$RUNNER_TEMP/libm3_collections_mask.so"
           java -Xcheck:jni -Djava.library.path="$RUNNER_TEMP" -cp "$RUNNER_TEMP/m3-classes" \
-            com.m3.collections.M3IndexedTableSelfTest --native
+            jdk.m3.collections.M3IndexedTableSelfTest --native
       - name: Owning Maven JUnit selection
         run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3IndexedTableTest,M3IndexedTableReentrantSortTest test

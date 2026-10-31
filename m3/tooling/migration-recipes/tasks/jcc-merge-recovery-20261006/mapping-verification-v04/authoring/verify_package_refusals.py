@@ -30,7 +30,7 @@ EPOCH_SHA256 = "4fd3b3bd4fb09759d8bb02ca9ba45d0b2934625f24bcc4ae195f3e49394dff70
 BEFORE_BINDINGS_SHA256 = "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126"
 TASK = "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006"
 PROOF = TASK + "/mapping-verification-v04"
-RESOURCE = "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04"
+RESOURCE = "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04"
 PATHS = {"m3/docs/name-mapping.json", "m3/docs/jcc-source-handoff.md",
          "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
          "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv"}

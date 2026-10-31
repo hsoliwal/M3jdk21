@@ -5,7 +5,7 @@
   "source_git_blob_sha1": "2354d0865df41ca7b1db87ab27a4ba3e3caa15dd",
   "source_sha256": "b2d51d03b6a7a69c22f8e2c615934656e635f2722f5f0e6f7a764a6121813483",
   "target": "native/m3_file_jni.c.txt",
-  "target_sha256": "07f00a28d052687edbe90165f0090da8cf1ba1011e7f93364c588b2b9322479a",
+  "target_sha256": "e5895b5b8156b4c36592293882d82aaee26c9df8bf62403671b698a91b169b58",
   "transferred_functions": [
     "read_be32",
     "mindex_read_mapped_handle",

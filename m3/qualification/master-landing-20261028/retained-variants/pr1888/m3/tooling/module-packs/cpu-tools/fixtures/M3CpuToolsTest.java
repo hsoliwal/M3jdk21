@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Hitesh Soliwal and contributors
-import com.m3.tools.cpu.CpuTools;
-import com.m3.tools.cpu.CpuToolsCli;
+import jdk.m3.tools.cpu.CpuTools;
+import jdk.m3.tools.cpu.CpuToolsCli;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
@@ -53,7 +53,7 @@ public final class M3CpuToolsTest {
         check(!session.registry().sha256().equals(CpuTools.session(new Limits(4, 4, 10, 1000), null)
                 .registry().sha256()), "binding identity includes budgets");
         long modules = ModuleLayer.boot().modules().stream().map(Module::getName)
-                .filter(n -> n.startsWith("com.m3.tools.") || n.startsWith("jdk.m3.")).count();
+                .filter(n -> n.startsWith("jdk.m3.tools.") || n.startsWith("jdk.m3.")).count();
         check(modules == 20, "all twenty tool modules resolved");
 
         expectText("b\r\na\rb\n", List.of("text.identity"), "b\r\na\rb\n");
@@ -289,8 +289,8 @@ public final class M3CpuToolsTest {
         List<String> patterns = List.of("aba", "ba", "\ud83d\ude42");
         var many = CpuTools.multiLiteral(source, patterns, 3);
         check(many.size() == 3 && !many.complete(), "multi-literal capped prefix");
-        check(many.hits().get(0).equals(new com.m3.tools.text.search.MultiLiteralSearch.Hit(0, 0, 3))
-                && many.hits().get(1).equals(new com.m3.tools.text.search.MultiLiteralSearch.Hit(1, 1, 3)),
+        check(many.hits().get(0).equals(new jdk.m3.tools.text.search.MultiLiteralSearch.Hit(0, 0, 3))
+                && many.hits().get(1).equals(new jdk.m3.tools.text.search.MultiLiteralSearch.Hit(1, 1, 3)),
                 "multi-literal suffix and UTF-16 coordinates");
         check(CpuTools.verifyMultiLiteral(source, patterns, 3, many, null), "multi-literal replay");
         check(!CpuTools.verifyMultiLiteral(source, patterns, 4, many, null), "multi-literal cap binding");
@@ -300,8 +300,8 @@ public final class M3CpuToolsTest {
         var corpus = CpuTools.corpusLiteral(searchableFiles, corpusPatterns, 100);
         check(corpus.complete() && corpus.scannedFiles() == 3 && corpus.size() > 5,
                 "one prepared automaton scans all M3File text owners without joining sources");
-        check(corpus.hit(0).equals(new com.m3.tools.text.search.MultiLiteralSearch.CorpusHit(0, 0, 0, 3))
-                && corpus.hit(1).equals(new com.m3.tools.text.search.MultiLiteralSearch.CorpusHit(0, 1, 1, 3)),
+        check(corpus.hit(0).equals(new jdk.m3.tools.text.search.MultiLiteralSearch.CorpusHit(0, 0, 0, 3))
+                && corpus.hit(1).equals(new jdk.m3.tools.text.search.MultiLiteralSearch.CorpusHit(0, 1, 1, 3)),
                 "global file order and local UTF-16 coordinates preserve overlapping literal order");
         check(CpuTools.verifyCorpusLiteral(searchableFiles, corpusPatterns, 100, corpus, null)
                 && corpus.sha256().matches("[0-9a-f]{64}"),
@@ -328,9 +328,9 @@ public final class M3CpuToolsTest {
         var regexCorpus = CpuTools.regexCorpus(searchableFiles, "(?=ba)", 100);
         check(regexCorpus.complete() && regexCorpus.scannedFiles() == 3 && regexCorpus.size() == 3,
                 "one compiled M3Regex/JDK Pattern is reused with independent file-local matcher regions");
-        check(regexCorpus.hit(0).equals(new com.m3.tools.text.regex.RegexMatcher.CorpusHit(0, 1, 1))
-                && regexCorpus.hit(1).equals(new com.m3.tools.text.regex.RegexMatcher.CorpusHit(0, 3, 3))
-                && regexCorpus.hit(2).equals(new com.m3.tools.text.regex.RegexMatcher.CorpusHit(1, 4, 4)),
+        check(regexCorpus.hit(0).equals(new jdk.m3.tools.text.regex.RegexMatcher.CorpusHit(0, 1, 1))
+                && regexCorpus.hit(1).equals(new jdk.m3.tools.text.regex.RegexMatcher.CorpusHit(0, 3, 3))
+                && regexCorpus.hit(2).equals(new jdk.m3.tools.text.regex.RegexMatcher.CorpusHit(1, 4, 4)),
                 "zero-width overlapping regex observations preserve source-local UTF-16 coordinates");
         check(regexCorpus.sha256().matches("[0-9a-f]{64}")
                 && CpuTools.verifyRegexCorpus(searchableFiles, "(?=ba)", 100, regexCorpus, null),
@@ -404,7 +404,7 @@ public final class M3CpuToolsTest {
                 && Arrays.equals(grams.positions("ba"), new int[]{1, 3})
                 && Arrays.equals(grams.positions("\ud83d\ude42"), new int[]{5})
                 && grams.frequency("ab") == 2, "physical UTF-16 gram coordinates");
-        check(grams.counts().equals(com.m3.tools.text.ngram.NGrams.count(source.text(), 2)),
+        check(grams.counts().equals(jdk.m3.tools.text.ngram.NGrams.count(source.text(), 2)),
                 "gram source oracle parity");
         int[] mutableGrams = grams.positions("ab");
         mutableGrams[0] = 999;

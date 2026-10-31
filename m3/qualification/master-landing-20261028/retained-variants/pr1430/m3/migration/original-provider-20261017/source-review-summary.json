@@ -3,14 +3,14 @@
   "sourceCommit": "5a3339df604fba2ea0cedd80707bc616e41cb596",
   "assemblyAudit": {
     "repository": "hsoliwal/com.synexia",
-    "sourcePath": "synexia-openrewrite-recipes/recipes/m3-original-mapping-provider-20261017/sdk",
+    "sourcePath": "m3-openrewrite-recipes/recipes/m3-original-mapping-provider-20261017/sdk",
     "sourceCommit": "5a3339df604fba2ea0cedd80707bc616e41cb596",
     "sdkFiles": 72,
     "sdkBytes": 1919301,
     "pinnedFiles": 71,
     "reconstructedSdkTree": "cb7764db204a5e87fca101bbec8bb9944785d589",
-    "pinsGitBlob": "176375972d8a329f7c7c39a5ff1524c5fc7957f7",
-    "pinsSha256": "b3c1ba7f3b85e4c0a11949f5f4b787fc994d888ac8a0c0d97aa6ae04b6276b73",
+    "pinsGitBlob": "20b6c84a673b07e536e0a8e1b05a0648e5f64c4d",
+    "pinsSha256": "3b1df8647f5f2866ae86b4f8bd1e5deb6deb39408885d2f81dba9010b91dd9d4",
     "sourceOnly": true
   },
   "sourceReviews": [
@@ -78,15 +78,15 @@
     "repository": "hsoliwal/com.synexia",
     "sourceCommit": "525e0c3704f8c4b4d9eef54799d1b4c947e37b5f",
     "sourcePullRequest": 12245,
-    "sourcePath": "synexia-openrewrite-recipes/recipes/m3-original-mapping-provider-20261017/sdk",
+    "sourcePath": "m3-openrewrite-recipes/recipes/m3-original-mapping-provider-20261017/sdk",
     "receiverCorePath": "m3/migration/original-provider-20261017/sdk",
     "moduleGitTree": "638520715ffb00255639cb1e6667494bab729b53",
     "pinsSha256": "75f37d1093f5fd3d657de32bcab672f725f6391b4c59910aece1c2ff238951d7",
-    "workflowSha256": "faf6a553557508404de8b644ae7ff17ffaf45c74d5b0cb6f3df86c583a0b2bc0",
-    "workflowGitBlob": "f04b6bfc76e5a671968a478f44cf13268c04e5e9",
+    "workflowSha256": "426f85c348a3bbff2ac767980e1cba3a205f624d3f2ca5b85cdcb52dc68b8751",
+    "workflowGitBlob": "edad663b2e4a51e22a5e25954df237192e5b8d08",
     "receiverBase": "07ba6e383343d32c83cfdaf641387bbe72bf325d",
-    "originalCanonicalPreimageGitBlob": "4f5911d625090913d85f9cf41b1ead1694dffade",
-    "canonicalRecipePostimageGitBlob": "853607c6fef4b08ba2a3fd6df35121ac0594db30",
+    "originalCanonicalPreimageGitBlob": "986147e2df24ef25076d451c49782d8e7e354a11",
+    "canonicalRecipePostimageGitBlob": "1a441d86ddd17b0d51ba32b9cbf82a2b421a623c",
     "runtimeApplied": false,
     "phaseAdvanced": false
   },
@@ -100,7 +100,7 @@
   },
   "productOverlay": {
     "files": 60,
-    "generatedBy": "com.synexia.m3.OriginalMappingProvider20261017",
+    "generatedBy": "jdk.internal.m3.OriginalMappingProvider20261017",
     "execution": "NOT_RUN",
     "applied": false
   },

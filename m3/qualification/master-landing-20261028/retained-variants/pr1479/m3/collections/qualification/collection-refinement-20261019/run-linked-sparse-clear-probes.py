@@ -79,7 +79,7 @@ def main():
     output.mkdir(parents=True)
     metadata = output / "PROVENANCE.json"
     record = {
-        "schema": "synexia.m3.linked-sparse-clear.v1",
+        "schema": "m3.linked-sparse-clear.v1",
         "epoch": args.epoch_label,
         "started_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         "argv": sys.argv, "python": sys.version, "platform": platform.platform(),
@@ -145,7 +145,7 @@ def main():
     record["input_classes"] = {}
     for variant in ("baseline", "candidate"):
         source_root = inputs[variant + "-classes"]
-        package = source_root / "com/m3/collections"
+        package = source_root / "jdk/m3/collections"
         selected = sorted({path for pattern in CLASS_PATTERNS for path in package.glob(pattern)})
         if not any(path.name == "M3LinkedList.class" for path in selected):
             raise SystemExit("missing compiled owner: " + variant)
@@ -177,7 +177,7 @@ def main():
         result = run("04-clear-proof-" + variant,
                      [java, *VM_FLAGS, "-ea", "-cp",
                       str(snapshots[variant]) + ":" + str(classes),
-                      "com.m3.collections.M3LinkedListClearRangeProof"])
+                      "jdk.m3.collections.M3LinkedListClearRangeProof"])
         proofs.append(result.strip())
     if proofs[0] != proofs[1] or not proofs[0].startswith("PASS M3LinkedListClearRangeProof"):
         raise SystemExit("baseline/candidate proof outcome differs")
@@ -191,7 +191,7 @@ def main():
             raw = run("05-sparse-clear-" + variant + "-fork" + str(fork),
                       [java, *VM_FLAGS, "-ea", "-cp",
                        str(snapshots[variant]) + ":" + str(classes),
-                       "com.m3.collections.M3LinkedListSparseClearProbe", "suite",
+                       "jdk.m3.collections.M3LinkedListSparseClearProbe", "suite",
                        ",".join(str(refill) for refill in args.refills)])
             for line in raw.splitlines():
                 cells = line.split("\t")

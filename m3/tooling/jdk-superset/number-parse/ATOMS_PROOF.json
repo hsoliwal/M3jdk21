@@ -1,0 +1,99 @@
+{
+  "authority": {
+    "canonical": "jdk.internal.m3.rewrite.M3AtomizeRecipe + M3PatternizeRecipe via .m3/atomize-patternize/run.sh",
+    "projection": "cpu_lhash_treesitter leaf extraction + declared pattern dimensions (candidate evidence, no mutation authority)",
+    "status": "PENDING_BUILD_HOST (Maven/OpenRewrite not executed on this host)"
+  },
+  "counts": {
+    "cross_donor_exact_classes": 0,
+    "cross_donor_structural_classes": 3,
+    "errors": 0,
+    "exact_classes": 410,
+    "exact_classes_size_ge2": 31,
+    "hashed_leaves_min8_tokens": 465,
+    "java_files": 48,
+    "lambdas": 0,
+    "leaves": 511,
+    "leaves_in_exact_dup_class": 86,
+    "leaves_in_structural_class": 253,
+    "methods": 455,
+    "parse_errors": 0,
+    "parsed_files": 48,
+    "structural_classes": 277,
+    "structural_classes_size_ge2": 65,
+    "types": 56,
+    "worker_faults": 0
+  },
+  "declared_rules": {
+    "algorithm": "NOT PROJECTED: requires M3PatternizeRecipe problem catalogues; keyword detectors are not admitted as algorithm identity",
+    "carrier": "REGEX if Pattern.compile/matches/quote or String.replaceAll/replaceFirst/matches is invoked; else TEXT_BLOCK if a text_block literal occurs; else STRING if a string_literal occurs; else NONE",
+    "classes": "leaves with fewer than 8 normalized tokens are not entered into pattern classes",
+    "complexity": "normalized token count: <16 TRIVIAL, <64 SIMPLE, <256 ORDINARY, <1024 COMPLEX, <4096 HOSTILE, else PATHOLOGICAL",
+    "composition": "LOCAL_ANON if a local class declaration or anonymous class body occurs; else LAMBDA_STREAM if a lambda, method reference or stream()/parallelStream() invocation occurs; else PLAIN",
+    "control": "STRAIGHT: no control statement; NESTED: control nesting depth >= 2; SWITCH: a switch occurs at depth <= 1; BRANCH: otherwise",
+    "language": "sorted '|'-joined flags among RECORD_GENERIC (record or type parameters), SEALED_PATTERN (sealed/non-sealed/permits, instanceof type/record pattern, switch pattern label), METHOD_REFERENCE, TRY_RESOURCE, RECURSIVE (unqualified or this-qualified self invocation); BASELINE when none",
+    "native": "DECLARATION if the native modifier is present; OVERLOAD if another method of the same owner shares the name; else NONE",
+    "visibility": "modifier keyword public/protected/private, else package (interface-implicit public is not inferred)"
+  },
+  "donors": [
+    {
+      "commit": "1.0.90",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 333,
+        "methods": 292,
+        "types": 41
+      },
+      "donor": "fdp",
+      "errors": 0,
+      "image": "H:/m3-scratch/fdp-absorb/image/fdp-1.0.90",
+      "java_files": 40,
+      "parse_errors": 0
+    },
+    {
+      "commit": "21",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 178,
+        "methods": 163,
+        "types": 15
+      },
+      "donor": "jdkmath",
+      "errors": 0,
+      "image": "H:/m3-scratch/fdp-absorb/image/jdk-math",
+      "java_files": 8,
+      "parse_errors": 0
+    }
+  ],
+  "root_sha256": "f4a7f1be19332015d0c38d43c8145e72a2dc509d0b2cb464379943c40dba80b3",
+  "schema": "m3.java-corpus-atomize-patternize.v1",
+  "self_validation_guard": {
+    "fdp": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "jdkmath": {
+      "all_equal": true,
+      "checked_leaves": 64
+    }
+  },
+  "tables": {
+    "PATTERNS_EXACT.tsv": "ee3d4e9e417cc813ef7db461875ce58b757c84ac2d23a506c0f1d41aa2b59aa9",
+    "PATTERNS_STRUCTURAL.tsv": "7124513eb22745e6e79bb18b92f7749f7b52f20af8b36238572b9081f4efb04b",
+    "SPECTRUM.tsv": "f0533c156e0960801eb359e3967497f9622c674112d599d745d19253d72520c9",
+    "fdp/ATOMS.tsv.gz": "a7210cb79025244ba2e9ae4eb6d325637d5417bc363682e0417a862a89a2293d",
+    "fdp/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "fdp/FILES.tsv": "831d7cf159b20ddcf91e15795790a6f3608d0c306884f6dadc8d1edc38e61f27",
+    "jdkmath/ATOMS.tsv.gz": "4efa9a87342f0e257cbafbf449d815fdffd8879c62bea03deecee11458822e3e",
+    "jdkmath/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "jdkmath/FILES.tsv": "465877b3d5575d1ecb5c27748e9724b7c21e42e165b4a02be8f2a54509e874e5"
+  },
+  "tools": {
+    "lhash_module": "cpu_lhash_treesitter.py",
+    "lhash_module_sha256": "a5d270b105b7dcd530e66e7223efbd2fef5401b393ca9480598745c1bea332a6",
+    "projector_sha256": "141a29d995d0992b1f731056652ea2c1e1887aec2685a2faf0074c6a45cdaca6",
+    "python": "3.12.6",
+    "tree_sitter": "0.26.0",
+    "tree_sitter_language_pack": "1.12.5"
+  }
+}

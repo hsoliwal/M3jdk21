@@ -1,0 +1,1562 @@
+target	atom	owned_ns	commons_ns	ratio
+M3UnmodifiableCollection list -	addAll[interface java.util.Collection]	5846.2	5745.4	1.02
+M3UnmodifiableCollection list -	add[class java.lang.Object]	6933.6	6965.0	1.00
+M3UnmodifiableCollection list -	clear[]	6770.2	6650.2	1.02
+M3UnmodifiableCollection list -	containsAll[interface java.util.Collection]	34.2	20.2	1.69
+M3UnmodifiableCollection list -	contains[class java.lang.Object]	35.4	23.8	1.49
+M3UnmodifiableCollection list -	forEach[interface java.util.function.Consumer]	60.0	44.6	1.35
+M3UnmodifiableCollection list -	isEmpty[]	21.2	9.8	2.16
+M3UnmodifiableCollection list -	iterator[]	40.0	41.2	0.97
+M3UnmodifiableCollection list -	parallelStream[]	23.4	15.0	1.56
+M3UnmodifiableCollection list -	removeAll[interface java.util.Collection]	6185.4	5998.8	1.03
+M3UnmodifiableCollection list -	removeIf[interface java.util.function.Predicate]	6501.0	6590.4	0.99
+M3UnmodifiableCollection list -	remove[class java.lang.Object]	5766.8	5784.6	1.00
+M3UnmodifiableCollection list -	retainAll[interface java.util.Collection]	6232.2	6349.2	0.98
+M3UnmodifiableCollection list -	size[]	22.6	9.2	2.46
+M3UnmodifiableCollection list -	spliterator[]	20.2	10.0	2.02
+M3UnmodifiableCollection list -	stream[]	24.8	15.0	1.65
+M3UnmodifiableCollection list -	toArray[]	29.2	20.2	1.45
+M3UnmodifiableCollection list -	toArray[class [Ljava.lang.Object;]	88.8	80.2	1.11
+M3UnmodifiableCollection list -	toArray[interface java.util.function.IntFunction]	45.8	31.8	1.44
+M3UnmodifiableCollection list -	toString[]	72.2	74.8	0.97
+M3UnmodifiableList list -	addAll[int, interface java.util.Collection]	6387.6	6235.6	1.02
+M3UnmodifiableList list -	addAll[interface java.util.Collection]	5637.4	5763.4	0.98
+M3UnmodifiableList list -	addFirst[class java.lang.Object]	5943.2	6308.6	0.94
+M3UnmodifiableList list -	addLast[class java.lang.Object]	6143.0	6485.6	0.95
+M3UnmodifiableList list -	add[class java.lang.Object]	5869.0	5838.6	1.01
+M3UnmodifiableList list -	add[int, class java.lang.Object]	5657.4	5679.2	1.00
+M3UnmodifiableList list -	clear[]	6294.4	6559.4	0.96
+M3UnmodifiableList list -	containsAll[interface java.util.Collection]	30.4	18.2	1.67
+M3UnmodifiableList list -	contains[class java.lang.Object]	23.2	13.8	1.68
+M3UnmodifiableList list -	equals[class java.lang.Object]	36.0	39.8	0.90
+M3UnmodifiableList list -	forEach[interface java.util.function.Consumer]	62.4	48.4	1.29
+M3UnmodifiableList list -	getFirst[]	21.2	18.6	1.14
+M3UnmodifiableList list -	getLast[]	36.2	42.2	0.86
+M3UnmodifiableList list -	get[int]	6445.6	6446.8	1.00
+M3UnmodifiableList list -	hashCode[]	24.2	28.4	0.85
+M3UnmodifiableList list -	indexOf[class java.lang.Object]	22.0	25.0	0.88
+M3UnmodifiableList list -	isEmpty[]	20.2	9.4	2.15
+M3UnmodifiableList list -	iterator[]	31.4	33.6	0.93
+M3UnmodifiableList list -	lastIndexOf[class java.lang.Object]	29.0	32.4	0.90
+M3UnmodifiableList list -	listIterator[]	34.2	56.0	0.61
+M3UnmodifiableList list -	listIterator[int]	2109.8	2111.2	1.00
+M3UnmodifiableList list -	parallelStream[]	38.6	33.0	1.17
+M3UnmodifiableList list -	removeAll[interface java.util.Collection]	6081.6	5793.4	1.05
+M3UnmodifiableList list -	removeFirst[]	6365.4	6687.2	0.95
+M3UnmodifiableList list -	removeIf[interface java.util.function.Predicate]	6100.0	6240.2	0.98
+M3UnmodifiableList list -	removeLast[]	6349.8	6371.8	1.00
+M3UnmodifiableList list -	remove[class java.lang.Object]	7152.4	6341.2	1.13
+M3UnmodifiableList list -	remove[int]	6526.6	6342.8	1.03
+M3UnmodifiableList list -	replaceAll[interface java.util.function.UnaryOperator]	6183.8	6344.0	0.97
+M3UnmodifiableList list -	retainAll[interface java.util.Collection]	6211.4	6117.4	1.02
+M3UnmodifiableList list -	reversed[]	35.8	40.4	0.89
+M3UnmodifiableList list -	set[int, class java.lang.Object]	6505.6	6454.2	1.01
+M3UnmodifiableList list -	size[]	18.4	7.2	2.56
+M3UnmodifiableList list -	sort[interface java.util.Comparator]	6222.4	6469.0	0.96
+M3UnmodifiableList list -	spliterator[]	6.8	60.2	0.11
+M3UnmodifiableList list -	stream[]	38.4	32.8	1.17
+M3UnmodifiableList list -	subList[int, int]	5267.2	5065.4	1.04
+M3UnmodifiableList list -	toArray[]	23.4	16.0	1.46
+M3UnmodifiableList list -	toArray[class [Ljava.lang.Object;]	39.2	27.6	1.42
+M3UnmodifiableList list -	toArray[interface java.util.function.IntFunction]	34.0	21.8	1.56
+M3UnmodifiableList list -	toString[]	67.0	59.8	1.12
+M3UnmodifiableQueue deque -	addAll[interface java.util.Collection]	5707.6	5756.2	0.99
+M3UnmodifiableQueue deque -	add[class java.lang.Object]	6129.4	6100.4	1.00
+M3UnmodifiableQueue deque -	clear[]	6361.8	6313.6	1.01
+M3UnmodifiableQueue deque -	containsAll[interface java.util.Collection]	32.8	18.4	1.78
+M3UnmodifiableQueue deque -	contains[class java.lang.Object]	23.6	15.0	1.57
+M3UnmodifiableQueue deque -	element[]	18.4	21.8	0.84
+M3UnmodifiableQueue deque -	forEach[interface java.util.function.Consumer]	24.0	72.8	0.33
+M3UnmodifiableQueue deque -	isEmpty[]	40.8	35.2	1.16
+M3UnmodifiableQueue deque -	iterator[]	39.8	40.0	0.99
+M3UnmodifiableQueue deque -	offer[class java.lang.Object]	6218.0	6250.4	0.99
+M3UnmodifiableQueue deque -	parallelStream[]	22.4	13.6	1.65
+M3UnmodifiableQueue deque -	peek[]	19.4	22.0	0.88
+M3UnmodifiableQueue deque -	poll[]	6348.4	6296.8	1.01
+M3UnmodifiableQueue deque -	removeAll[interface java.util.Collection]	6577.8	6970.2	0.94
+M3UnmodifiableQueue deque -	removeIf[interface java.util.function.Predicate]	6273.0	6301.2	1.00
+M3UnmodifiableQueue deque -	remove[]	6065.2	5976.8	1.01
+M3UnmodifiableQueue deque -	remove[class java.lang.Object]	6121.6	6097.0	1.00
+M3UnmodifiableQueue deque -	retainAll[interface java.util.Collection]	6085.8	6156.2	0.99
+M3UnmodifiableQueue deque -	size[]	20.0	10.6	1.89
+M3UnmodifiableQueue deque -	spliterator[]	18.2	9.0	2.02
+M3UnmodifiableQueue deque -	stream[]	22.6	12.8	1.77
+M3UnmodifiableQueue deque -	toArray[]	22.0	15.0	1.47
+M3UnmodifiableQueue deque -	toArray[class [Ljava.lang.Object;]	31.4	19.2	1.64
+M3UnmodifiableQueue deque -	toArray[interface java.util.function.IntFunction]	32.2	19.8	1.63
+M3UnmodifiableQueue deque -	toString[]	70.2	72.4	0.97
+M3UnmodifiableSortedSet treeset -	addAll[interface java.util.Collection]	5857.2	5793.0	1.01
+M3UnmodifiableSortedSet treeset -	addFirst[class java.lang.Object]	6183.0	6610.4	0.94
+M3UnmodifiableSortedSet treeset -	addLast[class java.lang.Object]	6127.4	6302.8	0.97
+M3UnmodifiableSortedSet treeset -	add[class java.lang.Object]	6101.4	5907.6	1.03
+M3UnmodifiableSortedSet treeset -	clear[]	6003.2	6029.0	1.00
+M3UnmodifiableSortedSet treeset -	comparator[]	19.2	22.2	0.86
+M3UnmodifiableSortedSet treeset -	containsAll[interface java.util.Collection]	35.8	18.6	1.92
+M3UnmodifiableSortedSet treeset -	contains[class java.lang.Object]	1767.0	1777.2	0.99
+M3UnmodifiableSortedSet treeset -	equals[class java.lang.Object]	35.0	40.0	0.87
+M3UnmodifiableSortedSet treeset -	first[]	18.0	22.4	0.80
+M3UnmodifiableSortedSet treeset -	forEach[interface java.util.function.Consumer]	50.0	54.4	0.92
+M3UnmodifiableSortedSet treeset -	getFirst[]	17.4	23.2	0.75
+M3UnmodifiableSortedSet treeset -	getLast[]	18.0	25.0	0.72
+M3UnmodifiableSortedSet treeset -	hashCode[]	31.2	31.8	0.98
+M3UnmodifiableSortedSet treeset -	headSet[class java.lang.Object]	323.2	330.8	0.98
+M3UnmodifiableSortedSet treeset -	isEmpty[]	18.8	9.2	2.04
+M3UnmodifiableSortedSet treeset -	iterator[]	41.8	81.0	0.52
+M3UnmodifiableSortedSet treeset -	last[]	19.0	19.2	0.99
+M3UnmodifiableSortedSet treeset -	parallelStream[]	24.6	18.0	1.37
+M3UnmodifiableSortedSet treeset -	removeAll[interface java.util.Collection]	6538.2	6549.4	1.00
+M3UnmodifiableSortedSet treeset -	removeFirst[]	5758.8	6168.6	0.93
+M3UnmodifiableSortedSet treeset -	removeIf[interface java.util.function.Predicate]	6332.8	5956.0	1.06
+M3UnmodifiableSortedSet treeset -	removeLast[]	7735.0	10114.0	0.76
+M3UnmodifiableSortedSet treeset -	remove[class java.lang.Object]	5889.6	5689.2	1.04
+M3UnmodifiableSortedSet treeset -	retainAll[interface java.util.Collection]	6257.8	6077.6	1.03
+M3UnmodifiableSortedSet treeset -	reversed[]	33.4	21.4	1.56
+M3UnmodifiableSortedSet treeset -	size[]	24.8	14.2	1.75
+M3UnmodifiableSortedSet treeset -	spliterator[]	17.4	22.2	0.78
+M3UnmodifiableSortedSet treeset -	stream[]	25.2	20.4	1.24
+M3UnmodifiableSortedSet treeset -	subSet[class java.lang.Object, class java.lang.Object]	2846.6	2883.6	0.99
+M3UnmodifiableSortedSet treeset -	tailSet[class java.lang.Object]	272.6	272.6	1.00
+M3UnmodifiableSortedSet treeset -	toArray[]	30.0	22.2	1.35
+M3UnmodifiableSortedSet treeset -	toArray[class [Ljava.lang.Object;]	25.6	28.4	0.90
+M3UnmodifiableSortedSet treeset -	toArray[interface java.util.function.IntFunction]	38.0	28.6	1.33
+M3UnmodifiableSortedSet treeset -	toString[]	57.4	49.4	1.16
+M3UnmodifiableNavigableSet treeset -	addAll[interface java.util.Collection]	6015.4	6321.2	0.95
+M3UnmodifiableNavigableSet treeset -	addFirst[class java.lang.Object]	6013.4	6054.8	0.99
+M3UnmodifiableNavigableSet treeset -	addLast[class java.lang.Object]	5961.8	6100.0	0.98
+M3UnmodifiableNavigableSet treeset -	add[class java.lang.Object]	6266.2	6220.2	1.01
+M3UnmodifiableNavigableSet treeset -	ceiling[class java.lang.Object]	271.0	379.4	0.71
+M3UnmodifiableNavigableSet treeset -	clear[]	5931.2	5921.0	1.00
+M3UnmodifiableNavigableSet treeset -	comparator[]	18.8	8.0	2.35
+M3UnmodifiableNavigableSet treeset -	containsAll[interface java.util.Collection]	37.4	20.0	1.87
+M3UnmodifiableNavigableSet treeset -	contains[class java.lang.Object]	1973.2	2069.0	0.95
+M3UnmodifiableNavigableSet treeset -	descendingIterator[]	60.6	113.2	0.54
+M3UnmodifiableNavigableSet treeset -	descendingSet[]	44.0	125.8	0.35
+M3UnmodifiableNavigableSet treeset -	equals[class java.lang.Object]	37.4	27.4	1.36
+M3UnmodifiableNavigableSet treeset -	first[]	28.4	9.4	3.02
+M3UnmodifiableNavigableSet treeset -	floor[class java.lang.Object]	276.6	282.8	0.98
+M3UnmodifiableNavigableSet treeset -	forEach[interface java.util.function.Consumer]	54.2	59.2	0.92
+M3UnmodifiableNavigableSet treeset -	getFirst[]	17.2	12.6	1.37
+M3UnmodifiableNavigableSet treeset -	getLast[]	18.0	12.6	1.43
+M3UnmodifiableNavigableSet treeset -	hashCode[]	31.4	18.0	1.74
+M3UnmodifiableNavigableSet treeset -	headSet[class java.lang.Object, boolean]	311.6	315.0	0.99
+M3UnmodifiableNavigableSet treeset -	headSet[class java.lang.Object]	295.4	297.4	0.99
+M3UnmodifiableNavigableSet treeset -	higher[class java.lang.Object]	289.2	384.0	0.75
+M3UnmodifiableNavigableSet treeset -	isEmpty[]	20.6	9.8	2.10
+M3UnmodifiableNavigableSet treeset -	iterator[]	42.8	101.8	0.42
+M3UnmodifiableNavigableSet treeset -	last[]	19.4	8.4	2.31
+M3UnmodifiableNavigableSet treeset -	lower[class java.lang.Object]	293.2	388.6	0.75
+M3UnmodifiableNavigableSet treeset -	parallelStream[]	16.0	19.4	0.82
+M3UnmodifiableNavigableSet treeset -	pollFirst[]	6104.8	5970.0	1.02
+M3UnmodifiableNavigableSet treeset -	pollLast[]	6392.4	6476.0	0.99
+M3UnmodifiableNavigableSet treeset -	removeAll[interface java.util.Collection]	6157.6	6102.2	1.01
+M3UnmodifiableNavigableSet treeset -	removeFirst[]	6631.8	6301.0	1.05
+M3UnmodifiableNavigableSet treeset -	removeIf[interface java.util.function.Predicate]	6255.2	6097.8	1.03
+M3UnmodifiableNavigableSet treeset -	removeLast[]	7073.4	6551.2	1.08
+M3UnmodifiableNavigableSet treeset -	remove[class java.lang.Object]	6148.0	6154.0	1.00
+M3UnmodifiableNavigableSet treeset -	retainAll[interface java.util.Collection]	6428.2	6232.0	1.03
+M3UnmodifiableNavigableSet treeset -	reversed[]	47.4	12.6	3.76
+M3UnmodifiableNavigableSet treeset -	size[]	25.2	14.6	1.73
+M3UnmodifiableNavigableSet treeset -	spliterator[]	18.4	8.4	2.19
+M3UnmodifiableNavigableSet treeset -	stream[]	24.0	18.8	1.28
+M3UnmodifiableNavigableSet treeset -	subSet[class java.lang.Object, boolean, class java.lang.Object, boolean]	2921.6	2997.0	0.97
+M3UnmodifiableNavigableSet treeset -	subSet[class java.lang.Object, class java.lang.Object]	2844.2	2842.2	1.00
+M3UnmodifiableNavigableSet treeset -	tailSet[class java.lang.Object, boolean]	297.2	298.6	1.00
+M3UnmodifiableNavigableSet treeset -	tailSet[class java.lang.Object]	286.4	286.8	1.00
+M3UnmodifiableNavigableSet treeset -	toArray[]	28.8	21.4	1.35
+M3UnmodifiableNavigableSet treeset -	toArray[class [Ljava.lang.Object;]	39.2	27.4	1.43
+M3UnmodifiableNavigableSet treeset -	toArray[interface java.util.function.IntFunction]	40.6	28.4	1.43
+M3UnmodifiableNavigableSet treeset -	toString[]	57.4	49.8	1.15
+M3UnmodifiableBag hashbag -	addAll[interface java.util.Collection]	6161.2	6233.4	0.99
+M3UnmodifiableBag hashbag -	add[class java.lang.Object, int]	5972.4	6581.2	0.91
+M3UnmodifiableBag hashbag -	add[class java.lang.Object]	6046.6	6015.4	1.01
+M3UnmodifiableBag hashbag -	clear[]	5951.0	6189.8	0.96
+M3UnmodifiableBag hashbag -	containsAll[interface java.util.Collection]	161.4	162.2	1.00
+M3UnmodifiableBag hashbag -	contains[class java.lang.Object]	24.6	19.2	1.28
+M3UnmodifiableBag hashbag -	equals[class java.lang.Object]	50.0	49.6	1.01
+M3UnmodifiableBag hashbag -	forEach[interface java.util.function.Consumer]	45.6	70.4	0.65
+M3UnmodifiableBag hashbag -	getCount[class java.lang.Object]	43.4	49.2	0.88
+M3UnmodifiableBag hashbag -	hashCode[]	43.4	48.2	0.90
+M3UnmodifiableBag hashbag -	isEmpty[]	22.8	10.6	2.15
+M3UnmodifiableBag hashbag -	iterator[]	48.4	49.6	0.98
+M3UnmodifiableBag hashbag -	parallelStream[]	23.2	14.6	1.59
+M3UnmodifiableBag hashbag -	removeAll[interface java.util.Collection]	6150.8	6036.8	1.02
+M3UnmodifiableBag hashbag -	removeIf[interface java.util.function.Predicate]	5987.8	5983.0	1.00
+M3UnmodifiableBag hashbag -	remove[class java.lang.Object, int]	6058.4	5777.2	1.05
+M3UnmodifiableBag hashbag -	remove[class java.lang.Object]	6063.2	6102.6	0.99
+M3UnmodifiableBag hashbag -	retainAll[interface java.util.Collection]	5868.4	5928.6	0.99
+M3UnmodifiableBag hashbag -	size[]	23.6	12.2	1.93
+M3UnmodifiableBag hashbag -	spliterator[]	18.8	10.4	1.81
+M3UnmodifiableBag hashbag -	stream[]	26.8	14.8	1.81
+M3UnmodifiableBag hashbag -	toArray[]	51.8	45.2	1.15
+M3UnmodifiableBag hashbag -	toArray[class [Ljava.lang.Object;]	68.4	58.4	1.17
+M3UnmodifiableBag hashbag -	toArray[interface java.util.function.IntFunction]	44.4	49.8	0.89
+M3UnmodifiableBag hashbag -	toString[]	109.0	100.2	1.09
+M3UnmodifiableBag hashbag -	uniqueSet[]	39.8	22.4	1.78
+M3UnmodifiableSortedBag treebag -	addAll[interface java.util.Collection]	6257.8	6434.8	0.97
+M3UnmodifiableSortedBag treebag -	add[class java.lang.Object, int]	6891.2	6251.8	1.10
+M3UnmodifiableSortedBag treebag -	add[class java.lang.Object]	6114.6	6210.4	0.98
+M3UnmodifiableSortedBag treebag -	clear[]	5794.2	5756.8	1.01
+M3UnmodifiableSortedBag treebag -	comparator[]	17.2	55.2	0.31
+M3UnmodifiableSortedBag treebag -	containsAll[interface java.util.Collection]	147.4	153.8	0.96
+M3UnmodifiableSortedBag treebag -	contains[class java.lang.Object]	2272.4	2236.6	1.02
+M3UnmodifiableSortedBag treebag -	equals[class java.lang.Object]	26.2	27.8	0.94
+M3UnmodifiableSortedBag treebag -	first[]	34.4	33.6	1.02
+M3UnmodifiableSortedBag treebag -	forEach[interface java.util.function.Consumer]	30.6	55.4	0.55
+M3UnmodifiableSortedBag treebag -	getCount[class java.lang.Object]	1872.6	1905.4	0.98
+M3UnmodifiableSortedBag treebag -	hashCode[]	30.2	20.0	1.51
+M3UnmodifiableSortedBag treebag -	isEmpty[]	21.0	10.2	2.06
+M3UnmodifiableSortedBag treebag -	iterator[]	73.6	94.4	0.78
+M3UnmodifiableSortedBag treebag -	last[]	20.2	19.8	1.02
+M3UnmodifiableSortedBag treebag -	parallelStream[]	22.6	13.4	1.69
+M3UnmodifiableSortedBag treebag -	removeAll[interface java.util.Collection]	6173.0	9013.0	0.68
+M3UnmodifiableSortedBag treebag -	removeIf[interface java.util.function.Predicate]	5705.8	5833.8	0.98
+M3UnmodifiableSortedBag treebag -	remove[class java.lang.Object, int]	5520.4	5413.6	1.02
+M3UnmodifiableSortedBag treebag -	remove[class java.lang.Object]	6079.6	6047.0	1.01
+M3UnmodifiableSortedBag treebag -	retainAll[interface java.util.Collection]	5798.6	5780.4	1.00
+M3UnmodifiableSortedBag treebag -	size[]	20.2	10.4	1.94
+M3UnmodifiableSortedBag treebag -	spliterator[]	17.4	8.8	1.98
+M3UnmodifiableSortedBag treebag -	stream[]	21.8	13.2	1.65
+M3UnmodifiableSortedBag treebag -	toArray[]	25.8	28.6	0.90
+M3UnmodifiableSortedBag treebag -	toArray[class [Ljava.lang.Object;]	37.4	39.2	0.95
+M3UnmodifiableSortedBag treebag -	toArray[interface java.util.function.IntFunction]	33.6	39.0	0.86
+M3UnmodifiableSortedBag treebag -	toString[]	78.8	81.0	0.97
+M3UnmodifiableSortedBag treebag -	uniqueSet[]	34.6	54.4	0.64
+M3SynchronizedCollection list -	addAll[interface java.util.Collection]	44.8	44.8	1.00
+M3SynchronizedCollection list -	add[class java.lang.Object]	22.6	24.2	0.93
+M3SynchronizedCollection list -	clear[]	23.4	18.6	1.26
+M3SynchronizedCollection list -	containsAll[interface java.util.Collection]	32.4	34.6	0.94
+M3SynchronizedCollection list -	contains[class java.lang.Object]	24.0	26.6	0.90
+M3SynchronizedCollection list -	equals[class java.lang.Object]	45.6	48.4	0.94
+M3SynchronizedCollection list -	forEach[interface java.util.function.Consumer]	45.2	31.2	1.45
+M3SynchronizedCollection list -	hashCode[]	23.6	26.2	0.90
+M3SynchronizedCollection list -	isEmpty[]	21.6	25.0	0.86
+M3SynchronizedCollection list -	iterator[]	20.6	20.6	1.00
+M3SynchronizedCollection list -	parallelStream[]	24.2	16.0	1.51
+M3SynchronizedCollection list -	removeAll[interface java.util.Collection]	28.0	31.4	0.89
+M3SynchronizedCollection list -	removeIf[interface java.util.function.Predicate]	28.2	29.0	0.97
+M3SynchronizedCollection list -	remove[class java.lang.Object]	60.4	72.4	0.83
+M3SynchronizedCollection list -	retainAll[interface java.util.Collection]	28.2	30.4	0.93
+M3SynchronizedCollection list -	size[]	21.4	24.0	0.89
+M3SynchronizedCollection list -	spliterator[]	19.6	10.0	1.96
+M3SynchronizedCollection list -	stream[]	24.6	14.6	1.68
+M3SynchronizedCollection list -	toArray[]	24.4	28.0	0.87
+M3SynchronizedCollection list -	toArray[class [Ljava.lang.Object;]	41.0	42.4	0.97
+M3SynchronizedCollection list -	toArray[interface java.util.function.IntFunction]	33.0	23.2	1.42
+M3SynchronizedCollection list -	toString[]	105.4	106.4	0.99
+M3SynchronizedBag hashbag -	addAll[interface java.util.Collection]	28.2	29.2	0.97
+M3SynchronizedBag hashbag -	add[class java.lang.Object, int]	33.2	33.8	0.98
+M3SynchronizedBag hashbag -	add[class java.lang.Object]	26.6	19.4	1.37
+M3SynchronizedBag hashbag -	clear[]	23.2	17.8	1.30
+M3SynchronizedBag hashbag -	containsAll[interface java.util.Collection]	145.0	145.2	1.00
+M3SynchronizedBag hashbag -	contains[class java.lang.Object]	24.2	16.8	1.44
+M3SynchronizedBag hashbag -	equals[class java.lang.Object]	38.6	40.0	0.96
+M3SynchronizedBag hashbag -	forEach[interface java.util.function.Consumer]	74.0	65.8	1.12
+M3SynchronizedBag hashbag -	getCount[class java.lang.Object]	27.6	31.2	0.88
+M3SynchronizedBag hashbag -	hashCode[]	45.8	50.4	0.91
+M3SynchronizedBag hashbag -	isEmpty[]	21.2	16.0	1.32
+M3SynchronizedBag hashbag -	iterator[]	25.2	17.6	1.43
+M3SynchronizedBag hashbag -	parallelStream[]	23.8	14.6	1.63
+M3SynchronizedBag hashbag -	removeAll[interface java.util.Collection]	38.4	25.0	1.54
+M3SynchronizedBag hashbag -	removeIf[interface java.util.function.Predicate]	48.4	31.4	1.54
+M3SynchronizedBag hashbag -	remove[class java.lang.Object, int]	30.8	30.2	1.02
+M3SynchronizedBag hashbag -	remove[class java.lang.Object]	23.8	17.2	1.38
+M3SynchronizedBag hashbag -	retainAll[interface java.util.Collection]	94.8	96.2	0.99
+M3SynchronizedBag hashbag -	size[]	24.2	18.6	1.30
+M3SynchronizedBag hashbag -	spliterator[]	18.6	9.2	2.02
+M3SynchronizedBag hashbag -	stream[]	23.6	14.0	1.69
+M3SynchronizedBag hashbag -	toArray[]	53.2	47.4	1.12
+M3SynchronizedBag hashbag -	toArray[class [Ljava.lang.Object;]	70.8	57.2	1.24
+M3SynchronizedBag hashbag -	toArray[interface java.util.function.IntFunction]	52.2	56.8	0.92
+M3SynchronizedBag hashbag -	toString[]	108.6	103.2	1.05
+M3SynchronizedBag hashbag -	uniqueSet[]	27.4	30.2	0.91
+M3SynchronizedMultiSet hashmultiset -	addAll[interface java.util.Collection]	50.2	35.4	1.42
+M3SynchronizedMultiSet hashmultiset -	add[class java.lang.Object, int]	964.2	945.6	1.02
+M3SynchronizedMultiSet hashmultiset -	add[class java.lang.Object]	28.6	21.0	1.36
+M3SynchronizedMultiSet hashmultiset -	clear[]	26.2	21.2	1.24
+M3SynchronizedMultiSet hashmultiset -	containsAll[interface java.util.Collection]	35.8	23.6	1.52
+M3SynchronizedMultiSet hashmultiset -	contains[class java.lang.Object]	27.4	19.4	1.41
+M3SynchronizedMultiSet hashmultiset -	entrySet[]	30.4	32.6	0.93
+M3SynchronizedMultiSet hashmultiset -	equals[class java.lang.Object]	44.4	47.8	0.93
+M3SynchronizedMultiSet hashmultiset -	forEach[interface java.util.function.Consumer]	69.8	56.0	1.25
+M3SynchronizedMultiSet hashmultiset -	getCount[class java.lang.Object]	33.0	36.0	0.92
+M3SynchronizedMultiSet hashmultiset -	hashCode[]	78.2	83.6	0.94
+M3SynchronizedMultiSet hashmultiset -	isEmpty[]	26.2	19.2	1.36
+M3SynchronizedMultiSet hashmultiset -	iterator[]	27.0	19.4	1.39
+M3SynchronizedMultiSet hashmultiset -	parallelStream[]	26.4	16.0	1.65
+M3SynchronizedMultiSet hashmultiset -	removeAll[interface java.util.Collection]	66.0	49.0	1.35
+M3SynchronizedMultiSet hashmultiset -	removeIf[interface java.util.function.Predicate]	42.2	27.2	1.55
+M3SynchronizedMultiSet hashmultiset -	remove[class java.lang.Object, int]	1029.4	1076.2	0.96
+M3SynchronizedMultiSet hashmultiset -	remove[class java.lang.Object]	26.4	19.0	1.39
+M3SynchronizedMultiSet hashmultiset -	retainAll[interface java.util.Collection]	38.8	26.4	1.47
+M3SynchronizedMultiSet hashmultiset -	setCount[class java.lang.Object, int]	998.0	1085.0	0.92
+M3SynchronizedMultiSet hashmultiset -	size[]	24.0	18.6	1.29
+M3SynchronizedMultiSet hashmultiset -	spliterator[]	21.0	10.6	1.98
+M3SynchronizedMultiSet hashmultiset -	stream[]	25.8	14.8	1.74
+M3SynchronizedMultiSet hashmultiset -	toArray[]	36.4	30.6	1.19
+M3SynchronizedMultiSet hashmultiset -	toArray[class [Ljava.lang.Object;]	48.6	38.6	1.26
+M3SynchronizedMultiSet hashmultiset -	toArray[interface java.util.function.IntFunction]	49.2	38.6	1.27
+M3SynchronizedMultiSet hashmultiset -	toString[]	314.8	333.6	0.94
+M3SynchronizedMultiSet hashmultiset -	uniqueSet[]	31.8	32.8	0.97
+M3SynchronizedQueue deque -	addAll[interface java.util.Collection]	40.8	28.2	1.45
+M3SynchronizedQueue deque -	add[class java.lang.Object]	26.4	20.2	1.31
+M3SynchronizedQueue deque -	clear[]	24.2	19.6	1.23
+M3SynchronizedQueue deque -	containsAll[interface java.util.Collection]	37.4	25.2	1.48
+M3SynchronizedQueue deque -	contains[class java.lang.Object]	28.4	20.2	1.41
+M3SynchronizedQueue deque -	element[]	22.6	26.4	0.86
+M3SynchronizedQueue deque -	equals[class java.lang.Object]	44.4	49.0	0.91
+M3SynchronizedQueue deque -	forEach[interface java.util.function.Consumer]	52.8	40.2	1.31
+M3SynchronizedQueue deque -	hashCode[]	53.8	57.4	0.94
+M3SynchronizedQueue deque -	isEmpty[]	23.6	17.8	1.33
+M3SynchronizedQueue deque -	iterator[]	23.4	14.0	1.67
+M3SynchronizedQueue deque -	offer[class java.lang.Object]	24.8	30.6	0.81
+M3SynchronizedQueue deque -	parallelStream[]	28.8	16.6	1.73
+M3SynchronizedQueue deque -	peek[]	22.8	24.6	0.93
+M3SynchronizedQueue deque -	poll[]	22.6	24.4	0.93
+M3SynchronizedQueue deque -	removeAll[interface java.util.Collection]	28.6	17.8	1.61
+M3SynchronizedQueue deque -	removeIf[interface java.util.function.Predicate]	31.8	20.0	1.59
+M3SynchronizedQueue deque -	remove[]	6028.4	5679.6	1.06
+M3SynchronizedQueue deque -	remove[class java.lang.Object]	22.8	17.2	1.33
+M3SynchronizedQueue deque -	retainAll[interface java.util.Collection]	34.0	20.4	1.67
+M3SynchronizedQueue deque -	size[]	22.0	16.8	1.31
+M3SynchronizedQueue deque -	spliterator[]	21.6	11.0	1.96
+M3SynchronizedQueue deque -	stream[]	26.2	15.8	1.66
+M3SynchronizedQueue deque -	toArray[]	32.2	26.0	1.24
+M3SynchronizedQueue deque -	toArray[class [Ljava.lang.Object;]	36.8	24.2	1.52
+M3SynchronizedQueue deque -	toArray[interface java.util.function.IntFunction]	38.8	27.0	1.44
+M3SynchronizedQueue deque -	toString[]	115.6	103.6	1.12
+M3SynchronizedSortedBag treebag -	addAll[interface java.util.Collection]	65.4	66.8	0.98
+M3SynchronizedSortedBag treebag -	add[class java.lang.Object, int]	1620.0	1619.4	1.00
+M3SynchronizedSortedBag treebag -	add[class java.lang.Object]	1853.8	1867.0	0.99
+M3SynchronizedSortedBag treebag -	clear[]	21.6	17.4	1.24
+M3SynchronizedSortedBag treebag -	comparator[]	33.4	31.2	1.07
+M3SynchronizedSortedBag treebag -	containsAll[interface java.util.Collection]	162.8	163.4	1.00
+M3SynchronizedSortedBag treebag -	contains[class java.lang.Object]	1875.8	1916.2	0.98
+M3SynchronizedSortedBag treebag -	equals[class java.lang.Object]	34.4	32.8	1.05
+M3SynchronizedSortedBag treebag -	first[]	28.4	30.6	0.93
+M3SynchronizedSortedBag treebag -	forEach[interface java.util.function.Consumer]	52.6	44.6	1.18
+M3SynchronizedSortedBag treebag -	getCount[class java.lang.Object]	2029.8	2090.8	0.97
+M3SynchronizedSortedBag treebag -	hashCode[]	32.6	23.6	1.38
+M3SynchronizedSortedBag treebag -	isEmpty[]	23.4	18.6	1.26
+M3SynchronizedSortedBag treebag -	iterator[]	23.8	16.0	1.49
+M3SynchronizedSortedBag treebag -	last[]	29.6	32.4	0.91
+M3SynchronizedSortedBag treebag -	parallelStream[]	24.2	15.6	1.55
+M3SynchronizedSortedBag treebag -	removeAll[interface java.util.Collection]	39.0	24.6	1.59
+M3SynchronizedSortedBag treebag -	removeIf[interface java.util.function.Predicate]	37.2	23.4	1.59
+M3SynchronizedSortedBag treebag -	remove[class java.lang.Object, int]	2139.6	2124.0	1.01
+M3SynchronizedSortedBag treebag -	remove[class java.lang.Object]	1925.4	1924.0	1.00
+M3SynchronizedSortedBag treebag -	retainAll[interface java.util.Collection]	102.8	89.2	1.15
+M3SynchronizedSortedBag treebag -	size[]	24.2	18.2	1.33
+M3SynchronizedSortedBag treebag -	spliterator[]	20.6	10.0	2.06
+M3SynchronizedSortedBag treebag -	stream[]	23.8	14.4	1.65
+M3SynchronizedSortedBag treebag -	toArray[]	33.2	36.2	0.92
+M3SynchronizedSortedBag treebag -	toArray[class [Ljava.lang.Object;]	57.4	44.4	1.29
+M3SynchronizedSortedBag treebag -	toArray[interface java.util.function.IntFunction]	53.2	41.0	1.30
+M3SynchronizedSortedBag treebag -	toString[]	93.4	93.6	1.00
+M3SynchronizedSortedBag treebag -	uniqueSet[]	39.6	22.6	1.75
+M3PredicatedList list both	addAll[int, interface java.util.Collection]	6073.2	6086.4	1.00
+M3PredicatedList list both	addAll[interface java.util.Collection]	2346.4	2452.8	0.96
+M3PredicatedList list both	addFirst[class java.lang.Object]	4096.6	4577.2	0.90
+M3PredicatedList list both	addLast[class java.lang.Object]	2156.4	2311.2	0.93
+M3PredicatedList list both	add[class java.lang.Object]	1046.8	1124.6	0.93
+M3PredicatedList list both	add[int, class java.lang.Object]	11704.6	11842.2	0.99
+M3PredicatedList list both	clear[]	35.4	24.6	1.44
+M3PredicatedList list both	containsAll[interface java.util.Collection]	26.2	13.0	2.02
+M3PredicatedList list both	contains[class java.lang.Object]	19.4	10.8	1.80
+M3PredicatedList list both	equals[class java.lang.Object]	36.4	40.8	0.89
+M3PredicatedList list both	forEach[interface java.util.function.Consumer]	42.0	25.8	1.63
+M3PredicatedList list both	getFirst[]	5693.2	6383.2	0.89
+M3PredicatedList list both	getLast[]	5820.4	6065.4	0.96
+M3PredicatedList list both	get[int]	5944.4	5937.0	1.00
+M3PredicatedList list both	hashCode[]	22.4	24.8	0.90
+M3PredicatedList list both	indexOf[class java.lang.Object]	21.0	25.8	0.81
+M3PredicatedList list both	isEmpty[]	21.2	9.6	2.21
+M3PredicatedList list both	iterator[]	34.0	23.0	1.48
+M3PredicatedList list both	lastIndexOf[class java.lang.Object]	21.0	25.0	0.84
+M3PredicatedList list both	listIterator[]	28.0	24.4	1.15
+M3PredicatedList list both	listIterator[int]	11953.2	12740.4	0.94
+M3PredicatedList list both	parallelStream[]	65.6	49.4	1.33
+M3PredicatedList list both	removeAll[interface java.util.Collection]	26.6	12.0	2.22
+M3PredicatedList list both	removeFirst[]	5490.0	5768.4	0.95
+M3PredicatedList list both	removeIf[interface java.util.function.Predicate]	28.0	12.4	2.26
+M3PredicatedList list both	removeLast[]	5860.8	6376.0	0.92
+M3PredicatedList list both	remove[class java.lang.Object]	20.8	12.2	1.70
+M3PredicatedList list both	remove[int]	6108.8	6418.4	0.95
+M3PredicatedList list both	replaceAll[interface java.util.function.UnaryOperator]	59.6	38.0	1.57
+M3PredicatedList list both	retainAll[interface java.util.Collection]	28.2	13.0	2.17
+M3PredicatedList list both	reversed[]	34.8	28.2	1.23
+M3PredicatedList list both	set[int, class java.lang.Object]	6463.6	6470.6	1.00
+M3PredicatedList list both	size[]	22.6	8.6	2.63
+M3PredicatedList list both	sort[interface java.util.Comparator]	74.2	51.4	1.44
+M3PredicatedList list both	spliterator[]	16.6	67.4	0.25
+M3PredicatedList list both	stream[]	65.0	49.2	1.32
+M3PredicatedList list both	subList[int, int]	10821.8	11734.4	0.92
+M3PredicatedList list both	toArray[]	20.2	12.6	1.60
+M3PredicatedList list both	toArray[class [Ljava.lang.Object;]	22.8	12.6	1.81
+M3PredicatedList list both	toArray[interface java.util.function.IntFunction]	26.6	13.8	1.93
+M3PredicatedList list both	toString[]	23.0	13.2	1.74
+M3PredicatedList deque rejectnull	addAll[int, interface java.util.Collection]	11993.4	12103.6	0.99
+M3PredicatedList deque rejectnull	addAll[interface java.util.Collection]	4630.4	3916.0	1.18
+M3PredicatedList deque rejectnull	addFirst[class java.lang.Object]	3069.6	3288.2	0.93
+M3PredicatedList deque rejectnull	addLast[class java.lang.Object]	3073.4	3356.6	0.92
+M3PredicatedList deque rejectnull	add[class java.lang.Object]	3242.4	3310.4	0.98
+M3PredicatedList deque rejectnull	add[int, class java.lang.Object]	12027.4	12525.8	0.96
+M3PredicatedList deque rejectnull	clear[]	17.2	23.8	0.72
+M3PredicatedList deque rejectnull	containsAll[interface java.util.Collection]	19.6	30.6	0.64
+M3PredicatedList deque rejectnull	contains[class java.lang.Object]	17.4	25.2	0.69
+M3PredicatedList deque rejectnull	equals[class java.lang.Object]	35.4	36.0	0.98
+M3PredicatedList deque rejectnull	forEach[interface java.util.function.Consumer]	23.4	33.6	0.70
+M3PredicatedList deque rejectnull	getFirst[]	11431.4	11823.6	0.97
+M3PredicatedList deque rejectnull	getLast[]	11547.8	12019.4	0.96
+M3PredicatedList deque rejectnull	get[int]	11320.0	11654.2	0.97
+M3PredicatedList deque rejectnull	hashCode[]	18.0	18.4	0.98
+M3PredicatedList deque rejectnull	indexOf[class java.lang.Object]	14.2	151.6	0.09
+M3PredicatedList deque rejectnull	isEmpty[]	19.0	26.0	0.73
+M3PredicatedList deque rejectnull	iterator[]	20.0	25.8	0.78
+M3PredicatedList deque rejectnull	lastIndexOf[class java.lang.Object]	13.8	144.6	0.10
+M3PredicatedList deque rejectnull	listIterator[]	24.6	25.6	0.96
+M3PredicatedList deque rejectnull	listIterator[int]	11854.6	11692.0	1.01
+M3PredicatedList deque rejectnull	parallelStream[]	17.4	40.8	0.43
+M3PredicatedList deque rejectnull	removeAll[interface java.util.Collection]	20.2	26.2	0.77
+M3PredicatedList deque rejectnull	removeFirst[]	11447.4	11743.0	0.97
+M3PredicatedList deque rejectnull	removeIf[interface java.util.function.Predicate]	28.6	33.8	0.85
+M3PredicatedList deque rejectnull	removeLast[]	11386.0	11809.6	0.96
+M3PredicatedList deque rejectnull	remove[class java.lang.Object]	16.8	24.4	0.69
+M3PredicatedList deque rejectnull	remove[int]	11444.4	11723.2	0.98
+M3PredicatedList deque rejectnull	replaceAll[interface java.util.function.UnaryOperator]	28.8	39.6	0.73
+M3PredicatedList deque rejectnull	retainAll[interface java.util.Collection]	17.6	32.4	0.54
+M3PredicatedList deque rejectnull	reversed[]	14.4	31.6	0.46
+M3PredicatedList deque rejectnull	set[int, class java.lang.Object]	11977.6	12042.6	0.99
+M3PredicatedList deque rejectnull	size[]	14.8	17.6	0.84
+M3PredicatedList deque rejectnull	sort[interface java.util.Comparator]	34.6	50.8	0.68
+M3PredicatedList deque rejectnull	spliterator[]	13.4	54.2	0.25
+M3PredicatedList deque rejectnull	stream[]	22.2	52.4	0.42
+M3PredicatedList deque rejectnull	subList[int, int]	11886.6	11890.6	1.00
+M3PredicatedList deque rejectnull	toArray[]	20.6	26.2	0.79
+M3PredicatedList deque rejectnull	toArray[class [Ljava.lang.Object;]	22.2	27.4	0.81
+M3PredicatedList deque rejectnull	toArray[interface java.util.function.IntFunction]	21.0	31.4	0.67
+M3PredicatedList deque rejectnull	toString[]	27.4	29.0	0.94
+M3PredicatedQueue deque both	addAll[interface java.util.Collection]	4728.0	4940.8	0.96
+M3PredicatedQueue deque both	add[class java.lang.Object]	2082.0	2194.6	0.95
+M3PredicatedQueue deque both	clear[]	35.0	24.0	1.46
+M3PredicatedQueue deque both	containsAll[interface java.util.Collection]	58.0	30.6	1.90
+M3PredicatedQueue deque both	contains[class java.lang.Object]	43.0	26.0	1.65
+M3PredicatedQueue deque both	element[]	11608.6	11516.4	1.01
+M3PredicatedQueue deque both	forEach[interface java.util.function.Consumer]	62.8	34.4	1.83
+M3PredicatedQueue deque both	isEmpty[]	41.6	22.6	1.84
+M3PredicatedQueue deque both	iterator[]	39.4	25.8	1.53
+M3PredicatedQueue deque both	offer[class java.lang.Object]	2123.6	2155.0	0.99
+M3PredicatedQueue deque both	parallelStream[]	51.2	32.0	1.60
+M3PredicatedQueue deque both	peek[]	34.0	33.8	1.01
+M3PredicatedQueue deque both	poll[]	34.4	40.0	0.86
+M3PredicatedQueue deque both	removeAll[interface java.util.Collection]	53.4	25.4	2.10
+M3PredicatedQueue deque both	removeIf[interface java.util.function.Predicate]	59.6	33.6	1.77
+M3PredicatedQueue deque both	remove[]	11665.0	11519.8	1.01
+M3PredicatedQueue deque both	remove[class java.lang.Object]	40.4	24.4	1.66
+M3PredicatedQueue deque both	retainAll[interface java.util.Collection]	58.0	32.0	1.81
+M3PredicatedQueue deque both	size[]	39.6	21.8	1.82
+M3PredicatedQueue deque both	spliterator[]	39.4	25.6	1.54
+M3PredicatedQueue deque both	stream[]	51.8	32.0	1.62
+M3PredicatedQueue deque both	toArray[]	37.6	25.6	1.47
+M3PredicatedQueue deque both	toArray[class [Ljava.lang.Object;]	42.6	21.2	2.01
+M3PredicatedQueue deque both	toArray[interface java.util.function.IntFunction]	43.2	24.4	1.77
+M3PredicatedQueue deque both	toString[]	44.2	28.2	1.57
+M3PredicatedSet hashset both	addAll[interface java.util.Collection]	4741.4	4971.0	0.95
+M3PredicatedSet hashset both	add[class java.lang.Object]	879.0	988.4	0.89
+M3PredicatedSet hashset both	clear[]	38.8	28.6	1.36
+M3PredicatedSet hashset both	containsAll[interface java.util.Collection]	64.6	35.0	1.85
+M3PredicatedSet hashset both	contains[class java.lang.Object]	45.4	29.4	1.54
+M3PredicatedSet hashset both	equals[class java.lang.Object]	59.2	67.4	0.88
+M3PredicatedSet hashset both	forEach[interface java.util.function.Consumer]	53.2	34.8	1.53
+M3PredicatedSet hashset both	hashCode[]	52.8	55.6	0.95
+M3PredicatedSet hashset both	isEmpty[]	41.0	22.4	1.83
+M3PredicatedSet hashset both	iterator[]	37.8	26.0	1.45
+M3PredicatedSet hashset both	parallelStream[]	51.0	32.2	1.58
+M3PredicatedSet hashset both	removeAll[interface java.util.Collection]	58.0	31.2	1.86
+M3PredicatedSet hashset both	removeIf[interface java.util.function.Predicate]	59.2	33.8	1.75
+M3PredicatedSet hashset both	remove[class java.lang.Object]	49.8	33.6	1.48
+M3PredicatedSet hashset both	retainAll[interface java.util.Collection]	58.4	32.6	1.79
+M3PredicatedSet hashset both	size[]	40.8	22.2	1.84
+M3PredicatedSet hashset both	spliterator[]	39.6	72.8	0.54
+M3PredicatedSet hashset both	stream[]	50.4	32.2	1.57
+M3PredicatedSet hashset both	toArray[]	41.0	30.2	1.36
+M3PredicatedSet hashset both	toArray[class [Ljava.lang.Object;]	49.2	30.0	1.64
+M3PredicatedSet hashset both	toArray[interface java.util.function.IntFunction]	57.8	34.2	1.69
+M3PredicatedSet hashset both	toString[]	42.6	28.4	1.50
+M3PredicatedSet treeset rejectnull	addAll[interface java.util.Collection]	4833.0	5108.6	0.95
+M3PredicatedSet treeset rejectnull	add[class java.lang.Object]	3090.0	3201.6	0.97
+M3PredicatedSet treeset rejectnull	clear[]	17.0	25.2	0.67
+M3PredicatedSet treeset rejectnull	containsAll[interface java.util.Collection]	20.0	30.8	0.65
+M3PredicatedSet treeset rejectnull	contains[class java.lang.Object]	3615.8	3650.8	0.99
+M3PredicatedSet treeset rejectnull	equals[class java.lang.Object]	34.0	35.4	0.96
+M3PredicatedSet treeset rejectnull	forEach[interface java.util.function.Consumer]	26.4	36.8	0.72
+M3PredicatedSet treeset rejectnull	hashCode[]	29.0	30.2	0.96
+M3PredicatedSet treeset rejectnull	isEmpty[]	19.6	23.0	0.85
+M3PredicatedSet treeset rejectnull	iterator[]	23.4	29.0	0.81
+M3PredicatedSet treeset rejectnull	parallelStream[]	20.4	33.0	0.62
+M3PredicatedSet treeset rejectnull	removeAll[interface java.util.Collection]	33.8	40.4	0.84
+M3PredicatedSet treeset rejectnull	removeIf[interface java.util.function.Predicate]	35.6	48.8	0.73
+M3PredicatedSet treeset rejectnull	remove[class java.lang.Object]	3849.4	4385.8	0.88
+M3PredicatedSet treeset rejectnull	retainAll[interface java.util.Collection]	33.4	45.6	0.73
+M3PredicatedSet treeset rejectnull	size[]	20.0	28.2	0.71
+M3PredicatedSet treeset rejectnull	spliterator[]	17.2	52.0	0.33
+M3PredicatedSet treeset rejectnull	stream[]	20.4	32.6	0.63
+M3PredicatedSet treeset rejectnull	toArray[]	29.0	37.0	0.78
+M3PredicatedSet treeset rejectnull	toArray[class [Ljava.lang.Object;]	36.0	41.8	0.86
+M3PredicatedSet treeset rejectnull	toArray[interface java.util.function.IntFunction]	36.4	46.0	0.79
+M3PredicatedSet treeset rejectnull	toString[]	28.4	30.8	0.92
+M3PredicatedSortedSet treeset both	addAll[interface java.util.Collection]	4778.2	5115.8	0.93
+M3PredicatedSortedSet treeset both	addFirst[class java.lang.Object]	11533.6	11721.0	0.98
+M3PredicatedSortedSet treeset both	addLast[class java.lang.Object]	11714.6	11797.4	0.99
+M3PredicatedSortedSet treeset both	add[class java.lang.Object]	5961.0	6107.2	0.98
+M3PredicatedSortedSet treeset both	clear[]	26.8	17.2	1.56
+M3PredicatedSortedSet treeset both	comparator[]	38.4	45.0	0.85
+M3PredicatedSortedSet treeset both	containsAll[interface java.util.Collection]	60.8	32.0	1.90
+M3PredicatedSortedSet treeset both	contains[class java.lang.Object]	3644.8	3807.8	0.96
+M3PredicatedSortedSet treeset both	equals[class java.lang.Object]	60.0	45.4	1.32
+M3PredicatedSortedSet treeset both	first[]	10899.6	11822.2	0.92
+M3PredicatedSortedSet treeset both	forEach[interface java.util.function.Consumer]	40.8	25.8	1.58
+M3PredicatedSortedSet treeset both	getFirst[]	11832.6	12200.2	0.97
+M3PredicatedSortedSet treeset both	getLast[]	11759.6	12410.8	0.95
+M3PredicatedSortedSet treeset both	hashCode[]	47.2	29.2	1.62
+M3PredicatedSortedSet treeset both	headSet[class java.lang.Object]	659.8	612.4	1.08
+M3PredicatedSortedSet treeset both	isEmpty[]	42.4	24.0	1.77
+M3PredicatedSortedSet treeset both	iterator[]	42.8	30.4	1.41
+M3PredicatedSortedSet treeset both	last[]	12194.2	11890.6	1.03
+M3PredicatedSortedSet treeset both	parallelStream[]	54.0	39.4	1.37
+M3PredicatedSortedSet treeset both	removeAll[interface java.util.Collection]	52.4	31.2	1.68
+M3PredicatedSortedSet treeset both	removeFirst[]	11667.0	11802.0	0.99
+M3PredicatedSortedSet treeset both	removeIf[interface java.util.function.Predicate]	64.2	38.2	1.68
+M3PredicatedSortedSet treeset both	removeLast[]	11725.0	12233.6	0.96
+M3PredicatedSortedSet treeset both	remove[class java.lang.Object]	3765.8	3815.6	0.99
+M3PredicatedSortedSet treeset both	retainAll[interface java.util.Collection]	61.4	35.8	1.72
+M3PredicatedSortedSet treeset both	reversed[]	37.0	25.4	1.46
+M3PredicatedSortedSet treeset both	size[]	47.2	28.4	1.66
+M3PredicatedSortedSet treeset both	spliterator[]	35.2	24.6	1.43
+M3PredicatedSortedSet treeset both	stream[]	103.8	77.6	1.34
+M3PredicatedSortedSet treeset both	subSet[class java.lang.Object, class java.lang.Object]	5662.4	5749.6	0.98
+M3PredicatedSortedSet treeset both	tailSet[class java.lang.Object]	657.8	633.8	1.04
+M3PredicatedSortedSet treeset both	toArray[]	39.0	29.8	1.31
+M3PredicatedSortedSet treeset both	toArray[class [Ljava.lang.Object;]	35.8	42.6	0.84
+M3PredicatedSortedSet treeset both	toArray[interface java.util.function.IntFunction]	71.0	46.4	1.53
+M3PredicatedSortedSet treeset both	toString[]	38.0	24.6	1.54
+M3PredicatedNavigableSet treeset both	addAll[interface java.util.Collection]	4175.8	3946.2	1.06
+M3PredicatedNavigableSet treeset both	addFirst[class java.lang.Object]	11469.2	11109.0	1.03
+M3PredicatedNavigableSet treeset both	addLast[class java.lang.Object]	11625.2	11453.8	1.01
+M3PredicatedNavigableSet treeset both	add[class java.lang.Object]	5664.4	5879.8	0.96
+M3PredicatedNavigableSet treeset both	ceiling[class java.lang.Object]	32.2	90.6	0.36
+M3PredicatedNavigableSet treeset both	clear[]	31.8	21.4	1.49
+M3PredicatedNavigableSet treeset both	comparator[]	25.6	14.4	1.78
+M3PredicatedNavigableSet treeset both	containsAll[interface java.util.Collection]	54.6	27.4	1.99
+M3PredicatedNavigableSet treeset both	contains[class java.lang.Object]	3562.8	3638.6	0.98
+M3PredicatedNavigableSet treeset both	descendingIterator[]	46.0	105.4	0.44
+M3PredicatedNavigableSet treeset both	descendingSet[]	71.0	131.6	0.54
+M3PredicatedNavigableSet treeset both	equals[class java.lang.Object]	53.2	83.0	0.64
+M3PredicatedNavigableSet treeset both	first[]	11775.8	11968.6	0.98
+M3PredicatedNavigableSet treeset both	floor[class java.lang.Object]	32.8	88.8	0.37
+M3PredicatedNavigableSet treeset both	forEach[interface java.util.function.Consumer]	52.2	33.0	1.58
+M3PredicatedNavigableSet treeset both	getFirst[]	11959.6	12914.4	0.93
+M3PredicatedNavigableSet treeset both	getLast[]	11118.0	11703.4	0.95
+M3PredicatedNavigableSet treeset both	hashCode[]	43.6	25.8	1.69
+M3PredicatedNavigableSet treeset both	headSet[class java.lang.Object, boolean]	662.8	752.8	0.88
+M3PredicatedNavigableSet treeset both	headSet[class java.lang.Object]	611.2	597.8	1.02
+M3PredicatedNavigableSet treeset both	higher[class java.lang.Object]	25.2	68.8	0.37
+M3PredicatedNavigableSet treeset both	isEmpty[]	37.6	19.4	1.94
+M3PredicatedNavigableSet treeset both	iterator[]	37.2	25.4	1.46
+M3PredicatedNavigableSet treeset both	last[]	11251.6	11191.4	1.01
+M3PredicatedNavigableSet treeset both	lower[class java.lang.Object]	32.2	92.6	0.35
+M3PredicatedNavigableSet treeset both	parallelStream[]	37.8	28.4	1.33
+M3PredicatedNavigableSet treeset both	pollFirst[]	41.6	96.2	0.43
+M3PredicatedNavigableSet treeset both	pollLast[]	19.4	70.6	0.27
+M3PredicatedNavigableSet treeset both	removeAll[interface java.util.Collection]	56.8	31.8	1.79
+M3PredicatedNavigableSet treeset both	removeFirst[]	11176.0	11648.0	0.96
+M3PredicatedNavigableSet treeset both	removeIf[interface java.util.function.Predicate]	54.8	27.6	1.99
+M3PredicatedNavigableSet treeset both	removeLast[]	5824.8	6918.2	0.84
+M3PredicatedNavigableSet treeset both	remove[class java.lang.Object]	3695.8	3761.2	0.98
+M3PredicatedNavigableSet treeset both	retainAll[interface java.util.Collection]	54.8	30.6	1.79
+M3PredicatedNavigableSet treeset both	reversed[]	34.8	25.4	1.37
+M3PredicatedNavigableSet treeset both	size[]	40.8	22.6	1.81
+M3PredicatedNavigableSet treeset both	spliterator[]	32.2	18.6	1.73
+M3PredicatedNavigableSet treeset both	stream[]	62.2	49.8	1.25
+M3PredicatedNavigableSet treeset both	subSet[class java.lang.Object, boolean, class java.lang.Object, boolean]	5524.0	5461.6	1.01
+M3PredicatedNavigableSet treeset both	subSet[class java.lang.Object, class java.lang.Object]	5257.8	5536.0	0.95
+M3PredicatedNavigableSet treeset both	tailSet[class java.lang.Object, boolean]	681.4	641.4	1.06
+M3PredicatedNavigableSet treeset both	tailSet[class java.lang.Object]	598.0	606.2	0.99
+M3PredicatedNavigableSet treeset both	toArray[]	43.2	32.0	1.35
+M3PredicatedNavigableSet treeset both	toArray[class [Ljava.lang.Object;]	33.2	40.6	0.82
+M3PredicatedNavigableSet treeset both	toArray[interface java.util.function.IntFunction]	55.4	32.8	1.69
+M3PredicatedNavigableSet treeset both	toString[]	41.0	27.0	1.52
+M3PredicatedBag hashbag both	addAll[interface java.util.Collection]	4594.0	4742.6	0.97
+M3PredicatedBag hashbag both	add[class java.lang.Object, int]	2169.6	2207.8	0.98
+M3PredicatedBag hashbag both	add[class java.lang.Object]	2005.8	2080.2	0.96
+M3PredicatedBag hashbag both	clear[]	34.6	22.4	1.54
+M3PredicatedBag hashbag both	containsAll[interface java.util.Collection]	220.2	194.0	1.14
+M3PredicatedBag hashbag both	contains[class java.lang.Object]	41.0	25.4	1.61
+M3PredicatedBag hashbag both	equals[class java.lang.Object]	52.8	59.2	0.89
+M3PredicatedBag hashbag both	forEach[interface java.util.function.Consumer]	56.4	38.4	1.47
+M3PredicatedBag hashbag both	getCount[class java.lang.Object]	23.2	29.0	0.80
+M3PredicatedBag hashbag both	hashCode[]	22.8	28.4	0.80
+M3PredicatedBag hashbag both	isEmpty[]	38.6	18.8	2.05
+M3PredicatedBag hashbag both	iterator[]	16.6	10.6	1.57
+M3PredicatedBag hashbag both	parallelStream[]	40.2	23.8	1.69
+M3PredicatedBag hashbag both	removeAll[interface java.util.Collection]	26.4	30.0	0.88
+M3PredicatedBag hashbag both	removeIf[interface java.util.function.Predicate]	35.6	19.4	1.84
+M3PredicatedBag hashbag both	remove[class java.lang.Object, int]	25.4	25.0	1.02
+M3PredicatedBag hashbag both	remove[class java.lang.Object]	42.4	26.8	1.58
+M3PredicatedBag hashbag both	retainAll[interface java.util.Collection]	79.0	73.8	1.07
+M3PredicatedBag hashbag both	size[]	23.0	11.0	2.09
+M3PredicatedBag hashbag both	spliterator[]	28.6	14.6	1.96
+M3PredicatedBag hashbag both	stream[]	53.8	32.2	1.67
+M3PredicatedBag hashbag both	toArray[]	20.2	13.2	1.53
+M3PredicatedBag hashbag both	toArray[class [Ljava.lang.Object;]	59.2	69.2	0.86
+M3PredicatedBag hashbag both	toArray[interface java.util.function.IntFunction]	44.4	49.6	0.90
+M3PredicatedBag hashbag both	toString[]	19.6	9.6	2.04
+M3PredicatedBag hashbag both	uniqueSet[]	15.0	19.6	0.77
+M3PredicatedBag treebag both	addAll[interface java.util.Collection]	4589.8	4590.2	1.00
+M3PredicatedBag treebag both	add[class java.lang.Object, int]	5027.4	5073.6	0.99
+M3PredicatedBag treebag both	add[class java.lang.Object]	3529.6	3589.8	0.98
+M3PredicatedBag treebag both	clear[]	13.4	21.2	0.63
+M3PredicatedBag treebag both	containsAll[interface java.util.Collection]	189.4	193.4	0.98
+M3PredicatedBag treebag both	contains[class java.lang.Object]	3421.0	3587.4	0.95
+M3PredicatedBag treebag both	equals[class java.lang.Object]	31.4	32.4	0.97
+M3PredicatedBag treebag both	forEach[interface java.util.function.Consumer]	25.8	39.6	0.65
+M3PredicatedBag treebag both	getCount[class java.lang.Object]	3683.4	3650.8	1.01
+M3PredicatedBag treebag both	hashCode[]	21.0	22.6	0.93
+M3PredicatedBag treebag both	isEmpty[]	11.0	15.8	0.70
+M3PredicatedBag treebag both	iterator[]	45.0	31.2	1.44
+M3PredicatedBag treebag both	parallelStream[]	17.0	28.6	0.59
+M3PredicatedBag treebag both	removeAll[interface java.util.Collection]	38.6	44.6	0.87
+M3PredicatedBag treebag both	removeIf[interface java.util.function.Predicate]	26.8	41.0	0.65
+M3PredicatedBag treebag both	remove[class java.lang.Object, int]	3700.2	3800.6	0.97
+M3PredicatedBag treebag both	remove[class java.lang.Object]	3570.4	3423.8	1.04
+M3PredicatedBag treebag both	retainAll[interface java.util.Collection]	140.2	151.2	0.93
+M3PredicatedBag treebag both	size[]	13.0	18.6	0.70
+M3PredicatedBag treebag both	spliterator[]	13.0	18.0	0.72
+M3PredicatedBag treebag both	stream[]	16.8	28.8	0.58
+M3PredicatedBag treebag both	toArray[]	24.8	30.4	0.82
+M3PredicatedBag treebag both	toArray[class [Ljava.lang.Object;]	31.8	38.6	0.82
+M3PredicatedBag treebag both	toArray[interface java.util.function.IntFunction]	26.4	37.6	0.70
+M3PredicatedBag treebag both	toString[]	16.0	18.0	0.89
+M3PredicatedBag treebag both	uniqueSet[]	12.6	13.6	0.93
+M3PredicatedSortedBag treebag both	addAll[interface java.util.Collection]	4616.0	4725.6	0.98
+M3PredicatedSortedBag treebag both	add[class java.lang.Object, int]	5333.4	5455.2	0.98
+M3PredicatedSortedBag treebag both	add[class java.lang.Object]	5483.6	5574.8	0.98
+M3PredicatedSortedBag treebag both	clear[]	32.4	21.8	1.49
+M3PredicatedSortedBag treebag both	comparator[]	32.0	32.0	1.00
+M3PredicatedSortedBag treebag both	containsAll[interface java.util.Collection]	208.4	220.2	0.95
+M3PredicatedSortedBag treebag both	contains[class java.lang.Object]	3700.0	4238.2	0.87
+M3PredicatedSortedBag treebag both	equals[class java.lang.Object]	30.0	32.6	0.92
+M3PredicatedSortedBag treebag both	first[]	11232.6	11135.8	1.01
+M3PredicatedSortedBag treebag both	forEach[interface java.util.function.Consumer]	58.2	40.0	1.45
+M3PredicatedSortedBag treebag both	getCount[class java.lang.Object]	3568.6	3694.6	0.97
+M3PredicatedSortedBag treebag both	hashCode[]	26.2	29.2	0.90
+M3PredicatedSortedBag treebag both	isEmpty[]	38.4	19.0	2.02
+M3PredicatedSortedBag treebag both	iterator[]	43.0	30.8	1.40
+M3PredicatedSortedBag treebag both	last[]	12099.0	11569.2	1.05
+M3PredicatedSortedBag treebag both	parallelStream[]	41.2	25.0	1.65
+M3PredicatedSortedBag treebag both	removeAll[interface java.util.Collection]	39.2	46.2	0.85
+M3PredicatedSortedBag treebag both	removeIf[interface java.util.function.Predicate]	52.6	32.0	1.64
+M3PredicatedSortedBag treebag both	remove[class java.lang.Object, int]	3618.2	3587.2	1.01
+M3PredicatedSortedBag treebag both	remove[class java.lang.Object]	3604.2	3612.8	1.00
+M3PredicatedSortedBag treebag both	retainAll[interface java.util.Collection]	168.2	144.6	1.16
+M3PredicatedSortedBag treebag both	size[]	45.4	22.0	2.06
+M3PredicatedSortedBag treebag both	spliterator[]	39.2	19.0	2.06
+M3PredicatedSortedBag treebag both	stream[]	49.2	29.2	1.68
+M3PredicatedSortedBag treebag both	toArray[]	21.6	27.4	0.79
+M3PredicatedSortedBag treebag both	toArray[class [Ljava.lang.Object;]	27.6	35.6	0.78
+M3PredicatedSortedBag treebag both	toArray[interface java.util.function.IntFunction]	60.2	35.8	1.68
+M3PredicatedSortedBag treebag both	toString[]	28.4	16.0	1.78
+M3PredicatedSortedBag treebag both	uniqueSet[]	32.2	14.6	2.21
+M3PredicatedMultiSet hashmultiset both	addAll[interface java.util.Collection]	4483.4	4659.4	0.96
+M3PredicatedMultiSet hashmultiset both	add[class java.lang.Object, int]	3383.2	3435.6	0.98
+M3PredicatedMultiSet hashmultiset both	add[class java.lang.Object]	2166.6	2252.0	0.96
+M3PredicatedMultiSet hashmultiset both	clear[]	18.0	10.8	1.67
+M3PredicatedMultiSet hashmultiset both	containsAll[interface java.util.Collection]	48.2	26.6	1.81
+M3PredicatedMultiSet hashmultiset both	contains[class java.lang.Object]	33.6	20.4	1.65
+M3PredicatedMultiSet hashmultiset both	entrySet[]	14.6	16.6	0.88
+M3PredicatedMultiSet hashmultiset both	equals[class java.lang.Object]	53.2	57.6	0.92
+M3PredicatedMultiSet hashmultiset both	forEach[interface java.util.function.Consumer]	29.8	23.0	1.30
+M3PredicatedMultiSet hashmultiset both	getCount[class java.lang.Object]	41.0	47.2	0.87
+M3PredicatedMultiSet hashmultiset both	hashCode[]	37.8	42.6	0.89
+M3PredicatedMultiSet hashmultiset both	isEmpty[]	30.0	14.8	2.03
+M3PredicatedMultiSet hashmultiset both	iterator[]	15.0	9.4	1.60
+M3PredicatedMultiSet hashmultiset both	parallelStream[]	25.6	15.0	1.71
+M3PredicatedMultiSet hashmultiset both	removeAll[interface java.util.Collection]	84.2	58.6	1.44
+M3PredicatedMultiSet hashmultiset both	removeIf[interface java.util.function.Predicate]	46.6	26.8	1.74
+M3PredicatedMultiSet hashmultiset both	remove[class java.lang.Object, int]	1485.8	1408.6	1.05
+M3PredicatedMultiSet hashmultiset both	remove[class java.lang.Object]	42.2	25.2	1.67
+M3PredicatedMultiSet hashmultiset both	retainAll[interface java.util.Collection]	45.8	25.6	1.79
+M3PredicatedMultiSet hashmultiset both	setCount[class java.lang.Object, int]	2733.6	2839.2	0.96
+M3PredicatedMultiSet hashmultiset both	size[]	23.0	9.8	2.35
+M3PredicatedMultiSet hashmultiset both	spliterator[]	19.2	9.0	2.13
+M3PredicatedMultiSet hashmultiset both	stream[]	27.8	15.0	1.85
+M3PredicatedMultiSet hashmultiset both	toArray[]	15.2	9.0	1.69
+M3PredicatedMultiSet hashmultiset both	toArray[class [Ljava.lang.Object;]	30.0	16.4	1.83
+M3PredicatedMultiSet hashmultiset both	toArray[interface java.util.function.IntFunction]	54.6	29.0	1.88
+M3PredicatedMultiSet hashmultiset both	toString[]	21.0	11.8	1.78
+M3PredicatedMultiSet hashmultiset both	uniqueSet[]	13.6	16.4	0.83
+M3PredicatedMap hashmap both	clear[]	23.0	14.6	1.58
+M3PredicatedMap hashmap both	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	1982.0	2094.8	0.95
+M3PredicatedMap hashmap both	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	52.6	28.6	1.84
+M3PredicatedMap hashmap both	compute[class java.lang.Object, interface java.util.function.BiFunction]	2376.4	2504.2	0.95
+M3PredicatedMap hashmap both	containsKey[class java.lang.Object]	40.2	20.0	2.01
+M3PredicatedMap hashmap both	containsValue[class java.lang.Object]	36.2	19.8	1.83
+M3PredicatedMap hashmap both	entrySet[]	34.8	36.2	0.96
+M3PredicatedMap hashmap both	equals[class java.lang.Object]	52.8	31.8	1.66
+M3PredicatedMap hashmap both	forEach[interface java.util.function.BiConsumer]	27.4	52.6	0.52
+M3PredicatedMap hashmap both	getOrDefault[class java.lang.Object, class java.lang.Object]	52.8	38.0	1.39
+M3PredicatedMap hashmap both	get[class java.lang.Object]	35.2	19.8	1.78
+M3PredicatedMap hashmap both	hashCode[]	37.6	21.8	1.72
+M3PredicatedMap hashmap both	isEmpty[]	37.0	17.6	2.10
+M3PredicatedMap hashmap both	keySet[]	32.6	19.8	1.65
+M3PredicatedMap hashmap both	mapIterator[]	45.6	118.6	0.38
+M3PredicatedMap hashmap both	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	6440.0	6797.4	0.95
+M3PredicatedMap hashmap both	putAll[interface java.util.Map]	4031.4	2822.4	1.43
+M3PredicatedMap hashmap both	putIfAbsent[class java.lang.Object, class java.lang.Object]	1996.2	2096.0	0.95
+M3PredicatedMap hashmap both	put[class java.lang.Object, class java.lang.Object]	3890.8	4063.2	0.96
+M3PredicatedMap hashmap both	remove[class java.lang.Object, class java.lang.Object]	56.2	32.2	1.75
+M3PredicatedMap hashmap both	remove[class java.lang.Object]	18.4	22.4	0.82
+M3PredicatedMap hashmap both	replaceAll[interface java.util.function.BiFunction]	70.0	91.0	0.77
+M3PredicatedMap hashmap both	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	51.6	30.4	1.70
+M3PredicatedMap hashmap both	replace[class java.lang.Object, class java.lang.Object]	51.2	38.2	1.34
+M3PredicatedMap hashmap both	size[]	36.2	17.4	2.08
+M3PredicatedMap hashmap both	toString[]	43.4	27.8	1.56
+M3PredicatedMap hashmap both	values[]	32.8	21.8	1.50
+M3PredicatedMap treemap keynull	clear[]	15.0	20.0	0.75
+M3PredicatedMap treemap keynull	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	3814.0	3738.2	1.02
+M3PredicatedMap treemap keynull	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	3707.2	3664.2	1.01
+M3PredicatedMap treemap keynull	compute[class java.lang.Object, interface java.util.function.BiFunction]	4846.8	4844.8	1.00
+M3PredicatedMap treemap keynull	containsKey[class java.lang.Object]	3498.8	3502.8	1.00
+M3PredicatedMap treemap keynull	containsValue[class java.lang.Object]	14.6	19.4	0.75
+M3PredicatedMap treemap keynull	entrySet[]	17.2	20.2	0.85
+M3PredicatedMap treemap keynull	equals[class java.lang.Object]	29.6	31.6	0.94
+M3PredicatedMap treemap keynull	forEach[interface java.util.function.BiConsumer]	30.2	81.8	0.37
+M3PredicatedMap treemap keynull	getOrDefault[class java.lang.Object, class java.lang.Object]	3704.2	3392.8	1.09
+M3PredicatedMap treemap keynull	get[class java.lang.Object]	3526.4	3554.8	0.99
+M3PredicatedMap treemap keynull	hashCode[]	27.4	29.4	0.93
+M3PredicatedMap treemap keynull	isEmpty[]	17.2	19.6	0.88
+M3PredicatedMap treemap keynull	keySet[]	14.8	19.4	0.76
+M3PredicatedMap treemap keynull	mapIterator[]	43.0	81.6	0.53
+M3PredicatedMap treemap keynull	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	7838.2	8657.4	0.91
+M3PredicatedMap treemap keynull	putAll[interface java.util.Map]	2126.0	2127.6	1.00
+M3PredicatedMap treemap keynull	putIfAbsent[class java.lang.Object, class java.lang.Object]	3912.6	3659.8	1.07
+M3PredicatedMap treemap keynull	put[class java.lang.Object, class java.lang.Object]	4554.4	4582.4	0.99
+M3PredicatedMap treemap keynull	remove[class java.lang.Object, class java.lang.Object]	3093.8	2394.6	1.29
+M3PredicatedMap treemap keynull	remove[class java.lang.Object]	3645.6	3667.2	0.99
+M3PredicatedMap treemap keynull	replaceAll[interface java.util.function.BiFunction]	28.4	77.6	0.37
+M3PredicatedMap treemap keynull	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	3779.4	3755.2	1.01
+M3PredicatedMap treemap keynull	replace[class java.lang.Object, class java.lang.Object]	3991.6	3967.8	1.01
+M3PredicatedMap treemap keynull	size[]	14.8	17.4	0.85
+M3PredicatedMap treemap keynull	toString[]	27.0	28.6	0.94
+M3PredicatedMap treemap keynull	values[]	14.8	19.4	0.76
+M3PredicatedMap linkedmap valuenull	clear[]	31.2	35.2	0.89
+M3PredicatedMap linkedmap valuenull	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	2022.6	2137.4	0.95
+M3PredicatedMap linkedmap valuenull	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	19.8	27.8	0.71
+M3PredicatedMap linkedmap valuenull	compute[class java.lang.Object, interface java.util.function.BiFunction]	1377.0	1428.0	0.96
+M3PredicatedMap linkedmap valuenull	containsKey[class java.lang.Object]	15.6	16.2	0.96
+M3PredicatedMap linkedmap valuenull	containsValue[class java.lang.Object]	17.4	21.2	0.82
+M3PredicatedMap linkedmap valuenull	entrySet[]	13.2	13.4	0.99
+M3PredicatedMap linkedmap valuenull	equals[class java.lang.Object]	26.2	27.6	0.95
+M3PredicatedMap linkedmap valuenull	forEach[interface java.util.function.BiConsumer]	21.8	28.2	0.77
+M3PredicatedMap linkedmap valuenull	getOrDefault[class java.lang.Object, class java.lang.Object]	25.8	36.2	0.71
+M3PredicatedMap linkedmap valuenull	get[class java.lang.Object]	18.2	18.8	0.97
+M3PredicatedMap linkedmap valuenull	hashCode[]	16.4	17.8	0.92
+M3PredicatedMap linkedmap valuenull	isEmpty[]	14.0	15.2	0.92
+M3PredicatedMap linkedmap valuenull	keySet[]	16.4	20.0	0.82
+M3PredicatedMap linkedmap valuenull	mapIterator[]	33.0	40.0	0.83
+M3PredicatedMap linkedmap valuenull	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	6140.4	5569.8	1.10
+M3PredicatedMap linkedmap valuenull	putAll[interface java.util.Map]	2485.8	2491.2	1.00
+M3PredicatedMap linkedmap valuenull	putIfAbsent[class java.lang.Object, class java.lang.Object]	2190.8	2364.0	0.93
+M3PredicatedMap linkedmap valuenull	put[class java.lang.Object, class java.lang.Object]	1973.0	1973.0	1.00
+M3PredicatedMap linkedmap valuenull	remove[class java.lang.Object, class java.lang.Object]	21.4	29.8	0.72
+M3PredicatedMap linkedmap valuenull	remove[class java.lang.Object]	18.6	23.2	0.80
+M3PredicatedMap linkedmap valuenull	replaceAll[interface java.util.function.BiFunction]	18.8	24.6	0.76
+M3PredicatedMap linkedmap valuenull	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	22.4	30.6	0.73
+M3PredicatedMap linkedmap valuenull	replace[class java.lang.Object, class java.lang.Object]	27.0	38.2	0.71
+M3PredicatedMap linkedmap valuenull	size[]	16.2	18.0	0.90
+M3PredicatedMap linkedmap valuenull	toString[]	15.8	16.8	0.94
+M3PredicatedMap linkedmap valuenull	values[]	17.6	21.2	0.83
+M3PredicatedMap hashmap rejectnull	clear[]	12.6	19.6	0.64
+M3PredicatedMap hashmap rejectnull	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	2986.2	3131.4	0.95
+M3PredicatedMap hashmap rejectnull	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	16.8	23.0	0.73
+M3PredicatedMap hashmap rejectnull	compute[class java.lang.Object, interface java.util.function.BiFunction]	2982.6	3105.0	0.96
+M3PredicatedMap hashmap rejectnull	containsKey[class java.lang.Object]	19.4	20.0	0.97
+M3PredicatedMap hashmap rejectnull	containsValue[class java.lang.Object]	12.6	19.4	0.65
+M3PredicatedMap hashmap rejectnull	entrySet[]	16.0	20.0	0.80
+M3PredicatedMap hashmap rejectnull	equals[class java.lang.Object]	13.2	31.8	0.42
+M3PredicatedMap hashmap rejectnull	forEach[interface java.util.function.BiConsumer]	30.2	79.2	0.38
+M3PredicatedMap hashmap rejectnull	getOrDefault[class java.lang.Object, class java.lang.Object]	27.4	38.0	0.72
+M3PredicatedMap hashmap rejectnull	get[class java.lang.Object]	19.0	19.6	0.97
+M3PredicatedMap hashmap rejectnull	hashCode[]	19.0	27.0	0.70
+M3PredicatedMap hashmap rejectnull	isEmpty[]	12.6	17.4	0.72
+M3PredicatedMap hashmap rejectnull	keySet[]	12.6	19.4	0.65
+M3PredicatedMap hashmap rejectnull	mapIterator[]	39.2	81.0	0.48
+M3PredicatedMap hashmap rejectnull	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	7081.2	7734.8	0.92
+M3PredicatedMap hashmap rejectnull	putAll[interface java.util.Map]	4064.8	4070.0	1.00
+M3PredicatedMap hashmap rejectnull	putIfAbsent[class java.lang.Object, class java.lang.Object]	2987.2	3105.6	0.96
+M3PredicatedMap hashmap rejectnull	put[class java.lang.Object, class java.lang.Object]	5251.6	5254.4	1.00
+M3PredicatedMap hashmap rejectnull	remove[class java.lang.Object, class java.lang.Object]	22.0	29.8	0.74
+M3PredicatedMap hashmap rejectnull	remove[class java.lang.Object]	19.0	23.6	0.81
+M3PredicatedMap hashmap rejectnull	replaceAll[interface java.util.function.BiFunction]	31.0	80.8	0.38
+M3PredicatedMap hashmap rejectnull	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	22.6	30.4	0.74
+M3PredicatedMap hashmap rejectnull	replace[class java.lang.Object, class java.lang.Object]	27.6	38.2	0.72
+M3PredicatedMap hashmap rejectnull	size[]	12.6	17.6	0.72
+M3PredicatedMap hashmap rejectnull	toString[]	24.4	27.0	0.90
+M3PredicatedMap hashmap rejectnull	values[]	12.4	19.4	0.64
+M3PredicatedSortedMap treemap both	clear[]	18.8	11.4	1.65
+M3PredicatedSortedMap treemap both	comparator[]	30.4	35.4	0.86
+M3PredicatedSortedMap treemap both	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	5882.8	6059.0	0.97
+M3PredicatedSortedMap treemap both	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	3785.4	3662.8	1.03
+M3PredicatedSortedMap treemap both	compute[class java.lang.Object, interface java.util.function.BiFunction]	5924.8	6080.2	0.97
+M3PredicatedSortedMap treemap both	containsKey[class java.lang.Object]	3429.4	3492.2	0.98
+M3PredicatedSortedMap treemap both	containsValue[class java.lang.Object]	36.2	19.6	1.85
+M3PredicatedSortedMap treemap both	entrySet[]	33.6	19.8	1.70
+M3PredicatedSortedMap treemap both	equals[class java.lang.Object]	53.8	31.8	1.69
+M3PredicatedSortedMap treemap both	firstEntry[]	81.8	137.6	0.59
+M3PredicatedSortedMap treemap both	firstKey[]	5769.6	7135.8	0.81
+M3PredicatedSortedMap treemap both	forEach[interface java.util.function.BiConsumer]	57.6	85.8	0.67
+M3PredicatedSortedMap treemap both	getOrDefault[class java.lang.Object, class java.lang.Object]	3809.6	3808.8	1.00
+M3PredicatedSortedMap treemap both	get[class java.lang.Object]	3582.6	3625.0	0.99
+M3PredicatedSortedMap treemap both	hashCode[]	39.6	23.4	1.69
+M3PredicatedSortedMap treemap both	headMap[class java.lang.Object]	563.4	563.6	1.00
+M3PredicatedSortedMap treemap both	isEmpty[]	38.0	19.6	1.94
+M3PredicatedSortedMap treemap both	keySet[]	31.2	19.6	1.59
+M3PredicatedSortedMap treemap both	lastEntry[]	61.6	69.8	0.88
+M3PredicatedSortedMap treemap both	lastKey[]	11318.6	10907.6	1.04
+M3PredicatedSortedMap treemap both	mapIterator[]	32.6	72.2	0.45
+M3PredicatedSortedMap treemap both	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	9866.0	10082.0	0.98
+M3PredicatedSortedMap treemap both	pollFirstEntry[]	55.8	105.2	0.53
+M3PredicatedSortedMap treemap both	pollLastEntry[]	43.4	70.2	0.62
+M3PredicatedSortedMap treemap both	putAll[interface java.util.Map]	3939.4	3965.6	0.99
+M3PredicatedSortedMap treemap both	putFirst[class java.lang.Object, class java.lang.Object]	11205.4	11278.6	0.99
+M3PredicatedSortedMap treemap both	putIfAbsent[class java.lang.Object, class java.lang.Object]	5753.0	5825.4	0.99
+M3PredicatedSortedMap treemap both	putLast[class java.lang.Object, class java.lang.Object]	11303.2	11363.6	0.99
+M3PredicatedSortedMap treemap both	put[class java.lang.Object, class java.lang.Object]	6239.4	6219.8	1.00
+M3PredicatedSortedMap treemap both	remove[class java.lang.Object, class java.lang.Object]	3665.2	3677.0	1.00
+M3PredicatedSortedMap treemap both	remove[class java.lang.Object]	3626.4	3635.8	1.00
+M3PredicatedSortedMap treemap both	replaceAll[interface java.util.function.BiFunction]	62.2	82.0	0.76
+M3PredicatedSortedMap treemap both	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	3826.4	3691.2	1.04
+M3PredicatedSortedMap treemap both	replace[class java.lang.Object, class java.lang.Object]	3694.4	3666.8	1.01
+M3PredicatedSortedMap treemap both	reversed[]	50.6	20.2	2.50
+M3PredicatedSortedMap treemap both	sequencedEntrySet[]	32.6	41.0	0.80
+M3PredicatedSortedMap treemap both	sequencedKeySet[]	25.8	33.0	0.78
+M3PredicatedSortedMap treemap both	sequencedValues[]	27.4	31.2	0.88
+M3PredicatedSortedMap treemap both	size[]	37.8	18.0	2.10
+M3PredicatedSortedMap treemap both	subMap[class java.lang.Object, class java.lang.Object]	5211.2	5074.2	1.03
+M3PredicatedSortedMap treemap both	tailMap[class java.lang.Object]	300.8	264.8	1.14
+M3PredicatedSortedMap treemap both	toString[]	44.6	29.2	1.53
+M3PredicatedSortedMap treemap both	values[]	32.4	20.2	1.60
+M3PredicatedSortedMap treemap keynull	clear[]	12.4	19.2	0.65
+M3PredicatedSortedMap treemap keynull	comparator[]	12.4	12.8	0.97
+M3PredicatedSortedMap treemap keynull	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	3706.6	3691.2	1.00
+M3PredicatedSortedMap treemap keynull	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	3800.4	4005.4	0.95
+M3PredicatedSortedMap treemap keynull	compute[class java.lang.Object, interface java.util.function.BiFunction]	4826.2	4905.4	0.98
+M3PredicatedSortedMap treemap keynull	containsKey[class java.lang.Object]	3308.6	3062.2	1.08
+M3PredicatedSortedMap treemap keynull	containsValue[class java.lang.Object]	10.2	16.0	0.64
+M3PredicatedSortedMap treemap keynull	entrySet[]	15.6	20.4	0.76
+M3PredicatedSortedMap treemap keynull	equals[class java.lang.Object]	10.6	25.6	0.41
+M3PredicatedSortedMap treemap keynull	firstEntry[]	28.6	81.8	0.35
+M3PredicatedSortedMap treemap keynull	firstKey[]	11433.4	11325.2	1.01
+M3PredicatedSortedMap treemap keynull	forEach[interface java.util.function.BiConsumer]	25.2	70.8	0.36
+M3PredicatedSortedMap treemap keynull	getOrDefault[class java.lang.Object, class java.lang.Object]	3697.6	3825.0	0.97
+M3PredicatedSortedMap treemap keynull	get[class java.lang.Object]	3704.6	3735.4	0.99
+M3PredicatedSortedMap treemap keynull	hashCode[]	10.6	23.0	0.46
+M3PredicatedSortedMap treemap keynull	headMap[class java.lang.Object]	549.2	492.2	1.12
+M3PredicatedSortedMap treemap keynull	isEmpty[]	13.4	20.2	0.66
+M3PredicatedSortedMap treemap keynull	keySet[]	12.8	20.0	0.64
+M3PredicatedSortedMap treemap keynull	lastEntry[]	19.4	50.6	0.38
+M3PredicatedSortedMap treemap keynull	lastKey[]	11080.6	11741.8	0.94
+M3PredicatedSortedMap treemap keynull	mapIterator[]	40.8	83.2	0.49
+M3PredicatedSortedMap treemap keynull	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	8376.0	7985.0	1.05
+M3PredicatedSortedMap treemap keynull	pollFirstEntry[]	29.4	84.4	0.35
+M3PredicatedSortedMap treemap keynull	pollLastEntry[]	22.4	47.6	0.47
+M3PredicatedSortedMap treemap keynull	putAll[interface java.util.Map]	2145.0	2147.0	1.00
+M3PredicatedSortedMap treemap keynull	putFirst[class java.lang.Object, class java.lang.Object]	10917.0	11850.4	0.92
+M3PredicatedSortedMap treemap keynull	putIfAbsent[class java.lang.Object, class java.lang.Object]	3699.8	3691.8	1.00
+M3PredicatedSortedMap treemap keynull	putLast[class java.lang.Object, class java.lang.Object]	11244.6	11381.4	0.99
+M3PredicatedSortedMap treemap keynull	put[class java.lang.Object, class java.lang.Object]	4822.4	4746.2	1.02
+M3PredicatedSortedMap treemap keynull	remove[class java.lang.Object, class java.lang.Object]	3400.4	2913.2	1.17
+M3PredicatedSortedMap treemap keynull	remove[class java.lang.Object]	3584.0	3382.8	1.06
+M3PredicatedSortedMap treemap keynull	replaceAll[interface java.util.function.BiFunction]	25.6	71.2	0.36
+M3PredicatedSortedMap treemap keynull	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	3668.2	3722.0	0.99
+M3PredicatedSortedMap treemap keynull	replace[class java.lang.Object, class java.lang.Object]	3651.4	3672.8	0.99
+M3PredicatedSortedMap treemap keynull	reversed[]	13.0	17.6	0.74
+M3PredicatedSortedMap treemap keynull	sequencedEntrySet[]	13.2	15.2	0.87
+M3PredicatedSortedMap treemap keynull	sequencedKeySet[]	13.0	15.2	0.86
+M3PredicatedSortedMap treemap keynull	sequencedValues[]	13.0	15.2	0.86
+M3PredicatedSortedMap treemap keynull	size[]	12.6	17.4	0.72
+M3PredicatedSortedMap treemap keynull	subMap[class java.lang.Object, class java.lang.Object]	5237.6	5122.6	1.02
+M3PredicatedSortedMap treemap keynull	tailMap[class java.lang.Object]	559.4	547.6	1.02
+M3PredicatedSortedMap treemap keynull	toString[]	22.4	24.4	0.92
+M3PredicatedSortedMap treemap keynull	values[]	12.2	19.4	0.63
+M3PredicatedSortedMap treemap valuenull	clear[]	12.4	19.4	0.64
+M3PredicatedSortedMap treemap valuenull	comparator[]	12.4	12.8	0.97
+M3PredicatedSortedMap treemap valuenull	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	6112.8	5856.0	1.04
+M3PredicatedSortedMap treemap valuenull	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	3812.8	3817.8	1.00
+M3PredicatedSortedMap treemap valuenull	compute[class java.lang.Object, interface java.util.function.BiFunction]	5178.2	5256.6	0.99
+M3PredicatedSortedMap treemap valuenull	containsKey[class java.lang.Object]	3439.6	3508.0	0.98
+M3PredicatedSortedMap treemap valuenull	containsValue[class java.lang.Object]	12.2	19.4	0.63
+M3PredicatedSortedMap treemap valuenull	entrySet[]	12.8	13.0	0.98
+M3PredicatedSortedMap treemap valuenull	equals[class java.lang.Object]	13.2	32.0	0.41
+M3PredicatedSortedMap treemap valuenull	firstEntry[]	23.6	30.6	0.77
+M3PredicatedSortedMap treemap valuenull	firstKey[]	11055.8	11053.6	1.00
+M3PredicatedSortedMap treemap valuenull	forEach[interface java.util.function.BiConsumer]	23.8	30.2	0.79
+M3PredicatedSortedMap treemap valuenull	getOrDefault[class java.lang.Object, class java.lang.Object]	3678.0	3815.2	0.96
+M3PredicatedSortedMap treemap valuenull	get[class java.lang.Object]	3787.4	3865.2	0.98
+M3PredicatedSortedMap treemap valuenull	hashCode[]	13.2	29.0	0.46
+M3PredicatedSortedMap treemap valuenull	headMap[class java.lang.Object]	546.4	547.0	1.00
+M3PredicatedSortedMap treemap valuenull	isEmpty[]	12.8	19.8	0.65
+M3PredicatedSortedMap treemap valuenull	keySet[]	12.8	20.0	0.64
+M3PredicatedSortedMap treemap valuenull	lastEntry[]	23.0	66.8	0.34
+M3PredicatedSortedMap treemap valuenull	lastKey[]	11046.8	10984.4	1.01
+M3PredicatedSortedMap treemap valuenull	mapIterator[]	34.6	41.4	0.84
+M3PredicatedSortedMap treemap valuenull	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	8808.4	8942.0	0.99
+M3PredicatedSortedMap treemap valuenull	pollFirstEntry[]	24.6	31.8	0.77
+M3PredicatedSortedMap treemap valuenull	pollLastEntry[]	16.4	48.4	0.34
+M3PredicatedSortedMap treemap valuenull	putAll[interface java.util.Map]	2527.0	2502.8	1.01
+M3PredicatedSortedMap treemap valuenull	putFirst[class java.lang.Object, class java.lang.Object]	11706.6	9965.0	1.17
+M3PredicatedSortedMap treemap valuenull	putIfAbsent[class java.lang.Object, class java.lang.Object]	4125.2	3881.6	1.06
+M3PredicatedSortedMap treemap valuenull	putLast[class java.lang.Object, class java.lang.Object]	11140.8	11347.6	0.98
+M3PredicatedSortedMap treemap valuenull	put[class java.lang.Object, class java.lang.Object]	5500.8	5712.0	0.96
+M3PredicatedSortedMap treemap valuenull	remove[class java.lang.Object, class java.lang.Object]	3693.0	3673.0	1.01
+M3PredicatedSortedMap treemap valuenull	remove[class java.lang.Object]	3563.4	3576.6	1.00
+M3PredicatedSortedMap treemap valuenull	replaceAll[interface java.util.function.BiFunction]	24.4	30.8	0.79
+M3PredicatedSortedMap treemap valuenull	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	3765.8	3729.6	1.01
+M3PredicatedSortedMap treemap valuenull	replace[class java.lang.Object, class java.lang.Object]	3694.4	3687.8	1.00
+M3PredicatedSortedMap treemap valuenull	reversed[]	14.8	20.4	0.73
+M3PredicatedSortedMap treemap valuenull	sequencedEntrySet[]	13.0	15.2	0.86
+M3PredicatedSortedMap treemap valuenull	sequencedKeySet[]	13.4	15.6	0.86
+M3PredicatedSortedMap treemap valuenull	sequencedValues[]	13.4	15.8	0.85
+M3PredicatedSortedMap treemap valuenull	size[]	12.6	17.6	0.72
+M3PredicatedSortedMap treemap valuenull	subMap[class java.lang.Object, class java.lang.Object]	5234.6	5186.6	1.01
+M3PredicatedSortedMap treemap valuenull	tailMap[class java.lang.Object]	508.6	523.8	0.97
+M3PredicatedSortedMap treemap valuenull	toString[]	26.2	28.4	0.92
+M3PredicatedSortedMap treemap valuenull	values[]	12.4	19.2	0.65
+M3TransformedCollection list both	addAll[interface java.util.Collection]	164.6	85.2	1.93
+M3TransformedCollection list both	add[class java.lang.Object]	44.6	22.2	2.01
+M3TransformedCollection list both	clear[]	27.2	17.4	1.56
+M3TransformedCollection list both	containsAll[interface java.util.Collection]	61.6	34.0	1.81
+M3TransformedCollection list both	contains[class java.lang.Object]	43.4	26.8	1.62
+M3TransformedCollection list both	forEach[interface java.util.function.Consumer]	78.6	60.2	1.31
+M3TransformedCollection list both	isEmpty[]	37.8	17.8	2.12
+M3TransformedCollection list both	iterator[]	33.4	21.0	1.59
+M3TransformedCollection list both	parallelStream[]	48.8	29.4	1.66
+M3TransformedCollection list both	removeAll[interface java.util.Collection]	59.2	31.0	1.91
+M3TransformedCollection list both	removeIf[interface java.util.function.Predicate]	47.2	22.2	2.13
+M3TransformedCollection list both	remove[class java.lang.Object]	41.4	23.4	1.77
+M3TransformedCollection list both	retainAll[interface java.util.Collection]	48.8	22.4	2.18
+M3TransformedCollection list both	size[]	31.8	12.6	2.52
+M3TransformedCollection list both	spliterator[]	15.0	19.2	0.78
+M3TransformedCollection list both	stream[]	41.8	25.8	1.62
+M3TransformedCollection list both	toArray[]	40.0	28.4	1.41
+M3TransformedCollection list both	toArray[class [Ljava.lang.Object;]	76.6	55.4	1.38
+M3TransformedCollection list both	toArray[interface java.util.function.IntFunction]	67.2	41.0	1.64
+M3TransformedCollection list both	toString[]	149.0	130.6	1.14
+M3TransformedList list both	addAll[int, interface java.util.Collection]	3145.0	3243.4	0.97
+M3TransformedList list both	addAll[interface java.util.Collection]	113.8	85.0	1.34
+M3TransformedList list both	addFirst[class java.lang.Object]	3021.0	3004.6	1.01
+M3TransformedList list both	addLast[class java.lang.Object]	40.0	30.2	1.32
+M3TransformedList list both	add[class java.lang.Object]	44.8	22.2	2.02
+M3TransformedList list both	add[int, class java.lang.Object]	3011.4	3024.6	1.00
+M3TransformedList list both	clear[]	30.4	19.8	1.54
+M3TransformedList list both	containsAll[interface java.util.Collection]	60.6	33.6	1.80
+M3TransformedList list both	contains[class java.lang.Object]	43.2	26.8	1.61
+M3TransformedList list both	equals[class java.lang.Object]	52.8	56.8	0.93
+M3TransformedList list both	forEach[interface java.util.function.Consumer]	78.2	60.0	1.30
+M3TransformedList list both	getFirst[]	30.8	23.0	1.34
+M3TransformedList list both	getLast[]	50.8	38.8	1.31
+M3TransformedList list both	get[int]	11928.6	12103.2	0.99
+M3TransformedList list both	hashCode[]	42.8	47.6	0.90
+M3TransformedList list both	indexOf[class java.lang.Object]	43.6	50.6	0.86
+M3TransformedList list both	isEmpty[]	36.6	17.8	2.06
+M3TransformedList list both	iterator[]	32.4	20.4	1.59
+M3TransformedList list both	lastIndexOf[class java.lang.Object]	42.8	50.8	0.84
+M3TransformedList list both	listIterator[]	43.6	48.8	0.89
+M3TransformedList list both	listIterator[int]	3980.2	3993.0	1.00
+M3TransformedList list both	parallelStream[]	62.4	46.6	1.34
+M3TransformedList list both	removeAll[interface java.util.Collection]	55.6	30.8	1.81
+M3TransformedList list both	removeFirst[]	11038.6	11995.8	0.92
+M3TransformedList list both	removeIf[interface java.util.function.Predicate]	48.0	22.2	2.16
+M3TransformedList list both	removeLast[]	11180.2	11560.2	0.97
+M3TransformedList list both	remove[class java.lang.Object]	39.8	23.4	1.70
+M3TransformedList list both	remove[int]	11906.2	10980.8	1.08
+M3TransformedList list both	replaceAll[interface java.util.function.UnaryOperator]	131.4	106.6	1.23
+M3TransformedList list both	retainAll[interface java.util.Collection]	47.6	22.2	2.14
+M3TransformedList list both	reversed[]	49.0	34.8	1.41
+M3TransformedList list both	set[int, class java.lang.Object]	12392.4	11888.0	1.04
+M3TransformedList list both	size[]	37.2	14.8	2.51
+M3TransformedList list both	sort[interface java.util.Comparator]	267.4	198.4	1.35
+M3TransformedList list both	spliterator[]	56.2	61.6	0.91
+M3TransformedList list both	stream[]	64.6	46.8	1.38
+M3TransformedList list both	subList[int, int]	10909.8	10897.2	1.00
+M3TransformedList list both	toArray[]	45.2	32.8	1.38
+M3TransformedList list both	toArray[class [Ljava.lang.Object;]	77.4	55.4	1.40
+M3TransformedList list both	toArray[interface java.util.function.IntFunction]	65.4	41.0	1.60
+M3TransformedList list both	toString[]	132.4	120.4	1.10
+M3TransformedSet hashset both	addAll[interface java.util.Collection]	182.0	89.6	2.03
+M3TransformedSet hashset both	add[class java.lang.Object]	49.0	26.8	1.83
+M3TransformedSet hashset both	clear[]	31.8	20.4	1.56
+M3TransformedSet hashset both	containsAll[interface java.util.Collection]	60.6	31.6	1.92
+M3TransformedSet hashset both	contains[class java.lang.Object]	44.4	25.2	1.76
+M3TransformedSet hashset both	equals[class java.lang.Object]	52.6	59.2	0.89
+M3TransformedSet hashset both	forEach[interface java.util.function.Consumer]	99.0	80.6	1.23
+M3TransformedSet hashset both	hashCode[]	85.0	93.2	0.91
+M3TransformedSet hashset both	isEmpty[]	37.2	18.4	2.02
+M3TransformedSet hashset both	iterator[]	45.8	33.6	1.36
+M3TransformedSet hashset both	parallelStream[]	48.6	28.8	1.69
+M3TransformedSet hashset both	removeAll[interface java.util.Collection]	79.6	57.2	1.39
+M3TransformedSet hashset both	removeIf[interface java.util.function.Predicate]	54.4	29.8	1.83
+M3TransformedSet hashset both	remove[class java.lang.Object]	44.0	26.2	1.68
+M3TransformedSet hashset both	retainAll[interface java.util.Collection]	55.0	28.2	1.95
+M3TransformedSet hashset both	size[]	37.8	18.0	2.10
+M3TransformedSet hashset both	spliterator[]	36.2	49.8	0.73
+M3TransformedSet hashset both	stream[]	49.4	28.6	1.73
+M3TransformedSet hashset both	toArray[]	51.8	39.4	1.31
+M3TransformedSet hashset both	toArray[class [Ljava.lang.Object;]	70.2	46.8	1.50
+M3TransformedSet hashset both	toArray[interface java.util.function.IntFunction]	60.0	41.0	1.46
+M3TransformedSet hashset both	toString[]	129.4	141.8	0.91
+M3TransformedSortedSet treeset both	addAll[interface java.util.Collection]	172.2	97.2	1.77
+M3TransformedSortedSet treeset both	addFirst[class java.lang.Object]	10681.4	11025.0	0.97
+M3TransformedSortedSet treeset both	addLast[class java.lang.Object]	10587.8	11620.4	0.91
+M3TransformedSortedSet treeset both	add[class java.lang.Object]	3470.4	3635.6	0.95
+M3TransformedSortedSet treeset both	clear[]	31.0	20.4	1.52
+M3TransformedSortedSet treeset both	comparator[]	31.2	30.6	1.02
+M3TransformedSortedSet treeset both	containsAll[interface java.util.Collection]	68.8	36.8	1.87
+M3TransformedSortedSet treeset both	contains[class java.lang.Object]	3598.0	3616.2	0.99
+M3TransformedSortedSet treeset both	equals[class java.lang.Object]	28.8	20.8	1.38
+M3TransformedSortedSet treeset both	first[]	32.2	40.6	0.79
+M3TransformedSortedSet treeset both	forEach[interface java.util.function.Consumer]	70.6	50.4	1.40
+M3TransformedSortedSet treeset both	getFirst[]	35.8	35.0	1.02
+M3TransformedSortedSet treeset both	getLast[]	28.6	21.0	1.36
+M3TransformedSortedSet treeset both	hashCode[]	58.0	36.2	1.60
+M3TransformedSortedSet treeset both	headSet[class java.lang.Object]	532.2	536.0	0.99
+M3TransformedSortedSet treeset both	isEmpty[]	16.2	7.2	2.25
+M3TransformedSortedSet treeset both	iterator[]	37.6	24.6	1.53
+M3TransformedSortedSet treeset both	last[]	34.4	34.6	0.99
+M3TransformedSortedSet treeset both	parallelStream[]	54.4	38.2	1.42
+M3TransformedSortedSet treeset both	removeAll[interface java.util.Collection]	57.0	42.2	1.35
+M3TransformedSortedSet treeset both	removeFirst[]	5648.0	7456.6	0.76
+M3TransformedSortedSet treeset both	removeIf[interface java.util.function.Predicate]	56.2	31.4	1.79
+M3TransformedSortedSet treeset both	removeLast[]	11476.2	12613.8	0.91
+M3TransformedSortedSet treeset both	remove[class java.lang.Object]	3592.6	3683.4	0.98
+M3TransformedSortedSet treeset both	retainAll[interface java.util.Collection]	55.2	30.2	1.83
+M3TransformedSortedSet treeset both	reversed[]	39.4	26.4	1.49
+M3TransformedSortedSet treeset both	size[]	41.0	22.2	1.85
+M3TransformedSortedSet treeset both	spliterator[]	31.2	18.0	1.73
+M3TransformedSortedSet treeset both	stream[]	52.2	36.0	1.45
+M3TransformedSortedSet treeset both	subSet[class java.lang.Object, class java.lang.Object]	5200.2	5446.0	0.95
+M3TransformedSortedSet treeset both	tailSet[class java.lang.Object]	598.8	586.0	1.02
+M3TransformedSortedSet treeset both	toArray[]	59.8	47.8	1.25
+M3TransformedSortedSet treeset both	toArray[class [Ljava.lang.Object;]	52.8	59.8	0.88
+M3TransformedSortedSet treeset both	toArray[interface java.util.function.IntFunction]	89.8	65.0	1.38
+M3TransformedSortedSet treeset both	toString[]	103.6	107.4	0.96
+M3TransformedNavigableSet treeset both	addAll[interface java.util.Collection]	102.6	68.2	1.50
+M3TransformedNavigableSet treeset both	addFirst[class java.lang.Object]	11805.6	11561.2	1.02
+M3TransformedNavigableSet treeset both	addLast[class java.lang.Object]	11183.4	11310.2	0.99
+M3TransformedNavigableSet treeset both	add[class java.lang.Object]	3174.4	3717.4	0.85
+M3TransformedNavigableSet treeset both	ceiling[class java.lang.Object]	536.4	311.4	1.72
+M3TransformedNavigableSet treeset both	clear[]	31.0	20.6	1.50
+M3TransformedNavigableSet treeset both	comparator[]	31.2	13.6	2.29
+M3TransformedNavigableSet treeset both	containsAll[interface java.util.Collection]	71.0	39.0	1.82
+M3TransformedNavigableSet treeset both	contains[class java.lang.Object]	3701.6	3760.6	0.98
+M3TransformedNavigableSet treeset both	descendingIterator[]	45.8	51.0	0.90
+M3TransformedNavigableSet treeset both	descendingSet[]	48.4	89.6	0.54
+M3TransformedNavigableSet treeset both	equals[class java.lang.Object]	53.6	34.4	1.56
+M3TransformedNavigableSet treeset both	first[]	33.0	14.8	2.23
+M3TransformedNavigableSet treeset both	floor[class java.lang.Object]	531.8	536.8	0.99
+M3TransformedNavigableSet treeset both	forEach[interface java.util.function.Consumer]	89.4	53.2	1.68
+M3TransformedNavigableSet treeset both	getFirst[]	33.6	24.4	1.38
+M3TransformedNavigableSet treeset both	getLast[]	34.0	25.0	1.36
+M3TransformedNavigableSet treeset both	hashCode[]	58.6	38.6	1.52
+M3TransformedNavigableSet treeset both	headSet[class java.lang.Object, boolean]	627.4	631.8	0.99
+M3TransformedNavigableSet treeset both	headSet[class java.lang.Object]	533.0	536.4	0.99
+M3TransformedNavigableSet treeset both	higher[class java.lang.Object]	523.0	531.4	0.98
+M3TransformedNavigableSet treeset both	isEmpty[]	17.0	7.2	2.36
+M3TransformedNavigableSet treeset both	iterator[]	15.6	9.4	1.66
+M3TransformedNavigableSet treeset both	last[]	32.8	16.0	2.05
+M3TransformedNavigableSet treeset both	lower[class java.lang.Object]	549.0	543.8	1.01
+M3TransformedNavigableSet treeset both	parallelStream[]	53.2	36.2	1.47
+M3TransformedNavigableSet treeset both	pollFirst[]	32.0	37.6	0.85
+M3TransformedNavigableSet treeset both	pollLast[]	31.0	36.4	0.85
+M3TransformedNavigableSet treeset both	removeAll[interface java.util.Collection]	37.4	43.6	0.86
+M3TransformedNavigableSet treeset both	removeFirst[]	11100.8	11819.2	0.94
+M3TransformedNavigableSet treeset both	removeIf[interface java.util.function.Predicate]	58.2	32.6	1.79
+M3TransformedNavigableSet treeset both	removeLast[]	10897.8	8808.0	1.24
+M3TransformedNavigableSet treeset both	remove[class java.lang.Object]	3880.4	3777.8	1.03
+M3TransformedNavigableSet treeset both	retainAll[interface java.util.Collection]	55.2	30.4	1.82
+M3TransformedNavigableSet treeset both	reversed[]	35.0	25.6	1.37
+M3TransformedNavigableSet treeset both	size[]	34.8	19.0	1.83
+M3TransformedNavigableSet treeset both	spliterator[]	31.4	18.6	1.69
+M3TransformedNavigableSet treeset both	stream[]	20.0	16.0	1.25
+M3TransformedNavigableSet treeset both	subSet[class java.lang.Object, boolean, class java.lang.Object, boolean]	3247.4	2369.6	1.37
+M3TransformedNavigableSet treeset both	subSet[class java.lang.Object, class java.lang.Object]	5194.6	5404.6	0.96
+M3TransformedNavigableSet treeset both	tailSet[class java.lang.Object, boolean]	653.8	611.4	1.07
+M3TransformedNavigableSet treeset both	tailSet[class java.lang.Object]	562.0	554.8	1.01
+M3TransformedNavigableSet treeset both	toArray[]	61.6	48.4	1.27
+M3TransformedNavigableSet treeset both	toArray[class [Ljava.lang.Object;]	34.2	23.2	1.47
+M3TransformedNavigableSet treeset both	toArray[interface java.util.function.IntFunction]	34.8	23.8	1.46
+M3TransformedNavigableSet treeset both	toString[]	113.4	107.6	1.05
+M3TransformedQueue deque both	addAll[interface java.util.Collection]	144.8	71.8	2.02
+M3TransformedQueue deque both	add[class java.lang.Object]	45.4	23.0	1.97
+M3TransformedQueue deque both	clear[]	32.2	20.2	1.59
+M3TransformedQueue deque both	containsAll[interface java.util.Collection]	59.4	32.8	1.81
+M3TransformedQueue deque both	contains[class java.lang.Object]	42.4	26.2	1.62
+M3TransformedQueue deque both	element[]	31.4	38.0	0.83
+M3TransformedQueue deque both	forEach[interface java.util.function.Consumer]	87.0	68.4	1.27
+M3TransformedQueue deque both	isEmpty[]	37.2	18.2	2.04
+M3TransformedQueue deque both	iterator[]	35.6	22.6	1.58
+M3TransformedQueue deque both	offer[class java.lang.Object]	37.0	43.8	0.84
+M3TransformedQueue deque both	parallelStream[]	50.4	32.2	1.57
+M3TransformedQueue deque both	peek[]	25.6	30.6	0.84
+M3TransformedQueue deque both	poll[]	31.2	38.2	0.82
+M3TransformedQueue deque both	removeAll[interface java.util.Collection]	57.8	32.4	1.78
+M3TransformedQueue deque both	removeIf[interface java.util.function.Predicate]	56.4	30.0	1.88
+M3TransformedQueue deque both	remove[]	11071.2	11547.2	0.96
+M3TransformedQueue deque both	remove[class java.lang.Object]	40.0	22.0	1.82
+M3TransformedQueue deque both	retainAll[interface java.util.Collection]	58.4	28.4	2.06
+M3TransformedQueue deque both	size[]	39.2	17.8	2.20
+M3TransformedQueue deque both	spliterator[]	36.2	18.0	2.01
+M3TransformedQueue deque both	stream[]	49.8	28.4	1.75
+M3TransformedQueue deque both	toArray[]	43.4	31.4	1.38
+M3TransformedQueue deque both	toArray[class [Ljava.lang.Object;]	62.4	38.8	1.61
+M3TransformedQueue deque both	toArray[interface java.util.function.IntFunction]	66.6	43.2	1.54
+M3TransformedQueue deque both	toString[]	174.8	159.6	1.10
+M3TransformedBag hashbag both	addAll[interface java.util.Collection]	156.8	78.4	2.00
+M3TransformedBag hashbag both	add[class java.lang.Object, int]	64.4	76.8	0.84
+M3TransformedBag hashbag both	add[class java.lang.Object]	49.2	26.8	1.84
+M3TransformedBag hashbag both	clear[]	13.6	7.8	1.74
+M3TransformedBag hashbag both	containsAll[interface java.util.Collection]	192.4	196.2	0.98
+M3TransformedBag hashbag both	contains[class java.lang.Object]	42.2	25.2	1.67
+M3TransformedBag hashbag both	equals[class java.lang.Object]	29.2	29.6	0.99
+M3TransformedBag hashbag both	forEach[interface java.util.function.Consumer]	134.0	119.8	1.12
+M3TransformedBag hashbag both	getCount[class java.lang.Object]	43.0	52.6	0.82
+M3TransformedBag hashbag both	hashCode[]	88.0	91.6	0.96
+M3TransformedBag hashbag both	isEmpty[]	16.4	7.0	2.34
+M3TransformedBag hashbag both	iterator[]	52.6	40.0	1.32
+M3TransformedBag hashbag both	parallelStream[]	19.6	11.2	1.75
+M3TransformedBag hashbag both	removeAll[interface java.util.Collection]	46.2	52.2	0.89
+M3TransformedBag hashbag both	removeIf[interface java.util.function.Predicate]	61.6	36.6	1.68
+M3TransformedBag hashbag both	remove[class java.lang.Object, int]	35.0	36.6	0.96
+M3TransformedBag hashbag both	remove[class java.lang.Object]	18.6	10.0	1.86
+M3TransformedBag hashbag both	retainAll[interface java.util.Collection]	132.4	138.0	0.96
+M3TransformedBag hashbag both	size[]	41.2	19.8	2.08
+M3TransformedBag hashbag both	spliterator[]	35.8	18.2	1.97
+M3TransformedBag hashbag both	stream[]	19.4	11.2	1.73
+M3TransformedBag hashbag both	toArray[]	111.6	98.0	1.14
+M3TransformedBag hashbag both	toArray[class [Ljava.lang.Object;]	103.2	84.6	1.22
+M3TransformedBag hashbag both	toArray[interface java.util.function.IntFunction]	137.0	108.8	1.26
+M3TransformedBag hashbag both	toString[]	194.2	177.8	1.09
+M3TransformedBag hashbag both	uniqueSet[]	42.4	54.2	0.78
+M3TransformedSortedBag treebag both	addAll[interface java.util.Collection]	202.6	120.4	1.68
+M3TransformedSortedBag treebag both	add[class java.lang.Object, int]	3084.2	2999.6	1.03
+M3TransformedSortedBag treebag both	add[class java.lang.Object]	3673.4	3686.4	1.00
+M3TransformedSortedBag treebag both	clear[]	33.2	22.0	1.51
+M3TransformedSortedBag treebag both	comparator[]	31.8	31.2	1.02
+M3TransformedSortedBag treebag both	containsAll[interface java.util.Collection]	193.8	194.4	1.00
+M3TransformedSortedBag treebag both	contains[class java.lang.Object]	3285.6	3594.4	0.91
+M3TransformedSortedBag treebag both	equals[class java.lang.Object]	42.8	24.6	1.74
+M3TransformedSortedBag treebag both	first[]	13.6	16.6	0.82
+M3TransformedSortedBag treebag both	forEach[interface java.util.function.Consumer]	83.4	68.8	1.21
+M3TransformedSortedBag treebag both	getCount[class java.lang.Object]	3656.6	3882.8	0.94
+M3TransformedSortedBag treebag both	hashCode[]	64.0	39.8	1.61
+M3TransformedSortedBag treebag both	isEmpty[]	38.0	18.6	2.04
+M3TransformedSortedBag treebag both	iterator[]	44.0	31.8	1.38
+M3TransformedSortedBag treebag both	last[]	23.4	27.6	0.85
+M3TransformedSortedBag treebag both	parallelStream[]	38.0	23.4	1.62
+M3TransformedSortedBag treebag both	removeAll[interface java.util.Collection]	41.2	47.0	0.88
+M3TransformedSortedBag treebag both	removeIf[interface java.util.function.Predicate]	64.6	39.2	1.65
+M3TransformedSortedBag treebag both	remove[class java.lang.Object, int]	3692.8	3708.4	1.00
+M3TransformedSortedBag treebag both	remove[class java.lang.Object]	3572.4	3621.2	0.99
+M3TransformedSortedBag treebag both	retainAll[interface java.util.Collection]	137.6	116.8	1.18
+M3TransformedSortedBag treebag both	size[]	38.0	18.6	2.04
+M3TransformedSortedBag treebag both	spliterator[]	14.4	6.4	2.25
+M3TransformedSortedBag treebag both	stream[]	48.8	29.2	1.67
+M3TransformedSortedBag treebag both	toArray[]	71.2	77.8	0.92
+M3TransformedSortedBag treebag both	toArray[class [Ljava.lang.Object;]	55.4	42.6	1.30
+M3TransformedSortedBag treebag both	toArray[interface java.util.function.IntFunction]	43.6	32.2	1.35
+M3TransformedSortedBag treebag both	toString[]	153.4	155.4	0.99
+M3TransformedSortedBag treebag both	uniqueSet[]	52.6	20.0	2.63
+M3TransformedMap hashmap both	clear[]	24.8	16.0	1.55
+M3TransformedMap hashmap both	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	64.2	44.2	1.45
+M3TransformedMap hashmap both	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	54.2	32.8	1.65
+M3TransformedMap hashmap both	compute[class java.lang.Object, interface java.util.function.BiFunction]	76.4	63.6	1.20
+M3TransformedMap hashmap both	containsKey[class java.lang.Object]	40.8	22.6	1.81
+M3TransformedMap hashmap both	containsValue[class java.lang.Object]	53.2	36.2	1.47
+M3TransformedMap hashmap both	entrySet[]	34.6	38.0	0.91
+M3TransformedMap hashmap both	equals[class java.lang.Object]	42.6	25.8	1.65
+M3TransformedMap hashmap both	forEach[interface java.util.function.BiConsumer]	144.0	165.4	0.87
+M3TransformedMap hashmap both	getOrDefault[class java.lang.Object, class java.lang.Object]	48.8	43.2	1.13
+M3TransformedMap hashmap both	get[class java.lang.Object]	37.4	22.6	1.66
+M3TransformedMap hashmap both	hashCode[]	112.6	92.6	1.22
+M3TransformedMap hashmap both	isEmpty[]	38.0	17.4	2.18
+M3TransformedMap hashmap both	keySet[]	31.2	19.4	1.61
+M3TransformedMap hashmap both	mapIterator[]	76.6	96.4	0.79
+M3TransformedMap hashmap both	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	3598.6	3751.6	0.96
+M3TransformedMap hashmap both	putAll[interface java.util.Map]	258.4	185.6	1.39
+M3TransformedMap hashmap both	putIfAbsent[class java.lang.Object, class java.lang.Object]	52.6	40.2	1.31
+M3TransformedMap hashmap both	put[class java.lang.Object, class java.lang.Object]	22.6	50.8	0.44
+M3TransformedMap hashmap both	remove[class java.lang.Object, class java.lang.Object]	47.6	32.4	1.47
+M3TransformedMap hashmap both	remove[class java.lang.Object]	35.4	23.4	1.51
+M3TransformedMap hashmap both	replaceAll[interface java.util.function.BiFunction]	151.4	182.6	0.83
+M3TransformedMap hashmap both	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	57.8	40.2	1.44
+M3TransformedMap hashmap both	replace[class java.lang.Object, class java.lang.Object]	56.0	52.8	1.06
+M3TransformedMap hashmap both	size[]	39.0	17.6	2.22
+M3TransformedMap hashmap both	toString[]	158.0	151.4	1.04
+M3TransformedMap hashmap both	values[]	25.2	15.6	1.62
+M3TransformedMap linkedmap both	clear[]	22.6	27.4	0.82
+M3TransformedMap linkedmap both	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	26.4	41.0	0.64
+M3TransformedMap linkedmap both	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	18.2	29.6	0.61
+M3TransformedMap linkedmap both	compute[class java.lang.Object, interface java.util.function.BiFunction]	40.8	60.2	0.68
+M3TransformedMap linkedmap both	containsKey[class java.lang.Object]	7.2	9.8	0.73
+M3TransformedMap linkedmap both	containsValue[class java.lang.Object]	7.2	11.4	0.63
+M3TransformedMap linkedmap both	entrySet[]	14.0	16.2	0.86
+M3TransformedMap linkedmap both	equals[class java.lang.Object]	10.6	25.6	0.41
+M3TransformedMap linkedmap both	forEach[interface java.util.function.BiConsumer]	38.4	148.0	0.26
+M3TransformedMap linkedmap both	getOrDefault[class java.lang.Object, class java.lang.Object]	18.0	34.8	0.52
+M3TransformedMap linkedmap both	get[class java.lang.Object]	18.2	22.6	0.81
+M3TransformedMap linkedmap both	hashCode[]	25.2	29.2	0.86
+M3TransformedMap linkedmap both	isEmpty[]	13.2	18.0	0.73
+M3TransformedMap linkedmap both	keySet[]	12.8	19.4	0.66
+M3TransformedMap linkedmap both	mapIterator[]	33.4	66.4	0.50
+M3TransformedMap linkedmap both	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	2367.2	2412.2	0.98
+M3TransformedMap linkedmap both	putAll[interface java.util.Map]	111.0	117.0	0.95
+M3TransformedMap linkedmap both	putIfAbsent[class java.lang.Object, class java.lang.Object]	14.0	21.8	0.64
+M3TransformedMap linkedmap both	put[class java.lang.Object, class java.lang.Object]	16.0	14.4	1.11
+M3TransformedMap linkedmap both	remove[class java.lang.Object, class java.lang.Object]	18.6	31.8	0.58
+M3TransformedMap linkedmap both	remove[class java.lang.Object]	9.2	12.6	0.73
+M3TransformedMap linkedmap both	replaceAll[interface java.util.function.BiFunction]	46.6	181.0	0.26
+M3TransformedMap linkedmap both	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	25.6	40.0	0.64
+M3TransformedMap linkedmap both	replace[class java.lang.Object, class java.lang.Object]	11.6	21.4	0.54
+M3TransformedMap linkedmap both	size[]	12.8	17.6	0.73
+M3TransformedMap linkedmap both	toString[]	113.6	115.4	0.98
+M3TransformedMap linkedmap both	values[]	12.6	19.4	0.65
+M3TransformedMap hashmap keynull	clear[]	13.6	17.0	0.80
+M3TransformedMap hashmap keynull	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	23.8	42.4	0.56
+M3TransformedMap hashmap keynull	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	16.2	30.4	0.53
+M3TransformedMap hashmap keynull	compute[class java.lang.Object, interface java.util.function.BiFunction]	38.8	59.2	0.66
+M3TransformedMap hashmap keynull	containsKey[class java.lang.Object]	16.4	24.6	0.67
+M3TransformedMap hashmap keynull	containsValue[class java.lang.Object]	32.2	38.4	0.84
+M3TransformedMap hashmap keynull	entrySet[]	17.6	21.8	0.81
+M3TransformedMap hashmap keynull	equals[class java.lang.Object]	14.0	33.8	0.41
+M3TransformedMap hashmap keynull	forEach[interface java.util.function.BiConsumer]	49.8	139.4	0.36
+M3TransformedMap hashmap keynull	getOrDefault[class java.lang.Object, class java.lang.Object]	18.8	45.4	0.41
+M3TransformedMap hashmap keynull	get[class java.lang.Object]	15.0	22.6	0.66
+M3TransformedMap hashmap keynull	hashCode[]	29.0	38.0	0.76
+M3TransformedMap hashmap keynull	isEmpty[]	13.4	18.6	0.72
+M3TransformedMap hashmap keynull	keySet[]	12.8	20.0	0.64
+M3TransformedMap hashmap keynull	mapIterator[]	22.8	62.8	0.36
+M3TransformedMap hashmap keynull	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	3606.8	3807.8	0.95
+M3TransformedMap hashmap keynull	putAll[interface java.util.Map]	139.6	146.6	0.95
+M3TransformedMap hashmap keynull	putIfAbsent[class java.lang.Object, class java.lang.Object]	21.4	40.2	0.53
+M3TransformedMap hashmap keynull	put[class java.lang.Object, class java.lang.Object]	22.6	31.6	0.72
+M3TransformedMap hashmap keynull	remove[class java.lang.Object, class java.lang.Object]	17.6	33.8	0.52
+M3TransformedMap hashmap keynull	remove[class java.lang.Object]	18.2	23.8	0.76
+M3TransformedMap hashmap keynull	replaceAll[interface java.util.function.BiFunction]	72.8	203.8	0.36
+M3TransformedMap hashmap keynull	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	18.0	32.0	0.56
+M3TransformedMap hashmap keynull	replace[class java.lang.Object, class java.lang.Object]	24.6	53.4	0.46
+M3TransformedMap hashmap keynull	size[]	10.2	14.2	0.72
+M3TransformedMap hashmap keynull	toString[]	200.4	185.0	1.08
+M3TransformedMap hashmap keynull	values[]	12.8	19.8	0.65
+M3TransformedMap hashmap valuenull	clear[]	15.4	19.6	0.79
+M3TransformedMap hashmap valuenull	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	24.0	43.0	0.56
+M3TransformedMap hashmap valuenull	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	16.6	31.2	0.53
+M3TransformedMap hashmap valuenull	compute[class java.lang.Object, interface java.util.function.BiFunction]	40.8	61.8	0.66
+M3TransformedMap hashmap valuenull	containsKey[class java.lang.Object]	15.0	23.6	0.64
+M3TransformedMap hashmap valuenull	containsValue[class java.lang.Object]	30.8	36.4	0.85
+M3TransformedMap hashmap valuenull	entrySet[]	16.2	20.0	0.81
+M3TransformedMap hashmap valuenull	equals[class java.lang.Object]	13.2	32.4	0.41
+M3TransformedMap hashmap valuenull	forEach[interface java.util.function.BiConsumer]	62.0	167.0	0.37
+M3TransformedMap hashmap valuenull	getOrDefault[class java.lang.Object, class java.lang.Object]	18.8	44.2	0.43
+M3TransformedMap hashmap valuenull	get[class java.lang.Object]	15.4	23.2	0.66
+M3TransformedMap hashmap valuenull	hashCode[]	70.8	92.8	0.76
+M3TransformedMap hashmap valuenull	isEmpty[]	13.8	17.6	0.78
+M3TransformedMap hashmap valuenull	keySet[]	12.4	19.4	0.64
+M3TransformedMap hashmap valuenull	mapIterator[]	51.6	93.2	0.55
+M3TransformedMap hashmap valuenull	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	3237.8	3078.0	1.05
+M3TransformedMap hashmap valuenull	putAll[interface java.util.Map]	131.0	139.2	0.94
+M3TransformedMap hashmap valuenull	putIfAbsent[class java.lang.Object, class java.lang.Object]	21.8	40.4	0.54
+M3TransformedMap hashmap valuenull	put[class java.lang.Object, class java.lang.Object]	8.2	10.8	0.76
+M3TransformedMap hashmap valuenull	remove[class java.lang.Object, class java.lang.Object]	16.8	32.2	0.52
+M3TransformedMap hashmap valuenull	remove[class java.lang.Object]	17.8	23.4	0.76
+M3TransformedMap hashmap valuenull	replaceAll[interface java.util.function.BiFunction]	71.2	197.8	0.36
+M3TransformedMap hashmap valuenull	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	21.8	38.4	0.57
+M3TransformedMap hashmap valuenull	replace[class java.lang.Object, class java.lang.Object]	25.2	53.8	0.47
+M3TransformedMap hashmap valuenull	size[]	12.6	17.4	0.72
+M3TransformedMap hashmap valuenull	toString[]	68.0	69.6	0.98
+M3TransformedMap hashmap valuenull	values[]	4.2	7.4	0.57
+M3TransformedSortedMap treemap both	clear[]	30.2	19.4	1.56
+M3TransformedSortedMap treemap both	comparator[]	32.4	38.8	0.84
+M3TransformedSortedMap treemap both	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	3710.6	3700.6	1.00
+M3TransformedSortedMap treemap both	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	3708.6	3700.2	1.00
+M3TransformedSortedMap treemap both	compute[class java.lang.Object, interface java.util.function.BiFunction]	3714.2	3759.8	0.99
+M3TransformedSortedMap treemap both	containsKey[class java.lang.Object]	3504.0	3588.2	0.98
+M3TransformedSortedMap treemap both	containsValue[class java.lang.Object]	45.2	27.4	1.65
+M3TransformedSortedMap treemap both	entrySet[]	34.6	19.8	1.75
+M3TransformedSortedMap treemap both	equals[class java.lang.Object]	54.0	31.2	1.73
+M3TransformedSortedMap treemap both	firstEntry[]	74.6	112.2	0.66
+M3TransformedSortedMap treemap both	firstKey[]	32.4	38.0	0.85
+M3TransformedSortedMap treemap both	forEach[interface java.util.function.BiConsumer]	104.6	149.4	0.70
+M3TransformedSortedMap treemap both	getOrDefault[class java.lang.Object, class java.lang.Object]	1788.2	1949.6	0.92
+M3TransformedSortedMap treemap both	get[class java.lang.Object]	3491.4	3500.4	1.00
+M3TransformedSortedMap treemap both	hashCode[]	75.8	56.0	1.35
+M3TransformedSortedMap treemap both	headMap[class java.lang.Object]	542.0	584.2	0.93
+M3TransformedSortedMap treemap both	isEmpty[]	31.6	15.8	2.00
+M3TransformedSortedMap treemap both	keySet[]	32.4	19.4	1.67
+M3TransformedSortedMap treemap both	lastEntry[]	95.2	116.6	0.82
+M3TransformedSortedMap treemap both	lastKey[]	32.4	33.0	0.98
+M3TransformedSortedMap treemap both	mapIterator[]	65.4	84.2	0.78
+M3TransformedSortedMap treemap both	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	7061.4	7606.4	0.93
+M3TransformedSortedMap treemap both	pollFirstEntry[]	55.8	86.4	0.65
+M3TransformedSortedMap treemap both	pollLastEntry[]	43.6	56.8	0.77
+M3TransformedSortedMap treemap both	putAll[interface java.util.Map]	154.4	135.8	1.14
+M3TransformedSortedMap treemap both	putFirst[class java.lang.Object, class java.lang.Object]	11206.6	11561.6	0.97
+M3TransformedSortedMap treemap both	putIfAbsent[class java.lang.Object, class java.lang.Object]	3686.4	3672.8	1.00
+M3TransformedSortedMap treemap both	putLast[class java.lang.Object, class java.lang.Object]	9978.4	11804.2	0.85
+M3TransformedSortedMap treemap both	put[class java.lang.Object, class java.lang.Object]	3471.0	3442.8	1.01
+M3TransformedSortedMap treemap both	remove[class java.lang.Object, class java.lang.Object]	3825.8	3833.6	1.00
+M3TransformedSortedMap treemap both	remove[class java.lang.Object]	3486.2	3648.2	0.96
+M3TransformedSortedMap treemap both	replaceAll[interface java.util.function.BiFunction]	126.4	186.8	0.68
+M3TransformedSortedMap treemap both	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	3814.0	3702.0	1.03
+M3TransformedSortedMap treemap both	replace[class java.lang.Object, class java.lang.Object]	3836.0	3816.4	1.01
+M3TransformedSortedMap treemap both	reversed[]	36.0	27.4	1.31
+M3TransformedSortedMap treemap both	sequencedEntrySet[]	34.0	18.2	1.87
+M3TransformedSortedMap treemap both	sequencedKeySet[]	32.2	17.8	1.81
+M3TransformedSortedMap treemap both	sequencedValues[]	33.0	18.2	1.81
+M3TransformedSortedMap treemap both	size[]	36.2	17.6	2.06
+M3TransformedSortedMap treemap both	subMap[class java.lang.Object, class java.lang.Object]	5053.8	5148.2	0.98
+M3TransformedSortedMap treemap both	tailMap[class java.lang.Object]	536.8	547.4	0.98
+M3TransformedSortedMap treemap both	toString[]	166.0	150.8	1.10
+M3TransformedSortedMap treemap both	values[]	34.2	19.4	1.76
+M3TransformedSortedMap treemap keynull	clear[]	12.4	19.4	0.64
+M3TransformedSortedMap treemap keynull	comparator[]	12.6	13.0	0.97
+M3TransformedSortedMap treemap keynull	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	3746.2	3766.6	0.99
+M3TransformedSortedMap treemap keynull	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	3682.8	3655.2	1.01
+M3TransformedSortedMap treemap keynull	compute[class java.lang.Object, interface java.util.function.BiFunction]	3914.0	3711.4	1.05
+M3TransformedSortedMap treemap keynull	containsKey[class java.lang.Object]	3557.0	3588.4	0.99
+M3TransformedSortedMap treemap keynull	containsValue[class java.lang.Object]	19.0	26.6	0.71
+M3TransformedSortedMap treemap keynull	entrySet[]	21.2	27.8	0.76
+M3TransformedSortedMap treemap keynull	equals[class java.lang.Object]	13.0	31.8	0.41
+M3TransformedSortedMap treemap keynull	firstEntry[]	17.6	114.2	0.15
+M3TransformedSortedMap treemap keynull	firstKey[]	12.8	13.4	0.96
+M3TransformedSortedMap treemap keynull	forEach[interface java.util.function.BiConsumer]	17.2	148.0	0.12
+M3TransformedSortedMap treemap keynull	getOrDefault[class java.lang.Object, class java.lang.Object]	3583.0	3714.2	0.96
+M3TransformedSortedMap treemap keynull	get[class java.lang.Object]	3510.8	3568.0	0.98
+M3TransformedSortedMap treemap keynull	hashCode[]	13.6	32.8	0.41
+M3TransformedSortedMap treemap keynull	headMap[class java.lang.Object]	519.8	532.8	0.98
+M3TransformedSortedMap treemap keynull	isEmpty[]	12.6	19.6	0.64
+M3TransformedSortedMap treemap keynull	keySet[]	17.8	27.8	0.64
+M3TransformedSortedMap treemap keynull	lastEntry[]	24.0	59.6	0.40
+M3TransformedSortedMap treemap keynull	lastKey[]	13.2	13.6	0.97
+M3TransformedSortedMap treemap keynull	mapIterator[]	41.2	83.4	0.49
+M3TransformedSortedMap treemap keynull	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	7282.6	7507.6	0.97
+M3TransformedSortedMap treemap keynull	pollFirstEntry[]	16.8	84.0	0.20
+M3TransformedSortedMap treemap keynull	pollLastEntry[]	20.2	72.0	0.28
+M3TransformedSortedMap treemap keynull	putAll[interface java.util.Map]	150.6	152.4	0.99
+M3TransformedSortedMap treemap keynull	putFirst[class java.lang.Object, class java.lang.Object]	10938.2	11196.0	0.98
+M3TransformedSortedMap treemap keynull	putIfAbsent[class java.lang.Object, class java.lang.Object]	3726.4	3688.4	1.01
+M3TransformedSortedMap treemap keynull	putLast[class java.lang.Object, class java.lang.Object]	11038.2	11573.0	0.95
+M3TransformedSortedMap treemap keynull	put[class java.lang.Object, class java.lang.Object]	3741.0	3687.2	1.01
+M3TransformedSortedMap treemap keynull	remove[class java.lang.Object, class java.lang.Object]	3678.6	3691.8	1.00
+M3TransformedSortedMap treemap keynull	remove[class java.lang.Object]	3545.8	3685.8	0.96
+M3TransformedSortedMap treemap keynull	replaceAll[interface java.util.function.BiFunction]	27.0	182.4	0.15
+M3TransformedSortedMap treemap keynull	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	3708.8	3705.2	1.00
+M3TransformedSortedMap treemap keynull	replace[class java.lang.Object, class java.lang.Object]	3689.4	3695.4	1.00
+M3TransformedSortedMap treemap keynull	reversed[]	15.6	27.8	0.56
+M3TransformedSortedMap treemap keynull	sequencedEntrySet[]	16.0	22.6	0.71
+M3TransformedSortedMap treemap keynull	sequencedKeySet[]	15.4	21.6	0.71
+M3TransformedSortedMap treemap keynull	sequencedValues[]	14.4	20.2	0.71
+M3TransformedSortedMap treemap keynull	size[]	13.0	18.0	0.72
+M3TransformedSortedMap treemap keynull	subMap[class java.lang.Object, class java.lang.Object]	5153.8	5113.2	1.01
+M3TransformedSortedMap treemap keynull	tailMap[class java.lang.Object]	535.4	529.8	1.01
+M3TransformedSortedMap treemap keynull	toString[]	153.2	155.8	0.98
+M3TransformedSortedMap treemap keynull	values[]	12.8	20.0	0.64
+M3UnmodifiableOrderedMap linkedmap -	clear[]	10900.2	11735.4	0.93
+M3UnmodifiableOrderedMap linkedmap -	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	5703.6	6335.4	0.90
+M3UnmodifiableOrderedMap linkedmap -	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	1944.0	2067.6	0.94
+M3UnmodifiableOrderedMap linkedmap -	compute[class java.lang.Object, interface java.util.function.BiFunction]	8589.8	8921.4	0.96
+M3UnmodifiableOrderedMap linkedmap -	containsKey[class java.lang.Object]	43.8	23.8	1.84
+M3UnmodifiableOrderedMap linkedmap -	containsValue[class java.lang.Object]	47.0	28.6	1.64
+M3UnmodifiableOrderedMap linkedmap -	entrySet[]	74.8	65.4	1.14
+M3UnmodifiableOrderedMap linkedmap -	equals[class java.lang.Object]	52.4	32.4	1.62
+M3UnmodifiableOrderedMap linkedmap -	firstKey[]	37.2	44.2	0.84
+M3UnmodifiableOrderedMap linkedmap -	forEach[interface java.util.function.BiConsumer]	106.2	112.0	0.95
+M3UnmodifiableOrderedMap linkedmap -	getOrDefault[class java.lang.Object, class java.lang.Object]	53.0	44.8	1.18
+M3UnmodifiableOrderedMap linkedmap -	get[class java.lang.Object]	30.2	18.8	1.61
+M3UnmodifiableOrderedMap linkedmap -	hashCode[]	49.6	29.4	1.69
+M3UnmodifiableOrderedMap linkedmap -	isEmpty[]	36.8	17.8	2.07
+M3UnmodifiableOrderedMap linkedmap -	keySet[]	66.8	63.4	1.05
+M3UnmodifiableOrderedMap linkedmap -	lastKey[]	36.0	42.2	0.85
+M3UnmodifiableOrderedMap linkedmap -	mapIterator[]	42.0	61.8	0.68
+M3UnmodifiableOrderedMap linkedmap -	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	13914.0	9137.0	1.52
+M3UnmodifiableOrderedMap linkedmap -	nextKey[class java.lang.Object]	52.2	57.6	0.91
+M3UnmodifiableOrderedMap linkedmap -	previousKey[class java.lang.Object]	20.0	22.0	0.91
+M3UnmodifiableOrderedMap linkedmap -	putAll[interface java.util.Map]	11670.4	10280.6	1.14
+M3UnmodifiableOrderedMap linkedmap -	putIfAbsent[class java.lang.Object, class java.lang.Object]	9249.6	9674.8	0.96
+M3UnmodifiableOrderedMap linkedmap -	put[class java.lang.Object, class java.lang.Object]	11576.2	11366.6	1.02
+M3UnmodifiableOrderedMap linkedmap -	remove[class java.lang.Object, class java.lang.Object]	170.2	153.6	1.11
+M3UnmodifiableOrderedMap linkedmap -	remove[class java.lang.Object]	10773.2	10876.8	0.99
+M3UnmodifiableOrderedMap linkedmap -	replaceAll[interface java.util.function.BiFunction]	12040.2	10027.0	1.20
+M3UnmodifiableOrderedMap linkedmap -	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	171.0	156.0	1.10
+M3UnmodifiableOrderedMap linkedmap -	replace[class java.lang.Object, class java.lang.Object]	1969.6	2129.8	0.92
+M3UnmodifiableOrderedMap linkedmap -	size[]	36.6	17.8	2.06
+M3UnmodifiableOrderedMap linkedmap -	toString[]	131.0	115.4	1.14
+M3UnmodifiableOrderedMap linkedmap -	values[]	66.6	64.2	1.04
+M3UnmodifiableTrie trie -	clear[]	11045.0	11143.8	0.99
+M3UnmodifiableTrie trie -	comparator[]	32.8	36.2	0.91
+M3UnmodifiableTrie trie -	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	8750.8	9906.0	0.88
+M3UnmodifiableTrie trie -	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	1977.4	2025.6	0.98
+M3UnmodifiableTrie trie -	compute[class java.lang.Object, interface java.util.function.BiFunction]	8477.8	8808.4	0.96
+M3UnmodifiableTrie trie -	containsKey[class java.lang.Object]	51.8	51.6	1.00
+M3UnmodifiableTrie trie -	containsValue[class java.lang.Object]	100.0	102.6	0.97
+M3UnmodifiableTrie trie -	entrySet[]	69.0	33.2	2.08
+M3UnmodifiableTrie trie -	equals[class java.lang.Object]	51.8	55.8	0.93
+M3UnmodifiableTrie trie -	firstEntry[]	83.8	69.2	1.21
+M3UnmodifiableTrie trie -	firstKey[]	48.6	53.0	0.92
+M3UnmodifiableTrie trie -	forEach[interface java.util.function.BiConsumer]	121.4	95.2	1.28
+M3UnmodifiableTrie trie -	getOrDefault[class java.lang.Object, class java.lang.Object]	66.2	46.4	1.43
+M3UnmodifiableTrie trie -	get[class java.lang.Object]	46.4	45.8	1.01
+M3UnmodifiableTrie trie -	hashCode[]	55.4	56.4	0.98
+M3UnmodifiableTrie trie -	headMap[class java.lang.Object]	999.2	985.4	1.01
+M3UnmodifiableTrie trie -	isEmpty[]	35.0	38.4	0.91
+M3UnmodifiableTrie trie -	keySet[]	69.6	32.8	2.12
+M3UnmodifiableTrie trie -	lastEntry[]	92.8	93.8	0.99
+M3UnmodifiableTrie trie -	lastKey[]	39.2	42.2	0.93
+M3UnmodifiableTrie trie -	mapIterator[]	21.2	43.4	0.49
+M3UnmodifiableTrie trie -	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	13989.2	14397.8	0.97
+M3UnmodifiableTrie trie -	nextKey[class java.lang.Object]	3471.6	3515.0	0.99
+M3UnmodifiableTrie trie -	pollFirstEntry[]	11346.8	12096.0	0.94
+M3UnmodifiableTrie trie -	pollLastEntry[]	11554.0	12087.0	0.96
+M3UnmodifiableTrie trie -	prefixMap[class java.lang.Object]	64.8	67.6	0.96
+M3UnmodifiableTrie trie -	previousKey[class java.lang.Object]	3450.4	3453.4	1.00
+M3UnmodifiableTrie trie -	putAll[interface java.util.Map]	11188.6	11392.8	0.98
+M3UnmodifiableTrie trie -	putFirst[class java.lang.Object, class java.lang.Object]	11007.6	11136.2	0.99
+M3UnmodifiableTrie trie -	putIfAbsent[class java.lang.Object, class java.lang.Object]	8402.2	8630.2	0.97
+M3UnmodifiableTrie trie -	putLast[class java.lang.Object, class java.lang.Object]	11053.4	11536.0	0.96
+M3UnmodifiableTrie trie -	put[class java.lang.Object, class java.lang.Object]	11019.6	10637.2	1.04
+M3UnmodifiableTrie trie -	remove[class java.lang.Object, class java.lang.Object]	54.8	34.6	1.58
+M3UnmodifiableTrie trie -	remove[class java.lang.Object]	11122.4	11027.6	1.01
+M3UnmodifiableTrie trie -	replaceAll[interface java.util.function.BiFunction]	133.2	108.0	1.23
+M3UnmodifiableTrie trie -	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	30.4	21.2	1.43
+M3UnmodifiableTrie trie -	replace[class java.lang.Object, class java.lang.Object]	1980.4	2092.0	0.95
+M3UnmodifiableTrie trie -	reversed[]	33.6	25.0	1.34
+M3UnmodifiableTrie trie -	sequencedEntrySet[]	66.2	33.0	2.01
+M3UnmodifiableTrie trie -	sequencedKeySet[]	33.2	15.6	2.13
+M3UnmodifiableTrie trie -	sequencedValues[]	33.4	16.6	2.01
+M3UnmodifiableTrie trie -	size[]	40.2	44.4	0.91
+M3UnmodifiableTrie trie -	subMap[class java.lang.Object, class java.lang.Object]	4087.0	4116.0	0.99
+M3UnmodifiableTrie trie -	tailMap[class java.lang.Object]	925.0	668.8	1.38
+M3UnmodifiableTrie trie -	toString[]	726.4	729.6	1.00
+M3UnmodifiableTrie trie -	values[]	57.4	59.6	0.96
+M3UnmodifiableBidiMap dualhashbidi -	clear[]	9512.8	9037.0	1.05
+M3UnmodifiableBidiMap dualhashbidi -	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	8482.0	8926.8	0.95
+M3UnmodifiableBidiMap dualhashbidi -	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	3088.4	3271.0	0.94
+M3UnmodifiableBidiMap dualhashbidi -	compute[class java.lang.Object, interface java.util.function.BiFunction]	9262.8	9637.2	0.96
+M3UnmodifiableBidiMap dualhashbidi -	containsKey[class java.lang.Object]	44.0	26.4	1.67
+M3UnmodifiableBidiMap dualhashbidi -	containsValue[class java.lang.Object]	46.4	31.2	1.49
+M3UnmodifiableBidiMap dualhashbidi -	entrySet[]	77.6	69.4	1.12
+M3UnmodifiableBidiMap dualhashbidi -	equals[class java.lang.Object]	56.8	36.8	1.54
+M3UnmodifiableBidiMap dualhashbidi -	forEach[interface java.util.function.BiConsumer]	208.8	281.0	0.74
+M3UnmodifiableBidiMap dualhashbidi -	getKey[class java.lang.Object]	24.6	30.0	0.82
+M3UnmodifiableBidiMap dualhashbidi -	getOrDefault[class java.lang.Object, class java.lang.Object]	57.0	46.6	1.22
+M3UnmodifiableBidiMap dualhashbidi -	get[class java.lang.Object]	40.8	27.2	1.50
+M3UnmodifiableBidiMap dualhashbidi -	hashCode[]	135.6	114.4	1.19
+M3UnmodifiableBidiMap dualhashbidi -	inverseBidiMap[]	45.8	45.8	1.00
+M3UnmodifiableBidiMap dualhashbidi -	isEmpty[]	41.2	21.6	1.91
+M3UnmodifiableBidiMap dualhashbidi -	keySet[]	33.2	37.0	0.90
+M3UnmodifiableBidiMap dualhashbidi -	mapIterator[]	22.4	53.4	0.42
+M3UnmodifiableBidiMap dualhashbidi -	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	14090.4	14700.6	0.96
+M3UnmodifiableBidiMap dualhashbidi -	putAll[interface java.util.Map]	10971.8	10219.8	1.07
+M3UnmodifiableBidiMap dualhashbidi -	putIfAbsent[class java.lang.Object, class java.lang.Object]	8340.8	8857.2	0.94
+M3UnmodifiableBidiMap dualhashbidi -	put[class java.lang.Object, class java.lang.Object]	11424.0	11263.0	1.01
+M3UnmodifiableBidiMap dualhashbidi -	removeValue[class java.lang.Object]	11007.0	10954.4	1.00
+M3UnmodifiableBidiMap dualhashbidi -	remove[class java.lang.Object, class java.lang.Object]	177.0	159.6	1.11
+M3UnmodifiableBidiMap dualhashbidi -	remove[class java.lang.Object]	11138.2	10945.8	1.02
+M3UnmodifiableBidiMap dualhashbidi -	replaceAll[interface java.util.function.BiFunction]	12272.0	12283.8	1.00
+M3UnmodifiableBidiMap dualhashbidi -	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	179.2	161.6	1.11
+M3UnmodifiableBidiMap dualhashbidi -	replace[class java.lang.Object, class java.lang.Object]	2970.8	3164.8	0.94
+M3UnmodifiableBidiMap dualhashbidi -	size[]	41.0	21.8	1.88
+M3UnmodifiableBidiMap dualhashbidi -	toString[]	229.2	233.6	0.98
+M3UnmodifiableBidiMap dualhashbidi -	values[]	73.8	61.8	1.19
+M3UnmodifiableOrderedBidiMap treebidi -	clear[]	9249.0	11566.2	0.80
+M3UnmodifiableOrderedBidiMap treebidi -	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	10960.2	11557.6	0.95
+M3UnmodifiableOrderedBidiMap treebidi -	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	6599.2	6880.2	0.96
+M3UnmodifiableOrderedBidiMap treebidi -	compute[class java.lang.Object, interface java.util.function.BiFunction]	11774.4	12424.2	0.95
+M3UnmodifiableOrderedBidiMap treebidi -	containsKey[class java.lang.Object]	3251.0	4253.4	0.76
+M3UnmodifiableOrderedBidiMap treebidi -	containsValue[class java.lang.Object]	3217.6	3363.4	0.96
+M3UnmodifiableOrderedBidiMap treebidi -	entrySet[]	71.8	61.2	1.17
+M3UnmodifiableOrderedBidiMap treebidi -	equals[class java.lang.Object]	36.0	62.6	0.58
+M3UnmodifiableOrderedBidiMap treebidi -	firstKey[]	49.0	84.6	0.58
+M3UnmodifiableOrderedBidiMap treebidi -	forEach[interface java.util.function.BiConsumer]	176.0	234.2	0.75
+M3UnmodifiableOrderedBidiMap treebidi -	getKey[class java.lang.Object]	3763.2	3900.2	0.96
+M3UnmodifiableOrderedBidiMap treebidi -	getOrDefault[class java.lang.Object, class java.lang.Object]	3688.6	3900.4	0.95
+M3UnmodifiableOrderedBidiMap treebidi -	get[class java.lang.Object]	3578.4	3660.0	0.98
+M3UnmodifiableOrderedBidiMap treebidi -	hashCode[]	121.0	131.8	0.92
+M3UnmodifiableOrderedBidiMap treebidi -	inverseBidiMap[]	32.6	32.8	0.99
+M3UnmodifiableOrderedBidiMap treebidi -	inverseOrderedBidiMap[]	32.8	33.2	0.99
+M3UnmodifiableOrderedBidiMap treebidi -	isEmpty[]	33.6	44.2	0.76
+M3UnmodifiableOrderedBidiMap treebidi -	keySet[]	66.6	94.8	0.70
+M3UnmodifiableOrderedBidiMap treebidi -	lastKey[]	27.2	59.8	0.45
+M3UnmodifiableOrderedBidiMap treebidi -	mapIterator[]	52.4	110.8	0.47
+M3UnmodifiableOrderedBidiMap treebidi -	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	15457.6	16985.4	0.91
+M3UnmodifiableOrderedBidiMap treebidi -	nextKey[class java.lang.Object]	3733.6	3813.2	0.98
+M3UnmodifiableOrderedBidiMap treebidi -	previousKey[class java.lang.Object]	3567.0	3608.4	0.99
+M3UnmodifiableOrderedBidiMap treebidi -	putAll[interface java.util.Map]	10870.4	11127.8	0.98
+M3UnmodifiableOrderedBidiMap treebidi -	putIfAbsent[class java.lang.Object, class java.lang.Object]	10864.4	11414.4	0.95
+M3UnmodifiableOrderedBidiMap treebidi -	put[class java.lang.Object, class java.lang.Object]	11126.0	11700.0	0.95
+M3UnmodifiableOrderedBidiMap treebidi -	removeValue[class java.lang.Object]	12129.4	11809.6	1.03
+M3UnmodifiableOrderedBidiMap treebidi -	remove[class java.lang.Object, class java.lang.Object]	4524.4	5203.6	0.87
+M3UnmodifiableOrderedBidiMap treebidi -	remove[class java.lang.Object]	11092.6	11116.2	1.00
+M3UnmodifiableOrderedBidiMap treebidi -	replaceAll[interface java.util.function.BiFunction]	7511.2	11968.8	0.63
+M3UnmodifiableOrderedBidiMap treebidi -	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	3873.6	4057.6	0.95
+M3UnmodifiableOrderedBidiMap treebidi -	replace[class java.lang.Object, class java.lang.Object]	6640.2	6976.8	0.95
+M3UnmodifiableOrderedBidiMap treebidi -	size[]	38.4	51.0	0.75
+M3UnmodifiableOrderedBidiMap treebidi -	toString[]	173.2	187.8	0.92
+M3UnmodifiableOrderedBidiMap treebidi -	values[]	55.6	78.2	0.71
+M3UnmodifiableSortedBidiMap dualtreebidi -	clear[]	6708.0	7053.4	0.95
+M3UnmodifiableSortedBidiMap dualtreebidi -	comparator[]	27.8	56.6	0.49
+M3UnmodifiableSortedBidiMap dualtreebidi -	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	10462.4	12593.4	0.83
+M3UnmodifiableSortedBidiMap dualtreebidi -	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	4217.8	4382.4	0.96
+M3UnmodifiableSortedBidiMap dualtreebidi -	compute[class java.lang.Object, interface java.util.function.BiFunction]	11515.4	11972.4	0.96
+M3UnmodifiableSortedBidiMap dualtreebidi -	containsKey[class java.lang.Object]	3339.8	3450.2	0.97
+M3UnmodifiableSortedBidiMap dualtreebidi -	containsValue[class java.lang.Object]	3609.6	3693.4	0.98
+M3UnmodifiableSortedBidiMap dualtreebidi -	entrySet[]	74.4	121.4	0.61
+M3UnmodifiableSortedBidiMap dualtreebidi -	equals[class java.lang.Object]	29.4	63.0	0.47
+M3UnmodifiableSortedBidiMap dualtreebidi -	firstEntry[]	166.4	190.6	0.87
+M3UnmodifiableSortedBidiMap dualtreebidi -	firstKey[]	24.6	43.6	0.56
+M3UnmodifiableSortedBidiMap dualtreebidi -	forEach[interface java.util.function.BiConsumer]	77.2	179.6	0.43
+M3UnmodifiableSortedBidiMap dualtreebidi -	getKey[class java.lang.Object]	3581.0	3685.0	0.97
+M3UnmodifiableSortedBidiMap dualtreebidi -	getOrDefault[class java.lang.Object, class java.lang.Object]	3541.4	3769.4	0.94
+M3UnmodifiableSortedBidiMap dualtreebidi -	get[class java.lang.Object]	2679.0	3224.0	0.83
+M3UnmodifiableSortedBidiMap dualtreebidi -	hashCode[]	43.6	48.4	0.90
+M3UnmodifiableSortedBidiMap dualtreebidi -	headMap[class java.lang.Object]	551.0	578.2	0.95
+M3UnmodifiableSortedBidiMap dualtreebidi -	inverseBidiMap[]	26.0	26.2	0.99
+M3UnmodifiableSortedBidiMap dualtreebidi -	isEmpty[]	14.2	61.6	0.23
+M3UnmodifiableSortedBidiMap dualtreebidi -	keySet[]	66.8	114.6	0.58
+M3UnmodifiableSortedBidiMap dualtreebidi -	lastEntry[]	162.0	403.0	0.40
+M3UnmodifiableSortedBidiMap dualtreebidi -	lastKey[]	29.2	42.6	0.69
+M3UnmodifiableSortedBidiMap dualtreebidi -	mapIterator[]	116.0	184.8	0.63
+M3UnmodifiableSortedBidiMap dualtreebidi -	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	16265.2	17355.8	0.94
+M3UnmodifiableSortedBidiMap dualtreebidi -	nextKey[class java.lang.Object]	704.0	683.6	1.03
+M3UnmodifiableSortedBidiMap dualtreebidi -	pollFirstEntry[]	11724.2	12131.4	0.97
+M3UnmodifiableSortedBidiMap dualtreebidi -	pollLastEntry[]	11505.6	12572.0	0.92
+M3UnmodifiableSortedBidiMap dualtreebidi -	previousKey[class java.lang.Object]	585.0	630.8	0.93
+M3UnmodifiableSortedBidiMap dualtreebidi -	putAll[interface java.util.Map]	11548.0	11375.8	1.02
+M3UnmodifiableSortedBidiMap dualtreebidi -	putFirst[class java.lang.Object, class java.lang.Object]	10972.6	11214.8	0.98
+M3UnmodifiableSortedBidiMap dualtreebidi -	putIfAbsent[class java.lang.Object, class java.lang.Object]	11272.0	11284.4	1.00
+M3UnmodifiableSortedBidiMap dualtreebidi -	putLast[class java.lang.Object, class java.lang.Object]	10871.8	11171.2	0.97
+M3UnmodifiableSortedBidiMap dualtreebidi -	put[class java.lang.Object, class java.lang.Object]	11063.4	10948.8	1.01
+M3UnmodifiableSortedBidiMap dualtreebidi -	removeValue[class java.lang.Object]	10909.6	10901.6	1.00
+M3UnmodifiableSortedBidiMap dualtreebidi -	remove[class java.lang.Object, class java.lang.Object]	3728.2	3840.0	0.97
+M3UnmodifiableSortedBidiMap dualtreebidi -	remove[class java.lang.Object]	10634.6	10429.8	1.02
+M3UnmodifiableSortedBidiMap dualtreebidi -	replaceAll[interface java.util.function.BiFunction]	11966.8	12427.8	0.96
+M3UnmodifiableSortedBidiMap dualtreebidi -	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	3876.2	4028.8	0.96
+M3UnmodifiableSortedBidiMap dualtreebidi -	replace[class java.lang.Object, class java.lang.Object]	6977.4	7223.4	0.97
+M3UnmodifiableSortedBidiMap dualtreebidi -	reversed[]	45.0	63.0	0.71
+M3UnmodifiableSortedBidiMap dualtreebidi -	sequencedEntrySet[]	32.2	19.2	1.68
+M3UnmodifiableSortedBidiMap dualtreebidi -	sequencedKeySet[]	26.6	15.8	1.68
+M3UnmodifiableSortedBidiMap dualtreebidi -	sequencedValues[]	28.0	15.6	1.79
+M3UnmodifiableSortedBidiMap dualtreebidi -	size[]	31.0	43.2	0.72
+M3UnmodifiableSortedBidiMap dualtreebidi -	subMap[class java.lang.Object, class java.lang.Object]	5280.2	5157.4	1.02
+M3UnmodifiableSortedBidiMap dualtreebidi -	tailMap[class java.lang.Object]	371.8	461.8	0.81
+M3UnmodifiableSortedBidiMap dualtreebidi -	toString[]	227.8	266.2	0.86
+M3UnmodifiableSortedBidiMap dualtreebidi -	valueComparator[]	32.0	65.6	0.49
+M3UnmodifiableSortedBidiMap dualtreebidi -	values[]	68.8	118.8	0.58

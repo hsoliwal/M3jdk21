@@ -1,0 +1,9 @@
+old	new	status
+org.apache.commons.text.similarity	com.m3.lib.text.similarity	MOVE
+org.apache.commons.text.translate	com.m3.lib.text.translate	MOVE
+org.apache.commons.text.matcher	com.m3.lib.text.matcher	MOVE
+org.apache.commons.text.numbers	com.m3.lib.text.numbers	MOVE
+org.apache.commons.text.lookup	com.m3.lib.text.lookup	MOVE
+org.apache.commons.text.diff	com.m3.lib.text.diff	MOVE
+org.apache.commons.text.io	com.m3.lib.text.io	MOVE
+org.apache.commons.text	com.m3.lib.text	MOVE

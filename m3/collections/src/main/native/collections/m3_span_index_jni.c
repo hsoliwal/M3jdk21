@@ -20,7 +20,7 @@ static jint earliest_covering(jint target, const jint *starts, const jlong *pref
     return starts[low] < target ? starts[low] : target;
 }
 
-JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3SpanIndex_batchNative(
+JNIEXPORT jintArray JNICALL Java_jdk_m3_collections_M3SpanIndex_batchNative(
         JNIEnv *env, jclass unused, jintArray sorted_starts, jlongArray prefix_max,
         jintArray targets) {
     (void) unused;

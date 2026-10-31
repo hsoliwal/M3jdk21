@@ -6,7 +6,7 @@ import hashlib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[4]
-CRATE = ROOT / "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-indexed-live-views-20261021"
+CRATE = ROOT / "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-indexed-live-views-20261021"
 PRE = Path(__file__).resolve().parent / "pre"
 
 # Historical six-row manifest is immutable; later, separately accepted product
@@ -15,21 +15,21 @@ PRE = Path(__file__).resolve().parent / "pre"
 HISTORY_PATH = Path(
     "m3/collections/qualification/arraylist-dual-word-20261023/SOURCE_HISTORY_DAG_20261025.md"
 )
-HISTORY_BLOB_SHA1 = "d1765e37afb90175de5df76df63c1e7f799f9628"
+HISTORY_BLOB_SHA1 = "a7093fecffb17094abb0f9748535d1c19096e74a"
 SUCCESSOR_CHAINS = {
-    "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java": (
-        "4f38bc4801a488c9b3cf1c2ec848a3293ec6b89c91bf01e6f6a9334197bbc0fa",
+    "m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java": (
+        "f4aefc61e249ba55f44f47bd4ed793a4135b4b8c45717a0e18d74e65069ecd7e",
         "9833b3d8d36287fe38025d9b7c38fb09e495f94f27c611af85433130f1e72ac2",
         "884c9078022f64eb3c1f4aa8c306d852521be6089164c7e99b08e17c318d8282",
-        "2168db105fe700ea1a8022ad362ee41d8f181180deba8404ea87d9c70f46d134",
+        "9a950e6d94ccac369dff45499d1eb3b7ebcc4412d60034be69dedf1e6623a9e5",
     ),
-    "m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java": (
-        "c59c2aaa40ef12712b7a5c3ab8af0173a63ae6b995fd4b71695bd61e312d7bff",
+    "m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java": (
+        "1b0ad329f85786698ecbc37cb15d328f5f3b715f90ba54c50ff63d12fa1892b2",
         "09594e9b2116889f9ca4065fabadf4d7dc4e2d9bae8a506d277f49fdc5ea362f",
         "43e9eb81a6828137668e597accbe347a315146d278f423e91fab5754af7f1431",
     ),
-    "m3/collections/src/main/java/com/m3/collections/M3IndexedLiveView.java": (
-        "84e9437c27f59060543cd4728a5222b489fe98f7e39068e66f4431b7ee00867f",
+    "m3/collections/src/main/java/jdk/m3/collections/M3IndexedLiveView.java": (
+        "c7b8f004d7702874d4353a021eb9297df207899c11556b966f6aa629f5920439",
         "2e5c00296e26186c071fc47d2e3bcd16315825c8404bf271eafa8cd597c268af",
     ),
 }

@@ -13,7 +13,7 @@ import tempfile
 import unittest
 
 OWNER = None
-PREFIX = "Java_com_m3_collections_M3IndexMaskCompactor_"
+PREFIX = "Java_jdk_m3_collections_M3IndexMaskCompactor_"
 EXPECTED = {
     PREFIX + "selectNative",
     PREFIX + "rangeAbiNative",
@@ -40,7 +40,7 @@ def declaration(name):
 class JniHeaderSymbolsContract(unittest.TestCase):
     def parse(self, source):
         with tempfile.TemporaryDirectory(prefix="m3-jni-header-contract-") as directory:
-            header = Path(directory) / "com_m3_collections_M3IndexMaskCompactor.h"
+            header = Path(directory) / "jdk_m3_collections_M3IndexMaskCompactor.h"
             header.write_text(source, encoding="utf-8")
             return OWNER.jni_header_symbols(header)
 

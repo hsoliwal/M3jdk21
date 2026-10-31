@@ -14,7 +14,7 @@ Root LICENSE/NOTICE apply to the canonical first-party tooling; per-file source
 headers, the current before-fixture notices and target source rights remain intact.
 
 The current source recipe guards 60 paths and changes 21. Its manifest SHA-256 is
-`5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819`.
+`ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6`.
 The actual OpenRewrite 8.17.1 PlainText SDK ran three tests successfully before
 publication. The existing serial kernel ran 7,734 bounded checks. Those receipts
 are at the canonical commit; byte-preserving mirroring is not a new SDK run.

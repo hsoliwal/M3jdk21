@@ -4,15 +4,15 @@
     {
       "path": "verify_candidates.py",
       "executed_path": "proof/executed-drivers/verify_candidates.py",
-      "executed_sha256": "2b9f9c8fac3020afb1b9ea344b953c2d1d5bd603841cc1a8f307804879c06129",
-      "receiving_sha256": "529115491b2067bdd2dbb857e91b76cdca6235674727a6957f40cf2109897b26",
+      "executed_sha256": "e495fb5975f9755cf641491fc90d651b8f1dac02d77262ea7766994502c13f63",
+      "receiving_sha256": "c384037c5e4f50a6a219591caf5d517f896fc02f221399dca624cb0d16a85447",
       "change": "Use the exact bundled resource probe instead of the historical repository resource path; probe bytes are identical. Assertions, algorithms, command choices and test selection are unchanged."
     },
     {
       "path": "qualify_current_module.py",
       "executed_path": "proof/executed-drivers/qualify_current_module.py",
-      "executed_sha256": "545d06e6b1a5ed4999dee6ff802ebfd892dbbcd8f7f95eb434c4090d431923e6",
-      "receiving_sha256": "280f440b33b86017474a928291e25d909db210c261002f2ec06f980edba18a75",
+      "executed_sha256": "ae36cdcb55d76df23f444eec8a6d56f73b9d403b091faf81f43f0853d3e7869b",
+      "receiving_sha256": "a8ac14543ec76d573d7a05dea5b36dc5b2f9fbd50cd7952031e3a7f2b07d3f0f",
       "change": "Add explicit --maven-repo and --sdk-receipt path arguments. Omitting them preserves the executed defaults. All copying, source-seal checks, Maven flags, test selection, timeout and result accounting are unchanged."
     }
   ]

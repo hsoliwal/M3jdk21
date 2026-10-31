@@ -3,11 +3,11 @@ name: M3JDK21 DOOP indexed collection view contracts
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3FilteredViews.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3TreeMap.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3*SlotSelfTest.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3TreeMap.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3*SlotSelfTest.java'
       - '.github/workflows/m3-doop-indexed-view-contracts-20261019.yml'
   push:
     branches:
@@ -40,13 +40,13 @@ jobs:
           javac --release 21 -Xlint:all,-serial,-module -Werror \
             -d target/doop-view-classes \
             -sourcepath m3/collections/src/main/java:m3/collections/src/test/java \
-            m3/collections/src/test/java/com/m3/collections/M3ReadonlyFilteredSlotSelfTest.java \
-            m3/collections/src/test/java/com/m3/collections/M3MutableFilteredSlotSelfTest.java \
-            m3/collections/src/test/java/com/m3/collections/M3IndexedFilterSortFusionSelfTest.java
+            m3/collections/src/test/java/jdk/m3/collections/M3ReadonlyFilteredSlotSelfTest.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3MutableFilteredSlotSelfTest.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3IndexedFilterSortFusionSelfTest.java
       - name: Deterministic JDK21 differential oracles
         shell: bash
         run: |
           set -euo pipefail
-          java -ea -cp target/doop-view-classes com.m3.collections.M3ReadonlyFilteredSlotSelfTest
-          java -ea -cp target/doop-view-classes com.m3.collections.M3MutableFilteredSlotSelfTest
-          java -ea -cp target/doop-view-classes com.m3.collections.M3IndexedFilterSortFusionSelfTest
+          java -ea -cp target/doop-view-classes jdk.m3.collections.M3ReadonlyFilteredSlotSelfTest
+          java -ea -cp target/doop-view-classes jdk.m3.collections.M3MutableFilteredSlotSelfTest
+          java -ea -cp target/doop-view-classes jdk.m3.collections.M3IndexedFilterSortFusionSelfTest

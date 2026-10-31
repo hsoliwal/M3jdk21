@@ -4,9 +4,9 @@ Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-
 
 ## Canonical ownership and source pin
 - Synexia recipe/source owner: [PR #11903](https://github.com/hsoliwal/com.synexia/pull/11903).
-- Existing target runtime owner: `m3/collections/src/main/java/com/m3/collections/M3LongFilteredView.java` (not `java.util`).
+- Existing target runtime owner: `m3/collections/src/main/java/jdk/m3/collections/M3LongFilteredView.java` (not `java.util`).
 - Existing original Git blob `f198006c86e7c8c3b7f6fceb8b82b114e3cdce39`; no duplicated collection hierarchy.
-- Generated postimage SHA-256 `cf9f15e9712b169768be2611a9eae98d317d47b07b7494b168bf81988e678341`, test SHA-256 `3cefdce84f9f78cbd77a8ac42626b6b54a15930dcc4becb0802c87491f725044`.
+- Generated postimage SHA-256 `cf9f15e9712b169768be2611a9eae98d317d47b07b7494b168bf81988e678341`, test SHA-256 `75b82513f5c8b96c4039597c81034409f8e941de750201cbf61eb5ccb82eed6b`.
 - Canonical class-backed recipe: `com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe`, named `com.synexia.m3.Jdk21LongFilterCompose20261016`.
 
 ## Contract and ownership

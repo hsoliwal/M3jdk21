@@ -1,0 +1,5 @@
+category	source	pin	decision	contract_and_reason
+Floating-point parsing facades	FastDoubleParser 1.0.90 (MIT), vendored in m3/vendor/third_party and absorbed into java.base by #2215	1.0.90 at M3jdk21 52fb81c483c74448a12eecb63aa9465e42cdb82c	ADAPT_OVERLAY	JavaDoubleParser/JavaFloatParser parse methods delegate to Double.parseDouble/Float.parseFloat; upstream bytes retained under upstream-excluded/; BigDecimal/BigInteger/JSON parsers unchanged
+Exact rounding referee	Python standard library fractions.Fraction and struct	Python 3.12	REUSE_UNCHANGED	round-half-even binary64/binary32 verdicts for differential disagreements; no product path
+Edge literals	M3ParseDifferential EDGE list (#2215 gate tool)	M3jdk21 5181bbe411e	REUSE_EXTENDED	reused verbatim and extended with long hex significands, halfway points and look-alike spaces
+Jackson numeric paths	FasterXML jackson-core 2.19.2 source already in M3jdk21	2.19.2 at M3jdk21 52fb81c483c74448a12eecb63aa9465e42cdb82c	REUSE_UNCHANGED	no Jackson source change; its shaded FastDoubleParser facades now reach java.base

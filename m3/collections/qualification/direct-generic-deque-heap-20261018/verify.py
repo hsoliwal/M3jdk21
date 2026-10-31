@@ -7,18 +7,18 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[3]
-TEMPLATES = ROOT / "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-native-generic-deque-priority-20261018"
+TEMPLATES = ROOT / "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-native-generic-deque-priority-20261018"
 SOURCE_BLOBS = {
-  "M3ArrayDeque.java": "9df441b51b1912fcaece88197b0e69e6fe89986a",
-  "M3PriorityQueue.java": "bd462291a8a33862d943e0afc5dd839693548e8b",
-  "M3GenericReferenceOwnersProof.java": "092a8972e758237363b6abe92d7827de1322ae2b",
-  "M3GenericReferenceOwnersTest.java": "d486b58e77a08cce6007ecb4657e4d790d209251",
+  "M3ArrayDeque.java": "25d61c5e3e0bdf28a75e66de03da7256761e8fbb",
+  "M3PriorityQueue.java": "795e6036e0e6ef4cf4e3f04f6fbe61b544583a2a",
+  "M3GenericReferenceOwnersProof.java": "30f194255938d5a40df6e3c9653a86b4449b8283",
+  "M3GenericReferenceOwnersTest.java": "8c830d553e9d41de96b808fe68952e96573d2788",
 }
 OWNERS = {
-  "m3/collections/src/main/java/com/m3/collections/M3SlotArrays.java":
+  "m3/collections/src/main/java/jdk/m3/collections/M3SlotArrays.java":
     "e337c69710c871f8caa77a1afe53149f1fd705cc",
-  "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java":
-    "134fb98f8a39969c43fd75338ecb233c5fe49446",
+  "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java":
+    "2053896cfc74192d7561478f6aca249eae87ca66",
   "m3/collections/src/main/native/collections/m3_index_mask_compactor.c":
     "aaa74686949de59b44b363741ef1c414fe3e95d0",
 }

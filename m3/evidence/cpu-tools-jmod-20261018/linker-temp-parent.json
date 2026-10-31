@@ -4,7 +4,7 @@
   "parent_target_baseline": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
   "parent_sdk_inputs_sha256": "b5fb1f7774252b167c9266a23a97cef00f36e378325334e23f7d788f307393db",
   "parent_sdk_results_sha256": "a9507f0949209eb663773a5049a7a2c10dc3898c383c0ec0ac627e523494525a",
-  "parent_receiver_sha256": "81fa7d1b22e453cb43d5c5b5efeb96e7d98d8a745994ebe4abed6485fb24589e",
+  "parent_receiver_sha256": "d6457d346914646e6a1c23028120feeaa28a8e1a65101fe4749016dd33978542",
   "parent_check": {
     "actual_sdk_results": true,
     "changes": 0,

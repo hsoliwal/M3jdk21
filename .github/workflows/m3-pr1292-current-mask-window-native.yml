@@ -28,8 +28,8 @@ jobs:
           root=m3/collections/src
           source="$root/main/native/collections/m3_index_mask_window.c"
           testfile="$root/test/native/m3_mask_window_current_master_contract.c"
-          test "$(git hash-object "$source")" = "bd300c90d54ede9b7f238efe8a18c918d2fcef9e"
-          test "$(git hash-object "$testfile")" = "30faabd9efe6ba846fbb8d5b559371edff1e7eb1"
+          test "$(git hash-object "$source")" = "baa23467163a0e9344fe3c1d78dcc87cb707fd56"
+          test "$(git hash-object "$testfile")" = "5c3f52eb07d78e700832e55646e37b71fee0f4dc"
           flags=(-std=c17 -Wall -Wextra -Werror -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux")
           cc "${flags[@]}" -O2 "$source" "$testfile" -o "${RUNNER_TEMP}/region_contract"
           "${RUNNER_TEMP}/region_contract"

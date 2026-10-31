@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # path	sha256	resource
 src/java.base/share/classes/java/lang/Runnable.java	5cb23586f22d8ecd7e0dd80e3352d181e8a24d72690838af8eaf72ac8dce6f07	Runnable.java.txt
-src/java.base/share/classes/java/util/Strings.java	6bb37ca2c3a6369a3c6fcb55fa24d77ae7044e99c2c71a3e81c976973b6aa62b	Strings.java.txt
+src/java.base/share/classes/java/util/Strings.java	eced65cad937a30302d7c78d78761bcb8393dc56c304401ea07ea211eb684b6a	Strings.java.txt
 src/java.base/share/classes/java/util/concurrent/Callable.java	680695c2e9fa5b7408c63a29ef29a1ad9bed25c03eac0daf2c8c2d537eb06d96	Callable.java.txt
 src/java.base/share/classes/java/util/concurrent/Executor.java	6b83e511df523ff2910965345fe6db5446b79d242d7c8068d2ced9a9f28d440c	Executor.java.txt
 src/java.base/share/classes/java/util/concurrent/ExecutorService.java	5d82b5de9f77c1ef77b15982fcc72c86b8fb45cd881222b4ee1cd9342a324ee9	ExecutorService.java.txt

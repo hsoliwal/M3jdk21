@@ -2,7 +2,7 @@
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
  */
-package com.m3.compiletime;
+package jdk.m3.compiletime;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;

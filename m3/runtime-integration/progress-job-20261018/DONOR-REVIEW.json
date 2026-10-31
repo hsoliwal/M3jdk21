@@ -69,9 +69,9 @@
       "disposition": "EXISTING_OWNER_REUSED_UNCHANGED"
     }
   ],
-  "synexia_sources": [
+  "m3_sources": [
     {
-      "path": "synexia-cop/src/main/java/com/synexia/context/core/IAdaptable.java",
+      "path": "m3-cop/src/main/java/jdk/internal/m3/context/core/IAdaptable.java",
       "git_blob": "49a332f22d79e8312995a2da3f1614de68aa397e",
       "sha256": "464c4efa85716eeec5deec9bba909cfdc688daeed27a476cf43f7239ba756214",
       "bytes": 8208,
@@ -85,7 +85,7 @@
       "disposition": "SOURCE_REVIEW_ONLY_EXISTING_PATTERN"
     },
     {
-      "path": "synexia-job/src/main/java/com/synexia/job/AbstractJob.java",
+      "path": "m3-job/src/main/java/jdk/internal/m3/job/AbstractJob.java",
       "git_blob": "46f49b687badc609316fc9e1a67c4678ed5e6a88",
       "sha256": "27d748b9e8cfc8e3398033a3078fcdac7caf3a03eb3966a8560ff200b531592b",
       "bytes": 9900,
@@ -99,7 +99,7 @@
       "disposition": "SOURCE_REVIEW_ONLY"
     },
     {
-      "path": "synexia-job/src/main/java/com/synexia/job/IJobResult.java",
+      "path": "m3-job/src/main/java/jdk/internal/m3/job/IJobResult.java",
       "git_blob": "a79cda5e14ba1c32cdc890b2a154aba861d2117b",
       "sha256": "82c12a8c66657e77a596b4e1b1c0f57e7615275e6a1f052d9999a04534619a56",
       "bytes": 8007,

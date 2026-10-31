@@ -492,8 +492,8 @@
       "sourceAuditLevel": "TARGETED_SOURCE"
     },
     {
-      "name": "hsoliwal/synexia-tornadovm",
-      "url": "https://github.com/hsoliwal/synexia-tornadovm",
+      "name": "hsoliwal/m3-tornadovm",
+      "url": "https://github.com/hsoliwal/m3-tornadovm",
       "fork": true,
       "visibility": "public",
       "private": false,

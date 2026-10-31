@@ -61,10 +61,10 @@ int main(int argc,char **argv){
  assert(argc==2);int optimized=atoi(argv[1]);JNIEnv env=&functions;
  for(int lane=0;lane<4;lane++)for(int density=0;density<3;density++){
   reset(density);jarray result;
-  if(lane==0)result=Java_com_m3_collections_M3IndexMaskCompactor_selectNative(&env,NULL,(jintArray)(void *)&ints,(jbyteArray)(void *)&states,1);
-  else if(lane==1)result=Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative(&env,NULL,(jintArray)(void *)&ints,(jbyteArray)(void *)&states,0,1024,1);
-  else if(lane==2)result=Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(&env,NULL,(jintArray)(void *)&ints,0,(jbyteArray)(void *)&states,0,1024,1);
-  else result=Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(&env,NULL,(jlongArray)(void *)&longs,0,(jbyteArray)(void *)&states,0,1024,1);
+  if(lane==0)result=Java_jdk_m3_collections_M3IndexMaskCompactor_selectNative(&env,NULL,(jintArray)(void *)&ints,(jbyteArray)(void *)&states,1);
+  else if(lane==1)result=Java_jdk_m3_collections_M3IndexMaskCompactor_selectRangeNative(&env,NULL,(jintArray)(void *)&ints,(jbyteArray)(void *)&states,0,1024,1);
+  else if(lane==2)result=Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowNative(&env,NULL,(jintArray)(void *)&ints,0,(jbyteArray)(void *)&states,0,1024,1);
+  else result=Java_jdk_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(&env,NULL,(jlongArray)(void *)&longs,0,(jbyteArray)(void *)&states,0,1024,1);
   assert(result!=NULL&&!pending);assert(output.n==(density==0?0:density==1?256:1024));
   assert(state_reads==8);assert(row_reads==(optimized?(density==0?0:density==1?1:4):4));checks+=4;
   printf("lane=%d density=%d states=%d payload=%d result=%d\n",lane,density,state_reads,row_reads,output.n);
@@ -72,14 +72,14 @@ int main(int argc,char **argv){
  // Count/emit disagreement: a new match and a removed match both fail closed.
  for(int which=1;which<=2;which++){
   reset(which==1?0:2);mutation=which;
-  jintArray result=Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(&env,NULL,(jintArray)(void *)&ints,0,(jbyteArray)(void *)&states,0,1024,1);
+  jintArray result=Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowNative(&env,NULL,(jintArray)(void *)&ints,0,(jbyteArray)(void *)&states,0,1024,1);
   assert(result==NULL&&pending&&strcmp(exception_name,"java/util/ConcurrentModificationException")==0);checks++;
  }
  reset(2);fault=5;
- assert(Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(&env,NULL,(jintArray)(void *)&ints,0,(jbyteArray)(void *)&states,0,1024,1)==NULL);
+ assert(Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowNative(&env,NULL,(jintArray)(void *)&ints,0,(jbyteArray)(void *)&states,0,1024,1)==NULL);
  assert(pending&&strcmp(exception_name,"injected-read-failure")==0);checks+=2;
  reset(0);
- assert(Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(&env,NULL,(jlongArray)(void *)&longs,0,(jbyteArray)(void *)&states,0,1024,0)!=NULL);
+ assert(Java_jdk_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(&env,NULL,(jlongArray)(void *)&longs,0,(jbyteArray)(void *)&states,0,1024,0)!=NULL);
  assert(state_reads==0&&row_reads==4&&output.n==1024);checks+=2;
  printf("NATIVE_WORK_PROBE checks=%d PASS (function-table instrument; actual JVM proof separate)\n",checks);
  return 0;

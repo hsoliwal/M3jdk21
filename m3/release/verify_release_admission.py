@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib.util
 import json
 import re
 import subprocess
@@ -46,8 +47,8 @@ REQUIRED_GATES = frozenset({
 })
 RECIPE_ROOTS = (
     ".m3/openrewrite-recipes", ".m3/task-crates", "m3/recipes",
-    "m3/tooling/migration-recipes", "m3/tooling/synexia-jdk-a3-recipes",
-    "m3/synexia-import/pure-int-recipe-custody",
+    "m3/tooling/migration-recipes", "m3/tooling/m3jdk-a3-recipes",
+    "m3/m3-import/pure-int-recipe-custody",
     "m3/runtime-integration/recipe",
     "m3/runtime-integration/char-array-copy/recipe",
     "m3/runtime-integration/utf8-cursor-20261014/recipe/canonical",
@@ -56,6 +57,10 @@ NAME_MAP = "m3/docs/name-mapping.json"
 NAME_PLAN = "m3/tooling/name-contract/name-plan.json"
 EVIDENCE_SCHEMA = "M3_RELEASE_EVIDENCE_V1"
 DEFAULT_EVIDENCE = "m3/release/queue/current/evidence.json"
+# Standalone rule (user, 2026-10-31): every release gate, the Maven/OpenRewrite control reactor included,
+# is owned and executed by this repository; donor lineage stays in ledgers (m3/tooling/standalone/).
+PRODUCT_REPOSITORY = "hsoliwal/M3jdk21"
+MAVEN_GATE = "M3_MAVEN_CONTROL_REACTOR"
 SHA1 = re.compile(r"[0-9a-f]{40}\Z")
 SHA256 = re.compile(r"[0-9a-f]{64}\Z")
 GATE_ID = re.compile(r"[A-Z][A-Z0-9_]*\Z")
@@ -228,9 +233,9 @@ def validate(root: Path, release_mode: bool = False,
         passed("contract.execution_evidence")
     gate_owners = evidence_policy.get("gate_owners", {})
     if (not isinstance(gate_owners, dict)
-            or gate_owners.get("M3_MAVEN_CONTROL_REACTOR") != "hsoliwal/com.synexia"):
-        block("contract.recipe_owner", "Maven/OpenRewrite execution must be Synexia-owned")
-        gate_owners = {"M3_MAVEN_CONTROL_REACTOR": "hsoliwal/com.synexia"}
+            or gate_owners.get(MAVEN_GATE) != PRODUCT_REPOSITORY):
+        block("contract.recipe_owner", "Maven/OpenRewrite execution must be owned by " + PRODUCT_REPOSITORY)
+        gate_owners = {MAVEN_GATE: PRODUCT_REPOSITORY}
 
     notice = read_text("M3-SYNEXIA-NOTICE.md")
     rights = read_text("M3-SYNEXIA-RIGHTS.md")
@@ -345,6 +350,29 @@ def validate(root: Path, release_mode: bool = False,
     except (subprocess.CalledProcessError, FileNotFoundError, ValueError, OSError) as exc:
         block("git.inspect", str(exc))
 
+    # Standalone rule (2026-10-31): M3JDK 21 needs no other repository to build, test, gate or release
+    # (check_standalone.py). Development mode is a ratchet against STANDALONE_BASELINE.tsv; release mode refuses any
+    # cross-repository dependency when the contract's standalone.required_for_release is true. A tree without the
+    # baseline, outside an enforced release, is reported without blocking.
+    section = contract.get("standalone")
+    required = isinstance(section, dict) and section.get("required_for_release") is True
+    enforced = release_mode and required
+    try:
+        spec = importlib.util.spec_from_file_location("check_standalone", Path(__file__).with_name("check_standalone.py"))
+        standalone = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(standalone)
+        scanned = standalone.scan(root)
+        baseline = standalone.read_baseline(root)
+        status, detail = standalone.verdict(scanned, baseline, enforced)
+        if status == "PASS":
+            passed("standalone.no_external_repo_dependency", detail)
+        elif baseline is None and not enforced:
+            checks.append({"name": "standalone.no_external_repo_dependency", "status": "INFO", "detail": detail})
+        else:
+            block("standalone.no_external_repo_dependency", detail, policy=status == "BLOCK", status=status)
+    except (subprocess.CalledProcessError, FileNotFoundError, OSError, ValueError, ImportError) as exc:
+        block("standalone.no_external_repo_dependency", str(exc))
+
     manifest_path = Path(evidence_path) if evidence_path is not None else root / DEFAULT_EVIDENCE
     if not manifest_path.is_absolute():
         manifest_path = root / manifest_path
@@ -386,7 +414,7 @@ def validate(root: Path, release_mode: bool = False,
         try:
             if entry.get("status") != "PASS" or type(entry.get("exit_code")) is not int or entry["exit_code"] != 0:
                 raise ValueError("gate did not record PASS with integer exit_code=0")
-            expected_owner = gate_owners.get(ident, "hsoliwal/M3jdk21")
+            expected_owner = gate_owners.get(ident, PRODUCT_REPOSITORY)
             if entry.get("owner_repository") != expected_owner:
                 raise ValueError("wrong gate owner; expected " + str(expected_owner))
             command = entry.get("command")
@@ -398,15 +426,15 @@ def validate(root: Path, release_mode: bool = False,
                     not isinstance(environment.get(key), str) or not environment[key].strip()
                     for key in ("os", "architecture", "toolchain"))):
                 raise ValueError("OS, architecture and toolchain identity missing")
-            if ident == "M3_MAVEN_CONTROL_REACTOR":
+            if ident == MAVEN_GATE:
                 canonical = entry.get("canonical_recipe")
                 if (not isinstance(canonical, dict)
-                        or canonical.get("repository") != "hsoliwal/com.synexia"
+                        or canonical.get("repository") != PRODUCT_REPOSITORY
                         or not isinstance(canonical.get("commit"), str)
                         or not SHA1.fullmatch(canonical["commit"])
                         or not isinstance(canonical.get("recipe_id"), str)
                         or not canonical["recipe_id"].strip()):
-                    raise ValueError("exact Synexia recipe revision and identity missing")
+                    raise ValueError("exact recipe repository, revision and identity missing")
             artifacts = entry.get("artifacts")
             if not isinstance(artifacts, list) or not artifacts:
                 raise ValueError("raw execution artifacts missing")

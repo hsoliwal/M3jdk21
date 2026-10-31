@@ -109,7 +109,7 @@ def main():
         retained = json.loads((C / "research/retained-owners.json").read_text())
         native_records = {Path(row["path"]).name: row for row in retained["owners"]
                           if row["path"].endswith(".c")}
-        production = [R / "m3/collections/src/main/java/com/m3/collections" / (name + ".java")
+        production = [R / "m3/collections/src/main/java/jdk/m3/collections" / (name + ".java")
                       for name in OWNERS]
         for source in production[1:]:
             rel = str(source.relative_to(R))
@@ -151,20 +151,20 @@ def main():
             native_sources[name] = extract(row["path"], native_dir / name, row["sha256"], row["git_blob"])
         c_fixtures = [extract("m3/collections/src/test/native/" + name, native_dir / name)
                       for name in ("m3_mask_window_regions.c", "m3_mask_window_spans.c")]
-        range_source = extract("m3/collections/src/test/java/com/m3/collections/M3NativeIndexRangeSelfTest.java",
-                               O / "proof-src/com/m3/collections/M3NativeIndexRangeSelfTest.java")
+        range_source = extract("m3/collections/src/test/java/jdk/m3/collections/M3NativeIndexRangeSelfTest.java",
+                               O / "proof-src/jdk/m3/collections/M3NativeIndexRangeSelfTest.java")
         proofs = []
         for name in CURRENT_TESTS:
-            rel = "m3/collections/src/test/java/com/m3/collections/" + name + ".java"
+            rel = "m3/collections/src/test/java/jdk/m3/collections/" + name + ".java"
             row = snapshots[rel]
             source = Path(row["local_path"])
             if sha(source) != row["sha256"]:
                 raise RuntimeError("Current native self-test drift: " + rel)
             proofs.append(source)
-        contract = R / "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowContract.java"
+        contract = R / "m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowContract.java"
         proofs.extend([range_source, contract])
-        support_sources = [extract("m3/collections/src/main/java/com/m3/collections/" + name + ".java",
-                           O / "support-src/com/m3/collections" / (name + ".java")) for name in SUPPORT]
+        support_sources = [extract("m3/collections/src/main/java/jdk/m3/collections/" + name + ".java",
+                           O / "support-src/jdk/m3/collections" / (name + ".java")) for name in SUPPORT]
         support_classes = O / "support-classes"
         support_classes.mkdir()
         report["unchanged_fixture_dependency_sources"] = {str(p): sha(p) for p in support_sources}
@@ -198,8 +198,8 @@ def main():
         save("proof-classes.json", outputs)
         report["fresh_test_fixtures_only"] = True
         api = run("public-protected-api", [J / "bin/javap", "-protected", "-s", "-classpath", Q,
-                  *["com.m3.collections." + name for name in OWNERS],
-                  "com.m3.collections.M3LongIndexProjection$Order", "com.m3.collections.M3IndexMaskCompactor$Backend"])
+                  *["jdk.m3.collections." + name for name in OWNERS],
+                  "jdk.m3.collections.M3LongIndexProjection$Order", "jdk.m3.collections.M3IndexMaskCompactor$Backend"])
         if api != (C / "verification/baseline/public-protected-api.stdout.log").read_text():
             raise RuntimeError("Generated Java public/protected API drift from baseline")
         report["public_protected_api_identical_to_baseline"] = True
@@ -210,7 +210,7 @@ def main():
         for name, owner in zip(NATIVE_NAMES, ["M3IndexMaskCompactor", "M3IndexMaskWindow", "M3LongAddressKernel"]):
             target = O / (Path(name).stem + ".o")
             run("compile-" + Path(name).stem, ["/usr/bin/gcc", *cflags, "-fPIC", "-include",
-                header_dir / ("com_m3_collections_" + owner + ".h"), "-c", native_sources[name], "-o", target])
+                header_dir / ("jdk_m3_collections_" + owner + ".h"), "-c", native_sources[name], "-o", target])
             object_files[name] = target
         libraries = {
             "libm3_collections_mask.so": [object_files[NATIVE_NAMES[0]], object_files[NATIVE_NAMES[1]]],
@@ -245,7 +245,7 @@ def main():
             path = library_dir if native else missing_dir
             runtime_cp = cp + os.pathsep + str(support_classes) if classname == "M3IndexMaskCompactorSelfTest" else cp
             output = run(label, [J / "bin/java", "-ea", "-XX:-UsePerfData", "-Xmx512m", "-Xcheck:jni",
-                "-Djava.library.path=" + str(path), "-cp", runtime_cp, "com.m3.collections." + classname, *args], expected=witness)
+                "-Djava.library.path=" + str(path), "-cp", runtime_cp, "jdk.m3.collections." + classname, *args], expected=witness)
             report["runtime_checks"].append({"name": label, "status": "PASS", "witness": output.strip(),
                                              "kind": "real JVM", "native_library_mode": "required" if native else "absent"})
             return output

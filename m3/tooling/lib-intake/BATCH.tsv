@@ -1,0 +1,22 @@
+lib	module	result	last_stage
+JavaEWAH	jdk.m3.ewah	PASS	S8_LAYER PASS
+re2j	jdk.m3.re2j	PASS	S8_LAYER PASS
+fastfilter	jdk.m3.fastfilter	PASS	S8_LAYER PASS
+pcollections	jdk.m3.pcollections	PASS	S8_LAYER PASS
+HdrHistogram	jdk.m3.hdrhistogram	PASS	S8_LAYER PASS
+dec	jdk.m3.dec	PASS	S8_LAYER PASS
+xz	jdk.m3.xz	PASS	S8_LAYER PASS
+commonmark	jdk.m3.commonmark	PASS	S8_LAYER PASS
+commons-codec-1.22.1	jdk.m3.codec	PASS	S8_LAYER PASS
+jsoup-1.23.2	jdk.m3.jsoup	PASS	S8_LAYER PASS
+snakeyaml-2.6	jdk.m3.snakeyaml	PASS	S8_LAYER PASS
+commons-lang3-3.17.0	jdk.m3.lang3	PASS	S8_LAYER PASS
+commons-io-2.18.0	jdk.m3.io	PASS	S8_LAYER PASS
+univocity-parsers	jdk.m3.parsers	HOLD	HOLDS.tsv
+antlr4-runtime-4.13.2	jdk.m3.runtime	PASS	S8_LAYER PASS
+commons-net	jdk.m3.net	PASS	S8_LAYER PASS
+commons-pool2	jdk.m3.pool2	HOLD	HOLDS.tsv
+classgraph	jdk.m3.classgraph	PASS	S8_LAYER PASS
+fastdoubleparser-1.0.90	jdk.m3.fastdoubleparser	PASS	S8_LAYER PASS
+jackson-core-2.19.2	jdk.m3.core	PASS	S8_LAYER PASS
+commons-text	jdk.m3.text	HOLD	HOLDS.tsv

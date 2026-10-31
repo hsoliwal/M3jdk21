@@ -1,0 +1,6 @@
+# SYNEXIA_M3_HANDOFF_V2
+@crate	synexia-guard-v2-alias-drift-v1
+@source-revision	0123456789abcdef0123456789abcdef01234567
+@license-policy	SYNEXIA_FIRST_PARTY_APACHE2_V1
+@artifact-policy	SYNEXIA_PUBLIC_TARGET_ARTIFACT_CLASS_V1
+ROW	JAVA	M3_RECIPE_ADAPTER	cap.recipe	source/SampleRecipeAdapter.java	ff685a333207ca7e15ed71270f1402ae7ad56a3fa7cbf3b6a92ec3e523a7b107	.m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/SampleRecipeAdapter.java	ABSENT	ff685a333207ca7e15ed71270f1402ae7ad56a3fa7cbf3b6a92ec3e523a7b107	0000-SampleRecipeAdapter.java.txt	Apache-2.0	com.synexia.rewrite.SampleRecipe	2222222222222222222222222222222222222222222222222222222222222222	3333333333333333333333333333333333333333333333333333333333333333

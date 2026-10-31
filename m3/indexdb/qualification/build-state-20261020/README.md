@@ -21,9 +21,9 @@ If source changes but compiler-confirmed ABI remains identical, only that source
 Canonical [Synexia #12583](https://github.com/hsoliwal/com.synexia/pull/12583), recipe `com.synexia.m3.M3BuildStateIndex20261020`, uses existing Maven/OpenRewrite `M3HashPinnedJavaSnapshotRecipe`. All three receiver Java files are identical Git blobs to the recipe templates. Each source has an ABSENT preimage and SHA-256-sealed afterimage; repeat application must be fixed-point, unexpected preimages rejected.
 
 ```text
-M3BuildState.java          SHA-256 5f3d60663635567345edaa4065563a2645dc31765811284ba838e3fdfd865232
-M3BuildStateContract.java  SHA-256 a99152f068eceb23121c610522577026c4f867f55b8a7619666b56e979370631
-M3BuildStateTest.java      SHA-256 045a438eee2574df76612cb53a82b3743d272e8e13ac5ca1cd36669714322888
+M3BuildState.java          SHA-256 c504e7a63e7f8f7b2c73d456f725ff9ec3a8c7342bfc15b16e54610e3233aa67
+M3BuildStateContract.java  SHA-256 03e8241a113dfa82517216b5923c046d541f9c7968c05bb233cae632310f6ba3
+M3BuildStateTest.java      SHA-256 09fdee626a67e13954985d581df44e74d8c753f7f6aabe6a463559c14f13a319
 ```
 
 ## Executed/local versus pending gates

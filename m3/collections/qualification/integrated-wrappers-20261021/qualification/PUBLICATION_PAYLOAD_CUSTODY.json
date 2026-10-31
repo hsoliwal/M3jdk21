@@ -5,12 +5,12 @@
   "publication_policy": "Publish exact manifest references only; exclude two rejected local unreferenced payloads. Preserve exact history separately. Verify remote template tree after commit.",
   "unreferenced_local_payloads": [
     {
-      "path": "canonical/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/arrayification-20261018/integrated-wrappers-20261021/templates/m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java",
+      "path": "canonical/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/arrayification-20261018/integrated-wrappers-20261021/templates/m3/collections/src/main/java/jdk/m3/collections/M3LongBitmapFilteredSnapshot.java",
       "sha256": "93e5cccc6453cac279fe146a7d619f1ffb837205a365f484e19923012cee75d1",
       "status": "EXCLUDED_FROM_FINAL_CANONICAL_DELTA"
     },
     {
-      "path": "canonical/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/arrayification-20261018/integrated-wrappers-20261021/templates/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "path": "canonical/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/arrayification-20261018/integrated-wrappers-20261021/templates/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
       "sha256": "56e2781621b3998b8afcf0d428b5c37d10339590d56f8c8cf852398b4df4bdee",
       "status": "EXCLUDED_FROM_FINAL_CANONICAL_DELTA"
     }

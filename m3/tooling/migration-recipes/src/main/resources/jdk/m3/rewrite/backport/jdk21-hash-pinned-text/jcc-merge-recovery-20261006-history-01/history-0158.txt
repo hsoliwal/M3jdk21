@@ -1,0 +1,16 @@
+{
+  "status": "PASS_WITH_BOUNDED_REFERENCE_SCOPE",
+  "checker_executed_by_reviewer": false,
+  "recorded_command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/check_references_v3.py"
+  ],
+  "recorded_exit_code": 0,
+  "recorded_output_sha256": "a7c41a897604c0421ca0f770fde83c51404208479f053b404cb98e5e7f2da7f1",
+  "stdout_counts_equal_output_arrays": true,
+  "recorded_receiving_custody_equal": true,
+  "raw_custody_exceptions": 2,
+  "new_donor_documents_or_future_companion_pr_covered": false,
+  "reviewed_inputs": 9
+}

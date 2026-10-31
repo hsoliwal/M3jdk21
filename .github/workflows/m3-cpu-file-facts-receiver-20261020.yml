@@ -6,7 +6,7 @@ on:
     branches: [m3/cpu-file-facts-20261020]
   pull_request:
     paths:
-      - m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/M3FileCpuFacts.java
+      - m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/M3FileCpuFacts.java
       - m3/tooling/module-packs/cpu-tools/fixtures/M3FileCpuFactsTest.java
       - m3/tooling/module-packs/cpu-tools/build.py
       - .github/workflows/m3-cpu-file-facts-receiver-20261020.yml
@@ -42,14 +42,29 @@ jobs:
           from pathlib import Path
           root = Path("m3/tooling/module-packs/cpu-tools")
           text = (root/"build.py").read_text()
-          assert text.count('FIXTURES = ("M3DonorToolsTest", "M3SourceToolsTest", "M3CpuToolsTest", "M3FileCpuFactsTest")') == 1
+          import ast
+          assignments = [
+              node for node in ast.parse(text, filename=str(root/"build.py")).body
+              if isinstance(node, ast.Assign)
+              and len(node.targets) == 1
+              and isinstance(node.targets[0], ast.Name)
+              and node.targets[0].id == "FIXTURES"
+          ]
+          assert len(assignments) == 1, "FIXTURES must have one literal declaration"
+          fixtures = ast.literal_eval(assignments[0].value)
+          required = ("M3DonorToolsTest", "M3SourceToolsTest",
+                      "M3CpuToolsTest", "M3FileCpuFactsTest")
+          assert isinstance(fixtures, tuple), "FIXTURES must be a tuple"
+          assert fixtures[:len(required)] == required, "original linked fixtures changed"
+          assert len(fixtures) == len(set(fixtures)), "duplicate linked fixture"
+          assert all(isinstance(name, str) and name.isidentifier() for name in fixtures)
           assert 'for test in FIXTURES:' in text
           assert 'image-fixtures-javac' in text
           assert 'for test in ("M3SourceToolsTest", "M3CpuToolsTest", "M3FileCpuFactsTest"):' in text
           assert '"m3_string_storage_enabled_fixtures": ["M3SourceToolsTest", "M3CpuToolsTest", "M3FileCpuFactsTest"],' in text
           assert 'image-m3-storage-' in text
           for file in (
-              root/"src/com.m3.tools.cpu/com/m3/tools/cpu/M3FileCpuFacts.java",
+              root/"src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/M3FileCpuFacts.java",
               root/"fixtures/M3FileCpuFactsTest.java"):
               assert file.is_file() and file.stat().st_size > 1000
           print("M3_CPU_SOURCE_ADMISSION_PASS fixture=1 no-reparse-owner=1")
@@ -60,7 +75,7 @@ jobs:
           set -euo pipefail
           mkdir -p m3-cpu-facts-receipts
           sha256sum \
-            m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/M3FileCpuFacts.java \
+            m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/M3FileCpuFacts.java \
             m3/tooling/module-packs/cpu-tools/fixtures/M3FileCpuFactsTest.java \
             m3/tooling/module-packs/cpu-tools/build.py \
             > m3-cpu-facts-receipts/SOURCE_SHA256.txt

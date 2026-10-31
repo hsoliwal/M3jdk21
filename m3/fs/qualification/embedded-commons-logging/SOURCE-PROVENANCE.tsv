@@ -16,5 +16,5 @@ m3/fs/src/main/java/org/apache/commons/logging/Log.java	f9fb4aac297a815e5798260e
 m3/fs/src/main/java/org/apache/commons/logging/LogConfigurationException.java	b8bed5dd816e52b90125ee3ebf2c27c4e21ef47d9452b690b33a393366ca4bf1	9bf174c3d55e947a883c0c0c1a8c35364ad43cdc	ASF Apache-2.0 tag LOGGING_1_2
 m3/fs/src/main/java/org/apache/commons/logging/LogFactory.java	584d510c00b9e9888e785dd66b95c2c50116b38423d9eb569a7139f95aae0cb8	735164ceb31c2ab739bf89fc7965a8204ecd5277	ASF Apache-2.0 tag LOGGING_1_2
 m3/fs/src/main/java/org/apache/commons/logging/LogSource.java	758215a743fa36fbfa024b2f7a14a152c6146da0f5ab8d1930ac6397c30564fa	0828dc52001177f03f37c60547a42b9a39d5d8fb	ASF Apache-2.0 tag LOGGING_1_2
-m3/fs/src/main/module/module-info.java	5022b88941949cc7b38671f987f8753369074ce5825e08eb65a60572018b66c6	cfcfa06ba4e1836e4226da1510433f4a1b38c672	M3 named-module descriptor
-m3/fs/src/test/java/com/m3/fs/M3FsEmbeddedCommonsLoggingTest.java	7b24fcb115fac02fa5eee9a9a341fa82abfd3b214d85681e1b3b545841ade199	fde1f5512775642b4a38db44abafbf3404dbd7ee	M3 test-only contract proof
+m3/fs/src/main/module/module-info.java	e4f696d939b75442311f7e186779241cda5a26e07c2cfe9ea60264a0c0ad7490	368d4f71cecd79cb185c7a492aeeb9a3f1ac0e09	M3 named-module descriptor
+m3/fs/src/test/java/jdk/m3/fs/M3FsEmbeddedCommonsLoggingTest.java	856af8d661a13c214902a311d1b96cffeac2e2a675382658d465047bc8acd8dc	fc913234e582a0d2f7d37d3aaf509b8c6297ee84	M3 test-only contract proof

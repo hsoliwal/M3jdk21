@@ -26,7 +26,7 @@ on:
       - 'src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3ASTPC.java'
       - 'src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3PrimitiveImageCompiler.java'
       - 'src/jdk.compiler/share/classes/com/sun/tools/javac/main/JavaCompiler.java'
-      - 'm3/vendor/synexia/nlp-search/**'
+      - 'm3/vendor/m3/nlp-search/**'
       - 'm3/vendor/third_party/opennlp-tools/**'
       - 'm3/vendor/third_party/lucene-core/**'
       - 'm3/vendor/third_party/lucene-analysis-common/**'
@@ -94,7 +94,7 @@ jobs:
       - name: Build source-vendored recipe and JUnit prerequisites
         run: >-
           mvn -B -ntp -f m3/vendor/third_party/pom.xml
-          -pl rewrite-core,rewrite-java,rewrite-java-21,slf4j-api-1.7.36,slf4j-api-2.0.9,junit-jupiter-5.10.2,junit-platform-launcher-1.10.2
+          -pl rewrite-core,rewrite-java,rewrite-java-21,slf4j-api-2.0.12,junit-jupiter-5.10.2,junit-platform-launcher-1.10.2
           -am -DskipTests install
       - name: Run original hash-pinned JMOD descriptor OpenRewrite JUnit
         run: >-

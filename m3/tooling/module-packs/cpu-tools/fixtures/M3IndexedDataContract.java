@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Hitesh Soliwal and contributors
-import com.m3.tools.cpu.*;
+import jdk.m3.tools.cpu.*;
 
 import java.security.MessageDigest;
 import java.nio.charset.StandardCharsets;

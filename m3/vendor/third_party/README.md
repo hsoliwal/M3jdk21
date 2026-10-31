@@ -6,3 +6,5 @@ PROVENANCE.json and notices; the Maven descriptors are M3jdk21 composition (Apac
 `<group>:<artifact>:<version>-m3-source-1`. Build all: `mvn -B -ntp -f m3/vendor/third_party/pom.xml install`.
 Images that cannot compile from their sources jar live in `m3/vendor/third_party-images/`. Ledger and verifier:
 `.m3/task-crates/dependency-source-inline-20261010/`. Nothing here enters src/**.
+Recorded M3 overlays are the one exception to "unchanged": `fastdoubleparser-1.0.90` compiles two overlay files
+(`OVERLAY_SOURCES.json` key `m3_overlays`, originals pinned under its `upstream-excluded/`).

@@ -42,7 +42,7 @@ def main():
     receipt = {"schema": "M3_OPENREWRITE_SOURCE_BUILT_PARSER_V1", "status": "RUNNING",
         "sdk_inputs_sha256": sha(qualified["candidate"] / "SDK_INPUTS.tsv"),
         "sdk_results_sha256": sha(qualified["candidate"] / "SDK_RESULTS.tsv"),
-        "coordinate": "com.synexia.sourcebuilt.openrewrite:rewrite-java-21:8.17.1-m3-javadoc-1",
+        "coordinate": "jdk.internal.m3.sourcebuilt.openrewrite:rewrite-java-21:8.17.1-m3-javadoc-1",
         "original_donor": "openrewrite/rewrite@3bd8271be963c025ce0856072d0f09360e3184cd",
         "commands": rows, "legacy_jdk_compiler_gate_changed": False,
         "scope": "bounded Javadoc atoms and paired donor class proof; no full upstream TCK claim"}
@@ -112,7 +112,7 @@ def main():
                 raise AssertionError("nested donor visitor changed beyond shifted source line numbers")
             debug_only.append(inner)
         artifact = output / "candidate/rewrite-java-21/target/rewrite-java-21-8.17.1-m3-javadoc-1.jar"
-        installed = args.repository / "com/synexia/sourcebuilt/openrewrite/rewrite-java-21/8.17.1-m3-javadoc-1" / artifact.name
+        installed = args.repository / "jdk/internal/m3/sourcebuilt/openrewrite/rewrite-java-21/8.17.1-m3-javadoc-1" / artifact.name
         if sha(artifact) != sha(installed):
             raise AssertionError("installed source-built parser differs from tested artifact")
         receipt.update({"status": "PASS", "compiled_classes": len(candidate), "changed_classes": changed,

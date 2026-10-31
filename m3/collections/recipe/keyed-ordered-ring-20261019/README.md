@@ -1,6 +1,6 @@
 # M3JDK21 keyed stream array/mask completion — 2026-10-19
 
-**Product owner:** `m3/collections/src/main/java/com/m3/collections/M3KeyedParallelismPlan.java` in
+**Product owner:** `m3/collections/src/main/java/jdk/m3/collections/M3KeyedParallelismPlan.java` in
 `hsoliwal/M3JDK21`, not an external M3 + JDK bridge.
 
 ## Contract and problem category
@@ -51,14 +51,14 @@ Recipe resources:
 `m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/keyed-ordered-ring-20261019/`.
 
 Actual owner preimage Git blob:
-`045e64a2dfc5c395bde5ec211196254ae7a680bb`.
+`f42593121ff1e9fb93842f7a7d0c0950dfb3f689`.
 Actual new owner blob:
-`492d03df34436cc339142e68d8fdb02c4cf9bd83`.
+`7e17498e8dcca576cef59b829e04c5b8c9809a51`.
 
 Preimage SHA-256:
-`efaf6160476817518ce6921c336c5b0d7232be7772a312185c503dee5bceb1bd`.
+`3c36bb031264386cfa666e7ed8400b6c71fceb4905ddfbb136708c94e3cf8087`.
 Postimage SHA-256:
-`2687afa8040de89110888f0e17a876e6d37ff40230f80cba6d5024bb83f9fe9c`.
+`2c05e660b4fe12b1be77d417376700aa5bbc941280b559bac3b3b12ad092364d`.
 
 Manifest is source-bound, with exact preimage/postimage. The host tests
 replay before→after, accept postimage fixed points, preserve unrelated

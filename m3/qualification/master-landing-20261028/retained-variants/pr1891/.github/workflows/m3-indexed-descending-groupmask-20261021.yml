@@ -3,8 +3,8 @@ name: M3JDK21 filtered sorted stable group-mask Java21/JNI
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3IndexedDescendingGroupMask*.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3IndexedDescendingGroupMask*.java'
       - 'm3/collections/qualification/descending-groupmask-20261021/**'
       - '.github/workflows/m3-indexed-descending-groupmask-20261021.yml'
   workflow_dispatch:
@@ -35,12 +35,12 @@ jobs:
           out="$RUNNER_TEMP/m3-groupmask"
           mkdir -p "$out/classes" "$out/native"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$out/classes" \
-            m3/collections/src/main/java/com/m3/collections/M3IndexSort.java \
-            m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java \
-            m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java \
-            m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java \
-            m3/collections/src/test/java/com/m3/collections/M3IndexedDescendingGroupMaskSelfTest.java
-          java -cp "$out/classes" com.m3.collections.M3IndexedDescendingGroupMaskSelfTest
+            m3/collections/src/main/java/jdk/m3/collections/M3IndexSort.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3IndexedDescendingGroupMaskSelfTest.java
+          java -cp "$out/classes" jdk.m3.collections.M3IndexedDescendingGroupMaskSelfTest
       - name: Build original JNI path-mask selector and run native-required oracle
         shell: bash
         run: |
@@ -51,7 +51,7 @@ jobs:
             m3/collections/src/main/native/collections/m3_index_path_masks.c \
             -o "$out/native/libm3_collections_pathmask.so"
           java -Xcheck:jni -Djava.library.path="$out/native" -cp "$out/classes" \
-            com.m3.collections.M3IndexedDescendingGroupMaskSelfTest native
+            jdk.m3.collections.M3IndexedDescendingGroupMaskSelfTest native
 
   full-original-collections-junit:
     runs-on: ubuntu-24.04
@@ -72,5 +72,5 @@ jobs:
             -Dtest=M3IndexedDescendingGroupMaskTest,M3IndexedFilterSortFusionTest,M3IndexedSnapshotPositionTest \
             test
           for suite in M3IndexedDescendingGroupMaskTest M3IndexedFilterSortFusionTest M3IndexedSnapshotPositionTest; do
-            test -s "m3/collections/target/surefire-reports/TEST-com.m3.collections.${suite}.xml"
+            test -s "m3/collections/target/surefire-reports/TEST-jdk.m3.collections.${suite}.xml"
           done

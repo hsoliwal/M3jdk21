@@ -1,0 +1,425 @@
+{
+  "schema": 1,
+  "sourceBase": "3429cd844962920a8952d09c641c6bb29c966a63",
+  "state": "AUTHORED_NOT_RUN",
+  "capBytes": 536870912,
+  "reserveBytes": 8589934592,
+  "execution": "NOT_RUN",
+  "directUnchangedProofBytes": 17706,
+  "bindingBoundary": "INPUTS.json excludes itself; the caller's exact source binding must seal this file. No historical receipt is current proof.",
+  "donorSdk": {
+    "repository": "hsoliwal/com.synexia",
+    "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+    "path": "m3-openrewrite-recipes/recipes/m3-regex-relations-current-owner-20261017/sdk",
+    "pomBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f"
+  },
+  "files": [
+    {
+      "path": "m3-mindex/native-jni/CMakeLists.txt",
+      "gitBlob": "4a722cc03a2df6aa6151bc75fed9c4e1fb629446",
+      "bytes": 14661,
+      "sha256": "60bbab6d925855e0b200e521addac17c557ef3586c7998d10db18435aafca3e6",
+      "role": "CURRENT_OWNER_KEEP"
+    },
+    {
+      "path": "m3-mindex/native-jni/src/mindex_text_metadata_jni.c",
+      "gitBlob": "1c19ed1c85ad392a3bf9a41d5d2b446a0cef231f",
+      "bytes": 3758,
+      "sha256": "6f59f995575adb64abdb37aad926267dda06a7205be5252f5bcea63635ff9462",
+      "role": "CURRENT_OWNER_KEEP"
+    },
+    {
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexCompositeString.java",
+      "gitBlob": "5d65ff6ba2ea1b83d929ab1c00e9b75df16f3aa9",
+      "bytes": 22477,
+      "sha256": "9756944bde133c742837fdb7e46ff12291098d68c980cf56e5b564cdc469786b",
+      "role": "CURRENT_OWNER_KEEP"
+    },
+    {
+      "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/TextMetadata.java",
+      "gitBlob": "56d379843eb8b7e037400267ba456cde06643399",
+      "bytes": 6288,
+      "sha256": "e44733190a98e776e753e2089a336a0bcd274f7cf209c1195a7ebbc301996fca",
+      "role": "CURRENT_OWNER_KEEP"
+    },
+    {
+      "path": "m3-mindex/runtime/src/test/java/jdk/internal/m3/mindex/MIndexCompositeStructuralOpsTest.java",
+      "gitBlob": "f38528656ae9b3c34ef2cf89a0f9070e85680e67",
+      "bytes": 3198,
+      "sha256": "85d5775e8cd683f078ca49371d98802d5c0194148e9970204d5ebc5b49c90291",
+      "role": "CURRENT_OWNER_KEEP"
+    },
+    {
+      "path": "m3-mindex/runtime/src/test/java/jdk/internal/m3/mindex/TextMetadataSummaryTest.java",
+      "gitBlob": "b858311ee5c3cf387e3a54d04e0d177b8df0d246",
+      "bytes": 2102,
+      "sha256": "1dd7e48ca10047e0d857864f0ae6360e5308c16b2a991ced218552d2be3ba868",
+      "role": "CURRENT_OWNER_KEEP"
+    },
+    {
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
+      "gitBlob": "78d5fb68f13872164973a8918cc7886c5f548bca",
+      "bytes": 10964,
+      "sha256": "c874b5d4b5fe8886d53763ab91d050f431c4b7c09d3fe34d58680231ccb1cf7e",
+      "role": "VERBATIM_ENGINE"
+    },
+    {
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
+      "gitBlob": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
+      "bytes": 5187,
+      "sha256": "300a520ec9d273922d1edbdf5442e5faf825c47e8e3df7febf4baa2f39945401",
+      "role": "VERBATIM_ENGINE"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/composite-summary-20261012/before/CMakeLists.txt",
+      "gitBlob": "8552b7ecc5d815bc17edcc46d9ae61d2e5c3f5b5",
+      "bytes": 13877,
+      "sha256": "bb3f24112b4c280d1e8e2ee8adbd9c589dd75b2cc27346baf406d1bed3550c2b",
+      "role": "PRESERVED_HISTORICAL_SOURCE"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/composite-summary-20261012/before/MIndexCompositeString.java",
+      "gitBlob": "f11e2f30a5edc918aff4cb1c94f95710dbe534c5",
+      "bytes": 21141,
+      "sha256": "60de8cb3a9cb6c95d5c0ceecd782bd26d9749d70bdbe0cb8d62b0970da5c859f",
+      "role": "PRESERVED_HISTORICAL_SOURCE"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/composite-summary-20261012/before/TextMetadata.java",
+      "gitBlob": "d4453e0ded40503a0ed6f1fa54eb0785adb0c47b",
+      "bytes": 765,
+      "sha256": "cea493500bc4a26ae084644211fddc951f3b8147e0758bf28e709e8744d1cdec",
+      "role": "PRESERVED_HISTORICAL_SOURCE"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/composite-summary-20261012/evidence/verify.log",
+      "gitBlob": "f6603502a711b9e1d4c8a4e4907beae7141b0670",
+      "bytes": 370,
+      "sha256": "88f16ce742fe68a9ff4b13f72b32b60ac6616807b64dd06d5934261c3a0c4c5b",
+      "role": "PRESERVED_HISTORICAL_SOURCE"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/composite-summary-20261012/pom.xml",
+      "gitBlob": "27bd7463aa551f50a0b6dd75e78feeea64a0f3c6",
+      "bytes": 1119,
+      "sha256": "a92cb6833cdb7cb0af13a38f59ff1ccf0db35b75dc4da80cd8331db145f432c5",
+      "role": "PRESERVED_HISTORICAL_SOURCE"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/composite-summary-20261012/proof/TextMetadataProof.java",
+      "gitBlob": "1911eb5e5b3561914e81658bd45847085fab450f",
+      "bytes": 7660,
+      "sha256": "32f858526b9e2922c3fde180da743530ad3570e24ff65eed7039854045ae8020",
+      "role": "PRESERVED_HISTORICAL_SOURCE"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/composite-summary-20261012/recipe.sh",
+      "gitBlob": "ca2d6bff2c7ee74aa967858f504e975e7c20696e",
+      "bytes": 645,
+      "sha256": "a29c270f339290a2124ee6cc9cdf5fdc14e08fbc19979415f856cf77bba95f53",
+      "role": "PRESERVED_HISTORICAL_SOURCE"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/composite-summary-20261012/templates/base-revision.txt",
+      "gitBlob": "216fa6642ebbdbd0f1e7e2ca629929bf758dfe30",
+      "bytes": 41,
+      "sha256": "abaa7741a3bd2f0a6a4713bbd08cf384c58fddfcc8764a18ff7ac2620f5030d3",
+      "role": "PRESERVED_HISTORICAL_SOURCE"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/composite-summary-20261012/templates/CMakeLists.txt.txt",
+      "gitBlob": "84e611f8de7c0472535eb581914ed5423b330ba6",
+      "bytes": 13912,
+      "sha256": "e630e08fece6621a9933ff22bb2366c5c780bb0272c8992d591a261e19368dc9",
+      "role": "PRESERVED_HISTORICAL_SOURCE"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/composite-summary-20261012/templates/manifest.tsv",
+      "gitBlob": "15d9e2717aa7a4a68e0cdbe2774148d3c38263b8",
+      "bytes": 1218,
+      "sha256": "2f1544635f4f07d989c7f1be8f4b1bb13a88eead33864060461ea2271e1412c6",
+      "role": "PRESERVED_HISTORICAL_SOURCE"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/composite-summary-20261012/templates/mindex_text_metadata_jni.c.txt",
+      "gitBlob": "1c19ed1c85ad392a3bf9a41d5d2b446a0cef231f",
+      "bytes": 3758,
+      "sha256": "6f59f995575adb64abdb37aad926267dda06a7205be5252f5bcea63635ff9462",
+      "role": "PRESERVED_HISTORICAL_SOURCE"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/composite-summary-20261012/templates/MIndexCompositeString.java.txt",
+      "gitBlob": "cd431f3fbeafdaf68b74868f75595e68fc5cdb02",
+      "bytes": 21631,
+      "sha256": "6a5b07e213448175a294115b70afcb3d1e8e4876217656621c9d05985da32dff",
+      "role": "PRESERVED_HISTORICAL_SOURCE"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/composite-summary-20261012/templates/MIndexCompositeStructuralOpsTest.java.txt",
+      "gitBlob": "f38528656ae9b3c34ef2cf89a0f9070e85680e67",
+      "bytes": 3198,
+      "sha256": "85d5775e8cd683f078ca49371d98802d5c0194148e9970204d5ebc5b49c90291",
+      "role": "PRESERVED_HISTORICAL_SOURCE"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/composite-summary-20261012/templates/TextMetadata.java.txt",
+      "gitBlob": "56d379843eb8b7e037400267ba456cde06643399",
+      "bytes": 6288,
+      "sha256": "e44733190a98e776e753e2089a336a0bcd274f7cf209c1195a7ebbc301996fca",
+      "role": "PRESERVED_HISTORICAL_SOURCE"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/composite-summary-20261012/templates/TextMetadataSummaryTest.java.txt",
+      "gitBlob": "b858311ee5c3cf387e3a54d04e0d177b8df0d246",
+      "bytes": 2102,
+      "sha256": "1dd7e48ca10047e0d857864f0ae6360e5308c16b2a991ced218552d2be3ba868",
+      "role": "PRESERVED_HISTORICAL_SOURCE"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/composite-summary-20261012/verify-recipe.py",
+      "gitBlob": "033b30e9940fd10ea8853e3357460e6ef5aab45f",
+      "bytes": 2883,
+      "sha256": "5419e2993bb051abf28f94c23396c1e46c6e92c7b03a1c4522e291b8aa11ea7a",
+      "role": "PRESERVED_HISTORICAL_SOURCE"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/composite-summary-20261012/verify.sh",
+      "gitBlob": "6721adf02a19c31bda3130d66ee3c83dc51a2cec",
+      "bytes": 1304,
+      "sha256": "07b84955d42c0549323b1faac5184bd5d49a3fdc60fbbbb388119a8b2622dd66",
+      "role": "PRESERVED_HISTORICAL_SOURCE"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/FOSS_REUSE_DECISION.tsv",
+      "gitBlob": "044596c0da3b82d07a9835d96ba50841e33ffcb0",
+      "bytes": 1300,
+      "sha256": "4e7d796a97cb10c1af3f3383637743bebdf84cebc51670ded7c1493e9f55531d",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/pinned-engine/jdk/internal/m3/rewrite/M3CompositeSummaryRecipe.java",
+      "gitBlob": "03128c1e61913a9754c12291d64e2057ba17efd1",
+      "bytes": 721,
+      "sha256": "74b669ad53e23b9ac6d9a0cbf6e855ec4832cb7dfa8897119fa5266547bfcc88",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
+      "gitBlob": "78d5fb68f13872164973a8918cc7886c5f548bca",
+      "bytes": 10964,
+      "sha256": "c874b5d4b5fe8886d53763ab91d050f431c4b7c09d3fe34d58680231ccb1cf7e",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
+      "gitBlob": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
+      "bytes": 5187,
+      "sha256": "300a520ec9d273922d1edbdf5442e5faf825c47e8e3df7febf4baa2f39945401",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/pinned-engine/jdk/internal/m3/rewrite/M3TextMetadataCurrentOwnerRecipe.java",
+      "gitBlob": "3df5ee1ad8f1fcac201175a8c013e49015769dd1",
+      "bytes": 810,
+      "sha256": "d478dd3e90a814d8a6e2fb005b1ba7a9b93120e0d8476c55a44d643a242aed3a",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/pom.xml",
+      "gitBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+      "bytes": 2678,
+      "sha256": "f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/src/main/resources/jdk/internal/m3/rewrite/composite-summary/base-revision.txt",
+      "gitBlob": "216fa6642ebbdbd0f1e7e2ca629929bf758dfe30",
+      "bytes": 41,
+      "sha256": "abaa7741a3bd2f0a6a4713bbd08cf384c58fddfcc8764a18ff7ac2620f5030d3",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/src/main/resources/jdk/internal/m3/rewrite/composite-summary/CMakeLists.txt.txt",
+      "gitBlob": "84e611f8de7c0472535eb581914ed5423b330ba6",
+      "bytes": 13912,
+      "sha256": "e630e08fece6621a9933ff22bb2366c5c780bb0272c8992d591a261e19368dc9",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/src/main/resources/jdk/internal/m3/rewrite/composite-summary/manifest.tsv",
+      "gitBlob": "15d9e2717aa7a4a68e0cdbe2774148d3c38263b8",
+      "bytes": 1218,
+      "sha256": "2f1544635f4f07d989c7f1be8f4b1bb13a88eead33864060461ea2271e1412c6",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/src/main/resources/jdk/internal/m3/rewrite/composite-summary/mindex_text_metadata_jni.c.txt",
+      "gitBlob": "1c19ed1c85ad392a3bf9a41d5d2b446a0cef231f",
+      "bytes": 3758,
+      "sha256": "6f59f995575adb64abdb37aad926267dda06a7205be5252f5bcea63635ff9462",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/src/main/resources/jdk/internal/m3/rewrite/composite-summary/MIndexCompositeString.java.txt",
+      "gitBlob": "cd431f3fbeafdaf68b74868f75595e68fc5cdb02",
+      "bytes": 21631,
+      "sha256": "6a5b07e213448175a294115b70afcb3d1e8e4876217656621c9d05985da32dff",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/src/main/resources/jdk/internal/m3/rewrite/composite-summary/MIndexCompositeStructuralOpsTest.java.txt",
+      "gitBlob": "f38528656ae9b3c34ef2cf89a0f9070e85680e67",
+      "bytes": 3198,
+      "sha256": "85d5775e8cd683f078ca49371d98802d5c0194148e9970204d5ebc5b49c90291",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/src/main/resources/jdk/internal/m3/rewrite/composite-summary/TextMetadata.java.txt",
+      "gitBlob": "56d379843eb8b7e037400267ba456cde06643399",
+      "bytes": 6288,
+      "sha256": "e44733190a98e776e753e2089a336a0bcd274f7cf209c1195a7ebbc301996fca",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/src/main/resources/jdk/internal/m3/rewrite/composite-summary/TextMetadataSummaryTest.java.txt",
+      "gitBlob": "b858311ee5c3cf387e3a54d04e0d177b8df0d246",
+      "bytes": 2102,
+      "sha256": "1dd7e48ca10047e0d857864f0ae6360e5308c16b2a991ced218552d2be3ba868",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/src/main/resources/jdk/internal/m3/rewrite/text-metadata-current-owner-20261019/base-revision.txt",
+      "gitBlob": "7195ca92a6e666b874f7414dc04404608f0cc93e",
+      "bytes": 41,
+      "sha256": "8adaaf1362e9b45427260cedc68f1cd95041d59ffcf078660a1972cf3efccbc0",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/src/main/resources/jdk/internal/m3/rewrite/text-metadata-current-owner-20261019/manifest.tsv",
+      "gitBlob": "78a5d4a8676d34e1d3b03f3d68de08bfca2d6159",
+      "bytes": 1244,
+      "sha256": "235589cc40b3677a93e26fbeafb372dc7f673fadb8eb9aff578e75fc80dc60d8",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/src/main/resources/META-INF/rewrite/text-metadata-current-owner.yml",
+      "gitBlob": "777bb6f28a5b94c3983f41ecdbe1b689625fe48b",
+      "bytes": 446,
+      "sha256": "bc6aef7ae43087f3eecc67db84d139d0dc046247f919efe58b40544c26d20cbd",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/src/test/java/jdk/internal/m3/rewrite/M3TextMetadataCurrentOwnerRecipeTest.java",
+      "gitBlob": "9aec198964431df2268a1443581e5e2d2182dea5",
+      "bytes": 13842,
+      "sha256": "57f0b24a5c1e1a32ee6d5cbbdb86236667dc91070fa29333b10fce00ab78ff14",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/src/test/resources/jdk/internal/m3/rewrite/text-metadata-current-owner-20261019/current/CMakeLists.txt.txt",
+      "gitBlob": "4a722cc03a2df6aa6151bc75fed9c4e1fb629446",
+      "bytes": 14661,
+      "sha256": "60bbab6d925855e0b200e521addac17c557ef3586c7998d10db18435aafca3e6",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/src/test/resources/jdk/internal/m3/rewrite/text-metadata-current-owner-20261019/current/mindex_text_metadata_jni.c.txt",
+      "gitBlob": "1c19ed1c85ad392a3bf9a41d5d2b446a0cef231f",
+      "bytes": 3758,
+      "sha256": "6f59f995575adb64abdb37aad926267dda06a7205be5252f5bcea63635ff9462",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/src/test/resources/jdk/internal/m3/rewrite/text-metadata-current-owner-20261019/current/MIndexCompositeString.java.txt",
+      "gitBlob": "5d65ff6ba2ea1b83d929ab1c00e9b75df16f3aa9",
+      "bytes": 22477,
+      "sha256": "9756944bde133c742837fdb7e46ff12291098d68c980cf56e5b564cdc469786b",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/src/test/resources/jdk/internal/m3/rewrite/text-metadata-current-owner-20261019/current/MIndexCompositeStructuralOpsTest.java.txt",
+      "gitBlob": "f38528656ae9b3c34ef2cf89a0f9070e85680e67",
+      "bytes": 3198,
+      "sha256": "85d5775e8cd683f078ca49371d98802d5c0194148e9970204d5ebc5b49c90291",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/src/test/resources/jdk/internal/m3/rewrite/text-metadata-current-owner-20261019/current/TextMetadata.java.txt",
+      "gitBlob": "56d379843eb8b7e037400267ba456cde06643399",
+      "bytes": 6288,
+      "sha256": "e44733190a98e776e753e2089a336a0bcd274f7cf209c1195a7ebbc301996fca",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/src/test/resources/jdk/internal/m3/rewrite/text-metadata-current-owner-20261019/current/TextMetadataSummaryTest.java.txt",
+      "gitBlob": "b858311ee5c3cf387e3a54d04e0d177b8df0d246",
+      "bytes": 2102,
+      "sha256": "1dd7e48ca10047e0d857864f0ae6360e5308c16b2a991ced218552d2be3ba868",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/src/test/resources/jdk/internal/m3/rewrite/text-metadata-current-owner-20261019/historical-before/CMakeLists.txt.txt",
+      "gitBlob": "8552b7ecc5d815bc17edcc46d9ae61d2e5c3f5b5",
+      "bytes": 13877,
+      "sha256": "bb3f24112b4c280d1e8e2ee8adbd9c589dd75b2cc27346baf406d1bed3550c2b",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/src/test/resources/jdk/internal/m3/rewrite/text-metadata-current-owner-20261019/historical-before/MIndexCompositeString.java.txt",
+      "gitBlob": "f11e2f30a5edc918aff4cb1c94f95710dbe534c5",
+      "bytes": 21141,
+      "sha256": "60de8cb3a9cb6c95d5c0ceecd782bd26d9749d70bdbe0cb8d62b0970da5c859f",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/src/test/resources/jdk/internal/m3/rewrite/text-metadata-current-owner-20261019/historical-before/TextMetadata.java.txt",
+      "gitBlob": "d4453e0ded40503a0ed6f1fa54eb0785adb0c47b",
+      "bytes": 765,
+      "sha256": "cea493500bc4a26ae084644211fddc951f3b8147e0758bf28e709e8744d1cdec",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/verify.py",
+      "gitBlob": "ded06e885ea4ef326f157f4bb4df925ad5478d85",
+      "bytes": 763,
+      "sha256": "1f3e4233cc92c64e9090bb14b3173aa3fada01478e8d8ffa7459380e7f572418",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/pom.xml",
+      "gitBlob": "5151da36791af8dcb513644808f9f1a409603e9b",
+      "bytes": 1307,
+      "sha256": "6710b7b5dbd2470ef75db4bd2f643ccb8c25ff19c59787759f5a52540b6d9cdf",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/qualify.py",
+      "gitBlob": "ec54c0b3a4e956f39dc2795258fb84f503d7962d",
+      "bytes": 20933,
+      "sha256": "923c05feaf8929ce12045ce774452d1db643ad69104a9360f28123da06b9b25c",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/README.md",
+      "gitBlob": "aca5b74e516f2c21e5e88f87b18e7290694ab16a",
+      "bytes": 5290,
+      "sha256": "f290f296e7c34c3dedf3ef6b55bafdf1fa0a913a430603e4667c14fb00633990",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/THIRD_PARTY_NOTICES.md",
+      "gitBlob": "266f5e359c76b413ae1882679c32544ec9e86ed7",
+      "bytes": 1085,
+      "sha256": "b2827f1c306ebcf3012c994a72a76e6baf089ea8a37438e964fa34e8cb2bbcad",
+      "role": "AUTHORING_INPUT"
+    },
+    {
+      "path": "m3-openrewrite-recipes/tasks/recipe-qualification/src/main/java/jdk/internal/m3/rewrite/Replay.java",
+      "gitBlob": "f9c2876cc372dc93cf62c8f087a716d6e16a4c2f",
+      "bytes": 10190,
+      "sha256": "a66e1edc751508972a774894525a965eff8c1fb5ce26802cdc1b82d12e6dd6cd",
+      "role": "VERBATIM_ENGINE"
+    }
+  ],
+  "taskScopeOnly": true
+}

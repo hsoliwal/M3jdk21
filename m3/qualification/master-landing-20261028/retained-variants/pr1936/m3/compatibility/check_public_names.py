@@ -27,8 +27,8 @@ PUBLIC = re.compile(r"\bpublic\s+(?:(?:abstract|final|sealed|non-sealed)\s+)*"
                     r"(?:class|interface|enum|record)\s+([A-Za-z_$][\w$]*)\b")
 JDK_SOURCE = re.compile(r"^src/[^/]+/(?:share|unix|linux|windows|macosx|bsd)/classes/(java|javax)/")
 RECIPE_ROOTS = (
-    "synexia-openrewrite-recipes/",
-    "synexia-m3-recipe/",
+    "m3-openrewrite-recipes/",
+    "m3-recipe/",
     "m3/tooling/migration-recipes/",
 )
 RECIPE_DESCRIPTOR = re.compile(r"(?:^|/)META-INF/rewrite/[^/]+\.ya?ml$")
@@ -38,11 +38,11 @@ RECIPE_JAVA = re.compile(r"(?:^|/)(?:rewrite|recipes?)/[^/]*Recipe(?:Test)?\.jav
 # provenance. This is a closed byte-and-schema exception, not permission for
 # other dated data, runtime/API names, or executable recipe artifacts.
 PINNED_PASSIVE_RECEIPTS = {
-    "m3/compatibility/synexia-java-base-collection-core-receipt-20261025.json": (
-        "9d8f3c5ef83f3668c176217973f646dba2c072ef242eeab57b6d0ffba7eacd0f",
+    "m3/compatibility/m3-java-base-collection-core-receipt-20261025.json": (
+        "7bc71f528948756465b70e6e9d6c218646f4bb66905276d76c7169f4c6b40f1c",
         "M3JDK21_JAVA_BASE_COLLECTION_CORE_RECEIPT_V1"),
-    "m3/compatibility/synexia-sdk-catalogue-maintenance-receipt-20261025.json": (
-        "609d21bca9c3169ae9157f4f2e809501deae444b7ba6a45d1ddb1b74af64577e",
+    "m3/compatibility/m3-sdk-catalogue-maintenance-receipt-20261025.json": (
+        "503c8d6ae63c898566ed185754ebef31f7667f3905d890aaa8a506960d2d590f",
         "M3JDK21_SDK_CATALOGUE_MAINTENANCE_RECEIPT_V1"),
 }
 
@@ -63,7 +63,7 @@ def pinned_passive_receipt(path: str, text: str | None) -> bool:
 
 # Passive source/evidence data is neither a public Java name nor an executable
 # recipe. Strictly scope the historical path exception to existing data lanes.
-DATA_RECEIPT_PREFIXES = ("m3/qualification/", "m3/synexia-import/current-full-borrow/")
+DATA_RECEIPT_PREFIXES = ("m3/qualification/", "m3/m3-import/current-full-borrow/")
 DATA_RECEIPT_EXTENSIONS = (".json", ".tsv")
 
 

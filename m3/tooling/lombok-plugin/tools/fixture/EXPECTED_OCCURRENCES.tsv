@@ -1,0 +1,15 @@
+origin	module	variant	path	line	kind	item	target	attributes	owner	member
+fixture	fixture	-	tools/fixture/CensusFixture.java	6	IMPORT	lombok.*	-	-	-	-
+fixture	fixture	-	tools/fixture/CensusFixture.java	7	IMPORT	lombok.experimental.FieldDefaults	-	-	-	-
+fixture	fixture	-	tools/fixture/CensusFixture.java	11	ANNOTATION	lombok.Value	TYPE:CLASS	-	-	CensusFixture
+fixture	fixture	-	tools/fixture/CensusFixture.java	12	ANNOTATION	lombok.EqualsAndHashCode	TYPE:CLASS	callSuper=false;of=<field-list>;onlyExplicitlyIncluded=true	-	CensusFixture
+fixture	fixture	-	tools/fixture/CensusFixture.java	13	ANNOTATION	lombok.experimental.FieldDefaults	TYPE:CLASS	level=AccessLevel.PRIVATE;makeFinal=true	-	CensusFixture
+fixture	fixture	-	tools/fixture/CensusFixture.java	16	ANNOTATION	lombok.EqualsAndHashCode.Include	FIELD	-	CensusFixture	a
+fixture	fixture	-	tools/fixture/CensusFixture.java	17	ANNOTATION	lombok.With	FIELD	value=AccessLevel.PROTECTED	CensusFixture	b
+fixture	fixture	-	tools/fixture/CensusFixture.java	19	ANNOTATION	lombok.Getter	FIELD:static	-	CensusFixture	shared
+fixture	fixture	-	tools/fixture/CensusFixture.java	21	ANNOTATION	lombok.AllArgsConstructor	TYPE:CLASS	onConstructor_={@Deprecated}	CensusFixture	Inner
+fixture	fixture	-	tools/fixture/CensusFixture.java	26	ANNOTATION	lombok.NonNull	RECORD_COMPONENT	-	Point	x
+fixture	fixture	-	tools/fixture/CensusFixture.java	30	ANNOTATION	lombok.Cleanup	LOCAL_VARIABLE	-	CensusFixture	in
+fixture	fixture	-	tools/fixture/CensusFixture.java	31	LOCAL_TYPE	lombok.val	LOCAL_VARIABLE	-	CensusFixture	y
+fixture	fixture	-	tools/fixture/CensusFixture.java	34	ANNOTATION	lombok.Builder	CONSTRUCTOR	-	CensusFixture	<init>
+fixture	fixture	-	tools/fixture/CensusFixture.java	35	ANNOTATION	lombok.NonNull	PARAMETER	-	CensusFixture	p

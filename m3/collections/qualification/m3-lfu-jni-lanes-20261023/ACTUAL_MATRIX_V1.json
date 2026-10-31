@@ -4,7 +4,7 @@
   "candidate_SHA256": "4c9956096b1d92cfe9ba2db5293104e38d622c4273c3ab491345925a7779a417",
   "checks": 197325,
   "current_DLL_SHA256": "8daf087344d1a54e99beccb664cd1d542abb8006421a368909ce3221a71f4144",
-  "current_engine": "Synexia4170473b trio595ab8c4/9a6c54f4/962d37d6; isolated offline8.17.1 SDKhost, fullreactor pending",
+  "current_engine": "M34170473b trio595ab8c4/9a6c54f4/962d37d6; isolated offline8.17.1 SDKhost, fullreactor pending",
   "expected_RED_JVMs": 1,
   "formal_review": "NO_VERDICT; source advisory only",
   "fresh_positive_or_fault_JVMs": 6,

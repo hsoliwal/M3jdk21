@@ -1,8 +1,8 @@
 /* Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
  * SPDX-License-Identifier: Apache-2.0
  */
-import com.m3.text.LocalM3Arena;
-import com.m3.text.M3StringPiece;
+import jdk.m3.text.LocalM3Arena;
+import jdk.m3.text.M3StringPiece;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.regex.Matcher;

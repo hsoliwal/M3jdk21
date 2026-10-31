@@ -21,12 +21,12 @@ def load(name):
     return (repo / paths[name]).read_text()
 with TemporaryDirectory(prefix="m3-affix-strings-proof-") as directory:
     tmp = Path(directory)
-    package = tmp / "com/m3/affix"
+    package = tmp / "jdk/m3/affix"
     package.mkdir(parents=True)
     affix = load("M3StringAffixPrecompute.java").replace(
-        "package java.lang;", "package com.m3.affix;")
+        "package java.lang;", "package jdk.m3.affix;")
     row = load("M3StringRegexRowPrecompute.java").replace(
-        "package java.lang;", "package com.m3.affix;")
+        "package java.lang;", "package jdk.m3.affix;")
     owner_anchor = "    int size() { return values.length; }"
     plan_anchor = "        Shape shape() { return shape; }"
     if row.count(owner_anchor) != 1 or row.count(plan_anchor) != 1:
@@ -37,13 +37,13 @@ with TemporaryDirectory(prefix="m3-affix-strings-proof-") as directory:
         "        boolean indexedForProof() { return affix != null && indexedCandidates() != null; }\n" + plan_anchor)
     (package / "M3StringAffixPrecompute.java").write_text(affix)
     (package / "M3StringRegexRowPrecompute.java").write_text(row)
-    sources = sorted((here / "proof/com/m3/affix").glob("*.java"))
+    sources = sorted((here / "proof/jdk/m3/affix").glob("*.java"))
     execute("javac", "--release", "21", "-proc:none",
             "-Xlint:all,-serial", "-Werror", "-d", tmp,
             *sources, package / "M3StringAffixPrecompute.java",
             package / "M3StringRegexRowPrecompute.java")
     for main in ("AffixIndexProof", "RegexRowProof", "AffixRankBeforeAfter"):
-        execute("java", "-Xmx512m", "-cp", tmp, "com.m3.affix." + main)
+        execute("java", "-Xmx512m", "-cp", tmp, "jdk.m3.affix." + main)
     utilpath = tmp / "java/util"
     utilpath.mkdir(parents=True)
     (utilpath / "Strings.java").write_text(load("Strings.java"))

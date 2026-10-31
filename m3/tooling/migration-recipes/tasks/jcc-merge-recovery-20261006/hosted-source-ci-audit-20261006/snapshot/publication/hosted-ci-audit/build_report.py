@@ -21,7 +21,7 @@ for rid in [37422112578,37422112682,37422112648]:
  assert jobs=={'total_count':0,'jobs':[]}
  samples.append({k:r[k] for k in ['id','name','html_url','path','event','head_sha','status','conclusion','created_at','updated_at','run_started_at','check_suite_id']}|{'jobs_count':0,'latest_check_runs_count':sm[r['check_suite_id']]['latest_check_runs_count']})
 summary={
- 'schema':'synexia-hosted-ci-read-only-audit-v1',
+ 'schema':'m3-hosted-ci-read-only-audit-v1',
  'audited_at_utc':'2026-10-06T06:12:48Z',
  'repository':'hsoliwal/com.synexia','pull_request':9479,'head_sha':head,
  'tree_sha':'a72565e0e67f330f12c712dcc7a3fcbe1d80d24e',
@@ -55,7 +55,7 @@ lines+=['',
 '`SUMMARY.json` provides machine-readable findings. `EVIDENCE_MANIFEST.json` hashes the request/response captures and report inputs, including the original first-page census and status captures from the root publication directory. Unsupported endpoint responses and the empty log response are retained.']
 (out/'REPORT.md').write_text('\n'.join(lines)+'\n')
 paths=sorted([p for p in out.iterdir() if p.is_file() and p.name!='EVIDENCE_MANIFEST.json']+[root/'publication/SOURCE_QUALIFIED_WORKFLOW_RUNS_0610.json',root/'publication/SOURCE_QUALIFIED_CHECK_RUNS_0610.json',root/'publication/SOURCE_QUALIFIED_STATUS_0610.json'])
-manifest={'schema':'synexia-hosted-ci-evidence-v1','files':[{'path':str(p.relative_to(root)),'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()} for p in paths]}
+manifest={'schema':'m3-hosted-ci-evidence-v1','files':[{'path':str(p.relative_to(root)),'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()} for p in paths]}
 (out/'EVIDENCE_MANIFEST.json').write_text(json.dumps(manifest,indent=2)+'\n')
 for name in ['REPORT.md','SUMMARY.json','EVIDENCE_MANIFEST.json']:
  p=out/name;print(name,p.stat().st_size,hashlib.sha256(p.read_bytes()).hexdigest())

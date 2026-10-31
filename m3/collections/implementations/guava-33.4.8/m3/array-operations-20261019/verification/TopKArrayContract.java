@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
-package com.m3.collections.guava.collect;
+package jdk.m3.collections.guava.collect;
 
 import java.lang.reflect.Field;
 import java.util.*;

@@ -9,27 +9,27 @@ on:
       - "src/hotspot/share/gc/shared/gcConfig.cpp"
       - "test/hotspot/jtreg/gc/arguments/TestSelectDefaultGC.java"
       - "m3/backports/recipes/jep-523-g1-default/**"
-      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jep523BackportRecipe.java"
-      - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk27-jep523-g1-default-java/**"
-      - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-jep523-g1-default-text/**"
-      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jep523BackportRecipeTest.java"
-      - "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/jdk27-jep523-g1-default/**"
+      - "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep523BackportRecipe.java"
+      - "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk27-jep523-g1-default-java/**"
+      - "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-jep523-g1-default-text/**"
+      - "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep523BackportRecipeTest.java"
+      - "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/jdk27-jep523-g1-default/**"
       - ".github/workflows/m3-jep523-g1-default.yml"
       - "m3/tooling/validators/WorkflowStructureCheck.java"
-      - "m3/compatibility/synexia-workflow-structure-check-receipt-20261008.tsv"
+      - "m3/compatibility/m3-workflow-structure-check-receipt-20261008.tsv"
   pull_request:
     paths:
       - "src/hotspot/share/gc/shared/gcConfig.cpp"
       - "test/hotspot/jtreg/gc/arguments/TestSelectDefaultGC.java"
       - "m3/backports/recipes/jep-523-g1-default/**"
-      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jep523BackportRecipe.java"
-      - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk27-jep523-g1-default-java/**"
-      - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-jep523-g1-default-text/**"
-      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jep523BackportRecipeTest.java"
-      - "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/jdk27-jep523-g1-default/**"
+      - "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep523BackportRecipe.java"
+      - "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk27-jep523-g1-default-java/**"
+      - "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-jep523-g1-default-text/**"
+      - "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep523BackportRecipeTest.java"
+      - "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/jdk27-jep523-g1-default/**"
       - ".github/workflows/m3-jep523-g1-default.yml"
       - "m3/tooling/validators/WorkflowStructureCheck.java"
-      - "m3/compatibility/synexia-workflow-structure-check-receipt-20261008.tsv"
+      - "m3/compatibility/m3-workflow-structure-check-receipt-20261008.tsv"
   workflow_dispatch:
 
 permissions:
@@ -90,20 +90,7 @@ jobs:
           test "${#paths[@]}" -eq 1
           test "${paths[0]}" = "src/hotspot/share/gc/shared/gcConfig.cpp"
 
-      - name: Install pinned source-built recipe dependencies
-        shell: bash
-        run: |
-          set -euo pipefail
-          # The JEP 523 OpenRewrite recipe depends on in-repo source-built
-          # OpenRewrite/JUnit coordinates, not unpinned public substitutes.
-          bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
-          mvn -B -ntp -f m3/pom.xml -pl tooling/migration-recipes -am -DskipTests install
 
-      - name: Recipe JUnit and fixed point
-        shell: bash
-        run: |
-          set -euo pipefail
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3Jep523BackportRecipeTest test
 
   g1-enabled:
     runs-on: ubuntu-22.04

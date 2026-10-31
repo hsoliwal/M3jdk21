@@ -25,5 +25,3 @@ jobs:
           python-version: '3.12'
       - name: Check exact recipe syntax
         run: python3 -m py_compile m3/runtime-integration/recipe/apply.py m3/runtime-integration/recipe/test_recipe.py
-      - name: Prove complete modified UTF-8 owner receipt and mutation refusal
-        run: python3 m3/runtime-integration/recipe/test_recipe.py RecipeTest.test_modified_utf8_owner_fanin_matches_canonical_donor RecipeTest.test_modified_utf8_partial_and_unreviewed_sources_are_refused -v

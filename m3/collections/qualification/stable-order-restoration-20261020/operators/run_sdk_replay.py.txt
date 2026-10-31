@@ -10,7 +10,7 @@ import xml.etree.ElementTree as ET
 
 C2 = Path(__file__).resolve().parent
 B = C2.parent / 'm3fs-vfs-20261020'
-HOST = B / 'canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/recipe-host'
+HOST = B / 'canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/recipe-host'
 RECEIVER = B / 'receiver'
 JDK = B / 'toolchain/jdk21'
 OUT = C2 / 'verification/sdk'
@@ -54,7 +54,7 @@ def run(name, argv):
 
 # Exact unchanged receiving owners are materialized solely to compile the real
 # closure. They are not changed files in the publication set.
-MAIN = 'm3/collections/src/main/java/com/m3/collections'
+MAIN = 'm3/collections/src/main/java/jdk/m3/collections'
 for name in ('M3LongIndexProjection.java', 'M3LongAddressKernel.java',
              'M3IndexMaskCompactor.java', 'M3IndexMaskWindow.java'):
     rel = MAIN + '/' + name

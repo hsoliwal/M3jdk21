@@ -6,10 +6,10 @@ on:
       - 'm3/collections/interop/qualification/current-census-20261017/**'
       - 'm3/collections/interop/qualification/compiler-three-test-successor-20261022/**'
       - 'm3/collections/interop/qualification/apache-bag-450-successor-20261022/**'
-      - 'm3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheBag.java'
-      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java'
-      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryKeyRangesTest.java'
-      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderFlagSelectionTest.java'
+      - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3ApacheBag.java'
+      - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3ApacheCollectionsTest.java'
+      - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryKeyRangesTest.java'
+      - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveProviderFlagSelectionTest.java'
       - 'm3/collections/qualification/m3-five-provider-current-census-20261017/**'
       - '.github/workflows/m3-five-provider-current-census-20261017.yml'
   workflow_dispatch:
@@ -59,7 +59,7 @@ jobs:
           from pathlib import Path
           from hashlib import sha256
           root=Path(".")
-          r=root/"m3/collections/qualification/m3-five-provider-current-census-20261017/recipe/src/main/resources/com/synexia/rewrite/m3-five-provider-current-census-20261017"
+          r=root/"m3/collections/qualification/m3-five-provider-current-census-20261017/recipe/src/main/resources/jdk/internal/m3/rewrite/m3-five-provider-current-census-20261017"
           rows=(r/"manifest.tsv").read_text(encoding="utf-8").splitlines()
           assert len(rows)==4,len(rows)
           for line in rows:
@@ -100,12 +100,12 @@ jobs:
           N="$RUNNER_TEMP/m3-interop-census/native"
           mkdir -p "$C" "$N"
           javac --release 21 -Xlint:all -Werror -d "$C" \
-            m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java \
-            m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java
+            m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java
           cc -std=c17 -Wall -Wextra -Werror -fPIC -shared -O1 -g \
             -fsanitize=undefined -fno-sanitize-recover=all \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
             m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
             -o "$N/libm3_collections_mask.so"
           java -Xcheck:jni -Djava.library.path="$N" -cp "$C" \
-            com.m3.collections.M3IndexMaskCompactorSelfTest
+            jdk.m3.collections.M3IndexMaskCompactorSelfTest

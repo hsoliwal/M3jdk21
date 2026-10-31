@@ -13,7 +13,7 @@
     <plugin><groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.3.0</version>
       <executions><execution><id>source-seal-fixed-point-and-drift-refusal</id>
         <phase>verify</phase><goals><goal>java</goal></goals>
-        <configuration><mainClass>com.synexia.m3.M3NativeIndexedTableRecipe</mainClass>
+        <configuration><mainClass>jdk.internal.m3.M3NativeIndexedTableRecipe</mainClass>
           <arguments><argument>--selftest</argument></arguments></configuration>
       </execution></executions>
     </plugin>

@@ -1,7 +1,7 @@
 # M3JDK21 full-width index-path mask terminal classification (2026-10-21)
 
 **Product:** M3JDK21 (OpenJDK 21 + the M3-native Java/JNI implementation as one SDK).
-**Owning source:** `m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java`.
+**Owning source:** `m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java`.
 No external collection wrapper, relocated storage class, per-entry node, or extra runtime integration layer was introduced.
 
 ## The specific behavioral atom
@@ -18,7 +18,7 @@ This preserves signed and duplicate row IDs, negative and strided logical paths,
 
 ## M3Scale serial recipe custody
 
-Use the existing Maven/OpenRewrite `com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe` (Java LST mode), with the new recipe `com.synexia.rewrite.M3IndexPathMaskClassification20261021`. The manifest under `m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-index-pathmask-classification-20261021/` seals two Java files and records exact before/post SHA-256 values. Required original product SHA-256 is `33b894d2b4c9f89a0244023737d49645d54cbcb1b388a0956e475567fdd4a577`, proposed new source SHA-256 is `a7055268950266c3ed19bc38bcecb002d81ca72e9d58b4d996d2d268cb1a2f62`, and the new proof source is guarded as absent.
+Use the existing Maven/OpenRewrite `com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe` (Java LST mode), with the new recipe `com.synexia.rewrite.M3IndexPathMaskClassification20261021`. The manifest under `m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-index-pathmask-classification-20261021/` seals two Java files and records exact before/post SHA-256 values. Required original product SHA-256 is `33b894d2b4c9f89a0244023737d49645d54cbcb1b388a0956e475567fdd4a577`, proposed new source SHA-256 is `8bc75d80d8713a7938192b580de1fe22fa48eb72309adce1bdad3257b1833494`, and the new proof source is guarded as absent.
 
 Refine **one source file/one replaceable atom per pass**. Never hand-edit generated postimages to iterate: change the recipe template, update its hash, rerun on a copy of the expected source epoch, prove a fixed-point second replay and drift refusal, then publish the recipe, tests, and generated source together. The repository's pinned Maven/OpenRewrite dependency closure has outstanding source-build gates; this PR does **not** claim actual Maven recipe replay until those are resolved.
 

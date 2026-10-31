@@ -1,0 +1,120 @@
+{
+  "authority": {
+    "canonical": "jdk.internal.m3.rewrite.M3AtomizeRecipe + M3PatternizeRecipe via .m3/atomize-patternize/run.sh",
+    "projection": "cpu_lhash_treesitter leaf extraction + declared pattern dimensions (candidate evidence, no mutation authority)",
+    "status": "PENDING_BUILD_HOST (Maven/OpenRewrite not executed on this host)"
+  },
+  "counts": {
+    "cross_donor_exact_classes": 35,
+    "cross_donor_structural_classes": 50,
+    "errors": 0,
+    "exact_classes": 2427,
+    "exact_classes_size_ge2": 382,
+    "hashed_leaves_min8_tokens": 3502,
+    "java_files": 247,
+    "lambdas": 4,
+    "leaves": 3648,
+    "leaves_in_exact_dup_class": 1457,
+    "leaves_in_structural_class": 2439,
+    "methods": 3366,
+    "parse_errors": 0,
+    "parsed_files": 247,
+    "structural_classes": 1262,
+    "structural_classes_size_ge2": 199,
+    "types": 278,
+    "worker_faults": 4
+  },
+  "declared_rules": {
+    "algorithm": "NOT PROJECTED: requires M3PatternizeRecipe problem catalogues; keyword detectors are not admitted as algorithm identity",
+    "carrier": "REGEX if Pattern.compile/matches/quote or String.replaceAll/replaceFirst/matches is invoked; else TEXT_BLOCK if a text_block literal occurs; else STRING if a string_literal occurs; else NONE",
+    "classes": "leaves with fewer than 8 normalized tokens are not entered into pattern classes",
+    "complexity": "normalized token count: <16 TRIVIAL, <64 SIMPLE, <256 ORDINARY, <1024 COMPLEX, <4096 HOSTILE, else PATHOLOGICAL",
+    "composition": "LOCAL_ANON if a local class declaration or anonymous class body occurs; else LAMBDA_STREAM if a lambda, method reference or stream()/parallelStream() invocation occurs; else PLAIN",
+    "control": "STRAIGHT: no control statement; NESTED: control nesting depth >= 2; SWITCH: a switch occurs at depth <= 1; BRANCH: otherwise",
+    "language": "sorted '|'-joined flags among RECORD_GENERIC (record or type parameters), SEALED_PATTERN (sealed/non-sealed/permits, instanceof type/record pattern, switch pattern label), METHOD_REFERENCE, TRY_RESOURCE, RECURSIVE (unqualified or this-qualified self invocation); BASELINE when none",
+    "native": "DECLARATION if the native modifier is present; OVERLOAD if another method of the same owner shares the name; else NONE",
+    "visibility": "modifier keyword public/protected/private, else package (interface-implicit public is not inferred)"
+  },
+  "donors": [
+    {
+      "commit": "vendored",
+      "counts": {
+        "lambdas": 4,
+        "leaves": 271,
+        "methods": 251,
+        "types": 16
+      },
+      "donor": "commons-csv",
+      "errors": 0,
+      "image": "H:/m3-scratch/csv-absorb/image/commons-csv",
+      "java_files": 12,
+      "parse_errors": 0
+    },
+    {
+      "commit": "vendored",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 644,
+        "methods": 609,
+        "types": 35
+      },
+      "donor": "jackson-dataformat-csv",
+      "errors": 0,
+      "image": "H:/m3-scratch/csv-absorb/image/jackson-dataformat-csv",
+      "java_files": 19,
+      "parse_errors": 0
+    },
+    {
+      "commit": "vendored",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 2733,
+        "methods": 2506,
+        "types": 227
+      },
+      "donor": "univocity-parsers",
+      "errors": 0,
+      "image": "H:/m3-scratch/csv-absorb/image/univocity-parsers",
+      "java_files": 216,
+      "parse_errors": 0
+    }
+  ],
+  "root_sha256": "46b1ee1e056f59a859267f826dd03fcea5f5c8b38ca8f32c786893423b5dccb2",
+  "schema": "m3.java-corpus-atomize-patternize.v1",
+  "self_validation_guard": {
+    "commons-csv": {
+      "all_equal": true,
+      "checked_leaves": 149
+    },
+    "jackson-dataformat-csv": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "univocity-parsers": {
+      "all_equal": true,
+      "checked_leaves": 320
+    }
+  },
+  "tables": {
+    "PATTERNS_EXACT.tsv": "ff83419b6bd46e21cc175c341718e3b48e10cf5aa89fe5dd520dcf54cdfaee55",
+    "PATTERNS_STRUCTURAL.tsv": "4553a8e91e2810b855a836e349f09e5ac8dab4852d98d22146193d8bfe75ac2b",
+    "SPECTRUM.tsv": "5bc6708cdf8aa15e9edba5c2a8d28f5e12c1506a09a03f4098c8a0d0eb4adc8c",
+    "commons-csv/ATOMS.tsv.gz": "76521a475c0151dbcf2c30486e3a7a3407ade5ffd0c4b8d883b69af2a040b71c",
+    "commons-csv/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "commons-csv/FILES.tsv": "cd48d288b5e82e0580a37fc831a384e0e81d99011a40bbcffaf83a4faa6fab76",
+    "jackson-dataformat-csv/ATOMS.tsv.gz": "d61ce21312dc370bcdd8dc2f3ce2401286afb9edbb9fb7090263cc04d1edbb2c",
+    "jackson-dataformat-csv/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "jackson-dataformat-csv/FILES.tsv": "d62620d35f0346226d021eee06f97da5b3ca278ac9e6299f502a5ea25ad6097e",
+    "univocity-parsers/ATOMS.tsv.gz": "eba59a0daeff40410e093b1e15d78ceb8e9f7213d75412d4b125c6a655a235f1",
+    "univocity-parsers/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "univocity-parsers/FILES.tsv": "e93e63686d4fb646324e2dcdc912d189746bbc6a21aa1e246a5dd53b08f6a023"
+  },
+  "tools": {
+    "lhash_module": "cpu_lhash_treesitter.py",
+    "lhash_module_sha256": "a5d270b105b7dcd530e66e7223efbd2fef5401b393ca9480598745c1bea332a6",
+    "projector_sha256": "141a29d995d0992b1f731056652ea2c1e1887aec2685a2faf0074c6a45cdaca6",
+    "python": "3.12.6",
+    "tree_sitter": "0.26.0",
+    "tree_sitter_language_pack": "1.12.5"
+  }
+}

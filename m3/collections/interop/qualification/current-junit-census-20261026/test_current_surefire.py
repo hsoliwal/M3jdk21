@@ -59,8 +59,9 @@ class OriginalJUnitV4Contract(unittest.TestCase):
 
     def test_original_real_167_case_archive_and_source_pass(self):
         expected = self.expected()
-        self.assertEqual(167, len(expected))
-        self.assertEqual(37, census.verify_reports(self.product, self.suite(), expected))
+        self.assertEqual(census.EXPECTED_METHODS, len(expected))
+        self.assertEqual(census.EXPECTED_SUITES,
+                         census.verify_reports(self.product, self.suite(), expected))
 
     def test_new_source_mutation_refused(self):
         source = self.source('M3ApacheStreamsTest.java')
@@ -76,6 +77,11 @@ class OriginalJUnitV4Contract(unittest.TestCase):
         source = self.source('M3BiMapTest.java')
         source.write_bytes(source.read_bytes() + b'// forged\n')
         self.refuse(self.expected, 'unreviewed original JUnit source change')
+
+    def test_admitted_addition_mutation_refused(self):
+        path = self.source(sorted(census.ADMITTED_ADDITIONS)[0])
+        path.write_bytes(path.read_bytes() + b'\n')
+        self.refuse(self.expected, 'admitted JUnit source addition drift')
 
     def test_extra_unregistered_source_refused(self):
         self.source('UnreviewedTest.java').write_text('class UnreviewedTest {}')

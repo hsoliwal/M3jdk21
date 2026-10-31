@@ -1,0 +1,16 @@
+old	new	status
+org.commonmark.internal.renderer	com.m3.lib.commonmark.internal.renderer	MOVE
+org.commonmark.renderer.markdown	com.m3.lib.commonmark.renderer.markdown	MOVE
+org.commonmark.parser.delimiter	com.m3.lib.commonmark.parser.delimiter	MOVE
+org.commonmark.internal.inline	com.m3.lib.commonmark.internal.inline	MOVE
+org.commonmark.internal.util	com.m3.lib.commonmark.internal.util	MOVE
+org.commonmark.renderer.html	com.m3.lib.commonmark.renderer.html	MOVE
+org.commonmark.renderer.text	com.m3.lib.commonmark.renderer.text	MOVE
+org.commonmark.parser.block	com.m3.lib.commonmark.parser.block	MOVE
+org.commonmark.parser.beta	com.m3.lib.commonmark.parser.beta	MOVE
+org.commonmark.internal	com.m3.lib.commonmark.internal	MOVE
+org.commonmark.renderer	com.m3.lib.commonmark.renderer	MOVE
+org.commonmark.parser	com.m3.lib.commonmark.parser	MOVE
+org.commonmark.node	com.m3.lib.commonmark.node	MOVE
+org.commonmark.text	com.m3.lib.commonmark.text	MOVE
+org.commonmark	com.m3.lib.commonmark	MOVE

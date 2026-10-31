@@ -1,0 +1,69 @@
+{
+  "schema": "M3_LIB_INTAKE_NAME_MAPPING_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors (M3 modifications)",
+  "license": "upstream LICENSE in legal_notice (vendored source); original notices retained",
+  "product": "M3JDK21",
+  "intake_mode": "LIB_INTAKE_TO_JMOD_V2",
+  "target_module": "jdk.m3.codec",
+  "target_path": "m3/vendor/third_party-m3/relocated/commons-codec-1.22.1",
+  "canonical_recipe": "m3/tooling/lib-intake/lib_intake.sh (pattern LIB_INTAKE_TO_JMOD v2)",
+  "canonical_recipe_owners": [
+    "org.openrewrite.java.ChangePackage (recursive=false, longest first; boundary-checked form of com.synexia M3BoundaryCheckedPackageRenameRecipe)"
+  ],
+  "source_path": "m3/vendor/third_party/commons-codec-1.22.1",
+  "source_coordinate": "commons-codec:commons-codec:1.22.1-m3-source-1",
+  "source_version": "1.22.1-m3-source-1",
+  "source_license_origin": "",
+  "source_packages": [
+    "org.apache.commons.codec"
+  ],
+  "runtime_packages": [
+    "com.m3.lib.codec"
+  ],
+  "intake_dependencies": "-",
+  "qualification_receipt": "m3/tooling/lib-intake/runs/commons-codec-1.22.1/STAGES.tsv",
+  "relocation_map": "m3/tooling/lib-intake/runs/commons-codec-1.22.1/RELOCATION_MAP.tsv",
+  "legal_notice": "m3/vendor/third_party-m3/relocated/commons-codec-1.22.1",
+  "mappings": [
+    {
+      "source": "org.apache.commons.codec and subpackages",
+      "target": "com.m3.lib.codec and subpackages",
+      "role": "relocated donor API in the optional jdk.m3.codec JMOD; type names retained"
+    },
+    {
+      "source": "org.apache.commons.codec.language.bm",
+      "target": "com.m3.lib.codec.language.bm",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.codec.language",
+      "target": "com.m3.lib.codec.language",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.codec.binary",
+      "target": "com.m3.lib.codec.binary",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.codec.digest",
+      "target": "com.m3.lib.codec.digest",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.codec.cli",
+      "target": "com.m3.lib.codec.cli",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.codec.net",
+      "target": "com.m3.lib.codec.net",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.codec",
+      "target": "com.m3.lib.codec",
+      "role": "package (ChangePackage)"
+    }
+  ]
+}

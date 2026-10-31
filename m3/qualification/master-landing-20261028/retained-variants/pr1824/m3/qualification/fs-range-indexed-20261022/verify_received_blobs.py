@@ -41,7 +41,7 @@ def main() -> None:
 
     import ast
     verifier = (ROOT / "m3/file/verify.py").read_text(encoding="utf-8")
-    module_tests = (ROOT / "m3/file/src/test/java/com/m3/file")
+    module_tests = (ROOT / "m3/file/src/test/java/jdk/m3/file")
     candidates = sorted(p.stem for p in module_tests.glob("*Contract.java"))
     start = verifier.index("        contracts = {")
     end = verifier.index("        if {path.stem", start)

@@ -1,0 +1,10 @@
+pass	rules	repo	source	revision	roots	atoms	unknown	unknown_percent
+1	17	m3jdk-java.util	hsoliwal/M3jdk21	315cd18d	src/java.base/share/classes/java/util	1745	1145	65.6
+2	27	m3jdk-java.util	hsoliwal/M3jdk21	315cd18d	src/java.base/share/classes/java/util	1745	776	44.5
+2	27	commons-collections	hsoliwal/commons-collections	7c1357f	src/main/java	756	554	73.3
+2	27	eclipse-collections	hsoliwal/eclipse-collections	07ba121	eclipse-collections/src/main/java eclipse-collections-api/src/main/java	2313	1707	73.8
+2	27	guava	hsoliwal/guava	2d28848	guava/src	2564	1573	61.3
+3	34	m3jdk-java.util	hsoliwal/M3jdk21	315cd18d	src/java.base/share/classes/java/util	1745	601	34.4
+3	34	commons-collections	hsoliwal/commons-collections	7c1357f	src/main/java	756	135	17.9
+3	34	eclipse-collections	hsoliwal/eclipse-collections	07ba121	eclipse-collections/src/main/java eclipse-collections-api/src/main/java	2313	558	24.1
+3	34	guava	hsoliwal/guava	2d28848	guava/src	2564	1032	40.2

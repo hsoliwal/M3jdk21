@@ -1,8 +1,8 @@
 {
   "schema": "M3_RADIX_PAIRED_RESOURCE_DIAGNOSTIC_V1",
   "status": "PASS_EXECUTED_DIAGNOSTIC",
-  "benchmarkSource": "m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformBench.java",
-  "benchmarkSha256": "8b026711262170986520d92fe782913d6a138f66bb9c795b6de748b11aa3dbe4",
+  "benchmarkSource": "m3/collections/src/test/java/jdk/m3/collections/M3SignalRadixUniformBench.java",
+  "benchmarkSha256": "ddf5a717b6004d11d9c957b073fada18d363e2f00df7ced6508e3866f050e2d2",
   "processes": 8,
   "workloadRows": 96,
   "forkOrder": "round1 baseline,candidate;round2 candidate,baseline;Java then JNI",
@@ -10,25 +10,25 @@
   "sampleProtocol": "existing unchanged donor:2*repetitions warmup;9 samples;reported median;fixed seed31337;repetitionsmax16..2048",
   "sourceSeals": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3SignalOrder.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3SignalOrder.java",
       "base": "a115db5d8d9a53c20bf6f6880286a967a80a8dda",
       "donor": "5217d74a6efe62a0e6d42807e692b5a0f4dc2e42",
-      "preimageSha256": "15c85e74a51a716af1b11038c05263b83b1a1ea02f345bc3838d661a158fd80f",
-      "postimageSha256": "3b117a531afd39f071fda04796684084812371982295a508270e58bfb70a2430"
+      "preimageSha256": "855447909cacc331ba7c11a413c1405ab4dc2cf7e4376985d5e4ba80481a9bdd",
+      "postimageSha256": "3ac89d3259b1e00faa326236cfe20acf21c7616ccaf2931f43ba09bddf2cfff3"
     },
     {
       "path": "m3/collections/src/main/native/collections/m3_signal_order_jni.c",
       "base": "a115db5d8d9a53c20bf6f6880286a967a80a8dda",
       "donor": "5217d74a6efe62a0e6d42807e692b5a0f4dc2e42",
       "preimageSha256": "e7a5991f5be2e0bad99400ff477a1c03ec9d1d8e1236f9faf366485f94966ed5",
-      "postimageSha256": "8dc63771408057e56610719e6d562454bece9769a5727c7614c104e659dc8a22"
+      "postimageSha256": "58b0e89220c54ed87687b9d7140413f84654fb15ec39451e41355f6c68d50f42"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformBench.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3SignalRadixUniformBench.java",
       "base": "a115db5d8d9a53c20bf6f6880286a967a80a8dda",
       "donor": "5217d74a6efe62a0e6d42807e692b5a0f4dc2e42",
       "preimageSha256": null,
-      "postimageSha256": "8b026711262170986520d92fe782913d6a138f66bb9c795b6de748b11aa3dbe4"
+      "postimageSha256": "ddf5a717b6004d11d9c957b073fada18d363e2f00df7ced6508e3866f050e2d2"
     }
   ],
   "runs": "RUNS.json",
@@ -1425,10 +1425,10 @@
         "${CANDIDATE_CLASSES}",
         "-d",
         "${RESOURCE_WORK}/bench-classes",
-        "${CANDIDATE_REPO}/m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformBench.java"
+        "${CANDIDATE_REPO}/m3/collections/src/test/java/jdk/m3/collections/M3SignalRadixUniformBench.java"
       ],
       "returncode": 0,
-      "sourceSha256": "8b026711262170986520d92fe782913d6a138f66bb9c795b6de748b11aa3dbe4"
+      "sourceSha256": "ddf5a717b6004d11d9c957b073fada18d363e2f00df7ced6508e3866f050e2d2"
     },
     {
       "label": "baseline",
@@ -1473,7 +1473,7 @@
         "${RESOURCE_WORK}/candidate/libm3signalorder.so"
       ],
       "returncode": 0,
-      "sourceSha256": "8dc63771408057e56610719e6d562454bece9769a5727c7614c104e659dc8a22",
+      "sourceSha256": "58b0e89220c54ed87687b9d7140413f84654fb15ec39451e41355f6c68d50f42",
       "librarySha256": "4ebac165598835cbcb9683904a82cc772ebb5c889a8229257aeb1f803db0702e"
     }
   ],

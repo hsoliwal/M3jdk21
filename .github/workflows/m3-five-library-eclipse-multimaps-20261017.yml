@@ -3,9 +3,9 @@ name: M3 five-library Eclipse multimap receiver
 on:
   pull_request:
     paths:
-      - "m3/collections/interop/src/main/java/com/m3/collections/interop/M3Eclipse*Multimap.java"
-      - "m3/collections/interop/src/test/java/com/m3/collections/interop/M3Eclipse*Multimap*Test.java"
-      - "m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryInteropContractTest.java"
+      - "m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3Eclipse*Multimap.java"
+      - "m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3Eclipse*Multimap*Test.java"
+      - "m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryInteropContractTest.java"
       - "m3/collections/interop/qualification/m3-five-eclipse-multimaps-20261017/**"
       - ".github/workflows/m3-five-library-eclipse-multimaps-20261017.yml"
   push:
@@ -61,17 +61,17 @@ jobs:
         run: |
           set -euxo pipefail
           javac --release 21 -proc:none -h proof/native -cp proof/classes \
-            -d proof/classes m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java
+            -d proof/classes m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java
           gcc -std=c17 -Wall -Wextra -Wconversion -Wshadow -Werror -pedantic -fPIC -shared \
             -fsanitize=undefined -fno-sanitize-recover=all \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
             m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
             -o proof/native/libm3_collections_mask.so
           javac --release 21 -proc:none -cp proof/classes -d proof/classes \
-            m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java
+            m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java
           UBSAN_OPTIONS=halt_on_error=1 java -Xmx256m -Xcheck:jni \
             -Djava.library.path="$PWD/proof/native" -cp proof/classes \
-            com.m3.collections.M3IndexMaskCompactorSelfTest --native
+            jdk.m3.collections.M3IndexMaskCompactorSelfTest --native
           git diff --exit-code
       - name: Retain actual source and proof logs
         if: always()

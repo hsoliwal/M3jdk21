@@ -63,7 +63,7 @@ This is an engineering admission rule, not permission to weaken OpenJDK licensin
 
 M3JDK21 may consume Synexia broadly, but the intake **mode** is part of the proof.
 
-The machine-readable authority is `m3/docs/synexia-intake-policy.tsv`. The repository's own
+The machine-readable authority is `m3/docs/m3-intake-policy.tsv`. The repository's own
 `ADDITIONAL_LICENSE_INFO` explicitly distinguishes independently licensed Apache-2.0 programs
 from copying incompatible-license code into GPLv2 source files. Therefore:
 
@@ -80,10 +80,10 @@ from copying incompatible-license code into GPLv2 source files. Therefore:
   from all necessary rightsholders under target-compatible terms and correct target headers.
 - `EXISTING_DIRECT_COPY_REVIEW` — historical Synexia records already marked
   `copied_code=true` under `src/**` are not silently grandfathered. They are enumerated in
-  `m3/docs/synexia-direct-copy-review.tsv` and remain review-required until either compatible
+  `m3/docs/m3-direct-copy-review.tsv` and remain review-required until either compatible
   relicensing is proven or the target is replaced by a target-owned implementation.
 
-`m3/runtime-integration/verify-synexia-intake.py` fails closed if the mode set, direct-copy
+`m3/runtime-integration/verify-m3-intake.py` fails closed if the mode set, direct-copy
 review inventory, FOSS provenance, or repository licensing boundary drifts.
 
 ## Canonical Synexia M3Index implementation ownership
@@ -105,7 +105,7 @@ exact Apache-2.0 custody snapshot, but the snapshot is not a second canonical im
 | reusable Maven/OpenRewrite recipes | Synexia `synexia-openrewrite-recipes` | execute only in Synexia; receive postimages and passive receipts |
 | `m3/runtime-integration`, OpenJDK/HotSpot/JNI receivers | M3JDK21 | target-specific |
 
-The receiver map is `m3/synexia-import/m3index-family-receiver.tsv`. Automatic vendor intake
+The receiver map is `m3/m3-import/m3index-family-receiver.tsv`. Automatic vendor intake
 must mirror the exact Synexia relative path below `m3/vendor/synexia/`; renaming or relocating
 inside the vendor snapshot is refused so provenance stays trivial.
 
@@ -218,7 +218,7 @@ owners may be internal implementation values or separately admitted public `com.
 operations/views, with explicit immutable/snapshot/range/composition ownership contracts.
 
 The first source-inventoried companion example is the existing `com.m3.arrays.M3Arrays` in
-module `com.m3.arrays`, at `m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java`, with descriptor
+module `com.m3.arrays`, at `m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java`, with descriptor
 `m3/arrays/src/main/java/module-info.java`. Its `STATIC_OPERATIONS` relation names the original
 `java.base` / `java.util.Arrays` / `src/java.base/share/classes/java/util/Arrays.java` API.
 Its current factories snapshot mutable inputs; existing slices/joins share immutable owners.
@@ -362,8 +362,8 @@ Track that work in the [visible release queue](../release/queue/README.md).
 ## Full-family machine pin
 
 The receiving authority for the complete Synexia MIndex/M3Index lineage is
-`m3/compatibility/synexia-full-family-pin.tsv`, enforced by
-`m3/compatibility/check_synexia_full_family.py`.
+`m3/compatibility/m3-full-family-pin.tsv`, enforced by
+`m3/compatibility/check_m3_full_family.py`.
 
 The pin deliberately remains qualification-only while the source PR is open and while all 4,770
 catalogue rows remain unevaluated. It cannot enable automatic application, target relicensing or a

@@ -2,7 +2,7 @@
 
 No concrete defect was found in the reviewed sealed E3 packet. This is static review and read-only byte/structure comparison, not an executed Java test, Python contract test, recipe application, installer result or publication claim.
 
-The reviewed sealed-plan digest is `af65912789780e214f09644b38f542db5f7670b83ee1fada228bce08f8f9b30e`. The reviewed map after-image SHA-256 is `e4ae516fea9822a4bfe26669e9749e167f52bb30049d520339ee42f3779bc0b3`. The plan digest was independently recomputed with the retained installer's exact canonical JSON representation. This canonical plan seal is distinct from the SHA-256 of the formatted plan.json file.
+The reviewed sealed-plan digest is `af65912789780e214f09644b38f542db5f7670b83ee1fada228bce08f8f9b30e`. The reviewed map after-image SHA-256 is `61818898ef6c092ddad2c1ee4cfe7508199912ff0a1f2d5c2a51ad6695d040c8`. The plan digest was independently recomputed with the retained installer's exact canonical JSON representation. This canonical plan seal is distinct from the SHA-256 of the formatted plan.json file.
 
 ## Packet and retained owner boundary
 

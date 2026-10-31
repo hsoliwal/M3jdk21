@@ -1,5 +1,5 @@
 #!/bin/sh
-# Compile M3JDK21 java.base patches and the JNI/JVMTI probe against local JDK 21.
+# Compile M3JDK 21 java.base patches and the JNI/JVMTI probe against local JDK 21.
 # This tests a subset, not a complete M3JDK21/HotSpot build.
 set -eu
 ROOT=$(CDPATH='' cd -- "$(dirname "$0")/../.." && pwd)

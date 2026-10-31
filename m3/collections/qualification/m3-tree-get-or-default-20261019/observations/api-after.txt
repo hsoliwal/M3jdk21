@@ -9,7 +9,7 @@ containsKey[class java.lang.Object]:boolean
 containsValue[class java.lang.Object]:boolean
 defer[class java.lang.Object]:boolean
 descendingKeySet[]:java.util.NavigableSet
-descendingMap[]:com.m3.collections.M3TreeMap
+descendingMap[]:jdk.m3.collections.M3TreeMap
 descendingMap[]:java.util.NavigableMap
 entrySet[]:java.util.SequencedSet
 entrySet[]:java.util.Set
@@ -23,7 +23,7 @@ getClass[]:java.lang.Class
 getOrDefault[class java.lang.Object, class java.lang.Object]:java.lang.Object
 get[class java.lang.Object]:java.lang.Object
 hashCode[]:int
-headMap[class java.lang.Object, boolean]:com.m3.collections.M3TreeMap
+headMap[class java.lang.Object, boolean]:jdk.m3.collections.M3TreeMap
 headMap[class java.lang.Object, boolean]:java.util.NavigableMap
 headMap[class java.lang.Object]:java.util.SortedMap
 higherEntry[class java.lang.Object]:java.util.Map$Entry
@@ -44,8 +44,8 @@ notify[]:void
 pollFirstEntry[]:java.util.Map$Entry
 pollLastEntry[]:java.util.Map$Entry
 preload[]:void
-preload[class com.m3.collections.M3LazyEventPolicy, class com.m3.collections.M3Progress]:void
-preload[class com.m3.collections.M3Progress]:void
+preload[class jdk.m3.collections.M3LazyEventPolicy, class jdk.m3.collections.M3Progress]:void
+preload[class jdk.m3.collections.M3Progress]:void
 putAll[interface java.util.Map]:void
 putFirst[class java.lang.Object, class java.lang.Object]:java.lang.Object
 putIfAbsent[class java.lang.Object, class java.lang.Object]:java.lang.Object
@@ -56,8 +56,8 @@ remove[class java.lang.Object]:java.lang.Object
 replaceAll[interface java.util.function.BiFunction]:void
 replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]:boolean
 replace[class java.lang.Object, class java.lang.Object]:java.lang.Object
-reversed[]:com.m3.collections.M3OrderedSlotMap
-reversed[]:com.m3.collections.M3TreeMap
+reversed[]:jdk.m3.collections.M3OrderedSlotMap
+reversed[]:jdk.m3.collections.M3TreeMap
 reversed[]:java.util.NavigableMap
 reversed[]:java.util.SequencedMap
 reversed[]:java.util.SortedMap
@@ -66,15 +66,15 @@ sequencedKeySet[]:java.util.NavigableSet
 sequencedKeySet[]:java.util.SequencedSet
 sequencedValues[]:java.util.SequencedCollection
 size[]:int
-subMap[class java.lang.Object, boolean, class java.lang.Object, boolean]:com.m3.collections.M3TreeMap
+subMap[class java.lang.Object, boolean, class java.lang.Object, boolean]:jdk.m3.collections.M3TreeMap
 subMap[class java.lang.Object, boolean, class java.lang.Object, boolean]:java.util.NavigableMap
 subMap[class java.lang.Object, class java.lang.Object]:java.util.SortedMap
-tailMap[class java.lang.Object, boolean]:com.m3.collections.M3TreeMap
+tailMap[class java.lang.Object, boolean]:jdk.m3.collections.M3TreeMap
 tailMap[class java.lang.Object, boolean]:java.util.NavigableMap
 tailMap[class java.lang.Object]:java.util.SortedMap
 toString[]:java.lang.String
-touch[class java.lang.Object, class com.m3.collections.M3LazyEventPolicy, class com.m3.collections.M3Progress]:java.lang.Object
-touch[class java.lang.Object, class com.m3.collections.M3Progress]:java.lang.Object
+touch[class java.lang.Object, class jdk.m3.collections.M3LazyEventPolicy, class jdk.m3.collections.M3Progress]:java.lang.Object
+touch[class java.lang.Object, class jdk.m3.collections.M3Progress]:java.lang.Object
 touch[class java.lang.Object]:java.lang.Object
 valueFlags[class java.lang.Object]:short
 values[]:java.util.Collection

@@ -1,6 +1,6 @@
 {
   "base_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
-  "recipe": "com.synexia.rewrite.M3IntegratedUtilitiesRecipe",
+  "recipe": "jdk.internal.m3.rewrite.M3IntegratedUtilitiesRecipe",
   "status": "COUNTEREXAMPLES_RETAINED_AS_POSITIVE_CONTRACT_REGRESSIONS",
   "entries": [
     {

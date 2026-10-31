@@ -306,7 +306,7 @@
     {
       "path": "java-base-doclint-inventory.json",
       "bytes": 37535,
-      "sha256": "186658166110a5ad3d0e1867a5203d3f97d3cdd854eaa60784ce31474b5eda80"
+      "sha256": "cd87e20a40dad35bd36fd7061d489e39fd11eca98485aaef54477df116ea67f1"
     },
     {
       "path": "java-base-live.json",

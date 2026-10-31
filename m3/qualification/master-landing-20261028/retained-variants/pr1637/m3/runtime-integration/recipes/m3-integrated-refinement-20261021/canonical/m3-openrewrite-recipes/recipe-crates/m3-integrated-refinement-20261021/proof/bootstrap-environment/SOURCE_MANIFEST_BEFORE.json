@@ -1,0 +1,21 @@
+{
+  "scope": "Retained environment-bootstrap scripts, exact POM, and logs; no full source snapshot claim",
+  "canonical_base": "e02e7cb0f2e8e46db4c5b476d59aa26658fa4d07",
+  "artifacts": [
+    {
+      "path": "proof/bootstrap-001/runner.py",
+      "sha256": "2b0a17522fd58999bc40cd74f0bd3831510ce4ee5d56ba1e85c133653924b9b1"
+    },
+    {
+      "path": "proof/bootstrap-002/runner.py",
+      "sha256": "9862fd550e4b03422464e4e21ec35a15a150eb3774477bb097b2836858b8a1ae"
+    },
+    {
+      "path": "proof/bootstrap-environment/pom.xml",
+      "sha256": "556a8edbd5236692ef4b059b586c63d30a71cd8a5676d63ce020fa14a00d7561"
+    }
+  ],
+  "unknowns": [
+    "Complete Java source-tree hashes were not retained by the original pre-compilation failure runner."
+  ]
+}

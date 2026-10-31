@@ -19,7 +19,7 @@ RECEIPTS=""; for r in $RUNS; do [ -d "$r" ] && RECEIPTS="$RECEIPTS $r"; done
 export JAVA_TOOL_OPTIONS="-Xmx1536m -Djava.io.tmpdir=K:/m3-work/tmp" TMP=K:/m3-work/tmp TEMP=K:/m3-work/tmp JAVA_HOME="C:\\Program Files\\Java\\jdk-21"
 ASM=$(cygpath -w ~/.m2/repository/org/ow2/asm/asm/9.6/asm-9.6.jar)
 if [ "$SIDE" = "synexia" ]; then
-  W=/k/m3-work/wt/synexia-c6; WK=K:/m3-work/wt/synexia-c6; BASE=origin/develop
+  W=/k/m3-work/wt/m3-c6; WK=K:/m3-work/wt/m3-c6; BASE=origin/develop
   P=""; GENOPT=""; SWOPT=""; ONLY=""; BOPT=""
 else
   W=/k/m3-work/wt/m3jdk21-c7; WK=K:/m3-work/wt/m3jdk21-c7; BASE=origin/master
@@ -33,7 +33,7 @@ gen() {  # $1 = extra args
     cut -f3 "$C/${P}THIRD_PARTY_MODULES.tsv" | tail -n +2 | grep -v "^third_party/re2j$" | while read -r d; do [ -n "$d" ] && rm -rf "$W/$d"; done
   fi
   python -I "$C/run_traced.py" "$C/gen_third_party.py" --inventory $INV --plan "$C/LOCK_PLAN.tsv" --status $STATUS --receipts $RECEIPTS --build-inputs "$C/BUILD_INPUTS.tsv" \
-    --store K:/m3-work/donors/maven-sources/store --repo "$WK" --out "$K/${P}THIRD_PARTY_MODULES.tsv" --template K:/m3-work/wt/synexia-c6/third_party/re2j --pom-classpath $K/POM_CLASSPATH.tsv $GENOPT $ONLY $1 2> "$C/${P}gen.log" | tail -1
+    --store K:/m3-work/donors/maven-sources/store --repo "$WK" --out "$K/${P}THIRD_PARTY_MODULES.tsv" --template K:/m3-work/wt/m3-c6/third_party/re2j --pom-classpath $K/POM_CLASSPATH.tsv $GENOPT $ONLY $1 2> "$C/${P}gen.log" | tail -1
   rc=${PIPESTATUS[0]}
   if [ "$rc" != 0 ]; then echo "GEN_FAILED rc=$rc (tree is partial; stopping the lane)"; tail -3 "$C/${P}gen.log"; exit 3; fi
   awk -F'\t' 'NR>1 {c[$2" "$7]++} END {for (k in c) printf "%s=%d; ", k, c[k]; print ""}' "$C/${P}THIRD_PARTY_MODULES.tsv"
@@ -67,7 +67,7 @@ for step in $steps; do
       if [ "$SIDE" = "synexia" ]; then
         python -I "$C/make_crate.py" --repo "$WK" --c6 "$K" --baseline "$(git -C "$W" rev-parse $BASE)" --runs $RECEIPTS --atoms "$K/atoms" | tail -1
       else
-        python -I "$C/m3_crate.py" --repo "$WK" --c6 "$K" --synexia-crate K:/m3-work/wt/synexia-c6/.m3/task-crates/dependency-source-inline-20261010 --synexia-pr "hsoliwal/com.synexia#10339" --baseline "$(git -C "$W" rev-parse $BASE)" --consumers "$K/m3_consumer_poms.txt" | tail -1
+        python -I "$C/m3_crate.py" --repo "$WK" --c6 "$K" --m3-crate K:/m3-work/wt/m3-c6/.m3/task-crates/dependency-source-inline-20261010 --m3-pr "hsoliwal/com.synexia#10339" --baseline "$(git -C "$W" rev-parse $BASE)" --consumers "$K/m3_consumer_poms.txt" | tail -1
       fi ;;
     verify)
       (cd "$W" && python -I .m3/task-crates/dependency-source-inline-20261010/verify_crate.py | tail -1) ;;

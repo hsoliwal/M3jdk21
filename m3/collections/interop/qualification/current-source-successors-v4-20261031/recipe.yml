@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: jdk.internal.m3.InteropV4V5RealHistoryReceiving20261031
+displayName: Source-sealed interop V4 and JUnit V5 build receiving candidate
+description: Original V3/V4 receipts remain immutable; actual Maven execution gates source promotion.
+recipeList:
+  - jdk.internal.m3.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-interop-v4-v5-real-history-20261031

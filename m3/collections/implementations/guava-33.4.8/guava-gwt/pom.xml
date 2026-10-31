@@ -359,7 +359,7 @@
               <goal>compile</goal>
             </goals>
             <configuration>
-              <module>com.m3.collections.guava.ForceGuavaCompilation</module>
+              <module>jdk.m3.collections.guava.ForceGuavaCompilation</module>
               <failOnError>true</failOnError>
               <logLevel>${gwt.logLevel}</logLevel>
               <generateJsInteropExports>true</generateJsInteropExports>
@@ -412,7 +412,7 @@
               <goal>test</goal>
             </goals>
             <configuration>
-              <module>com.m3.collections.guava.GuavaTests</module>
+              <module>jdk.m3.collections.guava.GuavaTests</module>
               <includes>**/GwtTestSuite.java</includes>
               <logLevel>${gwt.logLevel}</logLevel>
               <mode>htmlunit</mode>

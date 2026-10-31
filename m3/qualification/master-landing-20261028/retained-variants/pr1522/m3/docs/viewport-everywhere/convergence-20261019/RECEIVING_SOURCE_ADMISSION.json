@@ -37,12 +37,12 @@
       "git_blob": "b9e81d96d261749677fbc79774205c37863bd2db"
     },
     {
-      "path": "m3/lexicon/hf-intake/src/test/java/com/m3/lexicon/hf/M3HfLexiconIntakeProof.java",
+      "path": "m3/lexicon/hf-intake/src/test/java/jdk/m3/lexicon/hf/M3HfLexiconIntakeProof.java",
       "status": "modified",
       "git_blob": "76210b522d670415e141af81f1bf02c3f8d0f6f5"
     },
     {
-      "path": "m3/lexicon/hf-intake/src/test/resources/com/m3/lexicon/hf/language-resource-discovery.tsv",
+      "path": "m3/lexicon/hf-intake/src/test/resources/jdk/m3/lexicon/hf/language-resource-discovery.tsv",
       "status": "modified",
       "git_blob": "ed22aa162eb90e038b9be9b4e30624b704d31a91"
     },

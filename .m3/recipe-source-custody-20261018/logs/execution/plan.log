@@ -6,8 +6,8 @@
 [INFO] --------------------------------[ pom ]---------------------------------
 [INFO] 
 [INFO] --- exec:3.5.0:exec (default-cli) @ m3-recipe-qualification ---
-RECIPE base=275b610f26c191cd70420172ac65b634a8a4df49 manifest=75f737326eb76fec3f2a923d98e7ec444deb5a6fc700c30e1f25de27a73c722c changes=1 applied=false promotionAuthority=false
-.m3/SYNEXIA_RECIPE_SOURCE_CUSTODY_EXECUTION_20261018.json	ABSENT	8ad74cf7d63c32c69c6acb95a2018772296df4aee1990372a71270321daa0437
+RECIPE base=275b610f26c191cd70420172ac65b634a8a4df49 manifest=2fa8a7ad0919f16acd2e30c675ce2a8446c424e7e91c0eea1af127994c7ed4d5 changes=1 applied=false promotionAuthority=false
+.m3/M3_RECIPE_SOURCE_CUSTODY_EXECUTION_20261018.json	ABSENT	8ddc906ac2f5e8149a747309a25c80d18f976778d482f092160395ba4b455ef5
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------

@@ -53,9 +53,9 @@ static const struct JNINativeInterface_ table={
     .GetByteArrayRegion=bytes,.GetIntArrayRegion=ints,.GetLongArrayRegion=longs,
     .NewIntArray=new_ints,.NewLongArray=new_longs,.SetIntArrayRegion=put_ints,.SetLongArrayRegion=put_longs
 };
-extern jintArray Java_com_m3_collections_M3IndexMaskCompactor_selectNative(JNIEnv *,jclass,jintArray,jbyteArray,jint);
-extern jintArray Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(JNIEnv *,jclass,jintArray,jint,jbyteArray,jint,jint,jint);
-extern jlongArray Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(JNIEnv *,jclass,jlongArray,jint,jbyteArray,jint,jint,jint);
+extern jintArray Java_jdk_m3_collections_M3IndexMaskCompactor_selectNative(JNIEnv *,jclass,jintArray,jbyteArray,jint);
+extern jintArray Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowNative(JNIEnv *,jclass,jintArray,jint,jbyteArray,jint,jint,jint);
+extern jlongArray Java_jdk_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(JNIEnv *,jclass,jlongArray,jint,jbyteArray,jint,jint,jint);
 static void reset(void) { pending=fail_read=fail_alloc=0;row_reads=row_units=0;memset(&storage,0,sizeof(storage)); }
 int main(void) {
     JNIEnv env=&table; jint ids[1025]; jlong values[1025]; jbyte marks[1025];
@@ -65,9 +65,9 @@ int main(void) {
         memset(marks,0,sizeof(marks)); if(selected>=0)marks[selected]=(jbyte)0x80;
         for(int mode=0;mode<3;mode++) {
             reset(); jobject result;
-            if(mode==0) result=Java_com_m3_collections_M3IndexMaskCompactor_selectNative(&env,NULL,(jintArray)(void *)&rows,(jbyteArray)(void *)&states,128);
-            else if(mode==1) result=Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(&env,NULL,(jintArray)(void *)&rows,0,(jbyteArray)(void *)&states,0,1025,128);
-            else result=Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(&env,NULL,(jlongArray)(void *)&long_rows,0,(jbyteArray)(void *)&states,0,1025,128);
+            if(mode==0) result=Java_jdk_m3_collections_M3IndexMaskCompactor_selectNative(&env,NULL,(jintArray)(void *)&rows,(jbyteArray)(void *)&states,128);
+            else if(mode==1) result=Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowNative(&env,NULL,(jintArray)(void *)&rows,0,(jbyteArray)(void *)&states,0,1025,128);
+            else result=Java_jdk_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(&env,NULL,(jlongArray)(void *)&long_rows,0,(jbyteArray)(void *)&states,0,1025,128);
             CHECK(result && !pending); CHECK(output.length==(selected<0?0:1));
             CHECK(row_units==(EXPECT_SPARSE ? (selected<0?0UL:1UL) : 1025UL));
             CHECK(row_reads==(EXPECT_SPARSE ? (selected<0?0UL:1UL) : 5UL));
@@ -75,14 +75,14 @@ int main(void) {
         }
     }
     memset(marks,0,sizeof(marks)); reset();
-    CHECK(Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(&env,NULL,(jintArray)(void *)&rows,7,(jbyteArray)(void *)&states,11,513,0));
+    CHECK(Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowNative(&env,NULL,(jintArray)(void *)&rows,7,(jbyteArray)(void *)&states,11,513,0));
     CHECK(row_units==513 && row_reads==3 && output.length==513);
     for(int i=0;i<513;i++)CHECK(storage.ints[i]==ids[i+7]);
     reset(); fail_alloc=1;
-    CHECK(!Java_com_m3_collections_M3IndexMaskCompactor_selectNative(&env,NULL,(jintArray)(void *)&rows,(jbyteArray)(void *)&states,0));
+    CHECK(!Java_jdk_m3_collections_M3IndexMaskCompactor_selectNative(&env,NULL,(jintArray)(void *)&rows,(jbyteArray)(void *)&states,0));
     CHECK(pending && row_reads==0);
     reset(); fail_read=1;
-    CHECK(!Java_com_m3_collections_M3IndexMaskCompactor_selectNative(&env,NULL,(jintArray)(void *)&rows,(jbyteArray)(void *)&states,0));
+    CHECK(!Java_jdk_m3_collections_M3IndexMaskCompactor_selectNative(&env,NULL,(jintArray)(void *)&rows,(jbyteArray)(void *)&states,0));
     CHECK(pending && row_reads==1);
     printf("M3_SPARSE_MASK_READS_PASS checks=%lu sparse=%d single_match_row_units=%d\n",checks,EXPECT_SPARSE,EXPECT_SPARSE?1:1025);
     return 0;

@@ -4,9 +4,9 @@
   "base_revision": "7c0d2493edbf93ac5cb726667ce83046d3519e3e",
   "recipe_proof_sha256": "8b96ff9f844e6c238d2105c55af7b4c37f4628737e8232ca8115a5942dd14bd0",
   "receiver_root": "a9af2623aea50708e6506c43ffb484858d5f1740fa550466ea08307a34c733bf",
-  "driver_sha256": "0e5daf1012d1ac6876846e437dca49a6f7c65519c53dcae75c5da3cd60265cef",
+  "driver_sha256": "6b6bd9bafd1d275fcc13e62320e9788afc197d8f9e56cb7258bf93858017ad52",
   "copier_sha256": "185b03d4ab0961acf658694bfb654cddfc361a04dad249a0ced6b49ba70687c8",
-  "preimage_custody_sha256": "892a3a56aeb949addf29a10aee54d7bfae91019789b7e9a52fb1230ff52dea31",
+  "preimage_custody_sha256": "39ccfbfa3e8c42a7e1cbf7a2d3a6e9d32b6be8653ccf6944026d413824b7edaa",
   "inputs": [
     {
       "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/recipe-crates/m3-mask-native-atoms-runtime-20261021/TARGETS.json",
@@ -89,9 +89,9 @@
       "sha256": "58f403c3b2677ecb8c7c36d9e04233760c1477f4d770f431efddc5318edf9ad2"
     },
     {
-      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/recipe-crates/m3-mask-native-atoms-runtime-20261021/target/receiver/m3/collections/src/test/java/com/m3/collections/M3MaskPositionAtomsTest.java",
+      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/recipe-crates/m3-mask-native-atoms-runtime-20261021/target/receiver/m3/collections/src/test/java/jdk/m3/collections/M3MaskPositionAtomsTest.java",
       "bytes": 8624,
-      "sha256": "53d22b261f4376f41e735dc5121d3d8f97ee08f4eafdf99e3f615d0330b22548"
+      "sha256": "719cf8ac4ac83625d3ca91ccf6af826019d65d80dd4d3020f4865b9fc7bde5bf"
     },
     {
       "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/recipe-crates/m3-mask-native-atoms-runtime-20261021/target/recipe-proof.tsv",
@@ -106,22 +106,22 @@
     {
       "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "bytes": 31505,
-      "sha256": "083f8b1fd956fe2ed81168bc580d1e0f39a815401c50571d397ddba40150cf63"
+      "sha256": "92cc90c46a1ca672a016a89c0d65e6909e090264ba1aa76a85b7fa333470e38b"
     },
     {
       "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
       "bytes": 19983,
-      "sha256": "5a64bd502cb8aa7d51b78813b736e37a0a7f420233f405c4d2df08ee2eefe8bc"
+      "sha256": "3b4f7649fc3ee38df62a6dc9b318e8845da6574f7e48b4cd7a948b58e266d46f"
     },
     {
       "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
       "bytes": 8268,
-      "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579"
+      "sha256": "d2cd6bb4d800878b9f512bf436bf4e38cf73b37676235832e1f68840cfe895c0"
     },
     {
       "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-mask-native-atoms-runtime-20261021-native-test/M3MaskPositionAtomsTest.java.txt",
       "bytes": 8624,
-      "sha256": "53d22b261f4376f41e735dc5121d3d8f97ee08f4eafdf99e3f615d0330b22548"
+      "sha256": "719cf8ac4ac83625d3ca91ccf6af826019d65d80dd4d3020f4865b9fc7bde5bf"
     },
     {
       "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-mask-native-atoms-runtime-20261021-native-test/manifest.tsv",
@@ -161,12 +161,12 @@
     {
       "path": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/preimage-custody.json",
       "bytes": 1518,
-      "sha256": "892a3a56aeb949addf29a10aee54d7bfae91019789b7e9a52fb1230ff52dea31"
+      "sha256": "39ccfbfa3e8c42a7e1cbf7a2d3a6e9d32b6be8653ccf6944026d413824b7edaa"
     },
     {
-      "path": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/repository/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "path": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/repository/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
       "bytes": 18371,
-      "sha256": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c"
+      "sha256": "226b09d8996bf6b2a952c7341495a1f6dfbec13f8bb605996b1c26b93772e29f"
     },
     {
       "path": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/repository/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
@@ -174,19 +174,19 @@
       "sha256": "58f403c3b2677ecb8c7c36d9e04233760c1477f4d770f431efddc5318edf9ad2"
     },
     {
-      "path": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/repository/m3/collections/src/test/java/com/m3/collections/M3IndexMaskRangeNativeTest.java",
+      "path": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/repository/m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskRangeNativeTest.java",
       "bytes": 6815,
-      "sha256": "01cca6f8506da8120978892182071b2d3be631bebf5011fa112602524c532619"
+      "sha256": "13807a357ce639fba9d0c9e7111bb65c7aac1035706556c11c3ff10be40b136c"
     },
     {
-      "path": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/repository/m3/collections/src/test/java/com/m3/collections/M3MaskPositionAtomsTest.java",
+      "path": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/repository/m3/collections/src/test/java/jdk/m3/collections/M3MaskPositionAtomsTest.java",
       "bytes": 8624,
-      "sha256": "53d22b261f4376f41e735dc5121d3d8f97ee08f4eafdf99e3f615d0330b22548"
+      "sha256": "719cf8ac4ac83625d3ca91ccf6af826019d65d80dd4d3020f4865b9fc7bde5bf"
     },
     {
-      "path": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/repository/m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedMaskSelectorNativeContract.java",
+      "path": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/repository/m3/collections/src/test/java/jdk/m3/collections/M3RequiredExcludedMaskSelectorNativeContract.java",
       "bytes": 1830,
-      "sha256": "89c35701322381e4d958bf6344e2357988c4ad97ce1a0dd42a9a3f698a205c7f"
+      "sha256": "7a286b65a23caa3c5ecf2eca579a6bb7758a142f1042fba874cfba7680d78339"
     },
     {
       "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-mask-range-atoms-20261021/qualification/native/evidence/baseline-M3IndexMaskRangeNativeTest.stdout.log",

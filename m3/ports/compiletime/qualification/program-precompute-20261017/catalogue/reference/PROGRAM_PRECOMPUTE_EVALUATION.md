@@ -28,7 +28,7 @@ The public checkout is sparse. Missing working files were classified **NOT_MATER
 | D05-D08: existing rank/prefix/cache owners | Frozen mask geometry, cumulative counts, rank/select pages and bounded derived metadata | Immutable snapshot identity and exact indexing contracts are prerequisites. Live arbitrary predicate results are not admitted. |
 | D09: `MIndexAtomProgram` | Immutable, bounded UTF-16 classification, transition, count and mask tables | A finite admitted atom does not establish that arbitrary application control flow can be pre-executed. |
 
-The existing target `M3CompileTimeRegexPrecomputeRecipe` remains a historical authoring path for the compile-time module (Git blob `06935b9016a7d79f8f1fe04a77947aa64cf9a9c4` at the public pin; named YAML blob `992bec003139faab52ed3220c057439857a4fa00`). D16, `M3RegexPrecomputeMastery`, is an existing differential-qualification owner. Its report expressly does not grant source-mutation or promotion authority. Reuse the canonical recipe framework for the new bounded extension.
+The existing target `M3CompileTimeRegexPrecomputeRecipe` remains a historical authoring path for the compile-time module (Git blob `d517a60b077eb2adbfbcfe4d6f81951a9c7b4640` at the public pin; named YAML blob `dff43a9528fca22481eae790af9e5c574ab10a59`). D16, `M3RegexPrecomputeMastery`, is an existing differential-qualification owner. Its report expressly does not grant source-mutation or promotion authority. Reuse the canonical recipe framework for the new bounded extension.
 
 ## Selected compiler candidate: prepare the dependency graph once
 

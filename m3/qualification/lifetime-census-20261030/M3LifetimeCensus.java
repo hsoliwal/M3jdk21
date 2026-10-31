@@ -2,10 +2,10 @@
  * Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others.
  * SPDX-License-Identifier: Apache-2.0
  */
-import com.synexia.synthesis.lifetime.AllocationFact;
-import com.synexia.synthesis.lifetime.Escape;
-import com.synexia.synthesis.lifetime.LifetimeComposer;
-import com.synexia.synthesis.lifetime.M3MethodLifetimeSummary;
+import jdk.internal.m3.synthesis.lifetime.AllocationFact;
+import jdk.internal.m3.synthesis.lifetime.Escape;
+import jdk.internal.m3.synthesis.lifetime.LifetimeComposer;
+import jdk.internal.m3.synthesis.lifetime.M3MethodLifetimeSummary;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 
 /**
  * Atom (pattern COMPILE_TIME_LIFETIME_DOOP_CENSUS): runs the Synexia compile-time lifetime analyzer
- * (com.synexia.synthesis.lifetime, #10869: escape lattice, refcount actions) over a source tree and maps every
+ * (jdk.internal.m3.synthesis.lifetime, #10869: escape lattice, refcount actions) over a source tree and maps every
  * allocation site to a DOOP class. Rules (DOOP_RULES): exception types -> COLD_EXCEPTION; NONE -> STACK_LOCAL
  * (scalar-replace or reuse scratch); RETURNED -> CALLER_SLOT (caller-provided slot or lane); CALLEE -> BORROWED
  * (callee-scoped, pass down); FIELD -> OWNER_SCOPED (lifetime equals the owner: an SoA lane slot of the owner);

@@ -5,7 +5,7 @@ on:
     paths:
       - 'm3/collections/interop/**'
       - 'm3/collections/src/main/java/**'
-      - 'm3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
+      - 'm3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
       - '.github/workflows/m3-collections-interop-receiving.yml'
   push:
     branches: [aix/m3-collections-interop-receiving-20261015]
@@ -56,8 +56,8 @@ jobs:
           set -euxo pipefail
           mkdir -p proof/core-classes/META-INF
           { git rev-parse HEAD; uname -m; java -version 2>&1; mvn -version; } > proof/identity.txt
-          ENGINE=m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java
-          test "$(git hash-object "$ENGINE")" = 05e02169c7429183107a99c60e1aad05b4d73b5f
+          ENGINE=m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java
+          test "$(git hash-object "$ENGINE")" = aaf5c4615fb44e49dde1ddcf15eb11a578c31885
           python3 -m unittest discover -s m3/collections/interop/qualification/current-census-20261017 -p 'test_*.py' -v 2>&1 | tee proof/census-tests.log
           python3 -m unittest discover -s m3/collections/interop/qualification/current-census-superset-20261022 -p 'test_*.py' -v 2>&1 | tee proof/superset-census-tests.log
           python3 -m unittest discover -s m3/collections/interop/qualification/three-compiler-successor-20261022 -p 'test_*.py' -v 2>&1 | tee proof/three-compiler-source-tests.log
@@ -117,9 +117,9 @@ jobs:
             --reports m3/collections/interop/target/surefire-reports \
             | tee proof/junit-complete-source-method-census.log
           javap -classpath m3/collections/interop/target/m3-collections-interop-0.1.0-SNAPSHOT.jar \
-            com.m3.collections.interop.M3LibraryCollections \
-            com.m3.collections.interop.M3LibraryCollectors \
-            com.m3.collections.interop.M3SpringMultiValueMap > proof/interop-public-api.txt
+            jdk.m3.collections.interop.M3LibraryCollections \
+            jdk.m3.collections.interop.M3LibraryCollectors \
+            jdk.m3.collections.interop.M3SpringMultiValueMap > proof/interop-public-api.txt
           git diff --exit-code -- m3/collections/src/main/java m3/tooling/migration-recipes/src/main/java m3/collections/interop/src
       - name: Preserve actual resolved runtime dependency closure and hashes
         shell: bash

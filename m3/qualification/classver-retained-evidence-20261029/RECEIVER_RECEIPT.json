@@ -18,13 +18,13 @@
   "materialized_sdk_outputs": {
     "m3/compatibility/check_public_names.py": {
       "bytes": 13666,
-      "git_blob": "300adbb590484efc9070bc1f2bb549f0ff7e2346",
-      "sha256": "f4a8ae919e0c32790981bc1c2ad7709fe52c50d0767494800aaa00086442b7c7"
+      "git_blob": "fa111af759e6cfaf5fd01117391ca628c6674ae5",
+      "sha256": "4ee4566cd076ee65f26ad29e5598cbae56d71abaa67f53be1e5f1866e721ca5f"
     },
     "m3/compatibility/test_public_names.py": {
       "bytes": 14546,
-      "git_blob": "c2ddde266c3602915f4c720ee2068c3eac56d65e",
-      "sha256": "9067283415c80efc3bd7848e3d08a7f98234c0b9dd567cbcd1f59a311bba2656"
+      "git_blob": "5d851202caedd6af63c82513985cf88a2b6cc393",
+      "sha256": "190f25ef9dbf1069853bd79148a389f4f4af8603f9b29e23a4f91109d45fb11b"
     }
   },
   "executed": {

@@ -1,6 +1,6 @@
-import com.m3.text.M3LexiconPrecompute;
-import com.m3.text.SharedLexiconCatalog;
-import com.m3.text.SharedLexiconFamilySidecarCatalog;
+import jdk.m3.text.M3LexiconPrecompute;
+import jdk.m3.text.SharedLexiconCatalog;
+import jdk.m3.text.SharedLexiconFamilySidecarCatalog;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -66,15 +66,15 @@ public final class SharedLexiconFamilySidecarCatalogTest {
 
             Path partial = Files.createTempDirectory("m3lex-family-partial-");
             try {
-                Files.copy(root.resolve("synexia.precompute-family-index.tsv"),
-                        partial.resolve("synexia.precompute-family-index.tsv"));
+                Files.copy(root.resolve("m3.precompute-family-index.tsv"),
+                        partial.resolve("m3.precompute-family-index.tsv"));
                 expectIOException(() -> SharedLexiconFamilySidecarCatalog.open(partial),
                         "partial bundle rejected");
             } finally {
                 deleteTree(partial);
             }
-            Files.writeString(root.resolve("synexia.spell.tsv"),
-                    Files.readString(root.resolve("synexia.spell.tsv"), StandardCharsets.UTF_8)
+            Files.writeString(root.resolve("m3.spell.tsv"),
+                    Files.readString(root.resolve("m3.spell.tsv"), StandardCharsets.UTF_8)
                             + "tampered");
             expectIOException(() -> SharedLexiconFamilySidecarCatalog.open(root),
                     "checksum drift rejected");
@@ -106,17 +106,17 @@ public final class SharedLexiconFamilySidecarCatalogTest {
                 "source_language", "target_language", "lexicon_fingerprint", "source_fingerprint",
                 "translated_token_ids", "mapped_token_count")
                 + scope + "en\thi\tlex-a\tsrc-a\t0,3,7\t2\n";
-        writeFamily(root, "synexia.prefix-counts.tsv", prefix);
-        writeFamily(root, "synexia.spell.tsv", spell);
-        writeFamily(root, "synexia.token-frequency.tsv", frequency);
-        writeFamily(root, "synexia.token-hash.tsv", tokenHash);
-        writeFamily(root, "synexia.translation.tsv", translation);
+        writeFamily(root, "m3.prefix-counts.tsv", prefix);
+        writeFamily(root, "m3.spell.tsv", spell);
+        writeFamily(root, "m3.token-frequency.tsv", frequency);
+        writeFamily(root, "m3.token-hash.tsv", tokenHash);
+        writeFamily(root, "m3.translation.tsv", translation);
         String index = row("schema_version", "family", "file", "rows", "sha256")
-                + indexLine("prefix-counts", "synexia.prefix-counts.tsv", prefix, 1)
-                + indexLine("spell-index", "synexia.spell.tsv", spell, 2)
-                + indexLine("token-frequency", "synexia.token-frequency.tsv", frequency, 1)
-                + indexLine("token-hash-precompute", "synexia.token-hash.tsv", tokenHash, 1)
-                + indexLine("translation-projection", "synexia.translation.tsv", translation, 1);
+                + indexLine("prefix-counts", "m3.prefix-counts.tsv", prefix, 1)
+                + indexLine("spell-index", "m3.spell.tsv", spell, 2)
+                + indexLine("token-frequency", "m3.token-frequency.tsv", frequency, 1)
+                + indexLine("token-hash-precompute", "m3.token-hash.tsv", tokenHash, 1)
+                + indexLine("translation-projection", "m3.translation.tsv", translation, 1);
         Files.writeString(root.resolve(SharedLexiconFamilySidecarCatalog.INDEX_FILE), index,
                 StandardCharsets.UTF_8);
     }

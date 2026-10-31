@@ -45,14 +45,14 @@
     },
     {
       "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/baseline-source-closure.json",
-      "expected": "0917656d9ae5e90179c70967393ea1d71bc50c8d",
-      "actual": "0917656d9ae5e90179c70967393ea1d71bc50c8d",
+      "expected": "49571f1fc2da1cb7c2c50d63cee1d87ce6c5c87f",
+      "actual": "49571f1fc2da1cb7c2c50d63cee1d87ce6c5c87f",
       "ok": true
     },
     {
       "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/canonical-readback.json",
-      "expected": "ebbccac0eedfd129cbd9652fd71e88a47f7ac0e4",
-      "actual": "ebbccac0eedfd129cbd9652fd71e88a47f7ac0e4",
+      "expected": "086a6e8713472cb742ea0940f51a7232e6d3aaee",
+      "actual": "086a6e8713472cb742ea0940f51a7232e6d3aaee",
       "ok": true
     },
     {
@@ -123,8 +123,8 @@
     },
     {
       "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/jni-symbols.json",
-      "expected": "1516bc83015d46e43416dd6bddf7370608b8e778",
-      "actual": "1516bc83015d46e43416dd6bddf7370608b8e778",
+      "expected": "867b818511ecc28cc14871e1eb93b6f7659a61f2",
+      "actual": "867b818511ecc28cc14871e1eb93b6f7659a61f2",
       "ok": true
     },
     {
@@ -141,8 +141,8 @@
     },
     {
       "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/native-java-compile.command.json",
-      "expected": "2c6f250ecc2c3e6cd4bcf73fefd3cee7946d4b85",
-      "actual": "2c6f250ecc2c3e6cd4bcf73fefd3cee7946d4b85",
+      "expected": "598de118e17d5b56e884e512c974322cb354ef33",
+      "actual": "598de118e17d5b56e884e512c974322cb354ef33",
       "ok": true
     },
     {
@@ -153,8 +153,8 @@
     },
     {
       "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/native-jvm-runtime.command.json",
-      "expected": "315a046eae3736f0ff89aa0c0761a19c07a731ac",
-      "actual": "315a046eae3736f0ff89aa0c0761a19c07a731ac",
+      "expected": "e115d37eb10694aba350e9c00d9e05645af17322",
+      "actual": "e115d37eb10694aba350e9c00d9e05645af17322",
       "ok": true
     },
     {
@@ -201,8 +201,8 @@
     },
     {
       "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/tree-baseline.command.json",
-      "expected": "328e7ed47cb03c503fa4f50f01a072866703af92",
-      "actual": "328e7ed47cb03c503fa4f50f01a072866703af92",
+      "expected": "b495956aa7f58a616e68f2b0af0ae77b779152a1",
+      "actual": "b495956aa7f58a616e68f2b0af0ae77b779152a1",
       "ok": true
     },
     {
@@ -213,8 +213,8 @@
     },
     {
       "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/tree-candidate.command.json",
-      "expected": "d3780ca66b789d2448cff15ec6dca069035c9b6b",
-      "actual": "d3780ca66b789d2448cff15ec6dca069035c9b6b",
+      "expected": "bd7173a5c115206bb379d4def5a8db1090ff1d2c",
+      "actual": "bd7173a5c115206bb379d4def5a8db1090ff1d2c",
       "ok": true
     },
     {
@@ -237,8 +237,8 @@
     },
     {
       "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/tree-oracle-compile.command.json",
-      "expected": "86bc14f2eacff399f6c68fb2f7400f93eb477d44",
-      "actual": "86bc14f2eacff399f6c68fb2f7400f93eb477d44",
+      "expected": "4c37343ae42174552d5b34604e0ec6a5af446dd2",
+      "actual": "4c37343ae42174552d5b34604e0ec6a5af446dd2",
       "ok": true
     },
     {
@@ -255,8 +255,8 @@
     },
     {
       "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/incremental-output-anomaly.json",
-      "expected": "b8b404a4b44bec48c59af9b6fb17a6c28750f65a",
-      "actual": "b8b404a4b44bec48c59af9b6fb17a6c28750f65a",
+      "expected": "24319ad6114e18148c8ccceabaf959faea9f68c6",
+      "actual": "24319ad6114e18148c8ccceabaf959faea9f68c6",
       "ok": true
     },
     {
@@ -273,8 +273,8 @@
     },
     {
       "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/jdt-compile.command.json",
-      "expected": "185c4915a7d5cd4768dd1a9e900aa6de9d54fabf",
-      "actual": "185c4915a7d5cd4768dd1a9e900aa6de9d54fabf",
+      "expected": "40056c985cfcf194792dcff007efdab364a46587",
+      "actual": "40056c985cfcf194792dcff007efdab364a46587",
       "ok": true
     },
     {
@@ -303,8 +303,8 @@
     },
     {
       "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/jni-symbols.json",
-      "expected": "1516bc83015d46e43416dd6bddf7370608b8e778",
-      "actual": "1516bc83015d46e43416dd6bddf7370608b8e778",
+      "expected": "867b818511ecc28cc14871e1eb93b6f7659a61f2",
+      "actual": "867b818511ecc28cc14871e1eb93b6f7659a61f2",
       "ok": true
     },
     {
@@ -333,8 +333,8 @@
     },
     {
       "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/native-java-compile.command.json",
-      "expected": "33c4831f76f95f39d339dc05ac757065b580508c",
-      "actual": "33c4831f76f95f39d339dc05ac757065b580508c",
+      "expected": "b4677d2df56731384c5eaa098842ff11fa0bac05",
+      "actual": "b4677d2df56731384c5eaa098842ff11fa0bac05",
       "ok": true
     },
     {
@@ -345,8 +345,8 @@
     },
     {
       "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/native-jvm-runtime.command.json",
-      "expected": "da58f684cbfafaac6c53fc2c8c808032f7d2c99f",
-      "actual": "da58f684cbfafaac6c53fc2c8c808032f7d2c99f",
+      "expected": "a595f39cbcb06464b34bbe430003549a0a4aad86",
+      "actual": "a595f39cbcb06464b34bbe430003549a0a4aad86",
       "ok": true
     },
     {
@@ -375,8 +375,8 @@
     },
     {
       "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/native-traffic-compile.command.json",
-      "expected": "d0b924ba06a6fe82a5b0046e7a2baeded22a5569",
-      "actual": "d0b924ba06a6fe82a5b0046e7a2baeded22a5569",
+      "expected": "1025c15550d4b3dfcedef7facbc8d46f5fd74d23",
+      "actual": "1025c15550d4b3dfcedef7facbc8d46f5fd74d23",
       "ok": true
     },
     {
@@ -489,14 +489,14 @@
     },
     {
       "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/receiver-guard.log",
-      "expected": "3e79a6760cadc707b2b07302ce92c5aa7df70658",
-      "actual": "3e79a6760cadc707b2b07302ce92c5aa7df70658",
+      "expected": "b909e19f2cc5473179600fd0385903e13108f486",
+      "actual": "b909e19f2cc5473179600fd0385903e13108f486",
       "ok": true
     },
     {
       "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/recipe-engine-identity.json",
-      "expected": "75b47926364d3e2c71cdde72fb88b3791fc824b5",
-      "actual": "75b47926364d3e2c71cdde72fb88b3791fc824b5",
+      "expected": "0ef5103fe13e381d8065ba6f39d4be438a6a7de7",
+      "actual": "0ef5103fe13e381d8065ba6f39d4be438a6a7de7",
       "ok": true
     },
     {
@@ -507,8 +507,8 @@
     },
     {
       "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/sdk-receipt.json",
-      "expected": "d7793ee5bbef56f9c7945654be9c48cda57e3604",
-      "actual": "d7793ee5bbef56f9c7945654be9c48cda57e3604",
+      "expected": "57e1e92fa80505ab29d23363cbf6a02ed50f3aa6",
+      "actual": "57e1e92fa80505ab29d23363cbf6a02ed50f3aa6",
       "ok": true
     },
     {
@@ -531,8 +531,8 @@
     },
     {
       "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/workspace-compile-attempt1.command.json",
-      "expected": "746da38f66eea69a51ec95233c91d41f0ce1dae5",
-      "actual": "746da38f66eea69a51ec95233c91d41f0ce1dae5",
+      "expected": "7688a01273ffe65d6e286d2c4dbf7c9678cca19b",
+      "actual": "7688a01273ffe65d6e286d2c4dbf7c9678cca19b",
       "ok": true
     },
     {
@@ -543,8 +543,8 @@
     },
     {
       "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/workspace-compile.command.json",
-      "expected": "746da38f66eea69a51ec95233c91d41f0ce1dae5",
-      "actual": "746da38f66eea69a51ec95233c91d41f0ce1dae5",
+      "expected": "7688a01273ffe65d6e286d2c4dbf7c9678cca19b",
+      "actual": "7688a01273ffe65d6e286d2c4dbf7c9678cca19b",
       "ok": true
     },
     {
@@ -578,57 +578,57 @@
       "ok": true
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
-      "expected": "ad4ebf2f6ccce79b3d8f3fe1f3a513f5ade4d378",
-      "actual": "ad4ebf2f6ccce79b3d8f3fe1f3a513f5ade4d378",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
+      "expected": "caab9f1747a8ce390ae5618af0afc559902ed87f",
+      "actual": "caab9f1747a8ce390ae5618af0afc559902ed87f",
       "ok": true
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3SlotMap.java",
-      "expected": "e4bcf701a32bbcf0cc201030ebb2cff216bc9115",
-      "actual": "e4bcf701a32bbcf0cc201030ebb2cff216bc9115",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3SlotMap.java",
+      "expected": "94802be581fae2c47d896c76d81b2b3f9381f2aa",
+      "actual": "94802be581fae2c47d896c76d81b2b3f9381f2aa",
       "ok": true
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3TreeMap.java",
-      "expected": "bcb9c73bc8a4244695db627a483b99a671d60df8",
-      "actual": "bcb9c73bc8a4244695db627a483b99a671d60df8",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3TreeMap.java",
+      "expected": "3700622c29759ebf4cab870426a2b9fa81d8bfb5",
+      "actual": "3700622c29759ebf4cab870426a2b9fa81d8bfb5",
       "ok": true
     },
     {
       "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
-      "expected": "795a55d3b8646940fea5748c39bbcddc68e2122f",
-      "actual": "795a55d3b8646940fea5748c39bbcddc68e2122f",
+      "expected": "57b6480d5261cbee09ad413046ca464772889959",
+      "actual": "57b6480d5261cbee09ad413046ca464772889959",
       "ok": true
     },
     {
       "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredTerminalTrace.java",
-      "expected": "37c430377ca8e6552cade749b6d3738bad5ea851",
-      "actual": "37c430377ca8e6552cade749b6d3738bad5ea851",
+      "expected": "978b087462e1c21e7ce1ea87de9044f922664d4a",
+      "actual": "978b087462e1c21e7ce1ea87de9044f922664d4a",
       "ok": true
     },
     {
       "path": "m3/collections/src/test/java/com/m3/collections/M3SparseMaskReadContract.java",
-      "expected": "57a23e8d744d10f760d9930a8b33c716e4585bc6",
-      "actual": "57a23e8d744d10f760d9930a8b33c716e4585bc6",
+      "expected": "53d4fad7ce495d651b170dade030159bbc09cf37",
+      "actual": "53d4fad7ce495d651b170dade030159bbc09cf37",
       "ok": true
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3TreeMapEmptyLookupTest.java",
-      "expected": "95aee590ff9732f38f4064be626188a088c518e6",
-      "actual": "95aee590ff9732f38f4064be626188a088c518e6",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3TreeMapEmptyLookupTest.java",
+      "expected": "7718ddb4223f7a7b87c45ce0c19a1259e1c7b453",
+      "actual": "7718ddb4223f7a7b87c45ce0c19a1259e1c7b453",
       "ok": true
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3TreeMapGetOrDefaultTest.java",
-      "expected": "73183c6420cb782fdddcfbdb4fdd3196f8298227",
-      "actual": "73183c6420cb782fdddcfbdb4fdd3196f8298227",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3TreeMapGetOrDefaultTest.java",
+      "expected": "6fbc0c92497f59615420d4cd12d555cea4118f85",
+      "actual": "6fbc0c92497f59615420d4cd12d555cea4118f85",
       "ok": true
     },
     {
       "path": "m3/collections/src/test/native/m3_sparse_mask_reads.c",
-      "expected": "1888952af54008e62d88518fd370290284e347a4",
-      "actual": "1888952af54008e62d88518fd370290284e347a4",
+      "expected": "24de90805f54e363081bcfb9536a0164d7d363fa",
+      "actual": "24de90805f54e363081bcfb9536a0164d7d363fa",
       "ok": true
     },
     {

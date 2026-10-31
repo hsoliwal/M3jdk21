@@ -2,7 +2,7 @@
 
 Status: historical first-stage design, retained for provenance. The current runtime authority is
 `m3/docs/m3-runtime-invariants.tsv`, `m3/docs/name-mapping.json`, and
-`m3/docs/m3string-synexia-lineage.md`.
+`m3/docs/m3string-m3-lineage.md`.
 
 Synexia uses the donor name `MIndexString`; M3JDK uses the target name `M3String`.
 

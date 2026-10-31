@@ -1,0 +1,14 @@
+[
+  {
+    "oracle": "M3WrapperSemanticContract",
+    "originalSha256": "aebf90e95d98cdd63e6b902b35351b228f29117f27467731d06fcd0f7aab70e5",
+    "mappedSha256": "c06830ecf0c8cb1d872fde9cf5e2c8c1d3e08c53f0b423d77b7d0ca60d4f1ff6",
+    "mapping": "Only two exact imports select the now-existing jdk.m3.collections generic owners; entire frozen oracle body retained."
+  },
+  {
+    "oracle": "M3WrapperNavigationCounterexample",
+    "originalSha256": "0ad860e1fabf1c50ab03103c0975a0e62e4c5cae90cd3f50d37889cba526d80e",
+    "mappedSha256": "a015ec715fd64a6a19777482f505d5151e91aabe043f0cd4ad979f285a18023d",
+    "mapping": "Only two exact imports select the now-existing jdk.m3.collections generic owners; entire frozen oracle body retained."
+  }
+]

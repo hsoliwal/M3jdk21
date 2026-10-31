@@ -11,11 +11,11 @@ index 56d3675..09a5e60 100644
      paths:
        - 'm3/collections/qualification/m3-filtered-bounded-current-20261018/**'
 +      - 'm3/collections/qualification/m3-filtered-navigation-20261018/**'
-       - 'm3/collections/src/main/java/com/m3/collections/M3FilteredViews.java'
-       - 'm3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java'
--      - 'm3/collections/src/test/java/com/m3/collections/M3BoundedFilteredNavigationContract.java'
--      - 'm3/collections/src/test/java/com/m3/collections/M3BoundedFilteredNavigationTest.java'
-+      - 'm3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java'
+       - 'm3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java'
+       - 'm3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java'
+-      - 'm3/collections/src/test/java/jdk/m3/collections/M3BoundedFilteredNavigationContract.java'
+-      - 'm3/collections/src/test/java/jdk/m3/collections/M3BoundedFilteredNavigationTest.java'
++      - 'm3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java'
 +      - 'm3/collections/src/main/native/collections/m3_index_path_masks.c'
 +      - 'm3/collections/src/main/native/collections/m3_index_mask_compactor.c'
 +      - 'm3/collections/src/main/native/collections/m3_index_mask_window.c'
@@ -58,10 +58,10 @@ index 56d3675..09a5e60 100644
            set -eu
            Q=m3/collections/qualification/m3-filtered-bounded-current-20261018/recipe
            awk -F '\t' -v q="$Q" '{print $3 "  " q "/" $4}' "$Q/manifest.tsv" | sha256sum -c -
--          cmp "$Q/M3FilteredViews.java.txt" m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java
--          cmp "$Q/M3MutableFilteredViews.java.txt" m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java
+-          cmp "$Q/M3FilteredViews.java.txt" m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java
+-          cmp "$Q/M3MutableFilteredViews.java.txt" m3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java
 -      - name: Actual strict Java21 source compile and JDK NavigableSet Map differential
-+          awk -F '\t' '$1 != "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java" {print $3 "  " $1}' \
++          awk -F '\t' '$1 != "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java" {print $3 "  " $1}' \
 +            "$Q/manifest.tsv" | sha256sum -c -
 +      - name: Current full core and focused Java/JNI runtime closure
 +        run: python3 m3/collections/qualification/m3-filtered-navigation-20261018/runtime/verify.py

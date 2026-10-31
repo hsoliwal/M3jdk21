@@ -2,7 +2,7 @@
   "schema": "spring-public-map-mask-projection-v1",
   "status": "PROVIDER_BASELINE_PASS",
   "owner": null,
-  "fixtureSHA256": "e7b83f57343e3399865671eab4ec76997eed4953f8607fe8774c8ac9714c3b65",
+  "fixtureSHA256": "3fa184fa99f7b64ee3f0a964d55ecfd17032f2269074c7671e99ffa39cde1f11",
   "results": {
     "provider-java": {
       "status": "PASS",

@@ -9,4 +9,4 @@ Traceback (most recent call last):
                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/target/m3jdk21-arrays/receiver-proof/isolated-7pchah10/result-tamper/crate/receive.py", line 137, in qualification
     raise ValueError("SDK result changed after qualification: " + path)
-ValueError: SDK result changed after qualification: m3/arrays/src/test/java/com/m3/arrays/M3ArrayEmptySegmentsTest.java
+ValueError: SDK result changed after qualification: m3/arrays/src/test/java/jdk/m3/arrays/M3ArrayEmptySegmentsTest.java

@@ -1,7 +1,7 @@
 // Copyright 2026 Hitesh Soliwal and contributors.
 // SPDX-License-Identifier: Apache-2.0
 
-import com.m3.file.M3File;
+import jdk.m3.file.M3File;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -61,7 +61,7 @@ public final class NativeApiContract {
                 .getReturnType() == File.class, "original Linker API signature");
         check(new CompilerConfiguration().isCheckStaleCompilation(), "default stale analysis is compatible");
         check(M3File.class.getModule().isNamed()
-                && M3File.class.getModule().getName().equals("com.m3.file"), "original M3File is a selected module");
+                && M3File.class.getModule().getName().equals("jdk.m3.file"), "original M3File is a selected module");
         check(Path.of(CCompiler.class.getProtectionDomain().getCodeSource().getLocation().toURI()).toRealPath()
                 .startsWith(Path.of(arguments[5]).toRealPath().resolve("lib/m3-tools/native-api")),
                 "original native provider loads from installed selected assets");
@@ -231,7 +231,7 @@ public final class NativeApiContract {
     private static void checkConcurrentFailureExit(Path work, String gcc, String mode) throws Exception {
         Path childLog = work.resolve("concurrent-" + mode + ".log");
         Process child = new ProcessBuilder(Path.of(System.getProperty("java.home"), "bin", "java").toString(),
-                "--add-modules", "com.m3.file", "-cp", System.getProperty("java.class.path"),
+                "--add-modules", "jdk.m3.file", "-cp", System.getProperty("java.class.path"),
                 NativeApiContract.class.getName(), "--concurrent-failure", mode,
                 work.resolve("concurrent-" + mode).toString(), gcc)
                 .redirectErrorStream(true).redirectOutput(childLog.toFile()).start();

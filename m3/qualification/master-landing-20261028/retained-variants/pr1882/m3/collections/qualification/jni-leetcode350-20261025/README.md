@@ -11,9 +11,9 @@ Synexia PR #13224 commit `4c43888aa815b3e231ce199634a9d066d7122692`; source reci
 | `src/main/java/com/m3/collections/M3LongRankBatchNative.java` | `20446b00731fdd0b9524ac35be3860fbc0bb062b` | `fe4bd1751126d1a5c21c359bf9f028013d380a4f` |
 | `src/main/java/com/m3/collections/M3LongRankIndex.java` | `fe87db69813f63bf60beeff702eab10cfe306f99` | `f9de7b74124cd1e2f6f32c4e9a34af4178c1d787` |
 | `src/main/native/collections/m3_long_rank_batch_jni.c` | `ac7f123549b2b7e0a3788fe9176bb56dee8efe85` | `496e04bc57c00ba66895379229f3dc4e4dc0aa2c` |
-| `src/test/java/com/m3/collections/M3LongRankIntersectionContract.java` | ABSENT | `6285beb025d699b8739c75b51ce39b3d3dc5498e` |
-| `src/test/java/com/m3/collections/M3LongRankIntersectionTest.java` | ABSENT | `715deec71b1b08ea4beae17a554e187e2b380ee7` |
-| `.github/workflows/m3-jni-leetcode350-java21.yml` | ABSENT | `8f5cd5acef1ff1eaed676c9bcd09657e72d92c0c` |
+| `src/test/java/com/m3/collections/M3LongRankIntersectionContract.java` | ABSENT | `0904a4972eb1abc16877e45bac70b531a9c53250` |
+| `src/test/java/com/m3/collections/M3LongRankIntersectionTest.java` | ABSENT | `826da4157acdb23ca52966bce456094c76a9ec5d` |
+| `.github/workflows/m3-jni-leetcode350-java21.yml` | ABSENT | `41ae80a3d19835c412276d556012dbcc06114c9f` |
 
 All relative src paths above are under `m3/collections/`. Only the six listed sources/CI results and this data-only receipt are added/replaced; every existing JNI export and all other Java runtime code remains retained.
 

@@ -51,21 +51,21 @@ in [public-api.log](public-api.log).
 
 | Owner | SHA-256 |
 | --- | --- |
-| `M3FilteredLists.java` | `032bffd456e67c7568b028489ceec85f24510469b3a0e00571ab36cd17ae3b75` |
-| `M3FilteredViews.java` | `8419315c3058bce6add897b7ffa7c6763bbb6b85418bb35e190ba8a4d2dd70c4` |
-| `M3MutableFilteredViews.java` | `3c65c0d918b6cb39d4c27f98699fa97067d2aa3a7fb76ea48b2fd6092a9d0178` |
-| `M3SlotSpliterators.java` | `9257ce0c9c95e3afef20624631ba048aa3d60ef53a1189cd2bbabc07da2bba2f` |
+| `M3FilteredLists.java` | `bb0ff9a8008521576530b0cea64d00b4f22e6e4b8424b8e5df7f416a6a8b6051` |
+| `M3FilteredViews.java` | `5308017ea910acd0f81252e88fd8e57c2c1b49d8e6f2874bab0728c110526709` |
+| `M3MutableFilteredViews.java` | `19cbdee1b2e604ad5e491f9089d2ff869852cedee8ffd086e78bc887043678eb` |
+| `M3SlotSpliterators.java` | `f42b36dcf5555941f97dbf732ccd210a8e2152862622e626d445576a2c93e326` |
 
 The exact `M3WrapperConvergenceContract` and `M3WrapperConvergenceTest` fixtures
 come from the published `wrapper-contract-v2` and `wrapper-junit-v2` recipe
 custody. Their SHA-256 values are respectively
-`2913aeae2f20b80c669398e5727ad9bc000eccf3bb225d85bdd672c17d4fb847` and
-`fe071ef7e801a9bb1d57501512f0dd606f0c08652e100e6132dc7c4e4a8f6327`.
+`989507e15f05f3d931c51e7ae65d65dbc3fac7b80bc94984e4b9922ea17e8335` and
+`37373c5fe47db51de219365a602737b278feb9b2ca34bc888dd0c0a1661e4e89`.
 Both were checked against their exact manifests and the custody inventory's Git
 blob identities. Historical `PASS.md` records are not counted as fresh tests.
 
 The current `M3FilteredLists` Git blob is
-`10c4d16cc9cd62d36f22646988718422caa2311e`; its bytes also equal the accepted
+`39dde593da4de3d7caaa4c12afc3deae7ce6a9f3`; its bytes also equal the accepted
 historical read-only guard postimage. All local input hashes and all four Git
 owner hashes were checked again after execution. [SOURCES.json](SOURCES.json)
 and [SOURCE_SHA256.tsv](SOURCE_SHA256.tsv) contain the detailed pins.

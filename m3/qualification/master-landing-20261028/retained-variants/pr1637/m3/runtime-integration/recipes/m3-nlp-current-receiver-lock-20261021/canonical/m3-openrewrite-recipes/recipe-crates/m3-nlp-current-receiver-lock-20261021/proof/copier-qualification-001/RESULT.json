@@ -1,0 +1,154 @@
+{
+  "schema": "M3_NLP_CURRENT_OWNER_COPIER_QUALIFICATION/1",
+  "status": "PASS",
+  "scope": "isolated exact product-source fixtures; no target repository writes",
+  "sdk_receipt_sha256": "8260a2bb04090e4307080e47d26dffb554a756abcc6d26c0a8afb6e6a6b7125e",
+  "script_sha256": "dd16e0c5cb978b50f9377e2365d675e0bd42acb964fc7ddce9d63941f0979abd",
+  "source_seals_sha256": "5baa373db8748eba54cecfc5899eb36b5b2f09aa85cfb8399195bac6a367471a",
+  "target_paths": 2,
+  "first_writes": 2,
+  "replay_writes": 0,
+  "refusals": 4,
+  "steps": [
+    {
+      "name": "01-preflight",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/canonical/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/apply_receiver.py",
+        "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/receiving"
+      ],
+      "exit_code": 0,
+      "log_sha256": "20a7260560b6f05b20a12dc0dc69f2e8af95cd8a7c3f372f09320535032c33bc",
+      "receipt_sha256": "09f87546b121355dacd43424db4bf1e45a730879906e42021d3923c93780d647",
+      "before": {
+        "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java": "a273220cdd1a2b20857ccba086394c0a0a726cc3f2711e9eb7fdadbaffb08256",
+        "m3/tooling/module-packs/nlp-search/current-source-lock.json": "c072c8b97e8f83d0e9d2f0b9d3cdcd334622a1227888251ee13f4de28b5d843a"
+      },
+      "after": {
+        "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java": "a273220cdd1a2b20857ccba086394c0a0a726cc3f2711e9eb7fdadbaffb08256",
+        "m3/tooling/module-packs/nlp-search/current-source-lock.json": "c072c8b97e8f83d0e9d2f0b9d3cdcd334622a1227888251ee13f4de28b5d843a"
+      }
+    },
+    {
+      "name": "02-first-apply",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/canonical/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/apply_receiver.py",
+        "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/receiving",
+        "--apply"
+      ],
+      "exit_code": 0,
+      "log_sha256": "39e11f25b4aa0270d4dafbea116c8f43998b22a279442b87dd9d4a76791fc529",
+      "receipt_sha256": "ee01bc93f80dfab96ba94001ea8fd9d89b34a29145118abf210524f430419b2c",
+      "before": {
+        "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java": "a273220cdd1a2b20857ccba086394c0a0a726cc3f2711e9eb7fdadbaffb08256",
+        "m3/tooling/module-packs/nlp-search/current-source-lock.json": "c072c8b97e8f83d0e9d2f0b9d3cdcd334622a1227888251ee13f4de28b5d843a"
+      },
+      "after": {
+        "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java": "07c498aafa158278bf2fea6ee54bae7f09bf037051f1f8207511597ccef02929",
+        "m3/tooling/module-packs/nlp-search/current-source-lock.json": "271a532810591e94f5ceaab443820fdb08f96d1288e9ba5c1ce55c09d3444c8b"
+      }
+    },
+    {
+      "name": "03-fixed-point",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/canonical/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/apply_receiver.py",
+        "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/receiving",
+        "--apply"
+      ],
+      "exit_code": 0,
+      "log_sha256": "ecc80624289ed9259e855f275d0387e19655c9af71139e8898c75f1f0670f7b6",
+      "receipt_sha256": "1b9cc0a3f32541d8148ad6194069951af8f11e345072438e028662a9e2ea6bd6",
+      "before": {
+        "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java": "07c498aafa158278bf2fea6ee54bae7f09bf037051f1f8207511597ccef02929",
+        "m3/tooling/module-packs/nlp-search/current-source-lock.json": "271a532810591e94f5ceaab443820fdb08f96d1288e9ba5c1ce55c09d3444c8b"
+      },
+      "after": {
+        "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java": "07c498aafa158278bf2fea6ee54bae7f09bf037051f1f8207511597ccef02929",
+        "m3/tooling/module-packs/nlp-search/current-source-lock.json": "271a532810591e94f5ceaab443820fdb08f96d1288e9ba5c1ce55c09d3444c8b"
+      }
+    },
+    {
+      "name": "04-product-drift",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/canonical/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/apply_receiver.py",
+        "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/receiving-drift",
+        "--apply"
+      ],
+      "exit_code": 1,
+      "log_sha256": "90ec68db021425a02d7612b2137f3ee2cee6cf0c4e03a844c4f8af4436f8ad3f",
+      "receipt_sha256": "a21edfa0a364ef403ba060fef552293dfc37f05a8a0597457e8475d8607ce4f9",
+      "before": {
+        "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java": "5b90f441f281c7d5ad3ca8266b5e984b7b60f572b553169e2e5d0dc487d66dde",
+        "m3/tooling/module-packs/nlp-search/current-source-lock.json": "c072c8b97e8f83d0e9d2f0b9d3cdcd334622a1227888251ee13f4de28b5d843a"
+      },
+      "after": {
+        "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java": "5b90f441f281c7d5ad3ca8266b5e984b7b60f572b553169e2e5d0dc487d66dde",
+        "m3/tooling/module-packs/nlp-search/current-source-lock.json": "c072c8b97e8f83d0e9d2f0b9d3cdcd334622a1227888251ee13f4de28b5d843a"
+      }
+    },
+    {
+      "name": "05-symbolic-destination",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/canonical/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/apply_receiver.py",
+        "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/receiving-symbolic",
+        "--apply"
+      ],
+      "exit_code": 1,
+      "log_sha256": "993c7d8bf73fe0f147ef3f3ec6ace5c1373ffbae79d6742cb0e09949ceb4afa2",
+      "receipt_sha256": "2d53c7cbe6942162a13c26a5bd85632557777c3708ca0c61275cccf8fb68fdbb",
+      "before": {},
+      "after": {}
+    },
+    {
+      "name": "06-emitted-drift",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/canonical/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/apply_receiver.py",
+        "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/receiving-emitted-drift",
+        "--apply"
+      ],
+      "exit_code": 1,
+      "log_sha256": "537ff128eb2ece4f2565d5b4433038a327cc21d8f30518c19adca552ea532450",
+      "receipt_sha256": "93be3b5ed734d4d78904d6e4f047969b89fc9d98fa29e79b3d5e12d2709b57b5",
+      "before": {
+        "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java": "a273220cdd1a2b20857ccba086394c0a0a726cc3f2711e9eb7fdadbaffb08256",
+        "m3/tooling/module-packs/nlp-search/current-source-lock.json": "c072c8b97e8f83d0e9d2f0b9d3cdcd334622a1227888251ee13f4de28b5d843a"
+      },
+      "after": {
+        "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java": "a273220cdd1a2b20857ccba086394c0a0a726cc3f2711e9eb7fdadbaffb08256",
+        "m3/tooling/module-packs/nlp-search/current-source-lock.json": "c072c8b97e8f83d0e9d2f0b9d3cdcd334622a1227888251ee13f4de28b5d843a"
+      }
+    },
+    {
+      "name": "07-owner-drift",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/canonical/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/apply_receiver.py",
+        "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/receiving-owner-drift",
+        "--apply"
+      ],
+      "exit_code": 1,
+      "log_sha256": "f08241b479907b05664c4e710c74414a356010b83d395196938e4b4e9b95d53d",
+      "receipt_sha256": "2bd989d319c9efd45406107075f891e7dfca2ab8c3b9cb8c8956b596ea6dceee",
+      "before": {
+        "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java": "a273220cdd1a2b20857ccba086394c0a0a726cc3f2711e9eb7fdadbaffb08256",
+        "m3/tooling/module-packs/nlp-search/current-source-lock.json": "c072c8b97e8f83d0e9d2f0b9d3cdcd334622a1227888251ee13f4de28b5d843a"
+      },
+      "after": {
+        "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java": "a273220cdd1a2b20857ccba086394c0a0a726cc3f2711e9eb7fdadbaffb08256",
+        "m3/tooling/module-packs/nlp-search/current-source-lock.json": "c072c8b97e8f83d0e9d2f0b9d3cdcd334622a1227888251ee13f4de28b5d843a"
+      }
+    }
+  ]
+}

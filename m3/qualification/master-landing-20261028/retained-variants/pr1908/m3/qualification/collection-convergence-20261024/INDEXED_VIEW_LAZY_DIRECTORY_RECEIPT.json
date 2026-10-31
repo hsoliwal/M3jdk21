@@ -39,8 +39,8 @@
   "preserved_owners": [
     {
       "path": "src/java.base/share/classes/java/util/ChangeJournal.java",
-      "sha256": "7fb5c5c9a2be3ba14f1946a2a1c000b61010b93f0fd8894cd3e8b52fecaec203",
-      "git_blob_sha1": "7819788e326c0a833984186af9b4a91f3d156cdf"
+      "sha256": "2d9c2589aee071b66eb069bf421664b8d0a6794673f0f3050cbab19cf99f9ae5",
+      "git_blob_sha1": "380667b18341d3b3405eff966e9b19bdacb233db"
     },
     {
       "path": "src/java.base/share/classes/java/util/CollectionViews.java",
@@ -54,8 +54,8 @@
     },
     {
       "path": "src/java.base/share/native/libjava/M3IndexMaskWindow.c",
-      "sha256": "4a9c0ab3e8d7a0aac0027e8fb4789f768ee5a48b2db18b7a54e2fd543c5c7f91",
-      "git_blob_sha1": "59b2130ca8e897e75e24afbd45e8fd885c55b0e9"
+      "sha256": "a284d0cc09ca01e2c41b67024ac9fd911e69165abd1bf01246f40499e810f8da",
+      "git_blob_sha1": "d8cc9be4ba6cbef3f1106923390aaf1949c2e4fb"
     },
     {
       "path": "src/java.base/share/classes/java/util/concurrent/CopyOnWriteArrayList.java",
@@ -89,8 +89,8 @@
     },
     {
       "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java",
-      "sha256": "0c79f59b111bc1669a626c4a45598b7205319522b0c00c56ef009a8b9ea660e5",
-      "git_blob_sha1": "e6059aeb9b2e7f332fb0baea2684395c268a5414"
+      "sha256": "5617cf2586a2c0b4f8ae9f710e86e4f39f4b880a9fb1fe3deadc04a3f6c58fa9",
+      "git_blob_sha1": "135f13b0c4478659aa3395bdeaa740b4438f649d"
     }
   ],
   "sdk": {

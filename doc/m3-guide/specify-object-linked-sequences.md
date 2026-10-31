@@ -260,14 +260,14 @@ mutation, already-split child behavior and allocation-failure recovery are
 not exhaustively qualified by these tests. This page does not add methods to
 the owner, promote a JDK backend or establish serialization compatibility.
 
-Exact owner blob: `da39d792baf7311691d2d6e8398adf62f3aa88a8`.
+Exact owner blob: `a3721fc90071d6915ab6682ad4cb9d9147ea0b1d`.
 Shared helpers: `M3SlotArrays` `e337c69710c871f8caa77a1afe53149f1fd705cc`,
-`M3SlotSpliterators` `30cf137538353ac8e91514fff7c5db3903da8819`.
+`M3SlotSpliterators` `dab4d257bf82c8dbdf8fec04e1ac0d84ac7e4a83`.
 
-[owner]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3LinkedList.java
-[arrays]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3SlotArrays.java
-[spliterators]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java
-[factory]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3Collections.java
+[owner]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3LinkedList.java
+[arrays]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3SlotArrays.java
+[spliterators]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3SlotSpliterators.java
+[factory]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3Collections.java
 [module]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/module-info.java
 [pom]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/pom.xml
 [guide]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/README.md
@@ -276,10 +276,10 @@ Shared helpers: `M3SlotArrays` `e337c69710c871f8caa77a1afe53149f1fd705cc`,
 [abstract-collection]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/src/java.base/share/classes/java/util/AbstractCollection.java
 [list-api]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/src/java.base/share/classes/java/util/List.java
 [jdk-spliterators]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/src/java.base/share/classes/java/util/Spliterators.java
-[sequence-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/com/m3/collections/M3SequenceContractTest.java
-[jdk-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/com/m3/collections/M3JdkCollectionDifferentialTest.java
-[footprint-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/com/m3/collections/M3FootprintContractTest.java
-[entry-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/com/m3/collections/M3NoRetainedStructuralEntryTest.java
-[factory-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/com/m3/collections/M3FactoryContractTest.java
-[allocation-probe]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/com/m3/collections/M3AllocationProbe.java
-[cost-probe]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/com/m3/collections/M3CollectionCostProbe.java
+[sequence-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/jdk/m3/collections/M3SequenceContractTest.java
+[jdk-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/jdk/m3/collections/M3JdkCollectionDifferentialTest.java
+[footprint-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/jdk/m3/collections/M3FootprintContractTest.java
+[entry-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/jdk/m3/collections/M3NoRetainedStructuralEntryTest.java
+[factory-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/jdk/m3/collections/M3FactoryContractTest.java
+[allocation-probe]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/jdk/m3/collections/M3AllocationProbe.java
+[cost-probe]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/jdk/m3/collections/M3CollectionCostProbe.java

@@ -1,0 +1,19 @@
+path	git_blob	status	pr	note
+m3/tooling/annotations-absorb/ABSORB_MANIFEST.tsv	7ea3366473af87f4939b1de4fd89615da27c994c	added	2217	PR version, not live; the git blob id is its content address
+m3/tooling/annotations-absorb/ANNOTATIONS.tsv	8cf61e91de5bbf541af8bb0e97cd2afcc0e5685f	added	2217	PR version, not live; the git blob id is its content address
+m3/tooling/annotations-absorb/DONORS.tsv	259bfd0c93047c9160f651c03638448498095cca	added	2217	PR version, not live; the git blob id is its content address
+m3/tooling/annotations-absorb/LICENSE-Apache-2.0.txt	d645695673349e3947e8e5ae42332d0ac3164cd7	added	2217	PR version, not live; the git blob id is its content address
+m3/tooling/annotations-absorb/MAP_RULES.tsv	3088cebb72e806682e0afeb54a6bf48bc66296f4	added	2217	PR version, not live; the git blob id is its content address
+m3/tooling/annotations-absorb/README.md	c9e5ceb7d7dde056112f263377a1f1807f3634dd	added	2217	PR version, not live; the git blob id is its content address
+m3/tooling/annotations-absorb/gate.sh	0a5afb98ad46c37c6614a3d4f441538d5e48d6b5	added	2217	PR version, not live; the git blob id is its content address
+m3/tooling/annotations-absorb/tools/AnnotationLedger.java	c18b3b6f14881725cfb88905097841bcff1db528	added	2217	PR version, not live; the git blob id is its content address
+m3/tooling/annotations-absorb/tools/absorb_rename.py	611bd82f733e243b4973577bec9b31519c3255bd	added	2217	PR version, not live; the git blob id is its content address
+make/conf/module-loader-map.conf	2966412b874c3cf6a9aa9b761a0a44a15d056147	modified	2217	PR version, not live; the git blob id is its content address
+make/modules/jdk.m3.annotations/Java.gmk	a4f99a5b0db7fe6db278aa6ce82e778b8e3b65dc	added	2217	PR version, not live; the git blob id is its content address
+src/jdk.m3.annotations/share/classes/jdk/m3/annotations/NonNull.java	1a1731f0f02318b946e49f88f980f7bf411cb09b	added	2217	PR version, not live; the git blob id is its content address
+src/jdk.m3.annotations/share/classes/jdk/m3/annotations/NullMarked.java	d49449ee19b33ab423b298fa1214d1130008e4ae	added	2217	PR version, not live; the git blob id is its content address
+src/jdk.m3.annotations/share/classes/jdk/m3/annotations/NullUnmarked.java	0ceab42a3480ae308b5133d0e5bc4ab28f5dee68	added	2217	PR version, not live; the git blob id is its content address
+src/jdk.m3.annotations/share/classes/jdk/m3/annotations/Nullable.java	520a5f9433b3e6e7966f9eaf1be5f7f6042194b8	added	2217	PR version, not live; the git blob id is its content address
+src/jdk.m3.annotations/share/classes/jdk/m3/annotations/package-info.java	3368bf98094d2f39b3ccf6834999f0f1c8658f03	added	2217	PR version, not live; the git blob id is its content address
+src/jdk.m3.annotations/share/classes/module-info.java	df800400ceb862bbd2c298356168f38a552d0007	added	2217	PR version, not live; the git blob id is its content address
+src/jdk.m3.annotations/share/legal/jspecify.md	475cae95dc1da14cf60046261628e2b045d0897e	added	2217	PR version, not live; the git blob id is its content address

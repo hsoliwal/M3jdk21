@@ -3,11 +3,11 @@ on:
   workflow_dispatch:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3IndexPathMaskClassificationProof.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3IndexPathMaskClassificationProof.java'
       - 'm3/collections/qualification/pathmask-classification-20261021/**'
       - 'm3/collections/algorithm-catalog/pathmask-terminal-classification-20261021.tsv'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-index-pathmask-classification-20261021/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-index-pathmask-classification-20261021/**'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-index-pathmask-classification-20261021.yml'
       - '.github/workflows/m3-index-pathmask-classification-20261021.yml'
 concurrency:

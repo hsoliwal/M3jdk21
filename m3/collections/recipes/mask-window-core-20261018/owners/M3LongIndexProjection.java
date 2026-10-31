@@ -4,7 +4,7 @@
  *
  * Additive M3 indexed-array receiver, generated from a sealed Synexia recipe.
  */
-package com.m3.collections;
+package jdk.m3.collections;
 
 import java.util.Arrays;
 import java.util.Objects;

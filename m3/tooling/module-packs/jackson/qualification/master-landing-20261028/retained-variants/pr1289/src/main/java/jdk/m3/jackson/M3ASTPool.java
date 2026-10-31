@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
-// Adapted from com.synexia.mindex.MIndexASTPool, Synexia revision
+// Adapted from jdk.internal.m3.mindex.MIndexASTPool, Synexia revision
 // 50f48cbbe11f17fb8dc209bac3812f8940a1e267. Receiving changes: document lifetime,
 // exact String-reference coordinates, bounded growth, UTF-16 hash domain and sealing.
 package jdk.m3.jackson;

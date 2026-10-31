@@ -1,0 +1,45 @@
+# E4 actual bound-input review — V3, T01
+
+**Decision: admit the exact frozen input package for authoring the four E4 resources and their planned evidence copies. No concrete input defect remains in this bounded review.** This is not admission of generated afterimages, receiving execution, publication, source export, or capability acceptance. Those subsequent boundaries remain separate. No candidate module/function, generator, recipe, build, test, source verifier, or remote operation was run by this reviewer.
+
+The admitted input is `FINAL_SOURCE_INPUTS_V3.json`, SHA256 `df6713ad19ce80daad0383fbd5c3716412e2dca133e1db7e0150b88e141313b5`. Its final handoff is 29,680 bytes, SHA256 `d5e18258027f457a1fcdc45ff30b4e2e7a0723825ea95b651933af23f27fd28d`. The complete packet is bound by `BOUND_INPUTS_REVIEW_PACKET.json`, SHA256 `867e7a054af6dcadf81d7a71c6cbe822695f3b5be3fd1fefe5d6df7919cfbb2c`. All fourteen declared packet references match their byte counts, SHA256 and Git blob identities.
+
+## Actual publication and derived bindings
+
+The package binds source PR 9362, commit `0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8`, root `0361e4a07b77a01df170523033fef01c4052ddc5`, with sole parent `be92c62ece9023b5c33676716a1076d00e26120a`, on the recorded nonforced source recovery branch. The publication receipt is SHA256 `91c8df6ab07e3590fecf20de65e2e65943c4b70aebb9f5133901ae6362506c35`, status `PUBLISHED_CUSTODY_VERIFIED`. Commit, parent, root, ref and PR head agree with the actual final readback. This is a receipt-based observation at that immutable publication, not a fresh mainline/CI observation.
+
+The independent standard-library inspector rehashed all 381 retained base tree objects and all 830 final remote tree objects. It resolved all 19 designated source paths and all **55** proof paths from the actual final root and compared each complete stored path chain. All 74 local bodies match declared bytes, SHA256, Git blob, mode and final tree membership. The 19 source identities retain the current-context record/module/symbol mapping: thirteen laboratory and six Java/JNI bindings. Exactly four designated bodies differ from be92, and they are the four reviewed owners. No candidate helper was used to produce these checks.
+
+The derived inventory SHA256 `65f10e830243ed927aabedee9d0734daa46eed3b37ae4212e28ab85131fe9e9d` preserves the reviewed execution input exactly apart from adding the actual published output revision and the 55 immutable proof URLs. It preserves `qualification_status=BLOCKED`, `source_export_admitted=false` and `destination_gates_passed=false`. Record prose and pending obligations equal the separately frozen `RECORD_CONTENT.json`.
+
+## Root POM and root accounting
+
+The actual final root has 343 entries: 255 trees, 87 blobs and one Gitlink. The root-accounting file SHA256 `30dadc5274823dba2443d663000051a48c0785eb92042ba8e684520bc2ce5942` matches those exact entries and modes.
+
+The restored root POM remains the same 119,981-byte body, SHA256 `1af736d1a28af6e5cdf41a2b4fefa8b9f3c5cb7a6c2f6d16537e0a822f086a7d`, Git blob `a65f71452613662769dda64100c6d64dd90ae5da`. This review independently decoded the actual source-commit base64 fetch in `ROOT_POM_RECOVERY_CALL.json` (SHA256 `207669143fe8087284323adee24e69f738fe9517eebbb0bbd5da530369ce536b`), compared the returned body and Git ID with the stable copy and restored original derivation path, and checked actual final-root membership. A fresh XML parse yields the same 201 paired module/context declarations recorded by the derived accounting. The restoration changes neither the source revision nor Maven declarations.
+
+The handoff distinguishes 190 direct module paths, eleven nested paths, eight nested containers, four direct/nested overlaps and 194 distinct referenced root trees. It does not turn declaration availability into reactor execution or a whole-repository descendant denominator.
+
+## Exact evidence copies and custody limits
+
+The final input declares 131 additional receipts plus three reserved receipts, for **134** planned exact copies. All source bodies satisfy their declared identities. Every destination is canonical, absent, free of duplicate/ancestor conflicts, and has no symlink or nondirectory parent. The resource crate contains only its four existing before-images; no plan, afterimages or authoring result exists at this review boundary.
+
+The 131 extras equal the sealed 123-entry custody map plus eight scoped source-result/root-POM receipts. Index SHA256 `7876e0828731f3e4687c67162156788e7bde001406d5d723dd9acd8433fb36ee` and map SHA256 `082d12dd79e70bb747441fc8b221ab5ddeea5fd8174629b068c137c4682e1b5a` agree with all planned names. The 121 exact original custody files total 15,440,298 bytes. Each staged copy was compared independently against its original bytes/hash/Git identity/mode; all 35 prior draft copies also remain exact. All 121 carried originals are mode 100644. No raw Maven log was read.
+
+All 132 explicitly omitted local envelopes were independently hashed and checked against the referenced carried JSON pointer: 42 final tree-call bundles, one before-branch readback, and 89 upload batches. Every parsed tree object from the 42 actual call bundles equals the corresponding normalized final readback object; their exact union is all 830 final trees. The omitted before-branch trees, direct bodies and raw-fixture final reads equal the corresponding final readback fields. These checks confirm the index's stated coverage without recasting an omitted envelope as a carried file. Original absolute provenance references are preserved; the index maps receiving copy names and does not claim a complete original-envelope, payload-checkout or upload-transport reproduction.
+
+This reviewer independently decoded and hashed all 21 successful final direct body readbacks and matched the publication receipt. The six mandatory direct bodies remain four production changes plus two NUL fixtures. Exactly two malformed-UTF8 fixtures remain distinct Git-identity custody exceptions, excluded from direct-body success. Their `raw_body_readback` and `remote_sha256_observed` flags stay false. The final input, inventory and prose preserve the original failed-read observations, method and Git/GitHub content-address assumption without normalizing them into raw-byte verification.
+
+## Prose and unchanged acceptance boundaries
+
+The complete final handoff was read. Its final-copy link targets resolve to planned evidence copies or existing preserved files, with no unbound template tokens. It includes the exact custody carry prose. The actual source-outcome statements were compared with the reviewed aggregate execution input, final replay review and native-lane review: 70 mechanical stages, 119 current unit invocations, selected upstream 67 executed/66 passed/one dependency error, and the separate Linux native 19-pass lane remain different scopes. The 76 observation compilations explicitly exclude the two loader controls. T03 does not claim to rerun previous behavioral/native suites. The dependency error, earlier failed attempts, API/fingerprint limits, historical 0b/d1/df06 evidence, incomplete offline checkout environment, source-canon gates, module coverage, runtime/image and platform obligations stay explicit.
+
+The handoff is an afterimage draft: its receiving checks remain planned and unexecuted. It preserves the stated 46 IDs, other 44 complete records, twenty destination gates, complete 21 historical source objects, original receiver targets and E3 payload as obligations for the separate generated-resource review. This input review does not claim that a yet-unwritten map or binding has already satisfied those output obligations.
+
+The four V3 tools remain byte-exact to the previous independent source admissions: derive `8b71aaefeee38c8c8bba0d8c4e169df6b0aeb73ad9b4cad35dae7181c1d0246b`; author `b63123a1d1369bc6289d7901f950a6d9ebe5ccd5b82ac146814c7af3305ddb1a`; runner `c779f94023b3914bca1558a35d39ab11aaedd00a18cf5b74e2a30bf1205de6b6`; shared custody reader `340e3e1670e457d99ab9e0ae954eed85efacdea4e4e34f2d4b2165421b8c9248`. The prior T02 seals are preserved. Toolchain restoration is separate future execution-environment evidence and is not needed to promote this static input review.
+
+## Review artifacts and applicability
+
+`DERIVED_INPUT_CHECKS.json` and `PACKAGE_CHECKS.json` retain the independent data checks and all selected identities. Exact inspected inputs are under `inputs/`. The independent inspectors used only standard-library reads/hashes/JSON/XML and wrote only this review directory. Two reviewer-inspector schema-comparison corrections are retained in `inspector-revisions/`; they were not candidate failures or candidate executions.
+
+This admission is limited to authoring the concrete resources from the exact hashes above. The generated four afterimages, plan/manifest, bound Java test, evidence copies and preservation results must receive their own review before receiving execution. No source qualification, export, destination capability, CI or publication gate is admitted here.

@@ -33,7 +33,7 @@ Entry type is `M3File` everywhere. Small interfaces carry behaviour in default m
 
 | Owner | Path / ref | Use here |
 |-------|-----------|----------|
-| `com.m3.file.M3File` | `m3/file/src/main/java/com/m3/file/M3File.java` @ `85bf188c14d` | detached read edge kept verbatim; gains tree-entry role |
+| `com.m3.file.M3File` | `m3/file/src/main/java/jdk/m3/file/M3File.java` @ `85bf188c14d` | detached read edge kept verbatim; gains tree-entry role |
 | `module com.m3.file` | `m3/file/src/main/java/module-info.java` | unchanged; JDK-only (compiled into `m3/eclipse/optional-jmod/build.py:28`) |
 | `com.m3.fs.M3DirectoryTable` | `m3/fs/src/main/java/com/m3/fs/` | pattern: `char[]` name pool + offsets |
 | `org.m3.runtime.lazy.LazyObjectParent` | `m3/lazyobjects/` | pattern: parent-owned transient handles |

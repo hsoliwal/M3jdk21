@@ -68,13 +68,13 @@ static void reset(int fault) {
 }
 static jlong call(Array *r, Array *s, int first, int required, int excluded, Array *o, int off, int cap) {
     JNIEnv env=&table;
-    return Java_com_m3_collections_M3IndexMaskWindow_scanNative(&env,NULL,(jintArray)(void*)r,
+    return Java_jdk_m3_collections_M3IndexMaskWindow_scanNative(&env,NULL,(jintArray)(void*)r,
         (jbyteArray)(void*)s,first,required,excluded,(jintArray)(void*)o,off,cap);
 }
 static jlong call_bounded(Array *r, Array *s, int first, int end, int required,
         int excluded, Array *o, int off, int cap) {
     JNIEnv env=&table;
-    return Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative(&env,NULL,
+    return Java_jdk_m3_collections_M3IndexMaskWindow_scanBoundedNative(&env,NULL,
         (jintArray)(void*)r,(jbyteArray)(void*)s,first,end,required,excluded,
         (jintArray)(void*)o,off,cap);
 }

@@ -194,7 +194,7 @@ def summary(rows: Sequence[ProgrammeRow]) -> dict[str, object]:
     for row in rows:
         counts[row.programme_state] = counts.get(row.programme_state, 0) + 1
     return {
-        "schema": "M3_JDK21_BACKPORT_PROGRAMME_STATUS_V1",
+        "schema": "M3JDK21_BACKPORT_PROGRAMME_STATUS_V1",
         "root": root(rows),
         "jeps": len(rows),
         "states": dict(sorted(counts.items())),

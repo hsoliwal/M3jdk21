@@ -15,8 +15,8 @@
       "inputs": {
         "src/java.base/share/classes/jdk/internal/mindex/M3VI.java": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a",
         "src/java.base/share/classes/jdk/internal/mindex/M3Release.java": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
-        "m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv": "c47151b5df79d6d2711e6de748bff3fb08e2c01af5e9c6ac0b4b3b91ac97425c",
-        "m3/tooling/vi/src/test/java/com/m3/vi/VITest.java": "aa93ddaeb8935469c27b98e345f1fbc6c22b8dd2ebda8bc5cf94b7c6bf0b3db2"
+        "m3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/manifest.tsv": "c47151b5df79d6d2711e6de748bff3fb08e2c01af5e9c6ac0b4b3b91ac97425c",
+        "m3/tooling/vi/src/test/java/jdk/m3/vi/VITest.java": "9894a863922ac44343e3d9505e4717d2ec623470cd79793760db577a4b72c865"
       },
       "recipe_tests": 5,
       "interpreter_assertions": 3061,

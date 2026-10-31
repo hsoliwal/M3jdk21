@@ -24,7 +24,7 @@ A complete matched M3JDK21 source-built fastdebug/release image; jtreg on that i
 ## Full matched-image acceptance workflow (not yet executed)
 
 The opt-in GitHub Actions workflow
-`.github/workflows/m3-jdk21-java-base-mask-matched-image-20261027.yml`
+`.github/workflows/m3jdk21-java-base-mask-matched-image-20261027.yml`
 has a `workflow_dispatch` trigger only, to avoid consuming a full OpenJDK
 build on every documentation/test edit while many unrelated checks are queued.
 It installs the Linux build and jtreg prerequisites, reruns the exact
@@ -77,7 +77,7 @@ actual product-image jtreg, GC and performance work **have not**.
 ## Bounded G1/SerialGC reference stress (2026-10-28)
 
 Added `test/jdk/java/util/ArrayList/M3ArrayListVectorGcMutationContract.java`
-with Git blob `46eef59604fc52dae7dea11de615dffc5e90d943`.
+with Git blob `d617a9fd47e4c5fe9e44896d2e0870e0f669c007`.
 It exercises the same Java `ArrayList` and `Vector` mask-removal contracts
 across the 511/512/513 dispatch boundary, 1024/2049/4096 element windows,
 and no-op/full/alternating/range/sparse deletion patterns. Each case preserves
@@ -104,7 +104,7 @@ or allocation/performance evidence.
 ## Additional G1/Serial reference-liveness oracle (2026-10-28)
 
 New `test/jdk/java/util/ArrayList/M3CollectionMaskGcBarrierContract.java`,
-Git blob `5bb6fb3ee9e7a3e3ce73bdbf2439eb209e126302`, complements the existing
+Git blob `a5498980b9d9ebd0cbf6b84873d6a81ba345f8ac`, complements the existing
 `M3ArrayListVectorGcMutationContract`. Both use public Java collection
 semantics, not a replacement M3 runtime layer.
 

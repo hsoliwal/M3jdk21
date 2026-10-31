@@ -43,8 +43,8 @@ extraction is a Java callback, never JNI.
 
 | Product target | Before SHA-256 | After SHA-256 |
 | --- | --- | --- |
-| `src/main/java/com/m3/collections/interop/M3FiveLibraryIndexViews.java` | `fb8125ef79ffc4788b00571ab447a1ed08eca65a56668725db5b2d799a67e85b` | `33fe97faa1c93fb963be080529fb08112d852033fd82efa37b5eb5f5b0b44d2a` |
-| `src/test/java/com/m3/collections/interop/M3FiveLibraryExpandedContractsTest.java` | `ABSENT` | `a4006d9c2d9995ba22687ef40db45ddd62993f11804c65c55bbff7d9c95f7de4` |
+| `src/main/java/com/m3/collections/interop/M3FiveLibraryIndexViews.java` | `fb8125ef79ffc4788b00571ab447a1ed08eca65a56668725db5b2d799a67e85b` | `078c7d32a3fdee09f4baf1db8e133578836f80e7f2a3596563b75682d66b0929` |
+| `src/test/java/com/m3/collections/interop/M3FiveLibraryExpandedContractsTest.java` | `ABSENT` | `83c68622bfeed4fe1fe039bf802fd70f5029e4701c91dccd8fcf21f58a6cffdc` |
 
 The original public methods remain unchanged. The named class-backed
 Synexia recipe validates exact before-source identity, Java syntax,

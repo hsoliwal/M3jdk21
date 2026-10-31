@@ -28,62 +28,62 @@
   "publication_identity_source": "Publishing parent agent supplied PR identities and heads; local source/proof receipts were separately inspected",
   "receipts": [
     {
-      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/ast-hierarchy-20261018/candidate/SDK_INPUTS.tsv",
-      "sha256": "c98614a008da80c4dbee9b1f38d0d415afa9382c43ace8ec9b5a896efdf1f6b3",
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/ast-hierarchy-20261018/candidate/SDK_INPUTS.tsv",
+      "sha256": "129cf652ff782c48e99325a642adbc02305aaa4249fd85664527ce2774664836",
       "scope": "actual hierarchy SDK lane; separate from collection proof"
     },
     {
-      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/ast-hierarchy-20261018/candidate/SDK_RESULTS.tsv",
-      "sha256": "2c64e67357632d5651b43432babd86c89bd0d1f28348e39d636d83f835a01e30",
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/ast-hierarchy-20261018/candidate/SDK_RESULTS.tsv",
+      "sha256": "dbe94b628a9a136e51110ca27a9dc78f5e84d9e046bbd1689102a41aef5d5239",
       "scope": "actual hierarchy SDK lane; separate from collection proof"
     },
     {
-      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/ast-hierarchy-20261018/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml",
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/ast-hierarchy-20261018/surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml",
       "sha256": "cdbe3ab1ab7000ab4d910a71e68a9007b215fe07940b93395955a986913301fc",
       "scope": "actual hierarchy SDK lane; separate from collection proof"
     },
     {
-      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/ast-hierarchy-target-20261018/candidate/SDK_INPUTS.tsv",
-      "sha256": "8cc628f1638de3061dbff31712daa2aa2253b91e227db05d7df98dd2a99425a7",
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/ast-hierarchy-target-20261018/candidate/SDK_INPUTS.tsv",
+      "sha256": "651e541222c9872f3ed2efaab28ff899e8846ca2cfe979d1db8fc00cc488ee9b",
       "scope": "actual hierarchy SDK lane; separate from collection proof"
     },
     {
-      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/ast-hierarchy-target-20261018/candidate/SDK_RESULTS.tsv",
-      "sha256": "fc66f3eebc58fcb42f401a644fb998b6d705790ae81618e899321f5f87a16461",
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/ast-hierarchy-target-20261018/candidate/SDK_RESULTS.tsv",
+      "sha256": "ee41ae8b854d19e9e29dce4853d13152773d2c27147b14c00b31634be709c928",
       "scope": "actual hierarchy SDK lane; separate from collection proof"
     },
     {
-      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/ast-hierarchy-target-20261018/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml",
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/ast-hierarchy-target-20261018/surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml",
       "sha256": "c181b9cb9de8d0fe06e574d5315013ffcd3fa33120a488c1e583991267b51eae",
       "scope": "actual hierarchy SDK lane; separate from collection proof"
     },
     {
-      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/ast-cache-20261018/evidence/sdk-final.txt",
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/ast-cache-20261018/evidence/sdk-final.txt",
       "sha256": "5d3766d8181dfa4ba9edd3444e3fd1cbc405db47477ada90f2746b891116f3fd",
       "scope": "cache candidate failed SDK/compile or synthetic fixture only"
     },
     {
-      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/ast-cache-20261018/evidence/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml",
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/ast-cache-20261018/evidence/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml",
       "sha256": "33f5b41cf59e4432d3e42122f4c1dba70cd5cc365be1c1b65741cd155defaf8d",
       "scope": "cache candidate failed SDK/compile or synthetic fixture only"
     },
     {
-      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/ast-cache-20261018/evidence/closure-compile.txt",
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/ast-cache-20261018/evidence/closure-compile.txt",
       "sha256": "c2b6018845f4f0c9fa2b3e88e1d1e959bd68ec93f4301e09a120f0c4f5e132a0",
       "scope": "cache candidate failed SDK/compile or synthetic fixture only"
     },
     {
-      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/ast-cache-20261018/evidence/portable-fixture/RESULTS.json",
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/ast-cache-20261018/evidence/portable-fixture/RESULTS.json",
       "sha256": "818a3a39316d4fcbddbc70bbe2997d1d3065357c127722cb26ffe60dc907ce60",
       "scope": "cache candidate failed SDK/compile or synthetic fixture only"
     },
     {
-      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/ast-hierarchy-meta-20261018/evidence/RESULTS.json",
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/ast-hierarchy-meta-20261018/evidence/RESULTS.json",
       "sha256": "8aa75a8bc4e4ca5cbaf4dd3e59a9294842ff844af19bf6fb67227808b4a70f03",
       "scope": "separate hierarchy metadata custody qualification"
     },
     {
-      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/ast-hierarchy-meta-20261018/evidence/RECEIVER_RECEIPT.json",
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/ast-hierarchy-meta-20261018/evidence/RECEIVER_RECEIPT.json",
       "sha256": "11e0218b796bb5879ab3b3e00a1c4f2b86e74252c838c42b2ed2fedf2680b45b",
       "scope": "separate hierarchy metadata custody qualification"
     }

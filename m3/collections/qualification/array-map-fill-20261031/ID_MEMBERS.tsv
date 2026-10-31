@@ -1,0 +1,2 @@
+module	CLASS	PACKAGE	flags	ORACLE
+m3-long-object-linked-hash-map	M3LongObjectLinkedHashMap	jdk.m3.collections.id	-	java.util.LinkedHashMap<Long, V>

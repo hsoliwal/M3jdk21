@@ -26,10 +26,10 @@ from typing import Iterable, Sequence
 
 CRATE_LIMIT = 256
 RESOURCE_ROOT = Path(
-    "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned"
+    "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned"
 )
 TEXT_RESOURCE_ROOT = Path(
-    "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text"
+    "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text"
 )
 YAML_ROOT = Path("src/main/resources/META-INF/rewrite")
 
@@ -225,7 +225,7 @@ def materialize(
                 "java",
                 java_candidates,
                 RESOURCE_ROOT,
-                "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe",
+                "jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe",
                 ".java.txt",
             )
         )
@@ -235,7 +235,7 @@ def materialize(
                 "native",
                 native_candidates,
                 TEXT_RESOURCE_ROOT,
-                "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe",
+                "jdk.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe",
                 ".txt",
             )
         )
@@ -245,7 +245,7 @@ def materialize(
                 "text",
                 text_candidates,
                 TEXT_RESOURCE_ROOT,
-                "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe",
+                "jdk.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe",
                 ".txt",
             )
         )
@@ -331,7 +331,7 @@ def materialize(
             [
                 "---",
                 "type: specs.openrewrite.org/v1beta/recipe",
-                f"name: com.m3.generated.{recipe_name}",
+                f"name: jdk.m3.generated.{recipe_name}",
                 f"displayName: M3JDK21 candidate crate {crate_name}",
                 "description: Exact hash-pinned candidate; compatibility proof required before admission.",
                 "recipeList:",
@@ -345,7 +345,7 @@ def materialize(
         [
             "---",
             "type: specs.openrewrite.org/v1beta/recipe",
-            f"name: com.m3.generated.jdk{release}.CandidateBackports",
+            f"name: jdk.m3.generated.jdk{release}.CandidateBackports",
             f"displayName: M3JDK21 JDK {release} candidate backports",
             "description: Candidate-only composition of generated hash-pinned donor crates.",
             "recipeList:",
@@ -353,10 +353,10 @@ def materialize(
     )
     for crate_name in crate_names:
         recipe_name = crate_name.replace("-", "_")
-        yaml.append(f"  - com.m3.generated.{recipe_name}")
+        yaml.append(f"  - jdk.m3.generated.{recipe_name}")
     yaml.append("")
 
-    (yaml_root / f"m3-jdk{release}-candidate-backports.yml").write_text(
+    (yaml_root / f"m3jdk{release}-candidate-backports.yml").write_text(
         "\n".join(yaml),
         encoding="utf-8",
     )

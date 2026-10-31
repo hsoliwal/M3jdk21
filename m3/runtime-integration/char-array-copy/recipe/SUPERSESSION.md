@@ -18,7 +18,7 @@ The char-array-copy recipe is target-specific JDK runtime custody. It remains M3
 its semantics depend on exact `java.lang.String`/M3 String product state and target runtime tests.
 This does not create a second canonical reusable Synexia recipe family.
 
-Reusable recipe authorship continues to follow `m3/docs/SYNEXIA_CONVERGENCE_MODEL.md` and the
+Reusable recipe authorship continues to follow `m3/docs/M3_CONVERGENCE_MODEL.md` and the
 pinned Synexia canonical recipe-home manifest.
 
 ## Supersession rule

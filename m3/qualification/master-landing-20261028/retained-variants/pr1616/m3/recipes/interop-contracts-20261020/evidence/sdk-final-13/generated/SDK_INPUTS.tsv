@@ -13,7 +13,7 @@ crate/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-interop-contrac
 crate/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-interop-contracts-20261020/010-M3SdkFamiliesTest.java.txt	84159857d13f31dc7d1fe49a4d04356c40906cb7c6dfe1b9b0a206da6a6d4f7d
 crate/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-interop-contracts-20261020/011-M3SpringArrayContractTest.java.txt	a0810a10a35d0e23660ce3109dd260bd8bba0495e71268d988b5694bf71dd054
 crate/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-interop-contracts-20261020/012-M3SpringCaseInsensitiveSdkFactoryTest.java.txt	192e287a4b98241c59c0c4a3de07cec2505d867d4cb52ed949c7e6ca31b429f0
-crate/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-interop-contracts-20261020/manifest.tsv	233c1c18bee755e36823d3cee2709f86e6b6d8edf1030ed4801c90fdddae1015
+crate/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-interop-contracts-20261020/manifest.tsv	307796907e4f91b79239f2f9a738922fac1b98df382722c794704d669f82c1ed
 crate/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-interop-contracts-20261020/pre/002-M3ApacheBagContractTest.java.txt	737dba455e469117b94cd82a48458bcbe2e4c1fd038b0beb578dcc00ccc1982a
 crate/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-interop-contracts-20261020/pre/003-M3ApacheCollectionsTest.java.txt	ede37d37ca4373ac7888da6542f7447730be822829f789ed82caaaf99dc2ec53
 crate/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-interop-contracts-20261020/pre/004-M3FiveLibraryArrayificationTest.java.txt	43d670c2278b4db3cb39e8c6d63eff56827c7ef8359e7c85aa8f72b892bba51d

@@ -50,9 +50,9 @@ jobs:
           filter: blob:none
           sparse-checkout-cone-mode: false
           sparse-checkout: |
-            m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ASTLeafIndex.java
-            m3/ports/compiletime/src/test/java/com/m3/compiletime/M3ASTLeafIndexSelfTest.java
-            m3/ports/compiletime/src/test/java/com/m3/compiletime/M3ASTScopeDispatchProof.java
+            m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ASTLeafIndex.java
+            m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3ASTLeafIndexSelfTest.java
+            m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3ASTScopeDispatchProof.java
             src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java
             src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java
             test/jdk/jdk/internal/m3/M3IndexedArrayTest.java
@@ -68,11 +68,11 @@ jobs:
           set -euo pipefail
           mkdir -p out/scope
           javac --release 21 -proc:none -Xlint:all -Werror -d out/scope \
-            m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ASTLeafIndex.java \
-            m3/ports/compiletime/src/test/java/com/m3/compiletime/M3ASTLeafIndexSelfTest.java \
-            m3/ports/compiletime/src/test/java/com/m3/compiletime/M3ASTScopeDispatchProof.java
-          java -cp out/scope com.m3.compiletime.M3ASTLeafIndexSelfTest
-          java -cp out/scope com.m3.compiletime.M3ASTScopeDispatchProof
+            m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ASTLeafIndex.java \
+            m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3ASTLeafIndexSelfTest.java \
+            m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3ASTScopeDispatchProof.java
+          java -cp out/scope jdk.m3.compiletime.M3ASTLeafIndexSelfTest
+          java -cp out/scope jdk.m3.compiletime.M3ASTScopeDispatchProof
       - name: Validate original JDK java.base state-mask and view contracts
         run: |
           set -euo pipefail

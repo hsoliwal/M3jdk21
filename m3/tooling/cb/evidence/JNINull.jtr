@@ -1,7 +1,7 @@
 #Test Results (version 2)
 #Sun Oct 04 11:49:02 EEST 2026
 #-----testdescription-----
-$file=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb/JNINull.java
+$file=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/JNINull.java
 $root=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk
 keywords=othervm native
 library=/jdk/internal/mindex/cb
@@ -12,7 +12,7 @@ title=Preserve NewStringUTF null-input behavior with M3 string admission enabled
 #-----environment-----
 
 #-----testresult-----
-description=file\:/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb/JNINull.java
+description=file\:/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/JNINull.java
 elapsed=1356 0\:00\:01.356
 end=Sun Oct 04 11\:49\:02 EEST 2026
 environment=regtest
@@ -59,7 +59,7 @@ result: Passed. Build successful
 
 #section:compile
 ----------messages:(7/302)----------
-command: compile /workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb/JNINull.java
+command: compile /workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/JNINull.java
 reason: .class file out of date or does not exist
 started: Sun Oct 04 11:49:01 EEST 2026
 Mode: othervm
@@ -93,7 +93,7 @@ TZ=Asia/Nicosia \\
         -J-Dtest.nativepath=/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image \\
         -J-Dtest.root=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk \\
         -J-Dtest.name=jdk/internal/mindex/cb/com/m3/cb/JNINull.java \\
-        -J-Dtest.file=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb/JNINull.java \\
+        -J-Dtest.file=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/JNINull.java \\
         -J-Dtest.main.class=com.m3.cb.JNINull \\
         -J-Dtest.src=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb \\
         -J-Dtest.src.path=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb:/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb \\
@@ -101,7 +101,7 @@ TZ=Asia/Nicosia \\
         -J-Dtest.class.path=/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/classes/jdk/internal/mindex/cb/com/m3/cb/JNINull.d:/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/classes/jdk/internal/mindex/cb \\
         -d /workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/classes/jdk/internal/mindex/cb/com/m3/cb/JNINull.d \\
         -sourcepath /workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb:/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb \\
-        -classpath /workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb:/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/classes/jdk/internal/mindex/cb/com/m3/cb/JNINull.d:/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/classes/jdk/internal/mindex/cb /workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb/JNINull.java
+        -classpath /workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb:/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/classes/jdk/internal/mindex/cb/com/m3/cb/JNINull.d:/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/classes/jdk/internal/mindex/cb /workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/JNINull.java
 ----------System.out:(0/0)----------
 ----------System.err:(0/0)----------
 result: Passed. Compilation successful
@@ -141,7 +141,7 @@ CLASSPATH=/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jt
         -Dtest.nativepath=/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image \\
         -Dtest.root=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk \\
         -Dtest.name=jdk/internal/mindex/cb/com/m3/cb/JNINull.java \\
-        -Dtest.file=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb/JNINull.java \\
+        -Dtest.file=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/JNINull.java \\
         -Dtest.main.class=com.m3.cb.JNINull \\
         -Dtest.src=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb \\
         -Dtest.src.path=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb:/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb \\
@@ -195,7 +195,7 @@ CLASSPATH=/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jt
         -Dtest.nativepath=/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image \\
         -Dtest.root=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk \\
         -Dtest.name=jdk/internal/mindex/cb/com/m3/cb/JNINull.java \\
-        -Dtest.file=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb/JNINull.java \\
+        -Dtest.file=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/JNINull.java \\
         -Dtest.main.class=com.m3.cb.JNINull \\
         -Dtest.src=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb \\
         -Dtest.src.path=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb:/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb \\

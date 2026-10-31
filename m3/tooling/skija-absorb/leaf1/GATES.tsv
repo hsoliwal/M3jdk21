@@ -1,0 +1,10 @@
+stage	command	result
+0 donor	javac --release 21 -cp annotations-20.1.0:lombok-1.18.48 -processorpath lombok-1.18.48 (shared/java + types-0.2.0 sources, 224 files)	0 errors, 275 classes
+0 donor = published	api_surface.sh on skija-shared-0.143.18.jar + types-0.2.0.jar vs stage 0	4,623 vs 4,620 lines: the 3 extra lines are the package-private synthetic switch-map classes ColorType$1, EncodedOrigin$1, PathFillMode$1 of a different javac
+1 delombok	java -jar lombok-1.18.48.jar delombok + delombok_clean.py	generated=491 imports=48 stamps=63 sneaky=2 files=72; 0 lombok tokens left
+1 compile	javac --release 21 -proc:none -cp annotations-20.1.0 (no Lombok)	0 errors, 276 classes (275 + SneakyThrow)
+1 api	api_surface.sh stage 0 vs stage 1	0 removed, 2 added (the SneakyThrow class and its method)
+2 strip + rename	absorb_rename.py <src1> TYPE_RENAME_L1.tsv	files=225 jb_annotation=3026 jb_import=193 pkg=401 type_token=6584 type_token_shadowed=1 (java.nio.file.Path through a star import in the loader) strings=1 (reported, not edited)
+2 compile	javac --release 21 -proc:none, no jar on the classpath	0 errors, 276 classes
+2 api	api_surface.sh stage 1 (renamed by rename_sed.py) vs stage 2	4,622 = 4,622: 0 removed, 0 added; no humbleui or jetbrains name in the surface
+3 module	javac --release 21 -Xlint:all on src/jdk.m3.graphics/share/classes with module-info.java	0 errors; 63 warnings: missing-explicit-ctor 56, this-escape 4, fallthrough 2, module 1 (disabled in make/modules/jdk.m3.graphics/Java.gmk)

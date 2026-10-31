@@ -1,0 +1,26 @@
+{
+  "schema": "M3_CURRENT_OWNER_HOSTED_ADMISSION_OBSERVATION/1",
+  "status": "OBSERVED_FAILURE",
+  "pull_request": "https://github.com/hsoliwal/M3jdk21/pull/1637",
+  "run_url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39530589915",
+  "job_url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39530589915/job/118995313858",
+  "executed_job": true,
+  "downstream_recipe_or_adapter_tests_executed": false,
+  "scope": "Existing broader hosted admission refused a migration-engine Git blob before recipe or adapter tests. The exact same blob is recorded at baseline2779 and the published receiving tree. This is distinct from this packet's four unchanged canonical engines.",
+  "unchanged_source_pin_preserved": true,
+  "no_workflow_or_engine_correction_in_this_stage": true,
+  "files": [
+    {
+      "source_path": "/workspace/scratch/206049dfb270/integration-work/HOSTED_BASELINE_ENGINE_PIN_REFUSAL.json",
+      "path": "hosted-admission/HOSTED_BASELINE_ENGINE_PIN_REFUSAL.json",
+      "bytes": 821,
+      "sha256": "22107c97fd217f4ef4c75f85827ced29590dcf18b7d8fd969cbcff767b85aefc"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/integration-work/HOSTED_BASELINE_ENGINE_PIN_REFUSAL.log",
+      "path": "hosted-admission/HOSTED_BASELINE_ENGINE_PIN_REFUSAL.log",
+      "bytes": 25640,
+      "sha256": "fa85e07d38431705bc1ba6c53fe3bbdaa8ebf8ba66c329b8bfc49fa18be69049"
+    }
+  ]
+}

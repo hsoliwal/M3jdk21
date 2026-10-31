@@ -1,9 +1,0 @@
-evidenceKind	SDK_EXECUTION
-recipe	com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
-crate	m3jdk-collection-current-owners-java-02-20261017
-result	m3/ports/collections/src/main/java/com/m3/util/M3PrimitiveSoaStore.java	ABSENT	b2c5d01b1397bb1951b918b8ccbdcaef148d3ceb228023f06ddceb302e6da533
-fixedPoint	PASSED
-driftRefusal	PASSED
-duplicateRefusal	PASSED
-missingRefusal	NOT_APPLICABLE_ALL_TARGETS_ABSENT
-scope	sealed-recipe-SDK-only; runtime-contracts-and-source-mirror-gates-separate

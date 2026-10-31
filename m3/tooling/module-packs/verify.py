@@ -21,7 +21,7 @@ def main():
     output.mkdir(parents=True, exist_ok=False)
     root = Path(__file__).resolve().parent
     files = sorted((root / "kernel/src/main/java").rglob("*.java"))
-    checks = root / "kernel/src/test/java/com/m3/tools/modulepack/M3ModuleChecks.java"
+    checks = root / "kernel/src/test/java/jdk/m3/tools/modulepack/M3ModuleChecks.java"
     before = {str(path.relative_to(root)): hashlib.sha256(path.read_bytes()).hexdigest()
               for path in [*files, checks]}
     classes, tests = output / "classes", output / "test-classes"
@@ -34,7 +34,7 @@ def main():
     import os
     result = command([home / "bin/java", "--add-modules", "jdk.jlink", "-cp",
                       os.pathsep.join([str(classes), str(tests)]),
-                      "com.m3.tools.modulepack.M3ModuleChecks", output / "fixtures"],
+                      "jdk.m3.tools.modulepack.M3ModuleChecks", output / "fixtures"],
                      output / "checks.log")
     if "M3_MODULE_CHECKS_PASS" not in result:
         raise ValueError("Missing contract-check receipt")

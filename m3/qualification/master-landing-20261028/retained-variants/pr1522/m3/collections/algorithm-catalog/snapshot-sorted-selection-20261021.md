@@ -10,12 +10,12 @@ two regression sources and two appended catalogue rows are admitted here. The or
 
 The receiver is M3JDK21 `9441d86e6e0a699504ede20c0fd1df9a2febe033`.
 The unchanged snapshot owner is SHA-256
-`ff3d8802a77311de3e89094f34bb8b01df42e13cc74c96531b8801c7e08f5cc4`.
+`7d212a771c7b3e8215bcfcdd3f922f544f133f9025e5313882934a326e8a7050`.
 The **experimental, non-admitted** SDK owner is SHA-256
 `b75ce17bae2e5a5174c1651586afa75b7d5bedb561d094439ad3f3f9e64d4b47`.
 It reuses the first-party Apache-2.0 `filteredSorted` composition from Synexia
 `74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd`, donor blob
-`eacc774655a75fe2bc884aa37fd5bfbc67ac5d5d`. No challenge/editorial source was copied.
+`496b4b0ead9f1917a34fa6b79229536ac9854b17`. No challenge/editorial source was copied.
 The existing catalogue's GitHub, LeetCode, HackerRank and GeeksforGeeks evaluations and
 all previous rejected alternatives are preserved.
 

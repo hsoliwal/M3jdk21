@@ -1,0 +1,48 @@
+{
+  "schema": "jcc-static-review-seals/1",
+  "epoch": "V3-T02",
+  "files": [
+    {
+      "path": "REVIEW.json",
+      "bytes": 737,
+      "sha256": "d96b2d47d1617cea5ee7b693f2405ebab61edfa769e8bef25a1c75fbe02e5641",
+      "git_blob_sha1": "47f6539fad27eb64ac4a8fb057f00131852f7c42",
+      "mode": "100644"
+    },
+    {
+      "path": "REVIEW.md",
+      "bytes": 2768,
+      "sha256": "11c5fc020c3841648a345e9597312ff6b7aa20c0e99df92ddec53e92eeeb1d11",
+      "git_blob_sha1": "3ab1954aaa583ffc761dbd93dfb041973121ffce",
+      "mode": "100644"
+    },
+    {
+      "path": "STATIC_CHECKS.json",
+      "bytes": 841,
+      "sha256": "c056eba9e56486f641009b942768b3ac5a8e4a1a57464cde5aceeb856a930455",
+      "git_blob_sha1": "e2e40e25a5faf3abc218fb73ce5d2230d003cd22",
+      "mode": "100644"
+    },
+    {
+      "path": "inputs/READINESS_T02.json",
+      "bytes": 7301,
+      "sha256": "6bba7f210e73180b8d91e9a6023e4e846954feec665c74bc73763ec4a9ebb0a3",
+      "git_blob_sha1": "e0015290efe3effb83bc3f02c3e475fe3f70f1da",
+      "mode": "100644"
+    },
+    {
+      "path": "inputs/run_verification_v3.py",
+      "bytes": 13664,
+      "sha256": "c779f94023b3914bca1558a35d39ab11aaedd00a18cf5b74e2a30bf1205de6b6",
+      "git_blob_sha1": "ae10df70d469cd2ecb353e3dc018921af22bff30",
+      "mode": "100644"
+    },
+    {
+      "path": "revision.diff",
+      "bytes": 3117,
+      "sha256": "492a75974397e65dde54e1506efe612fe795532544a69b4f92a9579acf013768",
+      "git_blob_sha1": "62b566db26048d6614d7d494b1d5389d3e4d520c",
+      "mode": "100644"
+    }
+  ]
+}

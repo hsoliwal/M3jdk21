@@ -18,8 +18,8 @@ java -cp m3/collections/qualification/m3-long-index-path-masks-20261018/recipe/t
   com.synexia.m3.M3LongIndexPathMasksRecipe --check . \
   m3/collections/qualification/m3-long-index-path-masks-20261018/recipe/templates
 javac --release 21 -proc:none -Xlint:all -Werror -d /tmp/m3-long-path \
-  m3/collections/src/main/java/com/m3/collections/M3LongIndexPathMasks.java \
-  m3/collections/src/test/java/com/m3/collections/M3LongIndexPathMasksSelfTest.java
+  m3/collections/src/main/java/jdk/m3/collections/M3LongIndexPathMasks.java \
+  m3/collections/src/test/java/jdk/m3/collections/M3LongIndexPathMasksSelfTest.java
 java -cp /tmp/m3-long-path com.m3.collections.M3LongIndexPathMasksSelfTest
 ```
 

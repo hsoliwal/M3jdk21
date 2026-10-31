@@ -5,8 +5,8 @@ This is the **original M3JDK21 product**: the existing `M3LongIndexProjection` J
 
 ## Source inventory and canonical recipe
 
-- Product source before Git blob: `d18055008f6eabbd6603e080ff32f8d5a1da8b60`; SHA-256 `7bf939ea374ce6c0b13c403f5e154c0f8d376f9cddb8e623cf00ef299183a77e`.
-- Received source SHA-256: `3569c0a8ffd94c6e91b87b9316bbaf20583f7dd56810a7bee57a81c8a9975a8d`, copied byte-for-byte from canonical [Synexia recipe PR #12700](https://github.com/hsoliwal/com.synexia/pull/12700).
+- Product source before Git blob: `d98d8a45725f102292a63180a44e6054bf9b57c8`; SHA-256 `bf601d711667e1078ca30246da6fa89b43d7ed951a3179e0a161365526581959`.
+- Received source SHA-256: `0019e28bcff8d7dc80bcd82731c7b7f610a3471bf464e8f81edb4224a659c0dc`, copied byte-for-byte from canonical [Synexia recipe PR #12700](https://github.com/hsoliwal/com.synexia/pull/12700).
 - Two Java21 deterministic differential/JUnit test sources are exact copies of the source-sealed Synexia templates.
 - `M3LongAddressKernel` and `M3IndexMaskCompactor` remain unchanged; no JNI ABI, M3String owner or HotSpot interaction changes. Existing cross-platform JNI mask kernels and filtered/sorted wrapper work remain in their current source owners and review PRs.
 - Consult [category decisions](CATALOGUE.tsv), then the canonical Maven/OpenRewrite recipe and tests. Subsequent passes must update recipe/canonical catalogue and prove the same fixed point rather than manually patching each file.

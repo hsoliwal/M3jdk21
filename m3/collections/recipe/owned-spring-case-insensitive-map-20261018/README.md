@@ -4,10 +4,10 @@ Activate `com.synexia.m3.OwnedSpringCaseInsensitiveMap20261018` from
 `META-INF/rewrite/m3-owned-spring-case-insensitive-map.yml`.
 
 The unchanged canonical `M3HashPinnedJavaSnapshotRecipe` (13805 bytes,
-SHA-256 `3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599`)
+SHA-256 `9dc65793cb1f4fb20866f99f4e5d0043d54734aa03cf0fe297c0cadbba2d1c37`)
 installs exactly one absent production source or accepts its exact current
 postimage. The source is 31224 bytes with SHA-256
-`450e3f70be37f0fa0fcee7edd4adc8a2eea4a05a40646fb3e5c531e4ee8447ca`.
+`d90b72771ab454aa1dd03eb2c5784d7aaffd612736868a66fbe2682c8ab05f7c`.
 
 This preset configures `lst: false`. The receiving host must supply
 `PlainTextParser`-produced `SourceFile`s, including when the target already has
@@ -32,7 +32,7 @@ import org.openrewrite.Parser;
 import org.openrewrite.internal.InMemoryLargeSourceSet;
 import org.openrewrite.text.PlainTextParser;
 
-var target = Path.of("m3/collections/implementations/spring-case-insensitive-map/src/main/java/com/m3/collections/spring/M3LinkedCaseInsensitiveMap.java");
+var target = Path.of("m3/collections/implementations/spring-case-insensitive-map/src/main/java/jdk/m3/collections/spring/M3LinkedCaseInsensitiveMap.java");
 String text = Files.readString(target, StandardCharsets.UTF_8);
 var errors = new ArrayList<Throwable>();
 var ctx = new InMemoryExecutionContext(errors::add);

@@ -1,0 +1,17 @@
+{
+  "schema" : "M3_NLP_CURRENT_FORKS_SDK_RECEIPT_V1",
+  "engine" : "com.m3.rewrite.jmod.M3ModuleDescriptorRecipe",
+  "sdk_version" : "8.17.1",
+  "kind" : "descriptor",
+  "crate" : "/workspace/scratch/842aadebd195/synexia-evidence/sdk-engine/synexia-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018/descriptors/DESCRIPTOR_MANIFEST.tsv",
+  "targets" : 2,
+  "first_application_changes" : 2,
+  "fixed_point_changes" : 0,
+  "drift_refusals" : 1,
+  "duplicate_refusals" : 1,
+  "missing_refusals" : 0,
+  "source_sha256" : {
+    "m3/tooling/module-packs/nlp-search/src/jdk.m3.compiletime/module-info.java" : "ca2acaa6994d3cffd474ff11e234410a61fdd7bedf8447a3aeede19d66c02afa",
+    "m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/module-info.java" : "b9cd2d94692e1f41d5322e0d25bdbf84d62bb257b7a18081e29453bc37fe4635"
+  }
+}

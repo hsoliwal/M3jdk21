@@ -1,0 +1,14 @@
+jdk.m3.jsoup@1.23.2-m3-source-1
+exports com.m3.lib.jsoup
+exports com.m3.lib.jsoup.helper
+exports com.m3.lib.jsoup.internal
+exports com.m3.lib.jsoup.nodes
+exports com.m3.lib.jsoup.parser
+exports com.m3.lib.jsoup.safety
+exports com.m3.lib.jsoup.select
+requires java.base mandated
+requires java.net.http
+requires java.xml
+requires jdk.m3.re2j static
+requires org.jspecify static
+

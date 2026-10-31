@@ -19,7 +19,7 @@
 
 /*
  * @test
- * @summary M3JDK21 ArrayList/Vector masked removeIf retains exact survivor references across G1 and Serial collections
+ * @summary M3JDK 21 ArrayList/Vector masked removeIf retains exact survivor references across G1 and Serial collections
  * @run main/othervm -Xms24m -Xmx96m -XX:+UseG1GC M3CollectionMaskGcBarrierContract
  * @run main/othervm -Xms24m -Xmx96m -XX:+UseSerialGC M3CollectionMaskGcBarrierContract
  */
@@ -29,7 +29,7 @@ import java.util.Vector;
 
 /**
  * Public Java-heap oracle for reference-bearing masked compaction. Both GC
- * configurations must run on the actual source-built M3JDK21 image; the test
+ * configurations must run on the actual source-built M3JDK 21 image; the test
  * does not claim a complete GC/card-mark or concurrency proof.
  */
 public final class M3CollectionMaskGcBarrierContract {

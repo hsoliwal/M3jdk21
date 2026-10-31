@@ -21,8 +21,8 @@
        - name: Build and exercise immutable foundation
          run: ./m3/build.sh
        - name: Compare pinned Synexia content and range contract
---- a/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java
-+++ b/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java
+--- a/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java
++++ b/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java
 @@ -94,7 +94,7 @@
                              output.put(
                                      after.getSourcePath()
@@ -32,8 +32,8 @@
                                      after.printAll());
                          });
          return output;
---- a/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java
-+++ b/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java
+--- a/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java
++++ b/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java
 @@ -97,7 +97,7 @@
                              output.put(
                                      after.getSourcePath()

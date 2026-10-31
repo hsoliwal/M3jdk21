@@ -5,7 +5,7 @@
 
 /*
  * @test
- * @summary M3JDK21 native indexed-array live state-mask views and stable sorted positions
+ * @summary M3JDK 21 native indexed-array live state-mask views and stable sorted positions
  * @modules java.base/jdk.internal.m3
  * @run main/othervm M3StateMaskedIndexedViewTest
  * @run main/othervm -Xint M3StateMaskedIndexedViewTest

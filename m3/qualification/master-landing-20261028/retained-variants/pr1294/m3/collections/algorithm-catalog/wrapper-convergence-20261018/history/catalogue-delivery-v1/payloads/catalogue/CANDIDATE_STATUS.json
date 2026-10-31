@@ -6,12 +6,12 @@
   "candidate_qualification_status": "PASSED_25_SOURCE_BOUND_RECORDS",
   "source_id": "FINAL28_R2",
   "source_review": "FINAL_FILE_REVIEW.tsv",
-  "source_review_sha256": "9745087d4ac73028910466c254bd9c5fae04c4b450a218739918b65e91bb6864",
+  "source_review_sha256": "e50ff6d246f9cc4fe4516662f8dc15982a0f27a7a8e991b8540cf7258c88da54",
   "candidate_execution_source_id": "CANDIDATE25_07BA",
   "candidate_gates": "candidate-proof/GATES.json",
-  "candidate_gates_sha256": "30baab47ad3269c6655bbc3d553cb839a6f095635389b02157559f1d02c54c19",
+  "candidate_gates_sha256": "e325ed8dd3f51c87d17e539080316560e7339d6474e84252080050de80027d07",
   "candidate_inputs": "candidate-proof/SOURCE_INPUTS.json",
-  "candidate_inputs_sha256": "bac74f9e7b829ab41fb6e1d5ccc8b1e35643a38fa182e78aa999b5d6b1a10c0b",
+  "candidate_inputs_sha256": "396c4e10e7b0d840791f35c073aa85670c3168d695e925970e30d6b5e9560089",
   "candidate_gate_count": 25,
   "candidate_compile_inputs": 141,
   "scope": {
@@ -25,12 +25,12 @@
   "actual_sdk_qualification": {
     "status": "PASS_ACTUAL_SDK_AND_RECEIVERS",
     "receipt": "runtime-proof/SDK_ACCEPTANCE.json",
-    "sha256": "a9e03d0c1b71cad87b7c26c2f6e348850b96ed6349b3d02e8df515852f07fd37"
+    "sha256": "12d2329c15e7db972ab30af8d57df21a576c1980f1a6455113dace66c5878f47"
   },
   "receiver_java_jni": {
     "status": "PASS_SCOPED_2F_ACTUAL_RECEIVER",
     "receipt": "FINAL_RECEIVING_STATUS.json",
-    "sha256": "9f1bed14431ac454955811a58a443ee74a3e659e3cd1757eae2706a09f032c72"
+    "sha256": "37488064a47483307e62569d163de9db0fb78a21134564058fd63d74877fe074"
   },
   "canonical_immutable_pin": {
     "status": "EXTERNALLY_BOUND_AT_PUBLICATION",
@@ -40,8 +40,8 @@
   },
   "interpretation": "The original 28-file/07ba candidate epoch and its 25 gates remain unchanged. Actual SDK and 2f receiver/module/API/JNI receipts, the separate bridge and allocation observation are bound in FINAL_RECEIVING_STATUS.json. Publication pin is external; historical full guard remains unexecuted.",
   "retained_receiver_oracles": [
-    "m3/collections/src/test/java/com/m3/collections/M3BoundedFilteredNavigationContract.java",
-    "m3/collections/src/test/java/com/m3/collections/M3BoundedFilteredNavigationTest.java"
+    "m3/collections/src/test/java/jdk/m3/collections/M3BoundedFilteredNavigationContract.java",
+    "m3/collections/src/test/java/jdk/m3/collections/M3BoundedFilteredNavigationTest.java"
   ],
   "gate_logs": [
     {

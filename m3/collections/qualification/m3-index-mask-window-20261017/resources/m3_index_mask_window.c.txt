@@ -22,7 +22,7 @@ static jlong m3_window_invalid(JNIEnv *env, const char *message) {
 }
 
 JNIEXPORT jlong JNICALL
-Java_com_m3_collections_M3IndexMaskWindow_scanNative(
+Java_jdk_m3_collections_M3IndexMaskWindow_scanNative(
         JNIEnv *env, jclass owner, jintArray rows, jbyteArray states, jint first,
         jint required, jint excluded, jintArray output, jint output_offset, jint limit) {
     (void) owner;

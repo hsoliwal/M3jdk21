@@ -5,7 +5,7 @@ on:
     paths:
       - 'm3/collections/interop/**'
       - 'm3/collections/src/main/java/**'
-      - 'm3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
+      - 'm3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
       - '.github/workflows/m3-collections-interop-receiving.yml'
   push:
     branches: [aix/m3-collections-interop-receiving-20261015]
@@ -57,6 +57,15 @@ jobs:
           sparse-checkout: |
             m3/collections/interop
           persist-credentials: false
+      # Actual prior source state: 84 files, five V3-admitted changes, no added tests.
+      - uses: actions/checkout@v4
+        with:
+          repository: hsoliwal/M3jdk21
+          ref: b123804aff3ac6930e420cfb82b5ce07040049fe
+          path: approved-interop-20261029
+          sparse-checkout: |
+            m3/collections/interop
+          persist-credentials: false
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -67,14 +76,16 @@ jobs:
           set -euxo pipefail
           mkdir -p proof/core-classes/META-INF proof/array-classes/META-INF
           { git rev-parse HEAD; uname -m; java -version 2>&1; mvn -version; } > proof/identity.txt
-          ENGINE=m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java
-          test "$(git hash-object "$ENGINE")" = 05e02169c7429183107a99c60e1aad05b4d73b5f
+          ENGINE=m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java
+          test "$(git hash-object "$ENGINE")" = aaf5c4615fb44e49dde1ddcf15eb11a578c31885
           python3 -m unittest discover -s before-interop-20261026/m3/collections/interop/qualification/current-census-20261017 -p 'test_*.py' -v 2>&1 | tee proof/census-tests.log
           python3 -m unittest discover -s before-interop-20261026/m3/collections/interop/qualification/current-census-superset-20261022 -p 'test_*.py' -v 2>&1 | tee proof/superset-census-tests.log
           python3 -m unittest discover -s before-interop-20261026/m3/collections/interop/qualification/current-census-superset-20261024 -p 'test_*.py' -v 2>&1 | tee proof/superset-census-v2-tests.log
           python3 -m unittest discover -s before-interop-20261026/m3/collections/interop/qualification/compiler-three-test-successor-20261022 -p 'test_*.py' -v 2>&1 | tee proof/compiler-source-revision-tests.log
           python3 -m unittest discover -s m3/collections/interop/qualification/current-source-successors-20261026 -p 'test_*.py' -v 2>&1 | tee proof/source-successor-v3-tests.log
-          python3 m3/collections/interop/qualification/current-source-successors-20261026/verify_source_v3.py --product . --before-product before-interop-20261026 --historical-product historical-product | tee proof/admitted-postimages.tsv
+          python3 -m unittest discover -s m3/collections/interop/qualification/current-source-successors-v4-20261031 -p 'test_*.py' -v 2>&1 | tee proof/source-successor-v4-tests.log
+          python3 m3/collections/interop/qualification/current-source-successors-v4-20261031/verify_source_v4.py --product . --approved-product approved-interop-20261029 --before-product before-interop-20261026 --historical-product historical-product | tee proof/admitted-postimages.tsv
+          mvn -B -ntp -f m3/collections/interop/qualification/current-source-successors-v4-20261031/pom.xml verify 2>&1 | tee proof/source-v4-maven-receipt.log
       - name: Run all six actual recipe proofs before delivery
         shell: bash
         run: |
@@ -98,7 +109,7 @@ jobs:
           mvn -B -ntp -f m3/collections/interop/recipe/pom.xml \
             '-Dtest=M3CollectionsLibraryInteropTest#exactOutputsFixedPointAndOptionalMaterialization' \
             test 2>&1 | tee proof/recipe-delivery.log
-          python3 m3/collections/interop/qualification/current-source-successors-20261026/verify_source_v3.py --product . --before-product before-interop-20261026 --historical-product historical-product > proof/current-successor-ledger.tsv
+          python3 m3/collections/interop/qualification/current-source-successors-v4-20261031/verify_source_v4.py --product . --approved-product approved-interop-20261029 --before-product before-interop-20261026 --historical-product historical-product > proof/current-successor-ledger.tsv
           cat m3/collections/interop/recipe-receipt.tsv | tee proof/recipe-receipt.tsv
           git diff --exit-code -- m3/collections/interop/src m3/collections/interop/recipe-receipt.tsv
       - name: Compile unchanged M3 core and verify the dependency boundary
@@ -116,7 +127,7 @@ jobs:
           cp m3/collections/{LICENSE,NOTICE,provenance.json,name-mapping.json} proof/core-classes/META-INF/
           jar --create --file proof/m3-collections.jar -C proof/core-classes .
           jdeps --print-module-deps --module-path proof/m3-arrays.jar proof/m3-collections.jar | tee proof/core-module-deps.txt
-          test "$(cat proof/core-module-deps.txt)" = com.m3.arrays,java.base
+          test "$(cat proof/core-module-deps.txt)" = jdk.m3.arrays,java.base
           ARRAYS="$GITHUB_WORKSPACE/proof/m3-arrays.jar"
           (cd "$RUNNER_TEMP" && mvn -B -ntp org.apache.maven.plugins:maven-install-plugin:3.1.3:install-file -Dfile="$ARRAYS" -DpomFile="$GITHUB_WORKSPACE/m3/arrays/pom.xml")
           JAR="$GITHUB_WORKSPACE/proof/m3-collections.jar"
@@ -144,7 +155,7 @@ jobs:
           mkdir -p proof/native-handshake
           cat > proof/native-handshake/M3ArrayNativeRequiredHandshake.java <<'JAVA'
           // SPDX-License-Identifier: Apache-2.0
-          import com.m3.arrays.M3ArrayNative;
+          import jdk.m3.arrays.M3ArrayNative;
           public final class M3ArrayNativeRequiredHandshake {
               public static void main(String[] args) {
                   if (args.length != 1) throw new AssertionError("native path argument");
@@ -184,17 +195,32 @@ jobs:
           python3 -m unittest discover \
             -s m3/collections/interop/qualification/runtime-junit-census-20261022 \
             -p 'test_verify_surefire.py' -v 2>&1 | tee proof/junit-negative-controls.log
+          # The original V4 JUnit method census executes on the real approved
+          # predecessor. V5 adds exactly six new test identities and checks XML.
           python3 -m unittest discover \
-            -s m3/collections/interop/qualification/current-junit-census-20261026 \
-            -p 'test_current_surefire.py' -v 2>&1 | tee proof/junit-v4-negative-controls.log
-          python3 m3/collections/interop/qualification/current-junit-census-20261026/verify_current_surefire.py \
+            -s m3/collections/interop/qualification/current-junit-census-v5-20261031 \
+            -p 'test_*.py' -v 2>&1 | tee proof/junit-v5-negative-controls.log
+          python3 m3/collections/interop/qualification/current-junit-census-v5-20261031/verify_surefire_v5.py \
             --product . \
+            --approved-product approved-interop-20261029 \
+            --before-product before-interop-20261026 \
+            --historical-product historical-product \
             --reports m3/collections/interop/target/surefire-reports \
             | tee proof/junit-complete-source-method-census.log
+          # Replay ALL original 167 JUnit identities and their historical
+          # negative controls on the real approved checkout, not the 50-file current tree.
+          # The projection copies exact executed XML, excluding ONLY the two new suites.
+          python3 m3/collections/interop/qualification/current-junit-census-v5-20261031/replay_original_v4.py \
+            --product . \
+            --approved-product approved-interop-20261029 \
+            --before-product before-interop-20261026 \
+            --historical-product historical-product \
+            --reports m3/collections/interop/target/surefire-reports \
+            | tee proof/junit-actual-historical-v4-negative-controls.log
           javap -classpath m3/collections/interop/target/m3-collections-interop-0.1.0-SNAPSHOT.jar \
-            com.m3.collections.interop.M3LibraryCollections \
-            com.m3.collections.interop.M3LibraryCollectors \
-            com.m3.collections.interop.M3SpringMultiValueMap > proof/interop-public-api.txt
+            jdk.m3.collections.interop.M3LibraryCollections \
+            jdk.m3.collections.interop.M3LibraryCollectors \
+            jdk.m3.collections.interop.M3SpringMultiValueMap > proof/interop-public-api.txt
           git diff --exit-code -- m3/collections/src/main/java m3/tooling/migration-recipes/src/main/java m3/collections/interop/src
       - name: Preserve actual resolved runtime dependency closure and hashes
         shell: bash

@@ -4,7 +4,7 @@
  * Modified 2026 by Hitesh Soliwal and contributors: publish grown planes
  * only after every allocation succeeds.
  *
- * Proposed M3JDK21 internal implementation; not copied from donor source.
+ * Proposed M3JDK 21 internal implementation; not copied from donor source.
  */
 package jdk.internal.m3;
 

@@ -4,7 +4,7 @@ Input: `hsoliwal/M3jdk21` master `e28f41df0d18cc1e651eebcd71cc6cf951b0759b`.
 
 Owned production source: `src/java.base/share/classes/java/lang/MIndexString.java`.
 Owned regression source: `m3/runtime-integration/tests/MIndexStringInvariant.java`.
-Superseding-owner custody was refreshed against M3JDK master at `df532e779056dbec203dde20030657c3d144f5b5`: `M3String.java` now has Git blob `bcbe4d4da2903dc27ad65155aa5d632c0c57c759`; `M3StringInvariant.java` remains pinned at `a39f876f0d3065d0754f8381e57aa097b6051e35`. This metadata-only pin refresh does not alter either production owner or its tests; the foundation workflow must re-run the recipe refusal tests, compilation, and runtime proofs before acceptance.
+Superseding-owner custody is pinned to the exact merged source observation `9237d21cccc0d700555ccc4eab3b87edb2833af3` (M3JDK21 PR #1371, landed through PR #2070): `M3String.java` has Git blob `8ddd767e9198f5716ebde4aada80b91591125d9d`. The earlier merged-result blob `8a57ca4f085e4e8f1f1d9f2ec0fdb2fc5888597e` remains in `manifest.json` supersession history. `M3StringInvariant.java` remains pinned at `a39f876f0d3065d0754f8381e57aa097b6051e35`. This is a metadata-only custody correction; no production Java/JNI source or test body is changed. Full foundation compilation, recipe refusal tests, and runtime proofs remain required before acceptance.
 
 Owned gate: `.github/workflows/m3-foundation.yml`. The older runtime recipe remains
 source-sealed at its original postimage. CI reverses this overlay in its isolated

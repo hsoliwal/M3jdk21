@@ -32,10 +32,10 @@
       },
       {
         "path": "src/java.base/share/native/libjava/M3StateRelation.c",
-        "git_blob_sha1": "d6bdfeb01dd632b83b978b1bdb5ed2cbdeaebd9d",
-        "sha256": "faa999e2538087bd214c922cb1ad4b0dcaa208b04240acaed27771d47911cf1f",
+        "git_blob_sha1": "5d2a8cc83a7551f4d2a82dfa5781c7a79531d444",
+        "sha256": "03fa3e35008045561b57f11e4cff1ff3e04fc8b90220d1525d86f345b75fa332",
         "canonical_template_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-android-efficiency-20261020/src/java.base/share/native/libjava/M3StateRelation.c.txt",
-        "canonical_template_git_blob_sha1": "d6bdfeb01dd632b83b978b1bdb5ed2cbdeaebd9d",
+        "canonical_template_git_blob_sha1": "5d2a8cc83a7551f4d2a82dfa5781c7a79531d444",
         "license": "Apache-2.0",
         "migration_record_id": "synexia.m3jdk21.android-efficiency-20261020.state-relation-sparse",
         "migration_status": "implemented-unverified"
@@ -56,15 +56,15 @@
     "path": "m3/docs/name-mapping.json",
     "before_git_blob_sha1": "32d214357ba4f13c8e63be3737a989978b3613a2",
     "before_sha256": "7815ef0f4003f0b5a753a6439b8e7b658f4a09baf82c8b529deaef0cf92664b0",
-    "after_git_blob_sha1": "d8baac9900534e93c3337676c17f061449f42ee4",
-    "after_sha256": "4f9e82d22a7c14c1739b975ed6fb53fddc7610cd41782b078d143f9eb23454e9",
+    "after_git_blob_sha1": "be762328ca1b418c9f0ab5a7545df755e1159290",
+    "after_sha256": "7ab3e555a8be6988034a7e540982ec243f6180a7f8228d2d4fcbf1a1108ddc02",
     "after_bytes": 633358,
     "mappings": 77,
     "migration_records": 63,
     "all60_original_ids_and_statuses_preserved": true,
     "new_records_status": "implemented-unverified",
     "preservation_receipt": "evidence/metadata-preservation.json",
-    "preservation_receipt_sha256": "6208f70dbe26e00d209b7321d427324195cc288f4e46f78e835112de69b0c6b3"
+    "preservation_receipt_sha256": "326cbc2772af49cb702c6722a8744bb016adcc38fca642f157bd5188a548b7b5"
   },
   "sdk_materialization": {
     "path": "synexia-openrewrite-recipes/recipes/m3-android-efficiency-20261020/execution/SDK_MATERIALIZATION_STAGE_2.json",
@@ -103,7 +103,7 @@
     "declared_input_count": 66,
     "command": "evidence/migration-validator-command.json",
     "receipt": "evidence/migration-validator-receipt.json",
-    "receipt_sha256": "f673ccdcd130edf066c62c362acd88e75c5cbe1307e65c4d46f5b2cf1100bfc0",
+    "receipt_sha256": "e41525b2916598d172078c364160e3c879588498336ac0dff357d5a6e68ec23b",
     "schema_unchanged": true,
     "validator_unchanged": true,
     "jsonschema": "4.26.0",

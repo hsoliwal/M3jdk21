@@ -13,8 +13,8 @@
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
 /** Persistent array/mask collections and immutable index projections for Java 21. */
-module com.m3.pcollections {
+module jdk.m3.pcollections {
     requires transitive org.pcollections;
-    requires transitive com.m3.collections;
-    exports com.m3.pcollections;
+    requires transitive jdk.m3.collections;
+    exports jdk.m3.pcollections;
 }

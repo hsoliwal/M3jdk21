@@ -21,7 +21,7 @@ import tempfile
 
 HERE = Path(__file__).resolve().parent
 V1_DIR = HERE.parent / 'current-census-superset-20261022'
-V1_SHA256 = '1567b80c0d308436112559782091b8398258c5e2cf7609b55e8d5c4d94e9ef30'
+V1_SHA256 = 'ad66c38dc0b04cbb6a5d4d0c7a522993788d26feff5cbd80add6074b1c00f599'
 SHARD = 'added-04.tsv'
 REPIN = 'REPIN.tsv'
 PREDECESSORS = HERE / 'predecessors'

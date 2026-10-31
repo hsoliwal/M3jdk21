@@ -3,13 +3,13 @@
   "donors": {
     "fastdoubleparser-1.0.90": {
       "coordinate": "ch.randelshofer:fastdoubleparser:1.0.90-m3-source-1",
-      "file_count": 66,
+      "file_count": 68,
       "license": "MIT License",
       "module": null,
       "path": "m3/vendor/third_party/fastdoubleparser-1.0.90",
-      "provenance_sha256": "707f4185483253240ac894b197a93d37a7e6e737cd199123d7c2dc0d5130d140",
+      "provenance_sha256": "cfee2e16d3aae17efbc32492a9ca8db63172454f01342c664d296abe72872d76",
       "sources_jar_sha256": "9ef19b07959b456930efdfd4c5690caeb9ac39b07a813e84557ca12957478ce4",
-      "tree_sha256": "81bc46f6b02d70f2649779c769a5afc88bc6112cc9813a574a822155713c4a81"
+      "tree_sha256": "d95b2302ce35265fc1c3d44522769592437c3218d28f51ea286fd07b5d9b3afb"
     },
     "jackson-annotations-2.19.2": {
       "coordinate": "com.fasterxml.jackson.core:jackson-annotations:2.19.2-m3-source-1",
@@ -56,30 +56,30 @@
       "sha256": "24edd66788009d00eddcae9b2ba1bc61fd492b28aefb5f34c1439eff9e6b5acf"
     },
     {
-      "path": "m3/tooling/module-packs/kernel/src/main/java/com/m3/tools/modulepack/M3ModuleArtifact.java",
-      "sha256": "c6b9e87d245a4ac5e9d4cbc74a16a541d5cd04b7ecd3da8b5ad91498d6708a59"
+      "path": "m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleArtifact.java",
+      "sha256": "0da80eb22f2c356089d7da5c914b3bf939d9723a9aee7708e2de5d79cc117439"
     },
     {
-      "path": "m3/tooling/module-packs/kernel/src/main/java/com/m3/tools/modulepack/M3ModuleGraph.java",
-      "sha256": "dde14d28ad4fd93ff21efddd458cd475c96e5f7fc867d68023d0069fc340fbe4"
+      "path": "m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleGraph.java",
+      "sha256": "c1fa4ca74d190654fabb662db83a61ab9b0cdf617da5e0806ff96b5d99b015ac"
     },
     {
-      "path": "m3/tooling/module-packs/kernel/src/main/java/com/m3/tools/modulepack/M3ModuleInspector.java",
-      "sha256": "12c1e5cebc488f9d4669d668caf004854c436812122ec63bf1173d3ae3a57d3c"
+      "path": "m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleInspector.java",
+      "sha256": "6243fd822320cbbc8cf64855d06247f84f73e17a2e2b8655855033eadaee8b01"
     },
     {
-      "path": "m3/tooling/module-packs/kernel/src/main/java/com/m3/tools/modulepack/M3ModuleInventory.java",
-      "sha256": "d998787f47cf52effe3e8d7764984413fa5300e8c75a24a927fc5c529421ee36"
+      "path": "m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleInventory.java",
+      "sha256": "f9f7d948de83d875b2e96ade22f9c40b680d972a53b224cdfc509640d855fdb2"
     },
     {
       "path": "m3/tooling/module-packs/kernel/src/main/java/module-info.java",
-      "sha256": "d28ab95812ea2b2024d18e037b42eaabd06ee041a74b86ce760c238d3155399d"
+      "sha256": "f8c4096e7d38dec851e5aae6121dbd160aba89d99a7c2fe09eee57c6e9c084af"
     }
   ],
-  "predecessor_path": "qualification/pr1289-integration-20261029/SOURCE_LOCK_PREDECESSOR.json",
-  "predecessor_sha256": "5b23e7ee19b6e8999790cfadb787b3e70a5565dfe09ed7a2cb175636a8a1f0fc",
+  "predecessor_path": "qualification/fdp-delegate/SOURCE_LOCK_PREDECESSOR.json",
+  "predecessor_sha256": "4bb1a8b623b106985cca97969a79561c079ff0cf9a415fcf91e996f3ee4ab99a",
   "schema": 1,
-  "target_base_revision": "649a735e23a79a4df46e6c61bfcd2fadf156d90d",
+  "target_base_revision": "52fb81c483c74448a12eecb63aa9465e42cdb82c",
   "target_repository": "https://github.com/hsoliwal/M3jdk21",
   "tree_digest_algorithm": "SHA-256 over UTF-8 POSIX relative path, NUL, lowercase file SHA-256, LF, sorted by relative path; excludes target, dependency-reduced-pom.xml, __pycache__, .DS_Store"
 }

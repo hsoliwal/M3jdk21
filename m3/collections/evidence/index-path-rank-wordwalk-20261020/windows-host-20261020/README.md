@@ -2,7 +2,7 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # M3IndexPathRank: exact Java 21 baseline and candidate proof
 
-This receipt qualifies the exact source bytes at qualified product source commit `4fd2abe76a3a63f5c363f69b4a5f979540a95bdb`. The candidate `Window.toArray()` walks selected bitmap words and emits rows in source order. Its incumbent owner is Git blob `6bc439b69f739608141acf6ee3800e5b5b0163c3`; the candidate owner is `4a60fd1fab763c03dd14f1e4e5abe4ff33a712fa`.
+This receipt qualifies the exact source bytes at qualified product source commit `4fd2abe76a3a63f5c363f69b4a5f979540a95bdb`. The candidate `Window.toArray()` walks selected bitmap words and emits rows in source order. Its incumbent owner is Git blob `b1aaef46be48ef4f339adc252e8af226cce3538c`; the candidate owner is `4a60fd1fab763c03dd14f1e4e5abe4ff33a712fa`.
 
 Both owners compiled with the same two existing proof sources under Java 21, `--release 21 -Xlint:all -Werror -proc:none -implicit:none`, an empty source path, and an isolated classes-only classpath. No external dependencies were used. The executed source and tool hashes are recorded in [PLAN.json](PLAN.json) and the prelaunch [INVENTORY.json](INVENTORY.json). Their preparation status is retained unchanged; [RESULT.json](RESULT.json) records the subsequent execution.
 

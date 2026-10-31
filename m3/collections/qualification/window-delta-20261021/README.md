@@ -16,13 +16,13 @@ dataset `m3-window-delta-20261021`. See source-sealed
 
 ## Three reviewable Java targets
 - One modified original owner:
-  `m3/collections/src/main/java/com/m3/collections/M3WindowPlan.java`
-  original blob `de534edb6fcd76ca188b1c61a2d30b7be47c98da`
-  -> candidate `d0ce93a6e0afec40def2f84aab9a522e8fcc4e3d`.
+  `m3/collections/src/main/java/jdk/m3/collections/M3WindowPlan.java`
+  original blob `e83cb8477c803ebe2e6fe8b857af2524fe6a1328`
+  -> candidate `3af2f3ff5f3941e481eb5e09f3e0570262fda8ba`.
 - New original-owner source differential `M3WindowPlanChangeContract.java`;
-  candidate blob `ad2750877fb062d3d59a505254d3d8e8d4e95a38`.
+  candidate blob `fda92970c259c6f863d0b2444efdbf918c5a5313`.
 - New JUnit 5 discovery wrapper `M3WindowPlanChangeTest.java`;
-  blob `6953a9adf993c2f273ab5591321e908f433e43df`.
+  blob `2693e5f4f3a9fd7b6f890679b08faf8036a620bf`.
 
 Only three additive methods are introduced. The original `plan`, `commit`,
 `inserted`, `removed`, scroll geometry and public descriptors remain
@@ -61,8 +61,8 @@ recipe emission and owning acceptance, never a declaration that all
 ```sh
 mkdir -p /tmp/m3-window-change
 javac --release 21 -Xlint:all -Werror -d /tmp/m3-window-change \
-  m3/collections/src/main/java/com/m3/collections/M3WindowPlan.java \
-  m3/collections/src/test/java/com/m3/collections/M3WindowPlanChangeContract.java
+  m3/collections/src/main/java/jdk/m3/collections/M3WindowPlan.java \
+  m3/collections/src/test/java/jdk/m3/collections/M3WindowPlanChangeContract.java
 java -cp /tmp/m3-window-change com.m3.collections.M3WindowPlanChangeContract
 ```
 

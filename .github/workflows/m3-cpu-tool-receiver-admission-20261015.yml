@@ -25,10 +25,10 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/receiver-classes"
           javac --release 21 -Xlint:all -Werror -d "$RUNNER_TEMP/receiver-classes" \
-            m3/tooling/jmod-recipes/src/main/java/com/m3/rewrite/jmod/CpuToolReceiverAdmission.java \
-            m3/tooling/jmod-recipes/src/test/java/com/m3/rewrite/jmod/CpuToolReceiverAdmissionChecks.java
-          java -cp "$RUNNER_TEMP/receiver-classes" com.m3.rewrite.jmod.CpuToolReceiverAdmissionChecks
-          java -cp "$RUNNER_TEMP/receiver-classes" com.m3.rewrite.jmod.CpuToolReceiverAdmission \
+            m3/tooling/jmod-recipes/src/main/java/jdk/m3/rewrite/jmod/CpuToolReceiverAdmission.java \
+            m3/tooling/jmod-recipes/src/test/java/jdk/m3/rewrite/jmod/CpuToolReceiverAdmissionChecks.java
+          java -cp "$RUNNER_TEMP/receiver-classes" jdk.m3.rewrite.jmod.CpuToolReceiverAdmissionChecks
+          java -cp "$RUNNER_TEMP/receiver-classes" jdk.m3.rewrite.jmod.CpuToolReceiverAdmission \
             m3/tooling/jmod-recipes/CPU_TOOL_DONOR_CATALOGUE_PIN_20261015.tsv \
             m3/tooling/jmod-recipes/CPU_TOOL_RECEIVER_MAP_20261014.tsv \
             m3/tooling/jmod-recipes/CPU_TOOL_RECEIVER_DEFERRALS_20261015.tsv

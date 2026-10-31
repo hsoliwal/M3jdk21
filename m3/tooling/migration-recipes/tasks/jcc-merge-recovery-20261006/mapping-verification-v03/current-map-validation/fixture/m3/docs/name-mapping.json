@@ -3,7 +3,7 @@
   "policy": "additive; no blind renames or unverified compatibility claims; Synexia donor names do not define M3JDK target ABI; precompute is internal-only",
   "mappings": [
     {
-      "source": "com.synexia.indexstring.IndexStringTuple",
+      "source": "jdk.internal.m3.indexstring.IndexStringTuple",
       "source_commit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
       "target": "java.lang.M3StringTuple",
       "status": "adapted canonical balanced persistent composition owner",
@@ -11,14 +11,14 @@
       "target_rule": "M3String values retain owner+packed coordinate; tuple owners retain child coordinates only, maintain bounded persistent height, and canonicalize ordered terminal owner/range sequences independently of concat parenthesization; no text arrays"
     },
     {
-      "source": "com.synexia.indexstring.LocalM3StringPiece",
+      "source": "jdk.internal.m3.indexstring.LocalM3StringPiece",
       "source_commit": "9c36c18a7778e6096148a3bbee8f2af7575138b4",
-      "target": "com.m3.text.LocalM3StringPiece",
+      "target": "jdk.m3.text.LocalM3StringPiece",
       "status": "separate provisional byte-format prototype; NOT an API-compatible replacement",
       "canonical_owner_decision": "retain established Synexia owner; adapter/migration deferred"
     },
     {
-      "source": "com.synexia.indexstring.MIndexMappedStringBacking",
+      "source": "jdk.internal.m3.indexstring.MIndexMappedStringBacking",
       "source_commit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
       "target": "jdk.internal.mindex.M3MappedStringBacking",
       "status": "renamed target-side internal counterpart",
@@ -26,7 +26,7 @@
       "target_rule": "preserve mapped semantics while using M3 target vocabulary"
     },
     {
-      "source": "com.synexia.indexstring.MIndexNativeResolver / com.synexia.indexstring.nativebridge.MIndexNativeIntern",
+      "source": "jdk.internal.m3.indexstring.MIndexNativeResolver / jdk.internal.m3.indexstring.nativebridge.MIndexNativeIntern",
       "source_commit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
       "target": "java.lang.M3StringAtom + java.lang.M3StringPool",
       "status": "adapted scalar canonical-owner responsibility",
@@ -35,7 +35,7 @@
       "retention": "live M3String/M3StringTuple coordinates provide strong ownership; pool lookup retains WeakReference<M3StringAtom> only"
     },
     {
-      "source": "com.synexia.indexstring.MIndexString",
+      "source": "jdk.internal.m3.indexstring.MIndexString",
       "target": "java.lang.M3String",
       "status": "implemented-unverified runtime candidate",
       "source_role": "Synexia donor/reference implementation",
@@ -62,7 +62,7 @@
       ]
     },
     {
-      "source": "com.synexia.indexstring.MIndexStringBacking",
+      "source": "jdk.internal.m3.indexstring.MIndexStringBacking",
       "source_commit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
       "target": "jdk.internal.mindex.M3StringBacking",
       "status": "renamed target-side internal counterpart",
@@ -70,7 +70,7 @@
       "target_rule": "M3JDK target ABI uses M3 naming"
     },
     {
-      "source": "com.synexia.indexstring.MIndexStringCanonicalFacts / MIndexStringPrecomputation",
+      "source": "jdk.internal.m3.indexstring.MIndexStringCanonicalFacts / MIndexStringPrecomputation",
       "source_commit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
       "target": "java.lang.M3StringFacts + jdk.internal.mindex.M3TQ",
       "status": "split internal precompute counterpart; bounded scalar facts implemented, richer donor precompute remains synchronization queue",
@@ -78,7 +78,7 @@
       "target_rule": "precompute stays implementation-internal, keys exact canonical owner/range/composition identity, owns no canonical spelling"
     },
     {
-      "source": "com.synexia.indexstring.nativebridge.MIndexUtf16Shadow",
+      "source": "jdk.internal.m3.indexstring.nativebridge.MIndexUtf16Shadow",
       "source_commit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
       "target": "java.lang.M3String.nativeCharShadow + src/java.base/share/native/libjava/String.c",
       "status": "adapted JNI shadow boundary",
@@ -87,7 +87,7 @@
     },
     {
       "source": "LocalMIndexStringPiece",
-      "target": "com.m3.text.LocalM3StringPiece",
+      "target": "jdk.m3.text.LocalM3StringPiece",
       "status": "provisional semantic direction only",
       "source_commit": null,
       "compatibility_facade": "deferred until original source contract is supplied"
@@ -105,7 +105,7 @@
       "source_commit": null
     },
     {
-      "source": "com.synexia.indexstring.IndexResolver / IndexStringTuple",
+      "source": "jdk.internal.m3.indexstring.IndexResolver / IndexStringTuple",
       "target": "java.lang.M3StringOwner / java.lang.M3StringAtom / java.lang.M3StringTuple",
       "status": "M3JDK bootstrap-safe adaptation",
       "mapping_rule": "scalar and tuple ownership are target-internal; M3String remains owner+packed coordinate",
@@ -115,7 +115,7 @@
       ]
     },
     {
-      "source": "com.synexia.indexstring.MIndexStringCanonicalFacts and composable text facts",
+      "source": "jdk.internal.m3.indexstring.MIndexStringCanonicalFacts and composable text facts",
       "target": "java.lang.M3StringFacts plus owner-internal bounded range facts",
       "status": "internal-only target adaptation",
       "mapping_rule": "derived fixed-size facts attach to canonical M3 owner/range identity; no public String API and no spelling payload",
@@ -125,7 +125,7 @@
       ]
     },
     {
-      "source": "com.synexia.indexstring.MIndexStringSearchPlan and canonical operation-search facts",
+      "source": "jdk.internal.m3.indexstring.MIndexStringSearchPlan and canonical operation-search facts",
       "target": "java.lang.M3StringSearchPrecompute",
       "status": "internal-only bounded operation-precompute adaptation",
       "mapping_rule": "weakly key exact M3 owner+coordinate; retain primitive pattern metadata only; no String/char[]/byte[]/M3String payload; eviction changes performance only",
@@ -137,7 +137,7 @@
       ]
     },
     {
-      "source": "com.synexia.indexstring.MIndexStringPrecomputation / ByteFacts",
+      "source": "jdk.internal.m3.indexstring.MIndexStringPrecomputation / ByteFacts",
       "target": "java.lang.M3StringFacts + java.lang.M3String.encode / encodeNoRepl",
       "status": "internal byte-projection adaptation",
       "mapping_rule": "canonical facts drive caller-owned byte[] projection directly from owner+coordinate; byte[] is never canonical payload; checked/no-replacement exception contracts remain JDK21-authoritative",
@@ -147,7 +147,7 @@
       ]
     },
     {
-      "source": "com.synexia.indexstring.nativebridge.MIndexUtf16Shadow",
+      "source": "jdk.internal.m3.indexstring.nativebridge.MIndexUtf16Shadow",
       "target": "JNI String UTF-16/char shadow paths and java.lang.M3String.nativeCharShadow",
       "status": "native compatibility adaptation",
       "mapping_rule": "shadow only; never canonical M3String payload",
@@ -156,7 +156,7 @@
       ]
     },
     {
-      "source": "com.synexia.indexstring.nativebridge.MIndexUtf8Shadow",
+      "source": "jdk.internal.m3.indexstring.nativebridge.MIndexUtf8Shadow",
       "target": "JNI String UTF-8/byte shadow paths and java.lang.M3String.nativeByteShadow",
       "status": "native compatibility adaptation",
       "mapping_rule": "shadow only; never canonical M3String payload",
@@ -165,7 +165,7 @@
       ]
     },
     {
-      "source": "com.synexia.indexstring.MIndexPrecomputedStrings",
+      "source": "jdk.internal.m3.indexstring.MIndexPrecomputedStrings",
       "target": "java.lang.M3StringPool + jdk.internal.mindex.M3MappedStringBacking + java.lang.M3StringOwner",
       "status": "responsibility-split internal target",
       "source_role": "Synexia donor facade attaching frozen precomputed rows/ranges to MIndexString",
@@ -175,7 +175,7 @@
       "source_tracking_ref": "refs/heads/develop"
     },
     {
-      "source": "com.synexia.indexstring.MIndexMappedPrecomputation",
+      "source": "jdk.internal.m3.indexstring.MIndexMappedPrecomputation",
       "target": "jdk.internal.mindex.M3MappedStringBacking + java.lang.M3StringPool + internal fact owners",
       "status": "partial internal storage counterpart",
       "source_role": "Synexia donor mapped payload/fact publication owner",
@@ -185,7 +185,7 @@
       "source_tracking_ref": "refs/heads/develop"
     },
     {
-      "source": "com.synexia.indexstring.MIndexLiteralSearchSummary",
+      "source": "jdk.internal.m3.indexstring.MIndexLiteralSearchSummary",
       "target": "java.lang.M3StringFacts + java.lang.M3StringSearchPrecompute operations",
       "status": "no retained target summary object",
       "source_role": "Synexia donor caller-retained exact literal summary",
@@ -195,7 +195,7 @@
       "source_tracking_ref": "refs/heads/develop"
     },
     {
-      "source": "com.synexia.indexstring.MIndexMaskLiteralSearch",
+      "source": "jdk.internal.m3.indexstring.MIndexMaskLiteralSearch",
       "target": "java.lang.M3StringPositionPrecompute + exact M3String search",
       "status": "absorbed internal execution responsibility",
       "source_role": "Synexia exact indexOf over immutable position masks",
@@ -205,7 +205,7 @@
       "source_tracking_ref": "refs/heads/develop"
     },
     {
-      "source": "com.synexia.indexstring.MIndexPrefixFrontier",
+      "source": "jdk.internal.m3.indexstring.MIndexPrefixFrontier",
       "target": "no java.lang.String counterpart",
       "status": "donor-only fuzzy search state",
       "source_role": "Synexia query-local bounded edit-distance frontier",
@@ -215,7 +215,7 @@
       "source_tracking_ref": "refs/heads/develop"
     },
     {
-      "source": "com.synexia.indexstring.MIndexExactWeightPrecomputation",
+      "source": "jdk.internal.m3.indexstring.MIndexExactWeightPrecomputation",
       "target": "no java.lang.String counterpart",
       "status": "donor-only vocabulary/index sidecar",
       "source_role": "Synexia fixed-width exact-weight matrix for batch vocabulary operations",
@@ -225,7 +225,7 @@
       "source_tracking_ref": "refs/heads/develop"
     },
     {
-      "source": "com.synexia.indexstring.MIndexJoinedNativeSearch",
+      "source": "jdk.internal.m3.indexstring.MIndexJoinedNativeSearch",
       "target": "optional jdk.internal accelerator only",
       "status": "optional internal acceleration donor",
       "source_role": "Synexia prepared KMP/JNI executor over segmented bytes",
@@ -235,7 +235,7 @@
       "source_tracking_ref": "refs/heads/develop"
     },
     {
-      "source": "com.synexia.indexstring.IndexUtf16SearchImage",
+      "source": "jdk.internal.m3.indexstring.IndexUtf16SearchImage",
       "target": "no java.lang.String counterpart",
       "status": "donor-only dictionary/batch search image",
       "source_role": "Synexia frozen off-heap UTF-16 corpus/offset/length execution image",
@@ -246,8 +246,8 @@
     }
   ],
   "imported_donor_sources": [],
-  "reviewed_synexia_commit": "9c36c18a7778e6096148a3bbee8f2af7575138b4",
-  "reviewed_contracts": "synexia-reconciliation.md",
+  "reviewed_m3_commit": "9c36c18a7778e6096148a3bbee8f2af7575138b4",
+  "reviewed_contracts": "m3-reconciliation.md",
   "migration": {
     "version": 1,
     "source": {
@@ -389,9 +389,9 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "73978088621dc70f5021befafa443f7e622b517e",
-            "module": "synexia-indexstring",
-            "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexPrefixZ.java",
-            "symbol": "com.synexia.indexstring.MIndexPrefixZ",
+            "module": "m3-indexstring",
+            "path": "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexPrefixZ.java",
+            "symbol": "jdk.internal.m3.indexstring.MIndexPrefixZ",
             "signatures": [
               "MIndexPrefixZ analyze(MIndexString)",
               "MIndexPrefixZ analyze(MIndexString,IProgressMonitor)",
@@ -413,8 +413,8 @@
             "repo": "hsoliwal/M3jdk21",
             "commit": "3a8e21dcea32b97e869f3bdbb5817e1f9927ca4f",
             "module": "m3",
-            "path": "m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java",
-            "symbol": "com.m3.algorithm.M3PrefixZ",
+            "path": "m3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java",
+            "symbol": "jdk.m3.algorithm.M3PrefixZ",
             "signatures": [
               "M3PrefixZ analyze(M3StringPiece)",
               "M3PrefixZ analyze(M3StringPiece,long,BooleanSupplier)",
@@ -425,14 +425,14 @@
               "int longestProperBorderLength()",
               "long metadataPayloadBytes()"
             ],
-            "sha256": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a",
-            "git_blob_sha1": "65f259e23d818b9b35052feff37198f5ddf567b4",
+            "sha256": "5f936a3c6e69ca487eff6a0665ada01546750d9d87ce85ee50a337a4236233d0",
+            "git_blob_sha1": "317108234d7692410517731b325f7d28de99354e",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/m3/migration-pass1-prefix-evidence-20261002"
           }
         ],
-        "owner": "com.m3.algorithm.M3PrefixZ facts; com.m3.text.M3StringPiece remains text owner",
+        "owner": "jdk.m3.algorithm.M3PrefixZ facts; jdk.m3.text.M3StringPiece remains text owner",
         "identity": {
           "namespace": "No identity is minted; existing immutable input owner used only during analysis.",
           "generation": "No input retained by the result; only a private int[] and primitive scalar facts."
@@ -533,11 +533,11 @@
             "repo": "hsoliwal/M3jdk21",
             "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f",
             "module": "m3",
-            "path": "m3/core/src/com/m3/text/M3StringPiece.java",
-            "symbol": "com.m3.text.M3StringPiece",
+            "path": "m3/core/src/jdk/m3/text/M3StringPiece.java",
+            "symbol": "jdk.m3.text.M3StringPiece",
             "signatures": [],
-            "sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479",
-            "git_blob_sha1": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
+            "sha256": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755",
+            "git_blob_sha1": "62506fb9b3cff0e6f24e856648528db58c45b92b",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/master"
@@ -546,11 +546,11 @@
             "repo": "hsoliwal/M3jdk21",
             "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f",
             "module": "m3",
-            "path": "m3/core/src/com/m3/text/JoinedM3StringPiece.java",
-            "symbol": "com.m3.text.JoinedM3StringPiece",
+            "path": "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
+            "symbol": "jdk.m3.text.JoinedM3StringPiece",
             "signatures": [],
-            "sha256": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
-            "git_blob_sha1": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597",
+            "sha256": "1655c02a61577f8aebed59b94c92701be835c4c7ebaf80efa3c71271a4bd75d7",
+            "git_blob_sha1": "5022e9811ce9391671c794446c7772569cfd369f",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/master"
@@ -559,11 +559,11 @@
             "repo": "hsoliwal/M3jdk21",
             "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f",
             "module": "m3",
-            "path": "m3/core/src/com/m3/text/LocalM3Arena.java",
-            "symbol": "com.m3.text.LocalM3Arena",
+            "path": "m3/core/src/jdk/m3/text/LocalM3Arena.java",
+            "symbol": "jdk.m3.text.LocalM3Arena",
             "signatures": [],
-            "sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d",
-            "git_blob_sha1": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
+            "sha256": "e9573e7f04a875eb7bda7d3554a57653ebd655f66ac67be724b366092e76afc4",
+            "git_blob_sha1": "025ce8014cba8a36a9e496bb0a56faef57cf0968",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/master"
@@ -572,11 +572,11 @@
             "repo": "hsoliwal/M3jdk21",
             "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f",
             "module": "m3",
-            "path": "m3/core/src/com/m3/text/LocalM3StringPiece.java",
-            "symbol": "com.m3.text.LocalM3StringPiece",
+            "path": "m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
+            "symbol": "jdk.m3.text.LocalM3StringPiece",
             "signatures": [],
-            "sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51",
-            "git_blob_sha1": "6b745c9472144ad6de01de4d06a533974e558fb1",
+            "sha256": "77fd1cbeae4dc20a4c23497102cb7c44ec14adbdd6bbf328326957515a7858ad",
+            "git_blob_sha1": "387ae5e0c656177f1df663fd5029d4b31ba2fa00",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/master"
@@ -585,18 +585,18 @@
             "repo": "hsoliwal/M3jdk21",
             "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f",
             "module": "m3",
-            "path": "m3/core/src/com/m3/text/StorageIdentity.java",
-            "symbol": "com.m3.text.StorageIdentity",
+            "path": "m3/core/src/jdk/m3/text/StorageIdentity.java",
+            "symbol": "jdk.m3.text.StorageIdentity",
             "signatures": [],
-            "sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417",
-            "git_blob_sha1": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a",
+            "sha256": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354",
+            "git_blob_sha1": "8cd2ae86bee8f04f0d69709eed12897ff5c6a71c",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/master"
           }
         ],
         "targets": [],
-        "owner": "Existing com.m3.text P0 classes",
+        "owner": "Existing jdk.m3.text P0 classes",
         "identity": {
           "namespace": "Owner-local; no ID translation.",
           "generation": "Retain owner generation; destination audit pending."
@@ -655,7 +655,7 @@
         "observation": "Bodies inspected. LocalM3Arena copies and is NOT an interner; flat retained ranges do not close canonical payload identity/lifetime gates."
       },
       {
-        "id": "synexia.frozen-chars",
+        "id": "m3.frozen-chars",
         "kind": "pending",
         "status": "pending",
         "reason": "Body inspected: exact UTF-16BE mapped/heap units, mutable admission copies, arbitrary ranges; FrozenBytes dependency and port pending.",
@@ -663,19 +663,19 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "75fb1abaecb56969bea2914520bbe819f130632b",
-            "module": "synexia-indexstring",
-            "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenChars.java",
-            "symbol": "com.synexia.indexstring.FrozenChars",
+            "module": "m3-indexstring",
+            "path": "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/FrozenChars.java",
+            "symbol": "jdk.internal.m3.indexstring.FrozenChars",
             "signatures": [],
             "sha256": null,
-            "git_blob_sha1": "a8f016a1764aea6e970bc60e38f345804e82a84e",
+            "git_blob_sha1": "e7cecf3e32eca949dcf6616455caab6c62fd909d",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
           }
         ],
         "targets": [],
-        "owner": "com.synexia.indexstring.FrozenChars",
+        "owner": "jdk.internal.m3.indexstring.FrozenChars",
         "identity": {
           "namespace": "Owner-local; no ID translation.",
           "generation": "Retain owner generation; destination audit pending."
@@ -734,7 +734,7 @@
         "observation": "Body inspected: exact UTF-16BE mapped/heap units, mutable admission copies, arbitrary ranges; FrozenBytes dependency and port pending."
       },
       {
-        "id": "synexia.inventory-producer",
+        "id": "m3.inventory-producer",
         "kind": "pending",
         "status": "pending",
         "reason": "Existing TSV producer reused as format authority; full source scan not executed, and lexical findings do not prove semantic ownership.",
@@ -743,8 +743,8 @@
             "repo": "hsoliwal/com.synexia",
             "commit": "75fb1abaecb56969bea2914520bbe819f130632b",
             "module": "m3-java-inventory",
-            "path": "m3-java-inventory/src/main/java/com/synexia/m3/inventory/InventoryWriter.java",
-            "symbol": "com.synexia.m3.inventory.InventoryWriter",
+            "path": "m3-java-inventory/src/main/java/jdk/internal/m3/inventory/InventoryWriter.java",
+            "symbol": "jdk.internal.m3.inventory.InventoryWriter",
             "signatures": [],
             "sha256": null,
             "git_blob_sha1": "656f8749bca0a1330ef65aef28fd5c0e4d15c218",
@@ -754,7 +754,7 @@
           }
         ],
         "targets": [],
-        "owner": "com.synexia.m3.inventory.InventoryWriter",
+        "owner": "jdk.internal.m3.inventory.InventoryWriter",
         "identity": {
           "namespace": "Owner-local; no ID translation.",
           "generation": "Retain owner generation; destination audit pending."
@@ -813,7 +813,7 @@
         "observation": "Existing TSV producer reused as format authority; full source scan not executed, and lexical findings do not prove semantic ownership."
       },
       {
-        "id": "synexia.inventory-cli",
+        "id": "m3.inventory-cli",
         "kind": "pending",
         "status": "pending",
         "reason": "Existing scanner entry point inspected. Do not create a competing inventory scanner.",
@@ -822,8 +822,8 @@
             "repo": "hsoliwal/com.synexia",
             "commit": "75fb1abaecb56969bea2914520bbe819f130632b",
             "module": "m3-java-inventory",
-            "path": "m3-java-inventory/src/main/java/com/synexia/m3/inventory/M3InventoryMain.java",
-            "symbol": "com.synexia.m3.inventory.M3InventoryMain",
+            "path": "m3-java-inventory/src/main/java/jdk/internal/m3/inventory/M3InventoryMain.java",
+            "symbol": "jdk.internal.m3.inventory.M3InventoryMain",
             "signatures": [],
             "sha256": null,
             "git_blob_sha1": "2168788ef1605bdf848e44d3141217bedb7c2191",
@@ -833,7 +833,7 @@
           }
         ],
         "targets": [],
-        "owner": "com.synexia.m3.inventory.M3InventoryMain",
+        "owner": "jdk.internal.m3.inventory.M3InventoryMain",
         "identity": {
           "namespace": "Owner-local; no ID translation.",
           "generation": "Retain owner generation; destination audit pending."
@@ -900,8 +900,8 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "75fb1abaecb56969bea2914520bbe819f130632b",
-            "module": "synexia-mindex-indexstring-bridge",
-            "path": "synexia-mindex-indexstring-bridge/src/main/java/com/synexia/mindex/indexstring/MIndexCanonicalBridge.java",
+            "module": "m3-mindex-indexstring-bridge",
+            "path": "m3-mindex-indexstring-bridge/src/main/java/jdk/internal/m3/mindex/indexstring/MIndexCanonicalBridge.java",
             "symbol": null,
             "signatures": [],
             "sha256": null,
@@ -979,8 +979,8 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "75fb1abaecb56969bea2914520bbe819f130632b",
-            "module": "synexia-mindex-indexstring-bridge",
-            "path": "synexia-mindex-indexstring-bridge/src/main/java/com/synexia/mindex/indexstring/MIndexDagDeferredSwap.java",
+            "module": "m3-mindex-indexstring-bridge",
+            "path": "m3-mindex-indexstring-bridge/src/main/java/jdk/internal/m3/mindex/indexstring/MIndexDagDeferredSwap.java",
             "symbol": null,
             "signatures": [],
             "sha256": null,
@@ -1058,8 +1058,8 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "75fb1abaecb56969bea2914520bbe819f130632b",
-            "module": "synexia-mindex-indexstring-bridge",
-            "path": "synexia-mindex-indexstring-bridge/src/main/java/com/synexia/mindex/indexstring/MIndexDagPage.java",
+            "module": "m3-mindex-indexstring-bridge",
+            "path": "m3-mindex-indexstring-bridge/src/main/java/jdk/internal/m3/mindex/indexstring/MIndexDagPage.java",
             "symbol": null,
             "signatures": [],
             "sha256": null,
@@ -1137,8 +1137,8 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "75fb1abaecb56969bea2914520bbe819f130632b",
-            "module": "synexia-mindex-indexstring-bridge",
-            "path": "synexia-mindex-indexstring-bridge/src/main/java/com/synexia/mindex/indexstring/MIndexDagPageCodec.java",
+            "module": "m3-mindex-indexstring-bridge",
+            "path": "m3-mindex-indexstring-bridge/src/main/java/jdk/internal/m3/mindex/indexstring/MIndexDagPageCodec.java",
             "symbol": null,
             "signatures": [],
             "sha256": null,
@@ -1216,8 +1216,8 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "75fb1abaecb56969bea2914520bbe819f130632b",
-            "module": "synexia-mindex-indexstring-bridge",
-            "path": "synexia-mindex-indexstring-bridge/src/main/java/com/synexia/mindex/indexstring/MIndexKnowledgeArgumentCompiler.java",
+            "module": "m3-mindex-indexstring-bridge",
+            "path": "m3-mindex-indexstring-bridge/src/main/java/jdk/internal/m3/mindex/indexstring/MIndexKnowledgeArgumentCompiler.java",
             "symbol": null,
             "signatures": [],
             "sha256": null,
@@ -1295,8 +1295,8 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "75fb1abaecb56969bea2914520bbe819f130632b",
-            "module": "synexia-mindex-indexstring-bridge",
-            "path": "synexia-mindex-indexstring-bridge/src/main/java/com/synexia/mindex/indexstring/MIndexKnowledgeArguments.java",
+            "module": "m3-mindex-indexstring-bridge",
+            "path": "m3-mindex-indexstring-bridge/src/main/java/jdk/internal/m3/mindex/indexstring/MIndexKnowledgeArguments.java",
             "symbol": null,
             "signatures": [],
             "sha256": null,
@@ -1374,8 +1374,8 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "75fb1abaecb56969bea2914520bbe819f130632b",
-            "module": "synexia-mindex-indexstring-bridge",
-            "path": "synexia-mindex-indexstring-bridge/src/main/java/com/synexia/mindex/indexstring/MIndexLexiconCoordinateCompilerCli.java",
+            "module": "m3-mindex-indexstring-bridge",
+            "path": "m3-mindex-indexstring-bridge/src/main/java/jdk/internal/m3/mindex/indexstring/MIndexLexiconCoordinateCompilerCli.java",
             "symbol": null,
             "signatures": [],
             "sha256": null,
@@ -1453,8 +1453,8 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "75fb1abaecb56969bea2914520bbe819f130632b",
-            "module": "synexia-mindex-indexstring-bridge",
-            "path": "synexia-mindex-indexstring-bridge/src/main/java/com/synexia/mindex/indexstring/MIndexLexiconCoordinateManifest.java",
+            "module": "m3-mindex-indexstring-bridge",
+            "path": "m3-mindex-indexstring-bridge/src/main/java/jdk/internal/m3/mindex/indexstring/MIndexLexiconCoordinateManifest.java",
             "symbol": null,
             "signatures": [],
             "sha256": null,
@@ -1532,8 +1532,8 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "75fb1abaecb56969bea2914520bbe819f130632b",
-            "module": "synexia-mindex-indexstring-bridge",
-            "path": "synexia-mindex-indexstring-bridge/src/main/java/com/synexia/mindex/indexstring/MIndexLexiconCoordinatePublisher.java",
+            "module": "m3-mindex-indexstring-bridge",
+            "path": "m3-mindex-indexstring-bridge/src/main/java/jdk/internal/m3/mindex/indexstring/MIndexLexiconCoordinatePublisher.java",
             "symbol": null,
             "signatures": [],
             "sha256": null,
@@ -1611,8 +1611,8 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "75fb1abaecb56969bea2914520bbe819f130632b",
-            "module": "synexia-mindex-indexstring-bridge",
-            "path": "synexia-mindex-indexstring-bridge/src/main/java/com/synexia/mindex/indexstring/MIndexLexiconCoordinateSpace.java",
+            "module": "m3-mindex-indexstring-bridge",
+            "path": "m3-mindex-indexstring-bridge/src/main/java/jdk/internal/m3/mindex/indexstring/MIndexLexiconCoordinateSpace.java",
             "symbol": null,
             "signatures": [],
             "sha256": null,
@@ -1690,8 +1690,8 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "75fb1abaecb56969bea2914520bbe819f130632b",
-            "module": "synexia-mindex-indexstring-bridge",
-            "path": "synexia-mindex-indexstring-bridge/src/main/java/com/synexia/mindex/indexstring/MIndexRuntimeStructuralAdapterProvider.java",
+            "module": "m3-mindex-indexstring-bridge",
+            "path": "m3-mindex-indexstring-bridge/src/main/java/jdk/internal/m3/mindex/indexstring/MIndexRuntimeStructuralAdapterProvider.java",
             "symbol": null,
             "signatures": [],
             "sha256": null,
@@ -1769,8 +1769,8 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "75fb1abaecb56969bea2914520bbe819f130632b",
-            "module": "synexia-mindex-indexstring-bridge",
-            "path": "synexia-mindex-indexstring-bridge/src/main/java/com/synexia/mindex/indexstring/MIndexStringConversionBridge.java",
+            "module": "m3-mindex-indexstring-bridge",
+            "path": "m3-mindex-indexstring-bridge/src/main/java/jdk/internal/m3/mindex/indexstring/MIndexStringConversionBridge.java",
             "symbol": null,
             "signatures": [],
             "sha256": null,
@@ -2360,7 +2360,7 @@
         "observation": "Discovery is not proof of implementation or conformance."
       },
       {
-        "id": "synexia.counterpart.MIndexVersionTable",
+        "id": "m3.counterpart.MIndexVersionTable",
         "kind": "adapter",
         "status": "implemented-unverified",
         "reason": "Inlined dormant JDK-owned kernel; local recipe/module/runtime proof passed; complete JDK integration unverified.",
@@ -2368,15 +2368,15 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
-            "module": "synexia-openrewrite-recipes",
-            "path": "synexia-openrewrite-recipes/crates/mindex-vm-runtime/src/main/resources/com/synexia/rewrite/hash-pinned-java/mindex-vm-runtime/MIndexVersionTable.java.txt",
-            "symbol": "com.synexia.mindex.vm.MIndexVersionTable",
+            "module": "m3-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes/crates/mindex-vm-runtime/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/mindex-vm-runtime/MIndexVersionTable.java.txt",
+            "symbol": "jdk.internal.m3.mindex.vm.MIndexVersionTable",
             "signatures": [
               "static <T> MIndexVersionTable<T> prepare(List<MIndexString>, Scheme<T>, int, MIndexProgressMonitor)",
               "int[] between(MIndexString, boolean, MIndexString, boolean)"
             ],
-            "sha256": "a6cf406b99ce4064e23de1d9eddeb583b6b0f31f6ae74a06c8f98f8f8b330542",
-            "git_blob_sha1": "1675e6d7e35e3371bce2ba9b53716a00b6fd67da",
+            "sha256": "6f2ba0e4dcf2cd131e4907519b0ba91dabd41d68c5253a16834d9bb37ac160c2",
+            "git_blob_sha1": "e30893f329e957658fb6d408a6d361ce7df6c0d5",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -2439,7 +2439,7 @@
         "recipe": {
           "id": "m3-vi",
           "version": "1",
-          "path": "m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
+          "path": "m3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
           "sha256": "c47151b5df79d6d2711e6de748bff3fb08e2c01af5e9c6ac0b4b3b91ac97425c",
           "preconditions": [
             "Exact source/template pins; absent new targets or exact converged outputs."
@@ -2482,7 +2482,7 @@
         "observation": "See m3/docs/counterpart-naming.md; runtime effective implementation selection is not installed."
       },
       {
-        "id": "synexia.counterpart.MIndexLibraryRelease",
+        "id": "m3.counterpart.MIndexLibraryRelease",
         "kind": "adapter",
         "status": "implemented-unverified",
         "reason": "Inlined dormant JDK-owned kernel; local recipe/module/runtime proof passed; complete JDK integration unverified.",
@@ -2490,14 +2490,14 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
-            "module": "synexia-openrewrite-recipes",
-            "path": "synexia-openrewrite-recipes/crates/mindex-vm-runtime/src/main/resources/com/synexia/rewrite/hash-pinned-java/mindex-vm-runtime/MIndexLibraryRelease.java.txt",
-            "symbol": "com.synexia.mindex.vm.MIndexLibraryRelease",
+            "module": "m3-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes/crates/mindex-vm-runtime/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/mindex-vm-runtime/MIndexLibraryRelease.java.txt",
+            "symbol": "jdk.internal.m3.mindex.vm.MIndexLibraryRelease",
             "signatures": [
               "MIndexLibraryRelease(MIndexString origin, MIndexString group, MIndexString artifact, MIndexString rawVersion, MIndexString extension, MIndexString classifier, MIndexString contentSha256)"
             ],
-            "sha256": "fb34b0ca5dd91bcc45df89521e934af07139a3630c09b012b19876a0e54be422",
-            "git_blob_sha1": "9df260247ec226392832a01fcb99f6bc56b151c6",
+            "sha256": "b2ac4a895d541380c37f6300e1d4b04d5827db486517159b46744e64ff5acbd9",
+            "git_blob_sha1": "e1ca92f9b8e1134a799903f52b525613bbf25a5f",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -2558,7 +2558,7 @@
         "recipe": {
           "id": "m3-vi",
           "version": "1",
-          "path": "m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
+          "path": "m3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
           "sha256": "c47151b5df79d6d2711e6de748bff3fb08e2c01af5e9c6ac0b4b3b91ac97425c",
           "preconditions": [
             "Exact source/template pins; absent new targets or exact converged outputs."
@@ -2601,7 +2601,7 @@
         "observation": "See m3/docs/counterpart-naming.md; runtime effective implementation selection is not installed."
       },
       {
-        "id": "synexia.counterpart.MIndexVmSession",
+        "id": "m3.counterpart.MIndexVmSession",
         "kind": "adapter",
         "status": "implemented-unverified",
         "reason": "Inlined reflection counterpart and caller-owned runtime bridge; bounded tests pass; global JVM admission remains open.",
@@ -2609,14 +2609,14 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "7b5d45bea2fce0a042e4b85347c1eb4116846c55",
-            "module": "synexia-openrewrite-recipes",
-            "path": "synexia-openrewrite-recipes/crates/mindex-vm-runtime/src/main/resources/com/synexia/rewrite/hash-pinned-java/mindex-vm-runtime/MIndexVmSession.java.txt",
-            "symbol": "com.synexia.mindex.vm.MIndexVmSession",
+            "module": "m3-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes/crates/mindex-vm-runtime/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/mindex-vm-runtime/MIndexVmSession.java.txt",
+            "symbol": "jdk.internal.m3.mindex.vm.MIndexVmSession",
             "signatures": [
-              "com.synexia.mindex.vm.MIndexVmSession"
+              "jdk.internal.m3.mindex.vm.MIndexVmSession"
             ],
-            "sha256": "bdeb857abaa302a40c4f542c23c4629eb0091f04d56d60545d6ca51325ff92a4",
-            "git_blob_sha1": "d2fb810dccd53b5ecccde9063a348199f78e0672",
+            "sha256": "867a9ce0fb71162b38a68bd1e3d12b724bd61b15b844197a3b81f32cb4cc18cf",
+            "git_blob_sha1": "74f0fa06fc5ddb3417efdac3a8282e5f2488f07e",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -2670,12 +2670,12 @@
             "reason": "Strict module compile and jdeps; weak Class/loader reflection boundary."
           },
           {
-            "id": "synexia.counterpart.MIndexVersionTable",
+            "id": "m3.counterpart.MIndexVersionTable",
             "resolution": "resolved",
             "reason": "Retained exact M3VI Progress boundary."
           },
           {
-            "id": "synexia.counterpart.MIndexLibraryRelease",
+            "id": "m3.counterpart.MIndexLibraryRelease",
             "resolution": "resolved",
             "reason": "Retained exact M3Release value."
           }
@@ -2689,7 +2689,7 @@
         "recipe": {
           "id": "m3-cb",
           "version": "1",
-          "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+          "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
           "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
           "preconditions": [
             "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
@@ -2730,14 +2730,14 @@
             {
               "repo": "hsoliwal/com.synexia",
               "commit": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
-              "module": "synexia-openrewrite-recipes",
-              "path": "synexia-openrewrite-recipes/crates/mindex-vm-runtime/src/main/resources/com/synexia/rewrite/hash-pinned-java/mindex-vm-runtime/MIndexVmSession.java.txt",
-              "symbol": "com.synexia.mindex.vm.MIndexVmSession",
+              "module": "m3-openrewrite-recipes",
+              "path": "m3-openrewrite-recipes/crates/mindex-vm-runtime/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/mindex-vm-runtime/MIndexVmSession.java.txt",
+              "symbol": "jdk.internal.m3.mindex.vm.MIndexVmSession",
               "signatures": [
-                "com.synexia.mindex.vm.MIndexVmSession"
+                "jdk.internal.m3.mindex.vm.MIndexVmSession"
               ],
-              "sha256": "bdeb857abaa302a40c4f542c23c4629eb0091f04d56d60545d6ca51325ff92a4",
-              "git_blob_sha1": "d2fb810dccd53b5ecccde9063a348199f78e0672",
+              "sha256": "867a9ce0fb71162b38a68bd1e3d12b724bd61b15b844197a3b81f32cb4cc18cf",
+              "git_blob_sha1": "74f0fa06fc5ddb3417efdac3a8282e5f2488f07e",
               "fingerprint": null,
               "revision_role": "pinned",
               "tracking_ref": "refs/heads/develop"
@@ -2766,7 +2766,7 @@
         "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
       },
       {
-        "id": "synexia.counterpart.MIndexVmPrecomputeKey",
+        "id": "m3.counterpart.MIndexVmPrecomputeKey",
         "kind": "adapter",
         "status": "implemented-unverified",
         "reason": "Inlined reflection counterpart and caller-owned runtime bridge; bounded tests pass; global JVM admission remains open.",
@@ -2774,14 +2774,14 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "7b5d45bea2fce0a042e4b85347c1eb4116846c55",
-            "module": "synexia-openrewrite-recipes",
-            "path": "synexia-openrewrite-recipes/crates/mindex-vm-runtime/src/main/resources/com/synexia/rewrite/hash-pinned-java/mindex-vm-runtime/MIndexVmPrecomputeKey.java.txt",
-            "symbol": "com.synexia.mindex.vm.MIndexVmPrecomputeKey",
+            "module": "m3-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes/crates/mindex-vm-runtime/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/mindex-vm-runtime/MIndexVmPrecomputeKey.java.txt",
+            "symbol": "jdk.internal.m3.mindex.vm.MIndexVmPrecomputeKey",
             "signatures": [
-              "com.synexia.mindex.vm.MIndexVmPrecomputeKey"
+              "jdk.internal.m3.mindex.vm.MIndexVmPrecomputeKey"
             ],
-            "sha256": "406f451222b1f6e950c28439316fdbcd6e9cfb9463658e1deec85cfe41197f1a",
-            "git_blob_sha1": "fc9aef1cce8e43ca81fd922ca6ea406417b1334b",
+            "sha256": "424e07da19c2218db8a705776ed2884146637d4325921a06c670afe3c96129e7",
+            "git_blob_sha1": "d7eec9579f614ff521683475df3eb5b825159066",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -2835,12 +2835,12 @@
             "reason": "Strict module compile and jdeps; weak Class/loader reflection boundary."
           },
           {
-            "id": "synexia.counterpart.MIndexVersionTable",
+            "id": "m3.counterpart.MIndexVersionTable",
             "resolution": "resolved",
             "reason": "Retained exact M3VI Progress boundary."
           },
           {
-            "id": "synexia.counterpart.MIndexLibraryRelease",
+            "id": "m3.counterpart.MIndexLibraryRelease",
             "resolution": "resolved",
             "reason": "Retained exact M3Release value."
           }
@@ -2854,7 +2854,7 @@
         "recipe": {
           "id": "m3-cb",
           "version": "1",
-          "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+          "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
           "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
           "preconditions": [
             "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
@@ -2895,14 +2895,14 @@
             {
               "repo": "hsoliwal/com.synexia",
               "commit": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
-              "module": "synexia-openrewrite-recipes",
-              "path": "synexia-openrewrite-recipes/crates/mindex-vm-runtime/src/main/resources/com/synexia/rewrite/hash-pinned-java/mindex-vm-runtime/MIndexVmPrecomputeKey.java.txt",
-              "symbol": "com.synexia.mindex.vm.MIndexVmPrecomputeKey",
+              "module": "m3-openrewrite-recipes",
+              "path": "m3-openrewrite-recipes/crates/mindex-vm-runtime/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/mindex-vm-runtime/MIndexVmPrecomputeKey.java.txt",
+              "symbol": "jdk.internal.m3.mindex.vm.MIndexVmPrecomputeKey",
               "signatures": [
-                "com.synexia.mindex.vm.MIndexVmPrecomputeKey"
+                "jdk.internal.m3.mindex.vm.MIndexVmPrecomputeKey"
               ],
-              "sha256": "406f451222b1f6e950c28439316fdbcd6e9cfb9463658e1deec85cfe41197f1a",
-              "git_blob_sha1": "fc9aef1cce8e43ca81fd922ca6ea406417b1334b",
+              "sha256": "424e07da19c2218db8a705776ed2884146637d4325921a06c670afe3c96129e7",
+              "git_blob_sha1": "d7eec9579f614ff521683475df3eb5b825159066",
               "fingerprint": null,
               "revision_role": "pinned",
               "tracking_ref": "refs/heads/develop"
@@ -2931,7 +2931,7 @@
         "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
       },
       {
-        "id": "synexia.counterpart.MIndexClass",
+        "id": "m3.counterpart.MIndexClass",
         "kind": "adapter",
         "status": "implemented-unverified",
         "reason": "Inlined reflection counterpart and caller-owned runtime bridge; bounded tests pass; global JVM admission remains open.",
@@ -2939,14 +2939,14 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "7b5d45bea2fce0a042e4b85347c1eb4116846c55",
-            "module": "synexia-mindex",
-            "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexClass.java",
-            "symbol": "com.synexia.mindex.classindex.MIndexClass",
+            "module": "m3-mindex",
+            "path": "m3-mindex/class-index/src/main/java/jdk/internal/m3/mindex/classindex/MIndexClass.java",
+            "symbol": "jdk.internal.m3.mindex.classindex.MIndexClass",
             "signatures": [
-              "com.synexia.mindex.classindex.MIndexClass"
+              "jdk.internal.m3.mindex.classindex.MIndexClass"
             ],
-            "sha256": "bd4e1312397b2d0b836f69aa32be6f7846cce69d30abc814936d0a88af06ea7c",
-            "git_blob_sha1": "488bfc02c9830b333f45c631a9fa933cec56ea91",
+            "sha256": "6a5e0a7a89a39b8b19d919fee8c781441a7b285e627d2ea723b20cb7e3c0376b",
+            "git_blob_sha1": "754a52297ff8c9ce34ffe7c765f8d7c684e693e4",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -3000,12 +3000,12 @@
             "reason": "Strict module compile and jdeps; weak Class/loader reflection boundary."
           },
           {
-            "id": "synexia.counterpart.MIndexVersionTable",
+            "id": "m3.counterpart.MIndexVersionTable",
             "resolution": "resolved",
             "reason": "Retained exact M3VI Progress boundary."
           },
           {
-            "id": "synexia.counterpart.MIndexLibraryRelease",
+            "id": "m3.counterpart.MIndexLibraryRelease",
             "resolution": "resolved",
             "reason": "Retained exact M3Release value."
           }
@@ -3019,7 +3019,7 @@
         "recipe": {
           "id": "m3-cb",
           "version": "1",
-          "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+          "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
           "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
           "preconditions": [
             "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
@@ -3060,14 +3060,14 @@
             {
               "repo": "hsoliwal/com.synexia",
               "commit": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
-              "module": "synexia-mindex",
-              "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexClass.java",
-              "symbol": "com.synexia.mindex.classindex.MIndexClass",
+              "module": "m3-mindex",
+              "path": "m3-mindex/class-index/src/main/java/jdk/internal/m3/mindex/classindex/MIndexClass.java",
+              "symbol": "jdk.internal.m3.mindex.classindex.MIndexClass",
               "signatures": [
-                "com.synexia.mindex.classindex.MIndexClass"
+                "jdk.internal.m3.mindex.classindex.MIndexClass"
               ],
               "sha256": null,
-              "git_blob_sha1": "488bfc02c9830b333f45c631a9fa933cec56ea91",
+              "git_blob_sha1": "754a52297ff8c9ce34ffe7c765f8d7c684e693e4",
               "fingerprint": null,
               "revision_role": "pinned",
               "tracking_ref": "refs/heads/develop"
@@ -3096,7 +3096,7 @@
         "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
       },
       {
-        "id": "synexia.counterpart.MIndexClassIndex",
+        "id": "m3.counterpart.MIndexClassIndex",
         "kind": "adapter",
         "status": "implemented-unverified",
         "reason": "Inlined reflection counterpart and caller-owned runtime bridge; bounded tests pass; global JVM admission remains open.",
@@ -3104,14 +3104,14 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "7b5d45bea2fce0a042e4b85347c1eb4116846c55",
-            "module": "synexia-mindex",
-            "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexClassIndex.java",
-            "symbol": "com.synexia.mindex.classindex.MIndexClassIndex",
+            "module": "m3-mindex",
+            "path": "m3-mindex/class-index/src/main/java/jdk/internal/m3/mindex/classindex/MIndexClassIndex.java",
+            "symbol": "jdk.internal.m3.mindex.classindex.MIndexClassIndex",
             "signatures": [
-              "com.synexia.mindex.classindex.MIndexClassIndex"
+              "jdk.internal.m3.mindex.classindex.MIndexClassIndex"
             ],
-            "sha256": "047eb00e579a0bed899419373e19514f0e06876efec39b9cfa2bca2d391196aa",
-            "git_blob_sha1": "35632a8688201f2a6849b52e325daa27ae3a7bfe",
+            "sha256": "f169228bd954975a1254204a39e99187e68a99ca09f4f472dcb500349324d987",
+            "git_blob_sha1": "eead494947962c5099c6decfbcf546163249164d",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -3119,15 +3119,15 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "7b5d45bea2fce0a042e4b85347c1eb4116846c55",
-            "module": "synexia-mindex",
-            "path": "synexia-mindex/foundation/src/main/java/com/synexia/mindex/foundation/MIndexAlgorithm.java",
-            "symbol": "com.synexia.mindex.foundation.MIndexAlgorithm",
+            "module": "m3-mindex",
+            "path": "m3-mindex/foundation/src/main/java/jdk/internal/m3/mindex/foundation/MIndexAlgorithm.java",
+            "symbol": "jdk.internal.m3.mindex.foundation.MIndexAlgorithm",
             "signatures": [
               "lowerBound(int[],int,int,int)",
               "upperBound(int[],int,int,int)"
             ],
-            "sha256": "993c38054e42c14efe27b52fa0b1e4d322aa17a2f8bdf7e8a460d4adbabe9e35",
-            "git_blob_sha1": "44975a54d368ecaf774683ab5d64bd14bb070209",
+            "sha256": "9e9c2eb9edfed393379793e634573ea33a87e2220cbfd7f761325fc326a087d7",
+            "git_blob_sha1": "0e40bec4b02bde697eba68b9817cc46c566987e2",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -3181,12 +3181,12 @@
             "reason": "Strict module compile and jdeps; weak Class/loader reflection boundary."
           },
           {
-            "id": "synexia.counterpart.MIndexVersionTable",
+            "id": "m3.counterpart.MIndexVersionTable",
             "resolution": "resolved",
             "reason": "Retained exact M3VI Progress boundary."
           },
           {
-            "id": "synexia.counterpart.MIndexLibraryRelease",
+            "id": "m3.counterpart.MIndexLibraryRelease",
             "resolution": "resolved",
             "reason": "Retained exact M3Release value."
           }
@@ -3200,7 +3200,7 @@
         "recipe": {
           "id": "m3-cb",
           "version": "1",
-          "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+          "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
           "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
           "preconditions": [
             "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
@@ -3241,14 +3241,14 @@
             {
               "repo": "hsoliwal/com.synexia",
               "commit": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
-              "module": "synexia-mindex",
-              "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexClassIndex.java",
-              "symbol": "com.synexia.mindex.classindex.MIndexClassIndex",
+              "module": "m3-mindex",
+              "path": "m3-mindex/class-index/src/main/java/jdk/internal/m3/mindex/classindex/MIndexClassIndex.java",
+              "symbol": "jdk.internal.m3.mindex.classindex.MIndexClassIndex",
               "signatures": [
-                "com.synexia.mindex.classindex.MIndexClassIndex"
+                "jdk.internal.m3.mindex.classindex.MIndexClassIndex"
               ],
               "sha256": null,
-              "git_blob_sha1": "35632a8688201f2a6849b52e325daa27ae3a7bfe",
+              "git_blob_sha1": "eead494947962c5099c6decfbcf546163249164d",
               "fingerprint": null,
               "revision_role": "pinned",
               "tracking_ref": "refs/heads/develop"
@@ -3277,7 +3277,7 @@
         "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
       },
       {
-        "id": "synexia.counterpart.MIndexAST",
+        "id": "m3.counterpart.MIndexAST",
         "kind": "pending",
         "status": "pending",
         "reason": "Concise counterpart name reserved; dependency closure and runtime integration remain unimplemented.",
@@ -3285,11 +3285,11 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
-            "module": "synexia-mindex",
-            "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/MIndexAST.java",
-            "symbol": "com.synexia.mindex.ast.MIndexAST",
+            "module": "m3-mindex",
+            "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/ast/MIndexAST.java",
+            "symbol": "jdk.internal.m3.mindex.ast.MIndexAST",
             "signatures": [
-              "com.synexia.mindex.ast.MIndexAST"
+              "jdk.internal.m3.mindex.ast.MIndexAST"
             ],
             "sha256": null,
             "git_blob_sha1": "716f126c6faa70f8cc85aaad0be9b37fc9267fb6",
@@ -3387,7 +3387,7 @@
         "observation": "See m3/docs/counterpart-naming.md; runtime effective implementation selection is not installed."
       },
       {
-        "id": "synexia.counterpart.MIndexASTPrecompute",
+        "id": "m3.counterpart.MIndexASTPrecompute",
         "kind": "pending",
         "status": "pending",
         "reason": "Concise counterpart name reserved; dependency closure and runtime integration remain unimplemented.",
@@ -3395,11 +3395,11 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
-            "module": "synexia-mindex",
-            "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/MIndexASTPrecompute.java",
-            "symbol": "com.synexia.mindex.ast.MIndexASTPrecompute",
+            "module": "m3-mindex",
+            "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/ast/MIndexASTPrecompute.java",
+            "symbol": "jdk.internal.m3.mindex.ast.MIndexASTPrecompute",
             "signatures": [
-              "com.synexia.mindex.ast.MIndexASTPrecompute"
+              "jdk.internal.m3.mindex.ast.MIndexASTPrecompute"
             ],
             "sha256": null,
             "git_blob_sha1": "9b83784ff695a2a6dc0444beecbb7d97ee049875",
@@ -3497,7 +3497,7 @@
         "observation": "See m3/docs/counterpart-naming.md; runtime effective implementation selection is not installed."
       },
       {
-        "id": "synexia.counterpart.MIndexCompilerASTPrecompute",
+        "id": "m3.counterpart.MIndexCompilerASTPrecompute",
         "kind": "pending",
         "status": "pending",
         "reason": "Concise counterpart name reserved; dependency closure and runtime integration remain unimplemented.",
@@ -3505,11 +3505,11 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
-            "module": "synexia-mindex",
-            "path": "synexia-mindex/compiler/src/main/java/com/synexia/mindex/compiler/MIndexCompilerASTPrecompute.java",
-            "symbol": "com.synexia.mindex.compiler.MIndexCompilerASTPrecompute",
+            "module": "m3-mindex",
+            "path": "m3-mindex/compiler/src/main/java/jdk/internal/m3/mindex/compiler/MIndexCompilerASTPrecompute.java",
+            "symbol": "jdk.internal.m3.mindex.compiler.MIndexCompilerASTPrecompute",
             "signatures": [
-              "com.synexia.mindex.compiler.MIndexCompilerASTPrecompute"
+              "jdk.internal.m3.mindex.compiler.MIndexCompilerASTPrecompute"
             ],
             "sha256": null,
             "git_blob_sha1": "1ac623b8fa822f4f8ce9ed9c3bb8c9a5194184b6",
@@ -3607,7 +3607,7 @@
         "observation": "See m3/docs/counterpart-naming.md; runtime effective implementation selection is not installed."
       },
       {
-        "id": "synexia.counterpart.MIndexClassBoundary",
+        "id": "m3.counterpart.MIndexClassBoundary",
         "kind": "adapter",
         "status": "implemented-unverified",
         "reason": "Inlined reflection counterpart and caller-owned runtime bridge; bounded tests pass; global JVM admission remains open.",
@@ -3615,14 +3615,14 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "7b5d45bea2fce0a042e4b85347c1eb4116846c55",
-            "module": "synexia-mindex",
-            "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexClassBoundary.java",
-            "symbol": "com.synexia.mindex.classindex.MIndexClassBoundary",
+            "module": "m3-mindex",
+            "path": "m3-mindex/class-index/src/main/java/jdk/internal/m3/mindex/classindex/MIndexClassBoundary.java",
+            "symbol": "jdk.internal.m3.mindex.classindex.MIndexClassBoundary",
             "signatures": [
-              "com.synexia.mindex.classindex.MIndexClassBoundary"
+              "jdk.internal.m3.mindex.classindex.MIndexClassBoundary"
             ],
-            "sha256": "ea78f4d9e5870f6951dba8a124019aa96396261aac041c8ad8c247a6ddc35c3a",
-            "git_blob_sha1": "9166e2168afc6a78fe8bdb7e570defc178c7c35e",
+            "sha256": "016db454989437ba213e2af47d0273f70243a2d0bede85f8e79ab8c6772a5150",
+            "git_blob_sha1": "e414f8c8b247ea38473d368eadbde3f98702e682",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -3676,12 +3676,12 @@
             "reason": "Strict module compile and jdeps; weak Class/loader reflection boundary."
           },
           {
-            "id": "synexia.counterpart.MIndexVersionTable",
+            "id": "m3.counterpart.MIndexVersionTable",
             "resolution": "resolved",
             "reason": "Retained exact M3VI Progress boundary."
           },
           {
-            "id": "synexia.counterpart.MIndexLibraryRelease",
+            "id": "m3.counterpart.MIndexLibraryRelease",
             "resolution": "resolved",
             "reason": "Retained exact M3Release value."
           }
@@ -3695,7 +3695,7 @@
         "recipe": {
           "id": "m3-cb",
           "version": "1",
-          "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+          "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
           "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
           "preconditions": [
             "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
@@ -3740,7 +3740,7 @@
         "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
       },
       {
-        "id": "synexia.counterpart.MIndexJvmDescriptor",
+        "id": "m3.counterpart.MIndexJvmDescriptor",
         "kind": "adapter",
         "status": "implemented-unverified",
         "reason": "Observed retained target-only hidden-class descriptor correction; exact target and recipe identities reconciled. Prior scoped receipts remain historical; current full module/image and source-target contract acceptance is not established by this ledger update.",
@@ -3748,14 +3748,14 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "7b5d45bea2fce0a042e4b85347c1eb4116846c55",
-            "module": "synexia-mindex",
-            "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexJvmDescriptor.java",
-            "symbol": "com.synexia.mindex.classindex.MIndexJvmDescriptor",
+            "module": "m3-mindex",
+            "path": "m3-mindex/class-index/src/main/java/jdk/internal/m3/mindex/classindex/MIndexJvmDescriptor.java",
+            "symbol": "jdk.internal.m3.mindex.classindex.MIndexJvmDescriptor",
             "signatures": [
-              "com.synexia.mindex.classindex.MIndexJvmDescriptor"
+              "jdk.internal.m3.mindex.classindex.MIndexJvmDescriptor"
             ],
-            "sha256": "0e0ddfc53acaeb28137319fd20ee5005f9d7231949ebd3106193c287f13be9b8",
-            "git_blob_sha1": "d0eb96ae49c0456c8d31f1e714882b525b4c9a97",
+            "sha256": "3fb76c976a34e1808f42d35cc194ba490316fab8e9d4176c071180aefb362341",
+            "git_blob_sha1": "2e8995bd7b5995e908cf8e4f6c80c86244013f6d",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -3814,12 +3814,12 @@
             "reason": "Strict module compile and jdeps; weak Class/loader reflection boundary."
           },
           {
-            "id": "synexia.counterpart.MIndexVersionTable",
+            "id": "m3.counterpart.MIndexVersionTable",
             "resolution": "resolved",
             "reason": "Retained exact M3VI Progress boundary."
           },
           {
-            "id": "synexia.counterpart.MIndexLibraryRelease",
+            "id": "m3.counterpart.MIndexLibraryRelease",
             "resolution": "resolved",
             "reason": "Retained exact M3Release value."
           }
@@ -3831,10 +3831,10 @@
           "cached_facts": "Primitive class/member/CSR lanes; caller-scoped declarations and precompute context; no persistent or cross-VM cache."
         },
         "recipe": {
-          "id": "com.m3.rewrite.backport.Descriptor",
+          "id": "jdk.m3.rewrite.backport.Descriptor",
           "version": "snapshot@39702564163c017f9dc0350a305b032b06274857",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
-          "sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1",
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+          "sha256": "8006b173253ea7502efe7f7a77738b65f9df9e2871d4d6c29ff4fb8fb058c8c6",
           "preconditions": [
             "Use the retained M3Jdk21HashPinnedSnapshotRecipe and exact jdk22-descriptor manifest.",
             "The owner must match df17c48e54de060060e4393e5c2f3e8e2f068bad38a69576a82709cc6d4cbdb9 or 1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67; the test is ABSENT or exact postimage.",
@@ -3917,7 +3917,7 @@
         "observation": "The complete previous record and exact old/current source/target bindings are retained in m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json#descriptor_reconciliation. Previous sync target 3ec445df10a3e8fc74aa983181f0700ac7bfbcad precedes target introduction; the path is absent there. The old target hash is verified at f74592e363466a59b391fbbe47500c7985c9a691. Existing cb-module-runtime evidence is historical and unchanged; implemented-unverified is retained."
       },
       {
-        "id": "synexia.counterpart.MIndexMember",
+        "id": "m3.counterpart.MIndexMember",
         "kind": "adapter",
         "status": "implemented-unverified",
         "reason": "Inlined reflection counterpart and caller-owned runtime bridge; bounded tests pass; global JVM admission remains open.",
@@ -3925,14 +3925,14 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "7b5d45bea2fce0a042e4b85347c1eb4116846c55",
-            "module": "synexia-mindex",
-            "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexMember.java",
-            "symbol": "com.synexia.mindex.classindex.MIndexMember",
+            "module": "m3-mindex",
+            "path": "m3-mindex/class-index/src/main/java/jdk/internal/m3/mindex/classindex/MIndexMember.java",
+            "symbol": "jdk.internal.m3.mindex.classindex.MIndexMember",
             "signatures": [
-              "com.synexia.mindex.classindex.MIndexMember"
+              "jdk.internal.m3.mindex.classindex.MIndexMember"
             ],
-            "sha256": "4230b2df028a54d833284d373c044b58c4ffde0da1f15b394372d9cbff6e97da",
-            "git_blob_sha1": "70cd228801272d8e5fcb68bce280d2cb842e5ae8",
+            "sha256": "3acea5d4193a33fd6552e883f862243a23757d74855c51a450fa22ada1c0e350",
+            "git_blob_sha1": "ee7b754cd62c9bfccdea84f28c8f036917eb1126",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -3986,12 +3986,12 @@
             "reason": "Strict module compile and jdeps; weak Class/loader reflection boundary."
           },
           {
-            "id": "synexia.counterpart.MIndexVersionTable",
+            "id": "m3.counterpart.MIndexVersionTable",
             "resolution": "resolved",
             "reason": "Retained exact M3VI Progress boundary."
           },
           {
-            "id": "synexia.counterpart.MIndexLibraryRelease",
+            "id": "m3.counterpart.MIndexLibraryRelease",
             "resolution": "resolved",
             "reason": "Retained exact M3Release value."
           }
@@ -4005,7 +4005,7 @@
         "recipe": {
           "id": "m3-cb",
           "version": "1",
-          "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+          "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
           "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
           "preconditions": [
             "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
@@ -4050,7 +4050,7 @@
         "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
       },
       {
-        "id": "synexia.counterpart.MIndexMemberKind",
+        "id": "m3.counterpart.MIndexMemberKind",
         "kind": "adapter",
         "status": "implemented-unverified",
         "reason": "Inlined reflection counterpart and caller-owned runtime bridge; bounded tests pass; global JVM admission remains open.",
@@ -4058,14 +4058,14 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "7b5d45bea2fce0a042e4b85347c1eb4116846c55",
-            "module": "synexia-mindex",
-            "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexMemberKind.java",
-            "symbol": "com.synexia.mindex.classindex.MIndexMemberKind",
+            "module": "m3-mindex",
+            "path": "m3-mindex/class-index/src/main/java/jdk/internal/m3/mindex/classindex/MIndexMemberKind.java",
+            "symbol": "jdk.internal.m3.mindex.classindex.MIndexMemberKind",
             "signatures": [
-              "com.synexia.mindex.classindex.MIndexMemberKind"
+              "jdk.internal.m3.mindex.classindex.MIndexMemberKind"
             ],
-            "sha256": "76c8a68d9f1bafa36df848da02c1b00c4d738e7ff09c63d6761d6c8f892e20cb",
-            "git_blob_sha1": "9ba32db4528c74535a68c656b891d08924b75dc0",
+            "sha256": "196619a117a3783ad02487a3b05d8f22066a3b1667cabbd3cb17d63bba9dd4dc",
+            "git_blob_sha1": "f68a9ce030ace43d20c626c3c6f6bf8c54a0ece0",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -4119,12 +4119,12 @@
             "reason": "Strict module compile and jdeps; weak Class/loader reflection boundary."
           },
           {
-            "id": "synexia.counterpart.MIndexVersionTable",
+            "id": "m3.counterpart.MIndexVersionTable",
             "resolution": "resolved",
             "reason": "Retained exact M3VI Progress boundary."
           },
           {
-            "id": "synexia.counterpart.MIndexLibraryRelease",
+            "id": "m3.counterpart.MIndexLibraryRelease",
             "resolution": "resolved",
             "reason": "Retained exact M3Release value."
           }
@@ -4138,7 +4138,7 @@
         "recipe": {
           "id": "m3-cb",
           "version": "1",
-          "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+          "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
           "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
           "preconditions": [
             "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
@@ -4183,7 +4183,7 @@
         "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
       },
       {
-        "id": "synexia.counterpart.MIndexMemberFlags",
+        "id": "m3.counterpart.MIndexMemberFlags",
         "kind": "adapter",
         "status": "implemented-unverified",
         "reason": "Inlined reflection counterpart and caller-owned runtime bridge; bounded tests pass; global JVM admission remains open.",
@@ -4191,14 +4191,14 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "7b5d45bea2fce0a042e4b85347c1eb4116846c55",
-            "module": "synexia-mindex",
-            "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexMemberFlags.java",
-            "symbol": "com.synexia.mindex.classindex.MIndexMemberFlags",
+            "module": "m3-mindex",
+            "path": "m3-mindex/class-index/src/main/java/jdk/internal/m3/mindex/classindex/MIndexMemberFlags.java",
+            "symbol": "jdk.internal.m3.mindex.classindex.MIndexMemberFlags",
             "signatures": [
-              "com.synexia.mindex.classindex.MIndexMemberFlags"
+              "jdk.internal.m3.mindex.classindex.MIndexMemberFlags"
             ],
-            "sha256": "febb6a32912e4149ca5521b149c86554f37d978382242589603aa9265139dfb9",
-            "git_blob_sha1": "9a84c2a18fecd4b67a0c503527347e2d4f75d2c8",
+            "sha256": "680cf4bd7fb80ee6a760ed0f15220c060e37a1c51cac60821fda6a363ef69154",
+            "git_blob_sha1": "34d8b046955d327ef3917da907a71a2fb20743a8",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -4252,12 +4252,12 @@
             "reason": "Strict module compile and jdeps; weak Class/loader reflection boundary."
           },
           {
-            "id": "synexia.counterpart.MIndexVersionTable",
+            "id": "m3.counterpart.MIndexVersionTable",
             "resolution": "resolved",
             "reason": "Retained exact M3VI Progress boundary."
           },
           {
-            "id": "synexia.counterpart.MIndexLibraryRelease",
+            "id": "m3.counterpart.MIndexLibraryRelease",
             "resolution": "resolved",
             "reason": "Retained exact M3Release value."
           }
@@ -4271,7 +4271,7 @@
         "recipe": {
           "id": "m3-cb",
           "version": "1",
-          "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+          "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
           "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
           "preconditions": [
             "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
@@ -4316,7 +4316,7 @@
         "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
       },
       {
-        "id": "synexia.counterpart.MIndexClassFlags",
+        "id": "m3.counterpart.MIndexClassFlags",
         "kind": "adapter",
         "status": "implemented-unverified",
         "reason": "Inlined reflection counterpart and caller-owned runtime bridge; bounded tests pass; global JVM admission remains open.",
@@ -4324,14 +4324,14 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "7b5d45bea2fce0a042e4b85347c1eb4116846c55",
-            "module": "synexia-mindex",
-            "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexClassFlags.java",
-            "symbol": "com.synexia.mindex.classindex.MIndexClassFlags",
+            "module": "m3-mindex",
+            "path": "m3-mindex/class-index/src/main/java/jdk/internal/m3/mindex/classindex/MIndexClassFlags.java",
+            "symbol": "jdk.internal.m3.mindex.classindex.MIndexClassFlags",
             "signatures": [
-              "com.synexia.mindex.classindex.MIndexClassFlags"
+              "jdk.internal.m3.mindex.classindex.MIndexClassFlags"
             ],
-            "sha256": "bc3fcc4bc3f582e6565c1c8509038217e7a7360dbb0e290c66b03090c0f6961e",
-            "git_blob_sha1": "d8131ebce1c01a014a9320e2ec771673f2d06b5c",
+            "sha256": "08f2e889d5e35db1a18600db4a9abbd8b6cae0ba67978363d7b1f675c4f38853",
+            "git_blob_sha1": "33d406046f18d71c255e3ef130edb7a464260782",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -4385,12 +4385,12 @@
             "reason": "Strict module compile and jdeps; weak Class/loader reflection boundary."
           },
           {
-            "id": "synexia.counterpart.MIndexVersionTable",
+            "id": "m3.counterpart.MIndexVersionTable",
             "resolution": "resolved",
             "reason": "Retained exact M3VI Progress boundary."
           },
           {
-            "id": "synexia.counterpart.MIndexLibraryRelease",
+            "id": "m3.counterpart.MIndexLibraryRelease",
             "resolution": "resolved",
             "reason": "Retained exact M3Release value."
           }
@@ -4404,7 +4404,7 @@
         "recipe": {
           "id": "m3-cb",
           "version": "1",
-          "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+          "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
           "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
           "preconditions": [
             "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
@@ -4449,7 +4449,7 @@
         "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
       },
       {
-        "id": "synexia.counterpart.MIndexField",
+        "id": "m3.counterpart.MIndexField",
         "kind": "adapter",
         "status": "implemented-unverified",
         "reason": "Inlined reflection counterpart and caller-owned runtime bridge; bounded tests pass; global JVM admission remains open.",
@@ -4457,14 +4457,14 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "7b5d45bea2fce0a042e4b85347c1eb4116846c55",
-            "module": "synexia-mindex",
-            "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexField.java",
-            "symbol": "com.synexia.mindex.classindex.MIndexField",
+            "module": "m3-mindex",
+            "path": "m3-mindex/class-index/src/main/java/jdk/internal/m3/mindex/classindex/MIndexField.java",
+            "symbol": "jdk.internal.m3.mindex.classindex.MIndexField",
             "signatures": [
-              "com.synexia.mindex.classindex.MIndexField"
+              "jdk.internal.m3.mindex.classindex.MIndexField"
             ],
-            "sha256": "ae3d0439814c26aa0a012984aa6d4debef70bd31590b403f9643634c231cd8b4",
-            "git_blob_sha1": "bc93b18d5ee4867a841ac036ffb35dcd1e72c3f4",
+            "sha256": "56d18634a23f188db2da23a790412ce393b3223689c2977899b79143043b4e51",
+            "git_blob_sha1": "4a41ee9ccca3a1e33514e45f38aa8dff85d7162d",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -4518,12 +4518,12 @@
             "reason": "Strict module compile and jdeps; weak Class/loader reflection boundary."
           },
           {
-            "id": "synexia.counterpart.MIndexVersionTable",
+            "id": "m3.counterpart.MIndexVersionTable",
             "resolution": "resolved",
             "reason": "Retained exact M3VI Progress boundary."
           },
           {
-            "id": "synexia.counterpart.MIndexLibraryRelease",
+            "id": "m3.counterpart.MIndexLibraryRelease",
             "resolution": "resolved",
             "reason": "Retained exact M3Release value."
           }
@@ -4537,7 +4537,7 @@
         "recipe": {
           "id": "m3-cb",
           "version": "1",
-          "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+          "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
           "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
           "preconditions": [
             "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
@@ -4582,7 +4582,7 @@
         "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
       },
       {
-        "id": "synexia.counterpart.MIndexMethod",
+        "id": "m3.counterpart.MIndexMethod",
         "kind": "adapter",
         "status": "implemented-unverified",
         "reason": "Inlined reflection counterpart and caller-owned runtime bridge; bounded tests pass; global JVM admission remains open.",
@@ -4590,14 +4590,14 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "7b5d45bea2fce0a042e4b85347c1eb4116846c55",
-            "module": "synexia-mindex",
-            "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexMethod.java",
-            "symbol": "com.synexia.mindex.classindex.MIndexMethod",
+            "module": "m3-mindex",
+            "path": "m3-mindex/class-index/src/main/java/jdk/internal/m3/mindex/classindex/MIndexMethod.java",
+            "symbol": "jdk.internal.m3.mindex.classindex.MIndexMethod",
             "signatures": [
-              "com.synexia.mindex.classindex.MIndexMethod"
+              "jdk.internal.m3.mindex.classindex.MIndexMethod"
             ],
-            "sha256": "b11190cdc801a2ce46078fa04d364d9362402c3aef4ff16aebac05a56898aaaa",
-            "git_blob_sha1": "41268ab2541b70fef70767557228bf568d9a01b7",
+            "sha256": "47acb7331e94c07ae48662e9b4a0d6e7d5189ea698e7a189c89a31bc306cb85a",
+            "git_blob_sha1": "b9bba7c3ada958ff1c2f6227459a78532dcdfd7f",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -4651,12 +4651,12 @@
             "reason": "Strict module compile and jdeps; weak Class/loader reflection boundary."
           },
           {
-            "id": "synexia.counterpart.MIndexVersionTable",
+            "id": "m3.counterpart.MIndexVersionTable",
             "resolution": "resolved",
             "reason": "Retained exact M3VI Progress boundary."
           },
           {
-            "id": "synexia.counterpart.MIndexLibraryRelease",
+            "id": "m3.counterpart.MIndexLibraryRelease",
             "resolution": "resolved",
             "reason": "Retained exact M3Release value."
           }
@@ -4670,7 +4670,7 @@
         "recipe": {
           "id": "m3-cb",
           "version": "1",
-          "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+          "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
           "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
           "preconditions": [
             "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
@@ -4715,7 +4715,7 @@
         "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
       },
       {
-        "id": "synexia.counterpart.MIndexConstructor",
+        "id": "m3.counterpart.MIndexConstructor",
         "kind": "adapter",
         "status": "implemented-unverified",
         "reason": "Inlined reflection counterpart and caller-owned runtime bridge; bounded tests pass; global JVM admission remains open.",
@@ -4723,14 +4723,14 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "7b5d45bea2fce0a042e4b85347c1eb4116846c55",
-            "module": "synexia-mindex",
-            "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexConstructor.java",
-            "symbol": "com.synexia.mindex.classindex.MIndexConstructor",
+            "module": "m3-mindex",
+            "path": "m3-mindex/class-index/src/main/java/jdk/internal/m3/mindex/classindex/MIndexConstructor.java",
+            "symbol": "jdk.internal.m3.mindex.classindex.MIndexConstructor",
             "signatures": [
-              "com.synexia.mindex.classindex.MIndexConstructor"
+              "jdk.internal.m3.mindex.classindex.MIndexConstructor"
             ],
-            "sha256": "3b2b432ebb29f5f08e30b8f9194a2675f052a238f5f16432ac9e3d26e9d489c2",
-            "git_blob_sha1": "24be84434f65bffed5a5f0c609cbe596ae2b4985",
+            "sha256": "0f7d1f2c804978e9188dc63d9cfe9127654ad8ebfcaf3995761d77a50a862d61",
+            "git_blob_sha1": "5df90a368346a5cd4875119cfbff0d973598effa",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -4784,12 +4784,12 @@
             "reason": "Strict module compile and jdeps; weak Class/loader reflection boundary."
           },
           {
-            "id": "synexia.counterpart.MIndexVersionTable",
+            "id": "m3.counterpart.MIndexVersionTable",
             "resolution": "resolved",
             "reason": "Retained exact M3VI Progress boundary."
           },
           {
-            "id": "synexia.counterpart.MIndexLibraryRelease",
+            "id": "m3.counterpart.MIndexLibraryRelease",
             "resolution": "resolved",
             "reason": "Retained exact M3Release value."
           }
@@ -4803,7 +4803,7 @@
         "recipe": {
           "id": "m3-cb",
           "version": "1",
-          "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+          "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
           "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
           "preconditions": [
             "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
@@ -4848,7 +4848,7 @@
         "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
       },
       {
-        "id": "synexia.counterpart.MIndexRecordComponent",
+        "id": "m3.counterpart.MIndexRecordComponent",
         "kind": "adapter",
         "status": "implemented-unverified",
         "reason": "Inlined reflection counterpart and caller-owned runtime bridge; bounded tests pass; global JVM admission remains open.",
@@ -4856,14 +4856,14 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "7b5d45bea2fce0a042e4b85347c1eb4116846c55",
-            "module": "synexia-mindex",
-            "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexRecordComponent.java",
-            "symbol": "com.synexia.mindex.classindex.MIndexRecordComponent",
+            "module": "m3-mindex",
+            "path": "m3-mindex/class-index/src/main/java/jdk/internal/m3/mindex/classindex/MIndexRecordComponent.java",
+            "symbol": "jdk.internal.m3.mindex.classindex.MIndexRecordComponent",
             "signatures": [
-              "com.synexia.mindex.classindex.MIndexRecordComponent"
+              "jdk.internal.m3.mindex.classindex.MIndexRecordComponent"
             ],
-            "sha256": "b63a7f5a59d3badd7340e00021f2eaa410645d0f4a5d25a5a570797897969457",
-            "git_blob_sha1": "56d5b4adead17be7fef8e4b750f13fdf75d98a31",
+            "sha256": "b340b86517b838f43eed7087477b8f8bed47e19e23b826308e2a81181e49dce5",
+            "git_blob_sha1": "17af04a726daa4fcda4aa6bf0abbd6e3a177ba9e",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -4917,12 +4917,12 @@
             "reason": "Strict module compile and jdeps; weak Class/loader reflection boundary."
           },
           {
-            "id": "synexia.counterpart.MIndexVersionTable",
+            "id": "m3.counterpart.MIndexVersionTable",
             "resolution": "resolved",
             "reason": "Retained exact M3VI Progress boundary."
           },
           {
-            "id": "synexia.counterpart.MIndexLibraryRelease",
+            "id": "m3.counterpart.MIndexLibraryRelease",
             "resolution": "resolved",
             "reason": "Retained exact M3Release value."
           }
@@ -4936,7 +4936,7 @@
         "recipe": {
           "id": "m3-cb",
           "version": "1",
-          "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+          "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
           "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
           "preconditions": [
             "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
@@ -4981,7 +4981,7 @@
         "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
       },
       {
-        "id": "synexia.jcc-recipe-laboratory",
+        "id": "m3.jcc-recipe-laboratory",
         "kind": "dependency-reuse",
         "status": "blocked",
         "reason": "Blocked source-qualified JCC laboratory handoff with an independently authored destination candidate tooling fixture. Its finite four-test proof is linked separately; source export, owning-module coverage, JDK gates and committed capability acceptance remain unadmitted.",
@@ -4989,9 +4989,9 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
-            "module": "synexia-openrewrite-recipes",
-            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryLab.java",
-            "symbol": "com.synexia.rewrite.M3RecipeMasteryLab",
+            "module": "m3-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeMasteryLab.java",
+            "symbol": "jdk.internal.m3.rewrite.M3RecipeMasteryLab",
             "signatures": [],
             "sha256": "0054ddf028c5a83c270c1a53795373c7cd8fa77395d23be7fd70424b644b0a3e",
             "git_blob_sha1": "ee8adf451105c34d0afa228fe05b7dabb3b1e264",
@@ -5002,9 +5002,9 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
-            "module": "synexia-openrewrite-recipes",
-            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasterySchedulePlanner.java",
-            "symbol": "com.synexia.rewrite.M3RecipeMasterySchedulePlanner",
+            "module": "m3-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeMasterySchedulePlanner.java",
+            "symbol": "jdk.internal.m3.rewrite.M3RecipeMasterySchedulePlanner",
             "signatures": [],
             "sha256": "b0a7e5236a3e2bcfd593aee081c01650d920a49cf2e7254679cf8b23e67238cb",
             "git_blob_sha1": "7f8cc7134df7ea5d019a9a78ce3cfce7809135fc",
@@ -5018,8 +5018,8 @@
             "repo": "hsoliwal/M3jdk21",
             "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
             "module": "m3/tooling/migration-recipes",
-            "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceRecipe.java",
-            "symbol": "com.m3.rewrite.M3Java21ConvergenceRecipe",
+            "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceRecipe.java",
+            "symbol": "jdk.m3.rewrite.M3Java21ConvergenceRecipe",
             "signatures": [
               "java.util.List<org.openrewrite.Recipe> getRecipeList()"
             ],
@@ -5033,8 +5033,8 @@
             "repo": "hsoliwal/M3jdk21",
             "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
             "module": "m3/tooling/migration-recipes",
-            "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java",
-            "symbol": "com.m3.rewrite.atom.M3PureIntConvergenceRecipe",
+            "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom/M3PureIntConvergenceRecipe.java",
+            "symbol": "jdk.m3.rewrite.atom.M3PureIntConvergenceRecipe",
             "signatures": [
               "java.util.List<org.openrewrite.Recipe> getRecipeList()"
             ],
@@ -5048,14 +5048,14 @@
             "repo": "hsoliwal/M3jdk21",
             "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
             "module": "m3/tooling/migration-recipes",
-            "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java",
-            "symbol": "com.m3.rewrite.atom.M3PureIntAtomEligibility",
+            "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom/M3PureIntAtomEligibility.java",
+            "symbol": "jdk.m3.rewrite.atom.M3PureIntAtomEligibility",
             "signatures": [
               "package-private static boolean eligible(J.MethodDeclaration)",
               "package-private static boolean atomized(J.MethodDeclaration)"
             ],
-            "sha256": "ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb",
-            "git_blob_sha1": "0041adab5913304874f5063fc2b982ff3cc1e065",
+            "sha256": "d2f8d2285d8b9b90b30f0906e2373efab8a25d9c84f0eefc252ed7acf2e20719",
+            "git_blob_sha1": "44935f75d9736744fbe0653774e324b140eea0be",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/master"
@@ -5064,8 +5064,8 @@
             "repo": "hsoliwal/M3jdk21",
             "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
             "module": "m3/tooling/migration-recipes",
-            "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/MemJava.java",
-            "symbol": "com.m3.rewrite.atom.MemJava",
+            "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/atom/MemJava.java",
+            "symbol": "jdk.m3.rewrite.atom.MemJava",
             "signatures": [
               "package-private static java.lang.ClassLoader compile(java.util.Map<String,String>)"
             ],
@@ -5079,8 +5079,8 @@
             "repo": "hsoliwal/M3jdk21",
             "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
             "module": "m3/tooling/migration-recipes",
-            "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3IntRecipeProjectTest.java",
-            "symbol": "com.m3.rewrite.atom.M3IntRecipeProjectTest",
+            "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/atom/M3IntRecipeProjectTest.java",
+            "symbol": "jdk.m3.rewrite.atom.M3IntRecipeProjectTest",
             "signatures": [
               "package-private JUnit proof owner; no product API"
             ],
@@ -5094,8 +5094,8 @@
             "repo": "hsoliwal/M3jdk21",
             "commit": null,
             "module": "m3/tooling/migration-recipes",
-            "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/JccReceivingFixtureTest.java",
-            "symbol": "com.m3.rewrite.atom.JccReceivingFixtureTest",
+            "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/atom/JccReceivingFixtureTest.java",
+            "symbol": "jdk.m3.rewrite.atom.JccReceivingFixtureTest",
             "signatures": [
               "void eachScheduleCompilesAndMatchesFrozenOraclesAtEveryIntermediate() throws java.lang.Exception",
               "void actualCanonicalCompositeAgreesWithItsDeclaredChildrenAndFreshReplay() throws java.lang.Exception",
@@ -5148,10 +5148,10 @@
           "cached_facts": "Finite source receipts stay bound to their original source epoch and require target re-execution. The linked original receiving fixture has its own exact destination input hashes and four-test receipt; no source PASS count is transferred."
         },
         "recipe": {
-          "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-handoff-20261005",
+          "id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-handoff-20261005",
           "version": "0.1.0-SNAPSHOT",
-          "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-          "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+          "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+          "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
           "preconditions": [
             "Exact canonical map preimage 67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb.",
             "Use the retained text transformer and sealed-install/1 replay owner for reviewed ledger bytes.",
@@ -5190,7 +5190,7 @@
         "observation": "Review and explicit root coverage obligations: m3/docs/jcc-source-handoff.md and m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json. Ledger replay tests are separate from capability acceptance; tests is empty intentionally. Independently authored receiving-fixture evidence is linked under m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json#independent_receiving_fixture; it does not promote this blocked capability."
       },
       {
-        "id": "synexia.jcc-java-jni-regression",
+        "id": "m3.jcc-java-jni-regression",
         "kind": "pending",
         "status": "blocked",
         "reason": "Java/regex/opaque-source/JNI regression applicability remains unreviewed against the destination's narrower domain. No destination JNI or regex implementation is inferred from source receipts.",
@@ -5198,9 +5198,9 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
-            "module": "synexia-openrewrite-recipes",
-            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3AtomPatternSignalChainRecipe.java",
-            "symbol": "com.synexia.rewrite.M3AtomPatternSignalChainRecipe",
+            "module": "m3-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3AtomPatternSignalChainRecipe.java",
+            "symbol": "jdk.internal.m3.rewrite.M3AtomPatternSignalChainRecipe",
             "signatures": [],
             "sha256": "876929d5e8caa03ea1e3af6d8d1d4d575d15aee3014a5f2ca425f4786eda5e98",
             "git_blob_sha1": "09df87a872817787fc8607bf11805cfa26c53aed",
@@ -5211,9 +5211,9 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
-            "module": "synexia-openrewrite-recipes",
-            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CodeSignalChain.java",
-            "symbol": "com.synexia.rewrite.M3CodeSignalChain",
+            "module": "m3-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3CodeSignalChain.java",
+            "symbol": "jdk.internal.m3.rewrite.M3CodeSignalChain",
             "signatures": [],
             "sha256": "a15825aef2a00641d74fba761c4858f449d6924a1286aa1eb71b1d81932351fa",
             "git_blob_sha1": "2ecb4c0548f8864f4a71936531e0cd1a4cf0b2b6",
@@ -5255,7 +5255,7 @@
             "reason": "Every current root entry is accounted, but full file/symbol/dependency/source-canon coverage is unqualified."
           },
           {
-            "id": "synexia.jcc-recipe-laboratory",
+            "id": "m3.jcc-recipe-laboratory",
             "resolution": "blocked",
             "reason": "Requires the same admitted source handoff and existing destination proof owners."
           },
@@ -5272,10 +5272,10 @@
           "cached_facts": "Finite source receipts stay bound to their original source epoch and require target re-execution."
         },
         "recipe": {
-          "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-handoff-20261005",
+          "id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-handoff-20261005",
           "version": "0.1.0-SNAPSHOT",
-          "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-          "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+          "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+          "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
           "preconditions": [
             "Exact canonical map preimage 67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb.",
             "Use the retained text transformer and sealed-install/1 replay owner for reviewed ledger bytes.",
@@ -5313,7 +5313,7 @@
         "observation": "Review and explicit root coverage obligations: m3/docs/jcc-source-handoff.md and m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json. Ledger replay tests are separate from capability acceptance; tests is empty intentionally."
       },
       {
-        "id": "synexia.counterpart.MIndexRegexTrigramQuery",
+        "id": "m3.counterpart.MIndexRegexTrigramQuery",
         "kind": "adapter",
         "status": "implemented-unverified",
         "reason": "JDK-owned TQ kernel and explicit canonical-backing range bridge. Finite module/JNI qualification is separate from complete-image and automatic regex dispatch admission.",
@@ -5321,17 +5321,17 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "cf3796cfca75284e9626b1e31703e41314c9f852",
-            "module": "synexia-indexstring",
-            "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
-            "symbol": "com.synexia.indexstring.MIndexRegexTrigramQuery",
+            "module": "m3-indexstring",
+            "path": "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexTrigramQuery.java",
+            "symbol": "jdk.internal.m3.indexstring.MIndexRegexTrigramQuery",
             "signatures": [
               "Facts precompute(CharSequence,int)",
               "Facts precompute(CharSequence,int,int,int)",
               "boolean testPrecomputed(Facts)",
               "Facts Facts.concat(Facts,int)"
             ],
-            "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
-            "git_blob_sha1": "e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea",
+            "sha256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e",
+            "git_blob_sha1": "4e1d24af8d3054a27ae3b6f2d8eebd6486225118",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -5396,9 +5396,9 @@
           "cached_facts": "Caller-owned metadata, no global cache. Length budget precedes allocation; no global all-pairs precompute."
         },
         "recipe": {
-          "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-tq",
+          "id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-tq",
           "version": "1",
-          "path": "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
+          "path": "m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
           "sha256": "245e252da59d310ea7e4229e5cafa5d25e322fee82d349337b37eab8a1f161a1",
           "preconditions": [
             "Explicit ABSENT Java targets, exact template hashes, pinned existing recipe and backing owners.",
@@ -5443,7 +5443,7 @@
         "observation": "TQ is a caller-owned precompute kernel, not a production JNI accelerator or proof of complete MIndex migration."
       },
       {
-        "id": "synexia.collections.SegmentedAddress28",
+        "id": "m3.collections.SegmentedAddress28",
         "kind": "adapter",
         "status": "implemented-unverified",
         "reason": "Complete bounded collection kernel in java.base; full-image and automatic JDK consumer admission remain open.",
@@ -5451,14 +5451,14 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
-            "module": "synexia-common",
-            "path": "synexia-common/src/main/java/com/synexia/common/collections/SegmentedAddress28.java",
-            "symbol": "com.synexia.common.collections.SegmentedAddress28",
+            "module": "m3-common",
+            "path": "m3-common/src/main/java/jdk/internal/m3/common/collections/SegmentedAddress28.java",
+            "symbol": "jdk.internal.m3.common.collections.SegmentedAddress28",
             "signatures": [
-              "com.synexia.common.collections.SegmentedAddress28"
+              "jdk.internal.m3.common.collections.SegmentedAddress28"
             ],
-            "sha256": "5844dea8e82d79d4beedaa2254956a3a2bb1db20ee39fc38a6d6df59e39a3c37",
-            "git_blob_sha1": "4d7629fac2a5fc13e2008570d8b62caacdd800bc",
+            "sha256": "92d4ae1d60e6ce6aab79ef1b91e6de4c076e02bc0a0603a6b2fb22ca21c1d881",
+            "git_blob_sha1": "6b931aefdb4afaf8765a7228dcad5bc9e436c9f8",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -5517,9 +5517,9 @@
           "cached_facts": "Bit rank/select lazily prepares exact region/page counts maintained by successful bit changes; metadata is not a second bitmap."
         },
         "recipe": {
-          "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
+          "id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
           "version": "2-restoration-szf",
-          "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+          "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
           "sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
           "preconditions": [
             "Explicit absent Java targets and exact source/template/dependency hashes.",
@@ -5579,10 +5579,10 @@
           "supersedes": []
         },
         "source_state": "implemented",
-        "observation": "The older com.m3.collections proof module is retained. New java.base owners are explicit internal capabilities, not a blanket java.util replacement. Source recovery: LOST at master 87590cb, restored through the version 2 recipe; historical record retained in history/9af35b3/mapping-records.json."
+        "observation": "The older jdk.m3.collections proof module is retained. New java.base owners are explicit internal capabilities, not a blanket java.util replacement. Source recovery: LOST at master 87590cb, restored through the version 2 recipe; historical record retained in history/9af35b3/mapping-records.json."
       },
       {
-        "id": "synexia.collections.SegmentedIntLane28",
+        "id": "m3.collections.SegmentedIntLane28",
         "kind": "adapter",
         "status": "implemented-unverified",
         "reason": "Complete bounded collection kernel in java.base; full-image and automatic JDK consumer admission remain open.",
@@ -5590,28 +5590,28 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
-            "module": "synexia-common",
-            "path": "synexia-common/src/main/java/com/synexia/common/collections/SegmentedIntLane28.java",
-            "symbol": "com.synexia.common.collections.SegmentedIntLane28",
+            "module": "m3-common",
+            "path": "m3-common/src/main/java/jdk/internal/m3/common/collections/SegmentedIntLane28.java",
+            "symbol": "jdk.internal.m3.common.collections.SegmentedIntLane28",
             "signatures": [
-              "com.synexia.common.collections.SegmentedIntLane28"
+              "jdk.internal.m3.common.collections.SegmentedIntLane28"
             ],
-            "sha256": "175f3e0beb5b9e1aca7196491d19a54a95ed2218253951677e898615ba3ed8ac",
-            "git_blob_sha1": "5e71da1dd3fdc1640dc1771c952796a6c229281b",
+            "sha256": "a9be9f532e5c3606fda0ff30599227301133ca70e9d1fcb1f1e2182ef72f5488",
+            "git_blob_sha1": "2a42412b95a5ee07c4e716fe37c530b254fedec1",
             "fingerprint": null,
             "revision_role": "pinned"
           },
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "aabe02e51718922c486fb04590af8818ccc7e653",
-            "module": "synexia-openrewrite-recipes",
-            "path": "synexia-openrewrite-recipes/crates/m3-szf/src/main/resources/com/synexia/rewrite/hash-pinned-java/szf/SegmentedIntLane28.java.txt",
-            "symbol": "com.synexia.common.collections.SegmentedIntLane28",
+            "module": "m3-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes/crates/m3-szf/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/szf/SegmentedIntLane28.java.txt",
+            "symbol": "jdk.internal.m3.common.collections.SegmentedIntLane28",
             "signatures": [
-              "com.synexia.common.collections.SegmentedIntLane28"
+              "jdk.internal.m3.common.collections.SegmentedIntLane28"
             ],
-            "sha256": "bbba8cc495480bbde1d8e60ecb6b5c5ba3b8bf0583477622e3d547e5ba546ac0",
-            "git_blob_sha1": "993fe654bfcb4039a6a2fa11513751e7eb2c9729",
+            "sha256": "b2698128170550f44582cc9bafd0b1ba07c2bde3f06fed50829b3ef654ce6d9c",
+            "git_blob_sha1": "1613a57aa543cacb6f53f5a1c3bc0a10cf4a4cee",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -5671,9 +5671,9 @@
           "cached_facts": "Bit rank/select lazily prepares exact region/page counts maintained by successful bit changes; metadata is not a second bitmap."
         },
         "recipe": {
-          "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
+          "id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
           "version": "2-restoration-szf",
-          "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+          "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
           "sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
           "preconditions": [
             "Explicit absent Java targets and exact source/template/dependency hashes.",
@@ -5734,10 +5734,10 @@
           "supersedes": []
         },
         "source_state": "implemented",
-        "observation": "The older com.m3.collections proof module is retained. New java.base owners are explicit internal capabilities, not a blanket java.util replacement. Source recovery: LOST at master 87590cb, restored through the version 2 recipe; historical record retained in history/9af35b3/mapping-records.json."
+        "observation": "The older jdk.m3.collections proof module is retained. New java.base owners are explicit internal capabilities, not a blanket java.util replacement. Source recovery: LOST at master 87590cb, restored through the version 2 recipe; historical record retained in history/9af35b3/mapping-records.json."
       },
       {
-        "id": "synexia.collections.SegmentedLongLane28",
+        "id": "m3.collections.SegmentedLongLane28",
         "kind": "adapter",
         "status": "implemented-unverified",
         "reason": "Complete bounded collection kernel in java.base; full-image and automatic JDK consumer admission remain open.",
@@ -5745,28 +5745,28 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
-            "module": "synexia-common",
-            "path": "synexia-common/src/main/java/com/synexia/common/collections/SegmentedLongLane28.java",
-            "symbol": "com.synexia.common.collections.SegmentedLongLane28",
+            "module": "m3-common",
+            "path": "m3-common/src/main/java/jdk/internal/m3/common/collections/SegmentedLongLane28.java",
+            "symbol": "jdk.internal.m3.common.collections.SegmentedLongLane28",
             "signatures": [
-              "com.synexia.common.collections.SegmentedLongLane28"
+              "jdk.internal.m3.common.collections.SegmentedLongLane28"
             ],
-            "sha256": "237289bdec5fe8d6f142dfffab22a72eebc499ea1b54f0a350bbe09c0e801394",
-            "git_blob_sha1": "6105671f09f5a5e27147430b474719daab2b1e29",
+            "sha256": "7fdce7c2cfe529251c69cdf186d4cabc8333c46692df78cbabdae56aa2a023e2",
+            "git_blob_sha1": "f7b3a7f0f4f4b896ad8325a96e90331881e69259",
             "fingerprint": null,
             "revision_role": "pinned"
           },
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "aabe02e51718922c486fb04590af8818ccc7e653",
-            "module": "synexia-openrewrite-recipes",
-            "path": "synexia-openrewrite-recipes/crates/m3-szf/src/main/resources/com/synexia/rewrite/hash-pinned-java/szf/SegmentedLongLane28.java.txt",
-            "symbol": "com.synexia.common.collections.SegmentedLongLane28",
+            "module": "m3-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes/crates/m3-szf/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/szf/SegmentedLongLane28.java.txt",
+            "symbol": "jdk.internal.m3.common.collections.SegmentedLongLane28",
             "signatures": [
-              "com.synexia.common.collections.SegmentedLongLane28"
+              "jdk.internal.m3.common.collections.SegmentedLongLane28"
             ],
-            "sha256": "4b6c03da1a13274ce736039359538ff3ffc1ff1586714dba95e769574907ab8e",
-            "git_blob_sha1": "0ca5ca4cbd17589c2b2c33cbda4433ad6319049c",
+            "sha256": "c43673c769bc23dc592dba3a1da9fc2aebc804640dde102f7c749e71f59b415c",
+            "git_blob_sha1": "8f31549c019e33e0200f27c84aea154cbfc2f647",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -5826,9 +5826,9 @@
           "cached_facts": "Bit rank/select lazily prepares exact region/page counts maintained by successful bit changes; metadata is not a second bitmap."
         },
         "recipe": {
-          "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
+          "id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
           "version": "2-restoration-szf",
-          "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+          "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
           "sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
           "preconditions": [
             "Explicit absent Java targets and exact source/template/dependency hashes.",
@@ -5889,10 +5889,10 @@
           "supersedes": []
         },
         "source_state": "implemented",
-        "observation": "The older com.m3.collections proof module is retained. New java.base owners are explicit internal capabilities, not a blanket java.util replacement. Source recovery: LOST at master 87590cb, restored through the version 2 recipe; historical record retained in history/9af35b3/mapping-records.json."
+        "observation": "The older jdk.m3.collections proof module is retained. New java.base owners are explicit internal capabilities, not a blanket java.util replacement. Source recovery: LOST at master 87590cb, restored through the version 2 recipe; historical record retained in history/9af35b3/mapping-records.json."
       },
       {
-        "id": "synexia.collections.SegmentedBitLane28",
+        "id": "m3.collections.SegmentedBitLane28",
         "kind": "adapter",
         "status": "implemented-unverified",
         "reason": "Complete bounded collection kernel in java.base; full-image and automatic JDK consumer admission remain open.",
@@ -5900,28 +5900,28 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
-            "module": "synexia-common",
-            "path": "synexia-common/src/main/java/com/synexia/common/collections/SegmentedBitLane28.java",
-            "symbol": "com.synexia.common.collections.SegmentedBitLane28",
+            "module": "m3-common",
+            "path": "m3-common/src/main/java/jdk/internal/m3/common/collections/SegmentedBitLane28.java",
+            "symbol": "jdk.internal.m3.common.collections.SegmentedBitLane28",
             "signatures": [
-              "com.synexia.common.collections.SegmentedBitLane28"
+              "jdk.internal.m3.common.collections.SegmentedBitLane28"
             ],
-            "sha256": "fe535b8a1f3b22fa1a63455c9078d7b911c72a87a3255714f66e3639d11000af",
-            "git_blob_sha1": "8932039f353507225f31dfce7c146f5165ccfc54",
+            "sha256": "147021a606f135a4b6b0f347ce90354ee15aef12c229ec5c02a30935216a1e70",
+            "git_blob_sha1": "9bb7173afa861c05b62a557db63e3a6692ddfe4c",
             "fingerprint": null,
             "revision_role": "pinned"
           },
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
-            "module": "synexia-common",
-            "path": "synexia-common/src/main/native/collections/segmented_bit_lane.c",
-            "symbol": "Java_com_synexia_common_collections_SegmentedBitLane28_cardinality0",
+            "module": "m3-common",
+            "path": "m3-common/src/main/native/collections/segmented_bit_lane.c",
+            "symbol": "Java_jdk_internal_m3_common_collections_SegmentedBitLane28_cardinality0",
             "signatures": [
-              "Java_com_synexia_common_collections_SegmentedBitLane28_cardinality0"
+              "Java_jdk_internal_m3_common_collections_SegmentedBitLane28_cardinality0"
             ],
-            "sha256": "da2266d8ec93478f4fbeb6a5403e14ce8dcd6a6795c43a5d4230b2a97ef8eb0e",
-            "git_blob_sha1": "1ee8509cdd05a7edcfc732b3c5947dd78b30ce3a",
+            "sha256": "5a4ba31368df4b8c3f8e71275b4db583fcba0be37e5b39d07de8112db44319d5",
+            "git_blob_sha1": "20549bee772f30ffabdc406bb6ab52c7435d2b01",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -5994,9 +5994,9 @@
           "cached_facts": "Bit rank/select lazily prepares exact region/page counts maintained by successful bit changes; metadata is not a second bitmap."
         },
         "recipe": {
-          "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
+          "id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
           "version": "2-restoration-szf",
-          "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+          "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
           "sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
           "preconditions": [
             "Explicit absent Java targets and exact source/template/dependency hashes.",
@@ -6070,10 +6070,10 @@
           "supersedes": []
         },
         "source_state": "implemented",
-        "observation": "The older com.m3.collections proof module is retained. New java.base owners are explicit internal capabilities, not a blanket java.util replacement. Source recovery: LOST at master 87590cb, restored through the version 2 recipe; historical record retained in history/9af35b3/mapping-records.json."
+        "observation": "The older jdk.m3.collections proof module is retained. New java.base owners are explicit internal capabilities, not a blanket java.util replacement. Source recovery: LOST at master 87590cb, restored through the version 2 recipe; historical record retained in history/9af35b3/mapping-records.json."
       },
       {
-        "id": "synexia.collections.PackedBitAtoms",
+        "id": "m3.collections.PackedBitAtoms",
         "kind": "adapter",
         "status": "implemented-unverified",
         "reason": "Complete bounded collection kernel in java.base; full-image and automatic JDK consumer admission remain open.",
@@ -6081,14 +6081,14 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
-            "module": "synexia-common",
-            "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedBitAtoms.java",
-            "symbol": "com.synexia.common.collections.PackedBitAtoms",
+            "module": "m3-common",
+            "path": "m3-common/src/main/java/jdk/internal/m3/common/collections/PackedBitAtoms.java",
+            "symbol": "jdk.internal.m3.common.collections.PackedBitAtoms",
             "signatures": [
-              "com.synexia.common.collections.PackedBitAtoms"
+              "jdk.internal.m3.common.collections.PackedBitAtoms"
             ],
-            "sha256": "a8ac10ba4fd2d1fbc0f8f0a4a199e9ca1c28618a4bc17ad1702bc5598b1cfa29",
-            "git_blob_sha1": "9858def13146479794370dd56387d34edfaa95ef",
+            "sha256": "20bce3cf025430fea0351bdc4478b204d808cde04432437e689c2eddb55e0305",
+            "git_blob_sha1": "c463d9857d917263e88933a4d07902840c3f302e",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -6147,9 +6147,9 @@
           "cached_facts": "Bit rank/select lazily prepares exact region/page counts maintained by successful bit changes; metadata is not a second bitmap."
         },
         "recipe": {
-          "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
+          "id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
           "version": "2-restoration-szf",
-          "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+          "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
           "sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
           "preconditions": [
             "Explicit absent Java targets and exact source/template/dependency hashes.",
@@ -6209,10 +6209,10 @@
           "supersedes": []
         },
         "source_state": "implemented",
-        "observation": "The older com.m3.collections proof module is retained. New java.base owners are explicit internal capabilities, not a blanket java.util replacement. Source recovery: LOST at master 87590cb, restored through the version 2 recipe; historical record retained in history/9af35b3/mapping-records.json."
+        "observation": "The older jdk.m3.collections proof module is retained. New java.base owners are explicit internal capabilities, not a blanket java.util replacement. Source recovery: LOST at master 87590cb, restored through the version 2 recipe; historical record retained in history/9af35b3/mapping-records.json."
       }
     ]
   },
-  "precompute_port_map": "m3/docs/synexia-string-precompute-port-map.tsv",
+  "precompute_port_map": "m3/docs/m3-string-precompute-port-map.tsv",
   "precompute_scope_rule": "Only String-semantic and String-search donor precompute maps into M3JDK String/runtime internals; Synexia language, semantic, DAG, probabilistic and reasoning precompute must not be transplanted into java.lang.String."
 }

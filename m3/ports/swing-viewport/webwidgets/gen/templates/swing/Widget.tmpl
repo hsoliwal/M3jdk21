@@ -1,0 +1,20 @@
+package @WPKG@;
+
+import @PKG@.M3@C@Api;
+import @PKG@.M3@C@Model;
+
+/**
+ * M3 @CONCEPT@ for the M3JDK Swing port: a JComponent on the same lane model as the Nebula widget,
+ * family @FAM@ (pattern @PATTERN@). SwingX analogue (pattern only, LGPL not copied): @SWINGX@.
+ * Behaviour is the {@link M3@C@Api} of {@link #api()}.
+ */
+public class M3@C@ extends M3WebComponent<M3@C@Model> {
+	public M3@C@() {
+		super(new M3@C@Model());
+	}
+
+	/** The widget API (the lane model). */
+	public M3@C@Api api() {
+		return getModel();
+	}
+}

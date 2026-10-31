@@ -21,20 +21,20 @@
       {
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/source-binding-v3/SOURCE_FIELDS_AND_PROOFS.json",
         "bytes": 419637,
-        "sha256": "7b5e197da5e2645efb87345e2abf92dcd8071993ff308c8fa0bca0511d00c52e",
-        "git_blob_sha1": "97e1e5438249e64577f9b9c17dd391678b65d712"
+        "sha256": "65f10e830243ed927aabedee9d0734daa46eed3b37ae4212e28ab85131fe9e9d",
+        "git_blob_sha1": "8d44a30fb11ce988c489a6259e8be117df98ed3a"
       },
       {
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/source-binding-v3/ROOT_ACCOUNTING.json",
         "bytes": 70709,
-        "sha256": "55610f52b7b1e01ee15999969cc385616ff2e43f734e589ff61c750c5ab3c845",
-        "git_blob_sha1": "ad19c72cb925afa662e93898df2cc8a2839a7a67"
+        "sha256": "30dadc5274823dba2443d663000051a48c0785eb92042ba8e684520bc2ce5942",
+        "git_blob_sha1": "ae55363fa985efefc16c80c9eea4587034bc9be2"
       }
     ],
     "source_export_admitted": false,
     "receiving_recipe_execution": false
   },
-  "derivation_input_sha256": "0d494e5904854b3529e0fb72079cb8c4c9fab520e20077d0e68e6a1887e11b73",
+  "derivation_input_sha256": "8c6eab25d9adb14d3789799a979924f77a89b2f3824b5f676ea12c322bbf1da7",
   "derived_from_actual_source_publication": true,
   "source_or_receiving_gate_execution": false
 }

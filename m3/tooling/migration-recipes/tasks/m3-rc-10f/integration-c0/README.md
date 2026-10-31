@@ -1,6 +1,6 @@
 # Current c0 source recipe qualification
 
-This isolated Maven project uses the unchanged `M3Jdk21HashPinnedTextSnapshotRecipe` owner (SHA-256 `8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6`). Its authority pins are source commit `d1ecbd43dbadaf218deec0d98a2ddc23f3a3f45c` and M3 commit `c0a14387009aefc7d62bd3268055d526e04f9074`. It contains 143 explicit targets: 69 replacements and 74 additions, grouped into 36 disjoint families of at most seven targets.
+This isolated Maven project uses the unchanged `M3Jdk21HashPinnedTextSnapshotRecipe` owner (SHA-256 `e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795`). Its authority pins are source commit `d1ecbd43dbadaf218deec0d98a2ddc23f3a3f45c` and M3 commit `c0a14387009aefc7d62bd3268055d526e04f9074`. It contains 143 explicit targets: 69 replacements and 74 additions, grouped into 36 disjoint families of at most seven targets.
 
 The scheduler fixture runs 1,132 complete before/after mixtures within individual families, 611 declared initial refusals, 286 post-scan refusals, and 28 positive empty/unrelated-input cases for the fourteen pure-addition families. Forty-two JUnit methods include the family cases and six shared controls. The two named compositions are the exact Forward and Reverse family orders in `composition-orders.json`; their actual intermediate identities, patches and fixed-point replays are retained. This finite scope does not enumerate a Cartesian product across families, unlisted orders, all possible adversarial inputs or cross-family atomicity.
 
@@ -10,7 +10,7 @@ The 120 recovered source candidates are checked against authenticated surviving 
 
 The closed project has 292 logical files. Two before-image fixtures contain significant trailing TAB bytes and must remain exact:
 
-- `src/test/resources/before/m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java`
+- `src/test/resources/before/m3/tooling/a3/src/test/java/jdk/m3/a3/A3PlanTest.java`
 - `src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java`
 
 A flat published copy may omit these two fixtures. It is incomplete until reconstructed from the associated verified evidence archive; running Maven directly on that incomplete flat copy is unsupported. The companion publication-only `RECONSTRUCT.md` and `PROJECT-READY.json` bind the exact archive, all logical project identities and withheld fixture hashes. The archive's complete project is at logical path `ic0/project`. Using the supplied unchanged archive owner, reconstruct into a fresh destination before Maven execution:

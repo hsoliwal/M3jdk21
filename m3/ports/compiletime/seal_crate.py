@@ -14,7 +14,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[3]
 PORT = ROOT / "m3/ports/compiletime"
 CRATE_NAME = "m3-compiletime-regex-precompute"
-CRATE = ROOT / "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned" / CRATE_NAME
+CRATE = ROOT / "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned" / CRATE_NAME
 
 
 def targets() -> list[Path]:

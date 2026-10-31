@@ -84,7 +84,7 @@ def main():
     proof.mkdir()
     sources = sorted((module / "src/main/java").rglob("*.java"))
     vfs = [p for p in sources if selected_vfs_source(p.relative_to(module).as_posix())]
-    owned = [p for p in sources if "/com/m3/fs/vfs/" not in str(p)]
+    owned = [p for p in sources if "/jdk/m3/fs/vfs/" not in str(p)]
     if {str(p.relative_to(repository)):digest(p) for p in vfs+owned} != recorded["production_sources"]:
         raise RuntimeError("Compiled production inventory differs from recorded scope")
     runtime_cp = os.pathsep.join(str(row["jar"]) for row in dependencies)
@@ -97,10 +97,10 @@ def main():
     harness = out / "FacadeTestLauncher.java"
     shutil.copyfile(harness_source, harness)
     names = ["MFilesParallelTest", "MFilesBehaviorTest", "MFilesProviderTest", "MFileCaptureTest", "MFileStreamsTest"]
-    tests = [module / ("src/test/java/com/m3/fs/" + name + ".java") for name in names]
+    tests = [module / ("src/test/java/jdk/m3/fs/" + name + ".java") for name in names]
     cp = os.pathsep.join(map(str, [classes, *jars, module / "src/main/resources"]))
     run("compile-tests", [jdk / "bin/javac", "--release", "21", "-Xlint:all", "-Werror", "-implicit:none", "-sourcepath", "", "-cp", cp, "-d", proof, *tests, harness])
-    result = run("junit", [jdk / "bin/java", "-Xcheck:jni", "-cp", str(proof)+os.pathsep+cp, "FacadeTestLauncher", *("com.m3.fs."+name for name in names)])
+    result = run("junit", [jdk / "bin/java", "-Xcheck:jni", "-cp", str(proof)+os.pathsep+cp, "FacadeTestLauncher", *("jdk.m3.fs."+name for name in names)])
     counts = {m.group(2):int(m.group(1)) for m in re.finditer(r"\[\s*(\d+)\s+tests\s+(found|skipped|started|aborted|successful|failed)\s*\]", result)}
     if counts != {"found":136,"skipped":0,"started":136,"aborted":0,"successful":136,"failed":0}:
         raise RuntimeError("Unexpected test inventory/results: " + repr(counts))

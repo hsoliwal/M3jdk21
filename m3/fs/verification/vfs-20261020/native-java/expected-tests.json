@@ -1,133 +1,133 @@
 [
   {
-    "class": "com.m3.fs.M3FSNativeTest",
+    "class": "jdk.m3.fs.M3FSNativeTest",
     "methods": [
       "nativeCoreJniAndJavaFacadePreserveFilesystemSemantics",
       "immutableDirectSegmentsWriteThroughScatterGather",
       "lifecycleAndBoundsFailClosed"
     ],
-    "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FSNativeTest.java",
-    "source_sha256": "4889a392e7a12ff5b81eb757bc406ffacd336d4af591c48564af8b4a96661dfd",
+    "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FSNativeTest.java",
+    "source_sha256": "7ac6b8f1a0a598c242cd101438320d0da245f8f30da6436312ebde2ea5e21853",
     "tests": 3
   },
   {
-    "class": "com.m3.fs.M3FSScrubTest",
+    "class": "jdk.m3.fs.M3FSScrubTest",
     "methods": [
       "scrubReportsDeduplicatedUniqueBlocksAndReadOnlyVerification",
       "scrubReportRejectsIncompleteNativeClassificationGeometry"
     ],
-    "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FSScrubTest.java",
-    "source_sha256": "b3b5b8dee9212cd81ac9f7634934e7dd95767f2d25b4d47d2a25e0c81e348608",
+    "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FSScrubTest.java",
+    "source_sha256": "a2df3461d441bb61372976751986643a7dcd4d5c80c9f40f76a8dabb735d6c38",
     "tests": 2
   },
   {
-    "class": "com.m3.fs.M3FsCheckedInodeIoTest",
+    "class": "jdk.m3.fs.M3FsCheckedInodeIoTest",
     "methods": [
       "secondOwnerReplacementRejectsReadsWritesAppendsAndTruncation",
       "appendChoosesEofInTheSameTransactionAcrossOwners",
       "checkedTruncationSupportsArbitrarySizesAndNoOpGeneration",
       "noReplaceRenamePreservesDestinationAndOverwriteRenameIsAtomic"
     ],
-    "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsCheckedInodeIoTest.java",
-    "source_sha256": "ef23a1678b007a02bd4c9ab4d22cd042979e8990128f111ee779447d48cb9982",
+    "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FsCheckedInodeIoTest.java",
+    "source_sha256": "d7e93df0ac1727854984fcef62eae1577911f891d281ab97bda92c7e1f306798",
     "tests": 4
   },
   {
-    "class": "com.m3.fs.M3FsFeatureTest",
+    "class": "jdk.m3.fs.M3FsFeatureTest",
     "methods": [
       "featureBitsAreUniqueAndKnownMaskContainsEveryFeatureExactlyOnce",
       "currentNativeEngineAdvertisesItsImplementedSemanticSuperset"
     ],
-    "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsFeatureTest.java",
-    "source_sha256": "921b286100db221a5e13d8612b8ad720b87efba55b4cfbe7ea8631b8adc3aeee",
+    "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FsFeatureTest.java",
+    "source_sha256": "b0f7db72b6102c4ff661c6b4a66cbe315751b175d2c0b8a1c5cd3d21d797bd26",
     "tests": 2
   },
   {
-    "class": "com.m3.fs.M3FsHotPathTest",
+    "class": "jdk.m3.fs.M3FsHotPathTest",
     "methods": [
       "integratedBlockPathPreservesBytesAndSnapshots"
     ],
-    "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsHotPathTest.java",
-    "source_sha256": "1c99266d33d2e0a20f7a872170c592effd6966126a1c0efef763a42eddd49566",
+    "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FsHotPathTest.java",
+    "source_sha256": "ca5481d5c06bc65ed66740c4240179cecd3def2d6582d15ccfaca61b8f6c3a9c",
     "tests": 1
   },
   {
-    "class": "com.m3.fs.M3FsImageBindingTest",
+    "class": "jdk.m3.fs.M3FsImageBindingTest",
     "methods": [
       "atomicImageReplacementPreservesHardlinksAndRetainedSnapshot",
       "fallbackRequiresExactImageBytesEvenForMatchingCountsOrNativeOnlyValues",
       "supplementaryFallbackPrecedesUtf16LengthAndPresencePrefiltersForEveryMode",
       "fallbackRunsAgainstPinnedSourceWhileAnotherOwnerReplacesTheLiveImage"
     ],
-    "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsImageBindingTest.java",
-    "source_sha256": "8343698b8445ca8e4d9435c7b2c87340638eb2669e0412d83945b52afa7d2b1f",
+    "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FsImageBindingTest.java",
+    "source_sha256": "9d02a0fbebefc7454ba02e7aab21609417c5179753caadc3a15f7c69e1c13c43",
     "tests": 4
   },
   {
-    "class": "com.m3.fs.M3FsIndexedTest",
+    "class": "jdk.m3.fs.M3FsIndexedTest",
     "methods": [
       "indexedNativeOperations"
     ],
-    "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsIndexedTest.java",
-    "source_sha256": "8562b2f4b3621cf16dae2c883f5b9ca3655f938b86246a102e19e2a8bcfeb489",
+    "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FsIndexedTest.java",
+    "source_sha256": "a51b03b07f6447e699fddef6117ee9ed46aa375c024c32ce4d2e4224074dbbcf",
     "tests": 1
   },
   {
-    "class": "com.m3.fs.M3FsNativeSemanticTest",
+    "class": "jdk.m3.fs.M3FsNativeSemanticTest",
     "methods": [
       "filesystemExecutesMIndexStringAndRegexSemanticsNatively"
     ],
-    "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsNativeSemanticTest.java",
-    "source_sha256": "1b1286b7e1d83fe5af8a0f894fcb040efe981b3c50465e0b188f3d7485c7d759",
+    "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FsNativeSemanticTest.java",
+    "source_sha256": "d8fa88641a9ce6d0fb2866af26b9b9cb74c608e076628dd758c7a3b976fc0e9c",
     "tests": 1
   },
   {
-    "class": "com.m3.fs.M3FsRegexFallbackTest",
+    "class": "jdk.m3.fs.M3FsRegexFallbackTest",
     "methods": [
       "defaultFallbackMatchesUntouchedBackendsForEveryModeAndUtf16Boundary",
       "re2SelectionDoesNotSubstituteJdkSemanticsAndCallerOverrideStillOwnsAnswers",
       "fallbackCompilationRemainsLazyAndImageAndNativeAdmissionKeepPrecedence",
       "readOnlyAndRetainedSnapshotUseTheAutomaticRe2Backend"
     ],
-    "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsRegexFallbackTest.java",
-    "source_sha256": "f1056df5e03e0298a008d2c5dc93d343012dd3ab509a2c28d45e19552dc41703",
+    "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FsRegexFallbackTest.java",
+    "source_sha256": "4044a4dec92d4137eb15de9beaee245eda11c99719e480be2b3dc3bdf3dc46e0",
     "tests": 4
   },
   {
-    "class": "com.m3.fs.M3FsSnapshotViewTest",
+    "class": "jdk.m3.fs.M3FsSnapshotViewTest",
     "methods": [
       "retainedViewsSurviveConcurrentMutation"
     ],
-    "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsSnapshotViewTest.java",
-    "source_sha256": "4eee10ca7e191eba43de6c3a2085dab564e856ea293055adff279cec0f91d02b",
+    "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FsSnapshotViewTest.java",
+    "source_sha256": "3bc49fe07b048af63374d67c495c0458d028c748cc98c0f24c8309b019a44b6a",
     "tests": 1
   },
   {
-    "class": "com.m3.fs.M3FsSparseFeatureTest",
+    "class": "jdk.m3.fs.M3FsSparseFeatureTest",
     "methods": [
       "holePunchPreservesSizeReportsAllocationAndKeepsCloneIsolation",
       "rangeGeometryFailsBeforeNativeMutation"
     ],
-    "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsSparseFeatureTest.java",
-    "source_sha256": "70fdf32fc513a107336148959fadeb72d4908f8189d17d15af041fe94c875d6b",
+    "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FsSparseFeatureTest.java",
+    "source_sha256": "2448567f73b6155acf35fba7fdcd119f22e53fb2433df6819002f30d7884349f",
     "tests": 2
   },
   {
-    "class": "com.m3.fs.M3MappedStorageTest",
+    "class": "jdk.m3.fs.M3MappedStorageTest",
     "methods": [
       "mappedStorageAndExactByteContracts"
     ],
-    "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3MappedStorageTest.java",
-    "source_sha256": "1cc6fa6ee0825c0cbbfbb2b6e12f2530c8242e507273d700d7a86ed415aaa5e3",
+    "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3MappedStorageTest.java",
+    "source_sha256": "28352df4b8a4c4570f40aa9803c638b77ee8866ae5adc4a3441aff40565488c6",
     "tests": 1
   },
   {
-    "class": "com.m3.fs.M3NativeContentPositionTest",
+    "class": "jdk.m3.fs.M3NativeContentPositionTest",
     "methods": [
       "freshOffAndRequiredVmsAgreeOnPositionedEndianLanes"
     ],
-    "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3NativeContentPositionTest.java",
-    "source_sha256": "f5d92b1f4f1801109960683387257199ab5ad501048497b1a9f4ef50abdbd08a",
+    "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3NativeContentPositionTest.java",
+    "source_sha256": "ae0a5590f62d9e5dd9d74c89b000384a076718c7717773fe364e2bf6d9a87bb4",
     "tests": 1
   }
 ]

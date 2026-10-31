@@ -13,8 +13,8 @@
     <plugins>
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>
         <configuration><release>21</release><proc>none</proc><compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs>
-          <includes><include>com/m3/collections/M3IndexMaskWindow.java</include><include>com/m3/collections/M3IndexMaskCompactor.java</include></includes>
-          <testIncludes><testInclude>com/m3/collections/M3IndexMaskWindowSelfTest.java</testInclude><testInclude>com/m3/collections/M3IndexMaskWindowTest.java</testInclude></testIncludes>
+          <includes><include>jdk/m3/collections/M3IndexMaskWindow.java</include><include>jdk/m3/collections/M3IndexMaskCompactor.java</include></includes>
+          <testIncludes><testInclude>jdk/m3/collections/M3IndexMaskWindowSelfTest.java</testInclude><testInclude>jdk/m3/collections/M3IndexMaskWindowTest.java</testInclude></testIncludes>
         </configuration>
       </plugin>
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version>

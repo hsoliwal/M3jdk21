@@ -9,7 +9,7 @@
       ],
       "superseded_by": {
         "path": "src/java.base/share/classes/java/lang/M3String.java",
-        "git_blob": "8a57ca4f085e4e8f1f1d9f2ec0fdb2fc5888597e"
+        "git_blob": "8ddd767e9198f5716ebde4aada80b91591125d9d"
       },
       "supersession_history": [
         {
@@ -22,7 +22,13 @@
           "source_path": "src/java.base/share/classes/java/lang/M3String.java",
           "git_blob": "8a57ca4f085e4e8f1f1d9f2ec0fdb2fc5888597e",
           "source_commit": "5eeb841168ed420085223806fefcfca8d1b6b3ca",
-          "review_scope": "CURRENT_GITCHAIN_ONLY_FULL_JDK_GATE_PENDING"
+          "review_scope": "PREVIOUS_MERGED_RESULT_RETAINED"
+        },
+        {
+          "source_path": "src/java.base/share/classes/java/lang/M3String.java",
+          "git_blob": "8ddd767e9198f5716ebde4aada80b91591125d9d",
+          "source_commit": "9237d21cccc0d700555ccc4eab3b87edb2833af3",
+          "review_scope": "CURRENT_MERGED_RESULT_EXACT_SOURCE; FULL_JDK_GATE_PENDING"
         }
       ]
     },

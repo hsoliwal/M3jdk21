@@ -19,7 +19,7 @@ public final class TreeBulkPublicApi {
         return Arrays.toString(Arrays.stream(types).map(Type::getTypeName).toArray(String[]::new));
     }
     public static void main(String[] args) throws Exception {
-        Class<?> owner=Class.forName("com.m3.collections.M3TreeMap",false,TreeBulkPublicApi.class.getClassLoader());
+        Class<?> owner=Class.forName("jdk.m3.collections.M3TreeMap",false,TreeBulkPublicApi.class.getClassLoader());
         TreeSet<String> rows=new TreeSet<>();
         for(Method m:owner.getMethods()) {
             rows.add("M "+Modifier.toString(m.getModifiers())+" "+m.getName()+" "+m.getGenericReturnType().getTypeName()

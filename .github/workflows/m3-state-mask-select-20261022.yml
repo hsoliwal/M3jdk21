@@ -3,8 +3,8 @@ name: M3 source-owned required excluded array-state selection Java21
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3StateMaskArrays.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3StateMaskSelectContract.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3StateMaskArrays.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3StateMaskSelectContract.java'
       - 'm3/collections/qualification/state-mask-select-20261022/**'
       - '.github/workflows/m3-state-mask-select-20261022.yml'
   workflow_dispatch:
@@ -36,7 +36,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          actual="$(sha256sum m3/collections/src/main/java/com/m3/collections/M3StateMaskArrays.java | awk '{print $1}')"
+          actual="$(sha256sum m3/collections/src/main/java/jdk/m3/collections/M3StateMaskArrays.java | awk '{print $1}')"
           test "$actual" = "84181e87ab510ee84c1ee8c3645033192ef25a4dbb377aa76d60976bc3026357"
       - name: Compile exact original-owner source and differential test
         shell: bash
@@ -45,8 +45,8 @@ jobs:
           tmp="$(mktemp -d)"
           mkdir -p "$tmp/classes"
           javac --release 21 -Xlint:all -Werror -d "$tmp/classes" \
-            m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java \
-            m3/collections/src/main/java/com/m3/collections/M3StateMaskArrays.java \
-            m3/collections/src/test/java/com/m3/collections/M3StateMaskSelectContract.java
-          java -cp "$tmp/classes" com.m3.collections.M3StateMaskSelectContract
-          java -Xint -cp "$tmp/classes" com.m3.collections.M3StateMaskSelectContract
+            m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3StateMaskArrays.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3StateMaskSelectContract.java
+          java -cp "$tmp/classes" jdk.m3.collections.M3StateMaskSelectContract
+          java -Xint -cp "$tmp/classes" jdk.m3.collections.M3StateMaskSelectContract

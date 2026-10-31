@@ -1,0 +1,72 @@
+{
+  "schema": "M3_CURRENT_FORK_OWNER_QUALIFICATION_INDEX/1",
+  "status": "LOCAL_CURRENT_OWNER_AND_CORRECTION_PROOFS_PASS",
+  "canonical_parent": "3f4c3e1c97ca12b7f0d3efbbc387f40f942fa399",
+  "canonical_parent_tree": "219eebe67fab908a3a4991a35c3c4f77c2907133",
+  "actual_receiving_file_changes": {
+    "M3jdk21": 2,
+    "eclipse.platform.swt": 1
+  },
+  "current_fork_receipts": [
+    {
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/current-fork-owners-20261021/nlp/evidence/OPENNLP_OWNER_001.json",
+      "sha256": "883eda0112382800955a61ce1d9cbc999954cc5a1eb50dd2cc12a2534174e6e0"
+    },
+    {
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/current-fork-owners-20261021/nlp/evidence/LUCENE_OWNER_001.json",
+      "sha256": "d2981abb4e6abca4cfa27909023e721f257f60dfd71aadffde59200438220059"
+    },
+    {
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/current-fork-owners-20261021/nlp/evidence/PIN_AND_SHARED_INPUT_SCOPE.json",
+      "sha256": "049eb4c8e6c4f1e1faf4cef0c8540f4b33bc2f7f122351b6dc81a5722a3e528d"
+    }
+  ],
+  "original_receiver_refusal": {
+    "path": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/current-fork-owners-20261021/nlp/evidence/CURRENT_RECEIVER_001.json",
+    "sha256": "c74725aa452de9bbe804da3d137897550e733b8911e1f988a86f178ac2967def"
+  },
+  "nlp_correction": {
+    "path": "m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/QUALIFICATION_SUMMARY.json",
+    "sha256": "8fddd2c7be7d80bcb2afbce231d6b861594ba4662017dd4393e7f816c1ddaafd"
+  },
+  "swt_correction": {
+    "path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/QUALIFICATION_SUMMARY.json",
+    "sha256": "49e21c411a7b7f7f82ce7f750e4235e85842810aea435a5b74fa185934d15683"
+  },
+  "nlp_actual_receiving_runtime": {
+    "path": "m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/proof/receiver-runtime-001/combined-receiver-001-receipts/RESULT.json",
+    "sha256": "b0dd0d938a09221a7b222e3476f9fcbc4f896d5d62ac150030c002156dac6ea4"
+  },
+  "swt_actual_receiving_runtime": {
+    "path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/receiver-runtime-001/RESULT.json",
+    "sha256": "11c86ec78af00b87c729583db7c8014acd86ae55e431c9694ec73b82ef331fca"
+  },
+  "new_memory_receipts": [
+    {
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/FINAL_RESULT.json",
+      "sha256": "1d01dd8121eee094d525e0a73aa7df06f9538da01abe008b224499ade2487309"
+    },
+    {
+      "path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/FINAL_RESULT.json",
+      "sha256": "2682aeb05b7ff927d59316ffc2ddf1cf1171464c9b065ac6c41b73c53260e500"
+    }
+  ],
+  "hosted_admission": {
+    "path": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/current-fork-owners-20261021/hosted-admission/OBSERVATION.json",
+    "sha256": "101831de842f784b354e3b575ce1aa45ebd4081f3d355f70021bf414ac7d2369"
+  },
+  "navigation": {
+    "path": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/current-fork-owners-20261021/README.md",
+    "sha256": "b0eae95d13f4034c1b921bdf821f28c8dde03a502774acccfb5d59fc56066b72"
+  },
+  "bounded_owner_decisions": {
+    "path": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/catalogue/current-fork-owner-decisions-20261021.tsv",
+    "sha256": "e25e07c8de8c4f96f036820e9aec419d2cd92fff64596d667606769956a4fa1c"
+  },
+  "source_built_vs_cached": "Actual combined receiving pack62 =36 source-built+26 locked external; linked image92 includes30JDK modules. Existing fork dependency lists14+16 share3 archives,27unique archives produce26 external modules.",
+  "unchanged_old_packets": "Prior canonical core1273-file, SWT63-file and Maven4329-file publication inventories remain frozen; new registry and provenance bytes append after their exact last published owners.",
+  "no_new_workflows": true,
+  "binary_payloads_copied": false,
+  "admission": "PENDING: actual broader hosted engine-pin refusal and independent upstream/full-product/platform gates remain.",
+  "historical_status_handling": "Initial refusal/candidate/not-run statuses remain immutable. Final actual authorities are linked here without rewriting their predecessors."
+}

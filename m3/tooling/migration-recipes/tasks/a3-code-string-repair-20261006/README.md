@@ -6,8 +6,8 @@ This bounded recipe repairs an existing Java syntax error in the A3 regex/string
 
 The named recipe is `com.m3.rewrite.backport.A3CodeStringRepair`, using the unchanged canonical `M3Jdk21HashPinnedTextSnapshotRecipe` and crate `a3-code-string-repair-20261006`. It admits exactly three current preimages:
 
-1. `m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java`.
-2. `m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after`.
+1. `m3/tooling/a3/src/main/java/jdk/m3/a3/A3RegexMatrix.java`.
+2. `m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after`.
 3. The adjacent `a3-regex-memory-lab/manifest.tsv`.
 
 The two Java copies gain exactly two backslashes, changing the source literal to `"Pattern.compile(\"a+b?\")"`. Its intended runtime subject remains the code string `Pattern.compile("a+b?")`. The manifest changes only the matrix row's after-hash, from `f000b1eea411056baaca6051b220149f25334bc70bf69b4f0536839c6c78e404` to `19f7e3fb8c5f4332ab721d1962ab9cac261c524a10d9d91272346636fbe86ada`. All interfaces, other source bytes, and original test bodies remain unchanged. The existing Java parser and exact round-trip guard remain unchanged.

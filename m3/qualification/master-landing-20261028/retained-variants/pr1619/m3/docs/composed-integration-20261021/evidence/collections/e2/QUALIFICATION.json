@@ -28,7 +28,7 @@
     "test/jdk/java/lang/String/M3StringCanonicalDagTest.java": "ce58fbed5fb3608d625059d32b565bba80ca1bfa7ed556bdaa4d86ad03454c95",
     "test/jdk/java/lang/String/M3StringPoolMetadataBoundsTest.java": "1ead247d909137f295633f488f8db0849f405cfed75a87ba4f3779ab67ff9180",
     "m3/runtime-integration/check-m3string-concat-reference-dag.py": "4fff9f78297b91a63c401e9fd9994de6ed643207661bb58fd099d0870e073ec2",
-    "m3/runtime-integration/recipe/manifest.json": "416f8c17500afd1d9d2d2e3a7a85e300cf9807fbac7ead514b9c48cf0494e4e5"
+    "m3/runtime-integration/recipe/manifest.json": "44c6af1b7031d480b1d4ecd115fcecd73ab1546e317fb54c61a8110cadc0ea02"
   },
   "reusedEvidence": {
     "epoch": "E1",

@@ -1,0 +1,13 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: jdk.internal.m3.intake.Relocate
+displayName: LIB_INTAKE relocation of HdrHistogram
+description: Boundary-checked package relocation, one non-recursive ChangePackage per package, longest first.
+recipeList:
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.HdrHistogram.packedarray
+      newPackageName: jdk.m3.lib.hdrhistogram.packedarray
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.HdrHistogram
+      newPackageName: jdk.m3.lib.hdrhistogram
+      recursive: false

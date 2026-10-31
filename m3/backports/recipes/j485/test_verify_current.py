@@ -20,7 +20,7 @@ class VerifyCurrentTest(unittest.TestCase):
             root = Path(directory)
             resources = root / (
                 "m3/tooling/migration-recipes/src/main/resources/"
-                "com/m3/rewrite/backport/jdk21-hash-pinned"
+                "jdk/m3/rewrite/backport/jdk21-hash-pinned"
             )
             rows = []
             for index, (mode, before_text, after_text) in enumerate(

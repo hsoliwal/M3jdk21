@@ -4,7 +4,7 @@
 M3JDK21 is the **integrated JDK21/HotSpot/Java/JNI product**.
 This is not `M3 + JDK`, a compatibility layer, a second tree model or a
 JNI/GPU callback path. Original source:
-`m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java`.
+`m3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java`.
 
 Canonical source-first authoring: [Synexia #12886](https://github.com/hsoliwal/com.synexia/pull/12886)
 at `a168cebd5c95b3c9b4c47e9db5d44b8aca324f1a`, using the **unchanged existing**
@@ -19,7 +19,7 @@ SHA-256 `837aeb592e797902f9c50bcdbf4f85db3f9dbf97ee7537b5d6e85a9fa4a4e41a`.
 Standalone oracle: `M3TreeWindowShiftContract.java`,
 blob `81afe4e5d86062e91a3c20c749b150abb67a48fc`;
 JUnit5 discovery: `M3TreeWindowShiftTest.java`,
-blob `de6137afe743c003336a40d3c23a2c42668e9092`.
+blob `7d356dcb281994e15e03109b5d99ce091a63b1c2`.
 
 ## Behavioral atom
 

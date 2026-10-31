@@ -12,7 +12,7 @@
   "targets": {
     "product": "READ_ONLY",
     "tests": 7,
-    "recipe": "com.m3.j485.Tests"
+    "recipe": "jdk.m3.j485.Tests"
   },
   "invariant_locks": {
     "PUBLIC_API": "LOCKED",

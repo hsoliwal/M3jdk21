@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
 # GENERATED_FROM_SYNX_RECIPE m3-cpu-byte-window-20261018 commit=13253a623536376b9d290057caccd3026a7675e9
 path	sha256	owner	disposition
-m3/ports/capability-runtime/src/main/java/com/m3/runtime/capability/ByteSlidingWindows.java	fc03f60fd1aa9d752121fb481db33d8ee993013ad8f9a34968739cf4d2fb6e1a	Synexia:M3CpuByteWindowRecipe	CANDIDATE_UNQUALIFIED
-m3/ports/capability-runtime/src/test/java/com/m3/runtime/capability/ByteSlidingWindowsChecks.java	668f4332b0ebfbd51a4236f4fb1a34a549cb046682d86c8f4d5ee3be10bb1c50	Synexia:M3CpuByteWindowRecipe	CANDIDATE_UNQUALIFIED
+m3/ports/capability-runtime/src/main/java/jdk/m3/runtime/capability/ByteSlidingWindows.java	e6fd809ef3920c49f25308fd9f7949839671972d6db08942927b5799d3096f07	Synexia:M3CpuByteWindowRecipe	CANDIDATE_UNQUALIFIED
+m3/ports/capability-runtime/src/test/java/jdk/m3/runtime/capability/ByteSlidingWindowsChecks.java	27557b15ee442a1dd437bf8112017f3ea97e319a084321eea16c3ddaa297e312	Synexia:M3CpuByteWindowRecipe	CANDIDATE_UNQUALIFIED

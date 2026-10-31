@@ -30,7 +30,7 @@
    <resource>
     <directory>${repo.root}/m3/tooling/migration-recipes/src/main/resources</directory>
     <includes>
-     <include>com/synexia/rewrite/hash-pinned-java/m3-cpu-mask-runs-20261017/**</include>
+     <include>jdk/internal/m3/rewrite/hash-pinned-java/m3-cpu-mask-runs-20261017/**</include>
      <include>META-INF/rewrite/m3-cpu-mask-runs-20261017.yml</include>
     </includes>
    </resource>
@@ -42,7 +42,7 @@
     <version>3.13.0</version>
     <configuration>
      <includes>
-      <include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
+      <include>jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
      </includes>
      <compilerArgs>
       <arg>-Xlint:all</arg>
@@ -56,7 +56,7 @@
     <version>5.23.1</version>
     <configuration>
      <activeRecipes>
-      <recipe>com.synexia.m3.CpuMaskRuns20261017</recipe>
+      <recipe>jdk.internal.m3.CpuMaskRuns20261017</recipe>
      </activeRecipes>
      <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
      <failOnDryRunResults>false</failOnDryRunResults>
@@ -64,54 +64,4 @@
    </plugin>
   </plugins>
  </build>
- <profiles>
-  <profile>
-   <id>m3-recipe-boot</id>
-   <activation>
-    <file>
-     <exists>${maven.multiModuleProjectDirectory}/.m3/recipe-boot.properties</exists>
-    </file>
-   </activation>
-   <properties>
-    <m3.recipe.boot.skip>false</m3.recipe.boot.skip>
-   </properties>
-   <build>
-    <plugins>
-     <plugin>
-      <groupId>org.codehaus.mojo</groupId>
-      <artifactId>exec-maven-plugin</artifactId>
-      <version>3.5.0</version>
-      <inherited>true</inherited>
-      <dependencies>
-       <dependency>
-        <groupId>com.synexia.m3</groupId>
-        <artifactId>m3-pr-stack-preservation</artifactId>
-        <version>1.0.0-m3boot20261021</version>
-       </dependency>
-      </dependencies>
-      <executions>
-       <execution>
-        <id>m3-recipe-boot</id>
-        <phase>validate</phase>
-        <goals>
-         <goal>java</goal>
-        </goals>
-        <configuration>
-         <skip>${m3.recipe.boot.skip}</skip>
-         <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
-         <includeProjectDependencies>false</includeProjectDependencies>
-         <includePluginDependencies>true</includePluginDependencies>
-         <arguments>
-          <argument>${maven.multiModuleProjectDirectory}/.m3/recipe-boot.properties</argument>
-          <argument>${project.basedir}</argument>
-          <argument>${session.projects[0].basedir.absolutePath}</argument>
-         </arguments>
-        </configuration>
-       </execution>
-      </executions>
-     </plugin>
-    </plugins>
-   </build>
-  </profile>
- </profiles>
 </project>

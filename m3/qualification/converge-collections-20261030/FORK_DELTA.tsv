@@ -1,0 +1,7 @@
+fork	upstream	default	ahead	behind	changed_files
+guava	google/guava	master	55	34	300
+eclipse-collections	eclipse-collections/eclipse-collections	master	34	18	300
+commons-collections	apache/commons-collections	master	43	3	300
+spring-framework	spring-projects/spring-framework	main	8	89	300
+jackson-datatypes-collections	FasterXML/jackson-datatypes-collections	3.x	1	12	300
+swift-collections	apple/swift-collections	main	0	64	0

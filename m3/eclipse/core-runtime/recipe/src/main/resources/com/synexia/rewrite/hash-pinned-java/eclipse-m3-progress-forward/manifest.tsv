@@ -1,3 +1,0 @@
-# Exact absent-before M3JDK21 Eclipse progress bridge, source-only candidate
-m3/eclipse/core-runtime/src/main/java/com/m3/eclipse/runtime/M3EclipseProgressMonitor.java	ABSENT	10a41822af6ee4a71335fb2ab4e6395dd6be8c076fe8931c0e6b1391c9cef8bd	0001-M3EclipseProgressMonitor.java.txt
-m3/eclipse/core-runtime/src/test/java/com/m3/eclipse/runtime/M3EclipseProgressMonitorTest.java	ABSENT	480c640c1090373c02f5fef8aac78284f0b93c1911573df468b6c9640eb90e65	0002-M3EclipseProgressMonitorTest.java.txt

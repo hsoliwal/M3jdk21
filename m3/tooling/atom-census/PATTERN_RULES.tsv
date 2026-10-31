@@ -1,0 +1,35 @@
+pattern	name	body	catalogue
+TREE_ROTATION	(?i)^(rotate(Left|Right)|balance(Insertion|Deletion)|fixAfter(Insertion|Deletion))	-	red-black / AVL rotations: LeetCode 1382, GfG Red-Black Tree
+HEAP_SIFT	(?i)sift(Up|Down)|heapify	-	binary heap: LeetCode 215 / 347, HackerRank QHEAP1
+BINARY_SEARCH	(?i)binarySearch|indexedBinarySearch|iteratorBinarySearch	-	LeetCode 704, GfG Binary Search
+SORT	(?i)(sort|mergeSort|quickSort|insertionSort|mergeHi|mergeLo|gallop(Left|Right)|binarySort|countRun|med3)	-	LeetCode 912 Sort an Array, HackerRank Sorting
+BIT_SCAN	-	numberOf(Trailing|Leading)Zeros	LeetCode 191 / 338, GfG bit manipulation
+POPCOUNT_RANK	-	bitCount\(	LeetCode 338 Counting Bits; succinct rank/select
+POWER_OF_TWO_CAPACITY	(?i)tableSizeFor|nextPowerOfTwo|roundUpToPowerOf	-	LeetCode 231 Power of Two
+POWER_OF_TWO_CAPACITY	-	highestOneBit\(	LeetCode 231 Power of Two
+HASH_SPREAD	(?i)^(hash|spread|mix\w*|rehash|scramble)$	-	Knuth 6.4; LeetCode 706 Design HashMap
+RANGE_CHECK	(?i)^(rangeCheck\w*|check\w*(Index|Range|Bounds|Size|Length|FromToBounds)\w*|outOfBounds\w*)$	-	precondition checks: GfG array bounds
+ARRAY_GROW_COPY	(?i)(grow|newCapacity|ensureCapacity\w*|hugeCapacity)	-	dynamic array doubling: LeetCode 1381, GfG Dynamic Array
+SWAP_REVERSE_ROTATE	(?i)^(swap|reverse|rotate\w*|vecswap|shuffle)$	-	LeetCode 189 Rotate Array / 344 Reverse String / 384 Shuffle an Array
+TWO_POINTER_COMPACTION	(?i)(removeIf|batchRemove|bulkRemove|compact\w*|removeRange|shiftTail)	-	LeetCode 283 Move Zeroes / 27 Remove Element
+EQUALITY_HASH_CONTRACT	(?i)^(eq|equals|hashCode|deepEquals\w*|deepHashCode|equals\w+|hash\w+Code)$	-	java.lang.Object equals/hashCode contract
+COMPARE_ORDER	(?i)^(compare\w*|mismatch|order|reverseOrder|naturalOrder|comparing\w*|nulls(First|Last)|thenComparing\w*)$	-	comparators and lexicographic compare: LeetCode 165 / 179, GfG compare arrays
+MERGE_RUNS	(?i)^(merge(Runs|Parts)?|tryMergeRuns|pushDown|mergeAt|mergeCollapse|mergeForceCollapse)$	-	merge of sorted runs: LeetCode 21 / 88 / 23, GfG merge k sorted arrays
+PREFIX_SCAN	(?i)(parallelPrefix|prefix\w*|cumulate)	-	running sums / scans: LeetCode 303 / 1480
+STREAM_STAGE	(?i)^(make(Ref|Int|Long|Double)|ofSequential|filtered|iterate|generate|concat|range\w*|toMap|toConcurrentMap|adapt|identity|reducing|mapping|flatMapping|filtering|groupingBy\w*|partitioningBy|joining|summing\w*|averaging\w*|counting|minBy|maxBy|teeing|toList|toSet|toCollection|castingIdentity)$	-	stream pipeline stages and collectors (java.util.stream)
+BITSET_OPS	(?i)^(setBit|nBits|isClear|clearBit|isSet|testBit|flipBit|wordIndex|bitIndex|bitsFor\w*)$	-	bit set operations: LeetCode 136 / 191, GfG bitset
+ATOMIC_CAS	-	(compareAndSet|compareAndExchange|getAndAdd|getAndSet|weakCompareAndSet|VarHandle|U\.(put|get|compare)\w*)	lock-free compare-and-set: LeetCode 1114 / 1115 concurrency, GfG CAS
+CODE_POINT_CLASS	-	Character\.(is\w+|toChars|codePointAt|charCount|highSurrogate|lowSurrogate)|isSurrogate	code points and character classes: LeetCode 125 / 680, GfG Unicode
+BYTE_FIELD_CODEC	^(get|put)(8|16|32|64|Short|Int|Long)\w*$|^(CH|SH|LG|LL|GET\w*)$	-	little-endian field codecs: LeetCode 190 / 191, GfG endianness
+REGISTRY_LOOKUP	(?i)^(getInstance|getDefault|setDefault|getBundle|load\w*|valueOf|builder|lookup\w*)$	-	registry lookup and factory accessors (service / bundle / instance caches)
+ITERATION_ADAPTER	(?i)^(iterator|listIterator|spliteratorUnknownSize|elementAt|enumeration|forEach\w*)$	-	iterator adapters: LeetCode 284 Peeking Iterator / 251 Flatten 2D Vector
+PRECONDITION	(?i)^(check\w*|verify\w*|validate\w*|require\w*)$	-	argument and state preconditions (Guava Preconditions, Objects.requireNonNull)
+LINEAR_SEARCH	(?i)^(indexOf\w*|lastIndexOf\w*|contains\w*|detect\w*|anySatisfy\w*|allSatisfy\w*|noneSatisfy\w*)$	-	linear search and quantifiers: LeetCode 27 / 35 / 1346, GfG linear search
+FUNCTIONAL_ITERATE	(?i)^(injectInto\w*|collect\w*|select\w*|reject\w*|flatCollect\w*|groupBy\w*|distinct\w*|partition\w*|count\w*|sum\w*|transform\w*|filter\w*|zip\w*|chunk\w*|aggregate\w*|fold\w*|reduce\w*|max\w*By|min\w*By|tap|each\w*)$	-	map / filter / reduce over a collection: HackerRank Functional Programming, LeetCode 1480 / 2011
+TUPLE_FACTORY	(?i)^(pair\w*|twin|triple\w*|tuple\w*|entry|immutableEntry|keyValue)$	-	tuples and entries (pairs, twins, triples)
+CONVERSION	(?i)^(toArray\w*|join\w*|toImmutable\w*|toSorted\w*|toBag|toStack|asUnmodifiable\w*|asSynchronized\w*|asLazy|asParallel)$	-	collection conversion and views
+DECORATOR_FACTORY	^[a-z]\w*(Transformer|Closure|Predicate|Factory|Iterator|Map|List|Set|Bag|Queue|Collection|Comparator|Function|Procedure)$	-	decorator / adapter factories (GoF Decorator; Commons Collections functors)
+COLLECTION_ACCESSOR	(?i)^(get\w*|size|isEmpty|notEmpty|first\w*|last\w*|peek\w*)$	-	collection accessors
+STATIC_FACTORY	(?i)^(of|ofEntries|copyOf\w*|empty\w*|unmodifiable\w*|synchronized\w*|checked\w*|singleton\w*|newInstance|create\w*|from|new\w+|nCopies|fill|asList|stream|spliterator)$	-	static factory (Effective Java item 1)
+TEXT_FORMAT	(?i)(toString|format\w*|append\w*|parse\w*|quote\w*|escape\w*)	-	string building and parsing: LeetCode 271 / 468, HackerRank Strings
+ARITHMETIC_EXACT	(?i)(add|subtract|multiply|negate|floor|ceil|abs|clamp|min|max)\w*	Math\.|[+\-*/]	overflow-safe arithmetic: LeetCode 7 / 29

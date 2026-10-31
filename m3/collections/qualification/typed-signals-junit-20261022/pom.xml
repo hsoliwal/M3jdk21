@@ -39,18 +39,18 @@
             <arg>-Werror</arg>
           </compilerArgs>
           <includes>
-            <include>com/m3/collections/M3SignalColumns.java</include>
-            <include>com/m3/collections/M3SignalTopK.java</include>
-            <include>com/m3/collections/M3SignalRelations.java</include>
-            <include>com/m3/collections/M3SourceSignalImage.java</include>
+            <include>jdk/m3/collections/M3SignalColumns.java</include>
+            <include>jdk/m3/collections/M3SignalTopK.java</include>
+            <include>jdk/m3/collections/M3SignalRelations.java</include>
+            <include>jdk/m3/collections/M3SourceSignalImage.java</include>
           </includes>
           <testIncludes>
-            <testInclude>com/m3/collections/M3SignalColumnsSelfTest.java</testInclude>
-            <testInclude>com/m3/collections/M3SignalColumnsTest.java</testInclude>
-            <testInclude>com/m3/collections/M3SignalTopKSelfTest.java</testInclude>
-            <testInclude>com/m3/collections/M3SignalTopKTest.java</testInclude>
-            <testInclude>com/m3/collections/M3SourceSignalImageSelfTest.java</testInclude>
-            <testInclude>com/m3/collections/M3SourceSignalImageTest.java</testInclude>
+            <testInclude>jdk/m3/collections/M3SignalColumnsSelfTest.java</testInclude>
+            <testInclude>jdk/m3/collections/M3SignalColumnsTest.java</testInclude>
+            <testInclude>jdk/m3/collections/M3SignalTopKSelfTest.java</testInclude>
+            <testInclude>jdk/m3/collections/M3SignalTopKTest.java</testInclude>
+            <testInclude>jdk/m3/collections/M3SourceSignalImageSelfTest.java</testInclude>
+            <testInclude>jdk/m3/collections/M3SourceSignalImageTest.java</testInclude>
           </testIncludes>
         </configuration>
       </plugin>

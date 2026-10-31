@@ -52,8 +52,8 @@
       "path": "m3/docs/name-mapping.d/eclipse-snapshot-20261021.json",
       "selection": "metadata",
       "before_sha256": "ABSENT",
-      "sha256": "7b23f1ec7fbacd20189a394eb5af23b189c0b3f2858a67c41326b54e0d5bd605",
-      "git_blob": "4afb35a3c74e65d9f8c5bdfb9565b760aeabdfcd",
+      "sha256": "c9f7b51a4399d3acaa5f81be57cae5320defcd768b835bd4c4b0379effd17c7b",
+      "git_blob": "7449a9380082b4c658a8d339b8d65f9fe9b15236",
       "bytes": 1173
     },
     {
@@ -65,27 +65,27 @@
       "bytes": 4977
     },
     {
-      "path": "m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseIndexedSnapshot.java",
+      "path": "m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseIndexedSnapshot.java",
       "selection": "snapshot",
-      "before_sha256": "fd7527ce9d29e7fc15447421607e2cec5f4fc511248dd206874b7026b6757313",
-      "sha256": "ea915c61a13f99f4019d642826c3a30e5e169cec5425086f9a01efb2aee615f9",
-      "git_blob": "c6576562d840f29f66a0c807118697a8239fa571",
+      "before_sha256": "8ce80830b0a7fd5c33cd6c03e961c7d9b56efaec2d0e9af8392d3c23a5dfc5d7",
+      "sha256": "f5ef493add354dd6a3a6a3fc0cbfbbc4e9f9c9dacb734c2cd9532144da4e24e6",
+      "git_blob": "09b466e5b49413cf6347c911de4cd68517695a3b",
       "bytes": 3183
     },
     {
       "path": "m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseSelectionProbe.java",
       "selection": "snapshot",
       "before_sha256": "ABSENT",
-      "sha256": "64cddb00877e019c556354898793b451d324742ed6a523fa4ae1007555a5db12",
-      "git_blob": "ba9e6a8cbdc9cf6ad231ce74b296b3a216310c8c",
+      "sha256": "d8c23e7888b3725527f84219f4e25a973e845c878d68f75853d07e819f62491d",
+      "git_blob": "28e2242e21a6f716a9d1c8a9dfc65f0924390098",
       "bytes": 2482
     },
     {
       "path": "m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseSelectionTest.java",
       "selection": "snapshot",
       "before_sha256": "ABSENT",
-      "sha256": "522ca4c7461b4b4b6a5acf8a92aa9f7cb5360b4a6cb76e5792c7537bbd03ce74",
-      "git_blob": "c2c3de78fafff982a3fd81ba11a94efb26706975",
+      "sha256": "e5c980743c32178077e637aaa5c366e86fb17ac1aa48f6f2d17d5d06a913f06f",
+      "git_blob": "0df8bb3f84205488ce24a09b3fdf63811d16bd40",
       "bytes": 5658
     }
   ],
@@ -99,7 +99,7 @@
       "errors": 0,
       "skipped": 0,
       "pom_unchanged": true,
-      "original_pom_sha256": "6dea6636a98ea1e2a12e3c7ab542a3bd16e19a015a08e8a2239f9bf87e034f91"
+      "original_pom_sha256": "15002d6c3b3ab9ca8d8ecb820a260d41ce7d9f1fd04f811fa9af396808ae4f2e"
     },
     "required_forbidden_mask_combinations": 65536,
     "normal_and_interpreter_contract": "PASS",

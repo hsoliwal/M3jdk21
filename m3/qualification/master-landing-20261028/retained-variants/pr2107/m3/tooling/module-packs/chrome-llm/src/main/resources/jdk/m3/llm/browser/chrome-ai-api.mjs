@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-// M3JDK21 migration source: hsoliwal/com.synexia@2ab439480ecb0643615e85b42def954dbf3b5627
+// M3JDK 21 migration source: hsoliwal/com.synexia@2ab439480ecb0643615e85b42def954dbf3b5627
 // aix-chrome-ai-studio/mechanical/browser/chrome-ai-api.mjs
 // Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // Load each optional native task only when selected; Prompt does not parse Summarizer's module.

@@ -2,7 +2,7 @@
  * Copyright (c) 2026.
  * SPDX-License-Identifier: GPL-2.0-only WITH Classpath-exception-2.0
  *
- * Independent M3JDK21 implementation. Algorithmic problems are references,
+ * Independent M3JDK 21 implementation. Algorithmic problems are references,
  * not sources of copied implementation code.
  */
 package jdk.internal.m3;

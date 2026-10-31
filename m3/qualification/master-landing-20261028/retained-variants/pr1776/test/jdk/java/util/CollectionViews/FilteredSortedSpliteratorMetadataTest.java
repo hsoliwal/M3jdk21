@@ -4,7 +4,7 @@
  */
 /*
  * @test
- * @summary M3JDK21 owner-backed filtered sorted/Set spliterators retain JDK21 ordering metadata
+ * @summary M3JDK 21 owner-backed filtered sorted/Set spliterators retain JDK21 ordering metadata
  * @run main/othervm FilteredSortedSpliteratorMetadataTest
  */
 import java.util.AbstractSet;

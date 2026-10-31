@@ -9,11 +9,11 @@ from pathlib import Path
 from publication_custody_v3 import admit_publication_custody
 B=Path(__file__).resolve().parent;R=B/'overlay';P=B.parent/'successor-e04-prep'
 NAME='jcc-source-recovery-handoff-20261005';PREFIX=Path('m3/tooling/migration-recipes');TASK=PREFIX/'tasks'/NAME
-C=R/PREFIX/'src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text'/NAME
+C=R/PREFIX/'src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text'/NAME
 OLD=C.parent/'jcc-source-final-handoff-20261005'
 DEST='0994ecd65e86600f417f4d8702838d8c2663af61';DTREE='7e8f39ac999174f8d5b6028d638a68d8c317b070'
 BASELINE='be92c62ece9023b5c33676716a1076d00e26120a';BTREE='3c4f32b66633a251ba2c117090830252a7e2da03';D1='d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906'
-LAB='synexia.jcc-recipe-laboratory';JNI='synexia.jcc-java-jni-regression';IDS=(LAB,JNI)
+LAB='m3.jcc-recipe-laboratory';JNI='m3.jcc-java-jni-regression';IDS=(LAB,JNI)
 MAP='m3/docs/name-mapping.json';DOC='m3/docs/jcc-source-handoff.md';BIND='m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json';COV='m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv'
 def read(p):return json.loads(p.read_text())
 def enc(x):return (json.dumps(x,indent=2,ensure_ascii=False)+'\n').encode()
@@ -83,7 +83,7 @@ def validate_inputs(f,receipts_absent=False):
  assert inventory['source_publication']['custody']==custody and inventory['source_publication']['publication_status']==publication['status']
  sources=inventory['sources'];assert len(sources)==19
  context_path=B/'current-context/CONTEXT_REFERENCES.json'
- assert ident(context_path)['sha256']=='fbc460874aeb04a688ad0ed9b47ad8e3f3b37f88af09d0f32ecfeedc2827fbed'
+ assert ident(context_path)['sha256']=='ab9828692a1ca02adfabf22ff679e47e1e62a9d755b97f4071c42d5225698bc5'
  baseline=read(context_path);expected={x['path']:x for x in baseline['designated_sources']}
  assert set(expected)=={x['path'] for x in sources} and len({x['path'] for x in sources})==19
  for row in sources:
@@ -128,7 +128,7 @@ def main():
  for rid in IDS:
   row=rows[rid];assert row['status']=='blocked' and row['tests']==[]
   row['sync']['source_revision']=source;row['sync']['target_revision']=DEST;row['sync']['pending']=copy.deepcopy(f['pending_obligations'])
-  row['recipe']['id']='com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/'+NAME
+  row['recipe']['id']='jdk.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/'+NAME
   row['recipe']['preconditions']=['All four existing E3 preimages at '+DEST+'; canonical map SHA256 '+ident(C/'before00-name-mapping.json.txt')['sha256']+'.','Preserve the complete E3 crate, all seven dependency guards, all previous source/target objects, unchanged receiver evidence and Descriptor reconciliation.','Actual recovery source publication '+source+' is bound. Current input be92 qualification and historical 0b/d1 evidence remain separately scoped; no capability or JDK promotion.']
   row['observation']=f['record_observations'][rid]
   row['reason']=f['record_reasons'][rid]
@@ -172,7 +172,7 @@ def main():
  a=copy.deepcopy(oldmap);z=copy.deepcopy(mapping);del a['migration']['records'],z['migration']['records'];assert a==z
  outputs={MAP:('before00-name-mapping.json.txt','after00-name-mapping.json.txt',enc(mapping)),DOC:('before01-jcc-source-handoff.md.txt','after01-jcc-source-handoff.md.txt',checked_ref(f['handoff_document']).read_bytes()),BIND:('before02-source-destination-bindings.json.txt','after02-source-destination-bindings.json.txt',enc(binding)),COV:('before03-root-coverage-obligations.tsv.txt','after03-root-coverage-obligations.tsv.txt',coverage_bytes)}
  # Validate every output and Java binding sentinel before writing any generated resource.
- java=R/PREFIX/'src/test/java/com/m3/rewrite/backport/JccSourceRecoveryHandoffTest.java';text=java.read_text()
+ java=R/PREFIX/'src/test/java/jdk/m3/rewrite/backport/JccSourceRecoveryHandoffTest.java';text=java.read_text()
  for old in ('UNBOUND_RECOVERY_SOURCE_COMMIT','UNBOUND_RECOVERY_SOURCE_ROOT_TREE','UNBOUND_RECOVERY_SOURCE_REF','EXPECTED_RECOVERY_SOURCE_COUNT = -1'):assert text.count(old)==1
  for path,(bn,an,body) in outputs.items():assert (R/path).read_bytes()==(C/bn).read_bytes() and body!=(C/bn).read_bytes() and not (C/an).exists()
  plan={'schema':'m3.sealed-install/1','recipe_id':NAME+'/1','source_commit':source,'target_commit':DEST,'scope':'Additive four-existing-input receiving recovery metadata; source proof epochs separate and capability/JDK acceptance blocked.','outputs':[],'guards':copy.deepcopy(oldplan['guards'])};manifest=[]

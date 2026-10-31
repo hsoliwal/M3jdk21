@@ -1,0 +1,4 @@
+jdk.m3.pcollections@5.0.0-m3-source-1
+exports com.m3.lib.pcollections
+requires java.base mandated
+

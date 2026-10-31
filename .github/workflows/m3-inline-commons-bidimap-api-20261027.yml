@@ -35,7 +35,7 @@ jobs:
           echo '8e5c8a2bab648e55e21fda90607616650e79a7e9369a9aad696601bdb57f7477  m3/collections/implementations/apache-dual-linked-hash-bidi-map/src/main/java/org/apache/commons/collections4/Get.java' | sha256sum -c -
           echo 'd19832ab166d80ea284a9033877609178eb655231f54bc76bce3e5332dae2e99  m3/collections/implementations/apache-dual-linked-hash-bidi-map/src/main/java/org/apache/commons/collections4/MapIterator.java' | sha256sum -c -
           echo 'b960e71679833b83c14d11ce92091ae10377ebccb2b52bec09592ab484e8e3e0  m3/collections/implementations/apache-dual-linked-hash-bidi-map/src/main/java/org/apache/commons/collections4/ResettableIterator.java' | sha256sum -c -
-          echo '75b7b8b1208e2335d8e345e0e320a9f988f3d76aa153432699a6612dde1e81e8  m3/collections/implementations/apache-dual-linked-hash-bidi-map/src/test/java/com/m3/collections/apache/M3InlineCommonsBidiMapBoundaryTest.java' | sha256sum -c -
+          echo 'ed84d784a84ee64511833ff99a9d7880c21e127a4e3e4c456e4101fd5902f6a8  m3/collections/implementations/apache-dual-linked-hash-bidi-map/src/test/java/jdk/m3/collections/apache/M3InlineCommonsBidiMapBoundaryTest.java' | sha256sum -c -
       - name: Strict direct source compile with ONLY Java21 and no Commons jar
         shell: bash
         run: |

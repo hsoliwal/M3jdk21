@@ -1,0 +1,71 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 DOOP verified projection reuse contract
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3ObjectResidency.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3ObjectResidencyReuseTest.java'
+      - '.github/workflows/m3-doop-projection-reuse.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verified-handoff:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Download and verify standalone JUnit console
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 \
+            'https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-console-standalone/1.12.2/junit-platform-console-standalone-1.12.2.jar' \
+            -o "$RUNNER_TEMP/m3-junit-console.jar"
+          printf '%s  %s\n' \
+            '329bd10288875a74d04c9ca6b7c9889c265ddf87b21a9ea42a7f7392f391472a' \
+            "$RUNNER_TEMP/m3-junit-console.jar" | sha256sum --check -
+      - name: Compile real owner and all three strict Java 21 test classes
+        shell: bash
+        run: |
+          set -euo pipefail
+          MAIN="m3/collections/src/main/java/jdk/m3/collections"
+          TEST="m3/collections/src/test/java/jdk/m3/collections"
+          OUT="$RUNNER_TEMP/m3-doop-reuse"
+          mkdir -p "$OUT/main" "$OUT/test"
+          javac --release 21 -Xlint:all -Werror -d "$OUT/main" \
+            "$MAIN/M3Address28.java" \
+            "$MAIN/M3IntLane28.java" \
+            "$MAIN/M3BitLane28.java" \
+            "$MAIN/M3SlotAllocator28.java" \
+            "$MAIN/M3ObjectResidency.java" \
+            "$MAIN/M3Residency.java"
+          javac --release 21 -Xlint:all -Werror \
+            -cp "$OUT/main:$RUNNER_TEMP/m3-junit-console.jar" \
+            -d "$OUT/test" \
+            "$TEST/M3ObjectResidencyTest.java" \
+            "$TEST/M3ObjectResidencyBorrowTest.java" \
+            "$TEST/M3ObjectResidencyReuseTest.java"
+      - name: Test before and after handoff, without invoking System.gc()
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT="$RUNNER_TEMP/m3-doop-reuse"
+          java -ea -Xms16m -Xmx128m -jar "$RUNNER_TEMP/m3-junit-console.jar" \
+            execute --disable-banner --fail-if-no-tests \
+            --class-path "$OUT/main:$OUT/test" \
+            --select-class jdk.m3.collections.M3ObjectResidencyTest \
+            --select-class jdk.m3.collections.M3ObjectResidencyBorrowTest \
+            --select-class jdk.m3.collections.M3ObjectResidencyReuseTest

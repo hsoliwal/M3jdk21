@@ -3,7 +3,7 @@
   "canonical_repository": "hsoliwal/com.synexia",
   "canonical_source_commit": "528aaf79cfae79c5dbfe7c307340329d320e8c44",
   "canonical_publication_parent": "140c263a90f9803b9c46103c63355a286e0515f0",
-  "canonical_crate_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018",
+  "canonical_crate_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018",
   "canonical_commit_requirement": "Actual published canonical source commit; recipe/copy identities remain separately hash-pinned.",
   "target_repository": "hsoliwal/M3JDK21",
   "original_catalogue_base": "0d73745d7203123533dce8f8fb264ba2746f6d2d",
@@ -34,25 +34,25 @@
     {
       "pass_id": "readonly-iterator",
       "series_part": "WRAPPER_PR",
-      "source_path": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
-      "preimage_sha256": "b2dc49d3a9ec43b6e6bd34cf5c6dac53057cf90f42cc9ed506d54822a760fc2d",
-      "postimage_sha256": "032bffd456e67c7568b028489ceec85f24510469b3a0e00571ab36cd17ae3b75",
+      "source_path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java",
+      "preimage_sha256": "f1e3e21c37cbe084ef6b9446b86293d5039cd9b2bc6c1bf86d63a86793e3b8d5",
+      "postimage_sha256": "bb0ff9a8008521576530b0cea64d00b4f22e6e4b8424b8e5df7f416a6a8b6051",
       "contract_effect_boundary": "Explicit defect correction: remove always refuses with UnsupportedOperationException; hasNext/next/forEachRemaining retain the prior cursor read path and effects; one additional wrapper per traversal; no speed claim"
     },
     {
       "pass_id": "stable-order-groups",
       "series_part": "INDEX_JNI_COMPANION_PR",
-      "source_path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
-      "preimage_sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545",
-      "postimage_sha256": "7bf939ea374ce6c0b13c403f5e154c0f8d376f9cddb8e623cf00ef299183a77e",
+      "source_path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
+      "preimage_sha256": "6be07c18dbbbe9ae259ff85821bb3f4ec666fddd820b0950f4115c4256f45deb",
+      "postimage_sha256": "bf601d711667e1078ca30246da6fa89b43d7ed951a3179e0a161365526581959",
       "contract_effect_boundary": "Reverse equal-value groups while copying each group forward; retain duplicate physical occurrence order and current address-kernel loads; unknown-order stable merge remains; O(n) traversal and one result int array for the admitted opposite-order path"
     },
     {
       "pass_id": "native-row-suffix",
       "series_part": "INDEX_JNI_COMPANION_PR",
       "source_path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
-      "preimage_sha256": "a5cefed03d9db9429048a218945a8af71b5b7acc862e089f6cc8a451a172e212",
-      "postimage_sha256": "d731f12916ee7f6e935624e7dd9f108c8de99bba02e1a81f6cc96c8cd21a5b84",
+      "preimage_sha256": "e57a418a183326d17cd117bcb81c2ddd49202b8195778f38a06b970c1058f16d",
+      "postimage_sha256": "3361cebc637103be73d7928e61b69ecc7fd6899abd4f8078019c39dfce6b3960",
       "contract_effect_boundary": "Read row IDs from next+first_match and index local values by i-first_match; preserve current state reads, output batching, cursor, validation and both exports; no additional JNI calls or storage"
     }
   ],
@@ -123,7 +123,7 @@
     "public_copied_sources": 61,
     "existing_public_engine_sources": 4,
     "exact_sdk_binding_rows_per_fixture": 14,
-    "summary_sha256": "46a960aee51f2b81ab940655672e7b8cdfd8673c57dfe72143a2f665cc4e19bf",
+    "summary_sha256": "57d9297f14c8162207f7c9d525bf5dd7ffafc840441b299cedc0f853fa93599d",
     "evidence_manifest_sha256": "72974a4cafd34aabf3d0394c4ff18777d95e4869b927f643910577b46c2eb57f",
     "scope": "Additional execution of the two fixture lanes; does not increase the twelve canonical pass count."
   },
@@ -162,14 +162,14 @@
   "copy_custody": {
     "catalogue_files": 31,
     "canonical_copy_manifest": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/CANONICAL_COPY_MANIFEST.tsv",
-    "canonical_copy_manifest_sha256": "09377f5a451cc436a55b22c6aec5dc2ad931b3db21a145ad2534ca8e6b7c5f7b",
-    "canonical_copies_checksum_sha256": "27f4de9504a344fd51d58dca0a9eb56d4f102135ed30137c078034560f97e0e4",
+    "canonical_copy_manifest_sha256": "64b2c9bd37f0c98a5cfa4314dc4a372e4b0de61a0efafd8adcf4aa6315af22b4",
+    "canonical_copies_checksum_sha256": "80e4ddff41be3ce01fd5490f52da5754b7e9a37bc2b6b68b8caa64fd3e9e292f",
     "recipe_source_files": 61,
     "recipe_copy_manifest": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/RECIPE_CUSTODY_COPY_MANIFEST.tsv",
-    "recipe_copy_manifest_sha256": "6956b0c1c931df0d69dc4c6995836a9835d60661329e3f1822d4e0c2bc8cebbc",
-    "original_owner_catalogue_sha256": "674d2126f026508e45c64b69714ca99849c76a8dae6323a6da964ee8ae5d4396",
-    "integration_owner_census_sha256": "b58271951f05edac37926a0c6f3f622cbbb2277b4801557655d6afabbf3832fc",
-    "index_candidate_catalogue_sha256": "c4ca2ef4ec48bcfd4745b337962ee121e635def9b455cfc4779d98d3c221f763",
+    "recipe_copy_manifest_sha256": "da8c8f9a3031a8ad98d5e087c28148f4a8c6b38a52103c6f2920603495c7d245",
+    "original_owner_catalogue_sha256": "644f170f3857f8391cd0554c82e06b0980c6e600f115c22843310703e0029022",
+    "integration_owner_census_sha256": "caaf1684b3e6db0d8e1304672a2fd30dce260f145b1eb8da1e25d247a85ba7a9",
+    "index_candidate_catalogue_sha256": "1fa3f63d01d9b9f0f10a0c20a85a377f42ed30892730587111435b3566869f72",
     "source_catalogue_rows_modified": false
   },
   "unresolved_wrapper_findings": [

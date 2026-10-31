@@ -72,7 +72,7 @@
             </dependencies>
             <configuration>
               <activeRecipes>
-                <recipe>com.m3.a3.AlgorithmCatalogue</recipe>
+                <recipe>jdk.m3.a3.AlgorithmCatalogue</recipe>
               </activeRecipes>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
               <failOnDryRunResults>false</failOnDryRunResults>
@@ -98,7 +98,7 @@
             </dependencies>
             <configuration>
               <activeRecipes>
-                <recipe>com.m3.a3.SerialFileWork</recipe>
+                <recipe>jdk.m3.a3.SerialFileWork</recipe>
               </activeRecipes>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
               <failOnDryRunResults>false</failOnDryRunResults>

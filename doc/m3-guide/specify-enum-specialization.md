@@ -260,9 +260,9 @@ serialized-form compatibility is provided.
 
 | Complete source | Git blob | Remaining declared implementation members |
 | --- | --- | --- |
-| [M3EnumLongMap][dense] | `43623113339ffff197d682f2c497b0f07abd4b25` | Fields keyType/universe/values/present/size (37–41); constructor (43–52); both nested accept interfaces (27–35); API (54–226); private containsOrdinal/isValidKey/ordinal (228–243) |
-| [M3AdaptiveEnumLongMap][adaptive] | `67a1bf136c21ab2b347f0a33ec4784e17c0eb245` | Four fields (32–35); both constructors (37–58); API (60–287); private shouldUseDirect, static directPayloadBytes(int), migrateToDirect, migrateToSparse, copySparse, isValidKey, ordinal (289–330) |
-| [M3EnumSet][set] | `3b9cd8179549116524b7f9252a29ba185c22fc98` | Four fields (24–27); private constructor (29–37); factories/API/Object overrides (40–226); private combine/fillAll/maskTail/recount/checkUniverse/ordinal (228–284) |
+| [M3EnumLongMap][dense] | `a57ee7d571db8dc71179e725741b3b3b78f059f1` | Fields keyType/universe/values/present/size (37–41); constructor (43–52); both nested accept interfaces (27–35); API (54–226); private containsOrdinal/isValidKey/ordinal (228–243) |
+| [M3AdaptiveEnumLongMap][adaptive] | `bc836b4db9ad07a2f10ff1456b170162dd488cd3` | Four fields (32–35); both constructors (37–58); API (60–287); private shouldUseDirect, static directPayloadBytes(int), migrateToDirect, migrateToSparse, copySparse, isValidKey, ordinal (289–330) |
+| [M3EnumSet][set] | `17ac92820dd49ed0a4db7c477e85d17c6859c31e` | Four fields (24–27); private constructor (29–37); factories/API/Object overrides (40–226); private combine/fillAll/maskTail/recount/checkUniverse/ordinal (228–284) |
 
 No additional protected/package-private methods or named nested implementation
 types are declared in these three files. The complete int/long dependency is
@@ -295,13 +295,13 @@ scope, Apache-2.0 attribution and the ordered **String → arrays → collection
 → AST/compiler → remaining families** policy; this reference advances no
 runtime receiving phase.
 
-[dense]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/com/m3/collections/M3EnumLongMap.java
-[adaptive]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/com/m3/collections/M3AdaptiveEnumLongMap.java
-[set]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/com/m3/collections/M3EnumSet.java
-[factory]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/com/m3/collections/M3Collections.java
+[dense]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/jdk/m3/collections/M3EnumLongMap.java
+[adaptive]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/jdk/m3/collections/M3AdaptiveEnumLongMap.java
+[set]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/jdk/m3/collections/M3EnumSet.java
+[factory]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/jdk/m3/collections/M3Collections.java
 [module]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/module-info.java
 [pom]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/pom.xml
 [policy]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/docs/m3jdk21-porting-invariant.md
-[dense-tests]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/test/java/com/m3/collections/M3EnumLongMapTest.java
-[adaptive-tests]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/test/java/com/m3/collections/M3AdaptiveEnumLongMapTest.java
-[set-tests]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/test/java/com/m3/collections/M3EnumSetTest.java
+[dense-tests]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/test/java/jdk/m3/collections/M3EnumLongMapTest.java
+[adaptive-tests]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/test/java/jdk/m3/collections/M3AdaptiveEnumLongMapTest.java
+[set-tests]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/test/java/jdk/m3/collections/M3EnumSetTest.java

@@ -1,6 +1,6 @@
 /*
  * @test
- * @summary M3JDK21 array/mask pipeline matches sequential semantics and handles deep stage chains
+ * @summary M3JDK 21 array/mask pipeline matches sequential semantics and handles deep stage chains
  * @modules java.base/jdk.internal.util
  * @run main/othervm/timeout=120 -Xss256k M3PipelinePlanIterativeTest
  */

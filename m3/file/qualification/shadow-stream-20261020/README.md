@@ -69,7 +69,7 @@ try (var session = M3FileStreams.input(file, 65536,
 ## Evidence and donor catalogue
 
 The two product Java files were compiled with **actual, unchanged
-M3File.java Git blob `c182a3b1526f9fd0ca20c631d97df3048076defd`**,
+M3File.java Git blob `fcce3a02835de29fa4ac9f83083511aad17ec049`**,
 on stock Java 21.0.12.1, `javac --release 21 -proc:none -Xlint:all
 -Werror`. Deterministic + randomized `M3FileStreamsContract` passed
 **17,934 checks** both normal and `-Xint`. Tests cover observer-first
@@ -108,9 +108,9 @@ python3 "$root/receive.py" --dataset m3-file-shadow-20261020 \
 
 mkdir -p /tmp/m3-file-shadow
 javac --release 21 -proc:none -Xlint:all -Werror -d /tmp/m3-file-shadow \
-  m3/file/src/main/java/com/m3/file/M3File.java \
-  m3/file/src/main/java/com/m3/file/M3FileStreams.java \
-  m3/file/src/test/java/com/m3/file/M3FileStreamsContract.java
+  m3/file/src/main/java/jdk/m3/file/M3File.java \
+  m3/file/src/main/java/jdk/m3/file/M3FileStreams.java \
+  m3/file/src/test/java/jdk/m3/file/M3FileStreamsContract.java
 java -cp /tmp/m3-file-shadow com.m3.file.M3FileStreamsContract
 java -Xint -cp /tmp/m3-file-shadow com.m3.file.M3FileStreamsContract
 ```

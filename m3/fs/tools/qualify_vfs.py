@@ -26,7 +26,7 @@ from vfs_pack_support import (VFS_PREFIX, collect_legal, digest, input_file, loa
                               selected_vfs_source, verify_jar_legal, verify_linked_legal,
                               verify_source_lock, write_pack_inputs)
 
-PROBE = "src/test/java/com/m3/fs/verification/M3VfsImageProbe.java"
+PROBE = "src/test/java/jdk/m3/fs/verification/M3VfsImageProbe.java"
 DATE = "2026-10-20T00:00:00Z"
 SCOPE = ("Complete existing M3FS Java sources plus the 237-source attributed VFS core, "
          "JAR/JMOD assembly through the existing shared packer, and named-consumer execution "
@@ -196,7 +196,7 @@ def main(argv=None):
     fixtures(fixture_root)
     image = pack_output / "image"
     result = checked([image / "bin/java", "--module-path", consumer, "--module",
-                      "m3fs.vfs.consumer/com.m3.fs.verification.M3VfsImageProbe", fixture_root],
+                      "m3fs.vfs.consumer/jdk.m3.fs.verification.M3VfsImageProbe", fixture_root],
                      environment, out / "consumer-run.log")
     if "M3FS_VFS_IMAGE_PROBE=PASS" not in result.splitlines():
         raise RuntimeError("linked-image consumer did not emit its success marker")

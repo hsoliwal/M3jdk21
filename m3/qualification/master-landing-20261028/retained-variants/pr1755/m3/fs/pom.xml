@@ -58,7 +58,7 @@
       </configuration></execution>
     </executions></plugin>
     <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId><version>3.4.2</version><configuration><archive><manifestEntries>
-      <Bundle-ManifestVersion>2</Bundle-ManifestVersion><Bundle-SymbolicName>com.m3.fs</Bundle-SymbolicName><Bundle-Version>0.1.0</Bundle-Version><Bundle-Name>M3FS</Bundle-Name><Bundle-RequiredExecutionEnvironment>JavaSE-21</Bundle-RequiredExecutionEnvironment><Export-Package>com.m3.fs;version="0.1.0"</Export-Package>
+      <Bundle-ManifestVersion>2</Bundle-ManifestVersion><Bundle-SymbolicName>jdk.m3.fs</Bundle-SymbolicName><Bundle-Version>0.1.0</Bundle-Version><Bundle-Name>M3FS</Bundle-Name><Bundle-RequiredExecutionEnvironment>JavaSE-21</Bundle-RequiredExecutionEnvironment><Export-Package>jdk.m3.fs;version="0.1.0"</Export-Package>
     </manifestEntries></archive></configuration></plugin>
     <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-install-plugin</artifactId><version>3.1.2</version></plugin>
   </plugins></build>

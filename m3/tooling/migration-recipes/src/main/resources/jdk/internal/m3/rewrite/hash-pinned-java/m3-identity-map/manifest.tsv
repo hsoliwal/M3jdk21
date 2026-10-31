@@ -1,0 +1,4 @@
+# path	before_sha256	after_sha256	resource
+m3/collections/src/main/java/jdk/m3/collections/M3ObjectIdentityMap.java	ABSENT	5a842b880227b9bb63bf38554fc6114000558ac9c4483086d4cd43010f26ffd0	00-M3ObjectIdentityMap.java.txt
+m3/collections/src/main/java/jdk/m3/collections/M3ObjectIdentitySet.java	ABSENT	b9859f4acdf3e138c1029123a3f971b04c43d98a6be28dddd2f879ff481c39e3	01-M3ObjectIdentitySet.java.txt
+m3/collections/src/test/java/jdk/m3/collections/M3ObjectIdentityTest.java	ABSENT	a7292bad766442e69c19e8dba0e20c5e232ea8bd961bcdd2ebb2789194188844	02-M3ObjectIdentityTest.java.txt

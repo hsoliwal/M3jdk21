@@ -191,10 +191,10 @@ implementation classes in these four primary files.
 
 | Complete source | Git blob | Member locations |
 | --- | --- | --- |
-| [M3IntIntHashMap][int-int] | `f944165b0ddd1b4c45b656a3e522e0038676d17e` | Fields 22–32; constructors 34–47; public methods 50–249; private helpers 251–338; cursor 205–235 |
-| [M3IntLongHashMap][int-long] | `00e9190be49f7071504a477f0aad4eabd46f22d1` | Fields 25–36; constructors 38–51; sizing helper 54–59; public methods 62–261; private helpers 263–350; cursor 217–247 |
-| [M3IntIntConsumer][int-consumer] | `f1329b55c234a65faad61be2a1a557b2a9b2dcd8` | Interface/accept 8–11 |
-| [M3IntLongConsumer][long-consumer] | `49404c6e9b450da64228ddb4af958770f9060382` | Interface/accept 8–11 |
+| [M3IntIntHashMap][int-int] | `f1e3c1df5e174136778232c8596b85eab3453bfd` | Fields 22–32; constructors 34–47; public methods 50–249; private helpers 251–338; cursor 205–235 |
+| [M3IntLongHashMap][int-long] | `9ed0f60d04556e8547cf424f9624bcd16caeb858` | Fields 25–36; constructors 38–51; sizing helper 54–59; public methods 62–261; private helpers 263–350; cursor 217–247 |
+| [M3IntIntConsumer][int-consumer] | `27cf3e485304c752cc278b620853f2faf751d056` | Interface/accept 8–11 |
+| [M3IntLongConsumer][long-consumer] | `425c3868c59af76d12edf6c725bec12bb216fe88` | Interface/accept 8–11 |
 
 The package-local incoming use is concrete: adaptive-enum construction, reads,
 writes, sizing comparison, migration and copy all call the int/long owner;
@@ -220,15 +220,15 @@ standalone named tests. No inspected assertion establishes structural reentrant
 costs. Reflection shape assertions are not heap profiles. All execution and
 broader receiver/JDK-compatibility gates remain open.
 
-[int-int]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/com/m3/collections/M3IntIntHashMap.java
-[int-long]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/com/m3/collections/M3IntLongHashMap.java
-[int-consumer]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/com/m3/collections/M3IntIntConsumer.java
-[long-consumer]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/com/m3/collections/M3IntLongConsumer.java
-[iterator]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/com/m3/collections/M3IntIterator.java
-[adaptive]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/com/m3/collections/M3AdaptiveEnumLongMap.java
-[factory]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/com/m3/collections/M3Collections.java
+[int-int]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/jdk/m3/collections/M3IntIntHashMap.java
+[int-long]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/jdk/m3/collections/M3IntLongHashMap.java
+[int-consumer]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/jdk/m3/collections/M3IntIntConsumer.java
+[long-consumer]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/jdk/m3/collections/M3IntLongConsumer.java
+[iterator]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/jdk/m3/collections/M3IntIterator.java
+[adaptive]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/jdk/m3/collections/M3AdaptiveEnumLongMap.java
+[factory]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/jdk/m3/collections/M3Collections.java
 [module]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/main/java/module-info.java
 [pom]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/pom.xml
-[int-tests]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/test/java/com/m3/collections/M3IntLanesTest.java
-[long-tests]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/test/java/com/m3/collections/M3IntLongHashMapTest.java
-[adaptive-tests]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/test/java/com/m3/collections/M3AdaptiveEnumLongMapTest.java
+[int-tests]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/test/java/jdk/m3/collections/M3IntLanesTest.java
+[long-tests]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/test/java/jdk/m3/collections/M3IntLongHashMapTest.java
+[adaptive-tests]: https://github.com/hsoliwal/M3jdk21/blob/33cd1758a4a4613d3868ecde31d6d83400f66aed/m3/collections/src/test/java/jdk/m3/collections/M3AdaptiveEnumLongMapTest.java

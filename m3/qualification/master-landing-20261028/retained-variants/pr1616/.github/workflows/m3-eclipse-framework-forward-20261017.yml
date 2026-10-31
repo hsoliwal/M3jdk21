@@ -6,7 +6,7 @@ on:
       - 'm3/eclipse/framework/**'
       - 'm3/collections/src/main/java/**'
       - 'm3/recipes/runtime-convergence-20261020/**'
-      - 'm3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
+      - 'm3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
       - '.github/workflows/m3-eclipse-framework-forward-20261017.yml'
   workflow_dispatch:
 permissions:
@@ -39,7 +39,7 @@ jobs:
           from pathlib import Path
           import hashlib
           import subprocess
-          base = Path('m3/recipes/runtime-convergence-20261020/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-runtime-convergence-20261020')
+          base = Path('m3/recipes/runtime-convergence-20261020/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-runtime-convergence-20261020')
           seal = Path('m3/eclipse/framework/qualification/runtime-convergence-20261020/SOURCE_SEALS.tsv')
           manifest = [s.split('\t') for s in (base / 'manifest.tsv').read_text().splitlines() if s and not s.startswith('#')]
           bindings = [r for r in manifest if r[0] == seal.as_posix()]
@@ -68,7 +68,7 @@ jobs:
           set -euxo pipefail
           mvn -B -ntp -f m3/recipes/runtime-convergence-20261020/pom.xml \
             -Drecipe.owner.root="$GITHUB_WORKSPACE/m3/recipes/runtime-convergence-20261020/sdk-owner" \
-            -Dm3.recipe.name=com.synexia.m3jdk.RuntimeConvergence20261020 test 2>&1 | tee proof/successor-recipe.txt
+            -Dm3.recipe.name=jdk.internal.m3.m3jdk.RuntimeConvergence20261020 test 2>&1 | tee proof/successor-recipe.txt
       - name: Execute canonical source-sealed OpenRewrite recipe tests
         run: |
           set -euxo pipefail
@@ -101,9 +101,9 @@ jobs:
           print('ECLIPSE_API_OSGI_SERVICE_JUNIT_TESTS',n)
           PY
           unzip -p m3/eclipse/framework/target/m3-eclipse-framework-forward-0.1.0-SNAPSHOT.jar META-INF/MANIFEST.MF > proof/eclipse-bundle-manifest.txt
-          grep -q 'Bundle-Activator: com.m3.eclipse.framework.M3EclipseRuntimeActivator' proof/eclipse-bundle-manifest.txt
+          grep -q 'Bundle-Activator: jdk.m3.eclipse.framework.M3EclipseRuntimeActivator' proof/eclipse-bundle-manifest.txt
           unzip -p proof/m3-collections-osgi.jar META-INF/MANIFEST.MF > proof/collections-bundle-manifest.txt
-          grep -q 'Export-Package: com.m3.collections' proof/collections-bundle-manifest.txt
+          grep -q 'Export-Package: jdk.m3.collections' proof/collections-bundle-manifest.txt
           git diff --exit-code -- m3/eclipse/framework/src m3/collections/src/main/java
       - name: Retain exact-head evidence including failures
         uses: actions/upload-artifact@v4

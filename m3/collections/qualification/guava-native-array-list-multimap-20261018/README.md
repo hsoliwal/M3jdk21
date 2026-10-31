@@ -25,7 +25,7 @@ list 4/4, existing interop 23/23, unchanged Guava suite 6064/6064, native artifa
 tests 4/4, matching public/protected ABI and seeded differential behavior,
 bidirectional original/candidate serialization, and packaged class/module-path
 smokes. Its report SHA-256 is
-`fbb9211f4cf05907b8ea6d7d6a1a6bc9903147a925af89b5c7328c6d7acd518b`.
+`2f08775e8b90f67d4d49d5a6ad6d9fb9b25345d50e1ed8d3160d1cb78e01a0c9`.
 
 FOSS_REUSE_DECISION.tsv, SOURCE_PROVENANCE.tsv and the small recipe manifests
 bind the borrowed patterns and exact emitted source. Existing factory owners,

@@ -16,8 +16,8 @@ PORT_CLASSES = ("M3PrimitiveIndexView", "M3PrimitiveSoaStore", "M3PrimitiveKind"
                 "M3DenseHash", "M3SortableTopK", "M3RuntimeHeap")
 CONTRACTS = ("jdk.m3.collections.M3FilteredViewsContract",
              "jdk.m3.collections.M3MutableFilteredViewsContract",
-             "com.m3.util.M3PrimitiveIndexViewFilterContract")
-NATIVE_SYMBOL = "Java_com_m3_collections_M3IndexMaskCompactor_selectNative"
+             "jdk.m3.util.M3PrimitiveIndexViewFilterContract")
+NATIVE_SYMBOL = "Java_jdk_m3_collections_M3IndexMaskCompactor_selectNative"
 
 
 def command(log, *args, expected=None):
@@ -58,8 +58,8 @@ def qualify(java, javac, modules, pack, repo, output, native, linked):
     patch.mkdir()
     tests = [pack / "src/test/java" / (name.replace(".", "/") + ".java")
              for name in CONTRACTS]
-    common = ["--add-modules", "jdk.m3.collections,com.m3.collections"]
-    common += ["--add-reads", "jdk.m3.collections=com.m3.collections"]
+    common = ["--add-modules", "jdk.m3.collections,jdk.m3.collections"]
+    common += ["--add-reads", "jdk.m3.collections=jdk.m3.collections"]
     if not linked:
         common += ["--module-path", str(modules)]
     # Linked javac uses the image's actual modules; --release would hide nonstandard APIs.
@@ -71,17 +71,17 @@ def qualify(java, javac, modules, pack, repo, output, native, linked):
         command(output / (label + "-" + name.rsplit(".", 1)[1] + ".log"), java,
                 "-Xcheck:jni", *common, "--patch-module", "jdk.m3.collections=" + str(patch),
                 "-m", "jdk.m3.collections/" + name, expected="PASS")
-    mask_test = repo / "m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java"
+    mask_test = repo / "m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java"
     native_patch = output / (label + "-native-contracts")
     native_patch.mkdir()
     command(output / (label + "-native-oracle-javac.log"), javac,
             "-source", "21", "-target", "21", "-Xlint:all,-module", "-Werror", "-proc:none",
-            *common, "--patch-module", "com.m3.collections=" + str(mask_test.parent),
+            *common, "--patch-module", "jdk.m3.collections=" + str(mask_test.parent),
             "-d", native_patch, mask_test)
     library_path = [] if linked else ["-Djava.library.path=" + str(native)]
     command(output / (label + "-native-oracle.log"), java, "-Xcheck:jni", *library_path,
-            *common, "--patch-module", "com.m3.collections=" + str(native_patch),
-            "-m", "com.m3.collections/com.m3.collections.M3IndexMaskCompactorSelfTest",
+            *common, "--patch-module", "jdk.m3.collections=" + str(native_patch),
+            "-m", "jdk.m3.collections/jdk.m3.collections.M3IndexMaskCompactorSelfTest",
             "--native", expected="JNI=true")
 
 
@@ -105,7 +105,7 @@ def main():
         raise FileExistsError("fresh output directory required: " + str(output))
     collection_sources = sorted((repo / "m3/collections/src/main/java").rglob("*.java"))
     view_sources = sorted((pack / "src/main/java").rglob("*.java"))
-    port = repo / "m3/ports/collections/src/main/java/com/m3/util"
+    port = repo / "m3/ports/collections/src/main/java/jdk/m3/util"
     view_sources.extend(port / (name + ".java") for name in PORT_CLASSES)
     native_source = repo / "m3/collections/src/main/native/collections/m3_index_mask_compactor.c"
     packager = repo / "m3/tooling/jmod-recipes/tools/jmod_pack.py"
@@ -121,11 +121,11 @@ def main():
     source_receipt.extend(str(path.relative_to(repo)) + "\t" + digest(path)
                           for path in sorted([*collection_sources, *view_sources, native_source, packager]))
     (output / "COMPILED_INPUTS.tsv").write_text("\n".join(source_receipt) + "\n", encoding="utf-8")
-    for name, sources in (("com.m3.collections", collection_sources), ("jdk.m3.collections", view_sources)):
+    for name, sources in (("jdk.m3.collections", collection_sources), ("jdk.m3.collections", view_sources)):
         command(output / (name + "-javac.log"), home / "bin/javac", "--release", "21",
                 "-Xlint:all,-module", "-Werror", "-proc:none", "-h", headers,
                 "-d", modules / name, *sources)
-    header = headers / "com_m3_collections_M3IndexMaskCompactor.h"
+    header = headers / "jdk_m3_collections_M3IndexMaskCompactor.h"
     expected_jni = jni_header_symbols(header)
     library = native / "libm3_collections_mask.so"
     command(output / "native-compile.log", os.environ.get("CC", "cc"), "-std=c17", "-O2",
@@ -141,7 +141,7 @@ def main():
                          + " extra=" + repr(sorted(exported_jni - expected_jni)))
     qualify(home / "bin/java", home / "bin/javac", modules, pack, repo, output, native, False)
     rows = ["artifact\tversion\tjar\tmodule\trequires\tdisposition"]
-    for module in ("com.m3.collections", "jdk.m3.collections"):
+    for module in ("jdk.m3.collections", "jdk.m3.collections"):
         jar = jars / (module + ".jar")
         command(output / (module + "-jar.log"), home / "bin/jar", "--create", "--file", jar,
                 "--date", "2026-01-01T00:00:00Z", "-C", modules / module, ".")
@@ -154,7 +154,7 @@ def main():
     command(output / "jmod-pack.log", sys.executable, packager, "--jdk-home", home,
             "--image-tsv", image_tsv, "--manifest", manifest, "--layer-root", repo,
             "--out", output / "pack", "--legal-notices", pack / "legal",
-            "--native-library", "com.m3.collections=" + str(native),
+            "--native-library", "jdk.m3.collections=" + str(native),
             "--add-modules", "java.se,jdk.compiler,jdk.jlink,jdk.jartool,jdk.jdeps")
     image = output / "pack/image"
     for tool in ("java", "javac", "jar", "jmod", "jlink", "jdeps"):
@@ -169,7 +169,7 @@ def main():
     if not linked_library.is_file() or digest(linked_library) != digest(normalized_library):
         raise ValueError("linked native library differs from the exact strip-debug reference")
     qualify(image / "bin/java", image / "bin/javac", modules, pack, repo, output, native, True)
-    receipt = {"status": "PASS", "modules": ["com.m3.collections", "jdk.m3.collections"],
+    receipt = {"status": "PASS", "modules": ["jdk.m3.collections", "jdk.m3.collections"],
                "existing_collection_source_files": len(collection_sources),
                "optional_projection_source_files": len(view_sources),
                "native_symbol": NATIVE_SYMBOL, "native_symbols": sorted(expected_jni),

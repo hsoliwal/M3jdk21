@@ -3,9 +3,9 @@ name: M3JDK21 opt-in attributed method source signals Java21
 on:
   pull_request:
     paths:
-      - 'm3/compiler/source-signals/src/main/java/com/m3/compiler/signals/M3SourceSignalPlugin.java'
-      - 'm3/compiler/source-signals/src/main/java/com/m3/compiler/signals/M3MethodSignals.java'
-      - 'm3/compiler/source-signals/src/test/java/com/m3/compiler/signals/M3MethodSignals*.java'
+      - 'm3/compiler/source-signals/src/main/java/jdk/m3/compiler/signals/M3SourceSignalPlugin.java'
+      - 'm3/compiler/source-signals/src/main/java/jdk/m3/compiler/signals/M3MethodSignals.java'
+      - 'm3/compiler/source-signals/src/test/java/jdk/m3/compiler/signals/M3MethodSignals*.java'
       - 'm3/compiler/source-signals/qualification/method-signals-20261022/**'
       - '.github/workflows/m3-method-source-signals-20261022.yml'
   workflow_dispatch:
@@ -40,12 +40,12 @@ jobs:
           out="$RUNNER_TEMP/m3-method"
           mkdir -p "$out/classes/META-INF/services" "$out/sample" "$out/compiled"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$out/classes" \
-            m3/compiler/source-signals/src/main/java/com/m3/compiler/signals/M3MethodSignals.java \
-            m3/compiler/source-signals/src/main/java/com/m3/compiler/signals/M3SourceSignalPlugin.java \
-            m3/compiler/source-signals/src/test/java/com/m3/compiler/signals/M3MethodSignalsSelfTest.java
+            m3/compiler/source-signals/src/main/java/jdk/m3/compiler/signals/M3MethodSignals.java \
+            m3/compiler/source-signals/src/main/java/jdk/m3/compiler/signals/M3SourceSignalPlugin.java \
+            m3/compiler/source-signals/src/test/java/jdk/m3/compiler/signals/M3MethodSignalsSelfTest.java
           cp m3/compiler/source-signals/src/main/resources/META-INF/services/com.sun.source.util.Plugin \
             "$out/classes/META-INF/services/com.sun.source.util.Plugin"
-          java -cp "$out/classes" com.m3.compiler.signals.M3MethodSignalsSelfTest
+          java -cp "$out/classes" jdk.m3.compiler.signals.M3MethodSignalsSelfTest
           cat > "$out/sample/Model.java" <<'JAVA'
           package demo;
           class Model {

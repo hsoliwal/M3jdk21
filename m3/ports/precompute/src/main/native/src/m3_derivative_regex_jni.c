@@ -17,7 +17,7 @@ static void throw_illegal_state(JNIEnv *env, const char *message) {
 }
 
 JNIEXPORT jbyteArray JNICALL
-Java_com_m3_precompute_M3RegexDerivativeNative_nativeMatchRunsBatch(
+Java_jdk_m3_precompute_M3RegexDerivativeNative_nativeMatchRunsBatch(
     JNIEnv *env,
     jclass owner,
     jint classes,

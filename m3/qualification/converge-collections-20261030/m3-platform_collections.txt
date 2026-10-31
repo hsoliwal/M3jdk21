@@ -1,0 +1,15 @@
+m3-audit/src/main/java/jdk/internal/m3/audit/util/AuditEventMapper.java
+m3-billing/src/main/java/jdk/internal/m3/billing/mapper/BillingAccountMapper.java
+m3-billing/src/main/java/jdk/internal/m3/billing/mapper/InvoiceMapper.java
+m3-billing/src/main/java/jdk/internal/m3/billing/mapper/PaymentMapper.java
+m3-billing/src/main/java/jdk/internal/m3/billing/mapper/UsageMeterMapper.java
+m3-migration/src/main/java/jdk/internal/m3/migration/dto/MigrationMapper.java
+m3-queue/src/main/java/jdk/internal/m3/queue/domain/TaskQueue.java
+m3-queue/src/main/java/jdk/internal/m3/queue/repo/TaskQueueRepo.java
+m3-search/src/main/java/jdk/internal/m3/search/controller/SearchIndexController.java
+m3-search/src/main/java/jdk/internal/m3/search/dto/SearchIndexRequest.java
+m3-search/src/main/java/jdk/internal/m3/search/dto/SearchIndexResponse.java
+m3-search/src/main/java/jdk/internal/m3/search/entity/SearchIndex.java
+m3-search/src/main/java/jdk/internal/m3/search/repository/SearchIndexRepository.java
+m3-search/src/main/java/jdk/internal/m3/search/util/InvertedIndex.java
+m3-search/src/main/java/jdk/internal/m3/search/util/PrefixTrie.java
