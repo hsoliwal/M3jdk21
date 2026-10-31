@@ -209,6 +209,30 @@ atoms call. Proof: all 37 owned classes are byte-identical to the run before the
 negative controls 16/16 (generator mutants compile with the unchanged atoms); and the four files pass
 `-Xdoclint:all/protected` and M3JdkStandard. `run.sh` compiles the four atoms and pins them in PROVENANCE.tsv.
 
+## JUnit and perf tests per atom
+
+`run.sh` has a `junit` stage, which runs when `JUNIT_CONSOLE` names a junit-platform-console-standalone jar. On
+2026-10-31 it ran 3,262 tests and all passed:
+
+- **`M3DecoratorAtomTest` (1,575 tests):** for each of the 49 TARGETS rows, the seeded differential runs in process
+  (`M3DecoratorDifferential.run`). Each public method of the owned class is one test. It passes only when the seeded
+  steps called the method and no mismatch names it. A class contract test per target covers the factory, identity,
+  serialization and backing-state checks.
+- **`M3DecoratorGeneratorTest` (126 tests):** one test per generator atom output:
+  - each of the 13 rule checks;
+  - each of the 37 owned classes refilled from its scaffold in a fresh JVM, byte-identical to the committed file;
+  - the layout of each owned class is a fixed point;
+  - each helper template (H2, H3, H4 and H4 ordered) compiles in a host class.
+- **`M3DecoratorPerfTest` (1,561 tests):** one perf guard per method atom (`M3DecoratorDifferential.perf`). The owned
+  decorator and Commons get equal backings and the same seeded arguments. Both are called reflectively with access
+  checks off, after 20,000 warm-up calls. The result is the median of 5 rounds of 500 calls, alternating which side
+  runs first. A method fails above 4 times the Commons time per call. A target with an atom over the bound is
+  measured once more, warm: JIT state left by earlier targets skews a first pass (a probe measured `isEmpty` at 39
+  ns first and 5.2 ns warm, equal to Commons). `PERF_SNAPSHOT_20261031.tsv` holds the timings: mean ratio 1.13, and
+  1,005 of 1,561 atoms within 10%. This is a guard against pathological regressions, not a benchmark.
+
+New code names every literal (columns, properties, defaults, messages) as a constant.
+
 ## Proof
 
 `M3DecoratorDifferential.java` runs a seeded reflective differential of each owned class against the Commons class,
