@@ -556,51 +556,51 @@ recipeList:
       ignoreDefinition: false
   - org.openrewrite.java.ChangeType:
       oldFullyQualifiedTypeName: io.github.humbleui.skija.impl.Architecture
-      newFullyQualifiedTypeName: jdk.internal.m3.graphics.M3Architecture
+      newFullyQualifiedTypeName: jdk.m3.graphics.impl.M3Architecture
       ignoreDefinition: false
   - org.openrewrite.java.ChangeType:
       oldFullyQualifiedTypeName: io.github.humbleui.skija.impl.BufferUtil
-      newFullyQualifiedTypeName: jdk.internal.m3.graphics.M3BufferUtil
+      newFullyQualifiedTypeName: jdk.m3.graphics.impl.M3BufferUtil
       ignoreDefinition: false
   - org.openrewrite.java.ChangeType:
       oldFullyQualifiedTypeName: io.github.humbleui.skija.impl.Cleanable
-      newFullyQualifiedTypeName: jdk.internal.m3.graphics.M3Cleanable
+      newFullyQualifiedTypeName: jdk.m3.graphics.impl.M3Cleanable
       ignoreDefinition: false
   - org.openrewrite.java.ChangeType:
       oldFullyQualifiedTypeName: io.github.humbleui.skija.impl.Library
-      newFullyQualifiedTypeName: jdk.internal.m3.graphics.M3Library
+      newFullyQualifiedTypeName: jdk.m3.graphics.impl.M3Library
       ignoreDefinition: false
   - org.openrewrite.java.ChangeType:
       oldFullyQualifiedTypeName: io.github.humbleui.skija.impl.Log
-      newFullyQualifiedTypeName: jdk.internal.m3.graphics.M3Log
+      newFullyQualifiedTypeName: jdk.m3.graphics.impl.M3Log
       ignoreDefinition: false
   - org.openrewrite.java.ChangeType:
       oldFullyQualifiedTypeName: io.github.humbleui.skija.impl.Managed
-      newFullyQualifiedTypeName: jdk.internal.m3.graphics.M3Managed
+      newFullyQualifiedTypeName: jdk.m3.graphics.impl.M3Managed
       ignoreDefinition: false
   - org.openrewrite.java.ChangeType:
       oldFullyQualifiedTypeName: io.github.humbleui.skija.impl.Native
-      newFullyQualifiedTypeName: jdk.internal.m3.graphics.M3Native
+      newFullyQualifiedTypeName: jdk.m3.graphics.impl.M3Native
       ignoreDefinition: false
   - org.openrewrite.java.ChangeType:
       oldFullyQualifiedTypeName: io.github.humbleui.skija.impl.OperatingSystem
-      newFullyQualifiedTypeName: jdk.internal.m3.graphics.M3OperatingSystem
+      newFullyQualifiedTypeName: jdk.m3.graphics.impl.M3OperatingSystem
       ignoreDefinition: false
   - org.openrewrite.java.ChangeType:
       oldFullyQualifiedTypeName: io.github.humbleui.skija.impl.RefCnt
-      newFullyQualifiedTypeName: jdk.internal.m3.graphics.M3RefCnt
+      newFullyQualifiedTypeName: jdk.m3.graphics.impl.M3RefCnt
       ignoreDefinition: false
   - org.openrewrite.java.ChangeType:
       oldFullyQualifiedTypeName: io.github.humbleui.skija.impl.ReferenceUtil
-      newFullyQualifiedTypeName: jdk.internal.m3.graphics.M3ReferenceUtil
+      newFullyQualifiedTypeName: jdk.m3.graphics.impl.M3ReferenceUtil
       ignoreDefinition: false
   - org.openrewrite.java.ChangeType:
       oldFullyQualifiedTypeName: io.github.humbleui.skija.impl.ResourceFinder
-      newFullyQualifiedTypeName: jdk.internal.m3.graphics.M3ResourceFinder
+      newFullyQualifiedTypeName: jdk.m3.graphics.impl.M3ResourceFinder
       ignoreDefinition: false
   - org.openrewrite.java.ChangeType:
       oldFullyQualifiedTypeName: io.github.humbleui.skija.impl.Stats
-      newFullyQualifiedTypeName: jdk.internal.m3.graphics.M3Stats
+      newFullyQualifiedTypeName: jdk.m3.graphics.impl.M3Stats
       ignoreDefinition: false
   - org.openrewrite.java.ChangeType:
       oldFullyQualifiedTypeName: io.github.humbleui.skija.paragraph.Affinity

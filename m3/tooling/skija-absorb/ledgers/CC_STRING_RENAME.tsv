@@ -21,7 +21,7 @@ platform/cc/interop.cc	602	io/github/humbleui/skija/RuntimeEffectUniformInfo	jdk
 platform/cc/interop.cc	617	io/github/humbleui/skija/RuntimeEffectChildInfo	jdk/m3/graphics/M3RuntimeEffectChildInfo
 platform/cc/interop.cc	651	io/github/humbleui/skija/SurfaceProps	jdk/m3/graphics/M3SurfaceProps
 platform/cc/interop.cc	692	io/github/humbleui/skija/TransferFunction	jdk/m3/graphics/M3TransferFunction
-platform/cc/interop.cc	730	io/github/humbleui/skija/impl/Native	jdk/internal/m3/graphics/M3Native
+platform/cc/interop.cc	730	io/github/humbleui/skija/impl/Native	jdk/m3/graphics/impl/M3Native
 platform/cc/interop.cc	803	io/github/humbleui/types/IPoint	jdk/m3/graphics/M3IPoint
 platform/cc/interop.cc	830	io/github/humbleui/types/IRect	jdk/m3/graphics/M3IRect
 platform/cc/interop.cc	869	io/github/humbleui/types/Point	jdk/m3/graphics/M3Point
