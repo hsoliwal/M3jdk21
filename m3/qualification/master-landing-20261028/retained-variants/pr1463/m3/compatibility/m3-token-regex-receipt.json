@@ -76,7 +76,7 @@
     {
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3TokenMatcher.java",
       "before": "ABSENT",
-      "after": "6683641031307ae219d22cf5be0312bd2f6e71d63146a6902e6deff36e27bc2e",
+      "after": "505e4defe226358c48a97b2124d7484d2ebd48f0af4306280606a4542fd9ebae",
       "resource": "hash-pinned-java/02-M3TokenMatcher.java.txt"
     },
     {

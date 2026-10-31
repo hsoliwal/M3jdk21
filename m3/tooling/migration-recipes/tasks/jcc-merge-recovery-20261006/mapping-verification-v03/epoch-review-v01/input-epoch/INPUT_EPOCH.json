@@ -782,7 +782,7 @@
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/publication/M3_FINAL_CURRENT_M3.json",
-      "sha256": "f1dd5831a9838ec31d6903e98e683de010ef4440e9a372aee961a8761f5ae6fe"
+      "sha256": "e71ea967d2008207adabab5c3d105701b857cb4f0c97eb8c81f73eceb88bb9e4"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/publication/M3_FINAL_CURRENT_GITHUB.json",
@@ -1283,7 +1283,7 @@
   },
   "previous_input_epoch": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v02/input-epoch/INPUT_EPOCH.json",
-    "sha256": "973be97f762b46278f16c2bae6d887f2bc407110f333fe7ae0e7070e30cbe118"
+    "sha256": "2ea3ffe30ac6824bcc6d708c431b848a4c7997bdb4cdeaaddea1a62640734718"
   },
   "reconstructed_tree_count": {
     ".github": 12,

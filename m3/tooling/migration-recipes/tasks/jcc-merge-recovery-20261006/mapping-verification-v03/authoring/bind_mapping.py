@@ -337,7 +337,7 @@ def compose(current_files, prior_files, packet, *, allow_fixture=False):
     bindings["merge_recovery"] = {
         "current_input": DESTINATION, "current_input_root": DESTINATION_ROOT,
         "current_input_epoch": TASK_ROOT + "/mapping-input-epoch.json",
-        "intermediate_reviewed_input": {"commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2", "root_tree": "0812573f02908d8078d13f5f49346865cdf1c0e0", "input_epoch_sha256": "973be97f762b46278f16c2bae6d887f2bc407110f333fe7ae0e7070e30cbe118", "scope": "Prior 52-record fixture and inherited TQ validation failures retained; current TQ record is preserved from exact C0 input."}, "current_input_epoch_sha256": INPUT_EPOCH_SHA256,
+        "intermediate_reviewed_input": {"commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2", "root_tree": "0812573f02908d8078d13f5f49346865cdf1c0e0", "input_epoch_sha256": "2ea3ffe30ac6824bcc6d708c431b848a4c7997bdb4cdeaaddea1a62640734718", "scope": "Prior 52-record fixture and inherited TQ validation failures retained; current TQ record is preserved from exact C0 input."}, "current_input_epoch_sha256": INPUT_EPOCH_SHA256,
         "earlier_reviewed_input": {"commit": "87590cb96fb0e2dc0f88fae8e01957f7179cd255", "ordered_records": 47, "non_jcc_records": 45, "top_level_mappings": 17, "gates": 20, "scope": "Earlier fixture and refused map input retained as history; current preimages come from the separately frozen C0 epoch."},
         "source_history_publication": SOURCE_HISTORY, "source_history_pr": 9427,
         "receiving_history_publication": RECEIVER_HISTORY, "receiving_history_pr": 189,

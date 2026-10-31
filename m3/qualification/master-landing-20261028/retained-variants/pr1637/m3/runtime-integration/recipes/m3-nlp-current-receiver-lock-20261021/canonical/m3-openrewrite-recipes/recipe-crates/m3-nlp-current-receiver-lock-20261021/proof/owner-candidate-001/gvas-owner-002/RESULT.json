@@ -12,7 +12,7 @@
       "log_sha256": "45959d475cc154c667221d3ba8503a0045fcd2c1ca12fdc33149f72423627f2b"
     }
   ],
-  "driver_sha256": "af4c2f3232c29ea525d18f446419d4be3dd4e8f1a388e9fdc42a83e08a069b18",
+  "driver_sha256": "0ee1fc9a15885c39c217d8cdc64e95c99dc6d36671f14e15f7d27e761a5bf1a6",
   "elapsed_seconds": 2.5,
   "gate_inputs": [
     {
@@ -47,9 +47,9 @@
     },
     {
       "bytes": 6503,
-      "git_blob": "438e1d5a28aaae229b469b7a496397d04acf17b3",
+      "git_blob": "643444c738496600ea6184ceaf01c00cd36bb390",
       "path": "m3/verify-gvas-literal-precompute.py",
-      "sha256": "605b6a520374e9d3adb1a5f82dbbc55b4f9828e66c4a66f093e3fd6e7238fef5"
+      "sha256": "43ac8c6462f35d10624f1a78c96082550d4413866951f74b5fee6efd407f08c3"
     }
   ],
   "inputs_unchanged": true,
@@ -57,7 +57,7 @@
   "receiver_head": "2779aba3f98f31c324be43f731be7914e1a05935",
   "schema": "M3_NLP_RECEIVER_TEXT_OWNER_FOLLOWUP_1",
   "scope": "Identical original gate after sandbox child /proc visibility refusal; runs with required process visibility.",
-  "shared_driver_sha256": "023af9a38722a8e9b6a0e7db7a097f9fa177b5d93e334adba1e0f040088d9145",
+  "shared_driver_sha256": "ee680061df4e9494c3d3a9817ea4d39e4f138a0b2e29a3355b4ab6014980a277",
   "state": "PASS",
   "stdout": "M3_GVAS_LITERAL_STRICT_PASS processes=3 base=0x600000000000 literal=0x600000014f82 inode=1096645 checks_per_child=17530 sha256=5459e62dc9bda0ba4c3aba35ad2c55dd06501b8c661e0b2d05fd1710bd9179dc\n"
 }

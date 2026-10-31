@@ -57,7 +57,7 @@
     {
       "path": "src/java.base/share/classes/java/lang/M3StringImmediate.java",
       "before": null,
-      "after": "327ac7a55b80631378a822c2133729bd027f1f26bc53224020c3e1fad01109e3"
+      "after": "0e8123e45fd7677ce6b36d17ee2dbee1e8eee2daced2ef821566b8bbb061886c"
     },
     {
       "path": "src/java.base/share/classes/java/lang/M3StringOwner.java",

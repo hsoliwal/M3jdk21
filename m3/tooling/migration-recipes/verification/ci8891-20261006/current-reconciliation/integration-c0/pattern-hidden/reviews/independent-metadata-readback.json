@@ -19,7 +19,7 @@
   "bundle": {
     "bytes": 235613,
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/packaging-authoring-v1/bundle/BUNDLE.json",
-    "sha256": "581b220f311d1ce39e46170eb0f394adabc079d1f02b1293cef9e0ca079c2ca2"
+    "sha256": "fcc9ad208d1e0af28985fd4ec0b7c9f22d1f1cc9760668964eadf92c6ae444ce"
   },
   "compiledBodiesIncluded": false,
   "consumerQualified": false,
@@ -34,13 +34,13 @@
   "readback": {
     "bytes": 1388548,
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/packaging-authoring-v1/READBACK.json",
-    "sha256": "0a7fb4ac3aab814fa4d8d74cb5a45519b04c28b6ce603b6b09ed8d1e43f5cd10"
+    "sha256": "012fda27d9a7926b717dc20e90e8136382e894bb50cef860283aa632ae366a74"
   },
   "readbackFileReads": 3100,
   "readiness": {
     "bytes": 14401,
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/packaging-authoring-v1/PROJECT-READY.json",
-    "sha256": "b7c740f37871586aef109e3d68a4c42063f3879db61e45c5db8e74eaa31e8bf0"
+    "sha256": "66e83981ec9c970895e551fc6bc3af355096f66591efc121b144f01aef7b36e4"
   },
   "receivingBodyRows": 781,
   "receivingCompiledIdentityRows": 23,
@@ -49,12 +49,12 @@
   "rootCommandSpec": {
     "bytes": 8254,
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/packaging-authoring-v1/ROOT-COMMANDS.json",
-    "sha256": "c0caa748b9a8be8358e614d6c160e62b719349f8a0d9ed4dbf58e84606e1e016"
+    "sha256": "4ca01289087cffa812a65a05c490a39019e4cc50853b8bf5a2daec70043b6d58"
   },
   "rootExecution": {
     "bytes": 1660,
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/root-packaging-v1/RESULT.json",
-    "sha256": "9e5e55bc9e34f8713229501b11b69d63f683390331754c8114f316134ec4d357"
+    "sha256": "8dbba3061d4aacc6fba5df1ec374582041820a1cabf0b5dfc4e8a9d6621fe13e"
   },
   "schema": "synexia.ph0.independent-package-readback/1",
   "selectedBodyMappings": 1502,
@@ -63,7 +63,7 @@
   "sourceClosure": {
     "bytes": 3711764,
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/packaging-authoring-v1/SOURCE-CLOSURE.json",
-    "sha256": "252279226b71dd3c1855e2d63de2651ba1c747c6c26e41e6ea309113a6f7424f"
+    "sha256": "77244a96b9718a1e6cdf61c27fdfdb8c850b22cf4e72d7877b79642fad1eb1d1"
   },
   "status": "PASS_METADATA_IDENTITY_READBACK",
   "uniqueChunkBytes": 77860999

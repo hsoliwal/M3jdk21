@@ -8,6 +8,6 @@ m3/collections/src/test/java/jdk/m3/collections/M3ArrayifiedIndexContract.java	A
 m3/collections/src/test/java/jdk/m3/collections/M3ArrayifiedIndexContractTest.java	ABSENT	a937dc0c70e45aa994f21ba7e4c9233de04030e0	1760	12857	JUNIT_ARRAY_OWNER
 m3/collections/src/test/java/jdk/m3/collections/M3ArrayifiedIndexResourceProbe.java	ABSENT	ae4c57150b0321eb37a201bc798b2ed3396fb83e	1760	12857	RESOURCE_PROBE
 src/java.base/share/classes/jdk/internal/m3/M3IndexMaskWindow.java	f1e41112e980da7eaa33b2062f8cca743686dd8f	b9c942d354189c26ed0848d7dd73f21754838049	1761	12856	JAVA_BASE_MASK_COUNT
-src/java.base/share/native/libjava/M3IndexMaskWindow.c	37f2154791a09425852d095b73d0b137f3511fc6	59b2130ca8e897e75e24afbd45e8fd885c55b0e9	1761	12856	ORIGINAL_LIBJAVA_JNI
+src/java.base/share/native/libjava/M3IndexMaskWindow.c	37f2154791a09425852d095b73d0b137f3511fc6	d8cc9be4ba6cbef3f1106923390aaf1949c2e4fb	1761	12856	ORIGINAL_LIBJAVA_JNI
 test/jdk/jdk/internal/m3/M3MaskCountTest.java	ABSENT	3c6d7ca77c3b2e6e0e8e2cfd2b685790c1963d74	1761	12856	JAVA_JNI_COUNT_PARITY
 test/jdk/jdk/internal/m3/M3MaskPreparedPredicateTest.java	ABSENT	03ae7033b6d5d5357135fe23327da50bc4edbb2e	1761	12856	JAVA_JNI_NATIVE_PREDICATE

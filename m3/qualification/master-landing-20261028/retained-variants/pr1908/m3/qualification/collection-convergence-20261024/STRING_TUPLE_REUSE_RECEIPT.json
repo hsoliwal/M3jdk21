@@ -38,8 +38,8 @@
     },
     {
       "path": "m3/runtime-integration/check-m3string-concat-overflow-current.py",
-      "sha256": "b05d57fec8f6d9af9ef46e929ae221e65355bcd8e48f9456774aa707fcb9ebd0",
-      "git_blob": "8abe7f27a84bc6cea2d3257d8fd16015b4d91f9f"
+      "sha256": "b63fe4e88c48aceb799932e77c9ffb255ae67165d457e0029645fa191d41f80f",
+      "git_blob": "13fa023c5160c2360f6c44f726c589c1407e95c4"
     },
     {
       "path": "m3/runtime-integration/test_m3string_concat_overflow_current.py",

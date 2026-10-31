@@ -11,7 +11,7 @@
   "source_rights": "EXISTING_DIRECT_COPY_REVIEW plus target-owned correction; original Apache-2.0 Java/C/test notices retained. Pinned OpenJDK and process-helper sources retain their own original notices. No automatic relicensing.",
   "original_receiver_sources": {
     "m3/docs/m3jdk21-native-mask-window-receiver-20261020.md": {
-      "sha256": "0834c0e1eaf26e49ee12870ffd82861f0b10e9cfddf79a72cf6ab6e4b5e1cd43",
+      "sha256": "3aa887b6421b74dd58200e1ea0df805e8e826db6be9cc2f4c6dbb62570a98204",
       "donor_pr": 1557,
       "donor_commit": "900a723619fb7021e41b6e2c48a773fd41407224"
     },
@@ -26,7 +26,7 @@
       "donor_commit": "900a723619fb7021e41b6e2c48a773fd41407224"
     },
     "test/jdk/jdk/internal/m3/M3IndexMaskWindowJniTest.java": {
-      "sha256": "2490b6752d453daa7f7c4eb7d565ae2894a1236fd0ebaecac637f3230ffb5d8c",
+      "sha256": "3ce11de04665d4d19af7bc7f6928d1ae0f1ba53e7167452fee3a11276c92e91d",
       "donor_pr": 1557,
       "donor_commit": "900a723619fb7021e41b6e2c48a773fd41407224"
     }
@@ -57,9 +57,9 @@
   "candidate_files_sha256_excluding_this_receipt": {
     "src/java.base/share/classes/jdk/internal/m3/M3IndexMaskWindow.java": "3133ddda330e1c71d1ecd481ac70d3cade3954cbc1fe2492a5bb49e3fd60b90f",
     "src/java.base/share/native/libjava/M3IndexMaskWindow.c": "aba190de61ea6e55e076ec3d175d451b5fea975ed621124b4f084410ef739323",
-    "test/jdk/jdk/internal/m3/M3IndexMaskWindowJniTest.java": "2490b6752d453daa7f7c4eb7d565ae2894a1236fd0ebaecac637f3230ffb5d8c",
+    "test/jdk/jdk/internal/m3/M3IndexMaskWindowJniTest.java": "3ce11de04665d4d19af7bc7f6928d1ae0f1ba53e7167452fee3a11276c92e91d",
     "test/jdk/jdk/internal/m3/M3IndexMaskWindowIntegrationTest.java": "0490a6c7523f5fd1e49c30d3f89c504647b13ea119408fb23bb646f2237cd992",
-    "m3/docs/m3jdk21-native-mask-window-receiver-20261020.md": "2ca4a838aa5ce4546b3881665076a0ca02321c02362fb8b7bfde7aae0b8cd1f2",
+    "m3/docs/m3jdk21-native-mask-window-receiver-20261020.md": "2d2f3ef4eb61d8d505e28eceef916cb0b3435287e4bc4e982cd95f2a736c53f9",
     "m3/collections/algorithm-catalog/wrapper-convergence-20261020/native-proof/qualify.py": "f0170e148bd2f8dbce0047b329497c2d35e5d7487fa4fb2b4304032e5bc8ba12",
     "m3/collections/algorithm-catalog/wrapper-convergence-20261020/native-proof/src/test/java/HeaderFromInstalledClasses.java": "242bca97600713a40ddf41ccedc6eb245ec4d6e63e4d41eafe6f5f0e71434de9",
     "m3/collections/algorithm-catalog/wrapper-convergence-20261020/native-proof/src/test/java/ProcessBuilderProbe.java": "dcf2d2ae35c0d9029db4eae0deac328f2d7c3d9d0687ab4720834d2549c27f8f",
@@ -107,7 +107,7 @@
         "sha256": "0490a6c7523f5fd1e49c30d3f89c504647b13ea119408fb23bb646f2237cd992"
       },
       "test/jdk/jdk/internal/m3/M3IndexMaskWindowJniTest.java": {
-        "sha256": "2490b6752d453daa7f7c4eb7d565ae2894a1236fd0ebaecac637f3230ffb5d8c"
+        "sha256": "3ce11de04665d4d19af7bc7f6928d1ae0f1ba53e7167452fee3a11276c92e91d"
       },
       "test/jdk/java/util/CollectionViews/BootstrapViewsTest.java": {
         "sha256": "a36b48eee0924abd57ce1a356d26ce4e8c6516170e65478cd42cb2d09fbd8a75"
@@ -968,12 +968,12 @@
       },
       {
         "path": "src/java.base/share/native/libjava/M3ObjectMetrics.c",
-        "source_sha256": "ce18bcccd3014f83e899c0d0b878f1b221f654096600c5b2d21bfa95285a7edc",
+        "source_sha256": "68fb2fbc9ec26831fb3b97a7c093ceba2872b7d29ef3644f9c95ff8efdaca511",
         "object_sha256": "e7e409b76d35252a174ceed076f571195f391ed0ed0c1c17a05e590323ee0ab4"
       },
       {
         "path": "src/java.base/share/native/libjava/M3RX7.c",
-        "source_sha256": "441c6de3577b56d15134f8048c1eeaab3baa982517309ca8d3e7fc9c65006d1a",
+        "source_sha256": "7cbd0a016975704d1b3f9777421dcf02848ac14c8bebbd7aeefd41e9c46712c6",
         "object_sha256": "4024ef16bf27f8925002926a16508936dc920512ab55f5852e86dca03b974623"
       },
       {
@@ -983,7 +983,7 @@
       },
       {
         "path": "src/java.base/share/native/libjava/M3StateRelation.c",
-        "source_sha256": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16",
+        "source_sha256": "0df1989292b23b1f185f222db61ad55d5e38b30d5b758436ca9d62b8de277bbd",
         "object_sha256": "16c5993a9fe24e63290ce2309a56781738e567f3570b6dcb3db15da50e0c261f"
       },
       {
@@ -1593,7 +1593,7 @@
         "src/java.base/share/classes/java/util/CollectionViews.java": "ba48ef15edf9f64824669354d38f9fb295b6c39e2fc7885ee6b3b654aa932ef3",
         "src/java.base/share/native/libjava/M3IndexMaskWindow.c": "aba190de61ea6e55e076ec3d175d451b5fea975ed621124b4f084410ef739323",
         "test/jdk/jdk/internal/m3/M3IndexMaskWindowIntegrationTest.java": "0490a6c7523f5fd1e49c30d3f89c504647b13ea119408fb23bb646f2237cd992",
-        "test/jdk/jdk/internal/m3/M3IndexMaskWindowJniTest.java": "2490b6752d453daa7f7c4eb7d565ae2894a1236fd0ebaecac637f3230ffb5d8c",
+        "test/jdk/jdk/internal/m3/M3IndexMaskWindowJniTest.java": "3ce11de04665d4d19af7bc7f6928d1ae0f1ba53e7167452fee3a11276c92e91d",
         "test/jdk/java/util/CollectionViews/BootstrapViewsTest.java": "a36b48eee0924abd57ce1a356d26ce4e8c6516170e65478cd42cb2d09fbd8a75",
         "test/jdk/java/util/CollectionViews/CollectionViewsCoreContract.java": "3060640c56a40eb15a90c20150e3e5ef55aea96af5dab45c53fcba301e929208",
         "test/jdk/java/util/CollectionViews/CollectionViewsCowBulkTest.java": "f95a9a35f6b6ed1f25d2e6e5d14a0df7a5bedaa36b4c346f92be53208769da0d",

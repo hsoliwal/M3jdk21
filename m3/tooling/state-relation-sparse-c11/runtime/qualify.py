@@ -24,9 +24,9 @@ HEADER = "src/java.base/share/native/libjava/m3_state_relation.h"
 PROOF = "m3/compatibility/regex-relations-20261014/M3RelationPortProof.java"
 PINNED = {
     OWNER: "30359b57b7b553e78355d3672119c685051ec1da",
-    ADAPTER: "780c7887aaa6b0892a76f4eee1dcb17086a60289",
-    NATIVE: "610ca8bab47065a49b9b58814d6392a287f4fd8b",
-    HEADER: "18a02e228129827da486edc5b316790af6135310",
+    ADAPTER: "d70a152bdedc380ed8b28861ea94ef4c2adbea90",
+    NATIVE: "89b3127f0f262de3e00ba28a01079a659013dce2",
+    HEADER: "0e0c70e60b2cee61c3df31982a26f4251955cb61",
     PROOF: "e9a6beee8916cf97d5d4aac2383e7ac2fa8843e0",
 }
 MAIN = "jdk.internal.mindex.M3RelationPortProof"

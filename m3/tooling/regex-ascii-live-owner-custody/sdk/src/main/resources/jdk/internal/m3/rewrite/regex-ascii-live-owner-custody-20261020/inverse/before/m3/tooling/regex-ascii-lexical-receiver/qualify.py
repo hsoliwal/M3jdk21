@@ -69,23 +69,23 @@ def write(name, value):
 
 
 SOURCE_GIT = {
-    "m3/docs/name-mapping.json": "499cc323ade938eace0d06275467e4e77de8f106",
-    "src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java": "cf0c5fb3046e924484d8ea174816d1de60527f34",
-    "src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java": "22ed1649047d484a57a7e8e3cec83bf954e4388e",
-    "src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java": "9d4ba83c85b740e3d1368ecd6cc572be122ae8c2",
+    "m3/docs/name-mapping.json": "ce76431af299d15823c1cd30f9083ab1a9186f03",
+    "src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java": "61d6d3d991c5dd7bb14ce1872cc5d6d1dd5278fb",
+    "src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java": "0b81a6684ac4ea70930949edd58840eb57651105",
+    "src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java": "a7f325d456b55f6269d086ff8ddacad7205d1876",
     "src/java.base/share/classes/jdk/internal/mindex/M3NotYetReceived.java": "ac96ac14ced11cf51983e555b7ff7898e2b0a4e9",
-    "src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java": "bdeccba2317a2d0d67860723fbc89ede281f4197",
-    "src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java": "a1c8d53d923f3e128a852cf907a8b30ccc6959b9",
+    "src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java": "669362eaae71a088766b32d8a5049cb55cb59c01",
+    "src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java": "6bd90fe38924e62a187452ac8b516383d10896ab",
     "test/jdk/java/util/regex/M3AutomatonDifferentialTest.java": "160100dbe5854b1448627a85171cbc60d7e24d85"
 }
 AFTER_GIT = {
-    "m3/docs/name-mapping.json": "acb54b5a6b22d990c129adc5443c407f69caa8eb",
-    "src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java": "cf0c5fb3046e924484d8ea174816d1de60527f34",
-    "src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java": "22ed1649047d484a57a7e8e3cec83bf954e4388e",
-    "src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java": "9d4ba83c85b740e3d1368ecd6cc572be122ae8c2",
+    "m3/docs/name-mapping.json": "ffaa8dd8e5d707bffcecc7b43e7be27b8fd53960",
+    "src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java": "61d6d3d991c5dd7bb14ce1872cc5d6d1dd5278fb",
+    "src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java": "0b81a6684ac4ea70930949edd58840eb57651105",
+    "src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java": "a7f325d456b55f6269d086ff8ddacad7205d1876",
     "src/java.base/share/classes/jdk/internal/mindex/M3NotYetReceived.java": "ac96ac14ced11cf51983e555b7ff7898e2b0a4e9",
-    "src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java": "763fa4ac6b6f7c84856318d95356199b30376b28",
-    "src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java": "a1c8d53d923f3e128a852cf907a8b30ccc6959b9",
+    "src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java": "ac36ccca64aaee6dd2ae35f681ed1930e0ebad73",
+    "src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java": "6bd90fe38924e62a187452ac8b516383d10896ab",
     "test/jdk/java/util/regex/M3AutomatonDifferentialTest.java": "d274d4ec554e48aac56a433a195cab65d43944d9"
 }
 CHANGED_PATHS = tuple(name for name in SOURCE_GIT if SOURCE_GIT[name] != AFTER_GIT[name])

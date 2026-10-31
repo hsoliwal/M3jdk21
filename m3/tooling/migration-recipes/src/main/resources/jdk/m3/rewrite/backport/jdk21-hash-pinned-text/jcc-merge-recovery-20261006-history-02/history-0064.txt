@@ -114,7 +114,7 @@ def main():
     destination = Path(sys.argv[2]).resolve() if len(sys.argv) > 2 else OUT / 'epoch-01'
     assert destination.is_relative_to(OUT)
     model_raw = (OUT / 'BASE_TREE_MODEL.json').read_bytes()
-    assert digest(model_raw) == '26378280f0305c59a7529fed18de4dd938e935840260c9667fb55de4c6f6fd8a'
+    assert digest(model_raw) == '5a6c06886a4241745d38b6b463a88ace34236a1b0c557ffae596b05d048e1b82'
     model = json.loads(model_raw)
     assert model['commit'] == BASE_COMMIT and model['root'] == BASE_TREE
     trees = model['trees']

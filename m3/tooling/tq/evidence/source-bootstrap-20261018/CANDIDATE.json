@@ -70,8 +70,8 @@
     },
     {
       "path": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/manifest.tsv",
-      "before_sha256": "f754ebe9b07163ed2ce00524b96f08f07aecda22e1ca578178cd92cd3f0ea834",
-      "proposed_sha256": "a1101bd525bb95242fe270fad88c8f80e3a2977a1576802d4caabbfc3d1582b6",
+      "before_sha256": "b40e5e2fd6cbf8ad487f10ecd60bfdb9f893da88578194a1d8ad1221d7815740",
+      "proposed_sha256": "5b4e8a514d7c44dd46447e76fde8bbf9a8cec9f2a1dacdc9e2a9d3bfe814d525",
       "mode": "0644",
       "license": "Apache-2.0"
     },

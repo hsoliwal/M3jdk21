@@ -115,7 +115,7 @@
     },
     {
       "actual_equals_complete_after_bytes": true,
-      "after_sha256": "a80ffed31f45465774fd03ba90858c301327d6b472acf89652d01bf96b981707",
+      "after_sha256": "8c76c2dd45e775d29f8f47d8daf65842e465c74ad3dec7aacd55df59f9d051a1",
       "before_sha256": "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126",
       "original_mode_preserved": true,
       "path": "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json"
@@ -220,7 +220,7 @@
       "output_guard_adjustment_preserves_prior_failed_artifacts": true,
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/reference-audit/REFERENCE_AUDIT.json",
       "result": "PASS",
-      "sha256": "cdf193f9b9f1b63671de7227b3f79cbf4747aca893ec1d16bab75eed18185dbc",
+      "sha256": "f7dcc4fb3843ce83520aacaf8fd36f4347d64000233d92921e81f67154bdfa87",
       "source_proof_reference_occurrences": 46,
       "source_reference_occurrences": 17,
       "uses_existing_remote_readbacks_not_new_remote_requests": true

@@ -46,7 +46,7 @@
       },
       "after": {
         "resource": "after02-source-destination-bindings.json.txt",
-        "sha256": "a80ffed31f45465774fd03ba90858c301327d6b472acf89652d01bf96b981707"
+        "sha256": "8c76c2dd45e775d29f8f47d8daf65842e465c74ad3dec7aacd55df59f9d051a1"
       }
     }
   ],

@@ -17,14 +17,14 @@
       "crate": "ph0-phc",
       "id": "Phc",
       "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ph0-phc/manifest.tsv",
-      "manifestSHA256": "a5a77772a5f0a88698e9bae39f8ecb953419ef51d810273a9c33e7e491e237b5",
+      "manifestSHA256": "31a4c764cd7dbb835834de27a70e925b6c567d36502303041f5236b8f89a2971",
       "namedRecipe": "jdk.internal.m3.Ph0Phc",
       "targets": [
         {
           "afterBytes": 79664,
-          "afterSHA256": "c863703da9c9ff9bb2d39b9f159ee914e071cc19882b7802648e1e61b06c48be",
+          "afterSHA256": "ed524e76758081208a939f619d3bab55abf9ed0c95c053ab2957211d45718cab",
           "beforeBytes": 79672,
-          "beforeSHA256": "caa3af6b19162c603a9d29ccb92894c01b50f064f7c75846c9d0afbb8c117e70",
+          "beforeSHA256": "e90a850d9a8946ad3c741b99a81bc823a65415110ec32aabffd25da15f530e59",
           "operation": "REPLACE",
           "path": "m3/tooling/image-gates/current-c0.json"
         },

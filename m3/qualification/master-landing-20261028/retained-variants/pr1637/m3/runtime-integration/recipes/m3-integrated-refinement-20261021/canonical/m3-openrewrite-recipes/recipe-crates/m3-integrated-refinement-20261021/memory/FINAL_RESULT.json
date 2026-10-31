@@ -5,9 +5,9 @@
   "events": [
     "12db3d3bea4b8a5b958ed799934c0bbe33ea8b416a47f45d803495f1e4b11acf",
     "c876494cd3b2b01d905bb5a623ad97981e9ff113ebc0740978b0a4206491de2d",
-    "093cfae9d76bd99b0c97aa81cac51e3a1834c0c14c3cd7bbd0c4c0f7bcc9fe54",
-    "c960a4f166495a83f6c289b4f03ab76a74b3c42e09b2f9dd3f1046625639c120",
-    "2bc163b52e2e50a1254ba885980ed7cfdb88a5abe598f8849d4e85433afb9fa1"
+    "f23628de2938b1bb2a2e66ef689a40ab54a4cadca2af9d0c7158a5707f51fbbc",
+    "101b737403729e6eac9106693b5ed4e7e5c38f74499bf45221f8bd67712c6ef9",
+    "c4be4af96ddd29d4e3d401831a277a76a6057f52696b5e579625eef0bf899eaf"
   ],
   "event_count": 5,
   "conformance_checks": 129,
@@ -20,11 +20,11 @@
   },
   "retrieval": {
     "path": "memory/LESSONS.md",
-    "sha256": "aba9f8f556e3f080850b8745e3076bb1d8a72d02b7301b88c6a86a8637d57eb2"
+    "sha256": "f98a16890a6047f231762a4bcdd728952eabc975112a42e76c3669768dfe8d1c"
   },
   "index": {
     "path": "memory/INDEX.json",
-    "sha256": "4f572a068710f592cfce850359ba01ab6240ae67b5a71351130f158c7a1f0468"
+    "sha256": "8ee044ed87add3de699ec640b014bebfe3a6dabf956b16a831948a532a86af6e"
   },
   "source": [
     {
@@ -51,15 +51,15 @@
     },
     {
       "path": "proof/sdk-001/RESULT.json",
-      "sha256": "8abaa831ec9108d31c1b4e8ddaf25ec4b85c9d45f2feb403c8f8621686bd833e"
+      "sha256": "cc52eb45e978880fc4c7d3ad980e3a0a5076d4f86cf2014863424d06a898fec8"
     },
     {
       "path": "proof/sdk-002-offline/RESULT.json",
-      "sha256": "089c9eb763810e5abe50eec6f41845779289201943e74d8604f186fee657296b"
+      "sha256": "a1abf22e70da8c9ea163546910a24b0d6bd65fa08da6fc51329773f421d1287d"
     },
     {
       "path": "proof/memory-integrity-001/RESULT.json",
-      "sha256": "751019a3ff6e938074b14f8f87d85ec6af16bd6482f9aab357d63068a9a17847"
+      "sha256": "a63844479bb56435101881b36de70917e634fb335044d558e01cd212d37752ac"
     }
   ],
   "historical_unknowns": "Each event states unknown predecessor versions/commands explicitly. No lost October20 event or receipt is recreated.",

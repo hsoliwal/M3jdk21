@@ -2,11 +2,11 @@
 
 **Disposition: the actual bounded reference audit passed and is consistent with the admitted checker, receiving receipt and frozen reference identities.** No concrete audit defect was found. This review admits the reported reference-audit outcome for packaging. It does not admit the pending donor-document supplement, the final publication manifest or any remote publication.
 
-The actual audit is `reference-audit-v3/REFERENCE_AUDIT.json`, SHA-256 `07b4f393e8fb1cb53b86d3a83a3400972632af1a0c5de9bd9d90fc5d76a2031b` (769,381 bytes). It reports source commit `0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8`, source root `0361e4a07b77a01df170523033fef01c4052ddc5`, E3 receiving preimage `0994ecd65e86600f417f4d8702838d8c2663af61`, receiving root `7e8f39ac999174f8d5b6028d638a68d8c317b070`, and plan seal `0aa1f4a3e080c36d233066f0a6e1dc8e1047e6f0592dba60829b8cca3177df64`.
+The actual audit is `reference-audit-v3/REFERENCE_AUDIT.json`, SHA-256 `a7c41a897604c0421ca0f770fde83c51404208479f053b404cb98e5e7f2da7f1` (769,381 bytes). It reports source commit `0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8`, source root `0361e4a07b77a01df170523033fef01c4052ddc5`, E3 receiving preimage `0994ecd65e86600f417f4d8702838d8c2663af61`, receiving root `7e8f39ac999174f8d5b6028d638a68d8c317b070`, and plan seal `0aa1f4a3e080c36d233066f0a6e1dc8e1047e6f0592dba60829b8cca3177df64`.
 
 ## Actual invocation
 
-The captured command runs the exact admitted checker `f549f6a5d4513fc726d0e3d8cbe334202fac50e075ad7312f0a080fa81a3c4b6` through the configured Python with `-B`, in the E4 working directory. It records exit zero, 244 bytes of stdout and empty stderr. The stdout's audit hash and counts agree with the actual output. The audit timestamp falls inside the recorded invocation interval, 2026-10-05 17:42:54.173327–17:42:55.864392 UTC.
+The captured command runs the exact admitted checker `c88b8805881ab3cc299b530d50cbe8d6749a0a4925d7ea5e9ce512bd3a0a3ece` through the configured Python with `-B`, in the E4 working directory. It records exit zero, 244 bytes of stdout and empty stderr. The stdout's audit hash and counts agree with the actual output. The audit timestamp falls inside the recorded invocation interval, 2026-10-05 17:42:54.173327–17:42:55.864392 UTC.
 
 The invocation binds the actual receiving receipt `1f4ac9825d975520a04b7dc5ac1b282d96be32601c7abe2b0cfb676b0ff2df09`. The supplied invocation directory evidences one completed attempt and no failed checker invocation. The earlier readiness record remains explicitly a pre-execution record; it is not an additional run.
 
@@ -38,9 +38,9 @@ The actual checker reports reconstructing 936 recorded Git tree objects, travers
 
 ## Separate receiving-execution authority
 
-The receiving execution review by `/root/current_mastery_contracts` is an independently sealed input: `execution-review-v3/REVIEW.md`, SHA-256 `839f814bee8fe2dd0ba227907f10e1a6159d648688811043d9f4c770b19d2e5c`, with file seals `b616858dd2ae6495bcbdcb026b704f38fb223ca22742c64d7ca5ee94f89bea42`. This report was read in full.
+The receiving execution review by `/root/current_mastery_contracts` is an independently sealed input: `execution-review-v3/REVIEW.md`, SHA-256 `676c2ed4548ac2be360b39f389ecdde86e82ad08978d3019dd29d655ddfb31d2`, with file seals `aa28a8483f4890c9f44838c21ee7c776ca2457dc024cfa4df5e81df34474e4eb`. This report was read in full.
 
-That review establishes the ten actual receiving stages, twelve Java tests, six Python methods, the 132 loop-derived refusal checks, four-file apply/fixed-point/rollback/replay behavior and completion's expected blocked exit. It independently re-read all 1,008 frozen bodies and checked the four actual postimages. The exact freeze is `d5dee9d440dec5528f96a0168adcb6b6adaefefdc939e764a379fdd3049ef6c2`.
+That review establishes the ten actual receiving stages, twelve Java tests, six Python methods, the 132 loop-derived refusal checks, four-file apply/fixed-point/rollback/replay behavior and completion's expected blocked exit. It independently re-read all 1,008 frozen bodies and checked the four actual postimages. The exact freeze is `3747257e4df289cbc09ce34309683cb18c9c66caedab191379d0370a07057902`.
 
 This reference review compares every audit freeze record to that document but does not duplicate the complete 1,008-body/runtime review. It relies on that separate authority for the full body-stability finding. The two reviews concern distinct operations: the actual focused receiving proof and the subsequent local reference audit. Neither reruns or newly qualifies the original four-test receiver fixture or a Java/JNI source lane.
 

@@ -70,12 +70,12 @@ def write(name, value):
 TARGET_C = "src/java.base/share/native/libjava/M3StateRelation.c"
 SOURCE_GIT = {
     "src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java": "30359b57b7b553e78355d3672119c685051ec1da",
-    "src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java": "780c7887aaa6b0892a76f4eee1dcb17086a60289",
-    "src/java.base/share/native/libjava/M3StateRelation.c": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
-    "src/java.base/share/native/libjava/m3_state_relation.h": "18a02e228129827da486edc5b316790af6135310",
+    "src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java": "d70a152bdedc380ed8b28861ea94ef4c2adbea90",
+    "src/java.base/share/native/libjava/M3StateRelation.c": "89b3127f0f262de3e00ba28a01079a659013dce2",
+    "src/java.base/share/native/libjava/m3_state_relation.h": "0e0c70e60b2cee61c3df31982a26f4251955cb61",
     "m3/compatibility/regex-relations-20261014/M3RelationPortProof.java": "e9a6beee8916cf97d5d4aac2383e7ac2fa8843e0"
 }
-AFTER_GIT = {**SOURCE_GIT, TARGET_C: "106b95061f1adaca160e8fece2ad083f07f0b51b"}
+AFTER_GIT = {**SOURCE_GIT, TARGET_C: "816734640bdce057d1ab787a3a555cd50cf8a43e"}
 
 def owner_plan(original, post, actual):
     lanes = (original, post, actual)
@@ -206,7 +206,7 @@ def report():
     module = runpy.run_path(str(regular(SDK / "verify.py")), run_name="m3_sparse_sdk_reuse")
     pins, pins_data = module["inputs"]()
     if module["SUITES"] != {SUITE: METHODS} or module["RECEIVER_OUTPUTS"] != {
-            TARGET_C: "4c453d51223c3223f07fb88b39e1c1b6ed9891de8157d32a63990a9a4488ece9"}:
+            TARGET_C: "9cf05ae88cdde947d5c62001e2025a64a094531bbd727f51deb2e62b57636c60"}:
         raise RuntimeError("exact three-method one-C recipe contract required")
     expected_custody = {row["path"]: row["sha256"] for row in record["receiverOriginalOwners"]
                         if row["path"] != TARGET_C}

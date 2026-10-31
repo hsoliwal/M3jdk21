@@ -221,7 +221,7 @@
     {
       "source_id": "RECEIVER_2F_337",
       "file": "runtime-proof/received/SOURCE_MANIFEST.json",
-      "sha256": "6011c6eed511e414029578a4a8492e2c571e7639fa0e6f8e21f6b3a48ad55d0b",
+      "sha256": "e6973ba853554d97f35823512c189bd190181db1d2d10309d5b0b1a09b4fb4ad",
       "revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "evidence": "EXACT_337_INPUT_SOURCE_CLOSURE_AND_FINAL_RECHECK",
       "scope": "Exact2f module plus qualified r2/bridge outputs and verification runner/README"
@@ -229,7 +229,7 @@
     {
       "source_id": "ACTUAL_SDK_2F",
       "file": "runtime-proof/SDK_ACCEPTANCE.json",
-      "sha256": "03b14d9a92c5dff3a1c762cb229c8280a14a8838916edb1386143294d3fec045",
+      "sha256": "12d2329c15e7db972ab30af8d57df21a576c1980f1a6455113dace66c5878f47",
       "revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "evidence": "ACTUAL_SDK_5_SEAL_8_RECEIVER_9_PER_DATASET",
       "scope": "Separate r2 28, bridge 1 and proof2: 3; actual repeats0"
@@ -237,7 +237,7 @@
     {
       "source_id": "ACTUAL_RUNTIME_2F",
       "file": "runtime-proof/received/RECEIPT.json",
-      "sha256": "96a54f14260cae789065575484f18d5d74be287e8271f40b73a3b42bae56c161",
+      "sha256": "82e76d78b19dd5ab9e6987e6593c14be5dd3e714051ce1444a82b21fe154fd11",
       "revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "evidence": "PASS_SCOPED",
       "scope": "255 module tests, API, generated native ABI, C17/UBSan, checked JNI and named contracts"
@@ -245,7 +245,7 @@
     {
       "source_id": "LONG_BRIDGE_2F",
       "file": "runtime-proof/long-selftest/actual-long-selftest.json",
-      "sha256": "832374ab315335a85d0a7916e541ee3858c8e3ad6b9ebba9be664973cfbd7b2b",
+      "sha256": "27e402ac890dad2f1071247a6b6f4fc2a7290e71466dbffb540e50d4024bb830",
       "revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "evidence": "PASS_ACTUAL_RECEIVER_LONG_FACADE",
       "scope": "Existing 7,127 checks/1500 cases; bridge prequalification retains 1,259 exact observations and byte-identical public API"

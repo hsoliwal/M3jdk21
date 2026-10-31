@@ -3,7 +3,7 @@
   "source_head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
   "source_pr": "https://github.com/hsoliwal/M3jdk21/pull/1522",
   "canonical_runtime_recipe_source_pin": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
-  "canonical_runtime_manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+  "canonical_runtime_manifest_sha256": "ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6",
   "scope": "Four target-specific CI/dependency-verification files; Java/JNI production, test bodies, POMs and canonical runtime recipes are unchanged.",
   "runtime_qualification_epoch": "Earlier complete 657-file module/477-test receipts stay bound to their original source inventory. The full CI qualifier file changes here; the 268 production Java, 264 test Java, production C and guarded runtime owners remain exact.",
   "changes": [
@@ -21,10 +21,10 @@
     },
     {
       "path": ".github/workflows/m3-collections.yml",
-      "before_sha256": "20bbf390cad7ed2bdb8e024298cd7b32d311b6bf7c835742ee766bb53c5d0fda",
-      "after_sha256": "0848d1a673a908854bb885908d82eaadb23fa710c75ed3e6bd912516a21eb887",
-      "before_git_blob": "6e5aeabe3b065131b8789bb64e8738e46f559d75",
-      "after_git_blob": "506a2a09deb41c7c33a21586fa014f0ab9fd4081",
+      "before_sha256": "8d52122c6bd7bc4f52b0606704188a7040fc853c2dbefe6756b7b2a1792da504",
+      "after_sha256": "871d309a9e061205c1c6d3deff63568dfeac69155b89fc906ce32a482e8ea947",
+      "before_git_blob": "c42954ecf99a58893a76f3aee6dbe2d258e3a7fe",
+      "after_git_blob": "f15bfaeac2e96ec7a430cc9760170ac96cb6f921",
       "before_bytes": 7464,
       "after_bytes": 7596,
       "license": "Apache-2.0 integration code",
@@ -48,8 +48,8 @@
       "mode": "100644",
       "before_git_blob": "ee83df7c18ef17fd87dfb2fda80eb7c309e93325",
       "before_sha256": "82c67c9c64d80a7b79d70a3c4a502f1d1a727923da8ab84152c4bf0098531538",
-      "after_git_blob": "affddf77c2e1dd377a42cd4b2a9761fe03bb3fff",
-      "after_sha256": "505f90b690292aaddda77f9f5e2bf251e710d6b6effd47824ba0c9bec7017141",
+      "after_git_blob": "4db08c14e72d2e317f2fdda3af6c21f28bd12796",
+      "after_sha256": "15775a28b87905eb005acc206dca54ca8c5f7b084877417273c62652848f1cce",
       "source_epoch": "066b7a15c29388f3444ab3cf0550ecf1df698c6d"
     }
   ],
@@ -57,8 +57,8 @@
     {
       "path": "m3/docs/viewport-everywhere/convergence-20261019/ci-20261020/LAUNCHER_REPAIR.json",
       "original_local_path": "task-work/junit-launcher-repair/REPAIR_RECEIPT.json",
-      "sha256": "8e0fe574be9b7516b74a98aa35df6022b8ae6f0a1fb09fc5150592c58428f163",
-      "git_blob_sha1": "9a93b9e1b1574304024f1284881c3ec05774caf9",
+      "sha256": "4a27a608c6b92e34e3dfbd840698b6564b1f573e03a21401bdd14cb3890f58ee",
+      "git_blob_sha1": "e4902397c24fb5236f967e68e3ccf78b5f033c10",
       "bytes": 5488
     },
     {
@@ -71,29 +71,29 @@
     {
       "path": "m3/docs/viewport-everywhere/convergence-20261019/ci-20261020/PHYSICAL_SOURCE_PIN.json",
       "original_local_path": "task-work/m3-collections-readback/SOURCE_PIN_REPAIR.json",
-      "sha256": "ca72e38d2214dbf3124779f7857a3abf1efc9b4e0e18a7826566a1b0b4c670ef",
-      "git_blob_sha1": "7d210cc53831813afc89d25853d3f496715849f7",
+      "sha256": "b99028eaf0a4c6171b0d504070fc0a9f9c58a7060a314b6de9c82bd60d18fbb8",
+      "git_blob_sha1": "8c7b1fc72db451cf7291090a413de484218cfb85",
       "bytes": 5212
     },
     {
       "path": "m3/docs/viewport-everywhere/convergence-20261019/ci-20261020/INDEPENDENT_REVIEW.json",
       "original_local_path": "task-work/m3-collections-readback/LAUNCHER_REVIEW.json",
-      "sha256": "31d5f11dabb1cb97cffa2c957b553111db2ada3c243b0cf46004a7dc16b3a885",
-      "git_blob_sha1": "6cd72ab0801b2c7c4193ff71fb6802da16b4057b",
+      "sha256": "222c5994760265e52f160a28daf31f4a302537635728708183d129a603ac8a34",
+      "git_blob_sha1": "d5099991e5c3a3fac54cd9c4e2118352bf70ff4b",
       "bytes": 2696
     },
     {
       "path": "m3/docs/viewport-everywhere/convergence-20261019/ci-20261020/QUALIFIED_SOURCE_READBACK.json",
       "original_local_path": "task-work/m3-collections-readback/RECEIPT.json",
-      "sha256": "cc9ce0eee0af4b82f9813f9c851b13ee1ba0bceb5a55b3ce752397aa4ead45fd",
-      "git_blob_sha1": "89088e98da3e4c76355fe3aeef28b7ab02936a03",
+      "sha256": "eaecb65c3adf5f1662c2cf7fa32b5f9baca390aa63c958fcb3a94e28a704b690",
+      "git_blob_sha1": "c7a8897bee639ac0fdb1274a20a4429fe08fbeb7",
       "bytes": 98095
     },
     {
       "path": "m3/docs/viewport-everywhere/convergence-20261019/ci-20261020/PREVIOUS_CI_READBACK.json",
       "original_local_path": "task-work/m3-collections-readback/CI_READBACK.json",
-      "sha256": "7ddcf0b2bfe07a3dd377900dd9657775bf78c38ecb70787eb0e5432abfc102c1",
-      "git_blob_sha1": "9b5c74d8f2ff4b67116b9bddac8a55462bcfca18",
+      "sha256": "3719e0082b107cde40f5eaba88274c37184ce44df846edc0cf78c793a7c2a7cc",
+      "git_blob_sha1": "2345470ab944c75292a7147f3df4fa177eea65f8",
       "bytes": 44568
     },
     {
@@ -106,8 +106,8 @@
     {
       "path": "m3/docs/viewport-everywhere/convergence-20261019/ci-20261020/physical-pin-failure.log",
       "original_local_path": "task-work/m3-collections-readback/current_logs.log",
-      "sha256": "e889043f3c35ed66162aad1fc34a0b9cc7362de4dd7e43e3e0e2022d736a3bc2",
-      "git_blob_sha1": "b695f6f73a969a737f973c2d918787aca19120f7",
+      "sha256": "79cd312c3ae7f717d060533681f0ce7fa85791fd3a5f5c657c676ec28663cd3a",
+      "git_blob_sha1": "e5221909e5295578d2ee0226b4c18ee208370662",
       "bytes": 22620
     },
     {

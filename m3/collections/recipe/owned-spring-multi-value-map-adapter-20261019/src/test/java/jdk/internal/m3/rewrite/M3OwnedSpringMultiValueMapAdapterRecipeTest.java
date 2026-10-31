@@ -61,7 +61,7 @@ final class M3OwnedSpringMultiValueMapAdapterRecipeTest {
     private static final String TARGET =
             "m3/collections/implementations/spring-multi-value-map-adapter/src/main/java/jdk/m3/collections/spring/M3MultiValueMapAdapter.java";
     private static final String BEFORE_SHA = "230d31888cffe790887ff16816b09d3f693b01ab948ac9b8b55180553ae3b521";
-    private static final String AFTER_SHA = "82387cb8ab6d17371bd19d0e07d9b0049a62d758e1f7603e6a386c58c649d993";
+    private static final String AFTER_SHA = "5e2265e42f97175340cd6b9a34a1d088c0202f15d4cbe8ef3dba4dd4ac7bfcab";
     private static final int AFTER_BYTES = 11513;
     private static final String TEMPLATE = "M3MultiValueMapAdapter.java.txt";
     private static final String PREIMAGE = "M3MultiValueMapAdapter.scaffold.java.txt";

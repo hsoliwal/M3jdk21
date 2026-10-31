@@ -33,7 +33,7 @@
     },
     {
       "path": "FINAL_JUNIT_PROOF.json",
-      "sha256": "a29b4c42d6f9db3705fdea63f1facab65e67af662be5bae66a8195e17ebc2806",
+      "sha256": "011ba9dce48c402b4e51cefdeda5cc4034d93a3b49c7a47026e7666038a8b9d6",
       "bytes": 10540
     },
     {
@@ -153,7 +153,7 @@
     },
     {
       "path": "junit-module/src/main/java/com/m3/synexia/importer/SynexiaImportManifest.java",
-      "sha256": "56c56adede1ceba3abc8cc1591d945f624f08d95084442a0f7968446c012b125",
+      "sha256": "65a27310e7401fc8f6f3032ed492b8d864aecab7b2713fd7e51d96d8f7470ea0",
       "bytes": 8329
     },
     {
@@ -343,7 +343,7 @@
     },
     {
       "path": "PACKET_AND_COMPILER_PROOF.json",
-      "sha256": "7c5dbf5cfa51e7308bd9260a27fe3b8b5874f0fe48057bf26a403598757e97c6",
+      "sha256": "dc3f8cd7cd642a1d3a66c4a1b7c2bc6fc259b3e676859ffbbf18134d09db6885",
       "bytes": 37397
     },
     {
@@ -383,7 +383,7 @@
     },
     {
       "path": "src/main/java/com/m3/synexia/importer/SynexiaImportManifest.java",
-      "sha256": "56c56adede1ceba3abc8cc1591d945f624f08d95084442a0f7968446c012b125",
+      "sha256": "65a27310e7401fc8f6f3032ed492b8d864aecab7b2713fd7e51d96d8f7470ea0",
       "bytes": 8329
     },
     {

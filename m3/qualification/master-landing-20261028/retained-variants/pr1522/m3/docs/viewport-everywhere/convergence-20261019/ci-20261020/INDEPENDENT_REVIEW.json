@@ -11,10 +11,10 @@
     },
     {
       "path": ".github/workflows/m3-collections.yml",
-      "before_sha256": "20bbf390cad7ed2bdb8e024298cd7b32d311b6bf7c835742ee766bb53c5d0fda",
-      "after_sha256": "0848d1a673a908854bb885908d82eaadb23fa710c75ed3e6bd912516a21eb887",
-      "before_git_blob": "6e5aeabe3b065131b8789bb64e8738e46f559d75",
-      "after_git_blob": "506a2a09deb41c7c33a21586fa014f0ab9fd4081"
+      "before_sha256": "8d52122c6bd7bc4f52b0606704188a7040fc853c2dbefe6756b7b2a1792da504",
+      "after_sha256": "871d309a9e061205c1c6d3deff63568dfeac69155b89fc906ce32a482e8ea947",
+      "before_git_blob": "c42954ecf99a58893a76f3aee6dbe2d258e3a7fe",
+      "after_git_blob": "f15bfaeac2e96ec7a430cc9760170ac96cb6f921"
     },
     {
       "path": "m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py",

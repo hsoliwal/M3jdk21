@@ -118,7 +118,7 @@ def main():
         'source_pull_request': 'https://github.com/hsoliwal/com.synexia/pull/9362',
         'source_execution_input_commit': 'be92c62ece9023b5c33676716a1076d00e26120a',
         'source_publication_status': 'PUBLISHED_CUSTODY_VERIFIED',
-        'source_publication_receipt_sha256': 'bf2d3f29e903f12c201febb4c82083a32758095fdd8fbacbcf25a42e532f44fd',
+        'source_publication_receipt_sha256': '91c8df6ab07e3590fecf20de65e2e65943c4b70aebb9f5133901ae6362506c35',
         'retained_destination_owner_commit': 'da958d00d24154c0db87beca0ec80a7df2b43b73',
         'receiving_pr': 'https://github.com/hsoliwal/M3jdk21/pull/147',
         'publication_route': 'Update PR147 only if the expected branch head remains open/unmerged; root rechecks live state.',

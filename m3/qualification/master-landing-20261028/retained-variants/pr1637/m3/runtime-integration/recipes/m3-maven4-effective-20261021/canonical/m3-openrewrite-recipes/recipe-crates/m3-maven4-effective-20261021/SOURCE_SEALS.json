@@ -86,7 +86,7 @@
       "resource": "postimage.txt",
       "reason": "Unchanged canonical text engine refuses CSV; retained only as an explicit refusal fixture.",
       "failed_attempt": "proof/sdk-001-offline/RESULT.json",
-      "failed_attempt_sha256": "3c6bd13fba7584478ac05c7abc3cd8b32d7e62d9620e8c106f7e58a87a0f0c47"
+      "failed_attempt_sha256": "0626f2a962d01b73e4e11b44ee1e41a7e44beb933648904d70f509d74fba2a31"
     }
   ],
   "catalogue_decisions": {

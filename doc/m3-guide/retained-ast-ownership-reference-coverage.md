@@ -205,19 +205,19 @@ The [source-pin to documentation-head comparison](https://github.com/hsoliwal/M3
 
 | Public evidence path | Raw SHA-256 at source pin |
 | --- | --- |
-| [`m3/vendor/m3/README.md`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/README.md) | `af265918e4d1fa50e4c5a82545a0d87069edb39a2d6a7d07177782a1fd0c3a8e` |
+| [`m3/vendor/m3/README.md`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/README.md) | `b4ac6e882040df220d3d9d8682665ad59d47e17fc69f29bf169e4782e1e2792a` |
 | [`m3/docs/m3-delivery.md`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/docs/m3-delivery.md) | `c564efa16343a5eea1f49b184b7687ceca4917ae0a033ab0ed8adaf109650364` |
 | [`m3/docs/m3-apache-reuse.md`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/docs/m3-apache-reuse.md) | `6957c8f8796a7546a8676cdead62fff1440a32a742f1fcc377ae54cb2f31ee2c` |
 | [`m3/docs/m3-apache2-borrowing-contract.md`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/docs/m3-apache2-borrowing-contract.md) | `a4bbdfa9e272b73ff1b02ff6b9159c978f01a359242424d83c7a3a5ccd08a6ec` |
 | [`m3/docs/m3jdk21-porting-invariant.md`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/docs/m3jdk21-porting-invariant.md) | `604ef82225fdb9e6ecf00e14f7630fb0956b85ec89e5c9241537733d4054f39a` |
 | [`m3/docs/M3JDK21_PORTING_INVARIANT.md`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/docs/M3JDK21_PORTING_INVARIANT.md) | `a79062d8f88e59b6b34f57fbf22c525a3d8fe67dc00fa0d0e8d3176c62f9e90e` |
 | [`m3/docs/m3-intake-license-field-semantics-20261011.md`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/docs/m3-intake-license-field-semantics-20261011.md) | `d840f7d7be25bb736fd4d372a7c9c11e8c794dfc54dd13b04acb144608c65bdf` |
-| [`m3/pom.xml`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/pom.xml) | `d1894442c675d58e867009ab43dce5e900a9dfe41c21f7e9d01a212c18a316b4` |
-| [`m3/build.sh`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/build.sh) | `f3d12d51200572a8f945338bcd26931dc889c1878a1341b2b199a09b6d03590d` |
+| [`m3/pom.xml`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/pom.xml) | `37b503fb5aee9a1f3a02d0efaa8b224f31c9c2aaa5d8e0079143bc9bd8fb73fb` |
+| [`m3/build.sh`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/build.sh) | `c7b954a6faa16cc8a0cb4a2d13a8032c43fb308a739b225362b6ac3fd84864ee` |
 | [`m3/m3-import/pom.xml`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/m3-import/pom.xml) | `d85d3d4ed6c2ed2b2c637d64805c5f9462e2157ba66019be15075ca1bafbddb0` |
 | [`m3/ports/indexstring/pom.xml`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/ports/indexstring/pom.xml) | `d07cf94116968269d1367e6e4ad41c6bc847bb9410ade7ff542255a74d2f346b` |
 | [`m3/m3-import/intakes/ast-navigation-20261007/export.tsv`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/m3-import/intakes/ast-navigation-20261007/export.tsv) | `df8f3b861ef48076776b977fa18340fbcd73db30af0d71e351dc4e6a35aa6fd2` |
-| [`m3/m3-import/intakes/ast-navigation-20261007/evidence/QUALIFICATION.json`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/m3-import/intakes/ast-navigation-20261007/evidence/QUALIFICATION.json) | `d506e74d9ad096241703a5e869899da946ab5b97f48f5312b2352f6e89ffb0ab` |
+| [`m3/m3-import/intakes/ast-navigation-20261007/evidence/QUALIFICATION.json`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/m3-import/intakes/ast-navigation-20261007/evidence/QUALIFICATION.json) | `2ffe18cb3a68aa9a9a0e24fbd86e1ee42cdbf053d0c3277111bd0d423d07cb08` |
 | [`m3/vendor/m3/NOTICE`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/NOTICE) | `31cec4f2c4936b0e7a71a77847a3c20b0959e119a02ef5cf537f4f707fff9427` |
 | [`m3/vendor/m3/m3-indexstring/THIRD_PARTY_NOTICES.md`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/THIRD_PARTY_NOTICES.md) | `8efe35d33754f86343cbb54320893934c3beb46d5f2cb9ab02c2584032f5f3ab` |
 

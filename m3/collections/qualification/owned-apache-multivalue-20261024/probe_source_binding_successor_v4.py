@@ -21,7 +21,7 @@ HERE = Path(__file__).resolve().parent
 PREFIX = "m3/collections/qualification/owned-apache-multivalue-20261024/"
 VERIFIER = PREFIX + "verify_source_binding_successor_v4.py"
 TEMPLATES = "m3/collections/recipe/owned-apache-multivalue-20261024/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/apache-multivalue-v2-to-v3/"
-SEALED = "318f400215e46ba517950a02f908dd43954ae095cc315f91aaebab175a5ad699"
+SEALED = "7ec6b01fdf2a5651edf5c6fe8235881363f1398559c6072de2a9ea9d149baf82"
 RESERVE = 256 * 1024**2
 
 def main() -> None:

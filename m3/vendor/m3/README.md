@@ -20,7 +20,7 @@ This snapshot contains the established convergence/JNI/OpenRewrite seed rows and
 - export manifest:
   `synexia-openrewrite-recipes/src/main/resources/META-INF/m3/jdk-a3-recipe-export.tsv`
 - export manifest Git blob:
-  `2c51473e7adb6fa50fb0031ac6314a050b90feec`
+  `b691460aebcd458f5d5fb0d508b4a4a05ef8d6c5`
 - target provenance:
   `m3/m3-import/intakes/jdk-a3-public-export-20261007/SOURCE_PROVENANCE.tsv`
 

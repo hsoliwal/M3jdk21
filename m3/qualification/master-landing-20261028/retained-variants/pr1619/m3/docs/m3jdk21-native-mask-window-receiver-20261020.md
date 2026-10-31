@@ -44,7 +44,7 @@ separately from the runtime evidence here.
 | --- | --- | --- |
 | `src/java.base/share/classes/jdk/internal/m3/M3IndexMaskWindow.java` | `f42473470989a103062696f1a3f4aa348e524308391edcaffff3df311d35eacf` | `3133ddda330e1c71d1ecd481ac70d3cade3954cbc1fe2492a5bb49e3fd60b90f` |
 | `src/java.base/share/native/libjava/M3IndexMaskWindow.c` | `80ef8aa795825efe9940f0230ba20802084b7d164450668660297516a1091301` | `aba190de61ea6e55e076ec3d175d451b5fea975ed621124b4f084410ef739323` |
-| `test/jdk/jdk/internal/m3/M3IndexMaskWindowJniTest.java` | `2490b6752d453daa7f7c4eb7d565ae2894a1236fd0ebaecac637f3230ffb5d8c` | Same bytes; the independent original oracle is retained. |
+| `test/jdk/jdk/internal/m3/M3IndexMaskWindowJniTest.java` | `3ce11de04665d4d19af7bc7f6928d1ae0f1ba53e7167452fee3a11276c92e91d` | Same bytes; the independent original oracle is retained. |
 | `test/jdk/jdk/internal/m3/M3IndexMaskWindowIntegrationTest.java` | New regression and receiving test | `0490a6c7523f5fd1e49c30d3f89c504647b13ea119408fb23bb646f2237cd992` |
 
 The original receiver files carry **Apache-2.0**, not GPL, headers. Those notices

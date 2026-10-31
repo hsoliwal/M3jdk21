@@ -39,7 +39,7 @@ jobs:
           test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankIndex.java)" = '0f9763abfa67046490f344abfe620ae086d833c2'
           test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = '294447e6fe84c37a7b7bdbc3492a9bf62a78a731'
           test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongPairDistanceContract.java)" = '9c2f86c5550d13de1db599a8b055a93a5270788f'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongPairDistanceTest.java)" = '5f7ae2de23a97d10a23e773261e0288d23ab9276'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongPairDistanceTest.java)" = 'b9cb315567f3b1997e4bb4868edd94772173e409'
       - name: Strict compile original Java owner, contract and JNI header
         shell: bash
         run: |

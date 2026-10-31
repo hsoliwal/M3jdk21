@@ -45,8 +45,8 @@
     },
     {
       "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/baseline-source-closure.json",
-      "expected": "f5175cd47be41f9c999b9536412889867c6183a2",
-      "actual": "f5175cd47be41f9c999b9536412889867c6183a2",
+      "expected": "49571f1fc2da1cb7c2c50d63cee1d87ce6c5c87f",
+      "actual": "49571f1fc2da1cb7c2c50d63cee1d87ce6c5c87f",
       "ok": true
     },
     {

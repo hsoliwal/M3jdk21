@@ -159,9 +159,9 @@ m3/tooling/mr/pom.xml	org.openrewrite	rewrite-java	8.17.1-m3-source-1	8.17.1-m3-
 m3/tooling/mr/pom.xml	org.openrewrite	rewrite-java-21	8.17.1-m3-source-1	8.17.1-m3-source-1	ALREADY_SOURCE	8.17.1-m3-source-1
 m3/tooling/mr/pom.xml	org.slf4j	slf4j-api	2.0.9-m3-source-1	2.0.9-m3-source-1	ALREADY_SOURCE	2.0.9-m3-source-1
 m3/tooling/mr/pom.xml	org.junit.jupiter	junit-jupiter	5.10.2	5.10.2-m3-source-1	SWITCHED	5.10.2
-m3/tooling/m3-jdk-a3-recipes/pom.xml	org.openrewrite	rewrite-java	${rewrite.version}-m3-source-1	${rewrite.version}-m3-source-1	ALREADY_SOURCE	${rewrite.version}-m3-source-1
-m3/tooling/m3-jdk-a3-recipes/pom.xml	org.openrewrite	rewrite-java-21	${rewrite.version}-m3-source-1	${rewrite.version}-m3-source-1	ALREADY_SOURCE	${rewrite.version}-m3-source-1
-m3/tooling/m3-jdk-a3-recipes/pom.xml	org.junit.jupiter	junit-jupiter	${junit.version}	${junit.version}-m3-source-1	SWITCHED	5.10.2
+m3/tooling/m3jdk-a3-recipes/pom.xml	org.openrewrite	rewrite-java	${rewrite.version}-m3-source-1	${rewrite.version}-m3-source-1	ALREADY_SOURCE	${rewrite.version}-m3-source-1
+m3/tooling/m3jdk-a3-recipes/pom.xml	org.openrewrite	rewrite-java-21	${rewrite.version}-m3-source-1	${rewrite.version}-m3-source-1	ALREADY_SOURCE	${rewrite.version}-m3-source-1
+m3/tooling/m3jdk-a3-recipes/pom.xml	org.junit.jupiter	junit-jupiter	${junit.version}	${junit.version}-m3-source-1	SWITCHED	5.10.2
 m3/tooling/tq-sync/pom.xml	org.openrewrite	rewrite-java	8.17.1-m3-source-1	8.17.1-m3-source-1	ALREADY_SOURCE	8.17.1-m3-source-1
 m3/tooling/tq-sync/pom.xml	org.openrewrite	rewrite-java-21	8.17.1-m3-source-1	8.17.1-m3-source-1	ALREADY_SOURCE	8.17.1-m3-source-1
 m3/tooling/tq-sync/pom.xml	org.slf4j	slf4j-api	2.0.9-m3-source-1	2.0.9-m3-source-1	ALREADY_SOURCE	2.0.9-m3-source-1

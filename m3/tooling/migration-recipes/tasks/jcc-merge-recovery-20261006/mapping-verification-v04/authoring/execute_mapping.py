@@ -24,8 +24,8 @@ import xml.etree.ElementTree as ET
 HERE = Path(__file__).resolve().parent
 AUDIT = HERE.parents[1]
 ROOT = AUDIT.parent
-TEMPLATE_PACKET_SHA256 = "08df4f7137a96eae48a06186391719e4fe9085768c00ee389edec99d81641454"
-BINDER_SHA256 = "05cceac55f0bd8ca9fbb4ecaea8ce3704d25f260f88e0296202a2a49b36cb7c9"
+TEMPLATE_PACKET_SHA256 = "56a7387d9300d17e47ecb295ff6de19447681bc3f91eb341bb30825062f0bfd5"
+BINDER_SHA256 = "cf670f7ce05052dc9757e1f6782404c7886a1a1511e9a2514f772cbc309e2b45"
 INSTALLER_TEST_SHA256 = "0e3e1c024667364cfc58eb1ac8223b7399039240077f5d5d8346dd617352a0a9"
 POM_PATH = "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/pom.xml"
 TEST_CLASS = "jdk.m3.rewrite.backport.JccMergeMappingRecoveryV04Test"
@@ -158,7 +158,7 @@ def main():
             bodies[row["path"]] = body
         historical = binder.RESOURCE_ROOT + "/jcc-merge-recovery-20261006-history-01/"
         for name, expected in [("history-0014.txt", "abfc59de62d46f6442b95717ac367461ab057cd74ed9dfffc6515d7fb0a1574c"),
-                               ("history-0016.txt", "e17e0e066988a03583beab519a2ce4381c93f31b1da8ddf465f627cd68566b8d")]:
+                               ("history-0016.txt", "59b1491a232e3eabfd0530cbf47b01265603e6f493e382aa3c394c629b0516b6")]:
             body = (AUDIT / "candidate/overlay" / (historical + name)).read_bytes()
             assert digest(body) == expected
             bodies[historical + name] = body

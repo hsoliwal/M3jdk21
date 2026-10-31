@@ -15,7 +15,7 @@
   "stdout": {
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/root-execution-v1/extract/stdout.log",
     "bytes": 769,
-    "sha256": "3f77d3ba1da573d2459ce02e3eb87174b6b61c6441971400f4ca170acb2e11f6"
+    "sha256": "4c44f2ed68a2a79ea2e83148483895344fbaf0eecf1519d24a301cf605b7777f"
   },
   "stderr": {
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/root-execution-v1/extract/stderr.log",

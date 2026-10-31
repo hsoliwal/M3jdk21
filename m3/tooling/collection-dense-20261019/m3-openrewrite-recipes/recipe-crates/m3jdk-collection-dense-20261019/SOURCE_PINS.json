@@ -67,8 +67,8 @@
     },
     {
       "path": "test/jdk/java/util/Collections/M3CollectionMasksTest.java",
-      "git_blob": "82b2d2575b7f154c917af5517540cb3e3ee57e36",
-      "sha256": "09283aa9f8e6f184f9f2e50f2967be6fc47654b591d3de0908751d84d622ce17"
+      "git_blob": "9b9c06bc752277ce5a1bb71afff6f0c4946ac854",
+      "sha256": "73433d7592b44c9e7d8268a860532cfc72a13f342698efb3fafea4262ede33f3"
     },
     {
       "path": "test/jdk/java/util/Collections/M3CollectionViewsBenchmark.java",

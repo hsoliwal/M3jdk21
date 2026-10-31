@@ -8,7 +8,7 @@
     },
     {
       "path": "m3/docs/name-mapping.json",
-      "sha256": "7707672dbbd1eb353b7dab0ce16c934991f7363e26fea7579354a71c0ca8b2fc"
+      "sha256": "c6929d77804e40b43c7b5f5732d270a895520f50d79a3fe08e9bec534dce5f04"
     },
     {
       "path": "m3/ports/collections/src/main/java/jdk/m3/util/M3PrimitiveIndexView.java",

@@ -391,7 +391,7 @@
     "target_contract_change": "Class.descriptorString corrects hidden-class spelling; source retains the older getName substitution algorithm. Public method signatures are unchanged by the retained fix.",
     "historical_cb_receipt": {
       "path": "m3/tooling/cb/evidence/receipt.json",
-      "sha256": "d4781770894360767959138b874a4822473917bdbff1921287400b2edefecd96",
+      "sha256": "59dad7e343be1af3d9a29a0adfe0baa1de788ce7ff88e74908e485539d53417f",
       "qualification": "Historical source7b5d/target-base3ec scoped packet; not a current descriptor or whole-image rerun."
     },
     "historical_descriptor_receipts": [
@@ -508,7 +508,7 @@
     },
     "whole_module_gate": {
       "path": "m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/owning-module-frontier/REVIEW.json",
-      "sha256": "aec6090a1420f3d54a67b5ec9ac7b7e257b1f241f173754884689d7d44866beb",
+      "sha256": "ac128a680edefc7d38daac9b4fe7ce9cebf474a5b6f3d2136bc2a58eb6635d16",
       "bytes": 4807
     },
     "qualification": "Finite candidate tooling proof only; capability tests[] remain empty. Final source qualification and committed read-back remain pending."

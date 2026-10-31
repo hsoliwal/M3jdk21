@@ -23,10 +23,10 @@
     {
       "path": "m3/fs/src/main/java/jdk/m3/fs/M3FsPrecomputeBundle.java",
       "before_sha256": "c9bd258efefb991b32410f2116c156848f47d341d25cb997b22847f2156cc3f6",
-      "after_sha256": "324ca02a685035a3f8bbf2dc43d0583477ce17e5952c8167c532f3cf87eb70d7",
+      "after_sha256": "a2c8aab22f4d200b2a8ecbc1d4c86e77ae2d0008d974e0268adb3a63007491a1",
       "mode": "100644",
       "bytes": 50995,
-      "git_blob": "71c10d19cb0e4f816c67062087b114219544a12c"
+      "git_blob": "73453af87a7998036d030f7b68bce0442d9a20a2"
     },
     {
       "path": "m3/fs/src/test/java/jdk/m3/fs/M3FsPreparedViewCursorTest.java",
@@ -164,7 +164,7 @@
     {
       "sdk_input": "crate/datasets/fs-cursor-current-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-fs-cursor-current-20261021/0001-M3FsPrecomputeBundle.java.txt",
       "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/fs-cursor-current-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-fs-cursor-current-20261021/0001-M3FsPrecomputeBundle.java.txt",
-      "sha256": "324ca02a685035a3f8bbf2dc43d0583477ce17e5952c8167c532f3cf87eb70d7"
+      "sha256": "a2c8aab22f4d200b2a8ecbc1d4c86e77ae2d0008d974e0268adb3a63007491a1"
     },
     {
       "sdk_input": "crate/datasets/fs-cursor-current-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-fs-cursor-current-20261021/0002-M3FsPreparedViewCursorTest.java.txt",
@@ -256,7 +256,7 @@
     "utc": "2026-10-21T07:02:21.823694Z",
     "trigger": "arrays/views/cursor-isolation",
     "lesson": "Treat source drift as a new transformation epoch. Never install a previously qualified whole-file postimage over newer behavior. Reapply only the reviewed atoms, retain all new owner bytes, reseal the dependency/test closure, run the frozen failures and actual SDK/receiver again, and append the successor without rewriting old proof. Cursor views keep captured coordinates and shared payload/lifetime; fresh identities remain explicit.",
-    "admission_implementation_sha256": "4706cfdc35a670d20b45453f44c018cd8d64be34cd878ee8b307ad3dd79ad3d8"
+    "admission_implementation_sha256": "2c9150508755694a47e76f537834ace051663f0879f49cfb08bb0e08ab2b2696"
   },
   "limits": [
     "No full source-built M3JDK21 image, jtreg/JCK or cross-platform qualification.",

@@ -3,7 +3,7 @@
   "status": "PASS",
   "profile": "m3-maven4-effective-20261021/1.0",
   "events": [
-    "948de23008d7e66ebcb2f93a2b86c3ba6acaedbbae82c841d9da718a45d4b615"
+    "7e90af9173edceb152fde014b5b74cceb30c07a62c6af7293e0b2065b628bd2b"
   ],
   "event_count": 1,
   "conformance_checks": 129,
@@ -21,7 +21,7 @@
   },
   "index": {
     "path": "memory/INDEX.json",
-    "sha256": "c11dde22568ec1dcc437bcc9a21a7a920102e37659cd0e93621084c0a09b34bb"
+    "sha256": "ba0022653f265d72ef7d6a35b8e6940d77bf26e45d6720434ea00292dd753c62"
   },
   "source_lineage": [
     {
@@ -53,7 +53,7 @@
     },
     {
       "path": "proof/memory-conformance-001/check.log",
-      "sha256": "c673f9e872a61b12d9f4cd9e3bdc0a8f5f21d0b3799ba69a2b95e0ca575bee36"
+      "sha256": "4c05d45f6edca00263b3cc6bc8f5be3f01402e7867294b88ce1dff02d9078af5"
     }
   ],
   "publish_command": [
@@ -72,7 +72,7 @@
     "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/tooling/target/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
     "com.synexia.rewrite.memory.M3RecoveryMemory",
     "check",
-    "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/events/948de23008d7e66ebcb2f93a2b86c3ba6acaedbbae82c841d9da718a45d4b615.json",
+    "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/events/7e90af9173edceb152fde014b5b74cceb30c07a62c6af7293e0b2065b628bd2b.json",
     "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021",
     "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/events"
   ],

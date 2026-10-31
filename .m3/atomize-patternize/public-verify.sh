@@ -47,7 +47,7 @@ root="$(
 command -v sha1sum >/dev/null 2>&1 || fail "SHA1SUM_REQUIRED" 2
 a3_root="$repo/m3/vendor/m3/m3-openrewrite-recipes"
 a3_manifest="$a3_root/src/main/resources/META-INF/m3/jdk-a3-recipe-export.tsv"
-a3_expected_manifest_blob="2c51473e7adb6fa50fb0031ac6314a050b90feec"
+a3_expected_manifest_blob="b691460aebcd458f5d5fb0d508b4a4a05ef8d6c5"
 [[ -f "$a3_manifest" && ! -L "$a3_manifest" ]] || fail "PUBLIC_A3_EXPORT_MANIFEST_REQUIRED"
 
 git_blob() {

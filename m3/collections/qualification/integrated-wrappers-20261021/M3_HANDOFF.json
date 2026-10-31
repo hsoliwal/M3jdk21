@@ -26,7 +26,7 @@
   "catalogue": {
     "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/f5c6fc673b0c7dfa684f0b0c1e3f0c15bb57b14d/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/catalogue/candidate-catalogue.tsv",
     "receiving_mirror": "../../algorithm-catalog/integrated-wrappers-20261021.tsv",
-    "sha256": "d961af4b64d5e6ceb934ccabe233350cb3c8b40fab15cbd5e86d7df6d5a07dc7",
+    "sha256": "b6c60e2a9e43bd416fa0d5a5cfafb6baaf1cb9761924e0e46c7d1da81f030fb5",
     "rows": 16
   },
   "license_provenance_url": "https://github.com/hsoliwal/com.synexia/blob/f5c6fc673b0c7dfa684f0b0c1e3f0c15bb57b14d/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/LICENSE_PROVENANCE.md",
@@ -41,7 +41,7 @@
     "head": "f5c6fc673b0c7dfa684f0b0c1e3f0c15bb57b14d",
     "changed_paths": 97,
     "receipt": "provenance/EXACT_COMMIT_RECEIPT.json",
-    "receipt_sha256": "4cc5da0c01ccbdf004b57147f61eba2c01cd512d40f1a08b575ecbeb77a5f364",
+    "receipt_sha256": "434fb1a99c824d46cc69077315126a7ffc5a6f5d611f8ba6c4ee1744a8386147",
     "reports": [
       "provenance/PROVENANCE_FILES.tsv",
       "provenance/PROVENANCE_GATE.tsv",

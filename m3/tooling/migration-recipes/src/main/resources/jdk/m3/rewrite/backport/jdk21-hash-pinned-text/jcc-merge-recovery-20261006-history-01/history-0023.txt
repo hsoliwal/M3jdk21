@@ -42,11 +42,11 @@
       "path": "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
       "before": {
         "resource": "before02-source-destination-bindings.json.txt",
-        "sha256": "a80ffed31f45465774fd03ba90858c301327d6b472acf89652d01bf96b981707"
+        "sha256": "8c76c2dd45e775d29f8f47d8daf65842e465c74ad3dec7aacd55df59f9d051a1"
       },
       "after": {
         "resource": "after02-source-destination-bindings.json.txt",
-        "sha256": "e17e0e066988a03583beab519a2ce4381c93f31b1da8ddf465f627cd68566b8d"
+        "sha256": "59b1491a232e3eabfd0530cbf47b01265603e6f493e382aa3c394c629b0516b6"
       }
     }
   ],

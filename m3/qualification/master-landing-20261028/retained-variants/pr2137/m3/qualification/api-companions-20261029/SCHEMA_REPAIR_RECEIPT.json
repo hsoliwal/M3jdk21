@@ -28,7 +28,7 @@
     {
       "path": "m3/docs/name-mapping.json",
       "before_sha256": "145dec24eb11847b3915e6fb2e0e80fa4a773879833a3ac64e76101fab67500f",
-      "after_sha256": "50f68c0ad6b505da1e002f3c02be260a87c3281b45dacc14dd3557c9119571b1"
+      "after_sha256": "67b449da2ca0b82fd299b3b1f8dca36b0a3778cc8684602d90f10cce8d903a1f"
     },
     {
       "path": "m3/docs/name-mapping.schema.json",
@@ -38,7 +38,7 @@
     {
       "path": "m3/tooling/name-contract/name-plan.json",
       "before_sha256": "0bfb1c234cd9e8e65702a0797124619fc365d7842b7be74591fabd142dfb78b9",
-      "after_sha256": "596c11354a0304f540b8aefc3f73bb67abecf64a0133f0fca999db32f8217c17"
+      "after_sha256": "ce1f8408bea35ee769294f556994d0184958b560a713dac2e97bd9f21848b71e"
     },
     {
       "path": "m3/tooling/name-contract/test_audit.py",

@@ -1032,7 +1032,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0037-HOST_CAP_LINEAGE.json.txt",
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0037-HOST_CAP_LINEAGE.json.txt",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0037-HOST_CAP_LINEAGE.json.txt",
-      "sha256": "81deb8a04803da7f9e3f8c6f412c487266c9199fbd4082d9b3162a19c7ae781e",
+      "sha256": "d4f4ab80c3474999618684559948edb1547bc2c75a6b055922e5c6224dca17b6",
       "size_bytes": 1847,
       "classification": "GENERATED"
     },
@@ -1040,7 +1040,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0038-HOST_CAP_LINEAGE.json.txt",
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0038-HOST_CAP_LINEAGE.json.txt",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0038-HOST_CAP_LINEAGE.json.txt",
-      "sha256": "81deb8a04803da7f9e3f8c6f412c487266c9199fbd4082d9b3162a19c7ae781e",
+      "sha256": "d4f4ab80c3474999618684559948edb1547bc2c75a6b055922e5c6224dca17b6",
       "size_bytes": 1847,
       "classification": "GENERATED"
     },
@@ -1176,7 +1176,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/manifest.tsv",
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/manifest.tsv",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/manifest.tsv",
-      "sha256": "53b9121352a16e033b17e3eae3c29d55f7fe06988349d9187663f28ba3935ed3",
+      "sha256": "b79df3fa2b487dbfb8e9970bdd8d8862b03c092ca07a1b4d740f1d5d3b4b5343",
       "size_bytes": 12506,
       "classification": "GENERATED"
     },
@@ -1184,7 +1184,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/handoff/runtime-facade-v1/generated/CUSTODY-SOURCE.json",
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/CUSTODY-SOURCE.json",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/CUSTODY-SOURCE.json",
-      "sha256": "9be55f89b3107393e0f40e2ba57871683ed9617770c318166d69275d2f8f70d3",
+      "sha256": "4c043b5252853a59683317f42da01de5814381c0d825df1491878588d6ab9abf",
       "size_bytes": 414170,
       "classification": "FIRST_PARTY_NO_HEADER"
     },
@@ -3008,7 +3008,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-runtime-parser-host/candidate/SDK_INPUTS.tsv",
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/recipe-runtime-parser-host-v1/SDK_INPUTS.tsv",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-runtime-parser-host-v1/SDK_INPUTS.tsv",
-      "sha256": "565aefe0e42099d24a9b9da125e1a389853fa8ec88426bd3e33c63882bfbec9e",
+      "sha256": "dcdd5e102c578cc0f210910e65c04009a691fa26694f334b6fa2482cb35175d6",
       "size_bytes": 29923,
       "classification": "GENERATED"
     },
@@ -3016,7 +3016,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-runtime-parser-host/candidate/SDK_RESULTS.tsv",
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/recipe-runtime-parser-host-v1/SDK_RESULTS.tsv",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-runtime-parser-host-v1/SDK_RESULTS.tsv",
-      "sha256": "c2f09420a023a84fec0e9f195192a72761aeba4117e979f73b311a2335c331f7",
+      "sha256": "aa3f6913518e8c811d68e10f3bb7af41302e8a3abf94d59ec1e137d2cbca4612",
       "size_bytes": 13901,
       "classification": "GENERATED"
     },
@@ -3048,7 +3048,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-runtime-parser-host-v1/receiver-proof/evidence/RECEIVER_RECEIPT.json",
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/recipe-runtime-parser-host-v1/receiver-proof/evidence/RECEIVER_RECEIPT.json",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-runtime-parser-host-v1/receiver-proof/evidence/RECEIVER_RECEIPT.json",
-      "sha256": "15159a723dc9f303d33f2fdd8162c49dc5584d07e246f6d7a6d66314d070c384",
+      "sha256": "4e835fdb086906d412cf8af5218462c0004556e546b19fdf787f6451c3ef3f79",
       "size_bytes": 1777,
       "classification": "GENERATED"
     },
@@ -3600,7 +3600,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-runtime-parser-host/candidate/synexia-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/history/HOST_CAP_LINEAGE.json",
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/history/HOST_CAP_LINEAGE.json",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/history/HOST_CAP_LINEAGE.json",
-      "sha256": "81deb8a04803da7f9e3f8c6f412c487266c9199fbd4082d9b3162a19c7ae781e",
+      "sha256": "d4f4ab80c3474999618684559948edb1547bc2c75a6b055922e5c6224dca17b6",
       "size_bytes": 1847,
       "classification": "GENERATED"
     },

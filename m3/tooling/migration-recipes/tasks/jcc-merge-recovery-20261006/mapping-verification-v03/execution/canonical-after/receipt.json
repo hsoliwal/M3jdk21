@@ -1,7 +1,7 @@
 {
   "actual_source_binding": {
     "input_epoch_sha256": "027e47d20c7fb854e028487ceef341c929877a6421dbb75f6433b5cd007fe5ee",
-    "mapping_resources_sha256": "52b72e0f67f2326acea7f81a479c811d2ee5875b8c3f6f18cc2f985e5a4999ec",
+    "mapping_resources_sha256": "b64d79354c13b3695ffe2a1f3d897f7ef72f32cf751f3ab347d0d0a6dbdd5f26",
     "materialized_root": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/materialized",
     "source_commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
     "source_input_sha256": "7db913209511a230e36a8da12282b3e4a6f84193399821ce9693042f616fa39d",
@@ -33,11 +33,11 @@
     "m3/core/src/jdk/m3/text/LocalM3StringPiece.java": "77fd1cbeae4dc20a4c23497102cb7c44ec14adbdd6bbf328326957515a7858ad",
     "m3/core/src/jdk/m3/text/M3StringPiece.java": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755",
     "m3/core/src/jdk/m3/text/StorageIdentity.java": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354",
-    "m3/docs/jcc-source-handoff.md": "b87b6c729ba17ec1ac404fea2176611ee9be046cc97b26d8ef44aec9d85f1c8a",
+    "m3/docs/jcc-source-handoff.md": "52178015a89e5f1c08ab280725e5fb45a3617fdc9035fdecf793cd3c2b503858",
     "m3/docs/name-mapping.json": "d4f1a513c663906dd4ec498c46864568dbee9866b48b3a1e41f7240a58c04e1c",
     "m3/docs/name-mapping.schema.json": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
     "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv": "0cba435844da64936b50f039ebe12ffaa56fa39a3f86f20206c6d0874e61050c",
-    "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json": "7d26f0ac825b78889cb6963ef8bcf038ad83c5c6fc191814c92025815c84b2cc",
+    "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json": "283d44e6e66405165706447446ed5242104ac1e79d33a6ceafc0cbe1a128de09",
     "m3/migration/evidence/local-20261002-final/prefix-z-interpreter.log": "67eee524a18f5dcbb9793a54c338504293fbc8a8f01baba714029966c02ae780",
     "m3/migration/evidence/local-20261002-final/prefix-z-normal.log": "67eee524a18f5dcbb9793a54c338504293fbc8a8f01baba714029966c02ae780",
     "m3/migration/evidence/local-20261002-final/receipt.json": "34ff84b795b004e1d69b26bf3df95e554ce90b67ac16b0169a61f0877fd50181",

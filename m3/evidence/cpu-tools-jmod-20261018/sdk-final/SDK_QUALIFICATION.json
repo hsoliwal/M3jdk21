@@ -21,8 +21,8 @@
   "text_targets": 21,
   "actual_openrewrite_version": "8.17.1",
   "harness_sha256": "50e6c7c4e88da61727244a1469ee1fcb4b75ef0e106d3bdec966014287466803",
-  "sdk_inputs_sha256": "f44295cea979f1ee28627eb408e01f4515f8dab193008f23ac1b618c72fc245d",
-  "sdk_results_sha256": "e5451894b2d54cd526b592b03315a6c7c8f41fab4f81d857bbf83a8c3e442132",
+  "sdk_inputs_sha256": "c8a8e3f509f63c7658ecf56499acbae912d173b65d8a02fa2ed916c294a91592",
+  "sdk_results_sha256": "ee335103d48da65ceec4b8671999b9c3a87d70f57cd4f59ec1f449f630d50a60",
   "maven_command_receipt": "../maven-sdk-v3-command.json",
   "actual_receiver_receipt": "../receiver-actual/RECEIVER_ACTUAL.json",
   "previous_failures": [

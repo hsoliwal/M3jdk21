@@ -16,13 +16,13 @@
   "targets": [
     {
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3TokenMatcher.java",
-      "before_sha256": "6683641031307ae219d22cf5be0312bd2f6e71d63146a6902e6deff36e27bc2e",
+      "before_sha256": "505e4defe226358c48a97b2124d7484d2ebd48f0af4306280606a4542fd9ebae",
       "after_sha256": "3f9b5a9f3a36860f1582223a215f068e3afdc62e1abc8fe1c4307500d93a1a3a",
       "template": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-token-matcher-completion/M3TokenMatcher.java.txt",
       "license": "Apache-2.0",
       "preimage_owner": "hsoliwal/M3jdk21@51ca08a99835876cb5457a4f25062596b771de37",
       "scope": "EXISTING_JAVA_BASE_OWNER",
-      "before_git_blob": "e05de40a842b79ead7e3b302658af1c6407278fc"
+      "before_git_blob": "714d667894c70cfe3a2ff571891b941d59ad17e1"
     },
     {
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3TokenPattern.java",

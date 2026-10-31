@@ -7,7 +7,7 @@ Status: **DRAFT / PARTIAL**. One integrated M3JDK21 SDK product; Synexia owns au
 ## Original owner and exact source
 - Canonical Synexia Maven/OpenRewrite PR: [hsoliwal/com.synexia#12598](https://github.com/hsoliwal/com.synexia/pull/12598), recipe `com.synexia.m3.M3NativeShadowStreams20261020` (existing `M3HashPinnedJavaSnapshotRecipe`).
 - Baseline M3JDK21 master at `065e3626aac2de62d2f531aec3bed2fca533c9f9`; original `M3File.java` Git blob `fcce3a02835de29fa4ac9f83083511aad17ec049` / SHA-256 `47a5844aa69c0571cdd7b1b7fd2e53a9f187e12837b0fd639779fc98d983e097`.
-- Generated M3File postimage SHA-256 `93864fe41040396ffa40775ed7489f8e97ae6ee058538294e0626d046b12915c`; progress `2edc2ea964a91ded9215f41f35c82aa239b977dbac84464dbef5e31694eb704b`; shadow `3abee429e11ede5505e8fa91366a0ddf4e27495450a01d88235a2caf7c13efae`; oracle `5c69b7f9bd8b87639de574158510b50b391b686b08cfef8cb5e2fc69a3e929e7`.
+- Generated M3File postimage SHA-256 `93864fe41040396ffa40775ed7489f8e97ae6ee058538294e0626d046b12915c`; progress `d96068e0d00efad66cc71d75791d9e07109f34d0a7322e244b08f1a45cfb3344`; shadow `3abee429e11ede5505e8fa91366a0ddf4e27495450a01d88235a2caf7c13efae`; oracle `5c69b7f9bd8b87639de574158510b50b391b686b08cfef8cb5e2fc69a3e929e7`.
 
 ## Implemented behavioral atoms
 - `M3StreamProgress`: functional `worked(long)` plus default `cancelled`, `checkCancelled` and bounded `subProgress`. Parent cancellation and quotas propagate.

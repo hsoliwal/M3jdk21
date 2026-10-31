@@ -107,8 +107,8 @@
     {
       "path": "m3/tooling/collection-dense-20261019/m3-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019/SOURCE_PINS.json",
       "source_path": "m3-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019/SOURCE_PINS.json",
-      "source_git_blob": "807b79dde8ddb321d7edb702fc1eefa1faa229b9",
-      "sha256": "9503b9390f6e33341952662525c44cccaeb5a1ea8c15762cb07e9627499300cc",
+      "source_git_blob": "69947437e89f7abd52169e2624f9018f32f55810",
+      "sha256": "0f2fb096220e62e984b460cbb2b68793710dcc4638dc17ade97fd4a9c9d66feb",
       "role": "PINNED_NONCANONICAL_AUTHORING_MIRROR"
     },
     {
@@ -128,8 +128,8 @@
     {
       "path": "m3/tooling/collection-dense-20261019/m3-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019/evidence/INITIAL_INVENTORY.json",
       "source_path": "m3-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019/evidence/INITIAL_INVENTORY.json",
-      "source_git_blob": "94b6b1b17ccbce1c58eecdfd974762accadf739a",
-      "sha256": "51cf4e678d634953b6a178856d1a5b4b9a5370608b6cd8effa1b6e004495899e",
+      "source_git_blob": "9fcdc67961b9a45cb5b9fb2e541f215cf829be34",
+      "sha256": "ca648abede02c8e4e788dab5fdeefd8487f43e994dfb0341d4d883fc7be66973",
       "role": "PINNED_NONCANONICAL_AUTHORING_MIRROR"
     },
     {
@@ -3460,8 +3460,8 @@
     {
       "path": "m3/tooling/collection-dense-20261019/m3-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019/proof/inputs/test/jdk/java/util/Collections/M3CollectionMasksTest.java",
       "source_path": "m3-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019/proof/inputs/test/jdk/java/util/Collections/M3CollectionMasksTest.java",
-      "source_git_blob": "82b2d2575b7f154c917af5517540cb3e3ee57e36",
-      "sha256": "09283aa9f8e6f184f9f2e50f2967be6fc47654b591d3de0908751d84d622ce17",
+      "source_git_blob": "9b9c06bc752277ce5a1bb71afff6f0c4946ac854",
+      "sha256": "73433d7592b44c9e7d8268a860532cfc72a13f342698efb3fafea4262ede33f3",
       "role": "PINNED_NONCANONICAL_AUTHORING_MIRROR"
     },
     {

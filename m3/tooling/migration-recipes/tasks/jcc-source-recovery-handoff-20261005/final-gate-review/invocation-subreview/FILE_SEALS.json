@@ -4,17 +4,17 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/reference-audit-execution-review-v3/invocation-subreview/AUDIT.json",
       "bytes": 665,
-      "sha256": "20bd866961b80b60d569dbb4aed19b255602c641304c5547ac3f20a698fe7229"
+      "sha256": "f12d5a6a76f7068fdb5ae9a5efc27b6d90af99b66e8dcbae042bbf2cebf5f1b6"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/reference-audit-execution-review-v3/invocation-subreview/INPUT_SEALS.json",
       "bytes": 2547,
-      "sha256": "90685c3e51baf3b370557570f9e906736444b2292b08ebf834876ae9352eae35"
+      "sha256": "b48735e32189bd678b794275753626dc41ca88dd02d4d23fd92411de9a09aa1f"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/reference-audit-execution-review-v3/invocation-subreview/REVIEW.md",
       "bytes": 4917,
-      "sha256": "58ac4c5c7cbdcc787b6c56dadc2bd8fe95dbfedcd2dc39bff9fc94428cbb3ab7"
+      "sha256": "f45efeeb33612fd3f52b3d952c37f732b6a2b083dc97bfa6b395a415a171a6a8"
     }
   ]
 }

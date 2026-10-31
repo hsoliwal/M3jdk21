@@ -549,7 +549,7 @@ final class M3OriginalCliProviderRecipeTest {
             assertEquals(after, assertReplay(named, images(), reverse).get(name),
                     "named descriptor converged overlay in each source order");
         }
-        assertEquals("c23e6f63411b1d33a29f558c2a6370421a6f51ab99b6db99ac77ebc6e859812d",
+        assertEquals("a28f218198b30d1292d51836c8912d1f69229ef9bef40a4726a2808bcdcb4d46",
                 sha(before), "exact current receiver map preimage");
 
         // These reviewed spans cover the JSON object value, excluding its property label/comma.
@@ -566,7 +566,7 @@ final class M3OriginalCliProviderRecipeTest {
         assertEquals("298cb87b860ac4f320b223274ecbf0644810dfc4943889aad3ce74c61cb98dae",
                 sha(after.substring(valueStart, afterValueEnd)),
                 "independently reviewed pending-contract D60 migration object value");
-        assertEquals("21cb23e97b07152f52b39445de47337ba0fa67544c1641603e785c32eb0ff96d",
+        assertEquals("3f0411504f17610264ddcade8b7561b9f1d33d7708a99c68c754084bc76a4755",
                 sha(after), "exact independently reviewed complete canonical map");
         assertArrayEquals(before.substring(0, valueStart).getBytes(StandardCharsets.UTF_8),
                 after.substring(0, valueStart).getBytes(StandardCharsets.UTF_8),

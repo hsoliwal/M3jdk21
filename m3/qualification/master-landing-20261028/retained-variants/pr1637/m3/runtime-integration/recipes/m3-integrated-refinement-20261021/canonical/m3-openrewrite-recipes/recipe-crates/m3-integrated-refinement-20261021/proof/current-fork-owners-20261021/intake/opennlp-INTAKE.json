@@ -3,7 +3,7 @@
   "status": "PASS",
   "group": "opennlp",
   "handoff_source": "/workspace/scratch/206049dfb270/nlp-work/EVIDENCE_HANDOFF-OPENNLP.json",
-  "handoff_sha256": "5b510c2175db53eed57c743f9eb15e44539654791af1b642efc112b15ee9bc6c",
+  "handoff_sha256": "cfd1c8b258e9433315145d9505200f26604f947d4140809c84d5a112f8e4a3e9",
   "files": [
     {
       "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/SOURCE_HYDRATION.json",
@@ -78,7 +78,7 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/CURRENT_RECIPE_001.json",
       "destination": "nlp/evidence/CURRENT_RECIPE_001.json",
-      "sha256": "d7ff356db11e24b9afa5a79bc65cecd86e1cc1ae103f05f505f906b18f6df541",
+      "sha256": "aa032c7bcb487149e79d8d6bbb02d9266459fc241c7eb7eb639b2fcd7206cda4",
       "bytes": 170972,
       "reused_exact_existing_copy": false
     },

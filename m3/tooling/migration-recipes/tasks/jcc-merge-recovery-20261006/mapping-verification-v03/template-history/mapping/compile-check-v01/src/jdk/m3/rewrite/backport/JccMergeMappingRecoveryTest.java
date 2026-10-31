@@ -70,7 +70,7 @@ final class JccMergeMappingRecoveryTest {
             + "M3Jdk21HashPinnedTextSnapshotRecipe.java";
     private static final String TEXT_OWNER_SHA256 = "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795";
     private static final String PRIOR_MAP_SHA256 = "abfc59de62d46f6442b95717ac367461ab057cd74ed9dfffc6515d7fb0a1574c";
-    private static final String PRIOR_BINDINGS_SHA256 = "e17e0e066988a03583beab519a2ce4381c93f31b1da8ddf465f627cd68566b8d";
+    private static final String PRIOR_BINDINGS_SHA256 = "59b1491a232e3eabfd0530cbf47b01265603e6f493e382aa3c394c629b0516b6";
     private static final String SOURCE_COMMIT = "__UNRESOLVED_ACTUAL_SOURCE_COMMIT__";
     private static final String SOURCE_ROOT_TREE = "__UNRESOLVED_ACTUAL_SOURCE_ROOT_TREE__";
     private static final String SOURCE_INPUT_SHA256 = "__UNRESOLVED_ACTUAL_SOURCE_INPUT_SHA256__";

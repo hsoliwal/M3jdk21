@@ -494,6 +494,6 @@ status; linking them does not rerun them or advance current target acceptance.
 [jdk-tests]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/test/java/jdk/m3/collections/M3JdkShapedPrimitiveCollectionsTest.java
 [factory-tests]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/test/java/jdk/m3/collections/M3FactoryContractTest.java
 [native-readme]: ../../m3/collections/README.md
-[backend]: ../../m3/collections/M3_JDK_SHAPED_BACKENDS.md
+[backend]: ../../m3/collections/M3JDK_SHAPED_BACKENDS.md
 [product]: ../../m3/collections/M3_COLLECTION_PRODUCT_SCOPE.md
 [policy]: ../../m3/docs/m3jdk21-porting-invariant.md

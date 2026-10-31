@@ -20,7 +20,7 @@
       "crate": "m3jdk-collection-publication-assets-20261017",
       "kind": "text",
       "targets": 10,
-      "manifestSha256": "136179c09dad97d2a429b3b7982870b02e522adffb7e48935b3d5f434514cbb8"
+      "manifestSha256": "2d161623e1e1508c0d9d70b664d8b8007cbaea85104af680fcf951d9120df50a"
     }
   ],
   "unchangedJavaCrates": [
@@ -42,7 +42,7 @@
     },
     {
       "path": "m3/docs/name-mapping.json",
-      "sha256": "51e4b57aa235906738ce4fca524831487161bc76c9ae4e65a96efd68e11b08dc",
+      "sha256": "4868443bf93eaa0b16584b218bb80f4f9a095dfbe83f97902354a2c37819556a",
       "before": "03434d125f8d758a5da24f55adfdc399f6cc828f8fa5b214f1cfe8777d635283"
     },
     {

@@ -252,7 +252,7 @@
     "utc": "2026-10-21T06:50:19.617458Z",
     "trigger": "stream/provider-result-domain",
     "lesson": "Validate the complete legal result domain before publishing count, digest, shadow or progress state. Nonempty reads admit -1 or1..requested; scalar reads admit -1 or0..255. Fail through the existing owned-primary cleanup and suppression atom. Do not retry malformed providers, change observer ownership or mask false EOF.",
-    "admission_implementation_sha256": "4706cfdc35a670d20b45453f44c018cd8d64be34cd878ee8b307ad3dd79ad3d8"
+    "admission_implementation_sha256": "2c9150508755694a47e76f537834ace051663f0879f49cfb08bb0e08ab2b2696"
   },
   "limits": [
     "No full source-built M3JDK21 image, jtreg/JCK or cross-platform qualification.",

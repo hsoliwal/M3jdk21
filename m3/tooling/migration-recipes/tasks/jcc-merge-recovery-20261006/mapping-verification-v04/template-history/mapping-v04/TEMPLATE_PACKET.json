@@ -1,7 +1,7 @@
 {
   "canonical_baseline_receipt": {
     "path": "current-map-validation-v04/execution/baseline-v01/receipt.json",
-    "sha256": "56f8d4d85ffc076dbdba99067611dd4d05341fda77e8d68c66748c42cb66adde",
+    "sha256": "4211ce07acc08c18c4ba08b0efc7e205299b989623b5c09773ccfaf4a1625061",
     "status": "PASS"
   },
   "compile_only_status": "PASS",
@@ -17,7 +17,7 @@
     {
       "bytes": 53636,
       "path": "JccMergeMappingRecoveryV04Test.java.in",
-      "sha256": "449324e89b72aafa6a0b659787858a202feeb66306140bfa8c6ce2305c7ac761"
+      "sha256": "0c891ed81dd8422572820f30c3b5b119e5584ee28e479c3ffa2ce5cb5d0d7163"
     },
     {
       "bytes": 3441,
@@ -32,7 +32,7 @@
     {
       "bytes": 14710,
       "path": "render_template.py",
-      "sha256": "dd852c5f7ef242f03f75dd388e4750a684983010f687afc3f1d402447e744273"
+      "sha256": "f058167409d02eb987be01c606b44ea55eccc9e4815f6915acb694ce496ad2f7"
     },
     {
       "bytes": 3967,
@@ -42,7 +42,7 @@
     {
       "bytes": 6239,
       "path": "compile-check-v01/receipt.json",
-      "sha256": "42e9332c22c985fde4b9fd1945e4441d5867fc0671957d3aee9a88f60f63ac0f"
+      "sha256": "f49077c35146e68ccab757f6fea9f0e62a2f5254d691f6383a0cdacf9262e3ea"
     },
     {
       "bytes": 0,
@@ -57,7 +57,7 @@
     {
       "bytes": 3601,
       "path": "self-review-v01/receipt.json",
-      "sha256": "64b96b968f37b22ef455765fd4cd0a7d79d547ce768c95484065aee8bdf766b5"
+      "sha256": "685496638039a4a4d8ea4d7c5cec52f74bf9670dab9f256c19961822098f082e"
     },
     {
       "bytes": 0,
@@ -81,11 +81,11 @@
   "junit_methods_executed": 0,
   "materialized_result_property": "m3.mapping.materialized",
   "named_recipe": "jdk.m3.rewrite.backport.JccMergeMappingRecoveryV04",
-  "previous_qualified_publication_manifest_sha256": "9f4a4b463e6eacfd43eda099928fd31d2d416dc8c2748babe0c4719e33af2104",
+  "previous_qualified_publication_manifest_sha256": "071f16e072b74517d9446f9da449ed6d8ef711a79e71c2523717c648bd9bcb68",
   "previous_template_packet": {
     "path": "candidate/mapping-v03/java-template/TEMPLATE_PACKET.json",
     "sealed_files_verified_unchanged": 31,
-    "sha256": "5b375c3cb17a9e34199da9abb1cdb15c3d087e2f865d84a2184dca2ae4f6b427"
+    "sha256": "9d24eaf99ff3cc614688f3f1193aaafc96be71a290a080d2835d4d62c267ddd5"
   },
   "schema": "m3-jcc-mapping-java-template-packet/4",
   "scope": "Same13controls;exact090current55/53/34/20 andnewglobalnodes preserved;V03actualqualification retained as history. Compile-only and fixture-refusal checks passed. Actualsource binding/JUnit execution performed separately; no acceptance promotion.",

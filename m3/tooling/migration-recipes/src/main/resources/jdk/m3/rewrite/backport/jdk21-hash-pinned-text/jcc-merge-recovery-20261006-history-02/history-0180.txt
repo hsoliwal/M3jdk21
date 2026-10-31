@@ -11,7 +11,7 @@ BASE = Path(__file__).resolve().parent
 PROTOCOL = "EXACT_CREATE_AND_TREE_IDENTITY_FOR_TWO_INVALID_UTF8_FIXTURES"
 MANIFEST_SHA256 = "9270a6b4098960e2b7c7bd87b17325b648c4de363957f36028bacc9c1955e328"
 EXPECTATIONS_SHA256 = "6c9daf2e41937a90d8c884a7918be803315bad3f124cfd0f8c4ea77f34c1746e"
-VERIFIER_SHA256 = "6b8ce688a81b46c20e567bd719104bac6a4cf8578a42904dbe494bca2305e443"
+VERIFIER_SHA256 = "904a2105f04a12454a2d97c13a5bef6764e18ae28a2fe680e06ca0e6e14a6e93"
 SOURCE_INPUT = "be92c62ece9023b5c33676716a1076d00e26120a"
 SOURCE_ROOT = "3c4f32b66633a251ba2c117090830252a7e2da03"
 
@@ -43,7 +43,7 @@ def admit_publication_custody(publication):
     assert pub["manifest_sha256"] == MANIFEST_SHA256
     assert pub["verification_script_sha256"] == VERIFIER_SHA256
     assert pub["base_audit_script_sha256"] == "839c35c611de2dc02f2a3f1233131b24c79d77e109aaf010df9689dc8e04893b"
-    assert pub["publisher_script_sha256"] == "2c352ab7122ff72da7027cd6b06bfa6b4cf2db0531727bf56b482c062aeea754"
+    assert pub["publisher_script_sha256"] == "9c35afe184b437b5668019f2c8702875d4fed6c3ef2b8232ec845bacc2be2bb2"
     counts = {"required_blob_bodies_compared_byte_for_byte": 6,
               "required_blob_identities_verified_without_body_readback": 2,
               "production_blob_bodies_compared_byte_for_byte": 4,

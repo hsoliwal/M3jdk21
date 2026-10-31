@@ -22,11 +22,11 @@
   "outputs": [
     {
       "path": "m3/mop/src/main/java/jdk/m3/mop/M3RecipeMemory.java",
-      "before_sha256": "824d8b90483cf318027a7e9a32f59a14e0b2614c74676a4a1efff3762c72b7ba",
-      "after_sha256": "4706cfdc35a670d20b45453f44c018cd8d64be34cd878ee8b307ad3dd79ad3d8",
+      "before_sha256": "c924f7d4c015a0d8f9de6786d145c1b9921623506f662d231260fd2dd0747049",
+      "after_sha256": "2c9150508755694a47e76f537834ace051663f0879f49cfb08bb0e08ab2b2696",
       "mode": "100644",
       "bytes": 13678,
-      "git_blob": "e5e273643af74bd89d90bc82a8093979b59916ea"
+      "git_blob": "ef7b319ba2ba91bbfcb5a9564a5d313bb4866b7c"
     },
     {
       "path": "m3/mop/src/test/java/jdk/m3/mop/M3RecipeMemoryAdmissionContract.java",
@@ -172,7 +172,7 @@
     {
       "sdk_input": "crate/datasets/mop-admission-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-mop-admission-20261021/0001-M3RecipeMemory.java.txt",
       "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/mop-admission-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-mop-admission-20261021/0001-M3RecipeMemory.java.txt",
-      "sha256": "4706cfdc35a670d20b45453f44c018cd8d64be34cd878ee8b307ad3dd79ad3d8"
+      "sha256": "2c9150508755694a47e76f537834ace051663f0879f49cfb08bb0e08ab2b2696"
     },
     {
       "sdk_input": "crate/datasets/mop-admission-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-mop-admission-20261021/0002-M3RecipeMemoryAdmissionContract.java.txt",
@@ -187,7 +187,7 @@
     {
       "sdk_input": "crate/datasets/mop-admission-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-mop-admission-20261021/pre/0001-M3RecipeMemory.java.txt",
       "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/mop-admission-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-mop-admission-20261021/pre/0001-M3RecipeMemory.java.txt",
-      "sha256": "824d8b90483cf318027a7e9a32f59a14e0b2614c74676a4a1efff3762c72b7ba"
+      "sha256": "c924f7d4c015a0d8f9de6786d145c1b9921623506f662d231260fd2dd0747049"
     },
     {
       "sdk_input": "crate/datasets/mop-admission-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-mop-admission-20261021/0003-verify.sh.txt",
@@ -273,7 +273,7 @@
     "utc": "2026-10-21T06:50:19.478065Z",
     "trigger": "mop/admission/round-trip",
     "lesson": "Atomize framing, timestamp admission and lossless encoding. Admit the canonical empty header before stripping row delimiters; enforce the reader epoch floor and strict UTF-8 encoding before filesystem publication. Preserve valid Unicode, proof binding, append-only prefix, locking and atomic move. Retain the failing oracle before replacement.",
-    "admission_implementation_sha256": "4706cfdc35a670d20b45453f44c018cd8d64be34cd878ee8b307ad3dd79ad3d8"
+    "admission_implementation_sha256": "2c9150508755694a47e76f537834ace051663f0879f49cfb08bb0e08ab2b2696"
   },
   "limits": [
     "No full source-built M3JDK21 image, jtreg/JCK or cross-platform qualification.",

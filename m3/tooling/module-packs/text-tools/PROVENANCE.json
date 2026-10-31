@@ -11,12 +11,12 @@
   "qualification": "LOCAL_LINUX_JAVA21_FOCUSED_RECIPE_API_UNICODE_JNI_LINKED_IMAGE_PASS",
   "files": {
     "m3/docs/name-mapping.json": {
-      "sha256": "d63273d13d34e95590d2f8511ae191a817144a2d671db68add35ef95b5103995",
-      "git_blob": "8b15bc9a615b990e126598a4aeb4af133dab7492",
+      "sha256": "15629167d5f6d5f6999225a4ebd9b16b56943477c27701259048ac670d232fc4",
+      "git_blob": "d3d454d9a7891585d665f58b404989820ea751a4",
       "canonical_source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-tools-recovery-20261014/4.txt",
-      "canonical_source_sha256": "d63273d13d34e95590d2f8511ae191a817144a2d671db68add35ef95b5103995",
+      "canonical_source_sha256": "15629167d5f6d5f6999225a4ebd9b16b56943477c27701259048ac670d232fc4",
       "license": "Apache-2.0",
-      "canonical_source_git_blob": "8b15bc9a615b990e126598a4aeb4af133dab7492",
+      "canonical_source_git_blob": "d3d454d9a7891585d665f58b404989820ea751a4",
       "source_revision": "ebff714f37756273594086226098137d0a37b30a",
       "recipe": "M3HashPinnedTextSnapshotRecipe / m3-tools-recovery-20261014"
     },

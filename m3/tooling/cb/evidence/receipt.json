@@ -127,7 +127,7 @@
         "src/java.base/share/classes/jdk/internal/mindex/M3Release.java": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
         "m3/runtime-integration/tests/StringApiProbe.java": "3cc0dabd026bdb3f85512cb59cbd50a06c2e75f4d382eab9e458268d8897cc56",
         "m3/runtime-integration/tests/string_api_probe.c": "a53760f343c412c582cda4d4aecc8f800b5abdd1aa42d648d767f175fd1870c4",
-        "m3/tooling/cb/run-image.sh": "04dd73c2fe5d1ccb3b55e8eef74d6e82636e3a6fa242aa42ab35b2cf81e6e1f6"
+        "m3/tooling/cb/run-image.sh": "cc13d9558226182235e9eebb96015f235d832b52787200ee30cdb321fdb13b81"
       },
       "debug": "fastdebug",
       "warnings_as_errors": true,
@@ -167,7 +167,7 @@
         "src/java.base/share/classes/jdk/internal/mindex/M3Release.java": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
         "m3/runtime-integration/tests/StringApiProbe.java": "3cc0dabd026bdb3f85512cb59cbd50a06c2e75f4d382eab9e458268d8897cc56",
         "m3/runtime-integration/tests/string_api_probe.c": "a53760f343c412c582cda4d4aecc8f800b5abdd1aa42d648d767f175fd1870c4",
-        "m3/tooling/cb/run-image.sh": "04dd73c2fe5d1ccb3b55e8eef74d6e82636e3a6fa242aa42ab35b2cf81e6e1f6"
+        "m3/tooling/cb/run-image.sh": "cc13d9558226182235e9eebb96015f235d832b52787200ee30cdb321fdb13b81"
       },
       "jtreg_tests": 3,
       "class_assertions_per_mode": 4525,
@@ -206,7 +206,7 @@
         "src/java.base/share/classes/jdk/internal/mindex/M3Release.java": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
         "m3/runtime-integration/tests/StringApiProbe.java": "3cc0dabd026bdb3f85512cb59cbd50a06c2e75f4d382eab9e458268d8897cc56",
         "m3/runtime-integration/tests/string_api_probe.c": "a53760f343c412c582cda4d4aecc8f800b5abdd1aa42d648d767f175fd1870c4",
-        "m3/tooling/cb/run-image.sh": "04dd73c2fe5d1ccb3b55e8eef74d6e82636e3a6fa242aa42ab35b2cf81e6e1f6"
+        "m3/tooling/cb/run-image.sh": "cc13d9558226182235e9eebb96015f235d832b52787200ee30cdb321fdb13b81"
       },
       "assertions": 809315,
       "semantic_digest": "30e36ec204f5aec8e0d672ff5be675d3f8ac1677164481ec82a335b2540da499"
@@ -244,7 +244,7 @@
         "src/java.base/share/classes/jdk/internal/mindex/M3Release.java": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
         "m3/runtime-integration/tests/StringApiProbe.java": "3cc0dabd026bdb3f85512cb59cbd50a06c2e75f4d382eab9e458268d8897cc56",
         "m3/runtime-integration/tests/string_api_probe.c": "a53760f343c412c582cda4d4aecc8f800b5abdd1aa42d648d767f175fd1870c4",
-        "m3/tooling/cb/run-image.sh": "04dd73c2fe5d1ccb3b55e8eef74d6e82636e3a6fa242aa42ab35b2cf81e6e1f6"
+        "m3/tooling/cb/run-image.sh": "cc13d9558226182235e9eebb96015f235d832b52787200ee30cdb321fdb13b81"
       },
       "assertions": 809315,
       "semantic_digest": "30e36ec204f5aec8e0d672ff5be675d3f8ac1677164481ec82a335b2540da499"
@@ -282,7 +282,7 @@
         "src/java.base/share/classes/jdk/internal/mindex/M3Release.java": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
         "m3/runtime-integration/tests/StringApiProbe.java": "3cc0dabd026bdb3f85512cb59cbd50a06c2e75f4d382eab9e458268d8897cc56",
         "m3/runtime-integration/tests/string_api_probe.c": "a53760f343c412c582cda4d4aecc8f800b5abdd1aa42d648d767f175fd1870c4",
-        "m3/tooling/cb/run-image.sh": "04dd73c2fe5d1ccb3b55e8eef74d6e82636e3a6fa242aa42ab35b2cf81e6e1f6"
+        "m3/tooling/cb/run-image.sh": "cc13d9558226182235e9eebb96015f235d832b52787200ee30cdb321fdb13b81"
       },
       "assertions": 3061
     },
@@ -319,7 +319,7 @@
         "src/java.base/share/classes/jdk/internal/mindex/M3Release.java": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
         "m3/runtime-integration/tests/StringApiProbe.java": "3cc0dabd026bdb3f85512cb59cbd50a06c2e75f4d382eab9e458268d8897cc56",
         "m3/runtime-integration/tests/string_api_probe.c": "a53760f343c412c582cda4d4aecc8f800b5abdd1aa42d648d767f175fd1870c4",
-        "m3/tooling/cb/run-image.sh": "04dd73c2fe5d1ccb3b55e8eef74d6e82636e3a6fa242aa42ab35b2cf81e6e1f6"
+        "m3/tooling/cb/run-image.sh": "cc13d9558226182235e9eebb96015f235d832b52787200ee30cdb321fdb13b81"
       },
       "assertions": 3061
     },
@@ -356,7 +356,7 @@
         "src/java.base/share/classes/jdk/internal/mindex/M3Release.java": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
         "m3/runtime-integration/tests/StringApiProbe.java": "3cc0dabd026bdb3f85512cb59cbd50a06c2e75f4d382eab9e458268d8897cc56",
         "m3/runtime-integration/tests/string_api_probe.c": "a53760f343c412c582cda4d4aecc8f800b5abdd1aa42d648d767f175fd1870c4",
-        "m3/tooling/cb/run-image.sh": "04dd73c2fe5d1ccb3b55e8eef74d6e82636e3a6fa242aa42ab35b2cf81e6e1f6"
+        "m3/tooling/cb/run-image.sh": "cc13d9558226182235e9eebb96015f235d832b52787200ee30cdb321fdb13b81"
       },
       "assertions": 4525,
       "counterpart_compilation_observed": true,
@@ -395,7 +395,7 @@
         "src/java.base/share/classes/jdk/internal/mindex/M3Release.java": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
         "m3/runtime-integration/tests/StringApiProbe.java": "3cc0dabd026bdb3f85512cb59cbd50a06c2e75f4d382eab9e458268d8897cc56",
         "m3/runtime-integration/tests/string_api_probe.c": "a53760f343c412c582cda4d4aecc8f800b5abdd1aa42d648d767f175fd1870c4",
-        "m3/tooling/cb/run-image.sh": "04dd73c2fe5d1ccb3b55e8eef74d6e82636e3a6fa242aa42ab35b2cf81e6e1f6"
+        "m3/tooling/cb/run-image.sh": "cc13d9558226182235e9eebb96015f235d832b52787200ee30cdb321fdb13b81"
       },
       "assertions": 4525,
       "counterpart_compilation_observed": true,

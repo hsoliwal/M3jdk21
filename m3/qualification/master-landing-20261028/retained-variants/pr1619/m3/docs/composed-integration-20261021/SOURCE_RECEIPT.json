@@ -223,8 +223,8 @@
     },
     {
       "path": "m3/docs/abseil-convergence-20261021/FILE_PASSES.tsv",
-      "sha256": "7d3ccbf4a658aa5091a39d6b9454019ed723271df3e8145cca45734f4f5f33cf",
-      "git_blob": "d12180584ed8c2dd00f9acc61999b043fc125d6c",
+      "sha256": "525fe96ff4a1b750a16a594db0d5886c62731f02279dadf7ebb8d09a6c4d9cbe",
+      "git_blob": "c5bfb70f6fb02e4e9e09793ebe12eafcaef1a5dc",
       "mode": "100644",
       "bytes": 4890
     },
@@ -244,8 +244,8 @@
     },
     {
       "path": "m3/docs/abseil-convergence-20261021/SOURCE_RECEIPT.json",
-      "sha256": "6df69c004b0e3e21b646f4fd514a9912f3be4be7c0b29f2f04517336824b8227",
-      "git_blob": "4522d0f2b23c184742613e94b9c3728d715101ad",
+      "sha256": "d90ccd3d997f0eb2fac92f4acd308ab80afd5dc3162d0a9914da3f2453f6e91d",
+      "git_blob": "48a0aeef53b7491af4133bc7b86293f5f7bd0c5b",
       "mode": "100644",
       "bytes": 32818
     },
@@ -258,8 +258,8 @@
     },
     {
       "path": "m3/docs/name-mapping.json",
-      "sha256": "cad138a3dfa2b93419e0e414ca6a08dbe39ef8f50c11699065e4315f735af4ff",
-      "git_blob": "fea0492b87beb54b424ada5da5c8b85469aabbe5",
+      "sha256": "f4a6a010dc4e7f7104a8088394ad495b319dd206a52a1bf50b25b89051acf492",
+      "git_blob": "265d7c3149c6fa5f78dea1cf6def8ed98b69eaed",
       "mode": "100644",
       "bytes": 456929
     },
@@ -307,8 +307,8 @@
     },
     {
       "path": "src/java.base/share/classes/java/lang/M3StringImmediate.java",
-      "sha256": "0bf8cf838c1c4d6cdb7c78c319d125cd1fe09ddb5bf9fe37ca31bc1e6d39bf21",
-      "git_blob": "b3196df8c2ea1fecb7e99edf82735362fc5f2574",
+      "sha256": "7bbb8ce72f2b3d04c3de5c5938e8cb87af76bbe43d317c58058cc75d7201ad6b",
+      "git_blob": "0d6b158ccd93820cd829fa238fc63947ec92e848",
       "mode": "100644",
       "bytes": 11688
     },
@@ -456,19 +456,19 @@
   "subpackets": [
     {
       "path": "evidence/core/PACKET_MANIFEST.json",
-      "sha256": "af27aa4434da6943f9ddc8e322085241af4ed4306c23b7b5736e069b69d7f76b"
+      "sha256": "02e25e7791dc44c0839e7b31052a2012d641b1f98cd55ab7e09afa174e4add3d"
     },
     {
       "path": "evidence/core/E2/PACKET_MANIFEST.json",
-      "sha256": "8a117fa9d203a8864d282f027b1228b3640cb13cff816c042c4c4cb1c00c6d29"
+      "sha256": "5eec50496aa31f5676ec64a902dab238f2d85841a7bd1dde721bfe2edd1b3b29"
     },
     {
       "path": "evidence/collections/PACKET_MANIFEST.json",
-      "sha256": "cff8a31e9801d8f6ba4f9f944defb6df3cd05a6535c8c1a65472fb93306c7b72"
+      "sha256": "105a3c1196ca6e03ee1a0a2639955a0bc0002775d94ace23e17f8398c018a802"
     },
     {
       "path": "evidence/collections/e2/PACKET_MANIFEST.json",
-      "sha256": "d73d9ec92016fef768d4c18d342ad5ed33c38f42684cb7a498bd494678fac4ce"
+      "sha256": "1a5ee894c82cbdf5bd9d2148ae254086c0f72637fe8d5a112dbdd4a01ea657e7"
     },
     {
       "path": "evidence/guards/MANIFEST.json",

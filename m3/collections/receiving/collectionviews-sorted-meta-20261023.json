@@ -6,7 +6,7 @@
   "recipe_id": "jdk.internal.m3.CollectionViewsSortedMetadata20261023",
   "preimage_sha256": "d0713f7a8c949a6b11c89fbe637f1ccebb53d45f164a7c69029c517f5eb3eb2f",
   "postimage_sha256": "4fc81eda7a7b1831f36abc20fca52f9ba898fa7a767f2c1b62f8eab872ec056f",
-  "test_sha256": "e3d8f4208b2f8d3f0b05f512d39e30e276ad4496632f917376f3ebb8e37957ad",
+  "test_sha256": "253432540a994554e635b89ce52059328cbde1d56361bc23d7ce5fcf55b49045",
   "jni_symbols_added": 0,
   "phase1_recipe": "jdk.internal.m3.CollectionViewsOnePassCowSuperset20261023",
   "phase1_postimage_sha256": "d0713f7a8c949a6b11c89fbe637f1ccebb53d45f164a7c69029c517f5eb3eb2f",

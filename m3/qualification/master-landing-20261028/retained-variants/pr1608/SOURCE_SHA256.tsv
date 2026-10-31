@@ -6,7 +6,7 @@ m3/docs/collection-views-continuation.md	298eaa8c44eaf2244fbcbcb3eb3a265184dfe8d
 m3/docs/collection-views-qualification-20261021.json	e986d7a5616708761833f4b559f9d5200951e79ea218bcf8771f659296693f61	a589fa0e64e77083265865dc35afd2aae9d5ed46	100644	1608	PR version, not live
 m3/docs/collection-views-source-pin-20261021.json	271719909102587e51c5ba52f4e3f5c8605e72c8afd46ace6bbd61fef180333f	fd1fd1e9b3cf9d668ebc80e76b734b56b150d256	100644	1608	PR version, not live
 m3/docs/file-ast-native-continuation.md	6decdf800f6fa54b7e194061040cbe1a251e27977d201f5a8c54957e0fea53f9	9cbf9d878c046597c0226b0d029b4a2e267ae4cc	100644	1608	PR version, not live
-m3/docs/file-ast-native-qualification-20261021.json	65bef4e07aa2b1688dd84b6a51cb3b66611f6ab259099162f284ff21e0083797	3593630ac7653e0c104c978fdc3164bb7658c1b0	100644	1608	PR version, not live
+m3/docs/file-ast-native-qualification-20261021.json	0b0573ecb19a1f27904d051396385636a91a85800c6a2ae941fdc2985e4527bc	09c0eab6ca1d7a2d85b1ae93d7214e313af7f471	100644	1608	PR version, not live
 m3/docs/file-ast-native-source-pin-20261021.json	43447a6cb606e7c9d2e831d40711b70e1d9a9823607ad0d32b6e6e67d8f6fbf8	8624079c003a31d599e4d023b0e172d7a2fd4712	100644	1608	PR version, not live
 m3/docs/name-mapping.d/m3-collection-views-20261021.json	9e2d894fffa46363eb0b4a5707544ee80d1e6c1a50478cde2bf766c5bc161446	1a55d25241efeb6d968cf80364b2c28d166c31e3	100644	1608	PR version, not live
 m3/docs/name-mapping.d/m3-file-ast-continuation-20261021.json	9b4a6d5ea71e62fb7b419c1b20812a5d910af9ee277650068461af93b9b40dc3	8019a185f2ad147b62636c65ae70481b36ba7f24	100644	1608	PR version, not live
@@ -38,6 +38,6 @@ m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py	87f6525bc0
 src/java.base/share/classes/java/io/InputStream.java	f48ebb4233436b882f046d7d58ad44f5b1edff7ce808a3e236754f6ae8a36531	8cac85f1012d890ee70119f5f0b02e8bc69a8ab5	100644	1608	PR version, not live
 src/java.base/share/classes/java/io/OutputStream.java	92adb9c2a5f62e87088ab7158c8e503c87745a60b5076ca4c3bd08c5823cdce6	95912213ecbf49b882962eb881c521202402b658	100644	1608	PR version, not live
 src/java.base/share/classes/java/io/ShadowInputStream.java	81cfe0dd83132e550ad5f7efb858d0c1cf34fff33074bb786141fc4976fc6fd1	ee0f591fd4148d70ec4e5212d97fa2314e221345	100644	1608	PR version, not live
-src/java.base/share/classes/java/lang/M3StringImmediate.java	9360687d536948728c8500aaae168e5bc47a1f51bef9f9bb6dcb2c9d8a6044e8	bc12d259aa433e00163bdecbe6b333c2abe7fc76	100644	1608	PR version, not live
+src/java.base/share/classes/java/lang/M3StringImmediate.java	1b65fe1ba4b57e1d08a5df611fe22b07ccf525b41ee25a6d72ffb5535883b275	f151eba6bed8294746de6cca79484059a80226ff	100644	1608	PR version, not live
 src/java.base/share/classes/jdk/internal/m3/io/M3IO.java	76482eea6d15f0e4f95361cb5315e26ca04abb89919dcbf984035766a08d41b4	e46241b6fd8eb73805f823dcf0127c92f46bf9a5	100644	1608	PR version, not live
 test/jdk/java/io/InputStream/M3StreamProgressShadow.java	4776d5f0bb4192fd349233077a069e753bd11f08ba9bf543ba2ef4056f6839c1	36473410f3893ac1ae1d72f7fa92f913ab3bb861	100644	1608	PR version, not live

@@ -92,13 +92,13 @@
   }, {
     "target_path" : "m3/docs/name-mapping.json",
     "before_sha256" : "145dec24eb11847b3915e6fb2e0e80fa4a773879833a3ac64e76101fab67500f",
-    "after_sha256" : "ad4f034f164b085e159a56ded5b988dd2592d9ed8e09a9c3702d7d4233d58cb3",
+    "after_sha256" : "aa89accd1229b2b359aece617e3d8e4dac4a78905b357362f229c81a4aefdca3",
     "recipe_identity" : "com.synexia.m3jdk.FrozenPrimitiveNaming20261029",
     "kind" : "GENERATED_BUILD"
   }, {
     "target_path" : "m3/tooling/name-contract/name-plan.json",
     "before_sha256" : "0bfb1c234cd9e8e65702a0797124619fc365d7842b7be74591fabd142dfb78b9",
-    "after_sha256" : "4e566761aec7f6913903d893f13ab490aab2144db46808acce217121264c6510",
+    "after_sha256" : "26ad47d0f52f79216ffab291edb006c9f0979007761efaacb7eab382852e864d",
     "recipe_identity" : "com.synexia.m3jdk.FrozenPrimitiveNaming20261029",
     "kind" : "GENERATED_BUILD"
   } ]

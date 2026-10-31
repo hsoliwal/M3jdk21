@@ -25,25 +25,25 @@
     },
     {
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java",
-      "gitBlob": "780c7887aaa6b0892a76f4eee1dcb17086a60289",
+      "gitBlob": "d70a152bdedc380ed8b28861ea94ef4c2adbea90",
       "bytes": 8838,
-      "sha256": "bbc2901ebe5b2de9951b672127bd47e9d13c70b5a39482fa0727703d0a2ff757",
+      "sha256": "9d485a1771a30b4229acb5526ca90de5f2df4a03ee5ad8f5388bb128d2c38194",
       "role": "JAVA_ADAPTER_OWNER",
       "license": "Apache-2.0"
     },
     {
       "path": "src/java.base/share/native/libjava/M3StateRelation.c",
-      "gitBlob": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
+      "gitBlob": "89b3127f0f262de3e00ba28a01079a659013dce2",
       "bytes": 5899,
-      "sha256": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16",
+      "sha256": "0df1989292b23b1f185f222db61ad55d5e38b30d5b758436ca9d62b8de277bbd",
       "role": "COMPLETE_CURRENT_C_TRANSLATION_UNIT",
       "license": "Apache-2.0"
     },
     {
       "path": "src/java.base/share/native/libjava/m3_state_relation.h",
-      "gitBlob": "18a02e228129827da486edc5b316790af6135310",
+      "gitBlob": "0e0c70e60b2cee61c3df31982a26f4251955cb61",
       "bytes": 1021,
-      "sha256": "c948c0ac34180f1f9412a764c3c9fd8c59e11509467aa9e04f8825e903526885",
+      "sha256": "6a453bbe5c443d327228e48cc27c6d5dc356a67586f93796a52de17e69fa12a2",
       "role": "AUTHENTIC_KERNEL_HEADER",
       "license": "Apache-2.0"
     },
@@ -66,7 +66,7 @@
   },
   "historical": {
     "qualificationGitBlob": "90c166890a6f265473bf5471776ca0be596f2876",
-    "oldCGitBlob": "5b30f71d8ed878b3199225b9512b75a090ff896c",
+    "oldCGitBlob": "e6a10286f64052cb948de1dbcc43aaaa1d33db1e",
     "scope": "Historical C17 numeric-only module-patch proof; not a receipt for changed current C, C11 or classpath."
   },
   "scope": {

@@ -64,7 +64,7 @@ final class JccSourceRecoveryHandoffTest {
                     "59ed76969f86486e7adb377409e284f69577fe02754006fdfe5b3938a16760a0"),
             new Target("m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
                     "before02-source-destination-bindings.json.txt", "after02-source-destination-bindings.json.txt",
-                    "a80ffed31f45465774fd03ba90858c301327d6b472acf89652d01bf96b981707"),
+                    "8c76c2dd45e775d29f8f47d8daf65842e465c74ad3dec7aacd55df59f9d051a1"),
             new Target("m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
                     "before03-root-coverage-obligations.tsv.txt", "after03-root-coverage-obligations.tsv.txt",
                     "59c4c970ac75a56aa5d5a3e2f3e88f5caa831eb06be788266c725202b8c64b12"));

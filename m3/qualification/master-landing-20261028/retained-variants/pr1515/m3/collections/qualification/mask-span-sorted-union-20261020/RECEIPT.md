@@ -16,7 +16,7 @@ canonical recipe/convergence workspace, not a runtime layer.
 
 - Existing native compactor: `0ae9da857c53da08742636809a151f7573062890`.
 - Actual java.base SortedSet: exact #1538 donor `ad3ee89d40de8c0ca344863bb6fc4469cec97a09`.
-- Added common header: exact #1547 donor `a1bd5aab67eaed2db6fdc3851d85312f24bfc63d`.
+- Added common header: exact #1547 donor `5a3d6adde420d5c9d33279376384cd4a74825a02`.
 - New Java split proof: `7a163ef09089b0c2b30e9e6ec1360794263f5e5c`.
 - New native span proof: `d1284c4ea7f95c12866d03bae2d06c76c636b600`.
 

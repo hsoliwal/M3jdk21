@@ -21,7 +21,7 @@ does not supply authoritative source-edit coordinates or dependency resolution.
 | --- | --- |
 | Receiving M3 sources | `hsoliwal/M3jdk21` at `2779aba3f98f31c324be43f731be7914e1a05935`; exact preimages in this crate. Later stacked application is accepted only at each sealed preimage or postimage. |
 | Existing canonical engines | `hsoliwal/com.synexia` at `e02e7cb0f2e8e46db4c5b476d59aa26658fa4d07`; all four shared engine/scope sources remain byte-identical. |
-| Qualified harness donor | The separate integrated packet's SDK003 at receipt SHA-256 `57ccb0c5a801848e80e472ac533c7e287b1eaac8c36960824acc952ea19dbb25`; exact source snapshots, modification diffs and lineage are retained. Its runtime results and memory events are not inherited. |
+| Qualified harness donor | The separate integrated packet's SDK003 at receipt SHA-256 `c7edd6e3cc89d93b7fd6fce6bb98b9c0d204531fd8bbfa47d9abcb9bf2dfa818`; exact source snapshots, modification diffs and lineage are retained. Its runtime results and memory events are not inherited. |
 | Real Maven 4 provider | [hsoliwal/maven at `2993571eedbe96e06a737eaa8ae47cf112b255de`](https://github.com/hsoliwal/maven/tree/2993571eedbe96e06a737eaa8ae47cf112b255de), version `4.1.0-SNAPSHOT`; original API, implementation and test owners remain authoritative. |
 
 `SOURCE_SEALS.json` selects seven active file phases. Phase IDs retain their

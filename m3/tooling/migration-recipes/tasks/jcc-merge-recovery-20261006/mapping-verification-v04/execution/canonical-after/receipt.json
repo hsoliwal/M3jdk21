@@ -1,7 +1,7 @@
 {
   "actual_source_binding": {
     "input_epoch_sha256": "4fd3b3bd4fb09759d8bb02ca9ba45d0b2934625f24bcc4ae195f3e49394dff70",
-    "mapping_resources_sha256": "50085c9d65c658d6c7a4fad95b244bfa1069d18fa93c8d47bc29b68ada0379e9",
+    "mapping_resources_sha256": "09cefec20c7cbcfef8b36e3c8bbbfa2989f413e259135502e39b4f8d73893d57",
     "materialized_root": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/execution-actual-v01/materialized",
     "source_commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
     "source_input_sha256": "7db913209511a230e36a8da12282b3e4a6f84193399821ce9693042f616fa39d",
@@ -22,7 +22,7 @@
   "destination_gates_passed": false,
   "diagnostics": [],
   "exit_code": 0,
-  "fixture_manifest_sha256": "3cef130849a643171fd91e8ee1a6e6ef679e617b1f944064f6c7501f3ece1680",
+  "fixture_manifest_sha256": "f5339652d19345398823f28b7f449e388bbdad4783fdb63dea528961365f5789",
   "fixture_unchanged": true,
   "inputs": {
     "m3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java": "5f936a3c6e69ca487eff6a0665ada01546750d9d87ce85ee50a337a4236233d0",
@@ -34,7 +34,7 @@
     "m3/core/src/jdk/m3/text/M3StringPiece.java": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755",
     "m3/core/src/jdk/m3/text/StorageIdentity.java": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354",
     "m3/docs/jcc-source-handoff.md": "975d986ae5883e2851e39373705d7691d0aa74e6e7be3af47a75093c1ffe46dc",
-    "m3/docs/name-mapping.json": "ac5aefa32595e7a5d829e8d1870772b464f5d070f11799526104d3ff32ed3675",
+    "m3/docs/name-mapping.json": "23113e94eba0ac7b745fd8dee95d27fa80fc12100534a32f447c3124879c5e39",
     "m3/docs/name-mapping.schema.json": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
     "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv": "0cba435844da64936b50f039ebe12ffaa56fa39a3f86f20206c6d0874e61050c",
     "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json": "73b3b5bd60eff1c1a904bd96517309067a9a93832060b63fa19c0c826e10630d",
@@ -78,7 +78,7 @@
     "src/java.base/share/classes/jdk/internal/mindex/M3VI.java": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a",
     "src/java.base/share/native/libjava/M3BitLane28.c": "7cce5d9e56e5308f130e4dfaa191c663c27afb3e35ed206347447cc925dec89f"
   },
-  "mapping_sha256": "ac5aefa32595e7a5d829e8d1870772b464f5d070f11799526104d3ff32ed3675",
+  "mapping_sha256": "23113e94eba0ac7b745fd8dee95d27fa80fc12100534a32f447c3124879c5e39",
   "mode": "ACTUAL_FOUR_AFTERIMAGES",
   "new_diagnostics_relative_to_baseline": [],
   "removed_baseline_diagnostics": [],

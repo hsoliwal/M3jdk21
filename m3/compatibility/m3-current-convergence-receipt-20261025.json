@@ -82,8 +82,8 @@
           "signatures": [
             "Batch<E> snapshot(long,int)"
           ],
-          "sha256": "98c1be201f4eef1f720828f5a65bfa866d7b3313a18397b7bba4c102ef0cf50e",
-          "git_blob_sha1": "29bbd29f677d5eabe78bc1ff0d4f0f0878d52746",
+          "sha256": "7053b2b8b57432a64c13bf2b4a08c7b19bb3ca5acfaea39a6c9b63b995b2492f",
+          "git_blob_sha1": "9dc16766be8dca798387859a0172dbccefc6be91",
           "fingerprint": null,
           "revision_role": "pinned"
         }
@@ -98,8 +98,8 @@
           "signatures": [
             "Batch<E> snapshot(long,int)"
           ],
-          "sha256": "98c1be201f4eef1f720828f5a65bfa866d7b3313a18397b7bba4c102ef0cf50e",
-          "git_blob_sha1": "29bbd29f677d5eabe78bc1ff0d4f0f0878d52746",
+          "sha256": "7053b2b8b57432a64c13bf2b4a08c7b19bb3ca5acfaea39a6c9b63b995b2492f",
+          "git_blob_sha1": "9dc16766be8dca798387859a0172dbccefc6be91",
           "fingerprint": null,
           "revision_role": "pinned"
         }
@@ -406,8 +406,8 @@
         {
           "path": "src/java.base/share/classes/java/util/ChangeJournal.java",
           "preimage_sha256": "b6cd87d65584b65d7191b50d84c1dacb1f2e352f1c9a9ce5dd721abff8af3609",
-          "sha256": "98c1be201f4eef1f720828f5a65bfa866d7b3313a18397b7bba4c102ef0cf50e",
-          "git_blob_sha1": "29bbd29f677d5eabe78bc1ff0d4f0f0878d52746",
+          "sha256": "7053b2b8b57432a64c13bf2b4a08c7b19bb3ca5acfaea39a6c9b63b995b2492f",
+          "git_blob_sha1": "9dc16766be8dca798387859a0172dbccefc6be91",
           "bytes": 11183
         }
       ],

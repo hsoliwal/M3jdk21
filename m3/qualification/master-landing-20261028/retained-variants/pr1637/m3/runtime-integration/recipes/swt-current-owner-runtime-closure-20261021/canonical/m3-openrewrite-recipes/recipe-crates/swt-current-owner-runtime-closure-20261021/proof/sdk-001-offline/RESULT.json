@@ -54,12 +54,12 @@
     },
     {
       "path": "SOURCE_INPUTS.json",
-      "sha256": "187e758f76f76b72302e64e812b6547b4d5597778ad4224abea5d974f8e77cea",
+      "sha256": "9dffa7fbfd9619789104d0c85c757d8b72272c687efd874d9d85706b3a8a0053",
       "bytes": 4274
     },
     {
       "path": "SOURCE_INPUTS_AFTER.json",
-      "sha256": "187e758f76f76b72302e64e812b6547b4d5597778ad4224abea5d974f8e77cea",
+      "sha256": "9dffa7fbfd9619789104d0c85c757d8b72272c687efd874d9d85706b3a8a0053",
       "bytes": 4274
     },
     {
@@ -109,12 +109,12 @@
     },
     {
       "path": "inputs/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/src/test/java/jdk/internal/m3/rewrite/M3SwtCurrentOwnerRuntimeClosureRecipeTest.java",
-      "sha256": "2ec05f671df50d255c98ac04432fa679c5b35d0633851cfacc9d0f3f4175dd62",
+      "sha256": "d1313391568f0fddbfda2786fc6924ba5b77f66e2e98bfb75d6b559fe606283c",
       "bytes": 31658
     },
     {
       "path": "inputs/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/verify_sources.py",
-      "sha256": "875e3c5f2961dbf957207e4d0a495cb17aa837d656d181c0de2e8a4583bb63ca",
+      "sha256": "83b20a4bc348546e642fa6c04ba36fff86aca7fdd598f0b35a2f9301afc9415c",
       "bytes": 2425
     },
     {
@@ -129,7 +129,7 @@
     },
     {
       "path": "inputs/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java",
-      "sha256": "613fd494de5eebdbc29d8982c599d44cd321754b370175f7d097720904a04853",
+      "sha256": "3b4f7649fc3ee38df62a6dc9b318e8845da6574f7e48b4cd7a948b58e266d46f",
       "bytes": 19983
     },
     {
@@ -169,7 +169,7 @@
     },
     {
       "path": "proof-status.tsv",
-      "sha256": "534cf456ef4174d4e704f9eeb262ecfce43defe6e7d175fa40a8bdcd75d6b3d5",
+      "sha256": "8f45229eee7cc4030edc3a25b9fba42cf1a8fe63401a578297107f2c03e3fffc",
       "bytes": 90
     },
     {
@@ -179,7 +179,7 @@
     },
     {
       "path": "recipe-proof.tsv",
-      "sha256": "c3a070fdd45b46db00a9acf0ba00dc5561b731423154bb2957f1315fdd34c421",
+      "sha256": "d52b41311724936f0f8eee9eae0a42cc7fcc974436e95296930fae5ce374e3d8",
       "bytes": 1412
     },
     {

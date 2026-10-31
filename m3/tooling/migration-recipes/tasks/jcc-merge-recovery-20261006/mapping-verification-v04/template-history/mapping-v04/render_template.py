@@ -22,13 +22,13 @@ YAML_PATH = "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3
 SUMMARY_PATH = ("m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/"
                 "jcc-merge-recovery-20261006-mapping-v04/publication-input-summary.json")
 BEFORE_PINS = (
-    "12bfa8d328b74ba4de930d993c8194b8db51f3a111617690dff9f1ffebaea1c2",
+    "e76133a4d1bb472dfc88a41e8d8560d5ac0e08ba4d227b3b6c8fbd95915e6ebc",
     "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337",
     "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126",
     "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b",
 )
 PRIOR_MAP_PIN = "abfc59de62d46f6442b95717ac367461ab057cd74ed9dfffc6515d7fb0a1574c"
-PRIOR_BINDINGS_PIN = "e17e0e066988a03583beab519a2ce4381c93f31b1da8ddf465f627cd68566b8d"
+PRIOR_BINDINGS_PIN = "59b1491a232e3eabfd0530cbf47b01265603e6f493e382aa3c394c629b0516b6"
 INPUT_EPOCH_PIN = "4fd3b3bd4fb09759d8bb02ca9ba45d0b2934625f24bcc4ae195f3e49394dff70"
 
 

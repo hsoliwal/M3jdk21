@@ -5,7 +5,7 @@
 ## Additive received files
 
 - `src/java.base/share/classes/java/lang/M3StringProjection.java`: original Synexia generated Git blob `59f80a443ac43281ab22427378f031c5aedbb773` (content SHA256 `2cb6695adbd08074142e196fc314d60d50e1eb0d4810c27b12d0f39dfe2a31c4`).
-- `test/jdk/java/lang/String/M3StringProjectionTest.java`: original Synexia generated Git blob `8f59fc8b58f5aaf83a01edc18e7f17678192fe04` (content SHA256 `b87bc91196ec87f4654a10e0c7c5c7c7450d2e6279598222d03feaea6dd0710a`).
+- `test/jdk/java/lang/String/M3StringProjectionTest.java`: original Synexia generated Git blob `f2fbcd6e1ac4bace52bc00fbdcb67ac34a54a0a3` (content SHA256 `6603d7cfeb86c8d188e653fa05029892f43c32c9268fb8a403c6f0ef39d2c617`).
 
 The source-sealed Java21 proof crate at Synexia `synexia-openrewrite-recipes/recipes/m3jdk21-adaptive-projection-20261016` uses the incumbent `M3HashPinnedJavaSnapshotRecipe`. Both target paths are manifest `ABSENT` before installation, and its test proves fixed-point replay and refuse-unknown-drift.
 

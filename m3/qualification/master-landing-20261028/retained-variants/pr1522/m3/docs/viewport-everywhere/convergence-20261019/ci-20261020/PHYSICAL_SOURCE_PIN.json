@@ -5,7 +5,7 @@
   "decision": "Advance only the M3IndexedListSnapshot literal to the qualified receiver postimage and record the canonical manifest authority. Preserve all six exact checks, unknown-source refusal, both direct Java proof mains, C17 strict build and both native-required proof invocations.",
   "historical_baseline": "cd26677723b21ad6ea425f2cb72d992101466476 remains an immutable preimage fixture at canonical74d5; the current-owner workflow is not used to relabel it.",
   "canonical_source_pin": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
-  "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+  "manifest_sha256": "ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6",
   "all_six_source_pins": [
     {
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java",
@@ -37,16 +37,16 @@
     },
     {
       "path": "m3/collections/src/test/java/jdk/m3/collections/M3PhysicalStateSnapshotProof.java",
-      "previous_expected_git_blob": "21d0a93bfe7a05ba9624fe0a88c6f82e54aa6ac8",
-      "receiving_expected_git_blob": "21d0a93bfe7a05ba9624fe0a88c6f82e54aa6ac8",
-      "published_066b_git_blob": "21d0a93bfe7a05ba9624fe0a88c6f82e54aa6ac8",
+      "previous_expected_git_blob": "623ba1592db286cbf6f138279be16a5536ac9909",
+      "receiving_expected_git_blob": "623ba1592db286cbf6f138279be16a5536ac9909",
+      "published_066b_git_blob": "623ba1592db286cbf6f138279be16a5536ac9909",
       "status": "EXACT_RECEIVER_POSTIMAGE"
     },
     {
       "path": "m3/collections/src/test/java/jdk/m3/collections/M3PhysicalStateSnapshotTest.java",
-      "previous_expected_git_blob": "a0593519a059f5af572a78119764bcdab1ea7840",
-      "receiving_expected_git_blob": "a0593519a059f5af572a78119764bcdab1ea7840",
-      "published_066b_git_blob": "a0593519a059f5af572a78119764bcdab1ea7840",
+      "previous_expected_git_blob": "d8146199d8821c51380149cbdc128136106f4120",
+      "receiving_expected_git_blob": "d8146199d8821c51380149cbdc128136106f4120",
+      "published_066b_git_blob": "d8146199d8821c51380149cbdc128136106f4120",
       "status": "EXACT_RECEIVER_POSTIMAGE"
     }
   ],
@@ -79,8 +79,8 @@
     "mode": "100644",
     "before_git_blob": "ee83df7c18ef17fd87dfb2fda80eb7c309e93325",
     "before_sha256": "82c67c9c64d80a7b79d70a3c4a502f1d1a727923da8ab84152c4bf0098531538",
-    "after_git_blob": "affddf77c2e1dd377a42cd4b2a9761fe03bb3fff",
-    "after_sha256": "505f90b690292aaddda77f9f5e2bf251e710d6b6effd47824ba0c9bec7017141",
+    "after_git_blob": "4db08c14e72d2e317f2fdda3af6c21f28bd12796",
+    "after_sha256": "15775a28b87905eb005acc206dca54ca8c5f7b084877417273c62652848f1cce",
     "source_epoch": "066b7a15c29388f3444ab3cf0550ecf1df698c6d"
   },
   "validation": {

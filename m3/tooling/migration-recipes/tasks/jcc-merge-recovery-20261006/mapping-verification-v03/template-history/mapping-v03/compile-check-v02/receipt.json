@@ -16,7 +16,7 @@
     "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/java-template/compile-check-v02/src/com/m3/rewrite/backport/JccMergeMappingRecoveryV03Test.java"
   ],
   "exit_code": 0,
-  "template_sha256": "460fc9f2e2a3faa46cb16c23dcde4493ce87b3f556d5c9eabf224c79d4404728",
+  "template_sha256": "3406754b001ae27c329ff436764111e56bbe0c79e5af8389f7b87b4c726be133",
   "owner_sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
   "classpath": [
     {
@@ -63,5 +63,5 @@
   "scope": "Compile-only check of unresolved Java template and retained owner. No JUnit execution, source publication, test resource, or operational output was produced.",
   "receiving_input_epoch_sha256": "027e47d20c7fb854e028487ceef341c929877a6421dbb75f6433b5cd007fe5ee",
   "revision": 2,
-  "previous_receipt_sha256": "02fd2ca1753852544127c5661c520aaaa28694344b50093970aa1d953c5ecbe7"
+  "previous_receipt_sha256": "1b598d6f5917fb562998bc41cd0e785499fa7786cd8aeaf4930d945abb4d4923"
 }

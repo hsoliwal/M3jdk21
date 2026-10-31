@@ -935,9 +935,9 @@ index 0000000..641e397
 +    },
 +    {
 +      "path": "m3/docs/name-mapping.json",
-+      "current_sha256": "c23e6f63411b1d33a29f558c2a6370421a6f51ab99b6db99ac77ebc6e859812d",
-+      "current_git_blob": "80eaeba7e4e1d35cd9904a8a5c18e060abdd93f0",
-+      "original_preimage_sha256": "c23e6f63411b1d33a29f558c2a6370421a6f51ab99b6db99ac77ebc6e859812d",
++      "current_sha256": "a28f218198b30d1292d51836c8912d1f69229ef9bef40a4726a2808bcdcb4d46",
++      "current_git_blob": "986147e2df24ef25076d451c49782d8e7e354a11",
++      "original_preimage_sha256": "a28f218198b30d1292d51836c8912d1f69229ef9bef40a4726a2808bcdcb4d46",
 +      "delivered_sha256": "d63db548f89f25622399329148872225a438e9121cb3436d967bccd3bdff0c02",
 +      "delivered_git_blob": "beb622bdb79ad2b6192ff5bcb3f2de59050effdd",
 +      "candidate_sha256": "d63db548f89f25622399329148872225a438e9121cb3436d967bccd3bdff0c02",
@@ -945,7 +945,7 @@ index 0000000..641e397
 +      "recipe_chain": [
 +        {
 +          "dataset": "m3jdk21-runtime-control",
-+          "before": "c23e6f63411b1d33a29f558c2a6370421a6f51ab99b6db99ac77ebc6e859812d",
++          "before": "a28f218198b30d1292d51836c8912d1f69229ef9bef40a4726a2808bcdcb4d46",
 +          "after": "d63db548f89f25622399329148872225a438e9121cb3436d967bccd3bdff0c02",
 +          "manifest": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
 +          "template": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0005-name-mapping.json.txt"
@@ -1087,9 +1087,9 @@ index 0000000..641e397
 +    },
 +    {
 +      "path": "src/java.base/share/classes/java/util/Strings.java",
-+      "current_sha256": "cbadcbce521f89c53fbd92d9644402e7a72bb5e7e56e8943e8c29fbdc0fadb9d",
-+      "current_git_blob": "d4f0687c2145b94de67d29012cea5edf1f47badd",
-+      "original_preimage_sha256": "cbadcbce521f89c53fbd92d9644402e7a72bb5e7e56e8943e8c29fbdc0fadb9d",
++      "current_sha256": "7147989eba1d6def126049042d8fe4bc7780fbaa972ea932bed411961117b717",
++      "current_git_blob": "b7071f97d7b5b48d30335d344e60a1e2d35f8809",
++      "original_preimage_sha256": "7147989eba1d6def126049042d8fe4bc7780fbaa972ea932bed411961117b717",
 +      "delivered_sha256": "20071ef19a84a81f9bccd9a4260df58225442810aef2cbe0b1ec4980c8251087",
 +      "delivered_git_blob": "82ab932c10d8452f951c09cc1beaf79df77a53c4",
 +      "candidate_sha256": "20071ef19a84a81f9bccd9a4260df58225442810aef2cbe0b1ec4980c8251087",
@@ -1097,7 +1097,7 @@ index 0000000..641e397
 +      "recipe_chain": [
 +        {
 +          "dataset": "m3jdk21-strings-doclint",
-+          "before": "cbadcbce521f89c53fbd92d9644402e7a72bb5e7e56e8943e8c29fbdc0fadb9d",
++          "before": "7147989eba1d6def126049042d8fe4bc7780fbaa972ea932bed411961117b717",
 +          "after": "20071ef19a84a81f9bccd9a4260df58225442810aef2cbe0b1ec4980c8251087",
 +          "manifest": "datasets/m3jdk21-strings-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-strings-doclint/manifest.tsv",
 +          "template": "datasets/m3jdk21-strings-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-strings-doclint/0001-Strings.java.txt"

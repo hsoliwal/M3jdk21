@@ -10,7 +10,7 @@
   "qualified_target_baseline": "2717d156ad2aba73dfdfcfc6a58b59a82371798e",
   "historical_owner_baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
   "recipe": "com.synexia.rewrite.M3IntegratedUtilitiesRecipe",
-  "manifest_sha256": "c6fae9cffa1d83bbf1e657419f0c0bcd91c37084018be0c3a2dffd0a8301f7bb",
+  "manifest_sha256": "140b908730c40af4696b50eb034828b48f8b5a45d68107ecfab1846db9373f5a",
   "manifest_target_count": 490,
   "unchanged_keep_targets": 477,
   "actual_changed_results": 13,
@@ -24,7 +24,7 @@
     "target_commit": "2717d156ad2aba73dfdfcfc6a58b59a82371798e",
     "path": "m3/tooling/integrated-utilities/EXPORT_PROVENANCE.json",
     "canonical_commit": "4de06d536308121b64bbe714096f7cad6bc0b908",
-    "manifest_sha256": "57828683b68bfada969475578de29315df49896f146c40e70a40bdbaca514470",
+    "manifest_sha256": "22dfc6c19ac95fd88eba0ac9d12845fad84a10f9c01445237264b229c00f2495",
     "actual_changed_results": 33
   },
   "qualifications": {
@@ -43,7 +43,7 @@
     "parent_source_commit": "01b1e0c7a13c5c690dc35da64d461bcc557e83ca",
     "frozen_inventory_sha256": "0f9c05d3ab3cf48e20e37779d9f53d342bb7552758c29a1dda1ba655821abd33",
     "validator_sha256": "55e8183c58e4bf3608355e650e3be18609feab70f7baa75c935716b396d24900",
-    "manifest_sha256": "c6fae9cffa1d83bbf1e657419f0c0bcd91c37084018be0c3a2dffd0a8301f7bb",
+    "manifest_sha256": "140b908730c40af4696b50eb034828b48f8b5a45d68107ecfab1846db9373f5a",
     "authenticated_module_files": 214,
     "changed_source_paths": 40,
     "updated_existing_ledger_rows": 8,
@@ -118,8 +118,8 @@
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/catalogue/candidate-intake.json",
       "target_path": "m3/tooling/integrated-utilities/recipe/qualification/catalogue/candidate-intake.json",
-      "sha256": "7a5ffa266ab03918c287897019e117944fa95c53f6d8f13617afa02c1914937d",
-      "git_blob": "f4be8eb12c87caa08e8084976c9d38102db44804"
+      "sha256": "b4724e4fcc3fd08c8395c6ca95c91961e66c92db978d4328d6db0c22f38c6869",
+      "git_blob": "8123bc32bda48abc64c63abf9420d7a6cdf79890"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/catalogue/emitted-source-verification-1.json",
@@ -142,8 +142,8 @@
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/collections/combined-candidate-receiver.json",
       "target_path": "m3/tooling/integrated-utilities/recipe/qualification/collections/combined-candidate-receiver.json",
-      "sha256": "e17789173c806f65921720e17ac13fc5f46e203c13d5bc1f33bd7b2ac55dbf8f",
-      "git_blob": "36f4c738a44d62a66475d68ecba29c369131a35e"
+      "sha256": "c557305d6ce9dbc7a709aa7aa99954654083d62428a909cbcfc502299d26182a",
+      "git_blob": "a1849442c86029c1c4e1595fe9b0796ee8c18f9a"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/collections/current-raw-atoms.json",
@@ -166,14 +166,14 @@
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/collections/sorter-refinement-receiver.json",
       "target_path": "m3/tooling/integrated-utilities/recipe/qualification/collections/sorter-refinement-receiver.json",
-      "sha256": "0d334e13765b476d851f7b8585f9157dda4e4d3150eb460eec5eb13dcd0d0025",
-      "git_blob": "a1f7fbb4b42c8029c14572cfc4be5d96bf7f1660"
+      "sha256": "afa5b6c927910d003263726dd83898abb99e80011f408915b1cb1931d867c7c8",
+      "git_blob": "513306781afdb85c2cefdc25e670ccd9892cf93d"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/evidence-copy-inventory.json",
       "target_path": "m3/tooling/integrated-utilities/recipe/qualification/evidence-copy-inventory.json",
-      "sha256": "9be8b0c435dbae174fc3c931c898e7578403ece40fb6e10c3155aa9012c762cb",
-      "git_blob": "d4702a26e641663c638d9185061fcb95ddd573fa"
+      "sha256": "e8d4178ea63c4e1296526e44388fd07138ee3b29b4915b48659f99baf9a15a2d",
+      "git_blob": "cc106b6976dc90ac9986de7a3154ae0d2da9df3e"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/jtreg-existing/initial-refusal/cmdArgs.txt",
@@ -208,8 +208,8 @@
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/masks/M3CollectionMasksTest-compile.json",
       "target_path": "m3/tooling/integrated-utilities/recipe/qualification/masks/M3CollectionMasksTest-compile.json",
-      "sha256": "88a926569860c2e9fff4cedbe50ed23e7104be0335d1ff32007bba6bb17a8dbe",
-      "git_blob": "54c2d8fc161ec46af459953803bbd1c3317f400b"
+      "sha256": "40f43da62f5a4e3b1dd9fa50b7670ee8c11cfd1ca7835d97cf369dc914f48f4e",
+      "git_blob": "0c6aa352fea09e23e8c1029e576e9556433b0693"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/masks/M3CollectionViewsBenchmark-compile.json",
@@ -754,26 +754,26 @@
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/recipe/RECIPE_RESULTS-1.json",
       "target_path": "m3/tooling/integrated-utilities/recipe/qualification/recipe/RECIPE_RESULTS-1.json",
-      "sha256": "06e7da2b5446823072cc99dfd3758b2fff0d332d90831f4cbf562f8bfb88f260",
-      "git_blob": "60cd93f0cba8bec21b7bf11b476a096fc22412c8"
+      "sha256": "8650ca2f0c8542084d2e7b7cfe9b9053354e2de2c68e4eb02b23521269011630",
+      "git_blob": "b96d4d7a0abbd32bdfecc2090c192b513d01817d"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/recipe/collection-intake-1.json",
       "target_path": "m3/tooling/integrated-utilities/recipe/qualification/recipe/collection-intake-1.json",
-      "sha256": "21a4092821657f4ff727fab1b94cc53f7933e6ec21e22076394819a3a477d825",
-      "git_blob": "417b55213978858771d766ff541f323613371a23"
+      "sha256": "183da09418d2cc25f70227330145aab3ff433b7150ff30e07edbb1611637f653",
+      "git_blob": "bed4a8b9bd3ece3a8d9f5814a0c18a89edd1dbe4"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/recipe/manifest-1.tsv",
       "target_path": "m3/tooling/integrated-utilities/recipe/qualification/recipe/manifest-1.tsv",
-      "sha256": "57828683b68bfada969475578de29315df49896f146c40e70a40bdbaca514470",
-      "git_blob": "edff93e61df91dcc24effa2fbac7971b52bfcfe4"
+      "sha256": "22dfc6c19ac95fd88eba0ac9d12845fad84a10f9c01445237264b229c00f2495",
+      "git_blob": "9ce24c8be1b22d4aaa7fe222c5bab70615d456c2"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/recipe/mask-intake-1.json",
       "target_path": "m3/tooling/integrated-utilities/recipe/qualification/recipe/mask-intake-1.json",
-      "sha256": "2e34a333f7abfa0f19f312e4ceb7b3cd2fe6440d9c8d1081a3ac97e364bdf388",
-      "git_blob": "2f3b16834abe0d890a57757d5074623ca41c1ff1"
+      "sha256": "78233c42c282324ef4d3aeb392185c18d780f7005cfbef1af869c45286e84ec0",
+      "git_blob": "1405479b2820c0d39714bda2edaed1660f042eac"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/recipe/maven-production-sdk-run-1.log",
@@ -784,32 +784,32 @@
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/recipe/production-resource-assembly-1.json",
       "target_path": "m3/tooling/integrated-utilities/recipe/qualification/recipe/production-resource-assembly-1.json",
-      "sha256": "b9ec28ab6b3dff2e04cef29d22a7f449bc05878a38dcc9bd61d312d0237bd481",
-      "git_blob": "602db7de9891efb9f368add8bbf6683ee9608037"
+      "sha256": "d2f722d42e1548f82bf454b8ea68ffb6cc1f08f50bb5be439dd4a349694dbe06",
+      "git_blob": "0a0b96a5a3b9d25c13abe12f809f356a29f9ed98"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/recipe/production-sdk-receipt-1.json",
       "target_path": "m3/tooling/integrated-utilities/recipe/qualification/recipe/production-sdk-receipt-1.json",
-      "sha256": "338afcae3ff03690aafeb2c73594917e3d7fd2713e1412dfac75c69dc28cc4b4",
-      "git_blob": "b7750d2cc1ee4440a9a03c9a8387738e7a78938f"
+      "sha256": "79ae6033d3b853e85ab171bcd7d1fa89ba758b7e0d0fbebdd66305c11e9f5bd2",
+      "git_blob": "a12b1dbca7dfc40cb0bf90e6ccd968d705d64066"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/recipe/received-collections-receipt.json",
       "target_path": "m3/tooling/integrated-utilities/recipe/qualification/recipe/received-collections-receipt.json",
-      "sha256": "c58b1bd69f935353b3d3612fd85055a0534ecb864fdb7a6b08eb886e33b8bef8",
-      "git_blob": "52fd5b611382cff1f039d5624677d651ba1e027f"
+      "sha256": "907bb134b2d50827aceee1137961cbaf357750f7adf2ae8c3bc7680234236700",
+      "git_blob": "e6b18299f08cf27afffd11444358b6d3fb2da7d3"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/recipe/received-sdk-output-1.json",
       "target_path": "m3/tooling/integrated-utilities/recipe/qualification/recipe/received-sdk-output-1.json",
-      "sha256": "11c43db139fc1acd20d5eab1c30198acbabb1d78e1510420fd1e447bd60cc90e",
-      "git_blob": "0cd0a2872a4bc7292cb89723271e9f8765141236"
+      "sha256": "24403fc9e1684398939ead2302e883d4315723ca54caa84c41edbb9780fe4fa4",
+      "git_blob": "7ec7e2be25b47bab00d70a154c131cba11927716"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/recipe/received-utilities-receipt.json",
       "target_path": "m3/tooling/integrated-utilities/recipe/qualification/recipe/received-utilities-receipt.json",
-      "sha256": "101833357f01afc6438ad744831af392aa6eea89e91d88e1bc66d600b9bf425e",
-      "git_blob": "e6ea686d93c886208f6982f43e0422eaf431ed64"
+      "sha256": "067a01d3a2f4be0bf9cf5fc7fc585cd5295205a4b4a410c24a03c6ae43af8222",
+      "git_blob": "94549395a07ea5ccc26a7c7fcedb14eea0735526"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/sdk-fixture-receipt.json",
@@ -820,20 +820,20 @@
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/utilities/behavioral-atoms.raw.json",
       "target_path": "m3/tooling/integrated-utilities/recipe/qualification/utilities/behavioral-atoms.raw.json",
-      "sha256": "4769f0d38505931e0883412212e184d82059d10527ed0e5068624ef96bd92dc2",
-      "git_blob": "e955159c3305505dace1525c6831b157ad8f6fa2"
+      "sha256": "944261a2ac78605a4fa5d7a25bb6ed8e519621c2d8723169c3d690e0ea2ea779",
+      "git_blob": "6cab0ed8ec183df2e4839650521eb8f1b5ff9c6c"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/utilities/candidate-manifest.json",
       "target_path": "m3/tooling/integrated-utilities/recipe/qualification/utilities/candidate-manifest.json",
-      "sha256": "0ca1d7feadbc849fa3185c09f9b56334f9e4492cdf906bf44517614e981ef629",
-      "git_blob": "0faeef9bf744c5440247169323ec832a39799151"
+      "sha256": "614f5565abeaf1daee2c9a2f7ea958eec6d4f5db1f2ee99f92daf1b3af324ded",
+      "git_blob": "e1b55e4b73320ae77b63a21a95e048a88c3810d0"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/utilities/contract-results.json",
       "target_path": "m3/tooling/integrated-utilities/recipe/qualification/utilities/contract-results.json",
-      "sha256": "9d75b7be593de6691ad2e28debe37417ce8d635450fefb6a3d431a9281da7b13",
-      "git_blob": "d11216d15e4aa79f4ebceefa17fdf59a7b151290"
+      "sha256": "7c08b44f5cb891fb68449f3195809675d7ec59a33d16101aa92ff12b2b22cd93",
+      "git_blob": "4fcbe5666f425fbe571f578ae40b73c8bbb083b1"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/utilities/generic-sealer-selfcheck.json",
@@ -856,8 +856,8 @@
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/utilities/verifier-results.json",
       "target_path": "m3/tooling/integrated-utilities/recipe/qualification/utilities/verifier-results.json",
-      "sha256": "a9e38ec2fe4c6dd94e9f77f425de351b533ddcaa7d9e1a983103903bb616ec74",
-      "git_blob": "0fcd7eed1417e16b29661bb6c5a55c4175973a7c"
+      "sha256": "a26a4b563445ffe52b22474b0e50026e1b7725707f7b9b087bc7c1fb12614e0a",
+      "git_blob": "dfa95c313c536ab0581adffae0ad8546efdfaa27"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/src/main/java/com/synexia/rewrite/IntegratedUtilitiesRunner.java",
@@ -892,8 +892,8 @@
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/src/main/resources/com/synexia/rewrite/m3jdk21-integrated-utilities-20261018/manifest.tsv",
       "target_path": "m3/tooling/integrated-utilities/recipe/src/main/resources/jdk/internal/m3/rewrite/m3jdk21-integrated-utilities-20261018/manifest.tsv",
-      "sha256": "c6fae9cffa1d83bbf1e657419f0c0bcd91c37084018be0c3a2dffd0a8301f7bb",
-      "git_blob": "f88edcf786b136558553539c0a5f6c6ee08de454"
+      "sha256": "140b908730c40af4696b50eb034828b48f8b5a45d68107ecfab1846db9373f5a",
+      "git_blob": "7c57b7057ea3773dd94e94111b045fb0a4c151a7"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/src/main/resources/com/synexia/rewrite/m3jdk21-integrated-utilities-20261018/templates/m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv",
@@ -904,8 +904,8 @@
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/src/main/resources/com/synexia/rewrite/m3jdk21-integrated-utilities-20261018/templates/m3/compatibility/check_integrated_utility_coverage.py",
       "target_path": "m3/tooling/integrated-utilities/recipe/src/main/resources/jdk/internal/m3/rewrite/m3jdk21-integrated-utilities-20261018/templates/m3/compatibility/check_integrated_utility_coverage.py",
-      "sha256": "56bf749b02a394a5981fc80a5b8fc9cee52d7dbf637b3ac4b5244f69b347c483",
-      "git_blob": "d9929d059bdb7d262dd63441ceefaf2e652c45ab"
+      "sha256": "755331c282200ded3841e533de0f376cc05faec355f37f8de6ca9c1a0b504d12",
+      "git_blob": "4ff2a1f34a5cb8ca5c7655809d0d61af0e1e4ceb"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/src/main/resources/com/synexia/rewrite/m3jdk21-integrated-utilities-20261018/templates/m3/compatibility/test_integrated_utility_coverage.py",
@@ -916,26 +916,26 @@
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/src/main/resources/com/synexia/rewrite/m3jdk21-integrated-utilities-20261018/templates/m3/docs/INTEGRATED_UTILITY_COVERAGE_20261018.md",
       "target_path": "m3/tooling/integrated-utilities/recipe/src/main/resources/jdk/internal/m3/rewrite/m3jdk21-integrated-utilities-20261018/templates/m3/docs/INTEGRATED_UTILITY_COVERAGE_20261018.md",
-      "sha256": "dc8213d2136ec4a33c5f66e1e5ea4089f894df18cad07a1ba153811e17fc5db3",
-      "git_blob": "20754598cf87087b4f14ace26b92777f47223395"
+      "sha256": "8592c7633e799d65e3f49799826d95e2f889c0225ff5432d298e445765b75502",
+      "git_blob": "48687ec8057db31cf05e210e81c1095558af74dd"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/src/main/resources/com/synexia/rewrite/m3jdk21-integrated-utilities-20261018/templates/m3/docs/name-mapping.d/m3-integrated-utility-families-20261018.json",
       "target_path": "m3/tooling/integrated-utilities/recipe/src/main/resources/jdk/internal/m3/rewrite/m3jdk21-integrated-utilities-20261018/templates/m3/docs/name-mapping.d/m3-integrated-utility-families-20261018.json",
-      "sha256": "069db1662f60e22fa7a979436f3c7162dc5a0845930b8e5c79a679612b4a7a0a",
-      "git_blob": "2517b69bd3e420fc565e0b42c57026fe5004fef8"
+      "sha256": "82a00fe960e49e1aed8141bf1330e4d2fc86fe765c1153f6d980cd98dd965f33",
+      "git_blob": "3a92264c96a5a4b102fda35243d869b4394452e3"
     },
     {
-      "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/src/main/resources/com/synexia/rewrite/m3jdk21-integrated-utilities-20261018/templates/m3/docs/name-mapping.d/m3-jdk-module-owners-20261018.json",
-      "target_path": "m3/tooling/integrated-utilities/recipe/src/main/resources/jdk/internal/m3/rewrite/m3jdk21-integrated-utilities-20261018/templates/m3/docs/name-mapping.d/m3-jdk-module-owners-20261018.json",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/src/main/resources/com/synexia/rewrite/m3jdk21-integrated-utilities-20261018/templates/m3/docs/name-mapping.d/m3jdk-module-owners-20261018.json",
+      "target_path": "m3/tooling/integrated-utilities/recipe/src/main/resources/jdk/internal/m3/rewrite/m3jdk21-integrated-utilities-20261018/templates/m3/docs/name-mapping.d/m3jdk-module-owners-20261018.json",
       "sha256": "7ec04178398539f8f27459d0d754a294af275f5469fcfa51db6ce58d872d47b1",
       "git_blob": "c907772b9686a159019e452bea65097c60489180"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/src/main/resources/com/synexia/rewrite/m3jdk21-integrated-utilities-20261018/templates/m3/docs/name-mapping.json",
       "target_path": "m3/tooling/integrated-utilities/recipe/src/main/resources/jdk/internal/m3/rewrite/m3jdk21-integrated-utilities-20261018/templates/m3/docs/name-mapping.json",
-      "sha256": "b6d6bd6cb8a203f84897610ef963e175e6be6570550732b5820e208c691e9433",
-      "git_blob": "fc8fb25e412225a4aeb4091ac44ef54ec9e2d8c3"
+      "sha256": "91a4a7fdf119842f5bb9ae7d849ae06db65e2f6359aabc96e4e0c8dc1edabaa6",
+      "git_blob": "7613d3043cc81f260b6397cd60ad4a93b86fa446"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/src/main/resources/com/synexia/rewrite/m3jdk21-integrated-utilities-20261018/templates/m3/runtime-integration/integrated-collections/FOSS_REUSE_DECISION.json",
@@ -958,8 +958,8 @@
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/src/main/resources/com/synexia/rewrite/m3jdk21-integrated-utilities-20261018/templates/m3/runtime-integration/integrated-collections/candidate-receiver.json",
       "target_path": "m3/tooling/integrated-utilities/recipe/src/main/resources/jdk/internal/m3/rewrite/m3jdk21-integrated-utilities-20261018/templates/m3/runtime-integration/integrated-collections/candidate-receiver.json",
-      "sha256": "0d334e13765b476d851f7b8585f9157dda4e4d3150eb460eec5eb13dcd0d0025",
-      "git_blob": "a1f7fbb4b42c8029c14572cfc4be5d96bf7f1660"
+      "sha256": "afa5b6c927910d003263726dd83898abb99e80011f408915b1cb1931d867c7c8",
+      "git_blob": "513306781afdb85c2cefdc25e670ccd9892cf93d"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/src/main/resources/com/synexia/rewrite/m3jdk21-integrated-utilities-20261018/templates/m3/runtime-integration/integrated-collections/counterexamples.json",
@@ -988,14 +988,14 @@
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/src/main/resources/com/synexia/rewrite/m3jdk21-integrated-utilities-20261018/templates/m3/runtime-integration/integrated-utilities/behavioral-atoms.json",
       "target_path": "m3/tooling/integrated-utilities/recipe/src/main/resources/jdk/internal/m3/rewrite/m3jdk21-integrated-utilities-20261018/templates/m3/runtime-integration/integrated-utilities/behavioral-atoms.json",
-      "sha256": "a3015f30c325ed9e40e73f5416d48616e5411e32db64b0e813796fe5273ae0d8",
-      "git_blob": "006a6437933ffd7da828684da20a84e5cac3e15a"
+      "sha256": "399e736490260446a9562e4b479fb2c61532305125c1b7f2e2debe0044d1d2a3",
+      "git_blob": "d6684d60a9dba3c5fc16daff2599cd8e2b058241"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/src/main/resources/com/synexia/rewrite/m3jdk21-integrated-utilities-20261018/templates/m3/runtime-integration/integrated-utilities/contract-catalogue.json",
       "target_path": "m3/tooling/integrated-utilities/recipe/src/main/resources/jdk/internal/m3/rewrite/m3jdk21-integrated-utilities-20261018/templates/m3/runtime-integration/integrated-utilities/contract-catalogue.json",
-      "sha256": "8905efb6c8928d1d6834455532b3e65f6976d839a52e6ceb517940f4baf2e2bd",
-      "git_blob": "c95358803b8ee055862135f00fad09c4e72f33f8"
+      "sha256": "ad5b209d0320dd10c5eade3481636b80ef70ac1c706bd63aa46f05c92089720c",
+      "git_blob": "50f4bdc67bed3f2041e767aa3cb86641722ba431"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/src/main/resources/com/synexia/rewrite/m3jdk21-integrated-utilities-20261018/templates/m3/runtime-integration/integrated-utilities/verify.py",
@@ -1036,8 +1036,8 @@
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/src/main/resources/com/synexia/rewrite/m3jdk21-integrated-utilities-20261018/templates/src/java.base/share/classes/java/util/Strings.java",
       "target_path": "m3/tooling/integrated-utilities/recipe/src/main/resources/jdk/internal/m3/rewrite/m3jdk21-integrated-utilities-20261018/templates/src/java.base/share/classes/java/util/Strings.java",
-      "sha256": "b62532d9b0c77bc5edc07ea87daf58706e68ce4084ec228919d5cf0c28847270",
-      "git_blob": "77f38ff7e64bbb11efe38f28da90eaff3794f4ef"
+      "sha256": "34286346addedd6bcdc0058df970d159f714e73ce589a8eff86068a51c72a93b",
+      "git_blob": "c400aad525f0c02056d04343bae0e068d33f643e"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/src/main/resources/com/synexia/rewrite/m3jdk21-integrated-utilities-20261018/templates/src/java.base/share/classes/java/util/stream/Streams.java",
@@ -1072,8 +1072,8 @@
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/src/main/resources/com/synexia/rewrite/m3jdk21-integrated-utilities-20261018/templates/test/jdk/java/util/Collections/M3CollectionMasksTest.java",
       "target_path": "m3/tooling/integrated-utilities/recipe/src/main/resources/jdk/internal/m3/rewrite/m3jdk21-integrated-utilities-20261018/templates/test/jdk/java/util/Collections/M3CollectionMasksTest.java",
-      "sha256": "09283aa9f8e6f184f9f2e50f2967be6fc47654b591d3de0908751d84d622ce17",
-      "git_blob": "82b2d2575b7f154c917af5517540cb3e3ee57e36"
+      "sha256": "73433d7592b44c9e7d8268a860532cfc72a13f342698efb3fafea4262ede33f3",
+      "git_blob": "9b9c06bc752277ce5a1bb71afff6f0c4946ac854"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/src/main/resources/com/synexia/rewrite/m3jdk21-integrated-utilities-20261018/templates/test/jdk/java/util/Collections/M3CollectionViewsBenchmark.java",
@@ -1174,8 +1174,8 @@
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/catalogue/token-recovery/catalogue-token-recovery-intake.json",
       "target_path": "m3/tooling/integrated-utilities/recipe/qualification/catalogue/token-recovery/catalogue-token-recovery-intake.json",
-      "sha256": "dcf16fa11faadb3de3fc77831c0432e21db939b98f64a11cc91c0d46263d9036",
-      "git_blob": "87d19fff436f4b54384e922414be4e826ca0245e"
+      "sha256": "c83bdc2ffe4dde9c82f1b7d0483ca0b33913f38cf629151df2c6b4cc85a1775a",
+      "git_blob": "ab0486e33eecc5db919b0486bdbeb69b57760db8"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/catalogue/token-recovery/catalogue-token-recovery-tests-hydrated.log",
@@ -1198,26 +1198,26 @@
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/recipe/core-manifest-1-before-token-recovery.tsv",
       "target_path": "m3/tooling/integrated-utilities/recipe/qualification/recipe/core-manifest-1-before-token-recovery.tsv",
-      "sha256": "57828683b68bfada969475578de29315df49896f146c40e70a40bdbaca514470",
-      "git_blob": "edff93e61df91dcc24effa2fbac7971b52bfcfe4"
+      "sha256": "22dfc6c19ac95fd88eba0ac9d12845fad84a10f9c01445237264b229c00f2495",
+      "git_blob": "9ce24c8be1b22d4aaa7fe222c5bab70615d456c2"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/recipe/receive-token-results.py",
       "target_path": "m3/tooling/integrated-utilities/recipe/qualification/recipe/receive-token-results.py",
-      "sha256": "8dd823fe0ebe9ddaf5b840da92d97ba30313049dabe876fab3eb4645f2276606",
-      "git_blob": "a240365ec8b9722247f5cefa5b279f1047d95d51"
+      "sha256": "45605b64283eb2ce085666029d661927a07166a44e7b38d8130390d20132bdba",
+      "git_blob": "6c88f71b5a2318b7b497796b8e6580b8c0b2a182"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/recipe/token-received-results.json",
       "target_path": "m3/tooling/integrated-utilities/recipe/qualification/recipe/token-received-results.json",
-      "sha256": "00e545ed80e2942896b97baddcce1a4d02fa515359c9b3cc22c6f695ef38ac5b",
-      "git_blob": "ec43b80d111280bd5aa441b6713457d0441d6430"
+      "sha256": "a993867b8b68722e65a1a93466b0ab35d63ddd6e9ea01d441d0fadc37d01b56e",
+      "git_blob": "993354472521898877ddc36c64681530483de59e"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/recipe/token-received-sdk-check-receipt.json",
       "target_path": "m3/tooling/integrated-utilities/recipe/qualification/recipe/token-received-sdk-check-receipt.json",
-      "sha256": "796588ca54624e1b4644880c6c1181d9f9d70f1e8b755d1b63b18d9384cd464a",
-      "git_blob": "1e924a5b23545cfc189db7c8c32cea8b697d8f41"
+      "sha256": "23e0675b19115954f3ea6cb6f8e3eb76f3644bc0357754ff35b4862c2e71bd01",
+      "git_blob": "a8c8705e0c2b34804372eb9c40cffae2bb89e9f4"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/recipe/token-received-sdk-check.log",
@@ -1228,14 +1228,14 @@
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/recipe/token-recovery-RECIPE_RESULTS.json",
       "target_path": "m3/tooling/integrated-utilities/recipe/qualification/recipe/token-recovery-RECIPE_RESULTS.json",
-      "sha256": "4e858ee505faf6ae0f23b4041654c189a99c27a1eef49fa7ad86bae0750f3cab",
-      "git_blob": "cd2b215131977b27c623cf940a951d7db7a1fc80"
+      "sha256": "6b1a6d4ba835a3798a04a8dfbc359da6211d47d8490d6bc3f9364983bffb23bf",
+      "git_blob": "c1d93da0cb8e38247a68e63b4612a1af5b6da011"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/recipe/token-recovery-manifest.tsv",
       "target_path": "m3/tooling/integrated-utilities/recipe/qualification/recipe/token-recovery-manifest.tsv",
-      "sha256": "c6fae9cffa1d83bbf1e657419f0c0bcd91c37084018be0c3a2dffd0a8301f7bb",
-      "git_blob": "f88edcf786b136558553539c0a5f6c6ee08de454"
+      "sha256": "140b908730c40af4696b50eb034828b48f8b5a45d68107ecfab1846db9373f5a",
+      "git_blob": "7c57b7057ea3773dd94e94111b045fb0a4c151a7"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/recipe/token-recovery-maven-sdk.log",
@@ -1252,14 +1252,14 @@
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/recipe/token-recovery-resource-assembly.json",
       "target_path": "m3/tooling/integrated-utilities/recipe/qualification/recipe/token-recovery-resource-assembly.json",
-      "sha256": "95deac297e1a0bb991244187d9b03648770c95d481ad69eeb8317f2863452cae",
-      "git_blob": "f13bbaab4277a4a443c12c21367574c294f3e25e"
+      "sha256": "c2bad745d2ec5df1a0d3b610fc5597c08820a837e2bd740dd10567fc7ee18278",
+      "git_blob": "9bc764bf12089c4dc9ab74e0cdbaed0f76a3f00f"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/recipe/token-recovery-sdk-handoff.json",
       "target_path": "m3/tooling/integrated-utilities/recipe/qualification/recipe/token-recovery-sdk-handoff.json",
-      "sha256": "e5340e90c3124c2bae8367cbad3b63df038c6fbc206ef89fd3f568b0f4ca39d1",
-      "git_blob": "d44fd66c05322595db0019e324089ec5a6330e3c"
+      "sha256": "faa8070f990a70aead19e3d2121897b1b1de111e37401edec01b73233ff7d736",
+      "git_blob": "44c3b9d987c68ce997ce14102c8cc1dc2bd5a9d2"
     },
     {
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018/qualification/token-regex/behavioral-atoms.raw.json",

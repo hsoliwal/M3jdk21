@@ -2,9 +2,9 @@
   "schema": "M3_MAVEN4_COPIER_QUALIFICATION/1",
   "status": "PASS",
   "scope": "isolated exact product-source fixtures; no target repository writes",
-  "sdk_receipt_sha256": "2507ef44c70050f5b1ce5cde5c87e0f5fd793112f2f5d5fc4a80fb51857dd586",
+  "sdk_receipt_sha256": "b5f4998aa91aa97b9b2e87a2feff682130f6d093dc8c39073d774bb14da1b8ee",
   "script_sha256": "3f49d45ac2b5ab4e15441a06181dd4d81859ffac45b2816d6facd69b28eb194f",
-  "source_seals_sha256": "a076d8c7c82542897aef843b640cc88e762bbf088128c4ca34c262db4c4dba27",
+  "source_seals_sha256": "ea99837eeb463fbc09858de4249c77130b4ef8ddd0df3468386badab53c6fcc4",
   "target_paths": 7,
   "first_writes": 7,
   "replay_writes": 0,
@@ -21,7 +21,7 @@
       ],
       "exit_code": 0,
       "log_sha256": "96d6dabf9a1577625dbd7670da827a0ff58d8036fce20140ebdf9dbf1c668c93",
-      "receipt_sha256": "dd2d79666568321e32e0db0215174d5414a7f69e75942700c91d8ee1eec9cda6",
+      "receipt_sha256": "351693d4a6448ab65e7ad78cff2527eee04a134709f91631176f9d3891f0c2bd",
       "before": {
         ".github/workflows/m3-ast-real-providers-20261019.yml": "29154a6605ad4bd1ecac65a980a0f70bb9f88d61805295ad698ec965c9ac6d57",
         "m3/tooling/module-packs/parser/real-providers/CATALOGUE.csv": "6c3f7c2015abfde1e07006ae4175b4494da941ea10c20df25fb0cf32fbcf49e1",
@@ -46,7 +46,7 @@
       ],
       "exit_code": 0,
       "log_sha256": "1cbe601b356eabae85ba1c4a362f96a916d0c7338cff62d8d51c198e95ae04db",
-      "receipt_sha256": "c19f3ba449b67f470c9d7d2740e6e54beeff9ebcedfb1d8b82a11f24278e1534",
+      "receipt_sha256": "428fd89cde15254b0aaa1158b140a00f7f933211088c9f0bdd7f322584f53862",
       "before": {
         ".github/workflows/m3-ast-real-providers-20261019.yml": "29154a6605ad4bd1ecac65a980a0f70bb9f88d61805295ad698ec965c9ac6d57",
         "m3/tooling/module-packs/parser/real-providers/CATALOGUE.csv": "6c3f7c2015abfde1e07006ae4175b4494da941ea10c20df25fb0cf32fbcf49e1",
@@ -75,7 +75,7 @@
       ],
       "exit_code": 0,
       "log_sha256": "54385b94ffb37b578f44629cdceaeb1fe593c25f8f2e6f786d2307e56bdb0419",
-      "receipt_sha256": "7b6024955cfc9cc12f8c831fbb5bd3ec02944e1219a46ebf55ba604b6f3d896a",
+      "receipt_sha256": "7e2d4cc571fd16642d940bd07a2e4bdeec7c47c2b059bf4eb9ff63922c35439d",
       "before": {
         ".github/workflows/m3-ast-real-providers-20261019.yml": "fa803e9cba2a7882f8f7f3fe90071734d6ec660aa162929ee873f20a0f7ebcb0",
         "m3/tooling/module-packs/parser/real-providers/CATALOGUE.csv": "6c3f7c2015abfde1e07006ae4175b4494da941ea10c20df25fb0cf32fbcf49e1",

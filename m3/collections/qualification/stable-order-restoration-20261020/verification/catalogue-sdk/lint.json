@@ -1,5 +1,5 @@
 {
-  "engine_source_pins": "ce65e56c59468b5151b3de36e76bf424e5ab82c22a22d0821f99459d0bcd3d5c",
+  "engine_source_pins": "2bee3207d684c16b9b9c502ecb4966b76bd501ee8efbd926811d6620a3acfd8e",
   "status": "PASS",
   "targets": {
     "catalogue-candidates": {
@@ -12,7 +12,7 @@
     },
     "catalogue-pins": {
       "path": "m3/collections/algorithm-catalog/stable-order-restoration-20261020/SOURCE_PINS.json",
-      "sha256": "bb4b66ef9b6d5234cfc60624f52d65677728916e2c5d7e2494fff49fe77a77c5"
+      "sha256": "4371fbd746b3f584a625c09110897a5c5855c8c7f869a5edcd20d7f1d5fcf60b"
     },
     "catalogue-readme": {
       "path": "m3/collections/algorithm-catalog/stable-order-restoration-20261020/README.md",

@@ -37,12 +37,12 @@
     {
       "bytes": 41429,
       "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/extracted/rf0/project/proof.py",
-      "gitBlob": "da733e855ff4adc4b6ee58bf732d63bf32d5cf40",
+      "gitBlob": "a49c35243dd4c5ba2007ccf6b792d80a2e3bc0ac",
       "m3Path": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/runtime-checker/proof.py",
       "mode": "100644",
       "projectPath": "proof.py",
       "role": "qualified-project-flat",
-      "sha256": "61da42eb8abe8f4e950ce97b8ef81eb3f9d721cdf5635dbb445a37d8151d9ca5",
+      "sha256": "a363f997046102d50732d1069adb67edd9e064174fb6ee490900c1c94f260824",
       "synexiaPath": "m3-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/runtime-checker/proof.py"
     },
     {
@@ -70,12 +70,12 @@
     {
       "bytes": 577,
       "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/extracted/rf0/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/rf0-rfc/manifest.tsv",
-      "gitBlob": "46d25d71f47c9bd934585fcbc2544b1ab315af4e",
+      "gitBlob": "f7b856c07a761fa3583b7c270df755497c268be5",
       "m3Path": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/runtime-checker/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/rf0-rfc/manifest.tsv",
       "mode": "100644",
       "projectPath": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/rf0-rfc/manifest.tsv",
       "role": "qualified-project-flat",
-      "sha256": "8dbfae01daac2f4d8c7b3221db7558892824586021a67ec42f0d451c26a7268c",
+      "sha256": "8eb91537d63443d155d72d989fe640da85497764627e406054aa7a704b7d5869",
       "synexiaPath": "m3-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/runtime-checker/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/rf0-rfc/manifest.tsv"
     },
     {
@@ -103,12 +103,12 @@
     {
       "bytes": 79672,
       "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/extracted/rf0/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/rf0-rfc/target-3.txt",
-      "gitBlob": "466a025c922f4fd47bab62baa57addb8f83ee793",
+      "gitBlob": "5c3f8836c697f2b03b112140a2b190e6a1cba33b",
       "m3Path": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/runtime-checker/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/rf0-rfc/target-3.txt",
       "mode": "100644",
       "projectPath": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/rf0-rfc/target-3.txt",
       "role": "qualified-project-flat",
-      "sha256": "caa3af6b19162c603a9d29ccb92894c01b50f064f7c75846c9d0afbb8c117e70",
+      "sha256": "e90a850d9a8946ad3c741b99a81bc823a65415110ec32aabffd25da15f530e59",
       "synexiaPath": "m3-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/runtime-checker/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/rf0-rfc/target-3.txt"
     },
     {
@@ -125,12 +125,12 @@
     {
       "bytes": 2596,
       "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/extracted/rf0/project/src/main/resources/qualification.json",
-      "gitBlob": "7cee84f1b279e6ff4d14b2985d9d08a7921e30ac",
+      "gitBlob": "931a923a6cabcda2346ab7200816d4d7ca5a2a4d",
       "m3Path": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/runtime-checker/src/main/resources/qualification.json",
       "mode": "100644",
       "projectPath": "src/main/resources/qualification.json",
       "role": "qualified-project-flat",
-      "sha256": "7abf378a793ce8c4c551b544e188f5e4b7090d134ab60641e69a57c1c747722a",
+      "sha256": "204ff7c65392e57ccdede1cb50b18b67899fa77a4fd3e84a23f9c61baa451f53",
       "synexiaPath": "m3-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/runtime-checker/src/main/resources/qualification.json"
     },
     {
@@ -169,12 +169,12 @@
     {
       "bytes": 79659,
       "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/extracted/rf0/project/src/test/resources/before/m3/tooling/image-gates/current-c0.json",
-      "gitBlob": "1152a696e4166fc4ed875b7f9752d109fab5e7a2",
+      "gitBlob": "6f6c7a53565d770b385ad00dd865f557a73b51c4",
       "m3Path": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/runtime-checker/src/test/resources/before/m3/tooling/image-gates/current-c0.json",
       "mode": "100644",
       "projectPath": "src/test/resources/before/m3/tooling/image-gates/current-c0.json",
       "role": "qualified-project-flat",
-      "sha256": "6f5620d8b30b4abeb09dc5ecde928ccc1943a4edf1c610a36330e09ecdb96e6f",
+      "sha256": "597b99f17221abf7b7301cf82a96c113f7fc9e9fd26a24145a9e6e973198be30",
       "synexiaPath": "m3-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/runtime-checker/src/test/resources/before/m3/tooling/image-gates/current-c0.json"
     }
   ],
@@ -195,7 +195,7 @@
   "readback": {
     "bytes": 1399571,
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/READBACK.json",
-    "sha256": "7b505aa32bb740fb7d87e690fed9b5090cdb560e9846614ddbd1aa3765bcfe5d"
+    "sha256": "c9215d6a5b8e5c10354fc42a1463d3a0cedbcad3937f4558428c0bcdcf7b6ecc"
   },
   "schema": "m3.rf0.task-mapping/1"
 }

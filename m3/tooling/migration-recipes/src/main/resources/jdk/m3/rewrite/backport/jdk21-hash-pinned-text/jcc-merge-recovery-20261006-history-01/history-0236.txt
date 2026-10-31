@@ -8671,9 +8671,9 @@
       },
       "raw_fixture_custody_input": {
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/CUSTODY_INPUT.json",
-        "sha256": "2b2f294b13298da20e8d8cbe85581e89265fbe8d1c355a384dba308e4a8f9710"
+        "sha256": "384ce843f2e4545ad1c40d7ee58abbc471b5a6d1cbed89bea82dcff0479ce6a5"
       },
-      "verification_script_sha256": "6b8ce688a81b46c20e567bd719104bac6a4cf8578a42904dbe494bca2305e443",
+      "verification_script_sha256": "904a2105f04a12454a2d97c13a5bef6764e18ae28a2fe680e06ca0e6e14a6e93",
       "reviewed_raw_custody_helper_sha256": "203f44729f860620949ec9e6aa7c5f2c7d766de2e406548ceb6797797bfdcc33",
       "qualification": "Publication custody only; source execution and receiving acceptance require their separately scoped receipts.",
       "scope": "Verified source publication custody; six mandatory direct body comparisons, separately recorded additional designated-owner reads, and exactly two explicit invalid-UTF-8 Git-identity obligations. This is not universal remote raw-byte or remote SHA256 readback."
@@ -9458,8 +9458,8 @@
   "publication_receipt": {
     "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/PUBLICATION_CUSTODY.json",
     "bytes": 1099619,
-    "sha256": "bf2d3f29e903f12c201febb4c82083a32758095fdd8fbacbcf25a42e532f44fd",
-    "git_blob_sha1": "067f5f2b6b53343f68f3bf197069e05ae5b9fe3f"
+    "sha256": "91c8df6ab07e3590fecf20de65e2e65943c4b70aebb9f5133901ae6362506c35",
+    "git_blob_sha1": "6389a4301478fd4df74e146f1ae4b8942f675e20"
   },
   "execution_review_receipt": {
     "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/E4_EXECUTION_INPUT.json",
@@ -9471,8 +9471,8 @@
     {
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/BASE_TREE_MODEL.json",
       "bytes": 1372743,
-      "sha256": "26378280f0305c59a7529fed18de4dd938e935840260c9667fb55de4c6f6fd8a",
-      "git_blob_sha1": "06235641c8ca32ba686fd83bdc30f4c0f488fac7",
+      "sha256": "5a6c06886a4241745d38b6b463a88ace34236a1b0c557ffae596b05d048e1b82",
+      "git_blob_sha1": "97fc934901165fe98f8e2c6c58cf60bc894025fe",
       "scope": "Retained content-addressed base tree bodies; exact objects rehashed."
     },
     {

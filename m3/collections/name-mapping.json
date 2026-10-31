@@ -981,7 +981,7 @@
     "schema": "M3_COLLECTION_EXACT_SOURCE_REFINEMENT_V1",
     "receiver_baseline": "677437be295b23f7ccf7409be287008944d0e8b0",
     "successor_receipt": "qualification/tools4j-unix-source-successor-20261019.tsv",
-    "successor_receipt_sha256": "2e5b2593fef1f70ccf5b8a4d8b95a604ea85025b6ab8e3f1f4b3fcc234923704",
+    "successor_receipt_sha256": "9a1c2d3d93fa07dda84bd5b4e464204f4432448387c9359ac5c149d30cb38ec9",
     "receipt_columns": [
       "path",
       "inherited_manifest_sha256",

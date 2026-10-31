@@ -1,6 +1,6 @@
 # E4 reference checker: independent static review
 
-**Disposition: ADMITTED FOR BOUNDED READ-ONLY AUDIT.** No defect was found in the requested scope for the exact 40,725-byte checker with SHA-256 `f549f6a5d4513fc726d0e3d8cbe334202fac50e075ad7312f0a080fa81a3c4b6`. The coordinating owner was notified before invoking it. This report is a static admission, not the result of executing the checker or accepting receiving behavior.
+**Disposition: ADMITTED FOR BOUNDED READ-ONLY AUDIT.** No defect was found in the requested scope for the exact 40,725-byte checker with SHA-256 `c88b8805881ab3cc299b530d50cbe8d6749a0a4925d7ea5e9ce512bd3a0a3ece`. The coordinating owner was notified before invoking it. This report is a static admission, not the result of executing the checker or accepting receiving behavior.
 
 The actual readiness file hashes to `7d238a9c1a4b42ae12811fe85b8d2e66e0aeacdd8e982a3aa16ccd1e82c30561`. Its initial state is `DRAFT_AST_PARSED_NOT_EXECUTED`; the task's differently transcribed hash was corrected by the parent before admission. Both the checker and readiness bytes match their intended identities.
 

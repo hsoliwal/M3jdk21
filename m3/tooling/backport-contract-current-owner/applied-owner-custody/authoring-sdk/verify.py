@@ -23,9 +23,9 @@ TARGET_PATHS = CHANGE_PATHS + KEEP_PATHS
 OWNER_BEFORE_GIT = {
     "m3/tooling/backport-contract-current-owner/qualify.py": "13acb84b735ec47304807108f4292509e4dc1b7f",
     "m3/tooling/backport-contract-current-owner/README.md": "7b5a280796392c828899a98c384f6f543b37d32f",
-    "m3/tooling/backport-contract-current-owner/runtime/INPUTS.json": "bd84e66ac6bae7ab0277dde8615435a91756c3cb",
+    "m3/tooling/backport-contract-current-owner/runtime/INPUTS.json": "5e3967517857e79249f3e1cc28a707c9f79b8996",
     "m3/tooling/backport-contract-current-owner/runtime/qualify.py": "4c64fbf724649bd9527e95b6456bcda842ec8086",
-    "m3/tooling/backport-contract-current-owner/runtime/README.md": "65a38fb73e719c40dc8d50c27fa0815196e8bdd6",
+    "m3/tooling/backport-contract-current-owner/runtime/README.md": "0dfce38a83bfcc3abee720bf38d07e79d056abfb",
     ".github/workflows/m3-backport-contract-current-owner.yml": "5ab3cba8a55c95095e3db09b8c959938aeab91e1",
     "m3/tooling/backport-contract-current-owner/sdk/pins.json": "f205864458b8dfa91445a26643bec1ab7b2e1859",
     "m3/tooling/backport-contract-current-owner/sdk/verify.py": "8ad669b3954a0958820f6962de2e55f6b1988bc2"
@@ -33,9 +33,9 @@ OWNER_BEFORE_GIT = {
 OWNER_AFTER_GIT = {
     "m3/tooling/backport-contract-current-owner/qualify.py": "735f880afd81739cd21313302de947d49626d202",
     "m3/tooling/backport-contract-current-owner/README.md": "0be188a28a3575c7af4bb574e7e741a12101d083",
-    "m3/tooling/backport-contract-current-owner/runtime/INPUTS.json": "9cb800ba62f60e8febbbb96be91282640c799c7d",
+    "m3/tooling/backport-contract-current-owner/runtime/INPUTS.json": "8ac731367e254e1ed9b49813f9d109d3f06eb5e0",
     "m3/tooling/backport-contract-current-owner/runtime/qualify.py": "a3f8492416876547eefed9c5a2d8bc5583ddd8ec",
-    "m3/tooling/backport-contract-current-owner/runtime/README.md": "c6cd72c3c9075c7c8325411363b058b77ca41b2a",
+    "m3/tooling/backport-contract-current-owner/runtime/README.md": "67d987cbad0af4aa3de0ed17a56dc69b2a1afc7b",
     ".github/workflows/m3-backport-contract-current-owner.yml": "b992bdbfb5187f868fbf3388d01edb7d9e9d905c",
     "m3/tooling/backport-contract-current-owner/sdk/pins.json": "f205864458b8dfa91445a26643bec1ab7b2e1859",
     "m3/tooling/backport-contract-current-owner/sdk/verify.py": "8ad669b3954a0958820f6962de2e55f6b1988bc2"

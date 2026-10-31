@@ -21,22 +21,22 @@ METHODS = ["bothPartialStatesRoundTripAndReachFixedPointsInBothOrders",
 SUITES = {SUITE: METHODS}
 OWNER_GIT = {
     "src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java": "30359b57b7b553e78355d3672119c685051ec1da",
-    "src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java": "780c7887aaa6b0892a76f4eee1dcb17086a60289",
-    "src/java.base/share/native/libjava/M3StateRelation.c": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
-    "src/java.base/share/native/libjava/m3_state_relation.h": "18a02e228129827da486edc5b316790af6135310",
+    "src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java": "d70a152bdedc380ed8b28861ea94ef4c2adbea90",
+    "src/java.base/share/native/libjava/M3StateRelation.c": "89b3127f0f262de3e00ba28a01079a659013dce2",
+    "src/java.base/share/native/libjava/m3_state_relation.h": "0e0c70e60b2cee61c3df31982a26f4251955cb61",
     "m3/compatibility/regex-relations-20261014/M3RelationPortProof.java": "e9a6beee8916cf97d5d4aac2383e7ac2fa8843e0"
 }
 C_OWNER = "src/java.base/share/native/libjava/M3StateRelation.c"
-C_BEFORE_SHA = "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16"
-C_AFTER_GIT = "106b95061f1adaca160e8fece2ad083f07f0b51b"
-C_AFTER_SHA = "4c453d51223c3223f07fb88b39e1c1b6ed9891de8157d32a63990a9a4488ece9"
+C_BEFORE_SHA = "0df1989292b23b1f185f222db61ad55d5e38b30d5b758436ca9d62b8de277bbd"
+C_AFTER_GIT = "816734640bdce057d1ab787a3a555cd50cf8a43e"
+C_AFTER_SHA = "9cf05ae88cdde947d5c62001e2025a64a094531bbd727f51deb2e62b57636c60"
 TARGET_PATHS = list(OWNER_GIT)
 KEEP_PATHS = [name for name in TARGET_PATHS if name != C_OWNER]
 HISTORICAL = "src/test/resources/jdk/internal/m3/rewrite/state-relation-sparse-c11-20261020/historical/M3StateRelation.c.txt"
-HISTORICAL_GIT = "5b30f71d8ed878b3199225b9512b75a090ff896c"
+HISTORICAL_GIT = "e6a10286f64052cb948de1dbcc43aaaa1d33db1e"
 REJECTED = "src/test/resources/jdk/internal/m3/rewrite/state-relation-sparse-c11-20261020/rejected/M3StateRelation.c.txt"
-REJECTED_GIT = "abb751e6056e34f25d0f09660d575f362610359e"
-REJECTED_SHA = "5d40fe7c65d54e26c6964313186624675592703ea6e2e1cb2886840b2f15347e"
+REJECTED_GIT = "03a2273ec4a8521c78bfb746aed71a873d65182e"
+REJECTED_SHA = "60e3c5bd941615337c4aaf540179fcd39f25562eb90a96655384eb80d67fd931"
 RECEIVER_OUTPUTS: dict[str, str] = {}
 RECEIVER_CUSTODY: dict[str, str] = {}
 DESCRIPTOR = "src/main/resources/META-INF/rewrite/state-relation-sparse-c11-20261020.yml"

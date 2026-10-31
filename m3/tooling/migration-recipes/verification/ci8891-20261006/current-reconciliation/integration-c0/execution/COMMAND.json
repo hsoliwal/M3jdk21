@@ -61,7 +61,7 @@
   "spec": {
     "bytes": 1054690,
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/PACKAGE-SPEC.json",
-    "sha256": "f4e14932a9b66d8d3f4a1d3e122f048cd8809446a07c0d8d1af3810364df8234"
+    "sha256": "89617ef4b2048025987f397c8bc821c0a6fbfedb1912d5428019fdf3240d2d47"
   },
   "started": "2026-10-06T06:48:26.722212+00:00",
   "timeoutSecondsEach": 900

@@ -10,8 +10,8 @@ Canonical recipe owner: [hsoliwal/com.synexia PR #13224](https://github.com/hsol
 | `M3LongRankIndex.java` | `716189db70586d221f63dc647d692951d77094cf` | `6a8cf91eb78b6e77fb53b73d55cea0a214a33dd7` |
 | `m3_long_rank_batch_jni.c` | `25a228e37629490a18fe395f4c51df4f76296701` | `fab1b17dc529b81a401dd1d3d77fcb8035dc33c7` |
 | `M3LongRunStatisticsContract.java` | ABSENT | `fcca9bc86c908767057c3baa740aad5a2c762063` |
-| `M3LongRunStatisticsTest.java` | ABSENT | `09b24e2f4c8c763c4d475f62c8d95205190ff2a9` |
-| `.github/workflows/m3-rank-run-jni-java21.yml` | ABSENT | `ae9ee6d21606602fb1c000382072707965227205` |
+| `M3LongRunStatisticsTest.java` | ABSENT | `a22c6601e25972699927c2f5fe65635f6c3e43a2` |
+| `.github/workflows/m3-rank-run-jni-java21.yml` | ABSENT | `c494cbb1001cc521ecd0c9a11f6ef58e91116fcc` |
 
 Synexia owns named `Jdk21LongRunStatisticsJava20261026` (4 Java targets) and `Jdk21LongRunStatisticsNative20261026` (1 original JNI C17 owner plus source-sealed workflow). Their manifests pin original+post UTF-8 SHA-256, prevent missing/stale owners and enforce second-pass fixed-point; original Java sources are parsed through OpenRewrite Java and native C/workflow through OpenRewrite Text.
 

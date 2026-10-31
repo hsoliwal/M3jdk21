@@ -15,8 +15,8 @@
   "targets": [
     {
       "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java",
-      "expected_before_sha256": "d43e7096433b24372c4ced54143d321554d6db234e86224d6d6d29946d94cb61",
-      "parent_blob": "2ce544751b8783f76d66aaab9e9fecbde01fb6ed",
+      "expected_before_sha256": "98da3772abcda6def4a06d6eb90a6456972b1fd71c309fe00b791c5bc157e715",
+      "parent_blob": "6ee27f9c4b77733e798f79049790f0b5fdd0d3a9",
       "disposition": "MODIFY",
       "matched": true
     },
@@ -106,8 +106,8 @@
     },
     {
       "path": "m3/native/include/m3_jni_core.h",
-      "expected_before_sha256": "0df5c1391c159a036620d0b03a1c67898be8351da5a173775ffd57e15d14933e",
-      "parent_blob": "a1bd5aab67eaed2db6fdc3851d85312f24bfc63d",
+      "expected_before_sha256": "e479955a398c6e1db3b626ef87f5023fa490b4971bbcf8fee9b295c3dac06a34",
+      "parent_blob": "5a3d6adde420d5c9d33279376384cd4a74825a02",
       "disposition": "KEEP",
       "matched": true
     },

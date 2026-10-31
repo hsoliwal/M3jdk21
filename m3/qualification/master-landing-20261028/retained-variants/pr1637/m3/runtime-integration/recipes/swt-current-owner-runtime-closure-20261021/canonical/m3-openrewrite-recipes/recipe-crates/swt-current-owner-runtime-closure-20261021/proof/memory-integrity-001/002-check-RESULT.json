@@ -9,13 +9,13 @@
     "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/tooling/target/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
     "jdk.internal.m3.rewrite.memory.M3RecoveryMemory",
     "check",
-    "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/events/b4d03492e4f6853d6bae972e74d96b91b2251691a11fcdae32841e691e49b793.json",
+    "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/events/d686c3a1da8b46543cf1c5ff2142b14f99d3810eb7442a2372035659d798ab21.json",
     "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021",
     "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/events"
   ],
   "exit_code": 0,
   "log": {
     "path": "proof/memory-integrity-001/002-check.log",
-    "sha256": "ffffa90d4a1735d9d8e5314fb5a01f6f036b6ef37f0d28006b3746a337154db4"
+    "sha256": "190b5420a4dfd8a6a2a5a51686bef9b1d71dca7296024ee0db32e183f238f6f6"
   }
 }

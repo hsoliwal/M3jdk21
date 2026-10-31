@@ -4,8 +4,8 @@
   "files": [
     {
       "path": ".github/workflows/m3-collections.yml",
-      "before_sha256": "20bbf390cad7ed2bdb8e024298cd7b32d311b6bf7c835742ee766bb53c5d0fda",
-      "after_sha256": "0848d1a673a908854bb885908d82eaadb23fa710c75ed3e6bd912516a21eb887"
+      "before_sha256": "8d52122c6bd7bc4f52b0606704188a7040fc853c2dbefe6756b7b2a1792da504",
+      "after_sha256": "871d309a9e061205c1c6d3deff63568dfeac69155b89fc906ce32a482e8ea947"
     },
     {
       "path": "m3/collections/algorithm-catalog/masked-sort-fusion-20261021.tsv",
@@ -129,8 +129,8 @@
     },
     {
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3CollectionSdkCatalog.java",
-      "before_sha256": "ebbe8b81c2bc93d7b9c8c191b309c543728214b638be97fa89e9de6d826aef83",
-      "after_sha256": "ebbe8b81c2bc93d7b9c8c191b309c543728214b638be97fa89e9de6d826aef83"
+      "before_sha256": "a5e9298f47f26c015a6caf8f0e6ef5bdca20be2a0d48d0edb44141d6f0d1bd3c",
+      "after_sha256": "a5e9298f47f26c015a6caf8f0e6ef5bdca20be2a0d48d0edb44141d6f0d1bd3c"
     },
     {
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3CollectionSdkNames.java",
@@ -2394,13 +2394,13 @@
     },
     {
       "path": "m3/collections/src/test/java/jdk/m3/collections/M3PhysicalStateSnapshotProof.java",
-      "before_sha256": "119bb5d6b533fe93e5fc1b0409b36bb20fe6dd7928d4a6bebe2bc9b1f786f432",
-      "after_sha256": "119bb5d6b533fe93e5fc1b0409b36bb20fe6dd7928d4a6bebe2bc9b1f786f432"
+      "before_sha256": "b65f76e2b046ba2ed1c5fb5b5ec6bc05c88244fb01cd025d408b5cbee18ea5a8",
+      "after_sha256": "b65f76e2b046ba2ed1c5fb5b5ec6bc05c88244fb01cd025d408b5cbee18ea5a8"
     },
     {
       "path": "m3/collections/src/test/java/jdk/m3/collections/M3PhysicalStateSnapshotTest.java",
-      "before_sha256": "4bbc085d9ad39a53958427f55f15a19ccdf7641efdc0e89f5ccc279fb2ff0c7b",
-      "after_sha256": "4bbc085d9ad39a53958427f55f15a19ccdf7641efdc0e89f5ccc279fb2ff0c7b"
+      "before_sha256": "6fb3534f3fd0602dcf0162fbe59b9d637cefc3434c70da44207d32a1a1089d29",
+      "after_sha256": "6fb3534f3fd0602dcf0162fbe59b9d637cefc3434c70da44207d32a1a1089d29"
     },
     {
       "path": "m3/collections/src/test/java/jdk/m3/collections/M3PlaneGeometryTest.java",
@@ -2474,8 +2474,8 @@
     },
     {
       "path": "m3/collections/src/test/java/jdk/m3/collections/M3ResidencyStateMaskTest.java",
-      "before_sha256": "ee9111c75391f9e18a841156555c98516aeb806437b6c1c1e1dece3cb50a03f1",
-      "after_sha256": "ee9111c75391f9e18a841156555c98516aeb806437b6c1c1e1dece3cb50a03f1"
+      "before_sha256": "d36207bd03c3b4e0fd0bcf0e0a435c8112abee0268bac58315a27ed7733db86c",
+      "after_sha256": "d36207bd03c3b4e0fd0bcf0e0a435c8112abee0268bac58315a27ed7733db86c"
     },
     {
       "path": "m3/collections/src/test/java/jdk/m3/collections/M3RowTreeTest.java",

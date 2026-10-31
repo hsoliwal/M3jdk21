@@ -96,13 +96,13 @@
       },
       {
         "path": "m3/docs/name-mapping.json",
-        "sha256": "fa591a72460cfa3f17ff028d8858e9ded8d94a91bf911f148ddd9fde41817b62",
-        "git_blob": "1c4ba38dfe11a57fa5c86e6e64fa57d300c62b40"
+        "sha256": "12cd9c80b1adb64c89e6db8131dd65b73c7a11dec4c1db68cf022056fec6a464",
+        "git_blob": "de0b10652d6a7488fc0d67add06fa543f98fb124"
       },
       {
         "path": "m3/tooling/name-contract/name-plan.json",
-        "sha256": "924652336ef95c9c50ac0eb225ecdb5674999c13c76649a0b969f8fdf2638368",
-        "git_blob": "e83a61d2d06fdc29a0cd0d514914059e2abb4004"
+        "sha256": "dc20cd76a4a51bfa75ac6ae11b6b7f20c918039649140f475a93f22f95e46a39",
+        "git_blob": "5140dca5c62a18782f45d18ff8a9beb4c021d403"
       }
     ]
   },

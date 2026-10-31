@@ -14,7 +14,7 @@
       },
       "after": {
         "resource": "after-01.txt",
-        "sha256": "b87b6c729ba17ec1ac404fea2176611ee9be046cc97b26d8ef44aec9d85f1c8a"
+        "sha256": "52178015a89e5f1c08ab280725e5fb45a3617fdc9035fdecf793cd3c2b503858"
       }
     },
     {
@@ -47,7 +47,7 @@
       },
       "after": {
         "resource": "after-02.txt",
-        "sha256": "7d26f0ac825b78889cb6963ef8bcf038ad83c5c6fc191814c92025815c84b2cc"
+        "sha256": "283d44e6e66405165706447446ed5242104ac1e79d33a6ceafc0cbe1a128de09"
       }
     }
   ],

@@ -24,11 +24,11 @@ if [[ "$(git -C "$root" hash-object "$root/src/java.base/share/classes/jdk/inter
   echo 'HOLD: JDK-owned Java mask receiver drift' >&2
   exit 1
 fi
-if [[ "$(git -C "$root" hash-object "$root/src/java.base/share/native/libjava/M3IndexMaskWindow.c")" != 59b2130ca8e897e75e24afbd45e8fd885c55b0e9 ]]; then
+if [[ "$(git -C "$root" hash-object "$root/src/java.base/share/native/libjava/M3IndexMaskWindow.c")" != d8cc9be4ba6cbef3f1106923390aaf1949c2e4fb ]]; then
   echo 'HOLD: JDK-owned native mask receiver drift' >&2
   exit 1
 fi
-if [[ "$(git -C "$root" hash-object "$root/test/jdk/jdk/internal/m3/M3MaskCollectionViewIntegrationTest.java")" != a5a7d4508513b829d1ac14b9562aa108998a0e3f ]]; then
+if [[ "$(git -C "$root" hash-object "$root/test/jdk/jdk/internal/m3/M3MaskCollectionViewIntegrationTest.java")" != 56634718dcc1e843ea65bd262a2b95dcfa627110 ]]; then
   echo 'HOLD: cross-contract oracle source drift' >&2
   exit 1
 fi

@@ -76,7 +76,7 @@
     {
       "bytes": 4669388,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/SOURCE-CLOSURE.json",
-      "sha256": "ed049408b2ba549de7f453aebc5c91f066fe0332a6a95196cd3797fcaa51c3ad"
+      "sha256": "ec0b69741e4b9247d5740d4fb0a160368c9378a480c09c19a514534fa0426678"
     },
     {
       "bytes": 4400,
@@ -96,7 +96,7 @@
     {
       "bytes": 66573,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/project/proof.py",
-      "sha256": "adbd5eb72149e46fd272c932d5ac95124891ca1b68851233d02b5dd6716c7d31"
+      "sha256": "61ea01edaba87cd833c853766260ea64d1e38bcff6aa02bf059673e881c81b7a"
     },
     {
       "bytes": 299,
@@ -691,12 +691,12 @@
     {
       "bytes": 1316,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cgo/manifest.tsv",
-      "sha256": "c139fb1babb257dbb8f1aa5b5372a4bd5806ba57f7ac425c1a5bd3897c2f91f7"
+      "sha256": "a56abd2fdd313b9eb057087a4cdf6653dd8a2141a781b342fdc77b8e3811a2da"
     },
     {
       "bytes": 5159,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cgo/target-1.txt",
-      "sha256": "4c86fb6ddc117ed481309811887df97233803c708dd19b599516e229cddf4178"
+      "sha256": "885e4e4a5f530153c1af2e592d653273efff1775b4e35a0c4899f4c5c7d9b35e"
     },
     {
       "bytes": 344,
@@ -721,17 +721,17 @@
     {
       "bytes": 2247,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cgo/target-6.txt",
-      "sha256": "7d55178b0bf55e919bea24da21ab07582c3ec2c503662e0a6b20082ae31350e5"
+      "sha256": "9c5d9d7ceff0328f6db0bf44aa3c439b69eb3d8cf018929d98961e6cb96041b2"
     },
     {
       "bytes": 374,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cib/manifest.tsv",
-      "sha256": "bb094412707f0b0fc2b3f8e6f3ffd4bd2d6c64ba3f6dde999897ae4b527fd1c8"
+      "sha256": "550d220b04c80b90bfd4980b1737dabe0145f07501eff73601e045be9b8a68e2"
     },
     {
       "bytes": 15862,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cib/target-1.txt",
-      "sha256": "dbfb5f780ed8682fa89e0429da00404db089c8c6eee246a8d7359579d2fe7392"
+      "sha256": "9218cb292ce2c9c0d9619cb4a2c984ee31893df07990ce69a5e74fd445ec70ca"
     },
     {
       "bytes": 6325,
@@ -796,7 +796,7 @@
     {
       "bytes": 1627,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-dgc/manifest.tsv",
-      "sha256": "c193b5a6e8723c98fcd0533d4c3e04e98e3fac92e3dd2b1a6d7e0af1289878e8"
+      "sha256": "6c1b3bf32f22c951f33a70a1f539f262fbeca7f8b61db0477941e78bdf3624a1"
     },
     {
       "bytes": 6189,
@@ -811,7 +811,7 @@
     {
       "bytes": 1003,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-dgc/target-3.txt",
-      "sha256": "d9abd0532c48169e7e890381bbea022577091d852c366d94ce00c149053efc49"
+      "sha256": "031095562a4e27e9f648a0c7763a708d7015e7c8ee4ff3fc304b57d32657b569"
     },
     {
       "bytes": 1575,
@@ -836,17 +836,17 @@
     {
       "bytes": 577,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-fnd/manifest.tsv",
-      "sha256": "c7198e27be21f14aa8dbaee1afe1b8420e850513210527b3058c98f92b0c197a"
+      "sha256": "c92df1e96b893dd1836fa93affb1fed4423566464e7a64b96ef4a9097e690fe7"
     },
     {
       "bytes": 2759,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-fnd/target-1.txt",
-      "sha256": "de075aa382139b3a92b5803553756dd95a55398162dfb9a2a42b3eef81b78cd5"
+      "sha256": "31c4dbb4bca24c92cadc1de076fd80bd1cefb5b9df16a1fa0bc8077c095f5569"
     },
     {
       "bytes": 79534,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-fnd/target-2.txt",
-      "sha256": "158da261b7e0d50825993a39958aa00fbb2891053ecf61689076d75dc8417fe9"
+      "sha256": "021e4dff92d1fe78e015c7538c5d28e503dac8c62f43d09df3c831bdf3ddccf1"
     },
     {
       "bytes": 8723,
@@ -966,12 +966,12 @@
     {
       "bytes": 666,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jgr/manifest.tsv",
-      "sha256": "9e786b9cfecb9de99d39d30d063d78faad48d493412eb67cc3770dbda1e6afd4"
+      "sha256": "3a4a8aeacf2c3f971ce8e46ecd6e4c7da182c40e0696d6123559eed0106b015c"
     },
     {
       "bytes": 32695,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jgr/target-1.txt",
-      "sha256": "90e792b538bcb6507f6dc3a7a362e397037dba92967f7509142e1645d80c7418"
+      "sha256": "b042f627a9528365138428cf0029709cc91ec0027e421ffc33b8c5f957defaff"
     },
     {
       "bytes": 1214,
@@ -986,7 +986,7 @@
     {
       "bytes": 43840,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jgr/target-4.txt",
-      "sha256": "c7b523e41fd0e9c85409c3d6060628af80c85c5a8ebcbc23ef197008e61dcc8f"
+      "sha256": "8394f9a143b7b7ac0487dab52668d65b0963f2b2b2bfe4a392278819d1927359"
     },
     {
       "bytes": 759,
@@ -1186,7 +1186,7 @@
     {
       "bytes": 71439,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/project/src/main/resources/qualification.json",
-      "sha256": "737469840c54e1e2599e931a6c7b39d16e294a7e2f37debfb0a65c8345bdf24b"
+      "sha256": "6caa9aa81e8677c304547483b2d57a03ae9b3c67d7bbbd10ab142fd45713f905"
     },
     {
       "bytes": 31249,
@@ -1206,12 +1206,12 @@
     {
       "bytes": 2205,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/project/src/test/resources/before/.github/workflows/m3-foundation.yml",
-      "sha256": "736f90932bae21b4fb650eb8451f42999fab0a15fe7787cdc80a6375fd3866d8"
+      "sha256": "1a1ddd014a5cce76e75b1e4fce5c4cd0c746a3dbf5f18ef3a1bc9dad7d8fbdd1"
     },
     {
       "bytes": 15148,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/project/src/test/resources/before/.github/workflows/m3jdk21-backports.yml",
-      "sha256": "95cf2675cf9756311909303a568662efdc5f4d3c796f9f5fc92a10072c6c97ad"
+      "sha256": "344c24d590f39ec478f17986a08325c9935a8be57c7b28308121f239967c342a"
     },
     {
       "bytes": 6120,
@@ -1236,7 +1236,7 @@
     {
       "bytes": 14827,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/project/src/test/resources/before/m3/backports/generate_recipe_crates.py",
-      "sha256": "a13ea7038406394c62d2b613587e24647feafe413446610929e355f9aff38646"
+      "sha256": "8b19ddb3b5ff9af924a87a1d93eac9be48e4ba931865f4939bfc86fcc15f6f28"
     },
     {
       "bytes": 2934,
@@ -1266,7 +1266,7 @@
     {
       "bytes": 17732,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/project/src/test/resources/before/m3/backports/test_generate_recipe_crates.py",
-      "sha256": "3538e1793367f0fb0a6eea541533d6f818fc3aa89065c0731f2f08016d399ee4"
+      "sha256": "f365293fdd800153649c0a36250295ed86ccae36775a246656a0521b00cb890f"
     },
     {
       "bytes": 5171,
@@ -1366,7 +1366,7 @@
     {
       "bytes": 793,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/project/src/test/resources/before/m3/tooling/backport-dag/src/main/resources/jdk/m3/tooling/dag/adapters/camel/m3-backport-route.yaml",
-      "sha256": "b81e897b0c34961102aeb98920a1f5fcfa95b6f3b41fdf9c4f8208e78e8796d8"
+      "sha256": "b087067d88a5778f0ebf83bf4a0196dfa66be40778ea0b07f9c22d313a585ea6"
     },
     {
       "bytes": 1575,
@@ -1606,7 +1606,7 @@
     {
       "bytes": 66573,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/proof.py",
-      "sha256": "adbd5eb72149e46fd272c932d5ac95124891ca1b68851233d02b5dd6716c7d31"
+      "sha256": "61ea01edaba87cd833c853766260ea64d1e38bcff6aa02bf059673e881c81b7a"
     },
     {
       "bytes": 299,
@@ -2201,12 +2201,12 @@
     {
       "bytes": 1316,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cgo/manifest.tsv",
-      "sha256": "c139fb1babb257dbb8f1aa5b5372a4bd5806ba57f7ac425c1a5bd3897c2f91f7"
+      "sha256": "a56abd2fdd313b9eb057087a4cdf6653dd8a2141a781b342fdc77b8e3811a2da"
     },
     {
       "bytes": 5159,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cgo/target-1.txt",
-      "sha256": "4c86fb6ddc117ed481309811887df97233803c708dd19b599516e229cddf4178"
+      "sha256": "885e4e4a5f530153c1af2e592d653273efff1775b4e35a0c4899f4c5c7d9b35e"
     },
     {
       "bytes": 344,
@@ -2231,17 +2231,17 @@
     {
       "bytes": 2247,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cgo/target-6.txt",
-      "sha256": "7d55178b0bf55e919bea24da21ab07582c3ec2c503662e0a6b20082ae31350e5"
+      "sha256": "9c5d9d7ceff0328f6db0bf44aa3c439b69eb3d8cf018929d98961e6cb96041b2"
     },
     {
       "bytes": 374,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cib/manifest.tsv",
-      "sha256": "bb094412707f0b0fc2b3f8e6f3ffd4bd2d6c64ba3f6dde999897ae4b527fd1c8"
+      "sha256": "550d220b04c80b90bfd4980b1737dabe0145f07501eff73601e045be9b8a68e2"
     },
     {
       "bytes": 15862,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cib/target-1.txt",
-      "sha256": "dbfb5f780ed8682fa89e0429da00404db089c8c6eee246a8d7359579d2fe7392"
+      "sha256": "9218cb292ce2c9c0d9619cb4a2c984ee31893df07990ce69a5e74fd445ec70ca"
     },
     {
       "bytes": 6325,
@@ -2306,7 +2306,7 @@
     {
       "bytes": 1627,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-dgc/manifest.tsv",
-      "sha256": "c193b5a6e8723c98fcd0533d4c3e04e98e3fac92e3dd2b1a6d7e0af1289878e8"
+      "sha256": "6c1b3bf32f22c951f33a70a1f539f262fbeca7f8b61db0477941e78bdf3624a1"
     },
     {
       "bytes": 6189,
@@ -2321,7 +2321,7 @@
     {
       "bytes": 1003,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-dgc/target-3.txt",
-      "sha256": "d9abd0532c48169e7e890381bbea022577091d852c366d94ce00c149053efc49"
+      "sha256": "031095562a4e27e9f648a0c7763a708d7015e7c8ee4ff3fc304b57d32657b569"
     },
     {
       "bytes": 1575,
@@ -2346,17 +2346,17 @@
     {
       "bytes": 577,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-fnd/manifest.tsv",
-      "sha256": "c7198e27be21f14aa8dbaee1afe1b8420e850513210527b3058c98f92b0c197a"
+      "sha256": "c92df1e96b893dd1836fa93affb1fed4423566464e7a64b96ef4a9097e690fe7"
     },
     {
       "bytes": 2759,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-fnd/target-1.txt",
-      "sha256": "de075aa382139b3a92b5803553756dd95a55398162dfb9a2a42b3eef81b78cd5"
+      "sha256": "31c4dbb4bca24c92cadc1de076fd80bd1cefb5b9df16a1fa0bc8077c095f5569"
     },
     {
       "bytes": 79534,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-fnd/target-2.txt",
-      "sha256": "158da261b7e0d50825993a39958aa00fbb2891053ecf61689076d75dc8417fe9"
+      "sha256": "021e4dff92d1fe78e015c7538c5d28e503dac8c62f43d09df3c831bdf3ddccf1"
     },
     {
       "bytes": 8723,
@@ -2476,12 +2476,12 @@
     {
       "bytes": 666,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jgr/manifest.tsv",
-      "sha256": "9e786b9cfecb9de99d39d30d063d78faad48d493412eb67cc3770dbda1e6afd4"
+      "sha256": "3a4a8aeacf2c3f971ce8e46ecd6e4c7da182c40e0696d6123559eed0106b015c"
     },
     {
       "bytes": 32695,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jgr/target-1.txt",
-      "sha256": "90e792b538bcb6507f6dc3a7a362e397037dba92967f7509142e1645d80c7418"
+      "sha256": "b042f627a9528365138428cf0029709cc91ec0027e421ffc33b8c5f957defaff"
     },
     {
       "bytes": 1214,
@@ -2496,7 +2496,7 @@
     {
       "bytes": 43840,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jgr/target-4.txt",
-      "sha256": "c7b523e41fd0e9c85409c3d6060628af80c85c5a8ebcbc23ef197008e61dcc8f"
+      "sha256": "8394f9a143b7b7ac0487dab52668d65b0963f2b2b2bfe4a392278819d1927359"
     },
     {
       "bytes": 759,
@@ -2696,7 +2696,7 @@
     {
       "bytes": 71439,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/src/main/resources/qualification.json",
-      "sha256": "737469840c54e1e2599e931a6c7b39d16e294a7e2f37debfb0a65c8345bdf24b"
+      "sha256": "6caa9aa81e8677c304547483b2d57a03ae9b3c67d7bbbd10ab142fd45713f905"
     },
     {
       "bytes": 31251,
@@ -2716,12 +2716,12 @@
     {
       "bytes": 2205,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/src/test/resources/before/.github/workflows/m3-foundation.yml",
-      "sha256": "736f90932bae21b4fb650eb8451f42999fab0a15fe7787cdc80a6375fd3866d8"
+      "sha256": "1a1ddd014a5cce76e75b1e4fce5c4cd0c746a3dbf5f18ef3a1bc9dad7d8fbdd1"
     },
     {
       "bytes": 15148,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/src/test/resources/before/.github/workflows/m3jdk21-backports.yml",
-      "sha256": "95cf2675cf9756311909303a568662efdc5f4d3c796f9f5fc92a10072c6c97ad"
+      "sha256": "344c24d590f39ec478f17986a08325c9935a8be57c7b28308121f239967c342a"
     },
     {
       "bytes": 6120,
@@ -2746,7 +2746,7 @@
     {
       "bytes": 14827,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/src/test/resources/before/m3/backports/generate_recipe_crates.py",
-      "sha256": "a13ea7038406394c62d2b613587e24647feafe413446610929e355f9aff38646"
+      "sha256": "8b19ddb3b5ff9af924a87a1d93eac9be48e4ba931865f4939bfc86fcc15f6f28"
     },
     {
       "bytes": 2934,
@@ -2776,7 +2776,7 @@
     {
       "bytes": 17732,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/src/test/resources/before/m3/backports/test_generate_recipe_crates.py",
-      "sha256": "3538e1793367f0fb0a6eea541533d6f818fc3aa89065c0731f2f08016d399ee4"
+      "sha256": "f365293fdd800153649c0a36250295ed86ccae36775a246656a0521b00cb890f"
     },
     {
       "bytes": 5171,
@@ -2876,7 +2876,7 @@
     {
       "bytes": 793,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/src/test/resources/before/m3/tooling/backport-dag/src/main/resources/jdk/m3/tooling/dag/adapters/camel/m3-backport-route.yaml",
-      "sha256": "b81e897b0c34961102aeb98920a1f5fcfa95b6f3b41fdf9c4f8208e78e8796d8"
+      "sha256": "b087067d88a5778f0ebf83bf4a0196dfa66be40778ea0b07f9c22d313a585ea6"
     },
     {
       "bytes": 1575,
@@ -3641,12 +3641,12 @@
     {
       "bytes": 1316,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/target/classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cgo/manifest.tsv",
-      "sha256": "c139fb1babb257dbb8f1aa5b5372a4bd5806ba57f7ac425c1a5bd3897c2f91f7"
+      "sha256": "a56abd2fdd313b9eb057087a4cdf6653dd8a2141a781b342fdc77b8e3811a2da"
     },
     {
       "bytes": 5159,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/target/classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cgo/target-1.txt",
-      "sha256": "4c86fb6ddc117ed481309811887df97233803c708dd19b599516e229cddf4178"
+      "sha256": "885e4e4a5f530153c1af2e592d653273efff1775b4e35a0c4899f4c5c7d9b35e"
     },
     {
       "bytes": 344,
@@ -3671,17 +3671,17 @@
     {
       "bytes": 2247,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/target/classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cgo/target-6.txt",
-      "sha256": "7d55178b0bf55e919bea24da21ab07582c3ec2c503662e0a6b20082ae31350e5"
+      "sha256": "9c5d9d7ceff0328f6db0bf44aa3c439b69eb3d8cf018929d98961e6cb96041b2"
     },
     {
       "bytes": 374,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/target/classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cib/manifest.tsv",
-      "sha256": "bb094412707f0b0fc2b3f8e6f3ffd4bd2d6c64ba3f6dde999897ae4b527fd1c8"
+      "sha256": "550d220b04c80b90bfd4980b1737dabe0145f07501eff73601e045be9b8a68e2"
     },
     {
       "bytes": 15862,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/target/classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cib/target-1.txt",
-      "sha256": "dbfb5f780ed8682fa89e0429da00404db089c8c6eee246a8d7359579d2fe7392"
+      "sha256": "9218cb292ce2c9c0d9619cb4a2c984ee31893df07990ce69a5e74fd445ec70ca"
     },
     {
       "bytes": 6325,
@@ -3746,7 +3746,7 @@
     {
       "bytes": 1627,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/target/classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-dgc/manifest.tsv",
-      "sha256": "c193b5a6e8723c98fcd0533d4c3e04e98e3fac92e3dd2b1a6d7e0af1289878e8"
+      "sha256": "6c1b3bf32f22c951f33a70a1f539f262fbeca7f8b61db0477941e78bdf3624a1"
     },
     {
       "bytes": 6189,
@@ -3761,7 +3761,7 @@
     {
       "bytes": 1003,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/target/classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-dgc/target-3.txt",
-      "sha256": "d9abd0532c48169e7e890381bbea022577091d852c366d94ce00c149053efc49"
+      "sha256": "031095562a4e27e9f648a0c7763a708d7015e7c8ee4ff3fc304b57d32657b569"
     },
     {
       "bytes": 1575,
@@ -3786,17 +3786,17 @@
     {
       "bytes": 577,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/target/classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-fnd/manifest.tsv",
-      "sha256": "c7198e27be21f14aa8dbaee1afe1b8420e850513210527b3058c98f92b0c197a"
+      "sha256": "c92df1e96b893dd1836fa93affb1fed4423566464e7a64b96ef4a9097e690fe7"
     },
     {
       "bytes": 2759,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/target/classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-fnd/target-1.txt",
-      "sha256": "de075aa382139b3a92b5803553756dd95a55398162dfb9a2a42b3eef81b78cd5"
+      "sha256": "31c4dbb4bca24c92cadc1de076fd80bd1cefb5b9df16a1fa0bc8077c095f5569"
     },
     {
       "bytes": 79534,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/target/classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-fnd/target-2.txt",
-      "sha256": "158da261b7e0d50825993a39958aa00fbb2891053ecf61689076d75dc8417fe9"
+      "sha256": "021e4dff92d1fe78e015c7538c5d28e503dac8c62f43d09df3c831bdf3ddccf1"
     },
     {
       "bytes": 8723,
@@ -3916,12 +3916,12 @@
     {
       "bytes": 666,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/target/classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jgr/manifest.tsv",
-      "sha256": "9e786b9cfecb9de99d39d30d063d78faad48d493412eb67cc3770dbda1e6afd4"
+      "sha256": "3a4a8aeacf2c3f971ce8e46ecd6e4c7da182c40e0696d6123559eed0106b015c"
     },
     {
       "bytes": 32695,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/target/classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jgr/target-1.txt",
-      "sha256": "90e792b538bcb6507f6dc3a7a362e397037dba92967f7509142e1645d80c7418"
+      "sha256": "b042f627a9528365138428cf0029709cc91ec0027e421ffc33b8c5f957defaff"
     },
     {
       "bytes": 1214,
@@ -3936,7 +3936,7 @@
     {
       "bytes": 43840,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/target/classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jgr/target-4.txt",
-      "sha256": "c7b523e41fd0e9c85409c3d6060628af80c85c5a8ebcbc23ef197008e61dcc8f"
+      "sha256": "8394f9a143b7b7ac0487dab52668d65b0963f2b2b2bfe4a392278819d1927359"
     },
     {
       "bytes": 759,
@@ -4136,7 +4136,7 @@
     {
       "bytes": 71439,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/target/classes/qualification.json",
-      "sha256": "737469840c54e1e2599e931a6c7b39d16e294a7e2f37debfb0a65c8345bdf24b"
+      "sha256": "6caa9aa81e8677c304547483b2d57a03ae9b3c67d7bbbd10ab142fd45713f905"
     },
     {
       "bytes": 351,
@@ -4171,12 +4171,12 @@
     {
       "bytes": 2205,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/target/test-classes/before/.github/workflows/m3-foundation.yml",
-      "sha256": "736f90932bae21b4fb650eb8451f42999fab0a15fe7787cdc80a6375fd3866d8"
+      "sha256": "1a1ddd014a5cce76e75b1e4fce5c4cd0c746a3dbf5f18ef3a1bc9dad7d8fbdd1"
     },
     {
       "bytes": 15148,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/target/test-classes/before/.github/workflows/m3jdk21-backports.yml",
-      "sha256": "95cf2675cf9756311909303a568662efdc5f4d3c796f9f5fc92a10072c6c97ad"
+      "sha256": "344c24d590f39ec478f17986a08325c9935a8be57c7b28308121f239967c342a"
     },
     {
       "bytes": 6120,
@@ -4201,7 +4201,7 @@
     {
       "bytes": 14827,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/target/test-classes/before/m3/backports/generate_recipe_crates.py",
-      "sha256": "a13ea7038406394c62d2b613587e24647feafe413446610929e355f9aff38646"
+      "sha256": "8b19ddb3b5ff9af924a87a1d93eac9be48e4ba931865f4939bfc86fcc15f6f28"
     },
     {
       "bytes": 2934,
@@ -4231,7 +4231,7 @@
     {
       "bytes": 17732,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/target/test-classes/before/m3/backports/test_generate_recipe_crates.py",
-      "sha256": "3538e1793367f0fb0a6eea541533d6f818fc3aa89065c0731f2f08016d399ee4"
+      "sha256": "f365293fdd800153649c0a36250295ed86ccae36775a246656a0521b00cb890f"
     },
     {
       "bytes": 5171,
@@ -4331,7 +4331,7 @@
     {
       "bytes": 793,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v1/project/target/test-classes/before/m3/tooling/backport-dag/src/main/resources/jdk/m3/tooling/dag/adapters/camel/m3-backport-route.yaml",
-      "sha256": "b81e897b0c34961102aeb98920a1f5fcfa95b6f3b41fdf9c4f8208e78e8796d8"
+      "sha256": "b087067d88a5778f0ebf83bf4a0196dfa66be40778ea0b07f9c22d313a585ea6"
     },
     {
       "bytes": 1575,
@@ -4626,12 +4626,12 @@
     {
       "bytes": 2759,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/generated-candidate/.github/workflows/m3-foundation.yml",
-      "sha256": "de075aa382139b3a92b5803553756dd95a55398162dfb9a2a42b3eef81b78cd5"
+      "sha256": "31c4dbb4bca24c92cadc1de076fd80bd1cefb5b9df16a1fa0bc8077c095f5569"
     },
     {
       "bytes": 15862,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/generated-candidate/.github/workflows/m3jdk21-backports.yml",
-      "sha256": "dbfb5f780ed8682fa89e0429da00404db089c8c6eee246a8d7359579d2fe7392"
+      "sha256": "9218cb292ce2c9c0d9619cb4a2c984ee31893df07990ce69a5e74fd445ec70ca"
     },
     {
       "bytes": 6325,
@@ -5396,7 +5396,7 @@
     {
       "bytes": 32695,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/generated-candidate/m3/backports/generate_recipe_crates.py",
-      "sha256": "90e792b538bcb6507f6dc3a7a362e397037dba92967f7509142e1645d80c7418"
+      "sha256": "b042f627a9528365138428cf0029709cc91ec0027e421ffc33b8c5f957defaff"
     },
     {
       "bytes": 11182,
@@ -5426,7 +5426,7 @@
     {
       "bytes": 5159,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/generated-candidate/m3/backports/recipes/jep-485-gatherers/README.md",
-      "sha256": "4c86fb6ddc117ed481309811887df97233803c708dd19b599516e229cddf4178"
+      "sha256": "885e4e4a5f530153c1af2e592d653273efff1775b4e35a0c4899f4c5c7d9b35e"
     },
     {
       "bytes": 344,
@@ -5481,7 +5481,7 @@
     {
       "bytes": 43840,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/generated-candidate/m3/backports/test_generate_recipe_crates.py",
-      "sha256": "c7b523e41fd0e9c85409c3d6060628af80c85c5a8ebcbc23ef197008e61dcc8f"
+      "sha256": "8394f9a143b7b7ac0487dab52668d65b0963f2b2b2bfe4a392278819d1927359"
     },
     {
       "bytes": 9798,
@@ -5676,7 +5676,7 @@
     {
       "bytes": 1003,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/generated-candidate/m3/tooling/backport-dag/src/main/resources/jdk/m3/tooling/dag/adapters/camel/m3-backport-route.yaml",
-      "sha256": "d9abd0532c48169e7e890381bbea022577091d852c366d94ce00c149053efc49"
+      "sha256": "031095562a4e27e9f648a0c7763a708d7015e7c8ee4ff3fc304b57d32657b569"
     },
     {
       "bytes": 1575,
@@ -5706,7 +5706,7 @@
     {
       "bytes": 79534,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/generated-candidate/m3/tooling/image-gates/current-c0.json",
-      "sha256": "158da261b7e0d50825993a39958aa00fbb2891053ecf61689076d75dc8417fe9"
+      "sha256": "021e4dff92d1fe78e015c7538c5d28e503dac8c62f43d09df3c831bdf3ddccf1"
     },
     {
       "bytes": 8723,
@@ -6031,7 +6031,7 @@
     {
       "bytes": 2247,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/generated-candidate/m3/tooling/recipe-catalogue.tsv",
-      "sha256": "7d55178b0bf55e919bea24da21ab07582c3ec2c503662e0a6b20082ae31350e5"
+      "sha256": "9c5d9d7ceff0328f6db0bf44aa3c439b69eb3d8cf018929d98961e6cb96041b2"
     },
     {
       "bytes": 76253,
@@ -6081,7 +6081,7 @@
     {
       "bytes": 66573,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/proof.py",
-      "sha256": "adbd5eb72149e46fd272c932d5ac95124891ca1b68851233d02b5dd6716c7d31"
+      "sha256": "61ea01edaba87cd833c853766260ea64d1e38bcff6aa02bf059673e881c81b7a"
     },
     {
       "bytes": 299,
@@ -6676,12 +6676,12 @@
     {
       "bytes": 1316,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cgo/manifest.tsv",
-      "sha256": "c139fb1babb257dbb8f1aa5b5372a4bd5806ba57f7ac425c1a5bd3897c2f91f7"
+      "sha256": "a56abd2fdd313b9eb057087a4cdf6653dd8a2141a781b342fdc77b8e3811a2da"
     },
     {
       "bytes": 5159,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cgo/target-1.txt",
-      "sha256": "4c86fb6ddc117ed481309811887df97233803c708dd19b599516e229cddf4178"
+      "sha256": "885e4e4a5f530153c1af2e592d653273efff1775b4e35a0c4899f4c5c7d9b35e"
     },
     {
       "bytes": 344,
@@ -6706,17 +6706,17 @@
     {
       "bytes": 2247,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cgo/target-6.txt",
-      "sha256": "7d55178b0bf55e919bea24da21ab07582c3ec2c503662e0a6b20082ae31350e5"
+      "sha256": "9c5d9d7ceff0328f6db0bf44aa3c439b69eb3d8cf018929d98961e6cb96041b2"
     },
     {
       "bytes": 374,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cib/manifest.tsv",
-      "sha256": "bb094412707f0b0fc2b3f8e6f3ffd4bd2d6c64ba3f6dde999897ae4b527fd1c8"
+      "sha256": "550d220b04c80b90bfd4980b1737dabe0145f07501eff73601e045be9b8a68e2"
     },
     {
       "bytes": 15862,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cib/target-1.txt",
-      "sha256": "dbfb5f780ed8682fa89e0429da00404db089c8c6eee246a8d7359579d2fe7392"
+      "sha256": "9218cb292ce2c9c0d9619cb4a2c984ee31893df07990ce69a5e74fd445ec70ca"
     },
     {
       "bytes": 6325,
@@ -6781,7 +6781,7 @@
     {
       "bytes": 1627,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-dgc/manifest.tsv",
-      "sha256": "c193b5a6e8723c98fcd0533d4c3e04e98e3fac92e3dd2b1a6d7e0af1289878e8"
+      "sha256": "6c1b3bf32f22c951f33a70a1f539f262fbeca7f8b61db0477941e78bdf3624a1"
     },
     {
       "bytes": 6189,
@@ -6796,7 +6796,7 @@
     {
       "bytes": 1003,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-dgc/target-3.txt",
-      "sha256": "d9abd0532c48169e7e890381bbea022577091d852c366d94ce00c149053efc49"
+      "sha256": "031095562a4e27e9f648a0c7763a708d7015e7c8ee4ff3fc304b57d32657b569"
     },
     {
       "bytes": 1575,
@@ -6821,17 +6821,17 @@
     {
       "bytes": 577,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-fnd/manifest.tsv",
-      "sha256": "c7198e27be21f14aa8dbaee1afe1b8420e850513210527b3058c98f92b0c197a"
+      "sha256": "c92df1e96b893dd1836fa93affb1fed4423566464e7a64b96ef4a9097e690fe7"
     },
     {
       "bytes": 2759,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-fnd/target-1.txt",
-      "sha256": "de075aa382139b3a92b5803553756dd95a55398162dfb9a2a42b3eef81b78cd5"
+      "sha256": "31c4dbb4bca24c92cadc1de076fd80bd1cefb5b9df16a1fa0bc8077c095f5569"
     },
     {
       "bytes": 79534,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-fnd/target-2.txt",
-      "sha256": "158da261b7e0d50825993a39958aa00fbb2891053ecf61689076d75dc8417fe9"
+      "sha256": "021e4dff92d1fe78e015c7538c5d28e503dac8c62f43d09df3c831bdf3ddccf1"
     },
     {
       "bytes": 8723,
@@ -6951,12 +6951,12 @@
     {
       "bytes": 666,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jgr/manifest.tsv",
-      "sha256": "9e786b9cfecb9de99d39d30d063d78faad48d493412eb67cc3770dbda1e6afd4"
+      "sha256": "3a4a8aeacf2c3f971ce8e46ecd6e4c7da182c40e0696d6123559eed0106b015c"
     },
     {
       "bytes": 32695,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jgr/target-1.txt",
-      "sha256": "90e792b538bcb6507f6dc3a7a362e397037dba92967f7509142e1645d80c7418"
+      "sha256": "b042f627a9528365138428cf0029709cc91ec0027e421ffc33b8c5f957defaff"
     },
     {
       "bytes": 1214,
@@ -6971,7 +6971,7 @@
     {
       "bytes": 43840,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jgr/target-4.txt",
-      "sha256": "c7b523e41fd0e9c85409c3d6060628af80c85c5a8ebcbc23ef197008e61dcc8f"
+      "sha256": "8394f9a143b7b7ac0487dab52668d65b0963f2b2b2bfe4a392278819d1927359"
     },
     {
       "bytes": 759,
@@ -7171,7 +7171,7 @@
     {
       "bytes": 71439,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/src/main/resources/qualification.json",
-      "sha256": "737469840c54e1e2599e931a6c7b39d16e294a7e2f37debfb0a65c8345bdf24b"
+      "sha256": "6caa9aa81e8677c304547483b2d57a03ae9b3c67d7bbbd10ab142fd45713f905"
     },
     {
       "bytes": 31249,
@@ -7191,12 +7191,12 @@
     {
       "bytes": 2205,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/src/test/resources/before/.github/workflows/m3-foundation.yml",
-      "sha256": "736f90932bae21b4fb650eb8451f42999fab0a15fe7787cdc80a6375fd3866d8"
+      "sha256": "1a1ddd014a5cce76e75b1e4fce5c4cd0c746a3dbf5f18ef3a1bc9dad7d8fbdd1"
     },
     {
       "bytes": 15148,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/src/test/resources/before/.github/workflows/m3jdk21-backports.yml",
-      "sha256": "95cf2675cf9756311909303a568662efdc5f4d3c796f9f5fc92a10072c6c97ad"
+      "sha256": "344c24d590f39ec478f17986a08325c9935a8be57c7b28308121f239967c342a"
     },
     {
       "bytes": 6120,
@@ -7221,7 +7221,7 @@
     {
       "bytes": 14827,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/src/test/resources/before/m3/backports/generate_recipe_crates.py",
-      "sha256": "a13ea7038406394c62d2b613587e24647feafe413446610929e355f9aff38646"
+      "sha256": "8b19ddb3b5ff9af924a87a1d93eac9be48e4ba931865f4939bfc86fcc15f6f28"
     },
     {
       "bytes": 2934,
@@ -7251,7 +7251,7 @@
     {
       "bytes": 17732,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/src/test/resources/before/m3/backports/test_generate_recipe_crates.py",
-      "sha256": "3538e1793367f0fb0a6eea541533d6f818fc3aa89065c0731f2f08016d399ee4"
+      "sha256": "f365293fdd800153649c0a36250295ed86ccae36775a246656a0521b00cb890f"
     },
     {
       "bytes": 5171,
@@ -7351,7 +7351,7 @@
     {
       "bytes": 793,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/src/test/resources/before/m3/tooling/backport-dag/src/main/resources/jdk/m3/tooling/dag/adapters/camel/m3-backport-route.yaml",
-      "sha256": "b81e897b0c34961102aeb98920a1f5fcfa95b6f3b41fdf9c4f8208e78e8796d8"
+      "sha256": "b087067d88a5778f0ebf83bf4a0196dfa66be40778ea0b07f9c22d313a585ea6"
     },
     {
       "bytes": 1575,
@@ -8116,12 +8116,12 @@
     {
       "bytes": 1316,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/target/classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cgo/manifest.tsv",
-      "sha256": "c139fb1babb257dbb8f1aa5b5372a4bd5806ba57f7ac425c1a5bd3897c2f91f7"
+      "sha256": "a56abd2fdd313b9eb057087a4cdf6653dd8a2141a781b342fdc77b8e3811a2da"
     },
     {
       "bytes": 5159,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/target/classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cgo/target-1.txt",
-      "sha256": "4c86fb6ddc117ed481309811887df97233803c708dd19b599516e229cddf4178"
+      "sha256": "885e4e4a5f530153c1af2e592d653273efff1775b4e35a0c4899f4c5c7d9b35e"
     },
     {
       "bytes": 344,
@@ -8146,17 +8146,17 @@
     {
       "bytes": 2247,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/target/classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cgo/target-6.txt",
-      "sha256": "7d55178b0bf55e919bea24da21ab07582c3ec2c503662e0a6b20082ae31350e5"
+      "sha256": "9c5d9d7ceff0328f6db0bf44aa3c439b69eb3d8cf018929d98961e6cb96041b2"
     },
     {
       "bytes": 374,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/target/classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cib/manifest.tsv",
-      "sha256": "bb094412707f0b0fc2b3f8e6f3ffd4bd2d6c64ba3f6dde999897ae4b527fd1c8"
+      "sha256": "550d220b04c80b90bfd4980b1737dabe0145f07501eff73601e045be9b8a68e2"
     },
     {
       "bytes": 15862,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/target/classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cib/target-1.txt",
-      "sha256": "dbfb5f780ed8682fa89e0429da00404db089c8c6eee246a8d7359579d2fe7392"
+      "sha256": "9218cb292ce2c9c0d9619cb4a2c984ee31893df07990ce69a5e74fd445ec70ca"
     },
     {
       "bytes": 6325,
@@ -8221,7 +8221,7 @@
     {
       "bytes": 1627,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/target/classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-dgc/manifest.tsv",
-      "sha256": "c193b5a6e8723c98fcd0533d4c3e04e98e3fac92e3dd2b1a6d7e0af1289878e8"
+      "sha256": "6c1b3bf32f22c951f33a70a1f539f262fbeca7f8b61db0477941e78bdf3624a1"
     },
     {
       "bytes": 6189,
@@ -8236,7 +8236,7 @@
     {
       "bytes": 1003,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/target/classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-dgc/target-3.txt",
-      "sha256": "d9abd0532c48169e7e890381bbea022577091d852c366d94ce00c149053efc49"
+      "sha256": "031095562a4e27e9f648a0c7763a708d7015e7c8ee4ff3fc304b57d32657b569"
     },
     {
       "bytes": 1575,
@@ -8261,17 +8261,17 @@
     {
       "bytes": 577,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/target/classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-fnd/manifest.tsv",
-      "sha256": "c7198e27be21f14aa8dbaee1afe1b8420e850513210527b3058c98f92b0c197a"
+      "sha256": "c92df1e96b893dd1836fa93affb1fed4423566464e7a64b96ef4a9097e690fe7"
     },
     {
       "bytes": 2759,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/target/classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-fnd/target-1.txt",
-      "sha256": "de075aa382139b3a92b5803553756dd95a55398162dfb9a2a42b3eef81b78cd5"
+      "sha256": "31c4dbb4bca24c92cadc1de076fd80bd1cefb5b9df16a1fa0bc8077c095f5569"
     },
     {
       "bytes": 79534,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/target/classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-fnd/target-2.txt",
-      "sha256": "158da261b7e0d50825993a39958aa00fbb2891053ecf61689076d75dc8417fe9"
+      "sha256": "021e4dff92d1fe78e015c7538c5d28e503dac8c62f43d09df3c831bdf3ddccf1"
     },
     {
       "bytes": 8723,
@@ -8391,12 +8391,12 @@
     {
       "bytes": 666,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/target/classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jgr/manifest.tsv",
-      "sha256": "9e786b9cfecb9de99d39d30d063d78faad48d493412eb67cc3770dbda1e6afd4"
+      "sha256": "3a4a8aeacf2c3f971ce8e46ecd6e4c7da182c40e0696d6123559eed0106b015c"
     },
     {
       "bytes": 32695,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/target/classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jgr/target-1.txt",
-      "sha256": "90e792b538bcb6507f6dc3a7a362e397037dba92967f7509142e1645d80c7418"
+      "sha256": "b042f627a9528365138428cf0029709cc91ec0027e421ffc33b8c5f957defaff"
     },
     {
       "bytes": 1214,
@@ -8411,7 +8411,7 @@
     {
       "bytes": 43840,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/target/classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jgr/target-4.txt",
-      "sha256": "c7b523e41fd0e9c85409c3d6060628af80c85c5a8ebcbc23ef197008e61dcc8f"
+      "sha256": "8394f9a143b7b7ac0487dab52668d65b0963f2b2b2bfe4a392278819d1927359"
     },
     {
       "bytes": 759,
@@ -8611,7 +8611,7 @@
     {
       "bytes": 71439,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/target/classes/qualification.json",
-      "sha256": "737469840c54e1e2599e931a6c7b39d16e294a7e2f37debfb0a65c8345bdf24b"
+      "sha256": "6caa9aa81e8677c304547483b2d57a03ae9b3c67d7bbbd10ab142fd45713f905"
     },
     {
       "bytes": 351,
@@ -8656,12 +8656,12 @@
     {
       "bytes": 2205,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/target/test-classes/before/.github/workflows/m3-foundation.yml",
-      "sha256": "736f90932bae21b4fb650eb8451f42999fab0a15fe7787cdc80a6375fd3866d8"
+      "sha256": "1a1ddd014a5cce76e75b1e4fce5c4cd0c746a3dbf5f18ef3a1bc9dad7d8fbdd1"
     },
     {
       "bytes": 15148,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/target/test-classes/before/.github/workflows/m3jdk21-backports.yml",
-      "sha256": "95cf2675cf9756311909303a568662efdc5f4d3c796f9f5fc92a10072c6c97ad"
+      "sha256": "344c24d590f39ec478f17986a08325c9935a8be57c7b28308121f239967c342a"
     },
     {
       "bytes": 6120,
@@ -8686,7 +8686,7 @@
     {
       "bytes": 14827,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/target/test-classes/before/m3/backports/generate_recipe_crates.py",
-      "sha256": "a13ea7038406394c62d2b613587e24647feafe413446610929e355f9aff38646"
+      "sha256": "8b19ddb3b5ff9af924a87a1d93eac9be48e4ba931865f4939bfc86fcc15f6f28"
     },
     {
       "bytes": 2934,
@@ -8716,7 +8716,7 @@
     {
       "bytes": 17732,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/target/test-classes/before/m3/backports/test_generate_recipe_crates.py",
-      "sha256": "3538e1793367f0fb0a6eea541533d6f818fc3aa89065c0731f2f08016d399ee4"
+      "sha256": "f365293fdd800153649c0a36250295ed86ccae36775a246656a0521b00cb890f"
     },
     {
       "bytes": 5171,
@@ -8816,7 +8816,7 @@
     {
       "bytes": 793,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/ic0/trials/producer-v2/project/target/test-classes/before/m3/tooling/backport-dag/src/main/resources/jdk/m3/tooling/dag/adapters/camel/m3-backport-route.yaml",
-      "sha256": "b81e897b0c34961102aeb98920a1f5fcfa95b6f3b41fdf9c4f8208e78e8796d8"
+      "sha256": "b087067d88a5778f0ebf83bf4a0196dfa66be40778ea0b07f9c22d313a585ea6"
     },
     {
       "bytes": 1575,
@@ -9216,7 +9216,7 @@
     {
       "bytes": 5159,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/base-refresh-20261006-0443/current-amendments-authoring-v3/after/m3/backports/recipes/jep-485-gatherers/README.md",
-      "sha256": "4c86fb6ddc117ed481309811887df97233803c708dd19b599516e229cddf4178"
+      "sha256": "885e4e4a5f530153c1af2e592d653273efff1775b4e35a0c4899f4c5c7d9b35e"
     },
     {
       "bytes": 344,
@@ -9251,7 +9251,7 @@
     {
       "bytes": 2247,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/base-refresh-20261006-0443/current-amendments-authoring-v3/after/m3/tooling/recipe-catalogue.tsv",
-      "sha256": "7d55178b0bf55e919bea24da21ab07582c3ec2c503662e0a6b20082ae31350e5"
+      "sha256": "9c5d9d7ceff0328f6db0bf44aa3c439b69eb3d8cf018929d98961e6cb96041b2"
     },
     {
       "bytes": 2934,
@@ -9341,12 +9341,12 @@
     {
       "bytes": 2759,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/base-refresh-20261006-0443/foundation-authoring-v1/after/.github/workflows/m3-foundation.yml",
-      "sha256": "de075aa382139b3a92b5803553756dd95a55398162dfb9a2a42b3eef81b78cd5"
+      "sha256": "31c4dbb4bca24c92cadc1de076fd80bd1cefb5b9df16a1fa0bc8077c095f5569"
     },
     {
       "bytes": 79534,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/base-refresh-20261006-0443/foundation-authoring-v1/after/m3/tooling/image-gates/current-c0.json",
-      "sha256": "158da261b7e0d50825993a39958aa00fbb2891053ecf61689076d75dc8417fe9"
+      "sha256": "021e4dff92d1fe78e015c7538c5d28e503dac8c62f43d09df3c831bdf3ddccf1"
     },
     {
       "bytes": 8723,
@@ -9361,7 +9361,7 @@
     {
       "bytes": 2205,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/base-refresh-20261006-0443/foundation-authoring-v1/before/.github/workflows/m3-foundation.yml",
-      "sha256": "736f90932bae21b4fb650eb8451f42999fab0a15fe7787cdc80a6375fd3866d8"
+      "sha256": "1a1ddd014a5cce76e75b1e4fce5c4cd0c746a3dbf5f18ef3a1bc9dad7d8fbdd1"
     },
     {
       "bytes": 19242,
@@ -9731,7 +9731,7 @@
     {
       "bytes": 15148,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/ci-repairs-authoring/cib/before/.github/workflows/m3jdk21-backports.yml",
-      "sha256": "95cf2675cf9756311909303a568662efdc5f4d3c796f9f5fc92a10072c6c97ad"
+      "sha256": "344c24d590f39ec478f17986a08325c9935a8be57c7b28308121f239967c342a"
     },
     {
       "bytes": 6120,
@@ -9741,7 +9741,7 @@
     {
       "bytes": 15862,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/ci-repairs-authoring/cib/resources/target-0.txt",
-      "sha256": "dbfb5f780ed8682fa89e0429da00404db089c8c6eee246a8d7359579d2fe7392"
+      "sha256": "9218cb292ce2c9c0d9619cb4a2c984ee31893df07990ce69a5e74fd445ec70ca"
     },
     {
       "bytes": 6325,
@@ -10736,7 +10736,7 @@
     {
       "bytes": 793,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/dag-contract-repair/before/m3/tooling/backport-dag/src/main/resources/jdk/m3/tooling/dag/adapters/camel/m3-backport-route.yaml",
-      "sha256": "b81e897b0c34961102aeb98920a1f5fcfa95b6f3b41fdf9c4f8208e78e8796d8"
+      "sha256": "b087067d88a5778f0ebf83bf4a0196dfa66be40778ea0b07f9c22d313a585ea6"
     },
     {
       "bytes": 1575,
@@ -10761,7 +10761,7 @@
     {
       "bytes": 1003,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/dag-contract-repair/resources/target-2.txt",
-      "sha256": "d9abd0532c48169e7e890381bbea022577091d852c366d94ce00c149053efc49"
+      "sha256": "031095562a4e27e9f648a0c7763a708d7015e7c8ee4ff3fc304b57d32657b569"
     },
     {
       "bytes": 1575,
@@ -10786,7 +10786,7 @@
     {
       "bytes": 32695,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/jep-inputs/authoring-v2/recipe-resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ci8891-jgr/target-3.txt",
-      "sha256": "90e792b538bcb6507f6dc3a7a362e397037dba92967f7509142e1645d80c7418"
+      "sha256": "b042f627a9528365138428cf0029709cc91ec0027e421ffc33b8c5f957defaff"
     },
     {
       "bytes": 1214,
@@ -10801,7 +10801,7 @@
     {
       "bytes": 43840,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/jep-inputs/authoring-v2/recipe-resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ci8891-jgr/target-6.txt",
-      "sha256": "c7b523e41fd0e9c85409c3d6060628af80c85c5a8ebcbc23ef197008e61dcc8f"
+      "sha256": "8394f9a143b7b7ac0487dab52668d65b0963f2b2b2bfe4a392278819d1927359"
     },
     {
       "bytes": 43759,
@@ -10876,7 +10876,7 @@
     {
       "bytes": 14827,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/m3-checkout/m3/backports/generate_recipe_crates.py",
-      "sha256": "a13ea7038406394c62d2b613587e24647feafe413446610929e355f9aff38646"
+      "sha256": "8b19ddb3b5ff9af924a87a1d93eac9be48e4ba931865f4939bfc86fcc15f6f28"
     },
     {
       "bytes": 2472,
@@ -10886,7 +10886,7 @@
     {
       "bytes": 17732,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/m3-checkout/m3/backports/test_generate_recipe_crates.py",
-      "sha256": "3538e1793367f0fb0a6eea541533d6f818fc3aa89065c0731f2f08016d399ee4"
+      "sha256": "f365293fdd800153649c0a36250295ed86ccae36775a246656a0521b00cb890f"
     },
     {
       "bytes": 5171,
@@ -11061,7 +11061,7 @@
     {
       "bytes": 119267,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/publication-design/integration-c0-checkpoint-v1/HISTORY-AVAILABILITY.json",
-      "sha256": "fb247c0a2313334176adf419e373e1b0aae3274d7c35c06d5b290185cb24cebd"
+      "sha256": "5447a51edf6ac97b03e9fd8b6f5c42b783a1ef3e9aeac2a15a0ed2b559e40bd2"
     },
     {
       "bytes": 1487003,
@@ -11246,7 +11246,7 @@
     {
       "bytes": 66573,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/authoring-v3/project/proof.py",
-      "sha256": "adbd5eb72149e46fd272c932d5ac95124891ca1b68851233d02b5dd6716c7d31"
+      "sha256": "61ea01edaba87cd833c853766260ea64d1e38bcff6aa02bf059673e881c81b7a"
     },
     {
       "bytes": 299,
@@ -11841,12 +11841,12 @@
     {
       "bytes": 1316,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/authoring-v3/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cgo/manifest.tsv",
-      "sha256": "c139fb1babb257dbb8f1aa5b5372a4bd5806ba57f7ac425c1a5bd3897c2f91f7"
+      "sha256": "a56abd2fdd313b9eb057087a4cdf6653dd8a2141a781b342fdc77b8e3811a2da"
     },
     {
       "bytes": 5159,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/authoring-v3/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cgo/target-1.txt",
-      "sha256": "4c86fb6ddc117ed481309811887df97233803c708dd19b599516e229cddf4178"
+      "sha256": "885e4e4a5f530153c1af2e592d653273efff1775b4e35a0c4899f4c5c7d9b35e"
     },
     {
       "bytes": 344,
@@ -11871,17 +11871,17 @@
     {
       "bytes": 2247,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/authoring-v3/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cgo/target-6.txt",
-      "sha256": "7d55178b0bf55e919bea24da21ab07582c3ec2c503662e0a6b20082ae31350e5"
+      "sha256": "9c5d9d7ceff0328f6db0bf44aa3c439b69eb3d8cf018929d98961e6cb96041b2"
     },
     {
       "bytes": 374,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/authoring-v3/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cib/manifest.tsv",
-      "sha256": "bb094412707f0b0fc2b3f8e6f3ffd4bd2d6c64ba3f6dde999897ae4b527fd1c8"
+      "sha256": "550d220b04c80b90bfd4980b1737dabe0145f07501eff73601e045be9b8a68e2"
     },
     {
       "bytes": 15862,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/authoring-v3/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cib/target-1.txt",
-      "sha256": "dbfb5f780ed8682fa89e0429da00404db089c8c6eee246a8d7359579d2fe7392"
+      "sha256": "9218cb292ce2c9c0d9619cb4a2c984ee31893df07990ce69a5e74fd445ec70ca"
     },
     {
       "bytes": 6325,
@@ -11946,7 +11946,7 @@
     {
       "bytes": 1627,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/authoring-v3/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-dgc/manifest.tsv",
-      "sha256": "c193b5a6e8723c98fcd0533d4c3e04e98e3fac92e3dd2b1a6d7e0af1289878e8"
+      "sha256": "6c1b3bf32f22c951f33a70a1f539f262fbeca7f8b61db0477941e78bdf3624a1"
     },
     {
       "bytes": 6189,
@@ -11961,7 +11961,7 @@
     {
       "bytes": 1003,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/authoring-v3/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-dgc/target-3.txt",
-      "sha256": "d9abd0532c48169e7e890381bbea022577091d852c366d94ce00c149053efc49"
+      "sha256": "031095562a4e27e9f648a0c7763a708d7015e7c8ee4ff3fc304b57d32657b569"
     },
     {
       "bytes": 1575,
@@ -11986,17 +11986,17 @@
     {
       "bytes": 577,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/authoring-v3/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-fnd/manifest.tsv",
-      "sha256": "c7198e27be21f14aa8dbaee1afe1b8420e850513210527b3058c98f92b0c197a"
+      "sha256": "c92df1e96b893dd1836fa93affb1fed4423566464e7a64b96ef4a9097e690fe7"
     },
     {
       "bytes": 2759,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/authoring-v3/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-fnd/target-1.txt",
-      "sha256": "de075aa382139b3a92b5803553756dd95a55398162dfb9a2a42b3eef81b78cd5"
+      "sha256": "31c4dbb4bca24c92cadc1de076fd80bd1cefb5b9df16a1fa0bc8077c095f5569"
     },
     {
       "bytes": 79534,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/authoring-v3/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-fnd/target-2.txt",
-      "sha256": "158da261b7e0d50825993a39958aa00fbb2891053ecf61689076d75dc8417fe9"
+      "sha256": "021e4dff92d1fe78e015c7538c5d28e503dac8c62f43d09df3c831bdf3ddccf1"
     },
     {
       "bytes": 8723,
@@ -12116,12 +12116,12 @@
     {
       "bytes": 666,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/authoring-v3/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jgr/manifest.tsv",
-      "sha256": "9e786b9cfecb9de99d39d30d063d78faad48d493412eb67cc3770dbda1e6afd4"
+      "sha256": "3a4a8aeacf2c3f971ce8e46ecd6e4c7da182c40e0696d6123559eed0106b015c"
     },
     {
       "bytes": 32695,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/authoring-v3/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jgr/target-1.txt",
-      "sha256": "90e792b538bcb6507f6dc3a7a362e397037dba92967f7509142e1645d80c7418"
+      "sha256": "b042f627a9528365138428cf0029709cc91ec0027e421ffc33b8c5f957defaff"
     },
     {
       "bytes": 1214,
@@ -12136,7 +12136,7 @@
     {
       "bytes": 43840,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/authoring-v3/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jgr/target-4.txt",
-      "sha256": "c7b523e41fd0e9c85409c3d6060628af80c85c5a8ebcbc23ef197008e61dcc8f"
+      "sha256": "8394f9a143b7b7ac0487dab52668d65b0963f2b2b2bfe4a392278819d1927359"
     },
     {
       "bytes": 759,
@@ -12336,7 +12336,7 @@
     {
       "bytes": 71439,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/authoring-v3/project/src/main/resources/qualification.json",
-      "sha256": "737469840c54e1e2599e931a6c7b39d16e294a7e2f37debfb0a65c8345bdf24b"
+      "sha256": "6caa9aa81e8677c304547483b2d57a03ae9b3c67d7bbbd10ab142fd45713f905"
     },
     {
       "bytes": 31249,
@@ -12356,12 +12356,12 @@
     {
       "bytes": 2205,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/authoring-v3/project/src/test/resources/before/.github/workflows/m3-foundation.yml",
-      "sha256": "736f90932bae21b4fb650eb8451f42999fab0a15fe7787cdc80a6375fd3866d8"
+      "sha256": "1a1ddd014a5cce76e75b1e4fce5c4cd0c746a3dbf5f18ef3a1bc9dad7d8fbdd1"
     },
     {
       "bytes": 15148,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/authoring-v3/project/src/test/resources/before/.github/workflows/m3jdk21-backports.yml",
-      "sha256": "95cf2675cf9756311909303a568662efdc5f4d3c796f9f5fc92a10072c6c97ad"
+      "sha256": "344c24d590f39ec478f17986a08325c9935a8be57c7b28308121f239967c342a"
     },
     {
       "bytes": 6120,
@@ -12386,7 +12386,7 @@
     {
       "bytes": 14827,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/authoring-v3/project/src/test/resources/before/m3/backports/generate_recipe_crates.py",
-      "sha256": "a13ea7038406394c62d2b613587e24647feafe413446610929e355f9aff38646"
+      "sha256": "8b19ddb3b5ff9af924a87a1d93eac9be48e4ba931865f4939bfc86fcc15f6f28"
     },
     {
       "bytes": 2934,
@@ -12416,7 +12416,7 @@
     {
       "bytes": 17732,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/authoring-v3/project/src/test/resources/before/m3/backports/test_generate_recipe_crates.py",
-      "sha256": "3538e1793367f0fb0a6eea541533d6f818fc3aa89065c0731f2f08016d399ee4"
+      "sha256": "f365293fdd800153649c0a36250295ed86ccae36775a246656a0521b00cb890f"
     },
     {
       "bytes": 5171,
@@ -12516,7 +12516,7 @@
     {
       "bytes": 793,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/authoring-v3/project/src/test/resources/before/m3/tooling/backport-dag/src/main/resources/jdk/m3/tooling/dag/adapters/camel/m3-backport-route.yaml",
-      "sha256": "b81e897b0c34961102aeb98920a1f5fcfa95b6f3b41fdf9c4f8208e78e8796d8"
+      "sha256": "b087067d88a5778f0ebf83bf4a0196dfa66be40778ea0b07f9c22d313a585ea6"
     },
     {
       "bytes": 1575,
@@ -12781,7 +12781,7 @@
     {
       "bytes": 66573,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/evidence/producer-v2/project/proof.py",
-      "sha256": "adbd5eb72149e46fd272c932d5ac95124891ca1b68851233d02b5dd6716c7d31"
+      "sha256": "61ea01edaba87cd833c853766260ea64d1e38bcff6aa02bf059673e881c81b7a"
     },
     {
       "bytes": 299,
@@ -13376,12 +13376,12 @@
     {
       "bytes": 1316,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/evidence/producer-v2/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cgo/manifest.tsv",
-      "sha256": "c139fb1babb257dbb8f1aa5b5372a4bd5806ba57f7ac425c1a5bd3897c2f91f7"
+      "sha256": "a56abd2fdd313b9eb057087a4cdf6653dd8a2141a781b342fdc77b8e3811a2da"
     },
     {
       "bytes": 5159,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/evidence/producer-v2/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cgo/target-1.txt",
-      "sha256": "4c86fb6ddc117ed481309811887df97233803c708dd19b599516e229cddf4178"
+      "sha256": "885e4e4a5f530153c1af2e592d653273efff1775b4e35a0c4899f4c5c7d9b35e"
     },
     {
       "bytes": 344,
@@ -13406,17 +13406,17 @@
     {
       "bytes": 2247,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/evidence/producer-v2/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cgo/target-6.txt",
-      "sha256": "7d55178b0bf55e919bea24da21ab07582c3ec2c503662e0a6b20082ae31350e5"
+      "sha256": "9c5d9d7ceff0328f6db0bf44aa3c439b69eb3d8cf018929d98961e6cb96041b2"
     },
     {
       "bytes": 374,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/evidence/producer-v2/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cib/manifest.tsv",
-      "sha256": "bb094412707f0b0fc2b3f8e6f3ffd4bd2d6c64ba3f6dde999897ae4b527fd1c8"
+      "sha256": "550d220b04c80b90bfd4980b1737dabe0145f07501eff73601e045be9b8a68e2"
     },
     {
       "bytes": 15862,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/evidence/producer-v2/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cib/target-1.txt",
-      "sha256": "dbfb5f780ed8682fa89e0429da00404db089c8c6eee246a8d7359579d2fe7392"
+      "sha256": "9218cb292ce2c9c0d9619cb4a2c984ee31893df07990ce69a5e74fd445ec70ca"
     },
     {
       "bytes": 6325,
@@ -13481,7 +13481,7 @@
     {
       "bytes": 1627,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/evidence/producer-v2/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-dgc/manifest.tsv",
-      "sha256": "c193b5a6e8723c98fcd0533d4c3e04e98e3fac92e3dd2b1a6d7e0af1289878e8"
+      "sha256": "6c1b3bf32f22c951f33a70a1f539f262fbeca7f8b61db0477941e78bdf3624a1"
     },
     {
       "bytes": 6189,
@@ -13496,7 +13496,7 @@
     {
       "bytes": 1003,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/evidence/producer-v2/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-dgc/target-3.txt",
-      "sha256": "d9abd0532c48169e7e890381bbea022577091d852c366d94ce00c149053efc49"
+      "sha256": "031095562a4e27e9f648a0c7763a708d7015e7c8ee4ff3fc304b57d32657b569"
     },
     {
       "bytes": 1575,
@@ -13521,17 +13521,17 @@
     {
       "bytes": 577,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/evidence/producer-v2/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-fnd/manifest.tsv",
-      "sha256": "c7198e27be21f14aa8dbaee1afe1b8420e850513210527b3058c98f92b0c197a"
+      "sha256": "c92df1e96b893dd1836fa93affb1fed4423566464e7a64b96ef4a9097e690fe7"
     },
     {
       "bytes": 2759,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/evidence/producer-v2/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-fnd/target-1.txt",
-      "sha256": "de075aa382139b3a92b5803553756dd95a55398162dfb9a2a42b3eef81b78cd5"
+      "sha256": "31c4dbb4bca24c92cadc1de076fd80bd1cefb5b9df16a1fa0bc8077c095f5569"
     },
     {
       "bytes": 79534,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/evidence/producer-v2/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-fnd/target-2.txt",
-      "sha256": "158da261b7e0d50825993a39958aa00fbb2891053ecf61689076d75dc8417fe9"
+      "sha256": "021e4dff92d1fe78e015c7538c5d28e503dac8c62f43d09df3c831bdf3ddccf1"
     },
     {
       "bytes": 8723,
@@ -13651,12 +13651,12 @@
     {
       "bytes": 666,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/evidence/producer-v2/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jgr/manifest.tsv",
-      "sha256": "9e786b9cfecb9de99d39d30d063d78faad48d493412eb67cc3770dbda1e6afd4"
+      "sha256": "3a4a8aeacf2c3f971ce8e46ecd6e4c7da182c40e0696d6123559eed0106b015c"
     },
     {
       "bytes": 32695,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/evidence/producer-v2/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jgr/target-1.txt",
-      "sha256": "90e792b538bcb6507f6dc3a7a362e397037dba92967f7509142e1645d80c7418"
+      "sha256": "b042f627a9528365138428cf0029709cc91ec0027e421ffc33b8c5f957defaff"
     },
     {
       "bytes": 1214,
@@ -13671,7 +13671,7 @@
     {
       "bytes": 43840,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/evidence/producer-v2/project/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jgr/target-4.txt",
-      "sha256": "c7b523e41fd0e9c85409c3d6060628af80c85c5a8ebcbc23ef197008e61dcc8f"
+      "sha256": "8394f9a143b7b7ac0487dab52668d65b0963f2b2b2bfe4a392278819d1927359"
     },
     {
       "bytes": 759,
@@ -13871,7 +13871,7 @@
     {
       "bytes": 71439,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/evidence/producer-v2/project/src/main/resources/qualification.json",
-      "sha256": "737469840c54e1e2599e931a6c7b39d16e294a7e2f37debfb0a65c8345bdf24b"
+      "sha256": "6caa9aa81e8677c304547483b2d57a03ae9b3c67d7bbbd10ab142fd45713f905"
     },
     {
       "bytes": 31249,
@@ -13891,12 +13891,12 @@
     {
       "bytes": 2205,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/evidence/producer-v2/project/src/test/resources/before/.github/workflows/m3-foundation.yml",
-      "sha256": "736f90932bae21b4fb650eb8451f42999fab0a15fe7787cdc80a6375fd3866d8"
+      "sha256": "1a1ddd014a5cce76e75b1e4fce5c4cd0c746a3dbf5f18ef3a1bc9dad7d8fbdd1"
     },
     {
       "bytes": 15148,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/evidence/producer-v2/project/src/test/resources/before/.github/workflows/m3jdk21-backports.yml",
-      "sha256": "95cf2675cf9756311909303a568662efdc5f4d3c796f9f5fc92a10072c6c97ad"
+      "sha256": "344c24d590f39ec478f17986a08325c9935a8be57c7b28308121f239967c342a"
     },
     {
       "bytes": 6120,
@@ -13921,7 +13921,7 @@
     {
       "bytes": 14827,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/evidence/producer-v2/project/src/test/resources/before/m3/backports/generate_recipe_crates.py",
-      "sha256": "a13ea7038406394c62d2b613587e24647feafe413446610929e355f9aff38646"
+      "sha256": "8b19ddb3b5ff9af924a87a1d93eac9be48e4ba931865f4939bfc86fcc15f6f28"
     },
     {
       "bytes": 2934,
@@ -13951,7 +13951,7 @@
     {
       "bytes": 17732,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/evidence/producer-v2/project/src/test/resources/before/m3/backports/test_generate_recipe_crates.py",
-      "sha256": "3538e1793367f0fb0a6eea541533d6f818fc3aa89065c0731f2f08016d399ee4"
+      "sha256": "f365293fdd800153649c0a36250295ed86ccae36775a246656a0521b00cb890f"
     },
     {
       "bytes": 5171,
@@ -14051,7 +14051,7 @@
     {
       "bytes": 793,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source/sources/recipe-recovery/current-integration-c0/evidence/producer-v2/project/src/test/resources/before/m3/tooling/backport-dag/src/main/resources/jdk/m3/tooling/dag/adapters/camel/m3-backport-route.yaml",
-      "sha256": "b81e897b0c34961102aeb98920a1f5fcfa95b6f3b41fdf9c4f8208e78e8796d8"
+      "sha256": "b087067d88a5778f0ebf83bf4a0196dfa66be40778ea0b07f9c22d313a585ea6"
     },
     {
       "bytes": 1575,
@@ -14447,7 +14447,7 @@
   "plan": {
     "bytes": 361405,
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/package-plan.json",
-    "sha256": "af187b0e6018bb7c63839f8767b61a27e46bfc8ef8ae29ae13f7da6df9b39c5a"
+    "sha256": "f50498e692e4962ff3bfcab0f35c8983af2c13b7138516ee5d644c0e25ba1cbf"
   },
   "projectLogicalFiles": 292,
   "proofGatesExecutedByPackaging": false,
@@ -14455,7 +14455,7 @@
   "sourceClosure": {
     "bytes": 4669388,
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/SOURCE-CLOSURE.json",
-    "sha256": "ed049408b2ba549de7f453aebc5c91f066fe0332a6a95196cd3797fcaa51c3ad"
+    "sha256": "ec0b69741e4b9247d5740d4fb0a160368c9378a480c09c19a514534fa0426678"
   },
   "status": "READY_FOR_ROOT_REVIEW_NOT_EXECUTED"
 }

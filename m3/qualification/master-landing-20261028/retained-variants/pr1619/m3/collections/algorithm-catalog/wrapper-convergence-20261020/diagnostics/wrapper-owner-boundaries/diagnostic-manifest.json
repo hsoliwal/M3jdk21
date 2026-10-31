@@ -13,8 +13,8 @@
     "M3WrapperConvergenceContract.baseline.java.txt": "989507e15f05f3d931c51e7ae65d65dbc3fac7b80bc94984e4b9922ea17e8335",
     "README.md": "4fbca9a034b2d88305cd1ff03ff404733bce4b3255a5e8488276c6064419eb57",
     "SOURCE_REVIEW.md": "16aa5d235cc32d9b23532d77cc69dd9de6b10d7aa8241e2be7128d8d49c27070",
-    "recorded-replay-layout-amended.json": "6a6aca04c450c18389e7830e86f23e73ebe2caf296afc32c58c7ca38d617d386",
-    "recorded-replay.json": "57962c6bafcc9703546f4686a139bc6ded7e86c55549e64d005d929f57f4473d",
+    "recorded-replay-layout-amended.json": "d38c129dae1e5d4f94dc633a628bf24c9f5b9fc44a867db4173af83ec1ce8a01",
+    "recorded-replay.json": "2e0b0f4ec82795f5ca79c43db8f872ffdd02288ad96214ab389c44598794c878",
     "run_diagnostics.py": "20f0fa2e5f125eb6e3a2e650af0b699f52c3e3c5456bdca239466ff1a335b02e",
     "src/test/java/com/m3/collections/M3CandidateListBoundaryProof.java": "2388506c077c73b24fdb13b280384863580b832bf71bee7efd101fe0784c3530",
     "src/test/java/com/m3/collections/M3ComparatorBoundaryProof.java": "408f754b2aa9bc915c97bcdf2fdfe6cd12a9ce15a26e21f922772d3cc0f639c8",
@@ -261,7 +261,7 @@
     "original_record": {
       "disposition": "UNCHANGED_HISTORICAL_EXECUTION_EVIDENCE",
       "path": "recorded-replay.json",
-      "sha256": "57962c6bafcc9703546f4686a139bc6ded7e86c55549e64d005d929f57f4473d"
+      "sha256": "2e0b0f4ec82795f5ca79c43db8f872ffdd02288ad96214ab389c44598794c878"
     },
     "reason": "Use the canonical Java engine admitted src/test/java source root without changing the engine."
   }

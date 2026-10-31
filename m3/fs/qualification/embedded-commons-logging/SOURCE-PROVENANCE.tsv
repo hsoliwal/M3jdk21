@@ -5,7 +5,7 @@
 # Current M3FS other Commons and native SQLite dependencies remain pending; installed-image gate HOLD.
 m3/fs/legal/commons-logging/LICENSE.txt	cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30	d645695673349e3947e8e5ae42332d0ac3164cd7	ASF Apache-2.0
 m3/fs/legal/commons-logging/NOTICE.txt	785071a94ab6133000164bc6ed8543da88231503768dfeadcc83847af99cf8f8	556bd03951d4b677ef8552ad9a246643a449e938	ASF Apache-2.0
-m3/fs/pom.xml	b1c201399c3cf0c0d2361717892d9d46af9cffaccf22610c462002035fe0dacb	40cb8ebe00a7b2243f6c23cbd7e35af9072acc43	M3 source-build metadata
+m3/fs/pom.xml	d1b34a6e4b858ef6d0bcdd726f97bbb8b678536d28cb104e772ed3e75839c77c	5574d0c8320a3515f9155685d9d60a7a580d6aa9	M3 source-build metadata
 m3/fs/src/main/java/org/apache/commons/logging/impl/Jdk13LumberjackLogger.java	cd372a40a1ef864ecfb7da73b9b3ae691a26d714838e7b16ceed73e0aca3d2ad	bce53649274408ada0e5f3aaa64e513836ff636f	ASF Apache-2.0 tag LOGGING_1_2
 m3/fs/src/main/java/org/apache/commons/logging/impl/Jdk14Logger.java	f5ceaf4adb3adafc9bd125c9b95c29718037f86b9da60043083bb933b37bb9e5	18e6b40fc6783f718e16ac43320704623f37f701	ASF Apache-2.0 tag LOGGING_1_2
 m3/fs/src/main/java/org/apache/commons/logging/impl/LogFactoryImpl.java	7be9fad9e023fd67428124d7c96fb0cff087e24c17e82fe70c72cbad2c5a8a70	56b4a14fd8265902280ef7721c780fb94813573e	ASF Apache-2.0 tag LOGGING_1_2

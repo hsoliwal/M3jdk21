@@ -20,8 +20,8 @@
       "exit": 0
     }
   ],
-  "source_seals_sha256": "a076d8c7c82542897aef843b640cc88e762bbf088128c4ca34c262db4c4dba27",
-  "sdk_receipt_sha256": "2507ef44c70050f5b1ce5cde5c87e0f5fd793112f2f5d5fc4a80fb51857dd586",
+  "source_seals_sha256": "ea99837eeb463fbc09858de4249c77130b4ef8ddd0df3468386badab53c6fcc4",
+  "sdk_receipt_sha256": "b5f4998aa91aa97b9b2e87a2feff682130f6d093dc8c39073d774bb14da1b8ee",
   "core_target_commit": "e7c2f67a2e0ea7729ff56feff217d6e15206e84a",
   "canonical_owner": "m3-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021"
 }

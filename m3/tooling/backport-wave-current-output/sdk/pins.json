@@ -9,9 +9,9 @@
   "files": [
     {
       "path": "FOSS_REUSE_DECISION.tsv",
-      "gitBlob": "b1d20bf402fac6ddd078a15f8c52819b56db4b3f",
+      "gitBlob": "4103ffd88bfabaa675bef3bdb7fdfd7e91dd238e",
       "bytes": 848,
-      "sha256": "7bd81e4c46a50d4e2fb5be43465054eabb1ea1629039837577d5f8f3b289040c"
+      "sha256": "5edd11818b033b0fdf0dfcc2a17aebd7dc4163bb678e67506a8d129417e4c340"
     },
     {
       "path": "pinned-engine/jdk/internal/m3/rewrite/M3BackportWaveCurrentOutputInverseRecipe.java",
@@ -51,9 +51,9 @@
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/before/.github/workflows/m3jdk21-backport-wave-admission.yml",
-      "gitBlob": "60a24153dcefb57499c921a264c94402df8af16d",
+      "gitBlob": "c79022773165a4046a6078363bcb27ef4beb7d1d",
       "bytes": 3717,
-      "sha256": "1cf79b31b3dbcb74bf3858f1c898072a836ffae2da6f0d5de731cf09d4132d31"
+      "sha256": "3a7744e60786b90a474b16468fdec6f4d51fe576e3c99ed92bbf0b7b25909f57"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/before/m3/backports/BACKPORT_EXECUTION_WAVES.md",
@@ -111,27 +111,27 @@
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/inverse/manifest.tsv",
-      "gitBlob": "42654a961cd214bd1654854f14a2679dcf379e06",
+      "gitBlob": "b6e4dcfe564226bcc3d4c2e279909edbb84ac63c",
       "bytes": 1840,
-      "sha256": "ac09b63f395cd1e0ea6126c07e8cf3fac9a79e4ff59f5be18f390b69fd04b703"
+      "sha256": "6968c988a1156007c551909dc402f1d63500b44948b710c9116d0b30c498e6d7"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/inverse/out/.github/workflows/m3jdk21-backport-wave-admission.yml",
-      "gitBlob": "60a24153dcefb57499c921a264c94402df8af16d",
+      "gitBlob": "c79022773165a4046a6078363bcb27ef4beb7d1d",
       "bytes": 3717,
-      "sha256": "1cf79b31b3dbcb74bf3858f1c898072a836ffae2da6f0d5de731cf09d4132d31"
+      "sha256": "3a7744e60786b90a474b16468fdec6f4d51fe576e3c99ed92bbf0b7b25909f57"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/manifest.tsv",
-      "gitBlob": "e6314c6c907414a0e831f63227c3042ba104ba42",
+      "gitBlob": "1b7d20616f0112e92305935727cfb877c6b1a60f",
       "bytes": 1840,
-      "sha256": "df4fd6e222f64e6a9e1d9b6ad7e99b05a3f2bc4dbe41646fe2672f216492204b"
+      "sha256": "9e1c22cab7e958eebf90605fae5d24f4d32991ad6f1e3538b6673d1a682627ab"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/out/.github/workflows/m3jdk21-backport-wave-admission.yml",
-      "gitBlob": "c9017928ee7796eb70ea2c899c541ce139d7b458",
+      "gitBlob": "0eab21184c1b7d90ded858acdeac5c7cc2e1382c",
       "bytes": 3717,
-      "sha256": "539abe591a91c37ddc16601b0ce2bcccc4a238605f8eda72c3f8008920c9b51f"
+      "sha256": "942fe1f46b1b4f7c91418ded4c94b045576ec31b52dfed3ce0ac45ed4608ff25"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/out/m3/backports/BACKPORT_EXECUTION_WAVES.md",
@@ -201,9 +201,9 @@
     },
     {
       "path": "src/test/java/jdk/internal/m3/rewrite/M3BackportWaveCurrentOutputRecipeTest.java",
-      "gitBlob": "4a1cd5b05063bd45e20249d50b17e2b6d7d1837c",
+      "gitBlob": "1ba3166c623dc1e3e3fb68b232e1ee61aa58e1c5",
       "bytes": 18087,
-      "sha256": "b8f92e6a5b05682c46749d1841bd2c59ba73453aafdc8d3a18f2077ed5e42664"
+      "sha256": "1733966fb5553147c355d6b86877946a21e677ee9b3b9effcd19cdc77b6f3b09"
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
@@ -213,9 +213,9 @@
     },
     {
       "path": "verify.py",
-      "gitBlob": "3b2a01a0778939dc5ce1a5c22956802a08af8498",
+      "gitBlob": "2d45eb9e4fd77a14c3e7af7c126f7cbd06126957",
       "bytes": 25000,
-      "sha256": "22ec170292e23ffabde6de0ba075da722e906e23732bc3757d59f61ba3211322"
+      "sha256": "9278d7714e2c81a87b79396b5539b41c2e389dc11a3bc990793260611dec538b"
     }
   ]
 }

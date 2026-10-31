@@ -5,11 +5,11 @@
   "events": [
     "12db3d3bea4b8a5b958ed799934c0bbe33ea8b416a47f45d803495f1e4b11acf",
     "c876494cd3b2b01d905bb5a623ad97981e9ff113ebc0740978b0a4206491de2d",
-    "093cfae9d76bd99b0c97aa81cac51e3a1834c0c14c3cd7bbd0c4c0f7bcc9fe54",
-    "c960a4f166495a83f6c289b4f03ab76a74b3c42e09b2f9dd3f1046625639c120",
-    "2bc163b52e2e50a1254ba885980ed7cfdb88a5abe598f8849d4e85433afb9fa1",
-    "fc16016f246125317e2977ea0c887868414702be9d8ef627d4a664407628bf59",
-    "9b5ec28452aebfe830ecc58ddba5bc8184579b2ae0f8619389c65ba2ad41d228"
+    "f23628de2938b1bb2a2e66ef689a40ab54a4cadca2af9d0c7158a5707f51fbbc",
+    "101b737403729e6eac9106693b5ed4e7e5c38f74499bf45221f8bd67712c6ef9",
+    "c4be4af96ddd29d4e3d401831a277a76a6057f52696b5e579625eef0bf899eaf",
+    "0d7c9961287179121cac73d192c05d6d69ae9f53bba54ea6a977205c9b28db7b",
+    "5d0e40afa2e14ee0fffb4f19d6d9898a09c0281709621dd72adc897f9fbc9072"
   ],
   "event_count": 7,
   "conformance_checks": 129,
@@ -18,7 +18,7 @@
   "admission": "PENDING",
   "predecessor_checkpoint": {
     "path": "memory/FINAL_RESULT-002.json",
-    "sha256": "541cfecd6839afae3f9e62d8886b37940c263aaee04ac5bf7b2f012520ad5b04"
+    "sha256": "94aa96ff30d77670b8efd70c42336775eae9ed1720e66618a60170f9d5cae0a9"
   },
   "profile_receipt": {
     "path": "memory/PROFILE.md",
@@ -26,20 +26,20 @@
   },
   "retrieval": {
     "path": "memory/LESSONS-003.md",
-    "sha256": "2e29b8f266e85b8ee24194dea4cce717ced1e882c3768567100d254caee451d2"
+    "sha256": "eb78446f97db102b89fef4c954d63572d02171eb0b12cb11331f8684388dd51a"
   },
   "index": {
     "path": "memory/INDEX-003.json",
-    "sha256": "cd3487181203a0bb4a3f6eb81b0dac0c2540fd9468a17cf5c46d8f071355b02e"
+    "sha256": "2531f31ddb7a7a4641a915ec5ee2146ded3139f0f719976842b9527026193204"
   },
   "verification": [
     {
       "path": "proof/sdk-003-workflow-successor-offline/RESULT.json",
-      "sha256": "57ccb0c5a801848e80e472ac533c7e287b1eaac8c36960824acc952ea19dbb25"
+      "sha256": "c7edd6e3cc89d93b7fd6fce6bb98b9c0d204531fd8bbfa47d9abcb9bf2dfa818"
     },
     {
       "path": "proof/memory-integrity-003/RESULT.json",
-      "sha256": "dc4d779f2caafa39b88392128456475046df9e7e3a2aea9958add5f2433679e6"
+      "sha256": "d774bcd8f96a6dabcd4276c46a24b686554f99b14b0694ef10471d91f97215d2"
     }
   ],
   "scope": "Seventh actual publication-preflight observation appended; all prior event and checkpoint bytes preserved. Corrected publication helper outcome is separate from this profile/integrity result."

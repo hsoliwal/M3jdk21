@@ -2,8 +2,8 @@
   "changes": [
     {
       "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccMergeRecoveryTest.java",
-      "before_sha256": "a3b2ab17f249f1f12031715f1df06092e1ee9b38319f353686adab89872de267",
-      "after_sha256": "127680b221fa5ba0cf143562b84202e04bf3b0f80384d7556dba147c01a05ff1"
+      "before_sha256": "52b07aa360de7f06ce885403d65b84c14454def78e2f6ed4d4eed73d89513cb2",
+      "after_sha256": "34cfc90c01937332d7a7993d660d900a787ce5a71289f0d33cf4e6c9fb486499"
     }
   ],
   "unchanged_tests": 6,

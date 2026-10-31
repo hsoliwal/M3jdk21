@@ -29,11 +29,11 @@
     "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/preimages/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml": "ff8b2c1db5fffa1a9013fc863a1f5dac337b2cb633c07d513339b57fcce40b80",
     "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/prepare_packet.py": "d3b2319c095b0ae0e12dc408287bfbb917e0c7871e2753bcf34b188b3b100cbd",
     "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/qualify.py": "c50f89d00609e76c35baadc7eba90706f534ef38643ddac8651f544ad58e7939",
-    "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/src/test/java/com/synexia/rewrite/M3SwtCurrentOwnerRuntimeClosureRecipeTest.java": "2ec05f671df50d255c98ac04432fa679c5b35d0633851cfacc9d0f3f4175dd62",
-    "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/verify_sources.py": "875e3c5f2961dbf957207e4d0a495cb17aa837d656d181c0de2e8a4583bb63ca",
+    "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/src/test/java/com/synexia/rewrite/M3SwtCurrentOwnerRuntimeClosureRecipeTest.java": "d1313391568f0fddbfda2786fc6924ba5b77f66e2e98bfb75d6b559fe606283c",
+    "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/verify_sources.py": "83b20a4bc348546e642fa6c04ba36fff86aca7fdd598f0b35a2f9301afc9415c",
     "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
     "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java": "92cc90c46a1ca672a016a89c0d65e6909e090264ba1aa76a85b7fa333470e38b",
-    "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java": "613fd494de5eebdbc29d8982c599d44cd321754b370175f7d097720904a04853",
+    "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java": "3b4f7649fc3ee38df62a6dc9b318e8845da6574f7e48b4cd7a948b58e266d46f",
     "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java": "d2cd6bb4d800878b9f512bf436bf4e38cf73b37676235832e1f68840cfe895c0",
     "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/swt-current-owner-runtime-closure-20261021.yml": "9d32dd1cdb7cbb16370b326f524ba9b8306a22b8eb1b7214219139f1c8062339",
     "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/swt-current-owner-runtime-closure-20261021-001/manifest.tsv": "ba31fd4348f970884c297eec7cf01e00df39762fb826e8d57f0cc7c4143ce07b",
@@ -41,6 +41,6 @@
   },
   "source_inputs_unchanged": true,
   "task_receipt": "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/RESULT.json",
-  "task_receipt_sha256": "94112bdac83b7756c78d4ea92c24b0eb4cc948e7bd73622b7d96cd0fa4df2774",
+  "task_receipt_sha256": "d35f94052eb5c38a88997ec4157a4a6a0ede7fe16a5b95a6ef70b2c0bd3a917f",
   "compiled_outputs_retained_in_temporary_directory_only": true
 }

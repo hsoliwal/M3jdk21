@@ -9,10 +9,10 @@
   "rows": [
     {
       "path": "m3/docs/name-mapping.json",
-      "before_sha256": "12bfa8d328b74ba4de930d993c8194b8db51f3a111617690dff9f1ffebaea1c2",
-      "after_sha256": "ac5aefa32595e7a5d829e8d1870772b464f5d070f11799526104d3ff32ed3675",
-      "before_git_blob": "6ba02aa22af26a2b4bb4b4890496bd300bc0a9fa",
-      "after_git_blob": "99f5343d276595ec28d053a9bafd8a51dca971eb",
+      "before_sha256": "e76133a4d1bb472dfc88a41e8d8560d5ac0e08ba4d227b3b6c8fbd95915e6ebc",
+      "after_sha256": "23113e94eba0ac7b745fd8dee95d27fa80fc12100534a32f447c3124879c5e39",
+      "before_git_blob": "44c966eca8e52d8c86925478d5b3ffbb45882e82",
+      "after_git_blob": "6bce7c06e322a1d43526e775a006856ac4a394c3",
       "before_bytes": 308294,
       "after_bytes": 355729,
       "before_resource": "before-00.txt",
@@ -53,7 +53,7 @@
     }
   ],
   "plan_sha256": "884b2722f1f6a7df5b8c872542d7b06a513c82f973a3219347639bd617ad88ba",
-  "manifest_sha256": "2206497a6bf01edaa9dbc7a3053619d1748f3b2598df30640ee8f4f975b6e498",
+  "manifest_sha256": "d7a95f92813e6f5346969bf290aaa2041806ccfd9123fdc76d467eff490336f8",
   "source_input_sha256": "7db913209511a230e36a8da12282b3e4a6f84193399821ce9693042f616fa39d",
   "input_epoch_sha256": "4fd3b3bd4fb09759d8bb02ca9ba45d0b2934625f24bcc4ae195f3e49394dff70",
   "destination_root_tree": "bba8647ea80d1cb4101394b4c0fc5a97f0b8eb52",

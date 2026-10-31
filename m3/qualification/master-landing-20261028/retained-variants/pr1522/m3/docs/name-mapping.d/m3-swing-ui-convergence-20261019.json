@@ -1131,7 +1131,7 @@
     "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
     "current_collection_source_admission": "PASS_UNIFIED_CURRENT_MANIFEST; SDK3/module477/native477",
     "current_swing_source_admission": "PASS_EXACT_SOURCE_IDENTITY; historical runtime/SDK execution reused without a rerun claim",
-    "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+    "manifest_sha256": "ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6",
     "phase_promotion": false
   }
 }

@@ -71,14 +71,14 @@ final class JccMergeMappingRecoveryV04Test {
             + "M3Jdk21HashPinnedTextSnapshotRecipe.java";
     private static final String TEXT_OWNER_SHA256 = "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795";
     private static final String PRIOR_MAP_SHA256 = "abfc59de62d46f6442b95717ac367461ab057cd74ed9dfffc6515d7fb0a1574c";
-    private static final String PRIOR_BINDINGS_SHA256 = "e17e0e066988a03583beab519a2ce4381c93f31b1da8ddf465f627cd68566b8d";
+    private static final String PRIOR_BINDINGS_SHA256 = "59b1491a232e3eabfd0530cbf47b01265603e6f493e382aa3c394c629b0516b6";
     private static final String SOURCE_COMMIT = "bc06298218dd88f0164ed9b67e74fd8234ed70b2";
     private static final String SOURCE_ROOT_TREE = "a72565e0e67f330f12c712dcc7a3fcbe1d80d24e";
     private static final String SOURCE_INPUT_SHA256 = "7db913209511a230e36a8da12282b3e4a6f84193399821ce9693042f616fa39d";
     private static final String SUMMARY_SHA256 = "2ebbe21f8d65204544857c195e896eafa12dec5903c4959bebfb3a7b7208951f";
-    private static final String MANIFEST_SHA256 = "2206497a6bf01edaa9dbc7a3053619d1748f3b2598df30640ee8f4f975b6e498";
+    private static final String MANIFEST_SHA256 = "d7a95f92813e6f5346969bf290aaa2041806ccfd9123fdc76d467eff490336f8";
     private static final String PLAN_SHA256 = "884b2722f1f6a7df5b8c872542d7b06a513c82f973a3219347639bd617ad88ba";
-    private static final String PLAN_FILE_SHA256 = "ff09530dbeaa655a3c2972d046d04134eeb5d3da62c7c6bedadb7e178167fd4f";
+    private static final String PLAN_FILE_SHA256 = "7cb7b904314619da8d43b74f74035b15ba08a3c1d065cd94b98e9056c2158a15";
     private static final ObjectMapper JSON = new ObjectMapper();
 
     private record Target(String path, String before, String after, String beforeHash, String afterHash) {}
@@ -86,8 +86,8 @@ final class JccMergeMappingRecoveryV04Test {
     // Resource numbering follows bind_mapping.PATHS; manifest and plan order is tested separately.
     private static final List<Target> TARGETS = List.of(
             new Target("m3/docs/name-mapping.json", "before-00.txt", "after-00.txt",
-                    "12bfa8d328b74ba4de930d993c8194b8db51f3a111617690dff9f1ffebaea1c2",
-                    "ac5aefa32595e7a5d829e8d1870772b464f5d070f11799526104d3ff32ed3675"),
+                    "e76133a4d1bb472dfc88a41e8d8560d5ac0e08ba4d227b3b6c8fbd95915e6ebc",
+                    "23113e94eba0ac7b745fd8dee95d27fa80fc12100534a32f447c3124879c5e39"),
             new Target("m3/docs/jcc-source-handoff.md", "before-01.txt", "after-01.txt",
                     "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337",
                     "975d986ae5883e2851e39373705d7691d0aa74e6e7be3af47a75093c1ffe46dc"),
@@ -536,7 +536,7 @@ final class JccMergeMappingRecoveryV04Test {
         assertEquals("491bbd80a51483d0710fc12c1bad3a037b385ba0", qualifiedInput.path("root_tree").asText());
         assertEquals("027e47d20c7fb854e028487ceef341c929877a6421dbb75f6433b5cd007fe5ee",
                 qualifiedInput.path("input_epoch_sha256").asText());
-        assertEquals("9f4a4b463e6eacfd43eda099928fd31d2d416dc8c2748babe0c4719e33af2104",
+        assertEquals("071f16e072b74517d9446f9da449ed6d8ef711a79e71c2523717c648bd9bcb68",
                 qualifiedInput.path("publication_manifest_sha256").asText());
         assertEquals("Actual V03 recipe: 13 JUnit methods, four Result outputs, 28 installer refusals, six packaging refusals and canonical PASS completion=INCOMPLETE against C0; preserved evidence is not qualification of the new 090758 input.",
                 qualifiedInput.path("scope").asText());
@@ -544,7 +544,7 @@ final class JccMergeMappingRecoveryV04Test {
         assertEquals(Set.of("commit", "root_tree", "input_epoch_sha256", "scope"), keys(intermediateInput));
         assertEquals("d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2", intermediateInput.path("commit").asText());
         assertEquals("0812573f02908d8078d13f5f49346865cdf1c0e0", intermediateInput.path("root_tree").asText());
-        assertEquals("973be97f762b46278f16c2bae6d887f2bc407110f333fe7ae0e7070e30cbe118",
+        assertEquals("2ea3ffe30ac6824bcc6d708c431b848a4c7997bdb4cdeaaddea1a62640734718",
                 intermediateInput.path("input_epoch_sha256").asText());
         assertEquals("Prior 52-record fixture and inherited TQ validation failures retained; current TQ record is preserved from exact C0 input.",
                 intermediateInput.path("scope").asText());

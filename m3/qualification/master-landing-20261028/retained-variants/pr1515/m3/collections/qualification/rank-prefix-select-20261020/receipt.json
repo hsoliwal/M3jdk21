@@ -60,7 +60,7 @@
   ],
   "status": "DRAFT_COLLECTION_MAVEN_JNI_QUALIFIED_NOT_INSTALLED_JDK_QUALIFIED",
   "local_evidence_sha256": {
-    "INPUTS.tsv": "9a8606824460a809233e884bd3b91c777c48f8df7491f9f5ee056835b8b34552",
+    "INPUTS.tsv": "3664eaa544eef44d97fa852c76462cc3e55bf6c1acc6ed574ef8ac5d7873d875",
     "launcher-provenance-refusals.log": "0727fdff912b3270dd8224a2d3996791da4e5ef7695ec8b9fdedf01b4b3e103d",
     "module-verify.log": "ae0651fc3b128ddf8a1f965022959590ab641b02a4c5e6f227eae91b6f6b834d",
     "rank-interpreter.log": "473c20d5916cd8f0a96d3cebd38093db47b00c51fcda9f455ad3a2d2579df81a",

@@ -83,10 +83,10 @@
     {
       "path": "m3/ports/vcpu/native/CMakeLists.txt",
       "recipe": "native",
-      "before_git_blob": "c70009a27aefc14af12db6fd8b0666f4e638fb0a",
-      "before_sha256": "1dfd8827402bb08e2a77e12d020deb97aa9073edfae870f58e1c0693ea076187",
-      "sha256": "3c085b4528b20b370d76dc966eadbb0db022a679ec14ed513cea4c6ea13b6683",
-      "git_blob": "574d8dac01ddffc43c67965b66faee23d0108739",
+      "before_git_blob": "653ba474c1a5b3ab772c47a6061fbca608f755c7",
+      "before_sha256": "99ab4b6068831402b7a0c65dc3201ec18a5a08a329f06dcb8ae74bdfdd7b2548",
+      "sha256": "90ec9a126a17ae2bba41ff537b1fe9bd0e9fb702f01931e37f1a2f7e6f0ab309",
+      "git_blob": "51b8826cecb9320f7a8132f8be6e0dd6592b3155",
       "license": "Apache-2.0"
     },
     {

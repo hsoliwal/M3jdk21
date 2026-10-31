@@ -26,7 +26,7 @@ def require(condition, message):
         raise SystemExit(message)
 
 
-require(sha(HANDOFF) == "e5340e90c3124c2bae8367cbad3b63df038c6fbc206ef89fd3f568b0f4ca39d1", "handoff drift")
+require(sha(HANDOFF) == "faa8070f990a70aead19e3d2121897b1b1de111e37401edec01b73233ff7d736", "handoff drift")
 require(sha(INVENTORY) == "bd4b3ebb81f82034caab8fec0829e7e77f3099da781dd714c2becce81962d8b0", "source inventory drift")
 handoff = json.loads(HANDOFF.read_text())
 inventory = json.loads(INVENTORY.read_text())

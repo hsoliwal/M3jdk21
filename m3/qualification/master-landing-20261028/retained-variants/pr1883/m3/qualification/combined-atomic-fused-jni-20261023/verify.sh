@@ -28,13 +28,13 @@ import sys
 root = pathlib.Path(sys.argv[1])
 expected = {
     "src/java.base/share/classes/jdk/internal/m3/M3IndexMaskWindow.java": "91c7a99d394fe76a47af0c1eaaa35ffd6d070ee6e2497a63668db8301dd86329",
-    "src/java.base/share/native/libjava/M3IndexMaskWindow.c": "4a9c0ab3e8d7a0aac0027e8fb4789f768ee5a48b2db18b7a54e2fd543c5c7f91",
-    "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java": "0c79f59b111bc1669a626c4a45598b7205319522b0c00c56ef009a8b9ea660e5",
+    "src/java.base/share/native/libjava/M3IndexMaskWindow.c": "a284d0cc09ca01e2c41b67024ac9fd911e69165abd1bf01246f40499e810f8da",
+    "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java": "5617cf2586a2c0b4f8ae9f710e86e4f39f4b880a9fb1fe3deadc04a3f6c58fa9",
     "src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java": "6eaccec5b5ccc41b39ba165c2b5c57768e84d964430a7c28fba0c5061d41ba04",
     "src/java.base/share/classes/java/util/CollectionViews.java": "c8820e5bbd7b7c7b4c683f5081ec74b99a4aac6b854f6c8dc79d4e0ee4767ffb",
     "test/jdk/jdk/internal/m3/M3MaskCountTest.java": "988ab3de69205aebd2c42b26c1be06ae098d149da110ebb5dee861515482b898",
     "test/jdk/jdk/internal/m3/M3MaskPreparedPredicateTest.java": "650969a480f12a861a34252dee5512d1f53c4da9f32370fd546faacc1ef8d572",
-    "test/jdk/jdk/internal/m3/M3MaskCollectionViewIntegrationTest.java": "4d3961f38b9f0776f6a70c4845a9b24b3e73fc5e21292aea6c7c2e547e0b11c5",
+    "test/jdk/jdk/internal/m3/M3MaskCollectionViewIntegrationTest.java": "017c07207b528ae51ac5bf22354e726ab93301890ff3951c142cf0c3f19f432a",
     "test/jdk/jdk/internal/m3/M3FusedMaskedFilteredSortedViewTest.java": "1c599c9f7a8dd98dd1c6b067c7703105923914fa9a86082899a133993ed1bf97",
     "test/jdk/java/util/CollectionViews/BootstrapViewsTest.java": "a36b48eee0924abd57ce1a356d26ce4e8c6516170e65478cd42cb2d09fbd8a75",
     "test/jdk/java/util/CollectionViews/CollectionViewsContract.java": "9177fd1b1e69f5b0ef05188e4c24aad73ac286a32d7e0abdbeff8db730a94067",

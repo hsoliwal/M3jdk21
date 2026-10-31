@@ -7,6 +7,6 @@ m3/collections/src/main/java/jdk/m3/collections/M3FrozenLongSet.java	d145558bd8c
 m3/collections/src/test/java/jdk/m3/collections/M3FrozenLongSetTest.java	4672924887ac30f790b98184d8b565f47e2a4f17	added	2146	PR version, not live; the git blob id is its content address
 m3/collections/src/test/java/com/m3/collections/M3FrozenPrimitiveContractTest.java	f610dd316bb3c88bfce728dc05e14c81eded16bd	added	2146	PR version, not live; the git blob id is its content address
 m3/collections/src/test/java/com/m3/collections/M3FrozenPrimitiveOwnershipTest.java	446fc7685827adc8798f836f40cab97e8eef3924	added	2146	PR version, not live; the git blob id is its content address
-m3/docs/name-mapping.json	7e4e68093afa55557ba4ecca9f80eaa1996202e1	modified	2146	PR version, not live; the git blob id is its content address
-m3/qualification/frozen-primitive-20261029/RECEIVER_RECEIPT.json	27a7dce3f01bf3ad1da08eff2d1703b6d236f29b	added	2146	PR version, not live; the git blob id is its content address
-m3/tooling/name-contract/name-plan.json	394a71fda06cf4c04e3fb9ccc421391758e97205	modified	2146	PR version, not live; the git blob id is its content address
+m3/docs/name-mapping.json	8838449381d55c5dbaae92003cfe2ec3fd5db9b3	modified	2146	PR version, not live; the git blob id is its content address
+m3/qualification/frozen-primitive-20261029/RECEIVER_RECEIPT.json	4eabc72f05dc08d8463b06fa190eb37698d9853c	added	2146	PR version, not live; the git blob id is its content address
+m3/tooling/name-contract/name-plan.json	94a45f0920e0c9cbc814cdc54805f2215ca39e46	modified	2146	PR version, not live; the git blob id is its content address

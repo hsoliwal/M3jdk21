@@ -120,7 +120,7 @@
   ],
   "schema": "M3_CPU_TOOLS_BUILD_V1",
   "self-test_output_sha256": "fdd1a2ea5477a12f4be68be120a982f8cc8fc400e703d3c3cb7ce0f1fabbe28b",
-  "source_inputs_sha256": "4820026bf1b326562771545fa24e981d59c092d0455c3e2a421c7aa06181e310",
+  "source_inputs_sha256": "25aae2b26d067e8dd58d37657148ac4ba371966959e61890f9419de9995c1ad3",
   "source_jdk_linked_modules": [
     "java.base",
     "java.compiler",

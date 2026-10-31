@@ -19,7 +19,7 @@
   },
   "first_stage": {
     "path": "proof/sdk-002-offline/RESULT.json",
-    "sha256": "089c9eb763810e5abe50eec6f41845779289201943e74d8604f186fee657296b"
+    "sha256": "a1abf22e70da8c9ea163546910a24b0d6bd65fa08da6fc51329773f421d1287d"
   },
   "product_edits": false,
   "runtime_source_changes": 0,
@@ -28,8 +28,8 @@
   "derived_files": [
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/SOURCE_SEALS.json",
-      "before_sha256": "80a4d6a34b509ed4d5008fee26a507d1c770b0f936a4468c81dc4cea930b1d19",
-      "after_sha256": "048c61357305b29ade8c822f8624f85ca9743caadb38df13ffe6949d79937c5f"
+      "before_sha256": "b67bfeb515519ed2c24af57feec651a7860a22ce7cb74f7047a319b9a98f0095",
+      "after_sha256": "0b1e4d3f130c6177f56f26319b18b1f789a16547489514172cfbed0f7c02dda4"
     },
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/phases.tsv",

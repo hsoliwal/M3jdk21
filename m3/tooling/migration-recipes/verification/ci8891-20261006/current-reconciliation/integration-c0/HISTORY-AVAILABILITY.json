@@ -126,9 +126,9 @@
     {
       "expected": {
         "bytes": 374,
-        "gitBlob": "b7c32580153d0e57af01b9bd74263f6c8ae0ca6b",
+        "gitBlob": "6012bde84949e71ae42b738f2c7f99c6d21f5be0",
         "mode": "100644",
-        "sha256": "bb094412707f0b0fc2b3f8e6f3ffd4bd2d6c64ba3f6dde999897ae4b527fd1c8"
+        "sha256": "550d220b04c80b90bfd4980b1737dabe0145f07501eff73601e045be9b8a68e2"
       },
       "receivingPath": "m3/tooling/migration-recipes/tasks/m3-ci-8891/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ci8891-cib/manifest.tsv",
       "sourcePath": "m3-openrewrite-recipes/tasks/m3-ci-8891/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ci8891-cib/manifest.tsv",

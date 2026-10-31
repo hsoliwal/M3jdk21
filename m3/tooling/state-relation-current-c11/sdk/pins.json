@@ -9,21 +9,21 @@
   "files": [
     {
       "path": "FOSS_REUSE_DECISION.tsv",
-      "gitBlob": "bba9c671c3c65b5f6ef1b8833c70ecc036dfc893",
+      "gitBlob": "8b653256d4daff814dad69fea07dc109d0ad9139",
       "bytes": 1410,
-      "sha256": "a461637b04d74be6eff49efe3ee4c9626fa86958ea899b8571d412d35fa7034f"
+      "sha256": "3ba5c833675e1b6bef14a7b41e33120591a92162a11b7b9677e809791629ef09"
     },
     {
       "path": "README.md",
-      "gitBlob": "ee1336a9da41c736712beb229f168bf2cbe39821",
+      "gitBlob": "aee59006661dde0fa7144e4859fcbe10f0d69b0f",
       "bytes": 3900,
-      "sha256": "165dda08016d0a7211993701795be5ace235ba06a90a64680ff9b0d9bd043548"
+      "sha256": "8241cc8eababdd7b9ce7e38668363ac0b37f39c0dfbf691e551b8e6befb369e6"
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
-      "gitBlob": "b271965ee18c60e79a50ad1ce489ec94753d8f4b",
+      "gitBlob": "a85e04215e6c4d38d190cc300ed8dca5d5c4b659",
       "bytes": 2061,
-      "sha256": "aefb48831854e78b483f6fde11a0a8e862c9f958636e05f5a771d704bfe8166e"
+      "sha256": "eea3a76a94c5ca27d61b4f252fa9a5a0f18a9fe89a6d344a8691d4173f015b8d"
     },
     {
       "path": "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
@@ -63,9 +63,9 @@
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/state-relation-current-c11-20261019/before/src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java",
-      "gitBlob": "780c7887aaa6b0892a76f4eee1dcb17086a60289",
+      "gitBlob": "d70a152bdedc380ed8b28861ea94ef4c2adbea90",
       "bytes": 8838,
-      "sha256": "bbc2901ebe5b2de9951b672127bd47e9d13c70b5a39482fa0727703d0a2ff757"
+      "sha256": "9d485a1771a30b4229acb5526ca90de5f2df4a03ee5ad8f5388bb128d2c38194"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/state-relation-current-c11-20261019/before/src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java",
@@ -75,21 +75,21 @@
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/state-relation-current-c11-20261019/before/src/java.base/share/native/libjava/M3StateRelation.c",
-      "gitBlob": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
+      "gitBlob": "89b3127f0f262de3e00ba28a01079a659013dce2",
       "bytes": 5899,
-      "sha256": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16"
+      "sha256": "0df1989292b23b1f185f222db61ad55d5e38b30d5b758436ca9d62b8de277bbd"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/state-relation-current-c11-20261019/before/src/java.base/share/native/libjava/m3_state_relation.h",
-      "gitBlob": "18a02e228129827da486edc5b316790af6135310",
+      "gitBlob": "0e0c70e60b2cee61c3df31982a26f4251955cb61",
       "bytes": 1021,
-      "sha256": "c948c0ac34180f1f9412a764c3c9fd8c59e11509467aa9e04f8825e903526885"
+      "sha256": "6a453bbe5c443d327228e48cc27c6d5dc356a67586f93796a52de17e69fa12a2"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/state-relation-current-c11-20261019/manifest.tsv",
-      "gitBlob": "f8f0555d5bdf111b9e585238d6b5c0b0bc2db8be",
+      "gitBlob": "646e9d2e2cfd667771bde1a844f65cd84961b9f9",
       "bytes": 991,
-      "sha256": "81cf9049cdd7bb87a98182b9c1482721ef7fe63a494ab85d2832f82e58e9e312"
+      "sha256": "1daad5ae7810bc33038caf0763e2ba0659642da9643d1541b4def28c8b8b291e"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/state-relation-current-c11-20261019/out/m3/compatibility/regex-relations-20261014/M3RelationPortProof.java",
@@ -99,9 +99,9 @@
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/state-relation-current-c11-20261019/out/src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java",
-      "gitBlob": "780c7887aaa6b0892a76f4eee1dcb17086a60289",
+      "gitBlob": "d70a152bdedc380ed8b28861ea94ef4c2adbea90",
       "bytes": 8838,
-      "sha256": "bbc2901ebe5b2de9951b672127bd47e9d13c70b5a39482fa0727703d0a2ff757"
+      "sha256": "9d485a1771a30b4229acb5526ca90de5f2df4a03ee5ad8f5388bb128d2c38194"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/state-relation-current-c11-20261019/out/src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java",
@@ -111,33 +111,33 @@
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/state-relation-current-c11-20261019/out/src/java.base/share/native/libjava/M3StateRelation.c",
-      "gitBlob": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
+      "gitBlob": "89b3127f0f262de3e00ba28a01079a659013dce2",
       "bytes": 5899,
-      "sha256": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16"
+      "sha256": "0df1989292b23b1f185f222db61ad55d5e38b30d5b758436ca9d62b8de277bbd"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/state-relation-current-c11-20261019/out/src/java.base/share/native/libjava/m3_state_relation.h",
-      "gitBlob": "18a02e228129827da486edc5b316790af6135310",
+      "gitBlob": "0e0c70e60b2cee61c3df31982a26f4251955cb61",
       "bytes": 1021,
-      "sha256": "c948c0ac34180f1f9412a764c3c9fd8c59e11509467aa9e04f8825e903526885"
+      "sha256": "6a453bbe5c443d327228e48cc27c6d5dc356a67586f93796a52de17e69fa12a2"
     },
     {
       "path": "src/test/java/jdk/internal/m3/rewrite/M3StateRelationCurrentC11RecipeTest.java",
-      "gitBlob": "1315d91ec4eb924d0bbe921cabd077d3ba3b51e0",
+      "gitBlob": "2ed4da274c8cdbf10da9140f3ff4fffd3f7d1d73",
       "bytes": 12409,
-      "sha256": "115e14d2e1ec24cdc83c4daa49d536b511723b9b32d903de959415a35eda55fa"
+      "sha256": "88486b4ab5369bd38f41ca4430b735a71be3080ad86ad79491f8eea614485420"
     },
     {
       "path": "src/test/resources/jdk/internal/m3/rewrite/state-relation-current-c11-20261019/historical/M3StateRelation.c.txt",
-      "gitBlob": "5b30f71d8ed878b3199225b9512b75a090ff896c",
+      "gitBlob": "e6a10286f64052cb948de1dbcc43aaaa1d33db1e",
       "bytes": 5839,
-      "sha256": "66d28e350f4894498b15c0041c0a43c075f12c9e3a384214e45d9868ce1950b6"
+      "sha256": "19ec4980ab60534ce7fc555573d790442ff3ea632682b65d0225bc187c3e58e9"
     },
     {
       "path": "verify.py",
-      "gitBlob": "38f05eac36c97bef0704c336600767f74b272f8e",
+      "gitBlob": "a80c6f48aebe6249239c52277ad0fc53f21179b6",
       "bytes": 22427,
-      "sha256": "e566de20bb88cd0dd8f9d40c29e9902e5b64ae34ccb39f12c72c8b3514ddc53f"
+      "sha256": "0dc8bbe8ec36be94b0676d23b1315e1bced43bb9e2829b43ee52aac3f8b02c1d"
     }
   ]
 }

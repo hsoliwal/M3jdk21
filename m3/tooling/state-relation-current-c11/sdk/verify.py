@@ -21,15 +21,15 @@ METHODS = ["exactFiveOwnersReplayAsFixedPointInBothOrders",
 SUITES = {SUITE: METHODS}
 OWNER_GIT = {
     "src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java": "30359b57b7b553e78355d3672119c685051ec1da",
-    "src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java": "780c7887aaa6b0892a76f4eee1dcb17086a60289",
-    "src/java.base/share/native/libjava/M3StateRelation.c": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
-    "src/java.base/share/native/libjava/m3_state_relation.h": "18a02e228129827da486edc5b316790af6135310",
+    "src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java": "d70a152bdedc380ed8b28861ea94ef4c2adbea90",
+    "src/java.base/share/native/libjava/M3StateRelation.c": "89b3127f0f262de3e00ba28a01079a659013dce2",
+    "src/java.base/share/native/libjava/m3_state_relation.h": "0e0c70e60b2cee61c3df31982a26f4251955cb61",
     "m3/compatibility/regex-relations-20261014/M3RelationPortProof.java": "e9a6beee8916cf97d5d4aac2383e7ac2fa8843e0"
 }
 KEEP_PATHS = list(OWNER_GIT)
 TARGET_PATHS = KEEP_PATHS
 HISTORICAL = "src/test/resources/jdk/internal/m3/rewrite/state-relation-current-c11-20261019/historical/M3StateRelation.c.txt"
-HISTORICAL_GIT = "5b30f71d8ed878b3199225b9512b75a090ff896c"
+HISTORICAL_GIT = "e6a10286f64052cb948de1dbcc43aaaa1d33db1e"
 RECEIVER_OUTPUTS: dict[str, str] = {}
 RECEIVER_CUSTODY: dict[str, str] = {}
 DESCRIPTOR = "src/main/resources/META-INF/rewrite/state-relation-current-c11-20261019.yml"

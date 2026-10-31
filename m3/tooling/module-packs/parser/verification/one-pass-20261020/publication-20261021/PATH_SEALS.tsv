@@ -63,8 +63,8 @@ m3/tooling/module-packs/parser/verification/one-pass-20261020/qualification/fact
 m3/tooling/module-packs/parser/verification/one-pass-20261020/qualification/facts-final/sqlite-jni.log	ADD	ABSENT		ABSENT		773e170e8ebcbf0f415b2b675a76d5d48616fe16	UNCHANGED_PREIMAGE
 m3/tooling/module-packs/parser/verification/one-pass-20261020/qualification/one-pass-final/COMMANDS.json	ADD	ABSENT		ABSENT		32d091e586a5608227d0478032a62a251083d44d	UNCHANGED_PREIMAGE
 m3/tooling/module-packs/parser/verification/one-pass-20261020/qualification/one-pass-final/EMPTY_DESCRIPTOR_MANIFEST.tsv	ADD	ABSENT		ABSENT		170ca01ee474335c2a79603c449016f9cda2d427	UNCHANGED_PREIMAGE
-m3/tooling/module-packs/parser/verification/one-pass-20261020/qualification/one-pass-final/INPUTS.after.json	ADD	ABSENT		ABSENT		e02f12b69fbce06e5dab75ffbea02f207b04cc29	UNCHANGED_PREIMAGE
-m3/tooling/module-packs/parser/verification/one-pass-20261020/qualification/one-pass-final/INPUTS.json	ADD	ABSENT		ABSENT		21ae56e0ca40b184c4f8cf6c96f173e2909e15a6	UNCHANGED_PREIMAGE
+m3/tooling/module-packs/parser/verification/one-pass-20261020/qualification/one-pass-final/INPUTS.after.json	ADD	ABSENT		ABSENT		22f5a869814038be1d19d6bab3486bd0a848aaeb	UNCHANGED_PREIMAGE
+m3/tooling/module-packs/parser/verification/one-pass-20261020/qualification/one-pass-final/INPUTS.json	ADD	ABSENT		ABSENT		716f158b492db413aede457641a809b2bae4715c	UNCHANGED_PREIMAGE
 m3/tooling/module-packs/parser/verification/one-pass-20261020/qualification/one-pass-final/JMOD_IMAGE.dependencies.tsv	ADD	ABSENT		ABSENT		a3d3f09116660778c7e5a9b1b68502ccebf01718	UNCHANGED_PREIMAGE
 m3/tooling/module-packs/parser/verification/one-pass-20261020/qualification/one-pass-final/JMOD_IMAGE.proof.tsv	ADD	ABSENT		ABSENT		a2828e5c87eae6df92afa39d3d021a68c983e211	UNCHANGED_PREIMAGE
 m3/tooling/module-packs/parser/verification/one-pass-20261020/qualification/one-pass-final/LEGAL_AND_NATIVE_RESOURCES.json	ADD	ABSENT		ABSENT		9a8c506066e0df76caf41e533ab656a714b397d5	UNCHANGED_PREIMAGE
@@ -160,11 +160,11 @@ m3/tooling/module-packs/parser/verification/one-pass-20261020/qualification/pars
 m3/tooling/module-packs/parser/verification/one-pass-20261020/qualification/parser-final/test-commands.json	ADD	ABSENT		ABSENT		fdde71161142c50434f381ed90b0b00c3bda6476	UNCHANGED_PREIMAGE
 m3/tooling/module-packs/parser/verification/one-pass-20261020/qualification/parser-final/test-consumer-smoke.log	ADD	ABSENT		ABSENT		6c3837f04630227058342af7561e2ad65744039d	UNCHANGED_PREIMAGE
 m3/tooling/module-packs/parser/verification/one-pass-20261020/qualification/parser-final/test-receipt.json	ADD	ABSENT		ABSENT		5596bebb2582a017fa503b7541229f273cd0fafd	UNCHANGED_PREIMAGE
-m3/tooling/module-packs/parser/verification/one-pass-20261020/verification/final-receiving-review/COMPOSED_REVIEW.json	ADD	ABSENT		ABSENT		ed92e81463c92045da6c323641855baf20bc1b8a	UNCHANGED_PREIMAGE
-m3/tooling/module-packs/parser/verification/one-pass-20261020/verification/final-receiving-review/REVIEW.json	ADD	ABSENT		ABSENT		ad5e1b6e3403810a2dfc581af0489458d0637227	UNCHANGED_PREIMAGE
+m3/tooling/module-packs/parser/verification/one-pass-20261020/verification/final-receiving-review/COMPOSED_REVIEW.json	ADD	ABSENT		ABSENT		81529112aa9af0640649b0023832a37b52eb1d91	UNCHANGED_PREIMAGE
+m3/tooling/module-packs/parser/verification/one-pass-20261020/verification/final-receiving-review/REVIEW.json	ADD	ABSENT		ABSENT		784104649d0df1bdd7c0c27d19801fcd89f1da4f	UNCHANGED_PREIMAGE
 m3/tooling/module-packs/parser/verification/one-pass-20261020/verification/one-pass/CORRECTION.json	ADD	ABSENT		ABSENT		730a25e342f6a8d723ea7678bcdb1fd9786ce7d6	UNCHANGED_PREIMAGE
 m3/tooling/module-packs/parser/verification/one-pass-20261020/verification/one-pass/INVOCATION.json	ADD	ABSENT		ABSENT		810e9ea7071b6607812b655b2a2a87c3f571f5d0	UNCHANGED_PREIMAGE
-m3/tooling/module-packs/parser/verification/one-pass-20261020/verification/one-pass/PUBLICATION_INVENTORY.json	ADD	ABSENT		ABSENT		c4f1d62a542750cdf32bd36b23344e2a44a5c4cb	UNCHANGED_PREIMAGE
+m3/tooling/module-packs/parser/verification/one-pass-20261020/verification/one-pass/PUBLICATION_INVENTORY.json	ADD	ABSENT		ABSENT		701c72564716ac96eef784745811b232252f499f	UNCHANGED_PREIMAGE
 m3/tooling/module-packs/parser/verification/one-pass-20261020/verification/one-pass/README.md	ADD	ABSENT		ABSENT		62d41a564bbde34d2131dfa63da53ee2e309c232	UNCHANGED_PREIMAGE
 m3/tooling/module-packs/parser/verification/one-pass-20261020/verification/one-pass/SOURCE_PINS.json	ADD	ABSENT		ABSENT		afa152111945aff508321f2cc0b6a9c424d2b9cf	UNCHANGED_PREIMAGE
 m3/tooling/module-packs/parser/verification/one-pass-20261020/verification/one-pass/run_proof.py	ADD	ABSENT		ABSENT		dc3f751515cde4cb4e7fa1dafa07f339543816d6	UNCHANGED_PREIMAGE

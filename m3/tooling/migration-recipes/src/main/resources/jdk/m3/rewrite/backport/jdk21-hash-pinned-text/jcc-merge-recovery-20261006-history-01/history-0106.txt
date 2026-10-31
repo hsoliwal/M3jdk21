@@ -18,8 +18,8 @@
     {
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/DERIVATION_INPUTS_V3.json",
       "bytes": 38439,
-      "sha256": "3798d8ac0faa32453d851887b100ed55da97e5e0a3cbdb726f4011f284f3799f",
-      "git_blob_sha1": "d1b732a6c3114d504239c5e3f1de9b10cc067c89"
+      "sha256": "8c6eab25d9adb14d3789799a979924f77a89b2f3824b5f676ea12c322bbf1da7",
+      "git_blob_sha1": "b33cb29dc8752f163e7d330797525d5b41244499"
     },
     {
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/FINAL_SOURCE_INPUTS_V3.json",
@@ -30,20 +30,20 @@
     {
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/source-binding-v3/DERIVATION_RESULT.json",
       "bytes": 1121,
-      "sha256": "4a1769511f7f21fa80992e2e828db5b4b90ab75c994ce9f8511f5024efb52d2f",
-      "git_blob_sha1": "171eaac45cc2038fffaadb840664fbb2f9460683"
+      "sha256": "def3f591f3866e1e1ef825ef5101fd6a19e857b4b64bb3beec42ce9868f41e2d",
+      "git_blob_sha1": "90f8ebff8a56915247e20badc58b8f4ca252adf2"
     },
     {
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/source-binding-v3/SOURCE_FIELDS_AND_PROOFS.json",
       "bytes": 419637,
-      "sha256": "a8fef86bf2c1cb96dce3f2f0f1394e6f0d99d233a3934f9bf273209b84c85f09",
-      "git_blob_sha1": "9900ea2844fc783eccdb9b3fb4edadffe69e2523"
+      "sha256": "65f10e830243ed927aabedee9d0734daa46eed3b37ae4212e28ab85131fe9e9d",
+      "git_blob_sha1": "8d44a30fb11ce988c489a6259e8be117df98ed3a"
     },
     {
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/source-binding-v3/ROOT_ACCOUNTING.json",
       "bytes": 70709,
-      "sha256": "9a74176340e704c473d0a9c14f667874d792adc1919768e0713da262da85f10a",
-      "git_blob_sha1": "355419924772c1be748f6b68b289b58ef16ea1ba"
+      "sha256": "30dadc5274823dba2443d663000051a48c0785eb92042ba8e684520bc2ce5942",
+      "git_blob_sha1": "ae55363fa985efefc16c80c9eea4587034bc9be2"
     },
     {
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/bound-inputs-v3/HANDOFF_DOCUMENT.md",
@@ -60,8 +60,8 @@
     {
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/bound-inputs-v3/DERIVATION_INVOCATION.json",
       "bytes": 1842,
-      "sha256": "995ce34cdadf4990ba015bc44891c18d61f8e48b14e1f116345799d3cb10b79c",
-      "git_blob_sha1": "48810cf51e398c927f6a4795d8ec823cd4ffafe6"
+      "sha256": "0c0c66bb9f1186f8f5a5aa53398e762d7deb8ed15c576cce23672aa28989bb23",
+      "git_blob_sha1": "50b2714ef27ff2b82dfea17a0f765f1936c7c451"
     },
     {
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/derive_source_handoff_v3.py",
@@ -84,20 +84,20 @@
     {
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/publication_custody_v3.py",
       "bytes": 9752,
-      "sha256": "9b885587ad7187eb4c5d0d05f4fcf20d691bd3b55ccab406d3601342f4550479",
-      "git_blob_sha1": "925d873fba4eabd4d78a87ca63caa88045d904fb"
+      "sha256": "340e3e1670e457d99ab9e0ae954eed85efacdea4e4e34f2d4b2165421b8c9248",
+      "git_blob_sha1": "ab6182b9f208b27d1e9c54e6d6a51fe7a465c344"
     },
     {
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/ADDITIONAL_RECEIPTS.json",
       "bytes": 60890,
-      "sha256": "8d08a398718f0cd2b0a497f79d22656808a0b33e6c522a970e3870cb862c8dd0",
-      "git_blob_sha1": "812523bc7d24ae6da93431fc4e8b4e98df4d1d34"
+      "sha256": "082d12dd79e70bb747441fc8b221ab5ddeea5fd8174629b068c137c4682e1b5a",
+      "git_blob_sha1": "eaf3b002942e0fcf16aece8a2a4459f3cf9010f3"
     },
     {
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/CUSTODY_EVIDENCE_INDEX.json",
       "bytes": 260154,
-      "sha256": "c4198bc0e71352b20861e0d6e60fa3eb32785578672fd0b6e1acf02ce070dffc",
-      "git_blob_sha1": "93b0b6a73a46c4a903950af15188b41cb849822b"
+      "sha256": "7876e0828731f3e4687c67162156788e7bde001406d5d723dd9acd8433fb36ee",
+      "git_blob_sha1": "1838dbfdb07e182f193f78916e10cde3adeae7d8"
     }
   ]
 }

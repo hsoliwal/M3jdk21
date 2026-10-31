@@ -17,7 +17,7 @@
       "crate": "rf0-rfc",
       "id": "Rfc",
       "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/rf0-rfc/manifest.tsv",
-      "manifestSHA256": "8dbfae01daac2f4d8c7b3221db7558892824586021a67ec42f0d451c26a7268c",
+      "manifestSHA256": "8eb91537d63443d155d72d989fe640da85497764627e406054aa7a704b7d5869",
       "namedRecipe": "jdk.internal.m3.Rf0Rfc",
       "targets": [
         {
@@ -38,9 +38,9 @@
         },
         {
           "afterBytes": 79672,
-          "afterSHA256": "caa3af6b19162c603a9d29ccb92894c01b50f064f7c75846c9d0afbb8c117e70",
+          "afterSHA256": "e90a850d9a8946ad3c741b99a81bc823a65415110ec32aabffd25da15f530e59",
           "beforeBytes": 79659,
-          "beforeSHA256": "6f5620d8b30b4abeb09dc5ecde928ccc1943a4edf1c610a36330e09ecdb96e6f",
+          "beforeSHA256": "597b99f17221abf7b7301cf82a96c113f7fc9e9fd26a24145a9e6e973198be30",
           "operation": "REPLACE",
           "path": "m3/tooling/image-gates/current-c0.json"
         }

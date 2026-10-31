@@ -1,14 +1,14 @@
 {
   "status": "PASS",
   "mode": "APPLY",
-  "recipe_proof_sha256": "c0b6e0a3770cb668d204005dfc009bc2c456ecf8d9e94d121c6fe91a34314fbd",
+  "recipe_proof_sha256": "07adf97653024f7bfa811c961e3a4d67af5b2bb5c5f5fd338c93fc06b5931806",
   "receiver_root": "ecec0ca7aa5223c791cef3f58096c567835fcd9169d5e7f1aca7bc3dde408a80",
   "repository": "/workspace/scratch/206049dfb270/canonical-work/receiver-qualification-001/receiving",
   "files": [
     {
       "path": ".github/workflows/m3-collections.yml",
-      "before_sha256": "20bbf390cad7ed2bdb8e024298cd7b32d311b6bf7c835742ee766bb53c5d0fda",
-      "after_sha256": "0848d1a673a908854bb885908d82eaadb23fa710c75ed3e6bd912516a21eb887",
+      "before_sha256": "8d52122c6bd7bc4f52b0606704188a7040fc853c2dbefe6756b7b2a1792da504",
+      "after_sha256": "871d309a9e061205c1c6d3deff63568dfeac69155b89fc906ce32a482e8ea947",
       "action": "WRITE"
     },
     {
@@ -50,7 +50,7 @@
     {
       "path": "m3/collections/qualification/masked-sort-fusion-20261021/SOURCE_IDENTITY.json",
       "before_sha256": "ABSENT",
-      "after_sha256": "9e3954045862b0878d729d45d39f0d8afc75d55f75b271196bbd00123a2495bc",
+      "after_sha256": "9d798af724646d706d7260291622221756503ad46f8ba76e0fc8b30f02b62272",
       "action": "WRITE"
     },
     {

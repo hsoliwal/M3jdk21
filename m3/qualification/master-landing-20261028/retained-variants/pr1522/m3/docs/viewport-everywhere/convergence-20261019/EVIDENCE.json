@@ -69,9 +69,9 @@
   "manifest": {
     "bytes": 13432,
     "changes": 21,
-    "git_blob_sha1": "abe72af12495e1b59d5d34a40966e7def7585212",
+    "git_blob_sha1": "c8389bffb23bb728e1d19dc84bf84d50d77bb787",
     "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/manifest.tsv",
-    "sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+    "sha256": "ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6",
     "targets": 60,
     "url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/manifest.tsv"
   },

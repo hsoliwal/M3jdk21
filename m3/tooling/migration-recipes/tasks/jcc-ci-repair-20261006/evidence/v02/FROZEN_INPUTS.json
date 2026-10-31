@@ -4,18 +4,18 @@
   "iteration": "v02",
   "base_commit": "b71ee5bf88398fb80961c13db03e8c675fb445ce",
   "baseline_count": 9,
-  "parent_freeze_sha256": "1d87b3c206480dc334d86de4a3693beda6013f7bb6335034af640e92386404a8",
+  "parent_freeze_sha256": "1b5d73f8ee53b03c2a88f8cb3f57eb54c99e26281ca16ad53b66925a0fb588c7",
   "files": [
     {
       "path": "AUTHORING_RESULT.json",
       "bytes": 2242,
-      "sha256": "7219af9c05c974c1fe91a5876e161e62017ddfaab501868804a8223e356691ce",
+      "sha256": "03e234bc41b463590779afd28d6d91f71e66bf63ffeffbd4f9fa88ee3a17127f",
       "mode": "0o644"
     },
     {
       "path": "ITERATION.json",
       "bytes": 2029,
-      "sha256": "e57fbbdc95b87e88b2ec499b2b5fca9a105e31b2ba53caf8b11fba3635f78c66",
+      "sha256": "d7d5618ad9de024c2b909ae1337a0767f5466b5fa3b03e90934e1caf5a29624c",
       "mode": "0o644"
     },
     {
@@ -33,7 +33,7 @@
     {
       "path": "baseline/.github/workflows/m3-foundation.yml",
       "bytes": 2205,
-      "sha256": "736f90932bae21b4fb650eb8451f42999fab0a15fe7787cdc80a6375fd3866d8",
+      "sha256": "1a1ddd014a5cce76e75b1e4fce5c4cd0c746a3dbf5f18ef3a1bc9dad7d8fbdd1",
       "mode": "0o644"
     },
     {
@@ -93,7 +93,7 @@
     {
       "path": "overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/after-00-m3-foundation.yml.txt",
       "bytes": 2411,
-      "sha256": "e13515b5aaab155ce98bf059c445d1b989cdf82d84487884ac31fb3a183a171f",
+      "sha256": "9969a19a5727bb1684d6e8443c67681a0afd52f0427d9501f4b4d363e9709982",
       "mode": "0o644"
     },
     {
@@ -111,7 +111,7 @@
     {
       "path": "overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/before-00-m3-foundation.yml.txt",
       "bytes": 2205,
-      "sha256": "736f90932bae21b4fb650eb8451f42999fab0a15fe7787cdc80a6375fd3866d8",
+      "sha256": "1a1ddd014a5cce76e75b1e4fce5c4cd0c746a3dbf5f18ef3a1bc9dad7d8fbdd1",
       "mode": "0o644"
     },
     {
@@ -129,19 +129,19 @@
     {
       "path": "overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/manifest.tsv",
       "bytes": 810,
-      "sha256": "c7ec94377bde2ce16f75ea515c8d1547ab37c220b1cfe8d1b448eeee67dc4f04",
+      "sha256": "3f17e3dfb1d4e83af65354c5c1a9f445f2cd7a512868727bc030722f1933d997",
       "mode": "0o644"
     },
     {
       "path": "overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/plan.json",
       "bytes": 2937,
-      "sha256": "13cfd4d9cf102fef32d57196c1fa4521eb17bae1c02c2fb5ed129ec566724789",
+      "sha256": "8f536234d42bd32590b7c5cc36c7657407843a53a68c6c43e25ddcc07f3ef7b1",
       "mode": "0o644"
     },
     {
       "path": "overlay/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccCiRepairTest.java",
       "bytes": 15689,
-      "sha256": "8a45a7fe9cd687e9e61d0e5821cfed4208e3dfd736b795bea1386bd1a1cdbfe1",
+      "sha256": "7d1272d034907bbad8a2690e7d4242370692f31b23e67a3e2afd6fad3d2c4238",
       "mode": "0o644"
     },
     {
@@ -153,7 +153,7 @@
     {
       "path": "overlay/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/INPUTS.json",
       "bytes": 4219,
-      "sha256": "741e405cf206de3587e59e1d1be4a29587ffb65cd81afd504a524b5e70bc2732",
+      "sha256": "520164a24d0011c7c73395f4d27203f121ae74de8c8b04cb84c9a909629cacdc",
       "mode": "0o644"
     },
     {
@@ -165,13 +165,13 @@
     {
       "path": "overlay/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/prior-ci/INPUT_SEALS.json",
       "bytes": 4622,
-      "sha256": "6b2acc2708b79a97fa201dc12e24214fe22cfe62d4843378bb469e249b08468a",
+      "sha256": "89eb704a39cfd5cb58fa795321916f0461f7b0653f6b467e5536da1a8d9aaee7",
       "mode": "0o644"
     },
     {
       "path": "overlay/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/prior-ci/LOG_DIAGNOSTICS.json",
       "bytes": 9489,
-      "sha256": "47119c85573641f249e6dcded9d56ff3559139f9c440c36fb53403c719ad435d",
+      "sha256": "2f18ef2aa392de6240528b8eef15bb244a5418d7dce680784d6fd7d3bba00e13",
       "mode": "0o644"
     },
     {
@@ -207,7 +207,7 @@
     {
       "path": "overlay/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/test_installer.py",
       "bytes": 12659,
-      "sha256": "6b0bc37c6b4a5a5addb364cd1ef07bfc0f9497dcbab092d8f9e77e2ac4e47c4f",
+      "sha256": "3f0d196c264e38d758423e86cac8b2f7cfed2219c8575460cd381e4f91a56310",
       "mode": "0o644"
     },
     {

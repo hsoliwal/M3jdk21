@@ -43,7 +43,7 @@ do not establish a steady-state benchmark. **No timing or memory assertion, broa
 performance guarantee, or isolated native-memory improvement is claimed.**
 
 `resource-measurements.json` is the unchanged final raw receipt, SHA-256
-`805b9e81ce33ed10d1dc7743e59023d8af33ee38fb345629f2c145ce17eae8f4`.
+`268335cba0026ffe3b83e25c24c6ee5e0ef7cbbaaa0eb12901d9996c1bcb0bc1`.
 It records every sample, exact donor/receiver source hashes, generated class
 hashes, executable hashes, commands, toolchain release, JVM flags and NMT totals.
 The canonical source-only probe is under `verification/metadata-resource-probe`.

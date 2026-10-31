@@ -22,7 +22,7 @@ verify_blob 4f73ddb9aae36dadb8003257d3a6988536a18066 \
   m3/collections/src/main/java/jdk/m3/collections/M3MaskViewportNative.java
 verify_blob 5966bffacc730b3ef7102d615a2331a42ae4a22b \
   m3/collections/src/main/java/jdk/m3/collections/M3MaskViewportKernel.java
-verify_blob 2fde8c98bc8bf9057f40a42f1a9bad956b0129b9 \
+verify_blob 27d1b0f38164369f49919f83bfc1a960061fa043 \
   m3/collections/src/test/java/jdk/m3/collections/M3MaskViewportCheckedJniContract.java
 
 build=$(mktemp -d)

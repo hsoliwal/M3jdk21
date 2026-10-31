@@ -8,8 +8,8 @@
     {
       "path": ".github/workflows/m3-foundation.yml",
       "bytes": 2205,
-      "sha256": "736f90932bae21b4fb650eb8451f42999fab0a15fe7787cdc80a6375fd3866d8",
-      "git_blob": "fd4f2e03d6b842a5072170230e5728651a98156f",
+      "sha256": "1a1ddd014a5cce76e75b1e4fce5c4cd0c746a3dbf5f18ef3a1bc9dad7d8fbdd1",
+      "git_blob": "d32b783a32df1449a4ec28364542ea66fb984983",
       "verification": "ACTUAL_CURRENT_TREE_IDENTITY_MATCHES_HASHED_B71_BODY"
     },
     {
@@ -110,11 +110,11 @@
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/calls/current_refresh_m3_tree.json",
-      "sha256": "5e5a9fc78e553859be586663aacce20d7bae4954d21754a02af23b865784b7d0"
+      "sha256": "d1016d7fe37b9436dbca31b651865266db5e31666ad28c334551fc3f7dbf73f1"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/calls/current_refresh_github_tree.json",
-      "sha256": "80aa04a9e7bffaaa6af4bfa63527c17d4b6d77f158ec1d9c3bcbdc3f95f306e1"
+      "sha256": "c0e15a3a59178248aca45aceb935c49e074416ebbb7b602f809d21e1964f7520"
     }
   ],
   "scope": "Tree identity applicability only. Frozen b71 execution is not relabelled as an execution on the newer master."

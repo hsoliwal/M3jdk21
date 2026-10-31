@@ -1,7 +1,7 @@
 {
   "status": "PASS",
   "mode": "APPLY",
-  "recipe_proof_sha256": "c3a070fdd45b46db00a9acf0ba00dc5561b731423154bb2957f1315fdd34c421",
+  "recipe_proof_sha256": "d52b41311724936f0f8eee9eae0a42cc7fcc974436e95296930fae5ce374e3d8",
   "receiver_root": "4515e9cf273b74f575d55175240a4a088f4fb3647585d322087e196aa15441ae",
   "repository": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source",
   "files": [

@@ -1,11 +1,11 @@
 {
   "priorProof": {
     "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\PROOF.json",
-    "sha256": "f06fcd6b439529d32c28b46b47f9e6b924fe160dd46631a73c28f60f510a38ed"
+    "sha256": "c339b321169a224851bbb68d2d07cfd0c0d3195236f2f5ce94f035b8f1253e6b"
   },
   "priorFinalSeals": {
     "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\FINAL_FILE_SEALS.json",
-    "sha256": "b5f23258ed3b31f4355ca2d2f6e583b52c029b602c2663e336a94aff0e2a2a8b",
+    "sha256": "aff9e2961aa9e5058ffee7ba6c2a8dbe3577c60d4b371967e9d32438e278e919",
     "allVerified": true
   },
   "compiledReplayClasses": [

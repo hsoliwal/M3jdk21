@@ -27,7 +27,7 @@
     "errors": 0,
     "skipped": 0
   },
-  "input_receipt_sha256": "d6ea4421fa9a264c66c34fa7e56ac88d45763ed92838fed0ecedcba5238e4db9",
+  "input_receipt_sha256": "550ee536bc458cb29f08d8712e6455411c06a35bec18e461482b059c7a6e34fd",
   "all_frozen_source_class_jar_readbacks_unchanged": true,
   "frozen_mirror_files": 683,
   "original_classpath_members": 27,
@@ -40,7 +40,7 @@
   "recipe_phases": 48,
   "sealed_target_paths": 48,
   "log_sha256": "18a69ca5e69ac683a8323428252c5605d32137339cf8bc0125924dc02fbfb17e",
-  "recipe_receipt_sha256": "a3ca308d2e7f4dd7c25de60a76728a0ef94ed98e45bda85faff7a3a96cace756",
+  "recipe_receipt_sha256": "f17fcf4144f88d62fd2fbe37075b8e584f08f895cac7923b2f88180bb394ade9",
   "fresh_reports_source": "/workspace/scratch/206049dfb270/jobs-work/final-review/ci-classpath-plus-core-02/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/target/surefire-reports",
   "copied_historical_proof_status": "The frozen canonical mirror includes historical proof/sdk-001. Its RESULT.json is not this trial receipt; this trial uses fresh target/surefire-reports and target/recipe-proof.tsv only.",
   "target_sources_modified": false,

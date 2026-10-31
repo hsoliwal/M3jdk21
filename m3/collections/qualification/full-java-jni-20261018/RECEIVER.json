@@ -32,7 +32,7 @@
     {
       "target_path": ".github/workflows/m3-collections.yml",
       "before_sha256": "559240531a32d95b9fd76a7b0533a58e1be86d5ff4bb0e12e6db821cde28f1d0",
-      "after_sha256": "20bbf390cad7ed2bdb8e024298cd7b32d311b6bf7c835742ee766bb53c5d0fda",
+      "after_sha256": "8d52122c6bd7bc4f52b0606704188a7040fc853c2dbefe6756b7b2a1792da504",
       "canonical_template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-full-java-jni-20261018/.github__workflows__m3-collections.yml.txt"
     },
     {
@@ -49,8 +49,8 @@
     },
     {
       "target_path": "m3/vendor/third_party/apiguardian-api/pom.xml",
-      "before_sha256": "0d6c98a7e1d59844d3c64ed1e4c59381c5a46834f2731375a7a6c9642ca62091",
-      "after_sha256": "54521e57cf458017c20682a31ad1a4dc1fa08b2847f8fa79091566dc748404d6",
+      "before_sha256": "e539758ff9c8f9b634d2b111d26b43d575b4329965bb854783c6f59eaa1a3ee1",
+      "after_sha256": "e97b7e58eaba1546fd8ab0b2922a7b014b19ef3739cb8efde040c82a74fc8066",
       "canonical_template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-full-java-jni-20261018/m3__vendor__third_party__apiguardian-api__pom.xml.txt"
     },
     {

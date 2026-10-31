@@ -13,7 +13,7 @@
   "destination_gates_passed": false,
   "diagnostics": [],
   "exit_code": 0,
-  "fixture_manifest_sha256": "3cef130849a643171fd91e8ee1a6e6ef679e617b1f944064f6c7501f3ece1680",
+  "fixture_manifest_sha256": "f5339652d19345398823f28b7f449e388bbdad4783fdb63dea528961365f5789",
   "fixture_unchanged": true,
   "inputs": {
     "m3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java": "5f936a3c6e69ca487eff6a0665ada01546750d9d87ce85ee50a337a4236233d0",
@@ -25,7 +25,7 @@
     "m3/core/src/jdk/m3/text/M3StringPiece.java": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755",
     "m3/core/src/jdk/m3/text/StorageIdentity.java": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354",
     "m3/docs/jcc-source-handoff.md": "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337",
-    "m3/docs/name-mapping.json": "12bfa8d328b74ba4de930d993c8194b8db51f3a111617690dff9f1ffebaea1c2",
+    "m3/docs/name-mapping.json": "e76133a4d1bb472dfc88a41e8d8560d5ac0e08ba4d227b3b6c8fbd95915e6ebc",
     "m3/docs/name-mapping.schema.json": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
     "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv": "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b",
     "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json": "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126",
@@ -69,7 +69,7 @@
     "src/java.base/share/classes/jdk/internal/mindex/M3VI.java": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a",
     "src/java.base/share/native/libjava/M3BitLane28.c": "7cce5d9e56e5308f130e4dfaa191c663c27afb3e35ed206347447cc925dec89f"
   },
-  "mapping_sha256": "12bfa8d328b74ba4de930d993c8194b8db51f3a111617690dff9f1ffebaea1c2",
+  "mapping_sha256": "e76133a4d1bb472dfc88a41e8d8560d5ac0e08ba4d227b3b6c8fbd95915e6ebc",
   "mode": "EXACT_CURRENT_BASELINE",
   "new_diagnostics_relative_to_baseline": null,
   "removed_baseline_diagnostics": null,

@@ -6,12 +6,12 @@
   "sourcePath": "m3-openrewrite-recipes/recipes/m3-original-mapping-provider-20261017/sdk",
   "receiverCorePath": "m3/migration/original-provider-20261017/sdk",
   "moduleGitTree": "cb7764db204a5e87fca101bbec8bb9944785d589",
-  "pinsSha256": "c377a3a9a543aff3ff61cf2dd50fe8e156c6ff50aae0b90b0dd8c3c0e4af4cf4",
+  "pinsSha256": "3b1df8647f5f2866ae86b4f8bd1e5deb6deb39408885d2f81dba9010b91dd9d4",
   "workflowSha256": "426f85c348a3bbff2ac767980e1cba3a205f624d3f2ca5b85cdcb52dc68b8751",
   "workflowGitBlob": "edad663b2e4a51e22a5e25954df237192e5b8d08",
   "receiverBase": "a3e88976ee8664d1ef5d0cade96aec1206b2133d",
-  "originalCanonicalPreimageGitBlob": "80eaeba7e4e1d35cd9904a8a5c18e060abdd93f0",
-  "canonicalRecipePostimageGitBlob": "9b0f0d5fbdef643f44f039874f88417a406ef8a8",
+  "originalCanonicalPreimageGitBlob": "986147e2df24ef25076d451c49782d8e7e354a11",
+  "canonicalRecipePostimageGitBlob": "d6750ca6bad5ee9926826bf37fbf66234bbd1ecb",
   "runtimeApplied": false,
   "phaseAdvanced": false
 }

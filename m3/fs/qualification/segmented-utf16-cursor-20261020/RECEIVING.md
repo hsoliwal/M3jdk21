@@ -40,7 +40,7 @@ The new named recipe is
 `com.synexia.m3.M3FsSegmentedUtf16IndexedEquals20261020`.
 All complete Java compilation-unit postimages are source-sealed by SHA-256;
 the exact existing M3FS owner Git preimage is
-`36b6483cbaaa9b8a62b48cba69d52b94b5e82983`.
+`3f844ad2afe1189bd0edc920c270a5022ee5839c`.
 Do not hand-patch generated receiver files.
 
 ## Qualification

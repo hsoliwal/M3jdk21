@@ -16,6 +16,6 @@
   "exit_code": 0,
   "log": {
     "path": "proof/memory-integrity-001/002-publish.log",
-    "sha256": "8530e7f13bad29189e549f1d1edab7bce3bc2dfb8aa915d76c5303986976d0f3"
+    "sha256": "ea3600d1f701bf65dbe85da441a4e3385031a34405163c301e51669ea5123960"
   }
 }

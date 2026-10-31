@@ -34,7 +34,7 @@ Copies into `java.desktop` internals are an explicit relicence, recorded in
 
 | File | Role |
 |---|---|
-| `RENAME_MANIFEST.tsv` (sha256 `8347583d197df5c1b5675a8447308b7329d3928c5cdf6455e1f46c91c2d7f289`) | source path and SHA-256, target path and package, expected post SHA-256, licence |
+| `RENAME_MANIFEST.tsv` (sha256 `ff5fc47eab97e9e0593d6d2138ad3b32babef7e1daf45b767c9db452a27fd71b`) | source path and SHA-256, target path and package, expected post SHA-256, licence |
 | `gen_rename_manifest.py` | CPU sealer: git blobs, then the transform, then hashes (`python -I gen_rename_manifest.py SWT_REPO COMMIT OUT`) |
 | `ResidencyRename.java` | applier (`java ResidencyRename.java RENAME_MANIFEST.tsv SWT_WORKTREE M3JDK21_ROOT`) |
 

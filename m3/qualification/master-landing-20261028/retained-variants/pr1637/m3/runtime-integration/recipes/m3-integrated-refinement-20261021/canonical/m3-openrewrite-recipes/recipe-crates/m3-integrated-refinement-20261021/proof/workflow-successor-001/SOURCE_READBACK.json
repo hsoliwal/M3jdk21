@@ -11,8 +11,8 @@
   "unchanged": [
     {
       "path": ".github/workflows/m3-collections.yml",
-      "before_sha256": "0848d1a673a908854bb885908d82eaadb23fa710c75ed3e6bd912516a21eb887",
-      "after_sha256": "0848d1a673a908854bb885908d82eaadb23fa710c75ed3e6bd912516a21eb887"
+      "before_sha256": "871d309a9e061205c1c6d3deff63568dfeac69155b89fc906ce32a482e8ea947",
+      "after_sha256": "871d309a9e061205c1c6d3deff63568dfeac69155b89fc906ce32a482e8ea947"
     },
     {
       "path": ".github/workflows/m3-object-progress-candidate.yml",
@@ -41,8 +41,8 @@
     },
     {
       "path": "m3/collections/qualification/masked-sort-fusion-20261021/SOURCE_IDENTITY.json",
-      "before_sha256": "9e3954045862b0878d729d45d39f0d8afc75d55f75b271196bbd00123a2495bc",
-      "after_sha256": "9e3954045862b0878d729d45d39f0d8afc75d55f75b271196bbd00123a2495bc"
+      "before_sha256": "9d798af724646d706d7260291622221756503ad46f8ba76e0fc8b30f02b62272",
+      "after_sha256": "9d798af724646d706d7260291622221756503ad46f8ba76e0fc8b30f02b62272"
     },
     {
       "path": "m3/collections/qualification/masked-sort-fusion-20261021/src/test/java/com/m3/collections/M3CollectionSurfaceProbe.java",
@@ -247,10 +247,10 @@
   ],
   "old_sdk": {
     "path": "proof/sdk-002-offline/RESULT.json",
-    "sha256": "089c9eb763810e5abe50eec6f41845779289201943e74d8604f186fee657296b"
+    "sha256": "a1abf22e70da8c9ea163546910a24b0d6bd65fa08da6fc51329773f421d1287d"
   },
   "new_sdk": {
     "path": "proof/sdk-003-workflow-successor-offline/RESULT.json",
-    "sha256": "57ccb0c5a801848e80e472ac533c7e287b1eaac8c36960824acc952ea19dbb25"
+    "sha256": "c7edd6e3cc89d93b7fd6fce6bb98b9c0d204531fd8bbfa47d9abcb9bf2dfa818"
   }
 }

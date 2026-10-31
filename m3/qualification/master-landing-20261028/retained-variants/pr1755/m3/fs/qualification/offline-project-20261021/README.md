@@ -18,7 +18,7 @@ PR #1681 was merged into its feature branch, not assumed merged into master.
   selected file **once** and delivers bytes synchronously to optional
   additional shadow consumers (including M3Grammar/M3AST fact producers).
 - `M3BuildState` is received **exactly** from the newer first-party
-  master Git blob `a659c276706fa394cf09503d876b04f7d837d0a8`.
+  master Git blob `3cd86a862d0cbfad6b100cc73e2462394176bdaf`.
   It owns SHA-256 file fingerprints, compiler-attributed ABI masks,
   dependency edge lanes and their safe reverse closure; the offline
   scan emits **unknown ABI and zero compiler edges**, not fake facts.

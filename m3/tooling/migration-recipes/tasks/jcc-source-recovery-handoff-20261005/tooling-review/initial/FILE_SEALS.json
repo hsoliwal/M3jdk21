@@ -5,8 +5,8 @@
     {
       "path": "INPUTS.json",
       "bytes": 7320,
-      "sha256": "f7331ceb8caa338f3f67036ee6711be203d722859d1ef69567d774b3e87111c2",
-      "git_blob_sha1": "9562d716e9bb32041973dc1d8136734dd304a32b"
+      "sha256": "67657d100042552052fc16829996f22dc01431b5445e1c9687a7951ef90b9b80",
+      "git_blob_sha1": "677de5d83fbb9d022db3ad797566e05be58047de"
     },
     {
       "path": "REVIEW.json",
@@ -17,14 +17,14 @@
     {
       "path": "REVIEW.md",
       "bytes": 9055,
-      "sha256": "6bfd5a77684f54c58accf154334ffe25c4bc3a2184f0d59973024a579d7dedce",
-      "git_blob_sha1": "b09330732079aa3bb2897def687db07a3c0add84"
+      "sha256": "ab76e6fbf03f55eb51e6771ae0d004a1f39b3122d2b1955d7f6f2ae81405cd3f",
+      "git_blob_sha1": "2ac93b8e0a370b54e460b57e02ca8622358f857b"
     },
     {
       "path": "STATIC_INPUT_CHECKS.json",
       "bytes": 6923,
-      "sha256": "abd4fe989346403763672a89112e1da5425a57e10990e7e2408e013ad884f4cf",
-      "git_blob_sha1": "adf322bfed2fc03f315f55933472430bc8e26215"
+      "sha256": "6c514d7f4586457169168c1d30ec9497b947a525596b770c9651abfc2e55ba3a",
+      "git_blob_sha1": "2c3ef21ccda565282ed2e8a7001972ddcac5c95b"
     },
     {
       "path": "inputs/BINDING_INPUT_CONTRACT.md",
@@ -95,8 +95,8 @@
     {
       "path": "inputs/before02-source-destination-bindings.json.txt",
       "bytes": 92103,
-      "sha256": "a80ffed31f45465774fd03ba90858c301327d6b472acf89652d01bf96b981707",
-      "git_blob_sha1": "4a4ae8ea4cc7cf0b801eeef78ca54a805f9d9953"
+      "sha256": "8c76c2dd45e775d29f8f47d8daf65842e465c74ad3dec7aacd55df59f9d051a1",
+      "git_blob_sha1": "5ecf415c7af4176898328d58b9df2972e18277c4"
     },
     {
       "path": "inputs/before03-root-coverage-obligations.tsv.txt",
@@ -119,8 +119,8 @@
     {
       "path": "inputs/source_verify_publication.py",
       "bytes": 9623,
-      "sha256": "a5e9c2228304ea359b5459df150c618fcc3566b88217cdc262c893c31398baa7",
-      "git_blob_sha1": "b00b976d6d69196bc0726774bada944afb1659f1"
+      "sha256": "fa327277439825eb5870f67063833dec3495448d03a70f2d9222acc48e4f9226",
+      "git_blob_sha1": "b1ff5da2bae6e6b7eb391b06370d5f7d0cc41329"
     },
     {
       "path": "inputs/test_jcc_source_recovery_handoff_packet.py",

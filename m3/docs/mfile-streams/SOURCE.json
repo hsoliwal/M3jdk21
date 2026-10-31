@@ -9,7 +9,7 @@
   "canonical_base_commit": "f04fbac91a7891e64b77c7b24cef1ab75ec88144",
   "recipe_owner": "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe",
   "recipe_owner_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
-  "recipe_owner_git_blob": "55be45a83f4fc7e7317534fc87a66e727c845060",
+  "recipe_owner_git_blob": "05c56adbdd6a0fca923a47486203c7b9b326831d",
   "crate": "m3fs-vfs-text-20261020",
   "intake_mode": "DATA_OR_METADATA_EXPORT",
   "receiving_sequence_advanced": false,

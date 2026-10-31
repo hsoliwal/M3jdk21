@@ -14,7 +14,7 @@ An older optional library with no new symbol falls back to the Java kernel. The 
 - Java rank batch owner `M3LongRankBatchNative.java`: `1013859f83470bdd7682ae732ea0293634ea2687` -> `7871ab51e2ec8c3e4fb990817f5fbdb7ec9845cb`.
 - Java rank-index owner `M3LongRankIndex.java`: `b3d88e4b28aab8cbda451c87184c4540549352db` -> `ce7f53f1a4c69c9f5a990f26944519b1194dfe6e`.
 - Original native C owner `m3_long_rank_batch_jni.c`: `3a56a28ae6b48867260f9f3bad79d8adb8070a86` -> `442630c291ce9ba4c9c4490dca4076e7f09558c3`.
-- Add `M3LongCountSmallerRightContract.java` (`bca6c06ba6e5866e33a3884abe7d2d48b4fa40c6`) and original-module JUnit wrapper `M3LongCountSmallerRightTest.java` (`d12c6d82e54409ac313209add50470810c094791`).
+- Add `M3LongCountSmallerRightContract.java` (`bca6c06ba6e5866e33a3884abe7d2d48b4fa40c6`) and original-module JUnit wrapper `M3LongCountSmallerRightTest.java` (`522c9acd84d07cd86f78699494f0b5f558224f65`).
 - Dedicated exact-current-PR-head Java21/C17/JNI workflow `.github/workflows/m3-lc315-count-smaller-jni-java21.yml` (`6e7cccfea584c30a50f2ed8689b87fe5214e9bed`).
 
 ## Evidence actually executed

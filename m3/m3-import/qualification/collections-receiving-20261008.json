@@ -40,8 +40,8 @@
   "public_verifier_qualification": {
     "status": "PUBLIC_SCRIPT_QUALIFIED",
     "target_revision": "439b767c7c92e2751f7f6a47c012f96472420905",
-    "script_sha256": "8eee6494a5a4bc583720f36873af96a47888a00dcbb580f02d696f9b764675b1",
-    "script_git_blob": "321ccb6ced060574ed53c2b8288f02069b8715a7",
+    "script_sha256": "66e5b07f039dbbbf2b3297346d6f4fb3068e28a12c4446005f03e1e67f257553",
+    "script_git_blob": "ab39e10351e0faf3b7307bf88128f4b2cc581b8f",
     "script_origin": "ACTUAL_CANONICAL_TEXT_SDK_OUTPUT_PROVIDED_BY_METADATA_ARM",
     "current_frozen_context": 101,
     "retained_a3_export_files": 8,

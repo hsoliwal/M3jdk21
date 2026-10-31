@@ -43,7 +43,7 @@ jobs:
           test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankIndex.java)" = '5d7161b457c06a5b807d3356a8fe0b6b2149527c'
           test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = 'd8953eb3be514aadaafa05d581d57c76cb72b242'
           test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongCountSmallerRightContract.java)" = 'bca6c06ba6e5866e33a3884abe7d2d48b4fa40c6'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongCountSmallerRightTest.java)" = 'd12c6d82e54409ac313209add50470810c094791'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongCountSmallerRightTest.java)" = '522c9acd84d07cd86f78699494f0b5f558224f65'
           test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankClosestWindowContract.java)" = '13cc933b330fbb1c3985ce5bbdbbbebb34463195'
           test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankClosestWindowTest.java)" = '9aaa140f35ea2782506c652b1badada0696cf54f'
       - name: Strict compile original Java21 owner and independent quadratic oracle

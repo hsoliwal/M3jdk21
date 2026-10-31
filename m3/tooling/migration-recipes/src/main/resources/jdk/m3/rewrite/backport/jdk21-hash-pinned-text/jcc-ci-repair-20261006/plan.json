@@ -10,11 +10,11 @@
       "path": ".github/workflows/m3-foundation.yml",
       "before": {
         "resource": "before-00-m3-foundation.yml.txt",
-        "sha256": "736f90932bae21b4fb650eb8451f42999fab0a15fe7787cdc80a6375fd3866d8"
+        "sha256": "1a1ddd014a5cce76e75b1e4fce5c4cd0c746a3dbf5f18ef3a1bc9dad7d8fbdd1"
       },
       "after": {
         "resource": "after-00-m3-foundation.yml.txt",
-        "sha256": "e13515b5aaab155ce98bf059c445d1b989cdf82d84487884ac31fb3a183a171f"
+        "sha256": "9969a19a5727bb1684d6e8443c67681a0afd52f0427d9501f4b4d363e9709982"
       }
     },
     {

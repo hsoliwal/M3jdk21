@@ -1,5 +1,5 @@
 path	git_blob	status	pr	note
-m3/docs/name-mapping.json	2760bb3439a01839d59080abac934e1636df54bc	modified	2108	PR version, not live; the git blob id is its content address
+m3/docs/name-mapping.json	4588371c7100589a0653f8253c1f589726be6df7	modified	2108	PR version, not live; the git blob id is its content address
 m3/llm/LICENSE	d645695673349e3947e8e5ae42332d0ac3164cd7	added	2108	PR version, not live; the git blob id is its content address
 m3/llm/NOTICE	e9a6cd803dd899de388ba6de57ca2e19a4ebebbc	added	2108	PR version, not live; the git blob id is its content address
 m3/llm/PENDING_FAMILIES.tsv	ac8c75f4c023257fb28c7091da2685b8dd4057e1	added	2108	PR version, not live; the git blob id is its content address
@@ -77,5 +77,5 @@ m3/llm/src/test/java/com/m3/llm/internal/CanonicalJsonGrammarRegressionTest.java
 m3/llm/src/test/java/com/m3/llm/projection/ExtractiveProjectionSelfTest.java	3b54781d4bd4319565a35281b6056c432446196d	added	2108	PR version, not live; the git blob id is its content address
 m3/llm/src/test/java/com/m3/llm/projection/ExtractiveProjectionTest.java	b1e6a7496213bebac057817d26c41ad0b4c60fc2	added	2108	PR version, not live; the git blob id is its content address
 m3/llm/src/test/java/com/m3/llm/test/ModuleImageMain.java	9918281308a4a5d70131dbe90f40784699f67fe3	added	2108	PR version, not live; the git blob id is its content address
-m3/pom.xml	c6fca85b103598b0fbe0c0354f953bc734c5ca2e	modified	2108	PR version, not live; the git blob id is its content address
-m3/tooling/name-contract/name-plan.json	9ff9934fafc3e39bcc07fffb7fb9708dbd52dd2f	modified	2108	PR version, not live; the git blob id is its content address
+m3/pom.xml	b693d505b3382860ffb380c78bcc6d11eefa1107	modified	2108	PR version, not live; the git blob id is its content address
+m3/tooling/name-contract/name-plan.json	2b92593e437d1379e5f48f0ccf6ace5c18cd9b60	modified	2108	PR version, not live; the git blob id is its content address

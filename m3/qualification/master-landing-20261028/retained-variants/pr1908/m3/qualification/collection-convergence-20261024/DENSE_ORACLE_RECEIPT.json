@@ -18,8 +18,8 @@
   },
   "retained_owner": {
     "path": "src/java.base/share/classes/jdk/internal/m3/M3IntAlgorithms.java",
-    "before": "765135a735a4651eb4ebf4dbefd87e0c5527bcff77f79444a918b1d579c32518",
-    "after": "765135a735a4651eb4ebf4dbefd87e0c5527bcff77f79444a918b1d579c32518",
+    "before": "4033758bd26f7ec22460bbdeaf6a46dcbdb5554189ba4f198e02d3a8c6a49ea1",
+    "after": "4033758bd26f7ec22460bbdeaf6a46dcbdb5554189ba4f198e02d3a8c6a49ea1",
     "template": "M3IntAlgorithms.java.txt",
     "license": "GPL-2.0-only WITH Classpath-exception-2.0"
   },

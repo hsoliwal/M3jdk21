@@ -59,8 +59,8 @@
       "resource": "before02-source-destination-bindings.json.txt",
       "path": "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
       "bytes": 92103,
-      "sha256": "a80ffed31f45465774fd03ba90858c301327d6b472acf89652d01bf96b981707",
-      "git_blob_sha1": "4a4ae8ea4cc7cf0b801eeef78ca54a805f9d9953",
+      "sha256": "8c76c2dd45e775d29f8f47d8daf65842e465c74ad3dec7aacd55df59f9d051a1",
+      "git_blob_sha1": "5ecf415c7af4176898328d58b9df2972e18277c4",
       "exact_E3_manifest_match": true,
       "operational_preimage_equal": true
     },

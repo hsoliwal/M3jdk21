@@ -69,9 +69,9 @@
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-applied-owner-custody-20261020/forward/before/m3/tooling/backport-contract-current-owner/runtime/INPUTS.json",
-      "gitBlob": "bd84e66ac6bae7ab0277dde8615435a91756c3cb",
+      "gitBlob": "5e3967517857e79249f3e1cc28a707c9f79b8996",
       "bytes": 6754,
-      "sha256": "1268276e609a3cf4686153284391668bffa7cbaf4c6b9decd21513ab99f9f79f"
+      "sha256": "b43608f6d73999039d3ddb68373f02739418b2f1740c66b9c892e099843ae73d"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-applied-owner-custody-20261020/forward/before/m3/tooling/backport-contract-current-owner/runtime/qualify.py",
@@ -81,9 +81,9 @@
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-applied-owner-custody-20261020/forward/before/m3/tooling/backport-contract-current-owner/runtime/README.md",
-      "gitBlob": "65a38fb73e719c40dc8d50c27fa0815196e8bdd6",
+      "gitBlob": "0dfce38a83bfcc3abee720bf38d07e79d056abfb",
       "bytes": 5689,
-      "sha256": "c39bc3039ddbf66618d0ba2349c7b54d06996c9cdd9516764f689a28a2fb3b99"
+      "sha256": "1d3378e071d5967af6704cc7ddc28da95a2456b998e530921bf10ab3327bf5d3"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-applied-owner-custody-20261020/forward/before/m3/tooling/backport-contract-current-owner/sdk/pins.json",
@@ -99,9 +99,9 @@
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-applied-owner-custody-20261020/forward/manifest.tsv",
-      "gitBlob": "16b337d6a4ca73da79d2186f599999e61fc27080",
+      "gitBlob": "95c686cb8d3feda1f30c4af997df575eaade6757",
       "bytes": 1888,
-      "sha256": "c899d6440edd01182d73f5dbdce060bc606d961de863c889b62fa86b96d92e4b"
+      "sha256": "6e76ddb1cb2fbe421586e332a5990d38035bfc66a90a80c218b68ad4eb92fbc1"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-applied-owner-custody-20261020/forward/out/.github/workflows/m3-backport-contract-current-owner.yml",
@@ -123,9 +123,9 @@
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-applied-owner-custody-20261020/forward/out/m3/tooling/backport-contract-current-owner/runtime/INPUTS.json",
-      "gitBlob": "9cb800ba62f60e8febbbb96be91282640c799c7d",
+      "gitBlob": "8ac731367e254e1ed9b49813f9d109d3f06eb5e0",
       "bytes": 9330,
-      "sha256": "56e2785adbd94c4af0549b05366bf4aecb1dbd1b89de5ee952c435a58f06cdd3"
+      "sha256": "86ae663b5c5a96c89c62d430689b123b07064872e651a0579f1c1d0e5b11dc2a"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-applied-owner-custody-20261020/forward/out/m3/tooling/backport-contract-current-owner/runtime/qualify.py",
@@ -135,9 +135,9 @@
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-applied-owner-custody-20261020/forward/out/m3/tooling/backport-contract-current-owner/runtime/README.md",
-      "gitBlob": "c6cd72c3c9075c7c8325411363b058b77ca41b2a",
+      "gitBlob": "67d987cbad0af4aa3de0ed17a56dc69b2a1afc7b",
       "bytes": 7436,
-      "sha256": "6bf5e3a26f72801bb8a2a2ba745d43e2de98bc3811a285f4712e91cf2ee06a7f"
+      "sha256": "f0ce705eb5add18034663efc9d92d59ab6998ee8cc6bf855a3eed832d1f51be8"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-applied-owner-custody-20261020/forward/out/m3/tooling/backport-contract-current-owner/sdk/pins.json",
@@ -171,9 +171,9 @@
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-applied-owner-custody-20261020/inverse/before/m3/tooling/backport-contract-current-owner/runtime/INPUTS.json",
-      "gitBlob": "9cb800ba62f60e8febbbb96be91282640c799c7d",
+      "gitBlob": "8ac731367e254e1ed9b49813f9d109d3f06eb5e0",
       "bytes": 9330,
-      "sha256": "56e2785adbd94c4af0549b05366bf4aecb1dbd1b89de5ee952c435a58f06cdd3"
+      "sha256": "86ae663b5c5a96c89c62d430689b123b07064872e651a0579f1c1d0e5b11dc2a"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-applied-owner-custody-20261020/inverse/before/m3/tooling/backport-contract-current-owner/runtime/qualify.py",
@@ -183,9 +183,9 @@
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-applied-owner-custody-20261020/inverse/before/m3/tooling/backport-contract-current-owner/runtime/README.md",
-      "gitBlob": "c6cd72c3c9075c7c8325411363b058b77ca41b2a",
+      "gitBlob": "67d987cbad0af4aa3de0ed17a56dc69b2a1afc7b",
       "bytes": 7436,
-      "sha256": "6bf5e3a26f72801bb8a2a2ba745d43e2de98bc3811a285f4712e91cf2ee06a7f"
+      "sha256": "f0ce705eb5add18034663efc9d92d59ab6998ee8cc6bf855a3eed832d1f51be8"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-applied-owner-custody-20261020/inverse/before/m3/tooling/backport-contract-current-owner/sdk/pins.json",
@@ -201,9 +201,9 @@
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-applied-owner-custody-20261020/inverse/manifest.tsv",
-      "gitBlob": "d79c264e24012e16b207538d617c6f1136f40bd1",
+      "gitBlob": "96c450f8d7b1c1597f4ed77e0678a149a85ea139",
       "bytes": 1888,
-      "sha256": "4d24304a9d7ac2484779e2f8ae040db74555ae2854895d0319b191310f36c292"
+      "sha256": "922e4a8865b83e5adae6a33ae344c2e5ab1780a4370b8b86eed67cf59e9c876f"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-applied-owner-custody-20261020/inverse/out/.github/workflows/m3-backport-contract-current-owner.yml",
@@ -225,9 +225,9 @@
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-applied-owner-custody-20261020/inverse/out/m3/tooling/backport-contract-current-owner/runtime/INPUTS.json",
-      "gitBlob": "bd84e66ac6bae7ab0277dde8615435a91756c3cb",
+      "gitBlob": "5e3967517857e79249f3e1cc28a707c9f79b8996",
       "bytes": 6754,
-      "sha256": "1268276e609a3cf4686153284391668bffa7cbaf4c6b9decd21513ab99f9f79f"
+      "sha256": "b43608f6d73999039d3ddb68373f02739418b2f1740c66b9c892e099843ae73d"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-applied-owner-custody-20261020/inverse/out/m3/tooling/backport-contract-current-owner/runtime/qualify.py",
@@ -237,9 +237,9 @@
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-applied-owner-custody-20261020/inverse/out/m3/tooling/backport-contract-current-owner/runtime/README.md",
-      "gitBlob": "65a38fb73e719c40dc8d50c27fa0815196e8bdd6",
+      "gitBlob": "0dfce38a83bfcc3abee720bf38d07e79d056abfb",
       "bytes": 5689,
-      "sha256": "c39bc3039ddbf66618d0ba2349c7b54d06996c9cdd9516764f689a28a2fb3b99"
+      "sha256": "1d3378e071d5967af6704cc7ddc28da95a2456b998e530921bf10ab3327bf5d3"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-applied-owner-custody-20261020/inverse/out/m3/tooling/backport-contract-current-owner/sdk/pins.json",
@@ -273,9 +273,9 @@
     },
     {
       "path": "verify.py",
-      "gitBlob": "6e99b61658687b3398b47ab4e28f99eeea2ef6c9",
+      "gitBlob": "1fe885b7097be6aeaa5eaa1081f038c00d80e78b",
       "bytes": 31989,
-      "sha256": "7cbd7c6673618f4996d45452ecb8715b395579fabde84402f6043f0ef9e07ebb"
+      "sha256": "f520a7ae3cf0378a31c15fd7eb73c11dc5199b42bc0550579d9e932171977a06"
     }
   ]
 }

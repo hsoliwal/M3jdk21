@@ -8,7 +8,7 @@
   "sdk": {
     "receipt": {
       "path": "proof/sdk-001-offline/RESULT.json",
-      "sha256": "0bf285d0e082e121e178b0a22d47d92124e84579f5436c87276e8b999142fcdb"
+      "sha256": "8260a2bb04090e4307080e47d26dffb554a756abcc6d26c0a8afb6e6a6b7125e"
     },
     "tests": 1,
     "failures": 0,
@@ -20,7 +20,7 @@
   "copier": {
     "receipt": {
       "path": "proof/copier-qualification-001/RESULT.json",
-      "sha256": "597b29f2bb92576017e30c08e82300fe2e9117367f7dce54cd869964247fb569"
+      "sha256": "1ff7a23e980feb802320f6c034b4c820b821b5fdfd642d6abaab843ccab49d13"
     },
     "writes": 2,
     "replay_writes": 0,
@@ -28,11 +28,11 @@
   },
   "receiving_application": {
     "path": "proof/receiving-application-001/RESULT.json",
-    "sha256": "086499e28adf65d84acda3cc7aabafa6cea005d8ae4c4253dbb23dc62794be94"
+    "sha256": "bf4476df1ef78516e01ab22193c0fd1d7aa6faf38ced35744befd5e4a5d19708"
   },
   "actual_receiving_runtime": {
     "path": "proof/receiver-runtime-001/combined-receiver-001-receipts/RESULT.json",
-    "sha256": "1af51c5d7642bb84f88e61816ada2bc0b3d033dfdd4387f5a35cd2a11834c935"
+    "sha256": "fab5f62b10b712660d011c72eeaaa04f00b4f56d7a1a01b6f1bd37d17efd7842"
   },
   "runtime_scope": {
     "pack_modules": 62,
@@ -54,11 +54,11 @@
   },
   "memory": {
     "path": "memory/FINAL_RESULT.json",
-    "sha256": "4da9014446d363e55bcf59c86a75d480703ea99b0161acfbd1a592f91d32efe3"
+    "sha256": "93c1993033891a0f59ce8a03d6e5788bb1f30f81315391b359febebc893bdb39"
   },
   "source_rights": {
     "path": "provenance/SOURCE_AND_RIGHTS.json",
-    "sha256": "0f85d1ddf8f0234452146e14a5984dcd650b23b640c991498bcf256725de2ad1"
+    "sha256": "d33a5ed2338cbc4acb99e204b0feebff7ac2848a0b744f1119a060195c68c59f"
   },
   "admission": "PENDING; bounded local actual proof is not full-product or hosted acceptance.",
   "preserved_warnings": [

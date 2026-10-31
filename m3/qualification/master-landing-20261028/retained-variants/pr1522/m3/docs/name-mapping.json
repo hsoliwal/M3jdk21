@@ -875,7 +875,7 @@
         "source_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3CurrentMasterConvergence20261019.java",
         "source_sha256": "a736dbf73a39ee791d15aa585798c3d53eada2d7885e67e8c8c2530529e174cd",
         "manifest_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-current-master-convergence-20261019/manifest.tsv",
-        "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+        "manifest_sha256": "ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6",
         "canonical_repository": "hsoliwal/com.synexia",
         "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
         "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
@@ -898,7 +898,7 @@
           "skipped": 0,
           "java_lst": "NOT_RUN",
           "whole_reactor": "NOT_RUN",
-          "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+          "manifest_sha256": "ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6",
           "log_sha256": "d6bf20f3fd1ae04177b406b727c8679f8266880ed0800b057d31dcb6fde2e191"
         }
       },
@@ -950,7 +950,7 @@
           "skipped": 0,
           "java_lst": "NOT_RUN",
           "whole_reactor": "NOT_RUN",
-          "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+          "manifest_sha256": "ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6",
           "log_sha256": "d6bf20f3fd1ae04177b406b727c8679f8266880ed0800b057d31dcb6fde2e191"
         },
         {
@@ -963,7 +963,7 @@
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "state": "PASS",
           "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
-          "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+          "manifest_sha256": "ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6",
           "files": 657,
           "main_java": 268,
           "test_java": 264,
@@ -993,7 +993,7 @@
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "state": "PASS",
           "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
-          "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+          "manifest_sha256": "ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6",
           "tests": 477,
           "successful": 477,
           "failures": 0,
@@ -1062,7 +1062,7 @@
       "current_source_admission": {
         "state": "PASS",
         "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
-        "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+        "manifest_sha256": "ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6",
         "before_sha256": "6be07c18dbbbe9ae259ff85821bb3f4ec666fddd820b0950f4115c4256f45deb",
         "after_sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e",
         "canonical_before_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
@@ -1096,7 +1096,7 @@
         "source_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3CurrentMasterConvergence20261019.java",
         "source_sha256": "a736dbf73a39ee791d15aa585798c3d53eada2d7885e67e8c8c2530529e174cd",
         "manifest_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-current-master-convergence-20261019/manifest.tsv",
-        "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+        "manifest_sha256": "ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6",
         "canonical_repository": "hsoliwal/com.synexia",
         "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
         "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
@@ -1119,7 +1119,7 @@
           "skipped": 0,
           "java_lst": "NOT_RUN",
           "whole_reactor": "NOT_RUN",
-          "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+          "manifest_sha256": "ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6",
           "log_sha256": "d6bf20f3fd1ae04177b406b727c8679f8266880ed0800b057d31dcb6fde2e191"
         }
       },
@@ -1171,7 +1171,7 @@
           "skipped": 0,
           "java_lst": "NOT_RUN",
           "whole_reactor": "NOT_RUN",
-          "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+          "manifest_sha256": "ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6",
           "log_sha256": "d6bf20f3fd1ae04177b406b727c8679f8266880ed0800b057d31dcb6fde2e191"
         },
         {
@@ -1184,7 +1184,7 @@
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "state": "PASS",
           "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
-          "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+          "manifest_sha256": "ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6",
           "files": 657,
           "main_java": 268,
           "test_java": 264,
@@ -1214,7 +1214,7 @@
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "state": "PASS",
           "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
-          "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+          "manifest_sha256": "ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6",
           "tests": 477,
           "successful": 477,
           "failures": 0,
@@ -1283,7 +1283,7 @@
       "current_source_admission": {
         "state": "PASS",
         "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
-        "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+        "manifest_sha256": "ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6",
         "before_sha256": "bd192d5a81b3b331f8df75e09a4c3f0e5c462b5e39c3a72a7a020acb6e2e6b38",
         "after_sha256": "bd192d5a81b3b331f8df75e09a4c3f0e5c462b5e39c3a72a7a020acb6e2e6b38",
         "canonical_before_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/jdk/m3/collections/M3WindowPlan.java",
@@ -2586,10 +2586,10 @@
           "target_path": "src/java.base/share/native/libjava/M3StateRelation.c",
           "target_base_commit": "8e868958f017482cfd6c5085869263c92a011cf6",
           "inventory_commit": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
-          "target_preimage_sha256": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16",
-          "target_postimage_sha256": "faa999e2538087bd214c922cb1ad4b0dcaa208b04240acaed27771d47911cf1f",
-          "target_preimage_git_blob": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
-          "target_postimage_git_blob": "d6bdfeb01dd632b83b978b1bdb5ed2cbdeaebd9d",
+          "target_preimage_sha256": "0df1989292b23b1f185f222db61ad55d5e38b30d5b758436ca9d62b8de277bbd",
+          "target_postimage_sha256": "03fa3e35008045561b57f11e4cff1ff3e04fc8b90220d1525d86f345b75fa332",
+          "target_preimage_git_blob": "89b3127f0f262de3e00ba28a01079a659013dce2",
+          "target_postimage_git_blob": "5d2a8cc83a7551f4d2a82dfa5781c7a79531d444",
           "target_runtime_commit": "329cd9116eca5a3b2ec081fb6760ca3e6508da7e",
           "receiving_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1572",
           "status": "HOST_BOUNDED_QUALIFIED_RECEIVED_NO_PHASE_PROMOTION",
@@ -10104,8 +10104,8 @@
               "T Access.second(T)",
               "long[] Join.compose(long[],long[])"
             ],
-            "sha256": "bbc2901ebe5b2de9951b672127bd47e9d13c70b5a39482fa0727703d0a2ff757",
-            "git_blob_sha1": "780c7887aaa6b0892a76f4eee1dcb17086a60289",
+            "sha256": "9d485a1771a30b4229acb5526ca90de5f2df4a03ee5ad8f5388bb128d2c38194",
+            "git_blob_sha1": "d70a152bdedc380ed8b28861ea94ef4c2adbea90",
             "fingerprint": null,
             "revision_role": "pinned"
           },
@@ -10137,8 +10137,8 @@
               "jlongArray Java_jdk_internal_mindex_M3StateRelation_composeNative(JNIEnv*,jclass,jlongArray,jlongArray)",
               "jlongArray Java_jdk_internal_mindex_M3StateRelation_repeatNative(JNIEnv*,jclass,jlongArray,jlong)"
             ],
-            "sha256": "faa999e2538087bd214c922cb1ad4b0dcaa208b04240acaed27771d47911cf1f",
-            "git_blob_sha1": "d6bdfeb01dd632b83b978b1bdb5ed2cbdeaebd9d",
+            "sha256": "03fa3e35008045561b57f11e4cff1ff3e04fc8b90220d1525d86f345b75fa332",
+            "git_blob_sha1": "5d2a8cc83a7551f4d2a82dfa5781c7a79531d444",
             "fingerprint": null,
             "revision_role": "pinned"
           },
@@ -10152,8 +10152,8 @@
               "int m3_state_relation_compose(const uint64_t*,const uint64_t*,uint64_t*,size_t)",
               "int m3_state_relation_repeat(const uint64_t*,uint64_t*,size_t,uint64_t)"
             ],
-            "sha256": "c948c0ac34180f1f9412a764c3c9fd8c59e11509467aa9e04f8825e903526885",
-            "git_blob_sha1": "18a02e228129827da486edc5b316790af6135310",
+            "sha256": "6a453bbe5c443d327228e48cc27c6d5dc356a67586f93796a52de17e69fa12a2",
+            "git_blob_sha1": "0e0c70e60b2cee61c3df31982a26f4251955cb61",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -10215,7 +10215,7 @@
             "Internal M3 names and packages",
             "Runnable checkpoint replaces source IProgressMonitor",
             "Numeric-only M3StateRelation subset and renamed JNI/header symbols",
-            "Scoped state-compose refinement m3.m3jdk21.android-efficiency-20261020.state-relation-sparse; complete original record m3/docs/android-efficiency-20261020/history/ordered-relations-adapter-before.json SHA256 b694b4083d79afc4e741f8389acebd91da437f7e227eac516f73dd8c900e2b09."
+            "Scoped state-compose refinement m3.m3jdk21.android-efficiency-20261020.state-relation-sparse; complete original record m3/docs/android-efficiency-20261020/history/ordered-relations-adapter-before.json SHA256 9d54908573ec1b984485adba62f3978ed4b8414481d1a97ab77d3716b48f3431."
           ],
           "pending": [
             "Complete source API/dependency inventory and remaining Domain/RangeIndex/lifecycle surfaces",
@@ -10238,8 +10238,8 @@
                 "jlongArray Java_jdk_internal_mindex_M3StateRelation_composeNative(JNIEnv*,jclass,jlongArray,jlongArray)",
                 "jlongArray Java_jdk_internal_mindex_M3StateRelation_repeatNative(JNIEnv*,jclass,jlongArray,jlong)"
               ],
-              "sha256": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16",
-              "git_blob_sha1": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
+              "sha256": "0df1989292b23b1f185f222db61ad55d5e38b30d5b758436ca9d62b8de277bbd",
+              "git_blob_sha1": "89b3127f0f262de3e00ba28a01079a659013dce2",
               "fingerprint": null,
               "revision_role": "pinned"
             }
@@ -10247,7 +10247,7 @@
           "supersedes": []
         },
         "source_state": "partial",
-        "observation": "Partial adapter/source custody and all old product gates remain. Three unchanged artifacts retain previous pins. The common C active pin moves to the SDK-generated sparse refinement at receiving runtime commit 329cd9116eca5a3b2ec081fb6760ca3e6508da7e; complete previous record is preserved at m3/docs/android-efficiency-20261020/history/ordered-relations-adapter-before.json SHA256 b694b4083d79afc4e741f8389acebd91da437f7e227eac516f73dd8c900e2b09. See m3.m3jdk21.android-efficiency-20261020.state-relation-sparse for precise before/after pins and bounded host evidence."
+        "observation": "Partial adapter/source custody and all old product gates remain. Three unchanged artifacts retain previous pins. The common C active pin moves to the SDK-generated sparse refinement at receiving runtime commit 329cd9116eca5a3b2ec081fb6760ca3e6508da7e; complete previous record is preserved at m3/docs/android-efficiency-20261020/history/ordered-relations-adapter-before.json SHA256 9d54908573ec1b984485adba62f3978ed4b8414481d1a97ab77d3716b48f3431. See m3.m3jdk21.android-efficiency-20261020.state-relation-sparse for precise before/after pins and bounded host evidence."
       },
       {
         "id": "m3.regex.ordered-relations.dispatch",
@@ -10784,8 +10784,8 @@
               "jlongArray Java_jdk_internal_mindex_M3StateRelation_composeNative(JNIEnv*,jclass,jlongArray,jlongArray)",
               "jlongArray Java_jdk_internal_mindex_M3StateRelation_repeatNative(JNIEnv*,jclass,jlongArray,jlong)"
             ],
-            "sha256": "faa999e2538087bd214c922cb1ad4b0dcaa208b04240acaed27771d47911cf1f",
-            "git_blob_sha1": "d6bdfeb01dd632b83b978b1bdb5ed2cbdeaebd9d",
+            "sha256": "03fa3e35008045561b57f11e4cff1ff3e04fc8b90220d1525d86f345b75fa332",
+            "git_blob_sha1": "5d2a8cc83a7551f4d2a82dfa5781c7a79531d444",
             "fingerprint": null,
             "revision_role": "pinned"
           },
@@ -10817,8 +10817,8 @@
               "jlongArray Java_jdk_internal_mindex_M3StateRelation_composeNative(JNIEnv*,jclass,jlongArray,jlongArray)",
               "jlongArray Java_jdk_internal_mindex_M3StateRelation_repeatNative(JNIEnv*,jclass,jlongArray,jlong)"
             ],
-            "sha256": "faa999e2538087bd214c922cb1ad4b0dcaa208b04240acaed27771d47911cf1f",
-            "git_blob_sha1": "d6bdfeb01dd632b83b978b1bdb5ed2cbdeaebd9d",
+            "sha256": "03fa3e35008045561b57f11e4cff1ff3e04fc8b90220d1525d86f345b75fa332",
+            "git_blob_sha1": "5d2a8cc83a7551f4d2a82dfa5781c7a79531d444",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -10831,8 +10831,8 @@
         "contract": {
           "differences": [
             "Receive existing CTZ/clear-lowest-bit traversal, intrinsic calls on nonzero words and exact original portable body.",
-            "Active C SHA256 b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16 / Git blob 610ca8bab47065a49b9b58814d6392a287f4fd8b becomes SHA256 faa999e2538087bd214c922cb1ad4b0dcaa208b04240acaed27771d47911cf1f / Git blob d6bdfeb01dd632b83b978b1bdb5ed2cbdeaebd9d.",
-            "Reconcile m3.regex.ordered-relations.adapter active C pin; complete original record is retained at m3/docs/android-efficiency-20261020/history/ordered-relations-adapter-before.json SHA256 b694b4083d79afc4e741f8389acebd91da437f7e227eac516f73dd8c900e2b09."
+            "Active C SHA256 0df1989292b23b1f185f222db61ad55d5e38b30d5b758436ca9d62b8de277bbd / Git blob 89b3127f0f262de3e00ba28a01079a659013dce2 becomes SHA256 03fa3e35008045561b57f11e4cff1ff3e04fc8b90220d1525d86f345b75fa332 / Git blob 5d2a8cc83a7551f4d2a82dfa5781c7a79531d444.",
+            "Reconcile m3.regex.ordered-relations.adapter active C pin; complete original record is retained at m3/docs/android-efficiency-20261020/history/ordered-relations-adapter-before.json SHA256 9d54908573ec1b984485adba62f3978ed4b8414481d1a97ab77d3716b48f3431."
           ],
           "compatibility_obligations": [
             "Keep all validation before output, dimensions1..64/bit63, sparse/dense/zero/full masks, adjacent-row reuse, ceiling termination, repetition, exact and partial aliases.",
@@ -10885,8 +10885,8 @@
           "direction": "source-to-target",
           "target_adaptations": [
             "Receive existing CTZ/clear-lowest-bit traversal, intrinsic calls on nonzero words and exact original portable body.",
-            "Active C SHA256 b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16 / Git blob 610ca8bab47065a49b9b58814d6392a287f4fd8b becomes SHA256 faa999e2538087bd214c922cb1ad4b0dcaa208b04240acaed27771d47911cf1f / Git blob d6bdfeb01dd632b83b978b1bdb5ed2cbdeaebd9d.",
-            "Reconcile m3.regex.ordered-relations.adapter active C pin; complete original record is retained at m3/docs/android-efficiency-20261020/history/ordered-relations-adapter-before.json SHA256 b694b4083d79afc4e741f8389acebd91da437f7e227eac516f73dd8c900e2b09."
+            "Active C SHA256 0df1989292b23b1f185f222db61ad55d5e38b30d5b758436ca9d62b8de277bbd / Git blob 89b3127f0f262de3e00ba28a01079a659013dce2 becomes SHA256 03fa3e35008045561b57f11e4cff1ff3e04fc8b90220d1525d86f345b75fa332 / Git blob 5d2a8cc83a7551f4d2a82dfa5781c7a79531d444.",
+            "Reconcile m3.regex.ordered-relations.adapter active C pin; complete original record is retained at m3/docs/android-efficiency-20261020/history/ordered-relations-adapter-before.json SHA256 9d54908573ec1b984485adba62f3978ed4b8414481d1a97ab77d3716b48f3431."
           ],
           "pending": [
             "Source-built integrated M3JDK21/HotSpot and full libjava",
@@ -10911,8 +10911,8 @@
                 "jlongArray Java_jdk_internal_mindex_M3StateRelation_composeNative(JNIEnv*,jclass,jlongArray,jlongArray)",
                 "jlongArray Java_jdk_internal_mindex_M3StateRelation_repeatNative(JNIEnv*,jclass,jlongArray,jlong)"
               ],
-              "sha256": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16",
-              "git_blob_sha1": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
+              "sha256": "0df1989292b23b1f185f222db61ad55d5e38b30d5b758436ca9d62b8de277bbd",
+              "git_blob_sha1": "89b3127f0f262de3e00ba28a01079a659013dce2",
               "fingerprint": null,
               "revision_role": "pinned"
             }

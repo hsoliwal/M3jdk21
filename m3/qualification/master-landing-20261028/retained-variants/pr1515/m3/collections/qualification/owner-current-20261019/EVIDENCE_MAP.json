@@ -34,7 +34,7 @@
     {
       "target": "m3/collections/qualification/owner-current-20261019/FINAL_RECEIPTS.json",
       "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/FINAL_RECEIPTS.json",
-      "sha256": "2a94166f8de10c1d9d9d0c0e4926e75ea5aee4d9609df96984e64a1f8b85907c",
+      "sha256": "ed50cd7a4935c7f35af78cbdd4b4929ba16169405520044faaa75b718acd28db",
       "kind": "EXACT_COPY"
     },
     {
@@ -160,7 +160,7 @@
     {
       "target": "m3/collections/qualification/owner-current-20261019/proof/emitted-owning-module-1/SOURCE_RECEIPT.json",
       "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-owning-module-1/SOURCE_RECEIPT.json",
-      "sha256": "6ba7897566b239f2ca881cad9babd3e8992adba17a93405c3f54a0aa4ebfda80",
+      "sha256": "156a8723840bf8980af10e95be2ef430c63d8c865db25cea38ae9abbf3da9367",
       "kind": "EXACT_COPY"
     },
     {

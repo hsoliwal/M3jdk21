@@ -5,6 +5,6 @@
     "wall_time_seconds": 0.647112016,
     "exit_code": 0,
     "original_token_count": 77,
-    "output": "{\"status\": \"PUBLISHED_CUSTODY_VERIFIED\", \"commit\": \"0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8\", \"tree\": \"0361e4a07b77a01df170523033fef01c4052ddc5\", \"pr\": \"https://github.com/hsoliwal/com.synexia/pull/9362\", \"files\": 2796, \"receipt_sha256\": \"bf2d3f29e903f12c201febb4c82083a32758095fdd8fbacbcf25a42e532f44fd\"}\n"
+    "output": "{\"status\": \"PUBLISHED_CUSTODY_VERIFIED\", \"commit\": \"0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8\", \"tree\": \"0361e4a07b77a01df170523033fef01c4052ddc5\", \"pr\": \"https://github.com/hsoliwal/com.synexia/pull/9362\", \"files\": 2796, \"receipt_sha256\": \"91c8df6ab07e3590fecf20de65e2e65943c4b70aebb9f5133901ae6362506c35\"}\n"
   }
 }

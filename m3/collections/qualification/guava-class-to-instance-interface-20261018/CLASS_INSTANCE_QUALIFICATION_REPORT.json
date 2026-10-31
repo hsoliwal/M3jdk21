@@ -115,7 +115,7 @@
       "disposition"
     ],
     "fixed_points": "PASS BOTH",
-    "generated_java_sha256": "ebbe8b81c2bc93d7b9c8c191b309c543728214b638be97fa89e9de6d826aef83",
+    "generated_java_sha256": "a5e9298f47f26c015a6caf8f0e6ef5bdca20be2a0d48d0edb44141d6f0d1bd3c",
     "generator": "Unchanged original pure parse/render helpers and template; historical installers/seals preserved. BiMap actual emitted predecessor is exact preimage.",
     "java_changed_lines": 2,
     "other_rows_byte_identical": 106,

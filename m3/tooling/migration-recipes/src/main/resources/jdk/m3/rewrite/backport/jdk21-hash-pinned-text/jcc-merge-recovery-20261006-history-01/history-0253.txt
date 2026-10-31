@@ -181,7 +181,7 @@
   },
   "before_branch_custody_receipt": {
     "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/BEFORE_BRANCH_CUSTODY.json",
-    "sha256": "321ad36af119869924e37850313420e2a0979a6438c1f79e3629b6bc666e3e98"
+    "sha256": "e347ce74d2e2c9a3252260215f9a4cd3c3a2aa791219095675ae67df8f135f23"
   },
   "blobs": [
     {
@@ -851,7 +851,7 @@
     }
   },
   "custody_protocol": "EXACT_CREATE_AND_TREE_IDENTITY_FOR_TWO_INVALID_UTF8_FIXTURES",
-  "preflight_sha256": "424ec0d0148f40d4df153bdc201b4ed334395c52a02307775286abba2ab40bdc",
+  "preflight_sha256": "4a8e0c7647a9a6549ffc797de28d01a7806aa7757fedb2096bf35ecb0bba62c7",
   "pull_request": {
     "_links": {
       "comments": {
@@ -1217,7 +1217,7 @@
   },
   "raw_fixture_custody_input": {
     "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/CUSTODY_INPUT.json",
-    "sha256": "2b2f294b13298da20e8d8cbe85581e89265fbe8d1c355a384dba308e4a8f9710"
+    "sha256": "384ce843f2e4545ad1c40d7ee58abbc471b5a6d1cbed89bea82dcff0479ce6a5"
   },
   "raw_fixture_final_reads": [
     {

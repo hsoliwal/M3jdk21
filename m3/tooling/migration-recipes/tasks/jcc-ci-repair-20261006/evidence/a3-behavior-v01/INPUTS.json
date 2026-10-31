@@ -302,8 +302,8 @@
   "prior_java_receipt": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate-v02/execution/JAVA_EXECUTION.json",
     "bytes": 37719,
-    "sha256": "7d1e9134c48125d034dfd03bfef7353e96ada888cd8d2f4f5db57e9ac7e20d30",
-    "git_blob": "a0b15bef8b17606b8f0e3d8ff155b887359d0c9c"
+    "sha256": "4e53e428b77b8ef962a8c96846175391479f2991a878c2933f648c8c7c04646b",
+    "git_blob": "1ec1d6339bb79c5c4d52edddb03d37c2227e1359"
   },
   "toolchain": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/toolchain/TOOLCHAIN.json",

@@ -14,7 +14,7 @@
   "exit": 1,
   "draft": {
     "path": "memory/draft-002.json",
-    "sha256": "a5f4608443fbaf2af2cc47446d7c031d5e39c33bed27bef49210e7b356ca4a67"
+    "sha256": "7cddc0f75b55dff977c71ead789b21bc4890681a25bc615b305f901803748385"
   },
   "log": {
     "path": "proof/memory-conformance-001/publish-002.log",

@@ -39,10 +39,10 @@ RECIPE_JAVA = re.compile(r"(?:^|/)(?:rewrite|recipes?)/[^/]*Recipe(?:Test)?\.jav
 # other dated data, runtime/API names, or executable recipe artifacts.
 PINNED_PASSIVE_RECEIPTS = {
     "m3/compatibility/m3-java-base-collection-core-receipt-20261025.json": (
-        "a491cdcca5c57307960de0a4470776a391efc5ef298575fd42996c31e3dc77c7",
+        "7bc71f528948756465b70e6e9d6c218646f4bb66905276d76c7169f4c6b40f1c",
         "M3JDK21_JAVA_BASE_COLLECTION_CORE_RECEIPT_V1"),
     "m3/compatibility/m3-sdk-catalogue-maintenance-receipt-20261025.json": (
-        "6459dda86add8f7df25c044da615aa1c684c29095066943ef55600019cc62933",
+        "7d6e7b039a8490ea0790eef5c879e0555b5496c265e70a1ef2e07b49daa03e84",
         "M3JDK21_SDK_CATALOGUE_MAINTENANCE_RECEIPT_V1"),
 }
 

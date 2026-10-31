@@ -3,7 +3,7 @@
   "label": "receiver-runtime-001",
   "status": "EXACT_READBACK",
   "source_handoff": "nlp-work/EVIDENCE_HANDOFF-LOCK-RECEIVER.json",
-  "handoff_sha256": "8297250f8cbda23657cc02d8e09cfd63037d5a90a6ddc6edbae95893bc4d1a3f",
+  "handoff_sha256": "90cc45bfde024e751fca63c07f419ba58aaef17bf3ae3c3b4b3739bbbdaed4f0",
   "copied_files": 54,
   "bytes": 6236150,
   "files": [
@@ -11,13 +11,13 @@
       "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/FINAL_RECEIVER_QUALIFICATION.json",
       "path": "proof/receiver-runtime-001/FINAL_RECEIVER_QUALIFICATION.json",
       "bytes": 3748,
-      "sha256": "e9735ffaa55b10ce92e68c928cdb5e224cd0babc68eff396e8f1fd102b5d1f54"
+      "sha256": "3e10e584c1d6bbba3a46a74e0a638a445a8cf3ca3e06d08b339ade3341aa899f"
     },
     {
       "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001-receipts/INPUTS.json",
       "path": "proof/receiver-runtime-001/combined-receiver-001-receipts/INPUTS.json",
       "bytes": 2979999,
-      "sha256": "18606d40ee3ab44af376e7d93b3af7dab48c958423082ae0e4017a8ec990dcf6"
+      "sha256": "ce2654ba7202fe1126a58a7acda09a19d6e1ffdf2927127aef85260ab8ad77d3"
     },
     {
       "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001-receipts/INSTALLED_ARTIFACTS.json",
@@ -29,13 +29,13 @@
       "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001-receipts/READBACK.json",
       "path": "proof/receiver-runtime-001/combined-receiver-001-receipts/READBACK.json",
       "bytes": 2979999,
-      "sha256": "18606d40ee3ab44af376e7d93b3af7dab48c958423082ae0e4017a8ec990dcf6"
+      "sha256": "ce2654ba7202fe1126a58a7acda09a19d6e1ffdf2927127aef85260ab8ad77d3"
     },
     {
       "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001-receipts/RESULT.json",
       "path": "proof/receiver-runtime-001/combined-receiver-001-receipts/RESULT.json",
       "bytes": 5329,
-      "sha256": "1af51c5d7642bb84f88e61816ada2bc0b3d033dfdd4387f5a35cd2a11834c935"
+      "sha256": "fab5f62b10b712660d011c72eeaaa04f00b4f56d7a1a01b6f1bd37d17efd7842"
     },
     {
       "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001-receipts/command.log",

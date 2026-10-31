@@ -16,7 +16,7 @@
   "java_home": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/toolchain/jdk-21+35",
   "exit_code": 1,
   "asm93_addon_receipt_sha256": "c49c23fd5ec3fc02ad0c3332e16fe4b0f8c9ea4bfab296ad013c726bc226823d",
-  "input_seal_sha256": "5113fc356b68735ba1cef3c564d997e631acda1006a4162b8ad06b408eba998a",
+  "input_seal_sha256": "ece8f1484d00e9658cae2610530823d892e24d0bf3a7be9f34a2e3c3aea29603",
   "inputs_unchanged": true,
   "offline_cache_receipt": "runtime-resolution/actual-acquisition/OFFLINE_DIAGNOSTIC_CACHE_V02.json",
   "offline_cache_receipt_sha256": "034d226e546825818559e5517ce62bb00dd855f9ce59760fa607049388280da9",

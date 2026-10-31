@@ -3,5 +3,5 @@ path	git_blob	status	pr	note
 m3/collections/qualification/long-consolidation-20261029/RECEIPT.json	ec096badd0b58053965f70b5a0c763cbaa4a485a	added	2127	PR version, not live; the git blob id is its content address
 m3/collections/src/main/java/jdk/m3/collections/M3LongLongHashMap.java	1dd6988e97e61419b17f209751deb935baa83164	modified	2127	PR version, not live; the git blob id is its content address
 m3/collections/src/test/java/com/m3/collections/M3LongLongHashMapAddToTest.java	01dafa3df740a0b028f8b60a49d0aefd5c955b02	added	2127	PR version, not live; the git blob id is its content address
-m3/docs/name-mapping.json	24f512bb991e2d7254af3680b0e37cdde552883b	modified	2127	PR version, not live; the git blob id is its content address
-m3/tooling/name-contract/name-plan.json	067aeb4c940d77241df2b6b1653a34d068346672	modified	2127	PR version, not live; the git blob id is its content address
+m3/docs/name-mapping.json	7ba8595a8f2901f750612cd6f749db108f14dcc9	modified	2127	PR version, not live; the git blob id is its content address
+m3/tooling/name-contract/name-plan.json	750f4320c930d98c410d07e96f15fadc70ff3be0	modified	2127	PR version, not live; the git blob id is its content address

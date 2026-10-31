@@ -52,7 +52,7 @@
     {
       "path": "m3/runtime-integration/check-m3string-invariants.py",
       "before_sha256": "5ae66e43164c7e962c6d8ba73456b9f652431187cc103bc27387a51dd9302594",
-      "after_sha256": "0a33fe30cddaeea1d9620535970adc1caeb0c004748dd8a749a0f8b1f2e2105b",
+      "after_sha256": "419529c9873f028f98a807a016716dd4400af50e1d284089b0ac4fb5c0cc3cfe",
       "destination": "product"
     },
     {

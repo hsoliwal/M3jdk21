@@ -11,6 +11,6 @@ m3/lexicon/receiver/src/main/java/jdk/m3/lexicon/M3RegexWordTransferRows.java	d9
 m3/lexicon/receiver/src/test/java/jdk/m3/lexicon/M3RegexWordTransferBoundaryProof.java	0acdf8cb4c28bcdc66f19ba4456fc5aec99b5ed74f02c6922b1b142f6bee926e	4bea6f6870b734d3e9b5b5ee7da82207a24630d4	100644	1786	PR version, not live
 m3/lexicon/receiver/src/test/java/jdk/m3/lexicon/M3RegexWordTransferCompositionProof.java	e28c79a74abf3aad1349dbece9fd936ef1fd73ff1d1f6b702a0504a2f0aa7fc5	974d37f25b6b3e0c177017e09f007513703f58e3	100644	1786	PR version, not live
 m3/lexicon/receiver/tools/verify-transfer.py	2316d395349a60629c0d41b3c9ef8d79b79c10e63b0046d56d78eb59c5083b8b	6943d3f9dbb14711e24a4a628e6740637e9fe372	100644	1786	PR version, not live
-src/java.base/share/classes/java/util/ChangeJournal.java	2fd9384a9df26ed038bd6663e083586425228815dc7b4d43205af769d3c2544e	382e76061737743792885c4cadad5db15e474b2e	100644	1786	PR version, not live
+src/java.base/share/classes/java/util/ChangeJournal.java	ffad7d1b3fdb044fe970f4014348e2f1518705613ffb03f6e770ab3169eeb97f	536b492d612bb2d26156a4d1135c7fc434f0e6cb	100644	1786	PR version, not live
 src/java.base/share/classes/jdk/internal/mindex/M3RegexDpPlan.java	8a4a0390654dd913aff760da0909b5aa66f703d6aa83a5743205d568a4cdf284	f079f7c359896cc4ccc6834aa94bb851d6de0f81	100644	1786	PR version, not live
 src/java.base/share/native/libjava/M3RegexDpPlan.c	6c47919fd310c8b0a0df185786af71d94b057d6f9dd420550e1924ce8c2d84f4	de8f8a6d0954cf990ff77cf7822308a6318ab165	100644	1786	PR version, not live

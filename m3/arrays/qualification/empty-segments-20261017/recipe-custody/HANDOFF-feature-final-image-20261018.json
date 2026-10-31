@@ -1225,7 +1225,7 @@
     },
     {
       "path": "evidence/feature-final-image-20261018/source-identity/feature-source-identity-before-restoration.json",
-      "sha256": "fe11954f6cad2520fd3ca7feb16bf8ae01630e39932326cd664c312c2cbd3fb4",
+      "sha256": "c070abbc7c644ac8e12f34e49be59f60b0a4c4a0cc35d21bb1e237f241235e56",
       "bytes": 7671,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/build-proof/feature-source-identity-before-restoration.json"

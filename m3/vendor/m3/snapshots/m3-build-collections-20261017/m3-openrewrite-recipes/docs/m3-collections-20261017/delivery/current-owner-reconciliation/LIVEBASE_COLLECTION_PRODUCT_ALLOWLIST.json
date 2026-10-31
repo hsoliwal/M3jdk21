@@ -18,7 +18,7 @@
     },
     {
       "path": "m3/docs/name-mapping.json",
-      "sha256": "cfe009577ae15534caad1383031ac2d96950995c2937c0a3b8e2c85339473ffa",
+      "sha256": "4980cd7b908270044912775d85f079351b0e020b0b044d91aff2339584e924f1",
       "bytes": 400947,
       "recipeCrate": "m3jdk-collection-current-owners-assets-20261017"
     },

@@ -2,7 +2,7 @@
   "schema": "M3_NLP_CURRENT_OWNER_COPIER_QUALIFICATION/1",
   "status": "PASS",
   "scope": "isolated exact product-source fixtures; no target repository writes",
-  "sdk_receipt_sha256": "0bf285d0e082e121e178b0a22d47d92124e84579f5436c87276e8b999142fcdb",
+  "sdk_receipt_sha256": "8260a2bb04090e4307080e47d26dffb554a756abcc6d26c0a8afb6e6a6b7125e",
   "script_sha256": "dd16e0c5cb978b50f9377e2365d675e0bd42acb964fc7ddce9d63941f0979abd",
   "source_seals_sha256": "5baa373db8748eba54cecfc5899eb36b5b2f09aa85cfb8399195bac6a367471a",
   "target_paths": 2,
@@ -20,7 +20,7 @@
       ],
       "exit_code": 0,
       "log_sha256": "20a7260560b6f05b20a12dc0dc69f2e8af95cd8a7c3f372f09320535032c33bc",
-      "receipt_sha256": "799c49ec26218f022961e18e1de6cfc1038fce45456685b5a8bba4192bdae0f8",
+      "receipt_sha256": "09f87546b121355dacd43424db4bf1e45a730879906e42021d3923c93780d647",
       "before": {
         "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java": "a273220cdd1a2b20857ccba086394c0a0a726cc3f2711e9eb7fdadbaffb08256",
         "m3/tooling/module-packs/nlp-search/current-source-lock.json": "c072c8b97e8f83d0e9d2f0b9d3cdcd334622a1227888251ee13f4de28b5d843a"
@@ -41,7 +41,7 @@
       ],
       "exit_code": 0,
       "log_sha256": "39e11f25b4aa0270d4dafbea116c8f43998b22a279442b87dd9d4a76791fc529",
-      "receipt_sha256": "5dcd35ba629b3eb3127a47ee5671e7dc4a35f8b89c2e050808f576442033c180",
+      "receipt_sha256": "ee01bc93f80dfab96ba94001ea8fd9d89b34a29145118abf210524f430419b2c",
       "before": {
         "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java": "a273220cdd1a2b20857ccba086394c0a0a726cc3f2711e9eb7fdadbaffb08256",
         "m3/tooling/module-packs/nlp-search/current-source-lock.json": "c072c8b97e8f83d0e9d2f0b9d3cdcd334622a1227888251ee13f4de28b5d843a"
@@ -62,7 +62,7 @@
       ],
       "exit_code": 0,
       "log_sha256": "ecc80624289ed9259e855f275d0387e19655c9af71139e8898c75f1f0670f7b6",
-      "receipt_sha256": "fe1181baf115607d022a217be3f79f774f456369b8083f21f465cadd33ac1e9b",
+      "receipt_sha256": "1b9cc0a3f32541d8148ad6194069951af8f11e345072438e028662a9e2ea6bd6",
       "before": {
         "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java": "07c498aafa158278bf2fea6ee54bae7f09bf037051f1f8207511597ccef02929",
         "m3/tooling/module-packs/nlp-search/current-source-lock.json": "271a532810591e94f5ceaab443820fdb08f96d1288e9ba5c1ce55c09d3444c8b"

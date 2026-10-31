@@ -111,7 +111,7 @@
     {
       "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
       "bytes": 19983,
-      "sha256": "613fd494de5eebdbc29d8982c599d44cd321754b370175f7d097720904a04853"
+      "sha256": "3b4f7649fc3ee38df62a6dc9b318e8845da6574f7e48b4cd7a948b58e266d46f"
     },
     {
       "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",

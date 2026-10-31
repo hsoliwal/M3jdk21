@@ -49,7 +49,7 @@
     {
       "path": ".github/workflows/m3-first-release-admission.yml",
       "before_sha256": "00587a22204497ed4795162b6e9688a78cdd5067994a86ba29624df874dae3f4",
-      "after_sha256": "4f000838d53ad3d25581dd3b5f5e10167c58d6e3debbd50e44cfa81a2ac3895b",
+      "after_sha256": "dc1dd3d7bb4dd2c3d1a1e5e1182954f770a6409b25ddfe5125d78728c2b91ff2",
       "recipe": "canonical-text-snapshot"
     },
     {

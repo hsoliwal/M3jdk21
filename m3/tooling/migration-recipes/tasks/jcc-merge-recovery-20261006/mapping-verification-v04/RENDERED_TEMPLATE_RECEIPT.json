@@ -9,7 +9,7 @@
   "receiving_input_epoch_sha256": "4fd3b3bd4fb09759d8bb02ca9ba45d0b2934625f24bcc4ae195f3e49394dff70",
   "receiving_commit": "09075810b55229662329a158923287e8a7118f86",
   "receiving_root_tree": "bba8647ea80d1cb4101394b4c0fc5a97f0b8eb52",
-  "manifest_sha256": "2206497a6bf01edaa9dbc7a3053619d1748f3b2598df30640ee8f4f975b6e498",
+  "manifest_sha256": "d7a95f92813e6f5346969bf290aaa2041806ccfd9123fdc76d467eff490336f8",
   "plan_sha256": "884b2722f1f6a7df5b8c872542d7b06a513c82f973a3219347639bd617ad88ba",
   "files": [
     {
@@ -21,8 +21,8 @@
     {
       "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccMergeMappingRecoveryV04Test.java",
       "bytes": 53850,
-      "sha256": "1caf882b38c363f0cb701d39a1ff608ba416350c20e0ca9dee3798c679c5ab27",
-      "git_blob_sha1": "cd6f21d54f1e2393022478c0a8f6d1ff040320fc"
+      "sha256": "ff551b33ab778594aac33c159c6afdaefabe2a94501c9fb4e71c4809b5ed7823",
+      "git_blob_sha1": "91e7249d8fce8ccc71bac98aeb2e5382fb87076c"
     },
     {
       "path": "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/jcc-merge-recovery-20261006-mapping-v04/publication-input-summary.json",
@@ -38,12 +38,12 @@
     }
   ],
   "template_inputs": {
-    "JccMergeMappingRecoveryV04Test.java.in": "449324e89b72aafa6a0b659787858a202feeb66306140bfa8c6ce2305c7ac761",
+    "JccMergeMappingRecoveryV04Test.java.in": "0c891ed81dd8422572820f30c3b5b119e5584ee28e479c3ffa2ce5cb5d0d7163",
     "pom.xml": "258c1e3682df5f7f6c08c3f2c9a823bd5e132579c9af8e9264661fd6e7cac626",
     "m3-jcc-merge-mapping-recovery-v04.yml": "981936075a372483d634d9900ab46c624debbeff4cfacc5bffe7fcb0bbabdc91",
-    "render_template.py": "dd852c5f7ef242f03f75dd388e4750a684983010f687afc3f1d402447e744273"
+    "render_template.py": "f058167409d02eb987be01c606b44ea55eccc9e4815f6915acb694ce496ad2f7"
   },
-  "binder_sha256": "05cceac55f0bd8ca9fbb4ecaea8ce3704d25f260f88e0296202a2a49b36cb7c9",
+  "binder_sha256": "cf670f7ce05052dc9757e1f6782404c7886a1a1511e9a2514f772cbc309e2b45",
   "source_export_admitted": false,
   "destination_gates_passed": false,
   "scope": "Only test/configuration inputs staged. No JUnit execution, recipe output, or publication is asserted."

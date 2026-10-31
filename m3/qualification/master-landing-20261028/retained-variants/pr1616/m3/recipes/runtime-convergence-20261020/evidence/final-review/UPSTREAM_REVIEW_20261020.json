@@ -275,8 +275,8 @@
     },
     {
       "path": "m3/collections/qualification/guava-class-to-instance-interface-20261018/README.md",
-      "git_blob_sha1": "3bd0bbacd5bebc40b80ba502138790b22cb99b8f",
-      "sha256": "335d814f2d1ba4ec1fb2e3a02ea666206f215ec9541486c52ae51736c974f7f7",
+      "git_blob_sha1": "5292c79d1a7f76bffbb305573a50ef6523f181ff",
+      "sha256": "7d5974bccb11e36c27a4f97aacab4ef87e7fe8e9594e4aab21ee4dca28c88955",
       "bytes": 5697
     },
     {
@@ -311,8 +311,8 @@
     },
     {
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3CollectionSdkCatalog.java",
-      "git_blob_sha1": "5deb3190bea98614509bc0d165764890d722cd68",
-      "sha256": "ebbe8b81c2bc93d7b9c8c191b309c543728214b638be97fa89e9de6d826aef83",
+      "git_blob_sha1": "445c762c40d0475972ec50d27ea31ae34d86cfe0",
+      "sha256": "a5e9298f47f26c015a6caf8f0e6ef5bdca20be2a0d48d0edb44141d6f0d1bd3c",
       "bytes": 25259
     },
     {
@@ -407,8 +407,8 @@
     },
     {
       "path": "m3/tooling/module-packs/nlp-search/INTEGRATION_CUSTODY.json",
-      "git_blob_sha1": "821f4ba06a0c76316e34e584370cd37bbd7ef5e3",
-      "sha256": "0a2f16414fa80c807374c35d0674722fd86f58db88c8a8dd325b0195ab80ee6c",
+      "git_blob_sha1": "5f030abcc425bc764936cd5fa2cd57e92369b1f0",
+      "sha256": "3d961dfcfa329a704e5d5f9b2e456c04dfb13e1212b778f4246d926fa348997c",
       "bytes": 181858
     },
     {

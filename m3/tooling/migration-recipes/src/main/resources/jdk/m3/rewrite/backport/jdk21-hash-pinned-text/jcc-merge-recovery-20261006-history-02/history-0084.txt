@@ -8,7 +8,7 @@
 |---|---|
 | Adapter note | `c12b3bb6415f89a94e946d8937b50e9f974e6bcf79f4f6ecdb388dc1cdfa16c6` |
 | Final source manifest | `9270a6b4098960e2b7c7bd87b17325b648c4de363957f36028bacc9c1955e328` |
-| Unchanged V2 verifier | `a5e9c2228304ea359b5459df150c618fcc3566b88217cdc262c893c31398baa7` |
+| Unchanged V2 verifier | `fa327277439825eb5870f67063833dec3495448d03a70f2d9222acc48e4f9226` |
 | Raw verification plan | `7b2b3526fec60ea3fd6d53261ab1f509c7dcf37b9193d044f215e913ee9fbf90` |
 | Capability observation | `fba19b92e8b20eb4ef2ba2c6dbc6d48d5bce01eec5763362f62324fe27ab410a` |
 | Four creation-response records | `1213f1a8c1da0a7032f1dc9507c5aef152eaf94ea39db0212f3684be06778a5a` |

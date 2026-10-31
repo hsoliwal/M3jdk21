@@ -16,7 +16,7 @@
     "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/java-template/compile-check-v01/src/com/m3/rewrite/backport/JccMergeMappingRecoveryV04Test.java"
   ],
   "exit_code": 0,
-  "template_sha256": "449324e89b72aafa6a0b659787858a202feeb66306140bfa8c6ce2305c7ac761",
+  "template_sha256": "0c891ed81dd8422572820f30c3b5b119e5584ee28e479c3ffa2ce5cb5d0d7163",
   "owner_sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
   "classpath": [
     {

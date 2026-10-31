@@ -3,17 +3,17 @@
   "status": "PASS_EXPANDED_RECIPE_WITH_ROOT_CPU_REVIEW_SCOPE_ASSESSMENT",
   "proof": {
     "path": "PROOF.json",
-    "sha256": "e3b2c1da7f6a8799be41d4e3ca9cd8d5540c791aceb4319d47767d21265f4bd1"
+    "sha256": "9f554ffd2d24352d659ce1c336a821917fc7c850c6b863c7a2e13dd7c7fb049e"
   },
   "completeTemplates": "templates",
   "priorProofUnchanged": {
     "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\PROOF.json",
-    "sha256": "f06fcd6b439529d32c28b46b47f9e6b924fe160dd46631a73c28f60f510a38ed"
+    "sha256": "c339b321169a224851bbb68d2d07cfd0c0d3195236f2f5ce94f035b8f1253e6b"
   },
   "files": [
     {
       "path": "AUTOREVIEW_SCOPE_ASSESSMENT.json",
-      "sha256": "b5bc5c45d96cc72fae6ea0df1f92d167f1e61131da8a08886d553479fd26cfb9",
+      "sha256": "b508e8e4175fbf868239e5f2f63627abe93f47425269a140e09ac85b06ce4f26",
       "bytes": 2291
     },
     {
@@ -53,7 +53,7 @@
     },
     {
       "path": "INPUT_CUSTODY.json",
-      "sha256": "4709784dba435d183b7fdd9bf3a47d49c177a3975cda6c4f7dd1ae58f4a70f30",
+      "sha256": "86199f739226ddcd8e70b86eb584648691bab99f160b61559bef0abf52a710db",
       "bytes": 3412
     },
     {
@@ -83,7 +83,7 @@
     },
     {
       "path": "PROOF.json",
-      "sha256": "e3b2c1da7f6a8799be41d4e3ca9cd8d5540c791aceb4319d47767d21265f4bd1",
+      "sha256": "9f554ffd2d24352d659ce1c336a821917fc7c850c6b863c7a2e13dd7c7fb049e",
       "bytes": 2709
     },
     {

@@ -76,7 +76,7 @@
     },
     {
       "path": "m3/docs/name-mapping.json",
-      "sha256": "341b1a01e1fcdfe4fa6167bc84a5fdb9a156053339969dda13134c82e3281f21"
+      "sha256": "13c049e23b1b1ccc41079f910b6b3b7ffac255a55f4e709e6d2c19397a8277bd"
     },
     {
       "path": "m3/tooling/module-packs/chrome-llm/README.md",
@@ -172,63 +172,63 @@
     },
     {
       "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/document/Desm.java",
-      "sha256": "6f3a4a37f18130694b63d7b20a49f6d5fd038f2ef9fb15d4f2349edf851c75c7"
+      "sha256": "ca49922619c902c86faca4ca017aeb48a569e34db82c83ed15b1947e20ae82cd"
     },
     {
       "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/document/Hashes.java",
-      "sha256": "7f181d5a8b30c2666a0c7b69928cbb67a55b1275c32f18552a955833054e02bb"
+      "sha256": "14813ddb709406317a40aba916ac7df4be9ed8f79e754b5b623d09c8a8b54f4c"
     },
     {
       "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/document/Lexical.java",
-      "sha256": "9a79e803836b8c8c82ddf33bcfeabae6613838b027e5a6b43658c982d8fdeab0"
+      "sha256": "3528bd3169ff3f837db97927870a6921b79a2033486d77bff53dac51a9b78731"
     },
     {
       "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/document/TreeNode.java",
-      "sha256": "382ce2f201e60f442beff9cdbe215d82f4b88d042bda26cbb329a1cb6baf713c"
+      "sha256": "3c21c2b71b0e0634e548b6f52c39f080e198ceaa1cfb95ab8cd8b3525cf6d9d6"
     },
     {
       "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/facets/FacetCorpus.java",
-      "sha256": "38d462d2dfd99147e9f0c224f20e7935c7da9b3ee4e1447cd954619d6b5b2e9f"
+      "sha256": "86d16cce569697c10dc0c68f317172707e59d510ca59c22c7e0cce9503991d41"
     },
     {
       "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/facets/FacetExactCoverage.java",
-      "sha256": "c1ff344830a6ca3e2eb94a984b14960ed8a653facfa6779e9c9e354df6d9c239"
+      "sha256": "e2ba4013c879e537e13330b1e4028422e47eb650b9de25547f22bfaf92fbb180"
     },
     {
       "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/facets/FacetKernels.java",
-      "sha256": "d4756be21cb44218ff81405acedb1e60e559aa8eafe39aa6df8344a253edb7e1"
+      "sha256": "6a3550f249ff457a2003bd86923001f36a32f0defd0d12c784b0d31bd4ab4e42"
     },
     {
       "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/facets/FacetNode.java",
-      "sha256": "121252d7658737d0cbda9d375d0651d94fcce86a11b25c0e0b5a05c9089e9464"
+      "sha256": "29d41ecb58fcaa18bd51002ce92b53d6b1a53b37fb9f7a32d1fa0bee0e3b7d4a"
     },
     {
       "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/facets/FacetProjection.java",
-      "sha256": "78b18c77a1c5666aa0d74bead687ce0a7239e34c59d3f598d31d03c7f918030f"
+      "sha256": "984d834b7de7054b130559c6d4aa62fa1551cc03eb95b69e27860b6d646a5dd8"
     },
     {
       "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/facets/FacetSnapshot.java",
-      "sha256": "627eff6d468141dcb5b6ed359bcc9dc9e8d62fd498ec02732a57b10de1f1f26a"
+      "sha256": "eac195dcdde72ec2f6f950fcc0d43028384a5e85afb4720fb2b8243f2c62b213"
     },
     {
       "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/facets/LegacySummaryFacets.java",
-      "sha256": "827cc634261aa631c4b60a82e4ff1278c1db8f618c7b8d81044219d3d5417519"
+      "sha256": "70885d846836cebcfe151278d4cb8f192c1dec7c8f2003903baf246a8a487c79"
     },
     {
       "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/internal/Json.java",
-      "sha256": "86c837a7f542d096a7682a38c8bcbbb08b466a6b9c856fe92a24f34bf47a8e13"
+      "sha256": "5a59d0c455b4cba7cdede2cbf0312676ad783eb197a9cb5ca3f65f65d60429c8"
     },
     {
       "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/internal/Py.java",
-      "sha256": "5e1d9a17065294c7946936f7d630de7a00adeadc5efab992f9090910c1a3a5e0"
+      "sha256": "f1632b83c454cd2e3b759c2f6dd9f620843ba73f25cfee8d260499450e89f391"
     },
     {
       "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/internal/StringOps.java",
-      "sha256": "108812a19b0b2fa96de091db0e2662e50a38c562fff680db2f22262924c2de98"
+      "sha256": "2d4feccbb12a7f3fe3488b841a1d2769a9fdd6ee4c4b94cf3446fc8370fae1f1"
     },
     {
       "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/summary/Data.java",
-      "sha256": "f21efa8e4e4737239915c557d43eb5da423429ba8baf309791e12b7fbd9ab14a"
+      "sha256": "115e5440c8e8bc4f1519cf286de4305aad980b47ab43e4690b10cfe1f50e44c8"
     },
     {
       "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/summary/Summaries.java",
@@ -236,7 +236,7 @@
     },
     {
       "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/summary/Summary.java",
-      "sha256": "0a391dda6cd272a0e5d4631e10d9a60714c9b5dbf29979515d84f8045ea8d76d"
+      "sha256": "c40f5b6ae89afbb0d0b283a7a6cf8030f0767dc208255cd8354a34c01befc53e"
     },
     {
       "path": "m3/tooling/module-packs/chrome-llm/src/main/java/module-info.java",
@@ -244,15 +244,15 @@
     },
     {
       "path": "m3/tooling/module-packs/chrome-llm/src/main/native/facet_jni.c",
-      "sha256": "e06e9b6a40867036649d4ad58abeb801b2bc576d64485dc63a23db3badca732c"
+      "sha256": "e9905b745bb577a5c0a5f6433a7dc2cd90aacb4de34e223e6ee934152c62de9f"
     },
     {
       "path": "m3/tooling/module-packs/chrome-llm/src/main/resources/jdk/m3/llm/browser/chrome-ai-api.mjs",
-      "sha256": "f7fa588fd357345715c3f2da5291726af5cabdc33bbc42d0dbc8693759e75942"
+      "sha256": "51abff571949fbe5538b30da721858a3d53d38815dce3b72e347290303eefc62"
     },
     {
       "path": "m3/tooling/module-packs/chrome-llm/src/main/resources/jdk/m3/llm/browser/chrome-native-summarizer.mjs",
-      "sha256": "7eec4d9bf25027b03dca394a88dbb641050f417de7e86e47f0d869640b2dcaeb"
+      "sha256": "7fabee766271ec54dabc67d9a303b5cc976310c17162be410732932e15570c95"
     },
     {
       "path": "m3/tooling/module-packs/chrome-llm/src/main/resources/jdk/m3/llm/browser/chrome-protocol-bridge.mjs",
@@ -260,7 +260,7 @@
     },
     {
       "path": "m3/tooling/module-packs/chrome-llm/src/main/resources/jdk/m3/llm/browser/native-ai-session.mjs",
-      "sha256": "fb97970559d4e1af6bbf643f4df27123f856a3e3b5b4d8b60469e42870e1979e"
+      "sha256": "018acd4e18354320a00af4caee476f72d28fa9760f4af942acb20178d8b81c79"
     },
     {
       "path": "m3/tooling/module-packs/chrome-llm/src/main/resources/jdk/m3/llm/summary/casefold.tsv",
@@ -284,11 +284,11 @@
     },
     {
       "path": "m3/tooling/module-packs/chrome-llm/src/test/java/jdk/m3/llm/facets/FacetChecks.java",
-      "sha256": "d75619e14f2b900b586ca968f79eca0a8bac097bf56a9644ac5b6483185f8eaa"
+      "sha256": "825394ab4953153aa39da5243a8b522d5fb6b6e706551f149692bb5db776b677"
     },
     {
       "path": "m3/tooling/module-packs/chrome-llm/src/test/java/jdk/m3/llm/facets/FacetExactCoverageChecks.java",
-      "sha256": "b35a25fa3ba86bc75082d3204bd12de00f32865bbaf8b9cd7a59b60acc2121ee"
+      "sha256": "6b9a02f72808428bf1b4bcf076634731446e8dafd74825a43c8585ad0fd64845"
     },
     {
       "path": "m3/tooling/module-packs/chrome-llm/src/test/java/jdk/m3/llm/test/ChromeBrowserPortTest.java",
@@ -296,7 +296,7 @@
     },
     {
       "path": "m3/tooling/module-packs/chrome-llm/src/test/java/jdk/m3/llm/test/ChromeSummaryTest.java",
-      "sha256": "193958ec8bcd6c9d563867b516b34f78c0e2936f4261bad02fd0fa85d21277fa"
+      "sha256": "6a8b854dbe3b157fb675c8c0007800cb0355db8e15bd1f210e035f73166f6d33"
     },
     {
       "path": "m3/tooling/module-packs/chrome-llm/src/test/resources/jdk/m3/llm/browser/chrome-ai-api.test.mjs",
@@ -320,7 +320,7 @@
     },
     {
       "path": "m3/tooling/name-contract/name-plan.json",
-      "sha256": "96acf40c4af0691830fc160850f3f7b032b27ae45098796054e5c7292282ba88"
+      "sha256": "cd561d61f3fffdd7569dfe7287fa8f447ad6a40a076f49ce900c8d87f40627ed"
     }
   ],
   "publication_scope": {

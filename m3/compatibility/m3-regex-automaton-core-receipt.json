@@ -49,12 +49,12 @@
   "runtimeDependencyOnSynexia": false,
   "publicJdkReplacement": false,
   "targets": [
-    {"path": "src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java", "before": "ABSENT", "after": "c552bfff58a9f989b85cc14d4e6617e2472e62fe5ae094979b5ff9c6e176463e", "resource": "00-M3Automaton.java.txt"},
-    {"path": "src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java", "before": "ABSENT", "after": "4b31ce35c17b637cf8fab3c131bd5707bfbb995c14dde7104eb17f336e40756e", "resource": "01-M3AutomatonOps.java.txt"},
-    {"path": "src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java", "before": "ABSENT", "after": "49a1c0409c18f789a1f83766b7e42b6d374eb0fa25e565c59a685859ef8721ae", "resource": "02-M3ChunkCursor.java.txt"},
+    {"path": "src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java", "before": "ABSENT", "after": "f4bf2122b39af83d750f802c880bd562d2a4c4f9a0508edda9aa296357981c88", "resource": "00-M3Automaton.java.txt"},
+    {"path": "src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java", "before": "ABSENT", "after": "97c3bdbe20111a977c882f72a4f8e25cc13d83df708a2627b599c10fa68bbbf2", "resource": "01-M3AutomatonOps.java.txt"},
+    {"path": "src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java", "before": "ABSENT", "after": "9d128c83fbb709701e2f32b9dd55dad7ac70c2c35b20c16004ba0fa31c491c73", "resource": "02-M3ChunkCursor.java.txt"},
     {"path": "src/java.base/share/classes/jdk/internal/mindex/M3NotYetReceived.java", "before": "ABSENT", "after": "2b53cf0eb526ab7af3c2e224f49676d0f3570db3e523b7c98e78715a4410cbff", "resource": "03-M3NotYetReceived.java.txt"},
-    {"path": "src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java", "before": "ABSENT", "after": "249a77620ab454342d666680e89e8c43471bb857960aa91b1413c3b2090edec7", "resource": "04-M3RegExpCompiler.java.txt"},
-    {"path": "src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java", "before": "ABSENT", "after": "8f59403494dddce9c181fb7a8d36403a0491ae7b23cbedfed30fa4d06d6b213d", "resource": "05-M3RunTable.java.txt"},
+    {"path": "src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java", "before": "ABSENT", "after": "d84c11d0cc1e7945920027003dae40721d83636d4e30cd52fbef11285dbb1303", "resource": "04-M3RegExpCompiler.java.txt"},
+    {"path": "src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java", "before": "ABSENT", "after": "a89899d5638b0f8bb548d5b8116b0ec8d38d1e9e3fa22731183021b8a27e4adb", "resource": "05-M3RunTable.java.txt"},
     {"path": "test/jdk/java/util/regex/M3AutomatonDifferentialTest.java", "before": "ABSENT", "after": "0ca2223a848cb7b4c74a08527b3ce1f34d06ed8e53177ea8dee654ec2113be6a", "resource": "06-M3AutomatonDifferentialTest.java.txt"},
     {"path": "test/jdk/java/util/regex/M3ChunkCursorTest.java", "before": "ABSENT", "after": "c67c253b47c0485a10f12d5ed4717341caca1277f41d9ab75443a19a8f637799", "resource": "07-M3ChunkCursorTest.java.txt"}
   ],
@@ -62,7 +62,7 @@
     "descriptor": "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-regex-automaton-core.yml",
     "descriptorSha256": "53ba907b04200352818b4bd1913bd7237789ac6e6ced8e5944fc4fd53bd3e2c1",
     "manifest": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-regex-automaton-core/manifest.tsv",
-    "manifestSha256": "6cdbe3507c9c0704fbf08c386ed40ed207a6138b5fed8996a73b0df1488d94eb",
+    "manifestSha256": "7ff7dd94422024b7cd140e87cbbd16f70be6bbedc4db4854dc24c4fbf3d44888",
     "identity": "byte-identical to the Synexia crate resources at 583bb4ecdef2 (diff -r empty)"
   },
   "oracle": {

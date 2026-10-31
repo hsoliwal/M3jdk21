@@ -35,7 +35,7 @@
     {
       "bytes": 4449,
       "path": "README.md",
-      "sha256": "4b0fbdcc1056557a27fc7f23ba195a342659cb6aa60c3f4954eafcee74b05d26"
+      "sha256": "cc99f9d910f89504defa69e520b74906d4a0e0a33f1f0bf536f81b2f16796ba4"
     },
     {
       "bytes": 7804,
@@ -565,7 +565,7 @@
     {
       "bytes": 73641,
       "path": "previous-input-epoch-01/ACQUISITION.json",
-      "sha256": "5426183081026fa98875e9b40e4ab469e9fc5b6caacfbb188ee195f7d187e73d"
+      "sha256": "790b9b3c09cccf660795b3990753c3229ec93e441df47614462f70c521c26a8d"
     },
     {
       "bytes": 13236,
@@ -575,7 +575,7 @@
     {
       "bytes": 23882,
       "path": "previous-input-epoch-01/PACKET.json",
-      "sha256": "095a0d67348de486d3de758308eb98ddcd6d1ce34ca6fcbc9cf10ba204519168"
+      "sha256": "26fa8fc702f37748a4532415b253ac2b7b13296b5f61ca23c82c768819a275ad"
     },
     {
       "bytes": 3690,
@@ -1140,7 +1140,7 @@
     {
       "bytes": 1918602,
       "path": "previous-input-epoch-01/root-evidence/M3_FINAL_CURRENT_M3.json",
-      "sha256": "f1dd5831a9838ec31d6903e98e683de010ef4440e9a372aee961a8761f5ae6fe"
+      "sha256": "e71ea967d2008207adabab5c3d105701b857cb4f0c97eb8c81f73eceb88bb9e4"
     },
     {
       "bytes": 9664,
@@ -1220,7 +1220,7 @@
     {
       "bytes": 1918602,
       "path": "root-evidence/M3_FINAL_CURRENT_M3.json",
-      "sha256": "f1dd5831a9838ec31d6903e98e683de010ef4440e9a372aee961a8761f5ae6fe"
+      "sha256": "e71ea967d2008207adabab5c3d105701b857cb4f0c97eb8c81f73eceb88bb9e4"
     },
     {
       "bytes": 9664,
@@ -1259,18 +1259,18 @@
     "input_epoch_sha256": "2a4878ce5eeeeeccfe216dae36e62faa3e5da06c7baa654e7a43ce3d823c5139",
     "packet": "previous-input-epoch-01/PACKET.json",
     "scope": "First V03 epoch metadata had inaccurate all47fullrecordsunchanged claim; complete earlier proof retained without relabelling.",
-    "sha256": "095a0d67348de486d3de758308eb98ddcd6d1ce34ca6fcbc9cf10ba204519168"
+    "sha256": "26fa8fc702f37748a4532415b253ac2b7b13296b5f61ca23c82c768819a275ad"
   },
   "prior_packets_unchanged": [
     {
       "files_verified_unchanged": 15,
       "path": "candidate/mapping/java-template/TEMPLATE_PACKET.json",
-      "sha256": "d9441405014cca0bc6b106de6cf28539920a164e2c627f04dea750072f1e054d"
+      "sha256": "a5a81bee6c69a796e0cf7632746dff3be5ac56bb11fbaac3424dcba325fcd94b"
     },
     {
       "files_verified_unchanged": 11,
       "path": "candidate/mapping-v02/java-template/TEMPLATE_PACKET.json",
-      "sha256": "7ec82e03ff00a2853023454b7e30decca77051a4c3ac4afe30d283722a9d5a2b"
+      "sha256": "bba43023ead328438b81a397dcb6c646d5c79bfe33555d5a220ef1f985aabcd6"
     },
     {
       "files_verified_unchanged": 113,

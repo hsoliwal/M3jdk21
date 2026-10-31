@@ -1,13 +1,13 @@
 {
   "acquisition": {
     "artifact_paths": 46,
-    "bounded_acquisition_proof_sha256": "f72f5d1b62a2ad0452f139c42241507c14ea8a33ee175d2afc279c3e5f40b030",
+    "bounded_acquisition_proof_sha256": "92e4f1db01b960eef7cf09900531cb8c2a2cd3a8da810c7a2a7be8dd5bda98ff",
     "declared_hash_mismatches": [],
     "direct_source_tree_captures": 16,
     "fixture_files": 52,
     "fresh_captures": 2,
     "reused_captures": 44,
-    "sha256": "bc168f0c87ac04cfbe411a90ee53113b7ddd3d9590fec210774e70516024a046",
+    "sha256": "42bd619bc0dbe35e3d0863e272f56891f6da20971a5190340a18c33dd065c82e",
     "verified_m3_tree_objects": 717
   },
   "canonical_validation": {
@@ -15,7 +15,7 @@
     "exit_code": 0,
     "fixture_unchanged": true,
     "receipt": "execution/baseline-v01/receipt.json",
-    "receipt_sha256": "56f8d4d85ffc076dbdba99067611dd4d05341fda77e8d68c66748c42cb66adde",
+    "receipt_sha256": "4211ce07acc08c18c4ba08b0efc7e205299b989623b5c09773ccfaf4a1625061",
     "status": "PASS",
     "stdout": "MIGRATION_MANIFEST_VALID completion=INCOMPLETE"
   },
@@ -25,12 +25,12 @@
     {
       "bytes": 80082,
       "path": "ACQUISITION.json",
-      "sha256": "bc168f0c87ac04cfbe411a90ee53113b7ddd3d9590fec210774e70516024a046"
+      "sha256": "42bd619bc0dbe35e3d0863e272f56891f6da20971a5190340a18c33dd065c82e"
     },
     {
       "bytes": 13795,
       "path": "FIXTURE_MANIFEST.json",
-      "sha256": "3cef130849a643171fd91e8ee1a6e6ef679e617b1f944064f6c7501f3ece1680"
+      "sha256": "f5339652d19345398823f28b7f449e388bbdad4783fdb63dea528961365f5789"
     },
     {
       "bytes": 1934,
@@ -45,12 +45,12 @@
     {
       "bytes": 19591,
       "path": "REQUIREMENTS.json",
-      "sha256": "e99b3ba5d2dd7970cd803756d1b63e4d269955ffb310183c03dbc8d687b8da4a"
+      "sha256": "2e81581ed6b874feb8664e26a950b396facdc1aae354e5ea1637d4a90760fe17"
     },
     {
       "bytes": 34516,
       "path": "acquisition/PROOF_MANIFEST.json",
-      "sha256": "f72f5d1b62a2ad0452f139c42241507c14ea8a33ee175d2afc279c3e5f40b030"
+      "sha256": "92e4f1db01b960eef7cf09900531cb8c2a2cd3a8da810c7a2a7be8dd5bda98ff"
     },
     {
       "bytes": 392,
@@ -380,7 +380,7 @@
     {
       "bytes": 8810,
       "path": "execution/baseline-v01/receipt.json",
-      "sha256": "56f8d4d85ffc076dbdba99067611dd4d05341fda77e8d68c66748c42cb66adde"
+      "sha256": "4211ce07acc08c18c4ba08b0efc7e205299b989623b5c09773ccfaf4a1625061"
     },
     {
       "bytes": 53430,
@@ -445,7 +445,7 @@
     {
       "bytes": 308294,
       "path": "fixture/m3/docs/name-mapping.json",
-      "sha256": "12bfa8d328b74ba4de930d993c8194b8db51f3a111617690dff9f1ffebaea1c2"
+      "sha256": "e76133a4d1bb472dfc88a41e8d8560d5ac0e08ba4d227b3b6c8fbd95915e6ebc"
     },
     {
       "bytes": 16827,
@@ -660,7 +660,7 @@
     {
       "bytes": 18858,
       "path": "prepare_fixture.py",
-      "sha256": "c2f4b8759d50ee3f2902c9a4cd9d7abca41cdde58182025c4f91df1d39308883"
+      "sha256": "334d7c9b5c86f74c374cf549374ed2509a41f49e8676080a1120dd74d647e624"
     },
     {
       "bytes": 73641,
@@ -675,7 +675,7 @@
     {
       "bytes": 50022,
       "path": "prior-evidence/PACKET.json",
-      "sha256": "6f3e2993d6d29e51c46099f0e0ad6d4c775a435466b4be8cfd6ef6918e927224"
+      "sha256": "29aeb75ced3b31737e02760b0880c69b1b490758c54445d1c3847803fe5e8ea3"
     },
     {
       "bytes": 102628,
@@ -690,7 +690,7 @@
     {
       "bytes": 1918602,
       "path": "root-evidence/M3_FINAL_CURRENT_M3.json",
-      "sha256": "f1dd5831a9838ec31d6903e98e683de010ef4440e9a372aee961a8761f5ae6fe"
+      "sha256": "e71ea967d2008207adabab5c3d105701b857cb4f0c97eb8c81f73eceb88bb9e4"
     },
     {
       "bytes": 9664,
@@ -710,7 +710,7 @@
     {
       "bytes": 2145160,
       "path": "root-evidence/M3_LATEST_M3.json",
-      "sha256": "9e2339b75282bc7c397413c60c787194a339a63d6f17dcb8b9968474ef11c666"
+      "sha256": "73cd3ada7f6ef5c1f9cafce8ccb23d1d9c01141fae573d58ffd488786a90a514"
     },
     {
       "bytes": 10142,
@@ -720,7 +720,7 @@
     {
       "bytes": 10707,
       "path": "run_validator.py",
-      "sha256": "643da80884aa5dd1fa5560d6070f747ee207da506fcd415a2442d816449289e3"
+      "sha256": "36872d18837488e2aa65a4df05b0aca36151d971f390d39e6b234da42588ba3c"
     }
   ],
   "future_afterimage_validation": {
@@ -746,7 +746,7 @@
     "path": "current-map-validation-v03/PACKET.json",
     "scope": "EarlierC0/d1proofs andfailures remain at theiroriginalepochs; noresultsrelabeled.",
     "sealed_files_verified_unchanged": 245,
-    "sha256": "6f3e2993d6d29e51c46099f0e0ad6d4c775a435466b4be8cfd6ef6918e927224"
+    "sha256": "29aeb75ced3b31737e02760b0880c69b1b490758c54445d1c3847803fe5e8ea3"
   },
   "root_tree": "bba8647ea80d1cb4101394b4c0fc5a97f0b8eb52",
   "schema": "m3-current-map-validation-packet/4",

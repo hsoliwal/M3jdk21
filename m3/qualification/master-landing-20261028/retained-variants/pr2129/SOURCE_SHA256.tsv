@@ -2,6 +2,6 @@ path	git_blob	status	pr	note
 m3/collections/src/main/java/jdk/m3/collections/M3IntArrayList.java	28f14d7528bea3e5afb49959e6ed2cdbb6c5575d	modified	2129	PR version, not live; the git blob id is its content address
 m3/collections/src/main/java/jdk/m3/collections/M3LongArrayList.java	b88d59b8309abe2314343e53d3a5c29c57899afe	modified	2129	PR version, not live; the git blob id is its content address
 m3/collections/src/test/java/com/m3/collections/M3PrimitiveCompactionPrefixTest.java	f449628cf93b73dc428ca6642d4b8e7dae063645	added	2129	PR version, not live; the git blob id is its content address
-m3/docs/name-mapping.json	5e4ad2efadd8d44fd583e93b4dbaf15c0a66d160	modified	2129	PR version, not live; the git blob id is its content address
-m3/tooling/name-contract/name-plan.json	bdfaa107d6b2cacbce7199aba6d61123f0dc35db	modified	2129	PR version, not live; the git blob id is its content address
+m3/docs/name-mapping.json	ba249d7aea50826e13f248c13b1e05010e20f4a6	modified	2129	PR version, not live; the git blob id is its content address
+m3/tooling/name-contract/name-plan.json	26aac0382df73f4490925516dbf5eceee86c0c9a	modified	2129	PR version, not live; the git blob id is its content address
 m3/tooling/refinement-proofs/primitive-prefix-20261029/RECEIVER_RECEIPT.json	9e277cf0a98a6a4ce7f14f6d2abecd0296b433ef	added	2129	PR version, not live; the git blob id is its content address

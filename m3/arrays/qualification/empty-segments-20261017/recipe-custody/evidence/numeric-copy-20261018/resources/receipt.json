@@ -5,9 +5,9 @@
   "source_stage": "ACTUAL_SDK_OUTPUT",
   "sources": {
     "collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/candidate/m3/arrays/qualification/numeric-copy-20261018/src/test/java/jdk/m3/arrays/M3ArrayCopySizeAgent.java": "f1d6631ddd126bbd9f8eed49fd4a3b1d02600675dabecec0ee2ddc849df525b3",
-    "collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/candidate/m3/arrays/qualification/numeric-copy-20261018/src/test/java/jdk/m3/arrays/M3ArrayNumericCopyCostProbe.java": "b741edde8f4ea770b4d82aab1c0687cafded48401fe7972d536e09a4d8f1698d"
+    "collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/candidate/m3/arrays/qualification/numeric-copy-20261018/src/test/java/jdk/m3/arrays/M3ArrayNumericCopyCostProbe.java": "dde0c402e530b33be5c161e89e607da24557164b0270fa325722eff52ed83f3c"
   },
-  "sdk_results_sha256": "d4e670b57140271fbf5f6d0cf0c372d618bfd806c19a4d282b090a885c1b278d",
+  "sdk_results_sha256": "20cf95f2b567aee02b97b1c54847b836d958dd54d7e985a60f4979e4907356db",
   "workload_notes": [
     "descriptor_count names the prepared 256-segment input pool; owned graph fields give retained shape-specific topology",
     "15 warm samples per primitive and shape across three fresh JVMs per variant",

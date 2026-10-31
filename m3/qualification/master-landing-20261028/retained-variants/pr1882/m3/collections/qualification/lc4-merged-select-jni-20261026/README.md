@@ -9,7 +9,7 @@ This is an original M3JDK21 collection product source/JNI pass, NOT a compatibil
 - Java rank index: `461f927506227501e26926e08e5aa3f6e360243f` -> `b3d88e4b28aab8cbda451c87184c4540549352db`.
 - Original m3rankbatch C17 JNI: `9ca26b26412068d7fc58b5e431d9d091c8e062e8` -> `09551a86c7f9a4ce3b0ed1a26cbbd2b89b7f6b5a`.
 - New standalone product contract: `0900161d9116d2bcdc5e1429e27602b758e59384`; JUnit public facade: `c632617481cff3792e5d55156b335209386976bb`.
-- Dedicated exact-head compiler/JNI workflow: `c93a4101cf6a4c0303677e3a0967043c728d019e`.
+- Dedicated exact-head compiler/JNI workflow: `c84b0b802e6d0542e05ca8eda2abf228e107cff1`.
 All six source/CI product Git blobs match the source-sealed Synexia Java/Text recipe templates **byte-for-byte**.
 
 ## LeetCode problem-category design and JNI

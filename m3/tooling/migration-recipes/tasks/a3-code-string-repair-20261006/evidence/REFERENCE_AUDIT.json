@@ -26,15 +26,15 @@
     },
     {
       "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-native-jni-lane/manifest.tsv",
-      "git_blob": "2bef35fc84b9d6dcca3c171e06115493e55bbec3",
-      "sha256": "d2b056b6b68a431c4b4b559af08bc9403b8cf8825a1af98ba225e44323dede7c",
+      "git_blob": "483fa8809a49dc39d631dcf33d8ef6a3b65fa541",
+      "sha256": "f4cbe8f3a51137cc1828518b121812226b5800bd7b1001816456667b48985b7f",
       "bytes": 1139,
       "hits": []
     },
     {
       "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-proof-kit/manifest.tsv",
-      "git_blob": "8dcd430a0a30f14dd18d4522b7598e84de87917b",
-      "sha256": "26dfba89f2b4de3d33f3ad55c60d1b1e6f55a9720fe9d6ab1d778eb300383b9a",
+      "git_blob": "781800bdac9b4aecdc1e75944515148669732534",
+      "sha256": "c0b6febb1d8d775ef1ed50fc60444cfddf6bdc3e731a236c7a3f2c144bdc8c39",
       "bytes": 182,
       "hits": []
     },
@@ -75,29 +75,29 @@
     },
     {
       "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/manifest.tsv",
-      "git_blob": "52499ab4f2678c38676e659b94c1b12f3ed4c823",
-      "sha256": "f73ffae4776446ef9aec8ed4fef69e4dc5ff885cae610e70bdbfabe9124d3318",
+      "git_blob": "0db9d41c596d6ccb35b0c495b0e44bf48d75799e",
+      "sha256": "bdf8db3538a4ef434eac10882da56159eb89dc6af344b3062a234c7052f13812",
       "bytes": 876,
       "hits": []
     },
     {
       "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/plan.json",
-      "git_blob": "6b21d7e6e3b2603047a1164be678e63924550910",
-      "sha256": "ec57ea2b8da77cc6601bcfa4ba4fa16cdd043f1c2a272a76a0543386259ae882",
+      "git_blob": "abaa28a2c5ca013aa967643cb7328781e3ea4a27",
+      "sha256": "773061ce98ca152ae5015a12b13c08d332d5ffe64f43a913c677f297df4dbc8f",
       "bytes": 3414,
       "hits": []
     },
     {
       "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/manifest.tsv",
-      "git_blob": "63051cac1f3bf1708c420adc469ba6c5da367572",
-      "sha256": "43315ab4f02016c1e19535d2d45b01eb76224921f827bf4661913e03756b5c05",
+      "git_blob": "498da5417b538c49ce52ba13b7ef782ecc2b9e47",
+      "sha256": "f9e38d31f89d71ee6fcbb107d2ea0d12636196b16094d951b64b9a4b74bd5c0b",
       "bytes": 876,
       "hits": []
     },
     {
       "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/plan.json",
-      "git_blob": "2e2689da56b962ba4623d99841de1c9c582fcbb9",
-      "sha256": "c2fb0701518fa8fe07d8079328dd03a2e28a94d021b93cc55ed7c139595a9e99",
+      "git_blob": "c4b6be425ba7a025ce20a4da6dd7317c96fea5ff",
+      "sha256": "68d9e65e8d45d1c6e8eea04de4f9e2ab0326b7d66fef7f3d86f832fb0c8197e2",
       "bytes": 3390,
       "hits": []
     },
@@ -201,8 +201,8 @@
     },
     {
       "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/proof-kit/manifest.tsv",
-      "git_blob": "6c880d8e614d93510e319044688ad1c0f195d263",
-      "sha256": "36d8b7d6f79643c290d13b64575fcaada7cf3e519bca303987cbdc152b5a3186",
+      "git_blob": "3027859a0454b5905780c250b13c34fa075fad03",
+      "sha256": "98ebbdbdf4cdc760751058420b9c47e97f8eac69ba595c4b074b040bcc0b7b34",
       "bytes": 124,
       "hits": []
     },

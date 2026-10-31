@@ -80,7 +80,7 @@
       "no_write_verified": true
     }
   ],
-  "sdk_results_sha256": "e5451894b2d54cd526b592b03315a6c7c8f41fab4f81d857bbf83a8c3e442132",
+  "sdk_results_sha256": "ee335103d48da65ceec4b8671999b9c3a87d70f57cd4f59ec1f449f630d50a60",
   "exact_sdk_postimage_readback": "PASS",
   "fixed_point_byte_mode_mtime_identity": "PASS"
 }

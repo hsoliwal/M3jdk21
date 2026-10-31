@@ -37,8 +37,8 @@
     },
     {
       "target_path": "m3/collections/qualification/wrapper-convergence-20261018/HANDOFF.json",
-      "git_blob": "3b7f22ecc1eabc2a4e524b31f2555daf8045dea2",
-      "sha256": "8709a8e8d306ea008e1d3fd0d7e90cbc2a022a888dccfd663ed8b85436f58b47",
+      "git_blob": "2402249b2ce87bd19c58b878afdd91873812373a",
+      "sha256": "5e89017447d68baf33772df998a7ef6ea51c0ba0b20311f7f16ca6e9f3bcc03c",
       "bytes": 9190,
       "local_path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/qualification/wrapper-convergence-20261018/HANDOFF.json"
     },

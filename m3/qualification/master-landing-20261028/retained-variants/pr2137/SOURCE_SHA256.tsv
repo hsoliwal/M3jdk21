@@ -1,8 +1,8 @@
 path	git_blob	status	pr	note
 .github/workflows/m3jdk21-name-contract.yml	48866f61687b9491bc0c538267d2d333a8be6d32	modified	2137	PR version, not live; the git blob id is its content address
-m3/docs/name-mapping.json	06623da302b7275112895d9183f4a6e29316e239	modified	2137	PR version, not live; the git blob id is its content address
+m3/docs/name-mapping.json	12eaf1a496894fc578f120594643f88ea345f7a1	modified	2137	PR version, not live; the git blob id is its content address
 m3/docs/name-mapping.schema.json	bc9ecf11e2ecb1eadef4128b2ee2dd7242ad8312	modified	2137	PR version, not live; the git blob id is its content address
-m3/qualification/api-companions-20261029/SCHEMA_REPAIR_RECEIPT.json	c01ceb896f9b66973053ad1b9fdd69395001ad45	added	2137	PR version, not live; the git blob id is its content address
-m3/tooling/name-contract/name-plan.json	49e7e0f0d39eb6835c37c7386a96aa39e91f6beb	modified	2137	PR version, not live; the git blob id is its content address
+m3/qualification/api-companions-20261029/SCHEMA_REPAIR_RECEIPT.json	4cae68b2291306ffd4567b4382d9715bf0f5a8a0	added	2137	PR version, not live; the git blob id is its content address
+m3/tooling/name-contract/name-plan.json	f1fc9046e86c4d3474a77c79f59c0918127ff4a5	modified	2137	PR version, not live; the git blob id is its content address
 m3/tooling/name-contract/test_audit.py	3ca018d01490911f5756ec135118c06c76839915	modified	2137	PR version, not live; the git blob id is its content address
 m3/tooling/name-contract/test_schema.py	7d8f19e5e0a00d2498b3e48e96ff05844032573d	added	2137	PR version, not live; the git blob id is its content address

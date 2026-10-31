@@ -1,10 +1,10 @@
 path	git_blob	status	pr	note
-.github/workflows/m3-first-release-admission.yml	1da882ad83b5fe9ca4e76c1e82fa7947680cd365	modified	2116	PR version, not live; the git blob id is its content address
+.github/workflows/m3-first-release-admission.yml	a0fb1edfd301d3e111b2039e826b584f21d959fc	modified	2116	PR version, not live; the git blob id is its content address
 README.md	3bd9e67fd3d7afd19ed65806d7da881421a9db84	modified	2116	PR version, not live; the git blob id is its content address
 m3/docs/m3jdk21-porting-invariant.md	41a3c8e5911fe7f87742b89de37e85051c2dd8dd	modified	2116	PR version, not live; the git blob id is its content address
 m3/release/QUEUE.md	2f01ef191099f5aaf9c57ac6c6cf1b654129c55f	added	2116	PR version, not live; the git blob id is its content address
 m3/release/README.md	f05d0f40d8faaf48feccb9dd13b648e29f4b12db	modified	2116	PR version, not live; the git blob id is its content address
-m3/release/queue.json	63357d752c79683c59ae13ad56ff128eb813df7d	added	2116	PR version, not live; the git blob id is its content address
+m3/release/queue.json	b4e4ef85a35647172e44e661d0100621d7038091	added	2116	PR version, not live; the git blob id is its content address
 m3/release/release-contract.json	a2b9dbf33ea49075151d9cd576107091631e7e6f	modified	2116	PR version, not live; the git blob id is its content address
 m3/release/test_release_admission.py	177b011494fde9d4c588e7790007aab875b608ce	modified	2116	PR version, not live; the git blob id is its content address
-m3/release/verify_release_admission.py	ce2cdeba987500290cf91dd1ec1ab7de111884f6	modified	2116	PR version, not live; the git blob id is its content address
+m3/release/verify_release_admission.py	d5a8754b553f6cbc0c3f71d7e407fd10e746ed11	modified	2116	PR version, not live; the git blob id is its content address

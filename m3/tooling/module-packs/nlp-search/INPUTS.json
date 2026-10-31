@@ -2,7 +2,7 @@
   "files": {
     ".github/workflows/m3sdk-jmod-receiver.yml": "271f8b1aded73623d6684c5e35e566f73b0b474ca59a403ba3314c8c0121bd2b",
     "m3/docs/name-mapping.d/m3-file-nlp-search.json": "ac74fd38d51dbd2e83804871a692125e415328a7538b82434bcd1b7a68fac4b4",
-    "m3/docs/name-mapping.json": "867cf7f9e0efa1bab0298b8311762700adaddaa01d64ac3c29735b2a839fefe3",
+    "m3/docs/name-mapping.json": "70a852a048f4cb73df3cc25427348d9ce05c94e864fd2aa27340037a3d4ea347",
     "m3/ports/file/native/m3_file_jni.c": "e5895b5b8156b4c36592293882d82aaee26c9df8bf62403671b698a91b169b58",
     "m3/ports/file/native/m3_json_signal_jni.c": "2bb92d854108e2ebf5e54f6e126037b9538d532e7d08a969b5757f9d10eb1b4f",
     "m3/ports/file/native/m3_text_metrics_jni.c": "bf4ed4601838862c979051eb997a694b59584b3e8ee9b640eb82ab94de3e44fc",

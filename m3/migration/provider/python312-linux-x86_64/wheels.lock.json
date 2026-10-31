@@ -228,7 +228,7 @@
     },
     "previous": {
       "path": "m3/migration/provider/python312-linux-x86_64/previous-name-mapping.json",
-      "sha256": "d63273d13d34e95590d2f8511ae191a817144a2d671db68add35ef95b5103995",
+      "sha256": "15629167d5f6d5f6999225a4ebd9b16b56943477c27701259048ac670d232fc4",
       "bytes": 399438
     },
     "manifestPath": "m3/docs/name-mapping.json"

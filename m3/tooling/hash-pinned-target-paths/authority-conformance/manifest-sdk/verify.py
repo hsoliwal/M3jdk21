@@ -92,7 +92,7 @@ FROZEN_GIT = {
   "src/test/resources/frozen/M3ReleaseJepAuthorityRepairRecipeTest.java.txt": "9f4f4288c1a0e19b0b6cd3e48c1442263a64a17a",
   "src/test/resources/frozen/M3Jdk21HashPinnedTextSnapshotRecipeTest.java.txt": "3ba1c6924668d068c47f7608aa63dfa082b8c96a",
   "src/test/resources/frozen/M3ReleaseJepAuthorityRepairRecipe.java.txt": "dfb78083265f32c6e9ebc57f4302f3ef6d6ce274",
-  "support/owned_state_relation_verify.py": "b3622db6ed4e40d59aa6620394592f7748b68781"
+  "support/owned_state_relation_verify.py": "56c7d75fdf56b736cfb57d59e626afdac820531c"
 }
 BEFORE_SHA = "fca288fddb97ea486df2f21d6601848dad6df016aae0bd53c291d16e8181efd3"
 AFTER_SHA = "bfec24cb63b353c5dbbc72ef14f7820f8ce315d244bff3a714a21232f6bff803"
@@ -179,7 +179,7 @@ def inputs():
 
 def owned_report_validator(files):
     path = "support/owned_state_relation_verify.py"
-    require(blob(files[path]) == "b3622db6ed4e40d59aa6620394592f7748b68781", "owned XML validator identity")
+    require(blob(files[path]) == "56c7d75fdf56b736cfb57d59e626afdac820531c", "owned XML validator identity")
     return runpy.run_path(str(regular(ROOT / path)), run_name="m3_authority_manifest_owned_xml")
 
 def validate_counters(counter, ident, head):

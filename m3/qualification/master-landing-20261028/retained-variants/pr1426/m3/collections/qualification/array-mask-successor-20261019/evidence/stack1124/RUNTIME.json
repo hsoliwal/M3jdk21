@@ -164,7 +164,7 @@
   "full_installed_m3jdk_image": false,
   "source_bytes_modes_mtime_unchanged": true,
   "input_manifest": "SOURCE_INPUTS.tsv",
-  "input_manifest_sha256": "7d51b93111c6e6577558a7d38f83780a4da0acaa9a80917c3459f003228d66b3",
+  "input_manifest_sha256": "87041ae9f20afba9dbf9b86792ad2a469fa41fe4381cdd17900d2d881bb85e6e",
   "raw_receipt_sha256": "22c1f11b5a405ac9d4ca6b4e86a07cb846ac1552d1c06eecfba66c0ccbd23a36",
   "input_count": 354,
   "assertion_counters": {

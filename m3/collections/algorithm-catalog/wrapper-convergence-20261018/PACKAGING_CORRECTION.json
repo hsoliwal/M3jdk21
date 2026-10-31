@@ -3,7 +3,7 @@
   "status": "CORRECTED_DELIVERY_CANDIDATES_PENDING_ACTUAL_SDK",
   "rejected_dataset": "m3jdk21-wrap-catalog-20261018",
   "failed_targets": 314,
-  "original_acceptance_freeze_sha256": "8e01440a22f0b579487c9d3ef13cc72e2ff2f412e043d270c8ed7497ea4c70e7",
+  "original_acceptance_freeze_sha256": "ed0f907d22ecfef9aef3ab4176dc9b0b0cd13451d1099d119952a3d8fc564e34",
   "actual_sdk_result": {
     "status": "BUILD_FAILURE",
     "tests": 5,
@@ -40,8 +40,8 @@
   "renamed_delivery_paths": 161,
   "runtime_source_edits": 0,
   "engine_harness_edits": 0,
-  "source_manifest_sha256_unchanged": "6011c6eed511e414029578a4a8492e2c571e7639fa0e6f8e21f6b3a48ad55d0b",
-  "runtime_receipt_sha256_unchanged": "96a54f14260cae789065575484f18d5d74be287e8271f40b73a3b42bae56c161",
+  "source_manifest_sha256_unchanged": "e6973ba853554d97f35823512c189bd190181db1d2d10309d5b0b1a09b4fb4ad",
+  "runtime_receipt_sha256_unchanged": "82e76d78b19dd5ab9e6987e6593c14be5dd3e714051ce1444a82b21fe154fd11",
   "corrected_datasets": [
     "m3jdk21-wrap-evidence-20261018",
     "m3jdk21-wrap-catalog2-20261018"
@@ -52,12 +52,12 @@
   "failure_evidence": [
     {
       "delivered_path": "history/catalogue-delivery-v1/ACCEPTANCE_FREEZE.json",
-      "sha256": "8e01440a22f0b579487c9d3ef13cc72e2ff2f412e043d270c8ed7497ea4c70e7",
+      "sha256": "ed0f907d22ecfef9aef3ab4176dc9b0b0cd13451d1099d119952a3d8fc564e34",
       "origin": "audit/collections-navigation-correction/final/CATALOGUE_ACCEPTANCE_FREEZE.json"
     },
     {
       "delivered_path": "history/catalogue-delivery-v1/SEAL_RECEIPT.json",
-      "sha256": "f3d5269c8ab1a64843af54f17a58d631f792c87479dd1e285cbc5aa2dd712828",
+      "sha256": "d371d06b98f89c9a2cd702e8eb7b713510ffadfa0dc4572d6916addc382efc59",
       "origin": "qualification/wrappers/catalogue-seal.json"
     },
     {
@@ -87,7 +87,7 @@
     },
     {
       "delivered_path": "history/catalogue-delivery-v1/manifest.tsv",
-      "sha256": "182c94d88631897038187bb67294939e9a411ab2f2e4019d2e05b5caf49485f9",
+      "sha256": "d5de62766e2e918d83cf38c5b52b05317d96729f2a2eb5bf4f34fc68c32ed3de",
       "origin": "com.synexia/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog-20261018/manifest.tsv"
     }
   ],

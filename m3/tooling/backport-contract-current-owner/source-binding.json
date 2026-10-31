@@ -28,19 +28,19 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/runtime/INPUTS.json",
       "targetPath": "m3/tooling/backport-contract-current-owner/runtime/INPUTS.json",
-      "gitBlob": "9cb800ba62f60e8febbbb96be91282640c799c7d",
+      "gitBlob": "8ac731367e254e1ed9b49813f9d109d3f06eb5e0",
       "bytes": 9330
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/runtime/README.md",
       "targetPath": "m3/tooling/backport-contract-current-owner/runtime/README.md",
-      "gitBlob": "c6cd72c3c9075c7c8325411363b058b77ca41b2a",
+      "gitBlob": "67d987cbad0af4aa3de0ed17a56dc69b2a1afc7b",
       "bytes": 7436
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/runtime/THIRD_PARTY_NOTICES.md",
       "targetPath": "m3/tooling/backport-contract-current-owner/runtime/THIRD_PARTY_NOTICES.md",
-      "gitBlob": "2a6c887fae6edf083a547e6a01d25b40d37e710f",
+      "gitBlob": "515217ab3a3362e0fb0de967d46115b7a44201db",
       "bytes": 1550
     },
     {

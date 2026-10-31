@@ -10,17 +10,17 @@
     },
     {
       "bytes": 18828,
-      "git_blob": "b9081e38f7ee241dcc02ed7e139e029b3dcad97b",
+      "git_blob": "5765f894e00e150139bf9569190048a028110744",
       "origin": "actual OpenRewrite Result afterimage",
       "path": "m3/docs/jcc-source-handoff.md",
-      "sha256": "b87b6c729ba17ec1ac404fea2176611ee9be046cc97b26d8ef44aec9d85f1c8a"
+      "sha256": "52178015a89e5f1c08ab280725e5fb45a3617fdc9035fdecf793cd3c2b503858"
     },
     {
       "bytes": 255461,
-      "git_blob": "e128be7d0d0913cc346b3381018532efd20429b5",
+      "git_blob": "73d2b00c9c46145f3081c33b4a5c31236928a803",
       "origin": "actual OpenRewrite Result afterimage",
       "path": "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
-      "sha256": "7d26f0ac825b78889cb6963ef8bcf038ad83c5c6fc191814c92025815c84b2cc"
+      "sha256": "283d44e6e66405165706447446ed5242104ac1e79d33a6ceafc0cbe1a128de09"
     },
     {
       "bytes": 108212,

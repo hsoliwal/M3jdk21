@@ -42,7 +42,7 @@
     },
     {
       "path": "m3/runtime-integration/check-m3rx7-transition-native.sh",
-      "sha256": "551224b42e467068949ced3def93f7daae3bb73ee1ed42ddfedce6261f434483",
+      "sha256": "9efcb13152290c1a2eb862b4b71adbf028de045fb531c8895440314b10ebdd24",
       "source_kind": "TEXT"
     },
     {

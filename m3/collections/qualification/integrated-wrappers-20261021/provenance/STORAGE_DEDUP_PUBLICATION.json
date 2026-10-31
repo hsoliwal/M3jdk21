@@ -806,13 +806,13 @@
     {
       "path": "publication-v2/exact-commit-provenance/repo/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/catalogue/candidate-catalogue.tsv",
       "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/catalogue/candidate-catalogue.tsv",
-      "sha256": "d961af4b64d5e6ceb934ccabe233350cb3c8b40fab15cbd5e86d7df6d5a07dc7",
+      "sha256": "b6c60e2a9e43bd416fa0d5a5cfafb6baaf1cb9761924e0e46c7d1da81f030fb5",
       "bytes": 20493
     },
     {
       "path": "publication-v2/exact-commit-provenance/repo/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/catalogue/source-coverage.tsv",
       "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/catalogue/source-coverage.tsv",
-      "sha256": "88cc41c622a3d65f12b9098c555e3ec575e887a5a217c87bf234bd227aed9fa1",
+      "sha256": "d73e9579522293bfccac2e06dd0ad81e477f9eb892179be3330d93f2f05b710f",
       "bytes": 162971
     },
     {
@@ -1538,13 +1538,13 @@
     {
       "path": "qualification/final-core-v3/source/m3/collections/src/main/java/jdk/m3/collections/M3CollectionSdkCatalog.java",
       "source": "input/m3/m3/collections/src/main/java/jdk/m3/collections/M3CollectionSdkCatalog.java",
-      "sha256": "ebbe8b81c2bc93d7b9c8c191b309c543728214b638be97fa89e9de6d826aef83",
+      "sha256": "a5e9298f47f26c015a6caf8f0e6ef5bdca20be2a0d48d0edb44141d6f0d1bd3c",
       "bytes": 25259
     },
     {
       "path": "qualification/final-sdk-v3/source/m3/collections/src/main/java/jdk/m3/collections/M3CollectionSdkCatalog.java",
       "source": "input/m3/m3/collections/src/main/java/jdk/m3/collections/M3CollectionSdkCatalog.java",
-      "sha256": "ebbe8b81c2bc93d7b9c8c191b309c543728214b638be97fa89e9de6d826aef83",
+      "sha256": "a5e9298f47f26c015a6caf8f0e6ef5bdca20be2a0d48d0edb44141d6f0d1bd3c",
       "bytes": 25259
     },
     {
@@ -1634,13 +1634,13 @@
     {
       "path": "qualification/final-core-v3/source/m3/collections/src/main/java/jdk/m3/collections/M3LabelPool.java",
       "source": "input/m3/m3/collections/src/main/java/jdk/m3/collections/M3LabelPool.java",
-      "sha256": "e1ffc0451c9de9793ec5e101dd9daaea303d01915cc92079370604eed9c4ae14",
+      "sha256": "9f7f7c566e870d7e3308f4ded0320b86dab9b8fd88982ac85875ef8991f31b03",
       "bytes": 19455
     },
     {
       "path": "qualification/final-sdk-v3/source/m3/collections/src/main/java/jdk/m3/collections/M3LabelPool.java",
       "source": "input/m3/m3/collections/src/main/java/jdk/m3/collections/M3LabelPool.java",
-      "sha256": "e1ffc0451c9de9793ec5e101dd9daaea303d01915cc92079370604eed9c4ae14",
+      "sha256": "9f7f7c566e870d7e3308f4ded0320b86dab9b8fd88982ac85875ef8991f31b03",
       "bytes": 19455
     },
     {

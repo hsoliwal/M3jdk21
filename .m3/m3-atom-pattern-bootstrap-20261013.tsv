@@ -23,7 +23,7 @@ m3/collections/pom.xml	a6a11626747fe71ff72e75913325cfe17112bb5e	e82f308c1bc1e058
 m3/collections/recipe/pom.xml	d17d6c2d80fa82fb5ea256cc1a093e556d38b145	6db9f275c5a58761882b38aa5df695e39fa3996f	LIVE_OWNER	m3-synexia-atom-pattern,m3-synexia-atom-pattern-mastery
 m3/indexdb/pom.xml	87c8b1b74417e36868ea2af8d2546e6d12ab7291	6882689df3bb347241e2a75418072a42a46913d5	LIVE_OWNER	m3-synexia-atom-pattern,m3-synexia-atom-pattern-mastery
 m3/migration/pom.xml	5a1a01f8bec178fdf511286293dee4223099b3fc	67b444eb0e3ddb18b23231f3462951f8fbcb78f6	LIVE_OWNER	m3-synexia-atom-pattern,m3-synexia-atom-pattern-mastery
-m3/pom.xml	62dae39ed35e64048152366d407e52056edc6da0	19766bf32f2db46fe34ee19c6bb48e553589baaf	LIVE_OWNER	m3-synexia-atom-pattern,m3-synexia-atom-pattern-mastery
+m3/pom.xml	d17f2bf9b280f05f181f1ef6b5980c18dd20f467	e01cddcbac3751bfa79368c3727343754c7e3b21	LIVE_OWNER	m3-synexia-atom-pattern,m3-synexia-atom-pattern-mastery
 m3/ports/collections/pom.xml	c452e86706ed9137c2f03ffa6b0efdfc3ecbb13a	6b21183312160fe2c623576482a53ba3ed262d6d	LIVE_OWNER	m3-synexia-atom-pattern,m3-synexia-atom-pattern-mastery
 m3/ports/indexstring/pom.xml	468a2eb27777a3a7c9ab46902fc9a525807c657f	d3fb14b11cf2cf76185c02ea1ffac82167356ba6	LIVE_OWNER	m3-synexia-atom-pattern,m3-synexia-atom-pattern-mastery
 m3/ports/parallel-bulk/pom.xml	e5c05c27ddde7f9f4ae0f36f3b23cd1656edec5c	0519fb98841c26dbc19ea24146773559feec6687	LIVE_OWNER	m3-synexia-atom-pattern,m3-synexia-atom-pattern-mastery
@@ -44,7 +44,7 @@ m3/tooling/module-packs/kernel/pom.xml	644019ada2b71f28e2350babd1eafdd6d8140b08	
 m3/tooling/module-packs/pom.xml	ea69c941315afaf34e3d1b91d0dae9489ebfbfe7	f997f1ee0b0ed73adb7a4c1996b344e541307413	LIVE_OWNER	m3-synexia-atom-pattern,m3-synexia-atom-pattern-mastery
 m3/tooling/module-packs/recipes/pom.xml	a73db6ccf6d4980a938d60a552ac98059eb815a2	87d34dd5f3074de8b04c722c330ee39780c032f0	LIVE_OWNER	m3-synexia-atom-pattern,m3-synexia-atom-pattern-mastery
 m3/tooling/mr/pom.xml	9bf4e0a788b538eb03d4f74a74468dc26d57362d	05e1b9c037f8f9973a05269ef81057f0527c4ea1	LIVE_OWNER	m3-synexia-atom-pattern,m3-synexia-atom-pattern-mastery
-m3/tooling/m3-jdk-a3-recipes/pom.xml	36700c1c471391ebdf2f03daab2074b75a36e767	314063bdd07cf5619d28eb96c1f145809e262ece	LIVE_OWNER	m3-synexia-atom-pattern,m3-synexia-atom-pattern-mastery
+m3/tooling/m3jdk-a3-recipes/pom.xml	36700c1c471391ebdf2f03daab2074b75a36e767	314063bdd07cf5619d28eb96c1f145809e262ece	LIVE_OWNER	m3-synexia-atom-pattern,m3-synexia-atom-pattern-mastery
 m3/tooling/tq-sync/pom.xml	fac14bfa0b1d9c724cbf8660ec090aae543971ba	ee408306125c6d8bf5b5aecf7d74eb75cdac3377	LIVE_OWNER	m3-synexia-atom-pattern,m3-synexia-atom-pattern-mastery
 m3/tooling/tq/pom.xml	792d9230e1ca32dc0a0a4ce38ba5ca5152bcee35	d1e1cb45d317104f435638b5402e93fcce419b43	LIVE_OWNER	m3-synexia-atom-pattern,m3-synexia-atom-pattern-mastery
 m3/tooling/vi/pom.xml	0e9f70757c811dbacbd984e2b7e33acf3ce791ad	01e8886b95a788e03b43a86b7ab6904b2c770bc1	LIVE_OWNER	m3-synexia-atom-pattern,m3-synexia-atom-pattern-mastery

@@ -42,7 +42,7 @@
   "frozenOriginals": {
     "buildInputs": {
       "path": "verification/ORIGINAL_BUILD_INPUTS.json",
-      "gitBlob": "81fd3b990466a8d71cf4e7ded6841abbcf05fd8b",
+      "gitBlob": "feff4011cfad7b6829acb01458c709bc12d7cd31",
       "sourceEntries": 58,
       "originalJoinedGit": "5022e9811ce9391671c794446c7772569cfd369f"
     },
@@ -61,7 +61,7 @@
     },
     "qualifier": {
       "path": "verification/frozen/qualify.py.txt",
-      "gitBlob": "551ebcca9e92dbb0aea6f436286147957ccf71da",
+      "gitBlob": "1a1411c816881c4f04fd94c3f45c02d6d8ee890e",
       "disposition": "Frozen reference only. It assumes original cc3c in its58-input closure and must not be repinned or run as if3edc were that original."
     }
   },

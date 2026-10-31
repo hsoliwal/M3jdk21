@@ -20,7 +20,7 @@
   "commit": "09075810b55229662329a158923287e8a7118f86",
   "current_m3_evidence": {
     "capture": "publication/M3_LATEST_M3.json",
-    "capture_sha256": "9e2339b75282bc7c397413c60c787194a339a63d6f17dcb8b9968474ef11c666",
+    "capture_sha256": "73cd3ada7f6ef5c1f9cafce8ccb23d1d9c01141fae573d58ffd488786a90a514",
     "reconstructed_direct_trees": 717,
     "tree": "cd2d78c91054d43025939fb72ae17365af3b7cf5"
   },

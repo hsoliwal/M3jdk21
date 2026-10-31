@@ -169,9 +169,9 @@
   },
   {
     "path": "m3/build.sh",
-    "sha256": "f3d12d51200572a8f945338bcd26931dc889c1878a1341b2b199a09b6d03590d",
+    "sha256": "c7b954a6faa16cc8a0cb4a2d13a8032c43fb308a739b225362b6ac3fd84864ee",
     "bytes": 5412,
-    "git_blob": "70b50228bba3775b6feacd500eca3f3c7529e0f2",
+    "git_blob": "be764d854ce1d7686fd53da8953110a382ec1dec",
     "mode": "100644",
     "action": "UNCHANGED_PRESENT"
   },
@@ -825,9 +825,9 @@
   },
   {
     "path": "m3/run-rope-proof.sh",
-    "sha256": "deadc3340e0cefecaf78095204a9e6c70363e6b7f8680b64621fb57110503b08",
+    "sha256": "532b673bffdc69632c6dc48e2ed5dd6aa404b0f671a87abc0a82b1db5d6e1d18",
     "bytes": 1401,
-    "git_blob": "bdb4a83fde87be3454dddcce5bb95f3831c0a4a9",
+    "git_blob": "3f1138c864b17b82d6490a52bf766403cffb49fc",
     "mode": "100644",
     "action": "UNCHANGED_PRESENT"
   },
@@ -1377,17 +1377,17 @@
   },
   {
     "path": "m3/tooling/module-packs/nlp-search/INPUTS.json",
-    "sha256": "b57247af086b2ab93c837cbfbdb31fe95a0662e327c9ed635f286d8863aa025d",
+    "sha256": "e797966a8070882c740f2d4c303bd787040755dcb53227d6a1d030de055542b4",
     "bytes": 27756,
-    "git_blob": "565ab8dc5248dd377f625b3f7d6df0ad322e1f6f",
+    "git_blob": "122ffcb55246503cb81e89324c43cb9b869319e5",
     "mode": "100644",
     "action": "UNCHANGED_PRESENT"
   },
   {
     "path": "m3/tooling/module-packs/nlp-search/INTEGRATION_CUSTODY.json",
-    "sha256": "0a2f16414fa80c807374c35d0674722fd86f58db88c8a8dd325b0195ab80ee6c",
+    "sha256": "3d961dfcfa329a704e5d5f9b2e456c04dfb13e1212b778f4246d926fa348997c",
     "bytes": 181858,
-    "git_blob": "821f4ba06a0c76316e34e584370cd37bbd7ef5e3",
+    "git_blob": "5f030abcc425bc764936cd5fa2cd57e92369b1f0",
     "mode": "100644",
     "action": "UNCHANGED_PRESENT"
   },
@@ -2985,9 +2985,9 @@
   },
   {
     "path": "m3/tooling/module-packs/nlp-search/recipe-custody/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0002-name-mapping.json.txt",
-    "sha256": "867cf7f9e0efa1bab0298b8311762700adaddaa01d64ac3c29735b2a839fefe3",
+    "sha256": "70a852a048f4cb73df3cc25427348d9ce05c94e864fd2aa27340037a3d4ea347",
     "bytes": 404963,
-    "git_blob": "827bc7bc3e577aa196f56acea820b5d9a2cc3a37",
+    "git_blob": "d5ee8891a0963ab88bd0ae8651fc84cf1dff09fb",
     "mode": "100644",
     "action": "UNCHANGED_PRESENT"
   },
@@ -3073,9 +3073,9 @@
   },
   {
     "path": "m3/tooling/module-packs/nlp-search/recipe-custody/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0013-INPUTS.json.txt",
-    "sha256": "b57247af086b2ab93c837cbfbdb31fe95a0662e327c9ed635f286d8863aa025d",
+    "sha256": "e797966a8070882c740f2d4c303bd787040755dcb53227d6a1d030de055542b4",
     "bytes": 27756,
-    "git_blob": "565ab8dc5248dd377f625b3f7d6df0ad322e1f6f",
+    "git_blob": "122ffcb55246503cb81e89324c43cb9b869319e5",
     "mode": "100644",
     "action": "UNCHANGED_PRESENT"
   },
@@ -3177,9 +3177,9 @@
   },
   {
     "path": "m3/tooling/module-packs/nlp-search/recipe-custody/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0002-name-mapping.json.txt",
-    "sha256": "c23e6f63411b1d33a29f558c2a6370421a6f51ab99b6db99ac77ebc6e859812d",
+    "sha256": "a28f218198b30d1292d51836c8912d1f69229ef9bef40a4726a2808bcdcb4d46",
     "bytes": 404076,
-    "git_blob": "80eaeba7e4e1d35cd9904a8a5c18e060abdd93f0",
+    "git_blob": "986147e2df24ef25076d451c49782d8e7e354a11",
     "mode": "100644",
     "action": "UNCHANGED_PRESENT"
   },
@@ -3217,9 +3217,9 @@
   },
   {
     "path": "m3/tooling/module-packs/nlp-search/recipe-custody/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/manifest.tsv",
-    "sha256": "31627e26391199e7c0ce853038cb55dc306fa25f5e270efd792bd67584290657",
+    "sha256": "46361f7af9acb6b3073fa61b83e83fe343eb4be389b2769de236b70180f34b6c",
     "bytes": 4140,
-    "git_blob": "75a44a3eb0aaaf39a8e7b7555780d540b2cd8a9e",
+    "git_blob": "b9ab08c5df78bfef8aaace9721afb6e915d987ae",
     "mode": "100644",
     "action": "UNCHANGED_PRESENT"
   },
@@ -3409,9 +3409,9 @@
   },
   {
     "path": "m3/vendor/m3/README.md",
-    "sha256": "af265918e4d1fa50e4c5a82545a0d87069edb39a2d6a7d07177782a1fd0c3a8e",
+    "sha256": "b4ac6e882040df220d3d9d8682665ad59d47e17fc69f29bf169e4782e1e2792a",
     "bytes": 3492,
-    "git_blob": "f1560318d5b8c04e792efea93149d9646f184c6c",
+    "git_blob": "655eaa7247076b2e9e06401420d8b9fe3af8aa0f",
     "mode": "100644",
     "action": "MATERIALIZED_UNCHANGED_BASELINE"
   },
@@ -6185,9 +6185,9 @@
   },
   {
     "path": "m3/vendor/m3/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeMasteryPortableReceipt.java",
-    "sha256": "2b7eb6aa6bb20306d77a688040c72199894ed705f93a31ab9330c8b8ea98ec76",
+    "sha256": "69104cee94e06e9d87aadac208140eddf585e0404385e9ee7ca40bc635a8eeba",
     "bytes": 12219,
-    "git_blob": "618a0dc7dcd6c4ab6b3361e09022f5c1ff82f0c4",
+    "git_blob": "ec03c17a24d455a0c535e18069e85dd85f1a065a",
     "mode": "100644",
     "action": "MATERIALIZED_UNCHANGED_BASELINE"
   },
@@ -6273,9 +6273,9 @@
   },
   {
     "path": "m3/vendor/m3/m3-openrewrite-recipes/src/main/resources/META-INF/m3/jdk-a3-recipe-export.tsv",
-    "sha256": "8a6b8899a53669195716e6bb2104c3d8c17be1820d8f7265e78f8577040220ea",
+    "sha256": "11c3ddd89c939a0689eda812d497b279d6f792326fcd82096ea0317f10721ea8",
     "bytes": 1574,
-    "git_blob": "2c51473e7adb6fa50fb0031ac6314a050b90feec",
+    "git_blob": "b691460aebcd458f5d5fb0d508b4a4a05ef8d6c5",
     "mode": "100644",
     "action": "MATERIALIZED_UNCHANGED_BASELINE"
   },
@@ -9313,25 +9313,25 @@
   },
   {
     "path": "m3/verify-fixed-address-jni.py",
-    "sha256": "c9f5f77c41813adabed4ede72b60c1492f4001496243d3b2f8710de776884d7d",
+    "sha256": "8a93d98116d586a197e5dceabe46640b677e8ec33e7b549c25492db4727c1585",
     "bytes": 4439,
-    "git_blob": "ec043f2822796d8f4b8d1f958d852fd8b519a722",
+    "git_blob": "d4beb88944770a940dc0dee7b5a91b51438df1ee",
     "mode": "100755",
     "action": "UNCHANGED_PRESENT"
   },
   {
     "path": "m3/verify-gvas-literal-precompute.py",
-    "sha256": "605b6a520374e9d3adb1a5f82dbbc55b4f9828e66c4a66f093e3fd6e7238fef5",
+    "sha256": "43ac8c6462f35d10624f1a78c96082550d4413866951f74b5fee6efd407f08c3",
     "bytes": 6503,
-    "git_blob": "438e1d5a28aaae229b469b7a496397d04acf17b3",
+    "git_blob": "643444c738496600ea6184ceaf01c00cd36bb390",
     "mode": "100755",
     "action": "UNCHANGED_PRESENT"
   },
   {
     "path": "m3/verify-shared-mapping.py",
-    "sha256": "5b2459ff3cc148523ea237d461324d85aa7501db3eb2de188fac6db6dfc26747",
+    "sha256": "c78aa855d71a48505acc8baf9fd77dfce037aaaaedfdd473a1ecb69dd0f0d22f",
     "bytes": 1842,
-    "git_blob": "8e4f29c3cd2f13746aa0712fc6f46951bd68a06d",
+    "git_blob": "e7131f2efb8c0986681d82a4352fd73272c4baf0",
     "mode": "100644",
     "action": "UNCHANGED_PRESENT"
   }

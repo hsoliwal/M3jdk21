@@ -124,7 +124,7 @@
     {
       "target_file": "COLLECTIONS.json",
       "source_path": "evidence/collections/RESULTS.json",
-      "sha256": "caa5af62317338cad12b41c4c91fab9c4b3381299ddc89e681716edc33fd273b",
+      "sha256": "6c4df87cbfe5c076820b7aba513eac2f72b60192858917551ed4af7bea210b51",
       "bytes": 89110
     },
     {
@@ -190,7 +190,7 @@
     {
       "target_file": "PRELIMINARY_SOURCE_SEALS.json",
       "source_path": "evidence/string/observation-sources.json",
-      "sha256": "9ce12b0716ef26bde4a495dbe731b1c9cb292caec7c7b5346cbf214761fa0831",
+      "sha256": "d40a1ed10f744c5b7cb2e510cdb1f3b5b2116beb984c0dcf1d64e772a745127f",
       "bytes": 4321
     },
     {
@@ -208,7 +208,7 @@
     {
       "target_file": "STRING_SOURCE_SEALS.json",
       "source_path": "evidence/string/fresh-image-20261021T043259Z/sources.json",
-      "sha256": "8a1e357a64f77dc6f8c2737f9605dd77a4e2971d269b7ce9bbbf831f2563d925",
+      "sha256": "08ec46e6a7837c28ef633c280435a2861b6901195b505bbbd866e7a1d084ba8f",
       "bytes": 8706
     },
     {

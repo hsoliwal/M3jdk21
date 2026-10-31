@@ -16,9 +16,9 @@ cp "$ROOT/$SOURCE" "$OUT/after-src/java/util/CollectionViews.java"
 (cd "$ROOT" && sha256sum --check <<'SEALS'
 d847da2d84aa1db4a7a4f9258f695eaf96136868ef37ebe043ae8166fbdff57a  src/java.base/share/classes/java/util/CollectionViews.java
 f32eeb5079bcd6322e597303a937614931b7f33779a58d0ed03b53ae0a8302c6  test/jdk/java/util/CollectionViews/StoredRepresentativeOracle.java
-f35b8547a5163aa79cee603e0e8bdcbf7361515d435914ac205feb9a037990e2  test/jdk/java/util/CollectionViews/FilteredSpliteratorReentrantTest.java
-e3d8f4208b2f8d3f0b05f512d39e30e276ad4496632f917376f3ebb8e37957ad  test/jdk/java/util/CollectionViews/FilteredSortedSpliteratorMetadataTest.java
-ca6760ed91cc55eb948cf376d03eebcbdca39a28aeb3faab33491300b808437a  test/jdk/java/util/CollectionViews/FilteredIsEmptyTerminalTest.java
+5ed60b1c6d40a053a629004f22a27e575184770838e35fb6ac432dd4306951e4  test/jdk/java/util/CollectionViews/FilteredSpliteratorReentrantTest.java
+253432540a994554e635b89ce52059328cbde1d56361bc23d7ce5fcf55b49045  test/jdk/java/util/CollectionViews/FilteredSortedSpliteratorMetadataTest.java
+7900c0696dded108e5af64462ca8639c3a568f6924ec0d6b1ef092b6e5408b60  test/jdk/java/util/CollectionViews/FilteredIsEmptyTerminalTest.java
 9f2721b3285c16bedd1aa39f24ac4704265a621cd03e26c285a2f6b6d0754242  test/jdk/java/util/CollectionViews/FilteredIdentityBackingContractTest.java
 SEALS
 ) | tee "$OUT/seals.log"

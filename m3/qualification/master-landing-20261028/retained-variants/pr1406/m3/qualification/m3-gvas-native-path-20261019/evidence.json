@@ -36,8 +36,8 @@
     {
       "path": "m3/verify-gvas-lookup-index.py",
       "kind": "text",
-      "before": "24e5d8dbecff8456a5d11aef60ae186bcce5d56b69ca7236a55451a8d5bc2544",
-      "after": "42d4203097e1003bd70671807389c0916030c05e3a765318a77a0d485ad66b44",
+      "before": "f8a45cfd9444b5fc81e30b2091f08790f851e299e1236be7872418eed30ec67c",
+      "after": "3edc41714146c43e8c35cb4e522af2395611f0a3a65051f1a46e949d5edd8ea9",
       "absent_before": false
     }
   ],
@@ -478,8 +478,8 @@
     },
     {
       "path": "m3/verify-gvas-literal-precompute.py",
-      "qualified_sha256": "94f128c6d2732adefd299d90f63127db137119fad560832bf3ea1a04bb9f7be3",
-      "target_sha256": "94f128c6d2732adefd299d90f63127db137119fad560832bf3ea1a04bb9f7be3"
+      "qualified_sha256": "3800dc92899c3409120a8b5fd9c6b2f0482021b56b83a7fa5b6c6b99cfc558ed",
+      "target_sha256": "3800dc92899c3409120a8b5fd9c6b2f0482021b56b83a7fa5b6c6b99cfc558ed"
     },
     {
       "path": "m3/tests/test_gvas_literal_process_identity.py",

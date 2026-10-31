@@ -162,8 +162,8 @@
   "copy_custody": {
     "catalogue_files": 31,
     "canonical_copy_manifest": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/CANONICAL_COPY_MANIFEST.tsv",
-    "canonical_copy_manifest_sha256": "89b642ef5c4f480a62ed10ceefd4072d7d1539e85b40514a89e3e566d6b7fbe7",
-    "canonical_copies_checksum_sha256": "5bfee199a6b46e9e0bba3588c278b7723defb8676d13bd31e20b6b60b29f87da",
+    "canonical_copy_manifest_sha256": "64b2c9bd37f0c98a5cfa4314dc4a372e4b0de61a0efafd8adcf4aa6315af22b4",
+    "canonical_copies_checksum_sha256": "80e4ddff41be3ce01fd5490f52da5754b7e9a37bc2b6b68b8caa64fd3e9e292f",
     "recipe_source_files": 61,
     "recipe_copy_manifest": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/RECIPE_CUSTODY_COPY_MANIFEST.tsv",
     "recipe_copy_manifest_sha256": "da8c8f9a3031a8ad98d5e087c28148f4a8c6b38a52103c6f2920603495c7d245",

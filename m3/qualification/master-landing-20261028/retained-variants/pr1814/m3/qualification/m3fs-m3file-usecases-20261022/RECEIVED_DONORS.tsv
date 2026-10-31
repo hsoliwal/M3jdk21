@@ -1,6 +1,6 @@
 # path	before_git_blob	qualified_postimage_git_blob	product_donor_pr	synexia_recipe_pr	problem_category
 m3/docs/name-mapping.d/m3fs-provider-defaults-20261021.json	ABSENT	8c509e82e7f28914e87ee933798bb4fd5b9d4f4e	1747	12844	NAMING
-m3/docs/name-mapping.json	7aa5efec83fffa8e266ba3614fadea621b12013a	f92e81e8127b1b0a6ad9565a676c832d44d30f37	1747	12844	NAMING
+m3/docs/name-mapping.json	7aa5efec83fffa8e266ba3614fadea621b12013a	d863f38aaf47b65fe24a7836d29273a669e88c81	1747	12844	NAMING
 m3/file/src/main/java/jdk/m3/file/M3File.java	c706e9867178d4eb417cf74f97b9bf5605b90573	5cf4a48f71136ead83563922addc236ac45702db	new	new	M3FILE_CAPTURE
 m3/file/src/test/java/com/m3/file/M3FileCapturedBytesContract.java	ABSENT	5db0606e7bd15a3370495b19b169410785dac5e6	new	new	M3FILE_CAPTURE_TEST
 m3/file/verify.py	7ed897480d16134c27ab4325529d4cdb39856c68	62571a727566bfc80f86e4585d17a053735785a5	new	new	STRICT_GATE
@@ -20,4 +20,4 @@ m3/fs/src/test/java/jdk/m3/fs/MFileContentDefaultsTest.java	ABSENT	ef16174f320f0
 m3/fs/src/test/java/jdk/m3/fs/NioFileProviderTest.java	ABSENT	c6a091221dab95366b70627b9ee3ae7501adee2b	1747	12844	NIO_TEST
 m3/fs/src/test/java/jdk/m3/fs/verification/M3VfsImageProbe.java	f503623942191b4f8b9d74fe2b590daca8f67337	310b86cffffeea206cc258b6471179ea6dcc163e	1747	12844	JMOD_PROBE
 m3/fs/vfs/PROVIDER_DEFAULTS.md	ABSENT	0df8776ea943848e1606ff880da133a88b9be51c	1747	12844	DOC
-m3/tooling/name-contract/name-plan.json	ae2cb4aae7a4e0e51ccf56216ef2378d1b418000	d0cd332ed9b4a151389f203cff87fa4e29b5d80f	1747	12844	NAMING
+m3/tooling/name-contract/name-plan.json	ae2cb4aae7a4e0e51ccf56216ef2378d1b418000	2f45e89012be16150211499e8052013718cc0af1	1747	12844	NAMING

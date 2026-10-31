@@ -54,7 +54,7 @@
     {
       "bytes": 37932,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/prepare_package.py",
-      "sha256": "06065b52a3e71720fe3f3a09116374f5735c90f9ae8436d103a8ec3586656e69"
+      "sha256": "58e982f34fa5469372c264ae3ff73f4798b583e3943450aaf1cb5cc6c5ed1ee7"
     },
     {
       "bytes": 8317,
@@ -74,12 +74,12 @@
     {
       "bytes": 8276,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/ROOT-COMMANDS.json",
-      "sha256": "f591e6814f0943cb3eeb290546b3d5f800dcfde1c9032f8e90f7189468aac396"
+      "sha256": "f86a236dffa5e20e487c1cd4c9dda530c95d5f213f7e37a2749b5993fb48f2cf"
     },
     {
       "bytes": 42362,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/packaging-authoring-v1/prepare_package.py",
-      "sha256": "6aa0dc0e498b4742d49a561e79c05bf501d15cdcda082064483118896e3b459d"
+      "sha256": "3d02b0880928e264d9e29305bdfd97244b2ccdf424644700336627ea7d40f3cf"
     },
     {
       "bytes": 8307,
@@ -99,7 +99,7 @@
     {
       "bytes": 8254,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/packaging-authoring-v1/ROOT-COMMANDS.json",
-      "sha256": "c0caa748b9a8be8358e614d6c160e62b719349f8a0d9ed4dbf58e84606e1e016"
+      "sha256": "4ca01289087cffa812a65a05c490a39019e4cc50853b8bf5a2daec70043b6d58"
     }
   ],
   "owner": {

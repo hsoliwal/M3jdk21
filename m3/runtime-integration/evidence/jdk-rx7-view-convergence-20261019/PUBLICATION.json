@@ -13,7 +13,7 @@
   "filtered_view_production_delta": false,
   "rx7_early_finalization": "HOLD_NOT_APPLIED",
   "host_results": "Retained exact canonical host-receipt.json and packaged-host-proof.log; not hosted execution",
-  "runner_sha256": "3159f73e8172429295a0b82a146ab9d4748da0ae27d20483b5d0961cf1e72889",
+  "runner_sha256": "6fd7731fbac8ca99c673b37186b1b44cb60e8b2872d8b962d9efdd3f76912f7e",
   "runner_guard_syntax": "PASS",
   "runner_guard_invalid_pin_refusal": "PASS_EXIT_2",
   "new_guarded_runner_end_to_end": "NOT_RUN",

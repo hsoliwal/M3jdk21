@@ -50,7 +50,7 @@ jobs:
           from pathlib import Path
           root = Path.cwd().resolve()
           receipt = root / "m3/docs/m3-m3jdk21-eclipse-recipe-handoff-20261022.tsv"
-          historical_sha256 = "6fe9a6a24325da41df44c2c06e6d828ec0823420a43b92015fd26c1819d45ac8"
+          historical_sha256 = "24b53157b19558fb50a9148b981147b6b9ae76c2f50d20b1cb578ecf4ad24776"
           if hashlib.sha256(receipt.read_bytes()).hexdigest() != historical_sha256:
               raise SystemExit("M3 historical source handoff receipt drifted")
           lines = [line for line in receipt.read_text(encoding="utf-8").splitlines()

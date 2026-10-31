@@ -16,7 +16,7 @@
       "ordinal": "0",
       "disposition": "MODIFY",
       "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java",
-      "input_sha256": "d43e7096433b24372c4ced54143d321554d6db234e86224d6d6d29946d94cb61",
+      "input_sha256": "98da3772abcda6def4a06d6eb90a6456972b1fd71c309fe00b791c5bc157e715",
       "expected_after_sha256": "6ebdbef74bd512c22fa9503bdd461f0c00c666c4797b7bceafcddcc2c896779e",
       "emitted_sha256": "6ebdbef74bd512c22fa9503bdd461f0c00c666c4797b7bceafcddcc2c896779e",
       "changed_by_sdk": "true"
@@ -26,8 +26,8 @@
       "disposition": "MODIFY",
       "path": "src/java.base/share/classes/jdk/internal/m3/M3IntAlgorithms.java",
       "input_sha256": "24362173215883732a306e9bed08e76af35ac44bb343a2922a47e6e7c8826830",
-      "expected_after_sha256": "765135a735a4651eb4ebf4dbefd87e0c5527bcff77f79444a918b1d579c32518",
-      "emitted_sha256": "765135a735a4651eb4ebf4dbefd87e0c5527bcff77f79444a918b1d579c32518",
+      "expected_after_sha256": "4033758bd26f7ec22460bbdeaf6a46dcbdb5554189ba4f198e02d3a8c6a49ea1",
+      "emitted_sha256": "4033758bd26f7ec22460bbdeaf6a46dcbdb5554189ba4f198e02d3a8c6a49ea1",
       "changed_by_sdk": "true"
     },
     {
@@ -133,9 +133,9 @@
       "ordinal": "13",
       "disposition": "KEEP",
       "path": "m3/native/include/m3_jni_core.h",
-      "input_sha256": "0df5c1391c159a036620d0b03a1c67898be8351da5a173775ffd57e15d14933e",
-      "expected_after_sha256": "0df5c1391c159a036620d0b03a1c67898be8351da5a173775ffd57e15d14933e",
-      "emitted_sha256": "0df5c1391c159a036620d0b03a1c67898be8351da5a173775ffd57e15d14933e",
+      "input_sha256": "e479955a398c6e1db3b626ef87f5023fa490b4971bbcf8fee9b295c3dac06a34",
+      "expected_after_sha256": "e479955a398c6e1db3b626ef87f5023fa490b4971bbcf8fee9b295c3dac06a34",
+      "emitted_sha256": "e479955a398c6e1db3b626ef87f5023fa490b4971bbcf8fee9b295c3dac06a34",
       "changed_by_sdk": "false"
     },
     {
@@ -275,7 +275,7 @@
   "evidence": [
     {
       "path": "qualification/recipe-v3/PASS.json",
-      "sha256": "4aa2416432cb75e967a7ac05d19d49010a54a4faf48e008751b780f2299cb1f2",
+      "sha256": "744c6c4a04a747f1ef9d9e970d2e026c34ad8a73bec4d293b1561eac351607a9",
       "bytes": 1906
     },
     {
@@ -335,22 +335,22 @@
     },
     {
       "path": "sdk-image-v3/SDK_RUN.json",
-      "sha256": "baff67aad289f753cf78edca9387ad3e6cdcf8863e5e77100ba9cca631d932fb",
+      "sha256": "82f8f661bf237c4d898eb4c5251a0703f61332fff5c036e53a2adb1f775247dc",
       "bytes": 763
     },
     {
       "path": "sdk-image-v3/SDK_RECEIPT.tsv",
-      "sha256": "00ce190f061aa1b89fab2c1d7df6dba1010ed9c182dc5a34851b9449a9453b5b",
+      "sha256": "5fea140d411e7b3dec67bf0c062e2aea3941ebec3cf5ae81612b5e92ef2c6105",
       "bytes": 5742
     },
     {
       "path": "sdk-fixedpoint-image-v3/SDK_RUN.json",
-      "sha256": "2c0a0bccedf3d11eb469ac8810531437e358a3617d0f1713111e529881ff3c6d",
+      "sha256": "713990db1c84a05fd8316870c20088fc8532c9207c094ee3f9ec4f91739ca640",
       "bytes": 783
     },
     {
       "path": "sdk-fixedpoint-image-v3/SDK_RECEIPT.tsv",
-      "sha256": "5fc0919be5d30b420396284ae40aa44af6fd726b98740fead6da0868bc1531d6",
+      "sha256": "250c7f478428ce768841673a7eeacde734525e05d06704c7211489ffe3b8e614",
       "bytes": 6218
     }
   ],
@@ -371,7 +371,7 @@
     "head": "f5c6fc673b0c7dfa684f0b0c1e3f0c15bb57b14d",
     "changed_paths": 97,
     "receipt": "provenance/EXACT_COMMIT_RECEIPT.json",
-    "receipt_sha256": "4cc5da0c01ccbdf004b57147f61eba2c01cd512d40f1a08b575ecbeb77a5f364",
+    "receipt_sha256": "434fb1a99c824d46cc69077315126a7ffc5a6f5d611f8ba6c4ee1744a8386147",
     "reports": [
       "provenance/PROVENANCE_FILES.tsv",
       "provenance/PROVENANCE_GATE.tsv",

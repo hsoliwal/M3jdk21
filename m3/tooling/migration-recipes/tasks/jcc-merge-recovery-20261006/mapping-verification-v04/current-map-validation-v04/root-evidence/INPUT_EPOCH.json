@@ -782,7 +782,7 @@
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/publication/M3_LATEST_M3.json",
-      "sha256": "9e2339b75282bc7c397413c60c787194a339a63d6f17dcb8b9968474ef11c666"
+      "sha256": "73cd3ada7f6ef5c1f9cafce8ccb23d1d9c01141fae573d58ffd488786a90a514"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/publication/M3_LATEST_GITHUB.json",
@@ -794,7 +794,7 @@
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/publication/M3_LATEST_NAME_MAPPING.body.json",
-      "sha256": "12bfa8d328b74ba4de930d993c8194b8db51f3a111617690dff9f1ffebaea1c2"
+      "sha256": "e76133a4d1bb472dfc88a41e8d8560d5ac0e08ba4d227b3b6c8fbd95915e6ebc"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/publication/M3_LATEST_NAME_MAPPING.json",
@@ -1383,10 +1383,10 @@
       "bytes": 308294,
       "commit": "09075810b55229662329a158923287e8a7118f86",
       "file": "current/m3/docs/name-mapping.json",
-      "git_blob": "6ba02aa22af26a2b4bb4b4890496bd300bc0a9fa",
+      "git_blob": "44c966eca8e52d8c86925478d5b3ffbb45882e82",
       "membership": "Actual 090758 readback/reconstructed tree; exact-commit descriptor capture",
       "path": "m3/docs/name-mapping.json",
-      "sha256": "12bfa8d328b74ba4de930d993c8194b8db51f3a111617690dff9f1ffebaea1c2",
+      "sha256": "e76133a4d1bb472dfc88a41e8d8560d5ac0e08ba4d227b3b6c8fbd95915e6ebc",
       "status": "EXACT"
     },
     {

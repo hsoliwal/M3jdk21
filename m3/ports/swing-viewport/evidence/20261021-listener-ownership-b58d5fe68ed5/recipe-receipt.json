@@ -250,7 +250,7 @@
     "utc": "2026-10-21T06:50:19.748338Z",
     "trigger": "ui/lifecycle/listener-ownership",
     "lesson": "Record which direct viewport owns a listener and detach that registration on reparenting or removal. Preserve the original same-parent remove/add refresh: eliminating it changes listener dispatch order. Retain hidden deferral, showing geometry, EDT behavior and unrelated listeners; no new public disposal API is needed.",
-    "admission_implementation_sha256": "4706cfdc35a670d20b45453f44c018cd8d64be34cd878ee8b307ad3dd79ad3d8"
+    "admission_implementation_sha256": "2c9150508755694a47e76f537834ace051663f0879f49cfb08bb0e08ab2b2696"
   },
   "limits": [
     "No full source-built M3JDK21 image, jtreg/JCK or cross-platform qualification.",

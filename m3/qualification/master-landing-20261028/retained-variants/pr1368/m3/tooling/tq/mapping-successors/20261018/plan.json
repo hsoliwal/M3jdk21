@@ -6,11 +6,11 @@
       "path": "m3/docs/name-mapping.json",
       "before": {
         "resource": "payloads/before/0001-name-mapping.json.txt",
-        "sha256": "c23e6f63411b1d33a29f558c2a6370421a6f51ab99b6db99ac77ebc6e859812d"
+        "sha256": "a28f218198b30d1292d51836c8912d1f69229ef9bef40a4726a2808bcdcb4d46"
       },
       "after": {
         "resource": "payloads/after/0001-name-mapping.json.txt",
-        "sha256": "d28552f0f0e953849a1aa1ed1c831c92cf9ef737bdb135f3829cc4365282aa2a"
+        "sha256": "d66bb246114d20c82851c4f3b7f0238f2e9940502e540b39c5b69f613064e9b0"
       }
     },
     {
@@ -21,7 +21,7 @@
       },
       "after": {
         "resource": "payloads/after/0002-plan.json.txt",
-        "sha256": "5c02ab5f34d8ef5e79173dcc27318fd10ac50b5b715fc3a1a8d76db7c27be42f"
+        "sha256": "cfac31c9d903c0ace64a8b871057f098517e4fb3eedd5763fdbf050d7025e82e"
       }
     },
     {
@@ -32,7 +32,7 @@
       },
       "after": {
         "resource": "payloads/after/0003-manifest.tsv.txt",
-        "sha256": "fc45147928d4c1e1c6b8a76fb7bc83620843060787e88fbfda15e46947f5373d"
+        "sha256": "a0df648d1d7e5b2e429134e37a6a1e0ee0593f7b66937e7087c22ef9579b2142"
       }
     },
     {
@@ -43,7 +43,7 @@
       },
       "after": {
         "resource": "payloads/after/0004-name-mapping.json.txt.txt",
-        "sha256": "48401828719c2e439ac8fe35253c92696ed1cd271ad0e80b01975727c4218525"
+        "sha256": "fe9ed269cb1e860a0d54713a9e25b8fa9a09bba77d28467b832d23189524c120"
       }
     },
     {
@@ -237,11 +237,11 @@
       "path": "m3/tooling/tq-sync/plan.json",
       "before": {
         "resource": "payloads/before/0028-plan.json.txt",
-        "sha256": "65630d3adf07f8f18f2bdd14854931ac2feb3b98ade1e3fa1c1a81d48a78f686"
+        "sha256": "5d38483b5850f1441160fcfeb464e54dc0196b56da739dfe9090dd6355f511fa"
       },
       "after": {
         "resource": "payloads/sparse-input-epoch/after/0001-plan.json.txt",
-        "sha256": "c3c0522c2b5ab9dcb22214504ae65b000a42393543e0f02eafa3cddda0dadf87"
+        "sha256": "efb2e61d1dc3f47b2d7fd7cec680821ec43cec87594c158f2915e93ab11d0095"
       }
     },
     {
@@ -252,7 +252,7 @@
       },
       "after": {
         "resource": "payloads/after/0029-03-name-mapping.json.txt.txt",
-        "sha256": "48401828719c2e439ac8fe35253c92696ed1cd271ad0e80b01975727c4218525"
+        "sha256": "fe9ed269cb1e860a0d54713a9e25b8fa9a09bba77d28467b832d23189524c120"
       }
     },
     {
@@ -274,7 +274,7 @@
       },
       "after": {
         "resource": "payloads/after/0031-04-plan.json.txt.txt",
-        "sha256": "5c02ab5f34d8ef5e79173dcc27318fd10ac50b5b715fc3a1a8d76db7c27be42f"
+        "sha256": "cfac31c9d903c0ace64a8b871057f098517e4fb3eedd5763fdbf050d7025e82e"
       }
     },
     {
@@ -285,7 +285,7 @@
       },
       "after": {
         "resource": "payloads/after/0032-05-manifest.tsv.txt.txt",
-        "sha256": "fc45147928d4c1e1c6b8a76fb7bc83620843060787e88fbfda15e46947f5373d"
+        "sha256": "a0df648d1d7e5b2e429134e37a6a1e0ee0593f7b66937e7087c22ef9579b2142"
       }
     },
     {
@@ -296,7 +296,7 @@
       },
       "after": {
         "resource": "payloads/after/0033-06-name-mapping.json.txt.txt.txt",
-        "sha256": "48401828719c2e439ac8fe35253c92696ed1cd271ad0e80b01975727c4218525"
+        "sha256": "fe9ed269cb1e860a0d54713a9e25b8fa9a09bba77d28467b832d23189524c120"
       }
     },
     {
@@ -314,22 +314,22 @@
       "path": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/09-inputs.tsv.txt",
       "before": {
         "resource": "payloads/sparse-input-epoch/before/0002-09-inputs.tsv.txt.txt",
-        "sha256": "d2b2db84c1881d80c155b10308ed283ccd8915bc6ce042b37226b39219cd53dc"
+        "sha256": "47b97eac84f181ba334f954481d9fa4de8b3be538067edafca18de04f99392e9"
       },
       "after": {
         "resource": "payloads/sparse-input-epoch/after/0002-09-inputs.tsv.txt.txt",
-        "sha256": "798458a7bbae69ade9cca50a50c6d1313b786415eba87f72008954d3f6eff213"
+        "sha256": "b1d4eb8ca823e441498753afdd37aed96ff5a09679f13141cbfd7e16e249c70f"
       }
     },
     {
       "path": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/11-plan.json.txt",
       "before": {
         "resource": "payloads/before/0035-11-plan.json.txt.txt",
-        "sha256": "dc7bf333136c3837d1d4073ea006a15ff2c7aa4bc42feea3fc9df9bab50b6bfc"
+        "sha256": "2a1afa2dddd29a796d380a76f1221a283ca2bf0c557b5de8c4539ad9194fdcf0"
       },
       "after": {
         "resource": "payloads/after/0035-11-plan.json.txt.txt",
-        "sha256": "b32798c718c88a511b39452339d72a6eaec06e7e0f6c98174a94c642e4760da7"
+        "sha256": "c7ffcc147b24b2ebcc90262442e5f4815453b896b9a42f980fb0f2d8a172fade"
       }
     },
     {
@@ -369,33 +369,33 @@
       "path": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/manifest.tsv",
       "before": {
         "resource": "payloads/before/0039-manifest.tsv.txt",
-        "sha256": "b37e519df1deb54f236a562bfae9c26d04a5dc408d97e1fdd0799c9d003f0122"
+        "sha256": "af1003e33cf2defb2399278659be10f1bdc498d64d7c287d7e30aa43ba3628c3"
       },
       "after": {
         "resource": "payloads/sparse-input-epoch/after/0003-manifest.tsv.txt",
-        "sha256": "47109ee60f627463b7c3d520227476ed7e925bde44072a87e597aeae0c150b74"
+        "sha256": "c53aa4a211caaf82b12b4a50be7a1ecdfdcb147dad8b26a5d7c133f6c521c001"
       }
     },
     {
       "path": "m3/tooling/tq/current-20261018-plan.json",
       "before": {
         "resource": "payloads/before/0040-current-20261018-plan.json.txt",
-        "sha256": "dc7bf333136c3837d1d4073ea006a15ff2c7aa4bc42feea3fc9df9bab50b6bfc"
+        "sha256": "2a1afa2dddd29a796d380a76f1221a283ca2bf0c557b5de8c4539ad9194fdcf0"
       },
       "after": {
         "resource": "payloads/after/0040-current-20261018-plan.json.txt",
-        "sha256": "b32798c718c88a511b39452339d72a6eaec06e7e0f6c98174a94c642e4760da7"
+        "sha256": "c7ffcc147b24b2ebcc90262442e5f4815453b896b9a42f980fb0f2d8a172fade"
       }
     },
     {
       "path": "m3/tooling/tq/inputs.tsv",
       "before": {
         "resource": "payloads/sparse-input-epoch/before/0004-inputs.tsv.txt",
-        "sha256": "d2b2db84c1881d80c155b10308ed283ccd8915bc6ce042b37226b39219cd53dc"
+        "sha256": "47b97eac84f181ba334f954481d9fa4de8b3be538067edafca18de04f99392e9"
       },
       "after": {
         "resource": "payloads/sparse-input-epoch/after/0004-inputs.tsv.txt",
-        "sha256": "798458a7bbae69ade9cca50a50c6d1313b786415eba87f72008954d3f6eff213"
+        "sha256": "b1d4eb8ca823e441498753afdd37aed96ff5a09679f13141cbfd7e16e249c70f"
       }
     },
     {
@@ -419,7 +419,7 @@
       "before": null,
       "after": {
         "resource": "payloads/after/0043-SOURCE_ARCHIVE.json.txt",
-        "sha256": "51d6db474a50884ecb9d6d73a56643a3ba11590d3113ee929fea283eca5b013d"
+        "sha256": "d740f8e6955f2d93329e9053289356e03eb0248882b38bed894b15a4dc13a589"
       }
     },
     {
@@ -434,11 +434,11 @@
       "path": "m3/tooling/tq/plan.json",
       "before": {
         "resource": "payloads/before/0045-plan.json.txt",
-        "sha256": "dc7bf333136c3837d1d4073ea006a15ff2c7aa4bc42feea3fc9df9bab50b6bfc"
+        "sha256": "2a1afa2dddd29a796d380a76f1221a283ca2bf0c557b5de8c4539ad9194fdcf0"
       },
       "after": {
         "resource": "payloads/after/0045-plan.json.txt",
-        "sha256": "b32798c718c88a511b39452339d72a6eaec06e7e0f6c98174a94c642e4760da7"
+        "sha256": "c7ffcc147b24b2ebcc90262442e5f4815453b896b9a42f980fb0f2d8a172fade"
       }
     },
     {

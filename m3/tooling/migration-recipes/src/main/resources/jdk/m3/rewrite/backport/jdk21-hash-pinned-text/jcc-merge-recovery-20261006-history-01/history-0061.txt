@@ -4,12 +4,12 @@
     {
       "path": "INPUT_SEALS.json",
       "bytes": 141137,
-      "sha256": "9a1772699ad7537dc23edc74cb0d00c6d90fed2912a0e9ddd23c74ee2496f4c4"
+      "sha256": "c1db2f58d832d3faeaa6c680ea101eb2a04ac8037e6cdce519b17d6afd47db14"
     },
     {
       "path": "INSPECTION.json",
       "bytes": 8303,
-      "sha256": "5f7c06c1fe92a589b05b96c52e24f237a98962034e0e5311b50d06e350be14f3"
+      "sha256": "24cd03c36e25e70c4b3564582b9d318b19f2a506365b8fdc7184f0aa5292e5e4"
     },
     {
       "path": "INSPECTION_METHOD_NOTES.json",

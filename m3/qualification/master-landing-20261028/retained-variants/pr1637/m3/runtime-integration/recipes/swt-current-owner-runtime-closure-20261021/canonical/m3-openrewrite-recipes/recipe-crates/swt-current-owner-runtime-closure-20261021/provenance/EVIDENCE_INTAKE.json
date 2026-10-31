@@ -432,7 +432,7 @@
       "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/01-preflight.json",
       "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/copier-qualification-001/01-preflight.json",
       "bytes": 687,
-      "sha256": "f0bacd71691636bfdca9eb74e1341a4b9e3e3d4406bdf081aa4b832b1a308222",
+      "sha256": "b0fe23b6c8a07b6419a06207a8374ca36071f6d05e9015ce1fa32e405c3d9547",
       "scope": "Actual qualified-output copier:1write,0replay,4guardrefusals"
     },
     {
@@ -446,7 +446,7 @@
       "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/02-first-apply.json",
       "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/copier-qualification-001/02-first-apply.json",
       "bytes": 687,
-      "sha256": "af2248ac713f0e3b8981392aeeebd3bdaa648c38a23efe2de5a5fb28264e0699",
+      "sha256": "7f09d45cbb082f301a9768ab79932b731b68793c456decea01cd4e32e213fb4b",
       "scope": "Actual qualified-output copier:1write,0replay,4guardrefusals"
     },
     {
@@ -460,7 +460,7 @@
       "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/03-fixed-point.json",
       "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/copier-qualification-001/03-fixed-point.json",
       "bytes": 697,
-      "sha256": "bdb71c8270b48836b9c7c3c2de7accb6cb6ba85e593ed0171b8b87b95db7f235",
+      "sha256": "e4c942ca226db63377c929029f0b16627d4372797a2e959d9d55a863a984757f",
       "scope": "Actual qualified-output copier:1write,0replay,4guardrefusals"
     },
     {
@@ -530,7 +530,7 @@
       "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/RESULT.json",
       "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/copier-qualification-001/RESULT.json",
       "bytes": 7547,
-      "sha256": "31c5dd3f8428a4c0d454ccf8a50dfe36b85b297f9055b51ee6b0bdc924b01fe8",
+      "sha256": "63d37ec62163e198030c053e80eca540e12761bf38559a65a943e2b9276dec19",
       "scope": "Actual qualified-output copier:1write,0replay,4guardrefusals"
     },
     {
@@ -586,7 +586,7 @@
       "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/SDK_001_CUSTODY.json",
       "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/intake/SDK_001_CUSTODY.json",
       "bytes": 4449,
-      "sha256": "157259faf48c3d32d4da8c00a5d72aa457c74e395e5602ab678a6e0428143a4e",
+      "sha256": "6ca85661f242acb5102f0f291ab328079ae3be8eba1b65e48161d466a26fcb2f",
       "scope": "Exact task pin, byte custody or command receipt"
     },
     {

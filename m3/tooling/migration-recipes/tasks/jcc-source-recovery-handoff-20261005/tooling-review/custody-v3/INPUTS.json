@@ -5,8 +5,8 @@
       "source": "work/m3jdk21-current/successor-e04/publication_custody_v3.py",
       "snapshot": "inputs/publication_custody_v3.py",
       "bytes": 9752,
-      "sha256": "9b885587ad7187eb4c5d0d05f4fcf20d691bd3b55ccab406d3601342f4550479",
-      "git_blob_sha1": "925d873fba4eabd4d78a87ca63caa88045d904fb"
+      "sha256": "340e3e1670e457d99ab9e0ae954eed85efacdea4e4e34f2d4b2165421b8c9248",
+      "git_blob_sha1": "ab6182b9f208b27d1e9c54e6d6a51fe7a465c344"
     },
     {
       "source": "work/m3jdk21-current/successor-e04/derive_source_handoff_v3.py",
@@ -61,8 +61,8 @@
       "source": "work/m3jdk21-current/successor-e04/custody-v3-proposal/READINESS_T01.json",
       "snapshot": "inputs/READINESS_T01.json",
       "bytes": 16575,
-      "sha256": "1210c22563ecbf8819e044f6c43158ab68826ebfc9fbb58a37d414db5137a8e4",
-      "git_blob_sha1": "176aa7a4713f10b5ff1a06a053d9ffed51a9e4ae"
+      "sha256": "cfcf56cddf3e8c710583a4d60d2ba86e1af1d1d17da9fc136bbb5c27db9e5604",
+      "git_blob_sha1": "70bdd5e5175ee08df6ae33669f95070b80721329"
     },
     {
       "source": "work/m3jdk21-current/successor-e04/custody-v3-proposal/LOCAL_EXPECTATIONS.json",
@@ -96,8 +96,8 @@
       "source": "work/publication-current/source-recovery-publish/verify_publication_v3.py",
       "snapshot": "inputs/verify_publication_v3.py",
       "bytes": 13831,
-      "sha256": "6b8ce688a81b46c20e567bd719104bac6a4cf8578a42904dbe494bca2305e443",
-      "git_blob_sha1": "e6a98838b5d17ded3dc2b37d20a6dd3ed2b211fb"
+      "sha256": "904a2105f04a12454a2d97c13a5bef6764e18ae28a2fe680e06ca0e6e14a6e93",
+      "git_blob_sha1": "8c3bbe7815a13e5da510c080bf9bb1ed0da02a08"
     },
     {
       "source": "work/publication-current/source-recovery-publish/raw_custody_v3.py",

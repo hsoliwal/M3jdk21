@@ -18,7 +18,7 @@ complete before fixtures. Four complete out fixtures remain identical. The
 only changed out fixture, M3StateRelation.c, preserves all original copyright,
 Apache-2.0 and M3 adaptation notices. The original C is also retained as the
 complete inverse payload. Historical C Git blob
-5b30f71d8ed878b3199225b9512b75a090ff896c is unchanged and remains a non-target
+e6a10286f64052cb948de1dbcc43aaaa1d33db1e is unchanged and remains a non-target
 refusal fixture.
 
 The sparse-bit atom is adapted from owned Java MIndexStateRelation.applyRowsUntil,
@@ -30,8 +30,8 @@ inventory bb4958be148665085f5bb923e56d7d6bccb8b141 and pre-code admission
 5d2d2c39120c7a779e2beb06f0af19cb7364e253 record the accepted and rejected fits.
 
 The JUnit and counter/XML/physical-closure verifier adapt the existing
-StateRelation source-custody test 1315d91ec4eb924d0bbe921cabd077d3ba3b51e0 and
-verifier 38f05eac36c97bef0704c336600767f74b272f8e, Apache-2.0. Their provenance
+StateRelation source-custody test 2ed4da274c8cdbf10da9140f3ff4fffd3f7d1d73 and
+verifier a80c6f48aebe6249239c52277ad0fc53f21179b6, Apache-2.0. Their provenance
 includes prior lexical and text-metadata custody SDKs; the two original provider
 files and Maven POM remain byte-for-byte unchanged.
 
@@ -41,6 +41,6 @@ whole-JDK distribution. License text: https://www.apache.org/licenses/LICENSE-2.
 
 Adaptive successor authoring reuses those same owned atoms and providers under
 pre-code admission 16fe92372d86a157094ba973bbd8f347c1a6707e. The rejected default C
-abb751e6056e34f25d0f09660d575f362610359e is retained verbatim in rejected/M3StateRelation.c.txt
+03a2273ec4a8521c78bfb746aed71a873d65182e is retained verbatim in rejected/M3StateRelation.c.txt
 as a non-target regression fixture, with its original Apache-2.0 notices. No
 additional implementation donor, dependency or license grant is introduced.

@@ -4,7 +4,7 @@
   "status": "FROZEN_CURRENT_INPUT_TEMPLATE_NOT_BOUND_OR_EXECUTED",
   "destination_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
   "destination_root_tree": "0812573f02908d8078d13f5f49346865cdf1c0e0",
-  "input_epoch_sha256": "973be97f762b46278f16c2bae6d887f2bc407110f333fe7ae0e7070e30cbe118",
+  "input_epoch_sha256": "2ea3ffe30ac6824bcc6d708c431b848a4c7997bdb4cdeaaddea1a62640734718",
   "input_epoch": {
     "ordered_records": 52,
     "non_jcc_records": 50,
@@ -22,14 +22,14 @@
   "compile_only_status": "PASS",
   "previous_input_template_packet": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping/java-template/TEMPLATE_PACKET.json",
-    "sha256": "d9441405014cca0bc6b106de6cf28539920a164e2c627f04dea750072f1e054d",
+    "sha256": "a5a81bee6c69a796e0cf7632746dff3be5ac56bb11fbaac3424dcba325fcd94b",
     "all15_packet_files_unchanged": true
   },
   "files": [
     {
       "path": "JccMergeMappingRecoveryV02Test.java.in",
       "bytes": 50280,
-      "sha256": "80a5b84efedfa3785d392f2d80be7e9a6f3410974edb03a4f3ab4532b57e2d6e"
+      "sha256": "cb5714e9b8d9a623ea7611d8f416b0a1f785982811e60bd3fcb16c6c4b759674"
     },
     {
       "path": "pom.xml",
@@ -44,17 +44,17 @@
     {
       "path": "render_template.py",
       "bytes": 14634,
-      "sha256": "c47d346d3cef0ef3448a4005f76163e3af13165fba60f56ebe9cb1d424955076"
+      "sha256": "a29a46042a424aaf5cd462b093fadafb314930bce110a01147ba37edabfce722"
     },
     {
       "path": "README.md",
       "bytes": 7274,
-      "sha256": "47d97ba57bbdd7ffb6f137ef7ef01decc50251b450c655c204b5a2a70e4ab1bd"
+      "sha256": "51179db45547c4b45bf3a530b97eb30f64bd5a9a5f091c863ab5f33845f2727d"
     },
     {
       "path": "compile-check-v01/receipt.json",
       "bytes": 6239,
-      "sha256": "0c15fae64fcee7c6539f4f726168700de10f1c0639b41e530d629ab712bbb6cb"
+      "sha256": "950f03d3f1a47a1faeaffad9cec025496679a9643f179ea720d5db176e986473"
     },
     {
       "path": "compile-check-v01/javac.stdout.log",
@@ -69,7 +69,7 @@
     {
       "path": "self-review-v01/receipt.json",
       "bytes": 2738,
-      "sha256": "e132ff92e23e709aab301c67fdf9e04f2d412989a3c526fa63fcdc514bcfd7fb"
+      "sha256": "97cec2275c9b0e6b75ea6470e4a89964d9ea0e39a5988decdb52c9a6cb7afe49"
     },
     {
       "path": "self-review-v01/renderer-refusal.stdout.log",

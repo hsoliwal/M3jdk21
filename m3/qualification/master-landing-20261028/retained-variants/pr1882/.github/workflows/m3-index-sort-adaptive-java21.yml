@@ -38,9 +38,9 @@ jobs:
           test "$(git rev-parse HEAD)" = "$M3_EXPECTED_HEAD"
           test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3IndexSort.java)" = '9fdb435f3212a165262cb18ae11fcb1e9e56ae3e'
           test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3IndexSortAdaptiveContract.java)" = '60041005c55cfaf8e9f65ff3d83ad53ed2f4f1b9'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3IndexSortAdaptiveTest.java)" = '6ebdc79f1623c9f798824270d66df0ad3dd7e322'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3IndexSortAdaptiveTest.java)" = '8c1f4d0e1e1862e432be2b85bcc542ae4d80925a'
           test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3IndexSortStrictContract.java)" = '50483be714e2fc8436729241a57ab941c73b4709'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3IndexSortStrictTest.java)" = 'da5360d12d1afa99b6c527fbea2b1c951a27ac20'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3IndexSortStrictTest.java)" = '52df18993bcde6be7509fbbb441149a880dda149'
       - name: Strict compile of original M3JDK21 index owner and oracle
         shell: bash
         run: |

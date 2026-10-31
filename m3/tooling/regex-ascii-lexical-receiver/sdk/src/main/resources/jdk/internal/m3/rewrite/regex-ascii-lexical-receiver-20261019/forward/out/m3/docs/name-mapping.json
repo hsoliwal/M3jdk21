@@ -760,7 +760,7 @@
       "target_repository": "hsoliwal/M3jdk21",
       "target_revision": "677437be295b23f7ccf7409be287008944d0e8b0",
       "target_path": "src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java",
-      "target_git_blob": "bdeccba2317a2d0d67860723fbc89ede281f4197",
+      "target_git_blob": "669362eaae71a088766b32d8a5049cb55cb59c01",
       "status": "pending source-authored component refinement; recipe, original owner and receiver execution not yet qualified",
       "scope": "ASCII syntax for decimal repetition bounds and hexadecimal escapes. This is a component relationship, not whole-program compatibility, parser equivalence or a String/runtime port.",
       "source_rule": "Private native parser must refuse non-ASCII numeric syntax and retain its selected JDK or RE2/J fallback. Source RE2/J malformed-bound literal behavior remains distinct.",
@@ -8198,8 +8198,8 @@
               "T Access.second(T)",
               "long[] Join.compose(long[],long[])"
             ],
-            "sha256": "bbc2901ebe5b2de9951b672127bd47e9d13c70b5a39482fa0727703d0a2ff757",
-            "git_blob_sha1": "780c7887aaa6b0892a76f4eee1dcb17086a60289",
+            "sha256": "9d485a1771a30b4229acb5526ca90de5f2df4a03ee5ad8f5388bb128d2c38194",
+            "git_blob_sha1": "d70a152bdedc380ed8b28861ea94ef4c2adbea90",
             "fingerprint": null,
             "revision_role": "pinned"
           },
@@ -8231,8 +8231,8 @@
               "jlongArray Java_jdk_internal_mindex_M3StateRelation_composeNative(JNIEnv*,jclass,jlongArray,jlongArray)",
               "jlongArray Java_jdk_internal_mindex_M3StateRelation_repeatNative(JNIEnv*,jclass,jlongArray,jlong)"
             ],
-            "sha256": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16",
-            "git_blob_sha1": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
+            "sha256": "0df1989292b23b1f185f222db61ad55d5e38b30d5b758436ca9d62b8de277bbd",
+            "git_blob_sha1": "89b3127f0f262de3e00ba28a01079a659013dce2",
             "fingerprint": null,
             "revision_role": "pinned"
           },
@@ -8246,8 +8246,8 @@
               "int m3_state_relation_compose(const uint64_t*,const uint64_t*,uint64_t*,size_t)",
               "int m3_state_relation_repeat(const uint64_t*,uint64_t*,size_t,uint64_t)"
             ],
-            "sha256": "c948c0ac34180f1f9412a764c3c9fd8c59e11509467aa9e04f8825e903526885",
-            "git_blob_sha1": "18a02e228129827da486edc5b316790af6135310",
+            "sha256": "6a453bbe5c443d327228e48cc27c6d5dc356a67586f93796a52de17e69fa12a2",
+            "git_blob_sha1": "0e0c70e60b2cee61c3df31982a26f4251955cb61",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -8735,8 +8735,8 @@
               "private int number()",
               "private int hex(int,int)"
             ],
-            "sha256": "249a77620ab454342d666680e89e8c43471bb857960aa91b1413c3b2090edec7",
-            "git_blob_sha1": "bdeccba2317a2d0d67860723fbc89ede281f4197",
+            "sha256": "d84c11d0cc1e7945920027003dae40721d83636d4e30cd52fbef11285dbb1303",
+            "git_blob_sha1": "669362eaae71a088766b32d8a5049cb55cb59c01",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -8822,7 +8822,7 @@
           "supersedes": []
         },
         "source_state": "proposed",
-        "observation": "SOURCE_AUTHORED_NOT_APPLIED_NOT_RUN. Baseline pins describe inspected actual owners, not candidate deployment. Candidate receiver compiler payload SHA-256 ce36631a4d358e4e476fec74c2c226e75a364f20c4fd1d09b0f0aa454e27c4c2 and owning differential SHA-256 35da3140ab8ef9338daf7d2cc5dda723638803465d633ec608b246c4db785599 are task before/out recipe expectations only. Dependencies are explicitly pending; tests[] is empty because no new receipt exists. All pre-existing root mappings, migration records, global historical revisions and gates are preserved."
+        "observation": "SOURCE_AUTHORED_NOT_APPLIED_NOT_RUN. Baseline pins describe inspected actual owners, not candidate deployment. Candidate receiver compiler payload SHA-256 699c06bfcded97e54e18a54552765295521451c2a14b0f5bb810771f365fd969 and owning differential SHA-256 35da3140ab8ef9338daf7d2cc5dda723638803465d633ec608b246c4db785599 are task before/out recipe expectations only. Dependencies are explicitly pending; tests[] is empty because no new receipt exists. All pre-existing root mappings, migration records, global historical revisions and gates are preserved."
       }
     ]
   },

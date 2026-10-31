@@ -39,7 +39,7 @@ jobs:
           test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankIndex.java)" = '6a8cf91eb78b6e77fb53b73d55cea0a214a33dd7'
           test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = 'fab1b17dc529b81a401dd1d3d77fcb8035dc33c7'
           test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRunStatisticsContract.java)" = 'fcca9bc86c908767057c3baa740aad5a2c762063'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRunStatisticsTest.java)" = '09b24e2f4c8c763c4d475f62c8d95205190ff2a9'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRunStatisticsTest.java)" = 'a22c6601e25972699927c2f5fe65635f6c3e43a2'
       - name: Compile actual original rank source and source-owned executable differential
         shell: bash
         run: |

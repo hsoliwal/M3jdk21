@@ -56,7 +56,7 @@ def check_rows(rows, field):
 
 handoff_path = ROOT / 'jobs-work/maven4-recipe/FINAL_HANDOFF.json'
 handoff_bytes = handoff_path.read_bytes()
-assert sha(handoff_bytes) == '5fefdaa1b42f2a674fa9056021281f33ce2bce2e10dfd397676c4b177668a8ae'
+assert sha(handoff_bytes) == '4f2f931f4fa54eeaedc3b8c26333a3b55f164d41579538eb696b1422001e292d'
 handoff = json.loads(handoff_bytes)
 check_rows(handoff['files'], 'repository_path')
 assert len(handoff['files']) == 321

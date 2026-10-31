@@ -9,8 +9,8 @@
   "prior_readiness": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/READINESS_T01.json",
     "bytes": 16575,
-    "sha256": "1210c22563ecbf8819e044f6c43158ab68826ebfc9fbb58a37d414db5137a8e4",
-    "git_blob_sha1": "176aa7a4713f10b5ff1a06a053d9ffed51a9e4ae",
+    "sha256": "cfcf56cddf3e8c710583a4d60d2ba86e1af1d1d17da9fc136bbb5c27db9e5604",
+    "git_blob_sha1": "70bdd5e5175ee08df6ae33669f95070b80721329",
     "mode": "100644"
   },
   "changed_entrypoint": {

@@ -4,12 +4,12 @@
     {
       "bytes": 769381,
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/reference-audit-v3/REFERENCE_AUDIT.json",
-      "sha256": "07b4f393e8fb1cb53b86d3a83a3400972632af1a0c5de9bd9d90fc5d76a2031b"
+      "sha256": "a7c41a897604c0421ca0f770fde83c51404208479f053b404cb98e5e7f2da7f1"
     },
     {
       "bytes": 1530,
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/reference-audit-invocation-v3/EXECUTION.json",
-      "sha256": "ca2d77fcdd5b53f1df91f28f2b38edaaae094627e909682292d19e3bcb12e3f3"
+      "sha256": "af823a726f18769d61586fe9be5362ae31743c4523003d292bad9ae536b72803"
     },
     {
       "bytes": 31015,
@@ -19,7 +19,7 @@
     {
       "bytes": 417473,
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/verification-v3/inputs.json",
-      "sha256": "d5dee9d440dec5528f96a0168adcb6b6adaefefdc939e764a379fdd3049ef6c2"
+      "sha256": "3747257e4df289cbc09ce34309683cb18c9c66caedab191379d0370a07057902"
     },
     {
       "bytes": 83448,
@@ -29,12 +29,12 @@
     {
       "bytes": 419637,
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/source-binding-v3/SOURCE_FIELDS_AND_PROOFS.json",
-      "sha256": "a8fef86bf2c1cb96dce3f2f0f1394e6f0d99d233a3934f9bf273209b84c85f09"
+      "sha256": "65f10e830243ed927aabedee9d0734daa46eed3b37ae4212e28ab85131fe9e9d"
     },
     {
       "bytes": 70709,
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/source-binding-v3/ROOT_ACCOUNTING.json",
-      "sha256": "9a74176340e704c473d0a9c14f667874d792adc1919768e0713da262da85f10a"
+      "sha256": "30dadc5274823dba2443d663000051a48c0785eb92042ba8e684520bc2ce5942"
     },
     {
       "bytes": 470167,
@@ -49,7 +49,7 @@
     {
       "bytes": 3390,
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/plan.json",
-      "sha256": "c2fb0701518fa8fe07d8079328dd03a2e28a94d021b93cc55ed7c139595a9e99"
+      "sha256": "68d9e65e8d45d1c6e8eea04de4f9e2ab0326b7d66fef7f3d86f832fb0c8197e2"
     },
     {
       "bytes": 16423,
@@ -99,17 +99,17 @@
     {
       "bytes": 92103,
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before02-source-destination-bindings.json.txt",
-      "sha256": "a80ffed31f45465774fd03ba90858c301327d6b472acf89652d01bf96b981707"
+      "sha256": "8c76c2dd45e775d29f8f47d8daf65842e465c74ad3dec7aacd55df59f9d051a1"
     },
     {
       "bytes": 167811,
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after02-source-destination-bindings.json.txt",
-      "sha256": "e17e0e066988a03583beab519a2ce4381c93f31b1da8ddf465f627cd68566b8d"
+      "sha256": "59b1491a232e3eabfd0530cbf47b01265603e6f493e382aa3c394c629b0516b6"
     },
     {
       "bytes": 167811,
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
-      "sha256": "e17e0e066988a03583beab519a2ce4381c93f31b1da8ddf465f627cd68566b8d"
+      "sha256": "59b1491a232e3eabfd0530cbf47b01265603e6f493e382aa3c394c629b0516b6"
     },
     {
       "bytes": 88510,
@@ -124,22 +124,22 @@
     {
       "bytes": 8615,
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/execution-review-v3/REVIEW.md",
-      "sha256": "839f814bee8fe2dd0ba227907f10e1a6159d648688811043d9f4c770b19d2e5c"
+      "sha256": "676c2ed4548ac2be360b39f389ecdde86e82ad08978d3019dd29d655ddfb31d2"
     },
     {
       "bytes": 1229,
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/execution-review-v3/REVIEW.json",
-      "sha256": "3c8c5c20d99c5710c1803cc167a8efa3d69b80c0f2562bfe4001f337fcd51d8a"
+      "sha256": "9b38a60e8c43da1f1dfaf859bb6de41a9dd0dba30eeb2169f2384df335d9fde3"
     },
     {
       "bytes": 22695,
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/execution-review-v3/EXECUTION_CHECKS.json",
-      "sha256": "102916259934a1429006b51de25a415292fbf9f779ef6609cadd57ad906eddd0"
+      "sha256": "a5cc1aab410fbb6f8f155f7d6ed2b0e8dcdd43d1b615c5cde2fd743ac4613d0d"
     },
     {
       "bytes": 9916,
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/execution-review-v3/FILE_SEALS.json",
-      "sha256": "b616858dd2ae6495bcbdcb026b704f38fb223ca22742c64d7ca5ee94f89bea42"
+      "sha256": "aa28a8483f4890c9f44838c21ee7c776ca2457dc024cfa4df5e81df34474e4eb"
     }
   ],
   "schema": "jcc-e4-actual-reference-review-inputs/1"

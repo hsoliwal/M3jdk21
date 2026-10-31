@@ -4,9 +4,9 @@
   "profile": "swt-current-owner-runtime-closure-20261021/1.0",
   "event_count": 3,
   "events": [
-    "fc48dd49814293e527151d91c809e20db4c97a5ff18752431004f330f4262e5e",
-    "b4d03492e4f6853d6bae972e74d96b91b2251691a11fcdae32841e691e49b793",
-    "3eda9073af922583f714d5cf4ae7d9f01f91debf5ac51b91ccf32cdbe2f57098"
+    "0caf3684e3ee2386ed73d5d30e7c43a7b08ec48c3ff6c6c62ce61d66ad936a61",
+    "d686c3a1da8b46543cf1c5ff2142b14f99d3810eb7442a2372035659d798ab21",
+    "7b26a9bcf80b50a3ec76e0db1277d37e5d4bf66d57fe7551c3568dc4482a9836"
   ],
   "conformance_checks": 129,
   "control_cases": 32,
@@ -23,7 +23,7 @@
   },
   "index": {
     "path": "memory/INDEX.json",
-    "sha256": "770179b9f08a2c410a46bb3f9dfd77d97ebe7b459ba4db0a63069dc1dc50fd2d"
+    "sha256": "878031d6df9c2680205e758ccfab6b0c3b3eb26691bd7a345cbd2cb9471f4fe7"
   },
   "helper_lineage": {
     "path": "memory/HELPER_LINEAGE.json",
@@ -35,15 +35,15 @@
   },
   "event_integrity": {
     "path": "proof/memory-integrity-001/RESULT.json",
-    "sha256": "3953e5c5365c6e09739caa008251bf4a9f345a843f3827ec234ca565a003c59e"
+    "sha256": "7fa8d4bb88acb3a80ab4ae1a8807147be149c551509d1edb16406f5a08b9dea5"
   },
   "new_canonical_recipe_sdk": {
     "path": "proof/sdk-001-offline/RESULT.json",
-    "sha256": "94112bdac83b7756c78d4ea92c24b0eb4cc948e7bd73622b7d96cd0fa4df2774"
+    "sha256": "d35f94052eb5c38a88997ec4157a4a6a0ede7fe16a5b95a6ef70b2c0bd3a917f"
   },
   "actual_emitted_receiver": {
     "path": "proof/receiver-runtime-001/RESULT.json",
-    "sha256": "679ac1b3f0a18abead0c716b82a876db225f02d77afc01bcb8a3cae75f7932ec"
+    "sha256": "11c86ec78af00b87c729583db7c8014acd86ae55e431c9694ec73b82ef331fca"
   },
   "qualified_sdk_source_inputs_unchanged": true,
   "scope": "Independent closed-profile conformance and immutable evidence integrity. Runtime proof remains the actual owning receipts; no product or hosted admission is granted."

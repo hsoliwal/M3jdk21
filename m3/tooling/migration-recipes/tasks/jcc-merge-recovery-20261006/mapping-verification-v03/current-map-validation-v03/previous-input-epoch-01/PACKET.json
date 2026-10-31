@@ -6,7 +6,7 @@
     "fresh_captures": 1,
     "retained_prior_captures": 44,
     "reused_captures": 43,
-    "sha256": "5426183081026fa98875e9b40e4ab469e9fc5b6caacfbb188ee195f7d187e73d",
+    "sha256": "790b9b3c09cccf660795b3990753c3229ec93e441df47614462f70c521c26a8d",
     "verified_m3_tree_objects": 606,
     "verified_old_m3_tree_objects": 589
   },
@@ -25,7 +25,7 @@
     {
       "bytes": 73641,
       "path": "ACQUISITION.json",
-      "sha256": "5426183081026fa98875e9b40e4ab469e9fc5b6caacfbb188ee195f7d187e73d"
+      "sha256": "790b9b3c09cccf660795b3990753c3229ec93e441df47614462f70c521c26a8d"
     },
     {
       "bytes": 13236,
@@ -595,7 +595,7 @@
     {
       "bytes": 1918602,
       "path": "root-evidence/M3_FINAL_CURRENT_M3.json",
-      "sha256": "f1dd5831a9838ec31d6903e98e683de010ef4440e9a372aee961a8761f5ae6fe"
+      "sha256": "e71ea967d2008207adabab5c3d105701b857cb4f0c97eb8c81f73eceb88bb9e4"
     },
     {
       "bytes": 9664,
@@ -633,12 +633,12 @@
     {
       "files_verified_unchanged": 15,
       "path": "candidate/mapping/java-template/TEMPLATE_PACKET.json",
-      "sha256": "d9441405014cca0bc6b106de6cf28539920a164e2c627f04dea750072f1e054d"
+      "sha256": "a5a81bee6c69a796e0cf7632746dff3be5ac56bb11fbaac3424dcba325fcd94b"
     },
     {
       "files_verified_unchanged": 11,
       "path": "candidate/mapping-v02/java-template/TEMPLATE_PACKET.json",
-      "sha256": "7ec82e03ff00a2853023454b7e30decca77051a4c3ac4afe30d283722a9d5a2b"
+      "sha256": "bba43023ead328438b81a397dcb6c646d5c79bfe33555d5a220ef1f985aabcd6"
     },
     {
       "files_verified_unchanged": 113,

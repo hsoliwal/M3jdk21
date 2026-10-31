@@ -170,7 +170,7 @@ def include_path_mask_successor(historical_rows, receipt=_PATH_MASK_RECEIPT):
 
 # Exact successor of the four unchanged historical receiving receipts.
 _TOOLS4J_RECEIPT = HERE / 'qualification/tools4j-unix-source-successor-20261019.tsv'
-_TOOLS4J_RECEIPT_SHA256 = '2e5b2593fef1f70ccf5b8a4d8b95a604ea85025b6ab8e3f1f4b3fcc234923704'
+_TOOLS4J_RECEIPT_SHA256 = '9a1c2d3d93fa07dda84bd5b4e464204f4432448387c9359ac5c149d30cb38ec9'
 _TOOLS4J_PREDECESSOR_SHA256 = '104bd2f6582f4ce496ff13524a7a8f33e7f4c10fb18981ae9e3229c6da5ba7b9'
 
 
@@ -229,7 +229,7 @@ def include_tools4j_refinement_successor(previous_rows, receipt=_TOOLS4J_RECEIPT
 
 # Exact successor sealing the superset source set after the Tools4j refinement.
 _SUPERSET_RECEIPT = HERE / 'qualification/superset-source-successor-20261030.tsv'
-_SUPERSET_RECEIPT_SHA256 = '866bd9ffd36d1530366dd93985fb30d9b3ea5166f6e4406b62a619657c0762ea'
+_SUPERSET_RECEIPT_SHA256 = '1e0aacf50fa456c0f05fbae3302ad5aebbc4d74fbc5d0df3c6135cfb527b2184'
 _SUPERSET_PREDECESSOR_SHA256 = '6283ee8df10e7d2e4b2a0d47635ef57775fb476c1cae9545cfe1692fa59c176e'
 _SUPERSET_TRANSITIONS = 428
 _SUPERSET_RESULT_ROWS = 772

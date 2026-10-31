@@ -11,6 +11,6 @@ m3/arrays/src/main/native/m3_arrays.c	ABSENT	0c7be7f8176ca235c40d88aad2cefab15e7
 m3/arrays/src/main/native/m3_arrays_jni.c	ABSENT	95d9416f28aa21401afba0e24e074ed459ccf8839f6f8b00226717932ad8f00c	09-m3_arrays_jni.c.txt
 m3/arrays/src/main/native/tests/m3_arrays_checks.c	ABSENT	2ed94ea3ded2f9907bcfc11717a5832890b9fea8adbec3b001b719d40507ec7c	10-m3_arrays_checks.c.txt
 m3/docs/m3jdk21-porting-invariant.md	054a022471cecad91adcdc5efa0f7e1ee6e2f024e8d42254d2e5ca070134cdb5	46815260b6a470d90aab619d2208e88a28806fe6e76bb8b2f3352cdb95e5e33e	11-m3jdk21-porting-invariant.md.txt
-m3/docs/name-mapping.json	f82ae589ca63e47be2f0ce7ad44a5589b9bf3db74377405744f34571156d8366	01a740440138c0f4ef89602ba3cfff7ae3c40d9e5d0650150f8f683d9a87c65e	12-name-mapping.json.txt
+m3/docs/name-mapping.json	5f57c35325374407cefa840f8071a8f739b931854b6c420d6d09deb6a443b2d5	6fa3c7842e1da2fd575c527bbd915d4e7dcc15670d48c10655c3d5e278479a3d	12-name-mapping.json.txt
 m3/docs/m3-array-port-map.tsv	ABSENT	f28fe26ad880d5527b68c3f804b4689615a753b515bd7ce989ba224bd37a2632	13-synexia-array-port-map.tsv.txt
 m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-array-substrate.yml	ABSENT	aefaca8ec576e27ca6b170f311ee7b009a98bd999b142e041773ab64b4616b25	14-m3-array-substrate.yml.txt

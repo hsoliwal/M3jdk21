@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0
 """[DIFFERENTIAL ORACLE COPY of <apex-run>/switch_consumers.py
-sha256 5600ebff7623921a035de1155356f98ff01570b262283ededdfd708e6b607f50; only change: --out-dir]
+sha256 70fb9078e102a9cbeb970a8ae696c3a904e399cc4397a9fbe70dc61c7c8127fb; only change: --out-dir]
 C6 DEPENDENCY-SOURCE-INLINE, phase COMPOSE (consumers): point every Synexia consumer at the
 source-built coordinate (<version>-m3-source-1) of each admitted third_party module.
 

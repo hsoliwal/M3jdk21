@@ -16,11 +16,11 @@ m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomElig
 m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java	default-main-java	blob	a1a745a4ea8617937d8ecbb61eb17973dac0948f	EXACT_BODY_ACQUIRED	ba078715aa83969fc6c04fcd0d9d226ff0d0ad7f46f38ebede6f5b312504e534
 m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java	default-main-java	blob	c143dfd295453861105682bc8409c3c72c582a04	EXACT_BODY_ACQUIRED	fd376487d4497fef3f3f058584cd04abb5622abcff14364600b96a53df588862
 m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java	default-main-java	blob	3fdc75a71290e2fd1659bfbc7fa532828363275b	EXACT_BODY_ACQUIRED	e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795
-m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8347112BackportRecipe.java	default-main-java	blob	88892e9c304fdd05b4ec685bdcf23f3f09b5e2f0	BODY_NOT_ACQUIRED	
+m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8347112BackportRecipe.java	default-main-java	blob	dd1292ad07805e345e682c11a8425a41c54719b7	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8364182BackportRecipe.java	default-main-java	blob	37344b4a3c50e7d40f545c670410578598a2c5de	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8367584JfrOptionsHelpBackportRecipe.java	default-main-java	blob	45f129e87b9031d0be73e51cf12fddce78898c2d	BODY_NOT_ACQUIRED	
-m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8368692PasswordSystemInBackportRecipe.java	default-main-java	blob	1c96af3d6b8ef968f977adc79730d56a6da4b1a9	BODY_NOT_ACQUIRED	
-m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8374808BackportRecipe.java	default-main-java	blob	eb0884f68b50c23a1cda543a78d2d51d8e417f3d	BODY_NOT_ACQUIRED	
+m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8368692PasswordSystemInBackportRecipe.java	default-main-java	blob	aeab6b80c253fad6e8135fed5e753b8286624239	BODY_NOT_ACQUIRED	
+m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8374808BackportRecipe.java	default-main-java	blob	a20b62d7e23cb0dd38b5c9fca18a0f687c09225b	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep458BackportRecipe.java	default-main-java	blob	06696614a6f50823ba4a722b39e4f41f41e18541	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3VerbatimJavaPairRecipe.java	default-main-java	blob	62d10bd2dc7084624e6d5eecf0645d73737dd232	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3ContractMode.java	default-main-java	blob	e6a50a9fe75cd064399ed4b3909039f65403f8c5	EXACT_BODY_ACQUIRED	5c8c9ff94cec6d5ec7be9e5ca4984035c892c7bc03c079ec96e019ff7d3053fc
@@ -51,7 +51,7 @@ m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-collection-l
 m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-descriptor.yml	default-main-resource	blob	0d2fab7e2bbc181971980b2cf9f47afcef02ea03	EXACT_BODY_ACQUIRED	0484bb474e71dbb3e2dd4f0e7e02b9c83640c2de7b76994b32dc9f9cbc3970cc
 m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-file-inventory.yml	default-main-resource	blob	4c996a3b6c69a7f97459a7939fdfe5f425d354fc	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-java21-convergence.yml	default-main-resource	blob	d5b8a11745bef3623700c6a7fade5f56f3f14a0f	EXACT_BODY_ACQUIRED	cd0588c583ac8d3637b7622052cc26692451c4694524cd0d5351aa6f63cd71e4
-m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jdk-execution-followthrough.yml	default-main-resource	blob	fb8a28e113a3aec2adc529aa4c7e15fb657b3fd0	BODY_NOT_ACQUIRED	
+m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3jdk-execution-followthrough.yml	default-main-resource	blob	fb8a28e113a3aec2adc529aa4c7e15fb657b3fd0	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jni-newstring-admission.yml	default-main-resource	blob	8857dbd496f82d16c639b8a04316572798c1555a	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jni-packet.yml	default-main-resource	blob	108110b0cce001a7f7e0c2d7763772467b2cb090	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-kit.yml	default-main-resource	blob	38f6cb29057dcf87976c8dbd21527e1f2a12900e	BODY_NOT_ACQUIRED	
@@ -81,16 +81,16 @@ m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-serial-file-wo
 m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-declarative-yaml/00-m3-java21-convergence.yml.txt	default-main-resource	blob	d5b8a11745bef3623700c6a7fade5f56f3f14a0f	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-declarative-yaml/manifest.tsv	default-main-resource	blob	94bc8f322583f8a5a98e2825c3a9582b8b08a051	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-native-jni-lane/0001.txt	default-main-resource	blob	69ec104f50757799ecb49a85ea682bf2ab7750f6	BODY_NOT_ACQUIRED	
-m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-native-jni-lane/0002.txt	default-main-resource	blob	369d913983d271ffb1cff5c20f9eb210feb17e50	BODY_NOT_ACQUIRED	
+m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-native-jni-lane/0002.txt	default-main-resource	blob	8254df55e6a4bf325a801562a7d8cc3ae23b7206	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-native-jni-lane/0003.txt	default-main-resource	blob	6420a95cbe42a7cfcfe2c5110665966d4c7134f5	BODY_NOT_ACQUIRED	
-m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-native-jni-lane/0004.txt	default-main-resource	blob	7790b851314813344c102bab1b0f0ce4b7b7b69c	BODY_NOT_ACQUIRED	
+m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-native-jni-lane/0004.txt	default-main-resource	blob	d50ff264e5b068e72a6724226ac9a8505763b71e	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-native-jni-lane/0005.txt	default-main-resource	blob	a34e16aa78231687ed9c3ce6e46e27b306a8668a	BODY_NOT_ACQUIRED	
-m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-native-jni-lane/0006.txt	default-main-resource	blob	0166696c977e3cf49c9ed8ef99c091688073724e	BODY_NOT_ACQUIRED	
+m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-native-jni-lane/0006.txt	default-main-resource	blob	7746f6ccc607251f2165036f8023dacd52689523	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-native-jni-lane/0007.txt	default-main-resource	blob	bcd44f58abdd43cf17a8d986fecf10da92cc21da	BODY_NOT_ACQUIRED	
-m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-native-jni-lane/manifest.tsv	default-main-resource	blob	2bef35fc84b9d6dcca3c171e06115493e55bbec3	BODY_NOT_ACQUIRED	
-m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-proof-kit/before-workflow.yml.txt	default-main-resource	blob	fee68af9af7a36b12d64cbee380335ea040fb61e	BODY_NOT_ACQUIRED	
-m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-proof-kit/manifest.tsv	default-main-resource	blob	8dcd430a0a30f14dd18d4522b7598e84de87917b	BODY_NOT_ACQUIRED	
-m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-proof-kit/workflow.yml.txt	default-main-resource	blob	5d21cbb0eeb283e019072f6972dafa813897558c	BODY_NOT_ACQUIRED	
+m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-native-jni-lane/manifest.tsv	default-main-resource	blob	483fa8809a49dc39d631dcf33d8ef6a3b65fa541	BODY_NOT_ACQUIRED	
+m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-proof-kit/before-workflow.yml.txt	default-main-resource	blob	bd668abb1fcdc740a9606529d84c832c19dd9376	BODY_NOT_ACQUIRED	
+m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-proof-kit/manifest.tsv	default-main-resource	blob	781800bdac9b4aecdc1e75944515148669732534	BODY_NOT_ACQUIRED	
+m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-proof-kit/workflow.yml.txt	default-main-resource	blob	823ac726d6c64ea7083ee7e6f0e885f73efe59c5	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/db-meta/00-m3-db-parse.yml.txt	default-main-resource	blob	f7d4cdb82148d5bd906332189e875d2fa455c674	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/db-meta/01-pom.xml.txt	default-main-resource	blob	081122749cfc2f8a18d179fc9efc0a668b2d4a2c	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/db-meta/02-DESIGN.md.txt	default-main-resource	blob	dd5fd64a0f1df35dbb4af9d3416f290c4ca85817	BODY_NOT_ACQUIRED	
@@ -156,8 +156,8 @@ m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-ha
 m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/map-utf/before-workflow.yml.txt	default-main-resource	blob	4a448860e04af3d67737de30c1ac92e2d79c384c	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/map-utf/manifest.tsv	default-main-resource	blob	cddc19696fc5e6a4c36cf94f5734012b94b60b66	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/map-utf/workflow.yml.txt	default-main-resource	blob	de18f4659188dd587263911fa7154858f0febe9f	BODY_NOT_ACQUIRED	
-m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/proof-kit/manifest.tsv	default-main-resource	blob	6c880d8e614d93510e319044688ad1c0f195d263	BODY_NOT_ACQUIRED	
-m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/proof-kit/workflow.yml.txt	default-main-resource	blob	d6bc30ed452c0ac4e5dbe579db22e3c3a50ee99a	BODY_NOT_ACQUIRED	
+m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/proof-kit/manifest.tsv	default-main-resource	blob	3027859a0454b5905780c250b13c34fa075fad03	BODY_NOT_ACQUIRED	
+m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/proof-kit/workflow.yml.txt	default-main-resource	blob	75aaaf81a9fdc4c787d5e2ee9ddd250570aa84b6	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-class-ver/00-inspector.java.txt	default-main-resource	blob	f76f7f2fb28098ec32cdd1a6462e3b2c14105f49	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-class-ver/01-checks.java.txt	default-main-resource	blob	647f01bf4c7fadb88df833f1ec5e2f3625f06bb6	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-class-ver/02-test.java.txt	default-main-resource	blob	53914972a79b15abf64b02aa4e05428c97401d76	BODY_NOT_ACQUIRED	
@@ -384,14 +384,14 @@ m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3IntRecipeProjec
 m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3InventoryPureIntAtomCandidatesTest.java	default-test-java	blob	ae4059b7d017b980575ede2094d3472e5afbb831	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipeTest.java	default-test-java	blob	d81913808d237a0ed941caaf96e692d7f5a51321	EXACT_BODY_ACQUIRED	152189b0eeeed97460ea798f042fc9f9df7609c9477dcf7bdb593b06c48486c6
 m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/MemJava.java	default-test-java	blob	341b55a500964906d15c88ccef9f3e05f2a1c025	EXACT_BODY_ACQUIRED	c2a204144a4ff7fe2f4abfa151a744e7114961b83b7f006e019e595f4569e238
-m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/A3KitTest.java	default-test-java	blob	b58685ac51345bb3664ffa6e2619fe055fd468fd	BODY_NOT_ACQUIRED	
+m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/A3KitTest.java	default-test-java	blob	8b2b82e6ef4b84a1bc4500ffeb620fa54154539a	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/ClassVerTest.java	default-test-java	blob	1e9836569084bcfc4a2693101f234c0395d94917	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/ClosureRecipeTest.java	default-test-java	blob	481f012716f631cd7768290bc9bd50f3def42b4b	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/DbRecipeTest.java	default-test-java	blob	507d5e3e72f8c334ba4f951e84919e5274e84a5f	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/DescriptorRecipeTest.java	default-test-java	blob	6f58277e3321e78b74577734d96d62f4425d6a9d	EXACT_BODY_ACQUIRED	b0245e761fbb1ad2257ddc23a46678188358c4f2e097cbc7c114f60a5c2178e1
 m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/GateTest.java	default-test-java	blob	9860fd265306752cbd138b2060dca5c44745565e	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JniTest.java	default-test-java	blob	3d99383e198743866986c686610f668d9c368796	EXACT_BODY_ACQUIRED	f1c03c4e8e676c8e7893696427b2b2c4943976412286bd74d71c187db440d3df
-m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/KitTest.java	default-test-java	blob	c65e224ba51d99bc9d07cc2b630d9c5bde96a526	BODY_NOT_ACQUIRED	
+m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/KitTest.java	default-test-java	blob	f2f7a0d03c1495308a6d94b0485db6083c1071c9	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3A3NativeJniLaneRecipeTest.java	default-test-java	blob	87411b0371ec5491bdfd032e924e3da12078c191	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipeTest.java	default-test-java	blob	3ba1c6924668d068c47f7608aa63dfa082b8c96a	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8347112BackportRecipeTest.java	default-test-java	blob	6b8e944f7ab69cf3504c8ed0f47141e5a9e5507a	BODY_NOT_ACQUIRED	
@@ -419,9 +419,9 @@ m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/a3-declarative-pr
 m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/a3-native-jni-lane/pre/README.md.before.txt	default-test-resource	blob	9c64949d304d1777ab9beb3b063667da7f9196e6	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/a3-native-jni-lane/pre/a3.md.before.txt	default-test-resource	blob	fd701b718e33b7ae4e4b09362029ff090e0bdc67	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/a3-native-jni-lane/pre/file_delta_inventory.py.before.txt	default-test-resource	blob	332113093ca443707f6aac863aca746f5c2631d0	BODY_NOT_ACQUIRED	
-m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/a3-native-jni-lane/pre/generate_recipe_crates.py.before.txt	default-test-resource	blob	9a0f835fff31292594287a352546176c1c06e60f	BODY_NOT_ACQUIRED	
+m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/a3-native-jni-lane/pre/generate_recipe_crates.py.before.txt	default-test-resource	blob	ef771baf90f2604cdf41f4430a1f20628f31b627	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/a3-native-jni-lane/pre/test_file_delta_inventory.py.before.txt	default-test-resource	blob	6d75b91ef98bdb14edff1d1ff644c11a1389333b	BODY_NOT_ACQUIRED	
-m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/a3-native-jni-lane/pre/test_generate_recipe_crates.py.before.txt	default-test-resource	blob	6736ee2d16d3fbeb5bfd5b569fc857b2e8d0718c	BODY_NOT_ACQUIRED	
+m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/a3-native-jni-lane/pre/test_generate_recipe_crates.py.before.txt	default-test-resource	blob	6add05545d84f8caea9762755eafe182fec11f96	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/test-text-crate/manifest.tsv	default-test-resource	blob	8b7b81f787087f3bb2d5105014d7679ce56d6ec1	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/test-text-crate/new.conf.txt	default-test-resource	blob	a54e874289cd0185c47d2e892bd2ee03811e803e	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/test-text-crate/test.properties.txt	default-test-resource	blob	554dd0def273232f838c42020e54451d10d4d956	BODY_NOT_ACQUIRED	
@@ -595,12 +595,12 @@ m3/tooling/migration-recipes/tasks/recipe-closure/VERIFY_CONTRACT.tsv	other-trac
 m3/tooling/migration-recipes/tasks/recipe-closure/verify-descriptor.sh	other-tracked-module-input	blob	a34eb1e2733c5d78e6cba76b90d2a08dbf6275ac	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/tasks/replay-guards/ACTION_QUEUE.tsv	other-tracked-module-input	blob	d31f66fb58a5a5fe75543b844a3fcbd439f7c195	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/tasks/replay-guards/DESIGN.md	other-tracked-module-input	blob	f8232580782743d7da9f42e961df31be921459a5	BODY_NOT_ACQUIRED	
-m3/tooling/migration-recipes/tasks/replay-guards/FINAL_REPORT.md	other-tracked-module-input	blob	60a789d773bba5fe87125a7eae18320ad68ffcac	BODY_NOT_ACQUIRED	
+m3/tooling/migration-recipes/tasks/replay-guards/FINAL_REPORT.md	other-tracked-module-input	blob	ad9933807e5c6b922e2e4f97baab3f4a4b9e2237	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/tasks/replay-guards/OUTPUT_CONTRACT.tsv	other-tracked-module-input	blob	429b656cc7a168538496a01dc09e9d761d298a16	BODY_NOT_ACQUIRED	
-m3/tooling/migration-recipes/tasks/replay-guards/PROVENANCE.tsv	other-tracked-module-input	blob	de5a94c0c9a22884e35ce5ddb9e86a8eb285309b	BODY_NOT_ACQUIRED	
+m3/tooling/migration-recipes/tasks/replay-guards/PROVENANCE.tsv	other-tracked-module-input	blob	ba0a9562d7ae58686f13e19176f895eddd356df6	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/tasks/replay-guards/RESULTS.tsv	other-tracked-module-input	blob	3b2678b7b0aa36bd27165d02aa7b469a6fd9e9aa	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/tasks/replay-guards/RUN_CONTEXT.tsv	other-tracked-module-input	blob	52c4aa7575f79cbb66818df4bf3af0b11e74aa62	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/tasks/replay-guards/STATUS.tsv	other-tracked-module-input	blob	783b76658af5f7670637dc51c6267d6624b6d7d6	BODY_NOT_ACQUIRED	
-m3/tooling/migration-recipes/tasks/replay-guards/TASK_PACKET.json	other-tracked-module-input	blob	0e1a7b08d44f3965cec2f19bd427eb207cca00b8	BODY_NOT_ACQUIRED	
+m3/tooling/migration-recipes/tasks/replay-guards/TASK_PACKET.json	other-tracked-module-input	blob	765e90f489bb88fcda2e2289fd7ffa9926e60958	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/tasks/replay-guards/VERIFY_CONTRACT.tsv	other-tracked-module-input	blob	38d8c945b13c463c3fc003ed49201c474915bd17	BODY_NOT_ACQUIRED	
 m3/tooling/migration-recipes/verification/jni/pom.xml	other-tracked-module-input	blob	950d68265dccbfaf36764c225bbeb27ddab61112	EXACT_BODY_ACQUIRED	990c05eb337cf68271fb708415a45ad4567dc4c9d53d503f48067e8e2271f129

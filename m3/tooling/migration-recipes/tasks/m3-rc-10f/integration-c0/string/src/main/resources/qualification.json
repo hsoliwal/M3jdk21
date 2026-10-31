@@ -17,7 +17,7 @@
       "crate": "sc0-spc",
       "id": "Spc",
       "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/manifest.tsv",
-      "manifestSHA256": "fda9a717c6a9b66fec43653fbdacf3931aade5e07cfde975f07afcc1e09cbe75",
+      "manifestSHA256": "3984a4646b2bee1cd30a5f12d42e01979e0f3e8261d6605dff40e635e45a72bd",
       "namedRecipe": "jdk.internal.m3.Sc0Spc",
       "targets": [
         {
@@ -30,9 +30,9 @@
         },
         {
           "afterBytes": 79659,
-          "afterSHA256": "6f5620d8b30b4abeb09dc5ecde928ccc1943a4edf1c610a36330e09ecdb96e6f",
+          "afterSHA256": "597b99f17221abf7b7301cf82a96c113f7fc9e9fd26a24145a9e6e973198be30",
           "beforeBytes": 79652,
-          "beforeSHA256": "4ee3fc8b5959dada6587607ddc68822bf555516ba5f0b973a9249640b8d26ca7",
+          "beforeSHA256": "46a4e8a218c33beaeb1190fb82562d30744e0c0f6c03af1ecef50cc3866dc9da",
           "operation": "REPLACE",
           "path": "m3/tooling/image-gates/current-c0.json"
         },

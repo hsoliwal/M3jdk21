@@ -44,7 +44,7 @@ jobs:
           test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankEqualRangesContract.java)" = 'a3b1b472a85b7c8f9ca1233556aa777bf5bfed58'
           test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankEqualRangesTest.java)" = 'e3f80e5b82f9d6651cd323698be2746a95880938'
           test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankMonotoneSweepContract.java)" = 'e4862e2d1b11f6d00863e44017b70a72771cf750'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankMonotoneSweepTest.java)" = 'dfcd22a42037eed8d752d63a1c28c20c6843c817'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankMonotoneSweepTest.java)" = 'ff633dafb5ce002098df9db29095374d637c4131'
       - name: Strict original Java 21 batch owner and JNI headers
         shell: bash
         run: |

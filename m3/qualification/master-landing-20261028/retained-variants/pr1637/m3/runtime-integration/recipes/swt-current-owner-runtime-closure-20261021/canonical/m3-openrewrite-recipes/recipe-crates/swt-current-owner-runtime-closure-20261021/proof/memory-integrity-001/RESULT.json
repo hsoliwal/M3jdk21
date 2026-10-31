@@ -3,9 +3,9 @@
   "status": "PASS",
   "profile": "swt-current-owner-runtime-closure-20261021/1.0",
   "events": [
-    "fc48dd49814293e527151d91c809e20db4c97a5ff18752431004f330f4262e5e",
-    "b4d03492e4f6853d6bae972e74d96b91b2251691a11fcdae32841e691e49b793",
-    "3eda9073af922583f714d5cf4ae7d9f01f91debf5ac51b91ccf32cdbe2f57098"
+    "0caf3684e3ee2386ed73d5d30e7c43a7b08ec48c3ff6c6c62ce61d66ad936a61",
+    "d686c3a1da8b46543cf1c5ff2142b14f99d3810eb7442a2372035659d798ab21",
+    "7b26a9bcf80b50a3ec76e0db1277d37e5d4bf66d57fe7551c3568dc4482a9836"
   ],
   "commands": [
     [
@@ -32,7 +32,7 @@
       "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/tooling/target/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
       "jdk.internal.m3.rewrite.memory.M3RecoveryMemory",
       "check",
-      "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/events/fc48dd49814293e527151d91c809e20db4c97a5ff18752431004f330f4262e5e.json",
+      "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/events/0caf3684e3ee2386ed73d5d30e7c43a7b08ec48c3ff6c6c62ce61d66ad936a61.json",
       "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021",
       "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/events"
     ],
@@ -60,7 +60,7 @@
       "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/tooling/target/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
       "jdk.internal.m3.rewrite.memory.M3RecoveryMemory",
       "check",
-      "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/events/b4d03492e4f6853d6bae972e74d96b91b2251691a11fcdae32841e691e49b793.json",
+      "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/events/d686c3a1da8b46543cf1c5ff2142b14f99d3810eb7442a2372035659d798ab21.json",
       "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021",
       "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/events"
     ],
@@ -88,7 +88,7 @@
       "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/tooling/target/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
       "jdk.internal.m3.rewrite.memory.M3RecoveryMemory",
       "check",
-      "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/events/3eda9073af922583f714d5cf4ae7d9f01f91debf5ac51b91ccf32cdbe2f57098.json",
+      "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/events/7b26a9bcf80b50a3ec76e0db1277d37e5d4bf66d57fe7551c3568dc4482a9836.json",
       "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021",
       "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/events"
     ]

@@ -64,11 +64,11 @@
       "evidence": {
         "SDK_INPUTS.tsv": {
           "path": "evidence/current-runtime-recovery-20261018/sdk-results/SDK_INPUTS.tsv",
-          "sha256": "59bae1be8de0df869897834e1f78b04b1fa58796c835fe414172bb2c569a9805"
+          "sha256": "58f138a2e50cbf4aac4a187e57932049420eed3b5c792533ed9b030160f6be4e"
         },
         "SDK_RESULTS.tsv": {
           "path": "evidence/current-runtime-recovery-20261018/sdk-results/SDK_RESULTS.tsv",
-          "sha256": "4235c6252187f65fb1113de7104b44cca284ce47f52abae0a2ee3db5dfd6ac4d"
+          "sha256": "c0187b26f86d6eeace9bc4b4c0c0a221146312a17c1eb4aa135d627f83748671"
         },
         "SDK_TESTS.xml": {
           "path": "evidence/current-runtime-recovery-20261018/surefire/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml",
@@ -281,7 +281,7 @@
     },
     {
       "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/manifest.tsv",
-      "sha256": "c69efcbeb4a4cdc36cdc021c285915fdce360c9f50f69251226019f8799c2cb6",
+      "sha256": "58362e9a3561e4aef77535bc3a10d7f631b5fcb89e02540f0bbcefff7bcb063b",
       "bytes": 2813,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/manifest.tsv"
@@ -297,7 +297,7 @@
     },
     {
       "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0020-Strings.java.txt",
-      "sha256": "cbadcbce521f89c53fbd92d9644402e7a72bb5e7e56e8943e8c29fbdc0fadb9d",
+      "sha256": "7147989eba1d6def126049042d8fe4bc7780fbaa972ea932bed411961117b717",
       "bytes": 10897,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0020-Strings.java.txt"
@@ -529,7 +529,7 @@
     },
     {
       "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/manifest.tsv",
-      "sha256": "3c0769586fca0d4f50373f8a81f8af120e430cf38e27b24bfcaf030e94007d18",
+      "sha256": "737770d882c11dc08bd83e50688909c062202f0ef92f337fd8ea3e844e62cd40",
       "bytes": 3306,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/manifest.tsv"
@@ -561,7 +561,7 @@
     },
     {
       "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0008-name-mapping.json.txt",
-      "sha256": "c23e6f63411b1d33a29f558c2a6370421a6f51ab99b6db99ac77ebc6e859812d",
+      "sha256": "a28f218198b30d1292d51836c8912d1f69229ef9bef40a4726a2808bcdcb4d46",
       "bytes": 404076,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0008-name-mapping.json.txt"
@@ -609,7 +609,7 @@
     },
     {
       "path": "evidence/current-runtime-recovery-20261018/receiver-contract/RECEIVER_RECEIPT.json",
-      "sha256": "25375da91de6db123801734045bb471d815ed60e97ceaf790bc9f5c90ccb1c77",
+      "sha256": "f2abc5b79c88102c86567297b294fa99f6212c5da4f7d68654b27318ddab05c6",
       "bytes": 1631,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/merged-recovery-20261018/proof/receiving-v2/original-contract-proof/evidence/RECEIVER_RECEIPT.json"
@@ -849,7 +849,7 @@
     },
     {
       "path": "evidence/current-runtime-recovery-20261018/sdk-results/SDK_INPUTS.tsv",
-      "sha256": "59bae1be8de0df869897834e1f78b04b1fa58796c835fe414172bb2c569a9805",
+      "sha256": "58f138a2e50cbf4aac4a187e57932049420eed3b5c792533ed9b030160f6be4e",
       "bytes": 15102,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/SDK_INPUTS.tsv"
@@ -857,7 +857,7 @@
     },
     {
       "path": "evidence/current-runtime-recovery-20261018/sdk-results/SDK_RESULTS.tsv",
-      "sha256": "4235c6252187f65fb1113de7104b44cca284ce47f52abae0a2ee3db5dfd6ac4d",
+      "sha256": "c0187b26f86d6eeace9bc4b4c0c0a221146312a17c1eb4aa135d627f83748671",
       "bytes": 5208,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/SDK_RESULTS.tsv"
@@ -1121,7 +1121,7 @@
     },
     {
       "path": "evidence/current-runtime-recovery-20261018/sdk-results/text.patch.txt",
-      "sha256": "f0de25fd29911597a148805c0e57c4a6dcb6c8000fe6a6e3fe21e5be543f80df",
+      "sha256": "58f18b884c355cc71d7f72f5548d072a4ce23692db3b5d81268d142eb6ac34a3",
       "bytes": 118295,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/text.patch"

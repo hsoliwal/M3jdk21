@@ -68,16 +68,16 @@ def tree_id(entries):
 def main():
     pins = {
         'raw_custody_v3.py': '203f44729f860620949ec9e6aa7c5f2c7d766de2e406548ceb6797797bfdcc33',
-        'verify_publication_v3.py': '6b8ce688a81b46c20e567bd719104bac6a4cf8578a42904dbe494bca2305e443',
-        'verify_publication.py': 'a5e9c2228304ea359b5459df150c618fcc3566b88217cdc262c893c31398baa7',
+        'verify_publication_v3.py': '904a2105f04a12454a2d97c13a5bef6764e18ae28a2fe680e06ca0e6e14a6e93',
+        'verify_publication.py': 'fa327277439825eb5870f67063833dec3495448d03a70f2d9222acc48e4f9226',
         'audit_base.py': '839c35c611de2dc02f2a3f1233131b24c79d77e109aaf010df9689dc8e04893b',
-        'prepare_publication.py': '2c352ab7122ff72da7027cd6b06bfa6b4cf2db0531727bf56b482c062aeea754',
+        'prepare_publication.py': '9c35afe184b437b5668019f2c8702875d4fed6c3ef2b8232ec845bacc2be2bb2',
         'raw-custody-v3/PROTOCOL.md': 'cdf3826e3725acded05b38031b70d9e7a8f8579540b38d65a2a8e38ce64209f5',
-        'raw-custody-v3/CUSTODY_INPUT.json': '2b2f294b13298da20e8d8cbe85581e89265fbe8d1c355a384dba308e4a8f9710',
+        'raw-custody-v3/CUSTODY_INPUT.json': '384ce843f2e4545ad1c40d7ee58abbc471b5a6d1cbed89bea82dcff0479ce6a5',
         'raw-custody-v3/draft-T01/raw_custody_v3.py': '80f45f4a1d2e0cd49199e6885c62beff39a326aef5739e8890da5e9d991e2412',
-        'raw-custody-v3/draft-T01/verify_publication_v3.py': '11319f7fe3534240a742f6615d9bbf05bd2b3443a352c45f99b922edbf205b8b',
-        'epoch-01/PREFLIGHT.json': '424ec0d0148f40d4df153bdc201b4ed334395c52a02307775286abba2ab40bdc',
-        'BASE_TREE_MODEL.json': '26378280f0305c59a7529fed18de4dd938e935840260c9667fb55de4c6f6fd8a'
+        'raw-custody-v3/draft-T01/verify_publication_v3.py': '4cc60517ad06d1c3590059e43f353c59ad751cb74601bc65735a7df9259edcbf',
+        'epoch-01/PREFLIGHT.json': '4a8e0c7647a9a6549ffc797de28d01a7806aa7757fedb2096bf35ecb0bba62c7',
+        'BASE_TREE_MODEL.json': '5a6c06886a4241745d38b6b463a88ace34236a1b0c557ffae596b05d048e1b82'
     }
     snapshots = []
     for name, expected in pins.items():

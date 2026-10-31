@@ -43,7 +43,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v1/after/m3/tooling/image-gates/current-c0.json",
-      "sha256": "c863703da9c9ff9bb2d39b9f159ee914e071cc19882b7802648e1e61b06c48be",
+      "sha256": "ed524e76758081208a939f619d3bab55abf9ed0c95c053ab2957211d45718cab",
       "bytes": 79664
     },
     {
@@ -68,7 +68,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v1/before/m3/tooling/image-gates/current-c0.json",
-      "sha256": "caa3af6b19162c603a9d29ccb92894c01b50f064f7c75846c9d0afbb8c117e70",
+      "sha256": "e90a850d9a8946ad3c741b99a81bc823a65415110ec32aabffd25da15f530e59",
       "bytes": 79672
     },
     {
@@ -178,12 +178,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v1/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/phc-current-c0/manifest.tsv",
-      "sha256": "a5a77772a5f0a88698e9bae39f8ecb953419ef51d810273a9c33e7e491e237b5",
+      "sha256": "31a4c764cd7dbb835834de27a70e925b6c567d36502303041f5236b8f89a2971",
       "bytes": 1184
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v1/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/phc-current-c0/target-1.txt",
-      "sha256": "c863703da9c9ff9bb2d39b9f159ee914e071cc19882b7802648e1e61b06c48be",
+      "sha256": "ed524e76758081208a939f619d3bab55abf9ed0c95c053ab2957211d45718cab",
       "bytes": 79664
     },
     {
@@ -228,7 +228,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v2/after/m3/tooling/image-gates/current-c0.json",
-      "sha256": "c863703da9c9ff9bb2d39b9f159ee914e071cc19882b7802648e1e61b06c48be",
+      "sha256": "ed524e76758081208a939f619d3bab55abf9ed0c95c053ab2957211d45718cab",
       "bytes": 79664
     },
     {
@@ -253,7 +253,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v2/before/m3/tooling/image-gates/current-c0.json",
-      "sha256": "caa3af6b19162c603a9d29ccb92894c01b50f064f7c75846c9d0afbb8c117e70",
+      "sha256": "e90a850d9a8946ad3c741b99a81bc823a65415110ec32aabffd25da15f530e59",
       "bytes": 79672
     },
     {
@@ -348,12 +348,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v2/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/phc-current-c0/manifest.tsv",
-      "sha256": "a5a77772a5f0a88698e9bae39f8ecb953419ef51d810273a9c33e7e491e237b5",
+      "sha256": "31a4c764cd7dbb835834de27a70e925b6c567d36502303041f5236b8f89a2971",
       "bytes": 1184
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v2/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/phc-current-c0/target-1.txt",
-      "sha256": "c863703da9c9ff9bb2d39b9f159ee914e071cc19882b7802648e1e61b06c48be",
+      "sha256": "ed524e76758081208a939f619d3bab55abf9ed0c95c053ab2957211d45718cab",
       "bytes": 79664
     },
     {
@@ -413,7 +413,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/runtime-checker-c0-authoring-v1/before/m3/tooling/image-gates/current-c0.json",
-      "sha256": "6f5620d8b30b4abeb09dc5ecde928ccc1943a4edf1c610a36330e09ecdb96e6f",
+      "sha256": "597b99f17221abf7b7301cf82a96c113f7fc9e9fd26a24145a9e6e973198be30",
       "bytes": 79659
     },
     {
@@ -518,7 +518,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/string-escape-c0-authoring-v2/before/m3/tooling/image-gates/current-c0.json",
-      "sha256": "4ee3fc8b5959dada6587607ddc68822bf555516ba5f0b973a9249640b8d26ca7",
+      "sha256": "46a4e8a218c33beaeb1190fb82562d30744e0c0f6c03af1ecef50cc3866dc9da",
       "bytes": 79652
     },
     {
@@ -2903,7 +2903,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v1/candidate/m3/tooling/image-gates/current-c0.json",
-      "sha256": "caa3af6b19162c603a9d29ccb92894c01b50f064f7c75846c9d0afbb8c117e70",
+      "sha256": "e90a850d9a8946ad3c741b99a81bc823a65415110ec32aabffd25da15f530e59",
       "bytes": 79672
     },
     {
@@ -3033,7 +3033,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/candidate/m3/tooling/image-gates/current-c0.json",
-      "sha256": "caa3af6b19162c603a9d29ccb92894c01b50f064f7c75846c9d0afbb8c117e70",
+      "sha256": "e90a850d9a8946ad3c741b99a81bc823a65415110ec32aabffd25da15f530e59",
       "bytes": 79672
     },
     {
@@ -3198,7 +3198,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/original-six/m3/tooling/image-gates/current-c0.json",
-      "sha256": "caa3af6b19162c603a9d29ccb92894c01b50f064f7c75846c9d0afbb8c117e70",
+      "sha256": "e90a850d9a8946ad3c741b99a81bc823a65415110ec32aabffd25da15f530e59",
       "bytes": 79672
     },
     {
@@ -3283,7 +3283,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/product-drift/m3/tooling/image-gates/current-c0.json",
-      "sha256": "caa3af6b19162c603a9d29ccb92894c01b50f064f7c75846c9d0afbb8c117e70",
+      "sha256": "e90a850d9a8946ad3c741b99a81bc823a65415110ec32aabffd25da15f530e59",
       "bytes": 79672
     },
     {
@@ -3368,7 +3368,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-content/m3/tooling/image-gates/current-c0.json",
-      "sha256": "caa3af6b19162c603a9d29ccb92894c01b50f064f7c75846c9d0afbb8c117e70",
+      "sha256": "e90a850d9a8946ad3c741b99a81bc823a65415110ec32aabffd25da15f530e59",
       "bytes": 79672
     },
     {
@@ -3453,7 +3453,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-missing/m3/tooling/image-gates/current-c0.json",
-      "sha256": "caa3af6b19162c603a9d29ccb92894c01b50f064f7c75846c9d0afbb8c117e70",
+      "sha256": "e90a850d9a8946ad3c741b99a81bc823a65415110ec32aabffd25da15f530e59",
       "bytes": 79672
     },
     {
@@ -3533,7 +3533,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-symlink/m3/tooling/image-gates/current-c0.json",
-      "sha256": "caa3af6b19162c603a9d29ccb92894c01b50f064f7c75846c9d0afbb8c117e70",
+      "sha256": "e90a850d9a8946ad3c741b99a81bc823a65415110ec32aabffd25da15f530e59",
       "bytes": 79672
     },
     {
@@ -3613,7 +3613,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-content/m3/tooling/image-gates/current-c0.json",
-      "sha256": "caa3af6b19162c603a9d29ccb92894c01b50f064f7c75846c9d0afbb8c117e70",
+      "sha256": "e90a850d9a8946ad3c741b99a81bc823a65415110ec32aabffd25da15f530e59",
       "bytes": 79672
     },
     {
@@ -3693,7 +3693,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-missing/m3/tooling/image-gates/current-c0.json",
-      "sha256": "caa3af6b19162c603a9d29ccb92894c01b50f064f7c75846c9d0afbb8c117e70",
+      "sha256": "e90a850d9a8946ad3c741b99a81bc823a65415110ec32aabffd25da15f530e59",
       "bytes": 79672
     },
     {
@@ -3773,7 +3773,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-symlink/m3/tooling/image-gates/current-c0.json",
-      "sha256": "caa3af6b19162c603a9d29ccb92894c01b50f064f7c75846c9d0afbb8c117e70",
+      "sha256": "e90a850d9a8946ad3c741b99a81bc823a65415110ec32aabffd25da15f530e59",
       "bytes": 79672
     },
     {

@@ -8,7 +8,7 @@
   "recipe": "com.synexia.m3.Maven4Effective20261021",
   "donor_qualification": {
     "path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-003-workflow-successor-offline/RESULT.json",
-    "sha256": "57ccb0c5a801848e80e472ac533c7e287b1eaac8c36960824acc952ea19dbb25",
+    "sha256": "c7edd6e3cc89d93b7fd6fce6bb98b9c0d204531fd8bbfa47d9abcb9bf2dfa818",
     "status": "PASS",
     "scope": "Inherited harness lineage only; not this new packet proof"
   },
@@ -55,21 +55,21 @@
     },
     {
       "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-003-workflow-successor-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/verify_sources.py",
-      "source_sha256": "318dc14d91710372295860033b1683e695d671a19840097d77392aa110efc44f",
+      "source_sha256": "603a47418a7dbd6bd38708bff31bce26b4b4a70e3bdc2d85a7d829395e24b445",
       "source_bytes": 2324,
       "snapshot": "provenance/donors/integrated-sdk-003/verify_sources.py",
       "target_path": "verify_sources.py",
-      "after_sha256": "c45c46bd470bb83c989b132b29e7892348dad60ca5349f10c728d459eea37713",
+      "after_sha256": "14c78d38edf7884b9be1700639040c7d22b61fa53405204feef3ae5a6c687836",
       "disposition": "ADAPT_FIRST_PARTY_APACHE_2_0",
       "contract": "New task identity, suite inventory and attribution fixtures; scheduler/refusal/replay algorithms unchanged"
     },
     {
       "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-003-workflow-successor-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/com/synexia/rewrite/M3IntegratedRefinementRecipeTest.java",
-      "source_sha256": "5a64f5196c1388e6924238c14c7bdd70053d32d8e86d1f5e7be2e5259831efa5",
+      "source_sha256": "d477f820c8bf4712b36d4a1d9002b2fa82a62a88175c1f84cd7fd03e978eefe0",
       "source_bytes": 31463,
       "snapshot": "provenance/donors/integrated-sdk-003/src/test/java/com/synexia/rewrite/M3IntegratedRefinementRecipeTest.java",
       "target_path": "src/test/java/com/synexia/rewrite/M3Maven4EffectiveRecipeTest.java",
-      "after_sha256": "e4b7dc4953427d6b61e1f6bdb90f7bf66a18d76f2b6c8037d214ff9f0980ff9f",
+      "after_sha256": "fc1fd89668aacbba4d7ca445c99c538ee699d08a39cf782c272358a14ff361fa",
       "disposition": "ADAPT_FIRST_PARTY_APACHE_2_0",
       "contract": "New task identity, suite inventory and attribution fixtures; scheduler/refusal/replay algorithms unchanged"
     }
@@ -82,7 +82,7 @@
     },
     {
       "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
-      "sha256": "613fd494de5eebdbc29d8982c599d44cd321754b370175f7d097720904a04853",
+      "sha256": "3b4f7649fc3ee38df62a6dc9b318e8845da6574f7e48b4cd7a948b58e266d46f",
       "disposition": "UNCHANGED_SHARED_CANONICAL_OWNER"
     },
     {

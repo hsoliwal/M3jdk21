@@ -266,7 +266,7 @@
   {
     "bytes": 1401,
     "relative_path": "baseline2779/m3/run-rope-proof.sh",
-    "sha256": "deadc3340e0cefecaf78095204a9e6c70363e6b7f8680b64621fb57110503b08",
+    "sha256": "532b673bffdc69632c6dc48e2ed5dd6aa404b0f671a87abc0a82b1db5d6e1d18",
     "source_path": "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/run-rope-proof.sh"
   },
   {
@@ -302,7 +302,7 @@
   {
     "bytes": 6503,
     "relative_path": "baseline2779/m3/verify-gvas-literal-precompute.py",
-    "sha256": "605b6a520374e9d3adb1a5f82dbbc55b4f9828e66c4a66f093e3fd6e7238fef5",
+    "sha256": "43ac8c6462f35d10624f1a78c96082550d4413866951f74b5fee6efd407f08c3",
     "source_path": "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/verify-gvas-literal-precompute.py"
   },
   {
@@ -320,7 +320,7 @@
   {
     "bytes": 5862,
     "relative_path": "bigstring-owner-001/RESULT.json",
-    "sha256": "b40bbe15f8b7f882bf3604e29d0221382ee77d3acce6eddc73d2ec9ff4b38a5d",
+    "sha256": "d1aaaa5705e4f28e01e398c4e43cc6b6e72681b49ee7282f1a51f5544a108a99",
     "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/bigstring-owner-001/RESULT.json"
   },
   {
@@ -374,25 +374,25 @@
   {
     "bytes": 1136,
     "relative_path": "builder-and-whole-rope-001/BASELINE_INPUTS.json",
-    "sha256": "91d5b95388b7ce9451a4a17639c878e3a4aa214eea57d04a18ab31b59f2dbe6d",
+    "sha256": "0ea2c67b09d88660dc73dd6c95ec96ad302f8432d24ea041cdfca6dafd9b2337",
     "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/builder-and-whole-rope-001/BASELINE_INPUTS.json"
   },
   {
     "bytes": 5150,
     "relative_path": "builder-and-whole-rope-001/CANDIDATE_INPUTS.json",
-    "sha256": "88cd65605dd18a48a2f1cb1c51f57a54bcbf9c5bf5dfdb67ab2211d74d0ee96e",
+    "sha256": "e8e8d11e83f6167a27d6d7d8a579281d94cad674cd8ffbbad1ae4750cec42fd8",
     "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/builder-and-whole-rope-001/CANDIDATE_INPUTS.json"
   },
   {
     "bytes": 5150,
     "relative_path": "builder-and-whole-rope-001/CANDIDATE_READBACK.json",
-    "sha256": "88cd65605dd18a48a2f1cb1c51f57a54bcbf9c5bf5dfdb67ab2211d74d0ee96e",
+    "sha256": "e8e8d11e83f6167a27d6d7d8a579281d94cad674cd8ffbbad1ae4750cec42fd8",
     "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/builder-and-whole-rope-001/CANDIDATE_READBACK.json"
   },
   {
     "bytes": 12035,
     "relative_path": "builder-and-whole-rope-001/RESULT.json",
-    "sha256": "9b775abf5910c2e6046bfcb38517df1ace3e89e77cd650ff5b5696135afa4b1b",
+    "sha256": "babc91379c6e7b018f3dfd509e6b046beb71fd82d9dc5ca65ff94cceeeb72767",
     "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/builder-and-whole-rope-001/RESULT.json"
   },
   {
@@ -464,19 +464,19 @@
   {
     "bytes": 2997021,
     "relative_path": "combined-candidate-001-receipts/INPUTS.json",
-    "sha256": "2a8c3852de93c8a59f882d85d5e2748be56d588627ccad5fa6fb3c3e538e580a",
+    "sha256": "4497159b2e16e3ddc2461f487afefa045149c106de6b40e8f047bd958a93f3de",
     "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-candidate-001-receipts/INPUTS.json"
   },
   {
     "bytes": 2997021,
     "relative_path": "combined-candidate-001-receipts/READBACK.json",
-    "sha256": "2a8c3852de93c8a59f882d85d5e2748be56d588627ccad5fa6fb3c3e538e580a",
+    "sha256": "4497159b2e16e3ddc2461f487afefa045149c106de6b40e8f047bd958a93f3de",
     "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-candidate-001-receipts/READBACK.json"
   },
   {
     "bytes": 4126,
     "relative_path": "combined-candidate-001-receipts/RESULT.json",
-    "sha256": "6f729bd24ec80fe97d56c35b17c9d8e6ea72e57e5cc07319d01a5c88143ed433",
+    "sha256": "2a8f2eb746c97b9a3b9e106a3b9756dcc86b495913b0146b95bc5e34a818d729",
     "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-candidate-001-receipts/RESULT.json"
   },
   {
@@ -650,13 +650,13 @@
   {
     "bytes": 1438,
     "relative_path": "gvas-owner-001/INPUTS.json",
-    "sha256": "a980c1560116dde4830b17a1e4df86dc402cf323363ae5789b386d9bd767676d",
+    "sha256": "08db5821e5427cefd00c3524f7299b90dd1c12f96874b5f8755665e983e7c487",
     "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/gvas-owner-001/INPUTS.json"
   },
   {
     "bytes": 2396,
     "relative_path": "gvas-owner-001/RESULT.json",
-    "sha256": "3ee82afd5a3992387121e3ec10269dbb42b5ce89164dbdd16e98e799c3a87955",
+    "sha256": "26f7fddd9bbb36287c399d63f31b7fee824739c1b16fc9eb453ad1fc21e09f5f",
     "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/gvas-owner-001/RESULT.json"
   },
   {
@@ -668,19 +668,19 @@
   {
     "bytes": 1438,
     "relative_path": "gvas-owner-002/INPUTS.json",
-    "sha256": "a980c1560116dde4830b17a1e4df86dc402cf323363ae5789b386d9bd767676d",
+    "sha256": "08db5821e5427cefd00c3524f7299b90dd1c12f96874b5f8755665e983e7c487",
     "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/gvas-owner-002/INPUTS.json"
   },
   {
     "bytes": 1438,
     "relative_path": "gvas-owner-002/READBACK.json",
-    "sha256": "a980c1560116dde4830b17a1e4df86dc402cf323363ae5789b386d9bd767676d",
+    "sha256": "08db5821e5427cefd00c3524f7299b90dd1c12f96874b5f8755665e983e7c487",
     "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/gvas-owner-002/READBACK.json"
   },
   {
     "bytes": 2607,
     "relative_path": "gvas-owner-002/RESULT.json",
-    "sha256": "a8b030905ed5fe6d4c554f86cd15752bc4de7593bbd7a02d4f86436844d23f45",
+    "sha256": "e04ad9a66f7d77ee5500081d897ed856c9d9d1a1d717424ffab3c743228b6774",
     "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/gvas-owner-002/RESULT.json"
   },
   {
@@ -710,7 +710,7 @@
   {
     "bytes": 5765,
     "relative_path": "qualification-commands/qualify_builder_candidate.py",
-    "sha256": "f3ed20bfde0187e96425e6d88c5e0ab8bd25db487cc00c00f09c7735a87ba340",
+    "sha256": "6b7c1abf0266538403b4193810c3c97a194bb9a2d2719ac92757b89b0860830f",
     "source_path": "/workspace/scratch/206049dfb270/nlp-work/qualify_builder_candidate.py"
   },
   {
@@ -728,13 +728,13 @@
   {
     "bytes": 6784,
     "relative_path": "qualification-commands/run_text_owner_gate.py",
-    "sha256": "023af9a38722a8e9b6a0e7db7a097f9fa177b5d93e334adba1e0f040088d9145",
+    "sha256": "ee680061df4e9494c3d3a9817ea4d39e4f138a0b2e29a3355b4ab6014980a277",
     "source_path": "/workspace/scratch/206049dfb270/nlp-work/run_text_owner_gate.py"
   },
   {
     "bytes": 4555,
     "relative_path": "qualification-commands/run_text_prerequisite_followup.py",
-    "sha256": "af4c2f3232c29ea525d18f446419d4be3dd4e8f1a388e9fdc42a83e08a069b18",
+    "sha256": "0ee1fc9a15885c39c217d8cdc64e95c99dc6d36671f14e15f7d27e761a5bf1a6",
     "source_path": "/workspace/scratch/206049dfb270/nlp-work/run_text_prerequisite_followup.py"
   },
   {
@@ -746,13 +746,13 @@
   {
     "bytes": 6723,
     "relative_path": "rope-owner-001/INPUTS.json",
-    "sha256": "fcc2b6150068b4f63b5e076836f362c229f9a029d48b3a7ad88695edeef41a19",
+    "sha256": "c874c4b6351bc00b9e107bc9ca1c3aab1117306f26806c8a1468d2f9cdf13617",
     "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/rope-owner-001/INPUTS.json"
   },
   {
     "bytes": 7937,
     "relative_path": "rope-owner-001/RESULT.json",
-    "sha256": "e6e8dc15b4f48cf0d3064a301ad2015221f5d95d1bc2a3a4f8ddfe9d8d167836",
+    "sha256": "1e25b0f331fe05ffedea6393fb5376303fd717495d8773828da2622469db5ba9",
     "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/rope-owner-001/RESULT.json"
   },
   {
@@ -776,7 +776,7 @@
   {
     "bytes": 7252,
     "relative_path": "rope-owner-002/RESULT.json",
-    "sha256": "c1ce48632bd9dc0d946dafdfb5c911f5f6d203e2f81f95ec03d1c2fbeccfcfef",
+    "sha256": "15ada4d08d92956ee6eba79ea395a9e16b173f51115cda8235617e733f95a954",
     "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/rope-owner-002/RESULT.json"
   },
   {

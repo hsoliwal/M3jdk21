@@ -241,7 +241,7 @@
     "utc": "2026-10-21T06:50:19.874435Z",
     "trigger": "tooling/exact-source-custody",
     "lesson": "Treat source manifests as executable admission contracts. Re-fetch immutable donor bytes before correcting a bad digest; advance a target binding only to the qualified current owner. Retain historical receipts and validators, add successor evidence, and prove drift still refuses without replacing an already staged tree.",
-    "admission_implementation_sha256": "4706cfdc35a670d20b45453f44c018cd8d64be34cd878ee8b307ad3dd79ad3d8"
+    "admission_implementation_sha256": "2c9150508755694a47e76f537834ace051663f0879f49cfb08bb0e08ab2b2696"
   },
   "limits": [
     "No full source-built M3JDK21 image, jtreg/JCK or cross-platform qualification.",

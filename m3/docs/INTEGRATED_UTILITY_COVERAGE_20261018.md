@@ -49,7 +49,7 @@ pass/implemented status. The existing receiving plan and all phase statuses are 
 
 ## Complete source-module ownership index
 
-The linked naming-map fragment `m3/docs/name-mapping.d/m3-jdk-module-owners-20261018.json`
+The linked naming-map fragment `m3/docs/name-mapping.d/m3jdk-module-owners-20261018.json`
 is generated from every `src/<module>/<platform>/classes/module-info.java` in the pinned Git tree.
 It covers **70 source module declarations and 227 unqualified exported packages**, with
 **366 representative public source types** across the core and extended indexes. All modules

@@ -1949,11 +1949,11 @@
     },
     {
       "path": "src/test/java/com/m3/collections/M3PhysicalStateSnapshotProof.java",
-      "sha256": "119bb5d6b533fe93e5fc1b0409b36bb20fe6dd7928d4a6bebe2bc9b1f786f432"
+      "sha256": "b65f76e2b046ba2ed1c5fb5b5ec6bc05c88244fb01cd025d408b5cbee18ea5a8"
     },
     {
       "path": "src/test/java/com/m3/collections/M3PhysicalStateSnapshotTest.java",
-      "sha256": "4bbc085d9ad39a53958427f55f15a19ccdf7641efdc0e89f5ccc279fb2ff0c7b"
+      "sha256": "6fb3534f3fd0602dcf0162fbe59b9d637cefc3434c70da44207d32a1a1089d29"
     },
     {
       "path": "src/test/java/com/m3/collections/M3PlaneGeometryTest.java",
@@ -2013,7 +2013,7 @@
     },
     {
       "path": "src/test/java/com/m3/collections/M3ResidencyStateMaskTest.java",
-      "sha256": "ee9111c75391f9e18a841156555c98516aeb806437b6c1c1e1dece3cb50a03f1"
+      "sha256": "d36207bd03c3b4e0fd0bcf0e0a435c8112abee0268bac58315a27ed7733db86c"
     },
     {
       "path": "src/test/java/com/m3/collections/M3RowTreeTest.java",

@@ -4,11 +4,11 @@
   "profile": "m3-nlp-current-receiver-lock-20261021/1.0",
   "event_count": 5,
   "events": [
-    "f2cc55326a8d90a370b4339bbd6a52426e39bd92ba315faf6e0c6074b422a3ec",
-    "d9c3a2911acc140b38b4e7869e5295b684bb2c52c322dc06ae96d537f0d9c3c7",
-    "d5dbdbaa2f1320732a41a209af72752788f3284ffa32ad107138ac51ccd34ccc",
-    "d004e61de57ba3eda73639dc64959975d0161bf88688531883a689cdca7ccd68",
-    "7224e243213f827edae62c1529bcc5ff6f350b991f2bf86154302786ab3d5ccf"
+    "817062c6c85ca447ea7e08b39d283ca7c582725b6e062ab60b25548c7a77f072",
+    "dadf222e78614055d14654f2036f72754a49ecd01b35bddf22ebc2159149f8e5",
+    "437390987c6d83a77d5b943e71baad1b20402c22658eca47342114140f699d6d",
+    "562d19b551dc56e05a57625680fed470a0fe6ae9a9022c9420115f711e67ae6f",
+    "2ee702aaa0d163282b56c1b24dd5b24557cb20bf2c871397057f7588c31bb890"
   ],
   "conformance_checks": 129,
   "control_cases": 32,
@@ -25,7 +25,7 @@
   },
   "index": {
     "path": "memory/INDEX.json",
-    "sha256": "76a2a40f40cccaf44b60d95ff26a73197fa999cf18607377e09f6b66e7f73f48"
+    "sha256": "c6576d5aa7ffb5298c2f6838f1212585fa9e231dbf6ce24988440bb6580adc32"
   },
   "helper_lineage": {
     "path": "memory/HELPER_LINEAGE.json",
@@ -37,15 +37,15 @@
   },
   "event_integrity": {
     "path": "proof/memory-integrity-001/RESULT.json",
-    "sha256": "4004a57327d43414573311842394b8eaad5fa62c966438118759438c7abc5fab"
+    "sha256": "1f54918308bb7665bc4bb4e37eb36cda130786433972312bfb904f85744d59c5"
   },
   "canonical_sdk": {
     "path": "proof/sdk-001-offline/RESULT.json",
-    "sha256": "0bf285d0e082e121e178b0a22d47d92124e84579f5436c87276e8b999142fcdb"
+    "sha256": "8260a2bb04090e4307080e47d26dffb554a756abcc6d26c0a8afb6e6a6b7125e"
   },
   "actual_receiver": {
     "path": "proof/receiver-runtime-001/combined-receiver-001-receipts/RESULT.json",
-    "sha256": "1af51c5d7642bb84f88e61816ada2bc0b3d033dfdd4387f5a35cd2a11834c935"
+    "sha256": "fab5f62b10b712660d011c72eeaaa04f00b4f56d7a1a01b6f1bd37d17efd7842"
   },
   "qualified_sdk_inputs_unchanged": true,
   "scope": "Closed-profile conformance and actual evidence integrity only; no inherited event, test-count inflation or product admission."

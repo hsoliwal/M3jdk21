@@ -15,13 +15,13 @@ ORIGINAL_SELECTION = "b8dbd94ee955bdf8a9283e553c00208e00725efd3a8872d8941ae7df3c
 LOGICAL_MANIFEST = "3eb363680608829af4d6eee1c2104c817de3d59214252c508fdb299f8bd4af52"
 PACKETS = {
     "m3/docs/composed-integration-20261021/evidence/collections/PACKET_MANIFEST.json":
-        "cff8a31e9801d8f6ba4f9f944defb6df3cd05a6535c8c1a65472fb93306c7b72",
+        "105a3c1196ca6e03ee1a0a2639955a0bc0002775d94ace23e17f8398c018a802",
     "m3/docs/composed-integration-20261021/evidence/collections/e2/PACKET_MANIFEST.json":
-        "d73d9ec92016fef768d4c18d342ad5ed33c38f42684cb7a498bd494678fac4ce",
+        "1a5ee894c82cbdf5bd9d2148ae254086c0f72637fe8d5a112dbdd4a01ea657e7",
     "m3/docs/composed-integration-20261021/evidence/core/PACKET_MANIFEST.json":
-        "af27aa4434da6943f9ddc8e322085241af4ed4306c23b7b5736e069b69d7f76b",
+        "02e25e7791dc44c0839e7b31052a2012d641b1f98cd55ab7e09afa174e4add3d",
     "m3/docs/composed-integration-20261021/evidence/core/E2/PACKET_MANIFEST.json":
-        "8a117fa9d203a8864d282f027b1228b3640cb13cff816c042c4c4cb1c00c6d29",
+        "5eec50496aa31f5676ec64a902dab238f2d85841a7bd1dde721bfe2edd1b3b29",
 }
 
 

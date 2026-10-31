@@ -85,14 +85,14 @@
       "repository_path": ".github/workflows/m3-foundation.yml",
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate-v02/execution/materialized-01/.github/workflows/m3-foundation.yml",
       "bytes": 2411,
-      "sha256": "e13515b5aaab155ce98bf059c445d1b989cdf82d84487884ac31fb3a183a171f",
-      "git_blob": "6d22df3c3251dfcf3710c05279443774c264c95f",
+      "sha256": "9969a19a5727bb1684d6e8443c67681a0afd52f0427d9501f4b4d363e9709982",
+      "git_blob": "57bdcc788f0ebbf82afe9b97728e93ab108f5395",
       "origin": "ACTUAL_OPENREWRITE_RESULT_FROM_JccCiRepairTest",
       "matches_actual_installer_output": {
         "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/execution/installer/installer-workspace/.github/workflows/m3-foundation.yml",
         "bytes": 2411,
-        "sha256": "e13515b5aaab155ce98bf059c445d1b989cdf82d84487884ac31fb3a183a171f",
-        "git_blob": "6d22df3c3251dfcf3710c05279443774c264c95f"
+        "sha256": "9969a19a5727bb1684d6e8443c67681a0afd52f0427d9501f4b4d363e9709982",
+        "git_blob": "57bdcc788f0ebbf82afe9b97728e93ab108f5395"
       }
     },
     {
@@ -475,14 +475,14 @@
     "frozen_inputs": {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate-v02/FROZEN_INPUTS.json",
       "bytes": 9164,
-      "sha256": "aabb22634854a89b587ba8351b8ee81a4f2a3af944b33edb9b9bfad25e1020a2",
-      "git_blob": "b1ec3862ec3bfe3cd883a34421342f59e43dbe54"
+      "sha256": "86c4ec4b8e0bb641092f4dc9c2a00d54fd8cf1c6670ee42989ae4af93ca254c0",
+      "git_blob": "f2bfabd4d5fee7c0c02d599be2c3b602eb47e952"
     },
     "prepared_inputs": {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate-v02/execution/02-maven-inputs.json",
       "bytes": 12667,
-      "sha256": "4435cdbe036727b6fa9a3fcdf4131ab5bcd9b469caa79f7d5e35701ac28c23ca",
-      "git_blob": "ba771e9915a8a24ff876bbb66a230278f8f7abb5"
+      "sha256": "45cf2012d69709622a582a610f215420a4b8dec01c4a8594e131703ea1899032",
+      "git_blob": "e64228ab30248e81f5db7ac3b229b911597a6c68"
     }
   },
   "cache_custody": {

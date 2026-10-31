@@ -23,12 +23,12 @@
     {
       "bytes": 1634,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/root-run-v1/verify.json",
-      "sha256": "90c2b99178b7d2f7822dc01de7c338be269bdda518dc49eae3618f4d5eb00d78"
+      "sha256": "9fbf39c6c8872b75c6e81245865962327c06fa66b2690171a192b492111f988f"
     },
     {
       "bytes": 2041,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/root-run-v1/extract.json",
-      "sha256": "07aeffaa13948395e3a9b78523908d1dee56a7e601921ba8b6a53499f3763ca7"
+      "sha256": "01acdf20ddc682f3d7b746bae646eb6c2733678b27466606504c8fcf8aad2ac2"
     }
   ],
   "started": "2026-10-06T06:48:34.339369+00:00",
@@ -40,6 +40,6 @@
   "stdout": {
     "bytes": 1075,
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/root-run-v1/readback.stdout.log",
-    "sha256": "8860151a0f4353b95332ac33d350227a70facd0a8753bdb596c0cdb2beb79806"
+    "sha256": "24777d30e22e732b26776e3385616872f7a5234b2ed6bf1e08f764593e8a9c1b"
   }
 }

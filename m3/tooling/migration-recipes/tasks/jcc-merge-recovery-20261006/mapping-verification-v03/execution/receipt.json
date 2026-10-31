@@ -1,6 +1,6 @@
 {
   "asm93_addon_receipt_sha256": "c49c23fd5ec3fc02ad0c3332e16fe4b0f8c9ea4bfab296ad013c726bc226823d",
-  "binder_sha256": "cc3246bdd4ab71a41ddae0fb91bcc9133ef8048721b80fe7f82e376f825b78fc",
+  "binder_sha256": "7004dfc94aea795a56ea8b1c377bdb83f33fb67b6b5d259391ff5bc985d845ec",
   "cache_origin_sha256": "034d226e546825818559e5517ce62bb00dd855f9ce59760fa607049388280da9",
   "checks": [
     {
@@ -47,7 +47,7 @@
       "exit_code": 0,
       "name": "01-source-binding",
       "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "stdout_sha256": "86c6cb735b07d16e9c65aa3298139fabb9e63d92b09d958ec417ccfb2c2db2d1"
+      "stdout_sha256": "6f0d1ce8c455d4e609f4d4e5c835230b367c2441ffc9975d78bba0bfef0be292"
     },
     {
       "command": [
@@ -120,7 +120,7 @@
   "source_root_tree": "a72565e0e67f330f12c712dcc7a3fcbe1d80d24e",
   "started": "2026-10-06T06:11:35.748855+00:00",
   "status": "PASS",
-  "template_packet_sha256": "5b375c3cb17a9e34199da9abb1cdb15c3d087e2f865d84a2184dca2ae4f6b427",
+  "template_packet_sha256": "9d24eaf99ff3cc614688f3f1193aaafc96be71a290a080d2835d4d62c267ddd5",
   "verified_cache_sha256": "2433184e2416cca1c92761b297406ee8f76cc39f645e6be7f0445e5fbe348255",
   "workspace": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/repository"
 }

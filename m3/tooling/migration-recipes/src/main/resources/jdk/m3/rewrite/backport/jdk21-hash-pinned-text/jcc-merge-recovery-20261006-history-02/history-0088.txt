@@ -2,7 +2,7 @@
 
 **No remaining source-level blocker for the stated publication-custody check.** The exact V2
 source is 9,623 bytes, SHA-256
-`a5e9c2228304ea359b5459df150c618fcc3566b88217cdc262c893c31398baa7`.
+`fa327277439825eb5870f67063833dec3495448d03a70f2d9222acc48e4f9226`.
 This is static admission of the prepared verifier. It is not an execution, publication result,
 compiler/test result, or acceptance of an unseen final manifest/readback.
 
@@ -13,7 +13,7 @@ Both exact helper files are now checked with standard-library SHA-256 **before t
 | Helper | Pinned SHA-256 |
 |---|---|
 | audit_base.py | `839c35c611de2dc02f2a3f1233131b24c79d77e109aaf010df9689dc8e04893b` |
-| prepare_publication.py, V3 | `2c352ab7122ff72da7027cd6b06bfa6b4cf2db0531727bf56b482c062aeea754` |
+| prepare_publication.py, V3 | `9c35afe184b437b5668019f2c8702875d4fed6c3ef2b8232ec845bacc2be2bb2` |
 
 V2 retains the actual local bytes for every required canonical or base64-transported payload
 object. Each decoded remote object is compared directly with those bytes, in addition to its

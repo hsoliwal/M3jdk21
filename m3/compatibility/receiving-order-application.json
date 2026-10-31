@@ -14,7 +14,7 @@
       "stage": "target-01",
       "repository": "target",
       "path": "m3/docs/name-mapping.json",
-      "beforeSha256": "f82ae589ca63e47be2f0ce7ad44a5589b9bf3db74377405744f34571156d8366",
+      "beforeSha256": "5f57c35325374407cefa840f8071a8f739b931854b6c420d6d09deb6a443b2d5",
       "afterSha256": "75df53d5b22e58cf094ca4ecac28cb7c88753e1e4044934970e60f1ac15a04ff"
     },
     {
@@ -36,7 +36,7 @@
       "repository": "target",
       "path": "m3/compatibility/check_m3_full_family.py",
       "beforeSha256": "bea7492e21312b2951b33d005a38263ffc9d15370f493fd23a17f75cf1f049bc",
-      "afterSha256": "d1ad16b655fea3163566434a037b78937fadd402cd6185e7a538c9318f0f9d3d"
+      "afterSha256": "e5c293d6bfc4310272897bc27e34c5e4328e43805954d787e508641f524d8405"
     },
     {
       "stage": "target-05",

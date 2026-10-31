@@ -176,7 +176,7 @@
       "module": "apiguardian-api",
       "gav": "org.apiguardian:apiguardian-api:1.1.2-m3-source-1",
       "gitTree": "35061da8688d02e5bf61598175c883e85ab7ee22",
-      "pomBlob": "cbeafd81a00611494595a47726b6a807d65f1f11",
+      "pomBlob": "4568888fc2c6464a88d4564f74d7067eba60e468",
       "metadata": [
         {
           "path": ".gitattributes",
@@ -196,7 +196,7 @@
         },
         {
           "path": "pom.xml",
-          "gitBlob": "cbeafd81a00611494595a47726b6a807d65f1f11"
+          "gitBlob": "4568888fc2c6464a88d4564f74d7067eba60e468"
         },
         {
           "path": "verify_source.py",
@@ -2098,7 +2098,7 @@
   "tqInputs": {
     "srcGitTree": "321f54167edaeec37daece1fdb1ed1ff387a11b6",
     "pomBlob": "ee408306125c6d8bf5b5aecf7d74eb75cdac3377",
-    "manifestBlob": "092517c440d9c1f4221bbf04c7863d1fc5411e29",
+    "manifestBlob": "cf3d2768e2ccda9b8caa64e5b445285d3565d628",
     "testBlob": "6fa4ec1ff9755c2a668ba1548450f064b352ab6b",
     "engines": [
       {

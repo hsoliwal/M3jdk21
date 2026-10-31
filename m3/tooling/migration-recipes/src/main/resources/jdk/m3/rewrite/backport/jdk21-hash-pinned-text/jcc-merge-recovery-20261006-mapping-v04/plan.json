@@ -21,11 +21,11 @@
       "path": "m3/docs/name-mapping.json",
       "before": {
         "resource": "before-00.txt",
-        "sha256": "12bfa8d328b74ba4de930d993c8194b8db51f3a111617690dff9f1ffebaea1c2"
+        "sha256": "e76133a4d1bb472dfc88a41e8d8560d5ac0e08ba4d227b3b6c8fbd95915e6ebc"
       },
       "after": {
         "resource": "after-00.txt",
-        "sha256": "ac5aefa32595e7a5d829e8d1870772b464f5d070f11799526104d3ff32ed3675"
+        "sha256": "23113e94eba0ac7b745fd8dee95d27fa80fc12100534a32f447c3124879c5e39"
       }
     },
     {

@@ -8,7 +8,7 @@
   "payload_bytes": 98141352,
   "payload_files": 2796,
   "preflight_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/PREFLIGHT.json",
-  "preflight_sha256": "424ec0d0148f40d4df153bdc201b4ed334395c52a02307775286abba2ab40bdc",
+  "preflight_sha256": "4a8e0c7647a9a6549ffc797de28d01a7806aa7757fedb2096bf35ecb0bba62c7",
   "raw_fixture_custody": {
     "assumption": "Authentic GitHub object identifiers and ordinary Git content addressing bind the exact uploaded bytes; the two malformed UTF-8 remote byte arrays and their SHA-256 values were not recovered.",
     "blob_identity_custody": [
@@ -100,5 +100,5 @@
   "schema": "jcc-source-recovery-before-branch-custody/1",
   "status": "FINAL_COMMIT_CUSTODY_VERIFIED_BEFORE_BRANCH",
   "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-  "verification_script_sha256": "6b8ce688a81b46c20e567bd719104bac6a4cf8578a42904dbe494bca2305e443"
+  "verification_script_sha256": "904a2105f04a12454a2d97c13a5bef6764e18ae28a2fe680e06ca0e6e14a6e93"
 }

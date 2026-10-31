@@ -264,9 +264,9 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/verification/qualify.py",
       "targetPath": "m3/tooling/joined-range-directory/runtime/qualify.py",
-      "gitBlob": "551ebcca9e92dbb0aea6f436286147957ccf71da",
+      "gitBlob": "1a1411c816881c4f04fd94c3f45c02d6d8ee890e",
       "bytes": 17994,
-      "sha256": "ff8b2737a75684a51cf1d8c9ddfb2b2538f9c7549a7c3d60e5e6dcf673da2cc7"
+      "sha256": "e981d6f87cccd44a80aff62f8cab747a046e01883ad9b883e4d692dedc7484f1"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/verification/M3JoinedRangeProof.java",
@@ -278,9 +278,9 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/verification/BUILD_INPUTS.json",
       "targetPath": "m3/tooling/joined-range-directory/runtime/BUILD_INPUTS.json",
-      "gitBlob": "81fd3b990466a8d71cf4e7ded6841abbcf05fd8b",
+      "gitBlob": "feff4011cfad7b6829acb01458c709bc12d7cd31",
       "bytes": 14938,
-      "sha256": "d114f0228a1c247d27d08a039bf47971c9effbbb371abd394eebdbbe61c02391"
+      "sha256": "94357686358ef95ae7df7d6c6fe3d76ec5690051f21161ba31155ce551dd95c1"
     }
   ],
   "receiverOriginalOwners": [

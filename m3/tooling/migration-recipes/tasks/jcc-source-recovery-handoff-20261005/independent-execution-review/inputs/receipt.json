@@ -205,9 +205,9 @@
     },
     "raw_fixture_custody_input": {
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/CUSTODY_INPUT.json",
-      "sha256": "2b2f294b13298da20e8d8cbe85581e89265fbe8d1c355a384dba308e4a8f9710"
+      "sha256": "384ce843f2e4545ad1c40d7ee58abbc471b5a6d1cbed89bea82dcff0479ce6a5"
     },
-    "verification_script_sha256": "6b8ce688a81b46c20e567bd719104bac6a4cf8578a42904dbe494bca2305e443",
+    "verification_script_sha256": "904a2105f04a12454a2d97c13a5bef6764e18ae28a2fe680e06ca0e6e14a6e93",
     "reviewed_raw_custody_helper_sha256": "203f44729f860620949ec9e6aa7c5f2c7d766de2e406548ceb6797797bfdcc33",
     "qualification": "Publication custody only; source execution and receiving acceptance require their separately scoped receipts.",
     "scope": "Verified source publication custody; six mandatory direct body comparisons, separately recorded additional designated-owner reads, and exactly two explicit invalid-UTF-8 Git-identity obligations. This is not universal remote raw-byte or remote SHA256 readback."
@@ -527,8 +527,8 @@
   "inputs": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/verification-v3/inputs.json",
     "bytes": 417473,
-    "sha256": "d5dee9d440dec5528f96a0168adcb6b6adaefefdc939e764a379fdd3049ef6c2",
-    "git_blob_sha1": "3f371c3d3d5d01f72b088068626a4a758be1f19a",
+    "sha256": "3747257e4df289cbc09ce34309683cb18c9c66caedab191379d0370a07057902",
+    "git_blob_sha1": "0d7c2fab780308c2774707b5e442c776b3950dbd",
     "mode": "0o644"
   },
   "all_fixed_inputs_unchanged": true,

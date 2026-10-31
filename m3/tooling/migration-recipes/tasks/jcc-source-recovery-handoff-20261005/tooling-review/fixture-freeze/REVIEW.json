@@ -5,7 +5,7 @@
   "finding": "E4-V3-01",
   "resolution": "RESOLVED_AT_SOURCE_LEVEL",
   "runner_sha256": "c779f94023b3914bca1558a35d39ab11aaedd00a18cf5b74e2a30bf1205de6b6",
-  "readiness_sha256": "f9c92b7e150f5182a6e77aeedc2fe62a6ef4171011fb06c2e4619ce0d75db91a",
+  "readiness_sha256": "6bba7f210e73180b8d91e9a6023e4e846954feec665c74bc73763ec4a9ebb0a3",
   "two_fixture_declared_identities_admitted_before_output": true,
   "same_read_identities_frozen_and_checked_after_run": true,
   "actual_published_package_reviewed": false,

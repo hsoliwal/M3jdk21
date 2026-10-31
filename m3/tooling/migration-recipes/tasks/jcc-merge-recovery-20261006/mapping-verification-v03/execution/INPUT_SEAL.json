@@ -68,9 +68,9 @@
     },
     {
       "bytes": 167811,
-      "git_blob": "b867db32555dc9d1cf855e75ed10f5934b5f6cbe",
+      "git_blob": "8fc1846a9d81c1a6cd7e21f66048d9bc4ef2a834",
       "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/history-0016.txt",
-      "sha256": "e17e0e066988a03583beab519a2ce4381c93f31b1da8ddf465f627cd68566b8d"
+      "sha256": "59b1491a232e3eabfd0530cbf47b01265603e6f493e382aa3c394c629b0516b6"
     },
     {
       "bytes": 328312,
@@ -80,15 +80,15 @@
     },
     {
       "bytes": 18828,
-      "git_blob": "b9081e38f7ee241dcc02ed7e139e029b3dcad97b",
+      "git_blob": "5765f894e00e150139bf9569190048a028110744",
       "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v03/after-01.txt",
-      "sha256": "b87b6c729ba17ec1ac404fea2176611ee9be046cc97b26d8ef44aec9d85f1c8a"
+      "sha256": "52178015a89e5f1c08ab280725e5fb45a3617fdc9035fdecf793cd3c2b503858"
     },
     {
       "bytes": 255461,
-      "git_blob": "e128be7d0d0913cc346b3381018532efd20429b5",
+      "git_blob": "73d2b00c9c46145f3081c33b4a5c31236928a803",
       "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v03/after-02.txt",
-      "sha256": "7d26f0ac825b78889cb6963ef8bcf038ad83c5c6fc191814c92025815c84b2cc"
+      "sha256": "283d44e6e66405165706447446ed5242104ac1e79d33a6ceafc0cbe1a128de09"
     },
     {
       "bytes": 108212,
@@ -122,15 +122,15 @@
     },
     {
       "bytes": 777,
-      "git_blob": "c29a8323a7c644e8ab9142530b3f107c7703df47",
+      "git_blob": "7088b201043707cf1935438561552aabbdbaff3a",
       "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v03/manifest.tsv",
-      "sha256": "58bfeabe0fd0c21b800782d325f2f7b81a5eca9e746e96ea20efabddab7f6ad5"
+      "sha256": "2818667bb4e0c97ace54daf41e2fe454213a93ebd6cc2a0d2dc0d92db6f7ea17"
     },
     {
       "bytes": 3236,
-      "git_blob": "f17a29c4869816328c690f70ec689b4fa3c0f063",
+      "git_blob": "6a4e48b38777d142d3433e448f1b7f1e0137be1d",
       "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v03/plan.json",
-      "sha256": "ee121f5b6bb24bb2afedd1a360a04d7439f0844501fae3d398a4e113fb846784"
+      "sha256": "155f96b0e3396f0987b9700d970841cf8bb8ede038ec838abe7cc53a18bc2619"
     },
     {
       "bytes": 396,
@@ -140,9 +140,9 @@
     },
     {
       "bytes": 52685,
-      "git_blob": "6906a600bd9057beee68fe17c2155dad822c37db",
+      "git_blob": "76042ac484d1f3e886a5a3dbc38ed08fed1eab46",
       "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccMergeMappingRecoveryV03Test.java",
-      "sha256": "2e7d910e731411e126de6f76ef0fa017482152e36d5318b448c6af2fe11138af"
+      "sha256": "13da0f52896fe2aaf58b4106defb74d9b3ed963d9b39e078473389ec7190fedc"
     },
     {
       "bytes": 138214,
@@ -158,9 +158,9 @@
     },
     {
       "bytes": 3281,
-      "git_blob": "1e3438695f7b4fdb79a6ba43ef460d1b4efd2289",
+      "git_blob": "11781c602e797e60f2aa4d4cab84b16b7aa9991c",
       "path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/MAPPING_RESOURCES.json",
-      "sha256": "52b72e0f67f2326acea7f81a479c811d2ee5875b8c3f6f18cc2f985e5a4999ec"
+      "sha256": "b64d79354c13b3695ffe2a1f3d897f7ef72f32cf751f3ab347d0d0a6dbdd5f26"
     },
     {
       "bytes": 3441,
@@ -193,5 +193,5 @@
   "source_commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
   "source_input_sha256": "7db913209511a230e36a8da12282b3e4a6f84193399821ce9693042f616fa39d",
   "source_root_tree": "a72565e0e67f330f12c712dcc7a3fcbe1d80d24e",
-  "template_packet_sha256": "5b375c3cb17a9e34199da9abb1cdb15c3d087e2f865d84a2184dca2ae4f6b427"
+  "template_packet_sha256": "9d24eaf99ff3cc614688f3f1193aaafc96be71a290a080d2835d4d62c267ddd5"
 }

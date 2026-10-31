@@ -20,7 +20,7 @@ def snapshot(p,name=None):
  else:q.write_bytes(d)
  snapshots.append({'source':str(p),'snapshot':str(q.relative_to(O)),**identity(p)})
  return load(p) if p.suffix=='.json' else d
-packet=snapshot(B/'bound-inputs-v3/BOUND_RESOURCES_REVIEW_PACKET.json');assert identity(B/'bound-inputs-v3/BOUND_RESOURCES_REVIEW_PACKET.json')['sha256']=='6d09ec9408c0c8bc2ce8bdd9ef5dcb17bb70fcd1c12fb6d28b17e2cc33e6bd62'
+packet=snapshot(B/'bound-inputs-v3/BOUND_RESOURCES_REVIEW_PACKET.json');assert identity(B/'bound-inputs-v3/BOUND_RESOURCES_REVIEW_PACKET.json')['sha256']=='225e5a587fb5845929390de32a0b70642d8c24e6345ee42733b2ce8b6a355012'
 f=snapshot(B/'FINAL_SOURCE_INPUTS_V3.json');assert identity(B/'FINAL_SOURCE_INPUTS_V3.json')['sha256']=='df6713ad19ce80daad0383fbd5c3716412e2dca133e1db7e0150b88e141313b5';author=snapshot(B/'AUTHORING_RESULT_V3.json');plan=snapshot(packet['plan']['local_path']);snapshot(packet['manifest']['local_path']);check(packet['plan']['local_path'],packet['plan']);check(packet['manifest']['local_path'],packet['manifest']);check(packet['authoring']['local_path'],packet['authoring']);check(packet['bound_input']['local_path'],packet['bound_input'])
 assert packet['receiving_execution'] is False and packet['operational_outputs_unchanged'] is True and packet['source_export_admitted'] is False
 assert author['state']=='BOUND_RESOURCES_PENDING_EXECUTION' and author['recipe_execution']=='NOT_EXECUTED' and author['source_export_admitted'] is False

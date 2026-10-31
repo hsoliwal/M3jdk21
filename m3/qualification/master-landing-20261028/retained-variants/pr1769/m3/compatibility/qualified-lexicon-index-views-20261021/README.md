@@ -103,7 +103,7 @@ metadata successor dataset, separate from the original product recipe stages.
 | Target path | SHA-256 |
 |---|---|
 | `src/java.base/share/classes/jdk/internal/m3/M3IndexMaskWindow.java` | `91c7a99d394fe76a47af0c1eaaa35ffd6d070ee6e2497a63668db8301dd86329` |
-| `src/java.base/share/native/libjava/M3IndexMaskWindow.c` | `4a9c0ab3e8d7a0aac0027e8fb4789f768ee5a48b2db18b7a54e2fd543c5c7f91` |
+| `src/java.base/share/native/libjava/M3IndexMaskWindow.c` | `a284d0cc09ca01e2c41b67024ac9fd911e69165abd1bf01246f40499e810f8da` |
 | `test/jdk/jdk/internal/m3/M3MaskCountTest.java` | `988ab3de69205aebd2c42b26c1be06ae098d149da110ebb5dee861515482b898` |
 | `test/jdk/jdk/internal/m3/M3MaskPreparedPredicateTest.java` | `650969a480f12a861a34252dee5512d1f53c4da9f32370fd546faacc1ef8d572` |
 | `m3/collections/src/main/java/jdk/m3/collections/M3IndexedLiveView.java` | `59a11f4bc696c4638941065f2ed56f536432155bde8eb3b7c0aaaed283064f66` |
@@ -111,7 +111,7 @@ metadata successor dataset, separate from the original product recipe stages.
 | `m3/core/src/jdk/m3/text/SharedLexiconCatalog.java` | `ab7ad78dd33fe19133dafb13f2d088b5cecfcc4084a516cd59fc6dd920718f89` |
 | `m3/core/test/com/m3/text/SharedLexiconQualificationTest.java` | `8f0c0ea2adbc0260c22fd0bace565cef5260182b68123b27b233ae52b05829a6` |
 | `m3/fs/src/main/java/jdk/m3/fs/M3ColdFileImage.java` | `be1840af26958e57506f216212f148a83a904e4278bf5ed28f3da15766d7dac1` |
-| `m3/fs/src/main/java/jdk/m3/fs/M3FileSystemStore.java` | `d779d1c024e3a987f956f72ca5e565cdb592dbe2738d6ba9170394241cef16aa` |
+| `m3/fs/src/main/java/jdk/m3/fs/M3FileSystemStore.java` | `6d2350391560a742ec27766b379f07ccdcfb45562ed2697a5f26ce24122225b6` |
 | `m3/fs/src/test/java/com/m3/fs/M3QualifiedColdFileTest.java` | `e9d18b5c10f19ef3642293f34380d4db679793f6532a1cf62f02d8898b90b460` |
 
 For a later pass, consult the canonical catalogue, failed attempts and memory

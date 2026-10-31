@@ -168,12 +168,12 @@
     {
       "bytes": 2347,
       "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/M3ContentId.java",
-      "sha256": "bc3961dfd71ff05ed9969f6bde671182502432830d4c383e7882ecd5f766c433"
+      "sha256": "0bff0c9b861f305594bbb8e3f4415b9b5ff4776cda1f98ce8b0e457169f930d2"
     },
     {
       "bytes": 36994,
       "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/M3DirectoryContentStore.java",
-      "sha256": "fd5aadc3415e48c6214d3d53aa5cfe3b9f7fe8d73b38bfd43a391034d098a7e5"
+      "sha256": "54a8f91b3ded43d5584d1959ccb2e150f50596618d32ea5b6d7e86de619bc67b"
     },
     {
       "bytes": 7270,
@@ -198,7 +198,7 @@
     {
       "bytes": 21655,
       "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/M3FileSystemStore.java",
-      "sha256": "53d43c44df1417c479799a365ee811f85b9fa092fb7cce3d28cdb2ef965a406e"
+      "sha256": "eb2e0ca3b25209528a5da4a7aadca0ba8f9f56f400da98005cef46ac4d0e6d79"
     },
     {
       "bytes": 354,
@@ -213,7 +213,7 @@
     {
       "bytes": 2757,
       "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/M3FsFeature.java",
-      "sha256": "e17d9574e8e60baa09271e7d1c7977d2d38069638cd909a9cd967d8006960895"
+      "sha256": "4375b064f47ce7279e84fbd8e3162628c800f0e6808cc20a1d5d02e3ca504e3f"
     },
     {
       "bytes": 6332,
@@ -223,32 +223,32 @@
     {
       "bytes": 20729,
       "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/M3FsNative.java",
-      "sha256": "7851cc6828428646087032a516e5be7ba3271becdec34020c198212dacc55898"
+      "sha256": "d812392e6c74c2bd9f8eea85e8839de48dcb88d7dfbfacdd99045eecfa081c17"
     },
     {
       "bytes": 46126,
       "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/M3FsPrecomputeBundle.java",
-      "sha256": "1f6a718e72aaeb403323be5634bb66309f60533afdb36ae551adc2923f438573"
+      "sha256": "baff3368d10db207329fcaf30e09c905609e8d537377338799666bf346ee6dad"
     },
     {
       "bytes": 21957,
       "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/M3FsPrecomputeCatalog.java",
-      "sha256": "cfe4d6fd28a3238c2cdae9305402e17088fa9e9a3968812849835231f6acf1a2"
+      "sha256": "772240288b53edbb5544e61641d5fd23056963ff405e7dc7b222d1d24fb2e0dc"
     },
     {
       "bytes": 19391,
       "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/M3FsPrecomputeWriter.java",
-      "sha256": "dcb7a0e77195f6e6ef64ec5198f3ade0eee09541ce0871ec574ce17de784e203"
+      "sha256": "cb2347cd6fa0bfa9d7892727c8f321238acbdc70986f469087a63b447fbf608f"
     },
     {
       "bytes": 1200,
       "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/M3FsProgress.java",
-      "sha256": "bd6789774d86c7b6d149a86008e5a555ad05a287b6beed3fa5137df8b1a40e5f"
+      "sha256": "5f9c6b10f7b82c74e3e34cb583c2b7c8a362bee08c6cad8b4c2c061f1a0c72a5"
     },
     {
       "bytes": 9204,
       "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/M3FsRegexImage.java",
-      "sha256": "7d8e1b3a933dcafe237392f0c1d1ff778062e7f81d50de602562760037021360"
+      "sha256": "4d0ddd404bfff7b5371a1189cf9e57a818ccabb866f96f4a78346cd92ab6f207"
     },
     {
       "bytes": 8452,
@@ -268,27 +268,27 @@
     {
       "bytes": 6951,
       "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/M3MappedObject.java",
-      "sha256": "7f33a25ef7cbc7d259c38a33d4c8f3ce8da808641514975701dd850b28a2f3bd"
+      "sha256": "f4b66fe0d95cdc2ca12314ffae718197df450baa8e68b4ca571d97843352cf37"
     },
     {
       "bytes": 13357,
       "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/M3NativeContent.java",
-      "sha256": "81b0fd0dc98cc95f0a83c56f3dff43ef6042f1d90e6d574dc26faf6bcaf77273"
+      "sha256": "e47b9d9d7aa0d05f636ccf2a896eada7eaac0df5ca805eb9c9842fcb7c01d543"
     },
     {
       "bytes": 483,
       "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/M3ObjectKind.java",
-      "sha256": "bca2bf8dcb24f7b0b04c448a3bdd9b07786d8d5d378782268ac14ce67746396e"
+      "sha256": "04b433e559a7f1cb21c4a8a4c424853e04ae93166cf7e7f7fdcb9fbe3f568090"
     },
     {
       "bytes": 556,
       "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/M3ObjectRef.java",
-      "sha256": "59ea4d14a0f69fcb93c5d5d3ac6954886015f128043ecda91b83d0889a8ce408"
+      "sha256": "25609d257df2e0845319f1784992c5f06a0e805504aab7cda29efd96ab59e6db"
     },
     {
       "bytes": 16864,
       "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/M3PrecomputeCache.java",
-      "sha256": "dadaa8a6944d88d70d5c4563daa7011f6600784c886b04d7af27013a3af910ef"
+      "sha256": "4b59ecf7a2d5d75ac9917ecccff91c8ed8758b043ed6dc867b95179eafacdcf4"
     },
     {
       "bytes": 6199,
@@ -318,7 +318,7 @@
     {
       "bytes": 19233,
       "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/M3SnapshotStore.java",
-      "sha256": "50ff28db1bfb55f7c31617248adec1171ca7e678da4d01f135e93679792c2ffc"
+      "sha256": "10c814262ce70c0e1dcfc0fb104b72ee4a749735fba8d46208727d1a9d4942d2"
     },
     {
       "bytes": 5695,

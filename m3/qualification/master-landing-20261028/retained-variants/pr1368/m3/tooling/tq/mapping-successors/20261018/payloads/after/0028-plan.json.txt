@@ -40,7 +40,7 @@
       },
       "after": {
         "resource": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/03-name-mapping.json.txt",
-        "sha256": "48401828719c2e439ac8fe35253c92696ed1cd271ad0e80b01975727c4218525"
+        "sha256": "fe9ed269cb1e860a0d54713a9e25b8fa9a09bba77d28467b832d23189524c120"
       }
     },
     {
@@ -51,7 +51,7 @@
       },
       "after": {
         "resource": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/04-plan.json.txt",
-        "sha256": "5c02ab5f34d8ef5e79173dcc27318fd10ac50b5b715fc3a1a8d76db7c27be42f"
+        "sha256": "cfac31c9d903c0ace64a8b871057f098517e4fb3eedd5763fdbf050d7025e82e"
       }
     },
     {
@@ -62,7 +62,7 @@
       },
       "after": {
         "resource": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/05-manifest.tsv.txt",
-        "sha256": "fc45147928d4c1e1c6b8a76fb7bc83620843060787e88fbfda15e46947f5373d"
+        "sha256": "a0df648d1d7e5b2e429134e37a6a1e0ee0593f7b66937e7087c22ef9579b2142"
       }
     },
     {
@@ -73,7 +73,7 @@
       },
       "after": {
         "resource": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/06-name-mapping.json.txt.txt",
-        "sha256": "48401828719c2e439ac8fe35253c92696ed1cd271ad0e80b01975727c4218525"
+        "sha256": "fe9ed269cb1e860a0d54713a9e25b8fa9a09bba77d28467b832d23189524c120"
       }
     },
     {
@@ -106,7 +106,7 @@
       },
       "after": {
         "resource": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/09-inputs.tsv.txt",
-        "sha256": "d2b2db84c1881d80c155b10308ed283ccd8915bc6ce042b37226b39219cd53dc"
+        "sha256": "47b97eac84f181ba334f954481d9fa4de8b3be538067edafca18de04f99392e9"
       }
     },
     {
@@ -117,7 +117,7 @@
       },
       "after": {
         "resource": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/10-pins.json.txt",
-        "sha256": "64786a4e1700dc29d8d975bc911ebaad5bf0ae6f7b05c92b5042b27050f579e8"
+        "sha256": "76b87771c72ea64593a9d49b1d29531b1b69a27ba754ce016678b65637f5d0f2"
       }
     },
     {
@@ -128,7 +128,7 @@
       },
       "after": {
         "resource": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/11-plan.json.txt",
-        "sha256": "b32798c718c88a511b39452339d72a6eaec06e7e0f6c98174a94c642e4760da7"
+        "sha256": "c7ffcc147b24b2ebcc90262442e5f4815453b896b9a42f980fb0f2d8a172fade"
       }
     },
     {
@@ -299,7 +299,7 @@
     },
     {
       "path": "m3/tooling/tq/current-20261018-plan.json",
-      "sha256": "b32798c718c88a511b39452339d72a6eaec06e7e0f6c98174a94c642e4760da7"
+      "sha256": "c7ffcc147b24b2ebcc90262442e5f4815453b896b9a42f980fb0f2d8a172fade"
     }
   ],
   "plan_sha256": "f019bbee5cbb6dde717b35a220dd0d71e4f0c7bdad6e2e8612110f5999d23a9c"

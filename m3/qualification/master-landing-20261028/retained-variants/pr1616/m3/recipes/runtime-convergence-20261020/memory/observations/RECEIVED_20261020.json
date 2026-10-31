@@ -27,7 +27,7 @@
     "memory/events/46a24b79421e9073d54ea4d530f55916e7b76330fe354ccc1ae8a83fc1248b96.json": "46a24b79421e9073d54ea4d530f55916e7b76330fe354ccc1ae8a83fc1248b96"
   },
   "evidence_sha256": {
-    "evidence/receiving-20261020/COLLECTION_PROOF.json": "73100f39569caff460944b74dc4d78a92b15724c6074bda912dce805d24ed442",
+    "evidence/receiving-20261020/COLLECTION_PROOF.json": "7593e5122d98d901bae1bead6b530c670f7b19292fca0614194831558995c254",
     "evidence/receiving-20261020/COLLECTION_TEST_REPORTS.json": "c2eb2e9736a975e6545e0cd6d7a4718e8dcda054591391d5cb80ba091a882dc8",
     "evidence/receiving-20261020/PCOLLECTIONS_DIRECT_RECEIPT.json": "cf08a41ee53caf0e7ec2d0e9f4397af1c7be541c6d8ff61cc9920b398fc9be77",
     "evidence/receiving-20261020/RECEIPT.json": "12f8e94055ae1cefeb1bdb380ffffd22b5a0ba9748d5c5ab84e958e6dcdbf1ec",

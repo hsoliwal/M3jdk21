@@ -1,7 +1,7 @@
 {
   "schema": "m3-jcc-ci-python-execution-admission/1",
   "status": "PYTHON_PASS_JAVA_PENDING",
-  "frozen_inputs_sha256": "1d87b3c206480dc334d86de4a3693beda6013f7bb6335034af640e92386404a8",
+  "frozen_inputs_sha256": "1b5d73f8ee53b03c2a88f8cb3f57eb54c99e26281ca16ad53b66925a0fb588c7",
   "frozen_files_unchanged": 33,
   "python_receipt": "execution/installer/receipt.json",
   "python_receipt_sha256": "7b30ce7daa26fe17d053912f0c7240b4f86929c1faf0fa683f8a0e8f9371f122",

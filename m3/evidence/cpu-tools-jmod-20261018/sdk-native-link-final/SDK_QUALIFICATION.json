@@ -20,6 +20,6 @@
   "receiver_contract_cases": 10,
   "sdk_inputs_sha256": "b5fb1f7774252b167c9266a23a97cef00f36e378325334e23f7d788f307393db",
   "sdk_results_sha256": "a9507f0949209eb663773a5049a7a2c10dc3898c383c0ec0ac627e523494525a",
-  "parent_sdk_results_sha256": "e5451894b2d54cd526b592b03315a6c7c8f41fab4f81d857bbf83a8c3e442132",
+  "parent_sdk_results_sha256": "ee335103d48da65ceec4b8671999b9c3a87d70f57cd4f59ec1f449f630d50a60",
   "shared_engine_and_bound_harness_changes_from_parent": false
 }

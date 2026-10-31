@@ -151,12 +151,12 @@
     "bundleIndex": {
       "bytes": 123241,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/bundle/BUNDLE.json",
-      "sha256": "0ad486123b7fdb1d868c4cd13b25c3e797d4c63d4536df1e805ab691f5e7b11b"
+      "sha256": "a13fea2b9340daf792af3960b7d98666064f28525e146a480381cf46e1fa8956"
     },
     "extractReceipt": {
       "bytes": 1321,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/root-execution-v1/extract/receipt.json",
-      "sha256": "ef90a105510eca84aafe60e4897962aa5c5227d68c0a5c62ffac56a79889775e"
+      "sha256": "27bdb63612926659564bfe7d4fe91c27dcdcc5137fbda8d8d67458ecebd83429"
     },
     "extractedRoot": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/extracted",
     "owner": {
@@ -168,7 +168,7 @@
     "projectReady": {
       "bytes": 14331,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/PROJECT-READY.json",
-      "sha256": "71b7e3d0e33c06cc9ffffb8105dd3c11a674ff1a70a887e7feb8c4117f3d5958"
+      "sha256": "4e99f141b6069e8bbdcac7ca4d746bbf07bc46e089d75e63aea17687ac15c1ff"
     },
     "publicationPrefix": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/bundle/",
     "pythonExecutable": {
@@ -179,17 +179,17 @@
     "readback": {
       "bytes": 384272,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/READBACK.json",
-      "sha256": "6e96e7f16edcbba5462de65eb4a9e8adfc94d9e3497c06c3224711fb94de32de"
+      "sha256": "0478407e5a003ca49cf1734d9c1a302924a59d4925f59d140d947163a41e13b0"
     },
     "sourceClosure": {
       "bytes": 2214350,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/SOURCE-CLOSURE.json",
-      "sha256": "d150ecedc8b40f4b0a55bf0bb05a82a12c76e0fb9c0c584aea2905a394ca2108"
+      "sha256": "6437600b8a1c34b55be3cd9dc1853fead56c5e42951b1962568fb7507056b82c"
     },
     "verifyReceipt": {
       "bytes": 1173,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/root-execution-v1/verify/receipt.json",
-      "sha256": "c6cc6cd2522b238c8e8950962bd25872bb0c80dad25d070a000fe2fa8741350e"
+      "sha256": "512994fcdca26a35b9033df3a45f434e7a4acd67d73ab3e68ac4b663c3944b9c"
     }
   },
   "predictedFinalTree": "89c777422d73ec46ab2f733ea367f7ad04c51a02",
@@ -427,7 +427,7 @@
     "selection": {
       "bytes": 74585,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string-preparation/receiving-selection-v1/RECEIVING-SELECTION.json",
-      "sha256": "404b379a64e596dd03efe94f4ea456bdc57f16424e2297b3b598c2dc3d0854c7"
+      "sha256": "ee018354430dd4a256f88b09ad93adbcc91139adc6c2d6c83a050acd24030a2a"
     },
     "terminal": {
       "bytes": 33725,

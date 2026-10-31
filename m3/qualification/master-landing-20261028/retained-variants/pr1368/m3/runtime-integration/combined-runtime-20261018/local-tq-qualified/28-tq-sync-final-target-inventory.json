@@ -137,7 +137,7 @@
   {
     "path": "classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/09-inputs.tsv.txt",
     "bytes": 1937,
-    "sha256": "d2b2db84c1881d80c155b10308ed283ccd8915bc6ce042b37226b39219cd53dc"
+    "sha256": "47b97eac84f181ba334f954481d9fa4de8b3be538067edafca18de04f99392e9"
   },
   {
     "path": "classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/09-inputs.tsv.txt.before",
@@ -147,7 +147,7 @@
   {
     "path": "classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/10-pins.json.txt",
     "bytes": 3546,
-    "sha256": "64786a4e1700dc29d8d975bc911ebaad5bf0ae6f7b05c92b5042b27050f579e8"
+    "sha256": "76b87771c72ea64593a9d49b1d29531b1b69a27ba754ce016678b65637f5d0f2"
   },
   {
     "path": "classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/10-pins.json.txt.before",
@@ -157,7 +157,7 @@
   {
     "path": "classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/11-plan.json.txt",
     "bytes": 5005,
-    "sha256": "297a828deef7f0f536495d38c0bd1844625ecab275c27b06c61acd34bb9b0db1"
+    "sha256": "275188eaa00fca857ab23a001fd37fb79dae0f7708d6cc4da9841db24f02de98"
   },
   {
     "path": "classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/11-plan.json.txt.before",
@@ -337,17 +337,17 @@
   {
     "path": "generated/m3/tooling/tq/inputs.tsv",
     "bytes": 1937,
-    "sha256": "d2b2db84c1881d80c155b10308ed283ccd8915bc6ce042b37226b39219cd53dc"
+    "sha256": "47b97eac84f181ba334f954481d9fa4de8b3be538067edafca18de04f99392e9"
   },
   {
     "path": "generated/m3/tooling/tq/pins.json",
     "bytes": 3546,
-    "sha256": "64786a4e1700dc29d8d975bc911ebaad5bf0ae6f7b05c92b5042b27050f579e8"
+    "sha256": "76b87771c72ea64593a9d49b1d29531b1b69a27ba754ce016678b65637f5d0f2"
   },
   {
     "path": "generated/m3/tooling/tq/plan.json",
     "bytes": 5005,
-    "sha256": "297a828deef7f0f536495d38c0bd1844625ecab275c27b06c61acd34bb9b0db1"
+    "sha256": "275188eaa00fca857ab23a001fd37fb79dae0f7708d6cc4da9841db24f02de98"
   },
   {
     "path": "generated/m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/M3TQ.java.txt",

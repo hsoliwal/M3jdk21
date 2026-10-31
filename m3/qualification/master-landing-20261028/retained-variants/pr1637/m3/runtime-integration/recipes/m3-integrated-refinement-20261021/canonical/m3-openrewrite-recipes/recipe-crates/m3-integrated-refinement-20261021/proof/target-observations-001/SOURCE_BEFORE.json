@@ -4,10 +4,10 @@
   "files": [
     {
       "target_path": ".github/workflows/m3-collections.yml",
-      "sha256": "20bbf390cad7ed2bdb8e024298cd7b32d311b6bf7c835742ee766bb53c5d0fda",
+      "sha256": "8d52122c6bd7bc4f52b0606704188a7040fc853c2dbefe6756b7b2a1792da504",
       "retained_artifact": {
         "path": "preimages/.github/workflows/m3-collections.yml",
-        "sha256": "20bbf390cad7ed2bdb8e024298cd7b32d311b6bf7c835742ee766bb53c5d0fda"
+        "sha256": "8d52122c6bd7bc4f52b0606704188a7040fc853c2dbefe6756b7b2a1792da504"
       }
     },
     {

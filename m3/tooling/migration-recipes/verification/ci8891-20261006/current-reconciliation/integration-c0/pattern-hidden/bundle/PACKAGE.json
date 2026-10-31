@@ -4,7 +4,7 @@
   "boundary": "This is exact review/reconstruction evidence, not a hermetic toolchain image. Maven, JDK, Python and other dependency caches, compiled binaries, settings and credential material are omitted. Their sealed identities remain in the original manifests where recorded. OS, dynamic-library, shell and standard-library limits in the original tooling/results remain applicable. Packaging executes no proof gate and does not turn a focused or failed result into repository-wide admission.",
   "bundle": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/packaging-authoring-v1/bundle",
   "indexBytes": 235613,
-  "indexSHA256": "581b220f311d1ce39e46170eb0f394adabc079d1f02b1293cef9e0ca079c2ca2",
+  "indexSHA256": "fcc9ad208d1e0af28985fd4ec0b7c9f22d1f1cc9760668964eadf92c6ae444ce",
   "proofGatesExecuted": false,
   "schema": "m3.evidence.package-result/1",
   "status": "PACKAGED_REVIEW_EVIDENCE",

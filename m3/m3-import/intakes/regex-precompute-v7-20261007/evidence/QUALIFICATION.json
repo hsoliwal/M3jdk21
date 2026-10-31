@@ -5,10 +5,10 @@
   "proofs": {
     "AST_FULL_ORIGINAL_ORACLE_PROOF.json": "3eb09ce3253dd6208f437aa20b4138d53448507b3bc9752e0bf29d0a8ab7b9ac",
     "AST_IMPORTER_QUALIFICATION_PROOF.json": "312ddda73aeadd55b23526541ddc4e7f3eb98ec1221317a5c52e20563bd73299",
-    "AST_P0_CLOSEOUT_INDEX.json": "6700d549ede38c1c8eb0295e447d6123337c7348d8f1cb355c29ee41712722ec",
-    "FINAL_JUNIT_PROOF.json": "a29b4c42d6f9db3705fdea63f1facab65e67af662be5bae66a8195e17ebc2806",
-    "PROOF.json": "f06fcd6b439529d32c28b46b47f9e6b924fe160dd46631a73c28f60f510a38ed",
-    "expandedV3Replay": "e3b2c1da7f6a8799be41d4e3ca9cd8d5540c791aceb4319d47767d21265f4bd1"
+    "AST_P0_CLOSEOUT_INDEX.json": "9f7fb8a0c31912ff92629570a238977b51091556529ef009bd73c81582f83dd7",
+    "FINAL_JUNIT_PROOF.json": "011ba9dce48c402b4e51cefdeda5cc4034d93a3b49c7a47026e7666038a8b9d6",
+    "PROOF.json": "c339b321169a224851bbb68d2d07cfd0c0d3195236f2f5ce94f035b8f1253e6b",
+    "expandedV3Replay": "9f554ffd2d24352d659ce1c336a821917fc7c850c6b863c7a2e13dd7c7fb049e"
   },
   "astTests": {
     "tests": 4,
@@ -33,7 +33,7 @@
   },
   "expandedThreeTargetReplay": {
     "status": "PASS",
-    "proofSha256": "e3b2c1da7f6a8799be41d4e3ca9cd8d5540c791aceb4319d47767d21265f4bd1",
+    "proofSha256": "9f554ffd2d24352d659ce1c336a821917fc7c850c6b863c7a2e13dd7c7fb049e",
     "fixedPointAndSecondApplyUnchanged": true,
     "inputDriftRefusal": true,
     "unrelatedSiblingPreserved": true

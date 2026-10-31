@@ -296,7 +296,7 @@
     {
       "bytes": 12637,
       "path": "execution/baseline-v01/prepare_fixture.py.snapshot",
-      "sha256": "abb75ad8452e53ecf538d49c0ab9a62f66618e15657dd521ee8fb6324eedfa90"
+      "sha256": "91115fc1733ee21728c4f56dc12c42a19007a619e1ddcd713b64db472a0ab60f"
     },
     {
       "bytes": 1721,
@@ -586,12 +586,12 @@
     {
       "bytes": 12780,
       "path": "prepare_fixture.py",
-      "sha256": "8720515c6b2ca8deddfe24bdb1702be9e6e002db0e1daf5e9e5d99b7f6c5de49"
+      "sha256": "a0ac35c4d8e6b42f56089ef894edb26316d772f97a366251399cf8908b29cf85"
     },
     {
       "bytes": 58247,
       "path": "root-evidence/INPUT_EPOCH.json",
-      "sha256": "973be97f762b46278f16c2bae6d887f2bc407110f333fe7ae0e7070e30cbe118"
+      "sha256": "2ea3ffe30ac6824bcc6d708c431b848a4c7997bdb4cdeaaddea1a62640734718"
     },
     {
       "bytes": 6452,
@@ -611,7 +611,7 @@
     {
       "bytes": 10707,
       "path": "run_validator.py",
-      "sha256": "f105388afbbd817aa8c39087ef7d866c0091242a9425b561fd5b8d40490ff95a"
+      "sha256": "a3a2566787103660c03c89f848a01dfa303fffd3e47f65281a3a51455da29391"
     }
   ],
   "frozen_java_template_packets_unchanged": true,
@@ -620,7 +620,7 @@
     "canonical_nonzero_status_preserved": true,
     "only_four_mapping_replacements_allowed": true,
     "script": "run_validator.py",
-    "sha256": "f105388afbbd817aa8c39087ef7d866c0091242a9425b561fd5b8d40490ff95a"
+    "sha256": "a3a2566787103660c03c89f848a01dfa303fffd3e47f65281a3a51455da29391"
   },
   "initial_environment_failure": {
     "preserved": true,

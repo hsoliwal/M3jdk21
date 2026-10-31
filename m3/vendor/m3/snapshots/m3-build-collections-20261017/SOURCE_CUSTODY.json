@@ -102,7 +102,7 @@
     {
       "canonicalPath": "m3-openrewrite-recipes/docs/m3-collections-20261017/delivery/TARGET_SOURCE_ALLOWLIST.json",
       "snapshotPath": "m3/vendor/m3/snapshots/m3-build-collections-20261017/m3-openrewrite-recipes/docs/m3-collections-20261017/delivery/TARGET_SOURCE_ALLOWLIST.json",
-      "sha256": "71d58ea7c01fdedf6e396ef454064d5a41eab94230c7819aef098e635e8cf275",
+      "sha256": "89b8bdb6fccf2a598405fb1b94e9d610c044b36c93ccf1fe9080eb3b65c79d6f",
       "bytes": 25980
     },
     {
@@ -120,13 +120,13 @@
     {
       "canonicalPath": "m3-openrewrite-recipes/docs/m3-collections-20261017/delivery/current-owner-reconciliation/LIVEBASE_COLLECTION_PRODUCT_ALLOWLIST.json",
       "snapshotPath": "m3/vendor/m3/snapshots/m3-build-collections-20261017/m3-openrewrite-recipes/docs/m3-collections-20261017/delivery/current-owner-reconciliation/LIVEBASE_COLLECTION_PRODUCT_ALLOWLIST.json",
-      "sha256": "37d9a56cb41811cd44241c4710ff2e426bd23c55e9660a44f720026bc6625f44",
+      "sha256": "1ada6a04db7157f41e5386c4cc86032f3c293bca27dfa9aa573392938a413d0a",
       "bytes": 5618
     },
     {
       "canonicalPath": "m3-openrewrite-recipes/docs/m3-collections-20261017/delivery/current-owner-reconciliation/M3_CURRENT_COLLECTION_OWNER_PACKET.json",
       "snapshotPath": "m3/vendor/m3/snapshots/m3-build-collections-20261017/m3-openrewrite-recipes/docs/m3-collections-20261017/delivery/current-owner-reconciliation/M3_CURRENT_COLLECTION_OWNER_PACKET.json",
-      "sha256": "a3dc7fe6da223b29ae3ff40c2e210b8260d129ff0d8d4356610ef7018e19f89c",
+      "sha256": "e0c0adb6c15787aaa46e787cfcd8c8373c3b14c9a0d5bb15aa3bd49a5d060821",
       "bytes": 3961
     },
     {
@@ -534,7 +534,7 @@
     {
       "canonicalPath": "m3-openrewrite-recipes/docs/m3-collections-20261017/delivery/current-owner-reconciliation/sdk/m3jdk-collection-current-owners-assets-20261017.json",
       "snapshotPath": "m3/vendor/m3/snapshots/m3-build-collections-20261017/m3-openrewrite-recipes/docs/m3-collections-20261017/delivery/current-owner-reconciliation/sdk/m3jdk-collection-current-owners-assets-20261017.json",
-      "sha256": "d9be10c4e4084b0d699575a3da65911855ecf9281bc8a881cdd23e50ae32e768",
+      "sha256": "fd4c3847a917e19264be66987ae82d3b35e451568a22d09054e4b9b7f9c62833",
       "bytes": 1284
     },
     {
@@ -546,7 +546,7 @@
     {
       "canonicalPath": "m3-openrewrite-recipes/docs/m3-collections-20261017/delivery/current-owner-reconciliation/sdk/m3jdk-collection-current-owners-assets-20261017.tsv",
       "snapshotPath": "m3/vendor/m3/snapshots/m3-build-collections-20261017/m3-openrewrite-recipes/docs/m3-collections-20261017/delivery/current-owner-reconciliation/sdk/m3jdk-collection-current-owners-assets-20261017.tsv",
-      "sha256": "50751156636551b23766ee0fc3dbca6d5e85946e6dc4b707ad6e2442af0ef691",
+      "sha256": "b055e13a1c0cf690654f6e444e93263b3c3608835b243ba32792659e564fb035",
       "bytes": 1711
     },
     {
@@ -2700,7 +2700,7 @@
     {
       "canonicalPath": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-optional-collections-registration-20261017/manifest.tsv",
       "snapshotPath": "m3/vendor/m3/snapshots/m3-build-collections-20261017/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-optional-collections-registration-20261017/manifest.tsv",
-      "sha256": "2b27ff8587bf7776da3af7e3724b2e7de71a654cb8e9b3542738493d93c3c5a7",
+      "sha256": "d0e30ceeb9b57fc7b678f7c10262503822ffd13a71a0d20e305ed86addd951fc",
       "bytes": 393
     },
     {
@@ -2712,13 +2712,13 @@
     {
       "canonicalPath": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-optional-collections-registration-20261017/template-01.txt",
       "snapshotPath": "m3/vendor/m3/snapshots/m3-build-collections-20261017/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-optional-collections-registration-20261017/template-01.txt",
-      "sha256": "7707672dbbd1eb353b7dab0ce16c934991f7363e26fea7579354a71c0ca8b2fc",
+      "sha256": "c6929d77804e40b43c7b5f5732d270a895520f50d79a3fe08e9bec534dce5f04",
       "bytes": 399886
     },
     {
       "canonicalPath": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-optional-collections-registration-qualified-20261017/manifest.tsv",
       "snapshotPath": "m3/vendor/m3/snapshots/m3-build-collections-20261017/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-optional-collections-registration-qualified-20261017/manifest.tsv",
-      "sha256": "eb1fade1b20d63626d7ccd7b10496cdefad5fa7f718dd1731320e9b464d358b6",
+      "sha256": "1aeb5bf14af980bc8cc3659ce6523941c08b48c11f65026bb2456c89de5de914",
       "bytes": 393
     },
     {
@@ -2730,13 +2730,13 @@
     {
       "canonicalPath": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-optional-collections-registration-qualified-20261017/template-01.txt",
       "snapshotPath": "m3/vendor/m3/snapshots/m3-build-collections-20261017/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-optional-collections-registration-qualified-20261017/template-01.txt",
-      "sha256": "7707672dbbd1eb353b7dab0ce16c934991f7363e26fea7579354a71c0ca8b2fc",
+      "sha256": "c6929d77804e40b43c7b5f5732d270a895520f50d79a3fe08e9bec534dce5f04",
       "bytes": 399886
     },
     {
       "canonicalPath": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3jdk-collection-current-owners-assets-20261017/manifest.tsv",
       "snapshotPath": "m3/vendor/m3/snapshots/m3-build-collections-20261017/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3jdk-collection-current-owners-assets-20261017/manifest.tsv",
-      "sha256": "f2f4d182ece3a18a0f7aab08a31c0576d0ac033d5e0859a0f9aa798b20a89637",
+      "sha256": "04d8bdb1cb0d92c3c1b99d737ece2033431d474d15870db79678afaf185ba143",
       "bytes": 1540
     },
     {
@@ -2748,7 +2748,7 @@
     {
       "canonicalPath": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3jdk-collection-current-owners-assets-20261017/template-01.txt",
       "snapshotPath": "m3/vendor/m3/snapshots/m3-build-collections-20261017/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3jdk-collection-current-owners-assets-20261017/template-01.txt",
-      "sha256": "cfe009577ae15534caad1383031ac2d96950995c2937c0a3b8e2c85339473ffa",
+      "sha256": "4980cd7b908270044912775d85f079351b0e020b0b044d91aff2339584e924f1",
       "bytes": 400947
     },
     {

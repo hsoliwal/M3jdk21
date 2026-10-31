@@ -33576,7 +33576,7 @@
     "bytes": 19121
   },
   "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/vendor/m3/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeMasteryPortableReceipt.java": {
-    "sha256": "2b7eb6aa6bb20306d77a688040c72199894ed705f93a31ab9330c8b8ea98ec76",
+    "sha256": "69104cee94e06e9d87aadac208140eddf585e0404385e9ee7ca40bc635a8eeba",
     "bytes": 12219
   },
   "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/vendor/m3/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java": {
@@ -33620,7 +33620,7 @@
     "bytes": 1448
   },
   "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/vendor/m3/m3-openrewrite-recipes/src/main/resources/META-INF/m3/jdk-a3-recipe-export.tsv": {
-    "sha256": "8a6b8899a53669195716e6bb2104c3d8c17be1820d8f7265e78f8577040220ea",
+    "sha256": "11c3ddd89c939a0689eda812d497b279d6f792326fcd82096ea0317f10721ea8",
     "bytes": 1574
   },
   "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/vendor/m3/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-nlp-current-forks-ast-restore-20261018/000-M3AST.java.txt": {

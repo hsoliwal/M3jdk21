@@ -24,14 +24,14 @@ OWNER_BEFORE_GIT = {
     "m3/tooling/regex-ascii-lexical-receiver/qualify.py": "eb47ae9f9343948b0d93e3a01682ff980835587b",
     "m3/tooling/regex-ascii-lexical-receiver/README.md": "28f4187fd8470dc0d036cb77ec24d471eebb3941",
     ".github/workflows/m3-regex-ascii-lexical-receiver.yml": "43282c4c40dfd5f195fa2b6380d69ff4a7ce2d3c",
-    "m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json": "379358a00acb55b766866c822c22d17412e9a173",
+    "m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json": "ce9727c7585c8f90f62a23524bf8e8245ea59858",
     "m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py": "3b388c656fc0af06173735c8d9dc16f641b51de6"
 }
 OWNER_AFTER_GIT = {
-    "m3/tooling/regex-ascii-lexical-receiver/qualify.py": "88ebfa238f11422b3f0c46d850ee8e47fe334d44",
+    "m3/tooling/regex-ascii-lexical-receiver/qualify.py": "5b733379de482250fb0ef23f62db4dbc62aab455",
     "m3/tooling/regex-ascii-lexical-receiver/README.md": "d73a374eff026de3557f6163a4094d1c69222355",
     ".github/workflows/m3-regex-ascii-lexical-receiver.yml": "543bed1285bb8903db5fb67ac89f6b6cf4183d93",
-    "m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json": "379358a00acb55b766866c822c22d17412e9a173",
+    "m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json": "ce9727c7585c8f90f62a23524bf8e8245ea59858",
     "m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py": "3b388c656fc0af06173735c8d9dc16f641b51de6"
 }
 DIRECTIONS = ("forward", "inverse")

@@ -235,7 +235,7 @@ allocation-failure result is inferred from the small INT happy-path suite.
 | [m3/ports/collections/verify_collection_port_wave1.py](https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/ports/collections/verify_collection_port_wave1.py) | `b6da7c19ab501d52c43b2eddc339d67368b0d42e` | Read-only interpretation of verifier checks; script NOT_RUN |
 | [m3/ports/collections/src/test/java/jdk/m3/util/M3PrimitiveCollectionFacadesTest.java](https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/ports/collections/src/test/java/jdk/m3/util/M3PrimitiveCollectionFacadesTest.java) | `4cd3b2bd357c2ec1ea1c6f24ebac342ac30fa528` | Complete five-test caller/assertion body, NOT_RUN |
 | [.github/workflows/m3-collection-port-wave1.yml](https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/.github/workflows/m3-collection-port-wave1.yml) | `16ba3cc7abdc629969786a5c9410e76963e58d9d` | Path selection and declared gate/test commands, NOT_RUN |
-| [m3/pom.xml](https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/pom.xml) | `19766bf32f2db46fe34ee19c6bb48e553589baaf` | Control-reactor module/profile selection; no ports/collections declaration |
+| [m3/pom.xml](https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/pom.xml) | `e01cddcbac3751bfa79368c3727343754c7e3b21` | Control-reactor module/profile selection; no ports/collections declaration |
 
 Public target metadata declares donor `8513abf8eb0d911873c9127a138007a42dd4ab60`;
 its source-blob header values are provenance assertions distinct from this

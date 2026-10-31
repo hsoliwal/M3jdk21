@@ -14,7 +14,7 @@
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/current-fork-owners-20261021/nlp/evidence/LUCENE_OWNER_001.json",
-      "sha256": "a9dd5a13b0c2e827249ad12053792c5baac45cca5753c357e4023a2fcde51be9"
+      "sha256": "d2981abb4e6abca4cfa27909023e721f257f60dfd71aadffde59200438220059"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/current-fork-owners-20261021/nlp/evidence/PIN_AND_SHARED_INPUT_SCOPE.json",
@@ -27,28 +27,28 @@
   },
   "nlp_correction": {
     "path": "m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/QUALIFICATION_SUMMARY.json",
-    "sha256": "65fd83d34a461cac050bb8a439ae070a07d682d1641c30d3bf53acce8649d8ca"
+    "sha256": "88884cc61ec871646cc0da676a63e4ba8a455ff88c8bbe4516d2ff98ddca51e2"
   },
   "swt_correction": {
     "path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/QUALIFICATION_SUMMARY.json",
-    "sha256": "6fef58f979f61be3d9497e5c1df69a060a4b13691948a61613183447604abc25"
+    "sha256": "49e21c411a7b7f7f82ce7f750e4235e85842810aea435a5b74fa185934d15683"
   },
   "nlp_actual_receiving_runtime": {
     "path": "m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/proof/receiver-runtime-001/combined-receiver-001-receipts/RESULT.json",
-    "sha256": "1af51c5d7642bb84f88e61816ada2bc0b3d033dfdd4387f5a35cd2a11834c935"
+    "sha256": "fab5f62b10b712660d011c72eeaaa04f00b4f56d7a1a01b6f1bd37d17efd7842"
   },
   "swt_actual_receiving_runtime": {
     "path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/receiver-runtime-001/RESULT.json",
-    "sha256": "679ac1b3f0a18abead0c716b82a876db225f02d77afc01bcb8a3cae75f7932ec"
+    "sha256": "11c86ec78af00b87c729583db7c8014acd86ae55e431c9694ec73b82ef331fca"
   },
   "new_memory_receipts": [
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/FINAL_RESULT.json",
-      "sha256": "4da9014446d363e55bcf59c86a75d480703ea99b0161acfbd1a592f91d32efe3"
+      "sha256": "93c1993033891a0f59ce8a03d6e5788bb1f30f81315391b359febebc893bdb39"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/FINAL_RESULT.json",
-      "sha256": "1a611b3cfd965176fccb876946faebaa8e1a18618c2529bc66f30f53dbaf2433"
+      "sha256": "2682aeb05b7ff927d59316ffc2ddf1cf1171464c9b065ac6c41b73c53260e500"
     }
   ],
   "hosted_admission": {

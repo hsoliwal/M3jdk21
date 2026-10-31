@@ -21,7 +21,7 @@
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/EVIDENCE_SHA256.tsv",
-      "sha256": "8991408470ebff488f8e21cab3b1e0d46efabdd31c34c7a87c6b8fae1d1c56ad",
+      "sha256": "895a3fb576b69f18c818db72937782393aa86d5bbb2d3e2e25ab99b88fbf35fc",
       "bytes": 4390
     },
     {
@@ -86,7 +86,7 @@
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/RECEIVER_RUNTIME_RECEIPT.json",
-      "sha256": "96a54f14260cae789065575484f18d5d74be287e8271f40b73a3b42bae56c161",
+      "sha256": "82e76d78b19dd5ab9e6987e6593c14be5dd3e714051ce1444a82b21fe154fd11",
       "bytes": 381707
     },
     {

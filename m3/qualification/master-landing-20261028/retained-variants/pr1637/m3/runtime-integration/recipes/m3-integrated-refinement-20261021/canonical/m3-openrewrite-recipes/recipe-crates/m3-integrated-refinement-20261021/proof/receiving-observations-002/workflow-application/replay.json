@@ -1,14 +1,14 @@
 {
   "status": "PASS",
   "mode": "APPLY",
-  "recipe_proof_sha256": "e75ea96c40ec9d8fa138f643ceb35a790ab1df08acea5d70d85d395bbea5309f",
+  "recipe_proof_sha256": "87dbcd54d9c1983d0adb0f45a5d1e4cc023c1629310a9800bd87f014be37ef71",
   "receiver_root": "0fea3c210bd00135766df56e1a497f2accbad7265c83f3d60643a0d2c971c37b",
   "repository": "/workspace/scratch/206049dfb270/M3jdk21",
   "files": [
     {
       "path": ".github/workflows/m3-collections.yml",
-      "before_sha256": "0848d1a673a908854bb885908d82eaadb23fa710c75ed3e6bd912516a21eb887",
-      "after_sha256": "0848d1a673a908854bb885908d82eaadb23fa710c75ed3e6bd912516a21eb887",
+      "before_sha256": "871d309a9e061205c1c6d3deff63568dfeac69155b89fc906ce32a482e8ea947",
+      "after_sha256": "871d309a9e061205c1c6d3deff63568dfeac69155b89fc906ce32a482e8ea947",
       "action": "ALREADY_APPLIED"
     },
     {
@@ -49,8 +49,8 @@
     },
     {
       "path": "m3/collections/qualification/masked-sort-fusion-20261021/SOURCE_IDENTITY.json",
-      "before_sha256": "9e3954045862b0878d729d45d39f0d8afc75d55f75b271196bbd00123a2495bc",
-      "after_sha256": "9e3954045862b0878d729d45d39f0d8afc75d55f75b271196bbd00123a2495bc",
+      "before_sha256": "9d798af724646d706d7260291622221756503ad46f8ba76e0fc8b30f02b62272",
+      "after_sha256": "9d798af724646d706d7260291622221756503ad46f8ba76e0fc8b30f02b62272",
       "action": "ALREADY_APPLIED"
     },
     {

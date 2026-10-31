@@ -5,9 +5,9 @@
   "files": [
     {
       "path": "m3/build.sh",
-      "gitBlob": "70b50228bba3775b6feacd500eca3f3c7529e0f2",
+      "gitBlob": "be764d854ce1d7686fd53da8953110a382ec1dec",
       "bytes": 5412,
-      "sha256": "f3d12d51200572a8f945338bcd26931dc889c1878a1341b2b199a09b6d03590d"
+      "sha256": "c7b954a6faa16cc8a0cb4a2d13a8032c43fb308a739b225362b6ac3fd84864ee"
     },
     {
       "path": "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
@@ -352,7 +352,7 @@
       "sha256": "2f45a0ed93f2e8710801547158d35e6f0f9feaafa796b673bdd2feb4887cb81c"
     }
   ],
-  "originalBuildGit": "70b50228bba3775b6feacd500eca3f3c7529e0f2",
+  "originalBuildGit": "be764d854ce1d7686fd53da8953110a382ec1dec",
   "modes": [
     "jit",
     "int",

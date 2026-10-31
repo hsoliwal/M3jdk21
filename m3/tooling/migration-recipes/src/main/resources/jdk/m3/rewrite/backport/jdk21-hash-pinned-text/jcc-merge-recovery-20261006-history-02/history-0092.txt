@@ -25,7 +25,7 @@ def main():
         raise RuntimeError('Optimized Python disables required publication verification assertions')
     helpers = Path(__file__).resolve().parent
     assert hashlib.sha256((helpers / 'audit_base.py').read_bytes()).hexdigest() == '839c35c611de2dc02f2a3f1233131b24c79d77e109aaf010df9689dc8e04893b'
-    assert hashlib.sha256((helpers / 'prepare_publication.py').read_bytes()).hexdigest() == '2c352ab7122ff72da7027cd6b06bfa6b4cf2db0531727bf56b482c062aeea754'
+    assert hashlib.sha256((helpers / 'prepare_publication.py').read_bytes()).hexdigest() == '9c35afe184b437b5668019f2c8702875d4fed6c3ef2b8232ec845bacc2be2bb2'
     from audit_base import BASE_COMMIT, BASE_TREE, OUT, TASK, digest, exact_write, git_blob, git_tree, json_bytes, resolve
     from prepare_publication import BRANCH, PRODUCTION_UPDATES, expected_tree
 
@@ -34,9 +34,9 @@ def main():
     output = Path(sys.argv[3]).resolve()
     assert output.is_relative_to(OUT)
     publisher = OUT / 'prepare_publication.py'
-    assert digest(publisher.read_bytes()) == '2c352ab7122ff72da7027cd6b06bfa6b4cf2db0531727bf56b482c062aeea754'
+    assert digest(publisher.read_bytes()) == '9c35afe184b437b5668019f2c8702875d4fed6c3ef2b8232ec845bacc2be2bb2'
     model_raw = (OUT / 'BASE_TREE_MODEL.json').read_bytes()
-    assert digest(model_raw) == '26378280f0305c59a7529fed18de4dd938e935840260c9667fb55de4c6f6fd8a'
+    assert digest(model_raw) == '5a6c06886a4241745d38b6b463a88ace34236a1b0c557ffae596b05d048e1b82'
     model = json.loads(model_raw)
     assert model['commit'] == BASE_COMMIT and model['root'] == BASE_TREE
     base_trees = model['trees']

@@ -3,8 +3,8 @@
   "status": "PASS",
   "profile": "m3-maven4-effective-20261021/1.0",
   "events": [
-    "948de23008d7e66ebcb2f93a2b86c3ba6acaedbbae82c841d9da718a45d4b615",
-    "580fe2ff0e9dbd4e625251098948f20be7fe5207806a457aaf1176c6712034b4"
+    "7e90af9173edceb152fde014b5b74cceb30c07a62c6af7293e0b2065b628bd2b",
+    "12b0e7d8df2b80d9a2b2493f7b8e3f54254c35ccb27266463819e4c2ad7aa511"
   ],
   "event_count": 2,
   "conformance_checks": 129,
@@ -14,7 +14,7 @@
   "admission": "PENDING",
   "predecessor_checkpoint": {
     "path": "memory/FINAL_RESULT.json",
-    "sha256": "d8524063a3acfb23c6b2479ad9302a08963cb60656939e862d457fe690dbf17d"
+    "sha256": "657c5d51728970ca5bd2de0800dabef5749cb6dcf46ce4ceb53176dcc3d62168"
   },
   "profile_receipt": {
     "path": "memory/PROFILE.md",
@@ -26,7 +26,7 @@
   },
   "index": {
     "path": "memory/INDEX-002.json",
-    "sha256": "951b006a3075885205b7ea527a5804cb18b599c29f675acd060ee688e4e89ce7"
+    "sha256": "901fc62510bb0b40a0169d3946fa86883798386187bffcdc882b0d8a313ddf1d"
   },
   "verification": [
     {
@@ -35,7 +35,7 @@
     },
     {
       "path": "proof/memory-integrity-002/RESULT.json",
-      "sha256": "9448550e625cc723d36dd0166941ee9c2ae1e425ba738b1490a0347f6f659f75"
+      "sha256": "693cb99914e1450efbb06f8a3bd1d96d9593b325381ff63c029269aed4abaaf2"
     }
   ],
   "scope": "Two fresh Maven4 task events; historical unknowns explicit; malformed authoring draft retained as refused; no inherited integrated events or runtime admission."

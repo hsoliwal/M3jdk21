@@ -33,8 +33,8 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/FILE_PASSES.tsv",
-      "sha256": "8cec081ccd4681eaeb6b67e79340cc2198abc8cbe5fba5bf6707f982bf9461f7",
-      "git_blob": "c90f8fab11f733596748d322650bda6d8859e6d2",
+      "sha256": "2faf41e272b1d8260efb2f3caae5b40ca645d549fca7e11aa93d94845dedab48",
+      "git_blob": "0e62583db3aa6b72e24edf7d4d40169a3dd99282",
       "mode": "100644",
       "bytes": 52381,
       "preimage": "ABSENT"
@@ -65,16 +65,16 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/SOURCE_RECEIPT.json",
-      "sha256": "ca1f36170bf914e6fb19d9782daaa39107f7a1f574aee43d9899fb5a632f8754",
-      "git_blob": "f43df3884b43bd8d259a5b240fe9f8fe6a6d1006",
+      "sha256": "02e6c1fec784948589de2b9a2f480347289c57e6702b23d5d9ea1a25c6a81f25",
+      "git_blob": "b9c91e130499583319c7bd752eb510c8e4c8b7e8",
       "mode": "100644",
       "bytes": 19676,
       "preimage": "ABSENT"
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/collections/EPOCHS.json",
-      "sha256": "4631fe704b54911012ea452207e30213782e87c590c373e66e7e7a683913b3b1",
-      "git_blob": "2e3e18b2c0f3f1de18e05af5d06adb331ae860f8",
+      "sha256": "49ebac048d573fe5abc6df2a829eb711bf7129d33209e42270e591cc145177f0",
+      "git_blob": "3739955649a0fc64fb16cda4a01d8404f06c6c0d",
       "mode": "100644",
       "bytes": 10158,
       "preimage": "ABSENT"
@@ -129,40 +129,40 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/collections/NATIVE_ADDENDA.json",
-      "sha256": "4e0bdc3ea15a6701a34691cade9467ef32eea35b3ea7935d8734e8a2c27de8bd",
-      "git_blob": "dc574e63cc9a7341dba0864c289ab2c41a13b9ad",
+      "sha256": "fb8b042e3ae8a14a0f803e433f25886cfbfc55475da928bd7d2bac2d688f5298",
+      "git_blob": "67b007a38910bb0090cd9407c87b0a7570ae8807",
       "mode": "100644",
       "bytes": 5960,
       "preimage": "ABSENT"
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/collections/OWNING_PROOF.json",
-      "sha256": "a512bbaac19b6455dd369d5b56cdc5aeb7a8595003c2cffe9f038fdab9270d20",
-      "git_blob": "6a9072c7639d9c5c038ba73d3bf0669e1db8c047",
+      "sha256": "ea966f1de829a4f5b562d6e9f6d2316c8a132333dcaf4b91b7b1fa7074071375",
+      "git_blob": "8138f577d9f9661ced9ca0935f964a05a22db3b6",
       "mode": "100644",
       "bytes": 88517,
       "preimage": "ABSENT"
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/collections/OWNING_RUN.json",
-      "sha256": "ec9bf87ec749fd43d2775bbdb7f82a88ea00b3ca36b4ffb27bdf41155d1ffab3",
-      "git_blob": "88640b780c8bbd22586748b6adfabbb94d27f19d",
+      "sha256": "25d4912ad726a358ebe831f1d134e5b41d4972b79e8781b88a134d9d5dfc8daf",
+      "git_blob": "ed8f3833934324ef4aeae2c5614fb537cec527fc",
       "mode": "100644",
       "bytes": 1443,
       "preimage": "ABSENT"
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/collections/PACKET_MANIFEST.json",
-      "sha256": "cff8a31e9801d8f6ba4f9f944defb6df3cd05a6535c8c1a65472fb93306c7b72",
-      "git_blob": "e91fea2cd480fb5411d30e8be2f1e71863c19f6c",
+      "sha256": "105a3c1196ca6e03ee1a0a2639955a0bc0002775d94ace23e17f8398c018a802",
+      "git_blob": "31f2460919a7c6062149dda9a29da16d120e4800",
       "mode": "100644",
       "bytes": 2487,
       "preimage": "ABSENT"
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/collections/RAW_EVIDENCE_SHA256.tsv",
-      "sha256": "3528987f26fab966c53a6d410335e4ad4f1d27b11054bec435cf498ec593bcbf",
-      "git_blob": "7ddec963019c0960ba57ba6cf0222d0c1bba68e3",
+      "sha256": "2db5809f51b544a7a11f3ecf44022e77de4e11dedc6295696e6c1abad1425f31",
+      "git_blob": "71b652e5645c13c7fc1493712e39de535009c2b2",
       "mode": "100644",
       "bytes": 16994,
       "preimage": "ABSENT"
@@ -225,8 +225,8 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/collections/e2/PACKET_MANIFEST.json",
-      "sha256": "d73d9ec92016fef768d4c18d342ad5ed33c38f42684cb7a498bd494678fac4ce",
-      "git_blob": "1bfd1b1f9d09d87d69d0f598f97fc22bc901760b",
+      "sha256": "1a5ee894c82cbdf5bd9d2148ae254086c0f72637fe8d5a112dbdd4a01ea657e7",
+      "git_blob": "4d6309bbfdf14ac0b4c1cbd0188575364d933c1d",
       "mode": "100644",
       "bytes": 1227,
       "preimage": "ABSENT"
@@ -265,8 +265,8 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/collections/e2/SOURCE_EPOCH.json",
-      "sha256": "347f50b81408b5b98b31c831f726bb87acd9578d2dc08e26d6ded561f839808d",
-      "git_blob": "87a0260f08a4e7f62a556742a34ce41cab130633",
+      "sha256": "79ea32ad833fef6a9ecb583660db544448fbdb4ba3e3eca8f410a3e1b4087699",
+      "git_blob": "4a23a72a920d0fe58f60b1087f4becf3cf45899e",
       "mode": "100644",
       "bytes": 11726,
       "preimage": "ABSENT"
@@ -313,8 +313,8 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/core/E2/JTREG_E2.json",
-      "sha256": "6b3743e6f450ff76b7a912f54e19822942a5fdcd5ad0cfae852df6ee1c9b888a",
-      "git_blob": "0fbdb4350c40580702ef2b1103a48b22890cfc37",
+      "sha256": "ba74e6f4a7f77efce38f5a293d54fed203f80398800a02f52f2a689c251bf772",
+      "git_blob": "42f75a23212432cd6da6ac464b5a7a702f00a763",
       "mode": "100644",
       "bytes": 164822,
       "preimage": "ABSENT"
@@ -329,24 +329,24 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/core/E2/PACKET_MANIFEST.json",
-      "sha256": "8a117fa9d203a8864d282f027b1228b3640cb13cff816c042c4c4cb1c00c6d29",
-      "git_blob": "f623d2fd9a2e9d1f930b65bd87f685d36017cb87",
+      "sha256": "5eec50496aa31f5676ec64a902dab238f2d85841a7bd1dde721bfe2edd1b3b29",
+      "git_blob": "438e87acf9c86fc25674bafc0487033f4ae6a0a9",
       "mode": "100644",
       "bytes": 25631,
       "preimage": "ABSENT"
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/core/E2/SCOPE.md",
-      "sha256": "8a447e7db52db01d206fa9528d9cc92add36aa6cece4e8f763faf036c0c39c01",
-      "git_blob": "8d39ff2cc6fa4cae8d99bcd0e7e41dba29c53528",
+      "sha256": "b892dd8389db6520abf21395b5f2d662cf07c5d6d1aa2de28f48c349813942bf",
+      "git_blob": "fd6696c60cb97127492a00f1394d8e12eb7d8223",
       "mode": "100644",
       "bytes": 3333,
       "preimage": "ABSENT"
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/core/E2/SOURCE55_HASHES.tsv",
-      "sha256": "22fcb7ee81637cd47fd5082c3394bae19347904ebfaddb96547f9702122afab1",
-      "git_blob": "98450de3191a8dad6e154f3008b85ec0f092b936",
+      "sha256": "523cd02eaa492a891438111cd582ab84c165a461d72a1abe286e8a6e341c96e7",
+      "git_blob": "a38eb8be3115f1c9bb4c63a0e000c5667389f133",
       "mode": "100644",
       "bytes": 11739,
       "preimage": "ABSENT"
@@ -377,8 +377,8 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/core/JTREG_E1.json",
-      "sha256": "60102cf98af48bb649b69aab72e80370603a18b662709ac3155c179d2b7f99ee",
-      "git_blob": "0dfaf5793a31ec063bed265952801d4afcaaa013",
+      "sha256": "e2ba7601fe6b7be8210d0fa599f1e7e22e71a01bfd6bcbfc19fac7e74f5678ca",
+      "git_blob": "25259ff43b6b20223b5e7b0dbaa5e1be92a404c5",
       "mode": "100644",
       "bytes": 159268,
       "preimage": "ABSENT"
@@ -401,8 +401,8 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/core/PACKET_MANIFEST.json",
-      "sha256": "af27aa4434da6943f9ddc8e322085241af4ed4306c23b7b5736e069b69d7f76b",
-      "git_blob": "abfb965d1399ea402c043cb685447183e253d86b",
+      "sha256": "02e25e7791dc44c0839e7b31052a2012d641b1f98cd55ab7e09afa174e4add3d",
+      "git_blob": "46510d2005db0c40a0a7420f5d3429dbf639f369",
       "mode": "100644",
       "bytes": 32839,
       "preimage": "ABSENT"
@@ -441,8 +441,8 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/core/SOURCE_HASHES.tsv",
-      "sha256": "6cfd5aa85a90f360bd30c323b42e9837ea195327134b1eb221a4b0d2d4fc0700",
-      "git_blob": "730321f0843d515db681c6fa8ffa8a04d9f92c75",
+      "sha256": "e36513ff6cb235ba83b39e1fde2cf9b2e6e9ae5d833abb803e91ba1ee7427135",
+      "git_blob": "367fd9d8e9c047186a31e251775316eb48cfe8f5",
       "mode": "100644",
       "bytes": 17229,
       "preimage": "ABSENT"
@@ -521,8 +521,8 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/recipes/E1_COMPOSITION.json",
-      "sha256": "1fe557f535b810633bcf090b660eb5897524a4ed8813d49a24a7cb20f21fa003",
-      "git_blob": "19758b8a45c0c50caeebc777be809e036334ba38",
+      "sha256": "78a157db0abd06a5ba148df122ca94986f21cad9c0217a21b31caf7ece174a76",
+      "git_blob": "45922a1230c4a7f50f11407c55fc23c647e6efe3",
       "mode": "100644",
       "bytes": 19472,
       "preimage": "ABSENT"
@@ -537,8 +537,8 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/recipes/E2_COMPOSITION.json",
-      "sha256": "b19986afa568f51e1e023ecb3bfac5a5a6e057a29d328887c0048355d7256237",
-      "git_blob": "0aa4c3a0ec1ace26ba3a2409c0a1c8984a2d3c82",
+      "sha256": "93751ecca0a9ace3b4b804ce5a9a003477516fcd42fba2f0ce1bf8063a81c273",
+      "git_blob": "fd12de066254567bb645837a4b5bab69966b881b",
       "mode": "100644",
       "bytes": 24000,
       "preimage": "ABSENT"
@@ -553,8 +553,8 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/recipes/README.json",
-      "sha256": "8a950855d462de6dac953f07119256ca2a44050457454be9a9a31be2ac11df7f",
-      "git_blob": "3c82363aaf35df0a495a2fd77d21865ad262c7b6",
+      "sha256": "8003fcb1b5fa2b160d785804515bd860e195c295e96232b1332a3b48fa05c10c",
+      "git_blob": "4c273cfa00a6c047df570060f5214d91b70d2e1a",
       "mode": "100644",
       "bytes": 3837,
       "preimage": "ABSENT"
@@ -585,8 +585,8 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/recipes/combine-composed21_PRODUCT_RECEIVER.json",
-      "sha256": "2cba514d6fb7aa2a53f4c61d9b25a18f67619d82060b9f3aa7d55a9617f1f8ae",
-      "git_blob": "0fdcdb24b8eed71435483ed1a6efcc3e0151e6f8",
+      "sha256": "0330c7b109b3f68401022eecf009d2b636cee27aee931e90060243488aa31171",
+      "git_blob": "1a573ea04c3d2c0e3cab5b8cb98d29f8fae644b7",
       "mode": "100644",
       "bytes": 7575,
       "preimage": "ABSENT"
@@ -601,8 +601,8 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/recipes/combine-string21_PRODUCT_RECEIVER.json",
-      "sha256": "fe964c5ba0a1c911ff8486964173d551c992b0df63cbceb7d66a5f6123e67e0e",
-      "git_blob": "8a0d82ec19bdd41a17df6cb388003f9ecd93f32b",
+      "sha256": "607ed88363073d389d61d58ab986bbe679e7aafef235dbc5110f6074c810bcdd",
+      "git_blob": "0fac459325eb735a1636f7f0998889530235c876",
       "mode": "100644",
       "bytes": 2512,
       "preimage": "ABSENT"
@@ -633,8 +633,8 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/recipes/receive-composed21_PRODUCT_RECEIVER.json",
-      "sha256": "11ada3dd7e3d810c2c6d6ca45e25bb581d09440db39edd381d43115d2d03c2d6",
-      "git_blob": "1fda2bac380d1eaf13745b91fe84846aa49734ce",
+      "sha256": "dafa1864bc308b7d5b918b5619b1933cc74c338766c1fc0cf039b6b31f9319be",
+      "git_blob": "671839fe66eed0ee3d87a6f8df94e8927626dcc4",
       "mode": "100644",
       "bytes": 10197,
       "preimage": "ABSENT"
@@ -1072,19 +1072,19 @@
   "packet_manifests": [
     {
       "path": "m3/docs/composed-integration-20261021/evidence/collections/PACKET_MANIFEST.json",
-      "sha256": "cff8a31e9801d8f6ba4f9f944defb6df3cd05a6535c8c1a65472fb93306c7b72"
+      "sha256": "105a3c1196ca6e03ee1a0a2639955a0bc0002775d94ace23e17f8398c018a802"
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/collections/e2/PACKET_MANIFEST.json",
-      "sha256": "d73d9ec92016fef768d4c18d342ad5ed33c38f42684cb7a498bd494678fac4ce"
+      "sha256": "1a5ee894c82cbdf5bd9d2148ae254086c0f72637fe8d5a112dbdd4a01ea657e7"
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/core/PACKET_MANIFEST.json",
-      "sha256": "af27aa4434da6943f9ddc8e322085241af4ed4306c23b7b5736e069b69d7f76b"
+      "sha256": "02e25e7791dc44c0839e7b31052a2012d641b1f98cd55ab7e09afa174e4add3d"
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/core/E2/PACKET_MANIFEST.json",
-      "sha256": "8a117fa9d203a8864d282f027b1228b3640cb13cff816c042c4c4cb1c00c6d29"
+      "sha256": "5eec50496aa31f5676ec64a902dab238f2d85841a7bd1dde721bfe2edd1b3b29"
     }
   ],
   "limits": [

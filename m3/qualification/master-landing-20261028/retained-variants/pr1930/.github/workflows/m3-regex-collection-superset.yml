@@ -73,7 +73,7 @@ jobs:
               exit 1
             fi
           done <<'PRESERVED'
-          7819788e326c0a833984186af9b4a91f3d156cdf src/java.base/share/classes/java/util/ChangeJournal.java
+          380667b18341d3b3405eff966e9b19bdacb233db src/java.base/share/classes/java/util/ChangeJournal.java
           f079f7c359896cc4ccc6834aa94bb851d6de0f81 src/java.base/share/classes/jdk/internal/mindex/M3RegexDpPlan.java
           de8f8a6d0954cf990ff77cf7822308a6318ab165 src/java.base/share/native/libjava/M3RegexDpPlan.c
           8a57ca4f085e4e8f1f1d9f2ec0fdb2fc5888597e src/java.base/share/classes/java/lang/M3String.java
@@ -82,13 +82,13 @@ jobs:
           944c61e15ede09dfc0965a425bbd60aafe761176 src/java.base/share/classes/java/util/concurrent/CopyOnWriteArrayList.java
           ea949c6db62f312a71f7fdba3f2576816b512fec test/jdk/java/util/concurrent/CopyOnWriteArrayList/M3CopyOnWriteWordMaskTest.java
           ac3d3996faca3b5a125b9cda17a4bc7adf7de37a m3/qualification/collection-convergence-20261024/COW_SINGLE_WORD_RECEIPT.json
-          071a3dd97ab4294741a1393b7540398d06af2378 m3/qualification/collection-convergence-20261024/REGEX_COLLECTION_SUPERSET_RECEIPT.json
-          670ed47d9e6e3f57a29dbf4628a0791158e29960 m3/qualification/collection-convergence-20261024/REGEX_COMPACT_METADATA_RECEIPT.json
+          520d16b9e5b140ade278c93a37a66a21d419f559 m3/qualification/collection-convergence-20261024/REGEX_COLLECTION_SUPERSET_RECEIPT.json
+          75311cde73191cfccc9d2db731ba95bf0973b1cc m3/qualification/collection-convergence-20261024/REGEX_COMPACT_METADATA_RECEIPT.json
           5c39dc53d3bbd80eada25f74b960e22391eeecb6 src/java.base/share/classes/java/util/CollectionViews.java
-          e6059aeb9b2e7f332fb0baea2684395c268a5414 src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java
+          135f13b0c4478659aa3395bdeaa740b4438f649d src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java
           885f237a80cdd5997a852609fa60066d0f7d11c4 src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java
           b9c942d354189c26ed0848d7dd73f21754838049 src/java.base/share/classes/jdk/internal/m3/M3IndexMaskWindow.java
-          59b2130ca8e897e75e24afbd45e8fd885c55b0e9 src/java.base/share/native/libjava/M3IndexMaskWindow.c
+          d8cc9be4ba6cbef3f1106923390aaf1949c2e4fb src/java.base/share/native/libjava/M3IndexMaskWindow.c
           PRESERVED
       - name: Native JDK21 build dependencies
         shell: bash

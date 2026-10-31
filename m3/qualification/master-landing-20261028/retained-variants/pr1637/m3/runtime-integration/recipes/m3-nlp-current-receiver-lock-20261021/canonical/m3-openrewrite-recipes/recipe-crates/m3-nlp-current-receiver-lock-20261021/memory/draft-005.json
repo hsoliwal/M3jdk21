@@ -9,7 +9,7 @@
     "revision": "2779aba3f98f31c324be43f731be7914e1a05935"
   },
   "parents": [
-    "d004e61de57ba3eda73639dc64959975d0161bf88688531883a689cdca7ccd68"
+    "562d19b551dc56e05a57625680fed470a0fe6ae9a9022c9420115f711e67ae6f"
   ],
   "supersedes": [],
   "recipe_before": null,
@@ -59,15 +59,15 @@
     },
     {
       "path": "proof/intake-refusal-001/RESULT.json",
-      "sha256": "578982a9c4c11664d7747819784e9da05acd1c60ff24fe80223ede38868472c9"
+      "sha256": "a7a0ea358eb5d90d2c9555cd011e24a7e357ed8679e79adfa4cb27ff710b8404"
     },
     {
       "path": "provenance/intake/owner-candidate-001-HANDOFF.json",
-      "sha256": "3efcd3660550d141430e5154e636216b9809955d21020e2b3b8de5d4be96cf81"
+      "sha256": "e328502af37621c855fd2d2c5af7cf805869f14349645cc9fa91181358d38762"
     },
     {
       "path": "provenance/owner-candidate-001-INTAKE.json",
-      "sha256": "7d67a41359286e8d88199e6026729b262500da887d392d85f1a0103ac30be9f6"
+      "sha256": "07f1207667b7876f5a1f6a5ffa572dbae1d587e4df23e2b3738fa478c17772d7"
     },
     {
       "path": "provenance/qualification-tools/curate_owner_evidence.py",
@@ -84,12 +84,12 @@
         "canonical-work/curate_nlp_owner_evidence.py",
         "owner-candidate-001",
         "nlp-work/EVIDENCE_HANDOFF-LOCK-CANDIDATE.json",
-        "3efcd3660550d141430e5154e636216b9809955d21020e2b3b8de5d4be96cf81"
+        "e328502af37621c855fd2d2c5af7cf805869f14349645cc9fa91181358d38762"
       ],
       "evidence": [
         {
           "path": "proof/intake-refusal-001/RESULT.json",
-          "sha256": "578982a9c4c11664d7747819784e9da05acd1c60ff24fe80223ede38868472c9"
+          "sha256": "a7a0ea358eb5d90d2c9555cd011e24a7e357ed8679e79adfa4cb27ff710b8404"
         }
       ]
     },
@@ -102,12 +102,12 @@
         "canonical-work/curate_nlp_owner_evidence.py",
         "owner-candidate-001",
         "nlp-work/EVIDENCE_HANDOFF-LOCK-CANDIDATE.json",
-        "3efcd3660550d141430e5154e636216b9809955d21020e2b3b8de5d4be96cf81"
+        "e328502af37621c855fd2d2c5af7cf805869f14349645cc9fa91181358d38762"
       ],
       "evidence": [
         {
           "path": "provenance/owner-candidate-001-INTAKE.json",
-          "sha256": "7d67a41359286e8d88199e6026729b262500da887d392d85f1a0103ac30be9f6"
+          "sha256": "07f1207667b7876f5a1f6a5ffa572dbae1d587e4df23e2b3738fa478c17772d7"
         }
       ]
     },
@@ -128,11 +128,11 @@
       "evidence": [
         {
           "path": "proof/sdk-001-offline/RESULT.json",
-          "sha256": "0bf285d0e082e121e178b0a22d47d92124e84579f5436c87276e8b999142fcdb"
+          "sha256": "8260a2bb04090e4307080e47d26dffb554a756abcc6d26c0a8afb6e6a6b7125e"
         },
         {
           "path": "proof/sdk-001-offline/recipe-proof.tsv",
-          "sha256": "091f0e8ad4d89e4132f1c2c17741e0bcbd1ed27fdc46e6651d084eed7a9023c8"
+          "sha256": "6f7399849dbdafc29e5dccb6433b98fb12db8805cc578e90ca795b0f4f78c6cd"
         }
       ]
     },
@@ -165,7 +165,7 @@
       "evidence": [
         {
           "path": "proof/receiver-runtime-001/combined-receiver-001-receipts/RESULT.json",
-          "sha256": "1af51c5d7642bb84f88e61816ada2bc0b3d033dfdd4387f5a35cd2a11834c935"
+          "sha256": "fab5f62b10b712660d011c72eeaaa04f00b4f56d7a1a01b6f1bd37d17efd7842"
         },
         {
           "path": "proof/receiver-runtime-001/combined-receiver-001-receipts/command.log",
@@ -173,7 +173,7 @@
         },
         {
           "path": "proof/receiver-runtime-001/FINAL_RECEIVER_QUALIFICATION.json",
-          "sha256": "e9735ffaa55b10ce92e68c928cdb5e224cd0babc68eff396e8f1fd102b5d1f54"
+          "sha256": "3e10e584c1d6bbba3a46a74e0a638a445a8cf3ca3e06d08b339ade3341aa899f"
         }
       ]
     }
@@ -194,15 +194,15 @@
     "evidence": [
       {
         "path": "proof/sdk-001-offline/RESULT.json",
-        "sha256": "0bf285d0e082e121e178b0a22d47d92124e84579f5436c87276e8b999142fcdb"
+        "sha256": "8260a2bb04090e4307080e47d26dffb554a756abcc6d26c0a8afb6e6a6b7125e"
       },
       {
         "path": "proof/sdk-001-offline/recipe-proof.tsv",
-        "sha256": "091f0e8ad4d89e4132f1c2c17741e0bcbd1ed27fdc46e6651d084eed7a9023c8"
+        "sha256": "6f7399849dbdafc29e5dccb6433b98fb12db8805cc578e90ca795b0f4f78c6cd"
       },
       {
         "path": "proof/copier-qualification-001/RESULT.json",
-        "sha256": "597b29f2bb92576017e30c08e82300fe2e9117367f7dce54cd869964247fb569"
+        "sha256": "1ff7a23e980feb802320f6c034b4c820b821b5fdfd642d6abaab843ccab49d13"
       }
     ]
   },

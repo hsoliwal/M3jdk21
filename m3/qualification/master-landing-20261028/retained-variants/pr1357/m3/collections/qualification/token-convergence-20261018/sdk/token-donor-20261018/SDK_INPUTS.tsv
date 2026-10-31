@@ -10,8 +10,8 @@ crate/datasets/token-donor-20261018/resources/com/synexia/rewrite/hash-pinned-ja
 crate/datasets/token-donor-20261018/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-token-donor-20261018/0003-M3RX7TokenIndexContract.java.txt	116483c3fbe411ed8399e578aeedb8a18670d68fb47fee01f5831045d125d877
 crate/datasets/token-donor-20261018/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-token-donor-20261018/manifest.tsv	cedf5ebd9e4f34c9723944823bbfc0365b175910302997162363a3ac21b3b7ca
 crate/datasets/token-donor-20261018/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-token-donor-20261018/pre/0001-M3RX7.java.txt	709ebea61c346c761662713e1cb7cdaf67f02bdfa49222ec23eef2353b44e0d2
-crate/datasets/token-donor-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-token-donor-20261018/0002-M3RX7.c.txt	441c6de3577b56d15134f8048c1eeaab3baa982517309ca8d3e7fc9c65006d1a
-crate/datasets/token-donor-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-token-donor-20261018/manifest.tsv	b71881aa284fe98a2060ae474df5f7ef4a255d17c6414507ef951797d0f46bc6
+crate/datasets/token-donor-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-token-donor-20261018/0002-M3RX7.c.txt	7cbd0a016975704d1b3f9777421dcf02848ac14c8bebbd7aeefd41e9c46712c6
+crate/datasets/token-donor-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-token-donor-20261018/manifest.tsv	785215768d2b16ab22965b47e68d2df3f9531a1ae431bc0b101d53efe73720cf
 crate/pom.xml	4c90faaa9e64aebeeba14fb2196731c6334293781d0fdcafbf190f2f5662eb7d
 crate/prepare.py	7c2063fa5aa88d0872fff0157413a1d2fdca4f00d01c787f8650969e8b514014
 crate/receive.py	e81744965f37cb890e00f6c1c7e50f4dae44c68eedafdf46565a7e105bab5474

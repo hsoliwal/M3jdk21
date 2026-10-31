@@ -7,11 +7,11 @@
     },
     {
       "path": "canonical-artifacts.json",
-      "sha256": "3c2cb8841758af573c30c4506de7f49ec942ca293711a46d97712d682d956777"
+      "sha256": "fcae62f8f3839ac414f07433849a16ee2eeb4987cd1a47984c7abfd0bd5cf721"
     },
     {
       "path": "CUSTODY-SOURCE.json",
-      "sha256": "9be55f89b3107393e0f40e2ba57871683ed9617770c318166d69275d2f8f70d3"
+      "sha256": "4c043b5252853a59683317f42da01de5814381c0d825df1491878588d6ab9abf"
     },
     {
       "path": "pom.xml",
@@ -39,7 +39,7 @@
     },
     {
       "path": "datasets/m3-runtime-facade-custody-1/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-facade-custody-1/manifest.tsv",
-      "sha256": "c922e5d4ebd7ff4bf8f6832f1bc98772f3677b32fd89655e9beecce259c09ce9"
+      "sha256": "b681a99dcb6d2ae289674ace42ef8b0ac69f3486bfefb638cad22180bcfba304"
     },
     {
       "path": "target/m3-runtime-facade-custody-1/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml",

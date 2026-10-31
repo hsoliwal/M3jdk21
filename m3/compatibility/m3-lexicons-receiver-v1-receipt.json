@@ -120,7 +120,7 @@
     {
       "path": "m3/lexicon/receiver/src/main/java/jdk/m3/lexicon/M3LexiconFormat.java",
       "before": "ABSENT",
-      "after": "1ba7dee473ddc54c72e459d127fb69227dd8023b5be47aee5dbb67ea71c05939",
+      "after": "0e2dcd97440c4217cdceb7daf4087f1c4bb3e1bc09c89281cab710b076ea584b",
       "resource": "05-M3LexiconFormat.java.txt"
     },
     {

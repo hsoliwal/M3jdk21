@@ -1,7 +1,7 @@
 {
   "schema": "M3_TOKEN_RECOVERY_RECEIVED_ACTUAL_SDK_CHECK_V1",
   "time_utc": "2026-10-19T05:04:24.015344+00:00",
-  "manifest_sha256": "c6fae9cffa1d83bbf1e657419f0c0bcd91c37084018be0c3a2dffd0a8301f7bb",
+  "manifest_sha256": "140b908730c40af4696b50eb034828b48f8b5a45d68107ecfab1846db9373f5a",
   "source_packet_pre_receive_inventory_sha256": "bd4b3ebb81f82034caab8fec0829e7e77f3099da781dd714c2becce81962d8b0",
   "actual_sdk_check": "PASS",
   "actual_openrewrite_results": 0,
@@ -11,7 +11,7 @@
   "target_postimages_rehashed": 490,
   "unchanged_keep_postimages": 477,
   "all_target_hashes_match_manifest": true,
-  "receiver_admission_receipt_sha256": "00e545ed80e2942896b97baddcce1a4d02fa515359c9b3cc22c6f695ef38ac5b",
+  "receiver_admission_receipt_sha256": "a993867b8b68722e65a1a93466b0ab35d63ddd6e9ea01d441d0fadc37d01b56e",
   "receiver_runtime_receipt_sha256": "0890ed94d4f308e2b2e799dc005f1f561f273cb8ede5079af0bffa859306505a",
   "target_checkout_modified_by_check": false,
   "scope": "Source-bound candidate checkout and actual recipe fixed point; not full M3JDK21 image/platform/performance qualification",

@@ -1264,9 +1264,9 @@
           "src/java.base/share/classes/java/lang/M3StringFacts.java": "e2d6056aecffae091ea8b84d21e2d899a8959d142c9da3ed24915753c413c92a",
           "src/java.base/share/classes/java/lang/M3StringRegexDp.java": "69ebbcbd716f673af9fe282b8ab72f7b7de7961d7c43d69f534267c31a04a39f",
           "src/java.base/share/classes/java/lang/String.java": "5d4319de5a49b553f1b54b6c9ca65197c39cd6395e94acba413c75bfd34bfc57",
-          "src/java.base/share/classes/java/util/ChangeJournal.java": "2fd9384a9df26ed038bd6663e083586425228815dc7b4d43205af769d3c2544e",
+          "src/java.base/share/classes/java/util/ChangeJournal.java": "ffad7d1b3fdb044fe970f4014348e2f1518705613ffb03f6e770ab3169eeb97f",
           "src/java.base/share/classes/java/util/regex/M3PatternQuery.java": "b471add6421a394fb59a15b2fe9a7cac21a9c4c438d754996f961f43bb811531",
-          "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java": "d43e7096433b24372c4ced54143d321554d6db234e86224d6d6d29946d94cb61",
+          "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java": "98da3772abcda6def4a06d6eb90a6456972b1fd71c309fe00b791c5bc157e715",
           "src/java.base/share/classes/jdk/internal/mindex/M3TokenPredicateCache.java": "0ed768ba1672780790c55b4e64ac28b9c702740ba5a03484805e68b4d8725a10"
         },
         "startup_modes_pass": [
@@ -1312,9 +1312,9 @@
           "src/java.base/share/classes/java/lang/M3StringFacts.java": "0cc1b4726cb2637b184184a60c75964180d58790530101fcf46900f74f1dc72a",
           "src/java.base/share/classes/java/lang/M3StringRegexDp.java": "faa373f77eef1d2dd3457bfe8c5d65d2dff819bb606e00f7c269e7b08a37cf25",
           "src/java.base/share/classes/java/lang/String.java": "5d4319de5a49b553f1b54b6c9ca65197c39cd6395e94acba413c75bfd34bfc57",
-          "src/java.base/share/classes/java/util/ChangeJournal.java": "2fd9384a9df26ed038bd6663e083586425228815dc7b4d43205af769d3c2544e",
+          "src/java.base/share/classes/java/util/ChangeJournal.java": "ffad7d1b3fdb044fe970f4014348e2f1518705613ffb03f6e770ab3169eeb97f",
           "src/java.base/share/classes/java/util/regex/M3PatternQuery.java": "190d541c497c344ba5015f38edadf6d6fb359e10010afbb88729905e04b1c1d7",
-          "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java": "e5b9b0cafa6edb66697783250271fa165c9ccee7ccbf661b7b23843e7e1d7a43",
+          "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java": "ee23709b19fb37a1d43bd9c5f2f2e038e22b47bd21804b59beb0ad99a8eeeb06",
           "src/java.base/share/classes/jdk/internal/mindex/M3TokenPredicateCache.java": "1aa4e472110c2ca9432efc68cf7bea09c22ade8af670017fa4fe473bebfade88"
         },
         "startup_modes_pass": [
@@ -3657,14 +3657,14 @@
       "baseline_sha256": "33bf591763210e137025d5962b94d918911366bf51617a7ebcdea7f39abbe607",
       "feature_stacked_diff_includes_path": false,
       "final_bytes": 9426,
-      "final_git_blob_sha1": "382e76061737743792885c4cadad5db15e474b2e",
-      "final_sha256": "2fd9384a9df26ed038bd6663e083586425228815dc7b4d43205af769d3c2544e",
+      "final_git_blob_sha1": "536b492d612bb2d26156a4d1135c7fc434f0e6cb",
+      "final_sha256": "ffad7d1b3fdb044fe970f4014348e2f1518705613ffb03f6e770ab3169eeb97f",
       "path": "src/java.base/share/classes/java/util/ChangeJournal.java",
       "role": "documentation_companion",
       "stages": [
         {
           "dataset": "baseline-doclint-final",
-          "postimage_sha256": "2fd9384a9df26ed038bd6663e083586425228815dc7b4d43205af769d3c2544e",
+          "postimage_sha256": "ffad7d1b3fdb044fe970f4014348e2f1518705613ffb03f6e770ab3169eeb97f",
           "preimage_sha256": "33bf591763210e137025d5962b94d918911366bf51617a7ebcdea7f39abbe607"
         }
       ]
@@ -3692,19 +3692,19 @@
       ]
     },
     {
-      "baseline_git_blob_sha1": "2ce544751b8783f76d66aaab9e9fecbde01fb6ed",
-      "baseline_sha256": "d43e7096433b24372c4ced54143d321554d6db234e86224d6d6d29946d94cb61",
+      "baseline_git_blob_sha1": "6ee27f9c4b77733e798f79049790f0b5fdd0d3a9",
+      "baseline_sha256": "98da3772abcda6def4a06d6eb90a6456972b1fd71c309fe00b791c5bc157e715",
       "feature_stacked_diff_includes_path": true,
       "final_bytes": 13882,
-      "final_git_blob_sha1": "93b8e8513f9e28c3493df58a685ca25014439886",
-      "final_sha256": "e5b9b0cafa6edb66697783250271fa165c9ccee7ccbf661b7b23843e7e1d7a43",
+      "final_git_blob_sha1": "3924282fbd3bc0290f36fef445ce703274450460",
+      "final_sha256": "ee23709b19fb37a1d43bd9c5f2f2e038e22b47bd21804b59beb0ad99a8eeeb06",
       "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java",
       "role": "runtime_owner",
       "stages": [
         {
           "dataset": "collections-c831",
-          "postimage_sha256": "e5b9b0cafa6edb66697783250271fa165c9ccee7ccbf661b7b23843e7e1d7a43",
-          "preimage_sha256": "d43e7096433b24372c4ced54143d321554d6db234e86224d6d6d29946d94cb61"
+          "postimage_sha256": "ee23709b19fb37a1d43bd9c5f2f2e038e22b47bd21804b59beb0ad99a8eeeb06",
+          "preimage_sha256": "98da3772abcda6def4a06d6eb90a6456972b1fd71c309fe00b791c5bc157e715"
         }
       ]
     },

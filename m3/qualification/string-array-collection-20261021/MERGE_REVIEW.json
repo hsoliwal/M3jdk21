@@ -8,7 +8,7 @@
   "conflict_resolutions": [
     {
       "path": "src/java.base/share/classes/java/lang/M3StringImmediate.java",
-      "chosen_git_blob": "74c9a849c0124e1be77374cc8b97b7102ed0848f",
+      "chosen_git_blob": "99ecf2189b2e0c2eaec16d41487e44988dc3e51a",
       "resolution": "Preserve current master byte-for-byte; it already contains the equivalent comment/doc-only compiler correction."
     },
     {

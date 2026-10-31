@@ -110,7 +110,7 @@
     {
       "bytes": 28933,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/prepare_package.py",
-      "sha256": "cd09b84a7753a0f48e6f1b1726b72fdd44b317c52a11423df4e8e56bf6b46b3a"
+      "sha256": "f92fc8d812a953cd089bcf145fb2497ad83009a8b037c05359b0d66e202c49d7"
     },
     {
       "bytes": 8236,
@@ -155,7 +155,7 @@
   "receivingSelection": {
     "bytes": 74585,
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string-preparation/receiving-selection-v1/RECEIVING-SELECTION.json",
-    "sha256": "404b379a64e596dd03efe94f4ea456bdc57f16424e2297b3b598c2dc3d0854c7"
+    "sha256": "ee018354430dd4a256f88b09ad93adbcc91139adc6c2d6c83a050acd24030a2a"
   },
   "receivingStatus": "PRIMARY_ONLY_STOP",
   "receivingStopPreserved": true,
@@ -166,7 +166,7 @@
   "selectionReadback": {
     "bytes": 7504,
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/terminal-selection-v1/SELECTION-READBACK.json",
-    "sha256": "d207a72499dd1ccb6fcc48d0810cde394d282d1c76bf613ddd6440318117e75e"
+    "sha256": "7589a0107031bc02f4542714d1f03071ecbc3256d50a0040347a287c1385824e"
   },
   "semanticOutcomeSeparateFromPrimary": true,
   "semanticPrerequisite": {

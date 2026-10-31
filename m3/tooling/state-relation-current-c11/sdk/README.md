@@ -15,15 +15,15 @@ adc10e96af417655a7f1fc61b07c0ca8789c83da:
 | Owner | Git blob |
 | --- | --- |
 | M3StateRelation.java | 30359b57b7b553e78355d3672119c685051ec1da |
-| M3DotStarRelations.java | 780c7887aaa6b0892a76f4eee1dcb17086a60289 |
-| M3StateRelation.c | 610ca8bab47065a49b9b58814d6392a287f4fd8b |
-| m3_state_relation.h | 18a02e228129827da486edc5b316790af6135310 |
+| M3DotStarRelations.java | d70a152bdedc380ed8b28861ea94ef4c2adbea90 |
+| M3StateRelation.c | 89b3127f0f262de3e00ba28a01079a659013dce2 |
+| m3_state_relation.h | 0e0c70e60b2cee61c3df31982a26f4251955cb61 |
 | M3RelationPortProof.java | e9a6beee8916cf97d5d4aac2383e7ac2fa8843e0 |
 
 Every manifest row is KEEP with equal before/after SHA256. Complete before/out
 fixtures preserve exact bytes and notices; KEEP has no replacement payload, so
 the tests explicitly require null row.text(). The historical C blob
-5b30f71d8ed878b3199225b9512b75a090ff896c is pinned only as an immutable audit
+e6a10286f64052cb948de1dbcc43aaaa1d33db1e is pinned only as an immutable audit
 resource. It cannot be admitted as the current C owner.
 
 The three real JUnit methods are:

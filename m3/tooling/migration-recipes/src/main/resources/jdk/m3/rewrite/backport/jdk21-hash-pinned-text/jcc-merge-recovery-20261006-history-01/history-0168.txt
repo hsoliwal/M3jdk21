@@ -23,7 +23,7 @@ def snapshot(p,name=None):
 f=snapshot(B/'FINAL_SOURCE_INPUTS_V3.json');packet=snapshot(B/'bound-inputs-v3/BOUND_INPUTS_REVIEW_PACKET.json');record=snapshot(B/'bound-inputs-v3/RECORD_CONTENT.json');doc=snapshot(B/'bound-inputs-v3/HANDOFF_DOCUMENT.md').decode();idx=snapshot(B/'custody-final-evidence/CUSTODY_EVIDENCE_INDEX.json');additional=snapshot(B/'custody-final-evidence/ADDITIONAL_RECEIPTS.json');prose=snapshot(B/'custody-final-evidence/CUSTODY_CARRY_PROSE.md').decode()
 assert identity(B/'FINAL_SOURCE_INPUTS_V3.json')['sha256']=='df6713ad19ce80daad0383fbd5c3716412e2dca133e1db7e0150b88e141313b5'
 assert identity(B/'bound-inputs-v3/HANDOFF_DOCUMENT.md')['sha256']=='d5e18258027f457a1fcdc45ff30b4e2e7a0723825ea95b651933af23f27fd28d'
-assert identity(B/'bound-inputs-v3/BOUND_INPUTS_REVIEW_PACKET.json')['sha256']=='b9ff888a82341c4fbfeaee60ebc9481b9d9ec00d619585cab1df6f5bbcfe400f'
+assert identity(B/'bound-inputs-v3/BOUND_INPUTS_REVIEW_PACKET.json')['sha256']=='867e7a054af6dcadf81d7a71c6cbe822695f3b5be3fd1fefe5d6df7919cfbb2c'
 for r in packet['files']:check(r['local_path'],r)
 assert len(packet['files'])==14
 for k in ('publication_receipt','source_inventory','root_accounting','handoff_document'):check(f[k]['local_path'],f[k])

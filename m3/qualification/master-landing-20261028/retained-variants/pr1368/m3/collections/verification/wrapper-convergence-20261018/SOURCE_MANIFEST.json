@@ -56,8 +56,8 @@
       "receiver_manifest_preimage_commit": "2027d2f4e9810e5f0e78c91c079cfa0130c24695",
       "prior_manifest": {
         "path": "m3/collections/verification/wrapper-convergence-20261018/history/combined-collections-20261018/SOURCE_MANIFEST.json",
-        "sha256": "6011c6eed511e414029578a4a8492e2c571e7639fa0e6f8e21f6b3a48ad55d0b",
-        "git_blob": "181f00c6255e969cbf663c85bbbdb13ee4585a25",
+        "sha256": "e6973ba853554d97f35823512c189bd190181db1d2d10309d5b0b1a09b4fb4ad",
+        "git_blob": "ec29654f9e8e38a819d39dddc94e2210448cf8fe",
         "rows": 337
       },
       "module_input_count": 343,
@@ -2307,10 +2307,10 @@
     },
     {
       "path": "m3/collections/src/test/java/jdk/m3/collections/M3ResidencyStateMaskTest.java",
-      "before_sha256": "ee9111c75391f9e18a841156555c98516aeb806437b6c1c1e1dece3cb50a03f1",
-      "after_sha256": "ee9111c75391f9e18a841156555c98516aeb806437b6c1c1e1dece3cb50a03f1",
+      "before_sha256": "d36207bd03c3b4e0fd0bcf0e0a435c8112abee0268bac58315a27ed7733db86c",
+      "after_sha256": "d36207bd03c3b4e0fd0bcf0e0a435c8112abee0268bac58315a27ed7733db86c",
       "role": "baseline_module_input",
-      "before_git_blob": "1d374e3e61675b3d6e537773bd419cf9fbcdf305"
+      "before_git_blob": "9f4822a9af6fbe9011916158ea21ba249b94ead1"
     },
     {
       "path": "m3/collections/src/test/java/jdk/m3/collections/M3SdkOwnerFactorySelfTest.java",

@@ -24,15 +24,15 @@
   },
   "source_closure": {
     "path": "runtime-proof/received/SOURCE_MANIFEST.json",
-    "sha256": "6011c6eed511e414029578a4a8492e2c571e7639fa0e6f8e21f6b3a48ad55d0b"
+    "sha256": "e6973ba853554d97f35823512c189bd190181db1d2d10309d5b0b1a09b4fb4ad"
   },
   "actual_sdk_and_receivers": {
     "path": "runtime-proof/SDK_ACCEPTANCE.json",
-    "sha256": "03b14d9a92c5dff3a1c762cb229c8280a14a8838916edb1386143294d3fec045"
+    "sha256": "12d2329c15e7db972ab30af8d57df21a576c1980f1a6455113dace66c5878f47"
   },
   "runtime": {
     "path": "runtime-proof/received/RECEIPT.json",
-    "sha256": "96a54f14260cae789065575484f18d5d74be287e8271f40b73a3b42bae56c161"
+    "sha256": "82e76d78b19dd5ab9e6987e6593c14be5dd3e714051ce1444a82b21fe154fd11"
   },
   "maven_module": {
     "path": "runtime-proof/received/MAVEN_TESTS.json",
@@ -77,7 +77,7 @@
   },
   "actual_long_facade": {
     "path": "runtime-proof/long-selftest/actual-long-selftest.json",
-    "sha256": "832374ab315335a85d0a7916e541ee3858c8e3ad6b9ebba9be664973cfbd7b2b"
+    "sha256": "27e402ac890dad2f1071247a6b6f4fc2a7290e71466dbffb540e50d4024bb830"
   },
   "allocation": {
     "status": "PASS_NARROW_ALLOCATION_OBSERVATION",

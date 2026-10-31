@@ -71,14 +71,14 @@ final class JccMergeMappingRecoveryV03Test {
             + "M3Jdk21HashPinnedTextSnapshotRecipe.java";
     private static final String TEXT_OWNER_SHA256 = "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795";
     private static final String PRIOR_MAP_SHA256 = "abfc59de62d46f6442b95717ac367461ab057cd74ed9dfffc6515d7fb0a1574c";
-    private static final String PRIOR_BINDINGS_SHA256 = "e17e0e066988a03583beab519a2ce4381c93f31b1da8ddf465f627cd68566b8d";
+    private static final String PRIOR_BINDINGS_SHA256 = "59b1491a232e3eabfd0530cbf47b01265603e6f493e382aa3c394c629b0516b6";
     private static final String SOURCE_COMMIT = "bc06298218dd88f0164ed9b67e74fd8234ed70b2";
     private static final String SOURCE_ROOT_TREE = "a72565e0e67f330f12c712dcc7a3fcbe1d80d24e";
     private static final String SOURCE_INPUT_SHA256 = "7db913209511a230e36a8da12282b3e4a6f84193399821ce9693042f616fa39d";
     private static final String SUMMARY_SHA256 = "8b3a81b79455884f36bef802e5b92b77c2fb284f79e1e4252c4b1ef0f21a53fc";
-    private static final String MANIFEST_SHA256 = "58bfeabe0fd0c21b800782d325f2f7b81a5eca9e746e96ea20efabddab7f6ad5";
+    private static final String MANIFEST_SHA256 = "2818667bb4e0c97ace54daf41e2fe454213a93ebd6cc2a0d2dc0d92db6f7ea17";
     private static final String PLAN_SHA256 = "ec52694868c4a8090afd556b5c985fe06c152bccdb3ee19d1d113bd86cf31862";
-    private static final String PLAN_FILE_SHA256 = "ee121f5b6bb24bb2afedd1a360a04d7439f0844501fae3d398a4e113fb846784";
+    private static final String PLAN_FILE_SHA256 = "155f96b0e3396f0987b9700d970841cf8bb8ede038ec838abe7cc53a18bc2619";
     private static final ObjectMapper JSON = new ObjectMapper();
 
     private record Target(String path, String before, String after, String beforeHash, String afterHash) {}
@@ -90,11 +90,11 @@ final class JccMergeMappingRecoveryV03Test {
                     "d4f1a513c663906dd4ec498c46864568dbee9866b48b3a1e41f7240a58c04e1c"),
             new Target("m3/docs/jcc-source-handoff.md", "before-01.txt", "after-01.txt",
                     "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337",
-                    "b87b6c729ba17ec1ac404fea2176611ee9be046cc97b26d8ef44aec9d85f1c8a"),
+                    "52178015a89e5f1c08ab280725e5fb45a3617fdc9035fdecf793cd3c2b503858"),
             new Target("m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
                     "before-02.txt", "after-02.txt",
                     "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126",
-                    "7d26f0ac825b78889cb6963ef8bcf038ad83c5c6fc191814c92025815c84b2cc"),
+                    "283d44e6e66405165706447446ed5242104ac1e79d33a6ceafc0cbe1a128de09"),
             new Target("m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
                     "before-03.txt", "after-03.txt",
                     "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b",
@@ -532,7 +532,7 @@ final class JccMergeMappingRecoveryV03Test {
         assertEquals(Set.of("commit", "root_tree", "input_epoch_sha256", "scope"), keys(intermediateInput));
         assertEquals("d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2", intermediateInput.path("commit").asText());
         assertEquals("0812573f02908d8078d13f5f49346865cdf1c0e0", intermediateInput.path("root_tree").asText());
-        assertEquals("973be97f762b46278f16c2bae6d887f2bc407110f333fe7ae0e7070e30cbe118",
+        assertEquals("2ea3ffe30ac6824bcc6d708c431b848a4c7997bdb4cdeaaddea1a62640734718",
                 intermediateInput.path("input_epoch_sha256").asText());
         assertEquals("Prior 52-record fixture and inherited TQ validation failures retained; current TQ record is preserved from exact C0 input.",
                 intermediateInput.path("scope").asText());

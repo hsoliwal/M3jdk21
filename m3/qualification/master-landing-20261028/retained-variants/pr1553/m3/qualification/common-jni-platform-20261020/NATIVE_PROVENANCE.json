@@ -160,13 +160,13 @@
     {
       "path": "src/java.base/share/native/libjava/M3RX7.c",
       "before": {
-        "git_blob_sha1": "5b78633b2c4904506fbb47035eabb54611586b39",
-        "sha256": "441c6de3577b56d15134f8048c1eeaab3baa982517309ca8d3e7fc9c65006d1a",
+        "git_blob_sha1": "41eb222a837b5c2ebed944e49b9a6a32d357186b",
+        "sha256": "7cbd0a016975704d1b3f9777421dcf02848ac14c8bebbd7aeefd41e9c46712c6",
         "bytes": 4163
       },
       "after": {
-        "git_blob_sha1": "3a97c5b4c596f6c02fe3a82edeeb4413ba42b10a",
-        "sha256": "63f42202be6ce83f72e70854051dffd261125d686ee52ffe6de97540c3957524",
+        "git_blob_sha1": "60ecc0751efead8e6027423becb9077e618b9b3d",
+        "sha256": "163a893017a913005cb612a811bbb6ae5cdf0c16efdf92ce2b38ad2e1273ffb8",
         "bytes": 4063
       },
       "source_license": "GPL-2.0-only WITH Classpath-exception-2.0",
@@ -196,13 +196,13 @@
     {
       "path": "src/java.base/share/native/libjava/M3StateRelation.c",
       "before": {
-        "git_blob_sha1": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
-        "sha256": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16",
+        "git_blob_sha1": "89b3127f0f262de3e00ba28a01079a659013dce2",
+        "sha256": "0df1989292b23b1f185f222db61ad55d5e38b30d5b758436ca9d62b8de277bbd",
         "bytes": 5899
       },
       "after": {
-        "git_blob_sha1": "fd24b54be45d6679ea1d746487216bc99efccc2f",
-        "sha256": "42ce45bf2d2584b3dd22799389b2fa43971e2355608c744e59eabb039434444c",
+        "git_blob_sha1": "87402dcf2b2c99f2b691e24f99b53194b5555ea9",
+        "sha256": "a8a69de511c4e5df57ef86bd3918ceee845faccc1ced09617791cd27b92a2ab5",
         "bytes": 5788
       },
       "source_license": "Apache-2.0",
@@ -504,8 +504,8 @@
     {
       "path": "src/java.base/share/native/libjava/M3ObjectMetrics.c",
       "identity": {
-        "git_blob_sha1": "1e7505f9d87ea9d8f6c7def62efc293515eeb0bf",
-        "sha256": "ce18bcccd3014f83e899c0d0b878f1b221f654096600c5b2d21bfa95285a7edc",
+        "git_blob_sha1": "5d84fd42d312786924190a02d77039e98deb5c03",
+        "sha256": "68fb2fbc9ec26831fb3b97a7c093ceba2872b7d29ef3644f9c95ff8efdaca511",
         "bytes": 1477
       },
       "status": "UNCHANGED_DIFFERENT_LIFETIME_ATOM",

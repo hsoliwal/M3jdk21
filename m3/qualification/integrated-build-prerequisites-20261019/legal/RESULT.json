@@ -21,8 +21,8 @@
     "canonical_source_payload_count": 193,
     "new_receiver_metadata_count": 14,
     "apache_handoff_rows": 125,
-    "ledger_sha256": "fd426ca89928018f06a5644d41779842f091ca1f8c8d19ce80dc60c9fa4d4e2e",
-    "packet_sha256": "7b51bd0347114a44b30efcef82dd6dea6c5455304ba164efef44cca7731f9a2b"
+    "ledger_sha256": "54240a4f6044fc3a4de122b4c15833169bdd73c26e2b60febaaacba13bc31c31",
+    "packet_sha256": "9cb1e5fda0ec7f07a052f811c675daae12c0c346fd1b02f8ff714d3b39a12c4b"
   },
   "source_A_ledger": {
     "path": "docs/M3-SCALE/provenance/M3_FILE_PROVENANCE.tsv",
@@ -126,13 +126,13 @@
   "command_cwd": "/workspace/scratch/87fb3604f641/m3-implementation/M3jdk21",
   "evidence_files": {
     "LICENSE_LEDGER.tsv": {
-      "sha256": "fd426ca89928018f06a5644d41779842f091ca1f8c8d19ce80dc60c9fa4d4e2e",
-      "git_blob": "2cda8225079fa68e9d5a8bbad4107d407731e3cb",
+      "sha256": "54240a4f6044fc3a4de122b4c15833169bdd73c26e2b60febaaacba13bc31c31",
+      "git_blob": "2bcc1c3a4fa8fa4a46f061b5cca4dc332f2ef30d",
       "bytes": 127903
     },
     "APACHE_HANDOFF.tsv": {
-      "sha256": "7b51bd0347114a44b30efcef82dd6dea6c5455304ba164efef44cca7731f9a2b",
-      "git_blob": "035b977e99a3ec01164be237b882a230009a0239",
+      "sha256": "9cb1e5fda0ec7f07a052f811c675daae12c0c346fd1b02f8ff714d3b39a12c4b",
+      "git_blob": "329f7dc72429b69e6cdc5785510c112e3676a699",
       "bytes": 95220
     },
     "POLICY_GATE.log": {

@@ -35,7 +35,7 @@ public final class RegionFoundationInputs {
     public static final String MAPPING = "m3/docs/name-mapping.json";
     public static final String STRING_BEFORE = "b7a074c6f366397847538b6b1bc6a5e5fecfb94809ab70fda40ef58406595b13";
     public static final String WORKFLOW_BEFORE = "e3625a7f61ece03df4ac90102e45a299ed3f571ca889295da4899fcd8759d5ad";
-    public static final String MAPPING_BEFORE = "d63273d13d34e95590d2f8511ae191a817144a2d671db68add35ef95b5103995";
+    public static final String MAPPING_BEFORE = "15629167d5f6d5f6999225a4ebd9b16b56943477c27701259048ac670d232fc4";
     private static final String GUARD = "\n        // Preserve non-positive region semantics before M3 slicing or UTF-16 scaling.\n"
             + "        if (len <= 0) {\n            return true;\n        }";
     private RegionFoundationInputs() { }

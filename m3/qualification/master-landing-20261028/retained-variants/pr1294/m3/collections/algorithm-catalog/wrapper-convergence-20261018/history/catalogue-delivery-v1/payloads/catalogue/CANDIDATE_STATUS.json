@@ -25,12 +25,12 @@
   "actual_sdk_qualification": {
     "status": "PASS_ACTUAL_SDK_AND_RECEIVERS",
     "receipt": "runtime-proof/SDK_ACCEPTANCE.json",
-    "sha256": "03b14d9a92c5dff3a1c762cb229c8280a14a8838916edb1386143294d3fec045"
+    "sha256": "12d2329c15e7db972ab30af8d57df21a576c1980f1a6455113dace66c5878f47"
   },
   "receiver_java_jni": {
     "status": "PASS_SCOPED_2F_ACTUAL_RECEIVER",
     "receipt": "FINAL_RECEIVING_STATUS.json",
-    "sha256": "bb278d6f53f1793637c53ee741dcac1b2c8d3d469194c4ccbab8674a521853fc"
+    "sha256": "37488064a47483307e62569d163de9db0fb78a21134564058fd63d74877fe074"
   },
   "canonical_immutable_pin": {
     "status": "EXTERNALLY_BOUND_AT_PUBLICATION",

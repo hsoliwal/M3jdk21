@@ -7,7 +7,7 @@
   "astImporterProofSha256": "312ddda73aeadd55b23526541ddc4e7f3eb98ec1221317a5c52e20563bd73299",
   "terminalParentImporterPacketProof": {
     "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\PACKET_AND_COMPILER_PROOF.json",
-    "sha256": "7c5dbf5cfa51e7308bd9260a27fe3b8b5874f0fe48057bf26a403598757e97c6"
+    "sha256": "dc3f8cd7cd642a1d3a66c4a1b7c2bc6fc259b3e676859ffbbf18134d09db6885"
   },
   "files": [
     {
@@ -57,7 +57,7 @@
     },
     {
       "path": "AST_EXPORT_PREPARATION.json",
-      "sha256": "0dd62c01d886e4274e09541fcca8f8ba94a5a57f8b8bb5468754e52e933fae11",
+      "sha256": "1e604f512d1d58a77a28b3720140c2d9b5542d5ac7ecfc5e6bd66436623d8842",
       "bytes": 1300
     },
     {
@@ -72,7 +72,7 @@
     },
     {
       "path": "AST_IMPORTER_PRE_GENERATION_GATE.json",
-      "sha256": "a82137b35d49913a6fee6a7d735fdb26e45e951c2c13cbc402ed8adba320accd",
+      "sha256": "c8fa55d5698394da85330309928ad69d7ba2b67461c0c15a7610f6e60a404108",
       "bytes": 639
     },
     {

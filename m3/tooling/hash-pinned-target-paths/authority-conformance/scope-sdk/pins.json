@@ -23,9 +23,9 @@
   "files": [
     {
       "path": "FOSS_REUSE_DECISION.tsv",
-      "gitBlob": "ce3e0762c4820edb29b5b08e5e0a7abcf49b24fc",
+      "gitBlob": "9832aa75bdc51f6241539c3d7e8a13442f7117b6",
       "bytes": 898,
-      "sha256": "331fd5d33a59fffbea066c0adbcc67f18f98c702230e67ab2e9459c8d7393d87"
+      "sha256": "c4ccbc45127f5abcfb25cc23b3b50cfa1cba9428574c10c30ea0c08117c8d3d5"
     },
     {
       "path": "README.md",

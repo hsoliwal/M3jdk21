@@ -8208,8 +8208,8 @@
               "T Access.second(T)",
               "long[] Join.compose(long[],long[])"
             ],
-            "sha256": "bbc2901ebe5b2de9951b672127bd47e9d13c70b5a39482fa0727703d0a2ff757",
-            "git_blob_sha1": "780c7887aaa6b0892a76f4eee1dcb17086a60289",
+            "sha256": "9d485a1771a30b4229acb5526ca90de5f2df4a03ee5ad8f5388bb128d2c38194",
+            "git_blob_sha1": "d70a152bdedc380ed8b28861ea94ef4c2adbea90",
             "fingerprint": null,
             "revision_role": "pinned"
           },
@@ -8241,8 +8241,8 @@
               "jlongArray Java_jdk_internal_mindex_M3StateRelation_composeNative(JNIEnv*,jclass,jlongArray,jlongArray)",
               "jlongArray Java_jdk_internal_mindex_M3StateRelation_repeatNative(JNIEnv*,jclass,jlongArray,jlong)"
             ],
-            "sha256": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16",
-            "git_blob_sha1": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
+            "sha256": "0df1989292b23b1f185f222db61ad55d5e38b30d5b758436ca9d62b8de277bbd",
+            "git_blob_sha1": "89b3127f0f262de3e00ba28a01079a659013dce2",
             "fingerprint": null,
             "revision_role": "pinned"
           },
@@ -8256,8 +8256,8 @@
               "int m3_state_relation_compose(const uint64_t*,const uint64_t*,uint64_t*,size_t)",
               "int m3_state_relation_repeat(const uint64_t*,uint64_t*,size_t,uint64_t)"
             ],
-            "sha256": "c948c0ac34180f1f9412a764c3c9fd8c59e11509467aa9e04f8825e903526885",
-            "git_blob_sha1": "18a02e228129827da486edc5b316790af6135310",
+            "sha256": "6a453bbe5c443d327228e48cc27c6d5dc356a67586f93796a52de17e69fa12a2",
+            "git_blob_sha1": "0e0c70e60b2cee61c3df31982a26f4251955cb61",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -8736,8 +8736,8 @@
             "path": "m3-openrewrite-recipes/recipe-crates/m3-qualified-lexicon-index-views-20261021/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-qualified-lexicon-index-views-20261021-001/M3IndexMaskWindow.c.txt",
             "symbol": "M3IndexMaskWindow JNI exports",
             "signatures": [],
-            "sha256": "4a9c0ab3e8d7a0aac0027e8fb4789f768ee5a48b2db18b7a54e2fd543c5c7f91",
-            "git_blob_sha1": "59b2130ca8e897e75e24afbd45e8fd885c55b0e9",
+            "sha256": "a284d0cc09ca01e2c41b67024ac9fd911e69165abd1bf01246f40499e810f8da",
+            "git_blob_sha1": "d8cc9be4ba6cbef3f1106923390aaf1949c2e4fb",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -8762,8 +8762,8 @@
             "path": "src/java.base/share/native/libjava/M3IndexMaskWindow.c",
             "symbol": "M3IndexMaskWindow JNI exports",
             "signatures": [],
-            "sha256": "4a9c0ab3e8d7a0aac0027e8fb4789f768ee5a48b2db18b7a54e2fd543c5c7f91",
-            "git_blob_sha1": "59b2130ca8e897e75e24afbd45e8fd885c55b0e9",
+            "sha256": "a284d0cc09ca01e2c41b67024ac9fd911e69165abd1bf01246f40499e810f8da",
+            "git_blob_sha1": "d8cc9be4ba6cbef3f1106923390aaf1949c2e4fb",
             "fingerprint": null,
             "revision_role": "candidate"
           }
@@ -8994,8 +8994,8 @@
             "path": "m3-openrewrite-recipes/recipe-crates/m3-qualified-lexicon-index-views-20261021/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-qualified-lexicon-index-views-20261021-009/M3FileSystemStore.java.txt",
             "symbol": "jdk.m3.fs.M3FileSystemStore",
             "signatures": [],
-            "sha256": "d779d1c024e3a987f956f72ca5e565cdb592dbe2738d6ba9170394241cef16aa",
-            "git_blob_sha1": "c9dede2e2fd81bad1ee954f69df667533fb018f4",
+            "sha256": "6d2350391560a742ec27766b379f07ccdcfb45562ed2697a5f26ce24122225b6",
+            "git_blob_sha1": "48e715b70529a8cc1650a7a085d6b3c74b001200",
             "fingerprint": null,
             "revision_role": "pinned"
           },
@@ -9032,8 +9032,8 @@
             "path": "m3/fs/src/main/java/jdk/m3/fs/M3FileSystemStore.java",
             "symbol": "jdk.m3.fs.M3FileSystemStore",
             "signatures": [],
-            "sha256": "d779d1c024e3a987f956f72ca5e565cdb592dbe2738d6ba9170394241cef16aa",
-            "git_blob_sha1": "c9dede2e2fd81bad1ee954f69df667533fb018f4",
+            "sha256": "6d2350391560a742ec27766b379f07ccdcfb45562ed2697a5f26ce24122225b6",
+            "git_blob_sha1": "48e715b70529a8cc1650a7a085d6b3c74b001200",
             "fingerprint": null,
             "revision_role": "candidate"
           },

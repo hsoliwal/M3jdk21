@@ -3,7 +3,7 @@
   "status": "PASS",
   "group": "lucene",
   "handoff_source": "/workspace/scratch/206049dfb270/nlp-work/EVIDENCE_HANDOFF-LUCENE.json",
-  "handoff_sha256": "3251253a729a05db4b953bf749505f498098cce5199695395b65ad51d213f2d8",
+  "handoff_sha256": "9a24f232500b79cc185299954d9ab9739f5a1210ea6d816ac994ab002ea9dbc8",
   "files": [
     {
       "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/lucene-fetch.log",
@@ -29,7 +29,7 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/LUCENE_OWNER_001.json",
       "destination": "nlp/evidence/LUCENE_OWNER_001.json",
-      "sha256": "a9dd5a13b0c2e827249ad12053792c5baac45cca5753c357e4023a2fcde51be9",
+      "sha256": "d2981abb4e6abca4cfa27909023e721f257f60dfd71aadffde59200438220059",
       "bytes": 5371,
       "reused_exact_existing_copy": false
     },
@@ -43,14 +43,14 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/LUCENE_OWNER_001_INPUTS.json",
       "destination": "nlp/evidence/LUCENE_OWNER_001_INPUTS.json",
-      "sha256": "c84402379af34b76fb26fc8f018f998a30b2adcacd12cf0e61e8b95a7178763b",
+      "sha256": "c61c4e68ff19894865638e9d3dceeef6a5bb93f0cb9c7751145b95ca14ae8c82",
       "bytes": 2314051,
       "reused_exact_existing_copy": false
     },
     {
       "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/LUCENE_OWNER_001_READBACK.json",
       "destination": "nlp/evidence/LUCENE_OWNER_001_READBACK.json",
-      "sha256": "c84402379af34b76fb26fc8f018f998a30b2adcacd12cf0e61e8b95a7178763b",
+      "sha256": "c61c4e68ff19894865638e9d3dceeef6a5bb93f0cb9c7751145b95ca14ae8c82",
       "bytes": 2314051,
       "reused_exact_existing_copy": false
     },

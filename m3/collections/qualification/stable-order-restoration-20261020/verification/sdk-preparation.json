@@ -13,9 +13,9 @@
       "sha256": "052fea312ec7bc5cac52869ce5ae9021a635c7e6e09208b95f382eb9e2e9441b"
     },
     "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java": {
-      "git_blob": "55be45a83f4fc7e7317534fc87a66e727c845060",
+      "git_blob": "05c56adbdd6a0fca923a47486203c7b9b326831d",
       "reference": "https://github.com/hsoliwal/com.synexia/blob/f04fbac91a7891e64b77c7b24cef1ab75ec88144/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
-      "sha256": "613fd494de5eebdbc29d8982c599d44cd321754b370175f7d097720904a04853"
+      "sha256": "3b4f7649fc3ee38df62a6dc9b318e8845da6574f7e48b4cd7a948b58e266d46f"
     },
     "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java": {
       "git_blob": "d41d6dc93ec0e176f6d215d23e3b6a316a9e4a32",

@@ -4452,8 +4452,8 @@
       ],
       "parent": "m3/pom.xml",
       "reason": "LOCAL_PARENT",
-      "git_blob": "97974888044759a31a4c793d650cbf8b4daf53f0",
-      "before_sha256": "d35c1d6fef8bc734771c1d6250c4b76d25037b1cdb8d5773fbe6ed76b8fc28d7",
+      "git_blob": "c983649d5150a89d5d0d7eb09d348a07c6388550",
+      "before_sha256": "1fd8cbc4025d985defb18ad7c2118d0cb5d98385a25df80a018ffdcf4c0a8ea4",
       "parent_gav": [
         "com.m3",
         "m3jdk21-control-reactor",
@@ -4472,8 +4472,8 @@
       ],
       "parent": null,
       "reason": "NO_PARENT",
-      "git_blob": "19766bf32f2db46fe34ee19c6bb48e553589baaf",
-      "before_sha256": "d1894442c675d58e867009ab43dce5e900a9dfe41c21f7e9d01a212c18a316b4",
+      "git_blob": "e01cddcbac3751bfa79368c3727343754c7e3b21",
+      "before_sha256": "37b503fb5aee9a1f3a02d0efaa8b224f31c9c2aaa5d8e0079143bc9bd8fb73fb",
       "disposition": "EXCLUDE",
       "classification": "REPLAY_FIXTURE"
     },
@@ -5963,8 +5963,8 @@
       ],
       "parent": null,
       "reason": "NO_PARENT",
-      "git_blob": "cbeafd81a00611494595a47726b6a807d65f1f11",
-      "before_sha256": "54521e57cf458017c20682a31ad1a4dc1fa08b2847f8fa79091566dc748404d6",
+      "git_blob": "4568888fc2c6464a88d4564f74d7067eba60e468",
+      "before_sha256": "e97b7e58eaba1546fd8ab0b2922a7b014b19ef3739cb8efde040c82a74fc8066",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_VENDOR_WRAPPER",
       "install_root": "m3/vendor/third_party/apiguardian-api/pom.xml"

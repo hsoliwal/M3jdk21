@@ -34,7 +34,7 @@
   "java_compile_receipt": "compile-check-v01/receipt.json",
   "java_compile_status": "PASS",
   "prior_template_packet": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping/java-template/TEMPLATE_PACKET.json",
-  "prior_template_packet_sha256": "d9441405014cca0bc6b106de6cf28539920a164e2c627f04dea750072f1e054d",
+  "prior_template_packet_sha256": "a5a81bee6c69a796e0cf7632746dff3be5ac56bb11fbaac3424dcba325fcd94b",
   "prior_template_all15_files_unchanged": true,
   "checks": [
     "Python AST parse",

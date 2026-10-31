@@ -65,7 +65,7 @@ All **229 frozen inputs**—166 local fixed inputs and 63 external source/proof 
 | `m3/docs/jcc-source-handoff.md` | `59ed76969f86486e7adb377409e284f69577fe02754006fdfe5b3938a16760a0` |
 | `m3/docs/name-mapping.json` | `61818898ef6c092ddad2c1ee4cfe7508199912ff0a1f2d5c2a51ad6695d040c8` |
 | `m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv` | `59c4c970ac75a56aa5d5a3e2f3e88f5caa831eb06be788266c725202b8c64b12` |
-| `m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json` | `a80ffed31f45465774fd03ba90858c301327d6b472acf89652d01bf96b981707` |
+| `m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json` | `8c76c2dd45e775d29f8f47d8daf65842e465c74ad3dec7aacd55df59f9d051a1` |
 
 The four manifest rows exactly match the plan's paths, before identities, after identities, and resource names. All seven guards retain their pinned content. The current map has 46 records; the two requested JCC capability rows remain `blocked` with empty `tests` arrays. All four acceptance flags remain explicitly false.
 
@@ -73,7 +73,7 @@ The four manifest rows exactly match the plan's paths, before identities, after 
 
 Normal mapping validation conditionally checks target/recipe content hashes only for implemented records and checks executed evidence for tested records. The requested JCC rows remain blocked, so the ordinary validator's success **does not certify their target, recipe, or evidence hashes**.
 
-The separate explicit audit is `successor-e03/reference-audit/REFERENCE_AUDIT.json`, SHA-256 **`cdf193f9b9f1b63671de7227b3f79cbf4747aca893ec1d16bab75eed18185dbc`**. It reports passing bounded reference and lineage consistency. This reviewer independently rechecked actual local file identities for all:
+The separate explicit audit is `successor-e03/reference-audit/REFERENCE_AUDIT.json`, SHA-256 **`f7dcc4fb3843ce83520aacaf8fd36f4347d64000233d92921e81f67154bdfa87`**. It reports passing bounded reference and lineage consistency. This reviewer independently rechecked actual local file identities for all:
 
 - **17 source reference occurrences**.
 - **46 source-proof reference occurrences**.

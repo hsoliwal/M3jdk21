@@ -5,7 +5,7 @@ source_pr	9599
 source_export_pom	synexia-openrewrite-recipes/pom-jdk-a3-export.xml
 source_export_pom_git_blob	7beaa39f614d9327dabf916b25ef85c663653bc5
 export_manifest	synexia-openrewrite-recipes/src/main/resources/META-INF/m3/jdk-a3-recipe-export.tsv
-export_manifest_git_blob	2c51473e7adb6fa50fb0031ac6314a050b90feec
+export_manifest_git_blob	b691460aebcd458f5d5fb0d508b4a4a05ef8d6c5
 license	Apache-2.0
 target_artifact	com.synexia:synexia-jdk-a3-recipes:1.0.0-SNAPSHOT
 target_source_root	m3/vendor/synexia/synexia-openrewrite-recipes

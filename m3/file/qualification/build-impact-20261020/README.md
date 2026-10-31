@@ -13,7 +13,7 @@ A single stable physical row index identifies a source, class or build-input fil
 
 ## Verified locally
 Java 21 `javac --release 21 -Xlint:all -Werror` and M3BuildImpactPlanContract **25 checks passed with an API-compatible M3FileDeltaLedger test shim**. Source/code templates have SHA-256 seals:
-- Source e2da19e2f933a3d72dae33ce7905b6da4e24e2c21dc4bf7a37f99e2951b24cba
+- Source e19a5899ad4b69160259404dbd97e1a45ae6368332dc48b182beee734c2fec12
 - Contract 0b18ca58e66c63e91c6a661f8357fdc225ffbe58954e4d5abaabd55e2ea28544
 
 Canonical reusable OpenRewrite recipe: `hsoliwal/com.synexia#12584`, `com.synexia.rewrite.M3FileBuildImpact20261020`. It remains recipe-first and exact-source admittance. Full Maven, real ledger, custom matched JDK and integration builds are not locally executed.

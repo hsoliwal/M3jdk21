@@ -17,7 +17,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/recipe/expected-projects.json",
       "targetPath": "m3/tooling/tq-sync/source-reactor/expected-projects.json",
-      "gitBlob": "78e059c59cdc2b700621a4fea648a1f168029301",
+      "gitBlob": "462b7e1dfa3f6d74ceda23a2c3109b89777c98ca",
       "bytes": 35277
     },
     {

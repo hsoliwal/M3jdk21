@@ -957,7 +957,7 @@
     },
     {
       "path": "test/jdk/java/lang/String/M3MappedStringBackingTest.java",
-      "sha": "b1f69174a1c8c521f94759a9e046a0b63028e022"
+      "sha": "7207be00a5ea447d01415c94f63768d77cc2f68e"
     },
     {
       "path": "test/jdk/java/lang/String/M3TQTest.java",

@@ -1,7 +1,7 @@
 path	git_blob	status	pr	note
 .github/actions/upload-bundles/action.yml	aa857cc2b443e789c517e4d998e56698c3d430f6	modified	2120	PR version, not live; the git blob id is its content address
 .github/workflows/main.yml	c62f73cf2a958c26e4441f672a0eb765f2d79a1b	modified	2120	PR version, not live; the git blob id is its content address
-m3/ports/vcpu/native/CMakeLists.txt	574d8dac01ddffc43c67965b66faee23d0108739	modified	2120	PR version, not live; the git blob id is its content address
+m3/ports/vcpu/native/CMakeLists.txt	51b8826cecb9320f7a8132f8be6e0dd6592b3155	modified	2120	PR version, not live; the git blob id is its content address
 m3/ports/vcpu/native/cmake/m3vcpu_check_imports.cmake	1eaa0ee5172556c5c91ddede323b7c6cfc59a49e	modified	2120	PR version, not live; the git blob id is its content address
 m3/ports/vcpu/native/tests/cmake/test_imports.cmake	6d4b1b21fb6a9d06a328766e94dc7a2495f42daf	added	2120	PR version, not live; the git blob id is its content address
 m3/ports/vcpu/native/tests/import_tool_fixture.c	c85367b33ea5d9de3d0d80a8b776099e022d1843	added	2120	PR version, not live; the git blob id is its content address
@@ -9,4 +9,4 @@ m3/release/README.md	84f2b82e8adfa240d4557887ac650af7a5d507af	modified	2120	PR v
 m3/release/release-contract.json	9642168309390bbebe2b8af364a672f46a218cca	modified	2120	PR version, not live; the git blob id is its content address
 m3/release/test_release_admission.py	d949fc8d3a949a651539e56e70b6f26465e78be2	modified	2120	PR version, not live; the git blob id is its content address
 m3/release/verify_release_admission.py	045299e2969e4898225a27793aafd2668283ed17	modified	2120	PR version, not live; the git blob id is its content address
-m3/synexia-import/qualification/m3jdk21-release-portability-20261029.json	d9b2f9d2cf700bf0edf2be44b0475909e6f14f75	added	2120	PR version, not live; the git blob id is its content address
+m3/synexia-import/qualification/m3jdk21-release-portability-20261029.json	793eb41a2e21388ae68404655eda707f7ff96f9c	added	2120	PR version, not live; the git blob id is its content address

@@ -22,7 +22,7 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-runtime-001/RESULT.json",
       "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/receiver-runtime-001/RESULT.json",
-      "sha256": "679ac1b3f0a18abead0c716b82a876db225f02d77afc01bcb8a3cae75f7932ec",
+      "sha256": "11c86ec78af00b87c729583db7c8014acd86ae55e431c9694ec73b82ef331fca",
       "bytes": 2509
     },
     {
@@ -112,13 +112,13 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/integration-work/swt-receiver-001/RESULT.json",
       "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/receiver-application-001/RESULT.json",
-      "sha256": "9be0957893c84009c425508918629fdeef3f8137385f58fc9415ae4615fce128",
+      "sha256": "a61e11b6f6a96160e4b9fa266995510d5de0cc4b9b06c9f0d5c7c39c8d986076",
       "bytes": 743
     },
     {
       "source_path": "/workspace/scratch/206049dfb270/integration-work/swt-receiver-001/apply.json",
       "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/receiver-application-001/apply.json",
-      "sha256": "2d029578520d8461571fe32e7cb30b3191612e9676904abd592e4dc55f2c4d2e",
+      "sha256": "94c7ffce0102c04d363baf0007dedfeebc14b5ae7a0d4191703a26220050b440",
       "bytes": 655
     },
     {
@@ -130,7 +130,7 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/integration-work/swt-receiver-001/preflight.json",
       "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/receiver-application-001/preflight.json",
-      "sha256": "aa100e786f1f8da07f5166e8e20e90472968c17a57ca3ec65ad1ce83772490d7",
+      "sha256": "1b9f5d8f0398664e98894c7bfd7381739d48d9ff619f6890ff42a91ce2e623f4",
       "bytes": 655
     },
     {
@@ -142,7 +142,7 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/integration-work/swt-receiver-001/replay.json",
       "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/receiver-application-001/replay.json",
-      "sha256": "4dd36ccd80abe702a53ec1e390f4209f19dfdf63e46c1309d79573ae8c5bde33",
+      "sha256": "bb46722ebec18e6eab04ebdde684e6fa6ec09e85dbf239818267da94ddc59496",
       "bytes": 665
     },
     {

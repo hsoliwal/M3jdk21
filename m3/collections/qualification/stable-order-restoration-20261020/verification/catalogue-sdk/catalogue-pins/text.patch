@@ -62,19 +62,19 @@ index 0000000..46ec51b
 +  "qualification_receipts": {
 +    "verification/sdk/RESULTS.json": {
 +      "target_path": "m3/collections/qualification/stable-order-restoration-20261020/verification/sdk/RESULTS.json",
-+      "sha256": "dec0b1b97b7bbc1a5368517112169c66f0ded0adfaf743a0e22cf63930db369f"
++      "sha256": "162a5d8ebcb52c9bf05c284f315ffc2146773f446861bd8fc12db851c1488eaf"
 +    },
 +    "verification/generated/RESULTS.json": {
 +      "target_path": "m3/collections/qualification/stable-order-restoration-20261020/verification/generated/RESULTS.json",
-+      "sha256": "c3cc257dd3d67c4a5305e66c3abda448c03d0643646a06ceee38f492b72f8239"
++      "sha256": "8447b5d391ae2e8e21875d6952509ec174049a727b5140f59fd4dc23b12c0293"
 +    },
 +    "verification/GENERATED_COMPARISON.json": {
 +      "target_path": "m3/collections/qualification/stable-order-restoration-20261020/verification/GENERATED_COMPARISON.json",
-+      "sha256": "427ba0a45c0cbdba436bfe35c6b553de80057ebbdf2c5acfd9bd7a054aa7b9d4"
++      "sha256": "d8f0ae2fdbf6f119c2e6b892fdc480f950a2486425297313ebb0d664d2b04496"
 +    },
 +    "verification/native-final/RESULTS.json": {
 +      "target_path": "m3/collections/qualification/stable-order-restoration-20261020/verification/native-final/RESULTS.json",
-+      "sha256": "274fc97b1812364b176cd34cfe86e76f10e222b52feb7f0a223ee44b6a64d8be"
++      "sha256": "3ba7ce87bd053fa12078887d8af555bbfb75d46a721cf351743e5e64b4c3f7ff"
 +    },
 +    "verification/retained-wrappers/RESULTS.json": {
 +      "target_path": "m3/collections/qualification/stable-order-restoration-20261020/verification/retained-wrappers/RESULTS.json",

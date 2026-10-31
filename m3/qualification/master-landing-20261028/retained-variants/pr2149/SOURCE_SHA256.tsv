@@ -1,5 +1,5 @@
 path	git_blob	status	pr	note
-m3/collections/qualification/range-rank-recovery-20261029/RECEIVER_RECEIPT.json	5f35a1d48cf73302d4b5dcc9a82bc92e31a33856	added	2149	PR version, not live; the git blob id is its content address
+m3/collections/qualification/range-rank-recovery-20261029/RECEIVER_RECEIPT.json	3ab1a90ff60017dc87c226ce2d67d8818419abae	added	2149	PR version, not live; the git blob id is its content address
 m3/collections/qualification/range-rank-recovery-20261029/RECEIVER_RECEIPT.json.license	6f4115e25cc928a1778b70d39df9d0d9ed79bc40	added	2149	PR version, not live; the git blob id is its content address
 m3/collections/src/main/java/jdk/m3/collections/M3BagRankIndex.java	0fe4e29e0aa4943b13c7deaa1c5ab5be57de713c	modified	2149	PR version, not live; the git blob id is its content address
 m3/collections/src/main/java/jdk/m3/collections/M3IndexPathRank.java	979763a143bb471ad64b0a4c557e9b0be54c01b9	modified	2149	PR version, not live; the git blob id is its content address
@@ -9,5 +9,5 @@ m3/collections/src/test/java/com/m3/collections/M3IndexPathRankSelectionContract
 m3/collections/src/test/java/com/m3/collections/M3LongRangeAlgebraSelfTest.java	b57e4eb5f50e9e0a01e16050a199f7725112ff70	added	2149	PR version, not live; the git blob id is its content address
 m3/collections/src/test/java/com/m3/collections/M3LongRangeAlgebraTest.java	8e4f5b56d79c7219acefdf232f76a78b1f8bbc65	added	2149	PR version, not live; the git blob id is its content address
 m3/collections/src/test/java/com/m3/collections/M3LongRangeBoundarySearchTest.java	da3b3800b350b8675ab008d6e9569ebf9a7943f3	added	2149	PR version, not live; the git blob id is its content address
-m3/docs/name-mapping.json	1c4ba38dfe11a57fa5c86e6e64fa57d300c62b40	modified	2149	PR version, not live; the git blob id is its content address
-m3/tooling/name-contract/name-plan.json	e83a61d2d06fdc29a0cd0d514914059e2abb4004	modified	2149	PR version, not live; the git blob id is its content address
+m3/docs/name-mapping.json	de0b10652d6a7488fc0d67add06fa543f98fb124	modified	2149	PR version, not live; the git blob id is its content address
+m3/tooling/name-contract/name-plan.json	5140dca5c62a18782f45d18ff8a9beb4c021d403	modified	2149	PR version, not live; the git blob id is its content address

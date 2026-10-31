@@ -8,7 +8,7 @@
   "receiving_revision": "c0ffa6d76338ed1b06cfe0158b0e04d8930df546",
   "donor_qualification": {
     "path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-003-workflow-successor-offline/RESULT.json",
-    "sha256": "57ccb0c5a801848e80e472ac533c7e287b1eaac8c36960824acc952ea19dbb25",
+    "sha256": "c7edd6e3cc89d93b7fd6fce6bb98b9c0d204531fd8bbfa47d9abcb9bf2dfa818",
     "status": "PASS",
     "scope": "Harness lineage only, not this task proof"
   },
@@ -51,19 +51,19 @@
     },
     {
       "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-003-workflow-successor-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/verify_sources.py",
-      "source_sha256": "318dc14d91710372295860033b1683e695d671a19840097d77392aa110efc44f",
+      "source_sha256": "603a47418a7dbd6bd38708bff31bce26b4b4a70e3bdc2d85a7d829395e24b445",
       "source_bytes": 2324,
       "target_path": "verify_sources.py",
-      "after_sha256": "875e3c5f2961dbf957207e4d0a495cb17aa837d656d181c0de2e8a4583bb63ca",
+      "after_sha256": "83b20a4bc348546e642fa6c04ba36fff86aca7fdd598f0b35a2f9301afc9415c",
       "disposition": "ADAPT_FIRST_PARTY_APACHE_2_0",
       "contract": "Task identity, one-suite inventory and actual SWT attribution; scheduler/refusal/replay algorithms unchanged"
     },
     {
       "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-003-workflow-successor-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/com/synexia/rewrite/M3IntegratedRefinementRecipeTest.java",
-      "source_sha256": "5a64f5196c1388e6924238c14c7bdd70053d32d8e86d1f5e7be2e5259831efa5",
+      "source_sha256": "d477f820c8bf4712b36d4a1d9002b2fa82a62a88175c1f84cd7fd03e978eefe0",
       "source_bytes": 31463,
       "target_path": "src/test/java/com/synexia/rewrite/M3SwtCurrentOwnerRuntimeClosureRecipeTest.java",
-      "after_sha256": "2ec05f671df50d255c98ac04432fa679c5b35d0633851cfacc9d0f3f4175dd62",
+      "after_sha256": "d1313391568f0fddbfda2786fc6924ba5b77f66e2e98bfb75d6b559fe606283c",
       "disposition": "ADAPT_FIRST_PARTY_APACHE_2_0",
       "contract": "Task identity, one-suite inventory and actual SWT attribution; scheduler/refusal/replay algorithms unchanged"
     }
@@ -76,7 +76,7 @@
     },
     {
       "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
-      "sha256": "613fd494de5eebdbc29d8982c599d44cd321754b370175f7d097720904a04853",
+      "sha256": "3b4f7649fc3ee38df62a6dc9b318e8845da6574f7e48b4cd7a948b58e266d46f",
       "disposition": "UNCHANGED_SHARED_CANONICAL_OWNER"
     },
     {

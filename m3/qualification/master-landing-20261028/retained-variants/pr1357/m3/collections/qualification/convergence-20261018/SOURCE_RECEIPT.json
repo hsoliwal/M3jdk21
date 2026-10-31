@@ -233,8 +233,8 @@
     {
       "dataset": "converged-build-20261018",
       "path": "m3/vendor/third_party/apiguardian-api/pom.xml",
-      "pre_sha256": "0d6c98a7e1d59844d3c64ed1e4c59381c5a46834f2731375a7a6c9642ca62091",
-      "post_sha256": "54521e57cf458017c20682a31ad1a4dc1fa08b2847f8fa79091566dc748404d6"
+      "pre_sha256": "e539758ff9c8f9b634d2b111d26b43d575b4329965bb854783c6f59eaa1a3ee1",
+      "post_sha256": "e97b7e58eaba1546fd8ab0b2922a7b014b19ef3739cb8efde040c82a74fc8066"
     },
     {
       "dataset": "converged-build-20261018",

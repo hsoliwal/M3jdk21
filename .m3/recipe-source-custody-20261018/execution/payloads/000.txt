@@ -70,8 +70,8 @@
   "execution_scope": "CANONICAL_MAVEN_KERNEL_CONTROL_AND_CUSTODY_BINDING",
   "packet": {
     "base_sha": "275b610f26c191cd70420172ac65b634a8a4df49",
-    "manifest_sha256": "c861a670672475ba7ae704c4e700d65e93fa07c48cb7981fb51f236701c50d2a",
-    "manifest_git_blob": "d6545a7baf59b0b6078f0de3fa4ace7d202b6fbd",
+    "manifest_sha256": "9f0f812658032086f1e6aa0c3fcf42c1cbc0073a5418bd53ebc334b80e5519c9",
+    "manifest_git_blob": "93c3aaacb44773403750023e620a449be18cce12",
     "public_mirror": ".m3/recipe-source-custody-20261018/binding",
     "targets": [
       {
@@ -98,9 +98,9 @@
       },
       {
         "path": "m3/docs/m3-public-fork-recipe-intake-20261017.md",
-        "before_sha256": "cd9eb627b516831349cf5d4d95b13b0872df2c74c0fc39a12cdd1525068e00f8",
+        "before_sha256": "8b0a102143a144b62604ae09daf4a70d939482b0c085d8a856da72eb706f1d3e",
         "after_sha256": "4dc6f12a66d719fb6b7ca23d8b19d059a611718a5ba663488949bc97da3140bf",
-        "before_git_blob": "9f33db32a6419242b1fdb310599e6bff3c137e4c",
+        "before_git_blob": "cc4c327fd0af87a2c9b35c379b81489802f33704",
         "after_git_blob": "1582474d3519fd14ef00fe16127b78dde328625f",
         "mode": "100644",
         "resource": "payloads/002.txt",
@@ -140,11 +140,11 @@
       "finished_at_utc": "2026-10-18T08:01:17.601988+00:00",
       "exit_code": 0,
       "log": ".m3/recipe-source-custody-20261018/logs/binding/plan.log",
-      "log_sha256": "b847386c80a6455181173ea354e90a9a7c8a51fad829532eba5e41f0fd62d371",
+      "log_sha256": "ad4c85712a3a7fecb6fa45140ac45c8a06d35e648240dd445df9109a5acca09d",
       "expected_changes": 4,
       "report": [
         "275b610f26c191cd70420172ac65b634a8a4df49",
-        "c861a670672475ba7ae704c4e700d65e93fa07c48cb7981fb51f236701c50d2a",
+        "9f0f812658032086f1e6aa0c3fcf42c1cbc0073a5418bd53ebc334b80e5519c9",
         "4",
         "false"
       ]
@@ -168,11 +168,11 @@
       "finished_at_utc": "2026-10-18T08:01:22.124883+00:00",
       "exit_code": 0,
       "log": ".m3/recipe-source-custody-20261018/logs/binding/apply.log",
-      "log_sha256": "26e19cfada56fb3a33d579ba0efa4c073c775dbd9b0146349df9a4629890ca26",
+      "log_sha256": "0f5c30fd5a08a296fa82d23e7bc95037ebdc039942ca566194e62ce36d755fa0",
       "expected_changes": 4,
       "report": [
         "275b610f26c191cd70420172ac65b634a8a4df49",
-        "c861a670672475ba7ae704c4e700d65e93fa07c48cb7981fb51f236701c50d2a",
+        "9f0f812658032086f1e6aa0c3fcf42c1cbc0073a5418bd53ebc334b80e5519c9",
         "4",
         "true"
       ]
@@ -196,11 +196,11 @@
       "finished_at_utc": "2026-10-18T08:01:24.973537+00:00",
       "exit_code": 0,
       "log": ".m3/recipe-source-custody-20261018/logs/binding/check-1.log",
-      "log_sha256": "f523b537e5a51b5c5c3c64cc2463b75fc3df46eb0cfebed2a86e4f3335600934",
+      "log_sha256": "6d7cc7d57c5c65a5349a94ee08ac70463baf2b9524fcbb555801b36d15bb51bb",
       "expected_changes": 0,
       "report": [
         "275b610f26c191cd70420172ac65b634a8a4df49",
-        "c861a670672475ba7ae704c4e700d65e93fa07c48cb7981fb51f236701c50d2a",
+        "9f0f812658032086f1e6aa0c3fcf42c1cbc0073a5418bd53ebc334b80e5519c9",
         "0",
         "false"
       ]
@@ -224,11 +224,11 @@
       "finished_at_utc": "2026-10-18T08:01:29.925891+00:00",
       "exit_code": 0,
       "log": ".m3/recipe-source-custody-20261018/logs/binding/check-2.log",
-      "log_sha256": "eccc5d7f3ebff67937f1f4ab46eb6b8b1a92230f55aa3e12149c2d86bf797d44",
+      "log_sha256": "1a29eddd042f587db8ef0c5a2c15958919ff28279aada1b2396327585edb9b84",
       "expected_changes": 0,
       "report": [
         "275b610f26c191cd70420172ac65b634a8a4df49",
-        "c861a670672475ba7ae704c4e700d65e93fa07c48cb7981fb51f236701c50d2a",
+        "9f0f812658032086f1e6aa0c3fcf42c1cbc0073a5418bd53ebc334b80e5519c9",
         "0",
         "false"
       ]

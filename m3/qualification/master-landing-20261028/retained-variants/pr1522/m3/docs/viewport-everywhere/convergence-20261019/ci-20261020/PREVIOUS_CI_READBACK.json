@@ -1226,7 +1226,7 @@
       "local_log": "current_logs.log",
       "finding": "Historical source seal stops at M3IndexedListSnapshot: expected preimage blob217700023c2a6456a505b07b311290f8da8c02e2, actual qualified postimage2caf4faf78ea20ccb41de9a61b08790855b4edd4.",
       "checked_out_merge": "43be621dd4f524dffa2862de1ec4b66e12e66974",
-      "log_sha256": "e889043f3c35ed66162aad1fc34a0b9cc7362de4dd7e43e3e0e2022d736a3bc2",
+      "log_sha256": "79cd312c3ae7f717d060533681f0ce7fa85791fd3a5f5c657c676ec28663cd3a",
       "log_bytes": 22620
     }
   },

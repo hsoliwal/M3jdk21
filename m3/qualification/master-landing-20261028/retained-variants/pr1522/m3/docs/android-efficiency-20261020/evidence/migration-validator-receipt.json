@@ -4,7 +4,7 @@
   "started_utc": "2026-10-20T07:52:39.213415+00:00",
   "finished_utc": "2026-10-20T07:52:39.499606+00:00",
   "command_plan_path": "m3/docs/android-efficiency-20261020/evidence/migration-validator-command.json",
-  "command_plan_sha256": "4ace4dc574bacb1b8531ff07cf4d613e42de040ad51529ccbf71a0421945df41",
+  "command_plan_sha256": "8893769c36d51fc5f472e1e499e9d433a19d9d548453a8dd2c279f7d1dab4972",
   "canonical_commit": "517d49739dca95ba5caad4a3f14f94171a984b71",
   "receiving_runtime_commit": "329cd9116eca5a3b2ec081fb6760ca3e6508da7e",
   "runs": [
@@ -41,9 +41,9 @@
         "m3/core/src/jdk/m3/text/M3StringPiece.java": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755",
         "m3/core/src/jdk/m3/text/StorageIdentity.java": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354",
         "m3/docs/android-efficiency-20261020/history/class-index-counterpart-before.json": "b50cce55526cd14d0c7fe91c65b70cf94b7655d0208a493f341a4bc0a2fa5f54",
-        "m3/docs/android-efficiency-20261020/history/ordered-relations-adapter-before.json": "b694b4083d79afc4e741f8389acebd91da437f7e227eac516f73dd8c900e2b09",
+        "m3/docs/android-efficiency-20261020/history/ordered-relations-adapter-before.json": "9d54908573ec1b984485adba62f3978ed4b8414481d1a97ab77d3716b48f3431",
         "m3/docs/android-efficiency-20261020/history/segmented-bit-lane-28-before.json": "841af749c3d1980312ba3f96e6bbb94897470bb103376342aebbe6f9cd376c90",
-        "m3/docs/name-mapping.json": "94b15389903b58c885efefc5d017ad7853fc94077764fa1ef748217365a81003",
+        "m3/docs/name-mapping.json": "7ab3e555a8be6988034a7e540982ec243f6180a7f8228d2d4fcbf1a1108ddc02",
         "m3/docs/name-mapping.schema.json": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
         "m3/migration/evidence/local-20261002-final/exact-recipe-contract.log": "03768da3eb30d806aec3fbbfd7e7d02f19678cc6a9ddf408e23c104f03deea6f",
         "m3/migration/evidence/local-20261002-final/javac21.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -79,7 +79,7 @@
         "src/java.base/share/classes/jdk/internal/mindex/M3ClassFlags.java": "cb7dc87b4fb4849bd145520014bcd8cd55168134cf8b482dba495219b8a2344b",
         "src/java.base/share/classes/jdk/internal/mindex/M3Constructor.java": "f6a8cd76d1bd8bd5f2641d6d81dcb4e74b8aa613442c23fed32f3e99945be923",
         "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67",
-        "src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java": "bbc2901ebe5b2de9951b672127bd47e9d13c70b5a39482fa0727703d0a2ff757",
+        "src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java": "9d485a1771a30b4229acb5526ca90de5f2df4a03ee5ad8f5388bb128d2c38194",
         "src/java.base/share/classes/jdk/internal/mindex/M3Field.java": "a197eb18922617e1b0992d474f2acdb3c8753eb1c0b16a014a93a5460fe66481",
         "src/java.base/share/classes/jdk/internal/mindex/M3IntLane28.java": "ccb582914275bb00ea885d17b94173f60f65d7cbb2a2543af910de15428f6cda",
         "src/java.base/share/classes/jdk/internal/mindex/M3LongLane28.java": "89b6fee4b0572a975b48f9cdbf95a732d4601dd8748411732bc79d9e14afb644",
@@ -95,8 +95,8 @@
         "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java": "78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4",
         "src/java.base/share/classes/jdk/internal/mindex/M3VI.java": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a",
         "src/java.base/share/native/libjava/M3BitLane28.c": "615b37ffa3781dae9739213db43299bfb2025e98b9960f35dc25c5b0325cc216",
-        "src/java.base/share/native/libjava/M3StateRelation.c": "faa999e2538087bd214c922cb1ad4b0dcaa208b04240acaed27771d47911cf1f",
-        "src/java.base/share/native/libjava/m3_state_relation.h": "c948c0ac34180f1f9412a764c3c9fd8c59e11509467aa9e04f8825e903526885"
+        "src/java.base/share/native/libjava/M3StateRelation.c": "03fa3e35008045561b57f11e4cff1ff3e04fc8b90220d1525d86f345b75fa332",
+        "src/java.base/share/native/libjava/m3_state_relation.h": "6a453bbe5c443d327228e48cc27c6d5dc356a67586f93796a52de17e69fa12a2"
       },
       "timeout": false
     }

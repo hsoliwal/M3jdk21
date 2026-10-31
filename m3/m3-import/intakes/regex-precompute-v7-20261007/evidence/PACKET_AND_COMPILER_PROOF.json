@@ -119,8 +119,8 @@
     },
     {
       "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\existing-intake\\m3\\synexia-import\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImportManifest.java",
-      "expectedSha256": "56c56adede1ceba3abc8cc1591d945f624f08d95084442a0f7968446c012b125",
-      "actualSha256": "56c56adede1ceba3abc8cc1591d945f624f08d95084442a0f7968446c012b125",
+      "expectedSha256": "65a27310e7401fc8f6f3032ed492b8d864aecab7b2713fd7e51d96d8f7470ea0",
+      "actualSha256": "65a27310e7401fc8f6f3032ed492b8d864aecab7b2713fd7e51d96d8f7470ea0",
       "matched": true
     },
     {
@@ -365,8 +365,8 @@
     },
     {
       "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImportManifest.java",
-      "expectedSha256": "56c56adede1ceba3abc8cc1591d945f624f08d95084442a0f7968446c012b125",
-      "actualSha256": "56c56adede1ceba3abc8cc1591d945f624f08d95084442a0f7968446c012b125",
+      "expectedSha256": "65a27310e7401fc8f6f3032ed492b8d864aecab7b2713fd7e51d96d8f7470ea0",
+      "actualSha256": "65a27310e7401fc8f6f3032ed492b8d864aecab7b2713fd7e51d96d8f7470ea0",
       "matched": true
     },
     {

@@ -786,7 +786,7 @@
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/publication/M3_FOLLOWUP_CURRENT_GITHUB.json",
-      "sha256": "219ed13d31ba30bc081d8d247c58f5cbcd5846301fca41fafa31a251b9af5eea"
+      "sha256": "0305ea409ceaa1b0a2e1e2f688bf462d56e0160f97f28d8cf9dc2e36e61f593d"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/calls/followup_descriptor_d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2.json",
@@ -802,7 +802,7 @@
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/plan.json",
-      "sha256": "291284c742a18fd758692cf13c5b4b92f1469c0e5b0741cc0ec34cdd58adb8ff"
+      "sha256": "0edb8fcd7aee636388d1887487d81260db5ea44369799c1abeca5df2a0af643e"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/MAPPING_FOLLOWUP_CURRENT_ADMISSION_FAILURE_V01.json",

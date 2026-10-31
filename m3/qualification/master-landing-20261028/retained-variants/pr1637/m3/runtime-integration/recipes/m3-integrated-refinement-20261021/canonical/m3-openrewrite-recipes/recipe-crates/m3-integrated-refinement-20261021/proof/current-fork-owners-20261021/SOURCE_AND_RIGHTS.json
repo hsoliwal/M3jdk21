@@ -36,7 +36,7 @@
   "correction_rights": [
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/provenance/SOURCE_AND_RIGHTS.json",
-      "sha256": "0f85d1ddf8f0234452146e14a5984dcd650b23b640c991498bcf256725de2ad1"
+      "sha256": "d33a5ed2338cbc4acb99e204b0feebff7ac2848a0b744f1119a060195c68c59f"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/SOURCE_AND_RIGHTS.json",

@@ -252,7 +252,7 @@ their current bodies with the original v7 export.
 | `export.tsv` | 8547 | `0e1d2ba77403ebf7ba7a851b84493dff8b1a7cac` | `002c9dd9dd192bb1b23a31e0546a5bcf0165a109afb8c2c20c5155e8180d18c3` |
 | `SOURCE_CUSTODY.json` | 29478 | `5f5e88dabb017ec2b0307a5e40e8c907f3f51311` | `d77b8036dd8cbbae3a3a852071fd0050c8c623b710f45d5e01188c92ae9bf918` |
 | `PROVENANCE.json` | 1518 | `15a03b8141055d87856d54b5154974945667f9cb` | `cdf7b0cb64afdded26994e999a03da8eb6bf6b8f3b9193ae930a15ceefe79ee6` |
-| `evidence/QUALIFICATION.json` | 2048 | `2d62dd0695741fe2c5f4fb0d926b2abb81525b8f` | `d506e74d9ad096241703a5e869899da946ab5b97f48f5312b2352f6e89ffb0ab` |
+| `evidence/QUALIFICATION.json` | 2048 | `9b6337b9d925bd085898f13a26f9b3dca47733ba` | `2ffe18cb3a68aa9a9a0e24fbd86e1ee42cdbf053d0c3277111bd0d423d07cb08` |
 
 The manifest-root field is a recorded protocol identity, separate from the raw
 export-file SHA-256 above. Matching retained bytes to these records is an exact

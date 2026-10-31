@@ -3,7 +3,7 @@
   "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
   "targets": 60,
   "changes": 21,
-  "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+  "manifest_sha256": "ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6",
   "catalogue": {
     "prior_history_sha256": "6cfafbf5b93783fb949b194f5919fd7a0581ef64192e16a3e6ccca2818f7309f",
     "retained_rows": 48,

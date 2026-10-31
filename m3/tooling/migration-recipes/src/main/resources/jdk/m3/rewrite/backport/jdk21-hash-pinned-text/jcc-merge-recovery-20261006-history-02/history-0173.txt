@@ -39,10 +39,10 @@ MAP = 'm3/docs/name-mapping.json'
 DOC = 'm3/docs/jcc-source-handoff.md'
 BIND = 'm3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json'
 COV = 'm3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv'
-FIELD_HASH = 'a8fef86bf2c1cb96dce3f2f0f1394e6f0d99d233a3934f9bf273209b84c85f09'
-ROOT_HASH = '9a74176340e704c473d0a9c14f667874d792adc1919768e0713da262da85f10a'
+FIELD_HASH = '65f10e830243ed927aabedee9d0734daa46eed3b37ae4212e28ab85131fe9e9d'
+ROOT_HASH = '30dadc5274823dba2443d663000051a48c0785eb92042ba8e684520bc2ce5942'
 CONTEXT_HASH = 'ab9828692a1ca02adfabf22ff679e47e1e62a9d755b97f4071c42d5225698bc5'
-PUBLICATION_HASH = 'bf2d3f29e903f12c201febb4c82083a32758095fdd8fbacbcf25a42e532f44fd'
+PUBLICATION_HASH = '91c8df6ab07e3590fecf20de65e2e65943c4b70aebb9f5133901ae6362506c35'
 EXPECTATIONS_HASH = '6c9daf2e41937a90d8c884a7918be803315bad3f124cfd0f8c4ea77f34c1746e'
 
 
@@ -575,8 +575,8 @@ def check_custody_indexes(final, receipt_refs):
     package = HERE / 'custody-final-evidence'
     index_path = package / 'CUSTODY_EVIDENCE_INDEX.json'
     additional_path = package / 'ADDITIONAL_RECEIPTS.json'
-    check(index_path, {'sha256': 'c4198bc0e71352b20861e0d6e60fa3eb32785578672fd0b6e1acf02ce070dffc'})
-    check(additional_path, {'sha256': '8d08a398718f0cd2b0a497f79d22656808a0b33e6c522a970e3870cb862c8dd0'})
+    check(index_path, {'sha256': '7876e0828731f3e4687c67162156788e7bde001406d5d723dd9acd8433fb36ee'})
+    check(additional_path, {'sha256': '082d12dd79e70bb747441fc8b221ab5ddeea5fd8174629b068c137c4682e1b5a'})
     index, additional = load(index_path), load(additional_path)
     assert index['schema'] == 'm3-jcc-e04-publication-custody-evidence-carry/1'
     assert (index['source_commit'], index['source_root']) == (SOURCE, SOURCE_ROOT)

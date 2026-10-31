@@ -132,7 +132,7 @@
     },
     {
       "path": "runtime-proof/sdk/proof2/SDK_INPUTS.tsv",
-      "sha256": "711971d207b97d8885f1a5c5ce2044cedeac2c62beb97894d4a844e3f93e26de",
+      "sha256": "4a1ec1638879f84e415607f7a8784da2b7334138183225d9d21e516ba3568e21",
       "bytes": 2849,
       "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-wrapper-proof2-20261018/candidate/SDK_INPUTS.tsv",
       "purpose": "proof2 actual recipe/receiver qualification",
@@ -140,7 +140,7 @@
     },
     {
       "path": "runtime-proof/sdk/proof2/SDK_RESULTS.tsv",
-      "sha256": "a2bf0f03b1c88c1923c28ce005840a049fb2a022f5f7138d3a7b9efbc94f0955",
+      "sha256": "24d691e1b32f317616777130f09dee5c2304bd5eff28a7a85ba1e885e28d6186",
       "bytes": 488,
       "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-wrapper-proof2-20261018/candidate/SDK_RESULTS.tsv",
       "purpose": "proof2 actual recipe/receiver qualification",
@@ -172,7 +172,7 @@
     },
     {
       "path": "runtime-proof/sdk/proof2/SDK_RECEIVER_RECEIPT.json",
-      "sha256": "5d08444e5c074b2e14107f1bd6568b52aaf8a9fd0d695076b64ea5b2131d19ae",
+      "sha256": "2d5e97dc793c3f815fe60dbcae736176d3643611c9d09be51ddabd54553beed5",
       "bytes": 1651,
       "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-verification-20261018/r2/proof/receiver-proof/evidence/RECEIVER_RECEIPT.json",
       "purpose": "proof2 actual recipe/receiver qualification",
@@ -196,7 +196,7 @@
     },
     {
       "path": "runtime-proof/received/RECEIPT.json",
-      "sha256": "96a54f14260cae789065575484f18d5d74be287e8271f40b73a3b42bae56c161",
+      "sha256": "82e76d78b19dd5ab9e6987e6593c14be5dd3e714051ce1444a82b21fe154fd11",
       "bytes": 381707,
       "origin": "qualification/wrappers/current-runtime/RECEIPT.json",
       "purpose": "actual 2f receiver module/API/JNI evidence",
@@ -204,7 +204,7 @@
     },
     {
       "path": "runtime-proof/received/SOURCE_MANIFEST.json",
-      "sha256": "6011c6eed511e414029578a4a8492e2c571e7639fa0e6f8e21f6b3a48ad55d0b",
+      "sha256": "e6973ba853554d97f35823512c189bd190181db1d2d10309d5b0b1a09b4fb4ad",
       "bytes": 134405,
       "origin": "qualification/wrappers/current-runtime/SOURCE_MANIFEST.json",
       "purpose": "actual 2f receiver module/API/JNI evidence",
@@ -252,7 +252,7 @@
     },
     {
       "path": "runtime-proof/received/PREIMAGE_INPUTS.json",
-      "sha256": "f7967bfbe13763a8df26ddafdc1c331d72de796245c83890ab5a3cc0dfe41e4d",
+      "sha256": "9ab303bff3f3b5fe5461a1a95a77db0dc2b01849a59f132a00c7daecd098dc23",
       "bytes": 58184,
       "origin": "qualification/wrappers/current-runtime/PREIMAGE_INPUTS.json",
       "purpose": "actual 2f receiver module/API/JNI evidence",
@@ -1004,7 +1004,7 @@
     },
     {
       "path": "runtime-proof/long-selftest/actual-long-selftest.json",
-      "sha256": "832374ab315335a85d0a7916e541ee3858c8e3ad6b9ebba9be664973cfbd7b2b",
+      "sha256": "27e402ac890dad2f1071247a6b6f4fc2a7290e71466dbffb540e50d4024bb830",
       "bytes": 2777,
       "origin": "qualification/wrappers/actual-long-selftest.json",
       "purpose": "existing long facade test on actual receiver classes",
@@ -1188,7 +1188,7 @@
     },
     {
       "path": "runtime-proof/proof2/QUALIFICATION.json",
-      "sha256": "3d2e0ae4c2c979f6e8eb9a453e5ec3bf76b3120ca22686644ed5f279fa6c1377",
+      "sha256": "b8476f48581e8a2fe396919aa0eaf1c8a42fc43ac315f8720e47b63cfe592945",
       "bytes": 2995,
       "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-verification-20261018/r2/proof/QUALIFICATION.json",
       "purpose": "source manifest and unchanged verification runner SDK evidence",
@@ -1508,7 +1508,7 @@
     },
     {
       "path": "runtime-proof/performance/canonical/ALLOCATION_PUBLISH.json",
-      "sha256": "43b2d9513343fa8a8c783f9f92fdcfefc1f7084a9cb6f7f53bbbe42b3fa48e44",
+      "sha256": "53174bed43707ab2328d30dab6b8fdea04fe75f5686d49ec9afea20971274e12",
       "bytes": 14567,
       "origin": "ast-work/ORDER_WINDOW_ALLOCATION_PUBLISH.json",
       "purpose": "frozen existing-proof allocation custody and premeasurement protocol",
@@ -1516,7 +1516,7 @@
     },
     {
       "path": "runtime-proof/performance/canonical/EVIDENCE_SHA256.tsv",
-      "sha256": "8991408470ebff488f8e21cab3b1e0d46efabdd31c34c7a87c6b8fae1d1c56ad",
+      "sha256": "895a3fb576b69f18c818db72937782393aa86d5bbb2d3e2e25ab99b88fbf35fc",
       "bytes": 4390,
       "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/EVIDENCE_SHA256.tsv",
       "purpose": "frozen existing-proof allocation custody and premeasurement protocol",

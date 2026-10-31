@@ -2,14 +2,14 @@
   "schema": "m3-jcc-ci-maven-inputs/1",
   "status": "PREPARED_NOT_EXECUTED",
   "iteration": "v02",
-  "frozen_inputs_sha256": "aabb22634854a89b587ba8351b8ee81a4f2a3af944b33edb9b9bfad25e1020a2",
+  "frozen_inputs_sha256": "86c4ec4b8e0bb641092f4dc9c2a00d54fd8cf1c6670ee42989ae4af93ca254c0",
   "workspace": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate-v02/execution/maven-workspace",
   "copies": [
     {
       "source": "baseline/.github/workflows/m3-foundation.yml",
       "destination": ".github/workflows/m3-foundation.yml",
       "bytes": 2205,
-      "sha256": "736f90932bae21b4fb650eb8451f42999fab0a15fe7787cdc80a6375fd3866d8",
+      "sha256": "1a1ddd014a5cce76e75b1e4fce5c4cd0c746a3dbf5f18ef3a1bc9dad7d8fbdd1",
       "mode": "0o644"
     },
     {
@@ -79,7 +79,7 @@
       "source": "overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/after-00-m3-foundation.yml.txt",
       "destination": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/after-00-m3-foundation.yml.txt",
       "bytes": 2411,
-      "sha256": "e13515b5aaab155ce98bf059c445d1b989cdf82d84487884ac31fb3a183a171f",
+      "sha256": "9969a19a5727bb1684d6e8443c67681a0afd52f0427d9501f4b4d363e9709982",
       "mode": "0o644"
     },
     {
@@ -100,7 +100,7 @@
       "source": "overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/before-00-m3-foundation.yml.txt",
       "destination": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/before-00-m3-foundation.yml.txt",
       "bytes": 2205,
-      "sha256": "736f90932bae21b4fb650eb8451f42999fab0a15fe7787cdc80a6375fd3866d8",
+      "sha256": "1a1ddd014a5cce76e75b1e4fce5c4cd0c746a3dbf5f18ef3a1bc9dad7d8fbdd1",
       "mode": "0o644"
     },
     {
@@ -121,21 +121,21 @@
       "source": "overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/manifest.tsv",
       "destination": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/manifest.tsv",
       "bytes": 810,
-      "sha256": "c7ec94377bde2ce16f75ea515c8d1547ab37c220b1cfe8d1b448eeee67dc4f04",
+      "sha256": "3f17e3dfb1d4e83af65354c5c1a9f445f2cd7a512868727bc030722f1933d997",
       "mode": "0o644"
     },
     {
       "source": "overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/plan.json",
       "destination": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/plan.json",
       "bytes": 2937,
-      "sha256": "13cfd4d9cf102fef32d57196c1fa4521eb17bae1c02c2fb5ed129ec566724789",
+      "sha256": "8f536234d42bd32590b7c5cc36c7657407843a53a68c6c43e25ddcc07f3ef7b1",
       "mode": "0o644"
     },
     {
       "source": "overlay/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccCiRepairTest.java",
       "destination": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccCiRepairTest.java",
       "bytes": 15689,
-      "sha256": "8a45a7fe9cd687e9e61d0e5821cfed4208e3dfd736b795bea1386bd1a1cdbfe1",
+      "sha256": "7d1272d034907bbad8a2690e7d4242370692f31b23e67a3e2afd6fad3d2c4238",
       "mode": "0o644"
     },
     {
@@ -149,7 +149,7 @@
       "source": "overlay/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/INPUTS.json",
       "destination": "m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/INPUTS.json",
       "bytes": 4219,
-      "sha256": "741e405cf206de3587e59e1d1be4a29587ffb65cd81afd504a524b5e70bc2732",
+      "sha256": "520164a24d0011c7c73395f4d27203f121ae74de8c8b04cb84c9a909629cacdc",
       "mode": "0o644"
     },
     {
@@ -163,14 +163,14 @@
       "source": "overlay/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/prior-ci/INPUT_SEALS.json",
       "destination": "m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/prior-ci/INPUT_SEALS.json",
       "bytes": 4622,
-      "sha256": "6b2acc2708b79a97fa201dc12e24214fe22cfe62d4843378bb469e249b08468a",
+      "sha256": "89eb704a39cfd5cb58fa795321916f0461f7b0653f6b467e5536da1a8d9aaee7",
       "mode": "0o644"
     },
     {
       "source": "overlay/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/prior-ci/LOG_DIAGNOSTICS.json",
       "destination": "m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/prior-ci/LOG_DIAGNOSTICS.json",
       "bytes": 9489,
-      "sha256": "47119c85573641f249e6dcded9d56ff3559139f9c440c36fb53403c719ad435d",
+      "sha256": "2f18ef2aa392de6240528b8eef15bb244a5418d7dce680784d6fd7d3bba00e13",
       "mode": "0o644"
     },
     {
@@ -212,7 +212,7 @@
       "source": "overlay/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/test_installer.py",
       "destination": "m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/test_installer.py",
       "bytes": 12659,
-      "sha256": "6b0bc37c6b4a5a5addb364cd1ef07bfc0f9497dcbab092d8f9e77e2ac4e47c4f",
+      "sha256": "3f0d196c264e38d758423e86cac8b2f7cfed2219c8575460cd381e4f91a56310",
       "mode": "0o644"
     },
     {

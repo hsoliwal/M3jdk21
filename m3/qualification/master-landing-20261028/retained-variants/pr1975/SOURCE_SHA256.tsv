@@ -27,7 +27,7 @@ m3/ast/src/test/java/com/m3/ast/M3SyntaxOriginsSnapshotTest.java	bbccf88f28cb758
 m3/ast/src/test/java/com/m3/ast/M3SyntaxSnapshotContract.java	ce8fdd8772239f21dee553a1fa1073ed0ca1613b6794e7cb1a66ab7dfa961f86	b18853857670b384c0c2e9f1be7d406880457ea1	100644	1975	PR version, not live
 m3/ast/src/test/java/com/m3/ast/M3SyntaxSnapshotTest.java	d3929817281e5d3e900d22fbaf2e7742ad4ba60d63fd8b0897a6a84284d2130f	69d9c471a5eeda948352cb397109a23e471fa343	100644	1975	PR version, not live
 m3/ast/src/test/java/jdk/m3/ast/M3SyntaxTreeContract.java	63508acb0071d3e8de8f9e28893d485d1f9ff4adc965de807519c9ef04c804c0	bc8181a232afd5bd73937491eccc9bd04d4d8342	100644	1975	PR version, not live
-m3/docs/name-mapping.json	06aa9513f7354c224bd9e72052b738d5504a2c2218efc9ec04a287948d62c49f	aa70bed1008c0aa6ac6275b856f9f34435d2481e	100644	1975	PR version, not live
+m3/docs/name-mapping.json	fe78f8e1674a1d0e6aab740e17014ab85fffc7b941555dfad0e5cce2cfdcf647	bf9157696b5b3cbbd543e2ee32398bcf0f94d1b0	100644	1975	PR version, not live
 m3/file/docs/source-text-coordinates.md	64395ba4e6458ae0d0d1bb9c89b5fea99206b3ddb48316cbd87e3420d95f1dc6	19986adc2fb186fb543f7d915618847385b3413d	100644	1975	PR version, not live
 m3/file/src/main/java/jdk/m3/file/M3FileEditFrames.java	c18a44900275ea64431e5ed8b6bbf68c6350763b8e6814c6f933b44f361dd809	1b03528b997ac2e02c7e0df3e14439e34c60e1f6	100644	1975	PR version, not live
 m3/file/src/main/java/com/m3/file/M3FileEncodedEdits.java	8a43dad0782175eea8ab0f44a66df5aa2835e0e95d0ce8ad4be0fb19f1f610a3	fa7427c22ea5d5199960fc0c18fd99682272d4de	100644	1975	PR version, not live

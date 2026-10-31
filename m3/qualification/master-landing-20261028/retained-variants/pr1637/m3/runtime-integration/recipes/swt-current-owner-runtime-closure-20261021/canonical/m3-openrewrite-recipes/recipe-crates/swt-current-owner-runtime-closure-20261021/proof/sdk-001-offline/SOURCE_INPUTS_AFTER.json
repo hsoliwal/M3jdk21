@@ -46,12 +46,12 @@
   },
   {
     "path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/src/test/java/jdk/internal/m3/rewrite/M3SwtCurrentOwnerRuntimeClosureRecipeTest.java",
-    "sha256": "2ec05f671df50d255c98ac04432fa679c5b35d0633851cfacc9d0f3f4175dd62",
+    "sha256": "d1313391568f0fddbfda2786fc6924ba5b77f66e2e98bfb75d6b559fe606283c",
     "bytes": 31658
   },
   {
     "path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/verify_sources.py",
-    "sha256": "875e3c5f2961dbf957207e4d0a495cb17aa837d656d181c0de2e8a4583bb63ca",
+    "sha256": "83b20a4bc348546e642fa6c04ba36fff86aca7fdd598f0b35a2f9301afc9415c",
     "bytes": 2425
   },
   {
@@ -66,7 +66,7 @@
   },
   {
     "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java",
-    "sha256": "613fd494de5eebdbc29d8982c599d44cd321754b370175f7d097720904a04853",
+    "sha256": "3b4f7649fc3ee38df62a6dc9b318e8845da6574f7e48b4cd7a948b58e266d46f",
     "bytes": 19983
   },
   {

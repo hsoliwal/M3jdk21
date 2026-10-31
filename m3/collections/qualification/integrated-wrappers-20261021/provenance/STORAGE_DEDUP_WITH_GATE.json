@@ -293,25 +293,25 @@
     {
       "path": "publication-v2/exact-commit-provenance-v2/repo/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/catalogue/candidate-catalogue.tsv",
       "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/catalogue/candidate-catalogue.tsv",
-      "sha256": "d961af4b64d5e6ceb934ccabe233350cb3c8b40fab15cbd5e86d7df6d5a07dc7",
+      "sha256": "b6c60e2a9e43bd416fa0d5a5cfafb6baaf1cb9761924e0e46c7d1da81f030fb5",
       "bytes": 20493
     },
     {
       "path": "publication-v2/exact-commit-provenance/repo/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/catalogue/candidate-catalogue.tsv",
       "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/catalogue/candidate-catalogue.tsv",
-      "sha256": "d961af4b64d5e6ceb934ccabe233350cb3c8b40fab15cbd5e86d7df6d5a07dc7",
+      "sha256": "b6c60e2a9e43bd416fa0d5a5cfafb6baaf1cb9761924e0e46c7d1da81f030fb5",
       "bytes": 20493
     },
     {
       "path": "publication-v2/exact-commit-provenance-v2/repo/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/catalogue/source-coverage.tsv",
       "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/catalogue/source-coverage.tsv",
-      "sha256": "88cc41c622a3d65f12b9098c555e3ec575e887a5a217c87bf234bd227aed9fa1",
+      "sha256": "d73e9579522293bfccac2e06dd0ad81e477f9eb892179be3330d93f2f05b710f",
       "bytes": 162971
     },
     {
       "path": "publication-v2/exact-commit-provenance/repo/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/catalogue/source-coverage.tsv",
       "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/catalogue/source-coverage.tsv",
-      "sha256": "88cc41c622a3d65f12b9098c555e3ec575e887a5a217c87bf234bd227aed9fa1",
+      "sha256": "d73e9579522293bfccac2e06dd0ad81e477f9eb892179be3330d93f2f05b710f",
       "bytes": 162971
     },
     {

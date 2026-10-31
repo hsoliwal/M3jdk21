@@ -119,8 +119,8 @@
       "source_repository": "hsoliwal/com.synexia",
       "source_revision": "e02e7cb0f2e8e46db4c5b476d59aa26658fa4d07",
       "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
-      "git_blob": "55be45a83f4fc7e7317534fc87a66e727c845060",
-      "sha256": "613fd494de5eebdbc29d8982c599d44cd321754b370175f7d097720904a04853",
+      "git_blob": "05c56adbdd6a0fca923a47486203c7b9b326831d",
+      "sha256": "3b4f7649fc3ee38df62a6dc9b318e8845da6574f7e48b4cd7a948b58e266d46f",
       "bytes": 19983
     },
     {
@@ -175,8 +175,8 @@
       "source_repository": "hsoliwal/com.synexia",
       "source_revision": "b6c35b9a1f528dd9e5a3d9f6f4c51ca360db43d7",
       "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-string-ast-index-views-recovery-20261020/src/test/java/com/synexia/rewrite/M3StringAstIndexViewsRecipeTest.java",
-      "git_blob": "6100f2f1e839ab3a32e539e80e8c60b918e549d2",
-      "sha256": "dfd4501694a582005a838f2d26f115268a04531fdc013641813a6f64047913fd",
+      "git_blob": "94846d832844488d605c13cd55f87d01aa0c1e75",
+      "sha256": "8c951be002855e8013a63d6f3e3627fe955e1ca6b02762843a33c49636bf8cd3",
       "bytes": 30213
     },
     {
@@ -199,8 +199,8 @@
       "source_repository": "hsoliwal/com.synexia",
       "source_revision": "b6c35b9a1f528dd9e5a3d9f6f4c51ca360db43d7",
       "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-string-ast-index-views-recovery-20261020/HARNESS_PROVENANCE.json",
-      "git_blob": "6b4000cd5688d6f33a97e0db1692100fb8ee6993",
-      "sha256": "ea1887d1ec283edf18433dc977a7dc687325995c63ac2d432c57bb5ab960eeba",
+      "git_blob": "62abedc4eeb63dd7f201a76cfe29a1e2a5fb767c",
+      "sha256": "3c5ae7b48ddb1c276b97f8d1286376e8fb164f88398df28c6a7f2b8cd7feea75",
       "bytes": 2181
     },
     {

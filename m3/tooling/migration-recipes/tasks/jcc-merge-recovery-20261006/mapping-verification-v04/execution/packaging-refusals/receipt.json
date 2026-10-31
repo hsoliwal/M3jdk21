@@ -6,7 +6,7 @@
   "maven_cache_copied": false,
   "new_evidence_subtree_excluded_from_original_comparison": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/execution-actual-v01/packaging-refusals",
   "original_inputs_unchanged": true,
-  "packager_sha256": "381f83e024f9ca73878781f30d3797f802d1676825e248007b1bf5be8ab43ee3",
+  "packager_sha256": "e7c23168f23a652a0fa7428565c77d96f65217e0c16288b02153717ca3533ead",
   "packager_unchanged": true,
   "refusals": [
     {

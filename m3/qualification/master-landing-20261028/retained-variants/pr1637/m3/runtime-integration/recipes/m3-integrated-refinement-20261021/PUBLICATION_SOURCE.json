@@ -12,6 +12,6 @@
   "schema": "M3_CANONICAL_PUBLICATION_SOURCE/1",
   "runtime_repository": "hsoliwal/M3JDK21",
   "runtime_base": "2779aba3f98f31c324be43f731be7914e1a05935",
-  "source_seals_sha256": "048c61357305b29ade8c822f8624f85ca9743caadb38df13ffe6949d79937c5f",
+  "source_seals_sha256": "0b1e4d3f130c6177f56f26319b18b1f789a16547489514172cfbed0f7c02dda4",
   "classification": "Generated publication receipt; canonical recipe ownership stays in com.synexia."
 }

@@ -57,7 +57,7 @@
   "license": "Apache-2.0",
   "observation_epoch_seconds": 1792548147,
   "parents": [
-    "948de23008d7e66ebcb2f93a2b86c3ba6acaedbbae82c841d9da718a45d4b615"
+    "7e90af9173edceb152fde014b5b74cceb30c07a62c6af7293e0b2065b628bd2b"
   ],
   "pending_gates": [
     "Historical failed fixture source/argv custody remains incomplete and is not reconstructed; actual receiving result stays separately authoritative."
@@ -130,7 +130,7 @@
   },
   "source_manifest_after": {
     "path": "proof/sdk-002-offline/inputs/m3-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/SOURCE_SEALS.json",
-    "sha256": "a076d8c7c82542897aef843b640cc88e762bbf088128c4ca34c262db4c4dba27"
+    "sha256": "ea99837eeb463fbc09858de4249c77130b4ef8ddd0df3468386badab53c6fcc4"
   },
   "source_manifest_before": null,
   "supersedes": [],

@@ -22,10 +22,10 @@ class A3RecipeHomeTest {
                 "jdk.internal.m3.rewrite.M3RecipeMasteryPortableReceipt",
                 A3RecipeHome.PORTABLE_MASTERY_CLASS);
         assertEquals(
-                "2c51473e7adb6fa50fb0031ac6314a050b90feec",
+                "b691460aebcd458f5d5fb0d508b4a4a05ef8d6c5",
                 A3RecipeHome.EXPORT_MANIFEST_GIT_BLOB);
         assertEquals(
-                "618a0dc7dcd6c4ab6b3361e09022f5c1ff82f0c4",
+                "ec03c17a24d455a0c535e18069e85dd85f1a065a",
                 A3RecipeHome.PORTABLE_MASTERY_SOURCE_GIT_BLOB);
         A3RecipeHome.requireCanonicalExport();
 

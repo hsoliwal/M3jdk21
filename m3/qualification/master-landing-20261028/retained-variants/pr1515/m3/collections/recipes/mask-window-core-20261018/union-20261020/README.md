@@ -8,7 +8,7 @@ Receiving parent: `0122f7cf73b3b2a10429806c3e4beadc4caf0792` (#1549, including W
 
 - Preserve #1549's shared Java int/long emission and native independent-offset int kernel, required/excluded masks and nine JNI exports.
 - Adapt #1538's ordered byte-offset spans from `a02f0d912ff9da60a5dbc0a7832d7f4b56260fa0`. Read only the enclosing selected span in each nonempty native chunk. This adds 256 stack bytes, not retained row objects. Interior rejected rows may still lie inside the enclosing span.
-- Reuse #1547's complete common header exactly, blob `a1bd5aab67eaed2db6fdc3851d85312f24bfc63d`, from `789eafc24ae481724d6c4a2a9a9b75ffd191a6f6`. Use its checked windows and unsigned-byte mask atom. Other #1547 array/residency changes are not received here.
+- Reuse #1547's complete common header exactly, blob `5a3d6adde420d5c9d33279376384cd4a74825a02`, from `789eafc24ae481724d6c4a2a9a9b75ffd191a6f6`. Use its checked windows and unsigned-byte mask atom. Other #1547 array/residency changes are not received here.
 - Reuse actual `java.util.SortedSet` donor blob `ad3ee89d40de8c0ca344863bb6fc4469cec97a09` from #1538. Recursive split children preserve the owner's comparator lazily. This corrects the reproduced comparator defect without a public-interface change; one boundary spliterator object is added per split, not per stored element.
 - Keep the current M3FilteredLists (`590cd9209eb0e0989175ad9113b93ca6720c85b0`) and M3FilteredViews (`214f064c7cab2d3df5f9d155fc490e83ac6beb9c`) sources in the parent tree. Their full live-wrapper suite is NOT_RUN here. The primitive projection/address owners are exact KEEP inputs and their sort/slice/filter compositions are exercised.
 

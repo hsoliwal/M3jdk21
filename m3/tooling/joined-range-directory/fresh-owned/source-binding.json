@@ -28,22 +28,22 @@
       "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/integration/hosted/QUALIFICATION_PLAN.json",
       "targetPath": "m3/tooling/joined-range-directory/fresh-owned/QUALIFICATION_PLAN.json",
       "bytes": 5936,
-      "sha256": "33dc8e7bb537cb96bc44d273164bd850e124a18effde5076d0f334688960e0e7",
-      "gitBlob": "287688d0a88283fccf95fbce5ff4722f422a2884"
+      "sha256": "857ce353e89e9f570db7ecaf0f3bec72cb3ed8aedf45b20fc7b0200d70520909",
+      "gitBlob": "68ba4e8241e46cfd652f4ba62da52b5844930fc0"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/integration/hosted/SOURCE_STATUS.json",
       "targetPath": "m3/tooling/joined-range-directory/fresh-owned/SOURCE_STATUS.json",
       "bytes": 4855,
-      "sha256": "ee4e4bf03bcac66eed936f434062e53c1a565a7da4a93758c6ec0e761209345b",
-      "gitBlob": "cab10a19cb7e5803e1b7a75d126600bb0ef3c9b0"
+      "sha256": "0994a2270aca24aa4ac0c1049ccd68e2872126e1aafd5e5978da42929ad5c307",
+      "gitBlob": "94f7c2803704a0692587b5118ffb4f5cc4627768"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/integration/hosted/qualify.py",
       "targetPath": "m3/tooling/joined-range-directory/fresh-owned/qualify.py",
       "bytes": 96049,
-      "sha256": "42e7c1071d17dc0227a9495077f3d5e61ea39f7643d3203b895a779a50184443",
-      "gitBlob": "26361a8bb313c2b30afd1edea5d94688a3eb1e9e"
+      "sha256": "9bd0e42214c7836fbe3b8a5604d84cc554e60f9b76ce37d3ceec9e5f0ec957b0",
+      "gitBlob": "d1fb4b294bdeefd17055a5ff0025b7795639396c"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/FOSS_REUSE_DECISION.tsv",
@@ -293,9 +293,9 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/integration/bindings/parent-source-binding.json",
       "targetPath": "m3/tooling/joined-range-directory/source-binding.json",
-      "gitBlob": "6af91fb63e038c563394e57985c9919933aa41c9",
+      "gitBlob": "1507e87c0853e0cd397620930e8f1f6648d61e3f",
       "bytes": 21504,
-      "sha256": "12f725aebd9dd05bc22be0c460d6614d2c5f069680e5cabc9e9bb4b9f73c43e4"
+      "sha256": "805fb0cd1f893381a3124147471185a4e374e9facc55f8dd825ed4cc225516ce"
     }
   ]
 }

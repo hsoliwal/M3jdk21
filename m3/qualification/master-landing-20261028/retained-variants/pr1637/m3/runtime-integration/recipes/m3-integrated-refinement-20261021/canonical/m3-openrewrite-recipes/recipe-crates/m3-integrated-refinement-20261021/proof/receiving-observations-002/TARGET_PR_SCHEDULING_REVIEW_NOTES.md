@@ -27,7 +27,7 @@ Independent review reproduced a concrete prerequisite failure in the emitted fra
 
 The single-file successor candidate runs the existing core-runtime owning POM after resource verification, adds its `target/classes` to the parser classpath, and retains its Surefire reports in the existing always-upload artifact. Existing triggers, permissions, checkout pinning, historical gates, and job budget are unchanged. Its canonical successor application is tracked separately; the isolated classpath trial alone is not a hosted Actions result.
 
-Evidence is retained under `jobs-work/final-review/ci-classpath-01/` and `ci-classpath-plus-core-02/`; the latter `RESULT.json` has SHA256 `9674f785acff48a25f4170026730c02b647fe8693e90066601ab386f070dacf9`. The successor handoff is `jobs-work/final-review/workflow-successor/HANDOFF.json`. The existing object-progress workflow's new exact-head scheduled job uses source readback and the actual scheduler verifier and has no parser classpath requirement.
+Evidence is retained under `jobs-work/final-review/ci-classpath-01/` and `ci-classpath-plus-core-02/`; the latter `RESULT.json` has SHA256 `9c3a119ab5a38a2838d4ae087497238f538066f345793f70f20f8397150c2189`. The successor handoff is `jobs-work/final-review/workflow-successor/HANDOFF.json`. The existing object-progress workflow's new exact-head scheduled job uses source readback and the actual scheduler verifier and has no parser classpath requirement.
 
 ## Boundaries
 

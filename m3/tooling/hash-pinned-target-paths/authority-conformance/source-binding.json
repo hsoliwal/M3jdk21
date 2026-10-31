@@ -81,9 +81,9 @@
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/pins.json",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/pins.json",
-      "gitBlob": "86ff3dd2ca2db065f83607aee0b250bb7c398c53",
+      "gitBlob": "3730ed5beed5f300f429dbe2ca32947a77cbfc2c",
       "bytes": 18181,
-      "sha256": "750dcbcbeb950aca05d620eb05924c3803b8ef6cc2924dfda4ef70f09ab65b6b"
+      "sha256": "627091dc4cfcd41824b3402ef7cc201bba96897155b5d99de6fcd2e84dc0c6fc"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/pom.xml",
@@ -424,16 +424,16 @@
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/support/owned_state_relation_verify.py",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/support/owned_state_relation_verify.py",
-      "gitBlob": "b3622db6ed4e40d59aa6620394592f7748b68781",
+      "gitBlob": "56c7d75fdf56b736cfb57d59e626afdac820531c",
       "bytes": 24947,
-      "sha256": "d6db70957a57c6ee498965b483d94e097cbba4929893cb4a0ef9bc70c07c2488"
+      "sha256": "2d658433e2695d5ffa0bd3e440dc3bddbc41fe187ee9f01135e29eb46c333c86"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/verify.py",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/verify.py",
-      "gitBlob": "42c40495e66cc1d33718bc58c1b6b4d83906363a",
+      "gitBlob": "90b8eb8ebca8c9b98d016a9429c910739cad1b22",
       "bytes": 20582,
-      "sha256": "f7c06780d8aacd287c5322068d881bb2cd31d41dc9c9e34613ca67329adeaf1c"
+      "sha256": "ca64043cc4e8f55e9dce35a6dffed1f0851cea9fe9a9923d014a1bed4bef4e02"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/qualify.py",
@@ -445,9 +445,9 @@
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/FOSS_REUSE_DECISION.tsv",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/scope-sdk/FOSS_REUSE_DECISION.tsv",
-      "gitBlob": "ce3e0762c4820edb29b5b08e5e0a7abcf49b24fc",
+      "gitBlob": "9832aa75bdc51f6241539c3d7e8a13442f7117b6",
       "bytes": 898,
-      "sha256": "331fd5d33a59fffbea066c0adbcc67f18f98c702230e67ab2e9459c8d7393d87"
+      "sha256": "c4ccbc45127f5abcfb25cc23b3b50cfa1cba9428574c10c30ea0c08117c8d3d5"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/README.md",
@@ -494,9 +494,9 @@
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/pins.json",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/scope-sdk/pins.json",
-      "gitBlob": "7cfd52c8d0745eb6497fe0fbc417db9825d3247d",
+      "gitBlob": "dc5cbff6c5be6e35e8da00c75e75e8df1a67b8f4",
       "bytes": 6691,
-      "sha256": "92e60a367e47a9d6f54135d638528ac6512fd5b1e0fae892a0e71f783d718c52"
+      "sha256": "6db85957d577a799a51c65acf4a08256d33876b9b7fc5b9041efd3edca2c2075"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/pom.xml",
@@ -605,9 +605,9 @@
       "sdkFiles": 22,
       "inputPins": {
         "path": "scope-sdk/pins.json",
-        "gitBlob": "7cfd52c8d0745eb6497fe0fbc417db9825d3247d",
+        "gitBlob": "dc5cbff6c5be6e35e8da00c75e75e8df1a67b8f4",
         "bytes": 6691,
-        "sha256": "92e60a367e47a9d6f54135d638528ac6512fd5b1e0fae892a0e71f783d718c52"
+        "sha256": "6db85957d577a799a51c65acf4a08256d33876b9b7fc5b9041efd3edca2c2075"
       },
       "suites": {
         "jdk.internal.m3.rewrite.M3CanonicalScopeBoundaryRecipeTest": [
@@ -633,9 +633,9 @@
       "sdkFiles": 59,
       "inputPins": {
         "path": "manifest-sdk/pins.json",
-        "gitBlob": "86ff3dd2ca2db065f83607aee0b250bb7c398c53",
+        "gitBlob": "3730ed5beed5f300f429dbe2ca32947a77cbfc2c",
         "bytes": 18181,
-        "sha256": "750dcbcbeb950aca05d620eb05924c3803b8ef6cc2924dfda4ef70f09ab65b6b"
+        "sha256": "627091dc4cfcd41824b3402ef7cc201bba96897155b5d99de6fcd2e84dc0c6fc"
       },
       "suites": {
         "jdk.internal.m3.rewrite.M3ReleaseJepManifestOrderRecipeTest": [

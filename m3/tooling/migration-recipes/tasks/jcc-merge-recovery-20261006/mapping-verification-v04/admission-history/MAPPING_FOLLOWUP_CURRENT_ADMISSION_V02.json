@@ -4,7 +4,7 @@
   "guards_exact": 7,
   "input_epoch": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v02/input-epoch/INPUT_EPOCH.json",
-    "sha256": "973be97f762b46278f16c2bae6d887f2bc407110f333fe7ae0e7070e30cbe118"
+    "sha256": "2ea3ffe30ac6824bcc6d708c431b848a4c7997bdb4cdeaaddea1a62640734718"
   },
   "mapping_preimages_exact": 4,
   "prior_preimage_refusal_preserved": {

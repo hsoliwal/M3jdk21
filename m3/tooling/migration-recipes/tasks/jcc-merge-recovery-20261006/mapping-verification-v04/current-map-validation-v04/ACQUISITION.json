@@ -803,9 +803,9 @@
     },
     {
       "bytes": 308294,
-      "git_blob_sha1": "6ba02aa22af26a2b4bb4b4890496bd300bc0a9fa",
+      "git_blob_sha1": "44c966eca8e52d8c86925478d5b3ffbb45882e82",
       "path": "m3/docs/name-mapping.json",
-      "sha256": "12bfa8d328b74ba4de930d993c8194b8db51f3a111617690dff9f1ffebaea1c2",
+      "sha256": "e76133a4d1bb472dfc88a41e8d8560d5ac0e08ba4d227b3b6c8fbd95915e6ebc",
       "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/input-epoch/current/m3/docs/name-mapping.json"
     },
     {
@@ -851,7 +851,7 @@
     "old25mapping_nodes_ordered_unchanged": true,
     "old52complete_records_ordered_unchanged": true
   },
-  "old_packet_sha256": "6f3e2993d6d29e51c46099f0e0ad6d4c775a435466b4be8cfd6ef6918e927224",
+  "old_packet_sha256": "29aeb75ced3b31737e02760b0880c69b1b490758c54445d1c3847803fe5e8ea3",
   "readbacks": [
     {
       "bytes": 7818,
@@ -1418,7 +1418,7 @@
     },
     {
       "path": "root-evidence/M3_LATEST_M3.json",
-      "sha256": "9e2339b75282bc7c397413c60c787194a339a63d6f17dcb8b9968474ef11c666"
+      "sha256": "73cd3ada7f6ef5c1f9cafce8ccb23d1d9c01141fae573d58ffd488786a90a514"
     },
     {
       "path": "root-evidence/M3_FINAL_CURRENT_COMMIT.json",
@@ -1430,7 +1430,7 @@
     },
     {
       "path": "root-evidence/M3_FINAL_CURRENT_M3.json",
-      "sha256": "f1dd5831a9838ec31d6903e98e683de010ef4440e9a372aee961a8761f5ae6fe"
+      "sha256": "e71ea967d2008207adabab5c3d105701b857cb4f0c97eb8c81f73eceb88bb9e4"
     },
     {
       "path": "root-evidence/M3_FOLLOWUP_CURRENT_ROOT.json",

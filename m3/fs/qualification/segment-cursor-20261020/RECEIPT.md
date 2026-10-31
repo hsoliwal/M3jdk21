@@ -9,7 +9,7 @@ Canonical Synexia recipe: https://github.com/hsoliwal/com.synexia/pull/12561 at 
 Inside existing `M3FsPrecomputeBundle.SegmentedUtf16String`, sequential `contentEquals` reads direct `ByteBuffer` UTF-16 units by each immutable parent index/start/count, O(total code units + segment count), rather than invoking `segmentAt` binary lookup for every unit. Random `charAt` and ranged `copyChars` retain their existing exact segment geometry and offset semantics. No new `String`/char[] copy, page owner, UTF-16 normalization, Java/JNI ABI, or per-element object. Zero-length segments and split/unpaired surrogates remain legal.
 
 Sealed file SHA-256:
-- M3FsPrecomputeBundle.java: `1f6a718e72aaeb403323be5634bb66309f60533afdb36ae551adc2923f438573` → `07a5b271d3c1f4d268f3844d889623e29a2626ef5941bd0b806bfc34d148fd9f`.
-- M3SegmentedUtf16FsTest.java: `11894615127dc23f3b15c9ba0fc7b0a3bb2124b4ce940cceb4ca457bdabe221a` → `723c0e7731782ee46882a821b557cee812e0b6e64c3fd5bcf0c1a1076b2507b0`.
+- M3FsPrecomputeBundle.java: `baff3368d10db207329fcaf30e09c905609e8d537377338799666bf346ee6dad` → `07a5b271d3c1f4d268f3844d889623e29a2626ef5941bd0b806bfc34d148fd9f`.
+- M3SegmentedUtf16FsTest.java: `1b1cf072f33dcba2baec16d1f4ec47605bb3cdddf059e3ac57865fa8b371da3a` → `bfcec24ded26892b6ace2d157d2f3cafa3fd65803e65cdeb0bbd676ea778fa1f`.
 
 Standalone stock Java21 indexed-run model passed 585,058 independent assertions. Actual M3FS module Maven/JNI/CTest and the extended source JUnit test have NOT been run on this exact receiver; full modified-JDK/JMOD/GC/RSS and benchmark gates also remain open. Preserve the existing #1425 native ABI/format, donor license, and performance evidence as historical, not fresh qualification. Do not merge out of stack order.

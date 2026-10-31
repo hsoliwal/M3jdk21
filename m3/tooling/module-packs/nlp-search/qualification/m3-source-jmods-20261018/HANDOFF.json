@@ -83,7 +83,7 @@
     "src/jdk.compiler/share/classes/com/sun/tools/javac/main/JavaCompiler.java": "129e8c19ef328185c45465b9c8bf9baee43bb24be54842b69833c52e3e6f3dcb"
   },
   "recipe": "jdk.internal.m3.rewrite.M3NlpSearchSourceJmodsRecipe",
-  "recipe_receipt_sha256": "6e30f36661cc02b743e93922d178c62627ff80f06e16c72e5cac09a2441af43f",
+  "recipe_receipt_sha256": "63b436539dbfc890ab0993152cea5dcfd97645b68cd6105091aecab6415bd3dd",
   "schema": "M3_NLP_SOURCE_JMOD_CANONICAL_HANDOFF_1",
   "source_implementation_changes": 53
 }

@@ -2,7 +2,7 @@
 37c8842d5febdebc106b7fab3586b11c1c4c4ecb040dbc49f514c832a8461ce8  docs/M3-SCALE/invariants/M3-LLM-RECIPE-FIRST-2.md
 962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab  m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java
 f40191f188c5c601cdd6f7e591e81313c02430e88598d873f354c9c564ab0d57  m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java
-a1805b53c5f04dfd2a884638963b548c15e80c2f407cc90c00079c5b7cf8c66e  m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java
+ce2cfdc8a04dc83eefb815242f25beba7702f01db9a61b855f87712622f5cb6f  m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java
 bb8605b5383f501e8c170049f3c47c34867b0a823ca5dba5d133e6ef3d612c61  m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java
 9d302ac9369b5e4308c89c0ad22957ee62b09fea11f9d0ab878b422c99dabb04  m3-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-parser-collections-20261019.yml
 2647764e90666b193426f3985026f25d8fe76e1114239ae6dd52a0036f5f4292  m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-owner-current-20261019/M3FilteredListMutationProof.java.txt

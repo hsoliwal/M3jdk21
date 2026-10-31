@@ -27,21 +27,21 @@ final class M3StateRelationSparseC11RecipeTest {
     private static final String ROOT = "/jdk/internal/m3/rewrite/state-relation-sparse-c11-20261020/";
     private static final String DESCRIPTOR = "/META-INF/rewrite/state-relation-sparse-c11-20261020";
     private static final String NAME = "jdk.internal.m3.StateRelationSparseC11";
-    private static final String FORWARD_MANIFEST_SHA = "6d07c08af551c2eb2d74fa417f293f9871af8df8f499292fa3ff21df377064fd";
-    private static final String INVERSE_MANIFEST_SHA = "43436b08a8a5f322c1b0d1ceaee1584f24f654381466d812451e7cce6dcff6e9";
+    private static final String FORWARD_MANIFEST_SHA = "9542bbe216aa75444f924483df17e436ced4ec76ba13c01e9cccfb4543169f9b";
+    private static final String INVERSE_MANIFEST_SHA = "4588c5e6ce767ffc071acb27daf70a86d4b871cd2bdbb80e85fdda250ee4f5b3";
     private static final String FORWARD_DESCRIPTOR_SHA = "9d8ab747bc4775f467d466e5043bd61127681e35359f5339cfbcdacab739b252";
     private static final String INVERSE_DESCRIPTOR_SHA = "6b85531f3cca0aa6b532db220703b12dda283c34596b6e45ce5258f73fa3341a";
     private static final String C_OWNER = "src/java.base/share/native/libjava/M3StateRelation.c";
-    private static final String C_AFTER = "4c453d51223c3223f07fb88b39e1c1b6ed9891de8157d32a63990a9a4488ece9";
+    private static final String C_AFTER = "9cf05ae88cdde947d5c62001e2025a64a094531bbd727f51deb2e62b57636c60";
     private static final String REJECTED = ROOT + "rejected/M3StateRelation.c.txt";
-    private static final String REJECTED_SHA = "5d40fe7c65d54e26c6964313186624675592703ea6e2e1cb2886840b2f15347e";
+    private static final String REJECTED_SHA = "60e3c5bd941615337c4aaf540179fcd39f25562eb90a96655384eb80d67fd931";
     private static final String HISTORICAL = ROOT + "historical/M3StateRelation.c.txt";
-    private static final String HISTORICAL_SHA = "66d28e350f4894498b15c0041c0a43c075f12c9e3a384214e45d9868ce1950b6";
+    private static final String HISTORICAL_SHA = "19ec4980ab60534ce7fc555573d790442ff3ea632682b65d0225bc187c3e58e9";
     private static final Map<String, String> BEFORE = Map.ofEntries(
             Map.entry("src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java", "ae1de4b652b474c594d5fa6e8ec2d43aae720d166e885497217688c9fabae49d"),
-            Map.entry("src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java", "bbc2901ebe5b2de9951b672127bd47e9d13c70b5a39482fa0727703d0a2ff757"),
-            Map.entry(C_OWNER, "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16"),
-            Map.entry("src/java.base/share/native/libjava/m3_state_relation.h", "c948c0ac34180f1f9412a764c3c9fd8c59e11509467aa9e04f8825e903526885"),
+            Map.entry("src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java", "9d485a1771a30b4229acb5526ca90de5f2df4a03ee5ad8f5388bb128d2c38194"),
+            Map.entry(C_OWNER, "0df1989292b23b1f185f222db61ad55d5e38b30d5b758436ca9d62b8de277bbd"),
+            Map.entry("src/java.base/share/native/libjava/m3_state_relation.h", "6a453bbe5c443d327228e48cc27c6d5dc356a67586f93796a52de17e69fa12a2"),
             Map.entry("m3/compatibility/regex-relations-20261014/M3RelationPortProof.java", "bb77a4d48ed803e0503a8e497ec144748dd87d05b1c659971273d15b5bd89606"));
     private static final Set<String> PASSED = new LinkedHashSet<>();
     private static final Map<Boolean, String> EMITTED = new HashMap<>();

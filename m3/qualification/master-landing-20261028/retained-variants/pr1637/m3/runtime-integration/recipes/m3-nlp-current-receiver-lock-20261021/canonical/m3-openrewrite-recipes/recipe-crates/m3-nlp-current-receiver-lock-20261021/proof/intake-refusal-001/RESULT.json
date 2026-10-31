@@ -7,7 +7,7 @@
     "canonical-work/curate_nlp_owner_evidence.py",
     "owner-candidate-001",
     "nlp-work/EVIDENCE_HANDOFF-LOCK-CANDIDATE.json",
-    "3efcd3660550d141430e5154e636216b9809955d21020e2b3b8de5d4be96cf81"
+    "e328502af37621c855fd2d2c5af7cf805869f14349645cc9fa91181358d38762"
   ],
   "cwd": "/workspace/scratch/206049dfb270",
   "command_custody": "Retrospective exact transcription of executed session tool call",

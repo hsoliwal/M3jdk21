@@ -1,8 +1,8 @@
 {
   "schema": "M3_PENDING_CORRECTION_INDEX/1",
   "events": [
-    "948de23008d7e66ebcb2f93a2b86c3ba6acaedbbae82c841d9da718a45d4b615",
-    "580fe2ff0e9dbd4e625251098948f20be7fe5207806a457aaf1176c6712034b4"
+    "7e90af9173edceb152fde014b5b74cceb30c07a62c6af7293e0b2065b628bd2b",
+    "12b0e7d8df2b80d9a2b2493f7b8e3f54254c35ccb27266463819e4c2ad7aa511"
   ],
   "admission": "PENDING",
   "conformance_receipt": {
@@ -11,6 +11,6 @@
   },
   "predecessor_checkpoint": {
     "path": "memory/FINAL_RESULT.json",
-    "sha256": "d8524063a3acfb23c6b2479ad9302a08963cb60656939e862d457fe690dbf17d"
+    "sha256": "657c5d51728970ca5bd2de0800dabef5749cb6dcf46ce4ceb53176dcc3d62168"
   }
 }

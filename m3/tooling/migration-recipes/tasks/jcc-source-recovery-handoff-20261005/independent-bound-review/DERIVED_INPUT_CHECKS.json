@@ -33,32 +33,32 @@
       "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/DERIVATION_INPUTS_V3.json",
       "snapshot": "inputs/DERIVATION_INPUTS_V3.json",
       "bytes": 38439,
-      "sha256": "3798d8ac0faa32453d851887b100ed55da97e5e0a3cbdb726f4011f284f3799f",
-      "git_blob_sha1": "d1b732a6c3114d504239c5e3f1de9b10cc067c89",
+      "sha256": "8c6eab25d9adb14d3789799a979924f77a89b2f3824b5f676ea12c322bbf1da7",
+      "git_blob_sha1": "b33cb29dc8752f163e7d330797525d5b41244499",
       "mode": "100644"
     },
     {
       "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/source-binding-v3/SOURCE_FIELDS_AND_PROOFS.json",
       "snapshot": "inputs/SOURCE_FIELDS_AND_PROOFS.json",
       "bytes": 419637,
-      "sha256": "a8fef86bf2c1cb96dce3f2f0f1394e6f0d99d233a3934f9bf273209b84c85f09",
-      "git_blob_sha1": "9900ea2844fc783eccdb9b3fb4edadffe69e2523",
+      "sha256": "65f10e830243ed927aabedee9d0734daa46eed3b37ae4212e28ab85131fe9e9d",
+      "git_blob_sha1": "8d44a30fb11ce988c489a6259e8be117df98ed3a",
       "mode": "100644"
     },
     {
       "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/source-binding-v3/ROOT_ACCOUNTING.json",
       "snapshot": "inputs/ROOT_ACCOUNTING.json",
       "bytes": 70709,
-      "sha256": "9a74176340e704c473d0a9c14f667874d792adc1919768e0713da262da85f10a",
-      "git_blob_sha1": "355419924772c1be748f6b68b289b58ef16ea1ba",
+      "sha256": "30dadc5274823dba2443d663000051a48c0785eb92042ba8e684520bc2ce5942",
+      "git_blob_sha1": "ae55363fa985efefc16c80c9eea4587034bc9be2",
       "mode": "100644"
     },
     {
       "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/PUBLICATION_CUSTODY.json",
       "snapshot": "inputs/PUBLICATION_CUSTODY.json",
       "bytes": 1099619,
-      "sha256": "bf2d3f29e903f12c201febb4c82083a32758095fdd8fbacbcf25a42e532f44fd",
-      "git_blob_sha1": "067f5f2b6b53343f68f3bf197069e05ae5b9fe3f",
+      "sha256": "91c8df6ab07e3590fecf20de65e2e65943c4b70aebb9f5133901ae6362506c35",
+      "git_blob_sha1": "6389a4301478fd4df74e146f1ae4b8942f675e20",
       "mode": "100644"
     },
     {

@@ -10,12 +10,12 @@
   "production_or_test_source_change": false,
   "failed_record": {
     "path": "failed-ascii/RESULTS.json",
-    "sha256": "2e62457a2ae8f39fd582b8ba37c9061e021d237e7144f50219956ed2b7909314",
+    "sha256": "91e2b911152ab704038e7e4210536129f992fcba7c0cc8bb6bdc6ecaa41d9e24",
     "status": "FAIL"
   },
   "successful_record": {
     "path": "fresh/RESULTS.json",
-    "sha256": "7cf7cbe9756660d22e6a4a2fde8f49a88c7ad8755104721c70f0dd7ba19ae461",
+    "sha256": "38efa52bd167f6fda979aaf1ee9befb7234ef8f5aa38bc42fdbb9f81f88cc1f6",
     "junit_successful": 136
   },
   "diagnostic": "failed-ascii/locale-diagnostic.json",

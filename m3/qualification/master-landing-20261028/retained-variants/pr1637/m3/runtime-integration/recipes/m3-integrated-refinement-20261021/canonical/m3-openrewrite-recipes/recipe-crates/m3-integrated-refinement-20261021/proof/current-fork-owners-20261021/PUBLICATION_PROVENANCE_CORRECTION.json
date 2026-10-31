@@ -9,11 +9,11 @@
   },
   "original_sealer": {
     "path": "seal_publication.py",
-    "sha256": "92c058c01103509ccf5b244bcca0f7f03b02b0b1a180dff195761a79c591c157"
+    "sha256": "2a00f47e16e14922d1f65a3f1bf25e97227f13699ac51558a831f8bf04e87698"
   },
   "corrected_sealer": {
     "path": "seal_publication-002.py",
-    "sha256": "657884bd5bb9e583f1a76209be73c0b37dbbac851754d412f702d4d760b98b3b"
+    "sha256": "6b7898a62644b4a71d48f1aa28ab1bb8407a4b8f138b3c2d3bf2d754d8b0d5d1"
   },
   "correction": "Use exact existing allowed ADAPTED_UPSTREAM disposition for UPSTREAM_MODIFIED rows. Retain exact lineage detail in the existing source/rights and recipe/helper lineage records. Existing checker unchanged. The first failed attempt stopped before writing either canonical append owner.",
   "followup_receipt": "PUBLICATION_PROVENANCE_CHECK-002.json",

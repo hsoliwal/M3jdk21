@@ -106,7 +106,7 @@
       },
       "after": {
         "resource": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/09-inputs.tsv.txt",
-        "sha256": "d2b2db84c1881d80c155b10308ed283ccd8915bc6ce042b37226b39219cd53dc"
+        "sha256": "47b97eac84f181ba334f954481d9fa4de8b3be538067edafca18de04f99392e9"
       }
     },
     {
@@ -117,7 +117,7 @@
       },
       "after": {
         "resource": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/10-pins.json.txt",
-        "sha256": "64786a4e1700dc29d8d975bc911ebaad5bf0ae6f7b05c92b5042b27050f579e8"
+        "sha256": "76b87771c72ea64593a9d49b1d29531b1b69a27ba754ce016678b65637f5d0f2"
       }
     },
     {
@@ -128,7 +128,7 @@
       },
       "after": {
         "resource": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/11-plan.json.txt",
-        "sha256": "dc7bf333136c3837d1d4073ea006a15ff2c7aa4bc42feea3fc9df9bab50b6bfc"
+        "sha256": "2a1afa2dddd29a796d380a76f1221a283ca2bf0c557b5de8c4539ad9194fdcf0"
       }
     },
     {
@@ -299,7 +299,7 @@
     },
     {
       "path": "m3/tooling/tq/current-20261018-plan.json",
-      "sha256": "dc7bf333136c3837d1d4073ea006a15ff2c7aa4bc42feea3fc9df9bab50b6bfc"
+      "sha256": "2a1afa2dddd29a796d380a76f1221a283ca2bf0c557b5de8c4539ad9194fdcf0"
     }
   ],
   "plan_sha256": "9182df20e78fb013422d3ca9505653ee3a055c0b6e9193de696b211d5d97cd79"

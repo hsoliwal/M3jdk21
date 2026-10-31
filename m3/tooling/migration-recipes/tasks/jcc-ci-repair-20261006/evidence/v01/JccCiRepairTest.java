@@ -42,8 +42,8 @@ final class JccCiRepairTest {
     private static final List<Target> TARGETS = List.of(
             new Target(".github/workflows/m3-foundation.yml",
                     "before-00-m3-foundation.yml.txt", "after-00-m3-foundation.yml.txt",
-                    "736f90932bae21b4fb650eb8451f42999fab0a15fe7787cdc80a6375fd3866d8",
-                    "e13515b5aaab155ce98bf059c445d1b989cdf82d84487884ac31fb3a183a171f"),
+                    "1a1ddd014a5cce76e75b1e4fce5c4cd0c746a3dbf5f18ef3a1bc9dad7d8fbdd1",
+                    "9969a19a5727bb1684d6e8443c67681a0afd52f0427d9501f4b4d363e9709982"),
             new Target("m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java",
                     "before-01-M3A3RegexMemoryLabDeliveryRecipeTest.java.txt",
                     "after-01-M3A3RegexMemoryLabDeliveryRecipeTest.java.txt",

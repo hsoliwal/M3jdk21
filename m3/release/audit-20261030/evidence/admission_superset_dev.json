@@ -549,7 +549,7 @@
         "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-source-final-handoff.yml",
         "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-source-handoff.yml",
         "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-source-recovery-handoff.yml",
-        "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jdk-execution-followthrough.yml",
+        "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3jdk-execution-followthrough.yml",
         "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jep458-proof-refresh.yml",
         "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jep474-proof-refresh.yml",
         "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jep485-stream-gatherers.yml",
@@ -1044,7 +1044,7 @@
         "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/test/resources/before/.github/workflows/m3-a3.yml",
         "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/test/resources/before/.github/workflows/m3-class-ver.yml",
         "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/test/resources/before/.github/workflows/m3-foundation.yml",
-        "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/test/resources/before/.github/workflows/m3-jdk21-backports.yml",
+        "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/test/resources/before/.github/workflows/m3jdk21-backports.yml",
         "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/test/resources/before/.github/workflows/m3-jep458-current-master.yml",
         "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/test/resources/before/.github/workflows/m3-jep467-markdown-inventory.yml",
         "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/test/resources/before/.github/workflows/m3-jep493-runtime-image-inventory.yml",
@@ -1122,8 +1122,8 @@
         "m3/tooling/migration-recipes/verification/jcc-source-recovery-handoff/pom.xml",
         "m3/tooling/migration-recipes/verification/jni/pom.xml",
         "m3/tooling/migration-recipes/verify_canonical_atom_descriptors.py",
-        "m3/tooling/m3-jdk-a3-recipes/pom.xml",
-        "m3/tooling/m3-jdk-a3-recipes/src/test/java/jdk/m3/tooling/m3/a3/PublicA3ExportMirrorTest.java"
+        "m3/tooling/m3jdk-a3-recipes/pom.xml",
+        "m3/tooling/m3jdk-a3-recipes/src/test/java/jdk/m3/tooling/m3/a3/PublicA3ExportMirrorTest.java"
       ],
       "state": "HOLD"
     },

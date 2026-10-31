@@ -4,7 +4,7 @@
     "m3/collections/algorithm-catalog/stable-order-restoration-20261020/CANDIDATES.tsv": "4c665ab69a525cf0f289053989adc8fac1dbf78c527631dfe60e6b9e695bf6c8",
     "m3/collections/algorithm-catalog/stable-order-restoration-20261020/DISCOVERY.json": "9919c3a227026a3038ad4d568878eb5559ace640de205914867fabb226152fca",
     "m3/collections/algorithm-catalog/stable-order-restoration-20261020/README.md": "5226edebfdddfb21515cab2a1c8863d8d52304ecb57edff198619591bb903c31",
-    "m3/collections/algorithm-catalog/stable-order-restoration-20261020/SOURCE_PINS.json": "bb4b66ef9b6d5234cfc60624f52d65677728916e2c5d7e2494fff49fe77a77c5",
+    "m3/collections/algorithm-catalog/stable-order-restoration-20261020/SOURCE_PINS.json": "4371fbd746b3f584a625c09110897a5c5855c8c7f869a5edcd20d7f1d5fcf60b",
     "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java": "bf601d711667e1078ca30246da6fa89b43d7ed951a3179e0a161365526581959",
     "m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowContract.java": "7c1c055ec9a58a9c807fc05be3ec4a83b0a411729f41c259e3180d1e45262b94",
     "m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowResourceProbe.java": "a9dfb46285a65001c135fda31e3b69fe7a3882e00412029fe2abd64b1384fb9e",
@@ -15,7 +15,7 @@
   "date": "2026-10-20",
   "generated_verification_files": 3,
   "independent_review": {
-    "receipt_sha256": "ccf4ec383745d3d974e29091a02dfa6e02eadc387108c237b46258d3061ba1e6",
+    "receipt_sha256": "5523864b2b4b82e4314a75c3e6c4de12354c02ae04c825cdf054dda13ccd17d3",
     "status": "PASS"
   },
   "java": {
@@ -56,7 +56,7 @@
     "exact_candidate_sha256": "bf601d711667e1078ca30246da6fa89b43d7ed951a3179e0a161365526581959",
     "generated_receipt": {
       "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/generated/RESULTS.json",
-      "sha256": "c3cc257dd3d67c4a5305e66c3abda448c03d0643646a06ceee38f492b72f8239"
+      "sha256": "8447b5d391ae2e8e21875d6952509ec174049a727b5140f59fd4dc23b12c0293"
     },
     "limits": [
       "Exact generated receiver; native ABI/runtime proof remains separately assigned",
@@ -169,7 +169,7 @@
     "scope": "One existing stable-order restoration; exact SDK-emitted receiver projection and verification sources",
     "sdk_receipt": {
       "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/RESULTS.json",
-      "sha256": "dec0b1b97b7bbc1a5368517112169c66f0ded0adfaf743a0e22cf63930db369f"
+      "sha256": "162a5d8ebcb52c9bf05c284f315ffc2146773f446861bd8fc12db851c1488eaf"
     },
     "status": "GENERATED_JAVA_PASS_NATIVE_GATE_SEPARATE",
     "warm_wall_ratio_observed_decimal": "12.198606516",

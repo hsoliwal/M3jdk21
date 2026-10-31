@@ -103,7 +103,7 @@
     },
     {
       "path": "test/jdk/java/lang/String/M3MappedStringBackingTest.java",
-      "sha256": "9f42d1bdd6e174f5eac44e72afae2154ac140c9773c540b3073a06a8c2da827d"
+      "sha256": "2579d87f06b529f8917cdb68594b0877cddcad653148bf49ec38230dfe75bd1b"
     },
     {
       "path": "test/jdk/java/lang/String/MapFactsTest.java",

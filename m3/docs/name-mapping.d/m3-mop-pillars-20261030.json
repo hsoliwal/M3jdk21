@@ -10,7 +10,7 @@
       "target_rule": "one javac AST: atoms projected from com.sun.source trees at PARSE finish (Plugin) or a parse-only JavacTask (CLI), units published after ANALYZE; refusals are written by com.synexia.rewrite.mop.compiler.M3RecipeMemory (E44 schema) into the recipe's RECIPE_MEMORY.tsv; HOLD instead of ADMITTED without a fixed-point witness; per-kind limit ratchet"
     },
     {
-      "source": "M3JDK21 m3/mop/src/main/java/jdk/m3/mop/M3RecipeMemory.java (proof-receipt memory, blob e5e273643af74bd89d90bc82a8093979b59916ea)",
+      "source": "M3JDK21 m3/mop/src/main/java/jdk/m3/mop/M3RecipeMemory.java (proof-receipt memory, blob ef7b319ba2ba91bbfcb5a9564a5d313bb4866b7c)",
       "source_commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
       "target": "unchanged; the first draft of this leaf (M3jdk21 #2153 b84a4bad60f) added appendCandidate and 11 pillar classes under m3/mop, all reverted on the owner's decision",
       "status": "reverted to master bytes; m3/mop/MOP_PILLARS.md documents the javac -processorpath/-Xplugin:M3Mop invocation of the Synexia crate from an M3JDK21 checkout",

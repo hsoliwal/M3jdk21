@@ -9,8 +9,8 @@
 | `derive_source_handoff_v3.py` | `8b71aaefeee38c8c8bba0d8c4e169df6b0aeb73ad9b4cad35dae7181c1d0246b` |
 | `author_e04_v3.py` | `b63123a1d1369bc6289d7901f950a6d9ebe5ccd5b82ac146814c7af3305ddb1a` |
 | `run_verification_v3.py` | `2c0cc74d7c7faa821bec1969c20aa6e41f6cfd1aa29ec67cc6187b52878f38f9` |
-| `publication_custody_v3.py` | `9b885587ad7187eb4c5d0d05f4fcf20d691bd3b55ccab406d3601342f4550479` |
-| Proposal readiness T01 | `1210c22563ecbf8819e044f6c43158ab68826ebfc9fbb58a37d414db5137a8e4` |
+| `publication_custody_v3.py` | `340e3e1670e457d99ab9e0ae954eed85efacdea4e4e34f2d4b2165421b8c9248` |
+| Proposal readiness T01 | `cfcf56cddf3e8c710583a4d60d2ba86e1af1d1d17da9fc136bbb5c27db9e5604` |
 
 All snapshots are preserved under `inputs/`. The exact old derive/author/runner bodies and the prior independent T01/T02 seals remain unchanged. Independent diffs equal the proposed additive diffs. No old entrypoint or source payload is overwritten by this proposal.
 
@@ -22,7 +22,7 @@ This is a during-run input-preservation omission, not a missing initial fixture-
 
 ## Producer compatibility and exception boundaries
 
-The full reviewed producer `verify_publication_v3.py` is `6b8ce688a81b46c20e567bd719104bac6a4cf8578a42904dbe494bca2305e443`; its explicitly pinned helper is `203f44729f860620949ec9e6aa7c5f2c7d766de2e406548ceb6797797bfdcc33`. Both sources were read along with the separately sealed producer review. The receiver consumes their actual schema `jcc-source-recovery-publication/1` and accepts only `PUBLISHED_CUSTODY_VERIFIED`; it does not normalize this into the former successful-readback status.
+The full reviewed producer `verify_publication_v3.py` is `904a2105f04a12454a2d97c13a5bef6764e18ae28a2fe680e06ca0e6e14a6e93`; its explicitly pinned helper is `203f44729f860620949ec9e6aa7c5f2c7d766de2e406548ceb6797797bfdcc33`. Both sources were read along with the separately sealed producer review. The receiver consumes their actual schema `jcc-source-recovery-publication/1` and accepts only `PUBLISHED_CUSTODY_VERIFIED`; it does not normalize this into the former successful-readback status.
 
 The reader fixes the source manifest, source verifier, audit and publisher hashes, input/parent/root/branch and verification flags. It rejects the old output, be92, null/dummy and probe commit identities. It compares complete verified payload rows and counts against the exact manifest and requires the four production update/two NUL direct identities. Six is a mandatory direct-body denominator, not the total observed-read cap: the observed unique body set may contain additional exact designated owners, up to the 21-owner/NUL union. The two invalid UTF8 objects are excluded from that set.
 

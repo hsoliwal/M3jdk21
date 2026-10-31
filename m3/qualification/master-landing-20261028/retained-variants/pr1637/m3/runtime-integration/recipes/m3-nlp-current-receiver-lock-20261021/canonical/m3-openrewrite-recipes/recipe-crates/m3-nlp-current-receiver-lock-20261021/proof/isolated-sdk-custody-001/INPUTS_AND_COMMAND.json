@@ -30,11 +30,11 @@
     "m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/preimages/m3/tooling/module-packs/nlp-search/current-source-lock.json": "c072c8b97e8f83d0e9d2f0b9d3cdcd334622a1227888251ee13f4de28b5d843a",
     "m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/prepare_packet.py": "fabda7308bbc4fbd65fd4ec8f46465e6c321e091b478dfde2afd50cbf45e3e77",
     "m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/qualify.py": "c0fd4b4b5dd4015f0c27f34df0e3d818935d30a8c46a741c987773a4f0d6da98",
-    "m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/src/test/java/jdk/internal/m3/rewrite/M3NlpCurrentReceiverLockRecipeTest.java": "c623a57f0dec84f6f8b6e76f10b4fd495346b8b7ea373fa85e865f587b27ad00",
-    "m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/verify_sources.py": "2500f1d631626e0001b8ba04c63a6d768c03b6578f00c84cbe8efe16c5f29917",
+    "m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/src/test/java/jdk/internal/m3/rewrite/M3NlpCurrentReceiverLockRecipeTest.java": "3854e95a120d831d71136b9673707ef3893494829c3042fc054cabb58e1357f2",
+    "m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/verify_sources.py": "cb673aba8063bb90b403472317c69eebe285fd6ca9b80d01fda34baff4beca09",
     "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
     "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java": "92cc90c46a1ca672a016a89c0d65e6909e090264ba1aa76a85b7fa333470e38b",
-    "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java": "613fd494de5eebdbc29d8982c599d44cd321754b370175f7d097720904a04853",
+    "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java": "3b4f7649fc3ee38df62a6dc9b318e8845da6574f7e48b4cd7a948b58e266d46f",
     "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java": "d2cd6bb4d800878b9f512bf436bf4e38cf73b37676235832e1f68840cfe895c0",
     "m3-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-nlp-current-receiver-lock-20261021.yml": "2e14e4dc5dbb498014f6d04eb88ac4b51277d73d8c826486861f42c6bc74b624",
     "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-nlp-current-receiver-lock-20261021-001/manifest.tsv": "99043539fdc0eb1de21fed14826929be34cb4ee763e92659d5f53686dbff66f2",
@@ -45,6 +45,6 @@
   "parser_classpath": "/workspace/scratch/206049dfb270/canonical-work/nlp-owner-sdk-001/parser-classpath.txt",
   "parser_classpath_sha256": "5c8dad90d5dade6c7bb24ee5e15ec07ba75f49de7ca8781ccab9af38db3ef95a",
   "actual_owner_result": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/builder-and-whole-rope-001/RESULT.json",
-  "actual_owner_result_sha256": "9b775abf5910c2e6046bfcb38517df1ace3e89e77cd650ff5b5696135afa4b1b",
+  "actual_owner_result_sha256": "babc91379c6e7b018f3dfd509e6b046beb71fd82d9dc5ca65ff94cceeeb72767",
   "purpose": "Fresh temporary build avoids previously observed shared-workspace compiled residue; no source or test selector alteration."
 }

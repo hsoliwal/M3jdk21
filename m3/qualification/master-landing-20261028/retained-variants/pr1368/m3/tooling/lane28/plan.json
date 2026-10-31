@@ -85,7 +85,7 @@
       },
       "after": {
         "resource": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/name-mapping.json.txt",
-        "sha256": "48401828719c2e439ac8fe35253c92696ed1cd271ad0e80b01975727c4218525"
+        "sha256": "fe9ed269cb1e860a0d54713a9e25b8fa9a09bba77d28467b832d23189524c120"
       }
     },
     {

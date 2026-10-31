@@ -11,7 +11,7 @@ CRATE = "m3-original-mapping-provider-20261017"
 RESOURCE = "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/" + CRATE + "/"
 SUITE = "jdk.m3.rewrite.backport.M3OriginalCliProviderRecipeTest"
 BASELINE_MANIFEST = RESOURCE + "baseline-pre.tsv"
-BASELINE_MANIFEST_SHA = "1fd2558fdd93e7f1860a225dacfc7118452bd88498d9d272946110c0260a4341"
+BASELINE_MANIFEST_SHA = "e0ec50d7f1608180e1fe831d137e26d51e691606b85379a1a38c12d064c702f5"
 BASELINE_FILES, BASELINE_BYTES = 55, 795620
 METHODS = ["allMutableStatesBothOrdersAndFixedPoint","exactRecipeResultsDeliveredToDeclaredOutput","everyUnknownTargetRefusesAfterItsPositiveBaseline","everyDuplicateTargetRefusesAfterItsPositiveBaseline","everyRequiredTargetMissingRefusesAfterItsPositiveBaseline","everyNonPlainTextTargetRefusesAfterItsPositiveBaseline","everyChangedAfterScanTargetRefusesAfterItsPositiveBaseline","sealedManifestPathSafetyAndConvergedIdentity","deliveryPrechecksForeignContentsAndAllSymlinkComponents","currentMappingReconciliationPreservesNewFieldsAndReviewedMigration","frozenPreBaselineRemainsIndependentOfInstalledPost"]
 def digest(data):

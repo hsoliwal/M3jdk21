@@ -44,7 +44,7 @@ public final class M3CollectionSdkNamesRecipe {
     private static final String SDK_SHA = "eab54d460dffcbd3f83514c9abddce7aebdf335998a7b38278685051f6a988ea";
     private static final String CATALOG_TEST_SHA = "c9687c706997e4204fb0df632e53425261f0a74ff1bb07690bbef53ab03fc83f";
     private static final String SDK_TEST_SHA = "a5f5761e7454a55bf020a46db4c36b9b13b90109ef2d9a9b49d221406cb10128";
-    private static final String PREVIOUS_CATALOG_SHA = "d582d96bae89369e46b31cdbc9127e48d548136e18f61513d3dd194ff674689d";
+    private static final String PREVIOUS_CATALOG_SHA = "c822b7d5006371ff45f7d08e3979eb67e96878e840b7b51a4b3550923b067404";
     private static final String PREVIOUS_TEST_SHA = "709f83dd74eaf5e9718f72cf24d33433737e066ae56d7e0154956977de2437ca";
     private static final String TOKEN = "/* @M3_FAMILY_ARRAYS@ */";
     private static final String HEADER = "upstream_fqcn\tvendor\texisting_m3_owner\t"

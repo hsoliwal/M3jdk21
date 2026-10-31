@@ -45,7 +45,7 @@ eef6bf1e2d451f6f9ec9288dc1d9a54d321fd446f812636563609699a0fa7053  m3/tooling/cb/
 ba2eb17ff21ac30abd70b855dc8a2490371a51c062c50cff36b4226b4234c8e4  m3/tooling/cb/evidence/jtreg.sha256
 d4578b77ded4c87f33240fad4588e418b3157992288cbf4a1a4e38be14ece15b  m3/tooling/cb/evidence/mapping.txt
 2cb4eb966de40f965c2936a44fa7bf140eb6355b42c5b868ea11a90954afbf8b  m3/tooling/cb/evidence/native-tests.txt
-d4781770894360767959138b874a4822473917bdbff1921287400b2edefecd96  m3/tooling/cb/evidence/receipt.json
+59dad7e343be1af3d9a29a0adfe0baa1de788ce7ff88e74908e485539d53417f  m3/tooling/cb/evidence/receipt.json
 54474d9b23903950d6abf7a6cc5f3274cad4b4e96bb7fc5dfd410a78da0e7c72  m3/tooling/cb/evidence/recipe-tests.txt
 c2a48c6e0b10eb6ea0ce3f0a14563d897bb1298752a0f8074f26576da403ad9f  m3/tooling/cb/evidence/version.log
 24d84810ded39819f12f29946c9d72d1c431f1aa4957b2d7e9f702d12d0177b4  m3/tooling/cb/evidence/vi-int.log
@@ -84,7 +84,7 @@ f4ed7d3143b74e07cadff1fa9207e65f2e41caa8ee1475bd5207677abc8ffaf7  m3/tooling/cb/
 2a6b5acbb825ee33b99d455053c695eb80195041d2345b536cf5dce5df036461  m3/tooling/cb/pins.json
 5acfeeef9d5853198668de8022733459f842a7ae60b02a028b09192f16fb9c42  m3/tooling/cb/pom.xml
 e74fa9dd39640a50e832710f8a7efc7c8b084e05bbc22a7e7613f6632159d201  m3/tooling/cb/recipe-pin.tsv
-04dd73c2fe5d1ccb3b55e8eef74d6e82636e3a6fa242aa42ab35b2cf81e6e1f6  m3/tooling/cb/run-image.sh
+cc13d9558226182235e9eebb96015f235d832b52787200ee30cdb321fdb13b81  m3/tooling/cb/run-image.sh
 95adc8ea2a9035e65b613a7fb4131f8629bc90f81b70008895a77c1e396b05f9  m3/tooling/cb/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-jni/jni.cpp.txt
 471076651477273d831ea7cbfe25120aa7a8af6397c9611b0247e5c7c6b9702e  m3/tooling/cb/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-jni/libM3JNINull.c.txt
 4205a9adaf793e3340a2b0e581687646eb0428ad957680f5736267f104def1ac  m3/tooling/cb/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-jni/manifest.tsv

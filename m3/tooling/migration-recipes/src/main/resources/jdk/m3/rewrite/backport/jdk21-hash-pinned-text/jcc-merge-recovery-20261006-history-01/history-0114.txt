@@ -49,12 +49,12 @@
   },
   "checker_bytes": 40725,
   "checker_executed": false,
-  "checker_sha256": "f549f6a5d4513fc726d0e3d8cbe334202fac50e075ad7312f0a080fa81a3c4b6",
+  "checker_sha256": "c88b8805881ab3cc299b530d50cbe8d6749a0a4925d7ea5e9ce512bd3a0a3ece",
   "input_authority_hashes": {
     "CONTEXT_REFERENCES.json": "ab9828692a1ca02adfabf22ff679e47e1e62a9d755b97f4071c42d5225698bc5",
     "FINAL_SOURCE_INPUTS_V3.json": "df6713ad19ce80daad0383fbd5c3716412e2dca133e1db7e0150b88e141313b5",
-    "ROOT_ACCOUNTING.json": "9a74176340e704c473d0a9c14f667874d792adc1919768e0713da262da85f10a",
-    "SOURCE_FIELDS_AND_PROOFS.json": "a8fef86bf2c1cb96dce3f2f0f1394e6f0d99d233a3934f9bf273209b84c85f09"
+    "ROOT_ACCOUNTING.json": "30dadc5274823dba2443d663000051a48c0785eb92042ba8e684520bc2ce5942",
+    "SOURCE_FIELDS_AND_PROOFS.json": "65f10e830243ed927aabedee9d0734daa46eed3b37ae4212e28ab85131fe9e9d"
   },
   "inputs_stable": true,
   "owner_code_imported": false,

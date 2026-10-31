@@ -22,7 +22,7 @@ args=parser.parse_args();P=args.proof.resolve()
 # This final prospective selection requires the exact actual /9 STOP and its frozen bounded cohort.
 assert args.receiving_result is not None and args.receiving_inputs is not None and not args.receiving_pending,'exact actual primary terminal and bounded selection are mandatory'
 receiving_terminal_pin={'path':str(C/'receiver-current-c0-string/primary-observation-v1/RESULT.json'),'sha256':'6f8d824c7b58f801a3563869d1a34605b36f160a1a04ea4dc6d9dc5455e5e6e8','bytes':33725}
-receiving_selection_pin={'path':str(C/'receiver-current-c0-string-preparation/receiving-selection-v1/RECEIVING-SELECTION.json'),'sha256':'404b379a64e596dd03efe94f4ea456bdc57f16424e2297b3b598c2dc3d0854c7','bytes':74585}
+receiving_selection_pin={'path':str(C/'receiver-current-c0-string-preparation/receiving-selection-v1/RECEIVING-SELECTION.json'),'sha256':'ee018354430dd4a256f88b09ad93adbcc91139adc6c2d6c83a050acd24030a2a','bytes':74585}
 assert not args.receiving_result.is_symlink() and args.receiving_result.resolve()==Path(receiving_terminal_pin['path'])
 assert not args.receiving_inputs.is_symlink() and args.receiving_inputs.resolve()==Path(receiving_selection_pin['path'])
 assert pin(Path(receiving_terminal_pin['path']))==receiving_terminal_pin

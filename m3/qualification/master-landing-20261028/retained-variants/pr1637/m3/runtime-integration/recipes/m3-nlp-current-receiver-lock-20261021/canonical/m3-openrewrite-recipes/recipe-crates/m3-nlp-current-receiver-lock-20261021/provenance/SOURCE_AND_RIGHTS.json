@@ -22,7 +22,7 @@
   "first_party_author": "Hitesh Soliwal and Contributors to the Synexia Project",
   "canonical_recipe_lineage": {
     "path": "provenance/RECIPE_LINEAGE.json",
-    "sha256": "e0fde36409038a30b05393e6efb9120c8f0bbe898243b3be2fa06770e9c8f615"
+    "sha256": "23264a53189f0063c49d88f39d1aeae23d2af9fdf90a6010c59d43c8cff9ab65"
   },
   "memory_helper_lineage": {
     "path": "memory/HELPER_LINEAGE.json",

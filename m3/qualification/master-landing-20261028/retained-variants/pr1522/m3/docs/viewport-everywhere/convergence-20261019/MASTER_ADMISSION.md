@@ -10,7 +10,7 @@ were not in the frozen publication map; exact recovery of those bytes is not cla
 
 Receiving source remains M3JDK21 `9a164c31b38c7013c179a3ff38b0bb60c199c7fd`. The canonical collection recipe is
 `com.synexia.rewrite.M3CurrentMasterConvergence20261019`, manifest
-`0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075`: 60 targets, 39 KEEP and 21 changes including 12 additions.
+`ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6`: 60 targets, 39 KEEP and 21 changes including 12 additions.
 
 ## Selected owners
 
@@ -67,8 +67,8 @@ is claimed by this metadata recovery.
 
 The guarded publication appends ten mappings to the existing 66 in
 `m3/docs/name-mapping.json`. The prior raw SHA-256 is
-`870bc9346fbfe43d6eb09a3ca5ed1acf831ef303ffa27c5c91ece5b03704bdd6` and Git blob
-`499cc323ade938eace0d06275467e4e77de8f106`. Every original byte is preserved
+`ac0b133afdfedcf68727332c91e82390a951f3a03350a6cffa9de0e6edcb77f0` and Git blob
+`ce76431af299d15823c1cd30f9083ab1a9186f03`. Every original byte is preserved
 around the single insertion; all 66 original mapping objects and every other
 index value remain equal. `RECEIVING_PUBLICATION.json` records the exact seals.
 

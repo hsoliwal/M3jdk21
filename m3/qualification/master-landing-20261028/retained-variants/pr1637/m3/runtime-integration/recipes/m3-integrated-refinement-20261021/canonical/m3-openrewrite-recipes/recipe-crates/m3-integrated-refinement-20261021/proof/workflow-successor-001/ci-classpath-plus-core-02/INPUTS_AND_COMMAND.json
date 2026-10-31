@@ -31,7 +31,7 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/SOURCE_SEALS.json",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/SOURCE_SEALS.json",
-      "sha256": "80a4d6a34b509ed4d5008fee26a507d1c770b0f936a4468c81dc4cea930b1d19",
+      "sha256": "b67bfeb515519ed2c24af57feec651a7860a22ce7cb74f7047a319b9a98f0095",
       "bytes": 19164
     },
     {
@@ -133,7 +133,7 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/.github/workflows/m3-collections.yml",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/.github/workflows/m3-collections.yml",
-      "sha256": "20bbf390cad7ed2bdb8e024298cd7b32d311b6bf7c835742ee766bb53c5d0fda",
+      "sha256": "8d52122c6bd7bc4f52b0606704188a7040fc853c2dbefe6756b7b2a1792da504",
       "bytes": 7464
     },
     {
@@ -403,7 +403,7 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/receiver-001/01-preflight.json",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/receiver-001/01-preflight.json",
-      "sha256": "f8547d42b5ca3794acacaee8fb6199d78014e76e661919a5735eac9f4a07cfa1",
+      "sha256": "c8190b37ac6e102eb5aa905beb67d3910f7da316793488a618bb85a146a8449a",
       "bytes": 13783
     },
     {
@@ -415,7 +415,7 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/receiver-001/02-first-apply.json",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/receiver-001/02-first-apply.json",
-      "sha256": "36a4a099710bc1a1857976b31ff3ea64307edda43625f4940e3163b28427d950",
+      "sha256": "2feafdda95bd35adb7df71b43897e4e3d47d0eefd75f7589c7aed02350c5fed8",
       "bytes": 13783
     },
     {
@@ -427,7 +427,7 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/receiver-001/03-fixed-point.json",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/receiver-001/03-fixed-point.json",
-      "sha256": "99f84852e7f76d4091e6ca6e327757957e113b514598f69621e65f15d3e4db12",
+      "sha256": "f77a981e69d316a614a13904973e059e348c91989d2614054951c75d337c48f6",
       "bytes": 15797
     },
     {
@@ -487,7 +487,7 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/receiver-001/RESULT.json",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/receiver-001/RESULT.json",
-      "sha256": "fda259a156cb4fea194adc89fd6e3860591921f4737b178ce20c98b859b4cb6b",
+      "sha256": "b1ca426fe573ddc4848200bf5e5cd62383f7bfd6ec1c90278ffc1a679aee1cf8",
       "bytes": 60621
     },
     {
@@ -511,25 +511,25 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/RESULT.json",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/RESULT.json",
-      "sha256": "8abaa831ec9108d31c1b4e8ddaf25ec4b85c9d45f2feb403c8f8621686bd833e",
+      "sha256": "cc52eb45e978880fc4c7d3ad980e3a0a5076d4f86cf2014863424d06a898fec8",
       "bytes": 63416
     },
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/SOURCE_INPUTS.json",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/SOURCE_INPUTS.json",
-      "sha256": "b4a4b1b2d1909e4e48b55956ade17be08b3b44c01792f9da17eba01cc5ec1111",
+      "sha256": "a5c242a4caa109e6b4368292276b9e46450ec6d8022e11089319efd7c645027a",
       "bytes": 35094
     },
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/SOURCE_INPUTS_AFTER.json",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/SOURCE_INPUTS_AFTER.json",
-      "sha256": "b4a4b1b2d1909e4e48b55956ade17be08b3b44c01792f9da17eba01cc5ec1111",
+      "sha256": "a5c242a4caa109e6b4368292276b9e46450ec6d8022e11089319efd7c645027a",
       "bytes": 35094
     },
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/SOURCE_SEALS.json",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/SOURCE_SEALS.json",
-      "sha256": "80a4d6a34b509ed4d5008fee26a507d1c770b0f936a4468c81dc4cea930b1d19",
+      "sha256": "b67bfeb515519ed2c24af57feec651a7860a22ce7cb74f7047a319b9a98f0095",
       "bytes": 19164
     },
     {
@@ -565,7 +565,7 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/.github/workflows/m3-collections.yml",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/.github/workflows/m3-collections.yml",
-      "sha256": "20bbf390cad7ed2bdb8e024298cd7b32d311b6bf7c835742ee766bb53c5d0fda",
+      "sha256": "8d52122c6bd7bc4f52b0606704188a7040fc853c2dbefe6756b7b2a1792da504",
       "bytes": 7464
     },
     {
@@ -697,7 +697,7 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/jdk/internal/m3/rewrite/M3IntegratedRefinementRecipeTest.java",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/jdk/internal/m3/rewrite/M3IntegratedRefinementRecipeTest.java",
-      "sha256": "5a64f5196c1388e6924238c14c7bdd70053d32d8e86d1f5e7be2e5259831efa5",
+      "sha256": "d477f820c8bf4712b36d4a1d9002b2fa82a62a88175c1f84cd7fd03e978eefe0",
       "bytes": 31463
     },
     {
@@ -727,7 +727,7 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/verify_sources.py",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/verify_sources.py",
-      "sha256": "318dc14d91710372295860033b1683e695d671a19840097d77392aa110efc44f",
+      "sha256": "603a47418a7dbd6bd38708bff31bce26b4b4a70e3bdc2d85a7d829395e24b445",
       "bytes": 2324
     },
     {
@@ -745,7 +745,7 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/inputs/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/inputs/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java",
-      "sha256": "613fd494de5eebdbc29d8982c599d44cd321754b370175f7d097720904a04853",
+      "sha256": "3b4f7649fc3ee38df62a6dc9b318e8845da6574f7e48b4cd7a948b58e266d46f",
       "bytes": 19983
     },
     {
@@ -1087,13 +1087,13 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-001/manifest.tsv",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-001/manifest.tsv",
-      "sha256": "1b7c256e18f5eeaf5f6472478bd679c781073965b7669edbad3d234fa38c2e99",
+      "sha256": "725cab8c6b45b0a73b1062c4721fa456e960500fd4fd109c5ed2f72b5196ffac",
       "bytes": 181
     },
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-001/postimage.txt",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-001/postimage.txt",
-      "sha256": "0848d1a673a908854bb885908d82eaadb23fa710c75ed3e6bd912516a21eb887",
+      "sha256": "871d309a9e061205c1c6d3deff63568dfeac69155b89fc906ce32a482e8ea947",
       "bytes": 7596
     },
     {
@@ -1171,13 +1171,13 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-008/manifest.tsv",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-008/manifest.tsv",
-      "sha256": "e2840e6bb34a4fd4b01cc83c34a6cd75ec2a7bd7ff8313d383b85a78775a15f0",
+      "sha256": "7ff0da67120e0e3df6ff4b246a4eccee1186e83ab689929431f0f81524ce5741",
       "bytes": 164
     },
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-008/postimage.txt",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-008/postimage.txt",
-      "sha256": "9e3954045862b0878d729d45d39f0d8afc75d55f75b271196bbd00123a2495bc",
+      "sha256": "9d798af724646d706d7260291622221756503ad46f8ba76e0fc8b30f02b62272",
       "bytes": 157483
     },
     {
@@ -1351,7 +1351,7 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/phase-receipts/m3-integrated-refinement-20261021-001.tsv",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/phase-receipts/m3-integrated-refinement-20261021-001.tsv",
-      "sha256": "5bacb978dd91cf076f6d393c63f529c9dfab0a7d59f336a89b94d7feb5294807",
+      "sha256": "e8d2c2dcad6cd98ef96763b06e7be1a25fb1f50afa3e2392006604ba151164b1",
       "bytes": 439
     },
     {
@@ -1393,7 +1393,7 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/phase-receipts/m3-integrated-refinement-20261021-008.tsv",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/phase-receipts/m3-integrated-refinement-20261021-008.tsv",
-      "sha256": "b5c57fc7ffd5369a768fdb76e35a2580b03e9aaa13c3c590afb2b3f7cefe8564",
+      "sha256": "6132764e3a80037adb6fe4da30e860cf733056d91afbf5da88b7822cafb5abe5",
       "bytes": 439
     },
     {
@@ -1639,13 +1639,13 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/proof-status.tsv",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/proof-status.tsv",
-      "sha256": "3ed83cfe531f19d468e4e1cfa97221c341ebcd7e1dfa2df06104ad6464df42a0",
+      "sha256": "032831ab07a284006c052cafcbd91c9299ba99b0fdd7c7b2472d80efeb3912d1",
       "bytes": 90
     },
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/receiver/.github/workflows/m3-collections.yml",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/receiver/.github/workflows/m3-collections.yml",
-      "sha256": "0848d1a673a908854bb885908d82eaadb23fa710c75ed3e6bd912516a21eb887",
+      "sha256": "871d309a9e061205c1c6d3deff63568dfeac69155b89fc906ce32a482e8ea947",
       "bytes": 7596
     },
     {
@@ -1687,7 +1687,7 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/receiver/m3/collections/qualification/masked-sort-fusion-20261021/SOURCE_IDENTITY.json",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/receiver/m3/collections/qualification/masked-sort-fusion-20261021/SOURCE_IDENTITY.json",
-      "sha256": "9e3954045862b0878d729d45d39f0d8afc75d55f75b271196bbd00123a2495bc",
+      "sha256": "9d798af724646d706d7260291622221756503ad46f8ba76e0fc8b30f02b62272",
       "bytes": 157483
     },
     {
@@ -1933,7 +1933,7 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/recipe-proof.tsv",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/recipe-proof.tsv",
-      "sha256": "c0b6e0a3770cb668d204005dfc009bc2c456ecf8d9e94d121c6fe91a34314fbd",
+      "sha256": "07adf97653024f7bfa811c961e3a4d67af5b2bb5c5f5fd338c93fc06b5931806",
       "bytes": 6904
     },
     {
@@ -1975,25 +1975,25 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/RESULT.json",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/RESULT.json",
-      "sha256": "089c9eb763810e5abe50eec6f41845779289201943e74d8604f186fee657296b",
+      "sha256": "a1abf22e70da8c9ea163546910a24b0d6bd65fa08da6fc51329773f421d1287d",
       "bytes": 63338
     },
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/SOURCE_INPUTS.json",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/SOURCE_INPUTS.json",
-      "sha256": "b4a4b1b2d1909e4e48b55956ade17be08b3b44c01792f9da17eba01cc5ec1111",
+      "sha256": "a5c242a4caa109e6b4368292276b9e46450ec6d8022e11089319efd7c645027a",
       "bytes": 35094
     },
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/SOURCE_INPUTS_AFTER.json",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/SOURCE_INPUTS_AFTER.json",
-      "sha256": "b4a4b1b2d1909e4e48b55956ade17be08b3b44c01792f9da17eba01cc5ec1111",
+      "sha256": "a5c242a4caa109e6b4368292276b9e46450ec6d8022e11089319efd7c645027a",
       "bytes": 35094
     },
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/SOURCE_SEALS.json",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/SOURCE_SEALS.json",
-      "sha256": "80a4d6a34b509ed4d5008fee26a507d1c770b0f936a4468c81dc4cea930b1d19",
+      "sha256": "b67bfeb515519ed2c24af57feec651a7860a22ce7cb74f7047a319b9a98f0095",
       "bytes": 19164
     },
     {
@@ -2029,7 +2029,7 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/.github/workflows/m3-collections.yml",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/.github/workflows/m3-collections.yml",
-      "sha256": "20bbf390cad7ed2bdb8e024298cd7b32d311b6bf7c835742ee766bb53c5d0fda",
+      "sha256": "8d52122c6bd7bc4f52b0606704188a7040fc853c2dbefe6756b7b2a1792da504",
       "bytes": 7464
     },
     {
@@ -2161,7 +2161,7 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/jdk/internal/m3/rewrite/M3IntegratedRefinementRecipeTest.java",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/jdk/internal/m3/rewrite/M3IntegratedRefinementRecipeTest.java",
-      "sha256": "5a64f5196c1388e6924238c14c7bdd70053d32d8e86d1f5e7be2e5259831efa5",
+      "sha256": "d477f820c8bf4712b36d4a1d9002b2fa82a62a88175c1f84cd7fd03e978eefe0",
       "bytes": 31463
     },
     {
@@ -2191,7 +2191,7 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/verify_sources.py",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/verify_sources.py",
-      "sha256": "318dc14d91710372295860033b1683e695d671a19840097d77392aa110efc44f",
+      "sha256": "603a47418a7dbd6bd38708bff31bce26b4b4a70e3bdc2d85a7d829395e24b445",
       "bytes": 2324
     },
     {
@@ -2209,7 +2209,7 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/inputs/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/inputs/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java",
-      "sha256": "613fd494de5eebdbc29d8982c599d44cd321754b370175f7d097720904a04853",
+      "sha256": "3b4f7649fc3ee38df62a6dc9b318e8845da6574f7e48b4cd7a948b58e266d46f",
       "bytes": 19983
     },
     {
@@ -2551,13 +2551,13 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-001/manifest.tsv",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-001/manifest.tsv",
-      "sha256": "1b7c256e18f5eeaf5f6472478bd679c781073965b7669edbad3d234fa38c2e99",
+      "sha256": "725cab8c6b45b0a73b1062c4721fa456e960500fd4fd109c5ed2f72b5196ffac",
       "bytes": 181
     },
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-001/postimage.txt",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-001/postimage.txt",
-      "sha256": "0848d1a673a908854bb885908d82eaadb23fa710c75ed3e6bd912516a21eb887",
+      "sha256": "871d309a9e061205c1c6d3deff63568dfeac69155b89fc906ce32a482e8ea947",
       "bytes": 7596
     },
     {
@@ -2635,13 +2635,13 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-008/manifest.tsv",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-008/manifest.tsv",
-      "sha256": "e2840e6bb34a4fd4b01cc83c34a6cd75ec2a7bd7ff8313d383b85a78775a15f0",
+      "sha256": "7ff0da67120e0e3df6ff4b246a4eccee1186e83ab689929431f0f81524ce5741",
       "bytes": 164
     },
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-008/postimage.txt",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-008/postimage.txt",
-      "sha256": "9e3954045862b0878d729d45d39f0d8afc75d55f75b271196bbd00123a2495bc",
+      "sha256": "9d798af724646d706d7260291622221756503ad46f8ba76e0fc8b30f02b62272",
       "bytes": 157483
     },
     {
@@ -2815,7 +2815,7 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/phase-receipts/m3-integrated-refinement-20261021-001.tsv",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/phase-receipts/m3-integrated-refinement-20261021-001.tsv",
-      "sha256": "5bacb978dd91cf076f6d393c63f529c9dfab0a7d59f336a89b94d7feb5294807",
+      "sha256": "e8d2c2dcad6cd98ef96763b06e7be1a25fb1f50afa3e2392006604ba151164b1",
       "bytes": 439
     },
     {
@@ -2857,7 +2857,7 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/phase-receipts/m3-integrated-refinement-20261021-008.tsv",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/phase-receipts/m3-integrated-refinement-20261021-008.tsv",
-      "sha256": "b5c57fc7ffd5369a768fdb76e35a2580b03e9aaa13c3c590afb2b3f7cefe8564",
+      "sha256": "6132764e3a80037adb6fe4da30e860cf733056d91afbf5da88b7822cafb5abe5",
       "bytes": 439
     },
     {
@@ -3103,13 +3103,13 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/proof-status.tsv",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/proof-status.tsv",
-      "sha256": "3ed83cfe531f19d468e4e1cfa97221c341ebcd7e1dfa2df06104ad6464df42a0",
+      "sha256": "032831ab07a284006c052cafcbd91c9299ba99b0fdd7c7b2472d80efeb3912d1",
       "bytes": 90
     },
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/receiver/.github/workflows/m3-collections.yml",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/receiver/.github/workflows/m3-collections.yml",
-      "sha256": "0848d1a673a908854bb885908d82eaadb23fa710c75ed3e6bd912516a21eb887",
+      "sha256": "871d309a9e061205c1c6d3deff63568dfeac69155b89fc906ce32a482e8ea947",
       "bytes": 7596
     },
     {
@@ -3151,7 +3151,7 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/receiver/m3/collections/qualification/masked-sort-fusion-20261021/SOURCE_IDENTITY.json",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/receiver/m3/collections/qualification/masked-sort-fusion-20261021/SOURCE_IDENTITY.json",
-      "sha256": "9e3954045862b0878d729d45d39f0d8afc75d55f75b271196bbd00123a2495bc",
+      "sha256": "9d798af724646d706d7260291622221756503ad46f8ba76e0fc8b30f02b62272",
       "bytes": 157483
     },
     {
@@ -3397,7 +3397,7 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/recipe-proof.tsv",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/recipe-proof.tsv",
-      "sha256": "c0b6e0a3770cb668d204005dfc009bc2c456ecf8d9e94d121c6fe91a34314fbd",
+      "sha256": "07adf97653024f7bfa811c961e3a4d67af5b2bb5c5f5fd338c93fc06b5931806",
       "bytes": 6904
     },
     {
@@ -3427,13 +3427,13 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/provenance/RECOVERY_SOURCE_READBACKS.json",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/provenance/RECOVERY_SOURCE_READBACKS.json",
-      "sha256": "5aa140234c1fad5686bb1863af9d0d06f111c6ca214da9efe20abb532f0ac7cb",
+      "sha256": "920cb25876440bb6f94658e3743fef9c9529143060d1678346096d5fcc27a21b",
       "bytes": 12169
     },
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/provenance/donors/pr12605/HARNESS_PROVENANCE.json",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/provenance/donors/pr12605/HARNESS_PROVENANCE.json",
-      "sha256": "ea1887d1ec283edf18433dc977a7dc687325995c63ac2d432c57bb5ab960eeba",
+      "sha256": "3c5ae7b48ddb1c276b97f8d1286376e8fb164f88398df28c6a7f2b8cd7feea75",
       "bytes": 2181
     },
     {
@@ -3469,7 +3469,7 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/provenance/donors/pr12605/src/test/java/jdk/internal/m3/rewrite/M3StringAstIndexViewsRecipeTest.java",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/provenance/donors/pr12605/src/test/java/jdk/internal/m3/rewrite/M3StringAstIndexViewsRecipeTest.java",
-      "sha256": "dfd4501694a582005a838f2d26f115268a04531fdc013641813a6f64047913fd",
+      "sha256": "8c951be002855e8013a63d6f3e3627fe955e1ca6b02762843a33c49636bf8cd3",
       "bytes": 30213
     },
     {
@@ -3481,7 +3481,7 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/jdk/internal/m3/rewrite/M3IntegratedRefinementRecipeTest.java",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/jdk/internal/m3/rewrite/M3IntegratedRefinementRecipeTest.java",
-      "sha256": "5a64f5196c1388e6924238c14c7bdd70053d32d8e86d1f5e7be2e5259831efa5",
+      "sha256": "d477f820c8bf4712b36d4a1d9002b2fa82a62a88175c1f84cd7fd03e978eefe0",
       "bytes": 31463
     },
     {
@@ -3511,7 +3511,7 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/verify_sources.py",
       "copy_relative": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/verify_sources.py",
-      "sha256": "318dc14d91710372295860033b1683e695d671a19840097d77392aa110efc44f",
+      "sha256": "603a47418a7dbd6bd38708bff31bce26b4b4a70e3bdc2d85a7d829395e24b445",
       "bytes": 2324
     },
     {
@@ -3529,7 +3529,7 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java",
       "copy_relative": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java",
-      "sha256": "613fd494de5eebdbc29d8982c599d44cd321754b370175f7d097720904a04853",
+      "sha256": "3b4f7649fc3ee38df62a6dc9b318e8845da6574f7e48b4cd7a948b58e266d46f",
       "bytes": 19983
     },
     {
@@ -3871,13 +3871,13 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-001/manifest.tsv",
       "copy_relative": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-001/manifest.tsv",
-      "sha256": "1b7c256e18f5eeaf5f6472478bd679c781073965b7669edbad3d234fa38c2e99",
+      "sha256": "725cab8c6b45b0a73b1062c4721fa456e960500fd4fd109c5ed2f72b5196ffac",
       "bytes": 181
     },
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-001/postimage.txt",
       "copy_relative": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-001/postimage.txt",
-      "sha256": "0848d1a673a908854bb885908d82eaadb23fa710c75ed3e6bd912516a21eb887",
+      "sha256": "871d309a9e061205c1c6d3deff63568dfeac69155b89fc906ce32a482e8ea947",
       "bytes": 7596
     },
     {
@@ -3955,13 +3955,13 @@
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-008/manifest.tsv",
       "copy_relative": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-008/manifest.tsv",
-      "sha256": "e2840e6bb34a4fd4b01cc83c34a6cd75ec2a7bd7ff8313d383b85a78775a15f0",
+      "sha256": "7ff0da67120e0e3df6ff4b246a4eccee1186e83ab689929431f0f81524ce5741",
       "bytes": 164
     },
     {
       "source_path": "/workspace/scratch/206049dfb270/M3jdk21/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-008/postimage.txt",
       "copy_relative": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-008/postimage.txt",
-      "sha256": "9e3954045862b0878d729d45d39f0d8afc75d55f75b271196bbd00123a2495bc",
+      "sha256": "9d798af724646d706d7260291622221756503ad46f8ba76e0fc8b30f02b62272",
       "bytes": 157483
     },
     {
@@ -6851,7 +6851,7 @@
   "source_edits": 0,
   "target_worktree_mutation": false,
   "transport_difference": "Offline Maven/local cache path only; same owning POM/test goal/parser dependency contents as CI",
-  "parent_failure_receipt_sha256": "b2bcc737268f67596efd363ecb428b104a3c1a464d321c34020bb28facebc97b",
+  "parent_failure_receipt_sha256": "9c1397a17c34cdce2a0045069d2828bb0bea0f1d5e0592718efc79a0069affbd",
   "additional_compiled_owner": {
     "source_directory": "/workspace/scratch/206049dfb270/M3jdk21/m3/eclipse/core-runtime/target/classes",
     "copy": "/workspace/scratch/206049dfb270/jobs-work/final-review/ci-classpath-plus-core-02/core-runtime-classes",

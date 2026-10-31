@@ -106,7 +106,7 @@
       },
       "after": {
         "resource": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/09-inputs.tsv.txt",
-        "sha256": "d2b2db84c1881d80c155b10308ed283ccd8915bc6ce042b37226b39219cd53dc"
+        "sha256": "47b97eac84f181ba334f954481d9fa4de8b3be538067edafca18de04f99392e9"
       }
     },
     {
@@ -117,7 +117,7 @@
       },
       "after": {
         "resource": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/10-pins.json.txt",
-        "sha256": "64786a4e1700dc29d8d975bc911ebaad5bf0ae6f7b05c92b5042b27050f579e8"
+        "sha256": "76b87771c72ea64593a9d49b1d29531b1b69a27ba754ce016678b65637f5d0f2"
       }
     },
     {
@@ -128,7 +128,7 @@
       },
       "after": {
         "resource": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/11-plan.json.txt",
-        "sha256": "7a52c2dd6d17c85bbd346fc36bfbc4f903609c887bd629eab7f5fbf03f15e79f"
+        "sha256": "1194c8fa451f2f57008d07ee487a4865e6bdff641e4e11afd5f7e86b96221a16"
       }
     },
     {

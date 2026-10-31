@@ -27,12 +27,12 @@ final class M3BackportWaveCurrentOutputRecipeTest {
     private static final String ROOT = "/jdk/internal/m3/rewrite/backport-wave-current-output-20261020/";
     private static final String DESCRIPTOR = "/META-INF/rewrite/backport-wave-current-output-20261020";
     private static final String NAME = "jdk.internal.m3.BackportWaveCurrentOutput";
-    private static final String FORWARD_MANIFEST_SHA = "df4fd6e222f64e6a9e1d9b6ad7e99b05a3f2bc4dbe41646fe2672f216492204b";
-    private static final String INVERSE_MANIFEST_SHA = "ac09b63f395cd1e0ea6126c07e8cf3fac9a79e4ff59f5be18f390b69fd04b703";
+    private static final String FORWARD_MANIFEST_SHA = "9e1c22cab7e958eebf90605fae5d24f4d32991ad6f1e3538b6673d1a682627ab";
+    private static final String INVERSE_MANIFEST_SHA = "6968c988a1156007c551909dc402f1d63500b44948b710c9116d0b30c498e6d7";
     private static final String FORWARD_DESCRIPTOR_SHA = "fbb55455fd65f0e2ebebcdad693034c1ca5f2feb0359841181c7ebb31359462f";
     private static final String INVERSE_DESCRIPTOR_SHA = "8d8ede14073be15d433eadd78706cc9fbc0facb44d1bd00c6dcd3f0ce404ce45";
     private static final String WAVE_OWNER = ".github/workflows/m3jdk21-backport-wave-admission.yml";
-    private static final String WAVE_AFTER = "539abe591a91c37ddc16601b0ce2bcccc4a238605f8eda72c3f8008920c9b51f";
+    private static final String WAVE_AFTER = "942fe1f46b1b4f7c91418ded4c94b045576ec31b52dfed3ce0ac45ed4608ff25";
     private static final Map<String, String> BEFORE = Map.ofEntries(
             Map.entry("m3/backports/test_compatibility_policy.py", "69694e6e3725aeee8687a8c58bce477c7256f626d8425c04a9ce9772250a2bb6"),
             Map.entry("m3/backports/compatibility_policy.py", "d51301d3ea225e89b000a2256855ab7806a1faf20c5fa493eb5666de1e7880c2"),
@@ -43,7 +43,7 @@ final class M3BackportWaveCurrentOutputRecipeTest {
             Map.entry("m3/backports/backport_execution_waves.py", "2cb19465a6a0d4f24dc228921eb1a2d7c2bbc4e53ce68e635b0e60ddb2a563dc"),
             Map.entry("m3/backports/BACKPORT_EXECUTION_WAVES.md", "df2aca41ab120bdbc8c165d4abe3552c54a91c591aab116b718b94283ae23f28"),
             Map.entry("m3/compatibility/m3-wave-admission-pin-20261014.tsv", "984af6023eb4f4e0b917a700c5e75bd936083b7ae2f0daef07c37ad6a3e2ddd4"),
-            Map.entry(".github/workflows/m3jdk21-backport-wave-admission.yml", "1cf79b31b3dbcb74bf3858f1c898072a836ffae2da6f0d5de731cf09d4132d31"));
+            Map.entry(".github/workflows/m3jdk21-backport-wave-admission.yml", "3a7744e60786b90a474b16468fdec6f4d51fe576e3c99ed92bbf0b7b25909f57"));
     private static final Set<String> PASSED = new LinkedHashSet<>();
     private static final Map<Boolean, String> EMITTED = new HashMap<>();
     private static int successfulRuns;

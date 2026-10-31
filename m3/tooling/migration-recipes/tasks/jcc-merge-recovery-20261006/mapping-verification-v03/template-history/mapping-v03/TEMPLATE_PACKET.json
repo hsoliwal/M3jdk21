@@ -2,7 +2,7 @@
   "canonical_baseline_packet": {
     "path": "current-map-validation-v03/PACKET.json",
     "result": "MIGRATION_MANIFEST_VALID completion=INCOMPLETE",
-    "sha256": "6f3e2993d6d29e51c46099f0e0ad6d4c775a435466b4be8cfd6ef6918e927224"
+    "sha256": "29aeb75ced3b31737e02760b0880c69b1b490758c54445d1c3847803fe5e8ea3"
   },
   "compile_only_status": "PASS",
   "crate": "jcc-merge-recovery-20261006-mapping-v03",
@@ -17,12 +17,12 @@
     {
       "bytes": 52471,
       "path": "JccMergeMappingRecoveryV03Test.java.in",
-      "sha256": "460fc9f2e2a3faa46cb16c23dcde4493ce87b3f556d5c9eabf224c79d4404728"
+      "sha256": "3406754b001ae27c329ff436764111e56bbe0c79e5af8389f7b87b4c726be133"
     },
     {
       "bytes": 9411,
       "path": "README.md",
-      "sha256": "66295f7a2468a18354bd5574f4fda065f2d6adaebcb0e4513a36c79276c1fcc2"
+      "sha256": "cd0f90e5ac2ab5f44f10fcd27bf5d4ad6d4dc98cd7a2a2f9e82d94d7b3170cd4"
     },
     {
       "bytes": 0,
@@ -37,7 +37,7 @@
     {
       "bytes": 6239,
       "path": "compile-check-v01/receipt.json",
-      "sha256": "02fd2ca1753852544127c5661c520aaaa28694344b50093970aa1d953c5ecbe7"
+      "sha256": "1b598d6f5917fb562998bc41cd0e785499fa7786cd8aeaf4930d945abb4d4923"
     },
     {
       "bytes": 0,
@@ -62,7 +62,7 @@
     {
       "bytes": 6353,
       "path": "compile-check-v02/receipt.json",
-      "sha256": "2fe89571d77cb7a36a372c4b101c9f097795d51aef8e74f426e3985fb12d8c8c"
+      "sha256": "93c38565423cbd99458816155d100b1ca5af16dce4b03601167e841300deb813"
     },
     {
       "bytes": 626,
@@ -77,17 +77,17 @@
     {
       "bytes": 52471,
       "path": "previous-input-epoch-01/JccMergeMappingRecoveryV03Test.java.in",
-      "sha256": "b87905fe15a9fa618ef394d6932f7d0f9185caf2fe9cc45a3d58689ab7df158a"
+      "sha256": "178637d9f4ff0f5093bf6528b944910304c675c93fb12c48639e1c5ce81f44b6"
     },
     {
       "bytes": 8841,
       "path": "previous-input-epoch-01/README.md",
-      "sha256": "17d2ade1b726142765af8e4998640444fb3f57b2e1c168bdb91aadcd7ad39438"
+      "sha256": "798c58e422b0415b2550972f1542f5a524cb0cc742a863730f9d1081a70cc3cf"
     },
     {
       "bytes": 4194,
       "path": "previous-input-epoch-01/TEMPLATE_PACKET.json",
-      "sha256": "52972bb3b6c18131daa040e02ea1b6af800356955ad16a54f072bdef028d6c99"
+      "sha256": "6bd3ae08a6b5dfbf0a22e34314a3b267544459cf0131c436d58ae6e411ef2329"
     },
     {
       "bytes": 0,
@@ -102,7 +102,7 @@
     {
       "bytes": 6239,
       "path": "previous-input-epoch-01/compile-check-v01/receipt.json",
-      "sha256": "02fd2ca1753852544127c5661c520aaaa28694344b50093970aa1d953c5ecbe7"
+      "sha256": "1b598d6f5917fb562998bc41cd0e785499fa7786cd8aeaf4930d945abb4d4923"
     },
     {
       "bytes": 626,
@@ -117,7 +117,7 @@
     {
       "bytes": 14710,
       "path": "previous-input-epoch-01/render_template.py",
-      "sha256": "32daee14b2f94d8d6dfc2ca961d34dfeef1beb31831d4d43b6f352fb2133ba5f"
+      "sha256": "5910bcb28f18602d3d849d1092a3f561e80870616eab4f1863e570cc750a404a"
     },
     {
       "bytes": 3713,
@@ -137,7 +137,7 @@
     {
       "bytes": 14710,
       "path": "render_template.py",
-      "sha256": "3f25c815e517cc4d4dc43a1ca373b577a399ec4fbb3a3b81d23008e495340904"
+      "sha256": "00f1282d799908b878b2c9c35be92fbd247575147dd0a8be1c91c3c1072861fe"
     },
     {
       "bytes": 3713,
@@ -185,12 +185,12 @@
     {
       "files_verified_unchanged": 15,
       "path": "candidate/mapping/java-template/TEMPLATE_PACKET.json",
-      "sha256": "d9441405014cca0bc6b106de6cf28539920a164e2c627f04dea750072f1e054d"
+      "sha256": "a5a81bee6c69a796e0cf7632746dff3be5ac56bb11fbaac3424dcba325fcd94b"
     },
     {
       "files_verified_unchanged": 11,
       "path": "candidate/mapping-v02/java-template/TEMPLATE_PACKET.json",
-      "sha256": "7ec82e03ff00a2853023454b7e30decca77051a4c3ac4afe30d283722a9d5a2b"
+      "sha256": "bba43023ead328438b81a397dcb6c646d5c79bfe33555d5a220ef1f985aabcd6"
     },
     {
       "files_verified_unchanged": 113,
@@ -201,7 +201,7 @@
   "previous_v03_revision": {
     "all_sealed_files_verified_unchanged": 11,
     "packet": "previous-input-epoch-01/TEMPLATE_PACKET.json",
-    "sha256": "52972bb3b6c18131daa040e02ea1b6af800356955ad16a54f072bdef028d6c99"
+    "sha256": "6bd3ae08a6b5dfbf0a22e34314a3b267544459cf0131c436d58ae6e411ef2329"
   },
   "revision": 2,
   "revision_delta": "Only input-epoch pin changed in Java and renderer; operational bodies and13controls unchanged. Fresh compile-check-v02 and self-review-v02 receipts; firstV03seal retained.",

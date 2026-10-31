@@ -24,7 +24,7 @@
   },
   "source_manifest_after": {
     "path": "proof/sdk-002-offline/inputs/m3-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/SOURCE_SEALS.json",
-    "sha256": "a076d8c7c82542897aef843b640cc88e762bbf088128c4ca34c262db4c4dba27"
+    "sha256": "ea99837eeb463fbc09858de4249c77130b4ef8ddd0df3468386badab53c6fcc4"
   },
   "observation_epoch_seconds": 1792548010,
   "author": "Hitesh Soliwal and Contributors to the Synexia Project",
@@ -64,11 +64,11 @@
     },
     {
       "path": "proof/sdk-002-offline/inputs/m3-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/src/test/java/jdk/internal/m3/rewrite/M3Maven4EffectiveRecipeTest.java",
-      "sha256": "3b1350665c09b779ab1514d7e6cf4ab4601a12924d08bfdd9aabee18e42ad63f"
+      "sha256": "01d09f8818c6948e287475aa3204640bfece76794f320cc3fc8b366d17a85544"
     },
     {
       "path": "provenance/successor-002/SELECTION.json",
-      "sha256": "b73505f3c7b0923e7d638ca59a8cf718c0b711ce60ebcd8989294100cdab7479"
+      "sha256": "fa9d1683c0c050dc3076fd5887b1d16013dda4fd6950d48616da7be098c8ebae"
     }
   ],
   "verification": [
@@ -89,7 +89,7 @@
       "evidence": [
         {
           "path": "proof/sdk-001-offline/RESULT.json",
-          "sha256": "3c6bd13fba7584478ac05c7abc3cd8b32d7e62d9620e8c106f7e58a87a0f0c47"
+          "sha256": "0626f2a962d01b73e4e11b44ee1e41a7e44beb933648904d70f509d74fba2a31"
         },
         {
           "path": "proof/sdk-001-offline/maven.log",
@@ -114,7 +114,7 @@
       "evidence": [
         {
           "path": "proof/sdk-002-offline/RESULT.json",
-          "sha256": "2507ef44c70050f5b1ce5cde5c87e0f5fd793112f2f5d5fc4a80fb51857dd586"
+          "sha256": "b5f4998aa91aa97b9b2e87a2feff682130f6d093dc8c39073d774bb14da1b8ee"
         },
         {
           "path": "proof/sdk-002-offline/maven.log",
@@ -160,7 +160,7 @@
     "evidence": [
       {
         "path": "proof/sdk-002-offline/RESULT.json",
-        "sha256": "2507ef44c70050f5b1ce5cde5c87e0f5fd793112f2f5d5fc4a80fb51857dd586"
+        "sha256": "b5f4998aa91aa97b9b2e87a2feff682130f6d093dc8c39073d774bb14da1b8ee"
       }
     ]
   },

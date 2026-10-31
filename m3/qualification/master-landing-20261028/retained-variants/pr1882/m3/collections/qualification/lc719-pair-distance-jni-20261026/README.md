@@ -9,8 +9,8 @@ Original product PR #1882 preimage `66ddfd93f75f4830e2e3c8fea139f95e49dec65e`:
 - `src/main/java/com/m3/collections/M3LongRankIndex.java`: before `b1992bbe965c2f42500b02b5bb687dbb7153638b`, after `0f9763abfa67046490f344abfe620ae086d833c2`
 - `src/main/native/collections/m3_long_rank_batch_jni.c`: before `32753502cfa1e9f7e5e4a4833b22e495fe679f79`, after `294447e6fe84c37a7b7bdbc3492a9bf62a78a731`
 - New original-module standalone Java `M3LongPairDistanceContract.java`: `9c2f86c5550d13de1db599a8b055a93a5270788f`
-- Its original-module JUnit wrapper `M3LongPairDistanceTest.java`: `5f7ae2de23a97d10a23e773261e0288d23ab9276`
-- Focused exact-head original C17 `javac -h` generated JNI ABI / `-Xcheck:jni` CI: `268d6d3f4c79a607af53927e44bb1701a9d3ecd2`
+- Its original-module JUnit wrapper `M3LongPairDistanceTest.java`: `b9cb315567f3b1997e4bb4868edd94772173e409`
+- Focused exact-head original C17 `javac -h` generated JNI ABI / `-Xcheck:jni` CI: `5542f8052746d14e63f4933099d0c36b5cc9d996`
 
 All six Git blobs were compared byte-for-byte against canonical Synexia source templates. This receiver changes exactly the original owners/results plus a separate qualification workflow; no copied donor LeetCode/HackerRank/GFG solution implementation.
 

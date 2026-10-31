@@ -44,7 +44,7 @@
     }
   },
   "input_recheck": "PASS",
-  "runtime_receipt_sha256": "96a54f14260cae789065575484f18d5d74be287e8271f40b73a3b42bae56c161",
+  "runtime_receipt_sha256": "82e76d78b19dd5ab9e6987e6593c14be5dd3e714051ce1444a82b21fe154fd11",
   "stdout_stderr_sha256": "22ed0714ae1e45ad173a9b8b997a3098cc36908ff11619171ee1cb430915c623",
   "baseline_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49"
 }

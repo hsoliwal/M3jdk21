@@ -125,9 +125,9 @@
   "payload_bytes": 98141352,
   "payload_files": 2796,
   "preflight_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/PREFLIGHT.json",
-  "preflight_sha256": "424ec0d0148f40d4df153bdc201b4ed334395c52a02307775286abba2ab40bdc",
+  "preflight_sha256": "4a8e0c7647a9a6549ffc797de28d01a7806aa7757fedb2096bf35ecb0bba62c7",
   "production_blob_bodies_compared_byte_for_byte": 4,
-  "publisher_script_sha256": "2c352ab7122ff72da7027cd6b06bfa6b4cf2db0531727bf56b482c062aeea754",
+  "publisher_script_sha256": "9c35afe184b437b5668019f2c8702875d4fed6c3ef2b8232ec845bacc2be2bb2",
   "pull_request": {
     "base": "develop",
     "draft": true,
@@ -220,7 +220,7 @@
   },
   "raw_fixture_custody_input": {
     "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/CUSTODY_INPUT.json",
-    "sha256": "2b2f294b13298da20e8d8cbe85581e89265fbe8d1c355a384dba308e4a8f9710"
+    "sha256": "384ce843f2e4545ad1c40d7ee58abbc471b5a6d1cbed89bea82dcff0479ce6a5"
   },
   "readback_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/FINAL_READBACK.json",
   "readback_sha256": "8391f552328dedb2777a9ca9e793dc2dea867554abe646dbbb338388ce961c2a",
@@ -19809,5 +19809,5 @@
   ],
   "unchanged_sibling_entries_preserved_over_changed_paths": 3032,
   "updates": 4,
-  "verification_script_sha256": "6b8ce688a81b46c20e567bd719104bac6a4cf8578a42904dbe494bca2305e443"
+  "verification_script_sha256": "904a2105f04a12454a2d97c13a5bef6764e18ae28a2fe680e06ca0e6e14a6e93"
 }

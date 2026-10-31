@@ -13,7 +13,7 @@
   "stdout": {
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/root-execution-v1/verify.stdout.log",
     "bytes": 771,
-    "sha256": "3f4d16dac92bd8feb5903e172ddee6668202f5d1f7b523269a737fc9892de429"
+    "sha256": "aa43ab4f7cdb914307ff0aa37ce2b1825cc8332976bf2d00c45d20d4bbc3ad5b"
   },
   "stderr": {
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/root-execution-v1/verify.stderr.log",

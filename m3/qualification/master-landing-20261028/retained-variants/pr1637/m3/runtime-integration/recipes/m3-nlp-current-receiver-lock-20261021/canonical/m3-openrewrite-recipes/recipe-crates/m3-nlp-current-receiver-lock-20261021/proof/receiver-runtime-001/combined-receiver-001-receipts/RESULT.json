@@ -56,7 +56,7 @@
     "opennlp": true
   },
   "input_count": 11373,
-  "inputs_sha256": "18606d40ee3ab44af376e7d93b3af7dab48c958423082ae0e4017a8ec990dcf6",
+  "inputs_sha256": "ce2654ba7202fe1126a58a7acda09a19d6e1ffdf2927127aef85260ab8ad77d3",
   "inputs_unchanged": true,
   "limits": [
     "Java21 staged companion pins are distinct from original donor-basis commits and Java25 full upstream lane.",
@@ -68,7 +68,7 @@
   "log_sha256": "4c5e3d9cecaabdb0552118f2fc78a68e63bec81d4da95a7eba419752ca463265",
   "m3_owner_jar_hashes_equal_candidate": true,
   "module_count": 62,
-  "readback_sha256": "18606d40ee3ab44af376e7d93b3af7dab48c958423082ae0e4017a8ec990dcf6",
+  "readback_sha256": "ce2654ba7202fe1126a58a7acda09a19d6e1ffdf2927127aef85260ab8ad77d3",
   "receiver": "/workspace/scratch/206049dfb270/M3jdk21",
   "receiver_historical_base": "2779aba3f98f31c324be43f731be7914e1a05935",
   "schema": "M3_NLP_COMBINED_ACTUAL_RECEIVER_GATE_1",

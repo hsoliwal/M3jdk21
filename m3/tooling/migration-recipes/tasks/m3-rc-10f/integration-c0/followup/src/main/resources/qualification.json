@@ -17,7 +17,7 @@
       "crate": "fc0-cwf",
       "id": "Cwf",
       "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/fc0-cwf/manifest.tsv",
-      "manifestSHA256": "f55214573f573a89814e543222ff57383a556f1cc7d71f028f8be138b1acb0f1",
+      "manifestSHA256": "6d0c6c8d09c0d94b538e7039d83aaaff2652d7524647a5f945f805596e03f7ff",
       "namedRecipe": "jdk.internal.m3.Fc0Cwf",
       "targets": [
         {
@@ -30,9 +30,9 @@
         },
         {
           "afterBytes": 79652,
-          "afterSHA256": "4ee3fc8b5959dada6587607ddc68822bf555516ba5f0b973a9249640b8d26ca7",
+          "afterSHA256": "46a4e8a218c33beaeb1190fb82562d30744e0c0f6c03af1ecef50cc3866dc9da",
           "beforeBytes": 79534,
-          "beforeSHA256": "158da261b7e0d50825993a39958aa00fbb2891053ecf61689076d75dc8417fe9",
+          "beforeSHA256": "021e4dff92d1fe78e015c7538c5d28e503dac8c62f43d09df3c831bdf3ddccf1",
           "operation": "REPLACE",
           "path": "m3/tooling/image-gates/current-c0.json"
         },

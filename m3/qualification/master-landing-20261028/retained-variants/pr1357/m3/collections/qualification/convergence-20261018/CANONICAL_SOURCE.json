@@ -17,7 +17,7 @@
       "resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-converged-oracles-20261018/manifest.tsv": "b00dbb9911d4014978ddf8512e2a88a98439e7a72d6589ece59bf7d0d5a406b6"
     },
     "converged-build-20261018": {
-      "resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-converged-build-20261018/manifest.tsv": "5d4b248dd550d4a21af45b4b7d86602f5f9ec92f54720cae7c6edc801a12935e"
+      "resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-converged-build-20261018/manifest.tsv": "56b1728ad553d19dc8a8e5d4d1bce508dd616b3719958d377de55eefd260543a"
     }
   },
   "limits": "draft; three unresolved baseline wrapper probes; no whole-JDK, jtreg, full canonical reactor, hosted CI or non-Linux claim"

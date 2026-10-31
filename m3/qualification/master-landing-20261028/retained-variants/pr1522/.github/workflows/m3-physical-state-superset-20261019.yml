@@ -30,13 +30,13 @@ jobs:
           set -euo pipefail
           check() { actual=$(git hash-object "$2"); test "$actual" = "$1" || { echo "SOURCE DRIFT: $2 expected=$1 actual=$actual"; exit 1; }; }
           # Qualified current predicate/count atom; existing physical-state APIs are preserved.
-          # Synexia 74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd; manifest SHA-256 0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075.
+          # Synexia 74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd; manifest SHA-256 ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6.
           check eeec5ff32acd33d898e515bd3f53d117e5a34763 m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java
           check c32bb82f8348dcfe960794984b93a5ddc6823833 m3/collections/src/main/java/jdk/m3/collections/M3ObjectIndexSnapshot.java
           check 53b115468935270c0b03702b89b3fe84ee712068 m3/collections/src/test/java/jdk/m3/collections/M3ObjectPhysicalMaskSelfTest.java
           check 81a781a90a22fba34a6723b5fe2cf0cf83ec8208 m3/collections/src/test/java/jdk/m3/collections/M3ObjectPhysicalMaskTest.java
-          check 21d0a93bfe7a05ba9624fe0a88c6f82e54aa6ac8 m3/collections/src/test/java/jdk/m3/collections/M3PhysicalStateSnapshotProof.java
-          check a0593519a059f5af572a78119764bcdab1ea7840 m3/collections/src/test/java/jdk/m3/collections/M3PhysicalStateSnapshotTest.java
+          check 623ba1592db286cbf6f138279be16a5536ac9909 m3/collections/src/test/java/jdk/m3/collections/M3PhysicalStateSnapshotProof.java
+          check d8146199d8821c51380149cbdc128136106f4120 m3/collections/src/test/java/jdk/m3/collections/M3PhysicalStateSnapshotTest.java
       - name: Strict compile the current M3 collection owners and both direct proofs
         shell: bash
         run: |

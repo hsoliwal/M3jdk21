@@ -385,8 +385,8 @@
         {
           "path": "/tmp/m3fs-java-work/postimage/m3/fs/src/main/java/jdk/m3/fs/M3ContentId.java",
           "bytes": 2347,
-          "sha256": "bc3961dfd71ff05ed9969f6bde671182502432830d4c383e7882ecd5f766c433",
-          "git_blob": "f3b28daa4f38645fef0dbe12594821404a571b8a"
+          "sha256": "0bff0c9b861f305594bbb8e3f4415b9b5ff4776cda1f98ce8b0e457169f930d2",
+          "git_blob": "132a12fbfaa0ea65ab988bc39b2ff2cb7cbf940a"
         },
         {
           "path": "/tmp/m3fs-root-work/postimage/m3/fs/src/main/java/jdk/m3/fs/M3GenerationRoot.java",

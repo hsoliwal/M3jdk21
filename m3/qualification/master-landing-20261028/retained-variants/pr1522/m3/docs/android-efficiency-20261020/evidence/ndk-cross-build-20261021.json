@@ -55,15 +55,15 @@
       },
       {
         "path": "src/java.base/share/native/libjava/M3StateRelation.c",
-        "git_blob": "d6bdfeb01dd632b83b978b1bdb5ed2cbdeaebd9d",
+        "git_blob": "5d2a8cc83a7551f4d2a82dfa5781c7a79531d444",
         "bytes": 7673,
-        "sha256": "faa999e2538087bd214c922cb1ad4b0dcaa208b04240acaed27771d47911cf1f"
+        "sha256": "03fa3e35008045561b57f11e4cff1ff3e04fc8b90220d1525d86f345b75fa332"
       },
       {
         "path": "src/java.base/share/native/libjava/m3_state_relation.h",
-        "git_blob": "18a02e228129827da486edc5b316790af6135310",
+        "git_blob": "0e0c70e60b2cee61c3df31982a26f4251955cb61",
         "bytes": 1021,
-        "sha256": "c948c0ac34180f1f9412a764c3c9fd8c59e11509467aa9e04f8825e903526885"
+        "sha256": "6a453bbe5c443d327228e48cc27c6d5dc356a67586f93796a52de17e69fa12a2"
       },
       {
         "path": "m3/arrays/src/main/java/jdk/m3/arrays/M3ArrayNative.java",

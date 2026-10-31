@@ -22,7 +22,7 @@ update; no OpenRewrite source, template, runner or duplicate lock owner.
 
 | Historical atom | Source identity |
 | --- | --- |
-| Frozen first handoff | `m3/docs/m3-m3jdk21-eclipse-recipe-handoff-20261022.tsv`, Git blob `f5f8b7e33b3cf4b8d83b05c4f6339f49a1f56a89`, 5 rows |
+| Frozen first handoff | `m3/docs/m3-m3jdk21-eclipse-recipe-handoff-20261022.tsv`, Git blob `30d5224faaa7c923bf72af4f7a1b1d15bbdad207`, 5 rows |
 | Explicit public constructor | Source recipe Synexia #12951, historical expected SHA-256 `18d05ae54945d4129c46d62e26551cbc4fd200b31c185e020b9ee6240fdc9599` |
 | Timed acquisition | Synexia #12842 and M3JDK21 #1745, pre-union SHA-256 `7d0e50075f26400bfce311919457996468321a987d86cf0145737da9fde024c5` |
 | Existing combined original class | SHA-256 `bc671502c1500b60562240c1de2aa44776bf89a90ea32ab220ea646ed8491a6b`, Git blob `014fc8d30788121ed4564d7d6ff7021be06b739a` |

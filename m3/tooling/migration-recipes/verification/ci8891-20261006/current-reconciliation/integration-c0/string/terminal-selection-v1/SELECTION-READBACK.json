@@ -114,7 +114,7 @@
   "receivingSelection": {
     "bytes": 74585,
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string-preparation/receiving-selection-v1/RECEIVING-SELECTION.json",
-    "sha256": "404b379a64e596dd03efe94f4ea456bdc57f16424e2297b3b598c2dc3d0854c7"
+    "sha256": "ee018354430dd4a256f88b09ad93adbcc91139adc6c2d6c83a050acd24030a2a"
   },
   "rf0Selected": false,
   "schema": "synexia.sc0.terminal-selection-readback/1",

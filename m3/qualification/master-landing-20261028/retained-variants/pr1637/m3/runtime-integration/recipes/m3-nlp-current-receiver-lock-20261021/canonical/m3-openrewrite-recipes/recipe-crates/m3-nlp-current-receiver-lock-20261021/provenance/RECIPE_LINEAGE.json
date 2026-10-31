@@ -60,11 +60,11 @@
     {
       "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/verify_sources.py",
       "source_revision": "a2b50cfe926c5c5f400c7f659a947a5020fb8d4d",
-      "source_git_blob": "ce5514f2b4b884c8d75cdfcda8aa02c935bca371",
-      "source_sha256": "318dc14d91710372295860033b1683e695d671a19840097d77392aa110efc44f",
+      "source_git_blob": "401703fe2fc8056673be0e5c6cae051fe825735c",
+      "source_sha256": "603a47418a7dbd6bd38708bff31bce26b4b4a70e3bdc2d85a7d829395e24b445",
       "snapshot": "provenance/donors/published-core/verify_sources.py",
       "target_path": "verify_sources.py",
-      "after_sha256": "2500f1d631626e0001b8ba04c63a6d768c03b6578f00c84cbe8efe16c5f29917",
+      "after_sha256": "cb673aba8063bb90b403472317c69eebe285fd6ca9b80d01fda34baff4beca09",
       "diff": "provenance/adaptations/verify_sources.py.diff",
       "disposition": "ADAPTED_UPSTREAM",
       "license": "Apache-2.0"
@@ -72,11 +72,11 @@
     {
       "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/com/synexia/rewrite/M3IntegratedRefinementRecipeTest.java",
       "source_revision": "a2b50cfe926c5c5f400c7f659a947a5020fb8d4d",
-      "source_git_blob": "1d21ea3f9e1740c66d407742de66db3901e87796",
-      "source_sha256": "5a64f5196c1388e6924238c14c7bdd70053d32d8e86d1f5e7be2e5259831efa5",
+      "source_git_blob": "1e2bf642bfc868f07d41f05bb0f73bdf308273ab",
+      "source_sha256": "d477f820c8bf4712b36d4a1d9002b2fa82a62a88175c1f84cd7fd03e978eefe0",
       "snapshot": "provenance/donors/published-core/src/test/java/com/synexia/rewrite/M3IntegratedRefinementRecipeTest.java",
       "target_path": "src/test/java/com/synexia/rewrite/M3NlpCurrentReceiverLockRecipeTest.java",
-      "after_sha256": "c623a57f0dec84f6f8b6e76f10b4fd495346b8b7ea373fa85e865f587b27ad00",
+      "after_sha256": "3854e95a120d831d71136b9673707ef3893494829c3042fc054cabb58e1357f2",
       "diff": "provenance/adaptations/M3NlpCurrentReceiverLockRecipeTest.java.diff",
       "disposition": "ADAPTED_UPSTREAM",
       "license": "Apache-2.0"

@@ -27,7 +27,7 @@
         "source_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3CurrentMasterConvergence20261019.java",
         "source_sha256": "a736dbf73a39ee791d15aa585798c3d53eada2d7885e67e8c8c2530529e174cd",
         "manifest_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-current-master-convergence-20261019/manifest.tsv",
-        "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+        "manifest_sha256": "ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6",
         "canonical_repository": "hsoliwal/com.synexia",
         "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
         "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
@@ -50,7 +50,7 @@
           "skipped": 0,
           "java_lst": "NOT_RUN",
           "whole_reactor": "NOT_RUN",
-          "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+          "manifest_sha256": "ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6",
           "log_sha256": "d6bf20f3fd1ae04177b406b727c8679f8266880ed0800b057d31dcb6fde2e191"
         }
       },
@@ -102,7 +102,7 @@
           "skipped": 0,
           "java_lst": "NOT_RUN",
           "whole_reactor": "NOT_RUN",
-          "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+          "manifest_sha256": "ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6",
           "log_sha256": "d6bf20f3fd1ae04177b406b727c8679f8266880ed0800b057d31dcb6fde2e191"
         },
         {
@@ -115,7 +115,7 @@
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "state": "PASS",
           "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
-          "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+          "manifest_sha256": "ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6",
           "files": 657,
           "main_java": 268,
           "test_java": 264,
@@ -145,7 +145,7 @@
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "state": "PASS",
           "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
-          "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+          "manifest_sha256": "ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6",
           "tests": 477,
           "successful": 477,
           "failures": 0,
@@ -214,7 +214,7 @@
       "current_source_admission": {
         "state": "PASS",
         "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
-        "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+        "manifest_sha256": "ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6",
         "before_sha256": "6be07c18dbbbe9ae259ff85821bb3f4ec666fddd820b0950f4115c4256f45deb",
         "after_sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e",
         "canonical_before_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
@@ -248,7 +248,7 @@
         "source_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3CurrentMasterConvergence20261019.java",
         "source_sha256": "a736dbf73a39ee791d15aa585798c3d53eada2d7885e67e8c8c2530529e174cd",
         "manifest_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-current-master-convergence-20261019/manifest.tsv",
-        "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+        "manifest_sha256": "ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6",
         "canonical_repository": "hsoliwal/com.synexia",
         "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
         "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
@@ -271,7 +271,7 @@
           "skipped": 0,
           "java_lst": "NOT_RUN",
           "whole_reactor": "NOT_RUN",
-          "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+          "manifest_sha256": "ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6",
           "log_sha256": "d6bf20f3fd1ae04177b406b727c8679f8266880ed0800b057d31dcb6fde2e191"
         }
       },
@@ -323,7 +323,7 @@
           "skipped": 0,
           "java_lst": "NOT_RUN",
           "whole_reactor": "NOT_RUN",
-          "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+          "manifest_sha256": "ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6",
           "log_sha256": "d6bf20f3fd1ae04177b406b727c8679f8266880ed0800b057d31dcb6fde2e191"
         },
         {
@@ -336,7 +336,7 @@
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "state": "PASS",
           "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
-          "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+          "manifest_sha256": "ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6",
           "files": 657,
           "main_java": 268,
           "test_java": 264,
@@ -366,7 +366,7 @@
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "state": "PASS",
           "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
-          "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+          "manifest_sha256": "ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6",
           "tests": 477,
           "successful": 477,
           "failures": 0,
@@ -435,7 +435,7 @@
       "current_source_admission": {
         "state": "PASS",
         "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
-        "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+        "manifest_sha256": "ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6",
         "before_sha256": "bd192d5a81b3b331f8df75e09a4c3f0e5c462b5e39c3a72a7a020acb6e2e6b38",
         "after_sha256": "bd192d5a81b3b331f8df75e09a4c3f0e5c462b5e39c3a72a7a020acb6e2e6b38",
         "canonical_before_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/jdk/m3/collections/M3WindowPlan.java",
@@ -606,7 +606,7 @@
     "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
     "current_collection_source_admission": "PASS_UNIFIED_CURRENT_MANIFEST; SDK3/module477/native477",
     "current_swing_source_admission": "PASS_EXACT_SOURCE_IDENTITY; historical runtime/SDK execution reused without a rerun claim",
-    "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+    "manifest_sha256": "ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6",
     "phase_promotion": false
   }
 }

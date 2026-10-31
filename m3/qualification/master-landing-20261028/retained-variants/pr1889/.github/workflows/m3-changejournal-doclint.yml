@@ -37,7 +37,7 @@ jobs:
           from pathlib import Path
           import hashlib
           target = Path('src/java.base/share/classes/java/util/ChangeJournal.java')
-          expected = '7fb5c5c9a2be3ba14f1946a2a1c000b61010b93f0fd8894cd3e8b52fecaec203'
+          expected = '2d9c2589aee071b66eb069bf421664b8d0a6794673f0f3050cbab19cf99f9ae5'
           if not target.is_file() or target.is_symlink():
               raise SystemExit('MISSING_CHANGEJOURNAL_OWNER')
           actual = hashlib.sha256(target.read_bytes()).hexdigest()

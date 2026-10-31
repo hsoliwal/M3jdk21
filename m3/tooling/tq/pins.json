@@ -48,8 +48,8 @@
       "git_blob": "c2dc2371c730aa758ccc45e06ba4ab95661e5593"
     },
     "test/jdk/java/lang/String/M3MappedStringBackingTest.java": {
-      "sha256": "9f42d1bdd6e174f5eac44e72afae2154ac140c9773c540b3073a06a8c2da827d",
-      "git_blob": "b1f69174a1c8c521f94759a9e046a0b63028e022"
+      "sha256": "2579d87f06b529f8917cdb68594b0877cddcad653148bf49ec38230dfe75bd1b",
+      "git_blob": "7207be00a5ea447d01415c94f63768d77cc2f68e"
     },
     "test/jdk/java/lang/String/MapFactsTest.java": {
       "sha256": "07f1de47de88624740a0b4e0e7fb30a05627f37054cbd11dad0e3c3298401059",

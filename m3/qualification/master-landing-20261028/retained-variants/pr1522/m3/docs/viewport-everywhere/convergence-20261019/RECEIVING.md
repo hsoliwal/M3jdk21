@@ -10,7 +10,7 @@ not qualify a later M3JDK21 revision. No tests were run during this recovery.
 
 The existing `M3CurrentMasterConvergence20261019` recipe has a
 [60-target manifest][manifest], SHA-256
-`0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075`.
+`ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6`.
 All 21 changed outputs were emitted and their unchanged replays passed.
 The [source intake][inputs] includes all 268 main Java files, 254 baseline test
 Java files and seven original POM resources; the [composed candidate][emission]

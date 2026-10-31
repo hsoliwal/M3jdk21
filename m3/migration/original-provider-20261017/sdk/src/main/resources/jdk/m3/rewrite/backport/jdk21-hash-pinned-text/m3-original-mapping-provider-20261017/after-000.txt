@@ -369,7 +369,7 @@ jobs:
                   run("post-provider-frozen-pre-custody",py+[str(sdk/"verify.py"),"--report",str(build/"surefire-reports/TEST-jdk.m3.rewrite.backport.M3OriginalCliProviderRecipeTest.xml"),"--emitted",str(overlay),"--receiver",str(source),"--baseline-root",str(baseline),"--receipt",str(root/"recipe-after-provider.json"),"--run-id",runid])
               pre=json.loads((root/"recipe-execution.json").read_bytes())["frozenPreBaseline"]
               after=json.loads((root/"recipe-after-provider.json").read_bytes())["frozenPreBaseline"]
-              if pre!=after or pre.get("files")!=55 or pre.get("bytes")!=795620 or pre.get("manifestSha256")!="1fd2558fdd93e7f1860a225dacfc7118452bd88498d9d272946110c0260a4341" or pre.get("root")!=str(baseline) or pre.get("independentOfInstalledPost") is not True:raise RuntimeError("frozen PRE before/after provider closure drift")
+              if pre!=after or pre.get("files")!=55 or pre.get("bytes")!=795620 or pre.get("manifestSha256")!="e0ec50d7f1608180e1fe831d137e26d51e691606b85379a1a38c12d064c702f5" or pre.get("root")!=str(baseline) or pre.get("independentOfInstalledPost") is not True:raise RuntimeError("frozen PRE before/after provider closure drift")
               # Exact bootstrap receipt shape is checked below after provider implementation freezes.
               provider_receipt_path=root/"provider"/"provider-receipt.json"
               provider=json.loads(provider_receipt_path.read_bytes())

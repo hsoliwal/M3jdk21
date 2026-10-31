@@ -4,7 +4,7 @@
   "source_manifest": {
     "path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-current-module-materialization-k-v1\\SOURCE_MANIFEST.tsv",
     "bytes": 97733,
-    "sha256": "eaa5f823d487a9a66bf73599e527110916132d1f27f7a007244c32e8334c17af"
+    "sha256": "1c855115d28413df7bef607f1aeb624998bb8d606300adc33f21bc6fef9554af"
   },
   "patterns": {
     "process": "ProcessBuilder|Runtime\\s*\\.\\s*getRuntime\\s*\\(\\s*\\)\\s*\\.\\s*exec\\s*\\(|ProcessHandle|System\\s*\\.\\s*exit\\s*\\(",

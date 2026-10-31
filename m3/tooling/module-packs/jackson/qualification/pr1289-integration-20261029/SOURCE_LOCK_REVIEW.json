@@ -5,25 +5,25 @@
     {
       "path": "m3/vendor/third_party/fastdoubleparser-1.0.90/pom.xml",
       "before_sha256": "1b3e9129c572501c11a133f35796262327d0c20b8a432229940f3f1a58b66987",
-      "after_sha256": "95de0f7da48ec9a75f00ded75009ec80716b698dd9b834daee6c4f4b2ff3af24",
+      "after_sha256": "3ad29109340f774c25ecbd03573d93e655699a1e2f5285c6ce4cf196ff683494",
       "decision": "Same Maven build model after excluding added opt-in recipe-boot profile; runtime/library/legal source bytes unchanged."
     },
     {
       "path": "m3/vendor/third_party/jackson-annotations-2.19.2/pom.xml",
       "before_sha256": "940d979d2956b7895bec78acd1d68edc96244bf6658d1f7d72562d1507c11689",
-      "after_sha256": "fae10126a69c615d8cfc35f4a1340dc29da15227686787dcd1e2367e8ca59f64",
+      "after_sha256": "92cf4372efd1c31373e6434b2a5c14b3ac77e6fa17a19c53f346a535f9bd757a",
       "decision": "Same Maven build model after excluding added opt-in recipe-boot profile; runtime/library/legal source bytes unchanged."
     },
     {
       "path": "m3/vendor/third_party/jackson-core-2.19.2/pom.xml",
       "before_sha256": "bcd3135eaabf1ed79bf0353736f9b5b95153be0c5009c6140ffaa7b592556531",
-      "after_sha256": "74fc76babbc63674aea160f6b5ba7e3ef1b22805e2898c89887c431016f54e7a",
+      "after_sha256": "f4ef8186eb06e1656dc32751897ac145764c91e70d80da6a256d0e422dbbe341",
       "decision": "Same Maven build model after excluding added opt-in recipe-boot profile; runtime/library/legal source bytes unchanged."
     },
     {
       "path": "m3/vendor/third_party/jackson-databind-2.19.2/pom.xml",
       "before_sha256": "23753b6646f2ded160ff7e566a88fb651471046854a9bb45ca274ab44bf96a9b",
-      "after_sha256": "95b44941805e2f8badeb266c8284e33457b2c0bbe519087854915fa9d1e450f7",
+      "after_sha256": "66180cc4ff81b3c26eee4e7466386d756f53d0bd3957cac909c60e4ae3a00e7f",
       "decision": "Same Maven build model after excluding added opt-in recipe-boot profile; runtime/library/legal source bytes unchanged."
     },
     {
