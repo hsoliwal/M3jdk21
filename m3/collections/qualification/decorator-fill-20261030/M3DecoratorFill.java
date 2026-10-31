@@ -75,73 +75,8 @@ public final class M3DecoratorFill {
             "m3/collections/qualification/decorator-fill-20261030/M3DecoratorFill.java";
     /** The pattern version the GENERATED block of every owned class names. */
     private static final String VERSION = "1.6";
-    private static final Pattern METHOD = Pattern.compile(
-            "(?m)^    (public|private) (.+) \\{\\R        throw new " +
-                    "UnsupportedOperationException\\(M3_SCAFFOLD_MESSAGE\\);\\R    }\\R");
-    /**
-     * WRAP table: Commons wrapper factory -> owner expression; %s is the delegated call, %b the
-     * backing.
-     */
-    private static final Map<String, String> WRAP = Map.ofEntries(
-            Map.entry("UnmodifiableIterator.unmodifiableIterator:iterator",
-                    "java.util.Collections.unmodifiableCollection(%b).iterator()"),
-            Map.entry("UnmodifiableIterator.unmodifiableIterator:descendingIterator",
-                    "java.util.Collections.unmodifiableNavigableSet(%b).descendingIterator()"),
-            Map.entry("UnmodifiableListIterator.unmodifiableListIterator:listIterator",
-                    "java.util.Collections.unmodifiableList(%b).%c"),
-            Map.entry("UnmodifiableSortedSet.unmodifiableSortedSet",
-                    "java.util.Collections.unmodifiableSortedSet(%s)"),
-            Map.entry("UnmodifiableNavigableSet.unmodifiableNavigableSet",
-                    "java.util.Collections.unmodifiableNavigableSet(%s)"),
-            Map.entry("UnmodifiableSet.unmodifiableSet",
-                    "java.util.Collections.unmodifiableSet(%s)"),
-            Map.entry("UnmodifiableList.unmodifiableList",
-                    "java.util.Collections.unmodifiableList(%s)"),
-            // v1.6: the Unmodifiable map family
-            Map.entry("UnmodifiableCollection.unmodifiableCollection",
-                    "java.util.Collections.unmodifiableCollection(%s)"),
-            Map.entry("UnmodifiableEntrySet.unmodifiableEntrySet:entrySet",
-                    "java.util.Collections.unmodifiableMap(%b).entrySet()"),
-            Map.entry("UnmodifiableSortedMap.unmodifiableSortedMap",
-                    "java.util.Collections.unmodifiableSortedMap(%s)"),
-            Map.entry("UnmodifiableMap.unmodifiableMap",
-                    "java.util.Collections.unmodifiableMap(%s)"));
     /** SFA: a Java string literal (data, never rewritten). */
-    private static final String LIT = "\"(?:[^\"\\\\]|\\\\.)*\"";
-    private static final Pattern LITERAL = Pattern.compile(LIT);
     /** v1.6 INVERSE_CACHE body: a bidi map's inverse view, created once and linked back. */
-    private static final Pattern INVERSE_CACHE = Pattern.compile(
-            "^if \\(inverse == null\\) \\{ inverse = new (\\w+)<>\\(decorated\\(\\)\\.(\\w+)"
-            + "\\(\\)\\); inverse\\.inverse = this; \\} return inverse;$");
-    /**
-     * LANES_CONSTRUCTOR statement shapes s1..s4 (normalized Commons constructor text, super(..)
-     * chain flattened).
-     */
-    private static final Pattern CTOR_STMT = Pattern.compile(
-            "this\\.(\\w+) = Objects\\.requireNonNull\\((\\w+), (" + LIT + ")\\);"
-            + "|this\\.(\\w+) = (\\w+);|for \\(final (\\w+) (\\w+) : (\\w+)\\) \\{ " +
-                    "validate\\(\\7\\); \\}|(\\w+)\\.forEach\\(this::validate\\);");
-    /**
-     * GUARD_DELEGATE guard forms: elem, entry, each, each-entry; group 9 is the rest of the body.
-     */
-    private static final Pattern VALIDATE_GUARD = Pattern.compile(
-            "^(?:validate\\((\\w+)\\);|validate\\((\\w+), (\\w+)\\);"
-            + "|for \\(final (\\w+) (\\w+) : (\\w+)\\) \\{ validate\\(\\5\\); \\}"
-            + "|for \\(final Map\\.Entry<\\? extends K, \\? extends V> (\\w+) : " +
-                    "(\\w+)\\.entrySet\\(\\)\\) \\{ "
-            + "validate\\(\\7\\.getKey\\(\\), \\7\\.getValue\\(\\)\\); \\}) (.+)$");
-    /**
-     * LANE_CHECK statement of a lane member: if ([L != null && ]!L.test(p)) { throw new
-     * IllegalArgumentException(MSG); }.
-     */
-    private static final Pattern LANE_CHECK = Pattern.compile(
-            "if \\((?:(\\w+) != null && )?!(\\w+)\\.test\\((\\w+)\\)\\) \\{ "
-            + "throw new IllegalArgumentException\\(((?:" + LIT + "|\\w+)(?: \\+ (?:" + LIT
-                    + "|\\w+))*)\\); \\}");
-    private static final Pattern CHECKED_ENTRY_SET = Pattern.compile(
-            "^if \\(isSetValueChecking\\(\\)\\) \\{ return new (\\w+)"
-            + "\\(decorated\\(\\)\\.entrySet\\(\\), this\\); \\} return " +
-                    "decorated\\(\\)\\.entrySet\\(\\);$");
 
     record Atom(String visibility, String signature, String name, List<String[]> params,
             boolean isStatic, String returnType) {
@@ -276,7 +211,8 @@ public final class M3DecoratorFill {
 
     List<Atom> atoms(String scaffold) throws IOException {
         List<Atom> atoms = new ArrayList<>();
-        METHOD.matcher(scaffold).results().forEach(r -> atoms.add(atom(r.group(1), r.group(2))));
+        M3DecoratorPatterns.METHOD.matcher(scaffold).results()
+                .forEach(r -> atoms.add(atom(r.group(1), r.group(2))));
         atoms.stream().filter(a -> a.isStatic && a.params.size() == 1).findFirst()
                 .ifPresent(a -> factoryParamType = a.params.get(0)[0]);
         surface = atoms.stream().map(Atom::name).collect(Collectors.toSet());
@@ -287,7 +223,7 @@ public final class M3DecoratorFill {
     private String fill(String scaffold) throws IOException {
         List<Atom> atoms = atoms(scaffold);
         StringBuilder out = new StringBuilder();
-        Matcher m = METHOD.matcher(scaffold);
+        Matcher m = M3DecoratorPatterns.METHOD.matcher(scaffold);
         int i = 0;
         while (m.find()) {
             Atom a = atoms.get(i++);
@@ -621,7 +557,7 @@ public final class M3DecoratorFill {
      */
     private static String collapse(String s) {
         StringBuilder out = new StringBuilder();
-        Matcher m = LITERAL.matcher(s);
+        Matcher m = M3DecoratorPatterns.LITERAL.matcher(s);
         int pos = 0;
         while (m.find()) {
             out.append(s.substring(pos, m.start()).replaceAll("\\s+", " ")).append(m.group());
@@ -766,7 +702,7 @@ public final class M3DecoratorFill {
             return new Emit("VIEW", "return new SyncSet<>(backing." + view.group(3) + "(), "
                     + lockExpr + ");");
         }
-        Matcher validated = VALIDATE_GUARD.matcher(body);
+        Matcher validated = M3DecoratorPatterns.VALIDATE_GUARD.matcher(body);
         if (validated.matches()) {
             return guardDelegate(a, validated, names);
         }
@@ -825,7 +761,7 @@ public final class M3DecoratorFill {
     }
 
     private Emit wrap(Atom a, String body, List<String> names) {
-        Matcher inverse = INVERSE_CACHE.matcher(body);
+        Matcher inverse = M3DecoratorPatterns.INVERSE_CACHE.matcher(body);
         if (inverse.matches() && names.isEmpty()) {
             return inverseCache(a, inverse.group(1), inverse.group(2)).orElse(
                     new Emit("MANUAL", body));
@@ -860,7 +796,8 @@ public final class M3DecoratorFill {
         boolean own = m.group(1).equals(self + "." + m3Factory()) || m.group(1).equals(m3Factory());
         String template = own ? m3Simple + "." + m3Factory() + "(%s)"
                 : m.group(1).equals("new " + self + "<>") ? "new " + m3Simple + "<>(%s)"
-                : WRAP.getOrDefault(m.group(1) + ":" + m.group(2), WRAP.get(m.group(1)));
+                : M3DecoratorPatterns.WRAP.getOrDefault(m.group(1) + ":" + m.group(2),
+                        M3DecoratorPatterns.WRAP.get(m.group(1)));
         if (template == null && m.group(1).matches("Collections\\.unmodifiable\\w+")
                 && importsJdkCollections()) {
             // v1.6: the Commons class already wraps with the JDK owner itself
@@ -1002,7 +939,8 @@ public final class M3DecoratorFill {
                 int[] scope = text.isPresent() ? scope(text.get(), c) : new int[0];
                 if (scope.length == 2) {
                     Matcher m = Pattern.compile("\\b" + c.getSimpleName()
-                            + "\\([^)]*\\)\\s*\\{[^}]*?Objects\\.requireNonNull\\(\\w+, (" + LIT
+                            + "\\([^)]*\\)\\s*\\{[^}]*?Objects\\.requireNonNull\\(\\w+, ("
+                            + M3DecoratorPatterns.LIT
                             + ")\\)").matcher(text.get().substring(scope[0], scope[1]));
                     if (m.find()) {
                         return m.group(1);
@@ -1060,7 +998,6 @@ public final class M3DecoratorFill {
     }
 
     /** The GENERATED block comment the scaffold carries; the fill replaces it. */
-    private static final String GENERATED_BLOCK = "(?s)/\\*\n \\* GENERATED by .*? \\*/";
 
     /**
      * The GENERATED block comment of an owned class: provenance, how its atoms are emitted and an
@@ -1083,7 +1020,8 @@ public final class M3DecoratorFill {
                 "each method atom is classified as THROW, DELEGATE, EQUALS, WRAP, DEFAULT, FACTORY,"
                 + " FACTORY_NEW, SYNC, GUARD, VIEW or UNMODIFIABLE_MAP_ITERATOR and emitted from a"
                 + " template; no provider implementation code is copied.", "");
-        return text.replaceFirst(GENERATED_BLOCK, Matcher.quoteReplacement(generated))
+        return text.replaceFirst(M3DecoratorPatterns.GENERATED_BLOCK,
+                Matcher.quoteReplacement(generated))
                 .replaceFirst(
                         "(?s) \\* SCAFFOLD, not an owned implementation: declares the public " +
                         "surface of\n \\* (\\{@code [^}]+})"
@@ -1220,7 +1158,7 @@ public final class M3DecoratorFill {
         List<String[]> parsed = new ArrayList<>();
         String rest = flat.get()[0];
         while (!rest.isEmpty()) {
-            Matcher m = CTOR_STMT.matcher(rest);
+            Matcher m = M3DecoratorPatterns.CTOR_STMT.matcher(rest);
             if (!m.lookingAt()) {
                 ctorError = "constructor statement outside LANES_CONSTRUCTOR: " + rest;
                 return;
@@ -1372,7 +1310,7 @@ public final class M3DecoratorFill {
         }
         Pattern ids = Pattern.compile("(?<![.\\w])(" + String.join("|", rename.keySet()) + ")\\b");
         StringBuilder out = new StringBuilder();
-        Matcher lit = LITERAL.matcher(text);
+        Matcher lit = M3DecoratorPatterns.LITERAL.matcher(text);
         int pos = 0;
         while (lit.find()) {
             out.append(
@@ -1530,13 +1468,14 @@ public final class M3DecoratorFill {
         Map<String, String> rename = new HashMap<>();
         java.util.stream.IntStream.range(0, names.size()).forEach(
                 i -> rename.put(names.get(i), "arg" + i));
-        Matcher m = LANE_CHECK.matcher(rest);
+        Matcher m = M3DecoratorPatterns.LANE_CHECK.matcher(rest);
         while (m.lookingAt()) {
             boolean lanesOk = laneTypes.containsKey(m.group(2))
                     && (m.group(1) == null || m.group(1).equals(m.group(2)))
                     && names.contains(m.group(3))
                             && Arrays.stream(
-                            LITERAL.matcher(m.group(4)).replaceAll("\"\"").split(" \\+ "))
+                            M3DecoratorPatterns.LITERAL.matcher(m.group(4)).replaceAll("\"\"")
+                            .split(" \\+ "))
                             .filter(t -> !t.equals("\"\"")).allMatch(t -> names.contains(t)
                                     || laneTypes.containsKey(t));
             if (!lanesOk) {
@@ -1547,7 +1486,7 @@ public final class M3DecoratorFill {
                     + ")) {\n            throw new IllegalArgumentException("
                             + renameCode(m.group(4), rename) + ");\n        }");
             rest = rest.substring(m.end()).trim();
-            m = LANE_CHECK.matcher(rest);
+            m = M3DecoratorPatterns.LANE_CHECK.matcher(rest);
         }
         // v1.5: the transforming hook (TransformedMap.checkSetValue): the lane's result is returned
         Matcher hook = Pattern.compile("^return (\\w+)\\.apply\\((\\w+)\\);$").matcher(rest);
@@ -1688,7 +1627,7 @@ public final class M3DecoratorFill {
                         new Emit("MAP_ITERATOR_ADAPTER",
                         "return new EntrySetMapIterator<>(entrySet());"));
             }
-            Matcher checked = CHECKED_ENTRY_SET.matcher(body);
+            Matcher checked = M3DecoratorPatterns.CHECKED_ENTRY_SET.matcher(body);
             if (checked.matches()) {
                 return Optional.of(
                         checkedEntrySet(a, checked.group(1)).orElse(new Emit("MANUAL", body)));
@@ -1698,9 +1637,6 @@ public final class M3DecoratorFill {
             return Optional.of(new Emit("MANUAL", body + " (" + e + ")"));
         }
     }
-
-    private static final Pattern TRANSFORM_ARG =
-            Pattern.compile("transform(Key|Value|Map)?\\((\\w+)\\)");
 
     /**
      * v1.5: a policy lane of this class (or, for a nested helper, its owner) of Transformer type.
@@ -1789,7 +1725,7 @@ public final class M3DecoratorFill {
         List<String> out = new ArrayList<>();
         Set<String> needed = new LinkedHashSet<>();
         for (int i = 0; i < names.size(); i++) {
-            Matcher t = TRANSFORM_ARG.matcher(given.get(i));
+            Matcher t = M3DecoratorPatterns.TRANSFORM_ARG.matcher(given.get(i));
             if (t.matches()) {
                 if (!t.group(2).equals(names.get(i))) {
                     return Optional.empty();

@@ -192,13 +192,14 @@ class files unchanged).
 
 ## Generator atoms
 
-The generator is four atom files under one CLI contract
+The generator is five atom files under one CLI contract
 (`M3DecoratorFill <sources> <scaffold> <fqn> <out> <atoms>` and `--rule-check <sources> <out>`). Each can be
 replaced alone while that contract holds:
 
 | Atom | Lines | Contract |
 |---|---|---|
-| `M3DecoratorFill.java` | 2,237 | CLI; atomize, resolve, classify and emit one scaffold |
+| `M3DecoratorFill.java` | 2,173 | CLI; atomize, resolve, classify and emit one scaffold |
+| `M3DecoratorPatterns.java` | 106 | the regular expressions the classifier matches and the WRAP table (data only) |
 | `M3DecoratorTemplates.java` | 365 | helper text blocks H2, H3 and H4 (data only) |
 | `M3DecoratorJdkStandard.java` | 1,054 | the JDK_STANDARD pass: parameter names, imports, Javadoc, layout |
 | `M3DecoratorRuleCheck.java` | 174 | the R4/R5/R6 classifier checks behind `--rule-check` |
@@ -207,7 +208,13 @@ The split was mechanical: line ranges moved byte for byte, with nested classes d
 the class names, a record accessor in place of a field read, and package-private access on the core members the
 atoms call. Proof: all 37 owned classes are byte-identical to the run before the split; the verdict is PASS;
 negative controls 16/16 (generator mutants compile with the unchanged atoms); and the four files pass
-`-Xdoclint:all/protected` and M3JdkStandard. `run.sh` compiles the four atoms and pins them in PROVENANCE.tsv.
+`-Xdoclint:all/protected` and M3JdkStandard. `run.sh` compiles the atoms and pins them in PROVENANCE.tsv.
+
+Pass 2 moved the 11 regular expressions and the WRAP table into `M3DecoratorPatterns`, byte for byte.
+References were requalified by a lexer that skips string literals, text blocks, character literals and comments,
+because the same names occur inside strings (the category `"WRAP"`, the header text). Only identifier tokens in
+code changed, on 15 lines. Proof: verdict PASS; the 3,262 JUnit tests pass, including the 37 byte-identical
+replays; no owned class changed.
 
 ## JUnit and perf tests per atom
 
