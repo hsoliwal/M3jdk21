@@ -109,7 +109,7 @@ public final class M3WebGen {
 				family(s, fam, base);
 			}
 		}
-		if (s.nebula() && only.isEmpty()) {
+		if (only.isEmpty()) {
 			probes(s, base);
 		}
 		manifest(s);
@@ -120,15 +120,24 @@ public final class M3WebGen {
 		StringBuilder b = new StringBuilder();
 		List<String> seen = new ArrayList<>();
 		for (Map<String, String> m : members) {
-			if (s.exists(m).isEmpty() && !seen.contains(m.get("family")) && families().contains(m.get("family"))) {
-				seen.add(m.get("family"));
-				b.append(b.length() == 0 ? "" : ",\n").append("\t\t\tprobe(new M3").append(pascal(m.get("concept"))).append("(shell, SWT.NONE), \"")
-						.append(m.get("sample").replace("\\", "\\\\").replace("\"", "\\\"")).append("\")");
+			if (s.exists(m).isEmpty() && families().contains(m.get("family"))) {
+				seen.add(m.get("concept"));
+				b.append(b.length() == 0 ? "" : ",\n").append("\t\t\tprobe(new M3").append(pascal(m.get("concept"))).append(s.nebula() ? "(shell, SWT.NONE), \"" : "(), \"")
+						.append(probeSample(m).replace("\\", "\\\\").replace("\"", "\\\"")).append("\", \"").append(m.get("family")).append("\")");
 			}
 		}
 		Map<String, String> v = new LinkedHashMap<>(base);
 		v.put("@PROBES@", b.toString());
-		emit("nebula/PixelProbe.tmpl", s.example(s.wpkg() + ".snippets").resolve("M3WebPixelProbeSnippet.java"), v);
+		if (s.nebula()) {
+			emit("nebula/PixelProbe.tmpl", s.example(s.wpkg() + ".snippets").resolve("M3WebPixelProbeSnippet.java"), v);
+		} else {
+			emit("swing/SwingProbe.tmpl", s.example(s.wpkg() + ".examples").resolve("M3WebSwingProbeExample.java"), v);
+		}
+	}
+
+	/** Probe sample: token renderers are probed text-free (their glyph run would cover the whole token). */
+	static String probeSample(Map<String, String> m) {
+		return m.get("family").equals("TOKEN") ? "" : m.get("sample");
 	}
 
 	List<String> families() {

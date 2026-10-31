@@ -103,3 +103,6 @@ gallery	COLLECTION	GALLERY	11	0
 treemap	PLOT	TREEMAP	11	0	
 segmented-bar	SEGMENTS	SEGMENTED	11	0	
 gantt	PLOT	GANTT	11	0	
+emoji-picker	PICKER	CASCADER	11	0	
+signature-pad	EMBED	WEB	11	0	
+splash-screen	OVERLAY	CENTER	11	0	

@@ -103,3 +103,6 @@ gallery	COLLECTION	GALLERY	grid	ROUND	0	img1;img2;img3;img4;img5;img6	Nebula org
 treemap	PLOT	TREEMAP	img	RECT	0	40;25;20;15	Nebula org.eclipse.nebula.widgets.treemapper.TreeMapper	
 segmented-bar	SEGMENTS	SEGMENTED	radiogroup	ROUND	0	List;Board;Calendar	Nebula org.eclipse.nebula.widgets.segmentedbar.SegmentedBar	
 gantt	PLOT	GANTT	img	RECT	0	0~5;3~4;6~3	Nebula org.eclipse.nebula.widgets.ganttchart.GanttChart	
+emoji-picker	PICKER	CASCADER	combobox	ROUND	0	Smileys/grinning;Smileys/wink;Animals/cat;Food/pizza		
+signature-pad	EMBED	WEB	img	RECT	0	Sign here		
+splash-screen	OVERLAY	CENTER	dialog	ROUND	0	Synexia~Loading workspace		

@@ -22,6 +22,7 @@ examples/web/com/m3/swing/web/examples/M3CommandPaletteExample.java	swing/Exampl
 examples/web/com/m3/swing/web/examples/M3DatePickerExample.java	swing/Example.tmpl	b9fc59ed7d1e6193cc25a9f359a46af7ecb128382137c5b06ac0a00c4000711c
 examples/web/com/m3/swing/web/examples/M3DateRangeExample.java	swing/Example.tmpl	8845d5e7625f7bd1a18a95543e6069c5811db5426f8c84c428c6108204be8f4c
 examples/web/com/m3/swing/web/examples/M3DrawerExample.java	swing/Example.tmpl	88976ba16b4f54ec9af9857c13186fa52ba5036505bd37920315949cbc6fba67
+examples/web/com/m3/swing/web/examples/M3EmojiPickerExample.java	swing/Example.tmpl	f5e51625576397c7d2c18d12e37f2bf296a4f33cd8853ef4597cf1717e7772da
 examples/web/com/m3/swing/web/examples/M3EmptyStateExample.java	swing/Example.tmpl	e20c1a8fd9e5e5b5299b0ef34407304fdcf9c93de62b1d35af886a4e6d5aa2c6
 examples/web/com/m3/swing/web/examples/M3FabExample.java	swing/Example.tmpl	4712adf33d1e4063d665887a8d3abf91d1d60f464828b93b1ec302c682f055d5
 examples/web/com/m3/swing/web/examples/M3FileUploadExample.java	swing/Example.tmpl	685bae19d981ce3226833d969580b28d16bbc2672161e490a41b64dcdfd9a98e
@@ -49,9 +50,11 @@ examples/web/com/m3/swing/web/examples/M3RibbonExample.java	swing/Example.tmpl	5
 examples/web/com/m3/swing/web/examples/M3SearchExample.java	swing/Example.tmpl	d9cd7a407f11e48f6e1ae4bf62e30c50e1456e18ffa00995e2bab061ee8e3d5c
 examples/web/com/m3/swing/web/examples/M3SegmentedBarExample.java	swing/Example.tmpl	c0dceaf2b57b8bd2e94af154ea11eb804e8f1667ad3dd5efb0567463037ee881
 examples/web/com/m3/swing/web/examples/M3SheetDialogExample.java	swing/Example.tmpl	f25c7138326a39859e6c230bbcdafcfc2662b047bfc6ec94099003ae6d39d764
+examples/web/com/m3/swing/web/examples/M3SignaturePadExample.java	swing/Example.tmpl	87976f95dad4953bf489361f1eea294dd3da52e0543c5bb641253e0bf53e51d1
 examples/web/com/m3/swing/web/examples/M3SkeletonExample.java	swing/Example.tmpl	ce52d628afa1bb2570b958427f6a8fe936b9de9925035e14d57b50a7d9552e05
 examples/web/com/m3/swing/web/examples/M3SparklineExample.java	swing/Example.tmpl	3c117d031b976abad66151ff2cd7de68d139ddd5089dbabf818aaea7fc81473c
 examples/web/com/m3/swing/web/examples/M3SpinnerLoadingExample.java	swing/Example.tmpl	451c6fd37e8c3982fef50336a019d1e4280df7663f83d61b5a9a8f9845ed35fe
+examples/web/com/m3/swing/web/examples/M3SplashScreenExample.java	swing/Example.tmpl	0a7d5f569a85b56a193544f97c011add3337f108c3e203576d83e49c6ef4a2be
 examples/web/com/m3/swing/web/examples/M3SplitButtonExample.java	swing/Example.tmpl	05439df09bf442ca9120c384a83f044976b4cc6e48c55463feb27f88914b40f0
 examples/web/com/m3/swing/web/examples/M3StatKpiExample.java	swing/Example.tmpl	2a919081c31b07602776bb5dc8ba652306fd6f80b57e3c291fb7707502de2c1f
 examples/web/com/m3/swing/web/examples/M3StepperExample.java	swing/Example.tmpl	a8517d0134c9d9a86eaa6a2a29ac00aec13daffd521c9f9e90978c3bb761efb4
@@ -66,6 +69,7 @@ examples/web/com/m3/swing/web/examples/M3TourExample.java	swing/Example.tmpl	557
 examples/web/com/m3/swing/web/examples/M3TransitionAnimExample.java	swing/Example.tmpl	52791c1b8b6c9ad9d4efe4a9dfbca4faa7d0190a3540e3ed0755e839365a4dd7
 examples/web/com/m3/swing/web/examples/M3TreemapExample.java	swing/Example.tmpl	d373800efaa9fb6178eb12d08bb1de1cc12bae0e41dc830d761f29abc9245460
 examples/web/com/m3/swing/web/examples/M3VideoPlayerExample.java	swing/Example.tmpl	166199e799432dab294bb9bb51b8f9b1bb119f900a4044fdd38f0f53105d90dd
+examples/web/com/m3/swing/web/examples/M3WebSwingProbeExample.java	swing/SwingProbe.tmpl	d4fcb843fd93c57f73286843dfa1a94b48966216b3d6f94220e8a48c590d15f2
 examples/web/com/m3/swing/web/examples/M3WebViewExample.java	swing/Example.tmpl	72b1dbd18d9b327c72210351d6b0692ea1e3b5eb1aaae932ab77b83d10b5f89b
 src/main/java/com/m3/swing/web/M3Accordion.java	swing/Widget.tmpl	e11376000bd71e74c87dbf28f830617f8c3b2d719c6f0d1073fdafe6dc232a8b
 src/main/java/com/m3/swing/web/M3Affix.java	swing/Widget.tmpl	c5939f024621234960461279244508e90f0e1f6f026ca82d2b17e36c8c48358e
@@ -90,6 +94,7 @@ src/main/java/com/m3/swing/web/M3CommandPalette.java	swing/Widget.tmpl	93372424d
 src/main/java/com/m3/swing/web/M3DatePicker.java	swing/Widget.tmpl	e35800d4b840f8ff87cbce075bf0a556ec6b830bb18851d74560d5adad13a10a
 src/main/java/com/m3/swing/web/M3DateRange.java	swing/Widget.tmpl	95b9681f436ea0c2e7dd6759ceeaa2aeecf55e810fc8ec66f7fcb94c127da96f
 src/main/java/com/m3/swing/web/M3Drawer.java	swing/Widget.tmpl	0c67a679eb1189e80f20f615871509345794903b8bd63bb69bae17cc1cd3d890
+src/main/java/com/m3/swing/web/M3EmojiPicker.java	swing/Widget.tmpl	faf93142a9e8921e751f147ff5d7d32b29b58292629179b5fa141087cc519ae4
 src/main/java/com/m3/swing/web/M3EmptyState.java	swing/Widget.tmpl	11e3d4bc123a2e59a27220a02edd51f3900ddf820f3a400735b9a686c7bc19e7
 src/main/java/com/m3/swing/web/M3Fab.java	swing/Widget.tmpl	4d948beea16aa60836ed19752b4cc512b55ceedf3fc1e50b36ec96ce1425e378
 src/main/java/com/m3/swing/web/M3FileUpload.java	swing/Widget.tmpl	aa092a79b82d0f8482dfa57d0ff0081b3d416def44a793f78ff73aebe96a1f13
@@ -117,9 +122,11 @@ src/main/java/com/m3/swing/web/M3Ribbon.java	swing/Widget.tmpl	fb3e1eb4423dc2ead
 src/main/java/com/m3/swing/web/M3Search.java	swing/Widget.tmpl	77df80c381f6514039a8c1baa2585a4b0fa500f527157c2efbc5fc421ce95b35
 src/main/java/com/m3/swing/web/M3SegmentedBar.java	swing/Widget.tmpl	0081a2843ba352a93b7c2447f7bc3c9c526187c40f0a000e813c23cfaed7cc02
 src/main/java/com/m3/swing/web/M3SheetDialog.java	swing/Widget.tmpl	cc1f2891ed7687f2a074030b956f2afdd37c4f17e87dd7f841524eb0d15a6d5f
+src/main/java/com/m3/swing/web/M3SignaturePad.java	swing/Widget.tmpl	d1606564db88ecf29311beb2f062b94a3f050f31c564c5d463439605a802df7e
 src/main/java/com/m3/swing/web/M3Skeleton.java	swing/Widget.tmpl	5c734e9f747a64c117af8c41a9e2b43119f451137b6c0a03f2695ac44ce17660
 src/main/java/com/m3/swing/web/M3Sparkline.java	swing/Widget.tmpl	c2e5f301bf3fee705cf1234540ad9e9b9477f8d46af7b134e1cac53f3731698e
 src/main/java/com/m3/swing/web/M3SpinnerLoading.java	swing/Widget.tmpl	87bbd402869610ad8a58f12a94d26a7dafa045b12379a51ae2652f826f4c0e57
+src/main/java/com/m3/swing/web/M3SplashScreen.java	swing/Widget.tmpl	c50a64342d70b7167b84be27c537f6154eecaf15caf133ec4a17713b91ed2d4e
 src/main/java/com/m3/swing/web/M3SplitButton.java	swing/Widget.tmpl	0a4f85d60fcf564a276a50212183079a123c276e988693cc055601ce2cc5bf9b
 src/main/java/com/m3/swing/web/M3StatKpi.java	swing/Widget.tmpl	2e6a468b1c973fd45fbff8335af4483235efb7ecafd351297d42238ce9a9ed47
 src/main/java/com/m3/swing/web/M3Stepper.java	swing/Widget.tmpl	8ec9b402370ea99b81cd18eec67c1131c5806a214ba56b6e7279735e21ee1e2b
@@ -134,7 +141,7 @@ src/main/java/com/m3/swing/web/M3Tour.java	swing/Widget.tmpl	fbeb7853d1ce234bb62
 src/main/java/com/m3/swing/web/M3TransitionAnim.java	swing/Widget.tmpl	44d87f813a0bf5b4f6155f524c6b2d42c558553b5ff4d7c23abcbcc40724523e
 src/main/java/com/m3/swing/web/M3Treemap.java	swing/Widget.tmpl	6a3c3bd2a12327f9b68dd6c78129c0ab20613ad5aeb1d771c5a5453f5d385fb1
 src/main/java/com/m3/swing/web/M3VideoPlayer.java	swing/Widget.tmpl	616699f2acbd76a3151dc4d42e9f480602026a0d786e4bacfad5f11cf187655d
-src/main/java/com/m3/swing/web/M3WebComponent.java	swing/M3WebComponent.java.tmpl	a1314f6da6cdb8e9cee39611a5d2c923ddb0103a23b836244f2aeffb1dd209c3
+src/main/java/com/m3/swing/web/M3WebComponent.java	swing/M3WebComponent.java.tmpl	4208d32a6ca373da318b40df1554093aae258ee6d0841f98b76db0098c8894c4
 src/main/java/com/m3/swing/web/M3WebView.java	swing/Widget.tmpl	6328c48332f7229ab6de486d8450b563ac57dff6c82e15b061e2b83ec8e1a463
 src/main/java/com/m3/swing/web/model/M3AccordionApi.java	member/Api.tmpl	3f7ecb873e51d47d0912a70148074e276801e0cc3967e2e5db8db68cdc0a5d16
 src/main/java/com/m3/swing/web/model/M3AccordionModel.java	member/Model.tmpl	bb203bd1d4b8fc3283ce756657f0ad7771fb3e207e947b9cf73a41e5e7faf30a
@@ -192,6 +199,8 @@ src/main/java/com/m3/swing/web/model/M3DrawerApi.java	member/Api.tmpl	04367c6678
 src/main/java/com/m3/swing/web/model/M3DrawerModel.java	member/Model.tmpl	91fdce87715c5064ef3a11f6cc9ef543011945dbbfab11491887f59ede734a0e
 src/main/java/com/m3/swing/web/model/M3EmbedApi.java	family/EMBED.api.tmpl	6cf4658afe028e92a367d24e8cd9c792e32b5ce9f796dfef658aa7e49f5d7b05
 src/main/java/com/m3/swing/web/model/M3EmbedModel.java	family/EMBED.java.tmpl	21148e01f53bb96b9d95a09e8b4f6b33fe2a0c365a9c949e2c0ece775ff0cc30
+src/main/java/com/m3/swing/web/model/M3EmojiPickerApi.java	member/Api.tmpl	574fc7187f62f0e1b303dc3d50f0532c0ece8c534e6099a20a0aad8f5d02e73c
+src/main/java/com/m3/swing/web/model/M3EmojiPickerModel.java	member/Model.tmpl	9fc722fd9a54d6e8d839be142ef86e377b347493f48311552b87d645c3d6542c
 src/main/java/com/m3/swing/web/model/M3EmptyStateApi.java	member/Api.tmpl	dcc4870f73f310db43465caadc38d4936e1302600a36dd894f4564a8d1ada3e7
 src/main/java/com/m3/swing/web/model/M3EmptyStateModel.java	member/Model.tmpl	9aa70056bc5efba3d14d13038149706014bed1ef4d012b0f4415a4c233389458
 src/main/java/com/m3/swing/web/model/M3FabApi.java	member/Api.tmpl	0ae2b28c051ac41ccc47f3ac6c29bed7c219948ed0d869c7a5b9fcdd16254709
@@ -256,12 +265,16 @@ src/main/java/com/m3/swing/web/model/M3SegmentsApi.java	family/SEGMENTS.api.tmpl
 src/main/java/com/m3/swing/web/model/M3SegmentsModel.java	family/SEGMENTS.java.tmpl	6274a772c9dac74e665cf6caf95da6cf06e0c8be9b39f151877051e79cb11bde
 src/main/java/com/m3/swing/web/model/M3SheetDialogApi.java	member/Api.tmpl	121ba7d42be5157e529256c24e0149e2ebfb9101cfd351ad12461abf94b8e51a
 src/main/java/com/m3/swing/web/model/M3SheetDialogModel.java	member/Model.tmpl	23bcf2dc6f3a55d70d443c47db8beebaf26f1cdcf0d09469ce003c26b95a41ab
+src/main/java/com/m3/swing/web/model/M3SignaturePadApi.java	member/Api.tmpl	a5e496009b61562ede40f50215a686e6d5c97c4c9610ca491422467f62dcebdd
+src/main/java/com/m3/swing/web/model/M3SignaturePadModel.java	member/Model.tmpl	bb24fdff3758ffe8161b9a2309da621540c1634486ff36feceb7b0ed63fa1c1d
 src/main/java/com/m3/swing/web/model/M3SkeletonApi.java	member/Api.tmpl	151c352d4bebb87ba6a521110d7c716c5ebff33152fff5ea20711230172401bb
 src/main/java/com/m3/swing/web/model/M3SkeletonModel.java	member/Model.tmpl	6186bdac09d83edf153274be324df58649c518e053117ebb77f76d53bbd48edb
 src/main/java/com/m3/swing/web/model/M3SparklineApi.java	member/Api.tmpl	23ff9ae9877332157ba4be074a7fa4d160e71e036351ba460dc9ec003a498b7a
 src/main/java/com/m3/swing/web/model/M3SparklineModel.java	member/Model.tmpl	3103a1d17a3d31ead1eced256e337f56ac833fce4894fcb9d4cdb1cd73f75f46
 src/main/java/com/m3/swing/web/model/M3SpinnerLoadingApi.java	member/Api.tmpl	6a52e446dd5a73b682e74630fc6b13e10d9f82c83a33c007a75738df99f340ea
 src/main/java/com/m3/swing/web/model/M3SpinnerLoadingModel.java	member/Model.tmpl	bfd3b721b4b6a00bbfbb5700f2d7069692c33051b4a8046b9f014e6d82b97b42
+src/main/java/com/m3/swing/web/model/M3SplashScreenApi.java	member/Api.tmpl	9ac1670d1bf18c0f89eea8a80428e577a646b537da42ac9baa404ad7fdb5a975
+src/main/java/com/m3/swing/web/model/M3SplashScreenModel.java	member/Model.tmpl	ec519a61f3bc11e49e6f402ec20c35fa920895be6d7a76f6e27631032772a707
 src/main/java/com/m3/swing/web/model/M3SplitButtonApi.java	member/Api.tmpl	5e2882ca492fd58c0d0711624e9a4fa9bdf682d7e8e1df5dca2d108e792d2a80
 src/main/java/com/m3/swing/web/model/M3SplitButtonModel.java	member/Model.tmpl	774e9524ce0d1493ca8c92e4611f0c841d73914bbab98b659eb25c510066a526
 src/main/java/com/m3/swing/web/model/M3StatKpiApi.java	member/Api.tmpl	2bc8d8c65fa8a5d856913abed3904290543b857f397d2c6a6e47095a7e277b53
@@ -296,9 +309,9 @@ src/main/java/com/m3/swing/web/model/M3WebApi.java	core/M3WebApi.java.tmpl	d7274
 src/main/java/com/m3/swing/web/model/M3WebDelta.java	core/M3WebDelta.java.tmpl	81b64e6245037e06e93b6e0c39e311439a01b3f654a1309218e7178f1cc8a207
 src/main/java/com/m3/swing/web/model/M3WebGlyphs.java	core/M3WebGlyphs.java.tmpl	05c9b297fcccb003bab20b3e8ecc08206ce2295e9589277dd4191b4990e5e74e
 src/main/java/com/m3/swing/web/model/M3WebLanes.java	core/M3WebLanes.java.tmpl	4cd31f390c37a13bff4dd3c17279371bb5ac42c60327159c50c27b2d9197927e
-src/main/java/com/m3/swing/web/model/M3WebModel.java	core/M3WebModel.java.tmpl	db9757f566faf258b622c34f95106b540a8ae57029a51ef07e8cb0d77181a9f3
+src/main/java/com/m3/swing/web/model/M3WebModel.java	core/M3WebModel.java.tmpl	338b1900421714bb6da7a5fc321b000b9696221b61dcc8a6b808e6190d16f347
 src/main/java/com/m3/swing/web/model/M3WebPaint.java	core/M3WebPaint.java.tmpl	ce3715e32a0a1c2ea7a31b48471b818865b9182a9deda2cea4924e660c5fad1d
-src/main/java/com/m3/swing/web/model/M3WebPixelProbe.java	core/M3WebPixelProbe.java.tmpl	015454c7abf9c806c4ee5d835b529c07a6205fab34bb191e41d30e32f63bcba1
+src/main/java/com/m3/swing/web/model/M3WebPixelProbe.java	core/M3WebPixelProbe.java.tmpl	24836069ba460e53e38ad9e45f4b7975f2e9157433f926431c95b68e584ece7c
 src/main/java/com/m3/swing/web/model/M3WebStates.java	core/M3WebStates.java.tmpl	f125fe5abc03e20ab76308b9b6aa0fbc5d4e07e3ccd7ff20e00b1a0cce3d3360
 src/main/java/com/m3/swing/web/model/M3WebTheme.java	core/M3WebTheme.java.tmpl	0aa439636cc4bd63691df52ed14411301e3dba986d6454e242e193ab7977144c
 src/main/java/com/m3/swing/web/model/M3WebView.java	core/M3WebView.java.tmpl	e5b97bec9cec8a98cd6bcdb57b423e9c15cb474c4b735c54590c3df0cf13596d
@@ -328,6 +341,7 @@ src/test/java/com/m3/swing/web/M3CommandPaletteTest.java	swing/Test.tmpl	e3fead3
 src/test/java/com/m3/swing/web/M3DatePickerTest.java	swing/Test.tmpl	8650dd3449899f4d48bed0869ddc5eb8ed13f971b2e2fdaafa6739290853c894
 src/test/java/com/m3/swing/web/M3DateRangeTest.java	swing/Test.tmpl	ced13c018caccd119f7fb324389c29128b09da8098c45bf8778945e6becd665c
 src/test/java/com/m3/swing/web/M3DrawerTest.java	swing/Test.tmpl	1afb5a464bf84867c63204f9b2eed92ffa4f9f462d2e82547528042477cb50dd
+src/test/java/com/m3/swing/web/M3EmojiPickerTest.java	swing/Test.tmpl	9bee6a51692f8eb09dce2523811f718c317d50bb4b5cd40e87ae2af9dd44c76d
 src/test/java/com/m3/swing/web/M3EmptyStateTest.java	swing/Test.tmpl	a2e42ffe5a218d7c8aa49f8c7e67a92335d2fec52343b1e3c94c9f7b2e926e4c
 src/test/java/com/m3/swing/web/M3FabTest.java	swing/Test.tmpl	f13dd4f0c589403935d5399429b6781c010ae3146226fcb252233397138b59b7
 src/test/java/com/m3/swing/web/M3FileUploadTest.java	swing/Test.tmpl	94d91cbbdae2445fb529e2306532cae08dd99d8ece32d4fdc1afed805262653b
@@ -355,9 +369,11 @@ src/test/java/com/m3/swing/web/M3RibbonTest.java	swing/Test.tmpl	562f5f802ab9b69
 src/test/java/com/m3/swing/web/M3SearchTest.java	swing/Test.tmpl	75bf0f7f3f8b0ee226243a691ff4f4dfd1a2cf4da75cdeaabc212ca3e09ec582
 src/test/java/com/m3/swing/web/M3SegmentedBarTest.java	swing/Test.tmpl	f34a91dd30fc4161c9d1235cea3a124c31441c6deed8a28a763a340d197c4e64
 src/test/java/com/m3/swing/web/M3SheetDialogTest.java	swing/Test.tmpl	40b0c1be4681fd0384bd7c337918c27a4fcf97f0485d32a00223dc0808fc93a3
+src/test/java/com/m3/swing/web/M3SignaturePadTest.java	swing/Test.tmpl	cf8c6b12f4fa6ecae775f00e44bf817ff1816ea238977a8fd8cb71a814e7f212
 src/test/java/com/m3/swing/web/M3SkeletonTest.java	swing/Test.tmpl	f3290e13e588c5b9be300a9f7f92a81269f53055a900a3bd8ada6a8b8867b426
 src/test/java/com/m3/swing/web/M3SparklineTest.java	swing/Test.tmpl	49201fa02d15459c505b01f46b0608449a9a9643f495c63af966ead629cb23b6
 src/test/java/com/m3/swing/web/M3SpinnerLoadingTest.java	swing/Test.tmpl	a2dd7d4ad985548959a794730e3c678aca976154f6800e047d02b2d497c1619f
+src/test/java/com/m3/swing/web/M3SplashScreenTest.java	swing/Test.tmpl	aec30a77f848ec2ded3e1848ab2a7b9beae224697b26d509a20f70e6b2932a6b
 src/test/java/com/m3/swing/web/M3SplitButtonTest.java	swing/Test.tmpl	84c13d0a6450f431eace9904965d59cb417b8420268646b2dbba2296ad0fc707
 src/test/java/com/m3/swing/web/M3StatKpiTest.java	swing/Test.tmpl	3a1ff70fff197819378e0db759a0f89a3785a9109d8f1431cb54f63792e058fc
 src/test/java/com/m3/swing/web/M3StepperTest.java	swing/Test.tmpl	ae30b143f8d5d8ce6541964a466327073bafe5206481f0ebc0dcbfd326276455

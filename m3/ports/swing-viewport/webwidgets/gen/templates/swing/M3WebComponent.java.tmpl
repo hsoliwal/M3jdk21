@@ -243,6 +243,11 @@ public class M3WebComponent<M extends M3WebModel> extends JComponent {
 		dirtyAll = false;
 	}
 
+	/** Back-buffer read: the pixel of the retained body plane (0 before the first paint). */
+	public int planePixel(int x, int y) {
+		return body == null || x < 0 || y < 0 || x >= body.getWidth() || y >= body.getHeight() ? 0 : body.getRGB(x, y) & 0xffffff;
+	}
+
 	/** The region the last paint re-rendered into the body plane (the D aspect: equals the model damage). */
 	public Rectangle lastRendered() {
 		return new Rectangle(rendered);

@@ -131,6 +131,7 @@ public abstract class M3WebModel extends M3WebView {
 	public void layout(int w, int h) {
 		width = Math.max(0, w);
 		height = Math.max(0, h);
+		scroll = Math.max(0, Math.min(scroll, logicalExtent() - viewLength()));
 		arrange();
 		damageAll();
 	}

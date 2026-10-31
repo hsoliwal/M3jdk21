@@ -1,21 +1,22 @@
 <!-- SPDX-License-Identifier: Apache-2.0 OR EPL-2.0 -->
 # Web widget concepts: harvest coverage
 
-`CONCEPTS.tsv` holds 104 concepts. `COMPONENT_CONCEPTS.tsv` maps every harvested component name to a concept:
+`CONCEPTS.tsv` holds 107 concepts (104 from the harvest + 3 new). `COMPONENT_CONCEPTS.tsv` maps every harvested component name to a concept:
 
 | tier | rule | names |
 |---|---|---|
 | T1_ALIAS | the harvest's own alias table (`universe_concepts.py`, verbatim) | 4,774 |
 | T2_WORD | exact-word aliases added in `tools/concepts.py` (`EXTRA`) | 831 |
 | T5_PATH | a concept word in the component's directory path | 58 |
-| T6_CLUSTER | clusters from a CPU token census of the remaining names (`CLUSTER`; substrings for all-lowercase GTK/wx names) | 210 |
-| T3_NON_WIDGET | infrastructure names (events, bindings, converters, hooks, GTK private/builder/css types) | 577 |
-| UNMAPPED | none of the above; still open (mostly single GTK/wx/Flutter/FLTK internals) | 351 |
+| T6_CLUSTER | clusters from a CPU token census of the remaining names (`CLUSTER`; substrings for all-lowercase GTK/wx names) | 211 |
+| T7_FINAL | every remaining name, hand-checked cluster by cluster (`FINAL`), including 3 new concepts | 179 |
+| T3_NON_WIDGET | support types: events, bindings, converters, hooks, GTK private/builder/css/gesture types, printing, settings (`NON_WIDGET`, `NON_WIDGET_SUB`, `SUPPORT`) | 748 |
+| UNMAPPED | none | 0 |
 
-Total 6,801 names (6,323 harvested + 478 addendum); 5,873 map to one of the 104 concepts (86.4%), 577 are support
-types, 351 (5.2%) remain open. No new concept was added in this pass: the remaining names are singletons.
-
-Run `python tools/concepts.py <inputs> spec/MEMBERS.tsv <out>`; it prints the counts per tier.
+Total 6,801 names (6,323 harvested + 478 addendum): 6,053 map to one of 107 concepts, 748 are support types, 0 unmapped.
+New concepts from the last pass (generated on both sides with existing family patterns): emoji-picker (PICKER, cascade of
+category and emoji), signature-pad (EMBED, drawing surface; TODO M3P-EMBED-1 stroke capture), splash-screen (OVERLAY, centred
+modal plane).
 
 ## Major kits checked against the harvest (2026-10-30)
 

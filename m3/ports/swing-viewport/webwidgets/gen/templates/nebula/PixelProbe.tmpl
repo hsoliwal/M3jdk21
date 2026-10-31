@@ -28,9 +28,9 @@ public final class M3WebPixelProbeSnippet {
 @PROBES@
 		};
 		for (int i = 0; i < widgets.length; i++) {
-			widgets[i].setBounds(10 + (i % 4) * 300, 10 + (i / 4) * 200, 280, 180);
+			widgets[i].setBounds(4 + (i % 8) * 236, 4 + (i / 8) * 156, 230, 150);
 		}
-		shell.setBounds(20, 20, 1220, 640);
+		shell.setBounds(0, 0, 1900, 1400);
 		shell.open();
 		settle(display, 900);
 		int failed = report(display, widgets);
@@ -38,7 +38,8 @@ public final class M3WebPixelProbeSnippet {
 		System.exit(failed == 0 ? 0 : 1);
 	}
 
-	private static M3WebCanvas<?> probe(M3WebCanvas<?> widget, String sample) {
+	private static M3WebCanvas<?> probe(M3WebCanvas<?> widget, String sample, String family) {
+		widget.setData("m3.family", family);
 		widget.getModel().load(sample);
 		if (widget.getModel() instanceof @PKG@.M3OverlayModel) {
 			((@PKG@.M3OverlayModel) widget.getModel()).open();
@@ -64,9 +65,13 @@ public final class M3WebPixelProbeSnippet {
 		boolean blank = blank(data, widgets);
 		int failed = 0;
 		System.out.println("concept	x	y	expected	screen	screen_result	print	print_result");
+		java.util.Map<String, Integer> families = new java.util.LinkedHashMap<>();
 		for (M3WebCanvas<?> w : widgets) {
-			failed += row(w, data, printed(display, w), blank) ? 0 : 1;
+			int code = row(w, data, printed(display, w), blank);
+			failed += code == 2 ? 1 : 0;
+			families.merge(String.valueOf(w.getData("m3.family")), code, Math::max);
 		}
+		families.forEach((f, c) -> System.out.println("FAMILY	" + f + "	" + (c == 2 ? "FAIL" : c == 1 ? "PASS" : "NO_PROBE")));
 		screen.dispose();
 		return failed;
 	}
@@ -98,19 +103,19 @@ public final class M3WebPixelProbeSnippet {
 		return data;
 	}
 
-	private static boolean row(M3WebCanvas<?> w, ImageData screen, ImageData print, boolean blank) {
+	private static int row(M3WebCanvas<?> w, ImageData screen, ImageData print, boolean blank) {
 		M3WebModel m = w.getModel();
 		int[] probe = M3WebPixelProbe.probe(m, w.getSize().x, w.getSize().y);
 		if (probe.length != 4) {
 			System.out.println(m.concept() + "	-	-	-	-	NO_PROBE	-	NO_PROBE");
-			return true;
+			return 0;
 		}
 		Point at = w.toDisplay(probe[0], probe[1]);
 		int s = rgb(screen, at.x, at.y), q = rgb(print, probe[0], probe[1]);
 		boolean okPrint = M3WebPixelProbe.close(q, probe[2], probe[3]), ok = blank ? okPrint : M3WebPixelProbe.close(s, probe[2], probe[3]);
 		System.out.println(m.concept() + "	" + at.x + "	" + at.y + "	" + hex(probe[2]) + "	" + hex(s) + "	" + (blank ? "BLANK_FRAME" : ok ? "PASS" : "FAIL")
 				+ "	" + hex(q) + "	" + (okPrint ? "PASS" : "FAIL"));
-		return ok;
+		return ok ? 1 : 2;
 	}
 
 	private static int rgb(ImageData data, int x, int y) {
