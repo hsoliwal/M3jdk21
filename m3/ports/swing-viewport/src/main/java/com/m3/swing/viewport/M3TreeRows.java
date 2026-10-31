@@ -21,7 +21,8 @@ import javax.swing.tree.TreePath;
  * preferred height is clamped.</p>
  */
 //FLLDCIM: L4 — no per-row objects; L7 — uniform rows, arithmetic layout
-public class M3TreeRows extends AbstractLayoutCache {
+//FLLDCIM: MRL — final: no subclass can override a method the constructor calls (this-escape)
+public final class M3TreeRows extends AbstractLayoutCache {
 	/** Supplies the x of a row at a path level (the tree UI's {@code getRowX}). */
 	@FunctionalInterface
 	public interface RowX {
