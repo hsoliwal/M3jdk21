@@ -6,7 +6,7 @@ python3 - "$repo" <<'PY'
 from pathlib import Path
 import hashlib, sys
 root = Path(sys.argv[1]).resolve()
-recipe = root/'m3/collections/qualification/residency-state-mask-20261017/recipe/src/main/resources/com/synexia/rewrite'
+recipe = root/'m3/collections/qualification/residency-state-mask-20261017/recipe/src/main/resources/jdk/internal/m3/rewrite'
 j = recipe/'hash-pinned-java/m3jdk21-residency-state-mask-20261017'
 n = recipe/'hash-pinned-text/m3jdk21-residency-state-mask-native-20261017'
 paths=[]
@@ -33,13 +33,13 @@ PY
 work=$(mktemp -d)
 trap 'rm -rf "$work"' EXIT HUP INT TERM
 mkdir -p "$work/classes" "$work/headers"
-src="$repo/m3/collections/src/main/java/com/m3/collections"
-tests="$repo/m3/collections/src/test/java/com/m3/collections"
+src="$repo/m3/collections/src/main/java/jdk/m3/collections"
+tests="$repo/m3/collections/src/test/java/jdk/m3/collections"
 javac --release 21 -proc:none -Xlint:all,-serial -Werror -h "$work/headers" -d "$work/classes" \
     "$src/M3Address28.java" "$src/M3IntLane28.java" "$src/M3BitLane28.java" \
     "$src/M3SlotAllocator28.java" "$src/M3ObjectResidency.java" \
     "$src/M3ResidencyStateMaskIndex.java" "$tests/M3ResidencyStateMaskProof.java"
-java -Xmx128m -cp "$work/classes" com.m3.collections.M3ResidencyStateMaskProof > "$work/java.log"
+java -Xmx128m -cp "$work/classes" jdk.m3.collections.M3ResidencyStateMaskProof > "$work/java.log"
 grep '^M3_RESIDENCY_STATE_MASK_PASS' "$work/java.log"
 javahome=$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")
 gcc -std=c17 -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic -fPIC -shared \
@@ -49,13 +49,13 @@ gcc -std=c17 -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic -fPIC -shared
 expected=$(sed -n 's/.*fingerprint=\([0-9]*\).*/\1/p' "$work/java.log")
 for collector in Serial Parallel G1 Z Shenandoah; do
     java -Xmx128m -Xcheck:jni "-XX:+Use${collector}GC" -Djava.library.path="$work" \
-        -cp "$work/classes" com.m3.collections.M3ResidencyStateMaskProof native > "$work/$collector.log"
+        -cp "$work/classes" jdk.m3.collections.M3ResidencyStateMaskProof native > "$work/$collector.log"
     grep '^M3_RESIDENCY_STATE_MASK_PASS' "$work/$collector.log"
     actual=$(sed -n 's/.*fingerprint=\([0-9]*\).*/\1/p' "$work/$collector.log")
     test "$expected" = "$actual"
 done
 java -Xmx128m -Xcheck:jni -Xint -XX:+UseG1GC -Djava.library.path="$work" \
-    -cp "$work/classes" com.m3.collections.M3ResidencyStateMaskProof native > "$work/interpreter.log"
+    -cp "$work/classes" jdk.m3.collections.M3ResidencyStateMaskProof native > "$work/interpreter.log"
 grep '^M3_RESIDENCY_STATE_MASK_PASS' "$work/interpreter.log"
 test "$expected" = "$(sed -n 's/.*fingerprint=\([0-9]*\).*/\1/p' "$work/interpreter.log")"
 echo M3_RESIDENCY_STATE_MASK_REAL_JDK_JNI_PASS

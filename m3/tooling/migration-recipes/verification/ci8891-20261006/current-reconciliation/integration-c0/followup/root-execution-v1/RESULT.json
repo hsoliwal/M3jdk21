@@ -1,5 +1,5 @@
 {
-  "schema": "synexia.fc0.root-packaging-execution/1",
+  "schema": "m3.fc0.root-packaging-execution/1",
   "plan": {
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/terminal-selection-v1/COMMANDS.json",
     "bytes": 7776,

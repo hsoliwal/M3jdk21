@@ -6,8 +6,8 @@ SCRIPT=Path(__file__).absolute()
 for p in (SCRIPT,*SCRIPT.parents):
  if p.is_symlink() or getattr(p,'is_junction',lambda:False)():raise RuntimeError('aliased qualification path')
 ROOT=SCRIPT.parents[4]
-OWNER=ROOT/'m3/collections/recipe/owned-spring-multivalue-map-20261017/src/main/resources/com/synexia/rewrite/hash-pinned-java/owned-spring-multivalue-map'
-EXPECTED={'m3/collections/implementations/spring/src/main/java/com/m3/collections/spring/M3MultiValueMap.java': 'c1bf11b7ced59b3fdf424ce83c2941324d26ec5161e6dcbedccf8159c9c38c77', 'm3/collections/implementations/spring/src/main/java/com/m3/collections/spring/M3SingleValueMapView.java': '6f33bb30aa4c31a9d17191720d801f0298dccea25dba4a34265db1117293d511', 'm3/collections/implementations/spring/src/test/java/com/m3/collections/spring/M3MultiValueMapSelfTest.java': '2298173ebaa56e2f67f568b9489a24a584f8c3dce16d6e95d2087d2e162d7953'}
+OWNER=ROOT/'m3/collections/recipe/owned-spring-multivalue-map-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-spring-multivalue-map'
+EXPECTED={'m3/collections/implementations/spring/src/main/java/jdk/m3/collections/spring/M3MultiValueMap.java': 'c1bf11b7ced59b3fdf424ce83c2941324d26ec5161e6dcbedccf8159c9c38c77', 'm3/collections/implementations/spring/src/main/java/jdk/m3/collections/spring/M3SingleValueMapView.java': '6f33bb30aa4c31a9d17191720d801f0298dccea25dba4a34265db1117293d511', 'm3/collections/implementations/spring/src/test/java/jdk/m3/collections/spring/M3MultiValueMapSelfTest.java': '2298173ebaa56e2f67f568b9489a24a584f8c3dce16d6e95d2087d2e162d7953'}
 def read(p):
  relative=p.relative_to(ROOT);q=ROOT
  for part in relative.parts:

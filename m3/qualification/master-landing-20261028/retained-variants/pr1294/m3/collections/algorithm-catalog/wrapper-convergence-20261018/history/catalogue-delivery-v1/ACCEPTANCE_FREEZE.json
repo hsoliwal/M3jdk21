@@ -1,6 +1,6 @@
 {
   "schema": "m3-wrapper-final-catalogue-metadata-freeze/v1",
-  "task": "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018",
+  "task": "/workspace/scratch/8762dba320ce/com.synexia/m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018",
   "status": "METADATA_READY_FOR_EXISTING_TEXT_RECIPE",
   "source_files": [
     {
@@ -1414,17 +1414,17 @@
       "bytes": 20379
     },
     {
-      "path": "catalogue/runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexMaskCompactor.h",
+      "path": "catalogue/runtime-proof/received/after-jni-headers/jdk_m3_collections_M3IndexMaskCompactor.h",
       "sha256": "1f67a3bca5682e3d4b392bb04d6f27479a16fdaccb935463a9dbf026f13faf8c",
       "bytes": 2116
     },
     {
-      "path": "catalogue/runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexMaskWindow.h",
+      "path": "catalogue/runtime-proof/received/after-jni-headers/jdk_m3_collections_M3IndexMaskWindow.h",
       "sha256": "26d6f1302b888bbebde68d4d911f7b74d91c1fe5f90871928af0220829dc9866",
       "bytes": 1006
     },
     {
-      "path": "catalogue/runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexPathMasks.h",
+      "path": "catalogue/runtime-proof/received/after-jni-headers/jdk_m3_collections_M3IndexPathMasks.h",
       "sha256": "d73bb0e2e17c41ce6cd653732a8c7bc0dce71f2464c3dd536bbf544655936e95",
       "bytes": 1034
     },
@@ -1439,17 +1439,17 @@
       "bytes": 18773
     },
     {
-      "path": "catalogue/runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexMaskCompactor.h",
+      "path": "catalogue/runtime-proof/received/before-jni-headers/jdk_m3_collections_M3IndexMaskCompactor.h",
       "sha256": "1f67a3bca5682e3d4b392bb04d6f27479a16fdaccb935463a9dbf026f13faf8c",
       "bytes": 2116
     },
     {
-      "path": "catalogue/runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexMaskWindow.h",
+      "path": "catalogue/runtime-proof/received/before-jni-headers/jdk_m3_collections_M3IndexMaskWindow.h",
       "sha256": "26d6f1302b888bbebde68d4d911f7b74d91c1fe5f90871928af0220829dc9866",
       "bytes": 1006
     },
     {
-      "path": "catalogue/runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexPathMasks.h",
+      "path": "catalogue/runtime-proof/received/before-jni-headers/jdk_m3_collections_M3IndexPathMasks.h",
       "sha256": "5781e35d4a9a16a037e1e80a8e45f7ee53283822691ed863a7476e5defa9fe50",
       "bytes": 726
     },

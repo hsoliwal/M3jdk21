@@ -29,23 +29,23 @@ cc -shared -fPIC -Wall -Wextra -Werror -I"$M3_JDK/include" -I"$M3_JDK/include/li
   -cp "$out/classes" StringApiProbe > "$out/jni-enabled.log" 2>&1
 
 # Execute the retained VI oracle on this image, without patching java.base.
-cp "$root/m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/VIProbe.java.txt" \
+cp "$root/m3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/VIProbe.java.txt" \
   "$out/source/VIProbe.java"
 "$M3_JDK/bin/javac" --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
   -d "$out/classes" "$out/source/VIProbe.java"
 for mode in int mixed; do
   "$M3_JDK/bin/java" "-X$mode" --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
-    -cp "$out/classes" com.m3.vi.VIProbe > "$out/vi-$mode.log" 2>&1
+    -cp "$out/classes" jdk.m3.vi.VIProbe > "$out/vi-$mode.log" 2>&1
 done
 
 "$M3_JDK/bin/javac" --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED -d "$out/classes" \
-  "$root/test/jdk/jdk/internal/mindex/cb/com/m3/cb/CBProbe.java" \
-  "$root/test/jdk/jdk/internal/mindex/cb/com/m3/cb/VmFixture.java"
+  "$root/test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/CBProbe.java" \
+  "$root/test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/VmFixture.java"
 "$M3_JDK/bin/java" -Xbatch -XX:TieredStopAtLevel=1 -XX:CompileThreshold=100 -XX:+PrintCompilation \
-  --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED -cp "$out/classes" com.m3.cb.CBProbe \
+  --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED -cp "$out/classes" jdk.m3.cb.CBProbe \
   > "$out/c1.log" 2>&1
 "$M3_JDK/bin/java" -Xbatch -XX:-TieredCompilation -XX:CompileThreshold=100 -XX:+PrintCompilation \
-  --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED -cp "$out/classes" com.m3.cb.CBProbe \
+  --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED -cp "$out/classes" jdk.m3.cb.CBProbe \
   > "$out/c2.log" 2>&1
 cat "$out/jtreg.log" "$out/jni-default.log" "$out/jni-enabled.log" \
   "$out/vi-int.log" "$out/vi-mixed.log"

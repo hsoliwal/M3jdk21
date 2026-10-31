@@ -8,7 +8,7 @@
     "repository": "hsoliwal/com.synexia",
     "commit": "251ae0d8a435a5a91f18187ed30c15aa16a83b83",
     "pullRequest": "https://github.com/hsoliwal/com.synexia/pull/9720",
-    "packet": "synexia-openrewrite-recipes/crates/m3-collection-contracts/second-pass",
+    "packet": "m3-openrewrite-recipes/crates/m3-collection-contracts/second-pass",
     "packetTree": "d8ef74b5c9bdcd14cdd3d6b584b2d5a2bbe37b20",
     "recipeResourceTree": "3895ac86babc9079648f585018db7bb6e8a75e69",
     "publishedFilesVerified": 197,
@@ -19,7 +19,7 @@
     "repository": "hsoliwal/M3jdk21",
     "base": "d769ee9c3bcfd881f514817cb86c0768e62ed970",
     "qualifiedPreimageRevision": "237874c3ab3625a90187bd73b5faa15a258b0474",
-    "recipe": "com.synexia.rewrite.M3LeanSecondPassReceiverRecipe",
+    "recipe": "jdk.internal.m3.rewrite.M3LeanSecondPassReceiverRecipe",
     "recipeSourceGitBlob": "1030882c41acab3f6e189ae2f240db313e4bb7d8",
     "sdkApplication": "EXECUTED",
     "changedPolicyFiles": 1,
@@ -55,9 +55,9 @@
     "generalSpeedupClaim": false,
     "sourceCostResults": "MIXED_WORKLOAD_TIMINGS_NO_GENERAL_SPEEDUP_CLAIM",
     "sourceEvidencePaths": [
-      "synexia-openrewrite-recipes/crates/m3-collection-contracts/second-pass/proof/final",
-      "synexia-openrewrite-recipes/crates/m3-collection-contracts/second-pass/proof/mat-5",
-      "synexia-openrewrite-recipes/crates/m3-collection-contracts/second-pass/proof/cost-final"
+      "m3-openrewrite-recipes/crates/m3-collection-contracts/second-pass/proof/final",
+      "m3-openrewrite-recipes/crates/m3-collection-contracts/second-pass/proof/mat-5",
+      "m3-openrewrite-recipes/crates/m3-collection-contracts/second-pass/proof/cost-final"
     ]
   },
   "catalogue": {
@@ -66,7 +66,7 @@
     "totalKnownJavaOwners": 663,
     "allCollectionsQualified": false,
     "repositoryWideComplete": false,
-    "sourceIndex": "synexia-openrewrite-recipes/crates/m3-collection-contracts/second-pass/inventory/index.json",
+    "sourceIndex": "m3-openrewrite-recipes/crates/m3-collection-contracts/second-pass/inventory/index.json",
     "earlierNamedFamilyPaths": 4770,
     "earlierFamilyRoots": 13,
     "priorLedgerRetained": true
@@ -88,7 +88,7 @@
   },
   "candidates": [
     {
-      "sourceOwner": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveIndexView.java",
+      "sourceOwner": "m3-primitives/src/main/java/jdk/internal/m3/primitives/PrimitiveIndexView.java",
       "sourceGitBlob": "b348ffe2dfda3d51151c771d685f918dc928aad7",
       "targetScope": "m3/collections",
       "targetOwner": null,
@@ -96,7 +96,7 @@
       "reason": "Qualified source permutation view is not proof of a compatible target/JDK collection consumer."
     },
     {
-      "sourceOwner": "synexia-primitives/src/main/java/com/synexia/primitives/BoundedProviderBackedPrimitiveTree.java",
+      "sourceOwner": "m3-primitives/src/main/java/jdk/internal/m3/primitives/BoundedProviderBackedPrimitiveTree.java",
       "sourceGitBlob": "392de503d2560667fcc4ea3fff5ddca81a078a36",
       "targetScope": "m3/collections",
       "targetOwner": null,
@@ -120,9 +120,9 @@
     "outputGitBlob": "f65cc98e9088377755c51a447ce974356b28f15c"
   },
   "policyVerifier": {
-    "path": "m3/compatibility/check_synexia_full_family.py",
+    "path": "m3/compatibility/check_m3_full_family.py",
     "sha256": "be1b983596b6df7043cbd187617c144d52ecb07b2c555364895bdff198fdb170",
     "exitCode": 0,
-    "stdout": "SYNEXIA_FULL_FAMILY_PIN_PASS source=b24262a92b741c78c44ca61afc8dac7ee1376d8a paths=4770 families=33 license=Apache-2.0 active=STRING ordered_phases=5 completion=false\n"
+    "stdout": "M3_FULL_FAMILY_PIN_PASS source=b24262a92b741c78c44ca61afc8dac7ee1376d8a paths=4770 families=33 license=Apache-2.0 active=STRING ordered_phases=5 completion=false\n"
   }
 }

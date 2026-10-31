@@ -75,7 +75,7 @@
         "-cp",
         "S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\equality-review\\classes;S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\entry-getter-review\\classes-v1",
         "SpringMapEqualityProtocol",
-        "com.m3.collections.spring.M3LinkedCaseInsensitiveMap"
+        "jdk.m3.collections.spring.M3LinkedCaseInsensitiveMap"
       ],
       "returncode": 0,
       "stdoutSHA256": "333f97ae11ccafae5556b39ad1d6aadd1351e9b994d24336527185cb23328261",

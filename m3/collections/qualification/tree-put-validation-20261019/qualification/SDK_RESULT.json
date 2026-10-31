@@ -25,7 +25,7 @@
   },
   "inputs": {
     "candidate_opaque_source": {
-      "path": "m3-tree-put-validation-20261019/src/main/java/com/m3/collections/M3TreeMap.java",
+      "path": "m3-tree-put-validation-20261019/src/main/java/jdk/m3/collections/M3TreeMap.java",
       "bytes": 28016,
       "sha256": "9c767668c925581799dc97f20e63fce0be19e8fec4c4ec59b1ce257a6c969f4e",
       "git_blob": "dd0cf2b8125348cd7134eda565ca40aaa990a864"
@@ -100,81 +100,81 @@
         "ordered_path_size_sha256_set": "1c1417e15722441777537ec619eddd52f3b84e0d17ee17248e82e243da679996",
         "classes": [
           {
-            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/com/m3/collections/M3OrderedSlotMap$SetView.class",
+            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/jdk/m3/collections/M3OrderedSlotMap$SetView.class",
             "bytes": 2273,
             "sha256": "c97da3cefb99feac4efb99178228ec5b952c93b29092bc537fc9f714a2ecd6e6",
             "git_blob": "c5eded404213f1c3aaff25c99fb0596fa165e9f4",
-            "relative_path": "com/m3/collections/M3OrderedSlotMap$SetView.class"
+            "relative_path": "jdk/m3/collections/M3OrderedSlotMap$SetView.class"
           },
           {
-            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/com/m3/collections/M3OrderedSlotMap$View.class",
+            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/jdk/m3/collections/M3OrderedSlotMap$View.class",
             "bytes": 4407,
             "sha256": "65308c0a0db095fe7346f7e14c0122c5f96c542799a13731b7294f631628b219",
             "git_blob": "d796ff8f61a160c124e414879755786b21a61b8f",
-            "relative_path": "com/m3/collections/M3OrderedSlotMap$View.class"
+            "relative_path": "jdk/m3/collections/M3OrderedSlotMap$View.class"
           },
           {
-            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/com/m3/collections/M3OrderedSlotMap.class",
+            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/jdk/m3/collections/M3OrderedSlotMap.class",
             "bytes": 2303,
             "sha256": "cdcd57ab2d115fae9ffc07232a1264beaafb55ed2e48b00e8b44b810db3cb5d7",
             "git_blob": "48da4821ec84775529564f27e044e3b62e84ff7e",
-            "relative_path": "com/m3/collections/M3OrderedSlotMap.class"
+            "relative_path": "jdk/m3/collections/M3OrderedSlotMap.class"
           },
           {
-            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/com/m3/collections/M3SlotMap$1.class",
+            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/jdk/m3/collections/M3SlotMap$1.class",
             "bytes": 2193,
             "sha256": "f07f1b51a5f0a161b190870dfc0dff0f40a9ddd91b5cb0da1e3640558ff98601",
             "git_blob": "bed7ec391af7488dcf9078d5243dc362eecd9120",
-            "relative_path": "com/m3/collections/M3SlotMap$1.class"
+            "relative_path": "jdk/m3/collections/M3SlotMap$1.class"
           },
           {
-            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/com/m3/collections/M3SlotMap$2.class",
+            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/jdk/m3/collections/M3SlotMap$2.class",
             "bytes": 1517,
             "sha256": "bf3c0a04e05ce3f50394a501caa20d57ffc9960ffd567ce5fcdabe6e80c46662",
             "git_blob": "1e2cbf7c5fa9179a2d7898ce543987b76b1e3b13",
-            "relative_path": "com/m3/collections/M3SlotMap$2.class"
+            "relative_path": "jdk/m3/collections/M3SlotMap$2.class"
           },
           {
-            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/com/m3/collections/M3SlotMap$3.class",
+            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/jdk/m3/collections/M3SlotMap$3.class",
             "bytes": 1286,
             "sha256": "21dceb1ddea152611469435ef175f67a23c9d52f894e13bf6027ce40f7e402b3",
             "git_blob": "07299cd1c1c183d081647830bbe75297fbd3cc39",
-            "relative_path": "com/m3/collections/M3SlotMap$3.class"
+            "relative_path": "jdk/m3/collections/M3SlotMap$3.class"
           },
           {
-            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/com/m3/collections/M3SlotMap$4.class",
+            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/jdk/m3/collections/M3SlotMap$4.class",
             "bytes": 1970,
             "sha256": "83535ab3c1932e6b2735f064beedbbdf62cdb01602a577cb266e8cd3dcbc4028",
             "git_blob": "b348be6696b421174118d48c6a319889898820ec",
-            "relative_path": "com/m3/collections/M3SlotMap$4.class"
+            "relative_path": "jdk/m3/collections/M3SlotMap$4.class"
           },
           {
-            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/com/m3/collections/M3SlotMap$LiveEntry.class",
+            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/jdk/m3/collections/M3SlotMap$LiveEntry.class",
             "bytes": 3186,
             "sha256": "4676c32d200aef57c4cb679a0adee2a66a9e995cb3b9243642c542e13c804af6",
             "git_blob": "f37665c2a73cb762d7889106142f685143e8a8d1",
-            "relative_path": "com/m3/collections/M3SlotMap$LiveEntry.class"
+            "relative_path": "jdk/m3/collections/M3SlotMap$LiveEntry.class"
           },
           {
-            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/com/m3/collections/M3SlotMap.class",
+            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/jdk/m3/collections/M3SlotMap.class",
             "bytes": 10592,
             "sha256": "de46d59b9221f9208449d9167aafd0d176878d6e4eeed38f51416c5000c5e2f1",
             "git_blob": "af63226bcf02a5b8394de30db5fc41bc319b41be",
-            "relative_path": "com/m3/collections/M3SlotMap.class"
+            "relative_path": "jdk/m3/collections/M3SlotMap.class"
           },
           {
-            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/com/m3/collections/M3TreeMap$Tree.class",
+            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/jdk/m3/collections/M3TreeMap$Tree.class",
             "bytes": 9798,
             "sha256": "9f41f0a4a1167a24a5ecaba61c443d64c9b7ddca50af4aff672f2eee6dc7a998",
             "git_blob": "6832e154d780cf21384f93e2aa7bc25d5f82b59a",
-            "relative_path": "com/m3/collections/M3TreeMap$Tree.class"
+            "relative_path": "jdk/m3/collections/M3TreeMap$Tree.class"
           },
           {
-            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/com/m3/collections/M3TreeMap.class",
+            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/jdk/m3/collections/M3TreeMap.class",
             "bytes": 24100,
             "sha256": "4b2a9850470aff2cba223df4539a4d25b576ddb3711b3ba8db384a2673e8623d",
             "git_blob": "5e4c7b36caa8da5dafe3adf7209ae3d40cb167d4",
-            "relative_path": "com/m3/collections/M3TreeMap.class"
+            "relative_path": "jdk/m3/collections/M3TreeMap.class"
           },
           {
             "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/TreeBulkPublicApi.class",
@@ -338,18 +338,18 @@
     "ordered_path_size_sha256_set": "0d95dea307f913dfb5b4a5fd898d27d496622879dcb1ffc659c81ffee4f80f8f",
     "classes": [
       {
-        "path": "m3-tree-put-validation-20261019/qualification-compile-v1/classes/com/m3/collections/M3TreeMap$Tree.class",
+        "path": "m3-tree-put-validation-20261019/qualification-compile-v1/classes/jdk/m3/collections/M3TreeMap$Tree.class",
         "bytes": 9998,
         "sha256": "f52dc1464275bf4f161dcfb93488fa0eab27b9f8848160d527fc533c763bdc18",
         "git_blob": "46646439657b068c3fd9c7409cc8889f06d56321",
-        "relative_path": "com/m3/collections/M3TreeMap$Tree.class"
+        "relative_path": "jdk/m3/collections/M3TreeMap$Tree.class"
       },
       {
-        "path": "m3-tree-put-validation-20261019/qualification-compile-v1/classes/com/m3/collections/M3TreeMap.class",
+        "path": "m3-tree-put-validation-20261019/qualification-compile-v1/classes/jdk/m3/collections/M3TreeMap.class",
         "bytes": 24176,
         "sha256": "bfb7b1bde155aed7eca0ca8bcb0aaf6f069df0f344134f351bba200d7cff7a67",
         "git_blob": "d7492fc8da743dfa4223100b59541455189089cc",
-        "relative_path": "com/m3/collections/M3TreeMap.class"
+        "relative_path": "jdk/m3/collections/M3TreeMap.class"
       }
     ]
   },
@@ -490,7 +490,7 @@
         "-cp",
         "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-map-entry-protocol-20261018\\qualification-entry-proof-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\m3-tree-put-validation-20261019\\qualification-compile-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\m3-tree-map-entry-protocol-20261018\\qualification-compile-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\current-base-runtime-v5\\core130-classes",
         "TreeMapLookupEntryProof",
-        "com.m3.collections.M3TreeMap"
+        "jdk.m3.collections.M3TreeMap"
       ],
       "returncode": 0,
       "reason": "completed",
@@ -529,7 +529,7 @@
         "-cp",
         "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-map-linear-bulk-load-20261018\\qualification-proof-v2\\classes;S:\\codex-work\\m3-collections-next-20261018\\m3-tree-put-validation-20261019\\qualification-compile-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\m3-tree-map-entry-protocol-20261018\\qualification-compile-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\current-base-runtime-v5\\core130-classes",
         "M3TreeMapSortedBulkProof",
-        "com.m3.collections.M3TreeMap"
+        "jdk.m3.collections.M3TreeMap"
       ],
       "returncode": 0,
       "reason": "completed",
@@ -569,8 +569,8 @@
         "-cp",
         "S:\\codex-work\\m3-collections-next-20261018\\m3-avl-insertion-frontier-20261018\\qualification-property-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\m3-tree-put-validation-20261019\\qualification-compile-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\m3-tree-map-entry-protocol-20261018\\qualification-compile-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\current-base-runtime-v5\\core130-classes",
         "AvlGrowthFrontierProof",
-        "com.m3.collections.M3TreeMap",
-        "com.m3.collections.M3TreeSet"
+        "jdk.m3.collections.M3TreeMap",
+        "jdk.m3.collections.M3TreeSet"
       ],
       "returncode": 0,
       "reason": "completed",

@@ -1,5 +1,5 @@
 {
-  "owner": "com.m3.collections.guava.M3EnumMultiset",
+  "owner": "jdk.m3.collections.guava.M3EnumMultiset",
   "provider_contract": "com.google.common.collect.EnumMultiset (Guava 33.4.8-jre)",
   "inventory_row": "DONE #1499",
   "source_sha256": "fdcf06fa521109e3151d8fac9c16bf18fa4b6ebd7b6c0fc402f5577b799d4cba",

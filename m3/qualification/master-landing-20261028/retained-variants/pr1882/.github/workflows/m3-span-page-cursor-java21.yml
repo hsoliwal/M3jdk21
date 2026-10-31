@@ -8,7 +8,7 @@ on:
       - '.github/workflows/m3-span-page-cursor-java21.yml'
       - 'm3/collections/src/main/native/collections/m3_span_index_jni.c'
       - 'm3/collections/src/test/native/m3_span_page_cursor_contract.c'
-      - 'm3/collections/src/test/java/com/m3/collections/M3SpanIndexSelfTest.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3SpanIndexSelfTest.java'
 
 permissions:
   contents: read
@@ -35,7 +35,7 @@ jobs:
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
           test "$(git hash-object m3/collections/src/main/native/collections/m3_span_index_jni.c)" = 'ebfc70cb030aa62a0197caf6dcb4990a37820e45'
           test "$(git hash-object m3/collections/src/test/native/m3_span_page_cursor_contract.c)" = '3025ce6129fbba4e4b97291cb82cd61e9a655c64'
-          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3SpanIndexSelfTest.java)" = '521a80c189cb12722d2836d7d413a2e398ff72c5'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3SpanIndexSelfTest.java)" = '521a80c189cb12722d2836d7d413a2e398ff72c5'
       - name: Compile and run real production C page helper and oracle under UBSan
         shell: bash
         run: |
@@ -60,9 +60,9 @@ jobs:
           mkdir -p "$RUNNER_TEMP/m3-span/classes"
           javac --release 21 -Xlint:all,-module -Werror \
             -d "$RUNNER_TEMP/m3-span/classes" \
-            m3/collections/src/main/java/com/m3/collections/M3SlotArrays.java \
-            m3/collections/src/main/java/com/m3/collections/M3SpanIndex.java \
-            m3/collections/src/test/java/com/m3/collections/M3SpanIndexSelfTest.java
+            m3/collections/src/main/java/jdk/m3/collections/M3SlotArrays.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3SpanIndex.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3SpanIndexSelfTest.java
       - name: Actual Java/JNI integration and -Xcheck:jni page boundary oracle
         shell: bash
         run: |
@@ -70,7 +70,7 @@ jobs:
           java -Xcheck:jni -Dm3.span.paging.native.required=true \
             -Djava.library.path="$RUNNER_TEMP/m3-span" \
             -cp "$RUNNER_TEMP/m3-span/classes" \
-            com.m3.collections.M3SpanIndexSelfTest | tee "$RUNNER_TEMP/m3-span/jni.txt"
+            jdk.m3.collections.M3SpanIndexSelfTest | tee "$RUNNER_TEMP/m3-span/jni.txt"
           grep -Eq '^M3SpanIndex Java21/JNI oracle: PASS [1-9][0-9]* assertions, JNI=true$' "$RUNNER_TEMP/m3-span/jni.txt"
       - name: Preserve all native and Java oracle receipts
         if: ${{ always() }}

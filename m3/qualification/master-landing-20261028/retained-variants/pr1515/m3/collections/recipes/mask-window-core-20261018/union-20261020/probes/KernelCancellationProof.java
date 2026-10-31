@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package com.synexia.rewrite;
+package jdk.internal.m3.rewrite;
 import java.nio.file.*;
 import java.util.concurrent.CancellationException;
 public final class KernelCancellationProof {

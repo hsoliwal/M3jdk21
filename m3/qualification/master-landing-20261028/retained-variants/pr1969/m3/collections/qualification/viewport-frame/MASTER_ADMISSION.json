@@ -18,7 +18,7 @@
       "operation": "modify"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3MaskViewportNative.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3MaskViewportNative.java",
       "master_blob": "760f572442bbd4145a1e24daadae267bffae56df",
       "received_feature_blob": "9cdfab35cf719ccf26f61ee61e1ae10fa98eb9ad",
       "operation": "modify"

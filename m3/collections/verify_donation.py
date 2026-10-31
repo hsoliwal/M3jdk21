@@ -39,7 +39,7 @@ def unique_json_object(pairs):
     return result
 
 
-def read_donation_packet(path=HERE / 'synexia-donation.json'):
+def read_donation_packet(path=HERE / 'm3-donation.json'):
     """Read all nested objects without silently accepting duplicate JSON keys."""
     return json.loads(path.read_text(), object_pairs_hook=unique_json_object)
 
@@ -50,10 +50,10 @@ def read_donation_packet(path=HERE / 'synexia-donation.json'):
 _REPRESENTATIVE_RECEIPT = HERE / 'recipe/stored-representative-20261017/manifest.tsv'
 _REPRESENTATIVE_SHA256 = 'a62827ffafc18bd6d710d7898741d2114a0068b8ac9ee63aac02e55038e1f293'
 _REPRESENTATIVE_PATHS = (
-    'm3/collections/src/main/java/com/m3/collections/M3FilteredViews.java',
-    'm3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java',
-    'm3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeContract.java',
-    'm3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeTest.java',
+    'm3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java',
+    'm3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java',
+    'm3/collections/src/test/java/jdk/m3/collections/M3StoredRepresentativeContract.java',
+    'm3/collections/src/test/java/jdk/m3/collections/M3StoredRepresentativeTest.java',
 )
 
 
@@ -100,12 +100,12 @@ def include_stored_representative_successor(previous_rows,
 _FILTERED_VIEW_RECEIPT = HERE / 'recipe/filtered-sorted-views-20261017/manifest.tsv'
 _FILTERED_VIEW_SHA256 = '828e24b44e4d0b98c6819bb9dd983d71084ae0661e1d81fe90bd0dd286c50ede'
 _FILTERED_VIEW_PATHS = (
-    'm3/collections/src/main/java/com/m3/collections/M3FilteredViews.java',
-    'm3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java',
-    'm3/collections/src/test/java/com/m3/collections/M3FilteredViewsContract.java',
-    'm3/collections/src/test/java/com/m3/collections/M3FilteredViewsTest.java',
-    'm3/collections/src/test/java/com/m3/collections/M3MutableFilteredViewsContract.java',
-    'm3/collections/src/test/java/com/m3/collections/M3MutableFilteredViewsTest.java',
+    'm3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java',
+    'm3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java',
+    'm3/collections/src/test/java/jdk/m3/collections/M3FilteredViewsContract.java',
+    'm3/collections/src/test/java/jdk/m3/collections/M3FilteredViewsTest.java',
+    'm3/collections/src/test/java/jdk/m3/collections/M3MutableFilteredViewsContract.java',
+    'm3/collections/src/test/java/jdk/m3/collections/M3MutableFilteredViewsTest.java',
 )
 
 
@@ -140,10 +140,10 @@ def include_filtered_view_successor(historical_rows, receipt=_FILTERED_VIEW_RECE
 _PATH_MASK_RECEIPT = HERE / 'recipe/index-path-masks-20261017/manifest.tsv'
 _PATH_MASK_SHA256 = '1cba7c9ed681fbe65653b75949558640ea5aa31a1e3c8f5d83d27f9197518020'
 _PATH_MASK_PATHS = (
-    'm3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java',
+    'm3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java',
     'm3/collections/src/main/native/collections/m3_index_path_masks.c',
-    'm3/collections/src/test/java/com/m3/collections/M3IndexPathMasksSelfTest.java',
-    'm3/collections/src/test/java/com/m3/collections/M3IndexPathMasksTest.java',
+    'm3/collections/src/test/java/jdk/m3/collections/M3IndexPathMasksSelfTest.java',
+    'm3/collections/src/test/java/jdk/m3/collections/M3IndexPathMasksTest.java',
 )
 
 
@@ -373,10 +373,10 @@ def main():
         raise SystemExit('JUnit acceptance requires nonzero tests and no failures/errors/skips: ' + repr(totals))
     for name in ('M3LazyTreeMapSelfTest', 'M3LazyValueStateSelfTest'):
         run('04-' + name, [java_home / 'bin/java', '-ea', '-cp', runtime_classpath,
-                           'com.m3.collections.' + name])
+                           'jdk.m3.collections.' + name])
     resources = target / 'module-resources/META-INF'
     resources.mkdir(parents=True)
-    names = ('LICENSE', 'NOTICE', 'provenance.json', 'synexia-donation.json', 'SYNEXIA-DONATION-NOTICE.txt', 'name-mapping.json')
+    names = ('LICENSE', 'NOTICE', 'provenance.json', 'm3-donation.json', 'M3-DONATION-NOTICE.txt', 'name-mapping.json')
     for name in names:
         shutil.copyfile(HERE / name, resources / name)
     jar = target / 'm3-collections.jar'
@@ -403,7 +403,7 @@ def main():
                                   'PreparedLaneAllocationProbe'])
     if args.cost_probe:
         cost = run('11-collection-cost-probe', [java_home / 'bin/java', '-Xbatch', '-cp', runtime_classpath,
-                                               'com.m3.collections.M3CollectionCostProbe'])
+                                               'jdk.m3.collections.M3CollectionCostProbe'])
         (evidence / 'collection-cost.csv').write_text(cost)
     receipt = {'copyright': 'Copyright 2026 Hitesh Soliwal and contributors', 'license': 'Apache-2.0', 'schema': 'M3_COLLECTION_RECEIVING_QUALIFICATION_V1',
                'scope': 'SEPARATELY_BUILT_COLLECTION_MODULE',

@@ -23,13 +23,13 @@
     <resources><resource>
       <directory>${repo.root}/m3/tooling/migration-recipes/src/main/resources</directory>
       <includes>
-        <include>com/synexia/rewrite/hash-pinned-java/m3-indexed-live-views-20261021/**</include>
+        <include>jdk/internal/m3/rewrite/hash-pinned-java/m3-indexed-live-views-20261021/**</include>
         <include>META-INF/rewrite/m3-indexed-live-views-20261021.yml</include>
       </includes>
     </resource></resources>
     <plugins>
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>
-        <configuration><includes><include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include></includes></configuration>
+        <configuration><includes><include>jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include></includes></configuration>
       </plugin>
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version>
         <configuration><useModulePath>false</useModulePath><systemPropertyVariables>

@@ -16,10 +16,10 @@ from pathlib import Path
 import re
 
 HERE = Path(__file__).resolve().parent
-TEST_PATH = "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JccMergeMappingRecoveryTest.java"
+TEST_PATH = "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccMergeMappingRecoveryTest.java"
 POM_PATH = "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification/pom.xml"
 YAML_PATH = "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-merge-mapping-recovery.yml"
-SUMMARY_PATH = ("m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/"
+SUMMARY_PATH = ("m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/"
                 "jcc-merge-recovery-20261006-mapping/publication-input-summary.json")
 BEFORE_PINS = (
     "9fce21acb83574c795ca674b263a324315be01e8c87ba149ae6ae3ac79d39c45",
@@ -117,7 +117,7 @@ def main():
     history = json.loads((audit / "candidate/HISTORY_RESOURCES.json").read_bytes())
     guard_plan = json.loads((audit / "candidate/overlay" / history["crates"][0]["plan_path"]).read_bytes())
     expected_plan = {"schema": "m3.sealed-install/1",
-                     "recipe_id": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/" + binder.CRATE,
+                     "recipe_id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/" + binder.CRATE,
                      "version": 1, "source_commit": packet["commit"], "destination_base": binder.DESTINATION,
                      "scope": "Exact current20-owner mapping metadata; source and destination acceptance remain blocked",
                      "outputs": sorted(expected_plan_rows, key=lambda row: row["path"]), "guards": guard_plan["guards"]}

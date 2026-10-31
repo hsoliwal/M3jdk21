@@ -6,8 +6,8 @@
         "actual_sha256": "30b9aee3598aa556a9de57e612a1b3e3b045586b6d7382d53dc92798177338fb",
         "declared_git_blob_sha1": null,
         "expected_sha256": "245e252da59d310ea7e4229e5cafa5d25e322fee82d349337b37eab8a1f161a1",
-        "path": "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
-        "record": "synexia.counterpart.MIndexRegexTrigramQuery",
+        "path": "m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
+        "record": "m3.counterpart.MIndexRegexTrigramQuery",
         "role": "recipe",
         "sha256_matches_declared": false,
         "status": "implemented-unverified"
@@ -18,7 +18,7 @@
         "declared_git_blob_sha1": "565173748382cb3c49c35649785c41b46288a251",
         "expected_sha256": "6ba1883a307c0c8c4b6254c1a531e98b805c00a6cb943135a6cc13b47522b187",
         "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
-        "record": "synexia.counterpart.MIndexRegexTrigramQuery",
+        "record": "m3.counterpart.MIndexRegexTrigramQuery",
         "role": "target",
         "sha256_matches_declared": false,
         "status": "implemented-unverified"
@@ -32,8 +32,8 @@
   },
   "canonical_validation": {
     "diagnostics": [
-      "synexia.counterpart.MIndexRegexTrigramQuery: target hash drift: src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
-      "synexia.counterpart.MIndexRegexTrigramQuery: recipe hash drift"
+      "m3.counterpart.MIndexRegexTrigramQuery: target hash drift: src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
+      "m3.counterpart.MIndexRegexTrigramQuery: recipe hash drift"
     ],
     "exit_code": 1,
     "fixture_unchanged": true,
@@ -335,7 +335,7 @@
     },
     {
       "bytes": 5081,
-      "path": "fixture/m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java",
+      "path": "fixture/m3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java",
       "sha256": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a"
     },
     {
@@ -350,27 +350,27 @@
     },
     {
       "bytes": 2634,
-      "path": "fixture/m3/core/src/com/m3/text/JoinedM3StringPiece.java",
+      "path": "fixture/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
       "sha256": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb"
     },
     {
       "bytes": 1975,
-      "path": "fixture/m3/core/src/com/m3/text/LocalM3Arena.java",
+      "path": "fixture/m3/core/src/jdk/m3/text/LocalM3Arena.java",
       "sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d"
     },
     {
       "bytes": 2115,
-      "path": "fixture/m3/core/src/com/m3/text/LocalM3StringPiece.java",
+      "path": "fixture/m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
       "sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51"
     },
     {
       "bytes": 767,
-      "path": "fixture/m3/core/src/com/m3/text/M3StringPiece.java",
+      "path": "fixture/m3/core/src/jdk/m3/text/M3StringPiece.java",
       "sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479"
     },
     {
       "bytes": 494,
-      "path": "fixture/m3/core/src/com/m3/text/StorageIdentity.java",
+      "path": "fixture/m3/core/src/jdk/m3/text/StorageIdentity.java",
       "sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417"
     },
     {
@@ -435,7 +435,7 @@
     },
     {
       "bytes": 15906,
-      "path": "fixture/m3/migration/src/com/m3/migration/ExactFileRecipe.java",
+      "path": "fixture/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java",
       "sha256": "5baee59ad560a2ee2134ac0f0ad8b64914a31099f0b57f0b06d901dc96347d90"
     },
     {
@@ -445,27 +445,27 @@
     },
     {
       "bytes": 2451,
-      "path": "fixture/m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "path": "fixture/m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
       "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3"
     },
     {
       "bytes": 1242,
-      "path": "fixture/m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+      "path": "fixture/m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
       "sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883"
     },
     {
       "bytes": 396,
-      "path": "fixture/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+      "path": "fixture/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
       "sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1"
     },
     {
       "bytes": 303,
-      "path": "fixture/m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
+      "path": "fixture/m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
       "sha256": "30b9aee3598aa556a9de57e612a1b3e3b045586b6d7382d53dc92798177338fb"
     },
     {
       "bytes": 453,
-      "path": "fixture/m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
+      "path": "fixture/m3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
       "sha256": "c47151b5df79d6d2711e6de748bff3fb08e2c01af5e9c6ac0b4b3b91ac97425c"
     },
     {

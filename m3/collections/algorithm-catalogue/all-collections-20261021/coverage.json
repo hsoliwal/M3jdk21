@@ -17,7 +17,7 @@
   "java_source_bytes": 1856801,
   "java_source_files": 270,
   "latest_source_refresh": {
-    "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredDeques.java",
+    "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredDeques.java",
     "ref": "6ac3d5834844d444979ab1f7b8c85e68982759b7",
     "sha256": "b6aec5a921f9eaba6feb14461bf6dca7e67cee26bb84fee3ee3143f873df5121"
   },

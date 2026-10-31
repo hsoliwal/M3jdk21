@@ -1,19 +1,19 @@
 {
   "schema": "M3JDK21_TREE_RESIDENCY_BINDING_RECEIVING_V1",
-  "canonical_synexia_pr": "https://github.com/hsoliwal/com.synexia/pull/13707",
-  "canonical_synexia_commit": "ba6bd8738aa8b411718e6afbfa5de53520924049",
+  "canonical_m3_pr": "https://github.com/hsoliwal/com.synexia/pull/13707",
+  "canonical_m3_commit": "ba6bd8738aa8b411718e6afbfa5de53520924049",
   "canonical_recipe_stages": [
-    "com.synexia.m3.ViewportPlanIdentity20261027",
-    "com.synexia.m3.ViewportPlanCompose20261027"
+    "jdk.internal.m3.ViewportPlanIdentity20261027",
+    "jdk.internal.m3.ViewportPlanCompose20261027"
   ],
   "product_pr": "https://github.com/hsoliwal/M3jdk21/pull/2013",
   "original_product_master": "92962fbba10cbf13799253a307dc90f4de94b179",
-  "source_path": "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java",
+  "source_path": "m3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java",
   "source_pre_git_blob": "fd425edf2bb7446a0e4446b272a616015b200361",
   "source_post_git_blob": "2e7a634931a0f57e6fe4cef45c39db6fbe6c4487",
   "source_pre_sha256": "ce27f58fa068a61feb6e74d6067a5751241f41688b63e87085ecae34a1eeba6d",
   "source_post_sha256": "5b05afa28e4a8ed2d6090b1ac8ff5f1c89a334bb3b93c94ae8038669e72c5fbb",
-  "test_new_path": "m3/collections/src/test/java/com/m3/collections/M3TreePlanBindingTest.java",
+  "test_new_path": "m3/collections/src/test/java/jdk/m3/collections/M3TreePlanBindingTest.java",
   "test_git_blob": "391ede060e2276c8cc2bd2b55b063f3cbf44b137",
   "test_sha256": "77ecebc9d7109ca788282af18d416fcf84e1f5081674dd55da7a647f6f101495",
   "maven_openrewrite": {

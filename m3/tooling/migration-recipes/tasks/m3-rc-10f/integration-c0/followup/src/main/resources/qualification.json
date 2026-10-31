@@ -16,9 +16,9 @@
     {
       "crate": "fc0-cwf",
       "id": "Cwf",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/fc0-cwf/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/fc0-cwf/manifest.tsv",
       "manifestSHA256": "cea64f87482a492daeea04f17edf41093c94a427506dab39049a360eec411979",
-      "namedRecipe": "com.synexia.m3.Fc0Cwf",
+      "namedRecipe": "jdk.internal.m3.Fc0Cwf",
       "targets": [
         {
           "afterBytes": 5526,
@@ -75,9 +75,9 @@
     {
       "crate": "fc0-tqc",
       "id": "Tqc",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/fc0-tqc/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/fc0-tqc/manifest.tsv",
       "manifestSHA256": "78dcf91b92f44e0851fc4d11217b99ad30d697ec9ab4cc688b7a5a1e899afe1b",
-      "namedRecipe": "com.synexia.m3.Fc0Tqc",
+      "namedRecipe": "jdk.internal.m3.Fc0Tqc",
       "targets": [
         {
           "afterBytes": 5101,
@@ -110,9 +110,9 @@
     {
       "crate": "fc0-pdc",
       "id": "Pdc",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/fc0-pdc/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/fc0-pdc/manifest.tsv",
       "manifestSHA256": "fa7fd3b28b9a5cd05aab4052c84f85e29370909a6f3ece9a66f4ad8de2fa3a0f",
-      "namedRecipe": "com.synexia.m3.Fc0Pdc",
+      "namedRecipe": "jdk.internal.m3.Fc0Pdc",
       "targets": [
         {
           "afterBytes": 235261,
@@ -120,7 +120,7 @@
           "beforeBytes": 235235,
           "beforeSHA256": "8cbd439235c592ecc98eb2a26f8494108c18a6521e715431ca1bec6db1e0b170",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/10-Pattern.java.txt"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/10-Pattern.java.txt"
         },
         {
           "afterBytes": 3300,
@@ -128,7 +128,7 @@
           "beforeBytes": 3300,
           "beforeSHA256": "0285ce4946d66bea00e0b5d4bd52e863e5d60f84bb71171a26bdbd4c61da0bd9",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv"
         },
         {
           "afterBytes": 18329,
@@ -136,7 +136,7 @@
           "beforeBytes": 18329,
           "beforeSHA256": "dde797e49266f4d89ec271cb705f238a72d26e95e5e5865c6b608d924fde9d0d",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/atom/spectrum/CORPUS.tsv"
+          "path": "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/atom/spectrum/CORPUS.tsv"
         },
         {
           "afterBytes": 235261,
@@ -153,9 +153,9 @@
     {
       "crate": "fc0-clr",
       "id": "Clr",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/fc0-clr/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/fc0-clr/manifest.tsv",
       "manifestSHA256": "4c6996b6d5f06fb13742cd1ab6d44113bb936d9a7f624b18edd6aad6377d2809",
-      "namedRecipe": "com.synexia.m3.Fc0Clr",
+      "namedRecipe": "jdk.internal.m3.Fc0Clr",
       "targets": [
         {
           "afterBytes": 8717,
@@ -163,7 +163,7 @@
           "beforeBytes": 8906,
           "beforeSHA256": "5ee44459bd8725b89e92ad8cd0c7572954f7655331d8b7f7dc92a8b59b09cb6e",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/03-M3RecipeScopeDeclarationTest.java.txt"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/03-M3RecipeScopeDeclarationTest.java.txt"
         },
         {
           "afterBytes": 934,
@@ -171,7 +171,7 @@
           "beforeBytes": 934,
           "beforeSHA256": "0f79229a093fc3a53158401bb29a627e71f2774292b4d727e6c0911b9f2a47c9",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/manifest.tsv"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/manifest.tsv"
         }
       ],
       "yamlPath": "META-INF/rewrite/fc0-clr.yml",
@@ -187,7 +187,7 @@
         "Clr"
       ],
       "id": "Forward",
-      "recipe": "com.synexia.m3.Fc0Forward"
+      "recipe": "jdk.internal.m3.Fc0Forward"
     },
     {
       "families": [
@@ -197,11 +197,11 @@
         "Cwf"
       ],
       "id": "Reverse",
-      "recipe": "com.synexia.m3.Fc0Reverse"
+      "recipe": "jdk.internal.m3.Fc0Reverse"
     }
   ],
   "ownerSHA256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
-  "schema": "synexia.fc0.qualification/1",
+  "schema": "m3.fc0.qualification/1",
   "sourceCommit": "d1ecbd43dbadaf218deec0d98a2ddc23f3a3f45c",
   "targetCommit": "c0a14387009aefc7d62bd3268055d526e04f9074",
   "targetTree": "491bbd80a51483d0710fc12c1bad3a037b385ba0"

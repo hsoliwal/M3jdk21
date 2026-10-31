@@ -86,7 +86,7 @@ def main() -> None:
     recipe = ROOT / DATA
     aggregate_rows = []
     for kind in ("java", "text"):
-        group = recipe / "resources/com/synexia/rewrite" / ("hash-pinned-" + kind)
+        group = recipe / "resources/jdk/internal/m3/rewrite" / ("hash-pinned-" + kind)
         aggregate_rows += manifest(group / CRATE / "manifest.tsv")
     if len(aggregate_rows) != len(SOURCE) or any(len(r) != 4 for r in aggregate_rows):
         raise ValueError("exact forward-recipe aggregate manifest mismatch")
@@ -99,7 +99,7 @@ def main() -> None:
             raise ValueError("wrong original compiler source generation: " + path)
         if blob(head, path) != ("100644", new):
             raise ValueError("unapproved AST source replacement: " + path)
-        lane = recipe / "resources/com/synexia/rewrite" / ("hash-pinned-" + kind)
+        lane = recipe / "resources/jdk/internal/m3/rewrite" / ("hash-pinned-" + kind)
         aggregate = lane / CRATE
         stage_path = lane / stage
         row = actual_by_path[path]

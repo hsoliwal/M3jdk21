@@ -5,7 +5,7 @@
   "integration": "DIRECT_EXISTING_JDK_PACKAGES_NO_COMPANION_SDK",
   "target_license": "GPL-2.0-only WITH Classpath-exception-2.0",
   "first_party_attribution": "Copyright 2026 Hitesh Soliwal and contributors",
-  "recipe_policy": "CANONICAL_SYNEXIA_MAVEN_OPENREWRITE_EXACT_PREIMAGE_POSTIMAGE_FIXED_POINT_DRIFT_REFUSAL",
+  "recipe_policy": "CANONICAL_M3_MAVEN_OPENREWRITE_EXACT_PREIMAGE_POSTIMAGE_FIXED_POINT_DRIFT_REFUSAL",
   "third_party_source_copy": false,
   "sources": [
     {

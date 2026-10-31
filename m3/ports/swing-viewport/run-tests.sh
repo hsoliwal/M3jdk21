@@ -35,6 +35,6 @@ case "${1:-test}" in
   scale)
     shift
     "$jdk/bin/java" -Xmx${M3_SCALE_XMX:-256m} -XX:+UseSerialGC -Djava.awt.headless=true \
-      -cp "$(win "$out/main")$sep$(win "$out/test")" com.m3.swing.viewport.scale.M3SwingScale "$@" ;;
+      -cp "$(win "$out/main")$sep$(win "$out/test")" jdk.m3.swing.viewport.scale.M3SwingScale "$@" ;;
   *) echo "usage: $0 compile|test|scale" >&2; exit 2 ;;
 esac

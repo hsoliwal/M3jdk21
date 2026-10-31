@@ -5,7 +5,7 @@
     "--module-path",
     "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-capture/consumer-classes",
     "--module",
-    "m3fs.vfs.consumer/com.m3.fs.verification.M3VfsImageProbe",
+    "m3fs.vfs.consumer/jdk.m3.fs.verification.M3VfsImageProbe",
     "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-native-capture-receipts/vfs-fixtures"
   ],
   "exit_code": 0,
@@ -25,8 +25,8 @@
     "SOURCE_BUILT_M3JDK21": "NOT_RUN"
   },
   "named_consumer_class_sha256": {
-    "com/m3/fs/verification/M3VfsImageProbe$1.class": "91acc59b49fa7edeac952a90a2c55cfa2b494060e7cf3054a7882de23e20a267",
-    "com/m3/fs/verification/M3VfsImageProbe.class": "3608b5bbe107660f4291ceb9fa75c41e37382cee97f8383ce50886b1acf0fa3a",
+    "jdk/m3/fs/verification/M3VfsImageProbe$1.class": "91acc59b49fa7edeac952a90a2c55cfa2b494060e7cf3054a7882de23e20a267",
+    "jdk/m3/fs/verification/M3VfsImageProbe.class": "3608b5bbe107660f4291ceb9fa75c41e37382cee97f8383ce50886b1acf0fa3a",
     "module-info.class": "3e91e6acf5b5d4e7e07a414c1b6fbd4635ff2cb48f3ce4a285dbec8b3ad57183"
   },
   "native_probe": "PASS",

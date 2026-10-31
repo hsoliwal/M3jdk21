@@ -19,7 +19,7 @@ import sys
 import traceback
 
 CRATE = "jcc-merge-recovery-20261006-mapping-v04"
-RESOURCE = "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/" + CRATE
+RESOURCE = "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/" + CRATE
 TASK = "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006"
 INSTALLER = "m3/migration/recipe.py"
 INSTALLER_SHA256 = "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"

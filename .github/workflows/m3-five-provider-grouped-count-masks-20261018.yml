@@ -5,8 +5,8 @@ on:
       - 'm3/five-provider-grouped-count-masks-receiver-20261018'
   pull_request:
     paths:
-      - 'm3/collections/interop/src/main/java/com/m3/collections/interop/M3FiveProviderKeyGroups.java'
-      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderKeyGroupClosureTest.java'
+      - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3FiveProviderKeyGroups.java'
+      - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveProviderKeyGroupClosureTest.java'
       - 'm3/collections/interop/qualification/five-provider-grouped-count-masks-20261018/**'
       - '.github/workflows/m3-five-provider-grouped-count-masks-20261018.yml'
 permissions:
@@ -31,8 +31,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          echo '49767629cccbc847c4a66252f86ce18ce57be8aa49a685350624e570a126597f  m3/collections/interop/src/main/java/com/m3/collections/interop/M3FiveProviderKeyGroups.java' | sha256sum -c -
-          echo '97debdc8af2e48e695191daa9a5ad872b9d16131556b9372441ad75c3185a30a  m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderKeyGroupClosureTest.java' | sha256sum -c -
+          echo '49767629cccbc847c4a66252f86ce18ce57be8aa49a685350624e570a126597f  m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3FiveProviderKeyGroups.java' | sha256sum -c -
+          echo '97debdc8af2e48e695191daa9a5ad872b9d16131556b9372441ad75c3185a30a  m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveProviderKeyGroupClosureTest.java' | sha256sum -c -
       - name: Strict Java21 compile ACTUAL M3 core and verify java.base boundary
         shell: bash
         run: |
@@ -52,12 +52,12 @@ jobs:
           mkdir -p "$RUNNER_TEMP/core-tests"
           javac --release 21 -proc:none -Xlint:all,-module -Werror \
             -cp "$RUNNER_TEMP/m3-classes" -d "$RUNNER_TEMP/core-tests" \
-            m3/collections/src/test/java/com/m3/collections/M3CollectionSdkSortedFactorySelfTest.java \
-            m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksSelfTest.java
+            m3/collections/src/test/java/jdk/m3/collections/M3CollectionSdkSortedFactorySelfTest.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3IndexPathMasksSelfTest.java
           java -ea -cp "$RUNNER_TEMP/m3-classes:$RUNNER_TEMP/core-tests" \
-            com.m3.collections.M3CollectionSdkSortedFactorySelfTest
+            jdk.m3.collections.M3CollectionSdkSortedFactorySelfTest
           java -ea -cp "$RUNNER_TEMP/m3-classes:$RUNNER_TEMP/core-tests" \
-            com.m3.collections.M3IndexPathMasksSelfTest
+            jdk.m3.collections.M3IndexPathMasksSelfTest
       - name: Install real source-built M3 core for optional provider Maven artifact
         shell: bash
         run: |
@@ -92,7 +92,7 @@ jobs:
           set -euo pipefail
           java -ea -Xcheck:jni -Djava.library.path="$RUNNER_TEMP" \
             -cp "$RUNNER_TEMP/m3-classes:$RUNNER_TEMP/core-tests" \
-            com.m3.collections.M3IndexPathMasksSelfTest --native
+            jdk.m3.collections.M3IndexPathMasksSelfTest --native
           mvn -B -ntp -f m3/collections/interop/pom.xml \
             -Dtest=M3FiveProviderKeyGroupClosureTest,M3FiveProviderKeyGroupsTest \
             -DargLine="-ea -Xcheck:jni -Djava.library.path=$RUNNER_TEMP" test

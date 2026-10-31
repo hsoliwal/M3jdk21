@@ -52,7 +52,7 @@
     "module_info_class_generated": true,
     "runtime": "Oracle Java21.0.9+7-LTS-338",
     "runtime_exit": 0,
-    "runtime_mode": "java -Xmx256m -cp classes com.m3.collections.M3PrimitiveFilteredSequencesRuntimeContract",
+    "runtime_mode": "java -Xmx256m -cp classes jdk.m3.collections.M3PrimitiveFilteredSequencesRuntimeContract",
     "source_bodies_rechecked_after_execution": true,
     "sourcepath": "Existing readonly main Java root plus unchanged test Java root; Windows separator semicolon.",
     "stdout": "PASS checks=164104\r\n",
@@ -85,61 +85,61 @@
     {
       "bytes": 10619,
       "git_blob": "b9ce33761b5cb764e018cc4051c8d44dd28072d2",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3PrimitiveFilteredSequencesRuntimeContract.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3PrimitiveFilteredSequencesRuntimeContract.java",
       "sha256": "cd8cee77835a5e3c8359d2b4996c5af0c2f89e05e0e276ce1f5cf21781674132"
     },
     {
       "bytes": 17293,
       "git_blob": "8d3e2ed80e74d10b039b7b704bcc24a40dd48d82",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3PrimitiveFilteredSequences.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3PrimitiveFilteredSequences.java",
       "sha256": "b9411d0e1f1efc9130adabf89a76ba161cf717b0ca4021390d8fc862d3aefa04"
     },
     {
       "bytes": 11793,
       "git_blob": "543e4d99ba6cc07a949141640588fd6437203635",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongArrayList.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongArrayList.java",
       "sha256": "968773eb7e044332b9c1a44040b49e3aa253e0f1464d8d9e38513e2ebcc8f6dd"
     },
     {
       "bytes": 10605,
       "git_blob": "cfe73fe987ec59d906807f8a7580bba8d371a946",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongArrayDeque.java",
       "sha256": "cc87514c9499477dd435e512881ecb045356b99f65d212866ee2d32fb3795a84"
     },
     {
       "bytes": 1992,
       "git_blob": "df2d2741b67987d93deefcd75f139d5648eb4dc2",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongList.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongList.java",
       "sha256": "7da7f46ea6bfb6dee64fe8a4eaeb914b07e537d10c3cb08ed20f440b1cfcd2dd"
     },
     {
       "bytes": 1896,
       "git_blob": "7fb1dc4bcd5275c703a19f36062ae5c66b3d2f43",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongDeque.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongDeque.java",
       "sha256": "ffe2c4c488bef6dba327b5dcfb6ac7c2f82deddca454a52b45a1181041fe4272"
     },
     {
       "bytes": 2189,
       "git_blob": "8fcb61bd6a8a5077008ac0102f44f28035096bec",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongQueue.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongQueue.java",
       "sha256": "50bc94d1dfb4950b0156c307bc4db192979b7b82c5eb4666eb05b3e5462754f8"
     },
     {
       "bytes": 318,
       "git_blob": "94ff060e1294197863e3676632e9809cfc6d8593",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongStack.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongStack.java",
       "sha256": "812c2df2bc73f04e6ab7551c48cea59bc8b5c877bd347266c287764db88e4c36"
     },
     {
       "bytes": 554,
       "git_blob": "44778a63d99c5b1f99adee536b954a4ebb8c64f3",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIterator.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIterator.java",
       "sha256": "9d10e476f5d1664a1028fe52406ab05421758961c6d3d5cf163241e058a3f201"
     },
     {
       "bytes": 2310,
       "git_blob": "d0b389681ade738e97426d950b6291c746912cf0",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongCollection.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongCollection.java",
       "sha256": "ea0c1aa0957f7bafd5cf2892cbe483c98d5772192f81cc3c467d53ab5c1c7531"
     }
   ],

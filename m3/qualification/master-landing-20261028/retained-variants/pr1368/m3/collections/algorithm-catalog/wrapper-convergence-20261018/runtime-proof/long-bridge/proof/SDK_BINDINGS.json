@@ -1,10 +1,10 @@
 {
   "dataset": "m3jdk21-long-bridge-20261018",
-  "canonical_recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+  "canonical_recipe": "jdk.internal.m3.m3jdk.CollectionsContractRefinement20261017",
   "status": "PASSED_ACTUAL_SDK_5_SEALING_8_ISOLATED_RECEIVER_9",
   "target_count": 1,
   "actual_output_sha256": "77a99d047931c70c7a45a067c081748bae499b7f3002bfc08f7b2f47a01adf84",
-  "actual_output": "target/m3jdk21-long-bridge-20261018/candidate/m3/collections/src/main/java/com/m3/collections/M3LongIndexPathMasks.java",
+  "actual_output": "target/m3jdk21-long-bridge-20261018/candidate/m3/collections/src/main/java/jdk/m3/collections/M3LongIndexPathMasks.java",
   "engine_changes_from_origin": [],
   "retained_receipts": [
     {
@@ -23,7 +23,7 @@
       "sha256": "9490590f42d2e8b3fa4954bdca307bfda90376633ba93b1abaffc5ec83f16504"
     },
     {
-      "origin": "target/m3jdk21-long-bridge-20261018/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml",
+      "origin": "target/m3jdk21-long-bridge-20261018/surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml",
       "retained": "proof/SDK_TEST_REPORT.xml",
       "sha256": "dc908f2b40609672873ae8a2a756400aa3e08a4c3be13969c749d77f5fdf4e0b"
     }

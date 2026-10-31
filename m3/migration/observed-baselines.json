@@ -70,87 +70,87 @@
     }
   ],
   "module_roots": {
-    "synexia-indexstring": {
+    "m3-indexstring": {
       "git_tree_sha": "5c4bf95da683a752ddcddf79bfd063d894639c58",
       "disposition": "pending full path/symbol/resource inventory and dependency closure"
     },
-    "synexia-indexstring-compiler": {
+    "m3-indexstring-compiler": {
       "git_tree_sha": "114c1c04700e9e76d9514690222d313dcdea1fd5",
       "disposition": "pending full path/symbol/resource inventory and dependency closure"
     },
-    "synexia-indexstring-jini": {
+    "m3-indexstring-jini": {
       "git_tree_sha": "8010015d18a583757a277819fe1006da477273e0",
       "disposition": "pending full path/symbol/resource inventory and dependency closure"
     },
-    "synexia-indexstring-maven-plugin": {
+    "m3-indexstring-maven-plugin": {
       "git_tree_sha": "4138ef8507bf46aa61de484306be2f970da74cc7",
       "disposition": "pending full path/symbol/resource inventory and dependency closure"
     },
-    "synexia-indexstring-tornadovm": {
+    "m3-indexstring-tornadovm": {
       "git_tree_sha": "25f03d1f848dd7ed20b4f21d1227bb5bce512912",
       "disposition": "pending full path/symbol/resource inventory and dependency closure"
     },
-    "synexia-index-precompute": {
+    "m3-index-precompute": {
       "git_tree_sha": "c0af168d3c32235e86c642f512895c995abcecfe",
       "disposition": "pending full path/symbol/resource inventory and dependency closure"
     },
-    "synexia-index-precompute-adapters": {
+    "m3-index-precompute-adapters": {
       "git_tree_sha": "616067667b65f3f13ca8f4dd90e5db82d9bfcf3d",
       "disposition": "pending full path/symbol/resource inventory and dependency closure"
     },
-    "synexia-mindex": {
+    "m3-mindex": {
       "git_tree_sha": "3269b67624dfecfcfc858c746d20d32bb72ab3f2",
       "disposition": "pending full path/symbol/resource inventory and dependency closure"
     },
-    "synexia-mindex-indexstring-bridge": {
+    "m3-mindex-indexstring-bridge": {
       "git_tree_sha": "f22e2048bb9b709b2462aa874784c7bd7807a5d7",
       "disposition": "pending full path/symbol/resource inventory and dependency closure"
     },
-    "synexia-mat-collections": {
+    "m3-mat-collections": {
       "git_tree_sha": "803edb3d6527e110f036efa53a8c12d820547fd4",
       "disposition": "pending full path/symbol/resource inventory and dependency closure"
     },
-    "synexia-mat-index-string": {
+    "m3-mat-index-string": {
       "git_tree_sha": "993fa6caae8aa436ce800ee4571c79ae3bc240b6",
       "disposition": "pending full path/symbol/resource inventory and dependency closure"
     },
-    "synexia-mat-value": {
+    "m3-mat-value": {
       "git_tree_sha": "f40f817770495f97142c57d5a09334a8fbcca588",
       "disposition": "pending full path/symbol/resource inventory and dependency closure"
     },
-    "synexia-openrewrite-recipes": {
+    "m3-openrewrite-recipes": {
       "git_tree_sha": "112f35d11ef07bf03035dd28322577fc8487d9b8",
       "disposition": "pending full path/symbol/resource inventory and dependency closure"
     },
-    "synexia-runtime": {
+    "m3-runtime": {
       "git_tree_sha": "74d65667b795e014c1ab7902d237917bf566cdbe",
       "disposition": "pending full path/symbol/resource inventory and dependency closure"
     },
-    "synexia-primitives": {
+    "m3-primitives": {
       "git_tree_sha": "f4d76133585b8fb178f02519499810fd04699661",
       "disposition": "pending full path/symbol/resource inventory and dependency closure"
     },
-    "synexia-native-interop": {
+    "m3-native-interop": {
       "git_tree_sha": "8cfd59dd512eecfcfe2ab916de40c7b3edabb79d",
       "disposition": "pending full path/symbol/resource inventory and dependency closure"
     },
-    "synexia-interned-language": {
+    "m3-interned-language": {
       "git_tree_sha": "dfb18ebcc07352acc9a18e96497abb7a19b62bd9",
       "disposition": "pending full path/symbol/resource inventory and dependency closure"
     },
-    "synexia-dictlang": {
+    "m3-dictlang": {
       "git_tree_sha": "ab1a651e0d0bb205152bd58a29e73175f5113a94",
       "disposition": "pending full path/symbol/resource inventory and dependency closure"
     },
-    "synexia-algo": {
+    "m3-algo": {
       "git_tree_sha": "5389fd2b60a9c93d2ee456fdbb6816543f0a8448",
       "disposition": "pending full path/symbol/resource inventory and dependency closure"
     },
-    "synexia-algorithm-runtime": {
+    "m3-algorithm-runtime": {
       "git_tree_sha": "7ce44e638de8848cdfe370bf63c8682808e953d9",
       "disposition": "pending full path/symbol/resource inventory and dependency closure"
     },
-    "synexia-common-cache": {
+    "m3-common-cache": {
       "git_tree_sha": "1309dae05f0ec1a18f75ddf3eb9c5e2624ce1413",
       "disposition": "pending full path/symbol/resource inventory and dependency closure"
     },

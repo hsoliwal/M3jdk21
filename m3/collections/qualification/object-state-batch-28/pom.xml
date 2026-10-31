@@ -10,7 +10,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>21</maven.compiler.release>
     <m3.engine.sources>${project.basedir}/../../../../m3/tooling/migration-recipes/src/main/java</m3.engine.sources>
-    <m3.receiver.source>${project.basedir}/../../../../m3/collections/src/main/java/com/m3/collections</m3.receiver.source>
+    <m3.receiver.source>${project.basedir}/../../../../m3/collections/src/main/java/jdk/m3/collections</m3.receiver.source>
   </properties>
   <dependencies>
     <dependency>
@@ -59,10 +59,10 @@
           <release>21</release>
           <proc>none</proc>
           <includes>
-            <include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
+            <include>jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
           </includes>
           <testIncludes>
-            <testInclude>com/synexia/rewrite/M3ObjectStateBatchRecipeTest.java</testInclude>
+            <testInclude>jdk/internal/m3/rewrite/M3ObjectStateBatchRecipeTest.java</testInclude>
           </testIncludes>
           <compilerArgs>
             <arg>-Xlint:all</arg>
@@ -122,7 +122,7 @@
                 </goals>
                 <configuration>
                   <skip>${m3.recipe.boot.skip}</skip>
-                  <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+                  <mainClass>jdk.internal.m3.prstack.M3RecipeBoot</mainClass>
                   <includeProjectDependencies>false</includeProjectDependencies>
                   <includePluginDependencies>true</includePluginDependencies>
                   <arguments>

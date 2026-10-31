@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package com.synexia.indexstring.fs;
+package jdk.internal.m3.indexstring.fs;
 
 import java.util.EnumSet;
 import java.util.List;

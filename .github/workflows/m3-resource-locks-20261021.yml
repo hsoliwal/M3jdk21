@@ -3,8 +3,8 @@ name: M3JDK21 resource scopes original Java21 proof
 on:
   pull_request:
     paths:
-      - 'm3/file/src/main/java/com/m3/file/M3ResourceLocks.java'
-      - 'm3/file/src/test/java/com/m3/file/M3ResourceLocksContract.java'
+      - 'm3/file/src/main/java/jdk/m3/file/M3ResourceLocks.java'
+      - 'm3/file/src/test/java/jdk/m3/file/M3ResourceLocksContract.java'
       - 'm3/file/qualification/resource-locks-20261021/**'
       - '.github/workflows/m3-resource-locks-20261021.yml'
   workflow_dispatch:
@@ -30,15 +30,15 @@ jobs:
         shell: bash
         run: |
           printf '%s  %s\n' \
-            '99a90eca92fea1e45604e29c0f1c1295e9e4e3c05dc3bbb3b27c48890f007575' 'm3/file/src/main/java/com/m3/file/M3ResourceLocks.java' \
-            'a20c5e004fd23a83f05e02bc895c62f11ec8db02d86f1c0dae5448a4b911d292' 'm3/file/src/test/java/com/m3/file/M3ResourceLocksContract.java' | sha256sum -c -
+            '99a90eca92fea1e45604e29c0f1c1295e9e4e3c05dc3bbb3b27c48890f007575' 'm3/file/src/main/java/jdk/m3/file/M3ResourceLocks.java' \
+            'a20c5e004fd23a83f05e02bc895c62f11ec8db02d86f1c0dae5448a4b911d292' 'm3/file/src/test/java/jdk/m3/file/M3ResourceLocksContract.java' | sha256sum -c -
       - name: Compile exact source with warnings as errors and execute tests
         shell: bash
         run: |
           mkdir -p "$RUNNER_TEMP/m3-resource-locks"
           javac --release 21 -Xlint:all -Werror -d "$RUNNER_TEMP/m3-resource-locks" \
-            m3/file/src/main/java/com/m3/file/M3ResourceLocks.java \
-            m3/file/src/test/java/com/m3/file/M3ResourceLocksContract.java
-          java -cp "$RUNNER_TEMP/m3-resource-locks" com.m3.file.M3ResourceLocksContract \
+            m3/file/src/main/java/jdk/m3/file/M3ResourceLocks.java \
+            m3/file/src/test/java/jdk/m3/file/M3ResourceLocksContract.java
+          java -cp "$RUNNER_TEMP/m3-resource-locks" jdk.m3.file.M3ResourceLocksContract \
             | tee "$RUNNER_TEMP/m3-resource-locks.txt"
           grep -Fx 'M3_RESOURCE_LOCKS_PASS checks=140034' "$RUNNER_TEMP/m3-resource-locks.txt"

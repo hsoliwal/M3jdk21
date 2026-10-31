@@ -61,13 +61,13 @@
     }
   },
   "inspected_generated_sources": {
-    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/com/m3/fs/MFile.java": "2cc3a1ef93ac7d208f50a9e6f2a878334b30aec6522c87ee505336c3dfc9cd5c",
-    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/com/m3/fs/MFileCapture.java": "63e5e0e0d5edebfc8e6913fb3b76b6245490ce89b53125f43040f6912a874344",
-    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/com/m3/fs/MFileContent.java": "44de25cf6ea3799ad0ecbdc44fc9284cc47a18f277bf77db4e2f92d13d7c5659",
-    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/com/m3/fs/MFileContentView.java": "4ab8a28c58f993603392a3c0b54c52e0ce71769a0a716124ca4744f0de004c3a",
-    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/com/m3/fs/MFileShadow.java": "ffbe1900d68dfcd190bb151a1fb2fab32547b461a476f74f84f0ca89e471a7f8",
-    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/com/m3/fs/MFileStreams.java": "b7083747af91c4bc4bfea41ea80ef8f74a1f63d157cbd72da54b489daa3004a5",
-    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/com/m3/fs/MFiles.java": "b881c356f46fd5bed68d1e6d78a704b6fae7012c1fd0e576e043ea53bc8468b4"
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/MFile.java": "2cc3a1ef93ac7d208f50a9e6f2a878334b30aec6522c87ee505336c3dfc9cd5c",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/MFileCapture.java": "63e5e0e0d5edebfc8e6913fb3b76b6245490ce89b53125f43040f6912a874344",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/MFileContent.java": "44de25cf6ea3799ad0ecbdc44fc9284cc47a18f277bf77db4e2f92d13d7c5659",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/MFileContentView.java": "4ab8a28c58f993603392a3c0b54c52e0ce71769a0a716124ca4744f0de004c3a",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/MFileShadow.java": "ffbe1900d68dfcd190bb151a1fb2fab32547b461a476f74f84f0ca89e471a7f8",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/MFileStreams.java": "b7083747af91c4bc4bfea41ea80ef8f74a1f63d157cbd72da54b489daa3004a5",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/MFiles.java": "b881c356f46fd5bed68d1e6d78a704b6fae7012c1fd0e576e043ea53bc8468b4"
   },
   "qualification_results": {
     "generated_owned_java_sources": 62,

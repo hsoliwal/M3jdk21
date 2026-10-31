@@ -26,8 +26,8 @@ PUBLIC = re.compile(r"\bpublic\s+(?:(?:abstract|final|sealed|non-sealed)\s+)*"
                     r"(?:class|interface|enum|record)\s+([A-Za-z_$][\w$]*)\b")
 JDK_SOURCE = re.compile(r"^src/[^/]+/(?:share|unix|linux|windows|macosx|bsd)/classes/(java|javax)/")
 RECIPE_ROOTS = (
-    "synexia-openrewrite-recipes/",
-    "synexia-m3-recipe/",
+    "m3-openrewrite-recipes/",
+    "m3-recipe/",
     "m3/tooling/migration-recipes/",
 )
 RECIPE_DESCRIPTOR = re.compile(r"(?:^|/)META-INF/rewrite/[^/]+\.ya?ml$")
@@ -37,7 +37,7 @@ RECIPE_JAVA = re.compile(r"(?:^|/)(?:rewrite|recipes?)/[^/]*Recipe(?:Test)?\.jav
 
 # Passive source/evidence data is neither a public Java name nor an executable
 # recipe. Strictly scope the historical path exception to existing data lanes.
-DATA_RECEIPT_PREFIXES = ("m3/qualification/", "m3/synexia-import/current-full-borrow/")
+DATA_RECEIPT_PREFIXES = ("m3/qualification/", "m3/m3-import/current-full-borrow/")
 DATA_RECEIPT_EXTENSIONS = (".json", ".tsv")
 
 

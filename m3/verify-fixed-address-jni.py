@@ -51,15 +51,15 @@ def main():
         java = str(JDK / "bin/java")
         command(javac, "--release", "21", "-Xlint:all", "-Werror", "-h", str(work),
                 "-d", str(work),
-                str(ROOT / "core/src/com/m3/text/M3FixedAddressMapping.java"),
-                str(ROOT / "core/test/com/m3/text/M3FixedAddressMappingContractTest.java"))
+                str(ROOT / "core/src/jdk/m3/text/M3FixedAddressMapping.java"),
+                str(ROOT / "core/test/jdk/m3/text/M3FixedAddressMappingContractTest.java"))
         library = work / "libm3gvas.so"
         command(CC, "-std=c11", "-Wall", "-Wextra", "-Werror", "-fPIC", "-shared",
                 "-I" + str(JDK / "include"), "-I" + str(JDK / "include/linux"),
                 str(ROOT / "lexicon/native/m3_fixed_address_mapping_jni.c"),
                 "-o", str(library))
         base_cmd = [java, "-Xcheck:jni", "-ea", "-cp", str(work),
-                    "com.m3.text.M3FixedAddressMappingContractTest"]
+                    "jdk.m3.text.M3FixedAddressMappingContractTest"]
         for mode in ("collision", "digest"):
             output = subprocess.run([*base_cmd, mode, str(library), str(image), digest],
                                     text=True, capture_output=True, check=True)
@@ -69,7 +69,7 @@ def main():
         try:
             for vm_flag in ("-Xint", "-Xbatch"):
                 argv = [java, "-Xcheck:jni", vm_flag, "-ea", "-cp", str(work),
-                        "com.m3.text.M3FixedAddressMappingContractTest",
+                        "jdk.m3.text.M3FixedAddressMappingContractTest",
                         "child", str(library), str(image), digest]
                 child = subprocess.Popen(argv, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                                          stderr=subprocess.PIPE, text=True, bufsize=1)

@@ -16,10 +16,10 @@ import subprocess
 
 BASELINE_COMMIT = '31c8621d5fcad43708edada2ceb418af1f5e9e6c'
 HISTORICAL_COMMIT = 'a720780b1a5ab41ea27182b9b7ad873efdf533b4'
-TEST_PREFIX = 'm3/collections/interop/src/test/java/com/m3/collections/interop/'
+TEST_PREFIX = 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/'
 SOURCE_ROOT = 'm3/collections/interop/src/'
 CENSUS_ROOT = 'm3/collections/interop/qualification/'
-SOURCE_REVISION_RECIPE = 'com.synexia.m3.M3Jdk21ThreeInteropCompilerRepairs20261022'
+SOURCE_REVISION_RECIPE = 'jdk.internal.m3.M3Jdk21ThreeInteropCompilerRepairs20261022'
 EXPECTED = (
     ('M3ApacheCollectionsTest.java',
      'ede37d37ca4373ac7888da6542f7447730be822829f789ed82caaaf99dc2ec53',

@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / 'baseline/m3/collections'
 B = ROOT.parent / 'm3fs-vfs-20261020'
 JDK = B / 'toolchain/jdk21/bin'
-HOST = ROOT / 'custody/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host'
+HOST = ROOT / 'custody/m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host'
 BEFORE = '77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545'
 AFTER = '7bf939ea374ce6c0b13c403f5e154c0f8d376f9cddb8e623cf00ef299183a77e'
 OWNERS = ['M3LongIndexProjection', 'M3LongAddressKernel', 'M3IndexMaskCompactor', 'M3IndexMaskWindow']
@@ -55,7 +55,7 @@ def main():
         sdk = json.loads(sdk_path.read_text())
         expected_admissions = {}
         for pass_id in ['stable-order-groups', *[p for p, _ in PACKET_PROOFS]]:
-            manifest = HOST / ('passes/' + pass_id + '/resources/com/synexia/rewrite/hash-pinned-java/'
+            manifest = HOST / ('passes/' + pass_id + '/resources/jdk/internal/m3/rewrite/hash-pinned-java/'
                                + 'm3-wrapper-' + pass_id + '/manifest.tsv')
             rows = [line.split('\t') for line in manifest.read_text().splitlines()
                     if line and not line.startswith('#')]
@@ -82,11 +82,11 @@ def main():
                 evidence = sdk_path.parent / row['pass'] / name
                 if digest(evidence) != expected_hash:
                     raise SystemExit('SDK receipt drift: ' + str(evidence))
-        projection = receiver / 'm3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java'
+        projection = receiver / 'm3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java'
         if args.projection is not None and args.projection.resolve() != projection.resolve():
             raise SystemExit('Generated mode accepts only the root-admitted receiving projection')
     else:
-        projection = args.projection or BASE / 'src/main/java/com/m3/collections/M3LongIndexProjection.java'
+        projection = args.projection or BASE / 'src/main/java/jdk/m3/collections/M3LongIndexProjection.java'
     expected = BEFORE if args.label == 'baseline' else AFTER
     if digest(projection) != expected:
         raise SystemExit('Projection source does not match the approved ' + args.label + ' seal')
@@ -102,27 +102,27 @@ def main():
             raise SystemExit('Frozen input drift: ' + row['local_path'])
     main_classes = output / 'classes'
     proof_classes = output / 'proof-classes'
-    proof_sources = output / 'proof-src/com/m3/collections'
+    proof_sources = output / 'proof-src/jdk/m3/collections'
     no_native = output / 'no-native'
     for directory in [main_classes, proof_classes, proof_sources, no_native]:
         directory.mkdir(parents=True, exist_ok=True)
     if args.label == 'generated':
         if class_hashes(main_classes) or class_hashes(proof_classes):
             raise SystemExit('Generated qualification requires fresh class directories')
-        production = [receiver / ('m3/collections/src/main/java/com/m3/collections/' + n + '.java')
+        production = [receiver / ('m3/collections/src/main/java/jdk/m3/collections/' + n + '.java')
                       for n in OWNERS]
         for name, path in zip(OWNERS[1:], production[1:]):
-            unchanged = BASE / ('src/main/java/com/m3/collections/' + name + '.java')
+            unchanged = BASE / ('src/main/java/jdk/m3/collections/' + name + '.java')
             if digest(path) != digest(unchanged):
                 raise SystemExit('An unchanged production dependency differs from baseline: ' + str(path))
     else:
-        production = [projection] + [BASE / ('src/main/java/com/m3/collections/' + n + '.java') for n in OWNERS[1:]]
-    proofs = [BASE / ('src/test/java/com/m3/collections/' + n + '.java') for n in CURRENT_PROOFS]
+        production = [projection] + [BASE / ('src/main/java/jdk/m3/collections/' + n + '.java') for n in OWNERS[1:]]
+    proofs = [BASE / ('src/test/java/jdk/m3/collections/' + n + '.java') for n in CURRENT_PROOFS]
     for pass_id, name in PACKET_PROOFS:
         if args.label == 'generated':
-            proofs.append(receiver / ('m3/collections/src/test/java/com/m3/collections/' + name + '.java'))
+            proofs.append(receiver / ('m3/collections/src/test/java/jdk/m3/collections/' + name + '.java'))
         else:
-            source = HOST / ('passes/' + pass_id + '/resources/com/synexia/rewrite/hash-pinned-java/m3-wrapper-'
+            source = HOST / ('passes/' + pass_id + '/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-'
                              + pass_id + '/' + name + '.java.txt')
             target = proof_sources / (name + '.java')
             target.write_bytes(source.read_bytes())
@@ -189,8 +189,8 @@ def main():
         receipt['unchanged_production_class_hashes_match_baseline'] = True
     run('proof-javac', [JDK / 'javac', '--release', '21', '-Xlint:all', '-Werror', '-cp', proof_cp, '-d', proof_classes, *proofs])
     api = run('public-protected-api', [JDK / 'javap', '-protected', '-s', '-classpath', main_classes,
-              *['com.m3.collections.' + n for n in OWNERS],
-              'com.m3.collections.M3LongIndexProjection$Order', 'com.m3.collections.M3IndexMaskCompactor$Backend'])
+              *['jdk.m3.collections.' + n for n in OWNERS],
+              'jdk.m3.collections.M3LongIndexProjection$Order', 'jdk.m3.collections.M3IndexMaskCompactor$Backend'])
     if args.label != 'baseline':
         baseline_api = (ROOT / 'verification/baseline/public-protected-api.stdout.log').read_text()
         if api != baseline_api:
@@ -200,12 +200,12 @@ def main():
         receipt['api_identical_to_baseline'] = True
     java = [JDK / 'java', '-XX:-UsePerfData', '-Xmx768m', '-Xcheck:jni',
             '-Djava.library.path=' + str(no_native), '-cp', runtime_cp]
-    observed = run('junit', [*java, 'ProjectionJUnitRunner', *['com.m3.collections.' + n for n in TESTS]])
-    run('projection-self-test', [*java, 'com.m3.collections.M3LongIndexProjectionSelfTest'])
-    run('missing-native', [*java, 'com.m3.collections.M3IndexOrderWindowContract', '--missing'])
+    observed = run('junit', [*java, 'ProjectionJUnitRunner', *['jdk.m3.collections.' + n for n in TESTS]])
+    run('projection-self-test', [*java, 'jdk.m3.collections.M3LongIndexProjectionSelfTest'])
+    run('missing-native', [*java, 'jdk.m3.collections.M3IndexOrderWindowContract', '--missing'])
     probe = run('resource-sort', [JDK / 'java', '-XX:-UsePerfData', '-Xms128m', '-Xmx768m',
                 '-Djava.library.path=' + str(no_native), '-cp', runtime_cp,
-                'com.m3.collections.M3IndexOrderWindowResourceProbe', 'sort', '32768', '100'])
+                'jdk.m3.collections.M3IndexOrderWindowResourceProbe', 'sort', '32768', '100'])
     match = re.search(r'INDEX_ORDER_WINDOW_PASS .* observations=([0-9a-f]{64})', observed)
     if not match:
         raise SystemExit('Missing deterministic oracle completion marker')

@@ -12,13 +12,13 @@ from audit_base import (BASE_COMMIT, BASE_TREE, OUT, REVIEW, TASK, digest,
 
 BRANCH = 'aix/jcc-source-merge-recovery-20261005'
 PRODUCTION_UPDATES = {
-    'm3-fast-search/src/main/java/com/synexia/m3/search/CompetitiveProblemReview.java':
+    'm3-fast-search/src/main/java/jdk/internal/m3/search/CompetitiveProblemReview.java':
         '83dad41fa4ce50b70f1e2e6800241b69b5136807902fd2fc6a6d024024894ac4',
-    'synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeDonorPassLedger.java':
+    'm3-algo/src/main/java/jdk/internal/m3/algorithms/corpus/ChallengeDonorPassLedger.java':
         'a089808e8563bac1f2d57aa1cc9f131e609c1d01ffcb1af8b302579adb00c346',
-    'synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java':
+    'm3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java':
         'adee46f08cd93edb1f97c30be904d0b686cc6426f56c1fae0ee6d670693526df',
-    'synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MasteryContractSurface.java':
+    'm3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3MasteryContractSurface.java':
         'd825d59df9ca7839ad06af2fd5c6ae386ce373f24eecc9184d23d1fe3261d8b1',
 }
 

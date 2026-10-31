@@ -113,7 +113,7 @@
         "-cp",
         "S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\entry-getter-review\\classes-v1",
         "SpringEntryGetterProtocol",
-        "com.m3.collections.spring.M3LinkedCaseInsensitiveMap"
+        "jdk.m3.collections.spring.M3LinkedCaseInsensitiveMap"
       ],
       "returncode": 0,
       "stdoutSHA256": "fda38a455d5d1839cca88b254bcaf34febc614e95e788aa94aad2d4d99ebdfbc",

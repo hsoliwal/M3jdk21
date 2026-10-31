@@ -42,7 +42,7 @@ class IndexedViewLineageTests(unittest.TestCase):
     def test_unknown_java_owner_refused(self):
         with self.assertRaisesRegex(RuntimeError, "qualified historical"):
             history.admit_historical_successor(
-                "m3/collections/src/main/java/com/m3/collections/M3Unknown.java",
+                "m3/collections/src/main/java/jdk/m3/collections/M3Unknown.java",
                 "0" * 64, "1" * 64, self.proof
             )
 

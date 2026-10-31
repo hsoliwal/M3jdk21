@@ -22,12 +22,12 @@ public final class Rv32iJUnitLauncher {
             throw new AssertionError("original-suite hardware switch does not match requested mode");
         }
         var request = LauncherDiscoveryRequestBuilder.request().selectors(
-                DiscoverySelectors.selectClass("com.synexia.m3.cpugpu.CpuRv32iEngineTest"),
-                DiscoverySelectors.selectClass("com.synexia.m3.cpugpu.Elf32RiscVLoaderTest"),
-                DiscoverySelectors.selectClass("com.synexia.m3.cpugpu.Rv32iAssemblerTest"),
-                DiscoverySelectors.selectClass("com.synexia.m3.cpugpu.Rv32iBulkExecutorTest"),
-                DiscoverySelectors.selectClass("com.synexia.m3.cpugpu.TornadoRv32iDifferentialTest"),
-                DiscoverySelectors.selectClass("com.m3.tornado.Rv32iBulkExecutorAdapterTest")).build();
+                DiscoverySelectors.selectClass("jdk.internal.m3.cpugpu.CpuRv32iEngineTest"),
+                DiscoverySelectors.selectClass("jdk.internal.m3.cpugpu.Elf32RiscVLoaderTest"),
+                DiscoverySelectors.selectClass("jdk.internal.m3.cpugpu.Rv32iAssemblerTest"),
+                DiscoverySelectors.selectClass("jdk.internal.m3.cpugpu.Rv32iBulkExecutorTest"),
+                DiscoverySelectors.selectClass("jdk.internal.m3.cpugpu.TornadoRv32iDifferentialTest"),
+                DiscoverySelectors.selectClass("jdk.m3.tornado.Rv32iBulkExecutorAdapterTest")).build();
         var listener = new SummaryGeneratingListener();
         var launcher = LauncherFactory.create();
         launcher.registerTestExecutionListeners(listener);

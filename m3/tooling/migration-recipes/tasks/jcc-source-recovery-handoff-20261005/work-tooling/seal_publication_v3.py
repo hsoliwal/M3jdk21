@@ -12,7 +12,7 @@ B = Path(__file__).resolve().parent
 R = B / 'overlay'
 BASE = B.parent
 TASK = 'm3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005'
-CRATE = 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005'
+CRATE = 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005'
 PARENT = '0994ecd65e86600f417f4d8702838d8c2663af61'
 TREE = '7e8f39ac999174f8d5b6028d638a68d8c317b070'
 SOURCE = '0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8'
@@ -73,7 +73,7 @@ def main():
         paths.update(str(path.relative_to(R)) for path in (R / prefix).rglob('*') if path.is_file())
     paths.update([
         'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-source-recovery-handoff.yml',
-        'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JccSourceRecoveryHandoffTest.java',
+        'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccSourceRecoveryHandoffTest.java',
         'm3/migration/test/test_jcc_source_recovery_handoff_packet.py',
         'm3/tooling/migration-recipes/verification/jcc-source-recovery-handoff/pom.xml',
     ])

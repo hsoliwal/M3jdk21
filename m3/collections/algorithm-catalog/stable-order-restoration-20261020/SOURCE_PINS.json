@@ -6,14 +6,14 @@
   "canonical_current_manifest_status": "404; exact published handoff retained",
   "production_selected": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
       "before_sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545",
       "after_sha256": "7bf939ea374ce6c0b13c403f5e154c0f8d376f9cddb8e623cf00ef299183a77e"
     }
   ],
   "retained_owner_pins": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java",
       "git_blob": "10c4d16cc9cd62d36f22646988718422caa2311e",
       "sha256": "032bffd456e67c7568b028489ceec85f24510469b3a0e00571ab36cd17ae3b75",
       "bytes": 19677,
@@ -45,12 +45,12 @@
   "decision_status": "SELECTED_ATOM_QUALIFIED_FOR_SCOPED_GENERATED_JAVA_AND_CURRENT_JNI",
   "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
   "spdx_license_identifier": "Apache-2.0",
-  "current_replay_crate": "synexia-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020",
+  "current_replay_crate": "m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020",
   "admitted_java_outputs": {
-    "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java": "7bf939ea374ce6c0b13c403f5e154c0f8d376f9cddb8e623cf00ef299183a77e",
-    "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowContract.java": "7c1c055ec9a58a9c807fc05be3ec4a83b0a411729f41c259e3180d1e45262b94",
-    "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowResourceProbe.java": "d711aa55378fe89dc263a2de6fe90449ab690e9759d27906a9389f9a0434fdba",
-    "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowTest.java": "75f32c3f515783fff233992a3144f867fa9bc767d481ba1d2db05b996895ad40"
+    "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java": "7bf939ea374ce6c0b13c403f5e154c0f8d376f9cddb8e623cf00ef299183a77e",
+    "m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowContract.java": "7c1c055ec9a58a9c807fc05be3ec4a83b0a411729f41c259e3180d1e45262b94",
+    "m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowResourceProbe.java": "d711aa55378fe89dc263a2de6fe90449ab690e9759d27906a9389f9a0434fdba",
+    "m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowTest.java": "75f32c3f515783fff233992a3144f867fa9bc767d481ba1d2db05b996895ad40"
   },
   "summary_target_path": "m3/collections/qualification/stable-order-restoration-20261020/RESULTS.json",
   "qualification_receipts": {
@@ -103,28 +103,28 @@
       "bytes": 19677,
       "git_blob": "10c4d16cc9cd62d36f22646988718422caa2311e",
       "sha256": "032bffd456e67c7568b028489ceec85f24510469b3a0e00571ab36cd17ae3b75",
-      "target_path": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+      "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java",
       "tree": "985d672bf250aa090b2399d626f0e3e1b541135d"
     },
     {
       "bytes": 31807,
       "git_blob": "1a31827cd6274b5ad8eb62f3a5ce0e5e0667478f",
       "sha256": "8419315c3058bce6add897b7ffa7c6763bbb6b85418bb35e190ba8a4d2dd70c4",
-      "target_path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
       "tree": "985d672bf250aa090b2399d626f0e3e1b541135d"
     },
     {
       "bytes": 25720,
       "git_blob": "37b669dfe22a3b6be9e68aa59f9dd94e96fc3d49",
       "sha256": "3c65c0d918b6cb39d4c27f98699fa97067d2aa3a7fb76ea48b2fd6092a9d0178",
-      "target_path": "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
+      "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java",
       "tree": "985d672bf250aa090b2399d626f0e3e1b541135d"
     },
     {
       "bytes": 4051,
       "git_blob": "2fe08d8728732e5f53e75d9feb34c9c6ffc74a8d",
       "sha256": "9257ce0c9c95e3afef20624631ba048aa3d60ef53a1189cd2bbabc07da2bba2f",
-      "target_path": "m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java",
+      "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3SlotSpliterators.java",
       "tree": "985d672bf250aa090b2399d626f0e3e1b541135d"
     }
   ],

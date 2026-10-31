@@ -5,8 +5,8 @@ set -euo pipefail
 if [ "$#" -ne 1 ]; then echo 'usage: verify.sh M3JDK21_ROOT' >&2; exit 2; fi
 root="$(cd "$1" && pwd -P)"
 owner="$root/m3/collections"
-source="$owner/src/main/java/com/m3/collections"
-tests="$owner/src/test/java/com/m3/collections"
+source="$owner/src/main/java/jdk/m3/collections"
+tests="$owner/src/test/java/jdk/m3/collections"
 native="$owner/src/main/native/collections/m3_span_index_jni.c"
 cd "$root"
 test "$(git hash-object "$source/M3SpanIndex.java")" = 'f8229851a1a36b72f807736b6df33ef5e8f4ea01'
@@ -25,33 +25,33 @@ mkdir -p "$tmp/classes" "$tmp/headers" "$tmp/native" "$tmp/missing"
   -h "$tmp/headers" -d "$tmp/classes" \
   "$source/M3SlotArrays.java" "$source/M3SpanIndex.java" \
   "$tests/M3SpanBatchIntoContract.java" "$tests/M3SpanIndexSelfTest.java"
-grep -Fq 'Java_com_m3_collections_M3SpanIndex_batchNative' \
-  "$tmp/headers/com_m3_collections_M3SpanIndex.h"
-grep -Fq 'Java_com_m3_collections_M3SpanIndex_batchIntoNative' \
-  "$tmp/headers/com_m3_collections_M3SpanIndex.h"
+grep -Fq 'Java_jdk_m3_collections_M3SpanIndex_batchNative' \
+  "$tmp/headers/jdk_m3_collections_M3SpanIndex.h"
+grep -Fq 'Java_jdk_m3_collections_M3SpanIndex_batchIntoNative' \
+  "$tmp/headers/jdk_m3_collections_M3SpanIndex.h"
 "${CC:-gcc}" -std=c17 -O2 -Wall -Wextra -Werror -fPIC -shared \
   -fsanitize=undefined -fno-sanitize-recover=undefined \
   -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
-  -include "$tmp/headers/com_m3_collections_M3SpanIndex.h" \
+  -include "$tmp/headers/jdk_m3_collections_M3SpanIndex.h" \
   "$native" -o "$tmp/native/libm3_collections_span.so"
-for name in Java_com_m3_collections_M3SpanIndex_batchNative \
-            Java_com_m3_collections_M3SpanIndex_batchIntoNative; do
+for name in Java_jdk_m3_collections_M3SpanIndex_batchNative \
+            Java_jdk_m3_collections_M3SpanIndex_batchIntoNative; do
   nm -D "$tmp/native/libm3_collections_span.so" | grep -Fq "$name"
 done
 "$JAVA_HOME/bin/java" -Xcheck:jni -Djava.library.path="$tmp/native" \
-  -cp "$tmp/classes" com.m3.collections.M3SpanBatchIntoContract \
+  -cp "$tmp/classes" jdk.m3.collections.M3SpanBatchIntoContract \
   | tee "$tmp/native-normal.log"
 "$JAVA_HOME/bin/java" -Xint -Xcheck:jni -Djava.library.path="$tmp/native" \
-  -cp "$tmp/classes" com.m3.collections.M3SpanBatchIntoContract \
+  -cp "$tmp/classes" jdk.m3.collections.M3SpanBatchIntoContract \
   | tee "$tmp/native-interpreted.log"
 "$JAVA_HOME/bin/java" -Djava.library.path="$tmp/missing" \
-  -cp "$tmp/classes" com.m3.collections.M3SpanBatchIntoContract \
+  -cp "$tmp/classes" jdk.m3.collections.M3SpanBatchIntoContract \
   | tee "$tmp/java-fallback.log"
 grep -Fxq 'PASS M3_SPAN_BATCH_INTO checks=161307 native=true' "$tmp/native-normal.log"
 cmp "$tmp/native-normal.log" "$tmp/native-interpreted.log"
 grep -Fxq 'PASS M3_SPAN_BATCH_INTO checks=160947 native=false' "$tmp/java-fallback.log"
 "$JAVA_HOME/bin/java" -Xcheck:jni -Djava.library.path="$tmp/native" \
-  -cp "$tmp/classes" com.m3.collections.M3SpanIndexSelfTest \
+  -cp "$tmp/classes" jdk.m3.collections.M3SpanIndexSelfTest \
   | tee "$tmp/legacy-span-native.log"
 grep -Fq 'M3SpanIndex Java21/JNI oracle: PASS' "$tmp/legacy-span-native.log"
 if [ -n "${M3_SPAN_REPORT_DIR:-}" ]; then

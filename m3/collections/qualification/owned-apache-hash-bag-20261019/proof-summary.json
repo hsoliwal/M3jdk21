@@ -1,5 +1,5 @@
 {
-  "owner": "com.m3.collections.apache.M3HashBag",
+  "owner": "jdk.m3.collections.apache.M3HashBag",
   "provider_contract": "org.apache.commons.collections4.bag.HashBag (Commons Collections 4.5.0)",
   "inventory_row": "DONE #1421",
   "source_sha256": "b35a43e13a31ed7504b51a84bf4a6e00785724fa3999ccf6fb054122b4c09b96",

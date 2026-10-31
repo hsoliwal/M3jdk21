@@ -6,7 +6,7 @@ import hashlib, sys
 ROOT = Path(__file__).resolve().parents[3]
 TASK = Path(__file__).resolve().parent
 OWNER = "src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java"
-TEMPLATE = TASK / "recipe/src/main/resources/com/synexia/rewrite/m3-array-mask-sparse-20261018/M3CollectionMaskCompactor.java.txt"
+TEMPLATE = TASK / "recipe/src/main/resources/jdk/internal/m3/rewrite/m3-array-mask-sparse-20261018/M3CollectionMaskCompactor.java.txt"
 PREIMAGE = TASK / "recipe/src/test/resources/preimage/M3CollectionMaskCompactor.java"
 BEFORE = "6d26934bab87d6bc68a0c38f0c8ceeec72dc5817e5fca12cfafbc276bafb133d"
 AFTER = "050f051ebf615ed27a8089fa0874a398029fbfeabc25d4a310af1e1b2a0261b8"

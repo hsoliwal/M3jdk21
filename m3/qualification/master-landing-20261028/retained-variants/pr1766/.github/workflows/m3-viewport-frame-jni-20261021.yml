@@ -2,10 +2,10 @@ name: M3JDK21 viewport CPU/JNI frame (original source)
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3MaskViewportKernel.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3MaskViewportNative.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3MaskViewportKernel.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3MaskViewportNative.java'
       - 'm3/collections/src/main/c/m3maskviewport.c'
-      - 'm3/collections/src/test/java/com/m3/collections/M3ViewportFrameContract.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3ViewportFrameContract.java'
       - 'm3/collections/qualification/viewport-frame-20261021/**'
       - '.github/workflows/m3-viewport-frame-jni-20261021.yml'
   workflow_dispatch:
@@ -24,10 +24,10 @@ jobs:
           set -euo pipefail
           mkdir -p /tmp/m3-viewport-frame
           javac --release 21 -Xlint:all -Werror -d /tmp/m3-viewport-frame \
-            m3/collections/src/main/java/com/m3/collections/M3MaskViewportKernel.java \
-            m3/collections/src/main/java/com/m3/collections/M3MaskViewportNative.java \
-            m3/collections/src/test/java/com/m3/collections/M3ViewportFrameContract.java
-          java -cp /tmp/m3-viewport-frame com.m3.collections.M3ViewportFrameContract
+            m3/collections/src/main/java/jdk/m3/collections/M3MaskViewportKernel.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3MaskViewportNative.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3ViewportFrameContract.java
+          java -cp /tmp/m3-viewport-frame jdk.m3.collections.M3ViewportFrameContract
       - name: Native C JNI build and parity with live -Xcheck:jni
         shell: bash
         run: |
@@ -38,4 +38,4 @@ jobs:
             m3/collections/src/main/c/m3maskviewport.c
           java -Xcheck:jni \
             -Dm3.native.path=/tmp/m3-viewport-frame/libm3viewportframe.so \
-            -cp /tmp/m3-viewport-frame com.m3.collections.M3ViewportFrameContract --native
+            -cp /tmp/m3-viewport-frame jdk.m3.collections.M3ViewportFrameContract --native

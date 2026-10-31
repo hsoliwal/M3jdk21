@@ -38,6 +38,6 @@ jobs:
       - name: Build and exercise immutable foundation
         run: ./m3/build.sh
       - name: Compare pinned Synexia content and range contract
-        run: python3 m3/compatibility/check-synexia.py
+        run: python3 m3/compatibility/check-m3.py
       - name: Verify two-process read-only image mapping
         run: python3 m3/verify-shared-mapping.py

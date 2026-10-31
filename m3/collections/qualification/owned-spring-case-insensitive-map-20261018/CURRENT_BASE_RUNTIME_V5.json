@@ -164,7 +164,7 @@
         "-cp",
         "S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\current-base-runtime-v5\\fixture-classes;S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\current-base-runtime-v5\\core130-classes;S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\proof-owned-v2\\classes",
         "SpringCaseInsensitiveMapMaskProjectionProof",
-        "com.m3.collections.spring.M3LinkedCaseInsensitiveMap",
+        "jdk.m3.collections.spring.M3LinkedCaseInsensitiveMap",
         "java"
       ],
       "returncode": 0,
@@ -188,7 +188,7 @@
         "-cp",
         "S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\current-base-runtime-v5\\fixture-classes;S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\current-base-runtime-v5\\core130-classes;S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\proof-owned-v2\\classes",
         "SpringCaseInsensitiveMapMaskProjectionProof",
-        "com.m3.collections.spring.M3LinkedCaseInsensitiveMap",
+        "jdk.m3.collections.spring.M3LinkedCaseInsensitiveMap",
         "native"
       ],
       "returncode": 0,

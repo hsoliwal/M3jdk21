@@ -7,12 +7,12 @@ on:
       - "m3/**"
     paths:
       - "m3/tooling/migration-recipes/**"
-      - "m3/synexia-import/pure-int-recipe-custody/**"
-      - "m3/docs/synexia-apache2-borrowing-contract.md"
-      - "m3/compatibility/synexia-canonical-residue-gitblobs.tsv"
-      - "m3/compatibility/test_synexia_recipe_home_policy.py"
-      - "m3/compatibility/check_synexia_recipe_ownership.py"
-      - "m3/compatibility/synexia-recipe-home-policy.tsv"
+      - "m3/m3-import/pure-int-recipe-custody/**"
+      - "m3/docs/m3-apache2-borrowing-contract.md"
+      - "m3/compatibility/m3-canonical-residue-gitblobs.tsv"
+      - "m3/compatibility/test_m3_recipe_home_policy.py"
+      - "m3/compatibility/check_m3_recipe_ownership.py"
+      - "m3/compatibility/m3-recipe-home-policy.tsv"
       - "m3/indexdb/src/main/**"
       - "m3/tooling/recipe-catalogue.tsv"
       - "m3/tooling/emit-java21-convergence-proof.py"
@@ -21,9 +21,9 @@ on:
   pull_request:
     paths:
       - "m3/tooling/migration-recipes/**"
-      - "m3/docs/synexia-apache2-borrowing-contract.md"
-      - "m3/compatibility/synexia-canonical-residue-gitblobs.tsv"
-      - "m3/compatibility/synexia-recipe-home-policy.tsv"
+      - "m3/docs/m3-apache2-borrowing-contract.md"
+      - "m3/compatibility/m3-canonical-residue-gitblobs.tsv"
+      - "m3/compatibility/m3-recipe-home-policy.tsv"
       - "m3/indexdb/src/main/**"
       - "m3/tooling/recipe-catalogue.tsv"
       - "m3/tooling/emit-java21-convergence-proof.py"
@@ -75,10 +75,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 "$REPO/m3/compatibility/check_synexia_recipe_ownership.py"
+          python3 "$REPO/m3/compatibility/check_m3_recipe_ownership.py"
           python3 -m unittest discover \
             -s "$REPO/m3/compatibility" \
-            -p 'test_synexia_recipe_home_policy.py' \
+            -p 'test_m3_recipe_home_policy.py' \
             -v
 
       - name: Verify canonical A3 descriptor owners and refusal controls
@@ -95,7 +95,7 @@ jobs:
           set -euo pipefail
           java -version
           mvn -version
-          mvn -B -ntp -f "$REPO/m3/synexia-import/pure-int-recipe-custody/pom.xml" clean install
+          mvn -B -ntp -f "$REPO/m3/m3-import/pure-int-recipe-custody/pom.xml" clean install
           mvn -B -ntp -f "$REPO/m3/tooling/migration-recipes/pom.xml" clean verify
 
       - name: Emit M3 convergence proof artifacts

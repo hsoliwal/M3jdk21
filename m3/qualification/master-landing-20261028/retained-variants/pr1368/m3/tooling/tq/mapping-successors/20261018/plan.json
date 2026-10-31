@@ -25,7 +25,7 @@
       }
     },
     {
-      "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/manifest.tsv",
+      "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/manifest.tsv",
       "before": {
         "resource": "payloads/before/0003-manifest.tsv.txt",
         "sha256": "a90b5a4571363d6a34bacf94daa0671cd447196b2938fa62545aed5e39a1458b"
@@ -36,7 +36,7 @@
       }
     },
     {
-      "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/name-mapping.json.txt",
+      "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/name-mapping.json.txt",
       "before": {
         "resource": "payloads/before/0004-name-mapping.json.txt.txt",
         "sha256": "335045274ea3ae01d576290b56704ec3409ef1bd27c8c220348815c5bbb711da"
@@ -47,7 +47,7 @@
       }
     },
     {
-      "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/name-mapping.json.txt.before",
+      "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/name-mapping.json.txt.before",
       "before": {
         "resource": "payloads/before/0005-name-mapping.json.txt.before.txt",
         "sha256": "73e2ca95f786a668dd17edbb69f6c4611bebc634ee52281c171cf2dece9d9d60"
@@ -130,7 +130,7 @@
       }
     },
     {
-      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/0001-M3StringFacts.java.txt",
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/0001-M3StringFacts.java.txt",
       "before": null,
       "after": {
         "resource": "payloads/after/0015-0001-M3StringFacts.java.txt.txt",
@@ -138,7 +138,7 @@
       }
     },
     {
-      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/0002-M3StringPrecomputeBridge.java.txt",
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/0002-M3StringPrecomputeBridge.java.txt",
       "before": null,
       "after": {
         "resource": "payloads/after/0016-0002-M3StringPrecomputeBridge.java.txt.txt",
@@ -146,7 +146,7 @@
       }
     },
     {
-      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/0003-System.java.txt",
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/0003-System.java.txt",
       "before": null,
       "after": {
         "resource": "payloads/after/0017-0003-System.java.txt.txt",
@@ -154,7 +154,7 @@
       }
     },
     {
-      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/0004-Matcher.java.txt",
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/0004-Matcher.java.txt",
       "before": null,
       "after": {
         "resource": "payloads/after/0018-0004-Matcher.java.txt.txt",
@@ -162,7 +162,7 @@
       }
     },
     {
-      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/0005-JavaLangAccess.java.txt",
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/0005-JavaLangAccess.java.txt",
       "before": null,
       "after": {
         "resource": "payloads/after/0019-0005-JavaLangAccess.java.txt.txt",
@@ -170,7 +170,7 @@
       }
     },
     {
-      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/0006-M3RegexReuseTest.java.txt",
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/0006-M3RegexReuseTest.java.txt",
       "before": null,
       "after": {
         "resource": "payloads/after/0020-0006-M3RegexReuseTest.java.txt.txt",
@@ -178,7 +178,7 @@
       }
     },
     {
-      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/manifest.tsv",
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/manifest.tsv",
       "before": null,
       "after": {
         "resource": "payloads/after/0021-manifest.tsv.txt",
@@ -186,7 +186,7 @@
       }
     },
     {
-      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/pre/0001-M3StringFacts.java.txt",
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/pre/0001-M3StringFacts.java.txt",
       "before": null,
       "after": {
         "resource": "payloads/after/0022-0001-M3StringFacts.java.txt.txt",
@@ -194,7 +194,7 @@
       }
     },
     {
-      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/pre/0002-M3StringPrecomputeBridge.java.txt",
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/pre/0002-M3StringPrecomputeBridge.java.txt",
       "before": null,
       "after": {
         "resource": "payloads/after/0023-0002-M3StringPrecomputeBridge.java.txt.txt",
@@ -202,7 +202,7 @@
       }
     },
     {
-      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/pre/0003-System.java.txt",
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/pre/0003-System.java.txt",
       "before": null,
       "after": {
         "resource": "payloads/after/0024-0003-System.java.txt.txt",
@@ -210,7 +210,7 @@
       }
     },
     {
-      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/pre/0004-Matcher.java.txt",
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/pre/0004-Matcher.java.txt",
       "before": null,
       "after": {
         "resource": "payloads/after/0025-0004-Matcher.java.txt.txt",
@@ -218,7 +218,7 @@
       }
     },
     {
-      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/pre/0005-JavaLangAccess.java.txt",
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/pre/0005-JavaLangAccess.java.txt",
       "before": null,
       "after": {
         "resource": "payloads/after/0026-0005-JavaLangAccess.java.txt.txt",
@@ -226,7 +226,7 @@
       }
     },
     {
-      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/pre/0006-M3RegexReuseTest.java.txt",
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/pre/0006-M3RegexReuseTest.java.txt",
       "before": null,
       "after": {
         "resource": "payloads/after/0027-0006-M3RegexReuseTest.java.txt.txt",
@@ -245,7 +245,7 @@
       }
     },
     {
-      "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/03-name-mapping.json.txt",
+      "path": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/03-name-mapping.json.txt",
       "before": {
         "resource": "payloads/before/0029-03-name-mapping.json.txt.txt",
         "sha256": "335045274ea3ae01d576290b56704ec3409ef1bd27c8c220348815c5bbb711da"
@@ -256,7 +256,7 @@
       }
     },
     {
-      "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/03-name-mapping.json.txt.before",
+      "path": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/03-name-mapping.json.txt.before",
       "before": {
         "resource": "payloads/before/0030-03-name-mapping.json.txt.before.txt",
         "sha256": "22ce39ac68e6f5efab18e9bbf6d3da45af585067d88848f1eb7ce8a76987df87"
@@ -267,7 +267,7 @@
       }
     },
     {
-      "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/04-plan.json.txt",
+      "path": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/04-plan.json.txt",
       "before": {
         "resource": "payloads/before/0031-04-plan.json.txt.txt",
         "sha256": "592477414957af5b2780b5c9e4ce09391e6f3dc60d11e3ceff5cd0683338796b"
@@ -278,7 +278,7 @@
       }
     },
     {
-      "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/05-manifest.tsv.txt",
+      "path": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/05-manifest.tsv.txt",
       "before": {
         "resource": "payloads/before/0032-05-manifest.tsv.txt.txt",
         "sha256": "a90b5a4571363d6a34bacf94daa0671cd447196b2938fa62545aed5e39a1458b"
@@ -289,7 +289,7 @@
       }
     },
     {
-      "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/06-name-mapping.json.txt.txt",
+      "path": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/06-name-mapping.json.txt.txt",
       "before": {
         "resource": "payloads/before/0033-06-name-mapping.json.txt.txt.txt",
         "sha256": "335045274ea3ae01d576290b56704ec3409ef1bd27c8c220348815c5bbb711da"
@@ -300,7 +300,7 @@
       }
     },
     {
-      "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/07-name-mapping.json.txt.before.txt",
+      "path": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/07-name-mapping.json.txt.before.txt",
       "before": {
         "resource": "payloads/before/0034-07-name-mapping.json.txt.before.txt.txt",
         "sha256": "73e2ca95f786a668dd17edbb69f6c4611bebc634ee52281c171cf2dece9d9d60"
@@ -311,7 +311,7 @@
       }
     },
     {
-      "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/09-inputs.tsv.txt",
+      "path": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/09-inputs.tsv.txt",
       "before": {
         "resource": "payloads/sparse-input-epoch/before/0002-09-inputs.tsv.txt.txt",
         "sha256": "6f602866bae4dc215675311740a6f3d9b7795c866674e3f1f813c37ad07c075a"
@@ -322,7 +322,7 @@
       }
     },
     {
-      "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/11-plan.json.txt",
+      "path": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/11-plan.json.txt",
       "before": {
         "resource": "payloads/before/0035-11-plan.json.txt.txt",
         "sha256": "1779dde108352325ca972cbc8325718b17c131f5883229c25e635ea4aac19880"
@@ -333,7 +333,7 @@
       }
     },
     {
-      "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/12-manifest.tsv.txt",
+      "path": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/12-manifest.tsv.txt",
       "before": {
         "resource": "payloads/before/0036-12-manifest.tsv.txt.txt",
         "sha256": "456ce63b32cbeecefb417f082b4faf734d1652e7dc1a6c60e46bc86bde09d608"
@@ -344,7 +344,7 @@
       }
     },
     {
-      "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/13-name-mapping.json.txt.txt",
+      "path": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/13-name-mapping.json.txt.txt",
       "before": {
         "resource": "payloads/before/0037-13-name-mapping.json.txt.txt.txt",
         "sha256": "73e2ca95f786a668dd17edbb69f6c4611bebc634ee52281c171cf2dece9d9d60"
@@ -355,7 +355,7 @@
       }
     },
     {
-      "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/14-name-mapping.json.txt.before.txt",
+      "path": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/14-name-mapping.json.txt.before.txt",
       "before": {
         "resource": "payloads/before/0038-14-name-mapping.json.txt.before.txt.txt",
         "sha256": "bc6f8d7d7562d067d916a4987749019c5085e88665592ac533b49ef9a4856132"
@@ -366,7 +366,7 @@
       }
     },
     {
-      "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/manifest.tsv",
+      "path": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/manifest.tsv",
       "before": {
         "resource": "payloads/before/0039-manifest.tsv.txt",
         "sha256": "6aeb3e02fca5dd93a2b515d92fdd52b722499509f904a80b861bfeaab4ed297c"
@@ -442,7 +442,7 @@
       }
     },
     {
-      "path": "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/manifest.tsv",
+      "path": "m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/manifest.tsv",
       "before": {
         "resource": "payloads/before/0046-manifest.tsv.txt",
         "sha256": "456ce63b32cbeecefb417f082b4faf734d1652e7dc1a6c60e46bc86bde09d608"
@@ -453,7 +453,7 @@
       }
     },
     {
-      "path": "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/name-mapping.json.txt",
+      "path": "m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/name-mapping.json.txt",
       "before": {
         "resource": "payloads/before/0047-name-mapping.json.txt.txt",
         "sha256": "73e2ca95f786a668dd17edbb69f6c4611bebc634ee52281c171cf2dece9d9d60"
@@ -464,7 +464,7 @@
       }
     },
     {
-      "path": "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/name-mapping.json.txt.before",
+      "path": "m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/name-mapping.json.txt.before",
       "before": {
         "resource": "payloads/before/0048-name-mapping.json.txt.before.txt",
         "sha256": "bc6f8d7d7562d067d916a4987749019c5085e88665592ac533b49ef9a4856132"
@@ -475,7 +475,7 @@
       }
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk21-tq-sparse-lookup.yml",
+      "path": "m3-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk21-tq-sparse-lookup.yml",
       "before": null,
       "after": {
         "resource": "payloads/after/0049-m3jdk21-tq-sparse-lookup.yml.txt",
@@ -483,7 +483,7 @@
       }
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/M3TQ.java.txt",
+      "path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/M3TQ.java.txt",
       "before": null,
       "after": {
         "resource": "payloads/after/0050-M3TQ.java.txt.txt",
@@ -491,7 +491,7 @@
       }
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/M3TQSparseContainmentTest.java.txt",
+      "path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/M3TQSparseContainmentTest.java.txt",
       "before": null,
       "after": {
         "resource": "payloads/after/0051-M3TQSparseContainmentTest.java.txt.txt",
@@ -499,7 +499,7 @@
       }
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/manifest.tsv",
+      "path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/manifest.tsv",
       "before": null,
       "after": {
         "resource": "payloads/after/0052-manifest.tsv.txt",
@@ -521,15 +521,15 @@
       "sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
+      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
       "sha256": "54fd1fa51872048d8427594691838e27912187ae539463fde51aea5c62e46831"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
       "sha256": "8133bcf7e9f750c714cdd42784bdf30b60f67dd957b2831cd54cb01c9a2cfc3a"
     },
     {
-      "path": "m3/tooling/tq-sync/src/test/java/com/m3/tq/TQSyncTest.java",
+      "path": "m3/tooling/tq-sync/src/test/java/jdk/m3/tq/TQSyncTest.java",
       "sha256": "6e7a56c85819115303df92cec677bf851abae19bbbcb5c31553d52e4c6db7084"
     },
     {
@@ -537,11 +537,11 @@
       "sha256": "905fb42c90ef44cbc5d4449218b825eca025fd23ae169b15606b0b95de359793"
     },
     {
-      "path": "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/m3-tq-current-20261018/manifest.tsv",
+      "path": "m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-tq-current-20261018/manifest.tsv",
       "sha256": "cac30c16f176f9c269f9c910b4d5079d54496691486e7cc0d2db67b74760b511"
     },
     {
-      "path": "m3/tooling/tq/src/test/java/com/m3/tq/TQTest.java",
+      "path": "m3/tooling/tq/src/test/java/jdk/m3/tq/TQTest.java",
       "sha256": "bbd76de79fdfdfd016880ada18abdb372f8d160bc4ae0f21ccb203e381652e44"
     },
     {

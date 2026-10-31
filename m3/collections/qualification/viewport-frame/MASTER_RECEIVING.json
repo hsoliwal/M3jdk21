@@ -15,7 +15,7 @@
       "canonical_mechanism": "serial M3HashPinnedTextSnapshotRecipe results for frame-page, wide-offset and inline path"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3MaskViewportNative.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3MaskViewportNative.java",
       "master_pre_blob": "760f572442bbd4145a1e24daadae267bffae56df",
       "reviewed_result_blob": "9cdfab35cf719ccf26f61ee61e1ae10fa98eb9ad",
       "canonical_mechanism": "M3HashPinnedJavaSnapshotRecipe J.CompilationUnit result and JNI generated-header verification"

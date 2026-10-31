@@ -45,7 +45,7 @@ jobs:
           import re
           from pathlib import Path
           root = Path.cwd().resolve()
-          receipt = root / "m3/docs/synexia-m3jdk21-eclipse-recipe-handoff-20261022.tsv"
+          receipt = root / "m3/docs/m3-m3jdk21-eclipse-recipe-handoff-20261022.tsv"
           lines = [line for line in receipt.read_text(encoding="utf-8").splitlines()
                    if line and not line.startswith("#")]
           if len(lines) != 5:
@@ -60,7 +60,7 @@ jobs:
                       or any(part in ("..", ".") for part in Path(relative).parts)):
                   raise SystemExit("unsafe or unsorted M3 handoff source path")
               last = relative
-              if not relative.endswith(".java") or not recipe.startswith("com.synexia.m3."):
+              if not relative.endswith(".java") or not recipe.startswith("jdk.internal.m3."):
                   raise SystemExit("invalid M3 product recipe binding")
               if (previous != "ABSENT" and not re.fullmatch("[0-9a-f]{64}", previous)):
                   raise SystemExit("invalid original preimage SHA-256")
@@ -69,9 +69,9 @@ jobs:
               # The resource-lock owner advanced after the original five-file
               # receipt. Bind exactly its later source history and Synexia recipe;
               # all four other original results retain their original authority.
-              if relative == "m3/file/src/main/java/com/m3/file/M3ResourceLocks.java":
+              if relative == "m3/file/src/main/java/jdk/m3/file/M3ResourceLocks.java":
                   required = (
-                      "com.synexia.m3.M3ResourceLocksCurrentOwner",
+                      "jdk.internal.m3.M3ResourceLocksCurrentOwner",
                       "7d0e50075f26400bfce311919457996468321a987d86cf0145737da9fde024c5",
                       "eb0bf36625effaffa147be1f650590dfa08627a5f6f52d105b8fbb201d6b5718",
                       "M3JDK21@d2223b9da6a55a8097ea71f856bd86562b9dce83+M3JDK21#1810@2f933b34fec44456c50bd7c7d04486d7f591263e",

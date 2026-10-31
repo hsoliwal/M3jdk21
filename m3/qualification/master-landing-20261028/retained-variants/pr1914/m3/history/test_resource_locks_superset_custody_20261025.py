@@ -15,9 +15,9 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[2]
 WORKFLOW = ".github/workflows/m3-merged-atom-preservation-20261022.yml"
-HISTORICAL = "m3/docs/synexia-m3jdk21-eclipse-recipe-handoff-20261022.tsv"
-SUCCESSOR = "m3/docs/synexia-m3jdk21-eclipse-source-superset-20261025.tsv"
-LOCKS = "m3/file/src/main/java/com/m3/file/M3ResourceLocks.java"
+HISTORICAL = "m3/docs/m3-m3jdk21-eclipse-recipe-handoff-20261022.tsv"
+SUCCESSOR = "m3/docs/m3-m3jdk21-eclipse-source-superset-20261025.tsv"
+LOCKS = "m3/file/src/main/java/jdk/m3/file/M3ResourceLocks.java"
 HISTORICAL_SHA = "d6ad65fcb48f9a80b71acda82baa4cfcfce9438c87eae207d346e71ce2c74bba"
 OLD_SHA = "18d05ae54945d4129c46d62e26551cbc4fd200b31c185e020b9ee6240fdc9599"
 NEW_SHA = "eb0bf36625effaffa147be1f650590dfa08627a5f6f52d105b8fbb201d6b5718"

@@ -2,7 +2,7 @@
   "schema": "M3_EXACT_TASK_INPUTS_V1",
   "target_repository": "hsoliwal/M3jdk21",
   "target_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
-  "recipe": "com.synexia.m3.GvasLookupIndex20261018",
+  "recipe": "jdk.internal.m3.GvasLookupIndex20261018",
   "files": [
     {
       "path": ".github/workflows/m3-gvas-literal-precompute.yml",
@@ -11,13 +11,13 @@
       "bytes": 1280
     },
     {
-      "path": "m3/core/src/com/m3/text/M3GvasLiteralImage.java",
+      "path": "m3/core/src/jdk/m3/text/M3GvasLiteralImage.java",
       "before": "f3ed3fd91d7e60220ba22e717f6fec41dc7759e5a221ef1dba65251d0028f8d7",
       "after": "ac3e0cab92111e7b1af138b1f246a56083e81528dd1c951a21c2bb07d7778073",
       "bytes": 10470
     },
     {
-      "path": "m3/core/test/com/m3/text/M3GvasLookupIndexContractTest.java",
+      "path": "m3/core/test/jdk/m3/text/M3GvasLookupIndexContractTest.java",
       "before": "ABSENT",
       "after": "6e387bbd278c1cfa8891e9b19f235c22e478e9965c71f1b028f7ca9668106dd3",
       "bytes": 7226

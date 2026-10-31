@@ -30,7 +30,7 @@
 
 #define CHUNK 256
 #define LIMIT 1024
-#define NATIVE(name) Java_com_m3_collections_M3IndexMaskCompactor_##name
+#define NATIVE(name) Java_jdk_m3_collections_M3IndexMaskCompactor_##name
 
 extern jintArray JNICALL NATIVE(selectNative)(JNIEnv *, jclass, jintArray, jbyteArray, jint);
 extern jint JNICALL NATIVE(rangeAbiNative)(JNIEnv *, jclass);

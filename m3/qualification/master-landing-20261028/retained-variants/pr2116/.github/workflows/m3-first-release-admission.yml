@@ -109,7 +109,7 @@ jobs:
           python3 m3/runtime-integration/recipe/test_recipe.py
       - name: Verify Synexia compatibility and shared mapping
         run: |
-          python3 m3/compatibility/check-synexia.py
+          python3 m3/compatibility/check-m3.py
           python3 m3/verify-shared-mapping.py
 
       - name: Retain visible custody queue and failures
@@ -217,9 +217,9 @@ jobs:
         run: mvn -B -ntp -fae -f m3/pom.xml clean verify
       - name: Full-family and receiving-policy verification
         run: |
-          if test -f m3/compatibility/check_synexia_full_family.py; then
-            python3 m3/compatibility/check_synexia_full_family.py
-            python3 -m unittest -v m3/compatibility/test_synexia_full_family.py
+          if test -f m3/compatibility/check_m3_full_family.py; then
+            python3 m3/compatibility/check_m3_full_family.py
+            python3 -m unittest -v m3/compatibility/test_m3_full_family.py
           fi
 
       - name: Retain visible custody queue and failures

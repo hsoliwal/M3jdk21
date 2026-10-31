@@ -23,63 +23,63 @@
       "mode": "0o644"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/01-jcc-source-handoff.md.txt",
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/01-jcc-source-handoff.md.txt",
       "bytes": 17031,
       "sha256": "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337",
       "git_blob_sha1": "f7991e22d16e01c9d9626add7d6894a1404dc19c",
       "mode": "0o644"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/02-source-destination-bindings.json.txt",
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/02-source-destination-bindings.json.txt",
       "bytes": 24139,
       "sha256": "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126",
       "git_blob_sha1": "375a65a82dd39b5fa278e52472f3a99bdd5c9fdf",
       "mode": "0o644"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/03-root-coverage-obligations.tsv.txt",
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/03-root-coverage-obligations.tsv.txt",
       "bytes": 107504,
       "sha256": "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b",
       "git_blob_sha1": "5ed0454b97e046042a6ffce38f29a06776016378",
       "mode": "0o644"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/after00-name-mapping.json.txt",
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/after00-name-mapping.json.txt",
       "bytes": 220539,
       "sha256": "536af76dd7b7b7217707662c2f1437af4adaa53af898627b0884e0b4f4603ace",
       "git_blob_sha1": "895458cdc16a87f915f34747e1bf8684b827f16d",
       "mode": "0o644"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/before00-name-mapping.json.txt",
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/before00-name-mapping.json.txt",
       "bytes": 196161,
       "sha256": "67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb",
       "git_blob_sha1": "a9c2b967920add39044066e815a7dbb1384c4b87",
       "mode": "0o644"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/manifest.tsv",
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/manifest.tsv",
       "bytes": 687,
       "sha256": "258b5ab6f6cb7099685ee4548d5430fcb952561fefdf565a6dff149cf50c5f06",
       "git_blob_sha1": "9f24b0965b9c78257ab0ebfb9f3f83561766e0ea",
       "mode": "0o644"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan.json",
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan.json",
       "bytes": 2861,
       "sha256": "648f80ae4073400f1ea1210f8cdc26942019d53eb4452d839961c466f395d05a",
       "git_blob_sha1": "12fa915d4d077fd870900e65d79d2135921977b0",
       "mode": "0o644"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/JccReceivingFixtureTest.java",
+      "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/atom/JccReceivingFixtureTest.java",
       "bytes": 15860,
       "sha256": "b034673ea218515cc12ab0b4173eabf06732f29e8a456be45b5ba0d00489ab39",
       "git_blob_sha1": "3332012bbd7f3842279f40fdf0f1eaf123392957",
       "mode": "0o644"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JccHandoffTest.java",
+      "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccHandoffTest.java",
       "bytes": 19825,
       "sha256": "fe73b48307c045b219cec3a3d123cfb008b92f98fc11ad1907df6c64fd22af61",
       "git_blob_sha1": "2d719246062a41a6cb8bbc7bd7e671763caf1813",
@@ -465,8 +465,8 @@
   ],
   "source_reference_occurrences": [
     {
-      "reference": "synexia.jcc-recipe-laboratory.sources[0]",
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryLab.java",
+      "reference": "m3.jcc-recipe-laboratory.sources[0]",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeMasteryLab.java",
       "bytes": 43215,
       "sha256": "0054ddf028c5a83c270c1a53795373c7cd8fa77395d23be7fd70424b644b0a3e",
       "git_blob_sha1": "ee8adf451105c34d0afa228fe05b7dabb3b1e264",
@@ -475,8 +475,8 @@
       "basis": "FINAL_REWRITE_PACKAGE_TREE_READBACK"
     },
     {
-      "reference": "synexia.jcc-recipe-laboratory.sources[1]",
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasterySchedulePlanner.java",
+      "reference": "m3.jcc-recipe-laboratory.sources[1]",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeMasterySchedulePlanner.java",
       "bytes": 10021,
       "sha256": "b0a7e5236a3e2bcfd593aee081c01650d920a49cf2e7254679cf8b23e67238cb",
       "git_blob_sha1": "7f8cc7134df7ea5d019a9a78ce3cfce7809135fc",
@@ -485,8 +485,8 @@
       "basis": "FINAL_REWRITE_PACKAGE_TREE_READBACK"
     },
     {
-      "reference": "synexia.jcc-recipe-laboratory.sources[2]",
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "reference": "m3.jcc-recipe-laboratory.sources[2]",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "bytes": 15511,
       "sha256": "fc13f8457af623c610651e33507aef7d74d26a3ca31f64061136f8b6540cb729",
       "git_blob_sha1": "212086793a5dd621f4e13d096d805a74bfc04782",
@@ -495,8 +495,8 @@
       "basis": "FINAL_TRANSPORT_AND_EXACT_PUBLISHED_TREE_READBACK"
     },
     {
-      "reference": "synexia.jcc-recipe-laboratory.sources[3]",
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteRuntimeRecipeInventoryRecipe.java",
+      "reference": "m3.jcc-recipe-laboratory.sources[3]",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3OpenRewriteRuntimeRecipeInventoryRecipe.java",
       "bytes": 6223,
       "sha256": "337de272aaf58c3421b1d68870e3e83c86c629ec8d23f418e2c6129db08c99db",
       "git_blob_sha1": "18f8dd15fb8dcb58873977ac842f662bec303908",
@@ -505,8 +505,8 @@
       "basis": "FINAL_TRANSPORT_AND_EXACT_PUBLISHED_TREE_READBACK"
     },
     {
-      "reference": "synexia.jcc-recipe-laboratory.sources[4]",
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteTranspiler.java",
+      "reference": "m3.jcc-recipe-laboratory.sources[4]",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3OpenRewriteTranspiler.java",
       "bytes": 27183,
       "sha256": "cc4e0b24f50b0a6f462c8aa1ff1ddee2eea67d6043158b9e7a8f5a1e91b9e4c9",
       "git_blob_sha1": "fd2134586b5369a0dcd62d207dbc6208168dd72f",
@@ -515,8 +515,8 @@
       "basis": "FINAL_TRANSPORT_AND_EXACT_PUBLISHED_TREE_READBACK"
     },
     {
-      "reference": "synexia.jcc-recipe-laboratory.sources[5]",
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeCrateSerialAtomReview.java",
+      "reference": "m3.jcc-recipe-laboratory.sources[5]",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeCrateSerialAtomReview.java",
       "bytes": 24064,
       "sha256": "b11640b4d97f95e3c12299f85cf0dbba081ae70b7b6c2c4ff8b2135446be1337",
       "git_blob_sha1": "1b4edfccece8a7e9bb5df3212e3061470f7c13d9",
@@ -525,8 +525,8 @@
       "basis": "FINAL_TRANSPORT_AND_EXACT_PUBLISHED_TREE_READBACK"
     },
     {
-      "reference": "synexia.jcc-recipe-laboratory.sources[6]",
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SemanticCodeInventoryRecipe.java",
+      "reference": "m3.jcc-recipe-laboratory.sources[6]",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3SemanticCodeInventoryRecipe.java",
       "bytes": 36655,
       "sha256": "62be21443ad260be15f7c78ed6ceafc36cec91ba3fc0c6c7f2574b7413d095ce",
       "git_blob_sha1": "403cf572b2eefe511d5900803098b6c782bb7b48",
@@ -535,8 +535,8 @@
       "basis": "FINAL_TRANSPORT_AND_EXACT_PUBLISHED_TREE_READBACK"
     },
     {
-      "reference": "synexia.jcc-recipe-laboratory.sources[7]",
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePass.java",
+      "reference": "m3.jcc-recipe-laboratory.sources[7]",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3TranspilePass.java",
       "bytes": 528,
       "sha256": "f68f4db3d6a849d172f9b168e81138429a6c16aa18745c518058436e0e8efca6",
       "git_blob_sha1": "ef8c0ed9e64adc66dbb663fd36fa3d8a7486123c",
@@ -545,8 +545,8 @@
       "basis": "FINAL_REWRITE_PACKAGE_TREE_READBACK"
     },
     {
-      "reference": "synexia.jcc-recipe-laboratory.sources[8]",
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePassResult.java",
+      "reference": "m3.jcc-recipe-laboratory.sources[8]",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3TranspilePassResult.java",
       "bytes": 1441,
       "sha256": "596c420fbc30eb07867c03d48b56af6fab1dc6891114362dabc9e0f8ff7bbb4f",
       "git_blob_sha1": "977b8f683dd2ab76ca2256533989f12a2814f044",
@@ -555,8 +555,8 @@
       "basis": "FINAL_REWRITE_PACKAGE_TREE_READBACK"
     },
     {
-      "reference": "synexia.jcc-recipe-laboratory.sources[9]",
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePlan.java",
+      "reference": "m3.jcc-recipe-laboratory.sources[9]",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3TranspilePlan.java",
       "bytes": 3759,
       "sha256": "3073058ea8237577b4506ce3222ee83914f68c7451db83bb3f7f8792abf8d13a",
       "git_blob_sha1": "290b11dc5be769119cdb202262f0336ee3612313",
@@ -565,8 +565,8 @@
       "basis": "FINAL_REWRITE_PACKAGE_TREE_READBACK"
     },
     {
-      "reference": "synexia.jcc-recipe-laboratory.sources[10]",
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspileRun.java",
+      "reference": "m3.jcc-recipe-laboratory.sources[10]",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3TranspileRun.java",
       "bytes": 3256,
       "sha256": "0be8b21e6fd0ec16b21c781e6ee9d9248fa8413a4010984246fb69cf72ffd485",
       "git_blob_sha1": "14284e82051ac5936dd82d93881228a914906c84",
@@ -575,8 +575,8 @@
       "basis": "FINAL_REWRITE_PACKAGE_TREE_READBACK"
     },
     {
-      "reference": "synexia.jcc-java-jni-regression.sources[0]",
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3AtomPatternSignalChainRecipe.java",
+      "reference": "m3.jcc-java-jni-regression.sources[0]",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3AtomPatternSignalChainRecipe.java",
       "bytes": 72231,
       "sha256": "876929d5e8caa03ea1e3af6d8d1d4d575d15aee3014a5f2ca425f4786eda5e98",
       "git_blob_sha1": "09df87a872817787fc8607bf11805cfa26c53aed",
@@ -585,8 +585,8 @@
       "basis": "FINAL_REWRITE_PACKAGE_TREE_READBACK"
     },
     {
-      "reference": "synexia.jcc-java-jni-regression.sources[1]",
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CodeSignalChain.java",
+      "reference": "m3.jcc-java-jni-regression.sources[1]",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3CodeSignalChain.java",
       "bytes": 30230,
       "sha256": "a15825aef2a00641d74fba761c4858f449d6924a1286aa1eb71b1d81932351fa",
       "git_blob_sha1": "2ecb4c0548f8864f4a71936531e0cd1a4cf0b2b6",
@@ -595,8 +595,8 @@
       "basis": "FINAL_REWRITE_PACKAGE_TREE_READBACK"
     },
     {
-      "reference": "synexia.jcc-java-jni-regression.sources[2]",
-      "path": "m3-fast-search/src/main/java/com/synexia/m3/search/CompetitiveProblemReview.java",
+      "reference": "m3.jcc-java-jni-regression.sources[2]",
+      "path": "m3-fast-search/src/main/java/jdk/internal/m3/search/CompetitiveProblemReview.java",
       "bytes": 48432,
       "sha256": "c0f9acc4a64229fb911a5a8e0b211473b058fe67739fc38fca72a4c49c9e4046",
       "git_blob_sha1": "f460f84bc5c0dc1a0970af3c6081c23875aa4067",
@@ -605,8 +605,8 @@
       "basis": "FINAL_TRANSPORT_AND_EXACT_PUBLISHED_TREE_READBACK"
     },
     {
-      "reference": "synexia.jcc-java-jni-regression.sources[3]",
-      "path": "synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeDonorPassLedger.java",
+      "reference": "m3.jcc-java-jni-regression.sources[3]",
+      "path": "m3-algo/src/main/java/jdk/internal/m3/algorithms/corpus/ChallengeDonorPassLedger.java",
       "bytes": 33076,
       "sha256": "a089808e8563bac1f2d57aa1cc9f131e609c1d01ffcb1af8b302579adb00c346",
       "git_blob_sha1": "074dd60249893e4c606e68823fdebf191f98f269",
@@ -615,8 +615,8 @@
       "basis": "FINAL_TRANSPORT_AND_EXACT_PUBLISHED_TREE_READBACK"
     },
     {
-      "reference": "synexia.jcc-java-jni-regression.sources[4]",
-      "path": "synexia-algo/src/main/java/com/synexia/algorithms/corpus/CompetitiveCapabilityPlanIndex.java",
+      "reference": "m3.jcc-java-jni-regression.sources[4]",
+      "path": "m3-algo/src/main/java/jdk/internal/m3/algorithms/corpus/CompetitiveCapabilityPlanIndex.java",
       "bytes": 17440,
       "sha256": "59742f333ab2a04c3cd5b12061bff182e9a2114549117ce323928d391c10fafa",
       "git_blob_sha1": "e4e55dbc3f9255ad71dfa391c43c352b31472622",
@@ -625,8 +625,8 @@
       "basis": "FINAL_TRANSPORT_AND_EXACT_PUBLISHED_TREE_READBACK"
     },
     {
-      "reference": "synexia.jcc-java-jni-regression.sources[5]",
-      "path": "synexia-donor-inventory/src/main/java/com/synexia/donor/DonorMechanicalShapeCatalog.java",
+      "reference": "m3.jcc-java-jni-regression.sources[5]",
+      "path": "m3-donor-inventory/src/main/java/jdk/internal/m3/donor/DonorMechanicalShapeCatalog.java",
       "bytes": 20208,
       "sha256": "32ad3ecb53a611de29ce8bdcf4079d77576b3b6d5a56a847b67c9cbd5c91b326",
       "git_blob_sha1": "108514ff8960adc20c9fd88d4fd01ba55cc2f3c8",
@@ -638,7 +638,7 @@
   "source_proof_reference_occurrences": [
     {
       "reference": "binding.source_execution.proofs[0]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/api-review/final-original-replay/API_REVIEW.md",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/api-review/final-original-replay/API_REVIEW.md",
       "bytes": 7490,
       "sha256": "a5491d40c2222270bd438f0aac6632f9b71599c284a2149d659e22c14d3a4ee4",
       "git_blob_sha1": "c6bcc4b5d5dafb46b9bf8155bacf87cfd959e159",
@@ -648,7 +648,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[1]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/api-review/final-original-replay/combined-69.api.txt",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/api-review/final-original-replay/combined-69.api.txt",
       "bytes": 100868,
       "sha256": "1d06eda9fe75087a67bd2ecf18a8e453f88a0e7f99ed3964c11997eeaaee749b",
       "git_blob_sha1": "40145106400135c625cd2ed618763250bf3511b0",
@@ -658,7 +658,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[2]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/api-review/final-original-replay/manifest.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/api-review/final-original-replay/manifest.json",
       "bytes": 212331,
       "sha256": "4dbb35df6b4bb2c99a17455755d766e21240149d99981176a547f96980c5531a",
       "git_blob_sha1": "da0e990ed37ebda2f51083ec606bed703d30ab6c",
@@ -668,7 +668,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[3]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/api-review/final-original-replay/source-manifest.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/api-review/final-original-replay/source-manifest.json",
       "bytes": 24289,
       "sha256": "f0ba405732b4f15b0127943f011b6c7ebfe52a8f336bee208e2ebdb236fd4d00",
       "git_blob_sha1": "db23e9dce2be245218e2cf2096c6d1a3c92f911b",
@@ -678,7 +678,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[4]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/REPORT.md",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/REPORT.md",
       "bytes": 7608,
       "sha256": "276e217ccf736f8f093ba042ca59386197eaa84f8e40c0c28de2112b71fb9d84",
       "git_blob_sha1": "b4f541f612fe9fde5b7899b54d0f1a5c17cd4f84",
@@ -688,7 +688,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[5]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/RESULT.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/RESULT.json",
       "bytes": 250508,
       "sha256": "7feb3273c5fc04595b00233a2816cea2656bcb6c77d2773d34f9c9d17372fe00",
       "git_blob_sha1": "6a404e7ba6bd74f53a86726ceeafa99423cff617",
@@ -698,7 +698,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[6]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/apply-main/receipts/materialization.tsv",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/apply-main/receipts/materialization.tsv",
       "bytes": 43801,
       "sha256": "eb18eba66a36827de02c9bfab3ebf034d0f94d4620e285d261ace76f02d8574e",
       "git_blob_sha1": "202f366fbce7314a1923bb99f46c95bfd7340abc",
@@ -708,7 +708,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[7]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/apply-main/surefire-reports/TEST-com.synexia.rewrite.JccApplyTest.xml",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/apply-main/surefire-reports/TEST-jdk.internal.m3.rewrite.JccApplyTest.xml",
       "bytes": 17881,
       "sha256": "251a4948cbd350adab952e369367401e1697063e5e55c51a77476a1ba86f3503",
       "git_blob_sha1": "267a138cec02d7687919c06248a76fc9df1bc824",
@@ -718,7 +718,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[8]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/apply-self/receipts/materialization.tsv",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/apply-self/receipts/materialization.tsv",
       "bytes": 19821,
       "sha256": "725cf5c1f24c8745e45f70677e23d7e55e31e7cacb499684814b8c8fc42ec4f6",
       "git_blob_sha1": "6ff056155717e63b9adace19cc852cf759d97655",
@@ -728,7 +728,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[9]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/apply-self/surefire-reports/TEST-com.synexia.rewrite.JccApplyTest.xml",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/apply-self/surefire-reports/TEST-jdk.internal.m3.rewrite.JccApplyTest.xml",
       "bytes": 17565,
       "sha256": "bd01f754450bc73be72d2d02b53edf637fb84beb432218043f5a344fa5c9f1fb",
       "git_blob_sha1": "39a97d21e5e24ca750311268a9bd2e1784be487c",
@@ -738,7 +738,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[10]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/apply-upstream/receipts/materialization.tsv",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/apply-upstream/receipts/materialization.tsv",
       "bytes": 20696,
       "sha256": "c28b023f142a57d0c30874b78c7501eff80b369546fbcea06c9e89c46994378a",
       "git_blob_sha1": "ca07523ed84df9b7ca4fac1409e074d56aed48ea",
@@ -748,7 +748,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[11]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/apply-upstream/surefire-reports/TEST-com.synexia.rewrite.JccApplyTest.xml",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/apply-upstream/surefire-reports/TEST-jdk.internal.m3.rewrite.JccApplyTest.xml",
       "bytes": 17603,
       "sha256": "5939fbbb29aa116c967829d31586fc509ae0c246a0eeb0903e94ea61b7e045e7",
       "git_blob_sha1": "bf639842ed9eec4e5fa86349139470e31300557a",
@@ -758,7 +758,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[12]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/main/surefire-reports/TEST-com.synexia.mindex.MIndexDonorLiteralRegressionTest.xml",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/main/surefire-reports/TEST-jdk.internal.m3.mindex.MIndexDonorLiteralRegressionTest.xml",
       "bytes": 24179,
       "sha256": "842a00889bce2631c5df1baa6306e16fb18fba725c0e3ba6dcd18aeec35e99f2",
       "git_blob_sha1": "e8b478c95f75c118336377adcc666fcc893d4d19",
@@ -768,7 +768,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[13]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/main/surefire-reports/TEST-com.synexia.mindex.MIndexDonorRegexRegressionTest.xml",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/main/surefire-reports/TEST-jdk.internal.m3.mindex.MIndexDonorRegexRegressionTest.xml",
       "bytes": 24405,
       "sha256": "7a8a8029afd9cad19add9c9252e147a7948a18733812d19ce20169d27a0d2ca3",
       "git_blob_sha1": "80a33544b4e78eed54fc4c9c971a082f960cd516",
@@ -778,7 +778,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[14]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/main/surefire-reports/TEST-com.synexia.rewrite.JccCompositionTest.xml",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/main/surefire-reports/TEST-jdk.internal.m3.rewrite.JccCompositionTest.xml",
       "bytes": 23967,
       "sha256": "4f7bdfb76640741dc643722416d04e95cc0665971bdf61be8d1fa369335b1b0d",
       "git_blob_sha1": "72c1ed7488a72566644676dcf0b2f2bfe4123f1b",
@@ -788,7 +788,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[15]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/main/surefire-reports/TEST-com.synexia.rewrite.JccHostVerifierTest.xml",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/main/surefire-reports/TEST-jdk.internal.m3.rewrite.JccHostVerifierTest.xml",
       "bytes": 24154,
       "sha256": "21d7940b62493a9230123c9da8e34e2e2db714b3f26ad76be30d5ddc801b8fc4",
       "git_blob_sha1": "247c2cc75d4fedcff0bb7e2269d7d61bef64dccb",
@@ -798,7 +798,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[16]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/main/surefire-reports/TEST-com.synexia.rewrite.JccLedgerContractTest.xml",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/main/surefire-reports/TEST-jdk.internal.m3.rewrite.JccLedgerContractTest.xml",
       "bytes": 23897,
       "sha256": "e4261b5aa85ae9b0c08f20706380e900590774067279cf057d5760b6219321a5",
       "git_blob_sha1": "568498e331b5c5b14b622550297716491361d2be",
@@ -808,7 +808,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[17]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/main/surefire-reports/TEST-com.synexia.rewrite.JccMasteryTest.xml",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/main/surefire-reports/TEST-jdk.internal.m3.rewrite.JccMasteryTest.xml",
       "bytes": 25350,
       "sha256": "d9112f2910b7c415b550413c214a59917f2df62cd0dd775ebe47df8e93c5ba38",
       "git_blob_sha1": "91f56e68570277e3d1bdae69525ba28f7e576357",
@@ -818,7 +818,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[18]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/main/surefire-reports/TEST-com.synexia.rewrite.JccProjectCycleTest.xml",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/main/surefire-reports/TEST-jdk.internal.m3.rewrite.JccProjectCycleTest.xml",
       "bytes": 23997,
       "sha256": "1b4893d2b9e4899e26864c951c3d749c40178565879cf51b12ab1de0f9e7e45b",
       "git_blob_sha1": "f10b51a52f4a3f85a38910b0d1816f10ae49c591",
@@ -828,7 +828,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[19]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/main/surefire-reports/TEST-com.synexia.rewrite.JccUnicodeTest.xml",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/main/surefire-reports/TEST-jdk.internal.m3.rewrite.JccUnicodeTest.xml",
       "bytes": 30438,
       "sha256": "c426ac8ef057196a965c7752664614298b0086c81f9adc46635542f6e9ee1428",
       "git_blob_sha1": "df5a724b8f88e97c549f9334d10d6765bb50561e",
@@ -838,7 +838,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[20]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/parent/surefire-reports/TEST-com.synexia.rewrite.M3AtomPatternMasteryConvergenceTest.xml",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/parent/surefire-reports/TEST-jdk.internal.m3.rewrite.M3AtomPatternMasteryConvergenceTest.xml",
       "bytes": 20322,
       "sha256": "e4ed3e5b6eb6660e0c44ea123a8529b03dde16c3d41b9ab25e5a859a471ac0f6",
       "git_blob_sha1": "aeee67c36a22235caab8448e14f8d451aeedb3e2",
@@ -848,7 +848,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[21]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-com.synexia.algorithms.corpus.CompetitiveCapabilityPlanIndexTest.xml",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-jdk.internal.m3.algorithms.corpus.CompetitiveCapabilityPlanIndexTest.xml",
       "bytes": 24365,
       "sha256": "4f18cd5d0c658e88172c094c468f1800fb0603e1c1f56bb2c78e5f4e39bf3fa4",
       "git_blob_sha1": "c7e3f8266d31bbd1114d89ae0f0336008fba3ed6",
@@ -858,7 +858,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[22]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-com.synexia.donor.DonorMechanicalShapeCatalogTest.xml",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-jdk.internal.m3.donor.DonorMechanicalShapeCatalogTest.xml",
       "bytes": 24955,
       "sha256": "fbd529187d524a3b30ba2244efa8297e3eba8a4e2801e4eaee230703e4aada50",
       "git_blob_sha1": "3d5850265255e301f9fec1f6cff42ea3fdbc2967",
@@ -868,7 +868,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[23]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-com.synexia.m3.search.CompetitiveProblemReviewTest.xml",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-jdk.internal.m3.search.CompetitiveProblemReviewTest.xml",
       "bytes": 26429,
       "sha256": "94954a6610a029bce861602dfda7ce7d0b8af9757a9485497e9b8e5e224618f0",
       "git_blob_sha1": "09a8beb3e7dac57967372b92f681121e642408ba",
@@ -878,7 +878,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[24]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-com.synexia.rewrite.M3DocumentationAttributionExecutionTest.xml",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-jdk.internal.m3.rewrite.M3DocumentationAttributionExecutionTest.xml",
       "bytes": 24446,
       "sha256": "764c3660a9dea1dc2ce5a90ea0319450dc4551559b05c7c70aa1039fca64f9de",
       "git_blob_sha1": "2f97bb87c1942c02cfd0ab89dc553e80a196483b",
@@ -888,7 +888,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[25]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-com.synexia.rewrite.M3OpenRewriteTranspilerTest.xml",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-jdk.internal.m3.rewrite.M3OpenRewriteTranspilerTest.xml",
       "bytes": 26807,
       "sha256": "daa12df647be5fbe02914ad86bee7e2b60c590e134e473bec0384bcfaaa6cea8",
       "git_blob_sha1": "a08aa790db6d7514789fae35e8501fa69fdeccb1",
@@ -898,7 +898,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[26]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-com.synexia.rewrite.M3SemanticAttributionIntegrityTest.xml",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-jdk.internal.m3.rewrite.M3SemanticAttributionIntegrityTest.xml",
       "bytes": 26154,
       "sha256": "003d55b5105d6613fbce173745d704d40d858bb042caad419c912291d7f0f0df",
       "git_blob_sha1": "cd8a1dec05a2f01474620079642e057dfe41b40d",
@@ -908,7 +908,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[27]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-com.synexia.rewrite.M3SemanticAttributionReplayTest.xml",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-jdk.internal.m3.rewrite.M3SemanticAttributionReplayTest.xml",
       "bytes": 24552,
       "sha256": "e936ac18ca6d7692c1e851a736c18371eb8759d72630fc4f695372c2724de218",
       "git_blob_sha1": "ec331511b9ba1001ef2d3d81865656a4e01f33fb",
@@ -918,7 +918,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[28]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-com.synexia.rewrite.M3SemanticCodeInventoryRecipeTest.xml",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-jdk.internal.m3.rewrite.M3SemanticCodeInventoryRecipeTest.xml",
       "bytes": 24252,
       "sha256": "76f940d700b85e0eea322c857de29f64d83293909f568e6ee36c83952e4bf156",
       "git_blob_sha1": "ab6ac6abbc6f282e70b0332c1b6af8d86063d792",
@@ -928,7 +928,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[29]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-com.synexia.rewrite.M3SemanticInvocationScopeTest.xml",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-jdk.internal.m3.rewrite.M3SemanticInvocationScopeTest.xml",
       "bytes": 24745,
       "sha256": "6f5048c710a0e878ce3b97aa8ed76da104c3a0cf7e741b1eaf440b8cb042c626",
       "git_blob_sha1": "2a0b4cb8eeeedd2b382f43bcdc8916a805bfc495",
@@ -938,7 +938,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[30]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-review/FILE_SEALS.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-review/FILE_SEALS.json",
       "bytes": 1017,
       "sha256": "659f47e2663404f894c6fcd22870ced5b7a813350ba4caa852f07d06ab76330b",
       "git_blob_sha1": "6d6e127323239bc8e35ef08e9bfb80a1f805a705",
@@ -948,7 +948,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[31]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-review/INSPECTION.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-review/INSPECTION.json",
       "bytes": 23885,
       "sha256": "3c9689b591fec0081cc288e15d17cb13c497cf3cb74e6685bac9f4a95dc11110",
       "git_blob_sha1": "a4ffd155a6f435f009ef5302d4ef8dccffdd79d8",
@@ -958,7 +958,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[32]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-review/REVIEW.md",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-review/REVIEW.md",
       "bytes": 13876,
       "sha256": "19a9e56004ffe2899a8b48fd8de50351c889dcf84c97382d8c7195eaa083b223",
       "git_blob_sha1": "87bdcd6d59685d2b9e6002cef5ae52fb8bda4542",
@@ -968,7 +968,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[33]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-review/SOURCE_BYTE_COMPARISON.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-review/SOURCE_BYTE_COMPARISON.json",
       "bytes": 221852,
       "sha256": "dcb4323cd20131d45b82ff669e8113c656d5cb677c4bb3bcc8cece4b2a834aee",
       "git_blob_sha1": "edcaf0592095a2463e3ec4a93bf07786109539a2",
@@ -978,7 +978,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[34]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/upstream-runtime/CANONICAL_MIRROR_INVENTORY.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/upstream-runtime/CANONICAL_MIRROR_INVENTORY.json",
       "bytes": 4626,
       "sha256": "baca9149cf439524e02b9780857f6837a153d4eb53c5262e59271740399ffc60",
       "git_blob_sha1": "efd9e510f7aba375b95c37f0145223a92b91b7f6",
@@ -988,7 +988,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[35]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/upstream-runtime/EXPECTED_PASS_IDS.txt",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/upstream-runtime/EXPECTED_PASS_IDS.txt",
       "bytes": 2861,
       "sha256": "66674b95eca0d1fc7598758ebbe5dd285d190dd1ebba250e8a2dc0fdd3626f9a",
       "git_blob_sha1": "3b2dfa3d11d333c45c82d41d992f72c05d73dbec",
@@ -998,7 +998,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[36]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/upstream-runtime/FILE_SEALS.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/upstream-runtime/FILE_SEALS.json",
       "bytes": 1636,
       "sha256": "ff086d9c3a4b5b6a0610f09bf82e9bc98dd54348cf68fcbc5b5b103e9c82821a",
       "git_blob_sha1": "4417b069061dd3d455466c30d36aa7da3b50affe",
@@ -1008,7 +1008,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[37]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/upstream-runtime/FINAL_DISPOSITION.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/upstream-runtime/FINAL_DISPOSITION.json",
       "bytes": 3863,
       "sha256": "b4c411a84d6a9b2c1cca0c8973bf2b9f0c01556067f5de2f7338d6c8505e9e07",
       "git_blob_sha1": "abf59a153f594c5711fffd2523e1f6374372299a",
@@ -1018,7 +1018,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[38]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/upstream-runtime/FINAL_FILE_SEALS.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/upstream-runtime/FINAL_FILE_SEALS.json",
       "bytes": 1889,
       "sha256": "57ce0dbf50d61836ece465866735ed1f82162bd511ff9a2cf3fc99a81c6f9dee",
       "git_blob_sha1": "838103a3e5f9c344f181b91035d7d683fad9e2a1",
@@ -1028,7 +1028,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[39]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/upstream-runtime/PINNED_MAVEN_COVERAGE.tsv",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/upstream-runtime/PINNED_MAVEN_COVERAGE.tsv",
       "bytes": 135,
       "sha256": "087cedd2cd3d69a967b96d0f36d1e97f1022ff151e917e2d9f9b0e73b5aaae58",
       "git_blob_sha1": "7712f80a20ecf5f536c044467ce30074bf506fc0",
@@ -1038,7 +1038,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[40]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/upstream-runtime/PINNED_PACK_STRUCTURE_REVIEW.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/upstream-runtime/PINNED_PACK_STRUCTURE_REVIEW.json",
       "bytes": 25450,
       "sha256": "21ae79350fe385b229e69e5000516c971669ca6b9b1a74b6a1fa7cff21c69b71",
       "git_blob_sha1": "7b2e8c663ff8ec82f832b2c4fc44445c56b77a1f",
@@ -1048,7 +1048,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[41]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/upstream-runtime/PINNED_SDK_BYTECODE_REVIEW.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/upstream-runtime/PINNED_SDK_BYTECODE_REVIEW.json",
       "bytes": 14264,
       "sha256": "96d8ac84f974cc1f38146d7f03345694b490cc79244e9d58bee5c43bb2cbc4e9",
       "git_blob_sha1": "d7b0cfc9fbeaa0b909fce05418aafbf90b7c1f7c",
@@ -1058,7 +1058,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[42]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/upstream-runtime/PINNED_STATIC_ANALYSIS_POM.xml",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/upstream-runtime/PINNED_STATIC_ANALYSIS_POM.xml",
       "bytes": 4605,
       "sha256": "25686e71067a3523d1795d5902392305bc9310bea16611c9a5163f24de26301a",
       "git_blob_sha1": "01661d4231edc2a9fe83f7efeeedc26fc16bb2b6",
@@ -1068,7 +1068,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[43]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/upstream-runtime/READ_ONLY_REVIEW.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/upstream-runtime/READ_ONLY_REVIEW.json",
       "bytes": 19421,
       "sha256": "ac7d281a7783808d0aa3a3b88fa42e0753ce784f057134cc2956996034449aea",
       "git_blob_sha1": "2a79b2a79e5b8548dafa64ca78f666b2b6a796c3",
@@ -1078,7 +1078,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[44]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/upstream-runtime/READ_ONLY_REVIEW.md",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/upstream-runtime/READ_ONLY_REVIEW.md",
       "bytes": 12138,
       "sha256": "a9b0b1fd8cedf5962be161d0575794f88cc282d7d40dc2fb8c38a22adc1fdd5a",
       "git_blob_sha1": "b8f716cdeefa67f16d013c9c2f6e65baf2e99cc0",
@@ -1088,7 +1088,7 @@
     },
     {
       "reference": "binding.source_execution.proofs[45]",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/upstream-runtime/SOURCE_BINDINGS.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/upstream-runtime/SOURCE_BINDINGS.json",
       "bytes": 46914,
       "sha256": "98c62fdeff6ea8e7d6b0c19440e42a6d900dd439fc10ecffec8e98db3169d6a9",
       "git_blob_sha1": "d5f62af7fb53870bdec984fbd60f3c822acb0fb7",
@@ -1127,7 +1127,7 @@
     },
     {
       "reference": "plan.guards[3]",
-      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
       "bytes": 12032,
       "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
       "git_blob_sha1": "a2e8c916208b563517e51b738744a05357e633aa",
@@ -1154,7 +1154,7 @@
     },
     {
       "reference": "plan.guards[6]",
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
       "bytes": 396,
       "sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1",
       "git_blob_sha1": "2a62a7a35e9e59cf403336c197f60d7e5915b064",
@@ -1162,8 +1162,8 @@
       "basis": "PINNED_DA958_ACQUISITION"
     },
     {
-      "reference": "synexia.jcc-recipe-laboratory.targets[0]",
-      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceRecipe.java",
+      "reference": "m3.jcc-recipe-laboratory.targets[0]",
+      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceRecipe.java",
       "bytes": 2254,
       "sha256": "15e44e92ba509b405ed2e12ddc4c6bf2a427f59cdca95d7e8e960357732266e9",
       "git_blob_sha1": "2f59c7f0756e5618343a88161040201ccb1af39d",
@@ -1171,8 +1171,8 @@
       "basis": "PINNED_DA958_ACQUISITION"
     },
     {
-      "reference": "synexia.jcc-recipe-laboratory.targets[1]",
-      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java",
+      "reference": "m3.jcc-recipe-laboratory.targets[1]",
+      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom/M3PureIntConvergenceRecipe.java",
       "bytes": 1341,
       "sha256": "ba078715aa83969fc6c04fcd0d9d226ff0d0ad7f46f38ebede6f5b312504e534",
       "git_blob_sha1": "a1a745a4ea8617937d8ecbb61eb17973dac0948f",
@@ -1180,8 +1180,8 @@
       "basis": "PINNED_DA958_ACQUISITION"
     },
     {
-      "reference": "synexia.jcc-recipe-laboratory.targets[2]",
-      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java",
+      "reference": "m3.jcc-recipe-laboratory.targets[2]",
+      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom/M3PureIntAtomEligibility.java",
       "bytes": 7151,
       "sha256": "ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb",
       "git_blob_sha1": "0041adab5913304874f5063fc2b982ff3cc1e065",
@@ -1189,8 +1189,8 @@
       "basis": "PINNED_DA958_ACQUISITION"
     },
     {
-      "reference": "synexia.jcc-recipe-laboratory.targets[3]",
-      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/MemJava.java",
+      "reference": "m3.jcc-recipe-laboratory.targets[3]",
+      "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/atom/MemJava.java",
       "bytes": 4517,
       "sha256": "c2a204144a4ff7fe2f4abfa151a744e7114961b83b7f006e019e595f4569e238",
       "git_blob_sha1": "341b55a500964906d15c88ccef9f3e05f2a1c025",
@@ -1198,8 +1198,8 @@
       "basis": "PINNED_DA958_ACQUISITION"
     },
     {
-      "reference": "synexia.jcc-recipe-laboratory.targets[4]",
-      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3IntRecipeProjectTest.java",
+      "reference": "m3.jcc-recipe-laboratory.targets[4]",
+      "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/atom/M3IntRecipeProjectTest.java",
       "bytes": 18912,
       "sha256": "004de5f30e2a3c54d439b36493e8733dc73fdae8a288ba18238423ded5afcbed",
       "git_blob_sha1": "d3cd2a28b3635340c9035b6287650bdf44f975ac",
@@ -1207,8 +1207,8 @@
       "basis": "PINNED_DA958_ACQUISITION"
     },
     {
-      "reference": "synexia.jcc-recipe-laboratory.targets[5]",
-      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/JccReceivingFixtureTest.java",
+      "reference": "m3.jcc-recipe-laboratory.targets[5]",
+      "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/atom/JccReceivingFixtureTest.java",
       "bytes": 15860,
       "sha256": "b034673ea218515cc12ab0b4173eabf06732f29e8a456be45b5ba0d00489ab39",
       "git_blob_sha1": "3332012bbd7f3842279f40fdf0f1eaf123392957",
@@ -1216,8 +1216,8 @@
       "basis": "PUBLISHED_E2_DF06_READBACK"
     },
     {
-      "reference": "synexia.jcc-recipe-laboratory.recipe",
-      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "reference": "m3.jcc-recipe-laboratory.recipe",
+      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
       "bytes": 12032,
       "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
       "git_blob_sha1": "a2e8c916208b563517e51b738744a05357e633aa",
@@ -1225,8 +1225,8 @@
       "basis": "PINNED_DA958_ACQUISITION"
     },
     {
-      "reference": "synexia.jcc-java-jni-regression.recipe",
-      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "reference": "m3.jcc-java-jni-regression.recipe",
+      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
       "bytes": 12032,
       "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
       "git_blob_sha1": "a2e8c916208b563517e51b738744a05357e633aa",
@@ -1235,7 +1235,7 @@
     },
     {
       "reference": "binding.existing_destination_reuse_artifacts[0]",
-      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceRecipe.java",
+      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceRecipe.java",
       "bytes": 2254,
       "sha256": "15e44e92ba509b405ed2e12ddc4c6bf2a427f59cdca95d7e8e960357732266e9",
       "git_blob_sha1": "2f59c7f0756e5618343a88161040201ccb1af39d",
@@ -1244,7 +1244,7 @@
     },
     {
       "reference": "binding.existing_destination_reuse_artifacts[1]",
-      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java",
+      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom/M3PureIntConvergenceRecipe.java",
       "bytes": 1341,
       "sha256": "ba078715aa83969fc6c04fcd0d9d226ff0d0ad7f46f38ebede6f5b312504e534",
       "git_blob_sha1": "a1a745a4ea8617937d8ecbb61eb17973dac0948f",
@@ -1253,7 +1253,7 @@
     },
     {
       "reference": "binding.existing_destination_reuse_artifacts[2]",
-      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java",
+      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom/M3PureIntAtomEligibility.java",
       "bytes": 7151,
       "sha256": "ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb",
       "git_blob_sha1": "0041adab5913304874f5063fc2b982ff3cc1e065",
@@ -1262,7 +1262,7 @@
     },
     {
       "reference": "binding.existing_destination_reuse_artifacts[3]",
-      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/MemJava.java",
+      "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/atom/MemJava.java",
       "bytes": 4517,
       "sha256": "c2a204144a4ff7fe2f4abfa151a744e7114961b83b7f006e019e595f4569e238",
       "git_blob_sha1": "341b55a500964906d15c88ccef9f3e05f2a1c025",
@@ -1271,7 +1271,7 @@
     },
     {
       "reference": "binding.existing_destination_reuse_artifacts[4]",
-      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3IntRecipeProjectTest.java",
+      "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/atom/M3IntRecipeProjectTest.java",
       "bytes": 18912,
       "sha256": "004de5f30e2a3c54d439b36493e8733dc73fdae8a288ba18238423ded5afcbed",
       "git_blob_sha1": "d3cd2a28b3635340c9035b6287650bdf44f975ac",
@@ -1280,7 +1280,7 @@
     },
     {
       "reference": "binding.independent_receiving_fixture.candidate_artifact",
-      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/JccReceivingFixtureTest.java",
+      "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/atom/JccReceivingFixtureTest.java",
       "bytes": 15860,
       "sha256": "b034673ea218515cc12ab0b4173eabf06732f29e8a456be45b5ba0d00489ab39",
       "git_blob_sha1": "3332012bbd7f3842279f40fdf0f1eaf123392957",
@@ -1298,7 +1298,7 @@
     },
     {
       "reference": "binding.independent_receiving_fixture.retained_owner_inputs[0]",
-      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java",
+      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom/M3PureIntAtomEligibility.java",
       "bytes": 7151,
       "sha256": "ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb",
       "git_blob_sha1": "0041adab5913304874f5063fc2b982ff3cc1e065",
@@ -1307,7 +1307,7 @@
     },
     {
       "reference": "binding.independent_receiving_fixture.retained_owner_inputs[1]",
-      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
+      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
       "bytes": 3058,
       "sha256": "8384244946df1f840406aaf71438b4f0dba311dfd7eba7b421a064d63c31bf3b",
       "git_blob_sha1": "94ff41d9a298b671749a69bd8bc7b32005ebf877",
@@ -1316,7 +1316,7 @@
     },
     {
       "reference": "binding.independent_receiving_fixture.retained_owner_inputs[2]",
-      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
+      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
       "bytes": 2700,
       "sha256": "2d100ed5d5810232b90b46f55f99c907f54a195b679b58f295dd065c8f03db69",
       "git_blob_sha1": "6b3b8a126cca230526c66adba36f53f5f9f49f5b",
@@ -1325,7 +1325,7 @@
     },
     {
       "reference": "binding.independent_receiving_fixture.retained_owner_inputs[3]",
-      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java",
+      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java",
       "bytes": 3073,
       "sha256": "496624f1f8612f3c39ea20c6f77fa0dc0594fa13c378b2f2a3a06143c739df1c",
       "git_blob_sha1": "4954825bdb4b5193c59f24ec66f95d2bd3fc8658",
@@ -1334,7 +1334,7 @@
     },
     {
       "reference": "binding.independent_receiving_fixture.retained_owner_inputs[4]",
-      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java",
+      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom/M3PureIntConvergenceRecipe.java",
       "bytes": 1341,
       "sha256": "ba078715aa83969fc6c04fcd0d9d226ff0d0ad7f46f38ebede6f5b312504e534",
       "git_blob_sha1": "a1a745a4ea8617937d8ecbb61eb17973dac0948f",
@@ -1343,7 +1343,7 @@
     },
     {
       "reference": "binding.independent_receiving_fixture.retained_owner_inputs[5]",
-      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/MemJava.java",
+      "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/atom/MemJava.java",
       "bytes": 4517,
       "sha256": "c2a204144a4ff7fe2f4abfa151a744e7114961b83b7f006e019e595f4569e238",
       "git_blob_sha1": "341b55a500964906d15c88ccef9f3e05f2a1c025",
@@ -1545,7 +1545,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java",
       "bytes": 5081,
       "sha256": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a",
       "git_blob_sha1": "65f259e23d818b9b35052feff37198f5ddf567b4",
@@ -1569,7 +1569,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/core/src/com/m3/text/JoinedM3StringPiece.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
       "bytes": 2634,
       "sha256": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
       "git_blob_sha1": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597",
@@ -1577,7 +1577,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/core/src/com/m3/text/LocalM3Arena.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/core/src/jdk/m3/text/LocalM3Arena.java",
       "bytes": 1975,
       "sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d",
       "git_blob_sha1": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
@@ -1585,7 +1585,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/core/src/com/m3/text/LocalM3StringPiece.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
       "bytes": 2115,
       "sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51",
       "git_blob_sha1": "6b745c9472144ad6de01de4d06a533974e558fb1",
@@ -1593,7 +1593,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/core/src/com/m3/text/M3StringPiece.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/core/src/jdk/m3/text/M3StringPiece.java",
       "bytes": 767,
       "sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479",
       "git_blob_sha1": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
@@ -1601,7 +1601,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/core/src/com/m3/text/StorageIdentity.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/core/src/jdk/m3/text/StorageIdentity.java",
       "bytes": 494,
       "sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417",
       "git_blob_sha1": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a",
@@ -1777,7 +1777,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/migration/src/com/m3/migration/ExactFileRecipe.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java",
       "bytes": 15906,
       "sha256": "5baee59ad560a2ee2134ac0f0ad8b64914a31099f0b57f0b06d901dc96347d90",
       "git_blob_sha1": "918f41259c0c623bb88287c44c817070a58fd9fe",
@@ -1833,7 +1833,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
       "bytes": 2451,
       "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
       "git_blob_sha1": "3e672a11367953b810c51590d764d11d5cd62c04",
@@ -1849,7 +1849,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceCatalog.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceCatalog.java",
       "bytes": 1156,
       "sha256": "2e7514ddf7332311bb31f758dbfb27aa8242cf086cabc6cbb7f27b9f4cb7f2d3",
       "git_blob_sha1": "041f9be54da827cd88cbcb764b5ba5f8bd0a81f4",
@@ -1857,7 +1857,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceRecipe.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceRecipe.java",
       "bytes": 2254,
       "sha256": "15e44e92ba509b405ed2e12ddc4c6bf2a427f59cdca95d7e8e960357732266e9",
       "git_blob_sha1": "2f59c7f0756e5618343a88161040201ccb1af39d",
@@ -1865,7 +1865,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
       "bytes": 3058,
       "sha256": "8384244946df1f840406aaf71438b4f0dba311dfd7eba7b421a064d63c31bf3b",
       "git_blob_sha1": "94ff41d9a298b671749a69bd8bc7b32005ebf877",
@@ -1873,7 +1873,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java",
       "bytes": 3073,
       "sha256": "496624f1f8612f3c39ea20c6f77fa0dc0594fa13c378b2f2a3a06143c739df1c",
       "git_blob_sha1": "4954825bdb4b5193c59f24ec66f95d2bd3fc8658",
@@ -1881,7 +1881,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3FileAtomCandidateTable.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom/M3FileAtomCandidateTable.java",
       "bytes": 2523,
       "sha256": "2765872917a05ca2e71f977484a872bbac626cdf55ca24c71c8c9bc6dff10f24",
       "git_blob_sha1": "61e2dc2366f9a5cf0eaf93a06fe6e0f8ab061847",
@@ -1889,7 +1889,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3InventoryPureIntAtomCandidates.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom/M3InventoryPureIntAtomCandidates.java",
       "bytes": 2753,
       "sha256": "3ca3fb634bd742821a317c47dde7ecb5f5176a1df8e3c2e8248a7873821a832b",
       "git_blob_sha1": "518598697c896c6d43c43b0f95bdd4db2c4caa93",
@@ -1897,7 +1897,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
       "bytes": 2700,
       "sha256": "2d100ed5d5810232b90b46f55f99c907f54a195b679b58f295dd065c8f03db69",
       "git_blob_sha1": "6b3b8a126cca230526c66adba36f53f5f9f49f5b",
@@ -1905,7 +1905,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom/M3PureIntAtomEligibility.java",
       "bytes": 7151,
       "sha256": "ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb",
       "git_blob_sha1": "0041adab5913304874f5063fc2b982ff3cc1e065",
@@ -1913,7 +1913,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom/M3PureIntConvergenceRecipe.java",
       "bytes": 1341,
       "sha256": "ba078715aa83969fc6c04fcd0d9d226ff0d0ad7f46f38ebede6f5b312504e534",
       "git_blob_sha1": "a1a745a4ea8617937d8ecbb61eb17973dac0948f",
@@ -1921,7 +1921,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
       "bytes": 13233,
       "sha256": "0e65b26f674f68fea30151ea63a17faef2f88ca0f0679723bb3dc230fda22b72",
       "git_blob_sha1": "33783749e46474f2bdc68103e189fe2907a61fa9",
@@ -1929,7 +1929,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
       "bytes": 12032,
       "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
       "git_blob_sha1": "a2e8c916208b563517e51b738744a05357e633aa",
@@ -1937,7 +1937,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3ContractMode.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3ContractMode.java",
       "bytes": 383,
       "sha256": "5c8c9ff94cec6d5ec7be9e5ca4984035c892c7bc03c079ec96e019ff7d3053fc",
       "git_blob_sha1": "e6a50a9fe75cd064399ed4b3909039f65403f8c5",
@@ -1945,7 +1945,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3EditScope.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3EditScope.java",
       "bytes": 1432,
       "sha256": "258dc928a4e350694446cbe4ea6348adaa722deada05d6fe0af2f95e6969d140",
       "git_blob_sha1": "5df378aa0ce4c7fce8dd4055912d5516b0141c56",
@@ -1953,7 +1953,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3RecipeScopePolicy.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3RecipeScopePolicy.java",
       "bytes": 1230,
       "sha256": "332cf42918ef35d9ad6ba7c241f1a9222490f618908af3acb346fc837581b5d5",
       "git_blob_sha1": "e835666e5adc321e9f7ef8db47d8f2e652f89721",
@@ -1961,7 +1961,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3RecipeScopeRegistry.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3RecipeScopeRegistry.java",
       "bytes": 4112,
       "sha256": "9ba3245512f18e3d921b6a8d013cea05a70b5a84c473b34dbd574ba55a1978d4",
       "git_blob_sha1": "0e90d25af6bf46529cf260bca8a2e8872dcf328c",
@@ -1969,7 +1969,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3ScopeInference.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3ScopeInference.java",
       "bytes": 6354,
       "sha256": "fd34ae842ba65bb843c2bba8df30926a8b2ba71df7cda76b4db8ed3a0be2da92",
       "git_blob_sha1": "13a5ed9cd0b0923f1f81f799b7bcbe3758dd2ee8",
@@ -1977,7 +1977,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "bytes": 13692,
       "sha256": "9cf77c6e68a534e84b88230ca517fa6c5a76fb3e101ea3a1f68aa5222c3ec4d9",
       "git_blob_sha1": "717c3e01f8f0407ce96439e3ecc96190b10c1eed",
@@ -2017,7 +2017,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
       "bytes": 396,
       "sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1",
       "git_blob_sha1": "2a62a7a35e9e59cf403336c197f60d7e5915b064",
@@ -2025,7 +2025,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/01-jcc-source-handoff.md.txt",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/01-jcc-source-handoff.md.txt",
       "bytes": 17031,
       "sha256": "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337",
       "git_blob_sha1": "f7991e22d16e01c9d9626add7d6894a1404dc19c",
@@ -2033,7 +2033,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/02-source-destination-bindings.json.txt",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/02-source-destination-bindings.json.txt",
       "bytes": 24139,
       "sha256": "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126",
       "git_blob_sha1": "375a65a82dd39b5fa278e52472f3a99bdd5c9fdf",
@@ -2041,7 +2041,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/03-root-coverage-obligations.tsv.txt",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/03-root-coverage-obligations.tsv.txt",
       "bytes": 107504,
       "sha256": "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b",
       "git_blob_sha1": "5ed0454b97e046042a6ffce38f29a06776016378",
@@ -2049,7 +2049,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/after00-name-mapping.json.txt",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/after00-name-mapping.json.txt",
       "bytes": 220539,
       "sha256": "536af76dd7b7b7217707662c2f1437af4adaa53af898627b0884e0b4f4603ace",
       "git_blob_sha1": "895458cdc16a87f915f34747e1bf8684b827f16d",
@@ -2057,7 +2057,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/before00-name-mapping.json.txt",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/before00-name-mapping.json.txt",
       "bytes": 196161,
       "sha256": "67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb",
       "git_blob_sha1": "a9c2b967920add39044066e815a7dbb1384c4b87",
@@ -2065,7 +2065,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/manifest.tsv",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/manifest.tsv",
       "bytes": 687,
       "sha256": "258b5ab6f6cb7099685ee4548d5430fcb952561fefdf565a6dff149cf50c5f06",
       "git_blob_sha1": "9f24b0965b9c78257ab0ebfb9f3f83561766e0ea",
@@ -2073,7 +2073,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan.json",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan.json",
       "bytes": 2861,
       "sha256": "648f80ae4073400f1ea1210f8cdc26942019d53eb4452d839961c466f395d05a",
       "git_blob_sha1": "12fa915d4d077fd870900e65d79d2135921977b0",
@@ -2081,7 +2081,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after00-name-mapping.json.txt",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after00-name-mapping.json.txt",
       "bytes": 236215,
       "sha256": "e4ae516fea9822a4bfe26669e9749e167f52bb30049d520339ee42f3779bc0b3",
       "git_blob_sha1": "d10174dd61016069b9d5b73b7fd581a025855bcc",
@@ -2089,7 +2089,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after01-jcc-source-handoff.md.txt",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after01-jcc-source-handoff.md.txt",
       "bytes": 16423,
       "sha256": "59ed76969f86486e7adb377409e284f69577fe02754006fdfe5b3938a16760a0",
       "git_blob_sha1": "69ef3f693b65ec5dc95ab38f35c449c933c1c80b",
@@ -2097,7 +2097,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after02-source-destination-bindings.json.txt",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after02-source-destination-bindings.json.txt",
       "bytes": 92103,
       "sha256": "049c7c1987c05a15f4152fcb8f261a65245d72a25688d5a530a4afa5405cd3ef",
       "git_blob_sha1": "b6283a33b9348f4ac6da3adaf5a35edb34a5a0c1",
@@ -2105,7 +2105,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after03-root-coverage-obligations.tsv.txt",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after03-root-coverage-obligations.tsv.txt",
       "bytes": 107597,
       "sha256": "59c4c970ac75a56aa5d5a3e2f3e88f5caa831eb06be788266c725202b8c64b12",
       "git_blob_sha1": "b734e19c2dace50691612215e9a7cfb70c014aab",
@@ -2113,7 +2113,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/before00-name-mapping.json.txt",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/before00-name-mapping.json.txt",
       "bytes": 220539,
       "sha256": "536af76dd7b7b7217707662c2f1437af4adaa53af898627b0884e0b4f4603ace",
       "git_blob_sha1": "895458cdc16a87f915f34747e1bf8684b827f16d",
@@ -2121,7 +2121,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/before01-jcc-source-handoff.md.txt",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/before01-jcc-source-handoff.md.txt",
       "bytes": 17031,
       "sha256": "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337",
       "git_blob_sha1": "f7991e22d16e01c9d9626add7d6894a1404dc19c",
@@ -2129,7 +2129,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/before02-source-destination-bindings.json.txt",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/before02-source-destination-bindings.json.txt",
       "bytes": 24139,
       "sha256": "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126",
       "git_blob_sha1": "375a65a82dd39b5fa278e52472f3a99bdd5c9fdf",
@@ -2137,7 +2137,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/before03-root-coverage-obligations.tsv.txt",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/before03-root-coverage-obligations.tsv.txt",
       "bytes": 107504,
       "sha256": "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b",
       "git_blob_sha1": "5ed0454b97e046042a6ffce38f29a06776016378",
@@ -2145,7 +2145,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/manifest.tsv",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/manifest.tsv",
       "bytes": 876,
       "sha256": "4e8bd94f8dd29256ca41dee2fb0b5164ba24c387038143d88d5fa958e6ecdad5",
       "git_blob_sha1": "15f10c1fa21138816bda76d42545db9c015ab650",
@@ -2153,7 +2153,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/plan.json",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/plan.json",
       "bytes": 3414,
       "sha256": "ae42e3db29017106b47f493fc663ca679ead1802558699915d1a3a1fb3454c48",
       "git_blob_sha1": "9b5be4d1bbd8c817b6f29aa42e82326304ac741d",
@@ -2161,7 +2161,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/JccReceivingFixtureTest.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/atom/JccReceivingFixtureTest.java",
       "bytes": 15860,
       "sha256": "b034673ea218515cc12ab0b4173eabf06732f29e8a456be45b5ba0d00489ab39",
       "git_blob_sha1": "3332012bbd7f3842279f40fdf0f1eaf123392957",
@@ -2169,7 +2169,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3IntRecipeProjectTest.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/atom/M3IntRecipeProjectTest.java",
       "bytes": 18912,
       "sha256": "004de5f30e2a3c54d439b36493e8733dc73fdae8a288ba18238423ded5afcbed",
       "git_blob_sha1": "d3cd2a28b3635340c9035b6287650bdf44f975ac",
@@ -2177,7 +2177,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipeTest.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/atom/M3PureIntConvergenceRecipeTest.java",
       "bytes": 7418,
       "sha256": "152189b0eeeed97460ea798f042fc9f9df7609c9477dcf7bdb593b06c48486c6",
       "git_blob_sha1": "d81913808d237a0ed941caaf96e692d7f5a51321",
@@ -2185,7 +2185,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/MemJava.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/atom/MemJava.java",
       "bytes": 4517,
       "sha256": "c2a204144a4ff7fe2f4abfa151a744e7114961b83b7f006e019e595f4569e238",
       "git_blob_sha1": "341b55a500964906d15c88ccef9f3e05f2a1c025",
@@ -2193,7 +2193,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/DescriptorRecipeTest.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/DescriptorRecipeTest.java",
       "bytes": 8783,
       "sha256": "24e7a0d7dbd645426acd6a3bfcbff5d2d61332f9acf3e60bc225c61ab72e307e",
       "git_blob_sha1": "dae2201ee9f6266195ae19fee1e15ae57a539faa",
@@ -2201,7 +2201,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JccHandoffTest.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccHandoffTest.java",
       "bytes": 19825,
       "sha256": "fe73b48307c045b219cec3a3d123cfb008b92f98fc11ad1907df6c64fd22af61",
       "git_blob_sha1": "2d719246062a41a6cb8bbc7bd7e671763caf1813",
@@ -2209,7 +2209,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JccSourceFinalHandoffTest.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccSourceFinalHandoffTest.java",
       "bytes": 24518,
       "sha256": "c08ec9e4ecd9c803c310bdbce32ae3b23cad9c0953db408f36a399d980736309",
       "git_blob_sha1": "97c6851c29af7c8eca66d00d62ecc5cc953a3adf",
@@ -2217,7 +2217,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JniTest.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JniTest.java",
       "bytes": 4741,
       "sha256": "fec35bd3dc11f88e9c66a9c08c58141eea2769831cde868d56ed964ff54cd640",
       "git_blob_sha1": "0262d80b6c0b20371efcf8bfacb7559254418b6a",
@@ -2705,7 +2705,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
       "bytes": 453,
       "sha256": "c47151b5df79d6d2711e6de748bff3fb08e2c01af5e9c6ac0b4b3b91ac97425c",
       "git_blob_sha1": "2e77d4929b7b8dd3609b990774b062fc6991dc18",
@@ -2841,7 +2841,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/test/jdk/jdk/internal/mindex/descriptor/com/m3/descriptor/DescriptorTest.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/test/jdk/jdk/internal/mindex/descriptor/jdk/m3/descriptor/DescriptorTest.java",
       "bytes": 9136,
       "sha256": "4c7fc3b36ac32873e6f4f6e7aecc71b0e1bfe82a85b61a3114cf7e88a057b578",
       "git_blob_sha1": "2521a35c4de252593d9558310a25a1016724b13c",
@@ -2849,7 +2849,7 @@
       "group": "fixed_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/apply-main/receipts/materialization.tsv",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/apply-main/receipts/materialization.tsv",
       "bytes": 43801,
       "sha256": "eb18eba66a36827de02c9bfab3ebf034d0f94d4620e285d261ace76f02d8574e",
       "git_blob_sha1": "202f366fbce7314a1923bb99f46c95bfd7340abc",
@@ -2857,7 +2857,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/apply-main/surefire-reports/TEST-com.synexia.rewrite.JccApplyTest.xml",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/apply-main/surefire-reports/TEST-jdk.internal.m3.rewrite.JccApplyTest.xml",
       "bytes": 17881,
       "sha256": "251a4948cbd350adab952e369367401e1697063e5e55c51a77476a1ba86f3503",
       "git_blob_sha1": "267a138cec02d7687919c06248a76fc9df1bc824",
@@ -2865,7 +2865,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/apply-self/receipts/materialization.tsv",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/apply-self/receipts/materialization.tsv",
       "bytes": 19821,
       "sha256": "725cf5c1f24c8745e45f70677e23d7e55e31e7cacb499684814b8c8fc42ec4f6",
       "git_blob_sha1": "6ff056155717e63b9adace19cc852cf759d97655",
@@ -2873,7 +2873,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/apply-self/surefire-reports/TEST-com.synexia.rewrite.JccApplyTest.xml",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/apply-self/surefire-reports/TEST-jdk.internal.m3.rewrite.JccApplyTest.xml",
       "bytes": 17565,
       "sha256": "bd01f754450bc73be72d2d02b53edf637fb84beb432218043f5a344fa5c9f1fb",
       "git_blob_sha1": "39a97d21e5e24ca750311268a9bd2e1784be487c",
@@ -2881,7 +2881,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/apply-upstream/receipts/materialization.tsv",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/apply-upstream/receipts/materialization.tsv",
       "bytes": 20696,
       "sha256": "c28b023f142a57d0c30874b78c7501eff80b369546fbcea06c9e89c46994378a",
       "git_blob_sha1": "ca07523ed84df9b7ca4fac1409e074d56aed48ea",
@@ -2889,7 +2889,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/apply-upstream/surefire-reports/TEST-com.synexia.rewrite.JccApplyTest.xml",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/apply-upstream/surefire-reports/TEST-jdk.internal.m3.rewrite.JccApplyTest.xml",
       "bytes": 17603,
       "sha256": "5939fbbb29aa116c967829d31586fc509ae0c246a0eeb0903e94ea61b7e045e7",
       "git_blob_sha1": "bf639842ed9eec4e5fa86349139470e31300557a",
@@ -2897,7 +2897,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/main/surefire-reports/TEST-com.synexia.mindex.MIndexDonorLiteralRegressionTest.xml",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/main/surefire-reports/TEST-jdk.internal.m3.mindex.MIndexDonorLiteralRegressionTest.xml",
       "bytes": 24179,
       "sha256": "842a00889bce2631c5df1baa6306e16fb18fba725c0e3ba6dcd18aeec35e99f2",
       "git_blob_sha1": "e8b478c95f75c118336377adcc666fcc893d4d19",
@@ -2905,7 +2905,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/main/surefire-reports/TEST-com.synexia.mindex.MIndexDonorRegexRegressionTest.xml",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/main/surefire-reports/TEST-jdk.internal.m3.mindex.MIndexDonorRegexRegressionTest.xml",
       "bytes": 24405,
       "sha256": "7a8a8029afd9cad19add9c9252e147a7948a18733812d19ce20169d27a0d2ca3",
       "git_blob_sha1": "80a33544b4e78eed54fc4c9c971a082f960cd516",
@@ -2913,7 +2913,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/main/surefire-reports/TEST-com.synexia.rewrite.JccCompositionTest.xml",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/main/surefire-reports/TEST-jdk.internal.m3.rewrite.JccCompositionTest.xml",
       "bytes": 23967,
       "sha256": "4f7bdfb76640741dc643722416d04e95cc0665971bdf61be8d1fa369335b1b0d",
       "git_blob_sha1": "72c1ed7488a72566644676dcf0b2f2bfe4123f1b",
@@ -2921,7 +2921,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/main/surefire-reports/TEST-com.synexia.rewrite.JccHostVerifierTest.xml",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/main/surefire-reports/TEST-jdk.internal.m3.rewrite.JccHostVerifierTest.xml",
       "bytes": 24154,
       "sha256": "21d7940b62493a9230123c9da8e34e2e2db714b3f26ad76be30d5ddc801b8fc4",
       "git_blob_sha1": "247c2cc75d4fedcff0bb7e2269d7d61bef64dccb",
@@ -2929,7 +2929,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/main/surefire-reports/TEST-com.synexia.rewrite.JccLedgerContractTest.xml",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/main/surefire-reports/TEST-jdk.internal.m3.rewrite.JccLedgerContractTest.xml",
       "bytes": 23897,
       "sha256": "e4261b5aa85ae9b0c08f20706380e900590774067279cf057d5760b6219321a5",
       "git_blob_sha1": "568498e331b5c5b14b622550297716491361d2be",
@@ -2937,7 +2937,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/main/surefire-reports/TEST-com.synexia.rewrite.JccMasteryTest.xml",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/main/surefire-reports/TEST-jdk.internal.m3.rewrite.JccMasteryTest.xml",
       "bytes": 25350,
       "sha256": "d9112f2910b7c415b550413c214a59917f2df62cd0dd775ebe47df8e93c5ba38",
       "git_blob_sha1": "91f56e68570277e3d1bdae69525ba28f7e576357",
@@ -2945,7 +2945,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/main/surefire-reports/TEST-com.synexia.rewrite.JccProjectCycleTest.xml",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/main/surefire-reports/TEST-jdk.internal.m3.rewrite.JccProjectCycleTest.xml",
       "bytes": 23997,
       "sha256": "1b4893d2b9e4899e26864c951c3d749c40178565879cf51b12ab1de0f9e7e45b",
       "git_blob_sha1": "f10b51a52f4a3f85a38910b0d1816f10ae49c591",
@@ -2953,7 +2953,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/main/surefire-reports/TEST-com.synexia.rewrite.JccUnicodeTest.xml",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/main/surefire-reports/TEST-jdk.internal.m3.rewrite.JccUnicodeTest.xml",
       "bytes": 30438,
       "sha256": "c426ac8ef057196a965c7752664614298b0086c81f9adc46635542f6e9ee1428",
       "git_blob_sha1": "df5a724b8f88e97c549f9334d10d6765bb50561e",
@@ -2961,7 +2961,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/parent/surefire-reports/TEST-com.synexia.rewrite.M3AtomPatternMasteryConvergenceTest.xml",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/parent/surefire-reports/TEST-jdk.internal.m3.rewrite.M3AtomPatternMasteryConvergenceTest.xml",
       "bytes": 20322,
       "sha256": "e4ed3e5b6eb6660e0c44ea123a8529b03dde16c3d41b9ab25e5a859a471ac0f6",
       "git_blob_sha1": "aeee67c36a22235caab8448e14f8d451aeedb3e2",
@@ -2969,7 +2969,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-com.synexia.algorithms.corpus.CompetitiveCapabilityPlanIndexTest.xml",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-jdk.internal.m3.algorithms.corpus.CompetitiveCapabilityPlanIndexTest.xml",
       "bytes": 24365,
       "sha256": "4f18cd5d0c658e88172c094c468f1800fb0603e1c1f56bb2c78e5f4e39bf3fa4",
       "git_blob_sha1": "c7e3f8266d31bbd1114d89ae0f0336008fba3ed6",
@@ -2977,7 +2977,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-com.synexia.donor.DonorMechanicalShapeCatalogTest.xml",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-jdk.internal.m3.donor.DonorMechanicalShapeCatalogTest.xml",
       "bytes": 24955,
       "sha256": "fbd529187d524a3b30ba2244efa8297e3eba8a4e2801e4eaee230703e4aada50",
       "git_blob_sha1": "3d5850265255e301f9fec1f6cff42ea3fdbc2967",
@@ -2985,7 +2985,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-com.synexia.m3.search.CompetitiveProblemReviewTest.xml",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-jdk.internal.m3.search.CompetitiveProblemReviewTest.xml",
       "bytes": 26429,
       "sha256": "94954a6610a029bce861602dfda7ce7d0b8af9757a9485497e9b8e5e224618f0",
       "git_blob_sha1": "09a8beb3e7dac57967372b92f681121e642408ba",
@@ -2993,7 +2993,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-com.synexia.rewrite.M3DocumentationAttributionExecutionTest.xml",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-jdk.internal.m3.rewrite.M3DocumentationAttributionExecutionTest.xml",
       "bytes": 24446,
       "sha256": "764c3660a9dea1dc2ce5a90ea0319450dc4551559b05c7c70aa1039fca64f9de",
       "git_blob_sha1": "2f97bb87c1942c02cfd0ab89dc553e80a196483b",
@@ -3001,7 +3001,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-com.synexia.rewrite.M3OpenRewriteTranspilerTest.xml",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-jdk.internal.m3.rewrite.M3OpenRewriteTranspilerTest.xml",
       "bytes": 26807,
       "sha256": "daa12df647be5fbe02914ad86bee7e2b60c590e134e473bec0384bcfaaa6cea8",
       "git_blob_sha1": "a08aa790db6d7514789fae35e8501fa69fdeccb1",
@@ -3009,7 +3009,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-com.synexia.rewrite.M3SemanticAttributionIntegrityTest.xml",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-jdk.internal.m3.rewrite.M3SemanticAttributionIntegrityTest.xml",
       "bytes": 26154,
       "sha256": "003d55b5105d6613fbce173745d704d40d858bb042caad419c912291d7f0f0df",
       "git_blob_sha1": "cd8a1dec05a2f01474620079642e057dfe41b40d",
@@ -3017,7 +3017,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-com.synexia.rewrite.M3SemanticAttributionReplayTest.xml",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-jdk.internal.m3.rewrite.M3SemanticAttributionReplayTest.xml",
       "bytes": 24552,
       "sha256": "e936ac18ca6d7692c1e851a736c18371eb8759d72630fc4f695372c2724de218",
       "git_blob_sha1": "ec331511b9ba1001ef2d3d81865656a4e01f33fb",
@@ -3025,7 +3025,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-com.synexia.rewrite.M3SemanticCodeInventoryRecipeTest.xml",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-jdk.internal.m3.rewrite.M3SemanticCodeInventoryRecipeTest.xml",
       "bytes": 24252,
       "sha256": "76f940d700b85e0eea322c857de29f64d83293909f568e6ee36c83952e4bf156",
       "git_blob_sha1": "ab6ac6abbc6f282e70b0332c1b6af8d86063d792",
@@ -3033,7 +3033,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-com.synexia.rewrite.M3SemanticInvocationScopeTest.xml",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/upstream/surefire-reports/TEST-jdk.internal.m3.rewrite.M3SemanticInvocationScopeTest.xml",
       "bytes": 24745,
       "sha256": "6f5048c710a0e878ce3b97aa8ed76da104c3a0cf7e741b1eaf440b8cb042c626",
       "git_blob_sha1": "2a0b4cb8eeeedd2b382f43bcdc8916a805bfc495",
@@ -3041,7 +3041,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/m3-fast-search/src/main/java/com/synexia/m3/search/CompetitiveProblemReview.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/m3-fast-search/src/main/java/jdk/internal/m3/search/CompetitiveProblemReview.java",
       "bytes": 48432,
       "sha256": "c0f9acc4a64229fb911a5a8e0b211473b058fe67739fc38fca72a4c49c9e4046",
       "git_blob_sha1": "f460f84bc5c0dc1a0970af3c6081c23875aa4067",
@@ -3049,7 +3049,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeDonorPassLedger.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/m3-algo/src/main/java/jdk/internal/m3/algorithms/corpus/ChallengeDonorPassLedger.java",
       "bytes": 33076,
       "sha256": "a089808e8563bac1f2d57aa1cc9f131e609c1d01ffcb1af8b302579adb00c346",
       "git_blob_sha1": "074dd60249893e4c606e68823fdebf191f98f269",
@@ -3057,7 +3057,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-algo/src/main/java/com/synexia/algorithms/corpus/CompetitiveCapabilityPlanIndex.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/m3-algo/src/main/java/jdk/internal/m3/algorithms/corpus/CompetitiveCapabilityPlanIndex.java",
       "bytes": 17440,
       "sha256": "59742f333ab2a04c3cd5b12061bff182e9a2114549117ce323928d391c10fafa",
       "git_blob_sha1": "e4e55dbc3f9255ad71dfa391c43c352b31472622",
@@ -3065,7 +3065,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-donor-inventory/src/main/java/com/synexia/donor/DonorMechanicalShapeCatalog.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/m3-donor-inventory/src/main/java/jdk/internal/m3/donor/DonorMechanicalShapeCatalog.java",
       "bytes": 20208,
       "sha256": "32ad3ecb53a611de29ce8bdcf4079d77576b3b6d5a56a847b67c9cbd5c91b326",
       "git_blob_sha1": "108514ff8960adc20c9fd88d4fd01ba55cc2f3c8",
@@ -3073,7 +3073,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3AtomPatternSignalChainRecipe.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3AtomPatternSignalChainRecipe.java",
       "bytes": 72231,
       "sha256": "876929d5e8caa03ea1e3af6d8d1d4d575d15aee3014a5f2ca425f4786eda5e98",
       "git_blob_sha1": "09df87a872817787fc8607bf11805cfa26c53aed",
@@ -3081,7 +3081,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CodeSignalChain.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3CodeSignalChain.java",
       "bytes": 30230,
       "sha256": "a15825aef2a00641d74fba761c4858f449d6924a1286aa1eb71b1d81932351fa",
       "git_blob_sha1": "2ecb4c0548f8864f4a71936531e0cd1a4cf0b2b6",
@@ -3089,7 +3089,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "bytes": 15511,
       "sha256": "fc13f8457af623c610651e33507aef7d74d26a3ca31f64061136f8b6540cb729",
       "git_blob_sha1": "212086793a5dd621f4e13d096d805a74bfc04782",
@@ -3097,7 +3097,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteRuntimeRecipeInventoryRecipe.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3OpenRewriteRuntimeRecipeInventoryRecipe.java",
       "bytes": 6223,
       "sha256": "337de272aaf58c3421b1d68870e3e83c86c629ec8d23f418e2c6129db08c99db",
       "git_blob_sha1": "18f8dd15fb8dcb58873977ac842f662bec303908",
@@ -3105,7 +3105,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteTranspiler.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3OpenRewriteTranspiler.java",
       "bytes": 27183,
       "sha256": "cc4e0b24f50b0a6f462c8aa1ff1ddee2eea67d6043158b9e7a8f5a1e91b9e4c9",
       "git_blob_sha1": "fd2134586b5369a0dcd62d207dbc6208168dd72f",
@@ -3113,7 +3113,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeCrateSerialAtomReview.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeCrateSerialAtomReview.java",
       "bytes": 24064,
       "sha256": "b11640b4d97f95e3c12299f85cf0dbba081ae70b7b6c2c4ff8b2135446be1337",
       "git_blob_sha1": "1b4edfccece8a7e9bb5df3212e3061470f7c13d9",
@@ -3121,7 +3121,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryLab.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeMasteryLab.java",
       "bytes": 43215,
       "sha256": "0054ddf028c5a83c270c1a53795373c7cd8fa77395d23be7fd70424b644b0a3e",
       "git_blob_sha1": "ee8adf451105c34d0afa228fe05b7dabb3b1e264",
@@ -3129,7 +3129,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasterySchedulePlanner.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeMasterySchedulePlanner.java",
       "bytes": 10021,
       "sha256": "b0a7e5236a3e2bcfd593aee081c01650d920a49cf2e7254679cf8b23e67238cb",
       "git_blob_sha1": "7f8cc7134df7ea5d019a9a78ce3cfce7809135fc",
@@ -3137,7 +3137,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SemanticCodeInventoryRecipe.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3SemanticCodeInventoryRecipe.java",
       "bytes": 36655,
       "sha256": "62be21443ad260be15f7c78ed6ceafc36cec91ba3fc0c6c7f2574b7413d095ce",
       "git_blob_sha1": "403cf572b2eefe511d5900803098b6c782bb7b48",
@@ -3145,7 +3145,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePass.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3TranspilePass.java",
       "bytes": 528,
       "sha256": "f68f4db3d6a849d172f9b168e81138429a6c16aa18745c518058436e0e8efca6",
       "git_blob_sha1": "ef8c0ed9e64adc66dbb663fd36fa3d8a7486123c",
@@ -3153,7 +3153,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePassResult.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3TranspilePassResult.java",
       "bytes": 1441,
       "sha256": "596c420fbc30eb07867c03d48b56af6fab1dc6891114362dabc9e0f8ff7bbb4f",
       "git_blob_sha1": "977b8f683dd2ab76ca2256533989f12a2814f044",
@@ -3161,7 +3161,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePlan.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3TranspilePlan.java",
       "bytes": 3759,
       "sha256": "3073058ea8237577b4506ce3222ee83914f68c7451db83bb3f7f8792abf8d13a",
       "git_blob_sha1": "290b11dc5be769119cdb202262f0336ee3612313",
@@ -3169,7 +3169,7 @@
       "group": "external_source_and_proof_inputs"
     },
     {
-      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspileRun.java",
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3TranspileRun.java",
       "bytes": 3256,
       "sha256": "0be8b21e6fd0ec16b21c781e6ee9d9248fa8413a4010984246fb69cf72ffd485",
       "git_blob_sha1": "14284e82051ac5936dd82d93881228a914906c84",

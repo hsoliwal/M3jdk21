@@ -3,8 +3,8 @@ name: M3 five-provider real Guava SetMultimap contract and JNI
 on:
   pull_request:
     paths:
-      - 'm3/collections/interop/src/main/java/com/m3/collections/interop/M3GuavaSetMultimap.java'
-      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3GuavaSetMultimapTest.java'
+      - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3GuavaSetMultimap.java'
+      - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3GuavaSetMultimapTest.java'
       - 'm3/collections/qualification/m3-guava-setmultimap-20261018/**'
       - '.github/workflows/m3-guava-setmultimap-20261018.yml'
   workflow_dispatch:
@@ -30,9 +30,9 @@ jobs:
           import hashlib
           from pathlib import Path
           expected = {
-              "m3/collections/interop/src/main/java/com/m3/collections/interop/M3GuavaSetMultimap.java":
+              "m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3GuavaSetMultimap.java":
                   "0517eb6b401671e18b870eeb307e74f856a071c21a4a033432d0fc3348844099",
-              "m3/collections/interop/src/test/java/com/m3/collections/interop/M3GuavaSetMultimapTest.java":
+              "m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3GuavaSetMultimapTest.java":
                   "24c9b9ac0690dc04312c52363b25de179fa85ef38ad2d96696cb2e07dcef46d0"
           }
           root = Path.cwd()

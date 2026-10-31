@@ -42,7 +42,7 @@
       <resource>
         <directory>${project.basedir}/../../src/main/resources</directory>
         <includes>
-          <include>com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/**</include>
+          <include>jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/**</include>
           <include>META-INF/rewrite/m3-jcc-source-final-handoff.yml</include>
         </includes>
       </resource>
@@ -59,10 +59,10 @@
             <arg>-Xlint:all</arg>
           </compilerArgs>
           <includes>
-            <include>com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java</include>
+            <include>jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java</include>
           </includes>
           <testIncludes>
-            <testInclude>com/m3/rewrite/backport/JccSourceFinalHandoffTest.java</testInclude>
+            <testInclude>jdk/m3/rewrite/backport/JccSourceFinalHandoffTest.java</testInclude>
           </testIncludes>
         </configuration>
       </plugin>
@@ -114,7 +114,7 @@
                 </goals>
                 <configuration>
                   <skip>${m3.recipe.boot.skip}</skip>
-                  <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+                  <mainClass>jdk.internal.m3.prstack.M3RecipeBoot</mainClass>
                   <includeProjectDependencies>false</includeProjectDependencies>
                   <includePluginDependencies>true</includePluginDependencies>
                   <arguments>

@@ -17,8 +17,8 @@ ROOT = HERE.parents[1]
 RECEIPT = HERE / "qualification/object-state-offset-jni-20261017.tsv"
 RECEIPT_SHA256 = "f371b00237b1219cad8d131703929c32a06a56df567943411c40549e2351d4d5"
 EXPECTED = (
-    ("m3/collections/src/main/java/com/m3/collections/M3ObjectStateSlots28.java", "c56b6a29fd7da6ab1a1c3ac4b59cd0b6a15fc2b14a20c7c41975c12b57085c79", "c8c8b273da8d20ace83148230c62f63e03f92efa2cf880f935f9fae8dcdd3bc2"),
-    ("m3/collections/src/test/java/com/m3/collections/M3ObjectStateSlots28SelfTest.java", "e28893fb6734437cee712554f350fa173a3189a500feb64c80c678ca046e2f7b", "d2e750f4b3102c4269038ebd78318efc68f721ead906522f225a915c62808c26"),
+    ("m3/collections/src/main/java/jdk/m3/collections/M3ObjectStateSlots28.java", "c56b6a29fd7da6ab1a1c3ac4b59cd0b6a15fc2b14a20c7c41975c12b57085c79", "c8c8b273da8d20ace83148230c62f63e03f92efa2cf880f935f9fae8dcdd3bc2"),
+    ("m3/collections/src/test/java/jdk/m3/collections/M3ObjectStateSlots28SelfTest.java", "e28893fb6734437cee712554f350fa173a3189a500feb64c80c678ca046e2f7b", "d2e750f4b3102c4269038ebd78318efc68f721ead906522f225a915c62808c26"),
 )
 
 

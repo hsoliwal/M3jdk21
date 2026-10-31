@@ -58,7 +58,7 @@
       "sha256": "075c1fd6238386ed6dec222ac8556bd62eb13f370db31e314399bbfb10d3ab21"
     },
     {
-      "path": "compile-check-v01/src/com/m3/rewrite/backport/JccMergeMappingRecoveryTest.java",
+      "path": "compile-check-v01/src/jdk/m3/rewrite/backport/JccMergeMappingRecoveryTest.java",
       "bytes": 49145,
       "sha256": "a3ca105ed369e0eb0298440e47eab6e93afada986667d6605a24dfcb14eb3d7a"
     },

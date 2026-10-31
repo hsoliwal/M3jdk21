@@ -62,11 +62,11 @@ jobs:
 
       - name: Clone exact merged Synexia DAG content
         env:
-          GH_TOKEN: ${{ secrets.M3_SYNEXIA_TOKEN }}
+          GH_TOKEN: ${{ secrets.M3_TOKEN }}
         shell: bash
         run: |
           set -euo pipefail
-          test -n "${GH_TOKEN:-}" || { echo "M3_SYNEXIA_TOKEN is required for hosted upstream proof"; exit 1; }
+          test -n "${GH_TOKEN:-}" || { echo "M3_TOKEN is required for hosted upstream proof"; exit 1; }
           gh repo clone hsoliwal/com.synexia "$RUNNER_TEMP/com.synexia"
           git -C "$RUNNER_TEMP/com.synexia" checkout --detach 5369fdc8c076b998b0dd39c7c67c85d11a4b2d8f
           test "$(git -C "$RUNNER_TEMP/com.synexia" rev-parse HEAD)" = 5369fdc8c076b998b0dd39c7c67c85d11a4b2d8f
@@ -75,7 +75,7 @@ jobs:
         working-directory: ${{ runner.temp }}/com.synexia
         run: >-
           ./mvnw -B -ntp
-          -pl synexia-m3-recipe
+          -pl m3-recipe
           -Dtest=M3SecondPassReviewDagPlanTest
           test
 
@@ -83,5 +83,5 @@ jobs:
         working-directory: ${{ runner.temp }}/com.synexia
         run: >-
           ./mvnw -B -ntp
-          -f synexia-openrewrite-recipes/verification/m3-atom-pattern-signal-chain-20261004/pom.xml
+          -f m3-openrewrite-recipes/verification/m3-atom-pattern-signal-chain-20261004/pom.xml
           verify

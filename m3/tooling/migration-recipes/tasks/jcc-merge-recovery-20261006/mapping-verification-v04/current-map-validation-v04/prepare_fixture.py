@@ -176,7 +176,7 @@ def main():
     old_requirements = json.loads((old / "REQUIREMENTS.json").read_bytes())
     old_required_paths = {row["path"] for row in old_requirements["required_target_recipe_paths"]}
     new_paths = {"src/java.base/share/classes/java/util/regex/Matcher.java",
-                 "m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv"}
+                 "m3/tooling/mr/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv"}
     require(set(requirements) == old_required_paths | new_paths and len(requirements) == 32, "canonical artifact scope changed unexpectedly")
     require(tested == {row["path"]: row["tests"] for row in old_requirements["tested_receipts"]}, "tested receipt scope changed")
     closure = json.loads((old / "RECEIPT_CLOSURE.json").read_bytes())

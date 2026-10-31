@@ -13,7 +13,7 @@
 enum { M3_GATHER_CHUNK = 256 };
 
 JNIEXPORT void JNICALL
-Java_com_m3_collections_M3LongAddressKernel_gatherNative(
+Java_jdk_m3_collections_M3LongAddressKernel_gatherNative(
         JNIEnv *env, jclass ignored, jlongArray payload, jintArray addresses,
         jint address_from, jint length, jlongArray output, jint output_from) {
     (void) ignored;
@@ -95,7 +95,7 @@ static void m3_throw(JNIEnv *env, const char *type, const char *message) {
  * this code is original, not copied challenge code.
  */
 JNIEXPORT jint JNICALL
-Java_com_m3_collections_M3LongAddressKernel_gatherSelectedNative(
+Java_jdk_m3_collections_M3LongAddressKernel_gatherSelectedNative(
         JNIEnv *env, jclass ignored, jlongArray payload, jintArray addresses,
         jbyteArray row_states, jint address_from, jint length, jlongArray output,
         jint output_from, jint required, jint forbidden) {
@@ -196,7 +196,7 @@ static void m3_max_throw(JNIEnv *env, const char *kind, const char *message) {
 }
 
 JNIEXPORT void JNICALL
-Java_com_m3_collections_M3LaneAlgorithms_slidingMaximumIndices0(
+Java_jdk_m3_collections_M3LaneAlgorithms_slidingMaximumIndices0(
         JNIEnv *env, jclass unused, jlongArray values,
         jint from, jint to, jint window, jintArray output, jint output_from) {
     (void) unused;
@@ -303,7 +303,7 @@ static void m3_partition_throw(JNIEnv *env, const char *name, const char *messag
 }
 
 JNIEXPORT jlong JNICALL
-Java_com_m3_collections_M3LaneAlgorithms_partition3Long0(
+Java_jdk_m3_collections_M3LaneAlgorithms_partition3Long0(
         JNIEnv *env, jclass unused, jlongArray array, jint from, jint to, jlong pivot) {
     (void) unused;
     if (array == NULL) {
@@ -335,7 +335,7 @@ Java_com_m3_collections_M3LaneAlgorithms_partition3Long0(
 }
 
 JNIEXPORT jlong JNICALL
-Java_com_m3_collections_M3LaneAlgorithms_partition3Int0(
+Java_jdk_m3_collections_M3LaneAlgorithms_partition3Int0(
         JNIEnv *env, jclass unused, jintArray array, jint from, jint to, jint pivot) {
     (void) unused;
     if (array == NULL) {

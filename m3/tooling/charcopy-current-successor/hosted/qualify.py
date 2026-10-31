@@ -18,7 +18,7 @@ ROOT = Path(os.environ["M3_PROOF_ROOT"]).resolve()
 ARTIFACTS = ROOT / "artifacts"
 PREFIX = "m3/tooling/charcopy-current-successor/"
 WORKFLOW = ".github/workflows/m3-charcopy-current-successor.yml"
-SUITE = "com.synexia.rewrite.M3CharcopyCurrentSuccessorRecipeTest"
+SUITE = "jdk.internal.m3.rewrite.M3CharcopyCurrentSuccessorRecipeTest"
 METHODS = {"namedCurrentEightKeepInputsReplayAsExactFixedPoint",
            "everyDriftMissingDuplicateLegacyAndMixedInputRefuses",
            "exactInverseAndFullHistoricalPreimagesRetainTheirIdentity"}
@@ -267,9 +267,9 @@ def report():
                 "actual Maven command success required")
     providers = {}
     for name, expected in ENGINES.items():
-        owner = SDK / ("pinned-engine/com/synexia/rewrite/" + name + ".java")
+        owner = SDK / ("pinned-engine/jdk/internal/m3/rewrite/" + name + ".java")
         require(blob(regular(owner).read_bytes()) == expected, "provider source drift")
-        providers[name] = class_identity(SDK / ("target/classes/com/synexia/rewrite/" + name + ".class"))
+        providers[name] = class_identity(SDK / ("target/classes/jdk/internal/m3/rewrite/" + name + ".class"))
     write("qualification-receipt.json", {
         "schema": "M3_CHARCOPY_SUCCESSOR_HOSTED_QUALIFICATION_V1",
         "checkoutCommit": os.environ["EXPECTED_SOURCE_SHA"], "canonicalSourceCommit": record["sourceCommit"],

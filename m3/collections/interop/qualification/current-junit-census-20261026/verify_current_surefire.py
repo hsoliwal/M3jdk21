@@ -15,7 +15,7 @@ from pathlib import Path
 import re
 import xml.etree.ElementTree as ET
 
-SRC = 'm3/collections/interop/src/test/java/com/m3/collections/interop/'
+SRC = 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/'
 BASE = 'm3/collections/interop/qualification/runtime-junit-census-20261022/'
 CURRENT = 'm3/collections/interop/qualification/current-junit-census-20261026/'
 HISTORY = BASE + 'verify_surefire.py'
@@ -143,7 +143,7 @@ def expected_methods(product: Path) -> set[str]:
                 raise ValueError('unreviewed original JUnit source change: ' + relative)
         names = declared_methods(relative, data, methods)
         for name in names:
-            ident = 'com.m3.collections.interop.' + Path(relative).stem + '#' + name
+            ident = 'jdk.m3.collections.interop.' + Path(relative).stem + '#' + name
             if ident in expected:
                 raise ValueError('duplicate JUnit source method identity: ' + ident)
             expected.add(ident)

@@ -149,8 +149,8 @@ def binding(fresh=False):
 def checked_sdk(label, root, *, helper):
     module = runpy.run_path(str(regular(root / "verify.py")), run_name="m3_lexical_" + label + "_report")
     pins, pins_raw = module["inputs"]()
-    expected_suite = ("com.synexia.rewrite.M3RegexAsciiLiveOwnerCustodyRecipeTest" if helper
-                      else "com.synexia.rewrite.M3RegexAsciiLexicalReceiverRecipeTest")
+    expected_suite = ("jdk.internal.m3.rewrite.M3RegexAsciiLiveOwnerCustodyRecipeTest" if helper
+                      else "jdk.internal.m3.rewrite.M3RegexAsciiLexicalReceiverRecipeTest")
     expected_methods = (["allEightPartialStatesBothOrdersReachExactFixedPoint",
                          "allEightInverseStatesBothOrdersRecoverExactBefore",
                          "eachOwnedInputRefusesDriftMissingAndDuplicateOwnership"] if helper else
@@ -201,7 +201,7 @@ def checked_sdk(label, root, *, helper):
         emitted_root = root / "target/emitted/regex-ascii-lexical-receiver-20261019"
     compiled = {}
     for name in expected_classes:
-        raw = regular(root / ("target/classes/com/synexia/rewrite/" + name + ".class")).read_bytes()
+        raw = regular(root / ("target/classes/jdk/internal/m3/rewrite/" + name + ".class")).read_bytes()
         if len(raw) < 9 or raw[:4] != bytes.fromhex("cafebabe") or int.from_bytes(raw[6:8], "big") != 65:
             raise RuntimeError("actual Java21 provider classes required")
         compiled[name] = identity(raw)

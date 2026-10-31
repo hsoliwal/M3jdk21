@@ -17,16 +17,16 @@ BITMAP = "m3/collections/qualification/m3-long-bitmap-cache-20261017/recipe"
 HISTOGRAM = "m3/collections/recipe/state-mask-histogram-20261017"
 MANIFEST_SHA = "ad03213f94ae8b591ab06a75b8b1bc6a515d38609392e2de1e31bd2673bfdd49"
 BITMAP_OUTPUTS = {
-    "m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java":
+    "m3/collections/src/main/java/jdk/m3/collections/M3LongBitmapFilteredSnapshot.java":
         "ef4e4f4b7a8871cba0e631b96480ad3cf1e43640e5bf84a89cc91806df2d54d9",
-    "m3/collections/src/test/java/com/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java":
+    "m3/collections/src/test/java/jdk/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java":
         "de0be6b6fa43ea9b824db0f79106213976e94f8f7cdf6a84f15378a6c090cc37",
 }
 HISTORICAL = {
     "bitmap": {
-        "m3/compatibility/synexia-m3-collections-receiver-20261018.tsv":
+        "m3/compatibility/m3-collections-receiver-20261018.tsv":
             "def50d31fc5ef824d37608881b0bc004330d2ac6d32ec6a9c80f89c9807ecc05",
-        BITMAP + "/src/main/java/com/synexia/m3/M3LongBitmapFilteredSnapshotRecipe.java":
+        BITMAP + "/src/main/java/jdk/internal/m3/M3LongBitmapFilteredSnapshotRecipe.java":
             "1e8fc8f95354b1cf3431e3eed5bdfbcb44ad828be7d288fdab30c69588e0d3f5",
         **{BITMAP + "/src/main/resources/templates/" + Path(path).name: digest
            for path, digest in BITMAP_OUTPUTS.items()},
@@ -155,12 +155,12 @@ def qualify_bitmap(root, output, java_home):
             raise AssertionError(label + " failed: " + result.stdout + result.stderr)
 
     try:
-        source = root / (BITMAP + "/src/main/java/com/synexia/m3/M3LongBitmapFilteredSnapshotRecipe.java")
+        source = root / (BITMAP + "/src/main/java/jdk/internal/m3/M3LongBitmapFilteredSnapshotRecipe.java")
         run("original-strict-compile", [str(java_home / "bin/javac"), "--release", "21", "-proc:none",
                                         "-Xlint:all", "-Werror", "-d", str(classes), str(source)])
         resources = root / (BITMAP + "/src/main/resources")
         command = [str(java_home / "bin/java"), "-Djava.io.tmpdir=" + str(temporary), "-cp",
-                   str(classes) + os.pathsep + str(resources), "com.synexia.m3.M3LongBitmapFilteredSnapshotRecipe"]
+                   str(classes) + os.pathsep + str(resources), "jdk.internal.m3.M3LongBitmapFilteredSnapshotRecipe"]
         run("original-selftest", command + ["--selftest"])
         if list(temporary.iterdir()):
             raise AssertionError("original installer selftest leaked temporary files")

@@ -6,7 +6,7 @@
   "base_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
   "changed_sources": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
       "base_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "before_sha256": "1061f6a0c789082c7e86078c7ea3c48b97b804150a7ab96c2ff8e28ff6786369",
       "after_sha256": "2aa572587c9a4da5d7b5504e85d1457d1bbbabc66aeadde89a75f2839ea41ade"
@@ -32,7 +32,7 @@
   ],
   "new_test_sources": [
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredTerminalTraversalContract.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3FilteredTerminalTraversalContract.java",
       "before_sha256": "ABSENT",
       "after_sha256": "213ecb1ebe2883ca18e2889c624a055cd0f8dee04aa0974b84f78caa9e3b8df9"
     },
@@ -82,15 +82,15 @@
   },
   "jni_contracts": {
     "exports": [
-      "Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative",
-      "Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative",
-      "Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative",
-      "Java_com_m3_collections_M3IndexMaskCompactor_selectNative",
-      "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative",
-      "Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative",
-      "Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative",
-      "Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative",
-      "Java_com_m3_collections_M3IndexMaskWindow_scanNative"
+      "Java_jdk_m3_collections_M3IndexMaskCompactor_positionsAbiNative",
+      "Java_jdk_m3_collections_M3IndexMaskCompactor_rangeAbiNative",
+      "Java_jdk_m3_collections_M3IndexMaskCompactor_selectLongWindowNative",
+      "Java_jdk_m3_collections_M3IndexMaskCompactor_selectNative",
+      "Java_jdk_m3_collections_M3IndexMaskCompactor_selectPositionsNative",
+      "Java_jdk_m3_collections_M3IndexMaskCompactor_selectRangeNative",
+      "Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowNative",
+      "Java_jdk_m3_collections_M3IndexMaskWindow_scanBoundedNative",
+      "Java_jdk_m3_collections_M3IndexMaskWindow_scanNative"
     ],
     "generated_header_parity": "EXACT_EQUAL",
     "actual_native_required_modes": "PASSED",
@@ -518,7 +518,7 @@
     "baseline": "EXPECTED_ONE_SYMBOL_EXPORT_REFUSAL",
     "candidate": "ACTUAL_HOST_AND_LINKED_IMAGE_PASS",
     "modules": [
-      "com.m3.collections",
+      "jdk.m3.collections",
       "jdk.m3.collections"
     ],
     "packaged_compactor_exports": 7,

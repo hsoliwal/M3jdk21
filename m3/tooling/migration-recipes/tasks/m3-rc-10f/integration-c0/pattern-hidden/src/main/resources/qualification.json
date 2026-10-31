@@ -16,9 +16,9 @@
     {
       "crate": "ph0-phc",
       "id": "Phc",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ph0-phc/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ph0-phc/manifest.tsv",
       "manifestSHA256": "dc47ddb048af9ca88df53439d6609ceb21c4f8cf86f20ec5cac92fb1d4a255d4",
-      "namedRecipe": "com.synexia.m3.Ph0Phc",
+      "namedRecipe": "jdk.internal.m3.Ph0Phc",
       "targets": [
         {
           "afterBytes": 79664,
@@ -34,7 +34,7 @@
           "beforeBytes": 235261,
           "beforeSHA256": "68882a345277e74065e1f31fc85f07444eb7e3164a44a4226b629c80bfcb9843",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/10-Pattern.java.txt"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/10-Pattern.java.txt"
         },
         {
           "afterBytes": 3300,
@@ -42,7 +42,7 @@
           "beforeBytes": 3300,
           "beforeSHA256": "1a713463413df2684791ef1a214db69a7e5b23da888e61983c6b4902cef9c639",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv"
         },
         {
           "afterBytes": 18329,
@@ -50,7 +50,7 @@
           "beforeBytes": 18329,
           "beforeSHA256": "ad8f41c47e2635f8863361cb790b1c2f53f394da58e449b60a229ba6722aba3d",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/atom/spectrum/CORPUS.tsv"
+          "path": "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/atom/spectrum/CORPUS.tsv"
         },
         {
           "afterBytes": 235249,
@@ -71,18 +71,18 @@
         "Phc"
       ],
       "id": "Forward",
-      "recipe": "com.synexia.m3.Ph0Forward"
+      "recipe": "jdk.internal.m3.Ph0Forward"
     },
     {
       "families": [
         "Phc"
       ],
       "id": "Reverse",
-      "recipe": "com.synexia.m3.Ph0Reverse"
+      "recipe": "jdk.internal.m3.Ph0Reverse"
     }
   ],
   "ownerSHA256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
-  "schema": "synexia.ph0.qualification/1",
+  "schema": "m3.ph0.qualification/1",
   "sourceCommit": "d1ecbd43dbadaf218deec0d98a2ddc23f3a3f45c",
   "targetCommit": "c0a14387009aefc7d62bd3268055d526e04f9074",
   "targetTree": "491bbd80a51483d0710fc12c1bad3a037b385ba0"

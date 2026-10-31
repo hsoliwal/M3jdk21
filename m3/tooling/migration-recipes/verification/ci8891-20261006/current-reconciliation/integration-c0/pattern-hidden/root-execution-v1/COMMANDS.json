@@ -160,6 +160,6 @@
   ],
   "qualificationInferred": false,
   "rootExecutionRequired": true,
-  "schema": "synexia.ph0.package-commands/1",
+  "schema": "m3.ph0.package-commands/1",
   "status": "ROOT_REVIEW_REQUIRED_NOT_EXECUTED"
 }

@@ -4,20 +4,20 @@
   "license": "Apache-2.0",
   "target_repository": "hsoliwal/M3jdk21",
   "target_base_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
-  "synexia_recipe_commit": "83cbf7399396afafa42ec75ecd81e6d2131166da",
-  "synexia_recipe_pr": "https://github.com/hsoliwal/com.synexia/pull/12292",
-  "recipe": "com.synexia.rewrite.M3GuavaArrayValueLists20261018",
+  "m3_recipe_commit": "83cbf7399396afafa42ec75ecd81e6d2131166da",
+  "m3_recipe_pr": "https://github.com/hsoliwal/com.synexia/pull/12292",
+  "recipe": "jdk.internal.m3.rewrite.M3GuavaArrayValueLists20261018",
   "recipe_engine_blob": "3bdeeaea9a212fe0c7d1f544510f87c4cd49eb40",
-  "canonical_proof_path": "synexia-openrewrite-recipes/docs/guava-array-value-lists-20261018/PROOF.json",
+  "canonical_proof_path": "m3-openrewrite-recipes/docs/guava-array-value-lists-20261018/PROOF.json",
   "canonical_proof_sha256": "1b5ac019e764e55237832ab6f2dbe3187999ebe247d5b7898a8dfe258fd7806a",
   "bindings": [
     {
-      "path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryCollections.java",
+      "path": "m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3LibraryCollections.java",
       "before_sha256": "f93bc46a69911eb8a05b13b94bb4e4d77b42e2a534576e90c1243b7cbe779fb6",
       "after_sha256": "6da1ee407d7ade0daaf1260e87e42edbede7c01ff3f7b773fef0c137d0a4e8cb"
     },
     {
-      "path": "m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryCollectionsTest.java",
+      "path": "m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3LibraryCollectionsTest.java",
       "before_sha256": "4bebee17ef96cefd2c779c76a0b190e27de311d136dec2de0fc5c05161ac199a",
       "after_sha256": "792a0a8fdb7dadd0fc81e033fc0fc61cc8e2f7c4af5acdfb7098304d19b0d1f1"
     }
@@ -247,7 +247,7 @@
         "-cp",
         "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\runtime-before;C:\\codex-work\\m3-apache-validation-20261017-g1\\guava-unit\\deps\\guava-33.4.8-jre.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\eclipse\\collections\\eclipse-collections\\11.1.0\\eclipse-collections-11.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\eclipse\\collections\\eclipse-collections-api\\11.1.0\\eclipse-collections-api-11.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\springframework\\spring-core\\6.2.0\\spring-core-6.2.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\springframework\\spring-jcl\\6.2.0\\spring-jcl-6.2.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-collections4\\4.5.0\\commons-collections4-4.5.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\errorprone\\error_prone_annotations\\2.36.0\\error_prone_annotations-2.36.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jspecify\\jspecify\\1.0.0\\jspecify-1.0.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\j2objc\\j2objc-annotations\\3.0.0\\j2objc-annotations-3.0.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\guava\\failureaccess\\1.0.3\\failureaccess-1.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\code\\findbugs\\jsr305\\3.0.2\\jsr305-3.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.10.2\\junit-jupiter-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.10.2\\junit-jupiter-api-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.10.2\\junit-platform-commons-1.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.10.2\\junit-jupiter-params-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.10.2\\junit-jupiter-engine-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.10.2\\junit-platform-engine-1.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.10.2\\junit-platform-launcher-1.10.2.jar",
         "CollectionTestLauncher",
-        "com.m3.collections.interop.M3LibraryCollectionsTest#guavaListMultimapRetainsArrayListRandomAccessContracts",
+        "jdk.m3.collections.interop.M3LibraryCollectionsTest#guavaListMultimapRetainsArrayListRandomAccessContracts",
         "1"
       ],
       "expected": "RUNTIME_TESTS found=1 passed=0 failed=1 aborted=0 skipped=0",
@@ -349,7 +349,7 @@
         "-cp",
         "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\runtime-after;C:\\codex-work\\m3-apache-validation-20261017-g1\\guava-unit\\deps\\guava-33.4.8-jre.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\eclipse\\collections\\eclipse-collections\\11.1.0\\eclipse-collections-11.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\eclipse\\collections\\eclipse-collections-api\\11.1.0\\eclipse-collections-api-11.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\springframework\\spring-core\\6.2.0\\spring-core-6.2.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\springframework\\spring-jcl\\6.2.0\\spring-jcl-6.2.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-collections4\\4.5.0\\commons-collections4-4.5.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\errorprone\\error_prone_annotations\\2.36.0\\error_prone_annotations-2.36.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jspecify\\jspecify\\1.0.0\\jspecify-1.0.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\j2objc\\j2objc-annotations\\3.0.0\\j2objc-annotations-3.0.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\guava\\failureaccess\\1.0.3\\failureaccess-1.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\code\\findbugs\\jsr305\\3.0.2\\jsr305-3.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.10.2\\junit-jupiter-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.10.2\\junit-jupiter-api-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.10.2\\junit-platform-commons-1.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.10.2\\junit-jupiter-params-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.10.2\\junit-jupiter-engine-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.10.2\\junit-platform-engine-1.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.10.2\\junit-platform-launcher-1.10.2.jar",
         "CollectionTestLauncher",
-        "com.m3.collections.interop.M3LibraryCollectionsTest",
+        "jdk.m3.collections.interop.M3LibraryCollectionsTest",
         "23"
       ],
       "expected": "RUNTIME_TESTS found=23 passed=23 failed=0 aborted=0 skipped=0",
@@ -393,7 +393,7 @@
         "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\runtime-before;C:\\codex-work\\m3-apache-validation-20261017-g1\\guava-unit\\deps\\guava-33.4.8-jre.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\eclipse\\collections\\eclipse-collections\\11.1.0\\eclipse-collections-11.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\eclipse\\collections\\eclipse-collections-api\\11.1.0\\eclipse-collections-api-11.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\springframework\\spring-core\\6.2.0\\spring-core-6.2.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\springframework\\spring-jcl\\6.2.0\\spring-jcl-6.2.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-collections4\\4.5.0\\commons-collections4-4.5.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\errorprone\\error_prone_annotations\\2.36.0\\error_prone_annotations-2.36.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jspecify\\jspecify\\1.0.0\\jspecify-1.0.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\j2objc\\j2objc-annotations\\3.0.0\\j2objc-annotations-3.0.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\guava\\failureaccess\\1.0.3\\failureaccess-1.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\code\\findbugs\\jsr305\\3.0.2\\jsr305-3.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.10.2\\junit-jupiter-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.10.2\\junit-jupiter-api-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.10.2\\junit-platform-commons-1.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.10.2\\junit-jupiter-params-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.10.2\\junit-jupiter-engine-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.10.2\\junit-platform-engine-1.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.10.2\\junit-platform-launcher-1.10.2.jar",
         "-protected",
         "-s",
-        "com.m3.collections.interop.M3LibraryCollections"
+        "jdk.m3.collections.interop.M3LibraryCollections"
       ],
       "expected": "guavaListMultimap",
       "before": {
@@ -436,7 +436,7 @@
         "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\runtime-after;C:\\codex-work\\m3-apache-validation-20261017-g1\\guava-unit\\deps\\guava-33.4.8-jre.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\eclipse\\collections\\eclipse-collections\\11.1.0\\eclipse-collections-11.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\eclipse\\collections\\eclipse-collections-api\\11.1.0\\eclipse-collections-api-11.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\springframework\\spring-core\\6.2.0\\spring-core-6.2.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\springframework\\spring-jcl\\6.2.0\\spring-jcl-6.2.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-collections4\\4.5.0\\commons-collections4-4.5.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\errorprone\\error_prone_annotations\\2.36.0\\error_prone_annotations-2.36.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jspecify\\jspecify\\1.0.0\\jspecify-1.0.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\j2objc\\j2objc-annotations\\3.0.0\\j2objc-annotations-3.0.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\guava\\failureaccess\\1.0.3\\failureaccess-1.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\code\\findbugs\\jsr305\\3.0.2\\jsr305-3.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.10.2\\junit-jupiter-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.10.2\\junit-jupiter-api-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.10.2\\junit-platform-commons-1.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.10.2\\junit-jupiter-params-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.10.2\\junit-jupiter-engine-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.10.2\\junit-platform-engine-1.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.10.2\\junit-platform-launcher-1.10.2.jar",
         "-protected",
         "-s",
-        "com.m3.collections.interop.M3LibraryCollections"
+        "jdk.m3.collections.interop.M3LibraryCollections"
       ],
       "expected": "guavaListMultimap",
       "before": {

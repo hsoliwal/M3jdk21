@@ -1,6 +1,6 @@
 {
   "canonical_revision": "8f8200375d8d403b58e855ee5db02f2e8fac33a8",
-  "canonical_crate": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "canonical_crate": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
   "change": "Recipe-source POM exposes m3.recipe.test.maxHeap, default768m. All original engines, SDK tests, sealing/receiving gates unchanged.",
   "before_pom_sha256": "77768901812250c397a0ec138c83c7117a86bd14d1c77fbd75cce1324812ebb5",
   "after_pom_sha256": "4c90faaa9e64aebeeba14fb2196731c6334293781d0fdcafbf190f2f5662eb7d",

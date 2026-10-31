@@ -1,9 +1,9 @@
 {
-  "schema": "synexia-m3-recipe-observation-v1",
+  "schema": "m3-recipe-observation-v1",
   "event_id": "interop-contracts-20261020-sdk13",
   "captured_utc": "2026-10-20T14:57:37.394133+00:00",
-  "canonical_recipe": "com.synexia.m3jdk.InteropContracts20261020",
-  "canonical_home": "synexia-openrewrite-recipes/recipe-crates/m3-interop-contracts-20261020",
+  "canonical_recipe": "jdk.internal.m3.m3jdk.InteropContracts20261020",
+  "canonical_home": "m3-openrewrite-recipes/recipe-crates/m3-interop-contracts-20261020",
   "candidate_set_sha256": "05f397c6181992c354c6113aca7e2f9039bb8c835bef8e5c14a286ec526176eb",
   "observation": "ACTUAL_SDK_PASS_AND_READ_ONLY_RECEIVER_PREFLIGHT_PASS",
   "sdk_tests": {

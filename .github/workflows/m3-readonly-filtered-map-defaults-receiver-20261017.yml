@@ -2,8 +2,8 @@ name: M3 filtered Map default-method receiver Java21
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3FilteredViews.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3ReadOnlyMapDefaults*.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3ReadOnlyMapDefaults*.java'
       - 'm3/collections/qualification/m3-readonly-filtered-map-defaults-20261017/**'
       - '.github/workflows/m3-readonly-filtered-map-defaults-receiver-20261017.yml'
   workflow_dispatch:
@@ -31,8 +31,8 @@ jobs:
           cp "$mirror/pre/M3FilteredViews.java.txt" "$RUNNER_TEMP/m3-old-src/M3FilteredViews.java"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$RUNNER_TEMP/m3-old-classes" \
             "$RUNNER_TEMP/m3-old-src/M3FilteredViews.java" \
-            m3/collections/src/test/java/com/m3/collections/M3ReadOnlyMapDefaultsContract.java
-          if java -cp "$RUNNER_TEMP/m3-old-classes" com.m3.collections.M3ReadOnlyMapDefaultsContract >"$RUNNER_TEMP/red.log" 2>&1; then
+            m3/collections/src/test/java/jdk/m3/collections/M3ReadOnlyMapDefaultsContract.java
+          if java -cp "$RUNNER_TEMP/m3-old-classes" jdk.m3.collections.M3ReadOnlyMapDefaultsContract >"$RUNNER_TEMP/red.log" 2>&1; then
             echo "The original source unexpectedly passed the new oracle"
             exit 1
           fi
@@ -43,19 +43,19 @@ jobs:
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/m3-abi-new"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$RUNNER_TEMP/m3-abi-new" \
-            m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java
-          javap -classpath "$RUNNER_TEMP/m3-old-classes" -public -s com.m3.collections.M3FilteredViews > "$RUNNER_TEMP/abi-before.txt"
-          javap -classpath "$RUNNER_TEMP/m3-abi-new" -public -s com.m3.collections.M3FilteredViews > "$RUNNER_TEMP/abi-after.txt"
+            m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java
+          javap -classpath "$RUNNER_TEMP/m3-old-classes" -public -s jdk.m3.collections.M3FilteredViews > "$RUNNER_TEMP/abi-before.txt"
+          javap -classpath "$RUNNER_TEMP/m3-abi-new" -public -s jdk.m3.collections.M3FilteredViews > "$RUNNER_TEMP/abi-after.txt"
           diff -u "$RUNNER_TEMP/abi-before.txt" "$RUNNER_TEMP/abi-after.txt"
       - name: Generated source must pass new and existing JDK contract oracles
         run: |
           mkdir -p "$RUNNER_TEMP/m3-new-classes"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$RUNNER_TEMP/m3-new-classes" \
-            m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java \
-            m3/collections/src/test/java/com/m3/collections/M3ReadOnlyMapDefaultsContract.java \
-            m3/collections/src/test/java/com/m3/collections/M3FilteredViewsContract.java
-          java -cp "$RUNNER_TEMP/m3-new-classes" com.m3.collections.M3ReadOnlyMapDefaultsContract
-          java -cp "$RUNNER_TEMP/m3-new-classes" com.m3.collections.M3FilteredViewsContract
+            m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3ReadOnlyMapDefaultsContract.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3FilteredViewsContract.java
+          java -cp "$RUNNER_TEMP/m3-new-classes" jdk.m3.collections.M3ReadOnlyMapDefaultsContract
+          java -cp "$RUNNER_TEMP/m3-new-classes" jdk.m3.collections.M3FilteredViewsContract
   owning-module:
     runs-on: ubuntu-latest
     steps:

@@ -2,8 +2,8 @@
   "schema": "root-spring-complete-owner-before-code-admission-v1",
   "utc": "2026-10-18T04:13:32.048238+00:00",
   "status": "AUTHORIZE_FULL_OWNER_GENERATION_NOT_CANDIDATE_ADMISSION",
-  "owner": "com.m3.collections.spring.M3LinkedCaseInsensitiveMap",
-  "candidateSource": "candidate/com/m3/collections/spring/M3LinkedCaseInsensitiveMap.java",
+  "owner": "jdk.m3.collections.spring.M3LinkedCaseInsensitiveMap",
+  "candidateSource": "candidate/jdk/m3/collections/spring/M3LinkedCaseInsensitiveMap.java",
   "candidateDirectoryAbsentBeforeAdmission": true,
   "inputSealSHA256": "5ef32401ac100f1ba37dc255c4d0e743567104fe90d70416b05966334cc5e3e3",
   "checkedFiles": [

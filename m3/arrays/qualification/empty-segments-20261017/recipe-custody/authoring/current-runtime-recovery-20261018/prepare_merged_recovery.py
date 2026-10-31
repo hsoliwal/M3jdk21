@@ -228,7 +228,7 @@ def main():
                  "execution": "NEW_MAVEN_RECEIVING_AND_BUILD_GATES_REQUIRED; EARLIER_EVIDENCE_REMAINS_BOUND_TO_EARLIER_BYTES"}
     write(candidate / METADATA / "ADMISSION.json", json_bytes(admission))
     mapping = {"schema": "M3_CURRENT_RUNTIME_DELIVERY_MAP_V1", "dataset": DATASET,
-               "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+               "recipe": "jdk.internal.m3.m3jdk.CollectionsContractRefinement20261017",
                "baseline": CURRENT, "restored_delivery": DELIVERED,
                "scope": "27 original runtime repair targets; four separate current-delivery metadata files",
                "owner": "Existing JDK/HotSpot/JNI owners and seven original canonical datasets",
@@ -273,7 +273,7 @@ claim remains HOLD. The ordered STRING phase is unchanged. Runtime facade and
 ProgressJob API additions are separate feature datasets and reviews.
 
 The source authorer prepares inputs and invokes the original Maven sealer.
-The transformation is `com.synexia.m3jdk.CollectionsContractRefinement20261017`
+The transformation is `jdk.internal.m3.m3jdk.CollectionsContractRefinement20261017`
 with dataset `m3jdk21-runtime-restore-07ba`. The original Java and text owners,
 five SDK tests, eight sealing cases, nine receiver cases, and capped POM are
 reused. No target is copied into a receiving tree before actual SDK

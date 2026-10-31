@@ -7,7 +7,7 @@ import sys
 
 HERE=Path(__file__).resolve().parent
 ROOT=HERE.parents[4]
-CRATE=HERE/"recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-five-provider-counted-bags-20261017"
+CRATE=HERE/"recipe/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-five-provider-counted-bags-20261017"
 
 def checked(path):
     if path.is_symlink() or not path.is_file():
@@ -41,9 +41,9 @@ def verify():
         raise ValueError("expected eight distinct ordered exact Java postimages")
 
     owners={
-       "m3/collections/src/main/java/com/m3/collections/M3LinkedHashMap.java":
+       "m3/collections/src/main/java/jdk/m3/collections/M3LinkedHashMap.java":
             "ade59880b8c9b2bee1b32ae67ca9d29b7382d998",
-       "m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryCollections.java":
+       "m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3LibraryCollections.java":
             "f05d0949cadb14bfad90287444addf6501c21992",
     }
     for owner,expected in owners.items():

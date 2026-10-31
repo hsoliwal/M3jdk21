@@ -8,8 +8,8 @@ here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 repo="$(cd "$here/../.." && pwd)"
 target="$repo/.m3/target/atomize-patternize/public-receiver"
 classes="$target/classes"
-manifest="$repo/m3/synexia-import/synexia-seed-export.tsv"
-src="$repo/m3/synexia-import/src/main/java/com/m3/synexia/importer"
+manifest="$repo/m3/m3-import/m3-seed-export.tsv"
+src="$repo/m3/m3-import/src/main/java/jdk/m3/importer"
 
 fail() {
   printf '%s\n' "$1" >&2
@@ -18,16 +18,16 @@ fail() {
 
 command -v javac >/dev/null 2>&1 || fail "JAVAC_REQUIRED" 2
 command -v java >/dev/null 2>&1 || fail "JAVA_REQUIRED" 2
-[[ -f "$manifest" && ! -L "$manifest" ]] || fail "SYNEXIA_PUBLIC_MANIFEST_REQUIRED"
+[[ -f "$manifest" && ! -L "$manifest" ]] || fail "M3_PUBLIC_MANIFEST_REQUIRED"
 
 rm -rf -- "$target"
 mkdir -p "$classes"
 
 sources=(
-  "$src/SynexiaCanonicalFamilyPolicy.java"
-  "$src/SynexiaImportManifest.java"
-  "$src/SynexiaImporter.java"
-  "$src/SynexiaImportCli.java"
+  "$src/M3CanonicalFamilyPolicy.java"
+  "$src/M3ImportManifest.java"
+  "$src/M3Importer.java"
+  "$src/M3ImportCli.java"
 )
 
 for file in "${sources[@]}"; do
@@ -38,14 +38,14 @@ javac --release 21 -proc:none -implicit:none -encoding UTF-8 -Xlint:all -Werror 
   -d "$classes" "${sources[@]}"
 
 root="$(
-  java -cp "$classes" com.m3.synexia.importer.SynexiaImportCli \
+  java -cp "$classes" jdk.m3.importer.M3ImportCli \
     verify-target "$manifest" "$repo" "$repo"
 )"
 
 [[ "$root" =~ ^[0-9a-f]{64}$ ]] || fail "PUBLIC_RECEIVER_ROOT_INVALID"
 
 command -v sha1sum >/dev/null 2>&1 || fail "SHA1SUM_REQUIRED" 2
-a3_root="$repo/m3/vendor/synexia/synexia-openrewrite-recipes"
+a3_root="$repo/m3/vendor/m3/m3-openrewrite-recipes"
 a3_manifest="$a3_root/src/main/resources/META-INF/m3/jdk-a3-recipe-export.tsv"
 a3_expected_manifest_blob="8a3e3d6e802e95dbcc7b0bf83a347887b02d6717"
 [[ -f "$a3_manifest" && ! -L "$a3_manifest" ]] || fail "PUBLIC_A3_EXPORT_MANIFEST_REQUIRED"
@@ -79,14 +79,14 @@ done < "$a3_manifest"
 {
   printf 'key\tvalue\n'
   printf 'mode\tPUBLIC_VERIFY_ONLY\n'
-  printf 'manifest\t%s\n' 'm3/synexia-import/synexia-seed-export.tsv'
+  printf 'manifest\t%s\n' 'm3/m3-import/m3-seed-export.tsv'
   printf 'manifestRoot\t%s\n' "$root"
   printf 'a3SourceRevision\t%s\n' 'a062661e91e769a00c2d027e1f04a7a0c8f9dc28'
   printf 'a3ExportManifestGitBlob\t%s\n' "$a3_manifest_blob"
   printf 'a3ExportFiles\t%s\n' "$a3_files"
   printf 'sourceMutationAuthority\tfalse\n'
   printf 'promotionAuthority\tfalse\n'
-  printf 'privateSynexiaRequired\tfalse\n'
+  printf 'privateM3Required\tfalse\n'
 } > "$target/receipt.tsv"
 
 printf 'M3_PUBLIC_ATOM_PATTERN_RECEIVER_PASS root=%s a3ExportFiles=%s a3ManifestBlob=%s\n' \

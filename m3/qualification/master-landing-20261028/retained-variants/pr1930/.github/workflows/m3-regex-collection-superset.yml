@@ -50,11 +50,11 @@ jobs:
           b5463d8e126b9a70dc874f181674f79f2484f6677fb30b864654d9b62fa25614  test/jdk/java/util/regex/M3RegexFrontierShortCircuitTest.java
           8682503c6c38d2c8cf4837f9188fa609ddfdb9e4c3e59e595da87d93c4e40028  test/jdk/java/util/regex/M3RegexShortCircuitTest.java
           c0e67fad7a03fe6558ddeb31442b3c2c6a916ded8563572a632da3934d348318  test/jdk/java/util/regex/M3RegexCompactPlanTest.java
-          d0d258bb05d7102955295f5382e8a737cc2ffd93d578864f83f6025ea9150f1d  m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java
-          888b22b7615d170fff078bdc06780de07a7dfdef2025406b7f4134429db37503  m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java
-          60104a3b7d57b06dd8546086d7706d44ed540abe07da0bfb06c50b067689bd88  m3/collections/src/test/java/com/m3/collections/M3IndexedSnapshotDirectoryOwnershipSelfTest.java
-          1446ae09558aac7a88f9ab130aa9b59494d02b60169db9276d54e721e41d7bec  m3/collections/src/test/java/com/m3/collections/M3IndexedSnapshotDirectoryOwnershipTest.java
-          346b1b23baf27fdb9e5fcfd0609bf1897c7bdaa8fe4b17cb22732b0602b6babd  m3/collections/src/test/java/com/m3/collections/M3TreeWindowShiftContract.java
+          d0d258bb05d7102955295f5382e8a737cc2ffd93d578864f83f6025ea9150f1d  m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java
+          888b22b7615d170fff078bdc06780de07a7dfdef2025406b7f4134429db37503  m3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java
+          60104a3b7d57b06dd8546086d7706d44ed540abe07da0bfb06c50b067689bd88  m3/collections/src/test/java/jdk/m3/collections/M3IndexedSnapshotDirectoryOwnershipSelfTest.java
+          1446ae09558aac7a88f9ab130aa9b59494d02b60169db9276d54e721e41d7bec  m3/collections/src/test/java/jdk/m3/collections/M3IndexedSnapshotDirectoryOwnershipTest.java
+          346b1b23baf27fdb9e5fcfd0609bf1897c7bdaa8fe4b17cb22732b0602b6babd  m3/collections/src/test/java/jdk/m3/collections/M3TreeWindowShiftContract.java
           7e9f8ff52c96de88e5479019f217c8ea27eeeda0cbcf548e036110ed705f9178  src/java.base/share/classes/java/lang/M3StringRegexDp.java
           c816ca792348868bd45ccc1ba073a67852239f1872a1a33511a1884f457b2508  test/jdk/java/lang/String/M3RegexNativeRouteProbe.java
           94d58abfabb42ff980c6714e83c763482165dc64069d4a4c0d1c14680ca7c0fd  test/jdk/java/lang/String/M3StringRegexDpTest.java
@@ -276,11 +276,11 @@ jobs:
         run: |
           set -euo pipefail
           cat <<'SNAPSHOT_SEALS' | sha256sum -c
-          d0d258bb05d7102955295f5382e8a737cc2ffd93d578864f83f6025ea9150f1d  m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java
-          888b22b7615d170fff078bdc06780de07a7dfdef2025406b7f4134429db37503  m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java
-          60104a3b7d57b06dd8546086d7706d44ed540abe07da0bfb06c50b067689bd88  m3/collections/src/test/java/com/m3/collections/M3IndexedSnapshotDirectoryOwnershipSelfTest.java
-          1446ae09558aac7a88f9ab130aa9b59494d02b60169db9276d54e721e41d7bec  m3/collections/src/test/java/com/m3/collections/M3IndexedSnapshotDirectoryOwnershipTest.java
-          346b1b23baf27fdb9e5fcfd0609bf1897c7bdaa8fe4b17cb22732b0602b6babd  m3/collections/src/test/java/com/m3/collections/M3TreeWindowShiftContract.java
+          d0d258bb05d7102955295f5382e8a737cc2ffd93d578864f83f6025ea9150f1d  m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java
+          888b22b7615d170fff078bdc06780de07a7dfdef2025406b7f4134429db37503  m3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java
+          60104a3b7d57b06dd8546086d7706d44ed540abe07da0bfb06c50b067689bd88  m3/collections/src/test/java/jdk/m3/collections/M3IndexedSnapshotDirectoryOwnershipSelfTest.java
+          1446ae09558aac7a88f9ab130aa9b59494d02b60169db9276d54e721e41d7bec  m3/collections/src/test/java/jdk/m3/collections/M3IndexedSnapshotDirectoryOwnershipTest.java
+          346b1b23baf27fdb9e5fcfd0609bf1897c7bdaa8fe4b17cb22732b0602b6babd  m3/collections/src/test/java/jdk/m3/collections/M3TreeWindowShiftContract.java
           SNAPSHOT_SEALS
       - name: Build original primitive-array owner before dependent collections
         shell: bash
@@ -294,6 +294,6 @@ jobs:
           set -euo pipefail
           mvn -B -ntp -f m3/collections/pom.xml -DfailIfNoTests=true test
           java -ea -cp m3/collections/target/classes:m3/collections/target/test-classes:m3/arrays/target/classes \
-            com.m3.collections.M3TreeWindowShiftContract
+            jdk.m3.collections.M3TreeWindowShiftContract
           java -ea -cp m3/collections/target/classes:m3/collections/target/test-classes:m3/arrays/target/classes \
-            com.m3.collections.M3IndexedSnapshotDirectoryOwnershipSelfTest
+            jdk.m3.collections.M3IndexedSnapshotDirectoryOwnershipSelfTest

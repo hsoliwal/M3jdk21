@@ -5,7 +5,7 @@
   "canonical_repo": "hsoliwal/com.synexia",
   "canonical_pr": 12855,
   "canonical_dataset": "vpt-frame-fallback-20261027",
-  "canonical_recipe": "com.synexia.m3.ViewportFrameFallback20261027",
+  "canonical_recipe": "jdk.internal.m3.ViewportFrameFallback20261027",
   "original_engine_git_blobs": {
     "M3EditScope": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
     "M3HashPinnedJavaSnapshotRecipe": "98138cb6734ad86e3f77b8722fa5ff459842e841",

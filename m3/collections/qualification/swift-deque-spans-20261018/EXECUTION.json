@@ -2,7 +2,7 @@
   "schema": "M3_SWIFT_DEQUE_EXECUTION_V1",
   "target_predecessor": "7c6b3b51094c50c84746b819d79665e5f003bbdf",
   "local_worktree_dirty": true,
-  "recipe": "com.synexia.m3.SwiftDequeSpans20261018",
+  "recipe": "jdk.internal.m3.SwiftDequeSpans20261018",
   "recipe_tests": 4,
   "focused_baseline_tests": 5,
   "focused_candidate_tests": 5,
@@ -12,17 +12,17 @@
   "cost_sha256": "fc075345a426f2aee9390aa7ec4bb132dfd02338fb6d39f5f29832fb8ae7a0c9",
   "target_outputs": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongArrayDeque.java",
       "before_sha256": "67a1118b2df4cff80430e47700d6243e5135048abfa26ffdeffa66dc8f2e76cc",
       "after_sha256": "ee2ce70df68f11d14ba85a7da8485c9e82e7bc38c08601b57b69d1f39d3bdd2a",
-      "template": "m3__collections__src__main__java__com__m3__collections__M3LongArrayDeque.java.txt",
+      "template": "m3__collections__src__main__java__jdk__m3__collections__M3LongArrayDeque.java.txt",
       "kind": "java"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3DequeSpanCopyTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3DequeSpanCopyTest.java",
       "before_sha256": "ABSENT",
       "after_sha256": "ace325fb05470e1b8b52d2f650c69dc339abf32d7402d6a73cbf718b9cdc1cbd",
-      "template": "m3__collections__src__test__java__com__m3__collections__M3DequeSpanCopyTest.java.txt",
+      "template": "m3__collections__src__test__java__jdk__m3__collections__M3DequeSpanCopyTest.java.txt",
       "kind": "java"
     },
     {

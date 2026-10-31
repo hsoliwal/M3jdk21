@@ -3,9 +3,9 @@
   "current_master_base": "75e2bfe3d934bae1535243542b2417570b2bea24",
   "qualified_existing_receiver": "hsoliwal/M3jdk21#1884",
   "source_origin_commit": "0f4ec5d05aabe8d43642e29dd569f29b3aa59587",
-  "canonical_synexia_pr": 12855,
-  "canonical_synexia_ref": "edbd43a867b17762616de6e52dcc04be7982c05b",
-  "java_owner": "m3/collections/src/main/java/com/m3/collections/M3MaskViewportNative.java",
+  "canonical_m3_pr": 12855,
+  "canonical_m3_ref": "edbd43a867b17762616de6e52dcc04be7982c05b",
+  "java_owner": "m3/collections/src/main/java/jdk/m3/collections/M3MaskViewportNative.java",
   "native_owner": "m3/collections/src/main/c/m3maskviewport.c",
   "verified_current_master_preimages": {
     "native": "205f93c2fad9fe234fc87980ba89ef1a45cef0a8",

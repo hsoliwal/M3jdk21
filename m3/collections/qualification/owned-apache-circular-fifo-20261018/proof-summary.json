@@ -41,7 +41,7 @@
         "protocolSHA256": "92c85c421b483b1b6e7e89aee1dde0c1fb1a99a22b93e58d0bd64dd542b2d9d8",
         "scope": "provider-specific external mutation/null-prefix observations only"
       },
-      "com.m3.collections.apache.M3CircularFifoQueue": {
+      "jdk.m3.collections.apache.M3CircularFifoQueue": {
         "operations": 25000,
         "exceptionObservations": 6843,
         "protocolSHA256": "92c85c421b483b1b6e7e89aee1dde0c1fb1a99a22b93e58d0bd64dd542b2d9d8",
@@ -94,7 +94,7 @@
           "-cp",
           "S:\\codex-work\\m3-collections-next-20261018\\apache-circular-fifo\\mutation-v3-classes;S:\\codex-work\\m3-collections-next-20261018\\apache-circular-fifo\\candidate-v3-classes;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-collections4\\4.5.0\\commons-collections4-4.5.0.jar",
           "CircularFifoMutationProbe",
-          "com.m3.collections.apache.M3CircularFifoQueue"
+          "jdk.m3.collections.apache.M3CircularFifoQueue"
         ],
         "returncode": 0,
         "stdout": "{\"operations\":25000,\"exceptionObservations\":6843,\"protocolSHA256\":\"92c85c421b483b1b6e7e89aee1dde0c1fb1a99a22b93e58d0bd64dd542b2d9d8\",\"scope\":\"provider-specific external mutation/null-prefix observations only\"}\n",
@@ -165,7 +165,7 @@
         "allocatedBytes": 0,
         "scope": "warmed cached-reference add/eviction loop only; no throughput or all-operations claim"
       },
-      "com.m3.collections.apache.M3CircularFifoQueue": {
+      "jdk.m3.collections.apache.M3CircularFifoQueue": {
         "operations": 1000000,
         "allocatedBytes": 0,
         "scope": "warmed cached-reference add/eviction loop only; no throughput or all-operations claim"
@@ -216,7 +216,7 @@
           "-cp",
           "S:\\codex-work\\m3-collections-next-20261018\\apache-circular-fifo\\allocation-classes;S:\\codex-work\\m3-collections-next-20261018\\apache-circular-fifo\\candidate-v2-classes;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-collections4\\4.5.0\\commons-collections4-4.5.0.jar",
           "CircularFifoAllocationProbe",
-          "com.m3.collections.apache.M3CircularFifoQueue"
+          "jdk.m3.collections.apache.M3CircularFifoQueue"
         ],
         "returncode": 0,
         "stdout": "{\"operations\":1000000,\"allocatedBytes\":0,\"scope\":\"warmed cached-reference add/eviction loop only; no throughput or all-operations claim\"}\n",
@@ -275,10 +275,10 @@
           "S:\\codex-work\\m3-collections-next-20261018\\apache-circular-fifo\\null-ctor-probe-classes;S:\\codex-work\\m3-collections-next-20261018\\apache-circular-fifo\\candidate-v2-classes;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-collections4\\4.5.0\\commons-collections4-4.5.0.jar",
           "CircularFifoNullConstructorProbe",
           "org.apache.commons.collections4.queue.CircularFifoQueue",
-          "com.m3.collections.apache.M3CircularFifoQueue"
+          "jdk.m3.collections.apache.M3CircularFifoQueue"
         ],
         "returncode": 0,
-        "stdout": "org.apache.commons.collections4.queue.CircularFifoQueue|java.lang.NullPointerException|Cannot invoke \"java.util.Collection.size()\" because \"coll\" is null\ncom.m3.collections.apache.M3CircularFifoQueue|java.lang.NullPointerException|Cannot invoke \"java.util.Collection.size()\" because \"<parameter1>\" is null\n",
+        "stdout": "org.apache.commons.collections4.queue.CircularFifoQueue|java.lang.NullPointerException|Cannot invoke \"java.util.Collection.size()\" because \"coll\" is null\njdk.m3.collections.apache.M3CircularFifoQueue|java.lang.NullPointerException|Cannot invoke \"java.util.Collection.size()\" because \"<parameter1>\" is null\n",
         "stderr": ""
       }
     ]

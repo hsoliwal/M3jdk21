@@ -43,7 +43,7 @@
       "sha256": "904cd0d0be6a75c742dffea559a8ff23c30e073de128e3fc77e2309a31feab48"
     }
   ],
-  "schema": "synexia.ic0.independent-package-static-review/1",
+  "schema": "m3.ic0.independent-package-static-review/1",
   "sealedInputDispositions": {
     "EXACT_BODY_INCLUDED": 1059,
     "EXCLUDED_IDENTITY_ONLY": 1584

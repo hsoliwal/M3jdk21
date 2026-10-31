@@ -5,7 +5,7 @@
     "junit_passed": 13
   },
   "canonical_evidence_commit": "6c0b31b126c050c1c5b48e7ec51630ef8adef3df",
-  "canonical_evidence_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/viewport-frame-tree-receiving-20261027",
+  "canonical_evidence_path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/viewport-frame-tree-receiving-20261027",
   "canonical_evidence_url": "https://github.com/hsoliwal/com.synexia/tree/6c0b31b126c050c1c5b48e7ec51630ef8adef3df/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/viewport-frame-tree-receiving-20261027/assembled",
   "canonical_repository": "hsoliwal/com.synexia",
   "canonical_source_commit": "7e57e961d4ae02d1aa99199362475c10c7230b82",
@@ -33,12 +33,12 @@
     "runtime_sha256": "cb13ffd5cb2023cefc678a63067559b03574e6fee0e5033fab978603d624c5cc",
     "skipped": [
       {
-        "class": "com.m3.collections.M3FilteredSplitsMaskSpansTest",
+        "class": "jdk.m3.collections.M3FilteredSplitsMaskSpansTest",
         "reason": "all-native qualification is an explicit, isolated lane",
         "test": "allNativeBackendsAreRequiredByTheFullLane"
       },
       {
-        "class": "com.m3.collections.M3FilteredSplitsMaskSpansTest",
+        "class": "jdk.m3.collections.M3FilteredSplitsMaskSpansTest",
         "reason": "native proof requires the explicit checked-JNI runner",
         "test": "maskSpanCheckedJniOracle"
       }
@@ -84,17 +84,17 @@
     },
     {
       "git_blob": "ca5bc74d0ae6dcd42f3a319b4c33bef76a4d4d4a",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3TreeCoverageTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3TreeCoverageTest.java",
       "sha256": "68581fef4f8b6a6c240c66decbc57bbc097c188ce04cf90bf56cba52170a4b13"
     },
     {
       "git_blob": "1bf770fee2929533a7ac9478b7c44e8dd3841ad3",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3TreeNativeLifecycleOracle.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3TreeNativeLifecycleOracle.java",
       "sha256": "b33d545658ba594703813dd26e83b1e94b403271ad80e1a750245542962c6871"
     },
     {
       "git_blob": "64751e4e64732604d9ff7dc81e489999a5d233f2",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3TreeResidencyTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3TreeResidencyTest.java",
       "sha256": "979d8c1a817979e063b8501049d9d5f921221258384ed1d18f46aacc00d5bbbf"
     }
   ],

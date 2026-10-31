@@ -20,15 +20,15 @@ class ThreeExactJava21TestRevisions(unittest.TestCase):
         for name in ('changed-historical-01.tsv', 'changed-added-02.tsv'):
             (self.root / name).write_bytes((CANONICAL / name).read_bytes())
         self.old_historical = {
-            'm3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java':
+            'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3ApacheCollectionsTest.java':
             ('ede37d37ca4373ac7888da6542f7447730be822829f789ed82caaaf99dc2ec53',
              '9edf50007e098846f0d677204a445b6bc52b7f0d')
         }
         self.old_additive = {
-            'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryKeyRangesTest.java':
+            'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryKeyRangesTest.java':
             ('f2f8adcccfee3366007330f84a630ddfb1f093e99cdac060952dddb59dda486d',
              '9698cccbf6ca77c7e6a48eec23cee7781838b19e'),
-            'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderFlagSelectionTest.java':
+            'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveProviderFlagSelectionTest.java':
             ('511c42a8f8cf2119770931307ef4c29f35e0fdbbc1ba438e170aa151905ca76e',
              '86939063fd00e472850add045086c07521ba29c3')
         }

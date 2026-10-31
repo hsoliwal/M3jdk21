@@ -8,7 +8,7 @@
       "actual_sha256": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a",
       "declared_git_blob_sha1": "65f259e23d818b9b35052feff37198f5ddf567b4",
       "expected_sha256": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a",
-      "path": "m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java",
+      "path": "m3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java",
       "record": "m3.prefix-z",
       "role": "target",
       "sha256_matches_declared": true,
@@ -30,8 +30,8 @@
       "actual_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
       "declared_git_blob_sha1": null,
       "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
-      "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
-      "record": "synexia.counterpart.MIndexVmSession",
+      "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "record": "m3.counterpart.MIndexVmSession",
       "role": "recipe",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -41,8 +41,8 @@
       "actual_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
       "declared_git_blob_sha1": null,
       "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
-      "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
-      "record": "synexia.counterpart.MIndexVmPrecomputeKey",
+      "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "record": "m3.counterpart.MIndexVmPrecomputeKey",
       "role": "recipe",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -52,8 +52,8 @@
       "actual_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
       "declared_git_blob_sha1": null,
       "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
-      "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
-      "record": "synexia.counterpart.MIndexClass",
+      "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "record": "m3.counterpart.MIndexClass",
       "role": "recipe",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -63,8 +63,8 @@
       "actual_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
       "declared_git_blob_sha1": null,
       "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
-      "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
-      "record": "synexia.counterpart.MIndexClassIndex",
+      "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "record": "m3.counterpart.MIndexClassIndex",
       "role": "recipe",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -74,8 +74,8 @@
       "actual_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
       "declared_git_blob_sha1": null,
       "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
-      "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
-      "record": "synexia.counterpart.MIndexClassBoundary",
+      "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "record": "m3.counterpart.MIndexClassBoundary",
       "role": "recipe",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -85,8 +85,8 @@
       "actual_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
       "declared_git_blob_sha1": null,
       "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
-      "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
-      "record": "synexia.counterpart.MIndexMember",
+      "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "record": "m3.counterpart.MIndexMember",
       "role": "recipe",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -96,8 +96,8 @@
       "actual_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
       "declared_git_blob_sha1": null,
       "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
-      "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
-      "record": "synexia.counterpart.MIndexMemberKind",
+      "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "record": "m3.counterpart.MIndexMemberKind",
       "role": "recipe",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -107,8 +107,8 @@
       "actual_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
       "declared_git_blob_sha1": null,
       "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
-      "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
-      "record": "synexia.counterpart.MIndexMemberFlags",
+      "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "record": "m3.counterpart.MIndexMemberFlags",
       "role": "recipe",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -118,8 +118,8 @@
       "actual_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
       "declared_git_blob_sha1": null,
       "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
-      "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
-      "record": "synexia.counterpart.MIndexClassFlags",
+      "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "record": "m3.counterpart.MIndexClassFlags",
       "role": "recipe",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -129,8 +129,8 @@
       "actual_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
       "declared_git_blob_sha1": null,
       "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
-      "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
-      "record": "synexia.counterpart.MIndexField",
+      "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "record": "m3.counterpart.MIndexField",
       "role": "recipe",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -140,8 +140,8 @@
       "actual_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
       "declared_git_blob_sha1": null,
       "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
-      "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
-      "record": "synexia.counterpart.MIndexMethod",
+      "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "record": "m3.counterpart.MIndexMethod",
       "role": "recipe",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -151,8 +151,8 @@
       "actual_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
       "declared_git_blob_sha1": null,
       "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
-      "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
-      "record": "synexia.counterpart.MIndexConstructor",
+      "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "record": "m3.counterpart.MIndexConstructor",
       "role": "recipe",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -162,8 +162,8 @@
       "actual_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
       "declared_git_blob_sha1": null,
       "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
-      "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
-      "record": "synexia.counterpart.MIndexRecordComponent",
+      "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "record": "m3.counterpart.MIndexRecordComponent",
       "role": "recipe",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -173,8 +173,8 @@
       "actual_sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
       "declared_git_blob_sha1": null,
       "expected_sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
-      "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
-      "record": "synexia.collections.SegmentedAddress28",
+      "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+      "record": "m3.collections.SegmentedAddress28",
       "role": "recipe",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -184,8 +184,8 @@
       "actual_sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
       "declared_git_blob_sha1": null,
       "expected_sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
-      "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
-      "record": "synexia.collections.SegmentedIntLane28",
+      "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+      "record": "m3.collections.SegmentedIntLane28",
       "role": "recipe",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -195,8 +195,8 @@
       "actual_sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
       "declared_git_blob_sha1": null,
       "expected_sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
-      "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
-      "record": "synexia.collections.SegmentedLongLane28",
+      "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+      "record": "m3.collections.SegmentedLongLane28",
       "role": "recipe",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -206,8 +206,8 @@
       "actual_sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
       "declared_git_blob_sha1": null,
       "expected_sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
-      "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
-      "record": "synexia.collections.SegmentedBitLane28",
+      "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+      "record": "m3.collections.SegmentedBitLane28",
       "role": "recipe",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -217,8 +217,8 @@
       "actual_sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
       "declared_git_blob_sha1": null,
       "expected_sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
-      "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
-      "record": "synexia.collections.PackedBitAtoms",
+      "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+      "record": "m3.collections.PackedBitAtoms",
       "role": "recipe",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -228,8 +228,8 @@
       "actual_sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1",
       "declared_git_blob_sha1": null,
       "expected_sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1",
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
-      "record": "synexia.counterpart.MIndexJvmDescriptor",
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+      "record": "m3.counterpart.MIndexJvmDescriptor",
       "role": "recipe",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -239,8 +239,8 @@
       "actual_sha256": "5b44008f02f49ce0a48fafcb4da24af69ea526a67f88041c209d6d574ed788da",
       "declared_git_blob_sha1": null,
       "expected_sha256": "5b44008f02f49ce0a48fafcb4da24af69ea526a67f88041c209d6d574ed788da",
-      "path": "m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv",
-      "record": "synexia.regex.mr",
+      "path": "m3/tooling/mr/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv",
+      "record": "m3.regex.mr",
       "role": "recipe",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -250,8 +250,8 @@
       "actual_sha256": "3b195d75e2fdc32ac31b665c5541bd07d3ffdb11698c499bccfd7bc4c1b4e338",
       "declared_git_blob_sha1": null,
       "expected_sha256": "3b195d75e2fdc32ac31b665c5541bd07d3ffdb11698c499bccfd7bc4c1b4e338",
-      "path": "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
-      "record": "synexia.counterpart.MIndexRegexTrigramQuery",
+      "path": "m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
+      "record": "m3.counterpart.MIndexRegexTrigramQuery",
       "role": "recipe",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -261,8 +261,8 @@
       "actual_sha256": "c47151b5df79d6d2711e6de748bff3fb08e2c01af5e9c6ac0b4b3b91ac97425c",
       "declared_git_blob_sha1": null,
       "expected_sha256": "c47151b5df79d6d2711e6de748bff3fb08e2c01af5e9c6ac0b4b3b91ac97425c",
-      "path": "m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
-      "record": "synexia.counterpart.MIndexVersionTable",
+      "path": "m3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
+      "record": "m3.counterpart.MIndexVersionTable",
       "role": "recipe",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -272,8 +272,8 @@
       "actual_sha256": "c47151b5df79d6d2711e6de748bff3fb08e2c01af5e9c6ac0b4b3b91ac97425c",
       "declared_git_blob_sha1": null,
       "expected_sha256": "c47151b5df79d6d2711e6de748bff3fb08e2c01af5e9c6ac0b4b3b91ac97425c",
-      "path": "m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
-      "record": "synexia.counterpart.MIndexLibraryRelease",
+      "path": "m3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
+      "record": "m3.counterpart.MIndexLibraryRelease",
       "role": "recipe",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -284,7 +284,7 @@
       "declared_git_blob_sha1": null,
       "expected_sha256": "a8a095429d3acc9327fa75d73d4aaa87150e702976a04801af5df14baf965f78",
       "path": "src/java.base/share/classes/java/util/regex/Matcher.java",
-      "record": "synexia.regex.mr",
+      "record": "m3.regex.mr",
       "role": "target",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -295,7 +295,7 @@
       "declared_git_blob_sha1": "14cdb999f5eab5be443044bff2d273fb4e4113fb",
       "expected_sha256": "dd14fe5384ff92db5c0232ef1fbc68da731ee305dda5b7c22777a3fa4c5e90fa",
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3Address28.java",
-      "record": "synexia.collections.SegmentedAddress28",
+      "record": "m3.collections.SegmentedAddress28",
       "role": "target",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -306,7 +306,7 @@
       "declared_git_blob_sha1": "5942b1f46eedf83ad8c4ef8edee91f75e7424e7a",
       "expected_sha256": "025556c17d0ce7879f63b75d04c30a3b16b6338ff73fa33f4ee49fdb1e196bb8",
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java",
-      "record": "synexia.collections.SegmentedBitLane28",
+      "record": "m3.collections.SegmentedBitLane28",
       "role": "target",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -317,7 +317,7 @@
       "declared_git_blob_sha1": "2ad46058a5325483647af4af16858c329ae24665",
       "expected_sha256": "c5d9d2797966a56b9c2ec97908f6b76a0ad370a72cb05edc2a55b62775ba22ab",
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3Bits.java",
-      "record": "synexia.collections.PackedBitAtoms",
+      "record": "m3.collections.PackedBitAtoms",
       "role": "target",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -328,7 +328,7 @@
       "declared_git_blob_sha1": null,
       "expected_sha256": "c89a34d2e793f5a797ded51c32bf2f7ddad19ad1b932f003dfbde46b37f58d8a",
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3Boundary.java",
-      "record": "synexia.counterpart.MIndexClassBoundary",
+      "record": "m3.counterpart.MIndexClassBoundary",
       "role": "target",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -339,7 +339,7 @@
       "declared_git_blob_sha1": null,
       "expected_sha256": "af93f3bebd9a54f592742b0b6d9e1215770446fd13b8679fa259f7c0d5effa36",
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3CB.java",
-      "record": "synexia.counterpart.MIndexVmSession",
+      "record": "m3.counterpart.MIndexVmSession",
       "role": "target",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -350,7 +350,7 @@
       "declared_git_blob_sha1": null,
       "expected_sha256": "9a8fa33a3edf5edaaf6b22eeeb203cd08ff386bdd4b7307cdd47e849bc3b98b1",
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3CI.java",
-      "record": "synexia.counterpart.MIndexClassIndex",
+      "record": "m3.counterpart.MIndexClassIndex",
       "role": "target",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -361,7 +361,7 @@
       "declared_git_blob_sha1": null,
       "expected_sha256": "542fab6ba509299d937c26fe68c9eab96cda3b8dd2b30c41df6992038b0d4472",
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3Class.java",
-      "record": "synexia.counterpart.MIndexClass",
+      "record": "m3.counterpart.MIndexClass",
       "role": "target",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -372,7 +372,7 @@
       "declared_git_blob_sha1": null,
       "expected_sha256": "cb7dc87b4fb4849bd145520014bcd8cd55168134cf8b482dba495219b8a2344b",
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3ClassFlags.java",
-      "record": "synexia.counterpart.MIndexClassFlags",
+      "record": "m3.counterpart.MIndexClassFlags",
       "role": "target",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -383,7 +383,7 @@
       "declared_git_blob_sha1": null,
       "expected_sha256": "f6a8cd76d1bd8bd5f2641d6d81dcb4e74b8aa613442c23fed32f3e99945be923",
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3Constructor.java",
-      "record": "synexia.counterpart.MIndexConstructor",
+      "record": "m3.counterpart.MIndexConstructor",
       "role": "target",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -394,7 +394,7 @@
       "declared_git_blob_sha1": "92f4d7da32a3b8265675a413311fd304c6dc2dd2",
       "expected_sha256": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67",
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
-      "record": "synexia.counterpart.MIndexJvmDescriptor",
+      "record": "m3.counterpart.MIndexJvmDescriptor",
       "role": "target",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -405,7 +405,7 @@
       "declared_git_blob_sha1": null,
       "expected_sha256": "a197eb18922617e1b0992d474f2acdb3c8753eb1c0b16a014a93a5460fe66481",
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3Field.java",
-      "record": "synexia.counterpart.MIndexField",
+      "record": "m3.counterpart.MIndexField",
       "role": "target",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -416,7 +416,7 @@
       "declared_git_blob_sha1": "513a1e8f5d55c074250d3b2747f041c19a1128e7",
       "expected_sha256": "ccb582914275bb00ea885d17b94173f60f65d7cbb2a2543af910de15428f6cda",
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3IntLane28.java",
-      "record": "synexia.collections.SegmentedIntLane28",
+      "record": "m3.collections.SegmentedIntLane28",
       "role": "target",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -427,7 +427,7 @@
       "declared_git_blob_sha1": "325e8e90ace21e71069665b74585c522b2c627b4",
       "expected_sha256": "89b6fee4b0572a975b48f9cdbf95a732d4601dd8748411732bc79d9e14afb644",
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3LongLane28.java",
-      "record": "synexia.collections.SegmentedLongLane28",
+      "record": "m3.collections.SegmentedLongLane28",
       "role": "target",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -438,7 +438,7 @@
       "declared_git_blob_sha1": null,
       "expected_sha256": "c0cc0b38eb167ea313a67db584184ee94269b2f2b808a6a16cfafbb80fa541f1",
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3Member.java",
-      "record": "synexia.counterpart.MIndexMember",
+      "record": "m3.counterpart.MIndexMember",
       "role": "target",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -449,7 +449,7 @@
       "declared_git_blob_sha1": null,
       "expected_sha256": "f436e0fdfbe44074c3855944e005707e833ce96fa34b24cb300c3957c1cc24be",
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3MemberFlags.java",
-      "record": "synexia.counterpart.MIndexMemberFlags",
+      "record": "m3.counterpart.MIndexMemberFlags",
       "role": "target",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -460,7 +460,7 @@
       "declared_git_blob_sha1": null,
       "expected_sha256": "0c24a919386302c498d94e3a4d0bfffbe96084f7c93b62e23799646b4502496b",
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3MemberKind.java",
-      "record": "synexia.counterpart.MIndexMemberKind",
+      "record": "m3.counterpart.MIndexMemberKind",
       "role": "target",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -471,7 +471,7 @@
       "declared_git_blob_sha1": null,
       "expected_sha256": "f7651b04fa197f47904f5258ba2150242a9801bbcbef6e19fa90ed296fef8f58",
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3Method.java",
-      "record": "synexia.counterpart.MIndexMethod",
+      "record": "m3.counterpart.MIndexMethod",
       "role": "target",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -482,7 +482,7 @@
       "declared_git_blob_sha1": null,
       "expected_sha256": "e38403e001ea950c5e789c854f4f4e8004253a4a7545aa6e044a52112b592898",
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3PC.java",
-      "record": "synexia.counterpart.MIndexVmPrecomputeKey",
+      "record": "m3.counterpart.MIndexVmPrecomputeKey",
       "role": "target",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -493,7 +493,7 @@
       "declared_git_blob_sha1": null,
       "expected_sha256": "0be405cfa1d7fac2fbf1bdf5ae42e9798033eda53c6545b47154a16fa57134bd",
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3RecordComponent.java",
-      "record": "synexia.counterpart.MIndexRecordComponent",
+      "record": "m3.counterpart.MIndexRecordComponent",
       "role": "target",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -504,7 +504,7 @@
       "declared_git_blob_sha1": null,
       "expected_sha256": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3Release.java",
-      "record": "synexia.counterpart.MIndexLibraryRelease",
+      "record": "m3.counterpart.MIndexLibraryRelease",
       "role": "target",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -515,7 +515,7 @@
       "declared_git_blob_sha1": "ca23741ecd8cd24593ba5c260aa0d939c53d6766",
       "expected_sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155",
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
-      "record": "synexia.counterpart.MIndexRegexTrigramQuery",
+      "record": "m3.counterpart.MIndexRegexTrigramQuery",
       "role": "target",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -526,7 +526,7 @@
       "declared_git_blob_sha1": null,
       "expected_sha256": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a",
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3VI.java",
-      "record": "synexia.counterpart.MIndexVersionTable",
+      "record": "m3.counterpart.MIndexVersionTable",
       "role": "target",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -537,7 +537,7 @@
       "declared_git_blob_sha1": "e68e05555efbe2dbf1355e6820cc7795d9c33942",
       "expected_sha256": "7cce5d9e56e5308f130e4dfaa191c663c27afb3e35ed206347447cc925dec89f",
       "path": "src/java.base/share/native/libjava/M3BitLane28.c",
-      "record": "synexia.collections.SegmentedBitLane28",
+      "record": "m3.collections.SegmentedBitLane28",
       "role": "target",
       "sha256_matches_declared": true,
       "status": "implemented-unverified"
@@ -546,7 +546,7 @@
       "actual_git_blob_sha1": "65f259e23d818b9b35052feff37198f5ddf567b4",
       "actual_sha256": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a",
       "expected_sha256": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a",
-      "path": "m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java",
+      "path": "m3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java",
       "role": "receipt-input",
       "sha256_matches_declared": true,
       "test_id": "prefix-z-interpreter"
@@ -555,7 +555,7 @@
       "actual_git_blob_sha1": "65f259e23d818b9b35052feff37198f5ddf567b4",
       "actual_sha256": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a",
       "expected_sha256": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a",
-      "path": "m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java",
+      "path": "m3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java",
       "role": "receipt-input",
       "sha256_matches_declared": true,
       "test_id": "prefix-z-normal"
@@ -600,7 +600,7 @@
       "actual_git_blob_sha1": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597",
       "actual_sha256": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
       "expected_sha256": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
-      "path": "m3/core/src/com/m3/text/JoinedM3StringPiece.java",
+      "path": "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
       "role": "receipt-input",
       "sha256_matches_declared": true,
       "test_id": "prefix-z-interpreter"
@@ -609,7 +609,7 @@
       "actual_git_blob_sha1": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597",
       "actual_sha256": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
       "expected_sha256": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
-      "path": "m3/core/src/com/m3/text/JoinedM3StringPiece.java",
+      "path": "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
       "role": "receipt-input",
       "sha256_matches_declared": true,
       "test_id": "prefix-z-normal"
@@ -618,7 +618,7 @@
       "actual_git_blob_sha1": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
       "actual_sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d",
       "expected_sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d",
-      "path": "m3/core/src/com/m3/text/LocalM3Arena.java",
+      "path": "m3/core/src/jdk/m3/text/LocalM3Arena.java",
       "role": "receipt-input",
       "sha256_matches_declared": true,
       "test_id": "prefix-z-interpreter"
@@ -627,7 +627,7 @@
       "actual_git_blob_sha1": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
       "actual_sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d",
       "expected_sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d",
-      "path": "m3/core/src/com/m3/text/LocalM3Arena.java",
+      "path": "m3/core/src/jdk/m3/text/LocalM3Arena.java",
       "role": "receipt-input",
       "sha256_matches_declared": true,
       "test_id": "prefix-z-normal"
@@ -636,7 +636,7 @@
       "actual_git_blob_sha1": "6b745c9472144ad6de01de4d06a533974e558fb1",
       "actual_sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51",
       "expected_sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51",
-      "path": "m3/core/src/com/m3/text/LocalM3StringPiece.java",
+      "path": "m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
       "role": "receipt-input",
       "sha256_matches_declared": true,
       "test_id": "prefix-z-interpreter"
@@ -645,7 +645,7 @@
       "actual_git_blob_sha1": "6b745c9472144ad6de01de4d06a533974e558fb1",
       "actual_sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51",
       "expected_sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51",
-      "path": "m3/core/src/com/m3/text/LocalM3StringPiece.java",
+      "path": "m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
       "role": "receipt-input",
       "sha256_matches_declared": true,
       "test_id": "prefix-z-normal"
@@ -654,7 +654,7 @@
       "actual_git_blob_sha1": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
       "actual_sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479",
       "expected_sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479",
-      "path": "m3/core/src/com/m3/text/M3StringPiece.java",
+      "path": "m3/core/src/jdk/m3/text/M3StringPiece.java",
       "role": "receipt-input",
       "sha256_matches_declared": true,
       "test_id": "prefix-z-interpreter"
@@ -663,7 +663,7 @@
       "actual_git_blob_sha1": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
       "actual_sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479",
       "expected_sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479",
-      "path": "m3/core/src/com/m3/text/M3StringPiece.java",
+      "path": "m3/core/src/jdk/m3/text/M3StringPiece.java",
       "role": "receipt-input",
       "sha256_matches_declared": true,
       "test_id": "prefix-z-normal"
@@ -672,7 +672,7 @@
       "actual_git_blob_sha1": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a",
       "actual_sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417",
       "expected_sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417",
-      "path": "m3/core/src/com/m3/text/StorageIdentity.java",
+      "path": "m3/core/src/jdk/m3/text/StorageIdentity.java",
       "role": "receipt-input",
       "sha256_matches_declared": true,
       "test_id": "prefix-z-interpreter"
@@ -681,7 +681,7 @@
       "actual_git_blob_sha1": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a",
       "actual_sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417",
       "expected_sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417",
-      "path": "m3/core/src/com/m3/text/StorageIdentity.java",
+      "path": "m3/core/src/jdk/m3/text/StorageIdentity.java",
       "role": "receipt-input",
       "sha256_matches_declared": true,
       "test_id": "prefix-z-normal"
@@ -744,7 +744,7 @@
       "actual_git_blob_sha1": "918f41259c0c623bb88287c44c817070a58fd9fe",
       "actual_sha256": "5baee59ad560a2ee2134ac0f0ad8b64914a31099f0b57f0b06d901dc96347d90",
       "expected_sha256": "5baee59ad560a2ee2134ac0f0ad8b64914a31099f0b57f0b06d901dc96347d90",
-      "path": "m3/migration/src/com/m3/migration/ExactFileRecipe.java",
+      "path": "m3/migration/src/jdk/m3/migration/ExactFileRecipe.java",
       "role": "receipt-input",
       "sha256_matches_declared": true,
       "test_id": "prefix-z-interpreter"
@@ -753,7 +753,7 @@
       "actual_git_blob_sha1": "918f41259c0c623bb88287c44c817070a58fd9fe",
       "actual_sha256": "5baee59ad560a2ee2134ac0f0ad8b64914a31099f0b57f0b06d901dc96347d90",
       "expected_sha256": "5baee59ad560a2ee2134ac0f0ad8b64914a31099f0b57f0b06d901dc96347d90",
-      "path": "m3/migration/src/com/m3/migration/ExactFileRecipe.java",
+      "path": "m3/migration/src/jdk/m3/migration/ExactFileRecipe.java",
       "role": "receipt-input",
       "sha256_matches_declared": true,
       "test_id": "prefix-z-normal"
@@ -885,7 +885,7 @@
       "git_blob_sha1": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597",
       "membership": "Exact C0/latest path-mode-size-Git identity in independently reconstructed m3 trees",
       "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
-      "path": "m3/core/src/com/m3/text/JoinedM3StringPiece.java",
+      "path": "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
       "reused": true,
       "sha256": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb"
     },
@@ -897,7 +897,7 @@
       "git_blob_sha1": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
       "membership": "Exact C0/latest path-mode-size-Git identity in independently reconstructed m3 trees",
       "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
-      "path": "m3/core/src/com/m3/text/LocalM3Arena.java",
+      "path": "m3/core/src/jdk/m3/text/LocalM3Arena.java",
       "reused": true,
       "sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d"
     },
@@ -909,7 +909,7 @@
       "git_blob_sha1": "6b745c9472144ad6de01de4d06a533974e558fb1",
       "membership": "Exact C0/latest path-mode-size-Git identity in independently reconstructed m3 trees",
       "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
-      "path": "m3/core/src/com/m3/text/LocalM3StringPiece.java",
+      "path": "m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
       "reused": true,
       "sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51"
     },
@@ -921,7 +921,7 @@
       "git_blob_sha1": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
       "membership": "Exact C0/latest path-mode-size-Git identity in independently reconstructed m3 trees",
       "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
-      "path": "m3/core/src/com/m3/text/M3StringPiece.java",
+      "path": "m3/core/src/jdk/m3/text/M3StringPiece.java",
       "reused": true,
       "sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479"
     },
@@ -933,7 +933,7 @@
       "git_blob_sha1": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a",
       "membership": "Exact C0/latest path-mode-size-Git identity in independently reconstructed m3 trees",
       "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
-      "path": "m3/core/src/com/m3/text/StorageIdentity.java",
+      "path": "m3/core/src/jdk/m3/text/StorageIdentity.java",
       "reused": true,
       "sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417"
     },
@@ -993,7 +993,7 @@
       "git_blob_sha1": "918f41259c0c623bb88287c44c817070a58fd9fe",
       "membership": "Exact C0/latest path-mode-size-Git identity in independently reconstructed m3 trees",
       "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
-      "path": "m3/migration/src/com/m3/migration/ExactFileRecipe.java",
+      "path": "m3/migration/src/jdk/m3/migration/ExactFileRecipe.java",
       "reused": true,
       "sha256": "5baee59ad560a2ee2134ac0f0ad8b64914a31099f0b57f0b06d901dc96347d90"
     },
@@ -1029,7 +1029,7 @@
       "git_blob_sha1": "65f259e23d818b9b35052feff37198f5ddf567b4",
       "membership": "Exact C0/latest path-mode-size-Git identity in independently reconstructed m3 trees",
       "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
-      "path": "m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java",
+      "path": "m3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java",
       "reused": true,
       "sha256": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a"
     },
@@ -1053,7 +1053,7 @@
       "git_blob_sha1": "3e672a11367953b810c51590d764d11d5cd62c04",
       "membership": "Exact C0/latest path-mode-size-Git identity in independently reconstructed m3 trees",
       "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
-      "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
       "reused": true,
       "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3"
     },
@@ -1065,7 +1065,7 @@
       "git_blob_sha1": "671f39310580ee466315a1340ae3e2006dc897bc",
       "membership": "Exact C0/latest path-mode-size-Git identity in independently reconstructed m3 trees",
       "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
-      "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+      "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
       "reused": true,
       "sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883"
     },
@@ -1077,7 +1077,7 @@
       "git_blob_sha1": "2a62a7a35e9e59cf403336c197f60d7e5915b064",
       "membership": "Exact C0/latest path-mode-size-Git identity in independently reconstructed m3 trees",
       "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
       "reused": true,
       "sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1"
     },
@@ -1089,7 +1089,7 @@
       "git_blob_sha1": "777c79742b81d3fce8ad1f40e7a52e7d09474fde",
       "membership": "Exact C0/latest path-mode-size-Git identity in independently reconstructed m3 trees",
       "origin_commit": "c0a14387009aefc7d62bd3268055d526e04f9074",
-      "path": "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
+      "path": "m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
       "reused": true,
       "sha256": "3b195d75e2fdc32ac31b665c5541bd07d3ffdb11698c499bccfd7bc4c1b4e338"
     },
@@ -1101,7 +1101,7 @@
       "git_blob_sha1": "2e77d4929b7b8dd3609b990774b062fc6991dc18",
       "membership": "Exact C0/latest path-mode-size-Git identity in independently reconstructed m3 trees",
       "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
-      "path": "m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
+      "path": "m3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
       "reused": true,
       "sha256": "c47151b5df79d6d2711e6de748bff3fb08e2c01af5e9c6ac0b4b3b91ac97425c"
     },
@@ -1389,7 +1389,7 @@
       "git_blob_sha1": "d23517ac24eb1ba428f53bd34f304d70eb468406",
       "membership": "Exact latest immutable commit/path contents readback",
       "origin_commit": "09075810b55229662329a158923287e8a7118f86",
-      "path": "m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv",
+      "path": "m3/tooling/mr/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv",
       "reused": false,
       "sha256": "5b44008f02f49ce0a48fafcb4da24af69ea526a67f88041c209d6d574ed788da"
     },

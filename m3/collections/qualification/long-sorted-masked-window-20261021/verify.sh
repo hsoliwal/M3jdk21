@@ -3,9 +3,9 @@
 # SPDX-License-Identifier: Apache-2.0
 set -euo pipefail
 root="$(cd "$(dirname "$0")/../../../.." && pwd)"
-src="$root/m3/collections/src/main/java/com/m3/collections"
+src="$root/m3/collections/src/main/java/jdk/m3/collections"
 native="$root/m3/collections/src/main/native/collections"
-test="$root/m3/collections/src/test/java/com/m3/collections"
+test="$root/m3/collections/src/test/java/jdk/m3/collections"
 work="$(mktemp -d)"
 trap 'rm -rf "$work"' EXIT
 mkdir -p "$work/classes" "$work/native"
@@ -25,7 +25,7 @@ javac --release 21 -Xlint:all -Werror -d "$work/classes" \
   "$src/M3LongSortedSnapshot.java" \
   "$test/M3LongSortedMaskedWindowContract.java"
 
-java -cp "$work/classes" com.m3.collections.M3LongSortedMaskedWindowContract
+java -cp "$work/classes" jdk.m3.collections.M3LongSortedMaskedWindowContract
 
 jdk_home="$(cd "$(dirname "$(readlink -f "$(command -v javac)")")/.." && pwd)"
 case "$(uname -s)" in
@@ -40,6 +40,6 @@ cc -std=c11 -Wall -Wextra -Werror -Wpedantic -fPIC -shared \
   "$native/m3_index_mask_compactor.c"
 
 java -Xcheck:jni -Djava.library.path="$work/native" -cp "$work/classes" \
-  com.m3.collections.M3LongSortedMaskedWindowContract --native
+  jdk.m3.collections.M3LongSortedMaskedWindowContract --native
 
 echo "M3_SORTED_MASKED_WINDOW_JAVA_JNI_PASS"

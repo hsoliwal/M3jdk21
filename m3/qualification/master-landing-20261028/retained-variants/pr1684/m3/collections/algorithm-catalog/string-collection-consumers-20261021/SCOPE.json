@@ -5,7 +5,7 @@
   "textual_callsite_index_rows": 1569,
   "scan_roots": [
     "src/java.base/share/classes/java/util/",
-    "m3/collections/src/main/java/com/m3/collections/"
+    "m3/collections/src/main/java/jdk/m3/collections/"
   ],
   "limits": [
     "Text index is not a closed program call graph",

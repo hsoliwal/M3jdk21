@@ -3,8 +3,8 @@ name: M3 mask all-selected Java21/JNI source-sealed receiver
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3Mask*'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3Mask*'
       - 'm3/collections/verification/mask-all-select-20261017/**'
       - 'm3/compatibility/m3-mask-all-select-receiver-20261017.tsv'
       - '.github/workflows/m3-collections-mask-all-select-20261017.yml'

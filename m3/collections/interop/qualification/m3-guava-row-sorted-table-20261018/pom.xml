@@ -53,7 +53,7 @@
       <resource>
         <directory>${m3.resource.sources}</directory>
         <includes>
-          <include>com/synexia/rewrite/hash-pinned-java/m3-guava-row-sorted-table-20261018/**</include>
+          <include>jdk/internal/m3/rewrite/hash-pinned-java/m3-guava-row-sorted-table-20261018/**</include>
           <include>META-INF/rewrite/m3-guava-row-sorted-table-20261018.yml</include>
         </includes>
       </resource>
@@ -67,10 +67,10 @@
           <release>21</release>
           <proc>none</proc>
           <includes>
-            <include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
+            <include>jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
           </includes>
           <testIncludes>
-            <testInclude>com/synexia/rewrite/M3GuavaRowSortedTableRecipeTest.java</testInclude>
+            <testInclude>jdk/internal/m3/rewrite/M3GuavaRowSortedTableRecipeTest.java</testInclude>
           </testIncludes>
           <compilerArgs>
             <arg>-Xlint:all</arg>
@@ -127,7 +127,7 @@
                 </goals>
                 <configuration>
                   <skip>${m3.recipe.boot.skip}</skip>
-                  <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+                  <mainClass>jdk.internal.m3.prstack.M3RecipeBoot</mainClass>
                   <includeProjectDependencies>false</includeProjectDependencies>
                   <includePluginDependencies>true</includePluginDependencies>
                   <arguments>

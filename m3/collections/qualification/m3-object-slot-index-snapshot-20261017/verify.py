@@ -8,16 +8,16 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[4]
 HERE = Path(__file__).resolve().parent
-MIRROR = ROOT / "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017"
+MIRROR = ROOT / "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017"
 
 TARGETS = {
-    "m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java":
+    "m3/collections/src/main/java/jdk/m3/collections/M3ObjectIndexSnapshot.java":
         "ed19c7b34e23f61ea5bfa808550a1189ccc07900b7022f3572d78c23c5929f0c",
-    "m3/collections/src/main/java/com/m3/collections/M3ObjectSlotStore28.java":
+    "m3/collections/src/main/java/jdk/m3/collections/M3ObjectSlotStore28.java":
         "02893ff5d555ef577789ca82fdbbe043172219ae59202d10a51f2fa1337d9152",
-    "m3/collections/src/test/java/com/m3/collections/M3ObjectSlotIndexSelfTest.java":
+    "m3/collections/src/test/java/jdk/m3/collections/M3ObjectSlotIndexSelfTest.java":
         "745156bdcd632c0d664dcc9f42f19f47879fd4cfca05ecd69da4e03b60fad049",
-    "m3/collections/src/test/java/com/m3/collections/M3ObjectSlotIndexTest.java":
+    "m3/collections/src/test/java/jdk/m3/collections/M3ObjectSlotIndexTest.java":
         "eec9b203115a9896ebcc074926e4817b5ebcbdeab4e259c68d3c34b773b46ed0",
 }
 

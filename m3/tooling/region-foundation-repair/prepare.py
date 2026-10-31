@@ -15,7 +15,7 @@ engines = {
     'M3VerbatimJavaPairRecipe.java': '3af361baeb3c04b81808750c1a0d1d8f5c5621a87a2065deec460c540c2cc2b9',
     'M3Jdk21HashPinnedTextSnapshotRecipe.java': '8133bcf7e9f750c714cdd42784bdf30b60f67dd957b2831cd54cb01c9a2cfc3a',
 }
-engine_path = Path('com/m3/rewrite/backport')
+engine_path = Path('jdk/m3/rewrite/backport')
 for name, sha in engines.items():
     source = base / 'm3/tooling/migration-recipes/src/main/java' / engine_path / name
     raw = source.read_bytes()
@@ -27,9 +27,9 @@ for name, sha in engines.items():
 classes = crate / 'target/input-classes'
 classes.mkdir(parents=True, exist_ok=True)
 subprocess.run(['javac', '--release', '21', '-Xlint:all', '-Werror', '-d', str(classes),
-                str(crate/'src/main/java/com/synexia/rewrite/RegionFoundationInputs.java')], check=True)
-subprocess.run(['java', '-cp', str(classes), 'com.synexia.rewrite.RegionFoundationInputs', str(base), str(candidate)], check=True)
-resource = crate/'src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-region-foundation-20261016'
+                str(crate/'src/main/java/jdk/internal/m3/rewrite/RegionFoundationInputs.java')], check=True)
+subprocess.run(['java', '-cp', str(classes), 'jdk.internal.m3.rewrite.RegionFoundationInputs', str(base), str(candidate)], check=True)
+resource = crate/'src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-region-foundation-20261016'
 resource.mkdir(parents=True, exist_ok=True)
 paths = ['.github/workflows/m3-foundation.yml', 'm3/docs/name-mapping.json',
          'test/jdk/java/lang/String/M3RegionMatchesNonPositive.java']

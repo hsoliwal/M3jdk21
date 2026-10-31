@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
-package com.m3.collections.sortable;
+package jdk.m3.collections.sortable;
 
-import com.m3.collections.M3SignalOrder;
-import com.m3.collections.M3SignalOrderNative;
+import jdk.m3.collections.M3SignalOrder;
+import jdk.m3.collections.M3SignalOrderNative;
 import java.util.Arrays;
 import java.util.Random;
 

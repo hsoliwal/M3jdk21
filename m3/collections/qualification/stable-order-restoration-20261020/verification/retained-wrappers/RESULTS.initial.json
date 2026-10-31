@@ -19,7 +19,7 @@
       "-cp",
       "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar",
       "FacadeTestLauncher",
-      "com.m3.collections.M3WrapperConvergenceTest"
+      "jdk.m3.collections.M3WrapperConvergenceTest"
     ],
     "counts": {
       "aborted": 0,
@@ -44,7 +44,7 @@
         "-ea",
         "-cp",
         "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes",
-        "com.m3.collections.M3WrapperConvergenceContract",
+        "jdk.m3.collections.M3WrapperConvergenceContract",
         "readonly-policy"
       ],
       "checks": 25,
@@ -64,7 +64,7 @@
         "-ea",
         "-cp",
         "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes",
-        "com.m3.collections.M3WrapperConvergenceContract",
+        "jdk.m3.collections.M3WrapperConvergenceContract",
         "readonly-effects"
       ],
       "checks": 8,
@@ -84,7 +84,7 @@
         "-ea",
         "-cp",
         "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes",
-        "com.m3.collections.M3WrapperConvergenceContract",
+        "jdk.m3.collections.M3WrapperConvergenceContract",
         "readonly-linear"
       ],
       "cwd": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers",
@@ -105,7 +105,7 @@
         "-ea",
         "-cp",
         "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes",
-        "com.m3.collections.M3WrapperConvergenceContract",
+        "jdk.m3.collections.M3WrapperConvergenceContract",
         "readonly-failfast"
       ],
       "cwd": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers",
@@ -126,7 +126,7 @@
         "-ea",
         "-cp",
         "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes",
-        "com.m3.collections.M3WrapperConvergenceContract",
+        "jdk.m3.collections.M3WrapperConvergenceContract",
         "comparator-failure"
       ],
       "cwd": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers",
@@ -147,7 +147,7 @@
         "-ea",
         "-cp",
         "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes",
-        "com.m3.collections.M3WrapperConvergenceContract",
+        "jdk.m3.collections.M3WrapperConvergenceContract",
         "bounded-map"
       ],
       "checks": 64,
@@ -167,7 +167,7 @@
         "-ea",
         "-cp",
         "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes",
-        "com.m3.collections.M3WrapperConvergenceContract",
+        "jdk.m3.collections.M3WrapperConvergenceContract",
         "bounded-set"
       ],
       "checks": 64,
@@ -187,7 +187,7 @@
         "-ea",
         "-cp",
         "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes",
-        "com.m3.collections.M3WrapperConvergenceContract",
+        "jdk.m3.collections.M3WrapperConvergenceContract",
         "interior-null"
       ],
       "checks": 6,
@@ -207,7 +207,7 @@
         "-ea",
         "-cp",
         "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes",
-        "com.m3.collections.M3WrapperConvergenceContract"
+        "jdk.m3.collections.M3WrapperConvergenceContract"
       ],
       "cwd": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers",
       "exit_code": 1,
@@ -230,9 +230,9 @@
       "-s",
       "-classpath",
       "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes",
-      "com.m3.collections.M3FilteredLists",
-      "com.m3.collections.M3FilteredViews",
-      "com.m3.collections.M3MutableFilteredViews"
+      "jdk.m3.collections.M3FilteredLists",
+      "jdk.m3.collections.M3FilteredViews",
+      "jdk.m3.collections.M3MutableFilteredViews"
     ],
     "cwd": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers",
     "exit_code": 0,
@@ -266,12 +266,12 @@
       "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar",
       "-d",
       "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes",
-      "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/com/m3/collections/M3FilteredLists.java",
-      "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/com/m3/collections/M3FilteredViews.java",
-      "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/com/m3/collections/M3MutableFilteredViews.java",
-      "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/com/m3/collections/M3SlotSpliterators.java",
-      "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/com/m3/collections/M3WrapperConvergenceContract.java",
-      "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/com/m3/collections/M3WrapperConvergenceTest.java",
+      "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/jdk/m3/collections/M3FilteredLists.java",
+      "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/jdk/m3/collections/M3FilteredViews.java",
+      "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/jdk/m3/collections/M3MutableFilteredViews.java",
+      "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/jdk/m3/collections/M3SlotSpliterators.java",
+      "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/jdk/m3/collections/M3WrapperConvergenceContract.java",
+      "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/jdk/m3/collections/M3WrapperConvergenceTest.java",
       "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/FacadeTestLauncher.java"
     ],
     "classfile_count": 36,

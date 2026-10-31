@@ -25,7 +25,7 @@ class CanonicalAtomDescriptorTest(unittest.TestCase):
                        "recipeList:\n" + refs + "\n")
         for name in self.owners:
             self.write(f"{OWNER_DIR}/{name}.java",
-                       "package com.synexia.rewrite.atom;\n"
+                       "package jdk.internal.m3.rewrite.atom;\n"
                        f"public final class {name} {{}}\n")
         self.write(REGISTRY,
                    "\n".join('Map.entry("' + PACKAGE + "." + name +
@@ -60,7 +60,7 @@ class CanonicalAtomDescriptorTest(unittest.TestCase):
         self.assertEqual((3, 6, 4), verify(self.root))
 
     def test_legacy_namespace_refuses_even_in_unrelated_descriptor(self) -> None:
-        self.write(DESCRIPTOR_DIR + "/extra.yml", "com.m3.rewrite.atom.M3Old\n")
+        self.write(DESCRIPTOR_DIR + "/extra.yml", "jdk.m3.rewrite.atom.M3Old\n")
         with self.assertRaisesRegex(ValueError, "obsolete recipe package"):
             verify(self.root)
 

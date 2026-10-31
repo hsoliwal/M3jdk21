@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 #include <jni.h>
 #include <stdint.h>
-#include "com_m3_collections_M3ResidencyStateMaskIndex.h"
+#include "jdk_m3_collections_M3ResidencyStateMaskIndex.h"
 #include "../../../../../../src/java.base/share/native/libjava/m3_jni_util.h"
 
 /* Only ephemeral primitive index/word/state snapshots cross JNI; no Java object handles. */
@@ -20,7 +20,7 @@ static int selected(jlong bits, jbyte state, jlong required,
             && ((bits & required) == required) && ((bits & forbidden) == 0);
 }
 
-JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3ResidencyStateMaskIndex_select0(
+JNIEXPORT jintArray JNICALL Java_jdk_m3_collections_M3ResidencyStateMaskIndex_select0(
         JNIEnv *env, jclass owner, jintArray coordinates, jlongArray words,
         jbyteArray lifecycle, jlong required, jlong forbidden, jint allowed_states) {
     (void) owner;

@@ -8,8 +8,8 @@ on:
       - 'm3/tooling/module-packs/parser/**'
       - 'm3/tooling/module-packs/build-tools/delta/**'
       - 'm3/file/**'
-      - 'm3/ports/compiletime/src/main/java/com/m3/compiletime/ast/M3FileSourceFacts.java'
-      - 'm3/ports/compiletime/src/test/java/com/m3/compiletime/ast/M3FileSourceFactsDeltaContract.java'
+      - 'm3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3FileSourceFacts.java'
+      - 'm3/ports/compiletime/src/test/java/jdk/m3/compiletime/ast/M3FileSourceFactsDeltaContract.java'
       - 'm3/docs/name-mapping.d/m3-file-build-delta-20261020.json'
       - 'm3/tooling/jmod-recipes/tools/jmod_pack.py'
       - 'm3/tooling/jmod-recipes/tools/jmod_image.py'
@@ -39,9 +39,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/compatibility/check_synexia_full_family.py
-          python3 m3/compatibility/check_synexia_full_borrow_receiver.py
-          python3 m3/runtime-integration/verify-synexia-intake.py
+          python3 m3/compatibility/check_m3_full_family.py
+          python3 m3/compatibility/check_m3_full_borrow_receiver.py
+          python3 m3/runtime-integration/verify-m3-intake.py
       - name: Lint source structure and seal inputs
         shell: bash
         run: |

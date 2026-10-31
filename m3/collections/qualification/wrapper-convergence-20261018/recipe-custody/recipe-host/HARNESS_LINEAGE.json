@@ -12,7 +12,7 @@
     {
       "source_repository": "hsoliwal/M3jdk21",
       "source_revision": "0d73745d7203123533dce8f8fb264ba2746f6d2d",
-      "source_path": "m3/arrays/qualification/empty-segments-20261017/recipe-custody/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
+      "source_path": "m3/arrays/qualification/empty-segments-20261017/recipe-custody/src/test/java/jdk/internal/m3/rewrite/M3TaskRecipeTest.java",
       "sha256": "74b03a3ac3e445a04b8b15076d3ced667bfae2442bd0968cbe74468e4a499e43",
       "license": "Apache-2.0",
       "disposition": "ADAPT_HOST_ONLY"

@@ -2,7 +2,7 @@
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
  */
-package com.synexia.rewrite;
+package jdk.internal.m3.rewrite;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -28,11 +28,11 @@ import org.openrewrite.java.JavaParser;
 /** Real OpenRewrite SDK application, byte-exact sources, fixed point and drift refusals. */
 final class M3NativeBagRankIndex20261018RecipeTest {
     private static final String CRATE = "m3-native-bag-rank-index-20261018";
-    private static final String RESOURCE = "/com/synexia/rewrite/hash-pinned-java/" + CRATE + "/";
+    private static final String RESOURCE = "/jdk/internal/m3/rewrite/hash-pinned-java/" + CRATE + "/";
     private static final List<String> PATHS = List.of(
-            "m3/collections/src/main/java/com/m3/collections/M3BagRankIndex.java",
-            "m3/collections/src/test/java/com/m3/collections/M3BagRankIndexSelfTest.java",
-            "m3/collections/src/test/java/com/m3/collections/M3BagRankIndexTest.java");
+            "m3/collections/src/main/java/jdk/m3/collections/M3BagRankIndex.java",
+            "m3/collections/src/test/java/jdk/m3/collections/M3BagRankIndexSelfTest.java",
+            "m3/collections/src/test/java/jdk/m3/collections/M3BagRankIndexTest.java");
     private static final List<String> NAMES = List.of(
             "M3BagRankIndex.java.txt",
             "M3BagRankIndexSelfTest.java.txt",
@@ -98,7 +98,7 @@ final class M3NativeBagRankIndex20261018RecipeTest {
     @Test void foreignExistingImplementationRefuses() {
         var parsed = JavaParser.fromJavaVersion().build().parseInputs(
                 List.of(Parser.Input.fromString(Path.of(PATHS.getFirst()),
-                        "package com.m3.collections; public final class M3BagRankIndex {}")),
+                        "package jdk.m3.collections; public final class M3BagRankIndex {}")),
                 null, context()).toList();
         assertEquals(1, parsed.size());
         assertThrows(RuntimeException.class, () -> apply(parsed));

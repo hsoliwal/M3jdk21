@@ -39,7 +39,7 @@
   "origin_checks": {
     "probe_classes": 9,
     "observed_production_collection_classes": 370,
-    "all_observed_production_origins": "jrt:/com.m3.collections",
+    "all_observed_production_origins": "jrt:/jdk.m3.collections",
     "installed_native_libraries": 10,
     "all_native_origins": "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib",
     "all_sdk_jni_exports": 21

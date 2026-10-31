@@ -3,12 +3,12 @@
   "sourceRepository": "hsoliwal/com.synexia",
   "sourceRevision": "eaba5869004e320845edb652a73b8f9f2085d305",
   "sourcePullRequest": 12120,
-  "recipe": "com.synexia.m3jdk.MaskWindowSparse20261017",
-  "sourceCrate": "synexia-openrewrite-recipes/recipe-crates/m3-mask-window-sparse-20261017",
+  "recipe": "jdk.internal.m3.m3jdk.MaskWindowSparse20261017",
+  "sourceCrate": "m3-openrewrite-recipes/recipe-crates/m3-mask-window-sparse-20261017",
   "targetBaseline": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
   "outputs": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskWindow.java",
       "before": "cc3584e7ba4bafc98f154e7f63560334d472e7c03bd04688860642cc9f87bc19",
       "after": "dfaaf7b0d0c4f46657474eadb6f216dd68e920e327e153a0242ffe7ae6efbd9c",
       "beforeBlob": "e2f223274a2fb6006c0e8541621e9a1b16904566",
@@ -22,7 +22,7 @@
       "afterBlob": "6ccf6f10a2945be3631d0493da74b09070dca415"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowSparseContract.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3MaskWindowSparseContract.java",
       "before": "ABSENT",
       "after": "4972f1e06aecc9608a1d1fcb1d464a0057f8b9c4e7cfae958e4b01cddd1fd582",
       "beforeBlob": "ABSENT",

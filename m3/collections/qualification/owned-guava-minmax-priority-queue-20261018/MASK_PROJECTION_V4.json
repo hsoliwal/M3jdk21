@@ -183,7 +183,7 @@
         "-cp",
         "S:\\codex-work\\m3-collections-next-20261018\\guava-minmax-priority-queue\\projection-classes-v4;S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\current-base-runtime-v5\\core130-classes;C:\\codex-work\\m3-apache-validation-20261017-g1\\guava-unit\\deps\\guava-33.4.8-jre.jar",
         "GuavaMinMaxMaskProjectionProof",
-        "com.m3.collections.guava.M3MinMaxPriorityQueue",
+        "jdk.m3.collections.guava.M3MinMaxPriorityQueue",
         "java"
       ],
       "returncode": 0,
@@ -214,7 +214,7 @@
         "-cp",
         "S:\\codex-work\\m3-collections-next-20261018\\guava-minmax-priority-queue\\projection-classes-v4;S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\current-base-runtime-v5\\core130-classes;C:\\codex-work\\m3-apache-validation-20261017-g1\\guava-unit\\deps\\guava-33.4.8-jre.jar",
         "GuavaMinMaxMaskProjectionProof",
-        "com.m3.collections.guava.M3MinMaxPriorityQueue",
+        "jdk.m3.collections.guava.M3MinMaxPriorityQueue",
         "native"
       ],
       "returncode": 0,

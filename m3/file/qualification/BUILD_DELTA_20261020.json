@@ -4,17 +4,17 @@
   "product": "M3JDK21 (integrated JDK SDK; not optional Synexia runtime wrapper)",
   "source_repo": "hsoliwal/com.synexia",
   "source_branch": "aix/m3jdk21-maven-gradle-file-delta-20261020",
-  "canonical_recipe": "com.synexia.m3.M3Jdk21BuildDelta20261020",
+  "canonical_recipe": "jdk.internal.m3.M3Jdk21BuildDelta20261020",
   "base_master": "73f59218dc4ef1a3ef79aad990e77273db2a2d60",
   "target_branch": "aix/m3jdk21-integrated-build-delta-20261020",
   "scope": [
-    "m3/file/src/main/java/com/m3/file",
-    "m3/file/src/test/java/com/m3/file",
+    "m3/file/src/main/java/jdk/m3/file",
+    "m3/file/src/test/java/jdk/m3/file",
     "m3/file/pom.xml",
     "m3/file/BUILD_DELTA_20261020.md",
     "m3/docs/name-mapping.d/m3-file-delta-20261020.json"
   ],
-  "source_seal": "ALL_SEVEN_PRODUCT_JAVA_AND_TEXT_POSTIMAGES_GIT_BLOB_IDENTICAL_TO_SYNEXIA_TEMPLATES",
+  "source_seal": "ALL_SEVEN_PRODUCT_JAVA_AND_TEXT_POSTIMAGES_GIT_BLOB_IDENTICAL_TO_M3_TEMPLATES",
   "pinned_sha256": {
     "M3FileDelta.java": "62df6cac9e44bd6780064134b226e03e7440f327627a369fc26d07574183d319",
     "M3FileDeltaCli.java": "ad9c98bc01eb09d69fbfa1f318efc31e065de912f3bdda8aeae6649b7fc30576",
@@ -28,7 +28,7 @@
   },
   "existing_unchanged_sources": [
     [
-      "m3/file/src/main/java/com/m3/file/M3File.java",
+      "m3/file/src/main/java/jdk/m3/file/M3File.java",
       "c182a3b1526f9fd0ca20c631d97df3048076defd"
     ],
     [

@@ -8,8 +8,8 @@
   "current_parent_membership": 109,
   "designated_owners": 19,
   "designated_distribution": {
-    "synexia.jcc-recipe-laboratory": 13,
-    "synexia.jcc-java-jni-regression": 6
+    "m3.jcc-recipe-laboratory": 13,
+    "m3.jcc-java-jni-regression": 6
   },
   "E3_prior_objects_match_context_exactly": 17,
   "E3_preexisting_history_count": 4,
@@ -26,12 +26,12 @@
   "destination_gates": 20,
   "selected_status_and_tests": [
     {
-      "id": "synexia.jcc-recipe-laboratory",
+      "id": "m3.jcc-recipe-laboratory",
       "status": "blocked",
       "tests": []
     },
     {
-      "id": "synexia.jcc-java-jni-regression",
+      "id": "m3.jcc-java-jni-regression",
       "status": "blocked",
       "tests": []
     }

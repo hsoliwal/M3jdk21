@@ -51,19 +51,19 @@
       "gitBlob": "da919637d7a59a2b06820ff47c70f73bc59cfbf9"
     },
     {
-      "path": "sdk/pinned-engine/com/synexia/rewrite/M3CharcopyCurrentSuccessorRecipe.java",
+      "path": "sdk/pinned-engine/jdk/internal/m3/rewrite/M3CharcopyCurrentSuccessorRecipe.java",
       "bytes": 1951,
       "sha256": "1ac098e2c7349fa5c4c75e2e72dc42ba958bcc945b777afded0adaa3cbe2c70a",
       "gitBlob": "b50c9e1950ae73d8ddaa4b50c7e167c36869ab8a"
     },
     {
-      "path": "sdk/pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
+      "path": "sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
       "bytes": 10964,
       "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999",
       "gitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
     },
     {
-      "path": "sdk/pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
+      "path": "sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
       "bytes": 5187,
       "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec",
       "gitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a"
@@ -81,43 +81,43 @@
       "gitBlob": "9d043e2ff8b34e9ff54482ad7887c0a6ea4a31a3"
     },
     {
-      "path": "sdk/src/main/resources/com/synexia/rewrite/charcopy-current-successor-20261019/manifest.tsv",
+      "path": "sdk/src/main/resources/jdk/internal/m3/rewrite/charcopy-current-successor-20261019/manifest.tsv",
       "bytes": 1489,
       "sha256": "db44f3abf5270084eaa529469f664333fcef6abfe4df73e78d7548f2a3287303",
       "gitBlob": "1546700a445bf1c38834a41ba3b4ed263abf9527"
     },
     {
-      "path": "sdk/src/test/java/com/synexia/rewrite/M3CharcopyCurrentSuccessorRecipeTest.java",
+      "path": "sdk/src/test/java/jdk/internal/m3/rewrite/M3CharcopyCurrentSuccessorRecipeTest.java",
       "bytes": 14347,
       "sha256": "a7dedad6a36b2c6164251f9a2f2300af7a67d9d0195209b09287614ebf69b507",
       "gitBlob": "728861be589ece7e46e17bc775b024f9075bba35"
     },
     {
-      "path": "sdk/src/test/resources/com/synexia/rewrite/charcopy-current-successor-20261019/M3String-predecessor.java.txt",
+      "path": "sdk/src/test/resources/jdk/internal/m3/rewrite/charcopy-current-successor-20261019/M3String-predecessor.java.txt",
       "bytes": 55181,
       "sha256": "cd1192e27c981da03aeae2385d3d54ad31d912f043cf8c7dfba18c7b9106b728",
       "gitBlob": "35ed998540e044eed8cb7596e2e2c019ae369bd3"
     },
     {
-      "path": "sdk/src/test/resources/com/synexia/rewrite/charcopy-current-successor-20261019/M3StringConcatLengthOverflowTest-predecessor.java.txt",
+      "path": "sdk/src/test/resources/jdk/internal/m3/rewrite/charcopy-current-successor-20261019/M3StringConcatLengthOverflowTest-predecessor.java.txt",
       "bytes": 3957,
       "sha256": "587f7f63fb419970ffdc889bca05335eb3f49ebcc97d3810906b3587ff9e7ab4",
       "gitBlob": "04a62436389a02d735ec1a210052757818eef592"
     },
     {
-      "path": "sdk/src/test/resources/com/synexia/rewrite/charcopy-current-successor-20261019/M3StringFacts-predecessor.java.txt",
+      "path": "sdk/src/test/resources/jdk/internal/m3/rewrite/charcopy-current-successor-20261019/M3StringFacts-predecessor.java.txt",
       "bytes": 21176,
       "sha256": "2152c154d3cdece330667ee09675fd21d86f3b483a23a3156b8a3626c3f9f420",
       "gitBlob": "d8dd7dc30db6a9e3897146572bd4a7755c954ffb"
     },
     {
-      "path": "sdk/src/test/resources/com/synexia/rewrite/charcopy-current-successor-20261019/MIndexString-before.java.txt",
+      "path": "sdk/src/test/resources/jdk/internal/m3/rewrite/charcopy-current-successor-20261019/MIndexString-before.java.txt",
       "bytes": 23998,
       "sha256": "21e373dbe450c7cd7b85ede587209f88b4546b1833a75c83370b213aa66d97d0",
       "gitBlob": "520e6fa968946830f2f78fd847fef4793869d74a"
     },
     {
-      "path": "sdk/src/test/resources/com/synexia/rewrite/charcopy-current-successor-20261019/MIndexStringInvariant-before.java.txt",
+      "path": "sdk/src/test/resources/jdk/internal/m3/rewrite/charcopy-current-successor-20261019/MIndexStringInvariant-before.java.txt",
       "bytes": 7269,
       "sha256": "c4623ce4627dffb0b70c9b7d8cc8e429c50300a4fa6ec90ea5c7d1f6bbc4aee1",
       "gitBlob": "2a7403c846bebd10c7cd726962f28ceea3cbe73d"
@@ -179,7 +179,7 @@
       "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
     }
   ],
-  "namedRecipe": "com.synexia.m3.CharcopyCurrentSuccessor20261019",
+  "namedRecipe": "jdk.internal.m3.CharcopyCurrentSuccessor20261019",
   "jdkRelease": 21,
   "expected": {
     "sdkTests": 3,

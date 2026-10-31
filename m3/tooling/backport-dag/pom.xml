@@ -59,7 +59,7 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>3.6.4</version>
         <configuration>
-          <mainClass>com.m3.tooling.dag.M3BackportDagMain</mainClass>
+          <mainClass>jdk.m3.tooling.dag.M3BackportDagMain</mainClass>
         </configuration>
       </plugin>
       <plugin>
@@ -87,21 +87,21 @@
             </goals>
             <configuration>
               <includes>
-                <include>com/m3/tooling/dag/M3RecipeDag*</include>
-                <include>com/m3/tooling/dag/M3DagNode*</include>
-                <include>com/m3/tooling/dag/M3AdmissionFact*</include>
-                <include>com/m3/tooling/dag/M3RecipeAtom*</include>
-                <include>com/m3/tooling/dag/M3RecipeAtomEvidence*</include>
-                <include>com/m3/tooling/dag/M3BackportPacketEvidence*</include>
-                <include>com/m3/tooling/dag/M3BackportPacketEvidenceLoader*</include>
-                <include>com/m3/tooling/dag/M3AtomEvidenceRoot*</include>
-                <include>com/m3/tooling/dag/M3BackportPacket.class</include>
-                <include>com/m3/tooling/dag/M3BackportPacketLoader*</include>
-                <include>com/m3/tooling/dag/M3PacketDagComposer*</include>
-                <include>com/m3/tooling/dag/M3DagSemanticRoot*</include>
-                <include>com/m3/tooling/dag/M3DagProjection*</include>
-                <include>com/m3/tooling/dag/M3DagProjector*</include>
-                <include>com/m3/tooling/dag/M3A3BackportPreparation*</include>
+                <include>jdk/m3/tooling/dag/M3RecipeDag*</include>
+                <include>jdk/m3/tooling/dag/M3DagNode*</include>
+                <include>jdk/m3/tooling/dag/M3AdmissionFact*</include>
+                <include>jdk/m3/tooling/dag/M3RecipeAtom*</include>
+                <include>jdk/m3/tooling/dag/M3RecipeAtomEvidence*</include>
+                <include>jdk/m3/tooling/dag/M3BackportPacketEvidence*</include>
+                <include>jdk/m3/tooling/dag/M3BackportPacketEvidenceLoader*</include>
+                <include>jdk/m3/tooling/dag/M3AtomEvidenceRoot*</include>
+                <include>jdk/m3/tooling/dag/M3BackportPacket.class</include>
+                <include>jdk/m3/tooling/dag/M3BackportPacketLoader*</include>
+                <include>jdk/m3/tooling/dag/M3PacketDagComposer*</include>
+                <include>jdk/m3/tooling/dag/M3DagSemanticRoot*</include>
+                <include>jdk/m3/tooling/dag/M3DagProjection*</include>
+                <include>jdk/m3/tooling/dag/M3DagProjector*</include>
+                <include>jdk/m3/tooling/dag/M3A3BackportPreparation*</include>
               </includes>
               <rules>
                 <rule>
@@ -128,7 +128,7 @@
   </build>
   <profiles>
     <profile>
-      <id>m3-synexia-atom-pattern</id>
+      <id>m3-atom-pattern</id>
       <build>
         <plugins>
           <plugin>
@@ -138,13 +138,13 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
               </dependency>
             </dependencies>
             <executions>
               <execution>
-                <id>m3-synexia-atom-pattern-verify</id>
+                <id>m3-atom-pattern-verify</id>
                 <phase>verify</phase>
                 <goals>
                   <goal>dryRun</goal>
@@ -153,7 +153,7 @@
             </executions>
             <configuration>
               <activeRecipes>
-                <recipe>com.synexia.m3.EveryModuleAtomPatternApplication</recipe>
+                <recipe>jdk.internal.m3.EveryModuleAtomPatternApplication</recipe>
               </activeRecipes>
               <exportDatatables>true</exportDatatables>
               <runPerSubmodule>false</runPerSubmodule>
@@ -216,7 +216,7 @@
       </build>
     </profile>
     <profile>
-      <id>m3-synexia-atom-pattern-mastery</id>
+      <id>m3-atom-pattern-mastery</id>
       <build>
         <plugins>
           <plugin>
@@ -226,13 +226,13 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
               </dependency>
             </dependencies>
             <executions>
               <execution>
-                <id>m3-synexia-atom-pattern-mastery-verify</id>
+                <id>m3-atom-pattern-mastery-verify</id>
                 <phase>verify</phase>
                 <goals>
                   <goal>dryRun</goal>
@@ -241,7 +241,7 @@
             </executions>
             <configuration>
               <activeRecipes>
-                <recipe>com.synexia.m3.EveryModuleAtomPatternMastery</recipe>
+                <recipe>jdk.internal.m3.EveryModuleAtomPatternMastery</recipe>
               </activeRecipes>
               <exportDatatables>true</exportDatatables>
               <runPerSubmodule>false</runPerSubmodule>
@@ -336,7 +336,7 @@
                 </goals>
                 <configuration>
                   <skip>${m3.recipe.boot.skip}</skip>
-                  <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+                  <mainClass>jdk.internal.m3.prstack.M3RecipeBoot</mainClass>
                   <includeProjectDependencies>false</includeProjectDependencies>
                   <includePluginDependencies>true</includePluginDependencies>
                   <arguments>

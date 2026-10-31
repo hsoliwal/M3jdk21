@@ -29,7 +29,7 @@ jobs:
         run: |
           set -euo pipefail
           echo '041c252eb54d502e2a1edd94242fbbf74e948ae6fbdc537b188ac0f64ea22003  m3/collections/implementations/apache-hash-bag/src/main/java/org/apache/commons/collections4/Bag.java' | sha256sum -c -
-          echo '73d12e03851fefe19f3a04ade5838e3bf79cf78406ca3c36cad4a90a10cf0b73  m3/collections/implementations/apache-hash-bag/src/test/java/com/m3/collections/apache/M3BagInlineRuntimeBoundaryTest.java' | sha256sum -c -
+          echo '73d12e03851fefe19f3a04ade5838e3bf79cf78406ca3c36cad4a90a10cf0b73  m3/collections/implementations/apache-hash-bag/src/test/java/jdk/m3/collections/apache/M3BagInlineRuntimeBoundaryTest.java' | sha256sum -c -
       - name: Strict direct Java21 no-external-jar M3 dense-array compile
         shell: bash
         run: |

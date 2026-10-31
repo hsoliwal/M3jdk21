@@ -22,7 +22,7 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-      - name: Strict original com.m3.file and bounded parallel JUnit
+      - name: Strict original jdk.m3.file and bounded parallel JUnit
         shell: bash
         run: |
           set -euo pipefail

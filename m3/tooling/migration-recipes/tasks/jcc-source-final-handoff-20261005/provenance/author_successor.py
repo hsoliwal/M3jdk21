@@ -21,11 +21,11 @@ E2 = "df06cdee5a8526f573b3ad89622824d0b49e2f25"
 E2_TREE = "e3e079ba36553bae517c3e53a5a834b24452a82e"
 CRATE_NAME = "jcc-source-final-handoff-20261005"
 PREFIX = Path("m3/tooling/migration-recipes")
-CRATE = OVERLAY / PREFIX / "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text" / CRATE_NAME
+CRATE = OVERLAY / PREFIX / "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text" / CRATE_NAME
 E2_CRATE = CRATE.parent / "jcc-handoff-20261005"
 TASK = PREFIX / "tasks" / CRATE_NAME
-LAB = "synexia.jcc-recipe-laboratory"
-JNI = "synexia.jcc-java-jni-regression"
+LAB = "m3.jcc-recipe-laboratory"
+JNI = "m3.jcc-java-jni-regression"
 IDS = (LAB, JNI)
 MAPPING = "m3/docs/name-mapping.json"
 BINDING = "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json"
@@ -136,7 +136,7 @@ def main() -> None:
     assert [len(rows[record_id]["sources"]) for record_id in IDS] == [11, 6]
 
     receiver = next(target for target in rows[LAB]["targets"]
-                    if target["symbol"] == "com.m3.rewrite.atom.JccReceivingFixtureTest")
+                    if target["symbol"] == "jdk.m3.rewrite.atom.JccReceivingFixtureTest")
     assert receiver["commit"] is None and receiver["revision_role"] == "candidate"
     rows[LAB]["lineage"]["previous_targets"].append(copy.deepcopy(receiver))
     receiver["commit"] = E2
@@ -154,7 +154,7 @@ def main() -> None:
             "Reconcile source PR 9285 with moving develop separately; observed dirty mergeability does not rewrite the frozen source input or publication pins.",
             "Resolve or reobserve the prior receiving CI failures separately; merging PR 139 is publication history, not gate evidence."
         ]
-        row["recipe"]["id"] = "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/" + CRATE_NAME
+        row["recipe"]["id"] = "jdk.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/" + CRATE_NAME
         row["recipe"]["preconditions"] = [
             "All four existing E2 preimages at " + E2 + "; canonical map SHA256 " + digest((CRATE / "before00-name-mapping.json.txt").read_bytes()) + ".",
             "Use the unchanged retained text transformer and sealed-install/1 owner; preserve the historical E2 crate, seven guards and exact previous source/receiver artifact objects.",

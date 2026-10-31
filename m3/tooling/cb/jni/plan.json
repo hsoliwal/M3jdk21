@@ -24,7 +24,7 @@
       }
     },
     {
-      "path": "test/jdk/jdk/internal/mindex/cb/com/m3/cb/JNINull.java",
+      "path": "test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/JNINull.java",
       "before": null,
       "after": {
         "resource": "JNINull.java.after",
@@ -34,7 +34,7 @@
   ],
   "guards": [
     {
-      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
       "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
     }
   ],

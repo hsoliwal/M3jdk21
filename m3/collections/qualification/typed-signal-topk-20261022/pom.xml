@@ -50,14 +50,14 @@
           </compilerArgs>
           <includes>
             <include>module-info.java</include>
-            <include>com/m3/collections/M3SignalColumns.java</include>
-            <include>com/m3/collections/M3SignalTopK.java</include>
+            <include>jdk/m3/collections/M3SignalColumns.java</include>
+            <include>jdk/m3/collections/M3SignalTopK.java</include>
           </includes>
           <testIncludes>
-            <testInclude>com/m3/collections/M3SignalColumnsSelfTest.java</testInclude>
-            <testInclude>com/m3/collections/M3SignalColumnsTest.java</testInclude>
-            <testInclude>com/m3/collections/M3SignalTopKSelfTest.java</testInclude>
-            <testInclude>com/m3/collections/M3SignalTopKTest.java</testInclude>
+            <testInclude>jdk/m3/collections/M3SignalColumnsSelfTest.java</testInclude>
+            <testInclude>jdk/m3/collections/M3SignalColumnsTest.java</testInclude>
+            <testInclude>jdk/m3/collections/M3SignalTopKSelfTest.java</testInclude>
+            <testInclude>jdk/m3/collections/M3SignalTopKTest.java</testInclude>
           </testIncludes>
         </configuration>
       </plugin>

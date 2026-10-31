@@ -18,9 +18,9 @@ import xml.etree.ElementTree as ET
 SOURCE = "d1ecbd43dbadaf218deec0d98a2ddc23f3a3f45c"
 TARGET = "c0a14387009aefc7d62bd3268055d526e04f9074"
 TARGET_TREE = "491bbd80a51483d0710fc12c1bad3a037b385ba0"
-SUITE = "com.synexia.rewrite.Sc0RecipeTest"
+SUITE = "jdk.internal.m3.rewrite.Sc0RecipeTest"
 QUALIFICATION_SHA256 = "c5474bd26c5eb60316c35b548dcf7e5111cd9d614670797cd8f4cdf53244777f"
-MAIN = ("com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",)
+MAIN = ("jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",)
 OWNER_SHA256 = "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
 BUDGETS = {"static": 180, "compile": 600, "tests": 7200, "runtime": 7200}
 EXPECTED_PROJECT = 20
@@ -33,15 +33,15 @@ METHODS = ['closedFamiliesAndResourcePins',
  'pureAdditionInputs',
  'spcMixedStates']
 FAMILY_IDS = ('Spc',)
-FAMILIES = {'com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc': ('m3/runtime-integration/fix-root-ascii-case/manifest.json',
+FAMILIES = {'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc': ('m3/runtime-integration/fix-root-ascii-case/manifest.json',
                                                             'm3/tooling/image-gates/current-c0.json',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/03-M3StringPrecomputeSearchTest.java.txt',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/03-M3StringPrecomputeSearchTest.java.txt',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv',
                                                             'test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java')}
 REPLACEMENTS = ('m3/runtime-integration/fix-root-ascii-case/manifest.json',
  'm3/tooling/image-gates/current-c0.json',
- 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/03-M3StringPrecomputeSearchTest.java.txt',
- 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv',
+ 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/03-M3StringPrecomputeSearchTest.java.txt',
+ 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv',
  'test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java')
 COUNTS = {'additions': 0,
  'families': 1,
@@ -132,7 +132,7 @@ def files(directory):
 
 
 def expected_paths():
-    paths = {"pom.xml", "proof.py", "README.md", "src/test/java/com/synexia/rewrite/Sc0RecipeTest.java"}
+    paths = {"pom.xml", "proof.py", "README.md", "src/test/java/jdk/internal/m3/rewrite/Sc0RecipeTest.java"}
     paths.update("dependency-source/" + name for name in MAIN)
     paths.update("src/test/resources/before/" + name for name in REPLACEMENTS)
     for family, targets in FAMILIES.items():
@@ -173,7 +173,7 @@ def prepare(args):
     check_environment()
     spec_path = args.spec.resolve()
     spec = load(spec_path)
-    require(spec["schema"] == "synexia.sc0.proof-spec/1", "unknown proof spec")
+    require(spec["schema"] == "m3.sc0.proof-spec/1", "unknown proof spec")
     require(spec["sourceCommit"] == SOURCE and spec["targetCommit"] == TARGET, "baseline drift")
     require(sorted(spec["junitMethods"]) == METHODS, "test inventory differs from admission")
     rows = spec["inputs"]
@@ -268,7 +268,7 @@ def prepare(args):
     write(proof / "tool-links.json", tools)
     sealed.add(proof / "tool-links.json")
     write(proof / "inputs.json", [identity(path) for path in sorted(sealed, key=str)])
-    write(proof / "PATCH.json", {"schema": "synexia.sc0.prepared/1", "status": "PREPARED_NOT_EXECUTED",
+    write(proof / "PATCH.json", {"schema": "m3.sc0.prepared/1", "status": "PREPARED_NOT_EXECUTED",
           "sourceCommit": SOURCE, "targetCommit": TARGET, "inputManifestSHA256": sha(proof / "inputs.json"),
           "specSHA256": sha(proof / "spec.json"), "commandsSHA256": sha(proof / "commands.json"),
           "stagingSHA256": sha(proof / "staging.json"), "projectFiles": len(staging),
@@ -310,7 +310,7 @@ def qualification(project):
     require(set(value) == {"schema", "sourceCommit", "targetCommit", "targetTree", "ownerSHA256",
             "counts", "families", "orders", "compositionOrdersSHA256", "compositionYamlSHA256"},
             "qualification fields differ from admission")
-    require(value["schema"] == "synexia.sc0.qualification/1" and value["sourceCommit"] == SOURCE
+    require(value["schema"] == "m3.sc0.qualification/1" and value["sourceCommit"] == SOURCE
             and value["targetCommit"] == TARGET and value["targetTree"] == TARGET_TREE,
             "qualification baseline drift")
     require(value["ownerSHA256"] == OWNER_SHA256
@@ -322,11 +322,11 @@ def qualification(project):
     require(len(families) == COUNTS["families"], "family count drift")
     orders = load(resource / "composition-orders.json")
     require(set(orders) == {"schema", "sourceCommit", "targetCommit", "orders"}
-            and orders["schema"] == "synexia.sc0.composition-orders/1"
+            and orders["schema"] == "m3.sc0.composition-orders/1"
             and orders["sourceCommit"] == SOURCE and orders["targetCommit"] == TARGET,
             "composition order protocol drift")
-    expected_orders = [{"id": "Forward", "recipe": "com.synexia.m3.Sc0Forward", "families": list(FAMILY_IDS)},
-                       {"id": "Reverse", "recipe": "com.synexia.m3.Sc0Reverse", "families": list(reversed(FAMILY_IDS))}]
+    expected_orders = [{"id": "Forward", "recipe": "jdk.internal.m3.Sc0Forward", "families": list(FAMILY_IDS)},
+                       {"id": "Reverse", "recipe": "jdk.internal.m3.Sc0Reverse", "families": list(reversed(FAMILY_IDS))}]
     require(orders["orders"] == value["orders"] == expected_orders, "only both declared complete orders admitted")
     require(sha(resource / "composition-orders.json") == value["compositionOrdersSHA256"]
             and sha(resource / "META-INF/rewrite/sc0-orders.yml") == value["compositionYamlSHA256"],
@@ -338,7 +338,7 @@ def qualification(project):
         require(set(family) == {"id", "crate", "namedRecipe", "manifestPath", "manifestSHA256",
                 "yamlPath", "yamlSHA256", "targets"}, "family declaration fields drift")
         require(family["crate"] == "sc0-" + family["id"].lower()
-                and family["namedRecipe"] == "com.synexia.m3.Sc0" + family["id"]
+                and family["namedRecipe"] == "jdk.internal.m3.Sc0" + family["id"]
                 and family["manifestPath"] == folder + "/manifest.tsv"
                 and family["yamlPath"] == "META-INF/rewrite/" + family["crate"] + ".yml",
                 "family path/name relationship drift")
@@ -414,7 +414,7 @@ def static_gate(proof):
     require({path.relative_to(project).as_posix() for path in files(project)} == expected_paths(), "unexpected static project file")
     value = qualification(project)
     outputs = manifest_outputs(project)
-    fixture = (project / "src/test/java/com/synexia/rewrite/Sc0RecipeTest.java").read_text()
+    fixture = (project / "src/test/java/jdk/internal/m3/rewrite/Sc0RecipeTest.java").read_text()
     observed = re.findall(r"@Test\s+(?:(?:public|final)\s+)*void\s+(\w+)\s*\(", fixture)
     require(sorted(observed) == METHODS, "actual source test method inventory drift")
     for family in value["families"]:
@@ -466,7 +466,7 @@ def junit(proof):
 
 
 def state_seal(rows):
-    framed = "SYNEXIA-SC0-STATE/1\n" + "".join(
+    framed = "M3-SC0-STATE/1\n" + "".join(
         row["path"] + "\t" + row["sha256"] + "\t"
         + ("ABSENT" if row["bytes"] is None else str(row["bytes"])) + "\n" for row in rows)
     return digest(framed.encode("utf-8"))
@@ -490,7 +490,7 @@ def output_report(proof, stdout):
     keys = {"schema", "sourceCommit", "targetCommit", "outputs", "outputSeal", "qualificationSHA256",
             "compositionOrdersSHA256", "orderedCompositions"} | set(COUNTS) | set(FLAGS)
     require(set(payload) == keys, "unknown/missing OUTPUT fields")
-    require(payload["schema"] == "synexia.sc0.output/1" and payload["sourceCommit"] == SOURCE
+    require(payload["schema"] == "m3.sc0.output/1" and payload["sourceCommit"] == SOURCE
             and payload["targetCommit"] == TARGET, "OUTPUT protocol/baseline drift")
     require(payload["qualificationSHA256"] == QUALIFICATION_SHA256
             and payload["compositionOrdersSHA256"] == value["compositionOrdersSHA256"],
@@ -506,7 +506,7 @@ def output_report(proof, stdout):
     for row in rows:
         actual = identity(output / row["path"])
         require(actual["sha256"] == row["sha256"] and actual["bytes"] == row["bytes"], "actual generated output drift")
-    framed = "SYNEXIA-SC0-OUTPUT/1\n" + "".join(
+    framed = "M3-SC0-OUTPUT/1\n" + "".join(
         row["path"] + "\t" + row["sha256"] + "\t" + str(row["bytes"]) + "\n" for row in rows)
     seal = digest(framed.encode("utf-8"))
     require(payload["outputSeal"] == seal, "OUTPUT seal mismatch")
@@ -652,7 +652,7 @@ def run(args):
             if stage == "compile":
                 compiled = artifacts(proof)
                 required = {"classes/" + name.removesuffix(".java") + ".class" for name in MAIN}
-                required.add("test-classes/com/synexia/rewrite/Sc0RecipeTest.class")
+                required.add("test-classes/jdk/internal/m3/rewrite/Sc0RecipeTest.class")
                 require(required.issubset({row["path"] for row in compiled}), "required compiled classes missing")
                 write(proof / "build-artifacts.json", compiled)
                 compiled_seal = sha(proof / "build-artifacts.json")
@@ -674,7 +674,7 @@ def run(args):
     except (Exception, KeyboardInterrupt) as error:
         failure = {"stage": current, "type": type(error).__name__, "message": str(error)}
     finally:
-        result = {"schema": "synexia.sc0.proof-result/1", "status": "PASS_FOCUSED_PRODUCER" if success else "STOP",
+        result = {"schema": "m3.sc0.proof-result/1", "status": "PASS_FOCUSED_PRODUCER" if success else "STOP",
                   "sourceCommit": SOURCE, "targetCommit": TARGET, "patchSHA256": args.seal,
                   "inputManifestSHA256": sha(proof / "inputs.json"), "receipts": prior_seals,
                   "failure": failure, "junit": junit_result, "junitEvidence": junit_evidence,

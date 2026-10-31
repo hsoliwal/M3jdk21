@@ -1,7 +1,7 @@
 {
   "schema": "M3JDK21_TREE_RESIDENCY_REUSE_REVIEW_V1",
   "source": {
-    "path": "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java",
+    "path": "m3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java",
     "base_commit": "75e2bfe3d934bae1535243542b2417570b2bea24",
     "before_git_blob": "65ab293a00da1092243f7f1904771c5a0cc60a44",
     "after_sdk_git_blob": "6026f2eaee317bb2fe3bcaacb3f6d2c51a3b23b3",
@@ -12,7 +12,7 @@
     "repository": "hsoliwal/com.synexia",
     "pr": 12855,
     "dataset": "vpt-residency-reuse-20261026",
-    "named_recipe": "com.synexia.m3.ViewportResidencyReuse20261026",
+    "named_recipe": "jdk.internal.m3.ViewportResidencyReuse20261026",
     "exact_engines": {
       "M3HashPinnedJavaSnapshotRecipe": "98138cb6734ad86e3f77b8722fa5ff459842e841",
       "M3HashPinnedTextSnapshotRecipe": "14c383724cd3e9dda80d9311e298cc4ed4cf46c7",

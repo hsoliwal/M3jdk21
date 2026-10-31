@@ -18,9 +18,9 @@ import xml.etree.ElementTree as ET
 SOURCE = "d1ecbd43dbadaf218deec0d98a2ddc23f3a3f45c"
 TARGET = "c0a14387009aefc7d62bd3268055d526e04f9074"
 TARGET_TREE = "491bbd80a51483d0710fc12c1bad3a037b385ba0"
-SUITE = "com.synexia.rewrite.Ic0RecipeTest"
+SUITE = "jdk.internal.m3.rewrite.Ic0RecipeTest"
 QUALIFICATION_SHA256 = "ca8176f2a2a2617c0fb76c86c48ca152a28396381b1266f3ce0c84e7b65caba5"
-MAIN = ("com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",)
+MAIN = ("jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",)
 OWNER_SHA256 = "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
 NUL_BEFORE_PATH = "m3/backports/compatibility_policy.py"
 NUL_BEFORE_SHA256 = "3fbe65ee5d3130858d114b0637207585e0cb20c2b5008def8c3dc6607f042d41"
@@ -105,167 +105,167 @@ FAMILY_IDS = ('Cmp',
  'Awd',
  'Aad',
  'Jop')
-FAMILIES = {'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cmp': ('m3/docs/name-mapping.json',),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cgo': ('m3/backports/recipes/jep-485-gatherers/README.md',
+FAMILIES = {'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cmp': ('m3/docs/name-mapping.json',),
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cgo': ('m3/backports/recipes/jep-485-gatherers/README.md',
                                                             'm3/backports/recipes/jep-485-gatherers/atom-evidence.tsv',
-                                                            'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jep485StreamGatherersBackportRecipe.java',
+                                                            'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep485StreamGatherersBackportRecipe.java',
                                                             'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jep485-stream-gatherers.yml',
-                                                            'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jep485StreamGatherersBackportRecipeTest.java',
+                                                            'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep485StreamGatherersBackportRecipeTest.java',
                                                             'm3/tooling/recipe-catalogue.tsv'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cri': ('m3/backports/recipes/jep-493-runtime-image/CURRENT_TREE_RECEIPT.tsv',),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-gpc': ('m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep485-stream-gatherers/01-Gatherer.java.txt',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep485-stream-gatherers/03-Gatherers.java.txt',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep485-stream-gatherers/11-GatherersMapConcurrentTest.java.txt',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep485-stream-gatherers/manifest.tsv',
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cri': ('m3/backports/recipes/jep-493-runtime-image/CURRENT_TREE_RECEIPT.tsv',),
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-gpc': ('m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep485-stream-gatherers/01-Gatherer.java.txt',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep485-stream-gatherers/03-Gatherers.java.txt',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep485-stream-gatherers/11-GatherersMapConcurrentTest.java.txt',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep485-stream-gatherers/manifest.tsv',
                                                             'src/java.base/share/classes/java/util/stream/Gatherer.java',
                                                             'src/java.base/share/classes/java/util/stream/Gatherers.java',
                                                             'test/jdk/java/util/stream/GatherersMapConcurrentTest.java'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cor': ('m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/atom/spectrum/CORPUS.tsv',),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-sdc': ('m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/16-AbstractStringBuilder.java.txt',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv',
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cor': ('m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/atom/spectrum/CORPUS.tsv',),
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-sdc': ('m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/16-AbstractStringBuilder.java.txt',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv',
                                                             'src/java.base/share/classes/java/lang/AbstractStringBuilder.java'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-fnd': ('.github/workflows/m3-foundation.yml',
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-fnd': ('.github/workflows/m3-foundation.yml',
                                                             'm3/tooling/image-gates/current-c0.json',
                                                             'm3/tooling/image-gates/src/test/python/test_current_context.py',
                                                             'm3/tooling/image-gates/verify-current.py'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-ciw': ('.github/workflows/m3-class-ver.yml',
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-ciw': ('.github/workflows/m3-class-ver.yml',
                                                             'm3/migration/classver-evidence.json',
                                                             'm3/migration/classver.py',
                                                             'm3/migration/test/test_classver.py'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cib': ('.github/workflows/m3-jdk21-backports.yml',
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cib': ('.github/workflows/m3-jdk21-backports.yml',
                                                             '.github/workflows/m3-jep458-current-master.yml'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jgr': ('m3/backports/generate_recipe_crates.py',
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jgr': ('m3/backports/generate_recipe_crates.py',
                                                             'm3/backports/recipes/jep-467-markdown/GA_RECONCILIATION.json',
                                                             'm3/backports/recipes/jep-493-runtime-image/GA_RECONCILIATION.json',
                                                             'm3/backports/test_generate_recipe_crates.py'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jma': ('.github/workflows/m3-jep493-runtime-image-materialize.yml',
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jma': ('.github/workflows/m3-jep493-runtime-image-materialize.yml',
                                                             'm3/backports/materialize_generated_crates.py',
                                                             'm3/backports/recipes/jep-493-runtime-image/MATERIALIZATION_POLICY.tsv',
                                                             'm3/backports/recipes/jep-493-runtime-image/README.md',
                                                             'm3/backports/test_materialize_generated_crates.py'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-pcd': ('m3/backports/recipes/jep-467-markdown/collection-map.tsv',
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-pcd': ('m3/backports/recipes/jep-467-markdown/collection-map.tsv',
                                                             'm3/backports/recipes/jep-467-markdown/collection.tsv',
                                                             'm3/backports/recipes/jep-493-runtime-image/collection-map.tsv',
                                                             'm3/backports/recipes/jep-493-runtime-image/collection.tsv'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-pco': ('m3/tooling/backport-dag/src/main/java/com/m3/tooling/dag/M3BackportPacketCollection.java',
-                                                            'm3/tooling/backport-dag/src/main/java/com/m3/tooling/dag/M3PacketCollectionLoader.java',
-                                                            'm3/tooling/backport-dag/src/main/java/com/m3/tooling/dag/M3PacketCollectionMain.java',
-                                                            'm3/tooling/backport-dag/src/main/java/com/m3/tooling/dag/M3PacketDagComposer.java',
-                                                            'm3/tooling/backport-dag/src/test/java/com/m3/tooling/dag/M3BackportPacketCollectionTest.java'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-pcw': ('.github/workflows/m3-jep467-markdown-inventory.yml',
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-pco': ('m3/tooling/backport-dag/src/main/java/jdk/m3/tooling/dag/M3BackportPacketCollection.java',
+                                                            'm3/tooling/backport-dag/src/main/java/jdk/m3/tooling/dag/M3PacketCollectionLoader.java',
+                                                            'm3/tooling/backport-dag/src/main/java/jdk/m3/tooling/dag/M3PacketCollectionMain.java',
+                                                            'm3/tooling/backport-dag/src/main/java/jdk/m3/tooling/dag/M3PacketDagComposer.java',
+                                                            'm3/tooling/backport-dag/src/test/java/jdk/m3/tooling/dag/M3BackportPacketCollectionTest.java'),
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-pcw': ('.github/workflows/m3-jep467-markdown-inventory.yml',
                                                             '.github/workflows/m3-jep493-runtime-image-inventory.yml',
                                                             'm3/tooling/backport-dag/pom.xml'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-dgc': ('m3/tooling/backport-dag/src/main/java/com/m3/tooling/dag/M3RecipeDag.java',
-                                                            'm3/tooling/backport-dag/src/main/resources/com/m3/tooling/dag/adapters/airflow/m3_backport_dag.py',
-                                                            'm3/tooling/backport-dag/src/main/resources/com/m3/tooling/dag/adapters/camel/m3-backport-route.yaml',
-                                                            'm3/tooling/backport-dag/src/main/resources/com/m3/tooling/dag/adapters/drools/m3-backport-admission.drl',
-                                                            'm3/tooling/backport-dag/src/test/java/com/m3/tooling/dag/M3BackportDagLoaderTest.java',
-                                                            'm3/tooling/backport-dag/src/test/java/com/m3/tooling/dag/M3PacketDagComposerTest.java',
-                                                            'm3/tooling/backport-dag/src/test/java/com/m3/tooling/dag/M3RecipeDagTest.java'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-nul': ('m3/backports/compatibility_policy.py',
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-dgc': ('m3/tooling/backport-dag/src/main/java/jdk/m3/tooling/dag/M3RecipeDag.java',
+                                                            'm3/tooling/backport-dag/src/main/resources/jdk/m3/tooling/dag/adapters/airflow/m3_backport_dag.py',
+                                                            'm3/tooling/backport-dag/src/main/resources/jdk/m3/tooling/dag/adapters/camel/m3-backport-route.yaml',
+                                                            'm3/tooling/backport-dag/src/main/resources/jdk/m3/tooling/dag/adapters/drools/m3-backport-admission.drl',
+                                                            'm3/tooling/backport-dag/src/test/java/jdk/m3/tooling/dag/M3BackportDagLoaderTest.java',
+                                                            'm3/tooling/backport-dag/src/test/java/jdk/m3/tooling/dag/M3PacketDagComposerTest.java',
+                                                            'm3/tooling/backport-dag/src/test/java/jdk/m3/tooling/dag/M3RecipeDagTest.java'),
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-nul': ('m3/backports/compatibility_policy.py',
                                                             'm3/backports/test_compatibility_policy.py'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-hct': ('m3/migration/migration.py',
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-hct': ('m3/migration/migration.py',
                                                             'm3/migration/test/test_jcc_handoff_packet.py',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan-intake-752-ci.json',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan-intake-8131.json',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/pom-before-752.xml'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-hts': ('m3/migration/test/test_intake.py',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan-intake-752-ci.json',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan-intake-8131.json',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/pom-before-752.xml'),
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-hts': ('m3/migration/test/test_intake.py',
                                                             'm3/migration/test/test_intake_recipe.py',
                                                             'm3/migration/test/test_jcc_handoff_context_profiles.py',
                                                             'm3/migration/test/test_jcc_handoff_current_context.py'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-ipr': ('m3/migration/prepare_immutable_inputs.py',),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-aca': ('m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java',
-                                                            'm3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java',
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-ipr': ('m3/migration/prepare_immutable_inputs.py',),
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-aca': ('m3/tooling/a3/src/main/java/jdk/m3/a3/A3Alg.java',
+                                                            'm3/tooling/a3/src/test/java/jdk/m3/a3/A3PlanTest.java',
                                                             'm3/tooling/migration-recipes/pom.xml',
-                                                            'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3AlgorithmCatalogueManifest.java',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-acs': ('m3/tooling/a3/src/main/java/com/m3/a3/A3Cases.java',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-arm': ('m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java',
-                                                            'm3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv',
-                                                            'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java',
-                                                            'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-scp': ('m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/02-M3RecipeScopeRegistry.java.txt',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/03-M3RecipeScopeDeclarationTest.java.txt',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/manifest.tsv',
-                                                            'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/scope/M3ScopeCoverageClosureTest.java'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-aml': ('m3/tooling/a3/src/main/java/com/m3/a3/A3.java',
-                                                            'm3/tooling/a3/src/main/java/com/m3/a3/A3Lab.java',
-                                                            'm3/tooling/a3/src/test/java/com/m3/a3/A3LabTest.java'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-amc': ('m3/tooling/a3/src/main/java/com/m3/a3/A3M.java',
-                                                            'm3/tooling/a3/src/main/java/com/m3/a3/A3MCodec.java',
-                                                            'm3/tooling/a3/src/test/java/com/m3/a3/A3MTest.java'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-agt': ('m3/tooling/a3/src/main/java/com/m3/a3/A3Gate.java',
-                                                            'm3/tooling/a3/src/test/java/com/m3/a3/A3GateTest.java',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-mastery-v6/A3Gate.java.txt',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-mastery-v6/A3GateTest.java.txt'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-avr': ('m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3MasteryV6Recipe.java',
+                                                            'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/a3/M3A3AlgorithmCatalogueManifest.java',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java'),
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-acs': ('m3/tooling/a3/src/main/java/jdk/m3/a3/A3Cases.java',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv'),
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-arm': ('m3/tooling/a3/src/main/java/jdk/m3/a3/A3MemoryCompiler.java',
+                                                            'm3/tooling/a3/src/main/java/jdk/m3/a3/A3RegexMatrix.java',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv',
+                                                            'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java',
+                                                            'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java'),
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-scp': ('m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/02-M3RecipeScopeRegistry.java.txt',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/03-M3RecipeScopeDeclarationTest.java.txt',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/manifest.tsv',
+                                                            'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3ScopeCoverageClosureTest.java'),
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-aml': ('m3/tooling/a3/src/main/java/jdk/m3/a3/A3.java',
+                                                            'm3/tooling/a3/src/main/java/jdk/m3/a3/A3Lab.java',
+                                                            'm3/tooling/a3/src/test/java/jdk/m3/a3/A3LabTest.java'),
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-amc': ('m3/tooling/a3/src/main/java/jdk/m3/a3/A3M.java',
+                                                            'm3/tooling/a3/src/main/java/jdk/m3/a3/A3MCodec.java',
+                                                            'm3/tooling/a3/src/test/java/jdk/m3/a3/A3MTest.java'),
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-agt': ('m3/tooling/a3/src/main/java/jdk/m3/a3/A3Gate.java',
+                                                            'm3/tooling/a3/src/test/java/jdk/m3/a3/A3GateTest.java',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/a3-mastery-v6/A3Gate.java.txt',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/a3-mastery-v6/A3GateTest.java.txt'),
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-avr': ('m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/a3/M3A3MasteryV6Recipe.java',
                                                             'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-mastery-v6.yml',
-                                                            'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3MasteryV6DeliveryTest.java',
-                                                            'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/a3/M3A3MasteryV6RecipeTest.java'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-avp': ('m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-v6-pom/manifest.tsv',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-v6-pom/pom.xml.txt',
-                                                            'm3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-mastery-v6/pom.before.xml'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-arr': ('m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/A3.java.after',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/A3Lab.java.after',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/A3LabTest.java.after',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/A3M.java.after',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/A3MCodec.java.after',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/A3MTest.java.after',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/manifest.tsv'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-awr': ('m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-receipt-workflow/a3-lab.md.txt',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-receipt-workflow/a3-mastery.md.txt',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-receipt-workflow/a3.md.txt',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-receipt-workflow/manifest.tsv',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-receipt-workflow/pom.xml.txt',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-receipt-workflow/workflow.yml.txt'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-ard': ('m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-mastery-receipt-workflow.yml',
+                                                            'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3MasteryV6DeliveryTest.java',
+                                                            'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/a3/M3A3MasteryV6RecipeTest.java'),
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-avp': ('m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-v6-pom/manifest.tsv',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-v6-pom/pom.xml.txt',
+                                                            'm3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/a3-mastery-v6/pom.before.xml'),
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-arr': ('m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-receipt/A3.java.after',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-receipt/A3Lab.java.after',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-receipt/A3LabTest.java.after',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-receipt/A3M.java.after',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-receipt/A3MCodec.java.after',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-receipt/A3MTest.java.after',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-receipt/manifest.tsv'),
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-awr': ('m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-receipt-workflow/a3-lab.md.txt',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-receipt-workflow/a3-mastery.md.txt',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-receipt-workflow/a3.md.txt',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-receipt-workflow/manifest.tsv',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-receipt-workflow/pom.xml.txt',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-receipt-workflow/workflow.yml.txt'),
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-ard': ('m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-mastery-receipt-workflow.yml',
                                                             'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-mastery-receipt.yml',
-                                                            'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3MasteryReceiptDeliveryRecipeTest.java',
-                                                            'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3MasteryReceiptWorkflowRecipeTest.java'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-awb': ('m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-mastery-receipt-workflow/before/a3-lab.md',
-                                                            'm3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-mastery-receipt-workflow/before/a3-mastery.md',
-                                                            'm3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-mastery-receipt-workflow/before/a3.md',
-                                                            'm3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-mastery-receipt-workflow/before/pom.xml',
-                                                            'm3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-mastery-receipt-workflow/before/workflow.yml'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-amb': ('m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-mastery-receipt/before/A3.java',
-                                                            'm3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-mastery-receipt/before/A3Lab.java',
-                                                            'm3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-mastery-receipt/before/A3LabTest.java'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-awd': ('.github/workflows/m3-a3-v6-mastery.yml',
+                                                            'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3MasteryReceiptDeliveryRecipeTest.java',
+                                                            'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3MasteryReceiptWorkflowRecipeTest.java'),
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-awb': ('m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/a3-mastery-receipt-workflow/before/a3-lab.md',
+                                                            'm3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/a3-mastery-receipt-workflow/before/a3-mastery.md',
+                                                            'm3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/a3-mastery-receipt-workflow/before/a3.md',
+                                                            'm3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/a3-mastery-receipt-workflow/before/pom.xml',
+                                                            'm3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/a3-mastery-receipt-workflow/before/workflow.yml'),
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-amb': ('m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/a3-mastery-receipt/before/A3.java',
+                                                            'm3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/a3-mastery-receipt/before/A3Lab.java',
+                                                            'm3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/a3-mastery-receipt/before/A3LabTest.java'),
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-awd': ('.github/workflows/m3-a3-v6-mastery.yml',
                                                             '.github/workflows/m3-a3.yml',
                                                             'm3/docs/a3-lab.md',
                                                             'm3/docs/a3-mastery.md',
                                                             'm3/docs/a3.md',
                                                             'm3/tooling/a3/pom.xml'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-aad': ('m3/docs/a3-mastery-receipt.md',
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-aad': ('m3/docs/a3-mastery-receipt.md',
                                                             'm3/docs/a3-mastery-v6.md'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jop': ('.github/workflows/m3-jep485-stream-gatherers-optin.yml',
+ 'jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jop': ('.github/workflows/m3-jep485-stream-gatherers-optin.yml',
                                                             'm3/backports/recipes/jep-485-gatherers/POLICY.tsv',
                                                             'm3/backports/recipes/jep-485-gatherers/materialize.py',
                                                             'm3/backports/recipes/jep-485-gatherers/test_materialize.py')}
 REPLACEMENTS = ('m3/docs/name-mapping.json',
  'm3/backports/recipes/jep-485-gatherers/README.md',
  'm3/backports/recipes/jep-485-gatherers/atom-evidence.tsv',
- 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jep485StreamGatherersBackportRecipe.java',
+ 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep485StreamGatherersBackportRecipe.java',
  'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jep485-stream-gatherers.yml',
- 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jep485StreamGatherersBackportRecipeTest.java',
+ 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep485StreamGatherersBackportRecipeTest.java',
  'm3/tooling/recipe-catalogue.tsv',
  'm3/backports/recipes/jep-493-runtime-image/CURRENT_TREE_RECEIPT.tsv',
- 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep485-stream-gatherers/01-Gatherer.java.txt',
- 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep485-stream-gatherers/03-Gatherers.java.txt',
- 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep485-stream-gatherers/11-GatherersMapConcurrentTest.java.txt',
- 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep485-stream-gatherers/manifest.tsv',
+ 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep485-stream-gatherers/01-Gatherer.java.txt',
+ 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep485-stream-gatherers/03-Gatherers.java.txt',
+ 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep485-stream-gatherers/11-GatherersMapConcurrentTest.java.txt',
+ 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep485-stream-gatherers/manifest.tsv',
  'src/java.base/share/classes/java/util/stream/Gatherer.java',
  'src/java.base/share/classes/java/util/stream/Gatherers.java',
  'test/jdk/java/util/stream/GatherersMapConcurrentTest.java',
- 'm3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/atom/spectrum/CORPUS.tsv',
- 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/16-AbstractStringBuilder.java.txt',
- 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv',
+ 'm3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/atom/spectrum/CORPUS.tsv',
+ 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/16-AbstractStringBuilder.java.txt',
+ 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv',
  'src/java.base/share/classes/java/lang/AbstractStringBuilder.java',
  '.github/workflows/m3-foundation.yml',
  '.github/workflows/m3-class-ver.yml',
@@ -274,44 +274,44 @@ REPLACEMENTS = ('m3/docs/name-mapping.json',
  'm3/backports/generate_recipe_crates.py',
  'm3/backports/test_generate_recipe_crates.py',
  'm3/backports/recipes/jep-493-runtime-image/README.md',
- 'm3/tooling/backport-dag/src/main/java/com/m3/tooling/dag/M3PacketDagComposer.java',
+ 'm3/tooling/backport-dag/src/main/java/jdk/m3/tooling/dag/M3PacketDagComposer.java',
  '.github/workflows/m3-jep467-markdown-inventory.yml',
  '.github/workflows/m3-jep493-runtime-image-inventory.yml',
  'm3/tooling/backport-dag/pom.xml',
- 'm3/tooling/backport-dag/src/main/java/com/m3/tooling/dag/M3RecipeDag.java',
- 'm3/tooling/backport-dag/src/main/resources/com/m3/tooling/dag/adapters/airflow/m3_backport_dag.py',
- 'm3/tooling/backport-dag/src/main/resources/com/m3/tooling/dag/adapters/camel/m3-backport-route.yaml',
- 'm3/tooling/backport-dag/src/main/resources/com/m3/tooling/dag/adapters/drools/m3-backport-admission.drl',
- 'm3/tooling/backport-dag/src/test/java/com/m3/tooling/dag/M3BackportDagLoaderTest.java',
- 'm3/tooling/backport-dag/src/test/java/com/m3/tooling/dag/M3PacketDagComposerTest.java',
- 'm3/tooling/backport-dag/src/test/java/com/m3/tooling/dag/M3RecipeDagTest.java',
+ 'm3/tooling/backport-dag/src/main/java/jdk/m3/tooling/dag/M3RecipeDag.java',
+ 'm3/tooling/backport-dag/src/main/resources/jdk/m3/tooling/dag/adapters/airflow/m3_backport_dag.py',
+ 'm3/tooling/backport-dag/src/main/resources/jdk/m3/tooling/dag/adapters/camel/m3-backport-route.yaml',
+ 'm3/tooling/backport-dag/src/main/resources/jdk/m3/tooling/dag/adapters/drools/m3-backport-admission.drl',
+ 'm3/tooling/backport-dag/src/test/java/jdk/m3/tooling/dag/M3BackportDagLoaderTest.java',
+ 'm3/tooling/backport-dag/src/test/java/jdk/m3/tooling/dag/M3PacketDagComposerTest.java',
+ 'm3/tooling/backport-dag/src/test/java/jdk/m3/tooling/dag/M3RecipeDagTest.java',
  'm3/backports/compatibility_policy.py',
  'm3/backports/test_compatibility_policy.py',
  'm3/migration/migration.py',
  'm3/migration/test/test_jcc_handoff_packet.py',
- 'm3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java',
- 'm3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java',
+ 'm3/tooling/a3/src/main/java/jdk/m3/a3/A3Alg.java',
+ 'm3/tooling/a3/src/test/java/jdk/m3/a3/A3PlanTest.java',
  'm3/tooling/migration-recipes/pom.xml',
- 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3AlgorithmCatalogueManifest.java',
- 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java',
- 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java',
- 'm3/tooling/a3/src/main/java/com/m3/a3/A3Cases.java',
- 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after',
- 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv',
- 'm3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java',
- 'm3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java',
- 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after',
- 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after',
- 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv',
- 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java',
- 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java',
- 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/02-M3RecipeScopeRegistry.java.txt',
- 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/03-M3RecipeScopeDeclarationTest.java.txt',
- 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/manifest.tsv',
- 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/scope/M3ScopeCoverageClosureTest.java',
- 'm3/tooling/a3/src/main/java/com/m3/a3/A3.java',
- 'm3/tooling/a3/src/main/java/com/m3/a3/A3Lab.java',
- 'm3/tooling/a3/src/test/java/com/m3/a3/A3LabTest.java',
+ 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/a3/M3A3AlgorithmCatalogueManifest.java',
+ 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java',
+ 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java',
+ 'm3/tooling/a3/src/main/java/jdk/m3/a3/A3Cases.java',
+ 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after',
+ 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv',
+ 'm3/tooling/a3/src/main/java/jdk/m3/a3/A3MemoryCompiler.java',
+ 'm3/tooling/a3/src/main/java/jdk/m3/a3/A3RegexMatrix.java',
+ 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after',
+ 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after',
+ 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv',
+ 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java',
+ 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java',
+ 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/02-M3RecipeScopeRegistry.java.txt',
+ 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/03-M3RecipeScopeDeclarationTest.java.txt',
+ 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/manifest.tsv',
+ 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3ScopeCoverageClosureTest.java',
+ 'm3/tooling/a3/src/main/java/jdk/m3/a3/A3.java',
+ 'm3/tooling/a3/src/main/java/jdk/m3/a3/A3Lab.java',
+ 'm3/tooling/a3/src/test/java/jdk/m3/a3/A3LabTest.java',
  '.github/workflows/m3-a3.yml',
  'm3/docs/a3-lab.md',
  'm3/docs/a3-mastery.md',
@@ -406,7 +406,7 @@ def files(directory):
 
 
 def expected_paths():
-    paths = {"pom.xml", "proof.py", "README.md", "src/test/java/com/synexia/rewrite/Ic0RecipeTest.java"}
+    paths = {"pom.xml", "proof.py", "README.md", "src/test/java/jdk/internal/m3/rewrite/Ic0RecipeTest.java"}
     paths.update("dependency-source/" + name for name in MAIN)
     paths.update("src/test/resources/before/" + name for name in REPLACEMENTS)
     for family, targets in FAMILIES.items():
@@ -447,7 +447,7 @@ def prepare(args):
     check_environment()
     spec_path = args.spec.resolve()
     spec = load(spec_path)
-    require(spec["schema"] == "synexia.ic0.proof-spec/1", "unknown proof spec")
+    require(spec["schema"] == "m3.ic0.proof-spec/1", "unknown proof spec")
     require(spec["sourceCommit"] == SOURCE and spec["targetCommit"] == TARGET, "baseline drift")
     require(sorted(spec["junitMethods"]) == METHODS, "test inventory differs from admission")
     rows = spec["inputs"]
@@ -542,7 +542,7 @@ def prepare(args):
     write(proof / "tool-links.json", tools)
     sealed.add(proof / "tool-links.json")
     write(proof / "inputs.json", [identity(path) for path in sorted(sealed, key=str)])
-    write(proof / "PATCH.json", {"schema": "synexia.ic0.prepared/1", "status": "PREPARED_NOT_EXECUTED",
+    write(proof / "PATCH.json", {"schema": "m3.ic0.prepared/1", "status": "PREPARED_NOT_EXECUTED",
           "sourceCommit": SOURCE, "targetCommit": TARGET, "inputManifestSHA256": sha(proof / "inputs.json"),
           "specSHA256": sha(proof / "spec.json"), "commandsSHA256": sha(proof / "commands.json"),
           "stagingSHA256": sha(proof / "staging.json"), "projectFiles": len(staging),
@@ -584,7 +584,7 @@ def qualification(project):
     require(set(value) == {"schema", "sourceCommit", "targetCommit", "targetTree", "ownerSHA256",
             "counts", "families", "orders", "compositionOrdersSHA256", "compositionYamlSHA256"},
             "qualification fields differ from admission")
-    require(value["schema"] == "synexia.ic0.qualification/1" and value["sourceCommit"] == SOURCE
+    require(value["schema"] == "m3.ic0.qualification/1" and value["sourceCommit"] == SOURCE
             and value["targetCommit"] == TARGET and value["targetTree"] == TARGET_TREE,
             "qualification baseline drift")
     require(value["ownerSHA256"] == OWNER_SHA256
@@ -596,11 +596,11 @@ def qualification(project):
     require(len(families) == COUNTS["families"], "family count drift")
     orders = load(resource / "composition-orders.json")
     require(set(orders) == {"schema", "sourceCommit", "targetCommit", "orders"}
-            and orders["schema"] == "synexia.ic0.composition-orders/1"
+            and orders["schema"] == "m3.ic0.composition-orders/1"
             and orders["sourceCommit"] == SOURCE and orders["targetCommit"] == TARGET,
             "composition order protocol drift")
-    expected_orders = [{"id": "Forward", "recipe": "com.synexia.m3.Ic0Forward", "families": list(FAMILY_IDS)},
-                       {"id": "Reverse", "recipe": "com.synexia.m3.Ic0Reverse", "families": list(reversed(FAMILY_IDS))}]
+    expected_orders = [{"id": "Forward", "recipe": "jdk.internal.m3.Ic0Forward", "families": list(FAMILY_IDS)},
+                       {"id": "Reverse", "recipe": "jdk.internal.m3.Ic0Reverse", "families": list(reversed(FAMILY_IDS))}]
     require(orders["orders"] == value["orders"] == expected_orders, "only both declared complete orders admitted")
     require(sha(resource / "composition-orders.json") == value["compositionOrdersSHA256"]
             and sha(resource / "META-INF/rewrite/ic0-orders.yml") == value["compositionYamlSHA256"],
@@ -612,7 +612,7 @@ def qualification(project):
         require(set(family) == {"id", "crate", "namedRecipe", "manifestPath", "manifestSHA256",
                 "yamlPath", "yamlSHA256", "targets"}, "family declaration fields drift")
         require(family["crate"] == "ic0-" + family["id"].lower()
-                and family["namedRecipe"] == "com.synexia.m3.Ic0" + family["id"]
+                and family["namedRecipe"] == "jdk.internal.m3.Ic0" + family["id"]
                 and family["manifestPath"] == folder + "/manifest.tsv"
                 and family["yamlPath"] == "META-INF/rewrite/" + family["crate"] + ".yml",
                 "family path/name relationship drift")
@@ -688,7 +688,7 @@ def static_gate(proof):
     require({path.relative_to(project).as_posix() for path in files(project)} == expected_paths(), "unexpected static project file")
     value = qualification(project)
     outputs = manifest_outputs(project)
-    fixture = (project / "src/test/java/com/synexia/rewrite/Ic0RecipeTest.java").read_text()
+    fixture = (project / "src/test/java/jdk/internal/m3/rewrite/Ic0RecipeTest.java").read_text()
     observed = re.findall(r"@Test\s+(?:(?:public|final)\s+)*void\s+(\w+)\s*\(", fixture)
     require(sorted(observed) == METHODS, "actual source test method inventory drift")
     nul_refusals = 0
@@ -754,7 +754,7 @@ def junit(proof):
 
 
 def state_seal(rows):
-    framed = "SYNEXIA-IC0-STATE/1\n" + "".join(
+    framed = "M3-IC0-STATE/1\n" + "".join(
         row["path"] + "\t" + row["sha256"] + "\t"
         + ("ABSENT" if row["bytes"] is None else str(row["bytes"])) + "\n" for row in rows)
     return digest(framed.encode("utf-8"))
@@ -778,7 +778,7 @@ def output_report(proof, stdout):
     keys = {"schema", "sourceCommit", "targetCommit", "outputs", "outputSeal", "qualificationSHA256",
             "compositionOrdersSHA256", "orderedCompositions"} | set(COUNTS) | set(FLAGS)
     require(set(payload) == keys, "unknown/missing OUTPUT fields")
-    require(payload["schema"] == "synexia.ic0.output/1" and payload["sourceCommit"] == SOURCE
+    require(payload["schema"] == "m3.ic0.output/1" and payload["sourceCommit"] == SOURCE
             and payload["targetCommit"] == TARGET, "OUTPUT protocol/baseline drift")
     require(payload["qualificationSHA256"] == QUALIFICATION_SHA256
             and payload["compositionOrdersSHA256"] == value["compositionOrdersSHA256"],
@@ -794,7 +794,7 @@ def output_report(proof, stdout):
     for row in rows:
         actual = identity(output / row["path"])
         require(actual["sha256"] == row["sha256"] and actual["bytes"] == row["bytes"], "actual generated output drift")
-    framed = "SYNEXIA-IC0-OUTPUT/1\n" + "".join(
+    framed = "M3-IC0-OUTPUT/1\n" + "".join(
         row["path"] + "\t" + row["sha256"] + "\t" + str(row["bytes"]) + "\n" for row in rows)
     seal = digest(framed.encode("utf-8"))
     require(payload["outputSeal"] == seal, "OUTPUT seal mismatch")
@@ -940,7 +940,7 @@ def run(args):
             if stage == "compile":
                 compiled = artifacts(proof)
                 required = {"classes/" + name.removesuffix(".java") + ".class" for name in MAIN}
-                required.add("test-classes/com/synexia/rewrite/Ic0RecipeTest.class")
+                required.add("test-classes/jdk/internal/m3/rewrite/Ic0RecipeTest.class")
                 require(required.issubset({row["path"] for row in compiled}), "required compiled classes missing")
                 write(proof / "build-artifacts.json", compiled)
                 compiled_seal = sha(proof / "build-artifacts.json")
@@ -962,7 +962,7 @@ def run(args):
     except (Exception, KeyboardInterrupt) as error:
         failure = {"stage": current, "type": type(error).__name__, "message": str(error)}
     finally:
-        result = {"schema": "synexia.ic0.proof-result/1", "status": "PASS_FOCUSED_PRODUCER" if success else "STOP",
+        result = {"schema": "m3.ic0.proof-result/1", "status": "PASS_FOCUSED_PRODUCER" if success else "STOP",
                   "sourceCommit": SOURCE, "targetCommit": TARGET, "patchSHA256": args.seal,
                   "inputManifestSHA256": sha(proof / "inputs.json"), "receipts": prior_seals,
                   "failure": failure, "junit": junit_result, "junitEvidence": junit_evidence,

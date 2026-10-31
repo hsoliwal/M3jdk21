@@ -7,10 +7,10 @@
   "installed_independent_roots": 457,
   "inherited_without_source_edits": 30,
   "excluded": 148,
-  "canonical_recipe": "com.synexia.m3.bootstrap.M3InstallBootRecipe",
+  "canonical_recipe": "jdk.internal.m3.bootstrap.M3InstallBootRecipe",
   "recipe_sha256": "425d60c050a5cc9f184167341402dd7bbbda9bf1deaa6d123370357e3592f926",
   "runner_sha256": "d8f82c7aaae634f98d2c0fd04b3d6345d294622663979dd7b9d1ac94e6f45965",
-  "tool_gav": "com.synexia.m3:m3-pr-stack-preservation:1.0.0-m3boot20261021",
+  "tool_gav": "jdk.internal.m3:m3-pr-stack-preservation:1.0.0-m3boot20261021",
   "exec_plugin": "org.codehaus.mojo:exec-maven-plugin:3.5.0",
   "checks": {
     "exact_git_blob_inputs": 635,

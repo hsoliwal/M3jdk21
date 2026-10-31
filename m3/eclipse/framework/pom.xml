@@ -78,12 +78,12 @@
           <archive>
             <manifestEntries>
               <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
-              <Bundle-SymbolicName>com.m3.eclipse.framework</Bundle-SymbolicName>
+              <Bundle-SymbolicName>jdk.m3.eclipse.framework</Bundle-SymbolicName>
               <Bundle-Version>0.1.0</Bundle-Version>
-              <Bundle-Activator>com.m3.eclipse.framework.M3EclipseRuntimeActivator</Bundle-Activator>
+              <Bundle-Activator>jdk.m3.eclipse.framework.M3EclipseRuntimeActivator</Bundle-Activator>
               <Bundle-RequiredExecutionEnvironment>JavaSE-21</Bundle-RequiredExecutionEnvironment>
-              <Import-Package>com.m3.collections,org.eclipse.core.resources,org.eclipse.core.runtime,org.osgi.framework</Import-Package>
-              <Export-Package>com.m3.eclipse.framework</Export-Package>
+              <Import-Package>jdk.m3.collections,org.eclipse.core.resources,org.eclipse.core.runtime,org.osgi.framework</Import-Package>
+              <Export-Package>jdk.m3.eclipse.framework</Export-Package>
             </manifestEntries>
           </archive>
         </configuration>
@@ -124,7 +124,7 @@
                 </goals>
                 <configuration>
                   <skip>${m3.recipe.boot.skip}</skip>
-                  <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+                  <mainClass>jdk.internal.m3.prstack.M3RecipeBoot</mainClass>
                   <includeProjectDependencies>false</includeProjectDependencies>
                   <includePluginDependencies>true</includePluginDependencies>
                   <arguments>

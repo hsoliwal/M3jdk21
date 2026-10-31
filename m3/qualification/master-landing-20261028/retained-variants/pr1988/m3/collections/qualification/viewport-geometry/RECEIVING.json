@@ -4,8 +4,8 @@
   "canonical_pr": 12855,
   "canonical_commit": "7b0a5a072b6c6db16b8861bbc6a1307f40f88840",
   "dataset": "vpt-geometry-20261027",
-  "recipe": "com.synexia.m3.ViewportGeometry20261027",
-  "original_owner": "m3/collections/src/main/java/com/m3/collections/M3SparseExtents.java",
+  "recipe": "jdk.internal.m3.ViewportGeometry20261027",
+  "original_owner": "m3/collections/src/main/java/jdk/m3/collections/M3SparseExtents.java",
   "product_base_commit": "9dd1df62f3d5406760427cb5e840a36c9e7a59ea",
   "original_git_blob": "650356bcdffa372328e5a79f4f596a887fe5f447",
   "sdk_result_git_blob": "d35282fb564a0a9231f31781e1a699f7e571f8de",
@@ -38,7 +38,7 @@
       "9174dd681f0d75b5086fc19904a71524a03972dc"
     ]
   },
-  "original_synexia_receiver": {
+  "original_m3_receiver": {
     "check_changes": 1,
     "apply_changes": 1,
     "replay_changes": 0,

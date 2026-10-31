@@ -2,7 +2,7 @@
   "schema": "m3-fenwick-geometry-ci-receiving-v1",
   "canonical_repository": "hsoliwal/com.synexia",
   "canonical_commit": "2a4e310b3976a8368fd8e131534d9b3654ddc5a3",
-  "canonical_proof": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/fenwick-serial-receiving-20261027/QUALIFICATION.json",
+  "canonical_proof": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/fenwick-serial-receiving-20261027/QUALIFICATION.json",
   "proof_sha256": "0d16d5d1179312bb5ed458285a8bfb2ac04174e7ae6b2f826884469a78305dc5",
   "target_preimage_revision": "f188c04c1cf369a577b555d5c6006b86a14acc58",
   "datasets": [

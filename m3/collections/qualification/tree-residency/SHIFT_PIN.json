@@ -3,7 +3,7 @@
   "product": "M3JDK21",
   "product_pr": 1971,
   "product_parent": "0209c6c74b5fcb0a25e79bf7451cba02e98108c4",
-  "owner": "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java",
+  "owner": "m3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java",
   "owner_git_blob": "9725e48f7850b107b8b968527827eb5fde5b1fe6",
   "owner_sha256": "be77b8dd08c7a498355bc8793932039a00a0f523e206e47f116b7a6b10635082",
   "workflow": ".github/workflows/m3-tree-shift-20261021.yml",
@@ -16,7 +16,7 @@
     "pr": 12855,
     "commit": "d0a145f2cf26b5a60422ee99195ed7084eb47039",
     "dataset": "vpt-tree-shift-pin-20261026",
-    "named_recipe": "com.synexia.m3.ViewportTreeShiftPin20261026",
+    "named_recipe": "jdk.internal.m3.ViewportTreeShiftPin20261026",
     "original_recipe_engine_blob": "14c383724cd3e9dda80d9311e298cc4ed4cf46c7"
   },
   "executed_local": {

@@ -51,7 +51,7 @@
         "--class-path",
         "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-empty-lookup-regression-20261019\\classes;S:\\codex-work\\m3-collections-next-20261018\\m3-tree-empty-lookup-admission-20261019\\qualification-compile-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\m3-tree-map-entry-protocol-20261018\\qualification-compile-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\current-base-runtime-v5\\core130-classes",
         "--select-class",
-        "com.m3.collections.M3TreeMapEmptyLookupTest",
+        "jdk.m3.collections.M3TreeMapEmptyLookupTest",
         "--details=summary",
         "--disable-banner",
         "--disable-ansi-colors"

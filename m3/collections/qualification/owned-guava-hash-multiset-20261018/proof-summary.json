@@ -1,5 +1,5 @@
 {
-  "owner": "com.m3.collections.guava.M3HashMultiset",
+  "owner": "jdk.m3.collections.guava.M3HashMultiset",
   "provider_contract": "com.google.common.collect.HashMultiset (Guava 33.4.8-jre)",
   "inventory_row": "DONE #1418",
   "source_sha256": "933756a99a937b7b8c1472f1426c6675d00ceba18826c3d4fb89ffec2a39d79c",

@@ -26,7 +26,7 @@
     {
       "repository": "hsoliwal/M3jdk21",
       "head": "0efc1719ca5766aead09f4f7c49f5067975bd946",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3ProgressAdapters.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ProgressAdapters.java",
       "git_blob": "87d3fa14669325d26d0fe1f9a626fce43b357a51",
       "same_as_pin": true
     }
@@ -36,11 +36,11 @@
       "family": "m3jdk21",
       "dataset": "m3jdk21-progress-percent",
       "baseline_revision": "4b24824c3aa09d802121447f8970d442a855f064",
-      "owner": "m3/collections/src/main/java/com/m3/collections/M3ProgressAdapters.java",
+      "owner": "m3/collections/src/main/java/jdk/m3/collections/M3ProgressAdapters.java",
       "owner_before_sha256": "6d4637c9b3de4481180d6459f1312aff90141b6ddf46b91aff886bab958339c9",
       "owner_after_sha256": "87a4782840b9862cf2252f2cf53191d7eb6fa4a6b96a180f949aa59d05160231",
       "donor": {
-        "path": "m3/collections/src/main/java/com/m3/collections/M3ChildProgressMonitor.java",
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3ChildProgressMonitor.java",
         "git_blob": "44a791db2fac00214479e7020ec3c509f70d7ef2",
         "sha256": "3ccd42c38929179e855bcbfa1a6f54f9edb6968a210c65d013ed434ee592e680",
         "license": "Apache-2.0"

@@ -9,21 +9,21 @@ M3ShadowStreamsContract SHA-256: c38c59dcfc5137cf6685ba25f6e126e971251b66898a976
 
 javac --release 21 -proc:none -Xlint:all,-module -Werror ... module-info.java M3File.java M3StreamProgress.java M3ShadowStreams.java M3ShadowStreamsContract.java
 PASS (zero errors/warnings)
-java --module-path module -m com.m3.file/com.m3.file.M3ShadowStreamsContract
+java --module-path module -m jdk.m3.file/jdk.m3.file.M3ShadowStreamsContract
 M3_SHADOW_STREAM_PASS checks=44
-java -Xint --module-path module -m com.m3.file/com.m3.file.M3ShadowStreamsContract
+java -Xint --module-path module -m jdk.m3.file/jdk.m3.file.M3ShadowStreamsContract
 M3_SHADOW_STREAM_PASS checks=44
 
-jmod create --class-path module pack/com.m3.file.jmod
+jmod create --class-path module pack/jdk.m3.file.jmod
 PASS
-jlink --module-path $JDK/jmods:pack --add-modules com.m3.file --output pack/image --strip-debug --no-man-pages --no-header-files
+jlink --module-path $JDK/jmods:pack --add-modules jdk.m3.file --output pack/image --strip-debug --no-man-pages --no-header-files
 PASS
-pack/image/bin/java -m com.m3.file/com.m3.file.M3ShadowStreamsContract
+pack/image/bin/java -m jdk.m3.file/jdk.m3.file.M3ShadowStreamsContract
 M3_SHADOW_STREAM_PASS checks=44
-pack/image/bin/java -Xint -m com.m3.file/com.m3.file.M3ShadowStreamsContract
+pack/image/bin/java -Xint -m jdk.m3.file/jdk.m3.file.M3ShadowStreamsContract
 M3_SHADOW_STREAM_PASS checks=44
 pack/image/bin/java --list-modules
-com.m3.file
+jdk.m3.file
 java.base@21.0.12.1
 
 SHA-256 proof JMOD: fbc6a1556f79920401ef47639d705a6f2e9d876a9bcc98a47b1c9ffc08525065

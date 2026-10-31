@@ -12,8 +12,8 @@ python3 "$Q/verify_recipe.py"
 python3 -m unittest discover -s "$Q" -p 'test_lineage.py' -v
 javac --release 21 -proc:none -Xlint:all,-module -Werror \
   -sourcepath "$MAIN:$TEST" -d "$OUTPUT" \
-  "$MAIN/com/m3/collections/M3IndexedListSnapshot.java" \
-  "$TEST/com/m3/collections/M3IndexedLiveViewContract.java"
-java -ea -cp "$OUTPUT" com.m3.collections.M3IndexedLiveViewContract
-java -ea -Xint -cp "$OUTPUT" com.m3.collections.M3IndexedLiveViewContract
+  "$MAIN/jdk/m3/collections/M3IndexedListSnapshot.java" \
+  "$TEST/jdk/m3/collections/M3IndexedLiveViewContract.java"
+java -ea -cp "$OUTPUT" jdk.m3.collections.M3IndexedLiveViewContract
+java -ea -Xint -cp "$OUTPUT" jdk.m3.collections.M3IndexedLiveViewContract
 echo "M3_INDEXED_LIVE_JAVA21_PASS source=actual-receiver"

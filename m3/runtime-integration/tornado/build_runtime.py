@@ -609,7 +609,7 @@ class Build:
         shutil.copytree(self.receiver / "source-custody", resources / "m3/source-custody")
         self.run("receiver-jar", [self.tool("jar"), "--create", "--file", self.jars / "jdk.m3.tornado.jar",
                  "--module-version", "7.2.0", "--date", STAMP, "-C", classes, "."])
-        probes = [self.receiver / "src/test/java/com/m3/tornado/Rv32iImageProbe.java", BASE / "fixtures/M3TornadoImageProbe.java"]
+        probes = [self.receiver / "src/test/java/jdk/m3/tornado/Rv32iImageProbe.java", BASE / "fixtures/M3TornadoImageProbe.java"]
         require(all(path.is_file() for path in probes), "executable receiver/runtime probe absent")
         target = self.out / "probe-classes"
         target.mkdir()
@@ -641,8 +641,8 @@ class Build:
                 "jdk.m3.tornado=" + str(self.out / "junit-test-classes"),
                 "--add-exports", "java.base/jdk.internal.vm.parallel=jdk.m3.tornado,ALL-UNNAMED",
                 "--add-reads", "jdk.m3.tornado=ALL-UNNAMED",
-                "--add-opens", "jdk.m3.tornado/com.m3.tornado=ALL-UNNAMED",
-                "--add-opens", "jdk.m3.tornado/com.synexia.m3.cpugpu=ALL-UNNAMED", "-Dm3.gpu=" + str(mode == "device").lower(),
+                "--add-opens", "jdk.m3.tornado/jdk.m3.tornado=ALL-UNNAMED",
+                "--add-opens", "jdk.m3.tornado/jdk.internal.m3.cpugpu=ALL-UNNAMED", "-Dm3.gpu=" + str(mode == "device").lower(),
                 "-classpath", str(self.out / "junit-runner-classes") + os.pathsep + self.junit_classpath(), "Rv32iJUnitLauncher", mode]
 
     def test(self):
@@ -662,7 +662,7 @@ class Build:
         args = [self.tool("java"), "--enable-preview", "--module-path", self.jars,
                 "--add-exports", "java.base/jdk.internal.vm.parallel=jdk.m3.tornado"] + self.bootstrap_args()
         args += ["--patch-module", "jdk.m3.tornado=" + str(self.out / "probe-classes"),
-                 "-m", "jdk.m3.tornado/com.m3.tornado.Rv32iImageProbe", "cpu"]
+                 "-m", "jdk.m3.tornado/jdk.m3.tornado.Rv32iImageProbe", "cpu"]
         _, output = self.run("receiver-cpu-contract", args)
         require("M3_RV32IM_IMAGE_CPU_PASS" in output, "receiver CPU completion marker absent")
         if self.junit:
@@ -787,11 +787,11 @@ class Build:
                      "-XX:+UseM3StringStorage", "-XX:+EnableJVMCI", "-version"], acceptable=(1,))
             require(code != 0 and "UseM3StringStorage does not support JVMCI" in rejected, "String/JVMCI guard changed")
         patch = self.bootstrap_args() + ["--patch-module", "jdk.m3.tornado=" + str(self.out / "probe-classes")]
-        receiver = [launcher] + patch + ["-m", "jdk.m3.tornado/com.m3.tornado.Rv32iImageProbe"]
+        receiver = [launcher] + patch + ["-m", "jdk.m3.tornado/jdk.m3.tornado.Rv32iImageProbe"]
         _, cpu = self.run("image-receiver-cpu", receiver + ["cpu"])
         require("M3_RV32IM_IMAGE_CPU_PASS" in cpu, "installed receiver CPU proof incomplete")
-        probe = [launcher] + patch + ["--add-opens", "jdk.m3.tornado/com.m3.tornado=tornado.runtime",
-                                      "-m", "jdk.m3.tornado/com.m3.tornado.M3TornadoImageProbe"]
+        probe = [launcher] + patch + ["--add-opens", "jdk.m3.tornado/jdk.m3.tornado=tornado.runtime",
+                                      "-m", "jdk.m3.tornado/jdk.m3.tornado.M3TornadoImageProbe"]
         _, identity = self.run("image-runtime-identity", probe + ["identity", self.a.backend])
         require("M3_TORNADO_IMAGE_IDENTITY_PASS" in identity, "Tornado classes did not load from installed image")
         # Deterministic explicit absence is tested separately from host discovery.
@@ -812,7 +812,7 @@ class Build:
             self.state["device"] = {"status": "PASS", **detail}
             device_property = "-Dm3rv32i.execute.device=" + str(detail["backend_index"]) + ":" + str(detail["device_index"])
             _, accelerated = self.run("image-receiver-accelerated", [launcher] + patch + [device_property,
-                "-m", "jdk.m3.tornado/com.m3.tornado.Rv32iImageProbe", "gpu"])
+                "-m", "jdk.m3.tornado/jdk.m3.tornado.Rv32iImageProbe", "gpu"])
             require("M3_RV32IM_IMAGE_GPU_PASS" in accelerated, "receiver accelerator parity incomplete")
             if self.junit:
                 _, original = self.run("image-original-junit-device", [launcher, "-Xcheck:jni"] + self.junit_arguments("device", detail))

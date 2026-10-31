@@ -4,7 +4,7 @@
 # SOURCE_INSPECTED_NOT_RUN. Synthetic paths only. No target-code generation.
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.agent.DocumentationFieldRegex20261020
+name: jdk.internal.m3.agent.DocumentationFieldRegex20261020
 displayName: Normalize a field in one selected documentation fixture
 description: Demonstrates an exact-file scoped Java-regex replacement with existing options.
 recipeList:
@@ -18,7 +18,7 @@ recipeList:
       filePattern: agent-recipe-fixtures/README.md
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.agent.DocumentationFolderSearch20261020
+name: jdk.internal.m3.agent.DocumentationFolderSearch20261020
 displayName: Find TODO markers under a selected documentation fixture folder
 description: Demonstrates a folder glob using the existing text search recipe.
 recipeList:
@@ -31,7 +31,7 @@ recipeList:
       filePattern: agent-recipe-fixtures/docs/**
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.agent.AnnotationAttributeFixture20261020
+name: jdk.internal.m3.agent.AnnotationAttributeFixture20261020
 displayName: Update one selected annotation attribute fixture
 description: Demonstrates an ordinary edit-visitor file precondition and actual annotation options.
 preconditions:
@@ -45,7 +45,7 @@ recipeList:
       addOnly: false
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.agent.JavaCleanupFixture20261020
+name: jdk.internal.m3.agent.JavaCleanupFixture20261020
 displayName: Clean imports and format a selected Java fixture folder
 description: Demonstrates ordered AST composition with an ordinary edit-visitor file fence.
 preconditions:

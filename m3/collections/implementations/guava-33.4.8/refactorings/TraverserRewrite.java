@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-import com.m3.collections.guava.collect.TreeTraverser;
-import com.m3.collections.guava.graph.Traverser;
+import jdk.m3.collections.guava.collect.TreeTraverser;
+import jdk.m3.collections.guava.graph.Traverser;
 import com.google.errorprone.refaster.annotation.AfterTemplate;
 import com.google.errorprone.refaster.annotation.BeforeTemplate;
 import com.google.errorprone.refaster.annotation.Placeholder;
 
 /**
- * Refaster rules to rewrite usages of {@code com.m3.collections.guava.collect.TreeTraverser} in terms of
- * {@code com.m3.collections.guava.graph.Traverser}.
+ * Refaster rules to rewrite usages of {@code jdk.m3.collections.guava.collect.TreeTraverser} in terms of
+ * {@code jdk.m3.collections.guava.graph.Traverser}.
  */
 @SuppressWarnings("DefaultPackage")
 public class TraverserRewrite {

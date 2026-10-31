@@ -9,13 +9,13 @@ HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[3]
 MIRROR = HERE / "recipe-mirror"
 TARGETS = {
-    "m3/collections/src/main/java/com/m3/collections/M3ObjectRangeMap.java":
+    "m3/collections/src/main/java/jdk/m3/collections/M3ObjectRangeMap.java":
        ("8bed87ee1b2b884fa0bbd0934472305698bb7b7561a7bc0c0d6a772977818317", "M3ObjectRangeMap.java.txt"),
-    "m3/collections/src/test/java/com/m3/collections/M3ObjectRangeMapNativeProof.java":
+    "m3/collections/src/test/java/jdk/m3/collections/M3ObjectRangeMapNativeProof.java":
        ("0ffd19f51b13ff26f14e795d4779c9c656a078699623ef28efc9b36461ce04cc", "M3ObjectRangeMapNativeProof.java.txt"),
-    "m3/collections/src/test/java/com/m3/collections/M3ObjectRangeMapSelfTest.java":
+    "m3/collections/src/test/java/jdk/m3/collections/M3ObjectRangeMapSelfTest.java":
        ("f78aff3fdd0dff9d7e8faa685a92f26ba1a41d29c1c9a07d46a1af76b46a6381", "M3ObjectRangeMapSelfTest.java.txt"),
-    "m3/collections/src/test/java/com/m3/collections/M3ObjectRangeMapTest.java":
+    "m3/collections/src/test/java/jdk/m3/collections/M3ObjectRangeMapTest.java":
        ("55267424febd8d04b5ecf040582b73d7c0b1e831bdef2581d07ff20f98c1cd2a", "M3ObjectRangeMapTest.java.txt"),
 }
 def read(path):

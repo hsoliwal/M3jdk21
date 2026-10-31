@@ -26,8 +26,8 @@ SDK = HERE / "sdk"
 ARTIFACTS = PROOF / "artifacts"
 PREFIX = CFG["publicPrefix"]
 WORKFLOW = ".github/workflows/m3-joined-range-directory.yml"
-TARGET = "m3/core/src/com/m3/text/JoinedM3StringPiece.java"
-SUITE = "com.synexia.rewrite.M3JoinedRangeDirectoryRecipeTest"
+TARGET = "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java"
+SUITE = "jdk.internal.m3.rewrite.M3JoinedRangeDirectoryRecipeTest"
 METHODS = ["allTwoPartialStatesBothOrdersReachExactFixedPoint",
            "allTwoInverseStatesBothOrdersRecoverExactBefore",
            "eachOwnedInputRefusesDriftMissingAndDuplicateOwnership"]
@@ -236,11 +236,11 @@ def sdk_evidence():
     for flag in module["FALSE_GATES"]:
         require(receipt[flag] is False, "new SDK scope drift:" + flag)
     for name in module["COMPILED_PROVIDERS"]:
-        raw = read(SDK / ("target/classes/com/synexia/rewrite/" + name + ".class"))
+        raw = read(SDK / ("target/classes/jdk/internal/m3/rewrite/" + name + ".class"))
         item = receipt["compiledProviders"][name]
         require(raw[:4] == bytes.fromhex("cafebabe") and len(raw) > 8
                 and int.from_bytes(raw[6:8], "big") == 65 and item ==
-                {"path": "target/classes/com/synexia/rewrite/" + name + ".class",
+                {"path": "target/classes/jdk/internal/m3/rewrite/" + name + ".class",
                  "bytes": len(raw), "sha256": ident(raw)["sha256"], "majorVersion": 65},
                 "actual new compiled provider identity differs")
     require(set(receipt["compiledProviders"]) == set(module["COMPILED_PROVIDERS"]),
@@ -350,13 +350,13 @@ def command_plan():
     for cohort in CFG["cohorts"]:
         name = cohort["name"]
         directory = RUNTIME / name
-        jar, tests = directory / "m3/build/com.m3.text.jar", directory / "range-proof-classes"
+        jar, tests = directory / "m3/build/jdk.m3.text.jar", directory / "range-proof-classes"
         add(name + "-original-build", ["bash", str(directory / "m3/build.sh")], directory, 600)
         add(name + "-range-compile", [javac, "--release", "21", "-Xlint:all", "-Werror",
-            "--module-path", str(jar), "--add-modules", "com.m3.text,jdk.management", "-d", str(tests),
+            "--module-path", str(jar), "--add-modules", "jdk.m3.text,jdk.management", "-d", str(tests),
             str(PARENT / "runtime/M3JoinedRangeProof.java"), str(HERE / "M3JoinedFreshRangeWorkload.java")], directory)
-        base = [java, "-ea", "-esa", "--module-path", str(jar), "--add-modules", "com.m3.text,jdk.management",
-                "--add-opens", "com.m3.text/com.m3.text=ALL-UNNAMED", "-cp", str(tests), "M3JoinedRangeProof"]
+        base = [java, "-ea", "-esa", "--module-path", str(jar), "--add-modules", "jdk.m3.text,jdk.management",
+                "--add-opens", "jdk.m3.text/jdk.m3.text=ALL-UNNAMED", "-cp", str(tests), "M3JoinedRangeProof"]
         bases[name] = base
         for mode, flags in modes.items():
             add(name + "-range-" + mode, [java, *flags, *base[1:], "contract"], directory, 120)
@@ -452,14 +452,14 @@ def runtime():
             require(set(row) == {"path", "bytes", "sha256", "gitBlob", "content"}
                     and ident(row["content"].encode("utf-8")) == {k: row[k] for k in ("bytes", "sha256", "gitBlob")},
                     "complete original raw-log identity differs")
-        jar = directory / "m3/build/com.m3.text.jar"
+        jar = directory / "m3/build/jdk.m3.text.jar"
         tests = directory / "range-proof-classes"
         argv = [javac, "--release", "21", "-Xlint:all", "-Werror", "--module-path", str(jar),
-                "--add-modules", "com.m3.text,jdk.management", "-d", str(tests),
+                "--add-modules", "jdk.m3.text,jdk.management", "-d", str(tests),
                 str(PARENT / "runtime/M3JoinedRangeProof.java"), str(HERE / "M3JoinedFreshRangeWorkload.java")]
         code, log = run(name + "-range-compile", argv, directory)
-        base = [java, "-ea", "-esa", "--module-path", str(jar), "--add-modules", "com.m3.text,jdk.management",
-                "--add-opens", "com.m3.text/com.m3.text=ALL-UNNAMED", "-cp", str(tests), "M3JoinedRangeProof"]
+        base = [java, "-ea", "-esa", "--module-path", str(jar), "--add-modules", "jdk.m3.text,jdk.management",
+                "--add-opens", "jdk.m3.text/jdk.m3.text=ALL-UNNAMED", "-cp", str(tests), "M3JoinedRangeProof"]
         contracts = {}
         for mode, flags in donor["MODES"].items():
             code, log = run(name + "-range-" + mode, [java, *flags, *base[1:], "contract"], directory, timeout=120)
@@ -471,7 +471,7 @@ def runtime():
     for left, right in itertools.combinations(cohorts, 2):
         a, b = cohorts[left]["build"]["classes"], cohorts[right]["build"]["classes"]
         require(set(a) == set(b) == set(CFG["classes"])
-                and [p for p in sorted(a) if a[p] != b[p]] == ["com/m3/text/JoinedM3StringPiece.class"],
+                and [p for p in sorted(a) if a[p] != b[p]] == ["jdk/m3/text/JoinedM3StringPiece.class"],
                 "only admitted Joined class may differ across three full modules")
     samples, diagnostics = [], []
     for block, order in enumerate(CFG["triplets"]):
@@ -588,7 +588,7 @@ def verify_runtime():
         build = stored["build"]
         raw = read(RUNTIME / (name + "-original-build.log"))
         require(build["returncode"] == 0 and build["logIdentity"] == ident(raw)
-                and build["jar"] == ident(read(directory / "m3/build/com.m3.text.jar")),
+                and build["jar"] == ident(read(directory / "m3/build/jdk.m3.text.jar")),
                 "actual original build command/jar identity differs")
         counts = {}
         for contract_marker in helper["MARKERS"]:
@@ -635,7 +635,7 @@ def verify_runtime():
                     "actual118/4026/7424 range proof differs")
     for left, right in itertools.combinations(observed_class_maps, 2):
         a, b = observed_class_maps[left], observed_class_maps[right]
-        require([p for p in sorted(a) if a[p] != b[p]] == ["com/m3/text/JoinedM3StringPiece.class"],
+        require([p for p in sorted(a) if a[p] != b[p]] == ["jdk/m3/text/JoinedM3StringPiece.class"],
                 "unadmitted compiled class difference")
     expected_files = {command["log"] for command in receipt["commands"]} | {"inner-commands.jsonl", "runtime-receipt.json"}
     expected_files |= {c["name"] + "-original-build-logs.jsonl" for c in CFG["cohorts"]}

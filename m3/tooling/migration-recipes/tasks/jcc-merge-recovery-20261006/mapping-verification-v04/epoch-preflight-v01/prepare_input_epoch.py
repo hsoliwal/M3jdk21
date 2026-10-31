@@ -51,7 +51,7 @@ def main():
     assert len(current["migration"]["records"]) == 55 and current["migration"]["records"][:52] == old["migration"]["records"]
     assert len(current["mappings"]) == 34 and current["mappings"][:25] == old["mappings"]
     assert len(current["migration"]["gates"]) == 20 and current["migration"]["gates"] == old["migration"]["gates"]
-    assert [row["id"] for row in current["migration"]["records"][52:]] == ["synexia.regex.mr", "synexia.regex.rxm", "synexia.regex.rxa"]
+    assert [row["id"] for row in current["migration"]["records"][52:]] == ["m3.regex.mr", "m3.regex.rxm", "m3.regex.rxa"]
     added_keys = {"donor_artifact_policy", "porting_invariant", "family_name_mapping"}
     assert set(current) - set(old) == added_keys and set(old) <= set(current)
     for key in old:

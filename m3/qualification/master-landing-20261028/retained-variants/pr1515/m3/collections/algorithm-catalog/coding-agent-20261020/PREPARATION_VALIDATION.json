@@ -1,5 +1,5 @@
 {
-  "schema": "synexia.coding-agent.catalogue-validation.v1",
+  "schema": "m3.coding-agent.catalogue-validation.v1",
   "status": "PASS_METADATA_AND_SOURCE_BINDINGS_ONLY",
   "bindings": 101,
   "upstream_recipes": 87,

@@ -61,28 +61,28 @@
       {
         "errors": "0",
         "failures": "0",
-        "name": "com.m3.rewrite.backport.M3FileByteEventFactRecipeTest",
+        "name": "jdk.m3.rewrite.backport.M3FileByteEventFactRecipeTest",
         "skipped": "0",
         "tests": "3"
       },
       {
         "errors": "0",
         "failures": "0",
-        "name": "com.m3.rewrite.backport.M3StringLeafCursorConvergenceRecipeTest",
+        "name": "jdk.m3.rewrite.backport.M3StringLeafCursorConvergenceRecipeTest",
         "skipped": "0",
         "tests": "4"
       },
       {
         "errors": "0",
         "failures": "0",
-        "name": "com.m3.rewrite.backport.M3StringLeafCursorCurrentMasterTest",
+        "name": "jdk.m3.rewrite.backport.M3StringLeafCursorCurrentMasterTest",
         "skipped": "0",
         "tests": "4"
       },
       {
         "errors": "0",
         "failures": "0",
-        "name": "com.m3.rewrite.backport.M3StringTokenSequenceRegexRecipeTest",
+        "name": "jdk.m3.rewrite.backport.M3StringTokenSequenceRegexRecipeTest",
         "skipped": "0",
         "tests": "1"
       }
@@ -96,7 +96,7 @@
   "publication": "Compose onto qualified master tree, then overlay all 36 existing branch entries followed by this exact packet; preserve two parent histories",
   "qualified_master": "974687e3d3d69410466207624cf56e7bb62caedf",
   "qualified_master_tree": "4a423270d518c114605ab6ca9166ce7f2195de39",
-  "recipe": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3StringLeafCursorConvergenceRecipe.java",
+  "recipe": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3StringLeafCursorConvergenceRecipe.java",
   "recipe_after": {
     "bytes": 7666,
     "git_blob": "a29b26e81cc9d06504b9bd13b58a066307330812",

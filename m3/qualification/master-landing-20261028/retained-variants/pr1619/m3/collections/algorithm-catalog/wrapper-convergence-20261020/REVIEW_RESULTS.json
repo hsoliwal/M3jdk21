@@ -3,7 +3,7 @@
   "baseline_commit": "2779aba3f98f31c324be43f731be7914e1a05935",
   "decisions": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
       "category": "STRICT_SORTED_ENDPOINTS",
       "decision": "QUALIFIED_CANDIDATE_SCOPE",
       "baseline_sha256": "8419315c3058bce6add897b7ffa7c6763bbb6b85418bb35e190ba8a4d2dd70c4",
@@ -12,7 +12,7 @@
       "scope_limit": "Exact target generation and final receiving verification are recorded separately; no global phase promotion."
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredNavigableSet.java",
       "category": "STRICT_SORTED_ENDPOINTS",
       "decision": "QUALIFIED_CANDIDATE_SCOPE",
       "baseline_sha256": "d13c5c5db3e07e5c66f8857f2c74e07d2ba60babb7d2529bd397e61894881fd0",
@@ -21,7 +21,7 @@
       "scope_limit": "Exact target generation and final receiving verification are recorded separately; no global phase promotion."
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3CollectionViews.java",
       "category": "OWNER_BULK_MUTATION",
       "decision": "QUALIFIED_CANDIDATE_SCOPE",
       "baseline_sha256": "511800d4d79c7d8838ddb497f031e13827decd44c9c2790093f89ea01cdaa349",
@@ -30,7 +30,7 @@
       "scope_limit": "Exact target generation and final receiving verification are recorded separately; no global phase promotion."
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
       "category": "STABLE_INDIRECT_ORDER",
       "decision": "QUALIFIED_CANDIDATE_SCOPE",
       "baseline_sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545",
@@ -39,7 +39,7 @@
       "scope_limit": "Exact target generation and final receiving verification are recorded separately; no global phase promotion."
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3PrimitiveFilteredSequences.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3PrimitiveFilteredSequences.java",
       "category": "FILTER_COMPOSITION",
       "decision": "QUALIFIED_CANDIDATE_SCOPE",
       "baseline_sha256": "487a54917cbae6ec9802ca75aa04edc1a99dc0b6e9ed2a294b06dca6054c1af3",
@@ -48,7 +48,7 @@
       "scope_limit": "Exact target generation and final receiving verification are recorded separately; no global phase promotion."
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java",
       "category": "CURSOR_INVALIDATION",
       "decision": "REJECTED_NEW_READ_EFFECTS_AND_INCOMPLETE_INVALIDATION",
       "evidence": "diagnostics/wrapper-owner-boundaries",

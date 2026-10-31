@@ -1,5 +1,5 @@
 {
-  "owner": "com.m3.collections.spring.M3MultiValueMapAdapter",
+  "owner": "jdk.m3.collections.spring.M3MultiValueMapAdapter",
   "provider_contract": "org.springframework.util.MultiValueMapAdapter (Spring Framework core 6.2.0)",
   "inventory_row": "DONE #1469",
   "source_sha256": "4ba5519506da5f317d1fa6faf44e5e1b5474e5478829b76ecea39531de5e948c",

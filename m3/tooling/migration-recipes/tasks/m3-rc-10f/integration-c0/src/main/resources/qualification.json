@@ -16,9 +16,9 @@
     {
       "crate": "ic0-cmp",
       "id": "Cmp",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cmp/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cmp/manifest.tsv",
       "manifestSHA256": "9ff6c0ec93be56758814de6a2464e063ff49fd821eaa497ecd8b974ac235821b",
-      "namedRecipe": "com.synexia.m3.Ic0Cmp",
+      "namedRecipe": "jdk.internal.m3.Ic0Cmp",
       "targets": [
         {
           "afterBytes": 423495,
@@ -35,9 +35,9 @@
     {
       "crate": "ic0-cgo",
       "id": "Cgo",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cgo/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cgo/manifest.tsv",
       "manifestSHA256": "2d3f548908ebd33f2e93d516cd94e19830dbddf79468d9a8c0ff67b42d38e049",
-      "namedRecipe": "com.synexia.m3.Ic0Cgo",
+      "namedRecipe": "jdk.internal.m3.Ic0Cgo",
       "targets": [
         {
           "afterBytes": 5159,
@@ -61,7 +61,7 @@
           "beforeBytes": 2030,
           "beforeSHA256": "b5cefece21725e012ed7643ecf4f6fe505da9fa408a02f6f48de38773e94cad0",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jep485StreamGatherersBackportRecipe.java"
+          "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep485StreamGatherersBackportRecipe.java"
         },
         {
           "afterBytes": 395,
@@ -77,7 +77,7 @@
           "beforeBytes": 7839,
           "beforeSHA256": "9a7f6440ce4d4a738d5cfe916a7fff98511464887293caba2a498bd75264ee92",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jep485StreamGatherersBackportRecipeTest.java"
+          "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep485StreamGatherersBackportRecipeTest.java"
         },
         {
           "afterBytes": 2247,
@@ -94,9 +94,9 @@
     {
       "crate": "ic0-cri",
       "id": "Cri",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cri/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cri/manifest.tsv",
       "manifestSHA256": "d8ba52bee5619c7f5dc95fadbb84217436e2e337d2c1f8c08a82e4a7da977925",
-      "namedRecipe": "com.synexia.m3.Ic0Cri",
+      "namedRecipe": "jdk.internal.m3.Ic0Cri",
       "targets": [
         {
           "afterBytes": 684,
@@ -113,9 +113,9 @@
     {
       "crate": "ic0-gpc",
       "id": "Gpc",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-gpc/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-gpc/manifest.tsv",
       "manifestSHA256": "b7ae7304902b40ce7dd730cadd434077d1afa1852579aa18a457e85d13bd0773",
-      "namedRecipe": "com.synexia.m3.Ic0Gpc",
+      "namedRecipe": "jdk.internal.m3.Ic0Gpc",
       "targets": [
         {
           "afterBytes": 24060,
@@ -123,7 +123,7 @@
           "beforeBytes": 24085,
           "beforeSHA256": "808d8dec8da41e93dbe938081c36750a6d36c96a4b2dcd90d2558a7b5d0ebd47",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep485-stream-gatherers/01-Gatherer.java.txt"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep485-stream-gatherers/01-Gatherer.java.txt"
         },
         {
           "afterBytes": 31435,
@@ -131,7 +131,7 @@
           "beforeBytes": 31455,
           "beforeSHA256": "6115dd7015fe6680ef597a7cc3ec5b0c06eccc7259aa5bd4899454b5af624f1d",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep485-stream-gatherers/03-Gatherers.java.txt"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep485-stream-gatherers/03-Gatherers.java.txt"
         },
         {
           "afterBytes": 14856,
@@ -139,7 +139,7 @@
           "beforeBytes": 14652,
           "beforeSHA256": "eb1bd5ac55a99540b1516656041310ecf56c1a8dd20a8eb1fd599318b5647cf2",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep485-stream-gatherers/11-GatherersMapConcurrentTest.java.txt"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep485-stream-gatherers/11-GatherersMapConcurrentTest.java.txt"
         },
         {
           "afterBytes": 2598,
@@ -147,7 +147,7 @@
           "beforeBytes": 2598,
           "beforeSHA256": "3172ca1814ce01a40091d05f691ee044dfa72c1b4f24b10514fe491fc6d6e66c",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep485-stream-gatherers/manifest.tsv"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep485-stream-gatherers/manifest.tsv"
         },
         {
           "afterBytes": 24060,
@@ -180,9 +180,9 @@
     {
       "crate": "ic0-cor",
       "id": "Cor",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cor/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cor/manifest.tsv",
       "manifestSHA256": "f6ae4f6ec95f8a238bf65313858d242f5b32c495bba2091d1b3ea9a964919974",
-      "namedRecipe": "com.synexia.m3.Ic0Cor",
+      "namedRecipe": "jdk.internal.m3.Ic0Cor",
       "targets": [
         {
           "afterBytes": 18329,
@@ -190,7 +190,7 @@
           "beforeBytes": 18328,
           "beforeSHA256": "38ed8c01c6982fa4a52ea155c2e9652dfe45f317d8ae994c17fba01c7309fbda",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/atom/spectrum/CORPUS.tsv"
+          "path": "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/atom/spectrum/CORPUS.tsv"
         }
       ],
       "yamlPath": "META-INF/rewrite/ic0-cor.yml",
@@ -199,9 +199,9 @@
     {
       "crate": "ic0-sdc",
       "id": "Sdc",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-sdc/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-sdc/manifest.tsv",
       "manifestSHA256": "eb68a09f9c154f801830e1f40688be5c7d0af9d3fab286ed105de57b2994fb52",
-      "namedRecipe": "com.synexia.m3.Ic0Sdc",
+      "namedRecipe": "jdk.internal.m3.Ic0Sdc",
       "targets": [
         {
           "afterBytes": 76036,
@@ -209,7 +209,7 @@
           "beforeBytes": 76037,
           "beforeSHA256": "b1295f69831c23efd596f2ed9f65e2b07d20371fae4c0111c0b35fdd3bc4cd51",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/16-AbstractStringBuilder.java.txt"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/16-AbstractStringBuilder.java.txt"
         },
         {
           "afterBytes": 3300,
@@ -217,7 +217,7 @@
           "beforeBytes": 3300,
           "beforeSHA256": "2b724a9f9cf9fce382c34f4b5872312bfb4c30791decf8c093bd2dfb9fc0d400",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv"
         },
         {
           "afterBytes": 76253,
@@ -234,9 +234,9 @@
     {
       "crate": "ic0-fnd",
       "id": "Fnd",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-fnd/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-fnd/manifest.tsv",
       "manifestSHA256": "3e1e1d16d6cea44d0dfda5557ac7748234886843398571a4c2ac23d5b0b0cf7f",
-      "namedRecipe": "com.synexia.m3.Ic0Fnd",
+      "namedRecipe": "jdk.internal.m3.Ic0Fnd",
       "targets": [
         {
           "afterBytes": 2759,
@@ -277,9 +277,9 @@
     {
       "crate": "ic0-ciw",
       "id": "Ciw",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-ciw/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-ciw/manifest.tsv",
       "manifestSHA256": "556d7744fc7af55e1ef7ee66012872f40633daf0afb030657bb06fcfa1bb8587",
-      "namedRecipe": "com.synexia.m3.Ic0Ciw",
+      "namedRecipe": "jdk.internal.m3.Ic0Ciw",
       "targets": [
         {
           "afterBytes": 4428,
@@ -320,9 +320,9 @@
     {
       "crate": "ic0-cib",
       "id": "Cib",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cib/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cib/manifest.tsv",
       "manifestSHA256": "9ddb6eb1dbc4b618f0cd3817ed5f03f4eecd7202dead3e762f640a93c82456e2",
-      "namedRecipe": "com.synexia.m3.Ic0Cib",
+      "namedRecipe": "jdk.internal.m3.Ic0Cib",
       "targets": [
         {
           "afterBytes": 15862,
@@ -347,9 +347,9 @@
     {
       "crate": "ic0-jgr",
       "id": "Jgr",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jgr/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jgr/manifest.tsv",
       "manifestSHA256": "c53a4f1aaa6a37b8367225331072bf81ed39444b4ee272d2628ca6981fb49d34",
-      "namedRecipe": "com.synexia.m3.Ic0Jgr",
+      "namedRecipe": "jdk.internal.m3.Ic0Jgr",
       "targets": [
         {
           "afterBytes": 32695,
@@ -390,9 +390,9 @@
     {
       "crate": "ic0-jma",
       "id": "Jma",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jma/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jma/manifest.tsv",
       "manifestSHA256": "b18df1233ea0fa070f4ca05bd47dc2bf24f25a30a754011293a922c7bba254dd",
-      "namedRecipe": "com.synexia.m3.Ic0Jma",
+      "namedRecipe": "jdk.internal.m3.Ic0Jma",
       "targets": [
         {
           "afterBytes": 12048,
@@ -441,9 +441,9 @@
     {
       "crate": "ic0-pcd",
       "id": "Pcd",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-pcd/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-pcd/manifest.tsv",
       "manifestSHA256": "775cb5f335659c16a0d8f8c06785552490b7365966317ce3a737f971808ade11",
-      "namedRecipe": "com.synexia.m3.Ic0Pcd",
+      "namedRecipe": "jdk.internal.m3.Ic0Pcd",
       "targets": [
         {
           "afterBytes": 43759,
@@ -484,9 +484,9 @@
     {
       "crate": "ic0-pco",
       "id": "Pco",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-pco/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-pco/manifest.tsv",
       "manifestSHA256": "b1728a56c6675ff9167e0183b6f371cccb2b53117875a327bd2b83dc2f9adf41",
-      "namedRecipe": "com.synexia.m3.Ic0Pco",
+      "namedRecipe": "jdk.internal.m3.Ic0Pco",
       "targets": [
         {
           "afterBytes": 8155,
@@ -494,7 +494,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/backport-dag/src/main/java/com/m3/tooling/dag/M3BackportPacketCollection.java"
+          "path": "m3/tooling/backport-dag/src/main/java/jdk/m3/tooling/dag/M3BackportPacketCollection.java"
         },
         {
           "afterBytes": 12182,
@@ -502,7 +502,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/backport-dag/src/main/java/com/m3/tooling/dag/M3PacketCollectionLoader.java"
+          "path": "m3/tooling/backport-dag/src/main/java/jdk/m3/tooling/dag/M3PacketCollectionLoader.java"
         },
         {
           "afterBytes": 3138,
@@ -510,7 +510,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/backport-dag/src/main/java/com/m3/tooling/dag/M3PacketCollectionMain.java"
+          "path": "m3/tooling/backport-dag/src/main/java/jdk/m3/tooling/dag/M3PacketCollectionMain.java"
         },
         {
           "afterBytes": 5167,
@@ -518,7 +518,7 @@
           "beforeBytes": 4312,
           "beforeSHA256": "f475463faf184a0a310ab9295b6604be5795076295e46d4b6a78784613dce55e",
           "operation": "REPLACE",
-          "path": "m3/tooling/backport-dag/src/main/java/com/m3/tooling/dag/M3PacketDagComposer.java"
+          "path": "m3/tooling/backport-dag/src/main/java/jdk/m3/tooling/dag/M3PacketDagComposer.java"
         },
         {
           "afterBytes": 51135,
@@ -526,7 +526,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/backport-dag/src/test/java/com/m3/tooling/dag/M3BackportPacketCollectionTest.java"
+          "path": "m3/tooling/backport-dag/src/test/java/jdk/m3/tooling/dag/M3BackportPacketCollectionTest.java"
         }
       ],
       "yamlPath": "META-INF/rewrite/ic0-pco.yml",
@@ -535,9 +535,9 @@
     {
       "crate": "ic0-pcw",
       "id": "Pcw",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-pcw/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-pcw/manifest.tsv",
       "manifestSHA256": "9237f618a6d583c113755fc8ceb315fcc5a20af0fe545219494e1a0ddc17508f",
-      "namedRecipe": "com.synexia.m3.Ic0Pcw",
+      "namedRecipe": "jdk.internal.m3.Ic0Pcw",
       "targets": [
         {
           "afterBytes": 7812,
@@ -570,9 +570,9 @@
     {
       "crate": "ic0-dgc",
       "id": "Dgc",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-dgc/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-dgc/manifest.tsv",
       "manifestSHA256": "64415c0ae5a5ba87ed9c830bfbafd2596fc7d2cad32be4638a31128f1c2713be",
-      "namedRecipe": "com.synexia.m3.Ic0Dgc",
+      "namedRecipe": "jdk.internal.m3.Ic0Dgc",
       "targets": [
         {
           "afterBytes": 6189,
@@ -580,7 +580,7 @@
           "beforeBytes": 6285,
           "beforeSHA256": "def017e6b6bd2395f64b39bb4ea3258efd53526455cc0d9485d5a15356be2a2e",
           "operation": "REPLACE",
-          "path": "m3/tooling/backport-dag/src/main/java/com/m3/tooling/dag/M3RecipeDag.java"
+          "path": "m3/tooling/backport-dag/src/main/java/jdk/m3/tooling/dag/M3RecipeDag.java"
         },
         {
           "afterBytes": 2377,
@@ -588,7 +588,7 @@
           "beforeBytes": 1726,
           "beforeSHA256": "374c135a72e85bdcad84be5e9bbd696c763f06f33816e56e28f4a4d620e1aee9",
           "operation": "REPLACE",
-          "path": "m3/tooling/backport-dag/src/main/resources/com/m3/tooling/dag/adapters/airflow/m3_backport_dag.py"
+          "path": "m3/tooling/backport-dag/src/main/resources/jdk/m3/tooling/dag/adapters/airflow/m3_backport_dag.py"
         },
         {
           "afterBytes": 1003,
@@ -596,7 +596,7 @@
           "beforeBytes": 793,
           "beforeSHA256": "b81e897b0c34961102aeb98920a1f5fcfa95b6f3b41fdf9c4f8208e78e8796d8",
           "operation": "REPLACE",
-          "path": "m3/tooling/backport-dag/src/main/resources/com/m3/tooling/dag/adapters/camel/m3-backport-route.yaml"
+          "path": "m3/tooling/backport-dag/src/main/resources/jdk/m3/tooling/dag/adapters/camel/m3-backport-route.yaml"
         },
         {
           "afterBytes": 1575,
@@ -604,7 +604,7 @@
           "beforeBytes": 1575,
           "beforeSHA256": "922700cc7f1acf943e3f07b7c29d44f07c1b9bfab7e876f4e02d2ea408abb393",
           "operation": "REPLACE",
-          "path": "m3/tooling/backport-dag/src/main/resources/com/m3/tooling/dag/adapters/drools/m3-backport-admission.drl"
+          "path": "m3/tooling/backport-dag/src/main/resources/jdk/m3/tooling/dag/adapters/drools/m3-backport-admission.drl"
         },
         {
           "afterBytes": 1695,
@@ -612,7 +612,7 @@
           "beforeBytes": 968,
           "beforeSHA256": "76c3eafb6c52fe5918023a19dadf1ac98076d0f50332688c56303154871ce423",
           "operation": "REPLACE",
-          "path": "m3/tooling/backport-dag/src/test/java/com/m3/tooling/dag/M3BackportDagLoaderTest.java"
+          "path": "m3/tooling/backport-dag/src/test/java/jdk/m3/tooling/dag/M3BackportDagLoaderTest.java"
         },
         {
           "afterBytes": 13835,
@@ -620,7 +620,7 @@
           "beforeBytes": 9046,
           "beforeSHA256": "451b4cde41c505a19641dc17649ca0b22b2e82d13685d042e4f29f9af9a8e094",
           "operation": "REPLACE",
-          "path": "m3/tooling/backport-dag/src/test/java/com/m3/tooling/dag/M3PacketDagComposerTest.java"
+          "path": "m3/tooling/backport-dag/src/test/java/jdk/m3/tooling/dag/M3PacketDagComposerTest.java"
         },
         {
           "afterBytes": 12586,
@@ -628,7 +628,7 @@
           "beforeBytes": 8603,
           "beforeSHA256": "8fe0d897419c2e91dc3fcc7958e0c55c5bdea7b4ee4f48efc57a759b8e34960f",
           "operation": "REPLACE",
-          "path": "m3/tooling/backport-dag/src/test/java/com/m3/tooling/dag/M3RecipeDagTest.java"
+          "path": "m3/tooling/backport-dag/src/test/java/jdk/m3/tooling/dag/M3RecipeDagTest.java"
         }
       ],
       "yamlPath": "META-INF/rewrite/ic0-dgc.yml",
@@ -637,9 +637,9 @@
     {
       "crate": "ic0-nul",
       "id": "Nul",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-nul/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-nul/manifest.tsv",
       "manifestSHA256": "0f6ec78d70e31050ed4e481eb133b1438e378206ea9138c0b0b8c00e161c5d9e",
-      "namedRecipe": "com.synexia.m3.Ic0Nul",
+      "namedRecipe": "jdk.internal.m3.Ic0Nul",
       "targets": [
         {
           "afterBytes": 5296,
@@ -664,9 +664,9 @@
     {
       "crate": "ic0-hct",
       "id": "Hct",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-hct/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-hct/manifest.tsv",
       "manifestSHA256": "6449b223baded59c01d47c2a17fe1984aaf00d8427ccc7b96d54ec1aac1a119a",
-      "namedRecipe": "com.synexia.m3.Ic0Hct",
+      "namedRecipe": "jdk.internal.m3.Ic0Hct",
       "targets": [
         {
           "afterBytes": 56771,
@@ -690,7 +690,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan-intake-752-ci.json"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan-intake-752-ci.json"
         },
         {
           "afterBytes": 2873,
@@ -698,7 +698,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan-intake-8131.json"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan-intake-8131.json"
         },
         {
           "afterBytes": 3383,
@@ -706,7 +706,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/pom-before-752.xml"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/pom-before-752.xml"
         }
       ],
       "yamlPath": "META-INF/rewrite/ic0-hct.yml",
@@ -715,9 +715,9 @@
     {
       "crate": "ic0-hts",
       "id": "Hts",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-hts/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-hts/manifest.tsv",
       "manifestSHA256": "a0d3fc7e68265cf11593a08647eaf6dfe3f2e38aa5199365eecea21b2624ce51",
-      "namedRecipe": "com.synexia.m3.Ic0Hts",
+      "namedRecipe": "jdk.internal.m3.Ic0Hts",
       "targets": [
         {
           "afterBytes": 77751,
@@ -758,9 +758,9 @@
     {
       "crate": "ic0-ipr",
       "id": "Ipr",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-ipr/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-ipr/manifest.tsv",
       "manifestSHA256": "caa68576a994442ea21cbef99a730932a461816fc843dbb86e4220f7b361f098",
-      "namedRecipe": "com.synexia.m3.Ic0Ipr",
+      "namedRecipe": "jdk.internal.m3.Ic0Ipr",
       "targets": [
         {
           "afterBytes": 10052,
@@ -777,9 +777,9 @@
     {
       "crate": "ic0-aca",
       "id": "Aca",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-aca/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-aca/manifest.tsv",
       "manifestSHA256": "89d7df5d0190e71b6fb69797fe848b37f5ffb09e274f020135e0df948488782a",
-      "namedRecipe": "com.synexia.m3.Ic0Aca",
+      "namedRecipe": "jdk.internal.m3.Ic0Aca",
       "targets": [
         {
           "afterBytes": 10008,
@@ -787,7 +787,7 @@
           "beforeBytes": 9492,
           "beforeSHA256": "d88f347f77069dc1e2e6a3871c68c55e76f885f324801957d041f9ecc31ec6f4",
           "operation": "REPLACE",
-          "path": "m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java"
+          "path": "m3/tooling/a3/src/main/java/jdk/m3/a3/A3Alg.java"
         },
         {
           "afterBytes": 4466,
@@ -795,7 +795,7 @@
           "beforeBytes": 4462,
           "beforeSHA256": "d684f2c95622c32683dbdce162d2f49101c7431bfbba1927a34182dcecadc77f",
           "operation": "REPLACE",
-          "path": "m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java"
+          "path": "m3/tooling/a3/src/test/java/jdk/m3/a3/A3PlanTest.java"
         },
         {
           "afterBytes": 3522,
@@ -811,7 +811,7 @@
           "beforeBytes": 2338,
           "beforeSHA256": "280d7c08e9da9f618f4596516420a5c6c2de8f32fa1b52ff354853f3b0fb7c2b",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3AlgorithmCatalogueManifest.java"
+          "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/a3/M3A3AlgorithmCatalogueManifest.java"
         },
         {
           "afterBytes": 10008,
@@ -819,7 +819,7 @@
           "beforeBytes": 9492,
           "beforeSHA256": "d88f347f77069dc1e2e6a3871c68c55e76f885f324801957d041f9ecc31ec6f4",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java"
         },
         {
           "afterBytes": 4466,
@@ -827,7 +827,7 @@
           "beforeBytes": 4462,
           "beforeSHA256": "d684f2c95622c32683dbdce162d2f49101c7431bfbba1927a34182dcecadc77f",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java"
         }
       ],
       "yamlPath": "META-INF/rewrite/ic0-aca.yml",
@@ -836,9 +836,9 @@
     {
       "crate": "ic0-acs",
       "id": "Acs",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-acs/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-acs/manifest.tsv",
       "manifestSHA256": "7d443b17756355cb16d4871d68372194661aafb26cc650d15a71e6ba343d3d6f",
-      "namedRecipe": "com.synexia.m3.Ic0Acs",
+      "namedRecipe": "jdk.internal.m3.Ic0Acs",
       "targets": [
         {
           "afterBytes": 7750,
@@ -846,7 +846,7 @@
           "beforeBytes": 7782,
           "beforeSHA256": "677324e1566d482eb5b4470ec1a63d3493bb2a75fc77ea0edb61ba364906c298",
           "operation": "REPLACE",
-          "path": "m3/tooling/a3/src/main/java/com/m3/a3/A3Cases.java"
+          "path": "m3/tooling/a3/src/main/java/jdk/m3/a3/A3Cases.java"
         },
         {
           "afterBytes": 7750,
@@ -854,7 +854,7 @@
           "beforeBytes": 7782,
           "beforeSHA256": "677324e1566d482eb5b4470ec1a63d3493bb2a75fc77ea0edb61ba364906c298",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after"
         },
         {
           "afterBytes": 734,
@@ -862,7 +862,7 @@
           "beforeBytes": 734,
           "beforeSHA256": "b901f0b1aae122711792a66dc9750b9ba4608d59613641e74f378218757cbb4d",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv"
         }
       ],
       "yamlPath": "META-INF/rewrite/ic0-acs.yml",
@@ -871,9 +871,9 @@
     {
       "crate": "ic0-arm",
       "id": "Arm",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-arm/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-arm/manifest.tsv",
       "manifestSHA256": "39336b3be2d437740a281d3ce3fbda8cd61d0e6e5ebc1e821b98518e1464c5d7",
-      "namedRecipe": "com.synexia.m3.Ic0Arm",
+      "namedRecipe": "jdk.internal.m3.Ic0Arm",
       "targets": [
         {
           "afterBytes": 6447,
@@ -881,7 +881,7 @@
           "beforeBytes": 6442,
           "beforeSHA256": "9171b0ada1d7845b63d7a586d99ef97a6fa6eccbfd84204c47a6a01c8b3e4697",
           "operation": "REPLACE",
-          "path": "m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java"
+          "path": "m3/tooling/a3/src/main/java/jdk/m3/a3/A3MemoryCompiler.java"
         },
         {
           "afterBytes": 7516,
@@ -889,7 +889,7 @@
           "beforeBytes": 7514,
           "beforeSHA256": "f000b1eea411056baaca6051b220149f25334bc70bf69b4f0536839c6c78e404",
           "operation": "REPLACE",
-          "path": "m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java"
+          "path": "m3/tooling/a3/src/main/java/jdk/m3/a3/A3RegexMatrix.java"
         },
         {
           "afterBytes": 6447,
@@ -897,7 +897,7 @@
           "beforeBytes": 6442,
           "beforeSHA256": "9171b0ada1d7845b63d7a586d99ef97a6fa6eccbfd84204c47a6a01c8b3e4697",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after"
         },
         {
           "afterBytes": 7516,
@@ -905,7 +905,7 @@
           "beforeBytes": 7514,
           "beforeSHA256": "f000b1eea411056baaca6051b220149f25334bc70bf69b4f0536839c6c78e404",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after"
         },
         {
           "afterBytes": 658,
@@ -913,7 +913,7 @@
           "beforeBytes": 658,
           "beforeSHA256": "b2febbb17ed96ae6f582eee2e16af3fc5e435c23e350708f56397bee9ac38ab5",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv"
         },
         {
           "afterBytes": 5380,
@@ -921,7 +921,7 @@
           "beforeBytes": 5379,
           "beforeSHA256": "58d01008f3dc6e79d988e855d76ba90eb0a13d39a76e7eb4027d75442389ec94",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java"
+          "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java"
         },
         {
           "afterBytes": 4975,
@@ -929,7 +929,7 @@
           "beforeBytes": 4974,
           "beforeSHA256": "69882638771a411cf0866f789a7b3ef7e7e7040cde38a1c40ef4a743d37168e2",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java"
+          "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java"
         }
       ],
       "yamlPath": "META-INF/rewrite/ic0-arm.yml",
@@ -938,9 +938,9 @@
     {
       "crate": "ic0-scp",
       "id": "Scp",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-scp/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-scp/manifest.tsv",
       "manifestSHA256": "28e9142f03ee9948b10b370daf2001941c8c1371d33ec3985ac8f70fe84679a2",
-      "namedRecipe": "com.synexia.m3.Ic0Scp",
+      "namedRecipe": "jdk.internal.m3.Ic0Scp",
       "targets": [
         {
           "afterBytes": 4259,
@@ -948,7 +948,7 @@
           "beforeBytes": 4112,
           "beforeSHA256": "9ba3245512f18e3d921b6a8d013cea05a70b5a84c473b34dbd574ba55a1978d4",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/02-M3RecipeScopeRegistry.java.txt"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/02-M3RecipeScopeRegistry.java.txt"
         },
         {
           "afterBytes": 8906,
@@ -956,7 +956,7 @@
           "beforeBytes": 8378,
           "beforeSHA256": "cf1c56ebf8fc2df3778cd56e34240da7c3ba722cb2949e8957b81157abf8b9ba",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/03-M3RecipeScopeDeclarationTest.java.txt"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/03-M3RecipeScopeDeclarationTest.java.txt"
         },
         {
           "afterBytes": 934,
@@ -964,7 +964,7 @@
           "beforeBytes": 934,
           "beforeSHA256": "d80a5af11629b89cb2e69d3a119becb7606fb029e8e121d47d684ca755435182",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/manifest.tsv"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/manifest.tsv"
         },
         {
           "afterBytes": 11146,
@@ -972,7 +972,7 @@
           "beforeBytes": 11065,
           "beforeSHA256": "3a57bda49c218895a2be9f5053671d435840abd4c4079f4a1e5eed89becf0813",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/scope/M3ScopeCoverageClosureTest.java"
+          "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3ScopeCoverageClosureTest.java"
         }
       ],
       "yamlPath": "META-INF/rewrite/ic0-scp.yml",
@@ -981,9 +981,9 @@
     {
       "crate": "ic0-aml",
       "id": "Aml",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-aml/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-aml/manifest.tsv",
       "manifestSHA256": "ec4632138062740f3bea0f050661a176ea356b3734934c7856331dcbc3b21937",
-      "namedRecipe": "com.synexia.m3.Ic0Aml",
+      "namedRecipe": "jdk.internal.m3.Ic0Aml",
       "targets": [
         {
           "afterBytes": 6088,
@@ -991,7 +991,7 @@
           "beforeBytes": 5127,
           "beforeSHA256": "6d9ec887c87898167748ca5f77598f95a6784cfaf14882f4983733c006374b77",
           "operation": "REPLACE",
-          "path": "m3/tooling/a3/src/main/java/com/m3/a3/A3.java"
+          "path": "m3/tooling/a3/src/main/java/jdk/m3/a3/A3.java"
         },
         {
           "afterBytes": 17041,
@@ -999,7 +999,7 @@
           "beforeBytes": 16196,
           "beforeSHA256": "c212736f000836cb782a5ff81fd2de48e67d36ea4b3bd53cf7743c4aadbfdaf6",
           "operation": "REPLACE",
-          "path": "m3/tooling/a3/src/main/java/com/m3/a3/A3Lab.java"
+          "path": "m3/tooling/a3/src/main/java/jdk/m3/a3/A3Lab.java"
         },
         {
           "afterBytes": 7131,
@@ -1007,7 +1007,7 @@
           "beforeBytes": 6117,
           "beforeSHA256": "351eeac06154189e79f3d139336437d5911da5721c9a95a779ebd5d511997d9c",
           "operation": "REPLACE",
-          "path": "m3/tooling/a3/src/test/java/com/m3/a3/A3LabTest.java"
+          "path": "m3/tooling/a3/src/test/java/jdk/m3/a3/A3LabTest.java"
         }
       ],
       "yamlPath": "META-INF/rewrite/ic0-aml.yml",
@@ -1016,9 +1016,9 @@
     {
       "crate": "ic0-amc",
       "id": "Amc",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-amc/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-amc/manifest.tsv",
       "manifestSHA256": "86f114bcb03dc7df22a6a1bcea80ad1f7e7030e5b0cb481b7eadff6a12ba32da",
-      "namedRecipe": "com.synexia.m3.Ic0Amc",
+      "namedRecipe": "jdk.internal.m3.Ic0Amc",
       "targets": [
         {
           "afterBytes": 9874,
@@ -1026,7 +1026,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/a3/src/main/java/com/m3/a3/A3M.java"
+          "path": "m3/tooling/a3/src/main/java/jdk/m3/a3/A3M.java"
         },
         {
           "afterBytes": 10108,
@@ -1034,7 +1034,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/a3/src/main/java/com/m3/a3/A3MCodec.java"
+          "path": "m3/tooling/a3/src/main/java/jdk/m3/a3/A3MCodec.java"
         },
         {
           "afterBytes": 6319,
@@ -1042,7 +1042,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/a3/src/test/java/com/m3/a3/A3MTest.java"
+          "path": "m3/tooling/a3/src/test/java/jdk/m3/a3/A3MTest.java"
         }
       ],
       "yamlPath": "META-INF/rewrite/ic0-amc.yml",
@@ -1051,9 +1051,9 @@
     {
       "crate": "ic0-agt",
       "id": "Agt",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-agt/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-agt/manifest.tsv",
       "manifestSHA256": "49cc5867de7b3e55e3532558606cfcb13bd06b256d36314de3d668d630650e17",
-      "namedRecipe": "com.synexia.m3.Ic0Agt",
+      "namedRecipe": "jdk.internal.m3.Ic0Agt",
       "targets": [
         {
           "afterBytes": 20534,
@@ -1061,7 +1061,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/a3/src/main/java/com/m3/a3/A3Gate.java"
+          "path": "m3/tooling/a3/src/main/java/jdk/m3/a3/A3Gate.java"
         },
         {
           "afterBytes": 6575,
@@ -1069,7 +1069,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/a3/src/test/java/com/m3/a3/A3GateTest.java"
+          "path": "m3/tooling/a3/src/test/java/jdk/m3/a3/A3GateTest.java"
         },
         {
           "afterBytes": 20534,
@@ -1077,7 +1077,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-mastery-v6/A3Gate.java.txt"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/a3-mastery-v6/A3Gate.java.txt"
         },
         {
           "afterBytes": 6575,
@@ -1085,7 +1085,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-mastery-v6/A3GateTest.java.txt"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/a3-mastery-v6/A3GateTest.java.txt"
         }
       ],
       "yamlPath": "META-INF/rewrite/ic0-agt.yml",
@@ -1094,9 +1094,9 @@
     {
       "crate": "ic0-avr",
       "id": "Avr",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-avr/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-avr/manifest.tsv",
       "manifestSHA256": "64ee61c5460513b0d2e13be1407ae368f22528c8b6dba9ffc23ceb978acda9fe",
-      "namedRecipe": "com.synexia.m3.Ic0Avr",
+      "namedRecipe": "jdk.internal.m3.Ic0Avr",
       "targets": [
         {
           "afterBytes": 7506,
@@ -1104,7 +1104,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3MasteryV6Recipe.java"
+          "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/a3/M3A3MasteryV6Recipe.java"
         },
         {
           "afterBytes": 564,
@@ -1120,7 +1120,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3MasteryV6DeliveryTest.java"
+          "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3MasteryV6DeliveryTest.java"
         },
         {
           "afterBytes": 5952,
@@ -1128,7 +1128,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/a3/M3A3MasteryV6RecipeTest.java"
+          "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/a3/M3A3MasteryV6RecipeTest.java"
         }
       ],
       "yamlPath": "META-INF/rewrite/ic0-avr.yml",
@@ -1137,9 +1137,9 @@
     {
       "crate": "ic0-avp",
       "id": "Avp",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-avp/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-avp/manifest.tsv",
       "manifestSHA256": "8a0b1cc6913250370e5ec724876f270b01da80c3a060ec7d66f7fe6b07bbd2d7",
-      "namedRecipe": "com.synexia.m3.Ic0Avp",
+      "namedRecipe": "jdk.internal.m3.Ic0Avp",
       "targets": [
         {
           "afterBytes": 150,
@@ -1147,7 +1147,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-v6-pom/manifest.tsv"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-v6-pom/manifest.tsv"
         },
         {
           "afterBytes": 4531,
@@ -1155,7 +1155,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-v6-pom/pom.xml.txt"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-v6-pom/pom.xml.txt"
         },
         {
           "afterBytes": 3633,
@@ -1163,7 +1163,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-mastery-v6/pom.before.xml"
+          "path": "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/a3-mastery-v6/pom.before.xml"
         }
       ],
       "yamlPath": "META-INF/rewrite/ic0-avp.yml",
@@ -1172,9 +1172,9 @@
     {
       "crate": "ic0-arr",
       "id": "Arr",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-arr/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-arr/manifest.tsv",
       "manifestSHA256": "e99545b056b2ee220e71627ae06755317dc12416b626d118140b6efcba38402b",
-      "namedRecipe": "com.synexia.m3.Ic0Arr",
+      "namedRecipe": "jdk.internal.m3.Ic0Arr",
       "targets": [
         {
           "afterBytes": 6088,
@@ -1182,7 +1182,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/A3.java.after"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-receipt/A3.java.after"
         },
         {
           "afterBytes": 17041,
@@ -1190,7 +1190,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/A3Lab.java.after"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-receipt/A3Lab.java.after"
         },
         {
           "afterBytes": 7131,
@@ -1198,7 +1198,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/A3LabTest.java.after"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-receipt/A3LabTest.java.after"
         },
         {
           "afterBytes": 9874,
@@ -1206,7 +1206,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/A3M.java.after"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-receipt/A3M.java.after"
         },
         {
           "afterBytes": 10108,
@@ -1214,7 +1214,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/A3MCodec.java.after"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-receipt/A3MCodec.java.after"
         },
         {
           "afterBytes": 6319,
@@ -1222,7 +1222,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/A3MTest.java.after"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-receipt/A3MTest.java.after"
         },
         {
           "afterBytes": 926,
@@ -1230,7 +1230,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/manifest.tsv"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-receipt/manifest.tsv"
         }
       ],
       "yamlPath": "META-INF/rewrite/ic0-arr.yml",
@@ -1239,9 +1239,9 @@
     {
       "crate": "ic0-awr",
       "id": "Awr",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-awr/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-awr/manifest.tsv",
       "manifestSHA256": "018bc7d7ad2c11e7a284ef8adc77299f884237a0d4c0e2fadc7c0cc92b2bcda8",
-      "namedRecipe": "com.synexia.m3.Ic0Awr",
+      "namedRecipe": "jdk.internal.m3.Ic0Awr",
       "targets": [
         {
           "afterBytes": 5550,
@@ -1249,7 +1249,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-receipt-workflow/a3-lab.md.txt"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-receipt-workflow/a3-lab.md.txt"
         },
         {
           "afterBytes": 5105,
@@ -1257,7 +1257,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-receipt-workflow/a3-mastery.md.txt"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-receipt-workflow/a3-mastery.md.txt"
         },
         {
           "afterBytes": 8625,
@@ -1265,7 +1265,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-receipt-workflow/a3.md.txt"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-receipt-workflow/a3.md.txt"
         },
         {
           "afterBytes": 825,
@@ -1273,7 +1273,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-receipt-workflow/manifest.tsv"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-receipt-workflow/manifest.tsv"
         },
         {
           "afterBytes": 4558,
@@ -1281,7 +1281,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-receipt-workflow/pom.xml.txt"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-receipt-workflow/pom.xml.txt"
         },
         {
           "afterBytes": 11744,
@@ -1289,7 +1289,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-receipt-workflow/workflow.yml.txt"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-receipt-workflow/workflow.yml.txt"
         }
       ],
       "yamlPath": "META-INF/rewrite/ic0-awr.yml",
@@ -1298,9 +1298,9 @@
     {
       "crate": "ic0-ard",
       "id": "Ard",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-ard/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-ard/manifest.tsv",
       "manifestSHA256": "19091afaeb78b0c2aa57d2c57a8197e0a27dee9470f0458c4c10632c1037b2da",
-      "namedRecipe": "com.synexia.m3.Ic0Ard",
+      "namedRecipe": "jdk.internal.m3.Ic0Ard",
       "targets": [
         {
           "afterBytes": 506,
@@ -1324,7 +1324,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3MasteryReceiptDeliveryRecipeTest.java"
+          "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3MasteryReceiptDeliveryRecipeTest.java"
         },
         {
           "afterBytes": 5716,
@@ -1332,7 +1332,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3MasteryReceiptWorkflowRecipeTest.java"
+          "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3MasteryReceiptWorkflowRecipeTest.java"
         }
       ],
       "yamlPath": "META-INF/rewrite/ic0-ard.yml",
@@ -1341,9 +1341,9 @@
     {
       "crate": "ic0-awb",
       "id": "Awb",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-awb/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-awb/manifest.tsv",
       "manifestSHA256": "8b9f6945a0f73947008d67771a27a0b5de3f1e4929538f4fb13c9bdc04874ac4",
-      "namedRecipe": "com.synexia.m3.Ic0Awb",
+      "namedRecipe": "jdk.internal.m3.Ic0Awb",
       "targets": [
         {
           "afterBytes": 5171,
@@ -1351,7 +1351,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-mastery-receipt-workflow/before/a3-lab.md"
+          "path": "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/a3-mastery-receipt-workflow/before/a3-lab.md"
         },
         {
           "afterBytes": 3974,
@@ -1359,7 +1359,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-mastery-receipt-workflow/before/a3-mastery.md"
+          "path": "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/a3-mastery-receipt-workflow/before/a3-mastery.md"
         },
         {
           "afterBytes": 8267,
@@ -1367,7 +1367,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-mastery-receipt-workflow/before/a3.md"
+          "path": "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/a3-mastery-receipt-workflow/before/a3.md"
         },
         {
           "afterBytes": 3633,
@@ -1375,7 +1375,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-mastery-receipt-workflow/before/pom.xml"
+          "path": "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/a3-mastery-receipt-workflow/before/pom.xml"
         },
         {
           "afterBytes": 10881,
@@ -1383,7 +1383,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-mastery-receipt-workflow/before/workflow.yml"
+          "path": "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/a3-mastery-receipt-workflow/before/workflow.yml"
         }
       ],
       "yamlPath": "META-INF/rewrite/ic0-awb.yml",
@@ -1392,9 +1392,9 @@
     {
       "crate": "ic0-amb",
       "id": "Amb",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-amb/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-amb/manifest.tsv",
       "manifestSHA256": "07c82862622f587d850e42928e6972df02d549208e94d5742cb511be2f5e40ba",
-      "namedRecipe": "com.synexia.m3.Ic0Amb",
+      "namedRecipe": "jdk.internal.m3.Ic0Amb",
       "targets": [
         {
           "afterBytes": 5127,
@@ -1402,7 +1402,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-mastery-receipt/before/A3.java"
+          "path": "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/a3-mastery-receipt/before/A3.java"
         },
         {
           "afterBytes": 16196,
@@ -1410,7 +1410,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-mastery-receipt/before/A3Lab.java"
+          "path": "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/a3-mastery-receipt/before/A3Lab.java"
         },
         {
           "afterBytes": 6117,
@@ -1418,7 +1418,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-mastery-receipt/before/A3LabTest.java"
+          "path": "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/a3-mastery-receipt/before/A3LabTest.java"
         }
       ],
       "yamlPath": "META-INF/rewrite/ic0-amb.yml",
@@ -1427,9 +1427,9 @@
     {
       "crate": "ic0-awd",
       "id": "Awd",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-awd/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-awd/manifest.tsv",
       "manifestSHA256": "af2684a3af82b6cbebf718bbe59808af8c7ef1b1de52fdcf42a0d90efecc8649",
-      "namedRecipe": "com.synexia.m3.Ic0Awd",
+      "namedRecipe": "jdk.internal.m3.Ic0Awd",
       "targets": [
         {
           "afterBytes": 2100,
@@ -1486,9 +1486,9 @@
     {
       "crate": "ic0-aad",
       "id": "Aad",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-aad/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-aad/manifest.tsv",
       "manifestSHA256": "d1386ec5616bd2570de480991e84880c8f6c2992b0d03f1f93bca63135832f5f",
-      "namedRecipe": "com.synexia.m3.Ic0Aad",
+      "namedRecipe": "jdk.internal.m3.Ic0Aad",
       "targets": [
         {
           "afterBytes": 3078,
@@ -1513,9 +1513,9 @@
     {
       "crate": "ic0-jop",
       "id": "Jop",
-      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jop/manifest.tsv",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jop/manifest.tsv",
       "manifestSHA256": "207aa8d6e307c4c3cc8ff492700096c9231bbfcd19ac737b074587b7d453ba60",
-      "namedRecipe": "com.synexia.m3.Ic0Jop",
+      "namedRecipe": "jdk.internal.m3.Ic0Jop",
       "targets": [
         {
           "afterBytes": 12801,
@@ -1595,7 +1595,7 @@
         "Jop"
       ],
       "id": "Forward",
-      "recipe": "com.synexia.m3.Ic0Forward"
+      "recipe": "jdk.internal.m3.Ic0Forward"
     },
     {
       "families": [
@@ -1637,11 +1637,11 @@
         "Cmp"
       ],
       "id": "Reverse",
-      "recipe": "com.synexia.m3.Ic0Reverse"
+      "recipe": "jdk.internal.m3.Ic0Reverse"
     }
   ],
   "ownerSHA256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
-  "schema": "synexia.ic0.qualification/1",
+  "schema": "m3.ic0.qualification/1",
   "sourceCommit": "d1ecbd43dbadaf218deec0d98a2ddc23f3a3f45c",
   "targetCommit": "c0a14387009aefc7d62bd3268055d526e04f9074",
   "targetTree": "491bbd80a51483d0710fc12c1bad3a037b385ba0"

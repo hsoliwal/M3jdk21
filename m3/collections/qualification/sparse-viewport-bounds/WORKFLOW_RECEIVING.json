@@ -6,7 +6,7 @@
     "pr": 12855,
     "commit": "9a1073415679672ef89174e0e778aae4a5784b59",
     "dataset": "sparse-workflow-20261028",
-    "recipe": "com.synexia.m3.SparseWorkflow20261028"
+    "recipe": "jdk.internal.m3.SparseWorkflow20261028"
   },
   "original_workflow": {
     "path": ".github/workflows/m3-sparse-viewport-geometry.yml",

@@ -1050,7 +1050,7 @@ public class PathMatchingResourcePatternResolver implements ResourcePatternResol
 	 * @see PathMatcher#match(String, String)
 	 */
 	protected Set<Resource> findAllModulePathResources(String locationPattern) throws IOException {
-		Set<Resource> result = com.m3.collections.M3Collections.linkedHashSet();
+		Set<Resource> result = jdk.m3.collections.M3Collections.linkedHashSet();
 
 		// Skip scanning the module path when running in a native image.
 		if (NativeDetector.inNativeImage()) {

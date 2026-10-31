@@ -49,7 +49,7 @@ class SourceReceiverContractTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as home:
             root = Path(home)
             self.copy_fixture(root)
-            source = root / "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java"
+            source = root / "m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java"
             source.write_bytes(source.read_bytes() + b"// drift\n")
             with self.assertRaisesRegex(ValueError, "Git source postimage drift"):
                 receiver.verify(root)
@@ -58,7 +58,7 @@ class SourceReceiverContractTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as home:
             root = Path(home)
             self.copy_fixture(root)
-            source = root / "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java"
+            source = root / "m3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java"
             source.write_bytes(source.read_bytes() + b"// unintended tree change\n")
             with self.assertRaisesRegex(ValueError, "Git source postimage drift"):
                 receiver.verify(root)
@@ -67,7 +67,7 @@ class SourceReceiverContractTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as home:
             root = Path(home)
             self.copy_fixture(root)
-            (root / "m3/collections/src/test/java/com/m3/collections/M3TreeCoverageTest.java").unlink()
+            (root / "m3/collections/src/test/java/jdk/m3/collections/M3TreeCoverageTest.java").unlink()
             with self.assertRaisesRegex(ValueError, "missing/out-of-root"):
                 receiver.verify(root)
 

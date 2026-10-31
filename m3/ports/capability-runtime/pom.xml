@@ -39,7 +39,7 @@
               <goal>java</goal>
             </goals>
             <configuration>
-              <mainClass>com.m3.runtime.capability.CapabilityRuntimeChecks</mainClass>
+              <mainClass>jdk.m3.runtime.capability.CapabilityRuntimeChecks</mainClass>
               <classpathScope>test</classpathScope>
             </configuration>
           </execution>
@@ -50,7 +50,7 @@
               <goal>java</goal>
             </goals>
             <configuration>
-              <mainClass>com.m3.runtime.capability.ByteSlidingWindowsChecks</mainClass>
+              <mainClass>jdk.m3.runtime.capability.ByteSlidingWindowsChecks</mainClass>
               <classpathScope>test</classpathScope>
             </configuration>
           </execution>
@@ -61,7 +61,7 @@
               <goal>java</goal>
             </goals>
             <configuration>
-              <mainClass>com.m3.runtime.capability.ByteHistogram256Checks</mainClass>
+              <mainClass>jdk.m3.runtime.capability.ByteHistogram256Checks</mainClass>
               <classpathScope>test</classpathScope>
             </configuration>
           </execution>
@@ -103,7 +103,7 @@
                 </goals>
                 <configuration>
                   <skip>${m3.recipe.boot.skip}</skip>
-                  <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+                  <mainClass>jdk.internal.m3.prstack.M3RecipeBoot</mainClass>
                   <includeProjectDependencies>false</includeProjectDependencies>
                   <includePluginDependencies>true</includePluginDependencies>
                   <arguments>

@@ -77,9 +77,9 @@ def parse_samples(log):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--jdk", type=Path, required=True)
-    parser.add_argument("--donor", type=Path, required=True, help="exact pinned synexia-indexstring checkout")
+    parser.add_argument("--donor", type=Path, required=True, help="exact pinned m3-indexstring checkout")
     parser.add_argument("--receiver", type=Path, action="append", required=True,
-                        help="receiver com/m3/fs source directory; repeat for split staging")
+                        help="receiver jdk/m3/fs source directory; repeat for split staging")
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--rows", type=int, default=50_000)
     args = parser.parse_args()
@@ -89,7 +89,7 @@ def main():
     here = Path(__file__).resolve().parent
     harness = here / "MetadataResourceProbe.java"
     java, javac = args.jdk / "bin/java", args.jdk / "bin/javac"
-    donor_sources = [args.donor / "src/main/java/com/synexia/indexstring/fs" / name
+    donor_sources = [args.donor / "src/main/java/jdk/internal/m3/indexstring/fs" / name
                      for name in ("M3ContentId.java", "M3GenerationRoot.java")]
     receiver_sources = []
     for name in ("M3ContentId.java", "M3GenerationRoot.java", "M3IdTable.java", "M3Columns.java"):
@@ -132,8 +132,8 @@ def main():
             "No native filesystem operations, JDBC, Eclipse workload or API enumeration is measured.",
         ], "modes": {},
     }
-    for mode, package, sources in (("donor", "com.synexia.indexstring.fs", donor_sources),
-                                    ("receiver", "com.m3.fs", receiver_sources)):
+    for mode, package, sources in (("donor", "jdk.internal.m3.indexstring.fs", donor_sources),
+                                    ("receiver", "jdk.m3.fs", receiver_sources)):
         classes = work / mode
         classes.mkdir(exist_ok=True)
         compile_command = [javac, "-proc:none", "-Xlint:all", "-Werror", "-d", classes, harness, *sources]

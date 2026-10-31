@@ -153,9 +153,9 @@ static jobject JNICALL retain(JNIEnv *env, jobject value) {
     require(0, "global retention is outside the region contract"); return NULL;
 }
 
-extern jlong Java_com_m3_collections_M3IndexMaskWindow_scanNative(JNIEnv *, jclass,
+extern jlong Java_jdk_m3_collections_M3IndexMaskWindow_scanNative(JNIEnv *, jclass,
         jintArray, jbyteArray, jint, jint, jint, jintArray, jint, jint);
-extern jlong Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative(JNIEnv *, jclass,
+extern jlong Java_jdk_m3_collections_M3IndexMaskWindow_scanBoundedNative(JNIEnv *, jclass,
         jintArray, jbyteArray, jint, jint, jint, jint, jintArray, jint, jint);
 
 static void execute(JNIEnv *env, const char *name, fixture_array *rows, fixture_array *states,
@@ -172,10 +172,10 @@ static void execute(JNIEnv *env, const char *name, fixture_array *rows, fixture_
     jint *out = (jint *) output->data;
     for (jsize i = 0; i < output->size; i++) out[i] = GUARD;
     jlong actual = bounded
-            ? Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative(env, NULL,
+            ? Java_jdk_m3_collections_M3IndexMaskWindow_scanBoundedNative(env, NULL,
                 (jintArray) rows, (jbyteArray) states, first, end, required, excluded,
                 (jintArray) output, 2, limit)
-            : Java_com_m3_collections_M3IndexMaskWindow_scanNative(env, NULL,
+            : Java_jdk_m3_collections_M3IndexMaskWindow_scanNative(env, NULL,
                 (jintArray) rows, (jbyteArray) states, first, required, excluded,
                 (jintArray) output, 2, limit);
     if (fail_transfer != 0) {

@@ -12,7 +12,7 @@
  * Contributors:
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
-package com.synexia.rewrite;
+package jdk.internal.m3.rewrite;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -32,7 +32,7 @@ class M3GuavaBiMapRecipeTest {
     private static final Path REPO=Path.of(System.getProperty("m3.repo.root")).toAbsolutePath().normalize();
     private static final Path TASK=Path.of(System.getProperty("m3.task.root")).toAbsolutePath().normalize();
     private static M3GpuToolJoinManifest manifest() {
-        return M3GpuToolJoinManifest.load("/com/synexia/rewrite/m3-guava-bimap-20261017/",
+        return M3GpuToolJoinManifest.load("/jdk/internal/m3/rewrite/m3-guava-bimap-20261017/",
                 M3GuavaBiMapRecipeTest.class::getResourceAsStream, () -> {});
     }
     private static SourceFile text(String path,String value) {
@@ -78,7 +78,7 @@ class M3GuavaBiMapRecipeTest {
     }
     @Test void namedRecipeDiscovered() {
         var recipe=Environment.builder().scanClassLoader(getClass().getClassLoader()).build()
-                .activateRecipes("com.synexia.m3.GuavaBiMapSdk20261017");
+                .activateRecipes("jdk.internal.m3.GuavaBiMapSdk20261017");
         assertTrue(recipe.validateAll().stream().allMatch(validation -> validation.isValid()));
     }
     @Test void sdkRefusesDrift() throws Exception {

@@ -16,7 +16,7 @@ static int checked_range(jint start, jint count, jsize length) {
 }
 
 JNIEXPORT jint JNICALL
-Java_com_m3_arrays_M3ArrayNative_nativeCompareUtf16(
+Java_jdk_m3_arrays_M3ArrayNative_nativeCompareUtf16(
     JNIEnv *env,
     jclass type,
     jcharArray left_array,
@@ -56,7 +56,7 @@ Java_com_m3_arrays_M3ArrayNative_nativeCompareUtf16(
 }
 
 JNIEXPORT jcharArray JNICALL
-Java_com_m3_arrays_M3ArrayNative_nativeConcatenateUtf16(
+Java_jdk_m3_arrays_M3ArrayNative_nativeConcatenateUtf16(
     JNIEnv *env,
     jclass type,
     jobjectArray segments) {
@@ -146,7 +146,7 @@ static void m3_backing_failed(JNIEnv *env) {
 }
 
 JNIEXPORT jobjectArray JNICALL
-Java_com_m3_arrays_M3ArrayNative_nativeAllocateObjects(
+Java_jdk_m3_arrays_M3ArrayNative_nativeAllocateObjects(
     JNIEnv *env, jclass owner, jint length) {
   (void)owner;
   if (!m3_backing_length(env, length)) return NULL;
@@ -162,7 +162,7 @@ Java_com_m3_arrays_M3ArrayNative_nativeAllocateObjects(
 }
 
 JNIEXPORT jbyteArray JNICALL
-Java_com_m3_arrays_M3ArrayNative_nativeAllocateBytes(
+Java_jdk_m3_arrays_M3ArrayNative_nativeAllocateBytes(
     JNIEnv *env, jclass owner, jint length) {
   (void)owner;
   if (!m3_backing_length(env, length)) return NULL;
@@ -172,7 +172,7 @@ Java_com_m3_arrays_M3ArrayNative_nativeAllocateBytes(
 }
 
 JNIEXPORT jintArray JNICALL
-Java_com_m3_arrays_M3ArrayNative_nativeAllocateInts(
+Java_jdk_m3_arrays_M3ArrayNative_nativeAllocateInts(
     JNIEnv *env, jclass owner, jint length) {
   (void)owner;
   if (!m3_backing_length(env, length)) return NULL;
@@ -182,7 +182,7 @@ Java_com_m3_arrays_M3ArrayNative_nativeAllocateInts(
 }
 
 JNIEXPORT jlongArray JNICALL
-Java_com_m3_arrays_M3ArrayNative_nativeAllocateLongs(
+Java_jdk_m3_arrays_M3ArrayNative_nativeAllocateLongs(
     JNIEnv *env, jclass owner, jint length) {
   (void)owner;
   if (!m3_backing_length(env, length)) return NULL;

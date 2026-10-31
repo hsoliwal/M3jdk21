@@ -10,11 +10,11 @@ ROOT = HERE.parents[3]
 RECEIPT = HERE / "RECEIPT.tsv"
 RECEIPT_SHA256 = "b87d65b4588f8838b9d359c7e9267920db94b05aab9df878c18db92be4828af6"
 TARGETS = (
-    "m3/collections/src/main/java/com/m3/collections/M3CollectionSdk.java",
-    "m3/collections/src/main/java/com/m3/collections/M3IndexPartitions.java",
-    "m3/collections/src/main/java/com/m3/collections/M3LongBag.java",
-    "m3/collections/src/test/java/com/m3/collections/M3SdkRecoverySelfTest.java",
-    "m3/collections/src/test/java/com/m3/collections/M3SdkRecoveryTest.java",
+    "m3/collections/src/main/java/jdk/m3/collections/M3CollectionSdk.java",
+    "m3/collections/src/main/java/jdk/m3/collections/M3IndexPartitions.java",
+    "m3/collections/src/main/java/jdk/m3/collections/M3LongBag.java",
+    "m3/collections/src/test/java/jdk/m3/collections/M3SdkRecoverySelfTest.java",
+    "m3/collections/src/test/java/jdk/m3/collections/M3SdkRecoveryTest.java",
 )
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()

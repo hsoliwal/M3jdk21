@@ -1,5 +1,5 @@
 /* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
-package com.m3.collections.interop;
+package jdk.m3.collections.interop;
 
 import static org.junit.jupiter.api.Assertions.*;
 

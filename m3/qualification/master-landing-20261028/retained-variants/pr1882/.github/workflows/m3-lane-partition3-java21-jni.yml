@@ -5,10 +5,10 @@ name: M3JDK21 original primitive partition3 Java21 JNI proof
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3LaneAlgorithms.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3LaneAlgorithms.java'
       - 'm3/collections/src/main/native/collections/m3_long_address_kernel.c'
-      - 'm3/collections/src/test/java/com/m3/collections/M3LanePartition3PreparedContract.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3LanePartition3PreparedTest.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3LanePartition3PreparedContract.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3LanePartition3PreparedTest.java'
       - 'm3/collections/qualification/partition3-jni-20261027/**'
       - '.github/workflows/m3-lane-partition3-java21-jni.yml'
 
@@ -35,10 +35,10 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
-          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LaneAlgorithms.java)" = '9f512b267485bc1b68cf97eacadb42beada78372'
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LaneAlgorithms.java)" = '9f512b267485bc1b68cf97eacadb42beada78372'
           test "$(git hash-object m3/collections/src/main/native/collections/m3_long_address_kernel.c)" = '37c75d4f2532003b36381597d38d2a4af4812c0c'
-          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LanePartition3PreparedContract.java)" = '43abd6148088186fbdb901d94232e1b2ecde444e'
-          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LanePartition3PreparedTest.java)" = '6c25241f09af6a91563ba54d8962f3c2c8134795'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LanePartition3PreparedContract.java)" = '43abd6148088186fbdb901d94232e1b2ecde444e'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LanePartition3PreparedTest.java)" = '6c25241f09af6a91563ba54d8962f3c2c8134795'
       - name: Compile original Java21 owner and generate exact JNI header
         shell: bash
         run: |
@@ -47,15 +47,15 @@ jobs:
           javac --release 21 -Xlint:all -Werror \
             -h "$RUNNER_TEMP/m3-partition3/headers" \
             -d "$RUNNER_TEMP/m3-partition3/classes" \
-            m3/collections/src/main/java/com/m3/collections/M3LaneAlgorithms.java \
-            m3/collections/src/test/java/com/m3/collections/M3LanePartition3PreparedContract.java
+            m3/collections/src/main/java/jdk/m3/collections/M3LaneAlgorithms.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3LanePartition3PreparedContract.java
       - name: Compile existing original JNI library including the new partition exports
         shell: bash
         run: |
           set -euo pipefail
           gcc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined \
             -shared -fPIC -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
-            -include "$RUNNER_TEMP/m3-partition3/headers/com_m3_collections_M3LaneAlgorithms.h" \
+            -include "$RUNNER_TEMP/m3-partition3/headers/jdk_m3_collections_M3LaneAlgorithms.h" \
             m3/collections/src/main/native/collections/m3_long_address_kernel.c \
             -o "$RUNNER_TEMP/m3-partition3/native/libm3_collections_address.so"
       - name: Original Java and forced JNI exact mutation differential in normal and -Xint modes
@@ -76,7 +76,7 @@ jobs:
               if [ "$execution" = interpreter ]; then interpreted=(-Xint); fi
               java -Xcheck:jni "${opts[@]}" "${interpreted[@]}" \
                 -Djava.library.path="$native" -cp "$classes" \
-                com.m3.collections.M3LanePartition3PreparedContract \
+                jdk.m3.collections.M3LanePartition3PreparedContract \
                 | tee "$RUNNER_TEMP/m3-partition3-$mode-$execution.txt"
               grep -Eq "^PASS M3_LANE_PARTITION3_PREPARED checks=[0-9]+ native=$expected$" \
                 "$RUNNER_TEMP/m3-partition3-$mode-$execution.txt"
@@ -98,7 +98,7 @@ jobs:
             if [ "$execution" = interpreter ]; then interpreted=(-Xint); fi
             java -Xcheck:jni "${interpreted[@]}" -Dm3.collections.lane.native=true \
               -Djava.library.path="$oldlib" -cp "$RUNNER_TEMP/m3-partition3/classes" \
-              com.m3.collections.M3LanePartition3PreparedContract \
+              jdk.m3.collections.M3LanePartition3PreparedContract \
               | tee "$RUNNER_TEMP/m3-partition3-oldabi-$execution.txt"
             grep -Eq '^PASS M3_LANE_PARTITION3_PREPARED checks=[0-9]+ native=false$' \
               "$RUNNER_TEMP/m3-partition3-oldabi-$execution.txt"

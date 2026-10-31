@@ -4,10 +4,10 @@ on:
   pull_request:
     paths:
       - 'm3/collections/src/main/c/m3maskviewport.c'
-      - 'm3/collections/src/main/java/com/m3/collections/M3MaskViewportNative.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3MaskViewportPageContract.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3ViewportFrameContract.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3ViewportUnionContract.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3MaskViewportNative.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3MaskViewportPageContract.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3ViewportFrameContract.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3ViewportUnionContract.java'
       - 'm3/collections/qualification/viewport-superset-20261021/**'
       - '.github/workflows/m3-viewport-superset-20261021.yml'
   workflow_dispatch:
@@ -30,13 +30,13 @@ jobs:
           mkdir -p "$RUNNER_TEMP/m3-union"
           javac --release 21 -proc:none -Xlint:all -Werror \
             -d "$RUNNER_TEMP/m3-union" \
-            m3/collections/src/main/java/com/m3/collections/M3MaskViewportKernel.java \
-            m3/collections/src/main/java/com/m3/collections/M3MaskViewportNative.java \
-            m3/collections/src/test/java/com/m3/collections/M3MaskViewportPageContract.java \
-            m3/collections/src/test/java/com/m3/collections/M3ViewportFrameContract.java \
-            m3/collections/src/test/java/com/m3/collections/M3ViewportUnionContract.java
-          java -cp "$RUNNER_TEMP/m3-union" com.m3.collections.M3MaskViewportPageContract
-          java -cp "$RUNNER_TEMP/m3-union" com.m3.collections.M3ViewportFrameContract
+            m3/collections/src/main/java/jdk/m3/collections/M3MaskViewportKernel.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3MaskViewportNative.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3MaskViewportPageContract.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3ViewportFrameContract.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3ViewportUnionContract.java
+          java -cp "$RUNNER_TEMP/m3-union" jdk.m3.collections.M3MaskViewportPageContract
+          java -cp "$RUNNER_TEMP/m3-union" jdk.m3.collections.M3ViewportFrameContract
       - name: Compile C17 and verify all original/native exports
         shell: bash
         run: |
@@ -47,7 +47,7 @@ jobs:
             -o "$RUNNER_TEMP/m3-union/libm3viewportunion.so"
           for symbol in project projectPage projectFramePage; do
             nm -D --defined-only "$RUNNER_TEMP/m3-union/libm3viewportunion.so" |
-              grep -F "Java_com_m3_collections_M3MaskViewportNative_${symbol}"
+              grep -F "Java_jdk_m3_collections_M3MaskViewportNative_${symbol}"
           done
       - name: Run both original contracts and cross-export JNI parity
         shell: bash
@@ -55,8 +55,8 @@ jobs:
           set -euo pipefail
           LIB="$RUNNER_TEMP/m3-union/libm3viewportunion.so"
           java -Xcheck:jni -Dm3.native.path="$LIB" \
-            -cp "$RUNNER_TEMP/m3-union" com.m3.collections.M3MaskViewportPageContract --native
+            -cp "$RUNNER_TEMP/m3-union" jdk.m3.collections.M3MaskViewportPageContract --native
           java -Xcheck:jni -Dm3.native.path="$LIB" \
-            -cp "$RUNNER_TEMP/m3-union" com.m3.collections.M3ViewportFrameContract --native
+            -cp "$RUNNER_TEMP/m3-union" jdk.m3.collections.M3ViewportFrameContract --native
           java -Xcheck:jni -Dm3.native.path="$LIB" \
-            -cp "$RUNNER_TEMP/m3-union" com.m3.collections.M3ViewportUnionContract
+            -cp "$RUNNER_TEMP/m3-union" jdk.m3.collections.M3ViewportUnionContract

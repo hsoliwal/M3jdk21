@@ -1,9 +1,9 @@
 {
-  "schema": "SYNEXIA_RX7_CODEC_CAP_BINDING_V1",
+  "schema": "M3_RX7_CODEC_CAP_BINDING_V1",
   "repository": "hsoliwal/com.synexia",
   "sourceCommit": "ea431c714633f93927b9366967e4a132b6a575ab",
   "sourcePullRequest": "https://github.com/hsoliwal/com.synexia/pull/12338",
-  "canonicalPath": "synexia-openrewrite-recipes/tasks/string-concat-typed-compile-20261018/sdk",
+  "canonicalPath": "m3-openrewrite-recipes/tasks/string-concat-typed-compile-20261018/sdk",
   "receiverCorePath": "m3/migration/rx7-codec-cap-20261018/sdk",
   "moduleGitTree": "b0adad8e6699eb14794923681bc14048b32f821b",
   "pinsSha256": "bd8cb3ef5c389ec2a6f02d11f3056ce3ba291c4a7256a4265a19722700a6315f",
@@ -28,7 +28,7 @@
   "originalTestApplication": false,
   "sourcePathTreeExternalReadback": {
     "commit": "ea431c714633f93927b9366967e4a132b6a575ab",
-    "path": "synexia-openrewrite-recipes/tasks/string-concat-typed-compile-20261018/sdk",
+    "path": "m3-openrewrite-recipes/tasks/string-concat-typed-compile-20261018/sdk",
     "tree": "b0adad8e6699eb14794923681bc14048b32f821b"
   },
   "qualifiedHierarchyBranchPreserved": "b83c325c8a395464909bc71156cfb3b563b6623e",

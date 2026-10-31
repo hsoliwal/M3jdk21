@@ -148,7 +148,7 @@
   "receivingStopPreserved": true,
   "rootMustCaptureActualCommandsAndStreams": true,
   "runNextOnlyAfterActualPriorSuccess": true,
-  "schema": "synexia.fc0.terminal-bound-packaging-plan/1",
+  "schema": "m3.fc0.terminal-bound-packaging-plan/1",
   "selectionReadback": {
     "bytes": 3106,
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/terminal-selection-v1/SELECTION-READBACK.json",

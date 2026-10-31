@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Hitesh Soliwal and contributors
-import com.m3.tools.cpu.M3FiniteModelChecker;
-import com.m3.tools.cpu.M3ConstraintCsp;
-import com.m3.tools.cpu.M3StreamJoin;
-import com.m3.tools.cpu.M3BloomIndex;
-import com.m3.tools.cpu.M3QueueSimulation;
-import com.m3.tools.cpu.M3PairwiseCases;
-import com.m3.tools.cpu.M3AclMatrix;
-import com.m3.tools.cpu.M3RateGovernor;
+import jdk.m3.tools.cpu.M3FiniteModelChecker;
+import jdk.m3.tools.cpu.M3ConstraintCsp;
+import jdk.m3.tools.cpu.M3StreamJoin;
+import jdk.m3.tools.cpu.M3BloomIndex;
+import jdk.m3.tools.cpu.M3QueueSimulation;
+import jdk.m3.tools.cpu.M3PairwiseCases;
+import jdk.m3.tools.cpu.M3AclMatrix;
+import jdk.m3.tools.cpu.M3RateGovernor;
 
 
 import java.util.ArrayList;

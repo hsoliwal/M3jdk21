@@ -1212,26 +1212,26 @@
       "payload_bytes_unchanged": true
     },
     {
-      "original_catalogue_path": "runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexMaskCompactor.h",
-      "delivered_catalogue_path": "runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexMaskCompactor.h.txt",
-      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexMaskCompactor.h",
-      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexMaskCompactor.h.txt",
+      "original_catalogue_path": "runtime-proof/received/after-jni-headers/jdk_m3_collections_M3IndexMaskCompactor.h",
+      "delivered_catalogue_path": "runtime-proof/received/after-jni-headers/jdk_m3_collections_M3IndexMaskCompactor.h.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/after-jni-headers/jdk_m3_collections_M3IndexMaskCompactor.h",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/after-jni-headers/jdk_m3_collections_M3IndexMaskCompactor.h.txt",
       "payload_sha256": "1f67a3bca5682e3d4b392bb04d6f27479a16fdaccb935463a9dbf026f13faf8c",
       "payload_bytes_unchanged": true
     },
     {
-      "original_catalogue_path": "runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexMaskWindow.h",
-      "delivered_catalogue_path": "runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexMaskWindow.h.txt",
-      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexMaskWindow.h",
-      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexMaskWindow.h.txt",
+      "original_catalogue_path": "runtime-proof/received/after-jni-headers/jdk_m3_collections_M3IndexMaskWindow.h",
+      "delivered_catalogue_path": "runtime-proof/received/after-jni-headers/jdk_m3_collections_M3IndexMaskWindow.h.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/after-jni-headers/jdk_m3_collections_M3IndexMaskWindow.h",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/after-jni-headers/jdk_m3_collections_M3IndexMaskWindow.h.txt",
       "payload_sha256": "26d6f1302b888bbebde68d4d911f7b74d91c1fe5f90871928af0220829dc9866",
       "payload_bytes_unchanged": true
     },
     {
-      "original_catalogue_path": "runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexPathMasks.h",
-      "delivered_catalogue_path": "runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexPathMasks.h.txt",
-      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexPathMasks.h",
-      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexPathMasks.h.txt",
+      "original_catalogue_path": "runtime-proof/received/after-jni-headers/jdk_m3_collections_M3IndexPathMasks.h",
+      "delivered_catalogue_path": "runtime-proof/received/after-jni-headers/jdk_m3_collections_M3IndexPathMasks.h.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/after-jni-headers/jdk_m3_collections_M3IndexPathMasks.h",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/after-jni-headers/jdk_m3_collections_M3IndexPathMasks.h.txt",
       "payload_sha256": "d73bb0e2e17c41ce6cd653732a8c7bc0dce71f2464c3dd536bbf544655936e95",
       "payload_bytes_unchanged": true
     },
@@ -1244,26 +1244,26 @@
       "payload_bytes_unchanged": true
     },
     {
-      "original_catalogue_path": "runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexMaskCompactor.h",
-      "delivered_catalogue_path": "runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexMaskCompactor.h.txt",
-      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexMaskCompactor.h",
-      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexMaskCompactor.h.txt",
+      "original_catalogue_path": "runtime-proof/received/before-jni-headers/jdk_m3_collections_M3IndexMaskCompactor.h",
+      "delivered_catalogue_path": "runtime-proof/received/before-jni-headers/jdk_m3_collections_M3IndexMaskCompactor.h.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/before-jni-headers/jdk_m3_collections_M3IndexMaskCompactor.h",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/before-jni-headers/jdk_m3_collections_M3IndexMaskCompactor.h.txt",
       "payload_sha256": "1f67a3bca5682e3d4b392bb04d6f27479a16fdaccb935463a9dbf026f13faf8c",
       "payload_bytes_unchanged": true
     },
     {
-      "original_catalogue_path": "runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexMaskWindow.h",
-      "delivered_catalogue_path": "runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexMaskWindow.h.txt",
-      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexMaskWindow.h",
-      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexMaskWindow.h.txt",
+      "original_catalogue_path": "runtime-proof/received/before-jni-headers/jdk_m3_collections_M3IndexMaskWindow.h",
+      "delivered_catalogue_path": "runtime-proof/received/before-jni-headers/jdk_m3_collections_M3IndexMaskWindow.h.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/before-jni-headers/jdk_m3_collections_M3IndexMaskWindow.h",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/before-jni-headers/jdk_m3_collections_M3IndexMaskWindow.h.txt",
       "payload_sha256": "26d6f1302b888bbebde68d4d911f7b74d91c1fe5f90871928af0220829dc9866",
       "payload_bytes_unchanged": true
     },
     {
-      "original_catalogue_path": "runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexPathMasks.h",
-      "delivered_catalogue_path": "runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexPathMasks.h.txt",
-      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexPathMasks.h",
-      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexPathMasks.h.txt",
+      "original_catalogue_path": "runtime-proof/received/before-jni-headers/jdk_m3_collections_M3IndexPathMasks.h",
+      "delivered_catalogue_path": "runtime-proof/received/before-jni-headers/jdk_m3_collections_M3IndexPathMasks.h.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/before-jni-headers/jdk_m3_collections_M3IndexPathMasks.h",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/before-jni-headers/jdk_m3_collections_M3IndexPathMasks.h.txt",
       "payload_sha256": "5781e35d4a9a16a037e1e80a8e45f7ee53283822691ed863a7476e5defa9fe50",
       "payload_bytes_unchanged": true
     },

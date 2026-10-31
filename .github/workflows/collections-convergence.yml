@@ -10,12 +10,12 @@ on:
       - 'src/java.base/share/classes/java/util/CollectionViews.java'
       - 'test/jdk/jdk/internal/m3/M3FusedMaskedFilteredSortedViewTest.java'
       - 'test/jdk/java/util/CollectionViews/**'
-      - 'm3/collections/src/main/java/com/m3/collections/M3FilteredViews.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3FilteredLists.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3FilteredDeques.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3IndexedLiveView.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3NativeFiveLibrarySdk.java'
-      - 'm3/collections/src/test/java/com/m3/collections/**'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3FilteredDeques.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3IndexedLiveView.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3NativeFiveLibrarySdk.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/**'
       - 'm3/collections/qualification/current-wrapper-arraymask-convergence/**'
       - 'm3/collections/qualification/current-wrapper-arraymask-convergence/SOURCE_MANIFEST.tsv'
       - '.github/workflows/collections-convergence.yml'
@@ -48,11 +48,11 @@ jobs:
           git diff --check origin/master...HEAD
           test "$(git hash-object src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java)" = 50cdaedb8a4d5b09191e40ff3c5c05e130a87afc
           test "$(git hash-object src/java.base/share/classes/java/util/CollectionViews.java)" = 8840da98c37e2af8da36c63f2cacd6bdaf1cb0a8
-          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java)" = 45ad6df3a51e83c67dc70de7c7acd82bec2305d3
-          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java)" = 3c0d4b1629545d54c7519216618ce1a32990f327
-          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3FilteredDeques.java)" = 472e02d96401e04fd22637a7e412ccaed2abd0c6
-          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3IndexedLiveView.java)" = 2b010396590ab85a4fa38ea54d9277875371a7f2
-          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3NativeFiveLibrarySdk.java)" = ed42a45f330b9b99272349644c3796174e81404a
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java)" = 45ad6df3a51e83c67dc70de7c7acd82bec2305d3
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java)" = 3c0d4b1629545d54c7519216618ce1a32990f327
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3FilteredDeques.java)" = 472e02d96401e04fd22637a7e412ccaed2abd0c6
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3IndexedLiveView.java)" = 2b010396590ab85a4fa38ea54d9277875371a7f2
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3NativeFiveLibrarySdk.java)" = ed42a45f330b9b99272349644c3796174e81404a
           bash m3/collections/qualification/filtered-cursor-mask-20261021/verify.sh
       - name: Compile actual java.base array/mask and CollectionViews owners
         shell: bash
@@ -107,7 +107,7 @@ jobs:
           set -euo pipefail
           mvn -B -ntp -f m3/pom.xml -Pm3-extended -pl :m3-collections -am             -Dsurefire.failIfNoSpecifiedTests=false             -Dtest=M3FilteredMasterPredicatePlanLifecycleTest,M3FilteredMasterTreePlanTest,M3FilteredSortedIteratorPlanTest,IndexedLiveSortedSpliteratorTest,M3FilteredDequesTest,M3FilteredListsOwnerSetTest             test
           for klass in             M3FilteredMasterPredicatePlanLifecycleTest             M3FilteredMasterTreePlanTest             M3FilteredSortedIteratorPlanTest             IndexedLiveSortedSpliteratorTest             M3FilteredDequesTest             M3FilteredListsOwnerSetTest; do
-            test -s "m3/collections/target/surefire-reports/TEST-com.m3.collections.$klass.xml"
+            test -s "m3/collections/target/surefire-reports/TEST-jdk.m3.collections.$klass.xml"
           done
 
   native-five-family:

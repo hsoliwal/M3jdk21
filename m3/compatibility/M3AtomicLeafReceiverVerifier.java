@@ -18,7 +18,7 @@ public final class M3AtomicLeafReceiverVerifier {
             + "\tcompatibility_gate";
     private static final String WRAPPER_HEADER = "id\tproblem_category"
             + "\tsynexia_source_pr\treceiving_plane\trequired_semantics\tdecision";
-    private static final String SYNEXIA_PR =
+    private static final String M3_PR =
             "https://github.com/hsoliwal/com.synexia/pull/11925";
     // SHA-1 Git blobs and SHA-256 exact file bytes on the committed Synexia candidate.
     private static final Map<String, List<String>> PINS = Map.of(
@@ -75,7 +75,7 @@ public final class M3AtomicLeafReceiverVerifier {
     }
 
     private static void path(String value, String ownerName) {
-        require(value.startsWith("synexia-mindex/") && value.endsWith(".java")
+        require(value.startsWith("m3-mindex/") && value.endsWith(".java")
                 && !value.contains("\\") && !value.contains("//")
                 && !value.contains("/../") && !value.contains("/./")
                 && !Path.of(value).isAbsolute(), "unapproved source path");
@@ -106,7 +106,7 @@ public final class M3AtomicLeafReceiverVerifier {
                 require(row[6 + slot].equals(pins.get(slot)),
                         "content-addressed pin mismatch: " + id + " slot " + slot);
             }
-            require(row[11].equals(SYNEXIA_PR), "unapproved source PR");
+            require(row[11].equals(M3_PR), "unapproved source PR");
             require(row[12].equals("EVIDENCE_ONLY")
                     && row[13].equals("false"), "unproved JDK runtime admission");
             require(row[10].startsWith("M3_") && !row[10].contains("java.base")

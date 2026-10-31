@@ -43,7 +43,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
+          bash m3/m3-import/pure-int-recipe-custody/install.sh "$PWD"
 
       - name: Verify recipe substrate and DAG semantic kernel
         run: |
@@ -51,7 +51,7 @@ jobs:
 
       - name: Execute canonical DAG parser
         run: |
-          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=com.m3.tooling.dag.M3BackportDagMain             exec:java
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=jdk.m3.tooling.dag.M3BackportDagMain             exec:java
 
       - name: Project sample packet to Camel Airflow and Drools
         shell: bash
@@ -60,12 +60,12 @@ jobs:
           mkdir -p target/m3-projection-smoke
           cat > target/m3-projection-smoke/packet.tsv <<'EOF'
           packet_id	atom_id	scope	scope_promotion_approved	work_ref	depends_on
-          ci-projection	java	FILE	false	com.m3.rewrite.SampleJava	
-          ci-projection	text	FILE	false	com.m3.rewrite.SampleText	
-          ci-projection	join	PACKAGE	true	com.m3.rewrite.SampleJoin	java,text
+          ci-projection	java	FILE	false	jdk.m3.rewrite.SampleJava	
+          ci-projection	text	FILE	false	jdk.m3.rewrite.SampleText	
+          ci-projection	join	PACKAGE	true	jdk.m3.rewrite.SampleJoin	java,text
           EOF
           mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
-            -Dexec.mainClass=com.m3.tooling.dag.M3OrchestrationProjectionMain \
+            -Dexec.mainClass=jdk.m3.tooling.dag.M3OrchestrationProjectionMain \
             -Dexec.args="$PWD/target/m3-projection-smoke/packet.tsv $PWD/target/m3-projection-smoke/out" \
             exec:java
           test -s target/m3-projection-smoke/out/M3BackportRoutes.java
@@ -91,7 +91,7 @@ jobs:
           test -s m3/backports/target/backport-packets.tsv
           test -d m3/backports/target/backport-packets
           mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
-            -Dexec.mainClass=com.m3.tooling.dag.M3BackportPacketBatchMain \
+            -Dexec.mainClass=jdk.m3.tooling.dag.M3BackportPacketBatchMain \
             -Dexec.args="$PWD/m3/backports/target/backport-packets" \
             exec:java
 

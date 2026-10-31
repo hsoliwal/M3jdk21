@@ -13,8 +13,8 @@ import tempfile
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parent
-RESOURCE = "src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020"
-SUITE = "com.synexia.rewrite.M3BackportAppliedOwnerCustodyRecipeTest"
+RESOURCE = "src/main/resources/jdk/internal/m3/rewrite/backport-applied-owner-custody-20261020"
+SUITE = "jdk.internal.m3.rewrite.M3BackportAppliedOwnerCustodyRecipeTest"
 METHODS = ["allSixtyFourPartialStatesBothOrdersReachExactFixedPoint","allSixtyFourInverseStatesBothOrdersRecoverExactBefore","eachOwnedInputRefusesDriftMissingAndDuplicateOwnership"]
 SUITES = {SUITE: METHODS}
 CHANGE_PATHS = ["m3/tooling/backport-contract-current-owner/qualify.py","m3/tooling/backport-contract-current-owner/README.md","m3/tooling/backport-contract-current-owner/runtime/INPUTS.json","m3/tooling/backport-contract-current-owner/runtime/qualify.py","m3/tooling/backport-contract-current-owner/runtime/README.md",".github/workflows/m3-backport-contract-current-owner.yml"]
@@ -44,12 +44,12 @@ DIRECTIONS = ("forward", "inverse")
 RECEIVER_OUTPUTS: dict[str, str] = {}
 RECEIVER_CUSTODY: dict[str, str] = {}
 DESCRIPTOR = "src/main/resources/META-INF/rewrite/backport-applied-owner-custody-20261020.yml"
-TEST = "src/test/java/com/synexia/rewrite/M3BackportAppliedOwnerCustodyRecipeTest.java"
+TEST = "src/test/java/jdk/internal/m3/rewrite/M3BackportAppliedOwnerCustodyRecipeTest.java"
 REQUIRED_PATHS = sorted([
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
-    "pinned-engine/com/synexia/rewrite/M3BackportAppliedOwnerCustodyRecipe.java",
-    "pinned-engine/com/synexia/rewrite/M3BackportAppliedOwnerCustodyInverseRecipe.java",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
+    "pinned-engine/jdk/internal/m3/rewrite/M3BackportAppliedOwnerCustodyRecipe.java",
+    "pinned-engine/jdk/internal/m3/rewrite/M3BackportAppliedOwnerCustodyInverseRecipe.java",
     "pom.xml", DESCRIPTOR, TEST, "verify.py",
     "FOSS_REUSE_DECISION.tsv", "THIRD_PARTY_NOTICES.md", "README.md",
     *[RESOURCE + "/" + direction + "/manifest.tsv" for direction in DIRECTIONS],
@@ -57,12 +57,12 @@ REQUIRED_PATHS = sorted([
       for direction in DIRECTIONS for stage in ("before", "out") for name in TARGET_PATHS],
 ])
 ORIGINAL_GIT = {
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java": "1c1b1b568d369f688f6953161636bf36b484bf5a",
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
     "pom.xml": "d79867bcc09ad6329e12418e15907e54b8ab025f",
 }
-PROVIDERS = {"openrewriteAdapter": ORIGINAL_GIT["pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java"],
-             "manifestKernel": ORIGINAL_GIT["pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java"]}
+PROVIDERS = {"openrewriteAdapter": ORIGINAL_GIT["pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java"],
+             "manifestKernel": ORIGINAL_GIT["pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java"]}
 COMPILED_PROVIDERS = ("M3GpuToolJoinRecipe", "M3GpuToolJoinManifest",
                       "M3BackportAppliedOwnerCustodyRecipe", "M3BackportAppliedOwnerCustodyInverseRecipe")
 FALSE_GATES = ("targetJavaCompiled", "originalPrivateOwnerModuleQualified", "receiverRuntimeQualified",
@@ -226,7 +226,7 @@ def validate_marker(xml: bytes, ident: str) -> None:
 def self_test_reports() -> None:
     """Prove exact provider-derived names without stripping parameter signatures."""
     # Independent literal oracle matches the sealed Java methods and pinned provider.
-    expected_suites = {"com.synexia.rewrite.M3BackportAppliedOwnerCustodyRecipeTest":["allSixtyFourPartialStatesBothOrdersReachExactFixedPoint","allSixtyFourInverseStatesBothOrdersRecoverExactBefore","eachOwnedInputRefusesDriftMissingAndDuplicateOwnership"]}
+    expected_suites = {"jdk.internal.m3.rewrite.M3BackportAppliedOwnerCustodyRecipeTest":["allSixtyFourPartialStatesBothOrdersReachExactFixedPoint","allSixtyFourInverseStatesBothOrdersRecoverExactBefore","eachOwnedInputRefusesDriftMissingAndDuplicateOwnership"]}
     if SUITES != expected_suites:
         raise AssertionError("sealed SDK report inventory drift")
     refused = 0
@@ -358,7 +358,7 @@ def constructor_self_test() -> dict:
         require(git_blob(actual) == OWNER_BEFORE_GIT[name]
                 and actual == regular(resource / safe(name)).read_bytes(),
                 "ORIGINAL_SDK_KEEP_OWNER_CHANGED:" + name)
-    original_resource = original_sdk / "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019"
+    original_resource = original_sdk / "src/main/resources/jdk/internal/m3/rewrite/backport-contract-current-owner-20261019"
     current, frozen = {}, {}
     for name in driver["PINNED"]:
         location = original_sdk / "target/emitted" if name in driver["AFTER"] else source
@@ -540,7 +540,7 @@ def reports(pins: dict, pins_data: bytes) -> None:
         require(digest(raw) == expected_sha and raw == counterpart, "actual recipe output drift: " + name)
     compiled = {}
     for name in COMPILED_PROVIDERS:
-        relative = "target/classes/com/synexia/rewrite/" + name + ".class"
+        relative = "target/classes/jdk/internal/m3/rewrite/" + name + ".class"
         raw = regular(ROOT / relative).read_bytes()
         require(len(raw) > 8 and raw[:4] == bytes.fromhex("cafebabe")
                 and int.from_bytes(raw[6:8], "big") == 65, "actual Java21 SDK provider class required")

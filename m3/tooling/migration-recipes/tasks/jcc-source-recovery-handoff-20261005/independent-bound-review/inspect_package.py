@@ -4,7 +4,7 @@ import base64, collections, hashlib, json, posixpath, re
 B=Path('/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04')
 O=B/'derivation-static-review/bound-v3'; S=O/'inputs'; SOURCE='0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8';ROOT='0361e4a07b77a01df170523033fef01c4052ddc5'
 TASK='m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/'
-PREFIX='m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005'
+PREFIX='m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005'
 def load(p):return json.loads(Path(p).read_text())
 def identity(p):
  p=Path(p);assert p.is_file() and not p.is_symlink(),p;d=p.read_bytes();return {'bytes':len(d),'sha256':hashlib.sha256(d).hexdigest(),'git_blob_sha1':hashlib.sha1(f'blob {len(d)}\0'.encode()+d).hexdigest(),'mode':'100755' if p.stat().st_mode&0o111 else '100644'}

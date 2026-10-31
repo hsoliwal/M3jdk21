@@ -4,8 +4,8 @@ on:
     branches: [m3/five-provider-projection-closure-receiver-20261018]
   pull_request:
     paths:
-      - 'm3/collections/interop/src/main/java/com/m3/collections/interop/M3FiveLibraryIndexViews.java'
-      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryExpandedContractsTest.java'
+      - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3FiveLibraryIndexViews.java'
+      - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryExpandedContractsTest.java'
       - 'm3/collections/interop/qualification/five-provider-projection-closure-20261018/**'
       - '.github/workflows/m3-five-provider-projection-closure-20261018.yml'
 permissions:
@@ -30,8 +30,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          echo '33fe97faa1c93fb963be080529fb08112d852033fd82efa37b5eb5f5b0b44d2a  m3/collections/interop/src/main/java/com/m3/collections/interop/M3FiveLibraryIndexViews.java' | sha256sum -c -
-          echo 'a4006d9c2d9995ba22687ef40db45ddd62993f11804c65c55bbff7d9c95f7de4  m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryExpandedContractsTest.java' | sha256sum -c -
+          echo '33fe97faa1c93fb963be080529fb08112d852033fd82efa37b5eb5f5b0b44d2a  m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3FiveLibraryIndexViews.java' | sha256sum -c -
+          echo 'a4006d9c2d9995ba22687ef40db45ddd62993f11804c65c55bbff7d9c95f7de4  m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryExpandedContractsTest.java' | sha256sum -c -
       - name: Compile all ACTUAL M3 Java21 core owners with no fake classes
         shell: bash
         run: |
@@ -51,15 +51,15 @@ jobs:
           mkdir -p "$RUNNER_TEMP/m3-core-tests"
           javac --release 21 -proc:none -Xlint:all,-module -Werror \
             -cp "$RUNNER_TEMP/m3-core" -d "$RUNNER_TEMP/m3-core-tests" \
-            m3/collections/src/test/java/com/m3/collections/M3CollectionSdkSortedFactorySelfTest.java \
-            m3/collections/src/test/java/com/m3/collections/M3FilteredViewsContract.java \
-            m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksSelfTest.java
+            m3/collections/src/test/java/jdk/m3/collections/M3CollectionSdkSortedFactorySelfTest.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3FilteredViewsContract.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3IndexPathMasksSelfTest.java
           java -ea -cp "$RUNNER_TEMP/m3-core:$RUNNER_TEMP/m3-core-tests" \
-            com.m3.collections.M3CollectionSdkSortedFactorySelfTest
+            jdk.m3.collections.M3CollectionSdkSortedFactorySelfTest
           java -ea -cp "$RUNNER_TEMP/m3-core:$RUNNER_TEMP/m3-core-tests" \
-            com.m3.collections.M3FilteredViewsContract
+            jdk.m3.collections.M3FilteredViewsContract
           java -ea -cp "$RUNNER_TEMP/m3-core:$RUNNER_TEMP/m3-core-tests" \
-            com.m3.collections.M3IndexPathMasksSelfTest
+            jdk.m3.collections.M3IndexPathMasksSelfTest
       - name: Install only the actually compiled M3 core JAR for optional provider tests
         shell: bash
         run: |

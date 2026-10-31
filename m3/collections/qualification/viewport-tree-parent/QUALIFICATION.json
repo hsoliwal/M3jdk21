@@ -1,11 +1,11 @@
 {
   "schema": "M3_VIEWPORT_TREE_PARENT_REVIEW_V1",
   "status": "DRAFT_PROPOSED_NOT_MERGED",
-  "source_owner": "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java",
+  "source_owner": "m3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java",
   "target_branch_base": "9dd1df62f3d5406760427cb5e840a36c9e7a59ea",
   "canonical_repository": "hsoliwal/com.synexia",
-  "canonical_recipe_dataset": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/vpt-tree-parent-20261026",
-  "canonical_recipe": "com.synexia.m3.ViewportTreeParentClosure20261026",
+  "canonical_recipe_dataset": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/vpt-tree-parent-20261026",
+  "canonical_recipe": "jdk.internal.m3.ViewportTreeParentClosure20261026",
   "source_pre": {
     "git_blob": "9725e48f7850b107b8b968527827eb5fde5b1fe6",
     "sha256": "be77b8dd08c7a498355bc8793932039a00a0f523e206e47f116b7a6b10635082"

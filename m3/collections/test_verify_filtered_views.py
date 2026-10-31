@@ -19,12 +19,12 @@ spec.loader.exec_module(verifier)
 # Frozen 20261017 receipt postimages. Current owners may have qualified successors;
 # verify_donation.main separately requires its admitted hashes and exact source set.
 HISTORICAL_POSTIMAGES = [
-    ('m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java', '0b7f2175dbb34ed087b76a07e93335ee488338d544fd49c332f503acfdd51ca8'),
-    ('m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java', '2b3bb42e411202ecb5998f99c7ca34bf5026842ecab2e4c8b64711400c1f4681'),
-    ('m3/collections/src/test/java/com/m3/collections/M3FilteredViewsContract.java', 'fe7960369b1e3fab45dec3eadfadaa13f088e46e9c139de671faccac9fda4575'),
-    ('m3/collections/src/test/java/com/m3/collections/M3FilteredViewsTest.java', '5f17bb2a2f2abfd4584b144ff398f6b2359b97cb605fa06e0bbaa8001b81131e'),
-    ('m3/collections/src/test/java/com/m3/collections/M3MutableFilteredViewsContract.java', '042f476e027b877b717c9cb6a0877049a1c70ef8425a7fc65f61176f9c372781'),
-    ('m3/collections/src/test/java/com/m3/collections/M3MutableFilteredViewsTest.java', '5c9eed13cdf8afc36d74fcf738ffe8cc1fc4724d3f273880df79cf6ac84d0e28'),
+    ('m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java', '0b7f2175dbb34ed087b76a07e93335ee488338d544fd49c332f503acfdd51ca8'),
+    ('m3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java', '2b3bb42e411202ecb5998f99c7ca34bf5026842ecab2e4c8b64711400c1f4681'),
+    ('m3/collections/src/test/java/jdk/m3/collections/M3FilteredViewsContract.java', 'fe7960369b1e3fab45dec3eadfadaa13f088e46e9c139de671faccac9fda4575'),
+    ('m3/collections/src/test/java/jdk/m3/collections/M3FilteredViewsTest.java', '5f17bb2a2f2abfd4584b144ff398f6b2359b97cb605fa06e0bbaa8001b81131e'),
+    ('m3/collections/src/test/java/jdk/m3/collections/M3MutableFilteredViewsContract.java', '042f476e027b877b717c9cb6a0877049a1c70ef8425a7fc65f61176f9c372781'),
+    ('m3/collections/src/test/java/jdk/m3/collections/M3MutableFilteredViewsTest.java', '5c9eed13cdf8afc36d74fcf738ffe8cc1fc4724d3f273880df79cf6ac84d0e28'),
 ]
 
 

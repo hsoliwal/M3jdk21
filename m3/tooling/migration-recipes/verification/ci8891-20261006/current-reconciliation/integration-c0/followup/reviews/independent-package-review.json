@@ -215,7 +215,7 @@
       "sha256": "54529032a8fa35857b3ea21210f988228a97a2f53f28cea89f5bc9cd1fd092b2"
     }
   },
-  "schema": "synexia.fc0.independent-package-metadata-review/1",
+  "schema": "m3.fc0.independent-package-metadata-review/1",
   "scope": "Independent reads/hashes of existing metadata and mapped/extracted/source/raw-archive bytes only. No archive/proof/helper execution, imports, compilation or test gates.",
   "selectionHelper": {
     "bytes": 13165,

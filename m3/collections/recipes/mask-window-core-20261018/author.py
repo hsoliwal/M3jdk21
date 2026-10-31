@@ -6,7 +6,7 @@
 from pathlib import Path
 import argparse, hashlib, json
 T=Path(__file__).resolve().parent
-JAVA='m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java'
+JAVA='m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java'
 NATIVE='m3/collections/src/main/native/collections/m3_index_mask_compactor.c'
 EXPECTED={'M3IndexMaskCompactor.java': 'ec8b9d2683f5fdb99f6c3e9ad4c79dc60e8ad19cbc3fde2b09e9da2fe3a83f2b', 'm3_index_mask_compactor.c': 'd1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef'}
 def sha(b):return hashlib.sha256(b).hexdigest()
@@ -107,7 +107,7 @@ static jsize m3_first_selected(const jbyte *marks, jsize size, jint mask) {
         }''')
     s=replace_once(s,'m3_select_range(env, rows, states, 0, n, required_mask);','m3_select_range(env, rows, states, 0, 0, n, required_mask);')
     s=replace_once(s,'m3_select_range(env, rows, states, first, length, required_mask);','m3_select_range(env, rows, states, first, 0, length, required_mask);')
-    a,b=body_span(s,'Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(')
+    a,b=body_span(s,'Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowNative(')
     s=s[:a]+'''
     (void)owner;
     if (!m3_window_valid(env, rows, states, row_offset, state_offset, length, mask)) {
@@ -139,7 +139,7 @@ def main():
         if sha(raw)!=expected:raise ValueError('original source drift: '+name)
         data[name]=raw.decode('utf-8')
     outputs={JAVA:derive_java(data['M3IndexMaskCompactor.java']).encode(),NATIVE:derive_c(data['m3_index_mask_compactor.c']).encode()}
-    test='m3/collections/src/test/java/com/m3/collections/M3MaskWindowKernelSelfTest.java'
+    test='m3/collections/src/test/java/jdk/m3/collections/M3MaskWindowKernelSelfTest.java'
     outputs[test]=(T/'probes/M3MaskWindowKernelSelfTest.java').read_bytes()
     res=T/'src/main/resources/m3-mask-window';files={};lines=[]
     for path,raw in sorted(outputs.items()):

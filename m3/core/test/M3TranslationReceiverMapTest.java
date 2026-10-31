@@ -19,14 +19,14 @@ public final class M3TranslationReceiverMapTest {
 
     public static void main(String[] args) throws Exception {
         String manifestRow = Files.readAllLines(
-                Path.of("lexicon/synexia-source-manifest.tsv"), StandardCharsets.UTF_8)
+                Path.of("lexicon/m3-source-manifest.tsv"), StandardCharsets.UTF_8)
                 .stream()
                 .filter(line -> line.startsWith("translate.rows\t"))
                 .findFirst()
                 .orElseThrow();
         String[] columns = manifestRow.split("\\t", -1);
         check(columns.length >= 9);
-        check(columns[2].equals("synexia-interned-language/src/main/java/com/synexia/language/TranslationTsvImporter.java"));
+        check(columns[2].equals("m3-interned-language/src/main/java/jdk/internal/m3/language/TranslationTsvImporter.java"));
         check(columns[3].equals("source_language,target_language,source_token"));
         check(columns[7].contains("compact ASCII JSON"));
         check(columns[4].equals("source_language,target_language,source_token,target_token"));
@@ -41,23 +41,23 @@ public final class M3TranslationReceiverMapTest {
                 "translated_token_ids", "mapped_token_count",
                 "translation_grammar_supported")));
 
-        check(Class.forName("com.m3.text.M3LexiconPrecompute$TranslationProjection") != null);
+        check(Class.forName("jdk.m3.text.M3LexiconPrecompute$TranslationProjection") != null);
         check(Class.forName(
-                "com.m3.text.SharedLexiconPrecomputeCatalog$TranslationIdentity") != null);
-        check(Class.forName("com.m3.text.M3LanguageGrammarSupport") != null);
+                "jdk.m3.text.SharedLexiconPrecomputeCatalog$TranslationIdentity") != null);
+        check(Class.forName("jdk.m3.text.M3LanguageGrammarSupport") != null);
 
         int[] mixedProjectionIds = {0, 17, 2, 31};
-        com.m3.text.M3LexiconPrecompute.TranslationProjection derivedCount =
-                new com.m3.text.M3LexiconPrecompute.TranslationProjection(
+        jdk.m3.text.M3LexiconPrecompute.TranslationProjection derivedCount =
+                new jdk.m3.text.M3LexiconPrecompute.TranslationProjection(
                         "lex-3", "en", "fr", "source-3", mixedProjectionIds);
         check(derivedCount.mappedTokenCount() == 2);
-        com.m3.text.M3LexiconPrecompute.TranslationProjection explicitCount =
-                new com.m3.text.M3LexiconPrecompute.TranslationProjection(
+        jdk.m3.text.M3LexiconPrecompute.TranslationProjection explicitCount =
+                new jdk.m3.text.M3LexiconPrecompute.TranslationProjection(
                         "lex-3", "en", "fr", "source-3", mixedProjectionIds, 2);
         check(explicitCount.mappedTokenCount() == 2);
         boolean rejectedInconsistentMappedCount = false;
         try {
-            new com.m3.text.M3LexiconPrecompute.TranslationProjection(
+            new jdk.m3.text.M3LexiconPrecompute.TranslationProjection(
                     "lex-3", "en", "fr", "source-3", mixedProjectionIds, 4);
         } catch (IllegalArgumentException expected) {
             rejectedInconsistentMappedCount = true;
@@ -65,7 +65,7 @@ public final class M3TranslationReceiverMapTest {
         check(rejectedInconsistentMappedCount);
 
         List<String> fieldMap = Files.readAllLines(
-                Path.of("lexicon/synexia-precompute-field-map.tsv"),
+                Path.of("lexicon/m3-precompute-field-map.tsv"),
                 StandardCharsets.UTF_8);
         for (String field : List.of("sourceId", "recordId", "sourceLanguage",
                 "targetLanguage", "lexiconFingerprint", "sourceFingerprint")) {
@@ -78,22 +78,22 @@ public final class M3TranslationReceiverMapTest {
                 "M3LexiconPrecompute.TranslationProjection\tsourceFingerprint\tString\tsource_fingerprint\t")) {
             check(fieldMap.stream().anyMatch(line -> line.startsWith(row)));
         }
-        com.m3.text.SynexiaPrecomputePayload translationPayload =
-                com.m3.text.SynexiaPrecomputePayload.parse(
+        jdk.m3.text.M3PrecomputePayload translationPayload =
+                jdk.m3.text.M3PrecomputePayload.parse(
                         "{\"lexicon_fingerprint\":\"fp-é\","
                                 + "\"source_id\":\"translate.rows\","
                                 + "\"source_revision\":\"rev-7\"}");
         check(translationPayload.requireString("lexicon_fingerprint").equals("fp-é"));
         check(translationPayload.requireString("source_id").equals("translate.rows"));
         check(translationPayload.canonicalJson().contains("\\u00e9"));
-        check(com.m3.text.SynexiaPrecomputePayload.parse(translationPayload.canonicalJson())
+        check(jdk.m3.text.M3PrecomputePayload.parse(translationPayload.canonicalJson())
                 .requireString("lexicon_fingerprint").equals("fp-é"));
-        check(com.m3.text.SynexiaPrecomputePayload.parse(
+        check(jdk.m3.text.M3PrecomputePayload.parse(
                 "{\"lexicon_fingerprint\":7}").requireLong("lexicon_fingerprint") == 7L);
 
         boolean rejectedControlCharacter = false;
         try {
-            com.m3.text.SynexiaPrecomputePayload.parse(
+            jdk.m3.text.M3PrecomputePayload.parse(
                     "{\"source_id\":\"bad" + (char) 1 + "\"}");
         } catch (IllegalArgumentException expected) {
             rejectedControlCharacter = true;
@@ -101,7 +101,7 @@ public final class M3TranslationReceiverMapTest {
         check(rejectedControlCharacter);
         boolean rejectedNonAsciiDigit = false;
         try {
-            com.m3.text.SynexiaPrecomputePayload.parse(
+            jdk.m3.text.M3PrecomputePayload.parse(
                     "{\"lexicon_fingerprint\":" + (char) 0x0661 + "}");
         } catch (IllegalArgumentException expected) {
             rejectedNonAsciiDigit = true;

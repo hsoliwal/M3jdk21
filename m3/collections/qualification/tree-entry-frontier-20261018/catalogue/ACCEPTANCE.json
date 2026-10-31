@@ -5,7 +5,7 @@
     {
       "name": "M3SlotMap",
       "before_path": "m3-tree-map-entry-protocol-20261018/M3SlotMap.before.java.txt",
-      "after_path": "m3-tree-map-entry-protocol-20261018/src/main/java/com/m3/collections/M3SlotMap.java",
+      "after_path": "m3-tree-map-entry-protocol-20261018/src/main/java/jdk/m3/collections/M3SlotMap.java",
       "before_git_blob": "9e4d7588d5bd527f3988ca4d46d79f31132630c7",
       "after_git_blob": "93e7f6bf7271e3b6feafd85609c338a45a82b977",
       "after_sha256": "d6b16b35119584cba0f9d782862568393100851af68dc6dba113adc69b41799f"
@@ -13,7 +13,7 @@
     {
       "name": "M3TreeMap",
       "before_path": "m3-tree-map-entry-protocol-20261018/M3TreeMap.before.java.txt",
-      "after_path": "m3-avl-insertion-frontier-20261018/src/main/java/com/m3/collections/M3TreeMap.java",
+      "after_path": "m3-avl-insertion-frontier-20261018/src/main/java/jdk/m3/collections/M3TreeMap.java",
       "before_git_blob": "8d0690dd904df04cf087de7a7dc64107cf475210",
       "after_git_blob": "fc8a9e75011f5dc8b86f1ee553caba979cb2e30b",
       "after_sha256": "e8dcb2c6a1101195dbbecbb55018bb68f182f088309cdfd83f189231d69ca08e"
@@ -21,7 +21,7 @@
     {
       "name": "M3OrderedSlotMap",
       "before_path": "m3-tree-map-entry-protocol-20261018/M3OrderedSlotMap.before.java.txt",
-      "after_path": "m3-tree-map-entry-protocol-20261018/src/main/java/com/m3/collections/M3OrderedSlotMap.java",
+      "after_path": "m3-tree-map-entry-protocol-20261018/src/main/java/jdk/m3/collections/M3OrderedSlotMap.java",
       "before_git_blob": "e7be2297d19f22cf4dd4ef8b7d1424fe963063d9",
       "after_git_blob": "064fd943a59958778408b9f089a1c58a0b06ae18",
       "after_sha256": "982bf329055082c39650c1f976d7bff8bcef4a13ae028220607cdb3e093bf0c2"

@@ -22,7 +22,7 @@ static void m3_rank_acquisition_failed(JNIEnv *env) {
  * Input arrays are released JNI_ABORT; only the preallocated output array is written.
  */
 JNIEXPORT void JNICALL
-Java_com_m3_collections_M3LongRankBatchNative_lowerBounds0(
+Java_jdk_m3_collections_M3LongRankBatchNative_lowerBounds0(
         JNIEnv *env, jclass ignored, jlongArray sorted, jlongArray queries,
         jintArray results) {
     (void) ignored;
@@ -88,7 +88,7 @@ Java_com_m3_collections_M3LongRankBatchNative_lowerBounds0(
  */
 #if !defined(M3_RANK_LEGACY_ABI_TEST)
 JNIEXPORT jint JNICALL
-Java_com_m3_collections_M3LongRankBatchNative_capabilities0(
+Java_jdk_m3_collections_M3LongRankBatchNative_capabilities0(
         JNIEnv *env, jclass ignored) {
     (void) env;
     (void) ignored;
@@ -96,7 +96,7 @@ Java_com_m3_collections_M3LongRankBatchNative_capabilities0(
 }
 
 JNIEXPORT void JNICALL
-Java_com_m3_collections_M3LongRankBatchNative_lowerUpperBounds0(
+Java_jdk_m3_collections_M3LongRankBatchNative_lowerUpperBounds0(
         JNIEnv *env, jclass ignored, jlongArray sorted, jlongArray queries,
         jintArray pairs) {
     (void) ignored;

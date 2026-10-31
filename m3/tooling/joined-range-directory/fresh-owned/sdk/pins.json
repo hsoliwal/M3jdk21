@@ -26,25 +26,25 @@
       "sha256": "8471c914183472440b5e91f887efd2b061a512e2516442e007bf2513efdc5b03"
     },
     {
-      "path": "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
+      "path": "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
       "gitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
       "bytes": 10964,
       "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
     },
     {
-      "path": "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
+      "path": "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
       "gitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
       "bytes": 5187,
       "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec"
     },
     {
-      "path": "pinned-engine/com/synexia/rewrite/M3JoinedRangeDirectoryInverseRecipe.java",
+      "path": "pinned-engine/jdk/internal/m3/rewrite/M3JoinedRangeDirectoryInverseRecipe.java",
       "gitBlob": "0fbb61ead7047e0b2ab0627bd381967113d99db1",
       "bytes": 766,
       "sha256": "3a621135ee30d294cb86539604e245684084dc11f4fb44be0129c3f3214120f7"
     },
     {
-      "path": "pinned-engine/com/synexia/rewrite/M3JoinedRangeDirectoryRecipe.java",
+      "path": "pinned-engine/jdk/internal/m3/rewrite/M3JoinedRangeDirectoryRecipe.java",
       "gitBlob": "f1bafb2c8e156e2a0ad8479d3996bf139a6977df",
       "bytes": 755,
       "sha256": "75ea82b2c12b7680c7dbd61f6334b053522f918a72045b61e03be408409f2600"
@@ -62,145 +62,145 @@
       "sha256": "632f935ee7bc550dd3814ea3d0cb3d18cb0b74216fd65bfe274313e5f22a3f72"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/com/m3/text/JoinedM3StringPiece.java",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
       "gitBlob": "3edc23c22362b08af00f7332ddc445a0274a6dd4",
       "bytes": 2919,
       "sha256": "10ddd082c142420c29985a85d8b2f77507fdbcde2552b8bfc154e658f3b2a9e3"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/com/m3/text/LocalM3Arena.java",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/jdk/m3/text/LocalM3Arena.java",
       "gitBlob": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
       "bytes": 1975,
       "sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/com/m3/text/LocalM3StringPiece.java",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
       "gitBlob": "6b745c9472144ad6de01de4d06a533974e558fb1",
       "bytes": 2115,
       "sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/com/m3/text/M3StringPiece.java",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/jdk/m3/text/M3StringPiece.java",
       "gitBlob": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
       "bytes": 767,
       "sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/com/m3/text/StorageIdentity.java",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/jdk/m3/text/StorageIdentity.java",
       "gitBlob": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a",
       "bytes": 494,
       "sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/manifest.tsv",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/manifest.tsv",
       "gitBlob": "87a12624563e4c8af45ac7ea4a82efd90f9d59a4",
       "bytes": 950,
       "sha256": "13541b4fc43566e2c84ed77e6e38a114fa0a7cb5a26ffaffd7256cdd12fe2ca4"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/com/m3/text/JoinedM3StringPiece.java",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
       "gitBlob": "4f88f794266375ad8174fa56e952c30d32689877",
       "bytes": 3377,
       "sha256": "d69ef5cc0e4bd5d95808978b4a0d73982322230a623d897074840b58fab1993e"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/com/m3/text/LocalM3Arena.java",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/jdk/m3/text/LocalM3Arena.java",
       "gitBlob": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
       "bytes": 1975,
       "sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/com/m3/text/LocalM3StringPiece.java",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
       "gitBlob": "6b745c9472144ad6de01de4d06a533974e558fb1",
       "bytes": 2115,
       "sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/com/m3/text/M3StringPiece.java",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/jdk/m3/text/M3StringPiece.java",
       "gitBlob": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
       "bytes": 767,
       "sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/com/m3/text/StorageIdentity.java",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/jdk/m3/text/StorageIdentity.java",
       "gitBlob": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a",
       "bytes": 494,
       "sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/com/m3/text/JoinedM3StringPiece.java",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
       "gitBlob": "4f88f794266375ad8174fa56e952c30d32689877",
       "bytes": 3377,
       "sha256": "d69ef5cc0e4bd5d95808978b4a0d73982322230a623d897074840b58fab1993e"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/com/m3/text/LocalM3Arena.java",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/jdk/m3/text/LocalM3Arena.java",
       "gitBlob": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
       "bytes": 1975,
       "sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/com/m3/text/LocalM3StringPiece.java",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
       "gitBlob": "6b745c9472144ad6de01de4d06a533974e558fb1",
       "bytes": 2115,
       "sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/com/m3/text/M3StringPiece.java",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/jdk/m3/text/M3StringPiece.java",
       "gitBlob": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
       "bytes": 767,
       "sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/com/m3/text/StorageIdentity.java",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/jdk/m3/text/StorageIdentity.java",
       "gitBlob": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a",
       "bytes": 494,
       "sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/manifest.tsv",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/manifest.tsv",
       "gitBlob": "3f1f1fc694c4dd28cdbac948b7f639d87a8cf708",
       "bytes": 950,
       "sha256": "90c2fdfebb9c2d3997515bb0d5f75ad2f3c7a25202e14b5f372501068491bf74"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/com/m3/text/JoinedM3StringPiece.java",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
       "gitBlob": "3edc23c22362b08af00f7332ddc445a0274a6dd4",
       "bytes": 2919,
       "sha256": "10ddd082c142420c29985a85d8b2f77507fdbcde2552b8bfc154e658f3b2a9e3"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/com/m3/text/LocalM3Arena.java",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/jdk/m3/text/LocalM3Arena.java",
       "gitBlob": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
       "bytes": 1975,
       "sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/com/m3/text/LocalM3StringPiece.java",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
       "gitBlob": "6b745c9472144ad6de01de4d06a533974e558fb1",
       "bytes": 2115,
       "sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/com/m3/text/M3StringPiece.java",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/jdk/m3/text/M3StringPiece.java",
       "gitBlob": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
       "bytes": 767,
       "sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/com/m3/text/StorageIdentity.java",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/jdk/m3/text/StorageIdentity.java",
       "gitBlob": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a",
       "bytes": 494,
       "sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417"
     },
     {
-      "path": "src/test/java/com/synexia/rewrite/M3JoinedRangeDirectoryRecipeTest.java",
+      "path": "src/test/java/jdk/internal/m3/rewrite/M3JoinedRangeDirectoryRecipeTest.java",
       "gitBlob": "73471b80d618b4ab2b016d097459dd5cb390ef93",
       "bytes": 22058,
       "sha256": "a36dd62e6d2cb03614473e90e77298971bb8203eeeefcf1f11689f3d128ec61f"
     },
     {
-      "path": "src/test/resources/com/synexia/rewrite/joined-range-directory-20261020/proof/M3JoinedFreshRangeProof.java.txt",
+      "path": "src/test/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/proof/M3JoinedFreshRangeProof.java.txt",
       "gitBlob": "fa35d3170995ad74f6d7363d6e3fe85dd0b2449c",
       "bytes": 14816,
       "sha256": "8194f210675ff2da605989cf885687549a77ac6037757ac0a8fabcea307cee1f"

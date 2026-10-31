@@ -14,7 +14,7 @@ OUTPUT = WORK / "token-recovery-sdk-output"
 MODULE = WORK / "recipe-token-candidates"
 HANDOFF = WORK / "token-recovery-sdk-handoff.json"
 INVENTORY = WORK / "token-recovery-recipe-inventory-pre-receive.json"
-MANIFEST = MODULE / "src/main/resources/com/synexia/rewrite/m3jdk21-integrated-utilities-20261018/manifest.tsv"
+MANIFEST = MODULE / "src/main/resources/jdk/internal/m3/rewrite/m3jdk21-integrated-utilities-20261018/manifest.tsv"
 
 
 def sha(path):

@@ -90,7 +90,7 @@
     ],
     "summary": {
       "summary": "OWNED_PRIVATE_SERIALIZATION",
-      "owner": "com.m3.collections.guava.M3EvictingQueue",
+      "owner": "jdk.m3.collections.guava.M3EvictingQueue",
       "cases": 15,
       "checks": 24,
       "failures": 10
@@ -168,7 +168,7 @@
     ],
     "summary": {
       "summary": "OWNED_PRIVATE_SERIALIZATION",
-      "owner": "com.m3.collections.guava.M3EvictingQueue",
+      "owner": "jdk.m3.collections.guava.M3EvictingQueue",
       "cases": 15,
       "checks": 34,
       "failures": 0

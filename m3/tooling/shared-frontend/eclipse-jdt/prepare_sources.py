@@ -35,7 +35,7 @@ def main():
     out = args.out.absolute()
     if out != base / 'target' or out.is_symlink():
         parser.error('--out must be this module target directory')
-    roots = {'hsoliwal/com.synexia': args.synexia.resolve(),
+    roots = {'hsoliwal/com.synexia': args.m3.resolve(),
              'hsoliwal/M3jdk21': args.product.resolve()}
     manifest = json.loads((base / 'sources.json').read_text())
     staged = {}

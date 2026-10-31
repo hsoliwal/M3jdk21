@@ -4,8 +4,8 @@ on:
     branches: ['m3/five-provider-current-selection-receiver-20261017']
   pull_request:
     paths:
-      - 'm3/collections/interop/src/main/java/com/m3/collections/interop/M3FiveProviderFlagSelection.java'
-      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderFlagSelectionTest.java'
+      - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3FiveProviderFlagSelection.java'
+      - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveProviderFlagSelectionTest.java'
       - '.github/workflows/m3-five-provider-current-selection-20261017.yml'
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -23,9 +23,9 @@ jobs:
           java-version: '21'
       - name: Verify canonical sources and retained direct SDK
         run: |
-          echo '5becc5f604dc0309fe000c5388e76488f11f22e3f725ae01f073f2c3e85b73c0  m3/collections/interop/src/main/java/com/m3/collections/interop/M3FiveProviderFlagSelection.java' | sha256sum -c -
-          echo '511c42a8f8cf2119770931307ef4c29f35e0fdbbc1ba438e170aa151905ca76e  m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderFlagSelectionTest.java' | sha256sum -c -
-          test "$(git hash-object m3/collections/interop/src/main/java/com/m3/collections/interop/M3FiveProviderDirectSdk.java)" = c8cb510049ab9618f7335ee789ea4ca531fc4b3c
+          echo '5becc5f604dc0309fe000c5388e76488f11f22e3f725ae01f073f2c3e85b73c0  m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3FiveProviderFlagSelection.java' | sha256sum -c -
+          echo '511c42a8f8cf2119770931307ef4c29f35e0fdbbc1ba438e170aa151905ca76e  m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveProviderFlagSelectionTest.java' | sha256sum -c -
+          test "$(git hash-object m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3FiveProviderDirectSdk.java)" = c8cb510049ab9618f7335ee789ea4ca531fc4b3c
       - name: Original M3 core source/ABI admission
         shell: bash
         run: |

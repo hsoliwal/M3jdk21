@@ -20,7 +20,7 @@
     "changed_files": 6
   },
   "fenwick_exact_blobs": {
-    "m3/collections/src/main/java/com/m3/collections/M3SparseExtents.java": "ba6b2ebd0fac9f737deb28bce9385fff07164997",
+    "m3/collections/src/main/java/jdk/m3/collections/M3SparseExtents.java": "ba6b2ebd0fac9f737deb28bce9385fff07164997",
     ".github/workflows/m3-sparse-viewport-geometry.yml": "bc5a1a4e0e2d3ec2049caf2cf360c0a64c1ec30c",
     "m3/collections/viewport-proof/fixtures/M3FenwickInverseTest.txt": "dafa004fcbe3fe9e4183f830b2f1159e3c40591f",
     "m3/collections/qualification/viewport-fenwick/DOCUMENTATION.json": "f56c52907bc52b2188b2ebdaab015c70161faafe",
@@ -59,7 +59,7 @@
         "kind": "ABSENT"
       },
       {
-        "path": "m3/collections/src/main/java/com/m3/collections/M3SparseExtents.java",
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3SparseExtents.java",
         "kind": "EVOLVED"
       },
       {

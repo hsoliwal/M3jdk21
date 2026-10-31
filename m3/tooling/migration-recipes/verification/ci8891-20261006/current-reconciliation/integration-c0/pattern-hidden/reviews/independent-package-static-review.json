@@ -113,7 +113,7 @@
     "Historical /7 materialization bodies retain existing published-parent custody requirements. A later paired checker must not indiscriminately require compiled identities or every historical body in each new archive.",
     "Physical archive construction, verify/extract/readback, immutable parent Git-tree retention and actual paired publication remain root execution responsibilities."
   ],
-  "schema": "synexia.rfph.package-independent-static-review/1",
+  "schema": "m3.rfph.package-independent-static-review/1",
   "scope": "Static source/data review only; no selector, archive, proof, compiler, tests, Maven, or GitHub operation executed by reviewer.",
   "sourceProjects": [
     {

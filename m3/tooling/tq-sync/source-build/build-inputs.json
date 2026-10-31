@@ -2088,8 +2088,8 @@
     "/m3/vendor/third_party/univocity-parsers/",
     "/m3/vendor/third_party/xz/",
     "/m3/tooling/tq-sync/",
-    "/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
-    "/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java"
+    "/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
+    "/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java"
   ],
   "existingSha256Helper": {
     "path": ".m3/task-crates/dependency-source-inline-20261010/verify_crate.py",
@@ -2102,11 +2102,11 @@
     "testBlob": "d873aaf44c96f37a87fc84d13ac4eec595c1473b",
     "engines": [
       {
-        "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
+        "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
         "gitBlob": "7c11497c0183d04e66baa41ee5391de682175360"
       },
       {
-        "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+        "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
         "gitBlob": "4a38e39d0755462d40c2b22548b87abde938ea0b"
       }
     ]

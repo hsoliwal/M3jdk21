@@ -13,7 +13,7 @@
       "after_sha256": "5bbaf29b0b184fdd97f6765843910fde094f7ebe416e7276578290afef036977"
     },
     {
-      "path": "m3/arrays/src/test/java/com/m3/arrays/M3ArrayNativeTest.java",
+      "path": "m3/arrays/src/test/java/jdk/m3/arrays/M3ArrayNativeTest.java",
       "before_sha256": "e0b08d8dae4311127827dc606723180aa3a7f0a1141a147d30b8cdbe1a65a63e",
       "after_sha256": "a7138863de372351d655bd9be6d1d7bf7da9bf71c252d9187acf85e3c3bf3cef"
     }
@@ -32,7 +32,7 @@
       "sha256": "d5dd8f71a86e5f527941886a5358eeec5596a0f6a5735c82db8c10b72a129d1a"
     },
     {
-      "path": "m3/arrays/src/main/java/com/m3/arrays/M3ArrayNative.java",
+      "path": "m3/arrays/src/main/java/jdk/m3/arrays/M3ArrayNative.java",
       "sha256": "54e15c58f4467d2e27155b521e49e1bfe81d0bce1459e2c804c38ade5fcd4eec"
     }
   ],
@@ -47,7 +47,7 @@
       "stdout_sha256": "8886ec5e66f83839045eb8ed85bbf2c35ed5de819cf9a3931384925e1a205ee1"
     },
     "actual_java_test_class": {
-      "class": "com.m3.arrays.M3ArrayNativeTest",
+      "class": "jdk.m3.arrays.M3ArrayNativeTest",
       "status": "PASS_FOCUSED_DIRECT_METHOD_INVOCATION",
       "methods": [
         "javaFallbackHasExactCompareAndMaterializationSemantics",
@@ -90,8 +90,8 @@
     "jni_abi": {
       "status": "PASS_GENERATED_DECLARATION_EXPORT_PARITY",
       "exports": [
-        "Java_com_m3_arrays_M3ArrayNative_nativeCompareUtf16",
-        "Java_com_m3_arrays_M3ArrayNative_nativeConcatenateUtf16"
+        "Java_jdk_m3_arrays_M3ArrayNative_nativeCompareUtf16",
+        "Java_jdk_m3_arrays_M3ArrayNative_nativeConcatenateUtf16"
       ]
     },
     "native_required_refusal": {

@@ -83,25 +83,25 @@
       "tests": 260
     },
     "failingMethods": [
-      "com.m3.rewrite.backport.M3StringHistoryConvergenceRecipeTest.javaPostimagesAreFixedPointAndMissingOrWrongTreeRefuse"
+      "jdk.m3.rewrite.backport.M3StringHistoryConvergenceRecipeTest.javaPostimagesAreFixedPointAndMissingOrWrongTreeRefuse"
     ],
     "fullOpenJdkBuildQualified": false,
     "hostedWorkflowExecuted": false,
     "laterPrimaryCommands": "NOT_EXECUTED",
     "passingSuites": {
-      "TEST-com.m3.rewrite.M3A3LevenshteinEvidenceClosureRecipeTest.xml": {
+      "TEST-jdk.m3.rewrite.M3A3LevenshteinEvidenceClosureRecipeTest.xml": {
         "errors": 0,
         "failures": 0,
         "skipped": 0,
         "tests": 2
       },
-      "TEST-com.m3.rewrite.backport.ClosureRecipeTest.xml": {
+      "TEST-jdk.m3.rewrite.backport.ClosureRecipeTest.xml": {
         "errors": 0,
         "failures": 0,
         "skipped": 0,
         "tests": 3
       },
-      "TEST-com.m3.rewrite.backport.M3Jep485StreamGatherersBackportRecipeTest.xml": {
+      "TEST-jdk.m3.rewrite.backport.M3Jep485StreamGatherersBackportRecipeTest.xml": {
         "errors": 0,
         "failures": 0,
         "skipped": 0,

@@ -1,5 +1,5 @@
 {
-  "schema": "synexia.coding-agent.regex-contract.v1",
+  "schema": "m3.coding-agent.regex-contract.v1",
   "engine": "Java java.util.regex.Pattern and Matcher from pinned existing Recipe",
   "bindings": [
     "org.openrewrite.text.Find",

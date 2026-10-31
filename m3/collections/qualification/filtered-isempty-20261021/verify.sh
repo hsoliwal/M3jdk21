@@ -4,9 +4,9 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
 cd "$ROOT"
-SRC="m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java"
-CONTRACT="m3/collections/src/test/java/com/m3/collections/M3FilteredIsEmptyContract.java"
-TEST="m3/collections/src/test/java/com/m3/collections/M3FilteredIsEmptyTest.java"
+SRC="m3/collections/src/main/java/jdk/m3/collections/M3CollectionViews.java"
+CONTRACT="m3/collections/src/test/java/jdk/m3/collections/M3FilteredIsEmptyContract.java"
+TEST="m3/collections/src/test/java/jdk/m3/collections/M3FilteredIsEmptyTest.java"
 BASELINE_BLOB="7b777fcabcf7c47ab75ad0df1095663b11dcc31c"
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
@@ -24,9 +24,9 @@ javac --release 21 -proc:none -Xlint:all -Werror \
 javac --release 21 -proc:none -Xlint:all -Werror \
   -d "$TMP/new-classes" "$SRC" "$CONTRACT"
 
-javap -public -classpath "$TMP/base-classes" com.m3.collections.M3CollectionViews \
+javap -public -classpath "$TMP/base-classes" jdk.m3.collections.M3CollectionViews \
   > "$TMP/base-public.txt"
-javap -public -classpath "$TMP/new-classes" com.m3.collections.M3CollectionViews \
+javap -public -classpath "$TMP/new-classes" jdk.m3.collections.M3CollectionViews \
   > "$TMP/new-public.txt"
 diff -u "$TMP/base-public.txt" "$TMP/new-public.txt"
 
@@ -36,7 +36,7 @@ for MODE in mixed interpreted; do
   for CANDIDATE in base new; do
     TARGET="$TMP/$CANDIDATE-classes"
     java "${OPTS[@]}" -Xcheck:jni -cp "$TARGET" \
-      com.m3.collections.M3FilteredIsEmptyContract \
+      jdk.m3.collections.M3FilteredIsEmptyContract \
       | tee "$TMP/$CANDIDATE-$MODE.txt"
   done
   diff -u "$TMP/base-$MODE.txt" "$TMP/new-$MODE.txt"

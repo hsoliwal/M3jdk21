@@ -7,560 +7,560 @@
   },
   "suites": [
     {
-      "name": "com.m3.collections.M3AdaptiveEnumLongMapTest",
+      "name": "jdk.m3.collections.M3AdaptiveEnumLongMapTest",
       "tests": 5,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3BagRankIndexTest",
+      "name": "jdk.m3.collections.M3BagRankIndexTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3BitLane28FenwickTest",
+      "name": "jdk.m3.collections.M3BitLane28FenwickTest",
       "tests": 2,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3BoundedFilteredNavigationTest",
+      "name": "jdk.m3.collections.M3BoundedFilteredNavigationTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3ConcurrentContractTest",
+      "name": "jdk.m3.collections.M3ConcurrentContractTest",
       "tests": 12,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3ConcurrentLaneContractTest",
+      "name": "jdk.m3.collections.M3ConcurrentLaneContractTest",
       "tests": 5,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3CountedBagTest",
+      "name": "jdk.m3.collections.M3CountedBagTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3EnumLongMapTest",
+      "name": "jdk.m3.collections.M3EnumLongMapTest",
       "tests": 4,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3EnumSetTest",
+      "name": "jdk.m3.collections.M3EnumSetTest",
       "tests": 4,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3FactoryContractTest",
+      "name": "jdk.m3.collections.M3FactoryContractTest",
       "tests": 2,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3FilteredDequesTest",
+      "name": "jdk.m3.collections.M3FilteredDequesTest",
       "tests": 2,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3FilteredListsDeepCompositionTest",
+      "name": "jdk.m3.collections.M3FilteredListsDeepCompositionTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3FilteredListsReadonlyDepthTest",
+      "name": "jdk.m3.collections.M3FilteredListsReadonlyDepthTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3FilteredListsSortedInteropTest",
+      "name": "jdk.m3.collections.M3FilteredListsSortedInteropTest",
       "tests": 2,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3FilteredListsTest",
+      "name": "jdk.m3.collections.M3FilteredListsTest",
       "tests": 3,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3FilteredNavigableSetRangeTest",
+      "name": "jdk.m3.collections.M3FilteredNavigableSetRangeTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3FilteredNavigableSetTest",
+      "name": "jdk.m3.collections.M3FilteredNavigableSetTest",
       "tests": 4,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3FilteredViewsTest",
+      "name": "jdk.m3.collections.M3FilteredViewsTest",
       "tests": 4,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3FootprintContractTest",
+      "name": "jdk.m3.collections.M3FootprintContractTest",
       "tests": 7,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3GenericArrayListTest",
+      "name": "jdk.m3.collections.M3GenericArrayListTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3IndexMaskCompactorTest",
+      "name": "jdk.m3.collections.M3IndexMaskCompactorTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3IndexMaskWindowRecoveryTest",
+      "name": "jdk.m3.collections.M3IndexMaskWindowRecoveryTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3IndexMaskWindowTest",
+      "name": "jdk.m3.collections.M3IndexMaskWindowTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3IndexPathMasksTest",
+      "name": "jdk.m3.collections.M3IndexPathMasksTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3IndexPathRankTest",
+      "name": "jdk.m3.collections.M3IndexPathRankTest",
       "tests": 2,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3IndexedSnapshotPositionTest",
+      "name": "jdk.m3.collections.M3IndexedSnapshotPositionTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3IndexedTableReentrantSortTest",
+      "name": "jdk.m3.collections.M3IndexedTableReentrantSortTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3IndexedTableTest",
+      "name": "jdk.m3.collections.M3IndexedTableTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3IntLanesTest",
+      "name": "jdk.m3.collections.M3IntLanesTest",
       "tests": 6,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3IntLongHashMapTest",
+      "name": "jdk.m3.collections.M3IntLongHashMapTest",
       "tests": 2,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3JdkCollectionDifferentialTest",
+      "name": "jdk.m3.collections.M3JdkCollectionDifferentialTest",
       "tests": 10,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest",
+      "name": "jdk.m3.collections.M3JdkShapedPrimitiveCollectionsTest",
       "tests": 7,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3LazyObserverRegressionTest",
+      "name": "jdk.m3.collections.M3LazyObserverRegressionTest",
       "tests": 5,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3LazyTreeMapTest",
+      "name": "jdk.m3.collections.M3LazyTreeMapTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3LongAddressBoundedTest",
+      "name": "jdk.m3.collections.M3LongAddressBoundedTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3LongAddressKernelTest",
+      "name": "jdk.m3.collections.M3LongAddressKernelTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3LongArrayDequeTest",
+      "name": "jdk.m3.collections.M3LongArrayDequeTest",
       "tests": 3,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3LongArrayListTest",
+      "name": "jdk.m3.collections.M3LongArrayListTest",
       "tests": 7,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3LongCompositeLateBindTest",
+      "name": "jdk.m3.collections.M3LongCompositeLateBindTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3LongDagJUnitTest",
+      "name": "jdk.m3.collections.M3LongDagJUnitTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3LongFilteredViewContractTest",
+      "name": "jdk.m3.collections.M3LongFilteredViewContractTest",
       "tests": 5,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3LongIndexProjectionMaskOffsetTest",
+      "name": "jdk.m3.collections.M3LongIndexProjectionMaskOffsetTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3LongLinkedHashSetTest",
+      "name": "jdk.m3.collections.M3LongLinkedHashSetTest",
       "tests": 3,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3LongLongLinkedHashMapTest",
+      "name": "jdk.m3.collections.M3LongLongLinkedHashMapTest",
       "tests": 3,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3LongRangeSetTest",
+      "name": "jdk.m3.collections.M3LongRangeSetTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3LongRankIndexTest",
+      "name": "jdk.m3.collections.M3LongRankIndexTest",
       "tests": 3,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3LongSortedAlgebraTest",
+      "name": "jdk.m3.collections.M3LongSortedAlgebraTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3LongStateArrayTest",
+      "name": "jdk.m3.collections.M3LongStateArrayTest",
       "tests": 6,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3LongTreeSetTest",
+      "name": "jdk.m3.collections.M3LongTreeSetTest",
       "tests": 7,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3MapContractTest",
+      "name": "jdk.m3.collections.M3MapContractTest",
       "tests": 18,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3MaskAllSelectionReceiverTest",
+      "name": "jdk.m3.collections.M3MaskAllSelectionReceiverTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3MutableFilteredViewsTest",
+      "name": "jdk.m3.collections.M3MutableFilteredViewsTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3NativeIndexRangeTest",
+      "name": "jdk.m3.collections.M3NativeIndexRangeTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3NoRetainedStructuralEntryTest",
+      "name": "jdk.m3.collections.M3NoRetainedStructuralEntryTest",
       "tests": 3,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3ObjectIdentityTest",
+      "name": "jdk.m3.collections.M3ObjectIdentityTest",
       "tests": 4,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3ObjectResidencyBorrowTest",
+      "name": "jdk.m3.collections.M3ObjectResidencyBorrowTest",
       "tests": 4,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3ObjectResidencyRuntimePressureTest",
+      "name": "jdk.m3.collections.M3ObjectResidencyRuntimePressureTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3ObjectResidencyTest",
+      "name": "jdk.m3.collections.M3ObjectResidencyTest",
       "tests": 12,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3ObjectSlotIndexTest",
+      "name": "jdk.m3.collections.M3ObjectSlotIndexTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3PrimitiveCollectionDifferentialTest",
+      "name": "jdk.m3.collections.M3PrimitiveCollectionDifferentialTest",
       "tests": 3,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3PrimitiveFilteredSequencesTest",
+      "name": "jdk.m3.collections.M3PrimitiveFilteredSequencesTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3ProgressAdaptersPercentageTest",
+      "name": "jdk.m3.collections.M3ProgressAdaptersPercentageTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3ReadOnlyMapDefaultsTest",
+      "name": "jdk.m3.collections.M3ReadOnlyMapDefaultsTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3ReceivingRecoveryTest",
+      "name": "jdk.m3.collections.M3ReceivingRecoveryTest",
       "tests": 3,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3ResidencyStateMaskTest",
+      "name": "jdk.m3.collections.M3ResidencyStateMaskTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3SdkOwnerFactoryTest",
+      "name": "jdk.m3.collections.M3SdkOwnerFactoryTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3SdkRecoveryTest",
+      "name": "jdk.m3.collections.M3SdkRecoveryTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3SequenceContractTest",
+      "name": "jdk.m3.collections.M3SequenceContractTest",
       "tests": 6,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3SignalDimensionsTest",
+      "name": "jdk.m3.collections.M3SignalDimensionsTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3SignalOrderJUnitTest",
+      "name": "jdk.m3.collections.M3SignalOrderJUnitTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3SpanIndexTest",
+      "name": "jdk.m3.collections.M3SpanIndexTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3StateMaskHistogramTest",
+      "name": "jdk.m3.collections.M3StateMaskHistogramTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3StoredRepresentativeTest",
+      "name": "jdk.m3.collections.M3StoredRepresentativeTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3TombstoneReuseTest",
+      "name": "jdk.m3.collections.M3TombstoneReuseTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3TreeMapEmptyLookupTest",
+      "name": "jdk.m3.collections.M3TreeMapEmptyLookupTest",
       "tests": 4,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3TreeMapGetOrDefaultTest",
+      "name": "jdk.m3.collections.M3TreeMapGetOrDefaultTest",
       "tests": 5,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3ZeroMaskArrayFastPathTest",
+      "name": "jdk.m3.collections.M3ZeroMaskArrayFastPathTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.M3ZeroSlotCapacityTest",
+      "name": "jdk.m3.collections.M3ZeroSlotCapacityTest",
       "tests": 1,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.SegmentedLaneBulkContractTest",
+      "name": "jdk.m3.collections.SegmentedLaneBulkContractTest",
       "tests": 6,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     {
-      "name": "com.m3.collections.SegmentedPrimitiveStorageTest",
+      "name": "jdk.m3.collections.SegmentedPrimitiveStorageTest",
       "tests": 7,
       "failures": 0,
       "errors": 0,

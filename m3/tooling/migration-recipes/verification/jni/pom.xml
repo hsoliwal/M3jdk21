@@ -44,8 +44,8 @@
         <includes>
           <include>META-INF/rewrite/m3-jni-packet.yml</include>
           <include>META-INF/rewrite/m3-kit.yml</include>
-          <include>com/m3/rewrite/backport/jdk21-hash-pinned-text/jni-packet/**</include>
-          <include>com/m3/rewrite/backport/jdk21-hash-pinned-text/proof-kit/**</include>
+          <include>jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jni-packet/**</include>
+          <include>jdk/m3/rewrite/backport/jdk21-hash-pinned-text/proof-kit/**</include>
         </includes>
       </resource>
     </resources>
@@ -61,11 +61,11 @@
             <arg>-Xlint:all</arg>
           </compilerArgs>
           <includes>
-            <include>com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java</include>
+            <include>jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java</include>
           </includes>
           <testIncludes>
-            <testInclude>com/m3/rewrite/backport/JniTest.java</testInclude>
-            <testInclude>com/m3/rewrite/backport/KitTest.java</testInclude>
+            <testInclude>jdk/m3/rewrite/backport/JniTest.java</testInclude>
+            <testInclude>jdk/m3/rewrite/backport/KitTest.java</testInclude>
           </testIncludes>
         </configuration>
       </plugin>
@@ -114,7 +114,7 @@
                 </goals>
                 <configuration>
                   <skip>${m3.recipe.boot.skip}</skip>
-                  <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+                  <mainClass>jdk.internal.m3.prstack.M3RecipeBoot</mainClass>
                   <includeProjectDependencies>false</includeProjectDependencies>
                   <includePluginDependencies>true</includePluginDependencies>
                   <arguments>

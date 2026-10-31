@@ -37,7 +37,7 @@ static int m3_use_monotone_sweep(const jlong *targets, jsize count,
  * Input arrays are released JNI_ABORT; only the preallocated output array is written.
  */
 JNIEXPORT void JNICALL
-Java_com_m3_collections_M3LongRankBatchNative_lowerBounds0(
+Java_jdk_m3_collections_M3LongRankBatchNative_lowerBounds0(
         JNIEnv *env, jclass ignored, jlongArray sorted, jlongArray queries,
         jintArray results) {
     (void) ignored;
@@ -109,7 +109,7 @@ Java_com_m3_collections_M3LongRankBatchNative_lowerBounds0(
  * page and with no JNI calls while pinned. Outputs are published page by page.
  */
 JNIEXPORT void JNICALL
-Java_com_m3_collections_M3LongRankBatchNative_equalRanges0(
+Java_jdk_m3_collections_M3LongRankBatchNative_equalRanges0(
         JNIEnv *env, jclass ignored, jlongArray sorted, jlongArray queries,
         jintArray ranges) {
     (void) ignored;
@@ -238,7 +238,7 @@ static void m3_rank_throw(JNIEnv *env, const char *type, const char *message) {
  * A caller-owned output window remains untouched when validation fails.
  */
 JNIEXPORT void JNICALL
-Java_com_m3_collections_M3LongRankBatchNative_boundBatchInto0(
+Java_jdk_m3_collections_M3LongRankBatchNative_boundBatchInto0(
         JNIEnv *env, jclass ignored, jlongArray sorted, jlongArray queries,
         jint query_from, jint count, jintArray output, jint output_from, jint mode) {
     (void) ignored;
@@ -290,7 +290,7 @@ Java_com_m3_collections_M3LongRankBatchNative_boundBatchInto0(
  * calls/blocking/allocation during the short-lived critical section.
  */
 JNIEXPORT void JNICALL
-Java_com_m3_collections_M3LongRankBatchNative_rangeCountInto0(
+Java_jdk_m3_collections_M3LongRankBatchNative_rangeCountInto0(
         JNIEnv *env, jclass ignored, jlongArray sorted, jlongArray starts,
         jlongArray ends, jint query_from, jint count, jintArray output,
         jint output_from) {
@@ -372,7 +372,7 @@ Java_com_m3_collections_M3LongRankBatchNative_rangeCountInto0(
  * Java payload, retain object addresses, or cross into user callbacks.
  */
 JNIEXPORT jlong JNICALL
-Java_com_m3_collections_M3LongRankBatchNative_intersectionCount0(
+Java_jdk_m3_collections_M3LongRankBatchNative_intersectionCount0(
         JNIEnv *env, jclass ignored, jlongArray left, jlongArray right) {
     (void) ignored;
     if (left == NULL || right == NULL) {
@@ -444,7 +444,7 @@ static void m3_window_throw(JNIEnv *env, const char *name, const char *message) 
 }
 
 JNIEXPORT jlong JNICALL
-Java_com_m3_collections_M3LongRankBatchNative_intersectionWindowCount0(
+Java_jdk_m3_collections_M3LongRankBatchNative_intersectionWindowCount0(
         JNIEnv *env, jclass ignored, jlongArray left, jint left_from,
         jint left_length, jlongArray right, jint right_from,
         jint right_length, jboolean distinct) {
@@ -601,7 +601,7 @@ static jsize m3_intersection_values_scan(JNIEnv *env, jlongArray left, jsize lef
 }
 
 JNIEXPORT jlongArray JNICALL
-Java_com_m3_collections_M3LongRankBatchNative_intersectionValues0(
+Java_jdk_m3_collections_M3LongRankBatchNative_intersectionValues0(
         JNIEnv *env, jclass ignored, jlongArray left, jlongArray right,
         jboolean distinct) {
     (void) ignored;
@@ -728,7 +728,7 @@ static jlong m3_union_values_scan(JNIEnv *env, jlongArray left, jsize left_size,
 }
 
 JNIEXPORT jlongArray JNICALL
-Java_com_m3_collections_M3LongRankBatchNative_unionValues0(
+Java_jdk_m3_collections_M3LongRankBatchNative_unionValues0(
         JNIEnv *env, jclass ignored, jlongArray left, jlongArray right,
         jboolean distinct) {
     (void) ignored;
@@ -857,7 +857,7 @@ static jlong m3_difference_scan(JNIEnv *env,
 }
 
 JNIEXPORT jlongArray JNICALL
-Java_com_m3_collections_M3LongRankBatchNative_differenceValues0(
+Java_jdk_m3_collections_M3LongRankBatchNative_differenceValues0(
         JNIEnv *env, jclass ignored, jlongArray left, jlongArray right,
         jboolean distinct, jboolean symmetric) {
     (void) ignored;
@@ -893,7 +893,7 @@ Java_com_m3_collections_M3LongRankBatchNative_differenceValues0(
  * subtraction tests consecutive values without signed MIN/MAX overflow.
  */
 JNIEXPORT jlong JNICALL
-Java_com_m3_collections_M3LongRankBatchNative_runStatistics0(
+Java_jdk_m3_collections_M3LongRankBatchNative_runStatistics0(
         JNIEnv *env, jclass ignored, jlongArray sorted) {
     (void) ignored;
     if (sorted == NULL) {
@@ -990,7 +990,7 @@ static void m3_topk_throw(JNIEnv *env, const char *type, const char *message) {
 }
 
 JNIEXPORT jlongArray JNICALL
-Java_com_m3_collections_M3LongRankBatchNative_topKFrequent0(
+Java_jdk_m3_collections_M3LongRankBatchNative_topKFrequent0(
         JNIEnv *env, jclass ignored, jlongArray sorted, jint k) {
     (void) ignored;
     if (sorted == NULL) {
@@ -1104,7 +1104,7 @@ static void m3_kdiff_throw(JNIEnv *env, const char *klass, const char *message) 
 }
 
 JNIEXPORT jlong JNICALL
-Java_com_m3_collections_M3LongRankBatchNative_distinctDifferencePairCount0(
+Java_jdk_m3_collections_M3LongRankBatchNative_distinctDifferencePairCount0(
         JNIEnv *env, jclass ignored, jlongArray sorted, jlong distance) {
     (void) ignored;
     if (sorted == NULL) {
@@ -1228,7 +1228,7 @@ static int m3_pair_distance_count(JNIEnv *env, jlongArray sorted, jsize size,
 }
 
 JNIEXPORT void JNICALL
-Java_com_m3_collections_M3LongRankBatchNative_pairDistanceCounts0(
+Java_jdk_m3_collections_M3LongRankBatchNative_pairDistanceCounts0(
         JNIEnv *env, jclass ignored, jlongArray sorted, jlongArray thresholds,
         jlongArray results) {
     (void) ignored;
@@ -1311,7 +1311,7 @@ static void m3_rank_equal_range_chunk(const jlong *source, jsize source_size,
 }
 
 JNIEXPORT void JNICALL
-Java_com_m3_collections_M3LongRankBatchNative_equalRangesWindow0(
+Java_jdk_m3_collections_M3LongRankBatchNative_equalRangesWindow0(
         JNIEnv *env, jclass ignored, jlongArray sorted, jlongArray queries,
         jint query_from, jint count, jintArray output, jint output_from) {
     (void) ignored;
@@ -1390,7 +1390,7 @@ static void m3_kth_merged_throw(JNIEnv *env, const char *class_name,
 }
 
 JNIEXPORT void JNICALL
-Java_com_m3_collections_M3LongRankBatchNative_selectMergedInto0(
+Java_jdk_m3_collections_M3LongRankBatchNative_selectMergedInto0(
         JNIEnv *env, jclass ignored, jlongArray left, jlongArray right,
         jlongArray ranks, jint rank_from, jint length,
         jlongArray output, jint output_from) {
@@ -1482,7 +1482,7 @@ Java_com_m3_collections_M3LongRankBatchNative_selectMergedInto0(
  * No overflow-prone query + 1 conversion (LONG_MAX is handled).
  */
 JNIEXPORT void JNICALL
-Java_com_m3_collections_M3LongRankBatchNative_floorIndicesInto0(
+Java_jdk_m3_collections_M3LongRankBatchNative_floorIndicesInto0(
         JNIEnv *env, jclass unused, jlongArray sorted, jlongArray queries,
         jint query_from, jint length, jintArray output, jint output_from) {
     (void) unused;
@@ -1545,7 +1545,7 @@ static void m3_count_smaller_throw(JNIEnv *env, const char *name,
 }
 
 JNIEXPORT void JNICALL
-Java_com_m3_collections_M3LongRankBatchNative_countSmallerRight0(
+Java_jdk_m3_collections_M3LongRankBatchNative_countSmallerRight0(
         JNIEnv *env, jclass ignored, jlongArray input, jintArray output) {
     (void) ignored;
     if (input == NULL || output == NULL) {
@@ -1664,7 +1664,7 @@ static jint m3_closest_window_start(const jlong *sorted, jsize size, jint k, jlo
 
 /* Batches pure primitive #658 distance windows; no object ownership escapes JNI. */
 JNIEXPORT void JNICALL
-Java_com_m3_collections_M3LongRankBatchNative_closestWindowStarts0(
+Java_jdk_m3_collections_M3LongRankBatchNative_closestWindowStarts0(
         JNIEnv *env, jclass ignored, jlongArray sorted, jlongArray targets,
         jint target_from, jint length, jint k, jintArray starts, jint start_from) {
     (void) ignored;
@@ -1717,7 +1717,7 @@ Java_com_m3_collections_M3LongRankBatchNative_closestWindowStarts0(
  * no Java heap pointer, Java comparator or callback crosses the JNI boundary.
  */
 JNIEXPORT void JNICALL
-Java_com_m3_collections_M3LongRankBatchNative_kthPairDistancesInto0(
+Java_jdk_m3_collections_M3LongRankBatchNative_kthPairDistancesInto0(
         JNIEnv *env, jclass ignored, jlongArray sorted, jlongArray ranks,
         jint rank_from, jint length, jlongArray output, jint output_from) {
     (void) ignored;
@@ -1824,7 +1824,7 @@ static int m3_pair_sum_compare(jlong left, jlong right, jlong target) {
 }
 
 JNIEXPORT void JNICALL
-Java_com_m3_collections_M3LongRankBatchNative_pairSumIndicesInto0(
+Java_jdk_m3_collections_M3LongRankBatchNative_pairSumIndicesInto0(
         JNIEnv *env, jclass ignored, jlongArray sorted, jlongArray targets,
         jint target_from, jint length, jintArray output, jint output_from) {
     (void) ignored;
@@ -1898,7 +1898,7 @@ static int m3_triple_cmp(jlong a, jlong b, jlong c, jlong target) {
  * O(n^2) work, so no JVM critical pin is held throughout the scan.
  */
 JNIEXPORT jlong JNICALL
-Java_com_m3_collections_M3LongRankBatchNative_distinctTripletSumCount0(
+Java_jdk_m3_collections_M3LongRankBatchNative_distinctTripletSumCount0(
         JNIEnv *env, jclass unused, jlongArray sorted, jlong target) {
     (void) unused;
     if (sorted == NULL) {

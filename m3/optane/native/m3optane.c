@@ -8,7 +8,7 @@
 #include <stdint.h>
 #include <sys/mman.h>
 #include <unistd.h>
-#include "com_m3_optane_NativeSupport.h"
+#include "jdk_m3_optane_NativeSupport.h"
 
 static jlong bad_argument(JNIEnv *env, const char *message) {
     jclass type = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
@@ -16,13 +16,13 @@ static jlong bad_argument(JNIEnv *env, const char *message) {
     return 0;
 }
 
-JNIEXPORT jint JNICALL Java_com_m3_optane_NativeSupport_abiVersion0
+JNIEXPORT jint JNICALL Java_jdk_m3_optane_NativeSupport_abiVersion0
   (JNIEnv *env, jclass type) {
     (void)env; (void)type;
     return 1;
 }
 
-JNIEXPORT jlong JNICALL Java_com_m3_optane_NativeSupport_advise0
+JNIEXPORT jlong JNICALL Java_jdk_m3_optane_NativeSupport_advise0
   (JNIEnv *env, jclass type, jobject buffer, jint offset, jint length, jint advice) {
     (void)type;
     if (buffer == NULL || offset < 0 || length < 0 || length > 64 * 1024 * 1024)

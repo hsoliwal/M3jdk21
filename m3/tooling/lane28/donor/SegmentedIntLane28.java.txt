@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package com.synexia.common.collections;
+package jdk.internal.m3.common.collections;
 
 /** Lazy primitive-int lane using the same 8/8/12 logical addressing as long lanes. */
 public final class SegmentedIntLane28 {

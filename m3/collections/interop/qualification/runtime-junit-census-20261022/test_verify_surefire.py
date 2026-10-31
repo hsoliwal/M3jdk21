@@ -20,12 +20,12 @@ class SourceSuiteContract(unittest.TestCase):
         self.source = self.product / census.SOURCE_PREFIX
         self.source.mkdir(parents=True)
         self.body = ('// SPDX-License-Identifier: Apache-2.0\n'
-                     'package com.m3.collections.interop;\n'
+                     'package jdk.m3.collections.interop;\n'
                      'import org.junit.jupiter.api.Test;\n'
                      'final class M3FixtureTest { @Test void checksCase() {} }\n')
         self.java = self.source / 'M3FixtureTest.java'
         self.java.write_text(self.body, encoding='utf-8')
-        self.expected = 'com.m3.collections.interop.M3FixtureTest#checksCase'
+        self.expected = 'jdk.m3.collections.interop.M3FixtureTest#checksCase'
         self.row = [str(self.java.relative_to(self.product)),
                     census.git_blob(self.java.read_bytes()), 'checksCase']
         self.write_shard()
@@ -35,15 +35,15 @@ class SourceSuiteContract(unittest.TestCase):
         (self.receipts / 'expected-00.tsv').write_text('\t'.join(self.row) + '\n')
 
     def write_report(self, *, names=('checksCase',), skipped=0, failures=0):
-        suite = ET.Element('testsuite', name='com.m3.collections.interop.M3FixtureTest',
+        suite = ET.Element('testsuite', name='jdk.m3.collections.interop.M3FixtureTest',
                            tests=str(len(names)), skipped=str(skipped),
                            failures=str(failures), errors='0')
         for name in names:
             case = ET.SubElement(suite, 'testcase',
-                                 classname='com.m3.collections.interop.M3FixtureTest', name=name)
+                                 classname='jdk.m3.collections.interop.M3FixtureTest', name=name)
             if skipped:
                 ET.SubElement(case, 'skipped')
-        ET.ElementTree(suite).write(self.reports / 'TEST-com.m3.collections.interop.M3FixtureTest.xml')
+        ET.ElementTree(suite).write(self.reports / 'TEST-jdk.m3.collections.interop.M3FixtureTest.xml')
 
     def expected_methods(self):
         return census.expected_methods(self.product, self.receipts, strict=False)

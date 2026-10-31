@@ -34,7 +34,7 @@
       "scope": "SOURCE_REFERENCE_PENDING_SELECTIVE_REUSE",
       "sha256": "5495a8200ff4030a8faa66fde2f8bb9ccca52bdcbccd200a76147698289c2c0c",
       "source_custody": "EXACT_PRIOR_INVENTORY_BYTES_UNCHANGED",
-      "upstream_path": "m3/collections/src/main/java/com/m3/collections/M3LinkedHashMap.java"
+      "upstream_path": "m3/collections/src/main/java/jdk/m3/collections/M3LinkedHashMap.java"
     },
     {
       "bytes": 1261,
@@ -46,7 +46,7 @@
       "scope": "SOURCE_REFERENCE_PENDING_SELECTIVE_REUSE",
       "sha256": "4e978861b03650cec9ab1f064648cc8d342117d8b4f0556152604707c83c2518",
       "source_custody": "EXACT_PRIOR_INVENTORY_BYTES_UNCHANGED",
-      "upstream_path": "m3/collections/src/main/java/com/m3/collections/M3SlotArrays.java"
+      "upstream_path": "m3/collections/src/main/java/jdk/m3/collections/M3SlotArrays.java"
     },
     {
       "bytes": 3512,
@@ -58,7 +58,7 @@
       "scope": "SOURCE_REFERENCE_PENDING_SELECTIVE_REUSE",
       "sha256": "4ee2b86ea682c64da881d36eb5b4aadc4ba6640389f2adbfdc8dff4d44cf4070",
       "source_custody": "EXACT_PRIOR_INVENTORY_BYTES_UNCHANGED",
-      "upstream_path": "m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java"
+      "upstream_path": "m3/collections/src/main/java/jdk/m3/collections/M3SlotSpliterators.java"
     },
     {
       "bytes": 10870,
@@ -70,7 +70,7 @@
       "scope": "SOURCE_REFERENCE_PENDING_SELECTIVE_REUSE",
       "sha256": "0499cb1f5825429fcf7434665c6785bcffa59ed4a975974a29856ad60317e806",
       "source_custody": "EXACT_PRIOR_INVENTORY_BYTES_UNCHANGED",
-      "upstream_path": "m3/collections/src/main/java/com/m3/collections/M3SlotMap.java"
+      "upstream_path": "m3/collections/src/main/java/jdk/m3/collections/M3SlotMap.java"
     },
     {
       "bytes": 8519,
@@ -81,7 +81,7 @@
       "repository": "hsoliwal/M3jdk21",
       "sha256": "f8c19b2dd04c6198f5061685d7fb7890531620970510fe666ce5338b115d3b12",
       "source_custody": "EXACT_UPSTREAM_GIT_BLOB_VERIFIED",
-      "upstream_path": "m3/collections/src/main/java/com/m3/collections/M3ObjectSlotStore28.java"
+      "upstream_path": "m3/collections/src/main/java/jdk/m3/collections/M3ObjectSlotStore28.java"
     },
     {
       "bytes": 2595,
@@ -92,7 +92,7 @@
       "repository": "hsoliwal/M3jdk21",
       "sha256": "5fa8a82e3655a675aa0d1e21ba456a7dae272776c605eeba4af22a9dbc7eaa56",
       "source_custody": "EXACT_UPSTREAM_GIT_BLOB_VERIFIED",
-      "upstream_path": "m3/collections/src/main/java/com/m3/collections/M3Address28.java"
+      "upstream_path": "m3/collections/src/main/java/jdk/m3/collections/M3Address28.java"
     }
   ],
   "status": "SOURCE_ONLY_NO_OWNER_OR_JAVA_EXECUTION",

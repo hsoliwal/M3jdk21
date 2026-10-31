@@ -12,8 +12,8 @@
     "gates": 20
   },
   "crate": "jcc-merge-recovery-20261006-mapping-v02",
-  "named_recipe": "com.m3.rewrite.backport.JccMergeMappingRecoveryV02",
-  "test_class": "com.m3.rewrite.backport.JccMergeMappingRecoveryV02Test",
+  "named_recipe": "jdk.m3.rewrite.backport.JccMergeMappingRecoveryV02",
+  "test_class": "jdk.m3.rewrite.backport.JccMergeMappingRecoveryV02Test",
   "materialized_result_property": "m3.mapping.materialized",
   "source_commit": "__UNRESOLVED_ACTUAL_SOURCE_COMMIT__",
   "source_root_tree": "__UNRESOLVED_ACTUAL_SOURCE_ROOT_TREE__",

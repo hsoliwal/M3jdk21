@@ -1,14 +1,14 @@
 {
   "schema": 1,
   "status": "PENDING_OPTIONAL_MODULE_ADMISSION",
-  "target": "m3/optane; module com.m3.optane",
+  "target": "m3/optane; module jdk.m3.optane",
   "intake": "INDEPENDENT_APACHE_MODULE",
-  "canonical_recipe": "hsoliwal/com.synexia:synexia-openrewrite-recipes/recipes/optane-list-handoff-20261015",
+  "canonical_recipe": "hsoliwal/com.synexia:m3-openrewrite-recipes/recipes/optane-list-handoff-20261015",
   "reuse": [
     {
       "source": "MIndexProgressMonitor",
       "source_blob": "763ea75ea1553e679d6fcda271760328defef8cd",
-      "target": "com.m3.optane.ProgressMonitor",
+      "target": "jdk.m3.optane.ProgressMonitor",
       "disposition": "dependency-free operation adapter, not global progress owner"
     },
     {

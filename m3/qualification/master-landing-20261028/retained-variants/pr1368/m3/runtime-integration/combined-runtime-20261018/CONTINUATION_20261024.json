@@ -3,7 +3,7 @@
   "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
   "license": "Apache-2.0; generated metadata only; target/donor per-file rights unchanged",
   "product_owner": "hsoliwal/M3JDK21",
-  "canonical_recipe_owner": "hsoliwal/com.synexia:synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "canonical_recipe_owner": "hsoliwal/com.synexia:m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
   "canonical_common_source_pin": "bb58cf0090e1bfbe5cafcde44c6db980945d1b59",
   "previous_runtime_publication": "38a251f419c8236c8818f5670bebe651be6f31a2",
   "received_source_head": "28e34762d10d67a86f52c40cea7eb47c76ff3a01",
@@ -12,19 +12,19 @@
   "public_callable_interfaces_and_JNI_unchanged": true,
   "source_outputs": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java",
       "sha256": "032bffd456e67c7568b028489ceec85f24510469b3a0e00571ab36cd17ae3b75"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredDescendingDepthContract.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3FilteredDescendingDepthContract.java",
       "sha256": "cf469a67b1dcd56da25d6dd385da05c763a8671f81c5ec674465655618284700"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredListIteratorGuardContract.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3FilteredListIteratorGuardContract.java",
       "sha256": "1a90960d9959ed2853ab555d58bd9d0f141d4d4d4a3d161b8e8ba13cb74c1fe3"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredListIteratorGuardTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3FilteredListIteratorGuardTest.java",
       "sha256": "3f22124b03e2a8750e3f61ac6d546a388fcdb4e3e34afef69a872c62fda9ec64"
     },
     {
@@ -37,7 +37,7 @@
       "dataset": "m3-regression-witnesses-20261024",
       "observed_input_head": "7236d45d412d23a658e27ad6e279e6e41f20bbd7",
       "canonical_common_source_pin": "bb58cf0090e1bfbe5cafcde44c6db980945d1b59",
-      "qualification_owner": "/workspace/scratch/f8287c652798/continuation-20261024/canonical-regression-proof/source-identical-host/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "qualification_owner": "/workspace/scratch/f8287c652798/continuation-20261024/canonical-regression-proof/source-identical-host/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
       "qualification_sha256": "8534abb13996bbe65d5969642ac914a71d56bec69ddd2f32e8017e867b7d3a05",
       "check": {
         "dataset": "m3-regression-witnesses-20261024",
@@ -67,7 +67,7 @@
       "dataset": "m3-list-iterator-guard-20261024",
       "observed_input_head": "41db68d28ada879e84e0f401a9c576acbc4e1c0b",
       "canonical_common_source_pin": "bb58cf0090e1bfbe5cafcde44c6db980945d1b59",
-      "qualification_owner": "/workspace/scratch/f8287c652798/continuation-20261024/canonical-regression-proof/source-identical-host/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "qualification_owner": "/workspace/scratch/f8287c652798/continuation-20261024/canonical-regression-proof/source-identical-host/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
       "qualification_sha256": "635f4d46b8f3be80988e2afd37fde8dd88c1b2d1862e29fe8512aae56710b7b6",
       "check": {
         "dataset": "m3-list-iterator-guard-20261024",

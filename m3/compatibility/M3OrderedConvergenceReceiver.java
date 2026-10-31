@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 public final class M3OrderedConvergenceReceiver {
     static final String SCHEMA = "M3_ORDERED_CONVERGENCE_HANDOFF_V1";
     static final String REPOSITORY = "hsoliwal/com.synexia";
-    static final String POLICY = "SYNEXIA_FIRST_PARTY_APACHE2_V1";
+    static final String POLICY = "M3_FIRST_PARTY_APACHE2_V1";
     static final String HEADER = "kind\tname\tvalue\tevidence";
     static final int MAX_HANDOFF_BYTES = 64 * 1024;
     static final int MAX_SOURCE_BYTES = 16 * 1024 * 1024;
@@ -309,7 +309,7 @@ public final class M3OrderedConvergenceReceiver {
     public static void main(String[] args) throws Exception {
         if (args.length != 10) {
             throw new IllegalArgumentException("Usage: M3OrderedConvergenceReceiver "
-                    + "<synexia-repo> <m3jdk-repo> <synexia-handoff.tsv> <handoff-sha256> "
+                    + "<m3-repo> <m3jdk-repo> <m3-handoff.tsv> <handoff-sha256> "
                     + "<source-commit> <candidate-file> <target-relative-path> "
                     + "<target-preimage-sha256> <target-base-commit> <output-dir>");
         }

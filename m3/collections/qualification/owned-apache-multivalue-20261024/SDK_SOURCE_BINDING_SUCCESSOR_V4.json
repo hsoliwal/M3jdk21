@@ -16,7 +16,7 @@
  },
  "successors": [
   {
-   "path": "m3/collections/implementations/apache/src/main/java/com/m3/collections/apache/M3AbstractListValuedMap.java",
+   "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3AbstractListValuedMap.java",
    "reason": "D1: incremental value and logical-key counters (v2 -> v3 recipe apache-multivalue-v2-to-v3)",
    "before": {
     "bytes": 8715,
@@ -30,7 +30,7 @@
    }
   },
   {
-   "path": "m3/collections/implementations/apache/src/main/java/com/m3/collections/apache/M3AbstractMultiValuedMap.java",
+   "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3AbstractMultiValuedMap.java",
    "reason": "D1: incremental value and logical-key counters (v2 -> v3 recipe apache-multivalue-v2-to-v3)",
    "before": {
     "bytes": 33602,
@@ -44,7 +44,7 @@
    }
   },
   {
-   "path": "m3/collections/implementations/apache/src/main/java/com/m3/collections/apache/M3AbstractSetValuedMap.java",
+   "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3AbstractSetValuedMap.java",
    "reason": "D1: incremental value and logical-key counters (v2 -> v3 recipe apache-multivalue-v2-to-v3)",
    "before": {
     "bytes": 4278,
@@ -58,7 +58,7 @@
    }
   },
   {
-   "path": "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java",
+   "path": "m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java",
    "reason": "changed on master after the v3 seal (last change 104f2f46ced 2026-10-24); re-pinned as found, per decision B2",
    "before": {
     "bytes": 10039,
@@ -72,7 +72,7 @@
    }
   },
   {
-   "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionSdk.java",
+   "path": "m3/collections/src/main/java/jdk/m3/collections/M3CollectionSdk.java",
    "reason": "changed on master after the v3 seal (last change 104f2f46ced 2026-10-24); re-pinned as found, per decision B2",
    "before": {
     "bytes": 7807,
@@ -86,7 +86,7 @@
    }
   },
   {
-   "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+   "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
    "reason": "changed on master after the v3 seal (last change 104f2f46ced 2026-10-24); re-pinned as found, per decision B2",
    "before": {
     "bytes": 12568,
@@ -100,7 +100,7 @@
    }
   },
   {
-   "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedMultiValueMap.java",
+   "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexedMultiValueMap.java",
    "reason": "changed on master after the v3 seal (last change b4616950bff 2026-10-18); re-pinned as found, per decision B2",
    "before": {
     "bytes": 15368,
@@ -114,7 +114,7 @@
    }
   },
   {
-   "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedTable.java",
+   "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexedTable.java",
    "reason": "changed on master after the v3 seal (last change 104f2f46ced 2026-10-24); re-pinned as found, per decision B2",
    "before": {
     "bytes": 20810,
@@ -128,7 +128,7 @@
    }
   },
   {
-   "path": "m3/collections/src/main/java/com/m3/collections/M3LongRangeSet.java",
+   "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongRangeSet.java",
    "reason": "changed on master after the v3 seal (last change 104f2f46ced 2026-10-24); re-pinned as found, per decision B2",
    "before": {
     "bytes": 9008,
@@ -158,20 +158,20 @@
  ],
  "added": [
   {
-   "path": "m3/collections/implementations/apache/src/test/java/com/m3/collections/apache/M3MultiValuedMapCounterDifferentialTest.java",
+   "path": "m3/collections/implementations/apache/src/test/java/jdk/m3/collections/apache/M3MultiValuedMapCounterDifferentialTest.java",
    "bytes": 17228,
    "sha256": "982a2eb799c8faa846d7528a14d215078cf0e18ae8fa700b9eec69c66aad4ef2",
    "gitBlob": "0cb0253885cd7261962c8eb9d7c281b89275422b"
   },
   {
-   "path": "m3/collections/implementations/apache/src/jmh/java/com/m3/collections/apache/M3MultiValuedSizeBench.java",
+   "path": "m3/collections/implementations/apache/src/jmh/java/jdk/m3/collections/apache/M3MultiValuedSizeBench.java",
    "bytes": 3772,
    "sha256": "2050b6c7fa7411513f5d370f43b588cef212eb568597d3201c1e12c2f3d17ef3",
    "gitBlob": "7cb4416713df15bd8c339f2287f63718b0fc9562"
   }
  ],
  "recipe": {
-  "path": "m3/collections/recipe/owned-apache-multivalue-20261024/src/main/resources/com/synexia/rewrite/hash-pinned-java/apache-multivalue-v2-to-v3/manifest.tsv",
+  "path": "m3/collections/recipe/owned-apache-multivalue-20261024/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/apache-multivalue-v2-to-v3/manifest.tsv",
   "bytes": 1054,
   "sha256": "9aeb000a95f9f4bdcdf5b55c1b7d4017d87dbab6d577947da5e7c995494bf441",
   "gitBlob": "c4452e99dfd309105a82d375dc3c5bee8d76e9dc"

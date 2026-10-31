@@ -91,12 +91,12 @@ def main():
         for source in entry.get("reviewed_sources", []):
             if sha((args.donor_root / source["file"]).read_bytes()) != source["sha256"]:
                 raise ValueError("Eclipse reviewed source drift")
-    source_catalogue = args.canonical_source / "progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates" / TASK / "catalogue/context-owner-inventory.json"
+    source_catalogue = args.canonical_source / "progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates" / TASK / "catalogue/context-owner-inventory.json"
     selected = []
     for entry in json.loads(source_catalogue.read_text())["files"]:
-        if entry["path"] in ("synexia-job/src/main/java/com/synexia/job/IJobResult.java",
-                             "synexia-job/src/main/java/com/synexia/job/AbstractJob.java",
-                             "synexia-cop/src/main/java/com/synexia/context/core/IAdaptable.java"):
+        if entry["path"] in ("m3-job/src/main/java/jdk/internal/m3/job/IJobResult.java",
+                             "m3-job/src/main/java/jdk/internal/m3/job/AbstractJob.java",
+                             "m3-cop/src/main/java/jdk/internal/m3/context/core/IAdaptable.java"):
             if sha((args.canonical_source / "source" / entry["path"]).read_bytes()) != entry["sha256"]:
                 raise ValueError("Synexia donor source drift")
             selected.append(entry)
@@ -106,7 +106,7 @@ def main():
         "schema": "M3_PROGRESS_JOB_OWNER_REVIEW_V1", "target_pin": TARGET_PIN,
         "canonical_pin": CANONICAL_PIN, "product_owner": OWNER_PATH,
         "product_source_sha256": sha((candidates / OWNER_PATH).read_bytes()),
-        "current_owner_dependencies": dependencies, "synexia_sources": selected,
+        "current_owner_dependencies": dependencies, "m3_sources": selected,
         "eclipse_release_inputs": donor_receipt,
         "selection": {
             "implementation_owner": "Existing java.util.concurrent.MonitoredCallable and ProgressMonitors; no duplicate cancellation or scope implementation.",
@@ -137,8 +137,8 @@ def main():
         "status": "PENDING_FULL_IMAGE_API_REVIEW_AND_ORDERED_PHASE", "target_phase": "STRING", "phase_advanced": False,
         "public_api_change": "New opt-in abstract class; not an unchanged-interface internal refinement.",
         "interfaces_preserved": ["Runnable.run():void", "Callable.call():V throws Exception", "MonitoredCallable.callMonitored(ProgressMonitor):V throws Exception"],
-        "canonical_recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017", "dataset": DATASET,
-        "recipe_owner": "hsoliwal/com.synexia:synexia-openrewrite-recipes",
+        "canonical_recipe": "jdk.internal.m3.m3jdk.CollectionsContractRefinement20261017", "dataset": DATASET,
+        "recipe_owner": "hsoliwal/com.synexia:m3-openrewrite-recipes",
         "source_sha256": review["product_source_sha256"],
         "status_result": "S is returned unchanged; no IStatus/IJobResult dependency or conversion in java.base.",
         "executor": "Existing FutureTask and ExecutorService.submitMonitored compose with this Callable; no new scheduler or capture rule.",

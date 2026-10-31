@@ -24,7 +24,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          printf '%s\n' '5af79b8408cd3f14e300a8f274e74ec539d3f945a0d03655b55ddc03eb351b70  m3/collections/src/main/java/com/m3/collections/M3IndexedLiveView.java' | sha256sum -c -
+          printf '%s\n' '5af79b8408cd3f14e300a8f274e74ec539d3f945a0d03655b55ddc03eb351b70  m3/collections/src/main/java/jdk/m3/collections/M3IndexedLiveView.java' | sha256sum -c -
       - name: Compile real Java21 collection-owner dependency closure
         shell: bash
         run: |
@@ -34,10 +34,10 @@ jobs:
           javac --release 21 -proc:none -Xlint:all -Werror \
             -sourcepath "m3/collections/src/main/java:m3/collections/src/test/java" \
             -d "$out" \
-            m3/collections/src/test/java/com/m3/collections/M3IndexedLivePhysicalPageContract.java \
-            m3/collections/src/test/java/com/m3/collections/M3IndexedLiveViewContract.java
-          java -cp "$out" com.m3.collections.M3IndexedLivePhysicalPageContract
-          java -cp "$out" com.m3.collections.M3IndexedLiveViewContract
+            m3/collections/src/test/java/jdk/m3/collections/M3IndexedLivePhysicalPageContract.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3IndexedLiveViewContract.java
+          java -cp "$out" jdk.m3.collections.M3IndexedLivePhysicalPageContract
+          java -cp "$out" jdk.m3.collections.M3IndexedLiveViewContract
       - name: Keep mandatory custom forked JUnit Maven gate separate
         shell: bash
         run: |

@@ -240,7 +240,7 @@
     "repository": "hsoliwal/com.synexia",
     "sourceCommit": "525e0c3704f8c4b4d9eef54799d1b4c947e37b5f",
     "sourcePullRequest": 12245,
-    "sourcePath": "synexia-openrewrite-recipes/recipes/m3-original-mapping-provider-20261017/sdk",
+    "sourcePath": "m3-openrewrite-recipes/recipes/m3-original-mapping-provider-20261017/sdk",
     "receiverCorePath": "m3/migration/original-provider-20261017/sdk",
     "moduleGitTree": "638520715ffb00255639cb1e6667494bab729b53",
     "pinsSha256": "75f37d1093f5fd3d657de32bcab672f725f6391b4c59910aece1c2ff238951d7",

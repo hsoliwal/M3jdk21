@@ -152,15 +152,15 @@
     "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
     "jni_exports_identical": true,
     "jni_exports": [
-      "Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative",
-      "Java_com_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative",
-      "Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative",
-      "Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative",
-      "Java_com_m3_collections_M3IndexMaskCompactor_selectNative",
-      "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative",
-      "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative",
-      "Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative",
-      "Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative"
+      "Java_jdk_m3_collections_M3IndexMaskCompactor_positionsAbiNative",
+      "Java_jdk_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative",
+      "Java_jdk_m3_collections_M3IndexMaskCompactor_rangeAbiNative",
+      "Java_jdk_m3_collections_M3IndexMaskCompactor_selectLongWindowNative",
+      "Java_jdk_m3_collections_M3IndexMaskCompactor_selectNative",
+      "Java_jdk_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative",
+      "Java_jdk_m3_collections_M3IndexMaskCompactor_selectPositionsNative",
+      "Java_jdk_m3_collections_M3IndexMaskCompactor_selectRangeNative",
+      "Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowNative"
     ],
     "java_allocation_equal_all_paired_rows": true,
     "probe_source_sha256": "3361d4af2830e2f0a011ccd340e3993d34dd63ecb348c0c22b4d13aa3fde42d5",
@@ -169,6 +169,6 @@
     "compiled_owner_sha256": "b575827c4a385f992bc245f553ef44d307f564b8b04f0922ba94d833bb97ce9f",
     "limitation": "Unpinned shared host; only 150 warmups + 400 calls per case; noisy native/JVM allocation/compiler effects; no isolated cost gate or universal speed claim",
     "complete_receipt_sha256": "683c42dbfa977547b852decdb84013a0c089b1af5695d956f487a6727794d73c",
-    "canonical_evidence": "synexia-openrewrite-recipes/recipe-crates/m3-netbeans-collection-atoms-20261019/evidence/native-mask/REVIEW.json"
+    "canonical_evidence": "m3-openrewrite-recipes/recipe-crates/m3-netbeans-collection-atoms-20261019/evidence/native-mask/REVIEW.json"
   }
 }

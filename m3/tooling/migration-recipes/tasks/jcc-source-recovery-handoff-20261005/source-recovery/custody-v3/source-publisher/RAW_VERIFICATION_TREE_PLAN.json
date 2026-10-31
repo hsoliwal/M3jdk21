@@ -15,7 +15,7 @@
           "type": "blob"
         }
       ],
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-nul",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/jdk/internal/m3/rewrite/hash-pinned-java/parser-bad-manifest-nul",
       "unchanged_sibling_entries": 0
     },
     {
@@ -30,7 +30,7 @@
           "type": "blob"
         }
       ],
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-utf8",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/jdk/internal/m3/rewrite/hash-pinned-java/parser-bad-manifest-utf8",
       "unchanged_sibling_entries": 0
     },
     {
@@ -45,7 +45,7 @@
           "type": "blob"
         }
       ],
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-nul",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/jdk/internal/m3/rewrite/hash-pinned-java/parser-bad-nul",
       "unchanged_sibling_entries": 0
     },
     {
@@ -60,7 +60,7 @@
           "type": "blob"
         }
       ],
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-utf8",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/jdk/internal/m3/rewrite/hash-pinned-java/parser-bad-utf8",
       "unchanged_sibling_entries": 0
     },
     {
@@ -92,7 +92,7 @@
           "type": "tree"
         }
       ],
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/jdk/internal/m3/rewrite/hash-pinned-java",
       "unchanged_sibling_entries": 0
     },
     {
@@ -106,7 +106,7 @@
           "type": "tree"
         }
       ],
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/jdk/internal/m3/rewrite",
       "unchanged_sibling_entries": 0
     },
     {
@@ -120,7 +120,7 @@
           "type": "tree"
         }
       ],
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia",
       "unchanged_sibling_entries": 0
     },
     {
@@ -134,7 +134,7 @@
           "type": "tree"
         }
       ],
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com",
       "unchanged_sibling_entries": 0
     },
     {
@@ -148,7 +148,7 @@
           "type": "tree"
         }
       ],
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources",
       "unchanged_sibling_entries": 0
     },
     {
@@ -162,7 +162,7 @@
           "type": "tree"
         }
       ],
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser",
       "unchanged_sibling_entries": 0
     },
     {
@@ -176,7 +176,7 @@
           "type": "tree"
         }
       ],
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src",
       "unchanged_sibling_entries": 0
     },
     {
@@ -190,7 +190,7 @@
           "type": "tree"
         }
       ],
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92",
       "unchanged_sibling_entries": 0
     },
     {
@@ -271,7 +271,7 @@
           "type": "blob"
         }
       ],
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc",
       "unchanged_sibling_entries": 10
     },
     {
@@ -326,7 +326,7 @@
           "type": "tree"
         }
       ],
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005",
       "unchanged_sibling_entries": 6
     },
     {
@@ -538,7 +538,7 @@
           "type": "tree"
         }
       ],
-      "path": "synexia-openrewrite-recipes/recipes",
+      "path": "m3-openrewrite-recipes/recipes",
       "unchanged_sibling_entries": 33
     },
     {
@@ -1025,7 +1025,7 @@
           "type": "tree"
         }
       ],
-      "path": "synexia-openrewrite-recipes",
+      "path": "m3-openrewrite-recipes",
       "unchanged_sibling_entries": 69
     },
     {
@@ -2219,913 +2219,913 @@
         },
         {
           "mode": "040000",
-          "path": "synexia-agent",
+          "path": "m3-agent",
           "sha": "e53598bfeb9bfef195cf8335e44e7123f3551ce4",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-aicore",
+          "path": "m3-aicore",
           "sha": "ecd1ac28403d47067f250f8cbc8d380c9e51ecba",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-aiop",
+          "path": "m3-aiop",
           "sha": "db35a88f2f24dad80096c6cd2db57c5b22c78e9e",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-algo",
+          "path": "m3-algo",
           "sha": "755c9232b78ea69896c62a43a5b5f8a694cac9c7",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-algorithm-runtime",
+          "path": "m3-algorithm-runtime",
           "sha": "d5495d319957c19037b156bb96ea12d2d2cf206c",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-anop",
+          "path": "m3-anop",
           "sha": "8c2c98620e4fba051df2b563ffa2352687c650e9",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-aop",
+          "path": "m3-aop",
           "sha": "590ddca493f80e806b6251da88b762fcedc2fbc2",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-api-corpus",
+          "path": "m3-api-corpus",
           "sha": "a4323f8c0830f2746fb1bff40e52945d5f8e86f3",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-appliance-watchdog",
+          "path": "m3-appliance-watchdog",
           "sha": "b836c8af196983a3acfdf78d3ab5a9dd986354c1",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-archive-mavenizer",
+          "path": "m3-archive-mavenizer",
           "sha": "ff7400016e764157040ccfda0110f7eb911bbd58",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-artifact-intelligence",
+          "path": "m3-artifact-intelligence",
           "sha": "a38402f66edcd5116d707f76a07c1364ec99564b",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-beam-cpullm",
+          "path": "m3-beam-cpullm",
           "sha": "e9cf765d9bf7c54dec0be0b9a55f1d3495a31fdf",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-beam-etl",
+          "path": "m3-beam-etl",
           "sha": "2a06177acb4829f41812045f5ae80a39a1e3d17e",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-bitop",
+          "path": "m3-bitop",
           "sha": "7d7a274af6ca55f0f2d9d47f29a0f8d2f39ee1d5",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-bom",
+          "path": "m3-bom",
           "sha": "a18845b6b185de74056e7475f2719a2ef85b1c2e",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-bop",
+          "path": "m3-bop",
           "sha": "08bbecb9d6e73cd8dc073032beff1426b0368a7c",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-build-inventory",
+          "path": "m3-build-inventory",
           "sha": "8f60508b9857671b1ed8cb0a8289da3c702d2420",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-camel-dag-bridge",
+          "path": "m3-camel-dag-bridge",
           "sha": "7d70a1fea4c56c8bc52481fac143b558d8e7f5b1",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-camel-dag-kie",
+          "path": "m3-camel-dag-kie",
           "sha": "d40f66993f14d5e1d94d84282696de8d529e3108",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-chat-artifacts",
+          "path": "m3-chat-artifacts",
           "sha": "451b0554b19b9448425ba333f85d68b38953ecc8",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-chrome-ai",
+          "path": "m3-chrome-ai",
           "sha": "326bec4f0ce32cb005c4298c67d763656a6da7ab",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-chrome-diffusion",
+          "path": "m3-chrome-diffusion",
           "sha": "1bc7b2b1bbf26a538e914ac278adece14a0db7c6",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-chromeml-api",
+          "path": "m3-chromeml-api",
           "sha": "4d319dc870c9975731b2f67e6fd3b9e53ef33ada",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-classic-intelligence",
+          "path": "m3-classic-intelligence",
           "sha": "8169898b534a591234d7b17e21880eb277e07466",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-classic-tools",
+          "path": "m3-classic-tools",
           "sha": "20220d3ec69fd2249bf4b9b36faccdf46cdde241",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-classic-tools-jni",
+          "path": "m3-classic-tools-jni",
           "sha": "98da56c41cdabda65085787222cf0594ae6cb16b",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-cmop",
+          "path": "m3-cmop",
           "sha": "0b9eccde61ebe1008d6beb70ecff3730301100b3",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-code-convergence",
+          "path": "m3-code-convergence",
           "sha": "10481b75998a6cc0f6f1ca8a405943fbe9577ff6",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-code-convergence-jini",
+          "path": "m3-code-convergence-jini",
           "sha": "a1dbada9cf320cca376f77e72a07b2dd2459bdfd",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-common",
+          "path": "m3-common",
           "sha": "70d0b0f8dfec5ff8ae277eb2a605128adbcaaa23",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-common-cache",
+          "path": "m3-common-cache",
           "sha": "1309dae05f0ec1a18f75ddf3eb9c5e2624ce1413",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-common-core",
+          "path": "m3-common-core",
           "sha": "0ee2a5813767f9bb68c1a552c6a066cd00b89efb",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-consolidation-runtime",
+          "path": "m3-consolidation-runtime",
           "sha": "5a2fcf5cb9dfed6c7d83aab86e2ddbfa66e2dd31",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-cop",
+          "path": "m3-cop",
           "sha": "b4500eb5b96c756429a584d9828bccbfc51610b9",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-cop-bop",
+          "path": "m3-cop-bop",
           "sha": "05676ad5249f35d8643500357cd438c57e792f10",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-cpu-camel-fabric",
+          "path": "m3-cpu-camel-fabric",
           "sha": "b4ca713130b58be9781e51c83c968a156a8196c0",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-cpullm",
+          "path": "m3-cpullm",
           "sha": "4176db681cf0317a3817b8385baa0f9d1f929e2a",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-dashboard-api",
+          "path": "m3-dashboard-api",
           "sha": "86af41120a1c7c38acf9d711b231d8cde36ae8f1",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-dawn-jni",
+          "path": "m3-dawn-jni",
           "sha": "d5f98f9e918f4afd473a83e0a137fd3ccf5370ca",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-dfs",
+          "path": "m3-dfs",
           "sha": "d8a44fe7dc7124e42dc1cbd6bc303bc98e222160",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-dictlang",
+          "path": "m3-dictlang",
           "sha": "ab1a651e0d0bb205152bd58a29e73175f5113a94",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-diffusion",
+          "path": "m3-diffusion",
           "sha": "13582f4781a12995d809971196d32c3b16f39bda",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-docker",
+          "path": "m3-docker",
           "sha": "29e559614ce163caf00f8169851ff73809a5565f",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-donor-inventory",
+          "path": "m3-donor-inventory",
           "sha": "c5b779af825e71cb677ecba0b757c053ecffc89b",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-donor-superset",
+          "path": "m3-donor-superset",
           "sha": "e9f9f2f8157a79e24e5d07fa0d3908ffc57c8cec",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-donor-superset-api",
+          "path": "m3-donor-superset-api",
           "sha": "aa91e8c2f4d30d1fe884016cf5e3e8fc0f015dab",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-donor-superset-bridge-archive",
+          "path": "m3-donor-superset-bridge-archive",
           "sha": "a5579bca3033c63e6de0f725d668ba98eb7283f2",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-donor-superset-bridge-build",
+          "path": "m3-donor-superset-bridge-build",
           "sha": "235732e5cd8aaddb91e7445a290419081e494333",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-donor-superset-bridge-git",
+          "path": "m3-donor-superset-bridge-git",
           "sha": "05636e7d04d869ec49b4d1d912c074db7893d090",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-donor-superset-core",
+          "path": "m3-donor-superset-core",
           "sha": "751f334fc62a9420263cadb5de3acddb0fe446c4",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-donor-superset-headless",
+          "path": "m3-donor-superset-headless",
           "sha": "d09f58ab75f94810a1eaba4c974bc9df4f168bdf",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-edge-ingress",
+          "path": "m3-edge-ingress",
           "sha": "1e48e5e6d3b1e8476e4879e6f5e9b51578acd8bb",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-enterprise-data-plane",
+          "path": "m3-enterprise-data-plane",
           "sha": "552c3e1b921497228c6e4e0a900ff05e0ec65c54",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-etl",
+          "path": "m3-etl",
           "sha": "dcd586a26e287671b449fa7bc072ff5558ccd666",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-etl-dfs",
+          "path": "m3-etl-dfs",
           "sha": "b1ef1f16be726439d3e61d55bd1b3d56f1d6ca09",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-fastsearch",
+          "path": "m3-fastsearch",
           "sha": "86dec56588f970051c515bcfcbb39b9a6501f4fa",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-fileindex",
+          "path": "m3-fileindex",
           "sha": "10e016e92182ae5c4f896138a3eb057de33eceb3",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-flink-cpullm",
+          "path": "m3-flink-cpullm",
           "sha": "459d85b607d4b739211b1bfe03c0b90a93a414f4",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-flink-datastream",
+          "path": "m3-flink-datastream",
           "sha": "a659d02270014f6dabfe693af5d7957d79ca9ec1",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-flink-spi",
+          "path": "m3-flink-spi",
           "sha": "e4dbaac7b9451e1c218e10bca02aa2e440ca99c1",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-flldcim",
+          "path": "m3-flldcim",
           "sha": "e443758088aa4b7bfaac80b1d812f17c8d2adff4",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-fop",
+          "path": "m3-fop",
           "sha": "7501ae3a10b82a46bc772f37550d3374d7946821",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-forge",
+          "path": "m3-forge",
           "sha": "90c3ece29e4cea15c3814ceed0e9558bb8f04754",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-format-fabric",
+          "path": "m3-format-fabric",
           "sha": "3739cb4fe30a8b525f2be53044f770760bb7ed5f",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-game-kernel",
+          "path": "m3-game-kernel",
           "sha": "89bab0180eafd8ab684f854e9cd7423f54aefb88",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-hash-pack-parent",
+          "path": "m3-hash-pack-parent",
           "sha": "6447a3a2fdb848605757b8558f70be5def1c7016",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-hpcpop",
+          "path": "m3-hpcpop",
           "sha": "68a122dff051c4be42a19e06c888c95a92c32179",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-index-precompute",
+          "path": "m3-index-precompute",
           "sha": "527faec803802de6ee9ae737dd46b734293e6727",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-index-precompute-adapters",
+          "path": "m3-index-precompute-adapters",
           "sha": "731d84521b5027b3c03b5b21b5329b943234a661",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-indexstring",
+          "path": "m3-indexstring",
           "sha": "6202bc85b16a43f6f02a21b3f3afb9a573ba3755",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-indexstring-compiler",
+          "path": "m3-indexstring-compiler",
           "sha": "85d2fa3f71e6e1123ffea6d47bcee05a0817f1d5",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-indexstring-jini",
+          "path": "m3-indexstring-jini",
           "sha": "8010015d18a583757a277819fe1006da477273e0",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-indexstring-maven-plugin",
+          "path": "m3-indexstring-maven-plugin",
           "sha": "4138ef8507bf46aa61de484306be2f970da74cc7",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-indexstring-tornadovm",
+          "path": "m3-indexstring-tornadovm",
           "sha": "25f03d1f848dd7ed20b4f21d1227bb5bce512912",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-interned-language",
+          "path": "m3-interned-language",
           "sha": "dfb18ebcc07352acc9a18e96497abb7a19b62bd9",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-ioc",
+          "path": "m3-ioc",
           "sha": "f09605b582bfae22e00184b601a7ba53ed420558",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-iop",
+          "path": "m3-iop",
           "sha": "a82744ec82bf8e673582f31f2228a30e2a72d79a",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-java-web-workbench",
+          "path": "m3-java-web-workbench",
           "sha": "f2f20d4bb648fb375a3fc3c681a1a0d37be0e4c9",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-jev",
+          "path": "m3-jev",
           "sha": "4d8601936fff2f0efb446950dbe89234efeb8b91",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-job",
+          "path": "m3-job",
           "sha": "9d81ffe2134a6c37f592cf2567d1203faf920c89",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-kie-policy",
+          "path": "m3-kie-policy",
           "sha": "836f7c4d775c6cdf8a37ce2fcf0d8db1b39c4f24",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-kubernetes",
+          "path": "m3-kubernetes",
           "sha": "d3a54486010d20fa44752ed724168eb45d5c3926",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-l2c",
+          "path": "m3-l2c",
           "sha": "6c806f7744381583b6c2ee63f309f235f73b50b5",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-l2g",
+          "path": "m3-l2g",
           "sha": "e7e212efa8eab8766dfe7183e79d6dc1a4ce52d2",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-l2v",
+          "path": "m3-l2v",
           "sha": "721091e79aa6007ccdd138a059145178f80d91b5",
           "type": "tree"
         },
         {
           "mode": "160000",
-          "path": "synexia-llmcpp",
+          "path": "m3-llmcpp",
           "sha": "480d0c8c9aa9f844ad961392c79a5867559d5e9f",
           "type": "commit"
         },
         {
           "mode": "040000",
-          "path": "synexia-local-appliance",
+          "path": "m3-local-appliance",
           "sha": "e04eb7442f985d707cdd688e24cd79644eca4954",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-local-appliance-shell",
+          "path": "m3-local-appliance-shell",
           "sha": "77ffd8f2471db67ef22f7f58990000644fc311fa",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-local-k3s",
+          "path": "m3-local-k3s",
           "sha": "9a365e76cc562d7238c63ca8deb050e142a5a5c9",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-m3-api-factory",
+          "path": "m3-api-factory",
           "sha": "4290badf2b3b5a30f8ac0285553bc4404b8f4281",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-m3-cloner",
+          "path": "m3-cloner",
           "sha": "98d956d5eeabf2a1661c6006b09716eee77cb776",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-m3-recipe",
+          "path": "m3-recipe",
           "sha": "5ff39ab4e2f316c8b442e1d3debf8ecb314d8202",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-m3-tooling",
+          "path": "m3-tooling",
           "sha": "5c9f16e7fc36130d822481cc0d44de9840fbb6b1",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-m3index",
+          "path": "m3-m3index",
           "sha": "4bee45fa7f9f510ba19a3abe489ed0b12ebd5bce",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-machine",
+          "path": "m3-machine",
           "sha": "2caf4b64b6b03e654c9838c471cf656e81c87594",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-mat-collections",
+          "path": "m3-mat-collections",
           "sha": "29ef2cbfae23e07b5634067ea64dc2e12fea200e",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-mat-index-string",
+          "path": "m3-mat-index-string",
           "sha": "993fa6caae8aa436ce800ee4571c79ae3bc240b6",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-mat-value",
+          "path": "m3-mat-value",
           "sha": "f40f817770495f97142c57d5a09334a8fbcca588",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-mat-value-maven-plugin",
+          "path": "m3-mat-value-maven-plugin",
           "sha": "accab6a540caba2b229f9b938c8f3f6ec21712b0",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-mat-value-processor",
+          "path": "m3-mat-value-processor",
           "sha": "a55308557545b27d077221f1e4c322f37522db11",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-maven-plugin",
+          "path": "m3-maven-plugin",
           "sha": "e9f4ac467a7d3ff98fc169247b09eb9d03d1579a",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-mindex",
+          "path": "m3-mindex",
           "sha": "041a317f87daf727c661acc7c7206398b50f5b4a",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-mindex-indexstring-bridge",
+          "path": "m3-mindex-indexstring-bridge",
           "sha": "997bf5af5b4a26879b51e047f9123122b33dfd78",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-mindex-vm",
+          "path": "m3-mindex-vm",
           "sha": "273189d58174201d133a4616fe5b8c68854d6e39",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-mllm",
+          "path": "m3-mllm",
           "sha": "a1cc488e9fcfb3f461523baf96da3e928cdadb54",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-native-interop",
+          "path": "m3-native-interop",
           "sha": "3865d42cacd6b7dc9c6ca8cc289603af805153be",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-netnet",
+          "path": "m3-netnet",
           "sha": "79764ff6c67e1a9ae28ddb0f16b9d7e16504a119",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-neural-renderer-jni",
+          "path": "m3-neural-renderer-jni",
           "sha": "e0bc9d365f82a0ae66a848a7b788ddb6b7d87004",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-neural-rendering",
+          "path": "m3-neural-rendering",
           "sha": "df6d582b7266fb41da174a58e906d34db4825ad9",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-ngrok",
+          "path": "m3-ngrok",
           "sha": "4cac29404b2947c47421156a2888aa3c7fb25deb",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-openrewrite-recipes",
+          "path": "m3-openrewrite-recipes",
           "sha": "2e1ea5ea0076af3e2947a20dcddf8b306249d46c",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-opsdash",
+          "path": "m3-opsdash",
           "sha": "fdd571624220332d3bea7d502dc3cb981f3661e2",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-picocli-shell-m3",
+          "path": "m3-picocli-shell-m3",
           "sha": "244afd28c2dcf0c3ccc7aa6e1bf1cb79737ceb68",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-pluginify-api",
+          "path": "m3-pluginify-api",
           "sha": "ebd67230394e9d036ab5b33e4dd9c54a1c2fc45b",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-pluginify-bridge-eclipse",
+          "path": "m3-pluginify-bridge-eclipse",
           "sha": "27b3633f173d596d41a506dd0aa9ee23e384d71c",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-pluginify-bridge-native",
+          "path": "m3-pluginify-bridge-native",
           "sha": "f4ef33f4b24f443a74acfd134577b65b475814c8",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-pluginify-bridge-teavm",
+          "path": "m3-pluginify-bridge-teavm",
           "sha": "888d4eafddb4f14d3e2de30b9065184e6d3b39e5",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-pluginify-core",
+          "path": "m3-pluginify-core",
           "sha": "2d1fa80816bfeed03c950a3c05e275f17de1d515",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-pluginify-headless",
+          "path": "m3-pluginify-headless",
           "sha": "953153ebf7b8763fd1afed5f0009e9f6e25da819",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-pluginify-maven-plugin",
+          "path": "m3-pluginify-maven-plugin",
           "sha": "c9ff91c0fe804ccf201c0ee475c88baed241e83e",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-primitives",
+          "path": "m3-primitives",
           "sha": "e4b4a34dd67d513d7e8a5f9dfc2299faef27c7a1",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-process",
+          "path": "m3-process",
           "sha": "2a08a5ea477355cedc66a7299f61ced237f634a8",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-repository-java-candidate",
+          "path": "m3-repository-java-candidate",
           "sha": "0d9542033898268f01b3ca5a2850503e83cffb4c",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-retrieval-fabric",
+          "path": "m3-retrieval-fabric",
           "sha": "01328ad796ff1811774cd240efb6331ab6d2fba5",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-retrieval-runtime",
+          "path": "m3-retrieval-runtime",
           "sha": "04500e9c7c585e92a669f2157ee0ccbabf036af4",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-rop",
+          "path": "m3-rop",
           "sha": "110c06663481a566b547f520c94dacd4e2ae5952",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-rop-h2",
+          "path": "m3-rop-h2",
           "sha": "85903554b67ac9a96c3979fe5f85faed50964a25",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-route-policy",
+          "path": "m3-route-policy",
           "sha": "45a569f90642ce9a9a7e30176f23893b83a9aab0",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-runtime",
+          "path": "m3-runtime",
           "sha": "74d65667b795e014c1ab7902d237917bf566cdbe",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-sap-compat",
+          "path": "m3-sap-compat",
           "sha": "bdcce5f3a200843f3c31cd3d31439cb757d172f8",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-sap-migration",
+          "path": "m3-sap-migration",
           "sha": "1a64145df9cb56c69dd5356562b804e91dc96231",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-shape-bridge",
+          "path": "m3-shape-bridge",
           "sha": "d5af59c0396be68c5dbfcbca8aa3b72efc25b88d",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-shape-compiler",
+          "path": "m3-shape-compiler",
           "sha": "0dd547e958f43c4d2d93a483a551a0b2cce15488",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-specgrep",
+          "path": "m3-specgrep",
           "sha": "261637c00009b5d102f71da93d5f3eaf6e8f2867",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-specialist-ai",
+          "path": "m3-specialist-ai",
           "sha": "ec3da64be363e4572dee730e5b1115c20a064776",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-ssh",
+          "path": "m3-ssh",
           "sha": "c4bfdce1f73ca75bf84726a24ad12fb6e89b7a18",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-sshd-server",
+          "path": "m3-sshd-server",
           "sha": "22de36680f9661587b75b9c85b9b7657adbae83c",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-synthesis",
+          "path": "m3-synthesis",
           "sha": "9a733af767588984030c4f07f08b6d7534789a01",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-tabletree",
+          "path": "m3-tabletree",
           "sha": "fb54f9ba1fb77a6756d12fe8470a961c1cc2c72d",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-tabletree-spring-data",
+          "path": "m3-tabletree-spring-data",
           "sha": "b14344a34a0d7f92d865d26adff0fe281f25d874",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-tmop",
+          "path": "m3-tmop",
           "sha": "d91e9b6d8b462d292da57ee34cc089e962b9dc59",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-top",
+          "path": "m3-top",
           "sha": "928f7ad8fe14d892aa88630f7efa042446636f26",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-tornadovm-m3",
+          "path": "m3-tornadovm-m3",
           "sha": "b2fd3e1453a383a219d8871cc5b7d41bed275db7",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-translate",
+          "path": "m3-translate",
           "sha": "001bbf3628a0a0a1dbd75d357683d61d83046b68",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-truckmate",
+          "path": "m3-truckmate",
           "sha": "ac195fa6912910f4826c73414070da82f196d8c3",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-tunnel",
+          "path": "m3-tunnel",
           "sha": "6e13f8fd7cfcb64569da2d2ee7331682858ba408",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-unicodex",
+          "path": "m3-unicodex",
           "sha": "06c3c178c53478f763cfcb5214528a23dff025a4",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-unix4j-m3",
+          "path": "m3-unix4j-m3",
           "sha": "8bd1b458309096286ee20b57b55e13d8c2af1cda",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-upwork-pipeline",
+          "path": "m3-upwork-pipeline",
           "sha": "7ced7b79dbcd15c4d68ed250b010e13f69b4c3c3",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-vdp",
+          "path": "m3-vdp",
           "sha": "4559cc62be6624ef552b3f6fee2516bb8e6ce883",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-visual-pixel-runtime",
+          "path": "m3-visual-pixel-runtime",
           "sha": "5106adf6c01e3fedce807c4f5e187edf52225629",
           "type": "tree"
         },
         {
           "mode": "040000",
-          "path": "synexia-watchdog-policy",
+          "path": "m3-watchdog-policy",
           "sha": "16fb77867e89d926b48e355193602b76cd99e11e",
           "type": "tree"
         },
@@ -3185,25 +3185,25 @@
   "entries": [
     {
       "mode": "100644",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-nul/parser-dependencies.tsv",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/jdk/internal/m3/rewrite/hash-pinned-java/parser-bad-manifest-nul/parser-dependencies.tsv",
       "sha": "9e48fa497f59343f91fc5e2c36b9aba9cbc8b63d",
       "type": "blob"
     },
     {
       "mode": "100644",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/jdk/internal/m3/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
       "sha": "59b4ec83f687499a54f15695b9b246599f9579d7",
       "type": "blob"
     },
     {
       "mode": "100644",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-nul/Dependency.java.txt",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/jdk/internal/m3/rewrite/hash-pinned-java/parser-bad-nul/Dependency.java.txt",
       "sha": "fb1c29bba17633d2de5d53d924ec210965374c37",
       "type": "blob"
     },
     {
       "mode": "100644",
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/jdk/internal/m3/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
       "sha": "24cdc62e634934527d551324c2449bcf951b5589",
       "type": "blob"
     }

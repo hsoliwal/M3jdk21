@@ -11,19 +11,19 @@
     "pr": 12855,
     "commit": "8ec2ca63a1e6cbd6d2e01e24c23619519ce311af",
     "dataset": "viewport-tree-current-20261025",
-    "recipe": "com.synexia.m3.ViewportTreeCurrent20261025",
+    "recipe": "jdk.internal.m3.ViewportTreeCurrent20261025",
     "engine": "M3HashPinnedJavaSnapshotRecipe"
   },
   "sources": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java",
       "before_git": "bb41516a28fc653c9b2f42d26b991cfeaaf34999",
       "before_sha256": "888b22b7615d170fff078bdc06780de07a7dfdef2025406b7f4134429db37503",
       "after_git": "65ab293a00da1092243f7f1904771c5a0cc60a44",
       "after_sha256": "bf6fb2f1d5f1c86ee51a94ad7a058537b092d256dc6fa583cbd712e7800b2944"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3TreeRebasedAdmissionTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3TreeRebasedAdmissionTest.java",
       "before_git": "ABSENT",
       "after_git": "d2b260109b342cff3ffa6f6ba373a2830dbd7f48",
       "after_sha256": "3d0aa405824ec50add3323f081ade5f74ee33bcb419dd9faeffed12dd456c2b7"

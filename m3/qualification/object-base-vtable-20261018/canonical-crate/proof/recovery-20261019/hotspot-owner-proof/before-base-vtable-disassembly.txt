@@ -1,5 +1,5 @@
 
-/workspace/scratch/87fb3604f641/m3-implementation/collections-lane/synexia/synexia-openrewrite-recipes/recipe-crates/m3-object-base-vtable-20261018/target/hotspot-owner-proof/before.o:     file format elf64-x86-64
+/workspace/scratch/87fb3604f641/m3-implementation/collections-lane/m3/m3-openrewrite-recipes/recipe-crates/m3-object-base-vtable-20261018/target/hotspot-owner-proof/before.o:     file format elf64-x86-64
 
 
 Disassembly of section .text:

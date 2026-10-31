@@ -11,8 +11,8 @@ import subprocess
 
 SHARDS = tuple(f'added-{i:02d}.tsv' for i in range(4))
 PREFIX = 'm3/collections/interop/src/'
-MAIN = PREFIX + 'main/java/com/m3/collections/interop/'
-TEST = PREFIX + 'test/java/com/m3/collections/interop/'
+MAIN = PREFIX + 'main/java/jdk/m3/collections/interop/'
+TEST = PREFIX + 'test/java/jdk/m3/collections/interop/'
 FAMILIES = frozenset(('eclipse-collections', 'five-provider-index', 'guava', 'spring', 'jdk'))
 HEX64 = re.compile(r'[0-9a-f]{64}\Z')
 HEX40 = re.compile(r'[0-9a-f]{40}\Z')
@@ -24,7 +24,7 @@ def git_blob(data: bytes) -> str:
 
 # The 40-source receipt is immutable. The next generation has exactly one
 # source-sealed, Java21-syntax-only test transition and no other valid changes.
-COMPOUND_TEST_PATH = 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryArrayificationTest.java'
+COMPOUND_TEST_PATH = 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryArrayificationTest.java'
 COMPOUND_TRANSITION_SHA256 = 'ad81180bc4f5ee73dd008212fb575e62d50f815d673abd063e671c630789c24c'
 COMPOUND_TRANSITION = (
     COMPOUND_TEST_PATH,
@@ -59,7 +59,7 @@ COMPILER_TEST_PATHS = (
     TEST + 'M3FiveLibraryKeyRangesTest.java',
     TEST + 'M3FiveProviderFlagSelectionTest.java',
 )
-COMPILER_RECIPE = 'com.synexia.m3.M3Jdk21InteropThreeCompilerAtoms20261022'
+COMPILER_RECIPE = 'jdk.internal.m3.M3Jdk21InteropThreeCompilerAtoms20261022'
 
 
 def admitted_compiler_revisions(receipts: Path) -> dict[str, tuple[str, str, str, str]]:

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Hitesh Soliwal and contributors
-import com.m3.tools.cpu.CpuTools;
-import com.m3.tools.cpu.CpuToolsCli;
+import jdk.m3.tools.cpu.CpuTools;
+import jdk.m3.tools.cpu.CpuToolsCli;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
@@ -53,7 +53,7 @@ public final class M3CpuToolsTest {
         check(!session.registry().sha256().equals(CpuTools.session(new Limits(4, 4, 10, 1000), null)
                 .registry().sha256()), "binding identity includes budgets");
         long modules = ModuleLayer.boot().modules().stream().map(Module::getName)
-                .filter(n -> n.startsWith("com.m3.tools.") || n.startsWith("jdk.m3.")).count();
+                .filter(n -> n.startsWith("jdk.m3.tools.") || n.startsWith("jdk.m3.")).count();
         check(modules == 20, "all twenty tool modules resolved");
 
         expectText("b\r\na\rb\n", List.of("text.identity"), "b\r\na\rb\n");

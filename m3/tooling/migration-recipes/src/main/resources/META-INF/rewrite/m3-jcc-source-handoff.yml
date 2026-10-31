@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: com.m3.rewrite.backport.JccSourceHandoff
+name: jdk.m3.rewrite.backport.JccSourceHandoff
 displayName: M3 reviewed JCC source handoff ledger
 description: >-
   Replays the reviewed four-output JCC ledger and documentation packet through the
@@ -14,5 +14,5 @@ tags:
   - candidate-only
   - hash-pinned
 recipeList:
-  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+  - jdk.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
       crateName: jcc-handoff-20261005

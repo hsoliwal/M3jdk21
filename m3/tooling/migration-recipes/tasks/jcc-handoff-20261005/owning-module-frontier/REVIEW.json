@@ -116,8 +116,8 @@
     },
     "element": "BUNDLE",
     "includes": [
-      "com/m3/rewrite/scope/*",
-      "com/m3/rewrite/atom/*"
+      "jdk/m3/rewrite/scope/*",
+      "jdk/m3/rewrite/atom/*"
     ],
     "phases": [
       "prepare-agent",

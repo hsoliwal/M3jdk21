@@ -4,7 +4,7 @@
   "canonical_publication_parent": "621215399de3835e032e4dd7bdf1a416602ec678",
   "canonical_pull_request": "https://github.com/hsoliwal/com.synexia/pull/12705",
   "canonical_repository": "hsoliwal/com.synexia",
-  "canonical_task": "synexia-openrewrite-recipes/recipe-crates/m3-array-defaults-20261021",
+  "canonical_task": "m3-openrewrite-recipes/recipe-crates/m3-array-defaults-20261021",
   "complete_structural_review": "m3/collections/algorithm-catalogue/all-collections-20261021/README.md",
   "execution_kind": "SDK_EXECUTION",
   "full_reactors": "NOT_RUN",
@@ -21,15 +21,15 @@
       "before_sha256": "2673330335f4ea415b49a295d9cde4988c27280b990ab33984a195ca032d5791",
       "kind": "java",
       "pass": "array-defaults-map-20261021",
-      "recipe": "com.synexia.m3.ArrayDefaultsSortedBatch20261021",
-      "target": "m3/collections/src/main/java/com/m3/collections/M3LongLongTreeMap.java"
+      "recipe": "jdk.internal.m3.ArrayDefaultsSortedBatch20261021",
+      "target": "m3/collections/src/main/java/jdk/m3/collections/M3LongLongTreeMap.java"
     },
     {
       "after_sha256": "6d6b535e84832b85ac261cb07207f168c4fc3f4941ea78304cfce33322232adf",
       "before_sha256": "88ed35987b8956046ac8644ee8200d2aadea7ad9dd7a3175989f1e2043b9b83b",
       "kind": "text",
       "pass": "array-defaults-label-20261021",
-      "recipe": "com.synexia.m3.ArrayDefaultsTreeSetLabel20261021",
+      "recipe": "jdk.internal.m3.ArrayDefaultsTreeSetLabel20261021",
       "target": "m3/collections/JDK_FAMILY_MAP.tsv"
     }
   ],

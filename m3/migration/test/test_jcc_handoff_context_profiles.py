@@ -44,7 +44,7 @@ PROFILES = (
 
 POM = "m3/tooling/migration-recipes/pom.xml"
 HISTORICAL_POM = Path(
-    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/"
+    "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/"
     "jdk21-hash-pinned-text/jcc-handoff-20261005/pom-before-752.xml"
 )
 HISTORICAL_POM_SHA256 = "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888"

@@ -2,19 +2,19 @@
   "schema": "M3JDK21_TREE_PARENT_CLOSURE_RECEIVING_V1",
   "canonical_repo": "hsoliwal/com.synexia",
   "canonical_commit": "97cb92f40023785853b701f8abcd2f63d8e3621e",
-  "java_recipe": "com.synexia.m3.ViewportTreeParentClosure20261026",
-  "text_pin_recipe": "com.synexia.m3.ViewportTreeParentPin20261027",
+  "java_recipe": "jdk.internal.m3.ViewportTreeParentClosure20261026",
+  "text_pin_recipe": "jdk.internal.m3.ViewportTreeParentPin20261027",
   "master_preimage_commit": "9dd1df62f3d5406760427cb5e840a36c9e7a59ea",
   "targets": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java",
       "before_blob": "9725e48f7850b107b8b968527827eb5fde5b1fe6",
       "after_blob": "81816c58eb280820984162d6050d25a0c8e96932",
       "before_sha256": "be77b8dd08c7a498355bc8793932039a00a0f523e206e47f116b7a6b10635082",
       "after_sha256": "1e719d48bbaa9fa4c8065b16848c6bd770d13f661d2e823d192e212da65b2478"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3ParentHandleClosureProof.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3ParentHandleClosureProof.java",
       "before_blob": "ABSENT",
       "after_blob": "1140abde95743dd90e9e33a8a85ff0f034ef9321",
       "after_sha256": "2d891a6bd14007f003dc34b53dd548bcae55341839c26db400fca5e7c3da29b0"

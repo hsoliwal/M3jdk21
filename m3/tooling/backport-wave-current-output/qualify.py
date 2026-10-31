@@ -17,7 +17,7 @@ ROOT = Path(os.environ["M3_PROOF_ROOT"]).resolve()
 ARTIFACTS = ROOT / "artifacts"
 PREFIX = "m3/tooling/backport-wave-current-output/"
 WORKFLOW = ".github/workflows/m3-backport-wave-current-output.yml"
-SUITE = "com.synexia.rewrite.M3BackportWaveCurrentOutputRecipeTest"
+SUITE = "jdk.internal.m3.rewrite.M3BackportWaveCurrentOutputRecipeTest"
 METHODS = ["bothPartialStatesRoundTripAndReachFixedPointsInBothOrders",
            "everyOwnerRefusesDriftMissingAndDuplicateWithoutMutation",
            "exactCurrentWorkflowPinsPreserveHistoricalReceipt"]
@@ -77,7 +77,7 @@ SOURCE_GIT = {
     "m3/backports/test_backport_execution_waves.py": "7a3b961caa4302a2ebd1675360e29e6b1df9697b",
     "m3/backports/backport_execution_waves.py": "cc2a6ceb90b56d3b05d1307e705586c8d7cf1b40",
     "m3/backports/BACKPORT_EXECUTION_WAVES.md": "428d775ca476b187dceb26a012401b11b975bbbb",
-    "m3/compatibility/synexia-wave-admission-pin-20261014.tsv": "60c11d68f482efadeadbbe6f58bfac9ec9aa0090",
+    "m3/compatibility/m3-wave-admission-pin-20261014.tsv": "60c11d68f482efadeadbbe6f58bfac9ec9aa0090",
     ".github/workflows/m3-jdk21-backport-wave-admission.yml": "9ba94e55b4c8f468fb0ff5f3cd7c530caa6fdff2"
 }
 AFTER_GIT = {**SOURCE_GIT, TARGET_WORKFLOW: "60ab068a3ebe7bab7c568afc405035f1fd15ffd3"}
@@ -245,7 +245,7 @@ def report():
     if tuple(module["COMPILED_PROVIDERS"]) != expected_providers:
         raise RuntimeError("exact four Java21 source providers required")
     for name in expected_providers:
-        path = regular(SDK / ("target/classes/com/synexia/rewrite/" + name + ".class"))
+        path = regular(SDK / ("target/classes/jdk/internal/m3/rewrite/" + name + ".class"))
         raw = path.read_bytes()
         item = sdk["compiledProviders"][name]
         if (len(raw) <= 8 or raw[:4] != b"\xca\xfe\xba\xbe" or int.from_bytes(raw[6:8], "big") != 65

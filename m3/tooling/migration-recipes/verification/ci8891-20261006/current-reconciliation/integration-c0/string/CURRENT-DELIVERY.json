@@ -84,7 +84,7 @@
     },
     "errorMessage": "target is not a Java compilation unit: src/java.base/share/classes/java/util/regex/Pattern.java",
     "erroredMethods": [
-      "com.m3.rewrite.backport.M3StringHistoryConvergenceRecipeTest.javaPostimagesAreFixedPointAndMissingOrWrongTreeRefuse"
+      "jdk.m3.rewrite.backport.M3StringHistoryConvergenceRecipeTest.javaPostimagesAreFixedPointAndMissingOrWrongTreeRefuse"
     ],
     "fullOpenJdkBuildQualified": false,
     "hostedWorkflowExecuted": false,

@@ -14,7 +14,7 @@
   "limits": "Successor of the 20261018 bindings (unchanged as history). Bound core = the compile closure of SpringCaseInsensitiveMapMaskProjectionProof on the current base (no module-info.java, no M3LinkedHashMap, so no m3/arrays), the native compactor, the successor packet files, the 20261018 recipe crate, the owner module and the workflow, all at current master bytes.",
   "sources": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
       "sha256": "0b6398e423e1a436aba20169f8bc62d4aa1a9be85ff9f9e09faa0c434743fa6b",
       "bytes": 25743
     },
@@ -54,7 +54,7 @@
       "bytes": 3911
     },
     {
-      "path": "m3/collections/implementations/spring-case-insensitive-map/src/main/java/com/m3/collections/spring/M3LinkedCaseInsensitiveMap.java",
+      "path": "m3/collections/implementations/spring-case-insensitive-map/src/main/java/jdk/m3/collections/spring/M3LinkedCaseInsensitiveMap.java",
       "sha256": "450e3f70be37f0fa0fcee7edd4adc8a2eea4a05a40646fb3e5c531e4ee8447ca",
       "bytes": 31224
     },
@@ -69,7 +69,7 @@
       "bytes": 3555
     },
     {
-      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/engine-src/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/engine-src/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "sha256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599",
       "bytes": 13805
     },
@@ -99,27 +99,27 @@
       "bytes": 531
     },
     {
-      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/owned-spring-case-insensitive-map/M3LinkedCaseInsensitiveMap.java.txt",
+      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-spring-case-insensitive-map/M3LinkedCaseInsensitiveMap.java.txt",
       "sha256": "450e3f70be37f0fa0fcee7edd4adc8a2eea4a05a40646fb3e5c531e4ee8447ca",
       "bytes": 31224
     },
     {
-      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/owned-spring-case-insensitive-map/engine-receipt.tsv",
+      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-spring-case-insensitive-map/engine-receipt.tsv",
       "sha256": "7b1a2aee52fb611cc6fdf406bee8eeaf25d505598d4cbb08b86b228f7e6670de",
       "bytes": 179
     },
     {
-      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/owned-spring-case-insensitive-map/manifest.tsv",
+      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-spring-case-insensitive-map/manifest.tsv",
       "sha256": "0e81b6c09c63b3c9c73007f4585a85112259ec079606a646029fcf55812c99fe",
       "bytes": 239
     },
     {
-      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/owned-spring-case-insensitive-map/source-receipt.tsv",
+      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-spring-case-insensitive-map/source-receipt.tsv",
       "sha256": "e060f53dbdc5b66063a840175a9f6364ddad90d77d2475588b2bf24f617fbc37",
       "bytes": 202
     },
     {
-      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/test/java/com/synexia/rewrite/M3OwnedSpringCaseInsensitiveMapRecipeTest.java",
+      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/test/java/jdk/internal/m3/rewrite/M3OwnedSpringCaseInsensitiveMapRecipeTest.java",
       "sha256": "04943fca61debfe7ae48fe8fb83899e3cb9b128f5dce78cbbc4c4cbdb31fe135",
       "bytes": 13550
     },

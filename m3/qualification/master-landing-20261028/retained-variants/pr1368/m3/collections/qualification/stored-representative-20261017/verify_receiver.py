@@ -8,13 +8,13 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[4]
 EXPECTED = {
-    "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java":
+    "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java":
         "e61f94f0262878726b5c7255ebc3aa655a7808c4d1544a8bd0ee3fd1bc49f1a7",
-    "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java":
+    "m3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java":
         "51188863415920856a0f5e69ea8a54735e8502d7c0bcf8ca42fcf3a84bf1c6ec",
-    "m3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeContract.java":
+    "m3/collections/src/test/java/jdk/m3/collections/M3StoredRepresentativeContract.java":
         "821b8ae1ec22516dceef16f5951ab66fe3f6db799f26732c620202bab862754b",
-    "m3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeTest.java":
+    "m3/collections/src/test/java/jdk/m3/collections/M3StoredRepresentativeTest.java":
         "b948aca5ae6f14b80027429e6b820800927d3013bebb972fa92b712383af55f3"
 }
 for path, expected in EXPECTED.items():
@@ -24,8 +24,8 @@ for path, expected in EXPECTED.items():
     actual = sha256(file.read_bytes()).hexdigest()
     if actual != expected:
         sys.exit("M3_STORED_REP_RECEIVER_FAIL hash=" + path + " found=" + actual)
-read = (ROOT / "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java").read_text()
-write = (ROOT / "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java").read_text()
+read = (ROOT / "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java").read_text()
+write = (ROOT / "m3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java").read_text()
 for claim in ["source instanceof Set<?>", "storedKey(Object query)",
               "nav.floorEntry(alias)", "sorted.tailSet(alias).first()"]:
     if claim not in read:

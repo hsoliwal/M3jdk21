@@ -115,14 +115,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=com.m3.tooling.dag.M3BackportPacketMain             -Dexec.args="$PWD/m3/backports/recipes/jep-485-gatherers/packet.tsv $PWD/m3/backports/recipes/jep-485-gatherers/atom-evidence.tsv"             exec:java
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=jdk.m3.tooling.dag.M3BackportPacketMain             -Dexec.args="$PWD/m3/backports/recipes/jep-485-gatherers/packet.tsv $PWD/m3/backports/recipes/jep-485-gatherers/atom-evidence.tsv"             exec:java
 
       - name: 6 - Project exact packet to Camel Airflow and Drools
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p target/jep485-projection
-          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=com.m3.tooling.dag.M3OrchestrationProjectionMain             -Dexec.args="$PWD/m3/backports/recipes/jep-485-gatherers/packet.tsv $PWD/target/jep485-projection $PWD/m3/backports/recipes/jep-485-gatherers/atom-evidence.tsv"             exec:java
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=jdk.m3.tooling.dag.M3OrchestrationProjectionMain             -Dexec.args="$PWD/m3/backports/recipes/jep-485-gatherers/packet.tsv $PWD/target/jep485-projection $PWD/m3/backports/recipes/jep-485-gatherers/atom-evidence.tsv"             exec:java
           test -s target/jep485-projection/M3BackportRoutes.java
           test -s target/jep485-projection/m3_backport_dag.py
           test -s target/jep485-projection/m3_backport_rules.drl
@@ -187,7 +187,7 @@ jobs:
 
           manifest = Path(
               "m3/tooling/migration-recipes/src/main/resources/"
-              "com/m3/rewrite/backport/jdk21-hash-pinned/"
+              "jdk/m3/rewrite/backport/jdk21-hash-pinned/"
               "jdk24-jep485-stream-gatherers/manifest.tsv"
           )
           expected = sorted(

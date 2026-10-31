@@ -1,4 +1,4 @@
 // SPDX-License-Identifier: Apache-2.0
-module com.m3.runtime.capability {
-    exports com.m3.runtime.capability;
+module jdk.m3.runtime.capability {
+    exports jdk.m3.runtime.capability;
 }

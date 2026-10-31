@@ -13,8 +13,8 @@
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
 
-import com.m3.collections.M3LongIterator;
-import com.m3.collections.M3LongLongTreeMap;
+import jdk.m3.collections.M3LongIterator;
+import jdk.m3.collections.M3LongLongTreeMap;
 import java.lang.management.ManagementFactory;
 import java.lang.reflect.Field;
 import java.util.ArrayList;

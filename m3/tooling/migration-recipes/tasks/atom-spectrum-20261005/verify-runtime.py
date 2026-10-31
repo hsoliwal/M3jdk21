@@ -89,7 +89,7 @@ def main():
                 'ZERO_CHANGE_SWEEP_REQUIRED')
         sweeps[str(list(order))] = len(sequence) // 3
 
-    manifest = owner / 'src/test/resources/com/m3/rewrite/atom/spectrum/CORPUS.tsv'
+    manifest = owner / 'src/test/resources/jdk/m3/rewrite/atom/spectrum/CORPUS.tsv'
     pins = {row['path']: row for row in rows(manifest)}
     require(len(pins) == 100, 'REAL_CORPUS_DENOMINATOR')
     for name, pin in pins.items():
@@ -119,7 +119,7 @@ def main():
     materialized = target / 'materialized/atom-pattern-spectrum'
     materialization = rows(materialized / 'MATERIALIZATION.tsv')
     require(len(materialization) == 2, 'RECIPE_OWNER_DENOMINATOR')
-    crate = owner / 'src/main/resources/com/synexia/rewrite/hash-pinned-java/atom-pattern-spectrum'
+    crate = owner / 'src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/atom-pattern-spectrum'
     targets = {}
     for line in (crate / 'manifest.tsv').read_text(encoding='utf-8').splitlines():
         path, before, after, filename = line.split('\t')

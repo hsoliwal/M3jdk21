@@ -1,7 +1,7 @@
 {
   "exact_canonical_commit": "Recorded separately in CANONICAL_HANDOFF.json",
   "qualification_records_unchanged": true,
-  "raw_receipts_relative_to_canonical": "synexia-openrewrite-recipes/recipe-crates/m3fs-vfs-20261020/evidence/publication-base-recheck/receiving-base",
+  "raw_receipts_relative_to_canonical": "m3-openrewrite-recipes/recipe-crates/m3fs-vfs-20261020/evidence/publication-base-recheck/receiving-base",
   "receipt": {
     "base_commit": "95d0266ff15ae1f11876cce7360b155ef33a1862",
     "base_tree": "47e6569abd83f2a3e63bbd02ed334a4021d847f2",
@@ -94,12 +94,12 @@
     "master_rechecked_at_end": "065e3626aac2de62d2f531aec3bed2fca533c9f9",
     "payload_or_frozen_evidence_edits": 0,
     "policy_review": {
-      "authoritative_existing_spec": "m3/docs/mop-recipe-improvement-memory.md; SYNEXIA-MOP-RECIPE-MEMORY-1; MOP-RCM/1.0; linked from unchanged AGENTS.md",
+      "authoritative_existing_spec": "m3/docs/mop-recipe-improvement-memory.md; M3-MOP-RECIPE-MEMORY-1; MOP-RCM/1.0; linked from unchanged AGENTS.md",
       "canonical_memory_paths": [
-        "synexia-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/memory/LESSONS.md",
-        "synexia-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/memory/events/70d9ce2b7ab1964ad8c17850ed2e051ca810b44a571cb3666a8991513742237b.json",
-        "synexia-openrewrite-recipes/recipe-crates/m3fs-vfs-20261020/memory/LESSONS.md",
-        "synexia-openrewrite-recipes/recipe-crates/m3fs-vfs-20261020/memory/events/0faf72f685519bd528eaae0415ea0bc0af63ede2a4ea7e488aee67dfe82db508.json"
+        "m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/memory/LESSONS.md",
+        "m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/memory/events/70d9ce2b7ab1964ad8c17850ed2e051ca810b44a571cb3666a8991513742237b.json",
+        "m3-openrewrite-recipes/recipe-crates/m3fs-vfs-20261020/memory/LESSONS.md",
+        "m3-openrewrite-recipes/recipe-crates/m3fs-vfs-20261020/memory/events/0faf72f685519bd528eaae0415ea0bc0af63ede2a4ea7e488aee67dfe82db508.json"
       ],
       "exact_head_policy_files": {
         "AGENTS.md": {

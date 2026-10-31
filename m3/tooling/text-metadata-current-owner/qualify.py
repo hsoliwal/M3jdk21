@@ -13,12 +13,12 @@ import xml.etree.ElementTree as ET
 HERE = Path(__file__).resolve().parent
 RECEIVER = HERE.parents[2]
 SOURCE = HERE / "source"
-TASK_REL = "synexia-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019"
+TASK_REL = "m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019"
 TASK = SOURCE / TASK_REL
 SDK = TASK / "guard-sdk"
 ROOT = Path(os.environ["M3_PROOF_ROOT"]).resolve()
 ARTIFACTS = ROOT / "artifacts"
-SUITE = "com.synexia.rewrite.M3TextMetadataCurrentOwnerRecipeTest"
+SUITE = "jdk.internal.m3.rewrite.M3TextMetadataCurrentOwnerRecipeTest"
 METHODS = {"namedCurrentTupleReplaysAsExactFixedPointInBothOrders",
            "historicalRecipeAndArchivesRetainTheirOriginalAdmissionBoundary",
            "refusesUnknownMixedMissingAndDuplicateOwnersWithoutMutation"}
@@ -205,9 +205,9 @@ def report():
             "actual SDK scheduling receipt differs")
     provider_classes = {}
     for name, expected in ENGINES.items():
-        owner = SDK / ("pinned-engine/com/synexia/rewrite/" + name + ".java")
+        owner = SDK / ("pinned-engine/jdk/internal/m3/rewrite/" + name + ".java")
         require(blob(regular(owner).read_bytes()) == expected, "provider source drift")
-        provider_classes[name] = class_identity(SDK / ("target/classes/com/synexia/rewrite/" + name + ".class"))
+        provider_classes[name] = class_identity(SDK / ("target/classes/jdk/internal/m3/rewrite/" + name + ".class"))
     require([row["label"] for row in execution["commands"]] == COMMANDS, "exact native command sequence required")
     commands = []
     refusal_labels = {"text-metadata-historical-refusal", "text-metadata-missing-library-refusal"}
@@ -225,7 +225,7 @@ def report():
     header_ref = execution["generatedJniHeader"]
     header = regular(ROOT / str(relative(header_ref["path"]))).read_bytes()
     require(len(header) == header_ref["bytes"] and digest(header) == header_ref["sha256"]
-            and header == regular(work / "headers/com_synexia_mindex_TextMetadata.h").read_bytes(),
+            and header == regular(work / "headers/jdk_internal_m3_mindex_TextMetadata.h").read_bytes(),
             "actual generated JNI header differs")
     library = regular(work / "libm3_summary_proof.so").read_bytes()
     native = execution["nativeLibrary"]

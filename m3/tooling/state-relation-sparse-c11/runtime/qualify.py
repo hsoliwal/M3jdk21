@@ -133,7 +133,7 @@ def inputs(source):
     }, "COMPLETE_PROOF_EXPECTATION_DRIFT")
     host = runpy.run_path(str(safe_file(TASK.parent, "qualify.py")), run_name="m3_sparse_owner_plan_reuse")
     sdk = TASK.parent / "sdk"
-    fixtures = sdk / "src/main/resources/com/synexia/rewrite/state-relation-sparse-c11-20261020"
+    fixtures = sdk / "src/main/resources/jdk/internal/m3/rewrite/state-relation-sparse-c11-20261020"
     original, post, actual = {}, {}, {}
     for row in rows:
         name = row["path"]
@@ -351,7 +351,7 @@ def native_benchmark(root, source, env, jdk, cc, nm, generated, commands, metada
     require(not work.exists() and not work.is_symlink(), "FRESH_BENCHMARK_DIRECTORY_REQUIRED")
     work.mkdir()
     sdk = TASK.parent / "sdk"
-    original = sdk / "src/main/resources/com/synexia/rewrite/state-relation-sparse-c11-20261020/before" / NATIVE
+    original = sdk / "src/main/resources/jdk/internal/m3/rewrite/state-relation-sparse-c11-20261020/before" / NATIVE
     emitted = sdk / metadata["generatedCandidate"]["path"]
     harness = safe_file(TASK, "paired_bench.c")
     checker = safe_file(TASK, "verify_benchmark.py")
@@ -497,7 +497,7 @@ def execute(root, source, ident):
     proof_marker(raw, JAVA_MARKER)
     commands.append(row)
     sdk = TASK.parent / "sdk"
-    original_c = sdk / "src/main/resources/com/synexia/rewrite/state-relation-sparse-c11-20261020/before" / NATIVE
+    original_c = sdk / "src/main/resources/jdk/internal/m3/rewrite/state-relation-sparse-c11-20261020/before" / NATIVE
     emitted_c = sdk / metadata["generatedCandidate"]["path"]
     variants = (("baseline", original_c, []), ("sparse", emitted_c, []),
                 ("portable", emitted_c, ["-DM3_STATE_RELATION_FORCE_POSITIONAL_SCAN"]))

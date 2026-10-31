@@ -13,9 +13,9 @@ fi
 OUT=$(cd -- "$OUT" && pwd)
 JAVA_HOME=${JAVA_HOME:-$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")}
 JAVAC="$JAVA_HOME/bin/javac"; JAVA="$JAVA_HOME/bin/java"
-J=m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java
+J=m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java
 C=m3/collections/src/main/native/collections/m3_index_path_masks.c
-T=m3/collections/src/test/java/com/m3/collections/M3PathMaskChunkProof.java
+T=m3/collections/src/test/java/jdk/m3/collections/M3PathMaskChunkProof.java
 (cd "$ROOT"; printf '%s  %s\n' \
   6703eef75122fd9c18dba196249f2b4420030ee712f73f6929a9a32ba07a3b5a "$J" \
   3b2aa04fa4d6b228482e661e26b0198145e4ec74d17afc1e563f9bf5391d4011 "$C" \
@@ -26,15 +26,15 @@ mkdir -p "$OUT/classes" "$OUT/headers" "$OUT/native" "$OUT/missing"
 "${CC:-gcc}" -std=c17 -Wall -Wextra -Werror -pedantic -fPIC -shared \
   -fsanitize=undefined -fno-sanitize-recover=all \
   -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
-  -include "$OUT/headers/com_m3_collections_M3IndexPathMasks.h" \
+  -include "$OUT/headers/jdk_m3_collections_M3IndexPathMasks.h" \
   "$ROOT/$C" -o "$OUT/native/libm3_collections_pathmask.so"
 export UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1
-"$JAVA" -Xcheck:jni -Djava.library.path="$OUT/missing" -cp "$OUT/classes" com.m3.collections.M3PathMaskChunkProof java
-"$JAVA" -Xcheck:jni -Djava.library.path="$OUT/missing" -cp "$OUT/classes" com.m3.collections.M3PathMaskChunkProof missing
+"$JAVA" -Xcheck:jni -Djava.library.path="$OUT/missing" -cp "$OUT/classes" jdk.m3.collections.M3PathMaskChunkProof java
+"$JAVA" -Xcheck:jni -Djava.library.path="$OUT/missing" -cp "$OUT/classes" jdk.m3.collections.M3PathMaskChunkProof missing
 for mode in native defensive-null defensive-offset; do
-  "$JAVA" -Xcheck:jni -Djava.library.path="$OUT/native" -cp "$OUT/classes" com.m3.collections.M3PathMaskChunkProof "$mode"
+  "$JAVA" -Xcheck:jni -Djava.library.path="$OUT/native" -cp "$OUT/classes" jdk.m3.collections.M3PathMaskChunkProof "$mode"
 done
-"$JAVA" -Xint -Xcheck:jni -Djava.library.path="$OUT/native" -cp "$OUT/classes" com.m3.collections.M3PathMaskChunkProof native
-"$JAVA_HOME/bin/javap" -public -s -classpath "$OUT/classes" com.m3.collections.M3IndexPathMasks > "$OUT/public-api.txt"
+"$JAVA" -Xint -Xcheck:jni -Djava.library.path="$OUT/native" -cp "$OUT/classes" jdk.m3.collections.M3PathMaskChunkProof native
+"$JAVA_HOME/bin/javap" -public -s -classpath "$OUT/classes" jdk.m3.collections.M3IndexPathMasks > "$OUT/public-api.txt"
 printf '%s  %s\n' a05a6c0d9517cce9a71778f724f36753b38af0b1d71dd30afb7f296649b02537 "$OUT/public-api.txt" | sha256sum -c -
 printf 'PASS exact received product-kernel proof; full collection/JDK/Windows qualification NOT_RUN\n'

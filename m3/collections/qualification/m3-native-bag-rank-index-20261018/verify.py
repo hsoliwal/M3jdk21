@@ -9,11 +9,11 @@ HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[3]
 ORACLE = HERE / "recipe-mirror"
 TARGETS = {
-    "m3/collections/src/main/java/com/m3/collections/M3BagRankIndex.java":
+    "m3/collections/src/main/java/jdk/m3/collections/M3BagRankIndex.java":
         ("a8686254c2439bcdd1472bdddbefd5bfa7c4b2efce24aa89b6c1453e208515a5", "M3BagRankIndex.java.txt"),
-    "m3/collections/src/test/java/com/m3/collections/M3BagRankIndexSelfTest.java":
+    "m3/collections/src/test/java/jdk/m3/collections/M3BagRankIndexSelfTest.java":
         ("9f79cf7605c30bd1766878312af6ac2e880d2faf03f790c579146aee951704ec", "M3BagRankIndexSelfTest.java.txt"),
-    "m3/collections/src/test/java/com/m3/collections/M3BagRankIndexTest.java":
+    "m3/collections/src/test/java/jdk/m3/collections/M3BagRankIndexTest.java":
         ("58709c47d26fb7819d314fd2793caf85bd24edf84242f7db27a774b058abe827", "M3BagRankIndexTest.java.txt"),
 }
 def read(path):

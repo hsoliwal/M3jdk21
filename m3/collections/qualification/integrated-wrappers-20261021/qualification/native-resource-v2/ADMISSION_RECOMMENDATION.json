@@ -993,7 +993,7 @@
         "entries": [
           {
             "width": "int",
-            "symbol": "Java_com_m3_collections_M3IndexMaskCompactor_selectWindowMasksNative",
+            "symbol": "Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowMasksNative",
             "object_offset": "0x1340",
             "function_bytes": 751,
             "principal_frame_reservation_bytes": 1368,
@@ -1003,7 +1003,7 @@
           },
           {
             "width": "long",
-            "symbol": "Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowMasksNative",
+            "symbol": "Java_jdk_m3_collections_M3IndexMaskCompactor_selectLongWindowMasksNative",
             "object_offset": "0x1630",
             "function_bytes": 751,
             "principal_frame_reservation_bytes": 2392,
@@ -1020,7 +1020,7 @@
         "entries": [
           {
             "width": "int",
-            "symbol": "Java_com_m3_collections_M3IndexMaskCompactor_selectWindowMasksNative",
+            "symbol": "Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowMasksNative",
             "object_offset": "0x1340",
             "function_bytes": 862,
             "principal_frame_reservation_bytes": 1368,
@@ -1030,7 +1030,7 @@
           },
           {
             "width": "long",
-            "symbol": "Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowMasksNative",
+            "symbol": "Java_jdk_m3_collections_M3IndexMaskCompactor_selectLongWindowMasksNative",
             "object_offset": "0x16a0",
             "function_bytes": 862,
             "principal_frame_reservation_bytes": 2392,
@@ -1047,7 +1047,7 @@
         "entries": [
           {
             "width": "int",
-            "symbol": "Java_com_m3_collections_M3IndexMaskCompactor_selectWindowMasksNative",
+            "symbol": "Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowMasksNative",
             "object_offset": "0x1340",
             "function_bytes": 937,
             "principal_frame_reservation_bytes": 1384,
@@ -1057,7 +1057,7 @@
           },
           {
             "width": "long",
-            "symbol": "Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowMasksNative",
+            "symbol": "Java_jdk_m3_collections_M3IndexMaskCompactor_selectLongWindowMasksNative",
             "object_offset": "0x16f0",
             "function_bytes": 937,
             "principal_frame_reservation_bytes": 2408,
@@ -1156,7 +1156,7 @@
       "sha256": "57147b03247d18557dfbe21a0dfc1328e33e58001e429cf385bd9d99aa20f580"
     },
     {
-      "path": "input/m3/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "path": "input/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
       "bytes": 21506,
       "sha256": "c1e6205563921072f7ac86be79862e4e16c69cdf5951057331d4ca8a83025052"
     },

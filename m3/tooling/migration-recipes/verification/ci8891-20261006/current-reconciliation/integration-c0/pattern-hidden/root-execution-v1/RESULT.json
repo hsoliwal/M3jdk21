@@ -1,5 +1,5 @@
 {
-  "schema": "synexia.root-package-execution/1",
+  "schema": "m3.root-package-execution/1",
   "status": "PASS",
   "spec": {
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/packaging-authoring-v1/ROOT-COMMANDS.json",

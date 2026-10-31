@@ -6,7 +6,7 @@
   "vendorAggregator": {
     "path": "m3/vendor/third_party/pom.xml",
     "pomBlob": "287d47d2c44749f0d4d0cf903002137b11a50a4b",
-    "gav": "com.m3.vendor:third-party-sources:1.0.0-SNAPSHOT"
+    "gav": "jdk.m3.vendor:third-party-sources:1.0.0-SNAPSHOT"
   },
   "consumer": {
     "module": "m3/tooling/tq-sync",
@@ -479,7 +479,7 @@
     {
       "module": "m3-tooling-shaded",
       "pomBlob": "c28392d6c779ba72feb361285f161c1accf4701d",
-      "gav": "com.m3.vendor:m3-tooling-third-party:8.17.1-m3-shaded-1"
+      "gav": "jdk.m3.vendor:m3-tooling-third-party:8.17.1-m3-shaded-1"
     },
     {
       "module": "micrometer-core",

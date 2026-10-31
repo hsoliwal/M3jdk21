@@ -32,7 +32,7 @@ jobs:
           echo '723151604d98196f061629bac4ca9be380e72e65e45801e439babf45fe6f0b8c  m3/collections/implementations/spring-multi-value-map-adapter/src/main/java/org/springframework/util/MultiValueMap.java' | sha256sum -c -
           echo 'ac2cdbf7b1f2f3c3bbf8b92c64f98f0db8b983815b5cd33a67841ae66ebdccc0  m3/collections/implementations/spring-multi-value-map-adapter/src/main/java/org/springframework/util/MultiToSingleValueMapAdapter.java' | sha256sum -c -
           echo '21710244a6cde40ba87b20bc2fee407d82591da9d415383868a2df0ee59860d4  m3/collections/implementations/spring-multi-value-map-adapter/src/main/java/org/springframework/util/SingleToMultiValueMapAdapter.java' | sha256sum -c -
-          echo '09e92f19a8c832a99a45030640b491820a5eb7e01a4866241086b4ef2ef4bd81  m3/collections/implementations/spring-multi-value-map-adapter/src/test/java/com/m3/collections/spring/M3SpringInlineApiBoundaryTest.java' | sha256sum -c -
+          echo '09e92f19a8c832a99a45030640b491820a5eb7e01a4866241086b4ef2ef4bd81  m3/collections/implementations/spring-multi-value-map-adapter/src/test/java/jdk/m3/collections/spring/M3SpringInlineApiBoundaryTest.java' | sha256sum -c -
       - name: Strict original Java21 compile with ZERO Spring/JSR305 or M3 runtime jars
         shell: bash
         run: |

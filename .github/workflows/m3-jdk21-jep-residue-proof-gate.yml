@@ -9,10 +9,10 @@ on:
       - 'm3/backports/test_jep_residue.py'
       - 'm3/backports/test_m3_extension_residue.py'
       - 'm3/backports/recipes/jep-residue-proof-gate/**'
-      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3JepResidueProofGateReceiverRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3JepResidueProofGateReceiverRecipeTest.java'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk21-jep-residue-proof/**'
-      - 'm3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/jep-residue-proof/**'
+      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3JepResidueProofGateReceiverRecipe.java'
+      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3JepResidueProofGateReceiverRecipeTest.java'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jdk21-jep-residue-proof/**'
+      - 'm3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/jep-residue-proof/**'
       - '.github/workflows/m3-jdk21-jep-residue-proof-gate.yml'
   workflow_dispatch:
 
@@ -54,7 +54,7 @@ jobs:
       - name: Install provenance-pinned Synexia custody artifact
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/synexia-import/pure-int-recipe-custody/pom.xml clean install
+          mvn -B -ntp -f m3/m3-import/pure-int-recipe-custody/pom.xml clean install
       - name: Java21 Maven/OpenRewrite receiver replay
         run: |
           set -euo pipefail

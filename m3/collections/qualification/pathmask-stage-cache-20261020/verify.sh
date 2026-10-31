@@ -10,7 +10,7 @@ from pathlib import Path
 import sys
 
 root = Path(sys.argv[1])
-resource = root / "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java"
+resource = root / "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java"
 crates = ("m3-native-recipe-path-20261020", "m3-native-pathmask-stagecache-20261020",
           "m3-native-pathmask-test-20261020")
 seen = set()
@@ -42,7 +42,7 @@ cc -std=c17 -g -O1 -fPIC -shared -Wall -Wextra -Wpedantic -Werror \
   -o "$work/libm3_collections_pathmask.so"
 mkdir -p "$work/classes"
 javac -Xlint:all -Werror -d "$work/classes" \
-  "$root/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java" \
-  "$root/m3/collections/qualification/pathmask-stage-cache-20261020/src/test/java/com/m3/collections/M3PathMaskStageCacheParity.java"
+  "$root/m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java" \
+  "$root/m3/collections/qualification/pathmask-stage-cache-20261020/src/test/java/jdk/m3/collections/M3PathMaskStageCacheParity.java"
 java -Xcheck:jni -Djava.library.path="$work" -cp "$work/classes" \
-  com.m3.collections.M3PathMaskStageCacheParity
+  jdk.m3.collections.M3PathMaskStageCacheParity

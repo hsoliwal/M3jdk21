@@ -2,8 +2,8 @@
   "schema": "m3-agent-recipe-source-custody/v1",
   "source_repo": "hsoliwal/com.synexia",
   "source_commit": "078389fdfd4ba83ffc8886e05a571f8c144c1962",
-  "source_module": "synexia-m3-recipe",
-  "mechanical_recipe": "synexia-m3-recipe/scripts/generate_agent_receiver.py",
+  "source_module": "m3-recipe",
+  "mechanical_recipe": "m3-recipe/scripts/generate_agent_receiver.py",
   "license": "Apache-2.0",
   "qualified": false,
   "files": [

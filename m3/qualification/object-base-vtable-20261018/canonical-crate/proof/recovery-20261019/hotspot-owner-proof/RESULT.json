@@ -43,6 +43,6 @@
   "vtable_guard_changed": false,
   "runtime_fixture_sha256": "309af1ec6642cf153407164dced08dc3b9a51fe5f380d44d32a0765bd36e07cb",
   "runtime_fixture_strict_compile": "PASS; --release21 --patch-module java.base -Xlint:all -Werror",
-  "runtime_fixture_classes": "/workspace/scratch/87fb3604f641/m3-implementation/collections-lane/synexia/synexia-openrewrite-recipes/recipe-crates/m3-object-base-vtable-20261018/target/runtime-classes",
+  "runtime_fixture_classes": "/workspace/scratch/87fb3604f641/m3-implementation/collections-lane/m3/m3-openrewrite-recipes/recipe-crates/m3-object-base-vtable-20261018/target/runtime-classes",
   "full_image_and_runtime_fixture": "PENDING parent rebuild after exact source admission"
 }

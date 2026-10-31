@@ -21,7 +21,7 @@ case "$mode" in
 esac
 manifest="$target/source-files.tsv"
 receipt="$target/execution-receipt.tsv"
-recipe="${SYNEXIA_ATOM_PATTERN_RECIPE:-com.synexia.m3.EveryModuleAtomPatternMastery}"
+recipe="${M3_ATOM_PATTERN_RECIPE:-jdk.internal.m3.EveryModuleAtomPatternMastery}"
 
 fail() {
   printf '%s\n' "$1" >&2
@@ -105,9 +105,9 @@ if ((java_files == 0)); then
   exit 0
 fi
 
-version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
-plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
-artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+version="${M3_RECIPE_VERSION:?set M3_RECIPE_VERSION to an installed m3-openrewrite-recipes version}"
+plugin="${M3_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:m3-openrewrite-recipes:${version}"
 printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
 
 if [[ -x "$repo/mvnw" ]]; then

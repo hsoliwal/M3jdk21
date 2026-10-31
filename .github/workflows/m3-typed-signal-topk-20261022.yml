@@ -3,9 +3,9 @@ name: M3JDK21 typed signals stable primitive TopK Java21
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3SignalColumns.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3SignalTopK.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3SignalTopK*.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3SignalColumns.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3SignalTopK.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3SignalTopK*.java'
       - 'm3/collections/qualification/typed-signal-topk-20261022/**'
       - '.github/workflows/m3-typed-signal-topk-20261022.yml'
   workflow_dispatch:
@@ -36,10 +36,10 @@ jobs:
           out="$RUNNER_TEMP/m3-topk"
           mkdir -p "$out"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$out" \
-            m3/collections/src/main/java/com/m3/collections/M3SignalColumns.java \
-            m3/collections/src/main/java/com/m3/collections/M3SignalTopK.java \
-            m3/collections/src/test/java/com/m3/collections/M3SignalTopKSelfTest.java
-          java -cp "$out" com.m3.collections.M3SignalTopKSelfTest
+            m3/collections/src/main/java/jdk/m3/collections/M3SignalColumns.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3SignalTopK.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3SignalTopKSelfTest.java
+          java -cp "$out" jdk.m3.collections.M3SignalTopKSelfTest
   original-module-junit:
     runs-on: ubuntu-24.04
     timeout-minutes: 75

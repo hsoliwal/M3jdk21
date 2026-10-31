@@ -7,7 +7,7 @@ on:
       - 'm3/backports/backport_execution_waves.py'
       - 'm3/backports/test_backport_execution_waves.py'
       - 'm3/backports/BACKPORT_EXECUTION_WAVES.md'
-      - 'm3/compatibility/synexia-wave-admission-pin-20261014.tsv'
+      - 'm3/compatibility/m3-wave-admission-pin-20261014.tsv'
       - '.github/workflows/m3-jdk21-backport-wave-admission.yml'
   workflow_dispatch:
 

@@ -95,7 +95,7 @@
   ],
   "received_production_files": [
     {
-      "path": "m3jdk21/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "path": "m3jdk21/m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
       "bytes": 33662,
       "sha256": "c5140d787c8d4043d049c907bc813166a5515fead51401dd7c8e9e08010204ee"
     },

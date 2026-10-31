@@ -12,7 +12,7 @@ export JAVA_HOME="$M3_JAVA_HOME" PATH="$M3_JAVA_HOME/bin:$PATH"
 CC="${CC:-cc}"
 WORK="$(mktemp -d "${TMPDIR:-/tmp}/m3-jdk-views.XXXXXX")"
 trap 'rm -rf -- "$WORK"' EXIT
-COLL_REL=m3/collections/src/main/java/com/m3/collections
+COLL_REL=m3/collections/src/main/java/jdk/m3/collections
 PROOF_REL=m3/collections/qualification/jdk-rx7-view-convergence-20261019/proof
 INPUTS=(
   src/java.base/share/classes/java/util/SortedSet.java
@@ -56,7 +56,7 @@ java "${JAVA_ARGS[@]}" FilteredOwnerIntegration
 java "${JAVA_ARGS[@]}" RX7FindConvergence
 java -Xint "${JAVA_ARGS[@]}" RX7FindConvergence
 MASK="$ROOT/m3/collections/src/main/native/collections/m3_index_mask_window.c"
-"$CC" -std=c17 -O2 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=all -fPIC -shared -I"$M3_JAVA_HOME/include" -I"$M3_JAVA_HOME/include/linux" -include "$WORK/headers/com_m3_collections_M3IndexMaskWindow.h" "$MASK" -o "$WORK/native/libm3_collections_mask.so"
+"$CC" -std=c17 -O2 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=all -fPIC -shared -I"$M3_JAVA_HOME/include" -I"$M3_JAVA_HOME/include/linux" -include "$WORK/headers/jdk_m3_collections_M3IndexMaskWindow.h" "$MASK" -o "$WORK/native/libm3_collections_mask.so"
 java "${JAVA_ARGS[@]}" -Djava.library.path="$WORK/native" MaskWindowConvergence
 java "${JAVA_ARGS[@]}" -Djava.library.path="$WORK/missing" MaskWindowConvergence missing
 "$CC" -std=c17 -O2 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=all -I"$M3_JAVA_HOME/include" -I"$M3_JAVA_HOME/include/linux" "-DM3_WINDOW_SOURCE=\"$MASK\"" "$PROOF/MaskWindowWork.c" -o "$WORK/window-work"

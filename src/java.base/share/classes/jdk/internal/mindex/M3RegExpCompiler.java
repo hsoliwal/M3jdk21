@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Hitesh Soliwal and contributors
 //
-// Lineage (TARGET_OWNED_PORT, leaf R6-AUTOMATON, run 20261017-synexia-to-public):
+// Lineage (TARGET_OWNED_PORT, leaf R6-AUTOMATON, run 20261017-m3-to-public):
 //   Structure from Apache Lucene 9.10.0 org.apache.lucene.util.automaton.RegExp (git blob
 //   5ba8b957c326b62ef0fdd798bedf4f2d14ccf660; recursive descent union -> concatenation -> repetition -> simple
 //   expression, leaf-to-automaton reduction with minimization after every composite node, repetition work guard) and

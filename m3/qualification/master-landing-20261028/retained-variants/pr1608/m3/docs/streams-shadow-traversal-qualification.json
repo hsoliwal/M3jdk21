@@ -4,8 +4,8 @@
   "canonical_baseline": "7b849eaae565d5afccc98e0c8d46d0f02ebd9ca4",
   "dataset": "streams-files-20261020",
   "product_sources": {
-    "m3/file/src/main/java/com/m3/file/M3File.java": "89dda37a111a273789998e073e4526c4cef5b6abc5c15b5012c64931ca9b1c89",
-    "m3/file/src/test/java/com/m3/file/M3FileTraversalTest.java": "105e560d615760e2473796b7b17185bd2f3dadd1446bc2e63a7f461ec528a179",
+    "m3/file/src/main/java/jdk/m3/file/M3File.java": "89dda37a111a273789998e073e4526c4cef5b6abc5c15b5012c64931ca9b1c89",
+    "m3/file/src/test/java/jdk/m3/file/M3FileTraversalTest.java": "105e560d615760e2473796b7b17185bd2f3dadd1446bc2e63a7f461ec528a179",
     "src/java.base/share/classes/java/io/InputStream.java": "f48ebb4233436b882f046d7d58ad44f5b1edff7ce808a3e236754f6ae8a36531",
     "src/java.base/share/classes/java/io/OutputStream.java": "92adb9c2a5f62e87088ab7158c8e503c87745a60b5076ca4c3bd08c5823cdce6",
     "src/java.base/share/classes/java/io/ShadowInputStream.java": "81cfe0dd83132e550ad5f7efb858d0c1cf34fff33074bb786141fc4976fc6fd1",
@@ -37,7 +37,7 @@
   "canonical_recipe_repository": "hsoliwal/com.synexia",
   "canonical_recipe_commit": "652172556cdcc748c22829ace9075404445712a2",
   "canonical_recipe_pr": "https://github.com/hsoliwal/com.synexia/pull/12609",
-  "canonical_recipe_path": "synexia-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018",
-  "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+  "canonical_recipe_path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018",
+  "recipe": "jdk.internal.m3.m3jdk.CollectionsContractRefinement20261017",
   "attribution": "Copyright 2026 Hitesh Soliwal and contributors; Synexia MOP. Recipe metadata Apache-2.0; product/OpenJDK payload rights unchanged."
 }

@@ -47,7 +47,7 @@
     "actual_openrewrite_maven_verify": "PASS",
     "engine_source_revision": "1f9707f5d73bb462c1f73bc9f0b2399034344bd4",
     "errors": 0,
-    "existing_crate": "synexia-openrewrite-recipes/crates/m3-atom-pattern-multipass",
+    "existing_crate": "m3-openrewrite-recipes/crates/m3-atom-pattern-multipass",
     "failures": 0,
     "full_canonical_wrapper": {
       "actual_maven_compile_attempt": true,
@@ -62,66 +62,66 @@
     "suites": [
       {
         "errors": 0,
-        "evidence": "lab_com.synexia.m3.recipe.M3RegexPrecomputeMasteryTest",
+        "evidence": "lab_jdk.internal.m3.recipe.M3RegexPrecomputeMasteryTest",
         "failures": 0,
         "skipped": 0,
-        "suite": "com.synexia.m3.recipe.M3RegexPrecomputeMasteryTest",
+        "suite": "jdk.internal.m3.recipe.M3RegexPrecomputeMasteryTest",
         "tests": 5
       },
       {
         "errors": 0,
-        "evidence": "lab_com.synexia.m3.recipe.NativeRecipeBridgeTest",
+        "evidence": "lab_jdk.internal.m3.recipe.NativeRecipeBridgeTest",
         "failures": 0,
         "skipped": 0,
-        "suite": "com.synexia.m3.recipe.NativeRecipeBridgeTest",
+        "suite": "jdk.internal.m3.recipe.NativeRecipeBridgeTest",
         "tests": 6
       },
       {
         "errors": 0,
-        "evidence": "lab_com.synexia.rewrite.ApmPatternPrefixTest",
+        "evidence": "lab_jdk.internal.m3.rewrite.ApmPatternPrefixTest",
         "failures": 0,
         "skipped": 0,
-        "suite": "com.synexia.rewrite.ApmPatternPrefixTest",
+        "suite": "jdk.internal.m3.rewrite.ApmPatternPrefixTest",
         "tests": 3
       },
       {
         "errors": 0,
-        "evidence": "lab_com.synexia.rewrite.ApmRecipeTest",
+        "evidence": "lab_jdk.internal.m3.rewrite.ApmRecipeTest",
         "failures": 0,
         "skipped": 0,
-        "suite": "com.synexia.rewrite.ApmRecipeTest",
+        "suite": "jdk.internal.m3.rewrite.ApmRecipeTest",
         "tests": 6
       },
       {
         "errors": 0,
-        "evidence": "lab_com.synexia.rewrite.ApmRegexBoundaryTest",
+        "evidence": "lab_jdk.internal.m3.rewrite.ApmRegexBoundaryTest",
         "failures": 0,
         "skipped": 0,
-        "suite": "com.synexia.rewrite.ApmRegexBoundaryTest",
+        "suite": "jdk.internal.m3.rewrite.ApmRegexBoundaryTest",
         "tests": 2
       },
       {
         "errors": 0,
-        "evidence": "lab_com.synexia.rewrite.ApmRegexLanguageMasteryTest",
+        "evidence": "lab_jdk.internal.m3.rewrite.ApmRegexLanguageMasteryTest",
         "failures": 0,
         "skipped": 0,
-        "suite": "com.synexia.rewrite.ApmRegexLanguageMasteryTest",
+        "suite": "jdk.internal.m3.rewrite.ApmRegexLanguageMasteryTest",
         "tests": 5
       },
       {
         "errors": 0,
-        "evidence": "lab_com.synexia.rewrite.ApmRuntimeTest",
+        "evidence": "lab_jdk.internal.m3.rewrite.ApmRuntimeTest",
         "failures": 0,
         "skipped": 0,
-        "suite": "com.synexia.rewrite.ApmRuntimeTest",
+        "suite": "jdk.internal.m3.rewrite.ApmRuntimeTest",
         "tests": 11
       },
       {
         "errors": 0,
-        "evidence": "lab_com.synexia.rewrite.SbcRecipeTest",
+        "evidence": "lab_jdk.internal.m3.rewrite.SbcRecipeTest",
         "failures": 0,
         "skipped": 0,
-        "suite": "com.synexia.rewrite.SbcRecipeTest",
+        "suite": "jdk.internal.m3.rewrite.SbcRecipeTest",
         "tests": 96
       }
     ],
@@ -131,13 +131,13 @@
     {
       "actual_maven_verify": "PASS",
       "dataset": "baseline-doclint-final",
-      "descriptor_path": "synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/baseline-doclint-final/resources/META-INF/rewrite/m3-regex-language-mastery-20261021-baseline-doclint-final.yml",
+      "descriptor_path": "m3-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/baseline-doclint-final/resources/META-INF/rewrite/m3-regex-language-mastery-20261021-baseline-doclint-final.yml",
       "descriptor_sha256": "73879bf8533cd72cde3153b8294a2947df8c33537c33b30a149df6a41ec35923",
       "log_evidence": "baseline-doclint-final_sdk_log",
       "manifest_evidence": "baseline-doclint-final_manifest",
       "receiver_contract_cases": 9,
       "receiver_contract_evidence": "baseline-doclint-final_receiver_contract",
-      "recipe_id": "com.synexia.m3jdk.RegexLanguageMastery20261021",
+      "recipe_id": "jdk.internal.m3.m3jdk.RegexLanguageMastery20261021",
       "sdk_cases": 5,
       "sdk_inputs_evidence": "baseline-doclint-final_sdk_inputs",
       "sdk_results_evidence": "baseline-doclint-final_sdk_results",
@@ -150,13 +150,13 @@
     {
       "actual_maven_verify": "PASS",
       "dataset": "combined-c831",
-      "descriptor_path": "synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/combined-c831/resources/META-INF/rewrite/m3-regex-language-mastery-20261021-combined-c831.yml",
+      "descriptor_path": "m3-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/combined-c831/resources/META-INF/rewrite/m3-regex-language-mastery-20261021-combined-c831.yml",
       "descriptor_sha256": "527af1e3de1c62d5d5e72b927a8cd57d2d1463cc4b3f1043dc8a272be1485a90",
       "log_evidence": "combined-c831_sdk_log",
       "manifest_evidence": "combined-c831_manifest",
       "receiver_contract_cases": 9,
       "receiver_contract_evidence": "combined-c831_receiver_contract",
-      "recipe_id": "com.synexia.m3jdk.RegexLanguageMastery20261021",
+      "recipe_id": "jdk.internal.m3.m3jdk.RegexLanguageMastery20261021",
       "sdk_cases": 5,
       "sdk_inputs_evidence": "combined-c831_sdk_inputs",
       "sdk_results_evidence": "combined-c831_sdk_results",
@@ -179,13 +179,13 @@
     {
       "actual_maven_verify": "PASS",
       "dataset": "collections-c831",
-      "descriptor_path": "synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/collections-c831/resources/META-INF/rewrite/m3-regex-language-mastery-20261021-collections-c831.yml",
+      "descriptor_path": "m3-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/collections-c831/resources/META-INF/rewrite/m3-regex-language-mastery-20261021-collections-c831.yml",
       "descriptor_sha256": "e7f5780f5353de451ad82c58558c1bc746d05c993ebacf2cde8732bf2d5cc378",
       "log_evidence": "collections-c831_sdk_log",
       "manifest_evidence": "collections-c831_manifest",
       "receiver_contract_cases": 9,
       "receiver_contract_evidence": "collections-c831_receiver_contract",
-      "recipe_id": "com.synexia.m3jdk.RegexLanguageMastery20261021",
+      "recipe_id": "jdk.internal.m3.m3jdk.RegexLanguageMastery20261021",
       "sdk_cases": 5,
       "sdk_inputs_evidence": "collections-c831_sdk_inputs",
       "sdk_results_evidence": "collections-c831_sdk_results",
@@ -201,13 +201,13 @@
     {
       "actual_maven_verify": "PASS",
       "dataset": "unicode-prefix-c831",
-      "descriptor_path": "synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/unicode-prefix-c831/resources/META-INF/rewrite/m3-regex-language-mastery-20261021-unicode-prefix-c831.yml",
+      "descriptor_path": "m3-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/unicode-prefix-c831/resources/META-INF/rewrite/m3-regex-language-mastery-20261021-unicode-prefix-c831.yml",
       "descriptor_sha256": "78b73b1a84bd73b642cd3f2f0ca4e8f919459616b8c608e581de4439726d63c0",
       "log_evidence": "unicode-prefix-c831_sdk_log",
       "manifest_evidence": "unicode-prefix-c831_manifest",
       "receiver_contract_cases": 9,
       "receiver_contract_evidence": "unicode-prefix-c831_receiver_contract",
-      "recipe_id": "com.synexia.m3jdk.RegexLanguageMastery20261021",
+      "recipe_id": "jdk.internal.m3.m3jdk.RegexLanguageMastery20261021",
       "sdk_cases": 5,
       "sdk_inputs_evidence": "unicode-prefix-c831_sdk_inputs",
       "sdk_results_evidence": "unicode-prefix-c831_sdk_results",
@@ -707,7 +707,7 @@
   "evidence": {
     "baseline-doclint-final_manifest": {
       "bytes": 215,
-      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/baseline-doclint-final/resources/com/synexia/rewrite/hash-pinned-java/m3-regex-language-mastery-20261021-baseline-doclint-final/manifest.tsv",
+      "custody_relative_path": "regex-mastery-20261021/repo/m3-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/baseline-doclint-final/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-regex-language-mastery-20261021-baseline-doclint-final/manifest.tsv",
       "sha256": "37f836ff0d5adf9774a2a0edd969c5ce53d324d9ba346d5973040c02ca6a9a78"
     },
     "baseline-doclint-final_receiver_contract": {
@@ -717,7 +717,7 @@
     },
     "baseline-doclint-final_sdk_inputs": {
       "bytes": 2471,
-      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/target/baseline-doclint-final/candidate/SDK_INPUTS.tsv",
+      "custody_relative_path": "regex-mastery-20261021/repo/m3-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/target/baseline-doclint-final/candidate/SDK_INPUTS.tsv",
       "sha256": "ad8b4983b0e5d055ad1322540c4f5902c066faaa05cccad8bb37a4349ce081fb"
     },
     "baseline-doclint-final_sdk_log": {
@@ -727,7 +727,7 @@
     },
     "baseline-doclint-final_sdk_results": {
       "bytes": 247,
-      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/target/baseline-doclint-final/candidate/SDK_RESULTS.tsv",
+      "custody_relative_path": "regex-mastery-20261021/repo/m3-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/target/baseline-doclint-final/candidate/SDK_RESULTS.tsv",
       "sha256": "540150f201ddb4207737326004ff46d412839225673f2b2977274e0c2cd3d780"
     },
     "baseline_build": {
@@ -827,7 +827,7 @@
     },
     "collections-c831_manifest": {
       "bytes": 739,
-      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/collections-c831/resources/com/synexia/rewrite/hash-pinned-java/m3-regex-language-mastery-20261021-collections-c831/manifest.tsv",
+      "custody_relative_path": "regex-mastery-20261021/repo/m3-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/collections-c831/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-regex-language-mastery-20261021-collections-c831/manifest.tsv",
       "sha256": "adce7d23e9dfd1a42517b7d35e7c59d36934962912abffcd7a02f64175427a14"
     },
     "collections-c831_receiver_contract": {
@@ -837,7 +837,7 @@
     },
     "collections-c831_sdk_inputs": {
       "bytes": 3121,
-      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/target/collections-c831/candidate/SDK_INPUTS.tsv",
+      "custody_relative_path": "regex-mastery-20261021/repo/m3-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/target/collections-c831/candidate/SDK_INPUTS.tsv",
       "sha256": "3371282541a9b70f89067839dff54e11648944a99a476518a5ce68d38cc3741b"
     },
     "collections-c831_sdk_log": {
@@ -847,12 +847,12 @@
     },
     "collections-c831_sdk_results": {
       "bytes": 644,
-      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/target/collections-c831/candidate/SDK_RESULTS.tsv",
+      "custody_relative_path": "regex-mastery-20261021/repo/m3-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/target/collections-c831/candidate/SDK_RESULTS.tsv",
       "sha256": "8e40ed5f529a542499a763001b5d8a450048d18ec3bcd57b5927f439f39332af"
     },
     "combined-c831_manifest": {
       "bytes": 2199,
-      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/combined-c831/resources/com/synexia/rewrite/hash-pinned-java/m3-regex-language-mastery-20261021-combined-c831/manifest.tsv",
+      "custody_relative_path": "regex-mastery-20261021/repo/m3-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/combined-c831/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-regex-language-mastery-20261021-combined-c831/manifest.tsv",
       "sha256": "0a23b6a3e3b87824b1fca502095b8ca4a2d6746d44e14eb7ace32cd1541b2a22"
     },
     "combined-c831_receiver_contract": {
@@ -862,7 +862,7 @@
     },
     "combined-c831_sdk_inputs": {
       "bytes": 5791,
-      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/target/combined-c831/candidate/SDK_INPUTS.tsv",
+      "custody_relative_path": "regex-mastery-20261021/repo/m3-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/target/combined-c831/candidate/SDK_INPUTS.tsv",
       "sha256": "07be40725df9304b880678bf7c852ba94a5d8e093068feba14149413c28a4736"
     },
     "combined-c831_sdk_log": {
@@ -872,7 +872,7 @@
     },
     "combined-c831_sdk_results": {
       "bytes": 1855,
-      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/target/combined-c831/candidate/SDK_RESULTS.tsv",
+      "custody_relative_path": "regex-mastery-20261021/repo/m3-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/target/combined-c831/candidate/SDK_RESULTS.tsv",
       "sha256": "90e89df940d1336874bc6ead5f126ce2c04c997b13c4bf78591c57a4d2743510"
     },
     "common_M3CommonRegexFactsHostTest": {
@@ -940,44 +940,44 @@
       "custody_relative_path": "regex-mastery-20261021/lab-evidence/apm-language-native-6.log",
       "sha256": "7face8fe83e1750c28db1b7263b6b536084a08d4ba72cb19fc370066e0363869"
     },
-    "lab_com.synexia.m3.recipe.M3RegexPrecomputeMasteryTest": {
+    "lab_jdk.internal.m3.recipe.M3RegexPrecomputeMasteryTest": {
       "bytes": 17904,
-      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/crates/m3-atom-pattern-multipass/target/surefire-reports/TEST-com.synexia.m3.recipe.M3RegexPrecomputeMasteryTest.xml",
+      "custody_relative_path": "regex-mastery-20261021/repo/m3-openrewrite-recipes/crates/m3-atom-pattern-multipass/target/surefire-reports/TEST-jdk.internal.m3.recipe.M3RegexPrecomputeMasteryTest.xml",
       "sha256": "8f4ba43c085363a946738fa993b6d11919290df6af335bab53b1608f12d6d5b9"
     },
-    "lab_com.synexia.m3.recipe.NativeRecipeBridgeTest": {
+    "lab_jdk.internal.m3.recipe.NativeRecipeBridgeTest": {
       "bytes": 17968,
-      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/crates/m3-atom-pattern-multipass/target/surefire-reports/TEST-com.synexia.m3.recipe.NativeRecipeBridgeTest.xml",
+      "custody_relative_path": "regex-mastery-20261021/repo/m3-openrewrite-recipes/crates/m3-atom-pattern-multipass/target/surefire-reports/TEST-jdk.internal.m3.recipe.NativeRecipeBridgeTest.xml",
       "sha256": "08b4676f5e40c38f99b84e84728452342e2deaba3dce71e6d2bcdcf3c59841da"
     },
-    "lab_com.synexia.rewrite.ApmPatternPrefixTest": {
+    "lab_jdk.internal.m3.rewrite.ApmPatternPrefixTest": {
       "bytes": 17573,
-      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/crates/m3-atom-pattern-multipass/target/surefire-reports/TEST-com.synexia.rewrite.ApmPatternPrefixTest.xml",
+      "custody_relative_path": "regex-mastery-20261021/repo/m3-openrewrite-recipes/crates/m3-atom-pattern-multipass/target/surefire-reports/TEST-jdk.internal.m3.rewrite.ApmPatternPrefixTest.xml",
       "sha256": "13171d020bb43c23b916a9523c7935d5dc8bc3cf71d45775715a61901b5fe36d"
     },
-    "lab_com.synexia.rewrite.ApmRecipeTest": {
+    "lab_jdk.internal.m3.rewrite.ApmRecipeTest": {
       "bytes": 18829,
-      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/crates/m3-atom-pattern-multipass/target/surefire-reports/TEST-com.synexia.rewrite.ApmRecipeTest.xml",
+      "custody_relative_path": "regex-mastery-20261021/repo/m3-openrewrite-recipes/crates/m3-atom-pattern-multipass/target/surefire-reports/TEST-jdk.internal.m3.rewrite.ApmRecipeTest.xml",
       "sha256": "1e2c9590f836aca3657f7764c1ed52569e5e50a6c0a266c51bf484a6e6b40c3d"
     },
-    "lab_com.synexia.rewrite.ApmRegexBoundaryTest": {
+    "lab_jdk.internal.m3.rewrite.ApmRegexBoundaryTest": {
       "bytes": 17403,
-      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/crates/m3-atom-pattern-multipass/target/surefire-reports/TEST-com.synexia.rewrite.ApmRegexBoundaryTest.xml",
+      "custody_relative_path": "regex-mastery-20261021/repo/m3-openrewrite-recipes/crates/m3-atom-pattern-multipass/target/surefire-reports/TEST-jdk.internal.m3.rewrite.ApmRegexBoundaryTest.xml",
       "sha256": "03e52d3dd7375ac2f27254e761066da23033a3ed6dc506ff1138fb4f6466aa89"
     },
-    "lab_com.synexia.rewrite.ApmRegexLanguageMasteryTest": {
+    "lab_jdk.internal.m3.rewrite.ApmRegexLanguageMasteryTest": {
       "bytes": 18183,
-      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/crates/m3-atom-pattern-multipass/target/surefire-reports/TEST-com.synexia.rewrite.ApmRegexLanguageMasteryTest.xml",
+      "custody_relative_path": "regex-mastery-20261021/repo/m3-openrewrite-recipes/crates/m3-atom-pattern-multipass/target/surefire-reports/TEST-jdk.internal.m3.rewrite.ApmRegexLanguageMasteryTest.xml",
       "sha256": "6e98e4ad834703ca6e3241e7577044fdcecb6a688d92df36cfa0bc21f7e787c1"
     },
-    "lab_com.synexia.rewrite.ApmRuntimeTest": {
+    "lab_jdk.internal.m3.rewrite.ApmRuntimeTest": {
       "bytes": 18586,
-      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/crates/m3-atom-pattern-multipass/target/surefire-reports/TEST-com.synexia.rewrite.ApmRuntimeTest.xml",
+      "custody_relative_path": "regex-mastery-20261021/repo/m3-openrewrite-recipes/crates/m3-atom-pattern-multipass/target/surefire-reports/TEST-jdk.internal.m3.rewrite.ApmRuntimeTest.xml",
       "sha256": "017b5171d09f3eaf0a7b38c58f62a69b2fc58ea716e7226237a9296a6596601e"
     },
-    "lab_com.synexia.rewrite.SbcRecipeTest": {
+    "lab_jdk.internal.m3.rewrite.SbcRecipeTest": {
       "bytes": 28325,
-      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/crates/m3-atom-pattern-multipass/target/surefire-reports/TEST-com.synexia.rewrite.SbcRecipeTest.xml",
+      "custody_relative_path": "regex-mastery-20261021/repo/m3-openrewrite-recipes/crates/m3-atom-pattern-multipass/target/surefire-reports/TEST-jdk.internal.m3.rewrite.SbcRecipeTest.xml",
       "sha256": "f939268eb7d08c51af3357c3c2c58b92848aaf9329bd81b9ad92f656abe28df3"
     },
     "latest_naming_documented_cli": {
@@ -1132,7 +1132,7 @@
     },
     "unicode-prefix-c831_manifest": {
       "bytes": 395,
-      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/unicode-prefix-c831/resources/com/synexia/rewrite/hash-pinned-java/m3-regex-language-mastery-20261021-unicode-prefix-c831/manifest.tsv",
+      "custody_relative_path": "regex-mastery-20261021/repo/m3-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/unicode-prefix-c831/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-regex-language-mastery-20261021-unicode-prefix-c831/manifest.tsv",
       "sha256": "6ce3a59ff5c905209a544fded98027c52947dd9d674fb23bfc544f0704843464"
     },
     "unicode-prefix-c831_receiver_contract": {
@@ -1142,7 +1142,7 @@
     },
     "unicode-prefix-c831_sdk_inputs": {
       "bytes": 2684,
-      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/target/unicode-prefix-c831/candidate/SDK_INPUTS.tsv",
+      "custody_relative_path": "regex-mastery-20261021/repo/m3-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/target/unicode-prefix-c831/candidate/SDK_INPUTS.tsv",
       "sha256": "f111bb6cc478da37c0fc735730625ff3c1649ba1732f1bd35ee589c36d1ef84d"
     },
     "unicode-prefix-c831_sdk_log": {
@@ -1152,7 +1152,7 @@
     },
     "unicode-prefix-c831_sdk_results": {
       "bytes": 384,
-      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/target/unicode-prefix-c831/candidate/SDK_RESULTS.tsv",
+      "custody_relative_path": "regex-mastery-20261021/repo/m3-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/target/unicode-prefix-c831/candidate/SDK_RESULTS.tsv",
       "sha256": "d08b61b54800ed3b3bf35f0d0c961f104f6fdd9116cf95f73808a4f08e45e53f"
     },
     "unicode_expected_red": {
@@ -1566,7 +1566,7 @@
     "global_string_phase": {
       "baseline_exit": 1,
       "candidate_exit": 1,
-      "command": "python3 m3/synexia-import/current-full-borrow/check_string_phase.py",
+      "command": "python3 m3/m3-import/current-full-borrow/check_string_phase.py",
       "error": "target owner drift: src/java.base/share/classes/java/lang/M3String.java expected=35ed998540e044eed8cb7596e2e2c019ae369bd3 actual=8a57ca4f085e4e8f1f1d9f2ec0fdb2fc5888597e",
       "phase_closure_open_gates": 12,
       "pin_or_gate_modified": false,
@@ -1581,35 +1581,35 @@
         {
           "command": [
             "python3",
-            "m3/compatibility/check_synexia_public_target.py"
+            "m3/compatibility/check_m3_public_target.py"
           ],
           "exit_code": 0
         },
         {
           "command": [
             "python3",
-            "m3/compatibility/check_synexia_full_family.py"
+            "m3/compatibility/check_m3_full_family.py"
           ],
           "exit_code": 0
         },
         {
           "command": [
             "python3",
-            "m3/compatibility/check_synexia_full_borrow_receiver.py"
+            "m3/compatibility/check_m3_full_borrow_receiver.py"
           ],
           "exit_code": 0
         },
         {
           "command": [
             "python3",
-            "m3/synexia-import/current-full-borrow/check_string_phase_closure.py"
+            "m3/m3-import/current-full-borrow/check_string_phase_closure.py"
           ],
           "exit_code": 0
         },
         {
           "command": [
             "python3",
-            "m3/synexia-import/current-full-borrow/check_string_phase.py"
+            "m3/m3-import/current-full-borrow/check_string_phase.py"
           ],
           "exit_code": 1
         }

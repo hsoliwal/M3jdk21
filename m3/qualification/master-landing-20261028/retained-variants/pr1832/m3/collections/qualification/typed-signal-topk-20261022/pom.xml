@@ -39,21 +39,21 @@
           <release>21</release>
           <proc>none</proc>
           <compilerArgs>
-            <!-- The original fixed module is com.m3.collections; javac's
+            <!-- The original fixed module is jdk.m3.collections; javac's
                  module-name lint is excluded in its owning Maven POM as well.
                  Keep all other lint warnings fatal, with no public module rename. -->
             <arg>-Xlint:all,-module</arg>
             <arg>-Werror</arg>
           </compilerArgs>
           <includes>
-            <include>com/m3/collections/M3SignalColumns.java</include>
-            <include>com/m3/collections/M3SignalTopK.java</include>
+            <include>jdk/m3/collections/M3SignalColumns.java</include>
+            <include>jdk/m3/collections/M3SignalTopK.java</include>
           </includes>
           <testIncludes>
-            <testInclude>com/m3/collections/M3SignalColumnsSelfTest.java</testInclude>
-            <testInclude>com/m3/collections/M3SignalColumnsTest.java</testInclude>
-            <testInclude>com/m3/collections/M3SignalTopKSelfTest.java</testInclude>
-            <testInclude>com/m3/collections/M3SignalTopKTest.java</testInclude>
+            <testInclude>jdk/m3/collections/M3SignalColumnsSelfTest.java</testInclude>
+            <testInclude>jdk/m3/collections/M3SignalColumnsTest.java</testInclude>
+            <testInclude>jdk/m3/collections/M3SignalTopKSelfTest.java</testInclude>
+            <testInclude>jdk/m3/collections/M3SignalTopKTest.java</testInclude>
           </testIncludes>
         </configuration>
       </plugin>

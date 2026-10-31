@@ -35,7 +35,7 @@ OUTPUTS = (
     ("m3/backports/recipes/jep-485-gatherers/packet.tsv",
      "replay/images/jep485-packet.tsv", 192,
      "7e79ce168d8f3d0df8e3d7d633a1351d399f5013b4f7617824fbfa9d7efe613b"),
-    ("m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/tq-verify-plan.py.txt",
+    ("m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/tq-verify-plan.py.txt",
      "replay/images/tq-verify-plan.py.txt", 5089,
      "ff2c31f57aac81a7049612557a3757781927563bd2d7a7b598aa62a116e1d978"),
 )
@@ -165,7 +165,7 @@ def prepare(root, receipt):
             argv.extend(["--output", str(destination)])
         result = run(argv, receipt)
         stable()
-        require(result.get("schema") == "synexia.evidence.bundle-integrity/1"
+        require(result.get("schema") == "m3.evidence.bundle-integrity/1"
                 and result.get("status") == "ARCHIVE_INTEGRITY_VERIFIED"
                 and result.get("bundleIndexSHA256") == BUNDLE_SHA
                 and result.get("retainedPaths") == 3

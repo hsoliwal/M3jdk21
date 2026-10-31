@@ -25,7 +25,7 @@ That draft inventories the target's existing recipe-source surface, not yet migr
 
 ## Source-first implementation gate
 
-1. Compare each candidate against `synexia-openrewrite-recipes/CANONICAL_RECIPE_HOME.tsv`,
+1. Compare each candidate against `m3-openrewrite-recipes/CANONICAL_RECIPE_HOME.tsv`,
    `.m3/recipe-ownership.tsv`, legacy migration status and relevant active PR heads.
    Existing canonical recipes win; keep historical target-local mirrors frozen.
 2. For a genuine portable gap, qualify and commit recipe implementation, Maven POM,

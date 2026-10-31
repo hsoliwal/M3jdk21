@@ -191,7 +191,7 @@ try:
  head=git("rev-parse","HEAD")
  need(re.fullmatch("[0-9a-f]{40}",head) is not None and head==os.environ["EXPECTED_SOURCE_SHA"],"checkout must be exact trusted candidate HEAD")
  binding_bytes=read(source/BINDING_PATH,64*1024);binding=strict_json(binding_bytes)
- need(binding.get("schema")=="SYNEXIA_RX7_CODEC_CAP_BINDING_V1"
+ need(binding.get("schema")=="M3_RX7_CODEC_CAP_BINDING_V1"
   and binding.get("repository")=="hsoliwal/com.synexia" and binding.get("receiverCorePath")==SOURCE_PATH,"binding owner/schema drift")
  need(re.fullmatch("[0-9a-f]{40}",binding.get("sourceCommit","")) is not None,"immutable canonical source commit required")
  need(binding.get("runtimeApplied") is False and binding.get("phaseAdvanced") is False,"binding may not claim production promotion")
@@ -202,7 +202,7 @@ try:
  files=pins.get("files");need(isinstance(files,dict) and 1<=len(files)<=128,"closed SDK pins map required")
  expected_names={"activatesNamedForwardAndInverseDescriptors","qualifiesActualRecipeAndProtectedOraclesBeforeExport","qualifiesLauncherRecipeAndFixedPoints"}
  execution=pins.get("expectedExecution",{})
- need(execution.get("junitClass")=="com.synexia.rewrite.M3RX7CodecCapRecipeTest"
+ need(execution.get("junitClass")=="jdk.internal.m3.rewrite.M3RX7CodecCapRecipeTest"
   and isinstance(execution.get("namedMethods"),list)
   and len(execution["namedMethods"])==3 and set(execution["namedMethods"])==expected_names,"SDK declared execution inventory drift")
  observed=set()
@@ -225,7 +225,7 @@ try:
  for path,wanted in OLD.items():hash_file(source/path,wanted)
  need(not (source/(TEST+"M3RX7CodecBoundsTest.java")).exists(),"bounds test must remain an unapplied candidate")
  need((sdk/"pom.xml").is_file(),"closed Maven recipe POM missing")
- template_home=sdk/"src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-rx7-codec-cap-launcher-20261018"
+ template_home=sdk/"src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-rx7-codec-cap-launcher-20261018"
  need(read(source/SCRIPT_PATH,64*1024)==read(template_home/"launcher.sh.txt",64*1024),"active launcher is not exact SDK postimage")
  need(read(source/WORKFLOW_PATH,64*1024)==read(template_home/"workflow.yml.txt",64*1024),"active workflow is not exact SDK postimage")
  need(digest(read(source/SCRIPT_PATH,64*1024))==binding.get("launcherSha256")
@@ -239,14 +239,14 @@ try:
  maven_log=run("actual-maven-openrewrite-sdk",[str(maven),"-B","-ntp","-s",str(settings/"settings.xml"),
   "-gs",str(settings/"global-settings.xml"),"-Dmaven.repo.local="+str(m2),"-f",str(sdk/"pom.xml"),
   "-Dm3.build.root="+str(build),"-Dm3.output.root="+str(overlay),"-Duser.home="+str(home),"verify"],360,heap=768*MIB)
- report=build/"surefire-reports/TEST-com.synexia.rewrite.M3RX7CodecCapRecipeTest.xml"
+ report=build/"surefire-reports/TEST-jdk.internal.m3.rewrite.M3RX7CodecCapRecipeTest.xml"
  suite=ET.fromstring(read(report,256*1024))
  cases=suite.findall("testcase")
  names={case.get("name") for case in cases}
  need(int(suite.get("tests","0"))==len(cases)==3 and len(names)==len(cases),"actual named SDK tests required")
  need(all(int(suite.get(key,"0"))==0 for key in ("failures","errors","skipped")),"SDK tests failed or skipped")
  need(names==expected_names,"exact three SDK methods missing")
- need(all(case.get("classname")=="com.synexia.rewrite.M3RX7CodecCapRecipeTest"
+ need(all(case.get("classname")=="jdk.internal.m3.rewrite.M3RX7CodecCapRecipeTest"
   and not any(case.find(key) is not None for key in ("failure","error","skipped")) for case in cases),"unexecuted/failing SDK case")
  need(MARKER in maven_log or MARKER in "".join(suite.itertext()),"actual SDK export marker absent")
  emitted={}
@@ -258,7 +258,7 @@ try:
    emitted[relative_path]=hash_file(path,EXPORTS[relative_path],64*1024)
  need(set(emitted)==set(EXPORTS),"actual recipe must emit exactly codec and bounds main")
  for path,wanted in OLD.items():hash_file(source/path,wanted)
- baseline_resource=sdk/"src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-rx7-codec-cap-20261018-inverse/M3RX7Codec.java.txt"
+ baseline_resource=sdk/"src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-rx7-codec-cap-20261018-inverse/M3RX7Codec.java.txt"
  need(read(baseline_resource,64*1024)==read(source/(CORE+"M3RX7Codec.java"),64*1024),"baseline is not exact original codec")
  def compile_case(label,candidate):
   gate();directory=root/label;directory.mkdir()

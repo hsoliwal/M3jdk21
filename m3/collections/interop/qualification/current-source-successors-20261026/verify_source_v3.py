@@ -19,10 +19,10 @@ RECEIPT_REL = ("m3/collections/interop/qualification/"
                "current-source-successors-20261026/CURRENT_TEST_SUCCESSIONS.tsv")
 V2_REL = ("m3/collections/interop/qualification/"
           "current-census-superset-20261024/verify_superset_v2.py")
-JAVA_BASE = SOURCE_PREFIX + "test/java/com/m3/collections/interop/"
+JAVA_BASE = SOURCE_PREFIX + "test/java/jdk/m3/collections/interop/"
 STATUS = "SOURCE_ONLY_PENDING_FULL_JUNIT"
-MERGE_RECIPE = "com.synexia.m3.InteropStableMergeAndFactoryCensus"
-SPRING_RECIPE = "com.synexia.rewrite.M3SpringArrayOracle20261026"
+MERGE_RECIPE = "jdk.internal.m3.InteropStableMergeAndFactoryCensus"
+SPRING_RECIPE = "jdk.internal.m3.rewrite.M3SpringArrayOracle20261026"
 EXPECTED = (
     (JAVA_BASE + "M3FiveLibraryArrayificationTest.java",
      "6d31a53eb94af7c3cfe08ce126ce1be1f8d7da1b09150bd72a12c602d3ab3565",

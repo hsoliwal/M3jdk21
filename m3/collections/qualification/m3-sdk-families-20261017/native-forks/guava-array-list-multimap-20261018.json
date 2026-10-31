@@ -25,8 +25,8 @@
     "coordinate": "com.google.guava:guava:33.4.8-m3-java21",
     "public_owner": "com.google.common.collect.ArrayListMultimap",
     "private_storage_owners": [
-      "com.m3.collections.M3LinkedHashMap",
-      "com.m3.collections.M3ArrayList"
+      "jdk.m3.collections.M3LinkedHashMap",
+      "jdk.m3.collections.M3ArrayList"
     ],
     "feature_commit": "14ea57431688b9a6e9d424edb85d846aefdc7fff",
     "preserved_fork_master": "dfd9dca629d44faf71846b1f85acd38556f4854d",

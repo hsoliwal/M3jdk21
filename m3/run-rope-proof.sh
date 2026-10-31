@@ -21,7 +21,7 @@ mapfile -t sources < <(find "$root/m3/core/src" -type f -name '*.java' | sort)
 "$jdk/bin/javac" --release 21 -Xlint:all,-module -Werror \
   -d "$scratch/module" "${sources[@]}"
 "$jdk/bin/javac" --release 21 --module-path "$scratch/module" \
-  --add-modules com.m3.text -d "$scratch/tests" \
+  --add-modules jdk.m3.text -d "$scratch/tests" \
   "$root/m3/core/test/M3RopeTextIndexTest.java"
 
 for profile in jit int noncompact c2; do
@@ -33,5 +33,5 @@ for profile in jit int noncompact c2; do
   esac
   echo "Running M3 rope-index Java21 proof: $profile"
   "$jdk/bin/java" -ea -esa "${flags[@]}" --module-path "$scratch/module" \
-    --add-modules com.m3.text -cp "$scratch/tests" M3RopeTextIndexTest
+    --add-modules jdk.m3.text -cp "$scratch/tests" M3RopeTextIndexTest
 done

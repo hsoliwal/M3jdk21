@@ -31,13 +31,13 @@
       "tq_sanitize": false,
       "suites": [
         {
-          "name": "com.m3.tq.TQTest",
+          "name": "jdk.m3.tq.TQTest",
           "tests": "19",
           "failures": "0",
           "errors": "0",
           "skipped": "0",
           "time": "60.027",
-          "xml_path": "surefire-reports/TEST-com.m3.tq.TQTest.xml",
+          "xml_path": "surefire-reports/TEST-jdk.m3.tq.TQTest.xml",
           "xml_sha256": "51206fa187d7b81bc402751c6911ad9b416c9f005c8d45852af409faf6ac8b8d",
           "tq_sanitize_property": "false",
           "cases": [
@@ -139,13 +139,13 @@
       "tq_sanitize": true,
       "suites": [
         {
-          "name": "com.m3.tq.TQTest",
+          "name": "jdk.m3.tq.TQTest",
           "tests": "19",
           "failures": "0",
           "errors": "0",
           "skipped": "0",
           "time": "67.954",
-          "xml_path": "surefire-reports/TEST-com.m3.tq.TQTest.xml",
+          "xml_path": "surefire-reports/TEST-jdk.m3.tq.TQTest.xml",
           "xml_sha256": "4ad8eba56c978626b17cc500fa69850b57fb703103b190feb8a21178bd3c2f88",
           "tq_sanitize_property": "true",
           "cases": [
@@ -247,13 +247,13 @@
       "tq_sanitize": null,
       "suites": [
         {
-          "name": "com.m3.tq.TQSyncTest",
+          "name": "jdk.m3.tq.TQSyncTest",
           "tests": "3",
           "failures": "0",
           "errors": "0",
           "skipped": "0",
           "time": "0.618",
-          "xml_path": "surefire-reports/TEST-com.m3.tq.TQSyncTest.xml",
+          "xml_path": "surefire-reports/TEST-jdk.m3.tq.TQSyncTest.xml",
           "xml_sha256": "2bb2af36dfca01ca500f4c51f04335ab7805117b9a570641113ae9c1ced3e9fe",
           "tq_sanitize_property": null,
           "cases": [

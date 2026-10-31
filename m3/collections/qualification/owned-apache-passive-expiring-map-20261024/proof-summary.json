@@ -1,5 +1,5 @@
 {
-  "owner": "com.m3.collections.apache.M3PassiveExpiringMap",
+  "owner": "jdk.m3.collections.apache.M3PassiveExpiringMap",
   "provider_contract": "org.apache.commons.collections4.map.PassiveExpiringMap (Commons Collections 4.5.0)",
   "inventory_row": "DONE #1913",
   "source_sha256": "600b4921d7189f347829734b1604804bcf46b7e7123ebbc400869b55cbd46278",

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Hitesh Soliwal and contributors
 //
-// Lineage (TARGET_OWNED_PORT, leaf R6-AUTOMATON, run 20261017-synexia-to-public):
+// Lineage (TARGET_OWNED_PORT, leaf R6-AUTOMATON, run 20261017-m3-to-public):
 //   Apache Lucene 9.10.0 org.apache.lucene.util.automaton.Automaton (git blob d6f0d3c4698a1b38828ede7628b0aecb2ffeafea)
 //   and Transition (git blob a9e60b317607221e0e44089e424e19dc4caef99a), vendored unchanged in M3jdk21 at
 //   m3/vendor/third_party/lucene-core (BLOB_EQUAL to upstream tag 695c0ac84508438302cd346a812cfa2fdc5a10df).

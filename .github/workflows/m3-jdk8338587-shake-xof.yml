@@ -13,9 +13,9 @@ on:
       - 'm3/backports/recipes/j497/**'
       - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
       - 'm3/backports/test_jep_residue.py'
-      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipeTest.java'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jdk8338587-shake-xof/**'
+      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipe.java'
+      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipeTest.java'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jdk8338587-shake-xof/**'
       - '.github/workflows/m3-jdk8338587-shake-xof.yml'
   pull_request:
     paths:
@@ -26,9 +26,9 @@ on:
       - 'm3/backports/recipes/j497/**'
       - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
       - 'm3/backports/test_jep_residue.py'
-      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipeTest.java'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jdk8338587-shake-xof/**'
+      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipe.java'
+      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipeTest.java'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jdk8338587-shake-xof/**'
       - '.github/workflows/m3-jdk8338587-shake-xof.yml'
   workflow_dispatch:
 

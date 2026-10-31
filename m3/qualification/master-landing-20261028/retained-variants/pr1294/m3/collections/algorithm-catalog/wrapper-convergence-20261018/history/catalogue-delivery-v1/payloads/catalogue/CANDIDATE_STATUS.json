@@ -40,8 +40,8 @@
   },
   "interpretation": "The original 28-file/07ba candidate epoch and its 25 gates remain unchanged. Actual SDK and 2f receiver/module/API/JNI receipts, the separate bridge and allocation observation are bound in FINAL_RECEIVING_STATUS.json. Publication pin is external; historical full guard remains unexecuted.",
   "retained_receiver_oracles": [
-    "m3/collections/src/test/java/com/m3/collections/M3BoundedFilteredNavigationContract.java",
-    "m3/collections/src/test/java/com/m3/collections/M3BoundedFilteredNavigationTest.java"
+    "m3/collections/src/test/java/jdk/m3/collections/M3BoundedFilteredNavigationContract.java",
+    "m3/collections/src/test/java/jdk/m3/collections/M3BoundedFilteredNavigationTest.java"
   ],
   "gate_logs": [
     {

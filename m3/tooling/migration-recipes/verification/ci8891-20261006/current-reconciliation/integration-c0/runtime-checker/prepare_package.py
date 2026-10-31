@@ -21,7 +21,7 @@ args=parser.parse_args();P=args.proof.resolve()
 # Exact actual /10 STOP and root-emitted evidence selection are bound below.
 assert sha((P/'RESULT.json').read_bytes())=='c4cb9608ab895490158236e93334b83eea1996f454d8085c454676e3fea37e75','exact accepted Rf0 producer result required'
 assert sha((P/'generated-candidate/OUTPUT.json').read_bytes())=='0c5889046c2e4e8962f02071b0ba6a9ae6a8b2fc82f2d62cd2cc1687b62f605c','exact accepted Rf0 output required'
-result=load(P/'RESULT.json');assert result['schema']=='synexia.rf0.proof-result/1' and result['status']=='PASS_FOCUSED_PRODUCER' and result['failure'] is None
+result=load(P/'RESULT.json');assert result['schema']=='m3.rf0.proof-result/1' and result['status']=='PASS_FOCUSED_PRODUCER' and result['failure'] is None
 assert result['runtime']['output']==pin(P/'generated-candidate/OUTPUT.json')
 owner_bytes=OWNER.read_bytes();assert sha(owner_bytes)==OWNER_SHA
 ns={'__name__':'_unchanged_package_owner','__file__':str(OWNER)};exec(compile(owner_bytes,str(OWNER),'exec'),ns)
@@ -118,7 +118,7 @@ parent_publication=C/'publication-design/string-c0-final-v1/PUBLISHED.json'
 assert sha(parent_publication.read_bytes())=='4146e7b77cc83a7a10ada105975ac7130ddf098e3610b41b56c9b30a277222c0'
 publication=load(parent_publication)
 parent_heads={'hsoliwal/com.synexia':'b21badee0035a06f75714f16b1b7f02474e2973f','hsoliwal/M3jdk21':'c91ababf8e7f54125be7b58c7267f49233446e45'}
-assert publication['schema']=='synexia.sc0.paired-publication/1' and publication['status']=='PUBLISHED_PAIRED_DRAFTS' and publication['totalCheckpointFilesPerRepository']==507
+assert publication['schema']=='m3.sc0.paired-publication/1' and publication['status']=='PUBLISHED_PAIRED_DRAFTS' and publication['totalCheckpointFilesPerRepository']==507
 assert {row['repo']:row['head'] for row in publication['records']}==parent_heads
 assert all(row['draft'] is True and row['state']=='open' and row['merged'] is False for row in publication['records'])
 original(parent_publication,'immutable-parent-publication-receipt')
@@ -147,19 +147,19 @@ semantic_selection_pin={'path': '/workspace/scratch/5809f5dce3dd/continuation-20
 semantic_path=args.semantic_result.resolve();selection_path=args.semantic_inputs.resolve()
 assert pin(semantic_path)==semantic_binding['result'] and pin(selection_path)==semantic_selection_pin
 semantic_body=load(semantic_path);semantic_plan=load(Path(semantic_binding['plan']['path']))
-assert semantic_body['schema']=='synexia.rfc.semantic-result/1' and semantic_body['status']=='PASS_RFC_SYNTAX_PATCH_CONTROLS_RECEIVING_PENDING'
+assert semantic_body['schema']=='m3.rfc.semantic-result/1' and semantic_body['status']=='PASS_RFC_SYNTAX_PATCH_CONTROLS_RECEIVING_PENDING'
 assert semantic_body['failure'] is None and semantic_body['fatalFailure'] is None
 semantic_observed={key:value for key,value in semantic_body.items() if isinstance(value,bool)}
 assert semantic_observed=={'checkerSemanticallyExecuted': False, 'consumerQualified': False, 'fullM3RuntimeQualified': False, 'fullOpenJdkBuildQualified': False, 'fullReceiverQualified': False, 'jniQualified': False, 'priorReceivingGateQualificationInherited': False, 'productionPromotion': False, 'rfcSyntaxPatchControlsQualified': True, 'systemLoaderAndSharedLibraryClosureComplete': False}
 assert semantic_body['plan']==semantic_binding['plan'] and semantic_plan['controller']==semantic_binding['controller']
-assert semantic_plan['schema']=='synexia.rfc.semantic-plan/1'
+assert semantic_plan['schema']=='m3.rfc.semantic-plan/1'
 assert semantic_body['producer']['result']==pin(P/'RESULT.json') and semantic_body['producer']['output']==pin(P/'generated-candidate/OUTPUT.json')
 semantic_ids=['python-runtime-observation', 'git-loader-observation', 'rfc-syntax-patch-contract']
 assert semantic_body['completedCommands']==semantic_ids and semantic_body['unexecutedCommands']==[]
 assert len(semantic_body['receipts'])==len(semantic_plan['commands'])==3
 assert [row['id'] for row in semantic_plan['commands']]==semantic_ids
 semantic_selection=load(selection_path)
-assert set(semantic_selection)=={'schema','terminal','files'} and semantic_selection['schema']=='synexia.rfc.semantic-selection/1'
+assert set(semantic_selection)=={'schema','terminal','files'} and semantic_selection['schema']=='m3.rfc.semantic-selection/1'
 assert semantic_selection['terminal']==semantic_binding['result'] and len(semantic_selection['files'])==251
 semantic_paths=[row['path'] for row in semantic_selection['files']]
 assert semantic_paths==sorted(set(semantic_paths)) and str(semantic_path) in semantic_paths
@@ -180,7 +180,7 @@ for row in [semantic_body['admission'],semantic_body['observedOutputs'],*semanti
  assert row in semantic_selection['files'];original(Path(row['path']),'actual-rfc-semantic-evidence',row)
 for index,(row,command) in enumerate(zip(semantic_body['receipts'],semantic_plan['commands'])):
  receipt=load(Path(row['path']))
- assert receipt['schema']=='synexia.rfc.semantic-command/1' and receipt['id']==semantic_ids[index]
+ assert receipt['schema']=='m3.rfc.semantic-command/1' and receipt['id']==semantic_ids[index]
  assert receipt['argv']==command['argv'] and receipt['cwd']==semantic_plan['cwd'] and receipt['environment']==semantic_plan['environment']
  assert receipt['timeoutSeconds']==command['timeoutSeconds'] and receipt['exitCode']==0 and receipt['executionError'] is None
  assert receipt['priorReceipts']==semantic_body['receipts'][:index] and receipt['planSHA256']==semantic_binding['plan']['sha256']
@@ -214,7 +214,7 @@ receiving_observed={key:value for key,value in terminal_body.items() if isinstan
 assert receiving_observed=={'allAdmittedGroupsQualified': False, 'bridgeGroupQualified': False, 'canonicalProductionApplied': False, 'canonicalPromotionAuthorized': False, 'consumerQualified': False, 'fullOpenJdkBuildQualified': False, 'fullReceiverQualified': False, 'hostedWorkflowExecuted': False, 'jep458BlockedSpecificationObserved': False, 'jep458HostedWorkflowQualified': False, 'jep458ProjectionQualified': False, 'materializedInputsQualified': False, 'positiveCliGroupsQualified': False, 'preparedInputFixedPointObserved': True, 'primaryGroupQualified': False, 'spcSemanticQualified': True, 'strictCanonicalAdmission': False, 'testsCountedOnlyFromActualReports': True}
 assert terminal_body['focusedSemanticPrerequisites']['rfc']==semantic_binding
 assert terminal_body['focusedSemanticPrerequisites']['completeReceivingQualified'] is False
-assert set(receiving_selection)=={'schema','terminal','files'} and receiving_selection['schema']=='synexia.ph0.receiving-selection/1'
+assert set(receiving_selection)=={'schema','terminal','files'} and receiving_selection['schema']=='m3.ph0.receiving-selection/1'
 assert receiving_selection['terminal']==receiving_terminal_pin and len(receiving_selection['files'])==804
 receiving_paths=[row['path'] for row in receiving_selection['files']]
 assert receiving_paths==sorted(set(receiving_paths)) and str(terminal) in receiving_paths
@@ -255,10 +255,10 @@ for r in load(P/'inputs.json'):
  else:
   reasons=[e['reason'] for e in excluded if e['inputPath']==r['path'] and e['sha256']==r['sha256'] and e['bytes']==r['bytes']];assert reasons,r['path'];entry.update(disposition='EXCLUDED_IDENTITY_ONLY',reasons=sorted(set(reasons)))
  closure.append(entry)
-record={'schema':'synexia.rf0.package-source-closure/1','producer':{'result':pin(P/'RESULT.json'),'output':pin(P/'generated-candidate/OUTPUT.json')},'bodyMappings':sorted(mappings,key=lambda r:r['logicalPath']),'excludedIdentities':excluded,'sealedInputDispositions':closure,'compiledArtifactBodiesIncluded':False,'toolchainBodiesIncluded':False,'hermetic':False,'historicalMissingProofsRecreated':False,'consumerQualified':False,'archiveOwner':pin(OWNER),'parentPublication':parent,'parentProducer':parent_producer,'publicationCheckHistory':publication_check_history,'semanticOutcome':semantic_outcome,'receivingOutcome':receiving_outcome}
+record={'schema':'m3.rf0.package-source-closure/1','producer':{'result':pin(P/'RESULT.json'),'output':pin(P/'generated-candidate/OUTPUT.json')},'bodyMappings':sorted(mappings,key=lambda r:r['logicalPath']),'excludedIdentities':excluded,'sealedInputDispositions':closure,'compiledArtifactBodiesIncluded':False,'toolchainBodiesIncluded':False,'hermetic':False,'historicalMissingProofsRecreated':False,'consumerQualified':False,'archiveOwner':pin(OWNER),'parentPublication':parent,'parentProducer':parent_producer,'publicationCheckHistory':publication_check_history,'semanticOutcome':semantic_outcome,'receivingOutcome':receiving_outcome}
 write(S/'SOURCE-CLOSURE.json',record)
 # Empty LANES is deliberate: actual terminal evidence is explicitly selected and independently hash-closed above.
-plan={'schema':'synexia.evidence.package-plan/1','status':'FINAL_REVIEWED_SELECTION','sourceCommit':result['sourceCommit'],'targetCommit':result['targetCommit'],'packageOwnerSHA256':OWNER_SHA,'resultSHA256':sha((P/'RESULT.json').read_bytes()),'laneSelection':{'required':[],'additional':[],'allowNotExecuted':[],'includeAllExisting':False},'includePaths':sorted([*selected,'SOURCE-CLOSURE.json']),'selectionMode':'EXPLICIT_FINISHED_BODIES_WITH_SOURCE_CLOSURE_AUDIT','noAutomaticLaneQualification':True}
+plan={'schema':'m3.evidence.package-plan/1','status':'FINAL_REVIEWED_SELECTION','sourceCommit':result['sourceCommit'],'targetCommit':result['targetCommit'],'packageOwnerSHA256':OWNER_SHA,'resultSHA256':sha((P/'RESULT.json').read_bytes()),'laneSelection':{'required':[],'additional':[],'allowNotExecuted':[],'includeAllExisting':False},'includePaths':sorted([*selected,'SOURCE-CLOSURE.json']),'selectionMode':'EXPLICIT_FINISHED_BODIES_WITH_SOURCE_CLOSURE_AUDIT','noAutomaticLaneQualification':True}
 write(HERE/'package-plan.json',plan)
 write(HERE/'SOURCE-CLOSURE.json',record)
 print(json.dumps({'plan':pin(HERE/'package-plan.json'),'closure':pin(HERE/'SOURCE-CLOSURE.json'),'bodyCount':len(selected)+1,'projectFiles':16,'actualResult':pin(P/'RESULT.json')}))

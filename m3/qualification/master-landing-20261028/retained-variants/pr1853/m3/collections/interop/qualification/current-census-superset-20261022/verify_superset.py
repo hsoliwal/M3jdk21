@@ -11,8 +11,8 @@ import subprocess
 
 SHARDS = tuple(f'added-{i:02d}.tsv' for i in range(4))
 PREFIX = 'm3/collections/interop/src/'
-MAIN = PREFIX + 'main/java/com/m3/collections/interop/'
-TEST = PREFIX + 'test/java/com/m3/collections/interop/'
+MAIN = PREFIX + 'main/java/jdk/m3/collections/interop/'
+TEST = PREFIX + 'test/java/jdk/m3/collections/interop/'
 FAMILIES = frozenset(('eclipse-collections', 'five-provider-index', 'guava', 'spring', 'jdk'))
 HEX64 = re.compile(r'[0-9a-f]{64}\Z')
 HEX40 = re.compile(r'[0-9a-f]{40}\Z')
@@ -24,7 +24,7 @@ def git_blob(data: bytes) -> str:
 
 # The 40-source receipt is immutable. The next generation has exactly one
 # source-sealed, Java21-syntax-only test transition and no other valid changes.
-COMPOUND_TEST_PATH = 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryArrayificationTest.java'
+COMPOUND_TEST_PATH = 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryArrayificationTest.java'
 COMPOUND_TRANSITION_SHA256 = 'ad81180bc4f5ee73dd008212fb575e62d50f815d673abd063e671c630789c24c'
 COMPOUND_TRANSITION = (
     COMPOUND_TEST_PATH,
@@ -53,17 +53,17 @@ def exact_compound_transition(receipts: Path) -> tuple[str, ...]:
 
 # Subsequent source epochs are explicit: one historic 36-owner test and
 # two newly admitted 40-owner tests. Do not rewrite any earlier census.
-M3_JAVA21_REPAIR_RECIPE = 'com.synexia.m3.M3InteropThreeJava21Diagnostics20261022'
+M3_JAVA21_REPAIR_RECIPE = 'jdk.internal.m3.M3InteropThreeJava21Diagnostics20261022'
 HISTORICAL_TEST_UPDATES = {
-    'm3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java':
+    'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3ApacheCollectionsTest.java':
         ('15a5a360695ca787138002380c6482dcda6cb9c62857e58707c214d7240f5fad',
          '10830216e66629c86b020b22a9d0beb898e97b80', '6'),
 }
 ADDITIVE_TEST_UPDATES = {
-    'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryKeyRangesTest.java':
+    'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryKeyRangesTest.java':
         ('ef93d9a53e0b9935c6e796b55ce2c47e4d94a732c7ac9f07b5a635eb436cc467',
          'bda93a103282d5b8a14a9ad600b054a6484d0d19', '3'),
-    'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderFlagSelectionTest.java':
+    'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveProviderFlagSelectionTest.java':
         ('09318eadbdbb1cb97edb39bf973f2912e6f23f377e5f38a86a9dcf313f10b4ae',
          '2fb1629adb06dde1d56c32a7f122ed1f4834af3c', '4'),
 }

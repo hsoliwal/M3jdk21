@@ -2,14 +2,14 @@
   "immutable_V2_body_sha256": "709a577431c923f8032c93f8a882796a8c81446e321b7cb4fbfeda55553fc3de",
   "V3_source_receipts": [
     {
-      "target": "m3/collections/implementations/apache/src/main/java/com/m3/collections/apache/M3BidiMap.java",
+      "target": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3BidiMap.java",
       "before": "ABSENT",
       "sha256": "8f0448814922c2c0375728c7a5d50262c564f8be158a369f28e68452eeb177ac",
       "bytes": 17418,
       "template": "M3BidiMap.java.txt"
     },
     {
-      "target": "m3/collections/implementations/apache/src/test/java/com/m3/collections/apache/M3BidiMapSelfTest.java",
+      "target": "m3/collections/implementations/apache/src/test/java/jdk/m3/collections/apache/M3BidiMapSelfTest.java",
       "before": "ABSENT",
       "sha256": "e6cdb48ba26466b8e8a3c6afe31036182b353d7c10cfd83896737714a209419d",
       "bytes": 35742,

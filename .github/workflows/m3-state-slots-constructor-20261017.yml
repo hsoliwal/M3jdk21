@@ -5,7 +5,7 @@ on:
     branches: ["m3/state-slots-explicit-constructor-20261017"]
   pull_request:
     paths:
-      - "m3/collections/src/main/java/com/m3/collections/M3ObjectStateSlots28.java"
+      - "m3/collections/src/main/java/jdk/m3/collections/M3ObjectStateSlots28.java"
       - "m3/collections/qualification/state-slots-constructor-20261017/**"
       - ".github/workflows/m3-state-slots-constructor-20261017.yml"
 concurrency:

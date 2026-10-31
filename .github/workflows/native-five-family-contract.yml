@@ -4,8 +4,8 @@ on:
     branches: ['m3/native-five-family-no-vendor-runtime-20261027']
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3NativeFiveLibrarySdk.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3NativeFiveLibrarySdkNoVendorTest.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3NativeFiveLibrarySdk.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3NativeFiveLibrarySdkNoVendorTest.java'
       - 'm3/collections/qualification/no-vendor-runtime-20261027/**'
       - '.github/workflows/native-five-family-contract.yml'
 permissions:
@@ -30,13 +30,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          echo '139807457f448108fcc4e7b3f6f4971a177c32f02afaf7c0d14c4b83d08cdd09  m3/collections/src/main/java/com/m3/collections/M3NativeFiveLibrarySdk.java' | sha256sum -c -
-          echo 'acf62705791cc5b8c41b19cd6ae5deba13100a0266ef5e9099552ac9977a00cc  m3/collections/src/test/java/com/m3/collections/M3NativeFiveLibrarySdkNoVendorTest.java' | sha256sum -c -
+          echo '139807457f448108fcc4e7b3f6f4971a177c32f02afaf7c0d14c4b83d08cdd09  m3/collections/src/main/java/jdk/m3/collections/M3NativeFiveLibrarySdk.java' | sha256sum -c -
+          echo 'acf62705791cc5b8c41b19cd6ae5deba13100a0266ef5e9099552ac9977a00cc  m3/collections/src/test/java/jdk/m3/collections/M3NativeFiveLibrarySdkNoVendorTest.java' | sha256sum -c -
       - name: Compile complete M3 arrays and collections modules with Java 21 JPMS
         shell: bash
         run: |
           set -euo pipefail
-          # The real native core requires the IN-PRODUCT com.m3.arrays module.
+          # The real native core requires the IN-PRODUCT jdk.m3.arrays module.
           # Compile source, do not resolve any external third-party runtime JAR.
           mkdir -p "$RUNNER_TEMP/arrays" "$RUNNER_TEMP/classes"
           find m3/arrays/src/main/java -name '*.java' | sort > "$RUNNER_TEMP/arrays-sources.txt"
@@ -58,7 +58,7 @@ jobs:
           test "${#deps[@]}" -gt 0
           for dep in "${deps[@]}"; do
             case "$dep" in
-              java.base|com.m3.arrays) ;;
+              java.base|jdk.m3.arrays) ;;
               *) echo "Refusing unexpected external/runtime module: $dep" >&2; exit 1 ;;
             esac
           done

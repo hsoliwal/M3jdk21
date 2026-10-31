@@ -6,14 +6,14 @@ on:
       - '.github/workflows/m3-original-mapping-provider-qualification.yml'
       - 'm3/migration/**'
       - 'm3/docs/name-mapping*.json'
-      - 'm3/algorithms/src/com/m3/algorithm/M3PrefixZ.java'
+      - 'm3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java'
       - 'm3/algorithms/test/PrefixZContractTest.java'
       - 'm3/algorithms/test/ViewInteropContractTest.java'
-      - 'm3/core/src/com/m3/text/JoinedM3StringPiece.java'
-      - 'm3/core/src/com/m3/text/LocalM3Arena.java'
-      - 'm3/core/src/com/m3/text/LocalM3StringPiece.java'
-      - 'm3/core/src/com/m3/text/M3StringPiece.java'
-      - 'm3/core/src/com/m3/text/StorageIdentity.java'
+      - 'm3/core/src/jdk/m3/text/JoinedM3StringPiece.java'
+      - 'm3/core/src/jdk/m3/text/LocalM3Arena.java'
+      - 'm3/core/src/jdk/m3/text/LocalM3StringPiece.java'
+      - 'm3/core/src/jdk/m3/text/M3StringPiece.java'
+      - 'm3/core/src/jdk/m3/text/StorageIdentity.java'
       - 'm3/docs/name-mapping.json'
       - 'm3/docs/name-mapping.schema.json'
       - 'm3/migration/evidence/local-20261002-final/prefix-z-interpreter.log'
@@ -24,15 +24,15 @@ on:
       - 'm3/migration/recipes/prefix-z-v1.tsv'
       - 'm3/migration/requirements.txt'
       - 'm3/migration/run-tests.py'
-      - 'm3/migration/src/com/m3/migration/ExactFileRecipe.java'
+      - 'm3/migration/src/jdk/m3/migration/ExactFileRecipe.java'
       - 'm3/migration/test/RecipeContractTest.java'
       - 'm3/migration/test/test_migration.py'
-      - 'm3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv'
-      - 'm3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv'
-      - 'm3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv'
-      - 'm3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv'
-      - 'm3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv'
+      - 'm3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv'
+      - 'm3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv'
+      - 'm3/tooling/mr/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv'
+      - 'm3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv'
+      - 'm3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/manifest.tsv'
       - 'src/java.base/share/classes/java/util/regex/Matcher.java'
       - 'src/java.base/share/classes/jdk/internal/mindex/M3Address28.java'
       - 'src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java'
@@ -67,14 +67,14 @@ on:
       - '.github/workflows/m3-original-mapping-provider-qualification.yml'
       - 'm3/migration/**'
       - 'm3/docs/name-mapping*.json'
-      - 'm3/algorithms/src/com/m3/algorithm/M3PrefixZ.java'
+      - 'm3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java'
       - 'm3/algorithms/test/PrefixZContractTest.java'
       - 'm3/algorithms/test/ViewInteropContractTest.java'
-      - 'm3/core/src/com/m3/text/JoinedM3StringPiece.java'
-      - 'm3/core/src/com/m3/text/LocalM3Arena.java'
-      - 'm3/core/src/com/m3/text/LocalM3StringPiece.java'
-      - 'm3/core/src/com/m3/text/M3StringPiece.java'
-      - 'm3/core/src/com/m3/text/StorageIdentity.java'
+      - 'm3/core/src/jdk/m3/text/JoinedM3StringPiece.java'
+      - 'm3/core/src/jdk/m3/text/LocalM3Arena.java'
+      - 'm3/core/src/jdk/m3/text/LocalM3StringPiece.java'
+      - 'm3/core/src/jdk/m3/text/M3StringPiece.java'
+      - 'm3/core/src/jdk/m3/text/StorageIdentity.java'
       - 'm3/docs/name-mapping.json'
       - 'm3/docs/name-mapping.schema.json'
       - 'm3/migration/evidence/local-20261002-final/prefix-z-interpreter.log'
@@ -85,15 +85,15 @@ on:
       - 'm3/migration/recipes/prefix-z-v1.tsv'
       - 'm3/migration/requirements.txt'
       - 'm3/migration/run-tests.py'
-      - 'm3/migration/src/com/m3/migration/ExactFileRecipe.java'
+      - 'm3/migration/src/jdk/m3/migration/ExactFileRecipe.java'
       - 'm3/migration/test/RecipeContractTest.java'
       - 'm3/migration/test/test_migration.py'
-      - 'm3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv'
-      - 'm3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv'
-      - 'm3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv'
-      - 'm3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv'
-      - 'm3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv'
+      - 'm3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv'
+      - 'm3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv'
+      - 'm3/tooling/mr/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv'
+      - 'm3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv'
+      - 'm3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/manifest.tsv'
       - 'src/java.base/share/classes/java/util/regex/Matcher.java'
       - 'src/java.base/share/classes/jdk/internal/mindex/M3Address28.java'
       - 'src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java'
@@ -201,14 +201,14 @@ jobs:
             /.gitattributes
             /.github/workflows/m3-original-mapping-provider-qualification.yml
             /m3/migration/original-provider-20261017/
-            /m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java
+            /m3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java
             /m3/algorithms/test/PrefixZContractTest.java
             /m3/algorithms/test/ViewInteropContractTest.java
-            /m3/core/src/com/m3/text/JoinedM3StringPiece.java
-            /m3/core/src/com/m3/text/LocalM3Arena.java
-            /m3/core/src/com/m3/text/LocalM3StringPiece.java
-            /m3/core/src/com/m3/text/M3StringPiece.java
-            /m3/core/src/com/m3/text/StorageIdentity.java
+            /m3/core/src/jdk/m3/text/JoinedM3StringPiece.java
+            /m3/core/src/jdk/m3/text/LocalM3Arena.java
+            /m3/core/src/jdk/m3/text/LocalM3StringPiece.java
+            /m3/core/src/jdk/m3/text/M3StringPiece.java
+            /m3/core/src/jdk/m3/text/StorageIdentity.java
             /m3/docs/name-mapping.json
             /m3/docs/name-mapping.schema.json
             /m3/migration/evidence/local-20261002-final/prefix-z-interpreter.log
@@ -219,15 +219,15 @@ jobs:
             /m3/migration/recipes/prefix-z-v1.tsv
             /m3/migration/requirements.txt
             /m3/migration/run-tests.py
-            /m3/migration/src/com/m3/migration/ExactFileRecipe.java
+            /m3/migration/src/jdk/m3/migration/ExactFileRecipe.java
             /m3/migration/test/RecipeContractTest.java
             /m3/migration/test/test_migration.py
-            /m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv
-            /m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv
-            /m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv
-            /m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv
-            /m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv
-            /m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv
+            /m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv
+            /m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv
+            /m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv
+            /m3/tooling/mr/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv
+            /m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv
+            /m3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/manifest.tsv
             /src/java.base/share/classes/java/util/regex/Matcher.java
             /src/java.base/share/classes/jdk/internal/mindex/M3Address28.java
             /src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java
@@ -365,12 +365,12 @@ jobs:
           try:
               run("closed-sdk-source-and-current-target-custody",py+[str(sdk/"verify.py"),"--self-test","--receiver",str(source)])
               run("actual-maven-openrewrite-sdk",["mvn","-B","-ntp","-s",str(settings/"settings.xml"),"-gs",str(settings/"global-settings.xml"),"-Dmaven.repo.local="+str(root/"m2"),"-f",str(sdk/"pom.xml"),"-Dm3.build.root="+str(build),"-Dm3.output.root="+str(overlay),"-Dm3.baseline.root="+str(baseline),"verify"])
-              run("named-sdk-and-exact-emission-receipt",py+[str(sdk/"verify.py"),"--report",str(build/"surefire-reports/TEST-com.m3.rewrite.backport.M3OriginalCliProviderRecipeTest.xml"),"--emitted",str(overlay),"--receiver",str(source),"--baseline-root",str(baseline),"--receipt",str(root/"recipe-execution.json"),"--run-id",runid])
+              run("named-sdk-and-exact-emission-receipt",py+[str(sdk/"verify.py"),"--report",str(build/"surefire-reports/TEST-jdk.m3.rewrite.backport.M3OriginalCliProviderRecipeTest.xml"),"--emitted",str(overlay),"--receiver",str(source),"--baseline-root",str(baseline),"--receipt",str(root/"recipe-execution.json"),"--run-id",runid])
               run("provider-stdlib-boundary-tests",py+[str(bootstrap),"--self-test","--output",str(root/"provider-boundaries"),"--lock",str(bootstrap.with_name("wheels.lock.json"))])
               try:
                   run("genuine-provider-and-unchanged-original-cli",py+[str(bootstrap),"--root",str(overlay),"--baseline-root",str(baseline),"--output",str(root/"provider"),"--lock",str(bootstrap.with_name("wheels.lock.json"))],360)
               finally:
-                  run("post-provider-frozen-pre-custody",py+[str(sdk/"verify.py"),"--report",str(build/"surefire-reports/TEST-com.m3.rewrite.backport.M3OriginalCliProviderRecipeTest.xml"),"--emitted",str(overlay),"--receiver",str(source),"--baseline-root",str(baseline),"--receipt",str(root/"recipe-after-provider.json"),"--run-id",runid])
+                  run("post-provider-frozen-pre-custody",py+[str(sdk/"verify.py"),"--report",str(build/"surefire-reports/TEST-jdk.m3.rewrite.backport.M3OriginalCliProviderRecipeTest.xml"),"--emitted",str(overlay),"--receiver",str(source),"--baseline-root",str(baseline),"--receipt",str(root/"recipe-after-provider.json"),"--run-id",runid])
               pre=json.loads((root/"recipe-execution.json").read_bytes())["frozenPreBaseline"]
               after=json.loads((root/"recipe-after-provider.json").read_bytes())["frozenPreBaseline"]
               if pre!=after or pre.get("files")!=55 or pre.get("bytes")!=795620 or pre.get("manifestSha256")!="11d69c05d4e4dd0ef27c8a2195827c62b5dd48a49bef34943f4c6a11fbc4899c" or pre.get("root")!=str(baseline) or pre.get("independentOfInstalledPost") is not True:raise RuntimeError("frozen PRE before/after provider closure drift")
@@ -397,7 +397,7 @@ jobs:
                       content=path.read_bytes()
                       if len(content)!=record[stream+"Bytes"] or hashlib.sha256(content).hexdigest()!=record[stream+"Sha256"]:raise RuntimeError("CLI output receipt drift")
               baseline_error=(root/"provider"/records_by_label["baseline-validate"]["stderrPath"]).read_text(encoding="utf-8")
-              if "target hash drift: src/java.base/share/classes/jdk/internal/mindex/M3TQ.java" not in baseline_error or "missing file: synexia-openrewrite-recipes/" not in baseline_error:raise RuntimeError("original baseline diagnostics absent")
+              if "target hash drift: src/java.base/share/classes/jdk/internal/mindex/M3TQ.java" not in baseline_error or "missing file: m3-openrewrite-recipes/" not in baseline_error:raise RuntimeError("original baseline diagnostics absent")
               marker=(root/"provider"/records_by_label["current-validate"]["stdoutPath"]).read_text(encoding="utf-8")
               completion=(root/"provider"/records_by_label["current-complete"]["stderrPath"]).read_text(encoding="utf-8").splitlines()
               if marker!="MIGRATION_MANIFEST_VALID completion=INCOMPLETE\n" or len(completion)!=158:raise RuntimeError("unchanged completion boundaries lost")
@@ -412,7 +412,7 @@ jobs:
                   with log.open("rb") as f:f.seek(max(0,log.stat().st_size-32768));tail=f.read(32768)
               try:
                   before=gate(496*1024**2)
-                  selected=[root/"recipe-execution.json",root/"recipe-after-provider.json",root/"hosted-receipt.json",source/"m3/migration/original-provider-20261017/source-binding.json",sdk/"src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/baseline-pre.tsv"]
+                  selected=[root/"recipe-execution.json",root/"recipe-after-provider.json",root/"hosted-receipt.json",source/"m3/migration/original-provider-20261017/source-binding.json",sdk/"src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/baseline-pre.tsv"]
                   selected+=sorted(build.glob("surefire-reports/TEST-*.xml"))
                   selected+=sorted((root/"provider").glob("*.json"))
                   selected+=sorted((root/"provider-boundaries").glob("*.json"))

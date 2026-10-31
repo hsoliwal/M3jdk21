@@ -7,7 +7,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[3]
-RES = HERE / "recipe/src/main/resources/com/synexia/rewrite/m3-five-sdk-owner-repair-20261018"
+RES = HERE / "recipe/src/main/resources/jdk/internal/m3/rewrite/m3-five-sdk-owner-repair-20261018"
 
 def checked(path: Path) -> bytes:
     if not path.is_file() or path.is_symlink():
@@ -54,7 +54,7 @@ def run() -> None:
         "M3IndexMaskCompactor.java": "5def05aad11dbe3ab7bebe27a3c11b5d241c9a7a"
     }
     for name,pin in owners.items():
-        if blob(checked(ROOT / "m3/collections/src/main/java/com/m3/collections" / name)) != pin:
+        if blob(checked(ROOT / "m3/collections/src/main/java/jdk/m3/collections" / name)) != pin:
             raise ValueError("existing array/mask owner was changed: " + name)
     if blob(checked(ROOT / "m3/collections/src/main/native/collections/m3_index_mask_compactor.c")) != "a073e64cb12c59eb81247421cf3efe0628004142":
         raise ValueError("native ABI source changed")

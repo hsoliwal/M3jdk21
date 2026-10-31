@@ -9,7 +9,7 @@ from __future__ import annotations
 import argparse, csv, io, os, subprocess, sys, time
 from pathlib import Path
 
-SUFFIX = "-synexia-source-1"
+SUFFIX = "-m3-source-1"
 
 
 NATIVE_OOM_MARKERS = ("paging file is too small", "insufficient memory for the Java Runtime Environment")

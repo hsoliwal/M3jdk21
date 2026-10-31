@@ -4,9 +4,9 @@ name: M3JDK21 five-library three Java21 diagnostics and 36+8+40 source admission
 on:
   pull_request:
     paths:
-      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java'
-      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryKeyRangesTest.java'
-      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderFlagSelectionTest.java'
+      - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3ApacheCollectionsTest.java'
+      - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryKeyRangesTest.java'
+      - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveProviderFlagSelectionTest.java'
       - 'm3/collections/interop/qualification/current-census-superset-20261022/**'
       - '.github/workflows/m3-interop-three-java21-receiver-20261022.yml'
   push:
@@ -60,7 +60,7 @@ jobs:
                   b'blob ' + str(len(data)).encode() + b'\0' + data).hexdigest()
               if actual_sha != after_sha or actual_blob != after_blob:
                   raise SystemExit('generated source changed: ' + path)
-              if recipe != 'com.synexia.m3.M3InteropThreeJava21Diagnostics20261022':
+              if recipe != 'jdk.internal.m3.M3InteropThreeJava21Diagnostics20261022':
                   raise SystemExit('unattributed result: ' + path)
               declared = len(re.findall(r'@Test\b', data.decode('utf-8')))
               if declared != int(methods) or state != 'PENDING_JAVA21_VENDOR_CI':

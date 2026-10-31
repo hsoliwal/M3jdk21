@@ -20,7 +20,7 @@
     "bytes": 1025,
     "sha256": "b6ba9e3c6928a4d94b387c123fe0b686de2b2e37cfb2cd1fee33b500116dbe31"
   },
-  "benchmarkClass": "com.m3.bench.M3TreeMapPublicBench",
+  "benchmarkClass": "jdk.m3.bench.M3TreeMapPublicBench",
   "status": "SOURCE_FROZEN; NO_COMPILE_RUN_RESULTS",
   "runtimePins": "Root must bind full identity/correctness/public-ABI qualification for old8d,protocol1b,candidate; unqualified runtimes stay excluded.",
   "reproducibility": "Use identical source/classes/JMH/params/flags across versions. JMH1.37 jars and exact ns/whole-op normalization pinned in plan. Root requests CLI -prof gc.",

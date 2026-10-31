@@ -71,9 +71,9 @@ def main() -> int:
     root = Path(__file__).resolve().parent.parent
     q = root / "viewport-proof"
     sources = [root / "src/main/c/m3maskviewport.c",
-               *[root / "src/main/java/com/m3/collections" / name for name in
+               *[root / "src/main/java/jdk/m3/collections" / name for name in
                  ("M3MaskViewportKernel.java", "M3MaskViewportNative.java")],
-               *[root / "src/test/java/com/m3/collections" / name for name in
+               *[root / "src/test/java/jdk/m3/collections" / name for name in
                  ("M3MaskViewportKernelContract.java", "M3MaskViewportPageContract.java")],
                q / "CMakeLists.txt", q / "verify.sh", q / "verify.py",
                q / "fixtures/M3FrameRegionContract.txt",
@@ -155,7 +155,7 @@ def main() -> int:
         receipt.update(java_frame_wired=product_frame_wired,
                        java_page_wired=product_page_wired,
                        frame_test_only=not product_frame_wired)
-        frame_package = output / "frame-src/com/m3/collections"
+        frame_package = output / "frame-src/jdk/m3/collections"
         frame_package.mkdir(parents=True)
         frame_declaration = frame_package / "M3MaskViewportNative.java"
         original_native = sources[2].read_text()
@@ -186,8 +186,8 @@ def main() -> int:
         proof.run("frame-java-compile", [str(javac), "--release", "21", "-encoding", "UTF-8",
                   "-Xlint:all", "-Werror", "-h", str(frame_headers), "-d", str(frame_classes),
                   *frame_java_inputs], clean_stderr=True)
-        frame_header = frame_headers / "com_m3_collections_M3MaskViewportNative.h"
-        if ("Java_com_m3_collections_M3MaskViewportNative_projectFramePage"
+        frame_header = frame_headers / "jdk_m3_collections_M3MaskViewportNative.h"
+        if ("Java_jdk_m3_collections_M3MaskViewportNative_projectFramePage"
                 not in frame_header.read_text()):
             raise RuntimeError("frame JNI header missing declared native entrypoint")
         build, install = output / "native-build", output / "install"
@@ -196,13 +196,13 @@ def main() -> int:
                   "-DCMAKE_INSTALL_PREFIX=" + str(install)])
         proof.run("native-build", ["cmake", "--build", str(build), "--parallel", "1"])
         proof.run("native-install", ["cmake", "--install", str(build)])
-        header = "com_m3_collections_M3MaskViewportNative.h"
+        header = "jdk_m3_collections_M3MaskViewportNative.h"
         if (headers / header).read_bytes() != (build / "jni" / header).read_bytes():
             raise RuntimeError("independent generated JNI headers differ")
         library = install / "lib/libm3maskviewport.so"
         exports = proof.run("native-exports", ["nm", "-D", "--defined-only", str(library)])
         names = {line.split()[-1] for line in exports.splitlines() if line.strip()}
-        expected = {"Java_com_m3_collections_M3MaskViewportNative_" + method
+        expected = {"Java_jdk_m3_collections_M3MaskViewportNative_" + method
                     for method in ("project", "projectPage", "projectFramePage")}
         if names != expected:
             raise RuntimeError("unexpected native exports")
@@ -226,7 +226,7 @@ def main() -> int:
                 mode = "int" if interpreted else "mixed"
                 result = proof.run("java-" + name.lower() + "-" + mode,
                     [str(java), "-ea", *(["-Xint"] if interpreted else []), "-cp", str(classes),
-                     "com.m3.collections." + name], clean_stderr=True)
+                     "jdk.m3.collections." + name], clean_stderr=True)
                 key = "java-" + name
                 if observations.setdefault(key, result) != result:
                     raise RuntimeError("Java execution-mode mismatch")
@@ -239,7 +239,7 @@ def main() -> int:
                 label = (kind + "-" + gc + "-" + ("int" if interpreted else "mixed") + "-" + name).lower()
                 result = proof.run(label, [str(java), "-ea", "-Xcheck:jni", "-Xmx64m",
                     "-XX:+Use" + gc + "GC", *(["-Xint"] if interpreted else []),
-                    "-Dm3.native.path=" + str(binary), "-cp", str(classes), "com.m3.collections." + name,
+                    "-Dm3.native.path=" + str(binary), "-cp", str(classes), "jdk.m3.collections." + name,
                     *(["--native"] if name.endswith("PageContract") else [])], clean_stderr=True)
                 key = "jni-" + name
                 if observations.setdefault(key, result) != result:
@@ -255,7 +255,7 @@ def main() -> int:
             frame_result = proof.run("frame-" + label + "-" + mode,
                 [str(java), "-ea", "-Xcheck:jni", "-Xmx64m", "-XX:+UseSerialGC",
                  *(["-Xint"] if interpreted else []), "-cp", str(frame_classes),
-                 "com.m3.collections.M3FrameRegionContract", str(binary)], clean_stderr=True)
+                 "jdk.m3.collections.M3FrameRegionContract", str(binary)], clean_stderr=True)
             if not frame_result.startswith("M3_FRAME_REGION_PASS checks=35080 digest=ed73ef29740c1e87"):
                 raise RuntimeError("frame JNI reference oracle disagrees")
             if frame_observation is None:
@@ -276,7 +276,7 @@ def main() -> int:
                 page_result = proof.run("page-direct-" + label + "-" + gc.lower() + "-" + mode,
                     [str(java), "-ea", "-Xcheck:jni", "-Xmx64m", "-XX:+Use" + gc + "GC",
                      *(["-Xint"] if interpreted else []), "-cp", str(frame_classes),
-                     "com.m3.collections.M3NativePageDirectContract", str(binary)],
+                     "jdk.m3.collections.M3NativePageDirectContract", str(binary)],
                     clean_stderr=True)
                 if page_observation is None:
                     page_observation = page_result

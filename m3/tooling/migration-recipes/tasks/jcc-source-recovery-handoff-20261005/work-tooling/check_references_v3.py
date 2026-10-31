@@ -31,10 +31,10 @@ DEST = '0994ecd65e86600f417f4d8702838d8c2663af61'
 DEST_ROOT = '7e8f39ac999174f8d5b6028d638a68d8c317b070'
 OWNER = 'da958d00d24154c0db87beca0ec80a7df2b43b73'
 REF = 'refs/heads/aix/jcc-source-merge-recovery-20261005'
-IDS = ('synexia.jcc-recipe-laboratory', 'synexia.jcc-java-jni-regression')
+IDS = ('m3.jcc-recipe-laboratory', 'm3.jcc-java-jni-regression')
 NAME = 'jcc-source-recovery-handoff-20261005'
 TASK = PurePosixPath('m3/tooling/migration-recipes/tasks') / NAME
-CRATE = ROOT / 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text' / NAME
+CRATE = ROOT / 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text' / NAME
 MAP = 'm3/docs/name-mapping.json'
 DOC = 'm3/docs/jcc-source-handoff.md'
 BIND = 'm3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json'
@@ -438,7 +438,7 @@ def main():
             for index, child in enumerate(value):
                 nested_dest(child, f'{location}[{index}]')
 
-    old_plan = load(OLD / 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/plan.json')
+    old_plan = load(OLD / 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/plan.json')
     assert plan['guards'] == old_plan['guards'] and len(plan['guards']) == 7
     for index, guard in enumerate(plan['guards']):
         dest(guard, f'plan.guards[{index}]')

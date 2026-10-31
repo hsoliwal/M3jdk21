@@ -9,7 +9,7 @@
     "key/entry view queries"
   ],
   "sourceCommit": "a6a68ad408eeaac6917fdbae814e6c157641ef7f",
-  "file": "m3/collections/src/main/java/com/m3/collections/M3TreeMap.java",
+  "file": "m3/collections/src/main/java/jdk/m3/collections/M3TreeMap.java",
   "selection": "ADAPT existing array AVL findSlot atom",
   "alternatives": [
     {

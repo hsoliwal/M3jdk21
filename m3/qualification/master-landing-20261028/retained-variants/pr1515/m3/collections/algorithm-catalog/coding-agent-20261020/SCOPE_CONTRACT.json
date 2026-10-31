@@ -1,5 +1,5 @@
 {
-  "schema": "synexia.coding-agent.scope-contract.v1",
+  "schema": "m3.coding-agent.scope-contract.v1",
   "levels": [
     "repository",
     "module",

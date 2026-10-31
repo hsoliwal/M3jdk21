@@ -87,19 +87,19 @@ def main():
         raise ValueError('existing ABI count differs; named equality is also enforced by builder')
     headers = {}
     for name in ('M3IndexMaskCompactor', 'M3IndexMaskWindow', 'M3IndexPathMasks'):
-        header = 'com_m3_collections_' + name + '.h'
+        header = 'jdk_m3_collections_' + name + '.h'
         before, after = base_headers / header, pack_out / 'headers' / header
         if before.read_bytes() != after.read_bytes():
             raise ValueError('Java native declaration/header changed: ' + header)
         headers[name] = sha(after)
 
-    sources = [repo / 'm3/collections/src/test/java/com/m3/collections' / (name + '.java')
+    sources = [repo / 'm3/collections/src/test/java/jdk/m3/collections' / (name + '.java')
                for name in ('M3FilteredEndpointRestorationContract', 'M3MaskedSortFusionContract')]
     sources += sorted((packet / 'src/test/java').rglob('*.java'))
     tests = out / 'probe-classes'
     run('oracle-compile-against-baseline', [javac, '--release', '21', '-Xlint:all,-module', '-Werror',
         '-cp', base_classes, '-d', tests, *sources])
-    target_classes = pack_out / 'modules/com.m3.collections'
+    target_classes = pack_out / 'modules/jdk.m3.collections'
     installed_native = pack_out / 'pack/image/lib'
     missing = out / 'missing-native'
     missing.mkdir()
@@ -108,25 +108,25 @@ def main():
     for label, classes in (('baseline', base_classes), ('target', target_classes)):
         cp = str(classes) + os.pathsep + str(tests)
         surfaces[label] = run(label + '-public-surface', [java, '-cp', cp,
-            'com.m3.collections.M3CollectionSurfaceProbe'])
+            'jdk.m3.collections.M3CollectionSurfaceProbe'])
         for mode in ('private', 'facade'):
             run(label + '-strict-endpoint-' + mode, [java, '-cp', cp,
-                'com.m3.collections.M3FilteredEndpointRestorationContract', mode],
+                'jdk.m3.collections.M3FilteredEndpointRestorationContract', mode],
                 expected_exit=1 if label == 'baseline' else 0,
                 marker='NoSuchElementException' if label == 'baseline' else 'PASS')
         for mode, arguments in (('java', []), ('native', ['--native'])):
             run(label + '-masked-sort-' + mode, [java, '-Xcheck:jni',
                 '-Djava.library.path=' + str(installed_native), '-cp', cp,
-                'com.m3.collections.M3MaskedSortFusionContract', *arguments], marker='PASS')
+                'jdk.m3.collections.M3MaskedSortFusionContract', *arguments], marker='PASS')
             output = run(label + '-allocation-' + mode, [java, '-Xint', '-Xcheck:jni',
                 '-Djava.library.path=' + str(installed_native), '-cp', cp,
-                'com.m3.collections.M3MaskedSortAllocationProbe', *arguments])
+                'jdk.m3.collections.M3MaskedSortAllocationProbe', *arguments])
             rows = [json.loads(line) for line in output.splitlines() if line.startswith('{')]
             if [row['selected'] for row in rows] != [0, 1, 64, 1024]:
                 raise ValueError('allocation workload inventory differs')
             allocation[label + '-' + mode] = rows
         run(label + '-missing-native', [java, '-Xcheck:jni', '-Djava.library.path=' + str(missing),
-            '-cp', cp, 'com.m3.collections.M3MaskedSortFusionContract', '--missing'], marker='PASS')
+            '-cp', cp, 'jdk.m3.collections.M3MaskedSortFusionContract', '--missing'], marker='PASS')
     calls = {label: [line for line in text.splitlines() if line.startswith('CALL\t')]
              for label, text in surfaces.items()}
     if calls['baseline'] != calls['target']:
@@ -134,7 +134,7 @@ def main():
     expected_reflection = {
         'baseline': ['ENDPOINT\t' + name + '\tdeclaring=java.util.NavigableSet\tdefault=true'
                      for name in ('removeFirst', 'removeLast')],
-        'target': ['ENDPOINT\t' + name + '\tdeclaring=com.m3.collections.M3FilteredNavigableSet\tdefault=false'
+        'target': ['ENDPOINT\t' + name + '\tdeclaring=jdk.m3.collections.M3FilteredNavigableSet\tdefault=false'
                    for name in ('removeFirst', 'removeLast')]}
     for label, expected in expected_reflection.items():
         if [line for line in surfaces[label].splitlines() if line.startswith('ENDPOINT\t')] != expected:

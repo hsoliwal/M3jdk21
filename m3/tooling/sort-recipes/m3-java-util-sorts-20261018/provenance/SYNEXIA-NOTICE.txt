@@ -35,7 +35,7 @@ material. It does not relicense Eclipse SWT, Eclipse Nebula, OpenRewrite,
 OpenJDK, Java2s material, challenge-site content, or any other third-party donor.
 Their original copyright, license, NOTICE, and attribution obligations remain
 in force. Canonical policy:
-  docs/M3-SCALE/invariants/SYNEXIA-VIEWPORT-M3-LICENSING-1.md
+  docs/M3-SCALE/invariants/M3-VIEWPORT-M3-LICENSING-1.md
 
 The M3 cloner and related release tooling generate first-party starter packs,
 documentation, and build metadata intended for Apache-2.0 distribution.
@@ -54,7 +54,7 @@ The complete original license and Commons Clause notice are preserved in
 Every exported Synexia jSparrow proposal includes that complete license.
 Synexia's independently written integration does not relicense the donor,
 remove its obligations, authorize restricted sales, or imply endorsement.
-Canonical policy: docs/M3-SCALE/invariants/SYNEXIA-DONOR-ATTRIBUTION-1.md
+Canonical policy: docs/M3-SCALE/invariants/M3-DONOR-ATTRIBUTION-1.md
 
 
 Apache Lucene architectural donor for MIndex packed lexeme lookup
@@ -70,8 +70,8 @@ least-cost conjunction planning.
 Synexia independently implements its packed lexeme codec/lookup representation;
 no Lucene source code or serialized format is copied.
 Detailed provenance:
-  synexia-mindex/docs/evidence/PACKED_LEXEME_DONOR_PROVENANCE.md
-Canonical policy: docs/M3-SCALE/invariants/SYNEXIA-DONOR-ATTRIBUTION-1.md
+  m3-mindex/docs/evidence/PACKED_LEXEME_DONOR_PROVENANCE.md
+Canonical policy: docs/M3-SCALE/invariants/M3-DONOR-ATTRIBUTION-1.md
 
 
 Apache Commons Graph donor for MIndex weighted graph algorithms
@@ -85,9 +85,9 @@ Synexia independently implements these mechanics over primitive CSR arrays,
 direct-position binary heaps and primitive union-find; Commons Graph object
 models and runtime dependencies are not retained.
 Upstream NOTICE is preserved at:
-  synexia-mindex/foundation/docs/donors-20260925/APACHE-COMMONS-GRAPH-NOTICE.txt
+  m3-mindex/foundation/docs/donors-20260925/APACHE-COMMONS-GRAPH-NOTICE.txt
 Detailed provenance:
-  synexia-mindex/foundation/docs/donors-20260925/PROVENANCE.tsv
+  m3-mindex/foundation/docs/donors-20260925/PROVENANCE.tsv
 
 Apache Maven Resolver semantic donor for MIndex software planning
 Source: https://github.com/apache/maven-resolver
@@ -98,8 +98,8 @@ semantics. MIndexSoftwarePlanner applies the analogous rule that minimum
 admitted schema depth precedes secondary policy ranking.
 No Maven Resolver classes, artifact model or runtime dependency is copied.
 Detailed provenance:
-  synexia-mindex/foundation/docs/donors-20260925/PROVENANCE.tsv
-Canonical policy: docs/M3-SCALE/invariants/SYNEXIA-DONOR-ATTRIBUTION-1.md
+  m3-mindex/foundation/docs/donors-20260925/PROVENANCE.tsv
+Canonical policy: docs/M3-SCALE/invariants/M3-DONOR-ATTRIBUTION-1.md
 
 
 William Fiset Algorithms architectural donor for MIndex AST precompute
@@ -111,7 +111,7 @@ range-minimum preprocessing, KMP/Rabin-Karp/string-search algorithm families.
 Synexia independently implements these mechanics over MIndexAST integer occurrence
 coordinates and flat primitive arrays; no upstream source file is copied.
 Detailed provenance:
-  synexia-indexstring/docs/MINDEX_AST_PRECOMPUTE_DONORS.md
+  m3-indexstring/docs/MINDEX_AST_PRECOMPUTE_DONORS.md
 
 Justin Wetherell java-algorithms-implementation architectural donor for MIndex AST precompute
 Source: https://github.com/phishman3579/java-algorithms-implementation
@@ -122,7 +122,7 @@ search and lower/upper-bound search patterns.
 Synexia independently implements AST-specific primitive-array indexes; no upstream
 source file is copied.
 Detailed provenance:
-  synexia-indexstring/docs/MINDEX_AST_PRECOMPUTE_DONORS.md
+  m3-indexstring/docs/MINDEX_AST_PRECOMPUTE_DONORS.md
 
 
 ANTLR4 architectural donor for compiled MIndex AST spec images
@@ -135,7 +135,7 @@ Reviewed references:
 Adapted concept: versioned integer parser-state images loaded without reparsing grammar source.
 Synexia independently implements the .midxa AST-spec/production-plan image and copies no donor
 source bodies. Detailed provenance:
-  synexia-indexstring/docs/MINDEX_AST_SPEC_IMAGE_DONORS.md
+  m3-indexstring/docs/MINDEX_AST_SPEC_IMAGE_DONORS.md
 
 JavaCC architectural donor for compiled MIndex AST spec images
 Source: https://github.com/javacc/javacc
@@ -146,7 +146,7 @@ Reviewed reference:
 Adapted concept: generated parser/lookahead/token-mask tables move grammar work ahead of runtime.
 Synexia independently implements primitive AST-spec planes and copies no donor source bodies.
 Detailed provenance:
-  synexia-indexstring/docs/MINDEX_AST_SPEC_IMAGE_DONORS.md
+  m3-indexstring/docs/MINDEX_AST_SPEC_IMAGE_DONORS.md
 
 
 Fishercoder Leetcode architectural donor for grammar decision precompute
@@ -159,7 +159,7 @@ Adapted concept: sorted candidate intersection and binary-search lookup.
 Synexia independently implements primitive literal-hash and grammar-decision postings; no donor
 solution body or LeetCode problem/editorial text is copied.
 Detailed provenance:
-  synexia-indexstring/docs/donors/GRAMMAR_DECISION_DONORS.tsv
+  m3-indexstring/docs/donors/GRAMMAR_DECISION_DONORS.tsv
 
 Java-aid HackerRank Solutions architectural donor for grammar decision precompute
 Source: https://github.com/Java-aid/Hackerrank-Solutions
@@ -171,7 +171,7 @@ Adapted concept: precompute an exact index once and answer repeated queries with
 Synexia independently implements terminal-to-production primitive CSR dispatch; no donor solution
 body or HackerRank challenge statement is copied.
 Detailed provenance:
-  synexia-indexstring/docs/donors/GRAMMAR_DECISION_DONORS.tsv
+  m3-indexstring/docs/donors/GRAMMAR_DECISION_DONORS.tsv
 
 
 Fishercoder Leetcode adjacency-list donor for Earley waiting-state indexing
@@ -184,7 +184,7 @@ Adapted concept: adjacency-list traversal visits only relevant neighbors after o
 Synexia independently implements a sparse primitive expected-nonterminal -> waiting-state chart
 index. No LeetCode problem/editorial text or donor solution body is copied.
 Detailed design:
-  synexia-indexstring/docs/MINDEX_EARLEY_WAITING_INDEX.md
+  m3-indexstring/docs/MINDEX_EARLEY_WAITING_INDEX.md
 
 
 LeetCode-in-Java Design HashMap architectural donor for MIndex AST production dispatch
@@ -198,8 +198,8 @@ Adapted concept: fixed keyed hash lookup shape.
 Synexia independently implements immutable primitive open-addressed production dispatch and copies
 no donor source, problem statement or editorial.
 Detailed provenance:
-  synexia-indexstring/docs/MINDEX_AST_PRODUCTION_DISPATCH.md
-  synexia-donor-inventory/docs/AST_PRODUCTION_DISPATCH_DONORS.tsv
+  m3-indexstring/docs/MINDEX_AST_PRODUCTION_DISPATCH.md
+  m3-donor-inventory/docs/AST_PRODUCTION_DISPATCH_DONORS.tsv
 
 HackerRank Sparse Arrays architectural donor for MIndex AST production dispatch
 Source: https://github.com/RodneyShag/HackerRank_solutions
@@ -212,8 +212,8 @@ Adapted concept: pre-count-once repeated direct-query shape.
 Synexia independently implements deterministic grammar prediction CSR/open-address dispatch and
 copies no donor source, challenge statement or editorial.
 Detailed provenance:
-  synexia-indexstring/docs/MINDEX_AST_PRODUCTION_DISPATCH.md
-  synexia-donor-inventory/docs/AST_PRODUCTION_DISPATCH_DONORS.tsv
+  m3-indexstring/docs/MINDEX_AST_PRODUCTION_DISPATCH.md
+  m3-donor-inventory/docs/AST_PRODUCTION_DISPATCH_DONORS.tsv
 
 
 LeetCode-in-Java architectural donor for MIndex AST predictive production dispatch
@@ -227,7 +227,7 @@ Adapted concept: fixed hash-region/direct lookup for repeated point queries.
 Synexia independently implements immutable packed grammar-coordinate open addressing and copies no
 donor source body.
 Detailed provenance:
-  synexia-indexstring/docs/MINDEX_AST_PRODUCTION_DISPATCH_DONORS.md
+  m3-indexstring/docs/MINDEX_AST_PRODUCTION_DISPATCH_DONORS.md
 
 HackerRank_solutions architectural donor for MIndex AST predictive production dispatch
 Source: https://github.com/RodneyShag/HackerRank_solutions
@@ -240,7 +240,7 @@ Adapted concept: pre-count/index once and answer repeated queries without rescan
 Synexia independently implements primitive prediction-cell CSR, nonterminal row CSR and EOF CSR and
 copies no donor source body.
 Detailed provenance:
-  synexia-indexstring/docs/MINDEX_AST_PRODUCTION_DISPATCH_DONORS.md
+  m3-indexstring/docs/MINDEX_AST_PRODUCTION_DISPATCH_DONORS.md
 
 
 MIndexFile competitive-programming donor custody
@@ -279,7 +279,7 @@ trie/failure-link multi-pattern matching over file-local token handles.
 Synexia independently implements the MIndexFile primitive storage/index planes. No donor source
 body, challenge statement, editorial text or donor test vector is copied.
 Detailed provenance:
-  synexia-indexstring/docs/donors/MINDEX_FILE_DONORS.tsv
+  m3-indexstring/docs/donors/MINDEX_FILE_DONORS.tsv
 
 
 xerial/snappy-java architectural donor for MIndex AST dispatch JNI
@@ -292,8 +292,8 @@ Reviewed reference:
 Adapted concept: bounded-lifetime GetDirectBufferAddress access for direct ByteBuffer JNI kernels.
 Synexia independently implements AST dispatch kernels and copies no donor source body.
 Detailed provenance:
-  synexia-indexstring/docs/MINDEX_AST_DISPATCH_JNI.md
-  synexia-donor-inventory/docs/AST_DISPATCH_JNI_DONORS.tsv
+  m3-indexstring/docs/MINDEX_AST_DISPATCH_JNI.md
+  m3-donor-inventory/docs/AST_DISPATCH_JNI_DONORS.tsv
 
 RocksDB JNI architectural donor for MIndex AST dispatch JNI
 Source: https://github.com/facebook/rocksdb
@@ -305,21 +305,21 @@ Reviewed reference:
 Adapted concept: batched JNI/direct-buffer query paths that amortize crossing cost across many keys.
 Synexia independently implements immutable grammar-dispatch batches and copies no donor source body.
 Detailed provenance:
-  synexia-indexstring/docs/MINDEX_AST_DISPATCH_JNI.md
-  synexia-donor-inventory/docs/AST_DISPATCH_JNI_DONORS.tsv
+  m3-indexstring/docs/MINDEX_AST_DISPATCH_JNI.md
+  m3-donor-inventory/docs/AST_DISPATCH_JNI_DONORS.tsv
 
 JGDMS discovery providers runtime
 Source: https://github.com/pfirmstone/JGDMS
 Release: 3.1.0
 License: Apache License 2.0.
 The published au.net.zeus.jgdms:jgdms-discovery-providers:3.1.0 artifact is used by
-synexia-mindex/precompute-jini for Jini discovery. Upstream LICENSE and NOTICE obligations
+m3-mindex/precompute-jini for Jini discovery. Upstream LICENSE and NOTICE obligations
 remain applicable when that optional runtime dependency is distributed.
 
 
 LangDex external semantic data donor
 Source: https://huggingface.co/datasets/Asakiri/langdex
-Adapter package: com.synexia.unicodex.langdex
+Adapter package: jdk.internal.m3.unicodex.langdex
 
 Synexia's Java adapter/compiler/runtime code is independently implemented and remains under the
 repository's Apache-2.0 code license. LangDex databases, Parquet rows, scanned dictionaries and
@@ -345,4 +345,4 @@ license. This notice does not relicense OpenJDK or third-party donor material.
 Architectural ideas and algorithms are recorded for provenance; copyright is
 asserted only over copyrightable authored expression and implementation.
 Canonical policy:
-  docs/M3-SCALE/invariants/SYNEXIA-M3INDEX-OWNERSHIP-1.md
+  docs/M3-SCALE/invariants/M3-M3INDEX-OWNERSHIP-1.md

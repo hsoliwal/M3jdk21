@@ -22,19 +22,19 @@
       "m3_jni_core.h.txt"
     ],
     [
-      "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
       "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924",
       "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924",
       "KEEP"
     ],
     [
-      "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+      "m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java",
       "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
       "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
       "KEEP"
     ],
     [
-      "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
       "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e",
       "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e",
       "KEEP"
@@ -46,7 +46,7 @@
       "m3_index_mask_compactor.c.txt"
     ],
     [
-      "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+      "m3/collections/src/test/java/jdk/m3/collections/M3MaskWindowCurrentProof.java",
       "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3",
       "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3",
       "KEEP"

@@ -13,12 +13,12 @@ import subprocess
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[4] if len(HERE.parents) > 4 else Path.cwd()
 CENSUS = HERE / 'current-source-census.tsv'
-LEGACY = ROOT / 'm3/collections/interop/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/collections-library-interop/manifest.tsv'
+LEGACY = ROOT / 'm3/collections/interop/recipe/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/collections-library-interop/manifest.tsv'
 RECEIPT_SHA256 = 'd9ed46c1ebb31850319dec8bdf73ee3a1eaf5fdd4bb4430d5c1ab91ba4591e26'
 LEGACY_GIT_BLOB = 'bdc0cab41cd4033421388fbd44f37203d765f57e'
 BASE = 'm3/collections/interop/src/'
-MAIN = BASE + 'main/java/com/m3/collections/interop/'
-TEST = BASE + 'test/java/com/m3/collections/interop/'
+MAIN = BASE + 'main/java/jdk/m3/collections/interop/'
+TEST = BASE + 'test/java/jdk/m3/collections/interop/'
 ALLOWED_PATHS = tuple(sorted([
     MAIN + name for name in (
         'M3ApacheBag.java',

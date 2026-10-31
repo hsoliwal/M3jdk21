@@ -10,9 +10,9 @@
   },
   "namespaceMapping": {
     "source": "com.google.common",
-    "target": "com.m3.collections.guava",
+    "target": "jdk.m3.collections.guava",
     "ownedHelperSource": "com.google.thirdparty.publicsuffix",
-    "ownedHelperTarget": "com.m3.collections.guava.thirdparty.publicsuffix",
+    "ownedHelperTarget": "jdk.m3.collections.guava.thirdparty.publicsuffix",
     "externalProvidersPreserved": [
       "com.google.common.truth",
       "com.google.common.jimfs"

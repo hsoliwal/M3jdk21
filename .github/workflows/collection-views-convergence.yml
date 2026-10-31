@@ -98,5 +98,5 @@ jobs:
         run: |
           set -euo pipefail
           test "$(grep -c 'package java.util;' src/java.base/share/classes/java/util/CollectionViews.java)" -eq 1
-          ! grep -q 'com.m3.collections' src/java.base/share/classes/java/util/CollectionViews.java
+          ! grep -q 'jdk.m3.collections' src/java.base/share/classes/java/util/CollectionViews.java
           sha256sum src/java.base/share/classes/java/util/CollectionViews.java

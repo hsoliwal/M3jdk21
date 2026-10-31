@@ -7,13 +7,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[5]
 HERE = Path(__file__).resolve().parent
 CRATE = "m3jdk21-five-library-index-views-20261017"
-RES = HERE / "src/main/resources/com/synexia/rewrite/hash-pinned-java" / CRATE
-MIRROR = HERE / "canonical/src/main/resources/com/synexia/rewrite/hash-pinned-java" / CRATE
+RES = HERE / "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java" / CRATE
+MIRROR = HERE / "canonical/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java" / CRATE
 
 HISTORICAL_MANIFEST_SHA256 = "e6c0c9e779be05fafbf30158ec578a120a8154516462e71b75e03c333c27b78a"
-INDEX_PATH = "m3/collections/interop/src/main/java/com/m3/collections/interop/M3FiveLibraryIndexViews.java"
-TEST_PATH = "m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryIndexViewsTest.java"
-SUCCESSOR_TEST_PATH = "m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryState32Test.java"
+INDEX_PATH = "m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3FiveLibraryIndexViews.java"
+TEST_PATH = "m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryIndexViewsTest.java"
+SUCCESSOR_TEST_PATH = "m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryState32Test.java"
 SUCCESSOR_BEFORE = "605dbbf0193dbe9b298499d399f9c3607a95ce74b26884d8b3ac9c7aad50f193"
 SUCCESSOR_AFTER = "fb8125ef79ffc4788b00571ab447a1ed08eca65a56668725db5b2d799a67e85b"
 SUCCESSOR_TEST_AFTER = "26548a60299d8647807401c467d013da60e2f9d248cb82450dcc6d0fe70a3d15"

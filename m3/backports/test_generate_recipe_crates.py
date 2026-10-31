@@ -111,12 +111,12 @@ class GenerateRecipeCratesTest(unittest.TestCase):
                 / "m3-jdk22-candidate-backports.yml"
             ).read_text(encoding="utf-8")
             self.assertIn(
-                "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe",
+                "jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe",
                 yaml,
             )
             self.assertIn("crateName: jdk22-0001", yaml)
             self.assertIn(
-                "name: com.m3.generated.jdk22.CandidateBackports",
+                "name: jdk.m3.generated.jdk22.CandidateBackports",
                 yaml,
             )
 
@@ -188,8 +188,8 @@ class GenerateRecipeCratesTest(unittest.TestCase):
                 / self.mod.YAML_ROOT
                 / "m3-jdk22-candidate-backports.yml"
             ).read_text(encoding="utf-8")
-            self.assertIn("com.m3.generated.jdk22_0001", yaml)
-            self.assertIn("com.m3.generated.jdk22_0002", yaml)
+            self.assertIn("jdk.m3.generated.jdk22_0001", yaml)
+            self.assertIn("jdk.m3.generated.jdk22_0002", yaml)
 
     def test_include_text_emits_separate_java_and_plain_text_crates(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
@@ -258,11 +258,11 @@ class GenerateRecipeCratesTest(unittest.TestCase):
                 / "m3-jdk24-candidate-backports.yml"
             ).read_text(encoding="utf-8")
             self.assertIn(
-                "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe",
+                "jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe",
                 yaml,
             )
             self.assertIn(
-                "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe",
+                "jdk.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe",
                 yaml,
             )
             self.assertIn("crateName: jdk24-java-0001", yaml)
@@ -330,7 +330,7 @@ class GenerateRecipeCratesTest(unittest.TestCase):
                 / "m3-jdk24-candidate-backports.yml"
             ).read_text(encoding="utf-8")
             self.assertIn(
-                "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe",
+                "jdk.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe",
                 yaml,
             )
             self.assertIn("crateName: jdk24-native-0001", yaml)

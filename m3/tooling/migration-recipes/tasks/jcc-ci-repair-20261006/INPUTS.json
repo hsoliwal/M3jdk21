@@ -20,7 +20,7 @@
       "mode": "100644"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java",
+      "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java",
       "before": {
         "resource": "before-01-M3A3RegexMemoryLabDeliveryRecipeTest.java.txt",
         "sha256": "58d01008f3dc6e79d988e855d76ba90eb0a13d39a76e7eb4027d75442389ec94"
@@ -36,7 +36,7 @@
       "mode": "100644"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
+      "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
       "before": {
         "resource": "before-02-M3A3RegexMemoryWorkflowRecipeTest.java.txt",
         "sha256": "69882638771a411cf0866f789a7b3ef7e7e7040cde38a1c40ef4a743d37168e2"
@@ -66,11 +66,11 @@
       "sha256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
       "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3ScopeInference.java",
+      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3ScopeInference.java",
       "sha256": "eca941688f9449f54c16386c581ce162df608858526d4660473e250ed3d0f267"
     }
   ],
@@ -78,13 +78,13 @@
   "retained_installer_sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628",
   "scope_already_repaired": {
     "key": "scope",
-    "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3ScopeInference.java",
+    "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3ScopeInference.java",
     "ref": "b71ee5bf88398fb80961c13db03e8c675fb445ce",
     "sha256": "eca941688f9449f54c16386c581ce162df608858526d4660473e250ed3d0f267",
     "git_blob": "c1c9be4f9036f1335bf020498c850a0f30bd8fad",
     "bytes": 6292,
     "capture": "calls/scope.json",
-    "local": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/current-master-applicability/files/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3ScopeInference.java"
+    "local": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/current-master-applicability/files/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3ScopeInference.java"
   },
   "gcc_pin_disposition": "UNCHANGED; exact package retrieval/admission remains a separate obligation",
   "test_methods_preserved": {

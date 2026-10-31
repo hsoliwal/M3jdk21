@@ -4,7 +4,7 @@
     "before_sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545",
     "materialization": "actual OpenRewrite Result retained by ordered proof test",
     "pass": "stable-order-groups",
-    "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+    "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
     "receiving_compile": "PASS",
     "sdk_receipts": {
       "SDK_INPUTS.tsv": "6eab46bb1125c869e4f0888e131830dc9ec8a09a410032976ab9bad5becb2abe",
@@ -24,7 +24,7 @@
     "before_sha256": "ABSENT",
     "materialization": "actual OpenRewrite Result retained by ordered proof test",
     "pass": "index-contract",
-    "path": "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowContract.java",
+    "path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowContract.java",
     "receiving_compile": "PASS",
     "sdk_receipts": {
       "SDK_INPUTS.tsv": "c48e8591122c00a5c4887072afb53b55f32fde242f44a4a5f6d5f222f12257d8",
@@ -44,7 +44,7 @@
     "before_sha256": "ABSENT",
     "materialization": "actual OpenRewrite Result retained by ordered proof test",
     "pass": "index-resource-probe",
-    "path": "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowResourceProbe.java",
+    "path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowResourceProbe.java",
     "receiving_compile": "PASS",
     "sdk_receipts": {
       "SDK_INPUTS.tsv": "d5a40092bbf0e2a9799ef0aeb6dc9343c6e4218c7a625ce523cc8d6aa34deab7",
@@ -64,7 +64,7 @@
     "before_sha256": "ABSENT",
     "materialization": "actual OpenRewrite Result retained by ordered proof test",
     "pass": "index-junit",
-    "path": "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowTest.java",
+    "path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowTest.java",
     "receiving_compile": "PASS",
     "sdk_receipts": {
       "SDK_INPUTS.tsv": "5f032575c183a6a2cf147dcb9fe098b9b5de013c0356e87051734292e6170dd6",

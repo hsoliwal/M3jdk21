@@ -2,7 +2,7 @@
   "schema": "M3_EXACT_TASK_INPUTS_V1",
   "target_repository": "hsoliwal/M3jdk21",
   "target_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
-  "recipe": "com.synexia.m3.StringPoolIndex20261018",
+  "recipe": "jdk.internal.m3.StringPoolIndex20261018",
   "files": [
     {
       "path": ".github/workflows/mindex-string-backing.yml",

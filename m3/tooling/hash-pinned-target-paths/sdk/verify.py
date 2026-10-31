@@ -13,22 +13,22 @@ import tempfile
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parent
-RESOURCE = "src/main/resources/com/synexia/rewrite/hash-pinned-target-paths-20261020"
-SUITE = "com.synexia.rewrite.M3HashPinnedTargetPathsCompatRecipeTest"
+RESOURCE = "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020"
+SUITE = "jdk.internal.m3.rewrite.M3HashPinnedTargetPathsCompatRecipeTest"
 METHODS = ["bothPartialStatesRoundTripAndReachFixedPointsInBothOrders",
            "everyOwnerRefusesDriftMissingAndDuplicateWithoutMutation",
            "canonicalAccessorPreservesAllReceivingModes"]
 SUITES = {SUITE: METHODS}
 OWNER_GIT = {
-    "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java": "d58ca50dfaeb60f581b64f43545e688aca5c6530",
-    "m3/tooling/migration-recipes/src/test/java/com/synexia/rewrite/M3ObjectSlotIndexSnapshot20261017RecipeTest.java": "eb4a10e788530074df0616dcf601debb7618a4ee",
-    "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectIndexSnapshot.java.txt": "a212ea57297199900add9e1cc3aef1088abc9d1c",
-    "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexSelfTest.java.txt": "b57580a60c3692d64c34cadab43e6be82d24331d",
-    "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexTest.java.txt": "c2eba295f79b0db87e55703d73324323237165b3",
-    "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotStore28.java.txt": "0c65469024118a25399f9581a1be2769078fa087",
-    "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/manifest.tsv": "1813be7b3196f384682ee9fd0a6661e9ec84bb2f"
+    "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java": "d58ca50dfaeb60f581b64f43545e688aca5c6530",
+    "m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3ObjectSlotIndexSnapshot20261017RecipeTest.java": "eb4a10e788530074df0616dcf601debb7618a4ee",
+    "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectIndexSnapshot.java.txt": "a212ea57297199900add9e1cc3aef1088abc9d1c",
+    "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexSelfTest.java.txt": "b57580a60c3692d64c34cadab43e6be82d24331d",
+    "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexTest.java.txt": "c2eba295f79b0db87e55703d73324323237165b3",
+    "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotStore28.java.txt": "0c65469024118a25399f9581a1be2769078fa087",
+    "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/manifest.tsv": "1813be7b3196f384682ee9fd0a6661e9ec84bb2f"
 }
-PROVIDER_OWNER = "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
+PROVIDER_OWNER = "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
 PROVIDER_BEFORE_SHA = "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599"
 PROVIDER_AFTER_GIT = "0b944b326d1911661476b1ae06556869c2778282"
 PROVIDER_AFTER_SHA = "4b6b3310c6c9d7f60abcaca2ac43c813abdffd8e9ec472054397d38cd05bc39c"
@@ -37,14 +37,14 @@ KEEP_PATHS = [name for name in TARGET_PATHS if name != PROVIDER_OWNER]
 RECEIVER_OUTPUTS: dict[str, str] = {}
 RECEIVER_CUSTODY: dict[str, str] = {}
 DESCRIPTOR = "src/main/resources/META-INF/rewrite/hash-pinned-target-paths-20261020.yml"
-TEST = "src/test/java/com/synexia/rewrite/M3HashPinnedTargetPathsCompatRecipeTest.java"
-DONOR_LEAF = "src/test/resources/com/synexia/rewrite/hash-pinned-target-paths-20261020/canonical-targetPaths.java.txt"
+TEST = "src/test/java/jdk/internal/m3/rewrite/M3HashPinnedTargetPathsCompatRecipeTest.java"
+DONOR_LEAF = "src/test/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/canonical-targetPaths.java.txt"
 INVERSE_DESCRIPTOR = "src/main/resources/META-INF/rewrite/hash-pinned-target-paths-20261020-inverse.yml"
-INVERSE_ADAPTER = "pinned-engine/com/synexia/rewrite/M3HashPinnedTargetPathsCompatInverseRecipe.java"
+INVERSE_ADAPTER = "pinned-engine/jdk/internal/m3/rewrite/M3HashPinnedTargetPathsCompatInverseRecipe.java"
 REQUIRED_PATHS = sorted([
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
-    "pinned-engine/com/synexia/rewrite/M3HashPinnedTargetPathsCompatRecipe.java",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
+    "pinned-engine/jdk/internal/m3/rewrite/M3HashPinnedTargetPathsCompatRecipe.java",
     "pom.xml", DONOR_LEAF, DESCRIPTOR, INVERSE_DESCRIPTOR, INVERSE_ADAPTER, TEST, "verify.py",
     "FOSS_REUSE_DECISION.tsv", "THIRD_PARTY_NOTICES.md", "README.md",
     RESOURCE + "/manifest.tsv", RESOURCE + "/inverse/manifest.tsv",
@@ -52,12 +52,12 @@ REQUIRED_PATHS = sorted([
     *[RESOURCE + "/" + stage + "/" + name for stage in ("before", "out") for name in TARGET_PATHS],
 ])
 ORIGINAL_GIT = {
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java": "1c1b1b568d369f688f6953161636bf36b484bf5a",
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
     "pom.xml": "d79867bcc09ad6329e12418e15907e54b8ab025f",
 }
-PROVIDERS = {"openrewriteAdapter": ORIGINAL_GIT["pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java"],
-             "manifestKernel": ORIGINAL_GIT["pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java"]}
+PROVIDERS = {"openrewriteAdapter": ORIGINAL_GIT["pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java"],
+             "manifestKernel": ORIGINAL_GIT["pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java"]}
 COMPILED_PROVIDERS = ("M3GpuToolJoinRecipe", "M3GpuToolJoinManifest", "M3HashPinnedTargetPathsCompatRecipe",
                       "M3HashPinnedTargetPathsCompatInverseRecipe")
 FALSE_GATES = ("targetJavaCompiled", "originalPrivateOwnerModuleQualified", "receiverRuntimeQualified",
@@ -220,7 +220,7 @@ def validate_marker(xml: bytes, ident: str) -> None:
 def self_test_reports() -> None:
     """Prove exact provider-derived names without stripping parameter signatures."""
     # Independent literal oracle matches the sealed Java methods and pinned provider.
-    expected_suites = {"com.synexia.rewrite.M3HashPinnedTargetPathsCompatRecipeTest":["bothPartialStatesRoundTripAndReachFixedPointsInBothOrders","everyOwnerRefusesDriftMissingAndDuplicateWithoutMutation","canonicalAccessorPreservesAllReceivingModes"]}
+    expected_suites = {"jdk.internal.m3.rewrite.M3HashPinnedTargetPathsCompatRecipeTest":["bothPartialStatesRoundTripAndReachFixedPointsInBothOrders","everyOwnerRefusesDriftMissingAndDuplicateWithoutMutation","canonicalAccessorPreservesAllReceivingModes"]}
     if SUITES != expected_suites:
         raise AssertionError("sealed SDK report inventory drift")
     refused = 0
@@ -441,7 +441,7 @@ def reports(pins: dict, pins_data: bytes) -> None:
                             "bytes": len(raw), "sha256": digest(raw), "gitBlob": git_blob(raw)}
     compiled = {}
     for name in COMPILED_PROVIDERS:
-        relative = "target/classes/com/synexia/rewrite/" + name + ".class"
+        relative = "target/classes/jdk/internal/m3/rewrite/" + name + ".class"
         raw = regular(ROOT / relative).read_bytes()
         require(len(raw) > 8 and raw[:4] == bytes.fromhex("cafebabe")
                 and int.from_bytes(raw[6:8], "big") == 65, "actual Java21 SDK provider class required")

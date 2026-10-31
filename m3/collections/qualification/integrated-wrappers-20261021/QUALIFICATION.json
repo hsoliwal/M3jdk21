@@ -1,7 +1,7 @@
 {
   "schema": "m3.integrated.collections.final-qualification.v1",
   "status": "COMPONENT_QUALIFIED_DRAFT_REVIEW_CANDIDATE",
-  "recipe": "com.synexia.rewrite.M3IntegratedCollections20261021Recipe",
+  "recipe": "jdk.internal.m3.rewrite.M3IntegratedCollections20261021Recipe",
   "manifest_sha256": "ed0798ddef0c7d052cafb776a42098086d69d67466c47b97f8bb6c46fe46dae2",
   "canonical_source_revision": "408373f4101fdca2fb3625bec8af1234e5fd3e26",
   "m3_source_revision": "33d2e6ae8048c436bd55b951d9f7dbfab2f3efcb",
@@ -51,7 +51,7 @@
     {
       "ordinal": "4",
       "disposition": "MODIFY",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3ArrayifiedIndexOps.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ArrayifiedIndexOps.java",
       "input_sha256": "42b3d760c9dfcf30eba72da193159e0ac6bd7ee06a3de292b132f49bd955ea77",
       "expected_after_sha256": "32c98a947abe7622767f15a2bdbf04b124953d6660c09e013457391f50b731c0",
       "emitted_sha256": "32c98a947abe7622767f15a2bdbf04b124953d6660c09e013457391f50b731c0",
@@ -60,7 +60,7 @@
     {
       "ordinal": "5",
       "disposition": "KEEP",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongBitmapFilteredSnapshot.java",
       "input_sha256": "5e6340e15741b1e34c830ec69ab0f74eac1522a0b23a47238cf69ceb51fb206d",
       "expected_after_sha256": "5e6340e15741b1e34c830ec69ab0f74eac1522a0b23a47238cf69ceb51fb206d",
       "emitted_sha256": "5e6340e15741b1e34c830ec69ab0f74eac1522a0b23a47238cf69ceb51fb206d",
@@ -78,7 +78,7 @@
     {
       "ordinal": "7",
       "disposition": "KEEP",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
       "input_sha256": "5620c3deda4ec196ef9f2fe9702e410df74e348913ec94d15f816356b231b61c",
       "expected_after_sha256": "5620c3deda4ec196ef9f2fe9702e410df74e348913ec94d15f816356b231b61c",
       "emitted_sha256": "5620c3deda4ec196ef9f2fe9702e410df74e348913ec94d15f816356b231b61c",
@@ -87,7 +87,7 @@
     {
       "ordinal": "8",
       "disposition": "KEEP",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
       "input_sha256": "546bc46416b146a9a5c132c078dbb73683f27293892a38fea89131de16c85ab2",
       "expected_after_sha256": "546bc46416b146a9a5c132c078dbb73683f27293892a38fea89131de16c85ab2",
       "emitted_sha256": "546bc46416b146a9a5c132c078dbb73683f27293892a38fea89131de16c85ab2",
@@ -96,7 +96,7 @@
     {
       "ordinal": "9",
       "disposition": "KEEP",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java",
       "input_sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
       "expected_after_sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
       "emitted_sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
@@ -105,7 +105,7 @@
     {
       "ordinal": "10",
       "disposition": "KEEP",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongCollection.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongCollection.java",
       "input_sha256": "ea0c1aa0957f7bafd5cf2892cbe483c98d5772192f81cc3c467d53ab5c1c7531",
       "expected_after_sha256": "ea0c1aa0957f7bafd5cf2892cbe483c98d5772192f81cc3c467d53ab5c1c7531",
       "emitted_sha256": "ea0c1aa0957f7bafd5cf2892cbe483c98d5772192f81cc3c467d53ab5c1c7531",
@@ -114,7 +114,7 @@
     {
       "ordinal": "11",
       "disposition": "KEEP",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIterator.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIterator.java",
       "input_sha256": "9d10e476f5d1664a1028fe52406ab05421758961c6d3d5cf163241e058a3f201",
       "expected_after_sha256": "9d10e476f5d1664a1028fe52406ab05421758961c6d3d5cf163241e058a3f201",
       "emitted_sha256": "9d10e476f5d1664a1028fe52406ab05421758961c6d3d5cf163241e058a3f201",
@@ -159,7 +159,7 @@
     {
       "ordinal": "16",
       "disposition": "ADD",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedWindowRefinementContract.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3RequiredExcludedWindowRefinementContract.java",
       "input_sha256": "ABSENT",
       "expected_after_sha256": "ac1016f6e2d362d425604557fbc9663275983fc48494d8410b45288dc7f816e3",
       "emitted_sha256": "ac1016f6e2d362d425604557fbc9663275983fc48494d8410b45288dc7f816e3",
@@ -177,7 +177,7 @@
     {
       "ordinal": "18",
       "disposition": "ADD",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3BitmapOccurrenceRefinementProbe.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3BitmapOccurrenceRefinementProbe.java",
       "input_sha256": "ABSENT",
       "expected_after_sha256": "787e0d81e6520f2cffb2821e1976299570c03b315e413f2a05e45381dc12bac3",
       "emitted_sha256": "787e0d81e6520f2cffb2821e1976299570c03b315e413f2a05e45381dc12bac3",
@@ -186,7 +186,7 @@
     {
       "ordinal": "19",
       "disposition": "ADD",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3ArrayifiedIndexContract.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3ArrayifiedIndexContract.java",
       "input_sha256": "ABSENT",
       "expected_after_sha256": "b9f5b9f559a09189fe39e3bebec0380e8e1c487d5cf7ba7a59707c7992a2a133",
       "emitted_sha256": "b9f5b9f559a09189fe39e3bebec0380e8e1c487d5cf7ba7a59707c7992a2a133",
@@ -195,7 +195,7 @@
     {
       "ordinal": "20",
       "disposition": "ADD",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3ArrayifiedIndexContractTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3ArrayifiedIndexContractTest.java",
       "input_sha256": "ABSENT",
       "expected_after_sha256": "6d5d09c8b73c74bb0988c1059016628b20a9f399e125b7ba141248638d6d7d81",
       "emitted_sha256": "6d5d09c8b73c74bb0988c1059016628b20a9f399e125b7ba141248638d6d7d81",
@@ -204,7 +204,7 @@
     {
       "ordinal": "21",
       "disposition": "ADD",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3ArrayifiedIndexResourceProbe.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3ArrayifiedIndexResourceProbe.java",
       "input_sha256": "ABSENT",
       "expected_after_sha256": "20f00638d0d7c48e44f722b6908950549e37741353e450d0c05ef7a42ceb7c88",
       "emitted_sha256": "20f00638d0d7c48e44f722b6908950549e37741353e450d0c05ef7a42ceb7c88",

@@ -4,11 +4,11 @@ name: M3JNI LC347 primitive top-K frequency Java21
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongRankIndex.java'
       - 'm3/collections/src/main/native/collections/m3_long_rank_batch_jni.c'
-      - 'm3/collections/src/test/java/com/m3/collections/M3LongTopKFrequencyContract.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3LongTopKFrequencyTest.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3LongTopKFrequencyContract.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3LongTopKFrequencyTest.java'
       - 'm3/collections/qualification/topk-frequency-jni-20261026/**'
       - '.github/workflows/m3-topk-frequency-jni-java21.yml'
 
@@ -36,18 +36,18 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
-          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java)" = 'cd0a9b800a05e3cdd6478b408b31c71784a9ebb9'
-          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java)" = '1965edd9843d29070b01cc9d3107c8226a176e37'
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java)" = 'cd0a9b800a05e3cdd6478b408b31c71784a9ebb9'
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankIndex.java)" = '1965edd9843d29070b01cc9d3107c8226a176e37'
           test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = 'd578908b39e626485638b1ca9915484912b4d1c9'
-          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongTopKFrequencyContract.java)" = 'd717fd8134fc6f35f8da95caf6eef38a24cf748f'
-          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongTopKFrequencyTest.java)" = '2e2262f5fec76a8cb26ab0a5c0d488c04d8ed51e'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongTopKFrequencyContract.java)" = 'd717fd8134fc6f35f8da95caf6eef38a24cf748f'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongTopKFrequencyTest.java)" = '2e2262f5fec76a8cb26ab0a5c0d488c04d8ed51e'
       - name: Compile original M3 rank source and LC347 independent Java oracle
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/m3-topk/classes" "$RUNNER_TEMP/m3-topk/native"
-          src=m3/collections/src/main/java/com/m3/collections
-          test_src=m3/collections/src/test/java/com/m3/collections
+          src=m3/collections/src/main/java/jdk/m3/collections
+          test_src=m3/collections/src/test/java/jdk/m3/collections
           javac --release 21 -Xlint:all,-module -Werror -d "$RUNNER_TEMP/m3-topk/classes" \
             "$src/M3LongCollection.java" "$src/M3LongIterator.java" \
             "$src/M3LaneSearch.java" "$src/M3LongRankBatchNative.java" \
@@ -63,24 +63,24 @@ jobs:
             m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c \
             -o "$RUNNER_TEMP/m3-topk/native/libm3rankbatch.so"
           nm -D "$RUNNER_TEMP/m3-topk/native/libm3rankbatch.so" \
-            | grep -Fq 'Java_com_m3_collections_M3LongRankBatchNative_topKFrequent0'
+            | grep -Fq 'Java_jdk_m3_collections_M3LongRankBatchNative_topKFrequent0'
       - name: Execute Java, required-native and interpreter-native contracts
         shell: bash
         run: |
           set -euo pipefail
           cp="$RUNNER_TEMP/m3-topk/classes"
           lib="$RUNNER_TEMP/m3-topk/native"
-          java -ea -cp "$cp" com.m3.collections.M3LongTopKFrequencyContract \
+          java -ea -cp "$cp" jdk.m3.collections.M3LongTopKFrequencyContract \
             | tee "$RUNNER_TEMP/m3-topk/fallback.txt"
           grep -Fxq 'PASS M3_LONG_TOPK_FREQUENCY checks=18561 nativeRequired=false' \
             "$RUNNER_TEMP/m3-topk/fallback.txt"
           java -ea -Xcheck:jni -Dm3.collections.rank.native=true \
             -Djava.library.path="$lib" -cp "$cp" \
-            com.m3.collections.M3LongTopKFrequencyContract --native-required \
+            jdk.m3.collections.M3LongTopKFrequencyContract --native-required \
             | tee "$RUNNER_TEMP/m3-topk/native.txt"
           java -ea -Xint -Xcheck:jni -Dm3.collections.rank.native=true \
             -Djava.library.path="$lib" -cp "$cp" \
-            com.m3.collections.M3LongTopKFrequencyContract --native-required \
+            jdk.m3.collections.M3LongTopKFrequencyContract --native-required \
             | tee "$RUNNER_TEMP/m3-topk/interpreter.txt"
           grep -Fxq 'PASS M3_LONG_TOPK_FREQUENCY checks=23198 nativeRequired=true' \
             "$RUNNER_TEMP/m3-topk/native.txt"

@@ -99,7 +99,7 @@
     },
     {
       "id": "NATIVE-WINDOW",
-      "url": "https://github.com/hsoliwal/M3jdk21/blob/18213fe70c66567fdfc6ba6f669909e7e9251663/m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java",
+      "url": "https://github.com/hsoliwal/M3jdk21/blob/18213fe70c66567fdfc6ba6f669909e7e9251663/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskWindow.java",
       "revision": "18213fe70c66567fdfc6ba6f669909e7e9251663",
       "rights": "Existing M3 first-party owner; preserve target file rights",
       "observation": "Current array/offset/mask owner provides enclosing admitted span pattern.",
@@ -107,7 +107,7 @@
     },
     {
       "id": "APACHE-TRIE",
-      "url": "https://github.com/hsoliwal/M3jdk21/tree/18213fe70c66567fdfc6ba6f669909e7e9251663/m3/collections/implementations/commons-collections-4.5.0/src/main/java/com/m3/collections/apache/trie",
+      "url": "https://github.com/hsoliwal/M3jdk21/tree/18213fe70c66567fdfc6ba6f669909e7e9251663/m3/collections/implementations/commons-collections-4.5.0/src/main/java/jdk/m3/collections/apache/trie",
       "revision": "18213fe70c66567fdfc6ba6f669909e7e9251663",
       "rights": "Apache-2.0 upstream notices retained; reference only in this pass",
       "observation": "Operational relocated Patricia provider retains TrieEntry nodes; StringKeyAnalyzer uses logical chars.",

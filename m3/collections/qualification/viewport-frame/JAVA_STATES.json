@@ -3,7 +3,7 @@
   "canonical_repository": "hsoliwal/com.synexia",
   "canonical_commit": "0469c6482f184040a1cadf345a16b2b98476c888",
   "dataset": "viewport-frame-tristate-20261024",
-  "recipe": "com.synexia.m3.ViewportFrameTriState20261024",
+  "recipe": "jdk.internal.m3.ViewportFrameTriState20261024",
   "product_parent": "b2f9fdb4d4624c8afa332f7fad9ac00c5ddefb3c",
   "targets": [
     {

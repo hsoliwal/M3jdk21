@@ -180,7 +180,7 @@
   "junit_methods_authored": 13,
   "junit_methods_executed": 0,
   "materialized_result_property": "m3.mapping.materialized",
-  "named_recipe": "com.m3.rewrite.backport.JccMergeMappingRecoveryV03",
+  "named_recipe": "jdk.m3.rewrite.backport.JccMergeMappingRecoveryV03",
   "previous_packets_unchanged": [
     {
       "files_verified_unchanged": 15,
@@ -214,6 +214,6 @@
   "source_laboratory_owners": 14,
   "source_root_tree": "__UNRESOLVED_ACTUAL_SOURCE_ROOT_TREE__",
   "status": "FROZEN_PREPARED_ACTUAL_SOURCE_PUBLICATION_REQUIRED",
-  "test_class": "com.m3.rewrite.backport.JccMergeMappingRecoveryV03Test",
+  "test_class": "jdk.m3.rewrite.backport.JccMergeMappingRecoveryV03Test",
   "version": 3
 }

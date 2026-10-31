@@ -99,7 +99,7 @@
        properties that depend on the componentid.
     -->
     <commons.componentid>collections</commons.componentid>
-    <commons.module.name>com.m3.collections.apache</commons.module.name>
+    <commons.module.name>jdk.m3.collections.apache</commons.module.name>
     <!-- Current 4.x release series -->
     <commons.release.version>4.5.0</commons.release.version>
     <commons.release.next>4.5.1</commons.release.next>
@@ -178,7 +178,7 @@
           <excludes>
             <exclude>.asf.yaml</exclude>
             <exclude>site-content/**/*</exclude>
-            <exclude>src/test/resources/com/m3/collections/apache/data/test/*</exclude>
+            <exclude>src/test/resources/jdk/m3/collections/apache/data/test/*</exclude>
           </excludes>
         </configuration>
       </plugin>
@@ -216,7 +216,7 @@
         <configuration>
           <archive combine.children="append">
             <manifestEntries>
-              <Automatic-Module-Name>com.m3.collections.apache</Automatic-Module-Name>
+              <Automatic-Module-Name>jdk.m3.collections.apache</Automatic-Module-Name>
             </manifestEntries>
           </archive>
         </configuration>
@@ -299,7 +299,7 @@
           <excludes>
             <exclude>.asf.yaml</exclude>
             <exclude>site-content/**/*</exclude>
-            <exclude>src/test/resources/com/m3/collections/apache/data/test/*</exclude>
+            <exclude>src/test/resources/jdk/m3/collections/apache/data/test/*</exclude>
           </excludes>
         </configuration>
       </plugin>
@@ -422,7 +422,7 @@
                 </goals>
                 <configuration>
                   <skip>${m3.recipe.boot.skip}</skip>
-                  <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+                  <mainClass>jdk.internal.m3.prstack.M3RecipeBoot</mainClass>
                   <includeProjectDependencies>false</includeProjectDependencies>
                   <includePluginDependencies>true</includePluginDependencies>
                   <arguments>

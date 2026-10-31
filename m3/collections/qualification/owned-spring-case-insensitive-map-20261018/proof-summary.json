@@ -2,7 +2,7 @@
   "schema": "spring-owner-v2-current-base-compact-public-packet-v5",
   "status": "ROOT_OWNER_V2_PROOFS_AND_CURRENT_BASE_V5_RUNTIME_PASS_CUSTODY_REPLAY_FOCUSED_REVIEW_PENDING",
   "owner": {
-    "class": "com.m3.collections.spring.M3LinkedCaseInsensitiveMap",
+    "class": "jdk.m3.collections.spring.M3LinkedCaseInsensitiveMap",
     "bytes": 31224,
     "sha256": "450e3f70be37f0fa0fcee7edd4adc8a2eea4a05a40646fb3e5c531e4ee8447ca"
   },
@@ -233,21 +233,21 @@
     "selectedNativeSources": 1,
     "changedSelectedJavaSources": [
       {
-        "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java",
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java",
         "oldSHA256": "0f0939615884c4d8bbfe2a3c9bbc5072d49faa6c20636c2eadac3104269aefaa",
         "newSHA256": "0e201b871ca85fa0af306530b6e52cd7fbcdb47207ea0554456abb25e003a61d",
         "gitBlob": "c1c0bead12632dd42a30961ccf63193de0773c64",
         "bytes": 10082
       },
       {
-        "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedTable.java",
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexedTable.java",
         "oldSHA256": "9b87cefcc65e295afe516a1d007e3b5acbc87a8035e1f55223d1b2558cf7858c",
         "newSHA256": "3af737a20b7d75273dfe4ee29a34400902e0ad015535c05321898b1f5526aebc",
         "gitBlob": "ef65261a642da8e473763d57905297d3e0dc5c2c",
         "bytes": 21153
       },
       {
-        "path": "m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java",
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongArrayDeque.java",
         "oldSHA256": "cc87514c9499477dd435e512881ecb045356b99f65d212866ee2d32fb3795a84",
         "newSHA256": "67a1118b2df4cff80430e47700d6243e5135048abfa26ffdeffa66dc8f2e76cc",
         "gitBlob": "73d90117f3a3b4f1a5a670fb34f5326765627d2c",

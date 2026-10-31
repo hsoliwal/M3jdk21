@@ -11,8 +11,8 @@ import subprocess
 
 SHARDS = tuple(f'added-{i:02d}.tsv' for i in range(4))
 PREFIX = 'm3/collections/interop/src/'
-MAIN = PREFIX + 'main/java/com/m3/collections/interop/'
-TEST = PREFIX + 'test/java/com/m3/collections/interop/'
+MAIN = PREFIX + 'main/java/jdk/m3/collections/interop/'
+TEST = PREFIX + 'test/java/jdk/m3/collections/interop/'
 FAMILIES = frozenset(('eclipse-collections', 'five-provider-index', 'guava', 'spring', 'jdk'))
 HEX64 = re.compile(r'[0-9a-f]{64}\Z')
 HEX40 = re.compile(r'[0-9a-f]{40}\Z')
@@ -24,7 +24,7 @@ def git_blob(data: bytes) -> str:
 
 # The 40-source receipt is immutable. The next generation has exactly one
 # source-sealed, Java21-syntax-only test transition and no other valid changes.
-COMPOUND_TEST_PATH = 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryArrayificationTest.java'
+COMPOUND_TEST_PATH = 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryArrayificationTest.java'
 COMPOUND_TRANSITION_SHA256 = 'ad81180bc4f5ee73dd008212fb575e62d50f815d673abd063e671c630789c24c'
 COMPOUND_TRANSITION = (
     COMPOUND_TEST_PATH,
@@ -54,8 +54,8 @@ def exact_compound_transition(receipts: Path) -> tuple[str, ...]:
 # Both a historical source and a historical donor JUnit test transition are sealed.
 # This does NOT relax the 36-owner historical proof or the 40-new-file shard proofs.
 APACHE450_TRANSITIONS = (
-    ('m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheBag.java', '5ff51272c4fd48ef11a09b9138ac2329392bb2a70e2a4fe43fab2889909d224f', '86473e61bf886a28ca3a40010b6bd25f5f34cdb0', 'bd03c0a1460f9ccbb24eed31100d86fb3d7ea05be9872971cb81ad9852ad4b36', 'ac35841fb84a28d86390843e5a3dadcb390f069a', 'com.synexia.m3.M3ApacheBagRetain450Recipe', 'PENDING_REAL_DONOR_JUNIT'),
-    ('m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheBagContractTest.java', '737dba455e469117b94cd82a48458bcbe2e4c1fd038b0beb578dcc00ccc1982a', '4184a8b861025d80010723d4700588f075eca105', 'fa8c854c0e924a6394df83eac12bfdc062147a1f04fe1270b1de288f17b0569a', '73dd1833f5384d9404392ee9a79e19559ef865fd', 'com.synexia.m3.M3ApacheBagRetain450Recipe', 'PENDING_REAL_DONOR_JUNIT'),
+    ('m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3ApacheBag.java', '5ff51272c4fd48ef11a09b9138ac2329392bb2a70e2a4fe43fab2889909d224f', '86473e61bf886a28ca3a40010b6bd25f5f34cdb0', 'bd03c0a1460f9ccbb24eed31100d86fb3d7ea05be9872971cb81ad9852ad4b36', 'ac35841fb84a28d86390843e5a3dadcb390f069a', 'jdk.internal.m3.M3ApacheBagRetain450Recipe', 'PENDING_REAL_DONOR_JUNIT'),
+    ('m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3ApacheBagContractTest.java', '737dba455e469117b94cd82a48458bcbe2e4c1fd038b0beb578dcc00ccc1982a', '4184a8b861025d80010723d4700588f075eca105', 'fa8c854c0e924a6394df83eac12bfdc062147a1f04fe1270b1de288f17b0569a', '73dd1833f5384d9404392ee9a79e19559ef865fd', 'jdk.internal.m3.M3ApacheBagRetain450Recipe', 'PENDING_REAL_DONOR_JUNIT'),
 )
 
 
@@ -212,7 +212,7 @@ def verify_historical_revisions(product: Path, receipts: Path,
         if path in bag450:
             _, old_sha, old_blob, new_sha, new_blob, recipe, status = bag450[path]
             if ((expected_sha, expected_blob) != (old_sha, old_blob)
-                    or recipe != 'com.synexia.m3.M3ApacheBagRetain450Recipe'
+                    or recipe != 'jdk.internal.m3.M3ApacheBagRetain450Recipe'
                     or status != 'PENDING_REAL_DONOR_JUNIT'):
                 raise ValueError('Apache450 transition predecessor or recipe mismatch: ' + path)
             expected_sha, expected_blob = new_sha, new_blob

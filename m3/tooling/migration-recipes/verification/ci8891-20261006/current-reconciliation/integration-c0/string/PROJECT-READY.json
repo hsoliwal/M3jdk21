@@ -25,7 +25,7 @@
       "bytes": 12032,
       "gitBlob": "a2e8c916208b563517e51b738744a05357e633aa",
       "mode": "100644",
-      "path": "dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "path": "dependency-source/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
       "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
     },
     {
@@ -60,42 +60,42 @@
       "bytes": 1177,
       "gitBlob": "0279bcd227f7c84d8541423a607cfe4a2d607a62",
       "mode": "100644",
-      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/manifest.tsv",
+      "path": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/manifest.tsv",
       "sha256": "6495988cb6ec9ba66659f4fd2a56fccf2735a944c2b6ed401b270eaec5db6a9e"
     },
     {
       "bytes": 778,
       "gitBlob": "2ef4c1b3437ec4f73b41a56a5949fa3ed15081c0",
       "mode": "100644",
-      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-1.txt",
+      "path": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-1.txt",
       "sha256": "c0af7bc99ace3f9dcc5e0e9085d9bac66eeb1a497b2153a54bb11ca250916c14"
     },
     {
       "bytes": 79659,
       "gitBlob": "c55670389e1f56821e43f15e3b57abf3d7cb0e01",
       "mode": "100644",
-      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-2.txt",
+      "path": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-2.txt",
       "sha256": "dab4ded7bc1558a151376bc3b882403f22138981377249d85114fa9186cb7657"
     },
     {
       "bytes": 51207,
       "gitBlob": "8838f271a9d873dfa9f5de9bdc428f07e18cf712",
       "mode": "100644",
-      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-3.txt",
+      "path": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-3.txt",
       "sha256": "1fd4c8d856e7de971c874936ef8561167041cd3c087e6ad8796d3225cc6087dc"
     },
     {
       "bytes": 3300,
       "gitBlob": "85c69eaf0c843e539dd2d0b4ff8fae380038c92a",
       "mode": "100644",
-      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-4.txt",
+      "path": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-4.txt",
       "sha256": "1a713463413df2684791ef1a214db69a7e5b23da888e61983c6b4902cef9c639"
     },
     {
       "bytes": 51207,
       "gitBlob": "8838f271a9d873dfa9f5de9bdc428f07e18cf712",
       "mode": "100644",
-      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-5.txt",
+      "path": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-5.txt",
       "sha256": "1fd4c8d856e7de971c874936ef8561167041cd3c087e6ad8796d3225cc6087dc"
     },
     {
@@ -116,7 +116,7 @@
       "bytes": 29474,
       "gitBlob": "251b32d26ec870b02cda8fc9c6aa3eac8645cf7c",
       "mode": "100644",
-      "path": "src/test/java/com/synexia/rewrite/Sc0RecipeTest.java",
+      "path": "src/test/java/jdk/internal/m3/rewrite/Sc0RecipeTest.java",
       "sha256": "28415a31b71b949d5ca7fb86e1baff7066acbff79c9067598b6589d8962b12b2"
     },
     {
@@ -137,14 +137,14 @@
       "bytes": 49580,
       "gitBlob": "0bd0981554c389b2a89e04335dc66f717958d38e",
       "mode": "100644",
-      "path": "src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/03-M3StringPrecomputeSearchTest.java.txt",
+      "path": "src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/03-M3StringPrecomputeSearchTest.java.txt",
       "sha256": "1ed409eba2ba7135f22163288cc835b3f6c532f47bb2551ae1c4786fccd6079e"
     },
     {
       "bytes": 3300,
       "gitBlob": "df6055d13b89eb19b80363bb9c4669926973cd26",
       "mode": "100644",
-      "path": "src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv",
+      "path": "src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv",
       "sha256": "d67ddc1cc759f042871c680d9510b929da4fd6b0523b43e966139cbe8ddace3b"
     },
     {
@@ -182,7 +182,7 @@
         "bytes": 12032,
         "gitBlob": "a2e8c916208b563517e51b738744a05357e633aa",
         "mode": "100644",
-        "path": "dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+        "path": "dependency-source/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
         "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
       },
       {
@@ -217,42 +217,42 @@
         "bytes": 1177,
         "gitBlob": "0279bcd227f7c84d8541423a607cfe4a2d607a62",
         "mode": "100644",
-        "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/manifest.tsv",
+        "path": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/manifest.tsv",
         "sha256": "6495988cb6ec9ba66659f4fd2a56fccf2735a944c2b6ed401b270eaec5db6a9e"
       },
       {
         "bytes": 778,
         "gitBlob": "2ef4c1b3437ec4f73b41a56a5949fa3ed15081c0",
         "mode": "100644",
-        "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-1.txt",
+        "path": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-1.txt",
         "sha256": "c0af7bc99ace3f9dcc5e0e9085d9bac66eeb1a497b2153a54bb11ca250916c14"
       },
       {
         "bytes": 79659,
         "gitBlob": "c55670389e1f56821e43f15e3b57abf3d7cb0e01",
         "mode": "100644",
-        "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-2.txt",
+        "path": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-2.txt",
         "sha256": "dab4ded7bc1558a151376bc3b882403f22138981377249d85114fa9186cb7657"
       },
       {
         "bytes": 51207,
         "gitBlob": "8838f271a9d873dfa9f5de9bdc428f07e18cf712",
         "mode": "100644",
-        "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-3.txt",
+        "path": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-3.txt",
         "sha256": "1fd4c8d856e7de971c874936ef8561167041cd3c087e6ad8796d3225cc6087dc"
       },
       {
         "bytes": 3300,
         "gitBlob": "85c69eaf0c843e539dd2d0b4ff8fae380038c92a",
         "mode": "100644",
-        "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-4.txt",
+        "path": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-4.txt",
         "sha256": "1a713463413df2684791ef1a214db69a7e5b23da888e61983c6b4902cef9c639"
       },
       {
         "bytes": 51207,
         "gitBlob": "8838f271a9d873dfa9f5de9bdc428f07e18cf712",
         "mode": "100644",
-        "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-5.txt",
+        "path": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-5.txt",
         "sha256": "1fd4c8d856e7de971c874936ef8561167041cd3c087e6ad8796d3225cc6087dc"
       },
       {
@@ -273,7 +273,7 @@
         "bytes": 29474,
         "gitBlob": "251b32d26ec870b02cda8fc9c6aa3eac8645cf7c",
         "mode": "100644",
-        "path": "src/test/java/com/synexia/rewrite/Sc0RecipeTest.java",
+        "path": "src/test/java/jdk/internal/m3/rewrite/Sc0RecipeTest.java",
         "sha256": "28415a31b71b949d5ca7fb86e1baff7066acbff79c9067598b6589d8962b12b2"
       },
       {
@@ -294,14 +294,14 @@
         "bytes": 49580,
         "gitBlob": "0bd0981554c389b2a89e04335dc66f717958d38e",
         "mode": "100644",
-        "path": "src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/03-M3StringPrecomputeSearchTest.java.txt",
+        "path": "src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/03-M3StringPrecomputeSearchTest.java.txt",
         "sha256": "1ed409eba2ba7135f22163288cc835b3f6c532f47bb2551ae1c4786fccd6079e"
       },
       {
         "bytes": 3300,
         "gitBlob": "df6055d13b89eb19b80363bb9c4669926973cd26",
         "mode": "100644",
-        "path": "src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv",
+        "path": "src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv",
         "sha256": "d67ddc1cc759f042871c680d9510b929da4fd6b0523b43e966139cbe8ddace3b"
       },
       {
@@ -352,5 +352,5 @@
       "<portable>/bundle"
     ]
   },
-  "schema": "synexia.sc0.project-ready/1"
+  "schema": "m3.sc0.project-ready/1"
 }

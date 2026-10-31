@@ -13,7 +13,7 @@ from pathlib import Path, PurePosixPath
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parent
-CLASS = "com.synexia.rewrite.M3Utf8CursorRecipeTest"
+CLASS = "jdk.internal.m3.rewrite.M3Utf8CursorRecipeTest"
 METHODS = {
     "exactTargetAndPreimageRemainSealed",
     "sdkAppliesExactOutputThenHasNoChanges",
@@ -26,26 +26,26 @@ METHODS = {
 REQUIRED_PATHS = [
   "licenses/OpenJDK-ADDITIONAL_LICENSE_INFO",
   "licenses/OpenJDK-LICENSE",
-  "pinned-engine/com/synexia/rewrite/M3EditScope.java",
-  "pinned-engine/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
-  "pinned-engine/com/synexia/rewrite/M3ScopeInference.java",
+  "pinned-engine/jdk/internal/m3/rewrite/M3EditScope.java",
+  "pinned-engine/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+  "pinned-engine/jdk/internal/m3/rewrite/M3ScopeInference.java",
   "pom.xml",
   "src/main/resources/META-INF/rewrite/m3jdk21-utf8-cursor-20261014.yml",
-  "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-utf8-cursor-20261014/M3String.before.java.txt",
-  "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-utf8-cursor-20261014/M3String.java.txt",
-  "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-utf8-cursor-20261014/manifest.tsv",
-  "src/test/java/com/synexia/rewrite/M3Utf8CursorRecipeTest.java",
+  "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-utf8-cursor-20261014/M3String.before.java.txt",
+  "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-utf8-cursor-20261014/M3String.java.txt",
+  "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-utf8-cursor-20261014/manifest.tsv",
+  "src/test/java/jdk/internal/m3/rewrite/M3Utf8CursorRecipeTest.java",
   "verify.py"
 ]
 REQUIRED_GIT_BLOBS = {
-  "pinned-engine/com/synexia/rewrite/M3EditScope.java": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
-  "pinned-engine/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java": "2530c533003a8a17d0e782728d98a4dfebe13651",
-  "pinned-engine/com/synexia/rewrite/M3ScopeInference.java": "f6fd8d4a558a6b9b0c78cf4d010e63e3b3e1a9da",
-  "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-utf8-cursor-20261014/M3String.before.java.txt": "42399d411c1516a56a47dcdb10242960157b4677",
-  "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-utf8-cursor-20261014/M3String.java.txt": "35ed998540e044eed8cb7596e2e2c019ae369bd3",
-  "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-utf8-cursor-20261014/manifest.tsv": "9a64ff003d4c8aef8d4ef6800652acc67c44c967",
+  "pinned-engine/jdk/internal/m3/rewrite/M3EditScope.java": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
+  "pinned-engine/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java": "2530c533003a8a17d0e782728d98a4dfebe13651",
+  "pinned-engine/jdk/internal/m3/rewrite/M3ScopeInference.java": "f6fd8d4a558a6b9b0c78cf4d010e63e3b3e1a9da",
+  "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-utf8-cursor-20261014/M3String.before.java.txt": "42399d411c1516a56a47dcdb10242960157b4677",
+  "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-utf8-cursor-20261014/M3String.java.txt": "35ed998540e044eed8cb7596e2e2c019ae369bd3",
+  "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-utf8-cursor-20261014/manifest.tsv": "9a64ff003d4c8aef8d4ef6800652acc67c44c967",
   "src/main/resources/META-INF/rewrite/m3jdk21-utf8-cursor-20261014.yml": "a1e3eb558d4c5a47208be1941d41251bf0354794",
-  "src/test/java/com/synexia/rewrite/M3Utf8CursorRecipeTest.java": "b735eb59bf2b7f6167674d2bf8a345679e55d49f"
+  "src/test/java/jdk/internal/m3/rewrite/M3Utf8CursorRecipeTest.java": "b735eb59bf2b7f6167674d2bf8a345679e55d49f"
 }
 
 
@@ -110,7 +110,7 @@ def inputs() -> tuple[dict, bytes]:
     tests = inventory(ROOT / "src/test/java", "*.java")
     if engine != {name for name in REQUIRED_PATHS if name.startswith("pinned-engine/")}:
         raise ValueError("unsealed receiving provider")
-    if tests != {"src/test/java/com/synexia/rewrite/M3Utf8CursorRecipeTest.java"}:
+    if tests != {"src/test/java/jdk/internal/m3/rewrite/M3Utf8CursorRecipeTest.java"}:
         raise ValueError("receiving SDK test scope drift")
     resources = inventory(ROOT / "src/main/resources", "*")
     if resources != {name for name in REQUIRED_PATHS if name.startswith("src/main/resources/")}:
@@ -124,7 +124,7 @@ def receiver(repository: Path, pins: dict) -> None:
     for row in pins["files"]:
         donor = row.get("origin", {})
         if donor.get("repository") == "hsoliwal/M3jdk21" and donor.get("path", "").startswith(
-                "m3/vendor/synexia/") and row.get("unchangedGitBlob"):
+                "m3/vendor/m3/") and row.get("unchangedGitBlob"):
             if git_blob((repository / donor["path"]).read_bytes()) != row["unchangedGitBlob"]:
                 raise ValueError("live receiving provider differs from qualified snapshot")
     target = repository / "src/java.base/share/classes/java/lang/M3String.java"
@@ -159,12 +159,12 @@ def self_test(pins: dict, pins_data: bytes) -> None:
                 else:
                     raise AssertionError("unsealed receiving input admitted")
             for name in (
-                "pinned-engine/com/synexia/rewrite/nested/Extra.java",
+                "pinned-engine/jdk/internal/m3/rewrite/nested/Extra.java",
                 "pinned-engine/other/Extra.java",
                 "src/test/java/other/ExtraTest.java",
-                "src/test/resources/com/synexia/rewrite/hash-pinned-java/"
+                "src/test/resources/jdk/internal/m3/rewrite/hash-pinned-java/"
                 "m3jdk21-utf8-cursor-20261014/M3String.java.txt",
-                "src/main/resources/com/synexia/rewrite/hash-pinned-java/"
+                "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/"
                 "m3jdk21-utf8-cursor-20261014/parse-context.tsv",
             ):
                 path = fixture / name
@@ -183,7 +183,7 @@ def self_test(pins: dict, pins_data: bytes) -> None:
                     "unchangedGitBlob"] = "0" * 40
                 (fixture / "pins.json").write_text(json.dumps(changed), encoding="utf-8")
                 rejects()
-            name = "src/test/java/com/synexia/rewrite/M3Utf8CursorRecipeTest.java"
+            name = "src/test/java/jdk/internal/m3/rewrite/M3Utf8CursorRecipeTest.java"
             data = (fixture / name).read_bytes()
             altered = data + b"// changed test\n"
             (fixture / name).write_bytes(altered)

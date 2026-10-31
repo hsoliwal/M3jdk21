@@ -80,7 +80,7 @@ public final class M3CanonicalApiBoundaryTest {
         // A renamed helper remains internal because package identity is permanent.
         verifyModulePackages("java.base");
         verifyModulePackages("jdk.compiler");
-        rejectInternalSurface("com.m3.collections.SlotArray", "self-test");
+        rejectInternalSurface("jdk.m3.collections.SlotArray", "self-test");
         rejectInternalSurface("jdk.internal.mindex.IndexRows", "self-test");
         rejectInternalSurface("com.sun.tools.javac.m3.ParsedRows", "self-test");
         if (isInternalSurface("java.util.List<java.lang.String>")) {

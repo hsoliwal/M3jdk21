@@ -9,19 +9,19 @@
   "artifact_id": 12133424256,
   "artifact_sha256": "96bad91271a480e52b571b868398313756bc5bc9ad7caf7135d718ba4e8b26be",
   "test_source": {
-    "path": "m3/tooling/tq/src/test/java/com/m3/tq/TQTest.java",
+    "path": "m3/tooling/tq/src/test/java/jdk/m3/tq/TQTest.java",
     "git_blob": "0e5cf27d3d268f485d4befe27d26da4df381b477",
     "sha256": "7ce7e90af7f0011c133ef71f2b75b01f17b02a102d3b2b70bd01856092467c8c"
   },
   "source_pins": [
     {
-      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
+      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
       "blob": "7c11497c0183d04e66baa41ee5391de682175360",
       "sha256": "54fd1fa51872048d8427594691838e27912187ae539463fde51aea5c62e46831",
       "bytes": 15152
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
       "blob": "4a38e39d0755462d40c2b22548b87abde938ea0b",
       "sha256": "8133bcf7e9f750c714cdd42784bdf30b60f67dd957b2831cd54cb01c9a2cfc3a",
       "bytes": 12355
@@ -50,10 +50,10 @@
     "git_blob": "c862ebf9621d0979bbcaf53838d2e986dd349c64",
     "sha256": "6f602866bae4dc215675311740a6f3d9b7795c866674e3f1f813c37ad07c075a",
     "rows": {
-      "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java": "54fd1fa51872048d8427594691838e27912187ae539463fde51aea5c62e46831",
-      "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java": "8133bcf7e9f750c714cdd42784bdf30b60f67dd957b2831cd54cb01c9a2cfc3a",
-      ".m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/M3BootstrapTaskRecipe.java": "58bac6968ebd2cce6f43f338c289db14435b3ef05ed2abc13402275285b89462",
-      ".m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/M3BootstrapInventoryRecipe.java": "05ac05e7f3cb7549d26866a61dec0edf19515317c95f73db82d1c517cad88ef5",
+      "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java": "54fd1fa51872048d8427594691838e27912187ae539463fde51aea5c62e46831",
+      "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java": "8133bcf7e9f750c714cdd42784bdf30b60f67dd957b2831cd54cb01c9a2cfc3a",
+      ".m3/openrewrite-recipes/src/main/java/jdk/internal/m3/bootstrap/M3BootstrapTaskRecipe.java": "58bac6968ebd2cce6f43f338c289db14435b3ef05ed2abc13402275285b89462",
+      ".m3/openrewrite-recipes/src/main/java/jdk/internal/m3/bootstrap/M3BootstrapInventoryRecipe.java": "05ac05e7f3cb7549d26866a61dec0edf19515317c95f73db82d1c517cad88ef5",
       "src/java.base/share/classes/jdk/internal/mindex/M3StringBacking.java": "bcd2fe86a21464f7c65fd582368362d327e54b143dc05df13b31c1a029ecb251",
       "src/java.base/share/classes/jdk/internal/mindex/M3MappedStringBacking.java": "f84d4d7763156d615d32b7a1024931e18073a1122227d8228d8638332407bd01",
       "test/jdk/java/lang/String/M3MappedStringBackingTest.java": "9f42d1bdd6e174f5eac44e72afae2154ac140c9773c540b3073a06a8c2da827d",
@@ -87,7 +87,7 @@
   "tested_merge_tree_equals_head_tree": true,
   "suites": [
     {
-      "name": "com.m3.tq.TQSyncTest",
+      "name": "jdk.m3.tq.TQSyncTest",
       "tests": "3",
       "failures": "0",
       "errors": "0",
@@ -100,7 +100,7 @@
       ]
     },
     {
-      "name": "com.m3.tq.TQTest",
+      "name": "jdk.m3.tq.TQTest",
       "tests": "19",
       "failures": "0",
       "errors": "0",
@@ -214,7 +214,7 @@
   ],
   "artifact_inventory": [
     {
-      "path": "tq-sync/target/surefire-reports/TEST-com.m3.tq.TQSyncTest.xml",
+      "path": "tq-sync/target/surefire-reports/TEST-jdk.m3.tq.TQSyncTest.xml",
       "bytes": 14820,
       "sha256": "99e975731daf8f2d2e792a6137bf6e25d96bfa61d5180e8e326b2fb5c047960a"
     },
@@ -224,7 +224,7 @@
       "sha256": "e6efac2cfb72f5511f5f81b05858c6f977d87803adfb9dbd4b003bebb0e33adf"
     },
     {
-      "path": "tq-sync/target/surefire-reports/com.m3.tq.TQSyncTest.txt",
+      "path": "tq-sync/target/surefire-reports/jdk.m3.tq.TQSyncTest.txt",
       "bytes": 290,
       "sha256": "d88a330db3a3e87150ae11c6f782ef93da68406142dbe626fc5143a33a93a0fd"
     },
@@ -434,12 +434,12 @@
       "sha256": "289986e5963a660ed1f13895c78e6a2e63d976a8fa9550bcf983741fbb985bf9"
     },
     {
-      "path": "tq/target/surefire-reports/TEST-com.m3.tq.TQTest.xml",
+      "path": "tq/target/surefire-reports/TEST-jdk.m3.tq.TQTest.xml",
       "bytes": 16233,
       "sha256": "c3c5a023ad7e3b0e31e1c9a77a731276454ff29ab2b4f4afaf9a3b3c4ec9c894"
     },
     {
-      "path": "tq/target/surefire-reports/com.m3.tq.TQTest.txt",
+      "path": "tq/target/surefire-reports/jdk.m3.tq.TQTest.txt",
       "bytes": 283,
       "sha256": "a4e044a2494d6d200896d23496ae1e9245166faa0c1dbdbeea5f9d60d8189631"
     }
@@ -462,7 +462,7 @@
   "later_guard_failure": {
     "step": "TQ successor recipe and custody",
     "script": "m3/tooling/tq-sync/verify-plan.py",
-    "refusal": "dependency guard drift: m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java"
+    "refusal": "dependency guard drift: m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java"
   },
   "not_run": [
     "Native undefined-behavior gate",
@@ -472,8 +472,8 @@
   ],
   "guard_frontier": [
     "m3/tooling/tq/plan.json",
-    "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/11-plan.json.txt",
-    "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/manifest.tsv",
+    "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/11-plan.json.txt",
+    "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/manifest.tsv",
     "m3/tooling/tq-sync/plan.json"
   ],
   "metadata_copyright": "2026 Hitesh Soliwal and Contributors to the Synexia Project",

@@ -64,8 +64,8 @@
     "top_level_mappings": 25
   },
   "bound_owners": {
-    "synexia.jcc-recipe-laboratory": 14,
-    "synexia.jcc-java-jni-regression": 6
+    "m3.jcc-recipe-laboratory": 14,
+    "m3.jcc-java-jni-regression": 6
   },
   "source_export_admitted": false,
   "destination_gates_passed": false

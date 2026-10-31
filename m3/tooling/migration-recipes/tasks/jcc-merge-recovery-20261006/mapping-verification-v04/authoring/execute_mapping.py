@@ -28,7 +28,7 @@ TEMPLATE_PACKET_SHA256 = "7dbe7264f711f2e0d193b2c85a79a2d37f11d8acf32d4a94d3ab06
 BINDER_SHA256 = "121138aeaea1c31ad8f9265656215c36c4f3d5dc261f3ab6330cda13960fc659"
 INSTALLER_TEST_SHA256 = "4f03c9ac178c8011d474d02941dc2e6f2fe119f383e7cd4918f3e6c25e49252d"
 POM_PATH = "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/pom.xml"
-TEST_CLASS = "com.m3.rewrite.backport.JccMergeMappingRecoveryV04Test"
+TEST_CLASS = "jdk.m3.rewrite.backport.JccMergeMappingRecoveryV04Test"
 CACHE_RECEIPTS = {
     "OFFLINE_DIAGNOSTIC_CACHE_V02.json": "034d226e546825818559e5517ce62bb00dd855f9ce59760fa607049388280da9",
     "RECEIVER_ASM93_ADDON.json": "c49c23fd5ec3fc02ad0c3332e16fe4b0f8c9ea4bfab296ad013c726bc226823d",

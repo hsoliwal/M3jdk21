@@ -24,7 +24,7 @@
   "skipped": 0,
   "suites": [
     {
-      "class": "com.synexia.rewrite.sorts.M3JavaUtilSortsPacketTest",
+      "class": "jdk.internal.m3.rewrite.sorts.M3JavaUtilSortsPacketTest",
       "tests": 7,
       "failures": 0,
       "errors": 0,
@@ -63,7 +63,7 @@
       ]
     },
     {
-      "class": "com.synexia.rewrite.sorts.M3RecipeReplayTest",
+      "class": "jdk.internal.m3.rewrite.sorts.M3RecipeReplayTest",
       "tests": 13,
       "failures": 0,
       "errors": 0,

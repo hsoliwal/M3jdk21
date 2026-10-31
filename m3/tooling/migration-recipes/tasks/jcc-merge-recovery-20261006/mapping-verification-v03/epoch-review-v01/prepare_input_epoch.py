@@ -57,7 +57,7 @@ def main():
     old_records, new_records = [m["migration"]["records"] for m in (old_map, current_map)]
     assert [row["id"] for row in old_records] == [row["id"] for row in new_records]
     changed = [i for i, pair in enumerate(zip(old_records, new_records)) if pair[0] != pair[1]]
-    assert changed == [46] and new_records[46]["id"] == "synexia.counterpart.MIndexRegexTrigramQuery"
+    assert changed == [46] and new_records[46]["id"] == "m3.counterpart.MIndexRegexTrigramQuery"
     for key in current_map:
         if key != "migration":
             assert current_map[key] == old_map[key]

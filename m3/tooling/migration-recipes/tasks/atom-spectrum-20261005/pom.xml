@@ -43,8 +43,8 @@
       <resource>
         <directory>${project.basedir}/../../src/main/resources</directory>
         <includes>
-          <include>com/synexia/rewrite/hash-pinned-java/atom-comment-custody/**</include>
-          <include>com/synexia/rewrite/hash-pinned-java/atom-pattern-spectrum/**</include>
+          <include>jdk/internal/m3/rewrite/hash-pinned-java/atom-comment-custody/**</include>
+          <include>jdk/internal/m3/rewrite/hash-pinned-java/atom-pattern-spectrum/**</include>
         </includes>
       </resource>
     </resources>
@@ -52,7 +52,7 @@
       <testResource>
         <directory>${project.basedir}/../../src/test/resources</directory>
         <includes>
-          <include>com/m3/rewrite/atom/spectrum/**</include>
+          <include>jdk/m3/rewrite/atom/spectrum/**</include>
         </includes>
       </testResource>
     </testResources>
@@ -63,11 +63,11 @@
         <version>3.13.0</version>
         <configuration>
           <includes>
-            <include>com/m3/rewrite/atom/*.java</include>
-            <include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
+            <include>jdk/m3/rewrite/atom/*.java</include>
+            <include>jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
           </includes>
           <testIncludes>
-            <testInclude>com/m3/rewrite/atom/*.java</testInclude>
+            <testInclude>jdk/m3/rewrite/atom/*.java</testInclude>
           </testIncludes>
           <compilerArgs>
             <arg>-Xlint:all</arg>
@@ -129,7 +129,7 @@
                 </goals>
                 <configuration>
                   <skip>${m3.recipe.boot.skip}</skip>
-                  <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+                  <mainClass>jdk.internal.m3.prstack.M3RecipeBoot</mainClass>
                   <includeProjectDependencies>false</includeProjectDependencies>
                   <includePluginDependencies>true</includePluginDependencies>
                   <arguments>

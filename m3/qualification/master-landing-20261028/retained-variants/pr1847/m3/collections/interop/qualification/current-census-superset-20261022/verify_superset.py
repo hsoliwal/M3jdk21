@@ -11,8 +11,8 @@ import subprocess
 
 SHARDS = tuple(f'added-{i:02d}.tsv' for i in range(4))
 PREFIX = 'm3/collections/interop/src/'
-MAIN = PREFIX + 'main/java/com/m3/collections/interop/'
-TEST = PREFIX + 'test/java/com/m3/collections/interop/'
+MAIN = PREFIX + 'main/java/jdk/m3/collections/interop/'
+TEST = PREFIX + 'test/java/jdk/m3/collections/interop/'
 FAMILIES = frozenset(('eclipse-collections', 'five-provider-index', 'guava', 'spring', 'jdk'))
 HEX64 = re.compile(r'[0-9a-f]{64}\Z')
 HEX40 = re.compile(r'[0-9a-f]{40}\Z')
@@ -24,7 +24,7 @@ def git_blob(data: bytes) -> str:
 
 # The 36- and 40-source receipts stay immutable. First one Java 21 syntax
 # repair, then nine compiler/runtime transitions advance only pinned identities.
-COMPOUND_TEST_PATH = 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryArrayificationTest.java'
+COMPOUND_TEST_PATH = 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryArrayificationTest.java'
 COMPOUND_TRANSITION_SHA256 = 'ad81180bc4f5ee73dd008212fb575e62d50f815d673abd063e671c630789c24c'
 COMPOUND_TRANSITION = (
     COMPOUND_TEST_PATH,

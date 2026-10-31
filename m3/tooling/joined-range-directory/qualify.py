@@ -17,7 +17,7 @@ ROOT = Path(os.environ["M3_PROOF_ROOT"]).resolve()
 ARTIFACTS = ROOT / "artifacts"
 PREFIX = "m3/tooling/joined-range-directory/"
 WORKFLOW = ".github/workflows/m3-joined-range-directory.yml"
-SUITE = "com.synexia.rewrite.M3JoinedRangeDirectoryRecipeTest"
+SUITE = "jdk.internal.m3.rewrite.M3JoinedRangeDirectoryRecipeTest"
 METHODS = ["allTwoPartialStatesBothOrdersReachExactFixedPoint",
            "allTwoInverseStatesBothOrdersRecoverExactBefore",
            "eachOwnedInputRefusesDriftMissingAndDuplicateOwnership"]
@@ -66,20 +66,20 @@ def write(name, value):
     destination.write_text(json.dumps(value, indent=2) + "\n", encoding="utf-8")
 
 
-TARGET_PROVIDER = "m3/core/src/com/m3/text/JoinedM3StringPiece.java"
+TARGET_PROVIDER = "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java"
 SOURCE_GIT = {
-    "m3/core/src/com/m3/text/JoinedM3StringPiece.java": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597",
-    "m3/core/src/com/m3/text/M3StringPiece.java": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
-    "m3/core/src/com/m3/text/LocalM3StringPiece.java": "6b745c9472144ad6de01de4d06a533974e558fb1",
-    "m3/core/src/com/m3/text/LocalM3Arena.java": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
-    "m3/core/src/com/m3/text/StorageIdentity.java": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a"
+    "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597",
+    "m3/core/src/jdk/m3/text/M3StringPiece.java": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
+    "m3/core/src/jdk/m3/text/LocalM3StringPiece.java": "6b745c9472144ad6de01de4d06a533974e558fb1",
+    "m3/core/src/jdk/m3/text/LocalM3Arena.java": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
+    "m3/core/src/jdk/m3/text/StorageIdentity.java": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a"
 }
 AFTER_GIT = {
-    "m3/core/src/com/m3/text/JoinedM3StringPiece.java": "3edc23c22362b08af00f7332ddc445a0274a6dd4",
-    "m3/core/src/com/m3/text/M3StringPiece.java": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
-    "m3/core/src/com/m3/text/LocalM3StringPiece.java": "6b745c9472144ad6de01de4d06a533974e558fb1",
-    "m3/core/src/com/m3/text/LocalM3Arena.java": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
-    "m3/core/src/com/m3/text/StorageIdentity.java": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a"
+    "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java": "3edc23c22362b08af00f7332ddc445a0274a6dd4",
+    "m3/core/src/jdk/m3/text/M3StringPiece.java": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
+    "m3/core/src/jdk/m3/text/LocalM3StringPiece.java": "6b745c9472144ad6de01de4d06a533974e558fb1",
+    "m3/core/src/jdk/m3/text/LocalM3Arena.java": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
+    "m3/core/src/jdk/m3/text/StorageIdentity.java": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a"
 }
 
 def owner_plan(original, post, actual):
@@ -261,7 +261,7 @@ def report():
     if tuple(module["COMPILED_PROVIDERS"]) != providers or set(sdk["compiledProviders"]) != set(providers):
         raise RuntimeError("four exact compiled source providers required")
     for name in providers:
-        body = regular(SDK / ("target/classes/com/synexia/rewrite/" + name + ".class")).read_bytes()
+        body = regular(SDK / ("target/classes/jdk/internal/m3/rewrite/" + name + ".class")).read_bytes()
         item = sdk["compiledProviders"][name]
         if (len(body) < 9 or body[:4] != bytes.fromhex("cafebabe")
                 or int.from_bytes(body[6:8], "big") != 65
@@ -289,7 +289,7 @@ def report():
             or runtime["originalTestProgramsPerCohort"] != 16 or runtime["originalJvmModesPerCohort"] != 4
             or runtime["rangeCorpusQualified"] is not True or runtime["pairedAllocationTimingMeasured"] is not True
             or len(runtime["samples"]) != 150 or runtime["failures"]
-            or runtime["changedCompiledClasses"] != ["com/m3/text/JoinedM3StringPiece.class"]):
+            or runtime["changedCompiledClasses"] != ["jdk/m3/text/JoinedM3StringPiece.class"]):
         raise RuntimeError("actual complete core/range/workload evidence required")
     for flag in ("targetMutationByQualificationJob", "nativeCodeChanged", "fullMatchedJdkQualified",
                  "stringDispatchQualified", "performanceRetentionQualified", "phaseAdvanced"):

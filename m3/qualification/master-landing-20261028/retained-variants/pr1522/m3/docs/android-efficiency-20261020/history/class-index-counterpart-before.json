@@ -1,5 +1,5 @@
 {
-  "id": "synexia.counterpart.MIndexClassIndex",
+  "id": "m3.counterpart.MIndexClassIndex",
   "kind": "adapter",
   "status": "implemented-unverified",
   "reason": "Inlined reflection counterpart and caller-owned runtime bridge; bounded tests pass; global JVM admission remains open.",
@@ -7,11 +7,11 @@
     {
       "repo": "hsoliwal/com.synexia",
       "commit": "7b5d45bea2fce0a042e4b85347c1eb4116846c55",
-      "module": "synexia-mindex",
-      "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexClassIndex.java",
-      "symbol": "com.synexia.mindex.classindex.MIndexClassIndex",
+      "module": "m3-mindex",
+      "path": "m3-mindex/class-index/src/main/java/jdk/internal/m3/mindex/classindex/MIndexClassIndex.java",
+      "symbol": "jdk.internal.m3.mindex.classindex.MIndexClassIndex",
       "signatures": [
-        "com.synexia.mindex.classindex.MIndexClassIndex"
+        "jdk.internal.m3.mindex.classindex.MIndexClassIndex"
       ],
       "sha256": "047eb00e579a0bed899419373e19514f0e06876efec39b9cfa2bca2d391196aa",
       "git_blob_sha1": "35632a8688201f2a6849b52e325daa27ae3a7bfe",
@@ -22,9 +22,9 @@
     {
       "repo": "hsoliwal/com.synexia",
       "commit": "7b5d45bea2fce0a042e4b85347c1eb4116846c55",
-      "module": "synexia-mindex",
-      "path": "synexia-mindex/foundation/src/main/java/com/synexia/mindex/foundation/MIndexAlgorithm.java",
-      "symbol": "com.synexia.mindex.foundation.MIndexAlgorithm",
+      "module": "m3-mindex",
+      "path": "m3-mindex/foundation/src/main/java/jdk/internal/m3/mindex/foundation/MIndexAlgorithm.java",
+      "symbol": "jdk.internal.m3.mindex.foundation.MIndexAlgorithm",
       "signatures": [
         "lowerBound(int[],int,int,int)",
         "upperBound(int[],int,int,int)"
@@ -84,12 +84,12 @@
       "reason": "Strict module compile and jdeps; weak Class/loader reflection boundary."
     },
     {
-      "id": "synexia.counterpart.MIndexVersionTable",
+      "id": "m3.counterpart.MIndexVersionTable",
       "resolution": "resolved",
       "reason": "Retained exact M3VI Progress boundary."
     },
     {
-      "id": "synexia.counterpart.MIndexLibraryRelease",
+      "id": "m3.counterpart.MIndexLibraryRelease",
       "resolution": "resolved",
       "reason": "Retained exact M3Release value."
     }
@@ -103,7 +103,7 @@
   "recipe": {
     "id": "m3-cb",
     "version": "1",
-    "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+    "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
     "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
     "preconditions": [
       "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
@@ -144,11 +144,11 @@
       {
         "repo": "hsoliwal/com.synexia",
         "commit": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
-        "module": "synexia-mindex",
-        "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexClassIndex.java",
-        "symbol": "com.synexia.mindex.classindex.MIndexClassIndex",
+        "module": "m3-mindex",
+        "path": "m3-mindex/class-index/src/main/java/jdk/internal/m3/mindex/classindex/MIndexClassIndex.java",
+        "symbol": "jdk.internal.m3.mindex.classindex.MIndexClassIndex",
         "signatures": [
-          "com.synexia.mindex.classindex.MIndexClassIndex"
+          "jdk.internal.m3.mindex.classindex.MIndexClassIndex"
         ],
         "sha256": null,
         "git_blob_sha1": "35632a8688201f2a6849b52e325daa27ae3a7bfe",

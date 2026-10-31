@@ -14,9 +14,9 @@ WORK="$(mktemp -d)"
 trap 'rm -rf "$WORK"' EXIT
 mkdir -p "$WORK/classes" "$WORK/test"
 "$JAVAC" --release 21 -Xlint:all -Werror -d "$WORK/classes" \
-  "$ROOT/m3/core/src/com/m3/text/M3CorpusProjectionDigest.java" \
-  "$ROOT/m3/core/src/com/m3/text/M3CorpusSourceReceipt.java" \
-  "$ROOT/m3/core/src/com/m3/text/M3LanguageCorpusManifest.java"
+  "$ROOT/m3/core/src/jdk/m3/text/M3CorpusProjectionDigest.java" \
+  "$ROOT/m3/core/src/jdk/m3/text/M3CorpusSourceReceipt.java" \
+  "$ROOT/m3/core/src/jdk/m3/text/M3LanguageCorpusManifest.java"
 "$JAVAC" --release 21 -Xlint:all -Werror -cp "$WORK/classes" \
   -d "$WORK/test" "$ROOT/m3/core/test/M3LanguageCorpusManifestTest.java"
 for mode in jit interpreted no-compact c2; do

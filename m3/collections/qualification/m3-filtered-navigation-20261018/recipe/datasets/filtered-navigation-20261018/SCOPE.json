@@ -14,7 +14,7 @@
   },
   "selected_production_files": 2,
   "other_operations": "PENDING",
-  "public_owner_disposition": "Preserve com.m3.collections public owners and callable interfaces; new contract sources are test-only.",
+  "public_owner_disposition": "Preserve jdk.m3.collections public owners and callable interfaces; new contract sources are test-only.",
   "target_writes": "Actual qualified SDK Results only after all-input receiver admission.",
   "behavior_scope": "Repairs reproduce prior contract violations; unchanged observable traces are established only for retained differential and event-tape cases, not universal equivalence.",
   "native_scope": "Two extra Java reference-identity checks precede existing backend selection. Native sources, native ABI and JNI allocation path are unchanged.",

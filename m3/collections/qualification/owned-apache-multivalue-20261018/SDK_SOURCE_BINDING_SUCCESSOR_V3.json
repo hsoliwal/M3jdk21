@@ -22,7 +22,7 @@
       "gitBlob": "d4a78e31aa5a63b12944566986925a64a5492ae8"
     }
   ],
-  "sdkPath": "m3/collections/src/main/java/com/m3/collections/M3CollectionSdk.java",
+  "sdkPath": "m3/collections/src/main/java/jdk/m3/collections/M3CollectionSdk.java",
   "before": {
     "path": "m3/collections/qualification/owned-apache-multivalue-20261018/SDK_HISTORICAL_7020.java.txt",
     "bytes": 7020,
@@ -49,31 +49,31 @@
   "unchangedOwnedRows": 32,
   "arrayAndNativeOwners": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java",
       "bytes": 10039,
       "sha256": "ae1092d66bb27e18c0f435d9dc148bd0f46fbc33f9731d9e2d2194142ccc3d32",
       "gitBlob": "250905f67429fbedfb4d6f652ea6e90a516cb59c"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedTable.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexedTable.java",
       "bytes": 20810,
       "sha256": "9b87cefcc65e295afe516a1d007e3b5acbc87a8035e1f55223d1b2558cf7858c",
       "gitBlob": "5dc062e138b273382b4f161fb4c9869d90558390"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedMultiValueMap.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexedMultiValueMap.java",
       "bytes": 15368,
       "sha256": "0acfd80aee31b670b2dc0fa104d43b068ada2bd37781738170efdc7560f6fa82",
       "gitBlob": "9035b651c5aab1f5850009372e2432ef196efc79"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongRangeSet.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongRangeSet.java",
       "bytes": 9008,
       "sha256": "f865b006888f1d4554b51cf69e7f4d6bac67458982f957f9151af0b4f09eaec8",
       "gitBlob": "5dbc2ec9317c79d801bb4c312f2c0b7ffad6ffbd"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
       "bytes": 12568,
       "sha256": "af78b910c1639030286023696da693890be5163cd0ffe6befef68748ff9450bc",
       "gitBlob": "5def05aad11dbe3ab7bebe27a3c11b5d241c9a7a"

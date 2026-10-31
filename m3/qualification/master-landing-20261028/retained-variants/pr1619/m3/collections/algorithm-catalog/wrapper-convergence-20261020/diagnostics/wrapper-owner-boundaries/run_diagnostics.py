@@ -58,7 +58,7 @@ def main():
         if digest(fixtures / name) != expected:
             parser.error("historical snapshot hash drift: " + name)
 
-    package_path = Path("com/m3/collections")
+    package_path = Path("jdk/m3/collections")
     baseline_source = output / "baseline-src" / package_path
     rejected_source = output / "rejected-src" / package_path
     baseline_source.mkdir(parents=True)
@@ -126,13 +126,13 @@ def main():
             command = [java, "-XX:-UsePerfData", "-ea", "-cp", classpath]
             for mode, expected, disposition, fragments in modes:
                 execute(version + "-original-" + mode,
-                        command + ["com.m3.collections.M3WrapperConvergenceContract", mode],
+                        command + ["jdk.m3.collections.M3WrapperConvergenceContract", mode],
                         expected, disposition, version, fragments)
             for proof in ["M3ComparatorBoundaryProof", "M3ReadonlyBoundaryProof"]:
-                execute(version + "-" + proof, command + ["com.m3.collections." + proof],
+                execute(version + "-" + proof, command + ["jdk.m3.collections." + proof],
                         0, "POSITIVE_DEFECT_OBSERVATION_ONLY", version, ["DIAGNOSTIC OBSERVATIONS REPRODUCED"])
             execute(version + "-M3ListMutationGuardCounterexamples",
-                    command + ["com.m3.collections.M3ListMutationGuardCounterexamples", version],
+                    command + ["jdk.m3.collections.M3ListMutationGuardCounterexamples", version],
                     0, "POSITIVE_DEFECT_OBSERVATION_ONLY", version, ["DIAGNOSTIC OBSERVATIONS REPRODUCED"])
             for mode in ["transport", "empty-add", "exhausted-add", "exhausted-set", "exhausted-remove"]:
                 expected = 0 if version == "baseline" and mode == "transport" else 1
@@ -142,7 +142,7 @@ def main():
                     fragments += ["same caller marker tape=[get:2] stored=2",
                                   "writing delivered occurrence must not load unrelated next element"]
                 execute(version + "-required-list-" + mode,
-                        command + ["com.m3.collections.M3CandidateListBoundaryProof", mode], expected,
+                        command + ["jdk.m3.collections.M3CandidateListBoundaryProof", mode], expected,
                         "BASELINE_VALID_BEHAVIOR" if expected == 0 else "REQUIRED_BEHAVIOR_ORACLE_REMAINS_RED",
                         version, fragments)
 

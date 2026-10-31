@@ -14,9 +14,9 @@ import sys
 ROOT = Path(__file__).resolve().parents[4]
 RECEIPT = Path(__file__).with_name("RECEIVER_RECEIPT.json")
 FILES = {
-    "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java":
+    "m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java":
         "b1135dc23d04d4654cedab2e8b62684e1e7d4471",
-    "m3/collections/src/test/java/com/m3/collections/M3ArrayListShortWordMaskContract.java":
+    "m3/collections/src/test/java/jdk/m3/collections/M3ArrayListShortWordMaskContract.java":
         "e87326da9e8d59e36cd84fd1413a0f55087200aa",
     "m3/arrays/pom.xml": "668fab1d24bbebd407ed920664487db848db464e",
 }
@@ -65,7 +65,7 @@ def verify(root: Path, receipt: dict) -> dict:
     if receipt.get("source_master") != "882ebe18891c719c0e26b6ee42558e50e96fe33e":
         refuse("current source custody base drift")
     convergence = receipt.get("synexia", {})
-    if convergence.get("recipe") != "com.synexia.rewrite.M3ArrayListDualWordCurrentRecipe":
+    if convergence.get("recipe") != "jdk.internal.m3.rewrite.M3ArrayListDualWordCurrentRecipe":
         refuse("no canonical Synexia recipe linkage")
     rows = receipt.get("source_postimages")
     if not isinstance(rows, list) or len(rows) != len(FILES):

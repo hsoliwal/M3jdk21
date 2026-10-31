@@ -51,7 +51,7 @@ for group,count in [('sources',19),('proof_references',55)]:
    before=current[r['path']];assert r['repo']=='hsoliwal/com.synexia' and r['record']==before['record'] and r['symbol']==before['symbol'] and r['module']==before['module'];assert r['revision_role']=='pinned' and r['tracking_ref']=='refs/heads/'+pub['branch']
    if r['sha256']!=before['sha256']:changes.append(r['path'])
 assert set(changes)=={r['path'] for r in inv['current_designated_changes']} and len(changes)==4
-assert {k:v for k,v in collections.Counter(r['record'] for r in inv['sources']).items()}=={'synexia.jcc-recipe-laboratory':13,'synexia.jcc-java-jni-regression':6}
+assert {k:v for k,v in collections.Counter(r['record'] for r in inv['sources']).items()}=={'m3.jcc-recipe-laboratory':13,'m3.jcc-java-jni-regression':6}
 assert acct['root_entries']==[{k:e[k] for k in ('path','mode','type','sha')} for e in trees[ROOT]];assert acct['root_entry_count']==len(acct['root_entries'])==343;assert dict(collections.Counter(e['type'] for e in trees[ROOT]))==acct['root_entry_types']=={'tree':255,'blob':87,'commit':1}
 pom=Path(acct['root_pom']['body_path']);pom_state='PENDING_MISSING_BODY'
 if pom.exists():

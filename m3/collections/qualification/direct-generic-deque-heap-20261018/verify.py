@@ -7,7 +7,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[3]
-TEMPLATES = ROOT / "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-native-generic-deque-priority-20261018"
+TEMPLATES = ROOT / "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-native-generic-deque-priority-20261018"
 SOURCE_BLOBS = {
   "M3ArrayDeque.java": "9df441b51b1912fcaece88197b0e69e6fe89986a",
   "M3PriorityQueue.java": "bd462291a8a33862d943e0afc5dd839693548e8b",
@@ -15,9 +15,9 @@ SOURCE_BLOBS = {
   "M3GenericReferenceOwnersTest.java": "d486b58e77a08cce6007ecb4657e4d790d209251",
 }
 OWNERS = {
-  "m3/collections/src/main/java/com/m3/collections/M3SlotArrays.java":
+  "m3/collections/src/main/java/jdk/m3/collections/M3SlotArrays.java":
     "e337c69710c871f8caa77a1afe53149f1fd705cc",
-  "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java":
+  "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java":
     "134fb98f8a39969c43fd75338ecb233c5fe49446",
   "m3/collections/src/main/native/collections/m3_index_mask_compactor.c":
     "aaa74686949de59b44b363741ef1c414fe3e95d0",

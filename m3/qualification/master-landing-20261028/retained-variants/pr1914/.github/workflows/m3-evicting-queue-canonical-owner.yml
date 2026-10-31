@@ -32,13 +32,13 @@ jobs:
           python3 - <<'PY'
           import hashlib
           from pathlib import Path
-          old = Path('m3/collections/implementations/guava-evicting-queue/src/main/java/com/m3/collections/guava/M3EvictingQueue.java').read_bytes()
-          new = Path('m3/collections/implementations/evicting-queue/src/main/java/com/m3/collections/queue/M3EvictingQueue.java').read_bytes()
+          old = Path('m3/collections/implementations/guava-evicting-queue/src/main/java/jdk/m3/collections/guava/M3EvictingQueue.java').read_bytes()
+          new = Path('m3/collections/implementations/evicting-queue/src/main/java/jdk/m3/collections/queue/M3EvictingQueue.java').read_bytes()
           assert hashlib.sha256(old).hexdigest() == '3fb021a20b4c356283f2b8444647333a4399e9b00528a2bf519787e602dd1166'
           assert hashlib.sha256(new).hexdigest() == 'e4d4f9fa4e260d25df4622aaba2d0b5fb88410828df0b8ef3e046edcc85861e5'
           normalized = new.replace(
-              b'package com.m3.collections.queue;',
-              b'package com.m3.collections.guava;')
+              b'package jdk.m3.collections.queue;',
+              b'package jdk.m3.collections.guava;')
           normalized = normalized.replace(
               b'* <p>This is the vendor-neutral M3 owner with its own serialization class identity.\n * The earlier package spelling remains a separate historical compatibility class.',
               b'* <p>This is a mapped M3 owner, with its own serialization class identity.\n * It is not a subtype of the final Guava concrete class.')
@@ -75,9 +75,9 @@ jobs:
         run: |
           OLD=m3/collections/implementations/guava-evicting-queue/target
           NEW=m3/collections/implementations/evicting-queue/target
-          java -cp "$OLD/classes:$OLD/test-classes" com.m3.collections.guava.M3EvictingQueueContractProbe
-          java -Xmx64m -cp "$OLD/classes:$NEW/classes:$NEW/test-classes" com.m3.collections.queue.M3EvictingQueueCanonicalContractProbe
-          javap -p -classpath "$NEW/classes" com.m3.collections.queue.M3EvictingQueue | python3 -c 'import sys; data=sys.stdin.read(); assert "public final class com.m3.collections.queue.M3EvictingQueue" in data and "private void copyRingInto(java.lang.Object[], int)" in data'
+          java -cp "$OLD/classes:$OLD/test-classes" jdk.m3.collections.guava.M3EvictingQueueContractProbe
+          java -Xmx64m -cp "$OLD/classes:$NEW/classes:$NEW/test-classes" jdk.m3.collections.queue.M3EvictingQueueCanonicalContractProbe
+          javap -p -classpath "$NEW/classes" jdk.m3.collections.queue.M3EvictingQueue | python3 -c 'import sys; data=sys.stdin.read(); assert "public final class jdk.m3.collections.queue.M3EvictingQueue" in data and "private void copyRingInto(java.lang.Object[], int)" in data'
       - name: Enforce vendor-neutral canonical Maven binary and retained license manifests
         run: |
           python3 - <<'PY'
@@ -86,8 +86,8 @@ jobs:
           jar = Path('m3/collections/implementations/evicting-queue/target/m3-evicting-queue-0.1.0-SNAPSHOT.jar')
           with ZipFile(jar) as archive:
               names = set(archive.namelist())
-              assert 'com/m3/collections/queue/M3EvictingQueue.class' in names
-              assert not any(name.startswith('com/m3/collections/guava/') for name in names)
+              assert 'jdk/m3/collections/queue/M3EvictingQueue.class' in names
+              assert not any(name.startswith('jdk/m3/collections/guava/') for name in names)
               assert not any(name.startswith('com/google/common/') for name in names)
               assert {'META-INF/LICENSE.txt', 'META-INF/NOTICE.txt', 'META-INF/THIRD_PARTY_NOTICES.md'} <= names
           print('Canonical Maven jar contains only M3 owner and attributed license resources')

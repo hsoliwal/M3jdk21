@@ -2,7 +2,7 @@
   "status": "ROOT_SCOPED_PROOFS_PASS__PUBLIC_MODULE_AND_HOSTED_CI_PENDING",
   "baseCommit": "0efc1719ca5766aead09f4f7c49f5067975bd946",
   "owner": {
-    "path": "m3/collections/implementations/guava-evicting-queue/src/main/java/com/m3/collections/guava/M3EvictingQueue.java",
+    "path": "m3/collections/implementations/guava-evicting-queue/src/main/java/jdk/m3/collections/guava/M3EvictingQueue.java",
     "bytes": 16979,
     "sha256": "8afe356324bdaa51953933f2213b573175b64e2921df4c0df7c4a16161274840"
   },

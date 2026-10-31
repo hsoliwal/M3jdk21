@@ -25,28 +25,28 @@
     {
       "errors": "0",
       "failures": "0",
-      "name": "com.m3.rewrite.backport.M3FileByteEventFactRecipeTest",
+      "name": "jdk.m3.rewrite.backport.M3FileByteEventFactRecipeTest",
       "skipped": "0",
       "tests": "3"
     },
     {
       "errors": "0",
       "failures": "0",
-      "name": "com.m3.rewrite.backport.M3StringLeafCursorConvergenceRecipeTest",
+      "name": "jdk.m3.rewrite.backport.M3StringLeafCursorConvergenceRecipeTest",
       "skipped": "0",
       "tests": "4"
     },
     {
       "errors": "0",
       "failures": "0",
-      "name": "com.m3.rewrite.backport.M3StringLeafCursorCurrentMasterTest",
+      "name": "jdk.m3.rewrite.backport.M3StringLeafCursorCurrentMasterTest",
       "skipped": "0",
       "tests": "4"
     },
     {
       "errors": "0",
       "failures": "0",
-      "name": "com.m3.rewrite.backport.M3StringTokenSequenceRegexRecipeTest",
+      "name": "jdk.m3.rewrite.backport.M3StringTokenSequenceRegexRecipeTest",
       "skipped": "0",
       "tests": "1"
     }

@@ -20,10 +20,10 @@ import tempfile
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[3]
 PREFIX = Path("m3/collections/")
-JAVA_OWNER = PREFIX / "src/main/java/com/m3/collections/M3BitLane28.java"
-PROOF_OWNER = PREFIX / "src/test/java/com/m3/collections/M3BitLaneJumpProof.java"
+JAVA_OWNER = PREFIX / "src/main/java/jdk/m3/collections/M3BitLane28.java"
+PROOF_OWNER = PREFIX / "src/test/java/jdk/m3/collections/M3BitLaneJumpProof.java"
 NATIVE_OWNER = PREFIX / "src/test/native/m3_bitlane_jump_jni.c"
-ADDRESS = PREFIX / "src/main/java/com/m3/collections/M3Address28.java"
+ADDRESS = PREFIX / "src/main/java/jdk/m3/collections/M3Address28.java"
 EXPECTED = {
     JAVA_OWNER.as_posix(): (
         "011c7f61b442fb07bbc937cade8fa283175a574539ffdcf8c3d52ac4cb673626",
@@ -65,7 +65,7 @@ def receipt(root: Path) -> dict[str, bytes]:
         path = row["path"]
         expected = EXPECTED[path]
         if tuple(row[key] for key in
-                 ("pre_sha256", "post_sha256", "synexia_template_git_blob", "role")) != expected:
+                 ("pre_sha256", "post_sha256", "m3_template_git_blob", "role")) != expected:
             raise ValueError("refused: receipt authority drift")
         value = read_file(root / path)
         assert_image(value, expected[1], expected[2], path)
@@ -100,7 +100,7 @@ def execute(args: list[str]) -> str:
     return result.stdout.strip()
 
 def compile_sources(root: Path, output: Path, original: bool) -> Path:
-    target = output / "source/com/m3/collections"
+    target = output / "source/jdk/m3/collections"
     target.mkdir(parents=True)
     main = target / "M3BitLane28.java"
     main.write_bytes(read_file(HERE / "before/M3BitLane28.java")
@@ -127,12 +127,12 @@ def test_java21(root: Path, native: bool) -> None:
         temp = Path(dirname)
         old = compile_sources(root, temp / "old", True)
         current = compile_sources(root, temp / "new", False)
-        clazz = "com.m3.collections.M3BitLane28"
+        clazz = "jdk.m3.collections.M3BitLane28"
         before_api = execute(["javap", "-public", "-s", "-classpath", str(old), clazz])
         after_api = execute(["javap", "-public", "-s", "-classpath", str(current), clazz])
         if before_api != after_api:
             raise AssertionError("M3BitLane28 public Java API/ABI descriptor drift")
-        main = "com.m3.collections.M3BitLaneJumpProof"
+        main = "jdk.m3.collections.M3BitLaneJumpProof"
         for opts in ([], ["-Xint"]):
             output = execute(["java", "-ea", *opts, "-cp", str(current), main])
             if "M3_BITLANE_JUMP_PASS assertions=68012 native=false" not in output:

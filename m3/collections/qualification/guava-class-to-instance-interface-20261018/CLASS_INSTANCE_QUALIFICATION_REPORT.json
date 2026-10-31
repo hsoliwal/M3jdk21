@@ -87,7 +87,7 @@
   "full_superset_complete": false,
   "new_owner_created": false,
   "next_family": "com.google.common.collect.HashBiMap concrete",
-  "owner_factory": "com.m3.collections.interop.M3GuavaClassToInstanceMaps",
+  "owner_factory": "jdk.m3.collections.interop.M3GuavaClassToInstanceMaps",
   "predecessor_drafts": {
     "canonical": "https://github.com/hsoliwal/com.synexia/pull/12312",
     "receiver": "https://github.com/hsoliwal/M3jdk21/pull/1304"
@@ -103,7 +103,7 @@
     "after_row": [
       "com.google.common.collect.ClassToInstanceMap",
       "GUAVA",
-      "com.m3.collections.interop.M3GuavaClassToInstanceMaps",
+      "jdk.m3.collections.interop.M3GuavaClassToInstanceMaps",
       "M3ClassIndexMap",
       "OPTIONAL_ADAPTER",
       "class-token-key"

@@ -1,5 +1,5 @@
 {
-  "owner": "com.m3.collections.guava.M3ArrayListMultimap",
+  "owner": "jdk.m3.collections.guava.M3ArrayListMultimap",
   "provider_contract": "com.google.common.collect.ArrayListMultimap (Guava 33.4.8-jre)",
   "inventory_row": "DONE #1400",
   "source_sha256": "66ef182956a214103b2931f5d00526f1e8a0e727924e6fa73919faf1bc691fda",

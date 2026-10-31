@@ -50,9 +50,9 @@ class MultiPassSealTest(unittest.TestCase):
         (self.data / 'DATASET.json').write_text(json.dumps({
             'crate_name': m.CRATE, 'targets': 3, 'java_targets': 3,
         }) + '\n', encoding='utf-8')
-        yaml = '''name: com.synexia.m3jdk.AstBuildReverse20261017\nrecipeList:\n'''
+        yaml = '''name: jdk.internal.m3.m3jdk.AstBuildReverse20261017\nrecipeList:\n'''
         for stage in m.STAGES:
-            yaml += '  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:\n'
+            yaml += '  - jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe:\n'
             yaml += '      crateName: ' + stage + '\n'
         f = self.root / m.DESCRIPTOR
         f.parent.mkdir(parents=True, exist_ok=True)

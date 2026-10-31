@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-# Canonical recipe: com.synexia.m3.SpanMonotonePageJni20261027.
+# Canonical recipe: jdk.internal.m3.SpanMonotonePageJni20261027.
 name: M3 Span JNI monotone-pages Java 21
 
 on:
@@ -7,8 +7,8 @@ on:
     paths:
       - '.github/workflows/m3-span-jni-monotone-20261027.yml'
       - 'm3/collections/src/main/native/collections/m3_span_index_jni.c'
-      - 'm3/collections/src/main/java/com/m3/collections/M3SpanIndex.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3SpanBatchIntoContract.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3SpanIndex.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3SpanBatchIntoContract.java'
 
 permissions:
   contents: read
@@ -33,10 +33,10 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
-          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3SpanIndex.java)" = 'f8229851a1a36b72f807736b6df33ef5e8f4ea01'
-          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3SlotArrays.java)" = 'b945fd98cef1ea03e30131e1460c507cd90119c9'
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3SpanIndex.java)" = 'f8229851a1a36b72f807736b6df33ef5e8f4ea01'
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3SlotArrays.java)" = 'b945fd98cef1ea03e30131e1460c507cd90119c9'
           test "$(git hash-object m3/collections/src/main/native/collections/m3_span_index_jni.c)" = '3dccc1694fb8dd7c3148bc7f59b1cc4391d37077'
-          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3SpanBatchIntoContract.java)" = '88e2ccf3c979fb0f25c42948639c5be17b71c5f0'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3SpanBatchIntoContract.java)" = '88e2ccf3c979fb0f25c42948639c5be17b71c5f0'
       - name: Strict compile of original Java 21 snapshot owner and query corpus
         shell: bash
         run: |
@@ -44,9 +44,9 @@ jobs:
           mkdir -p "$RUNNER_TEMP/m3-span/classes" "$RUNNER_TEMP/m3-span/headers" "$RUNNER_TEMP/m3-span/native"
           javac --release 21 -Xlint:all,-module -Werror \
             -h "$RUNNER_TEMP/m3-span/headers" -d "$RUNNER_TEMP/m3-span/classes" \
-            m3/collections/src/main/java/com/m3/collections/M3SlotArrays.java \
-            m3/collections/src/main/java/com/m3/collections/M3SpanIndex.java \
-            m3/collections/src/test/java/com/m3/collections/M3SpanBatchIntoContract.java
+            m3/collections/src/main/java/jdk/m3/collections/M3SlotArrays.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3SpanIndex.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3SpanBatchIntoContract.java
       - name: Compile the same native span owner with fatal UBSan and generated JNI prototypes
         shell: bash
         run: |
@@ -55,7 +55,7 @@ jobs:
             -fsanitize=undefined -fno-sanitize-recover=undefined \
             -fPIC -shared \
             "-I$JAVA_HOME/include" "-I$JAVA_HOME/include/linux" \
-            -include "$RUNNER_TEMP/m3-span/headers/com_m3_collections_M3SpanIndex.h" \
+            -include "$RUNNER_TEMP/m3-span/headers/jdk_m3_collections_M3SpanIndex.h" \
             m3/collections/src/main/native/collections/m3_span_index_jni.c \
             -o "$RUNNER_TEMP/m3-span/native/libm3_collections_span.so"
       - name: Execute old and new JNI exports with full Java oracle
@@ -64,7 +64,7 @@ jobs:
           set -euo pipefail
           java -Xcheck:jni -Djava.library.path="$RUNNER_TEMP/m3-span/native" \
             -cp "$RUNNER_TEMP/m3-span/classes" \
-            com.m3.collections.M3SpanBatchIntoContract \
+            jdk.m3.collections.M3SpanBatchIntoContract \
             | tee "$RUNNER_TEMP/m3-span/native-parity.log"
           grep -Eq '^PASS M3_SPAN_BATCH_INTO checks=[0-9]+ native=true$' \
             "$RUNNER_TEMP/m3-span/native-parity.log"
@@ -74,7 +74,7 @@ jobs:
           set -euo pipefail
           java -Xcheck:jni -Djava.library.path="$RUNNER_TEMP/m3-span/missing" \
             -cp "$RUNNER_TEMP/m3-span/classes" \
-            com.m3.collections.M3SpanBatchIntoContract \
+            jdk.m3.collections.M3SpanBatchIntoContract \
             | tee "$RUNNER_TEMP/m3-span/java-fallback.log"
           grep -Eq '^PASS M3_SPAN_BATCH_INTO checks=[0-9]+ native=false$' \
             "$RUNNER_TEMP/m3-span/java-fallback.log"

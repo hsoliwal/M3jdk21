@@ -31,13 +31,13 @@ import xml.etree.ElementTree as ET
 SCHEMA = "m3-wrapper-verification/v1"
 MODULE = "m3/collections/"
 JAVA = MODULE + "src/main/java/"
-TEST = MODULE + "src/test/java/com/m3/collections/"
+TEST = MODULE + "src/test/java/jdk/m3/collections/"
 NATIVE = MODULE + "src/main/native/collections/"
 HERE = MODULE + "verification/wrapper-convergence-20261018/"
-PACKAGE = "com.m3.collections."
+PACKAGE = "jdk.m3.collections."
 RESOURCE_FILES = ("pom.xml", "LICENSE", "NOTICE", "provenance.json",
-                  "synexia-donation.json", "name-mapping.json",
-                  "SYNEXIA-DONATION-NOTICE.txt")
+                  "m3-donation.json", "name-mapping.json",
+                  "M3-DONATION-NOTICE.txt")
 RUNTIME_OWNERS = ("M3FilteredNavigableSet", "M3FilteredViews",
                   "M3MutableFilteredViews", "M3LongIndexProjection", "M3IndexPathMasks")
 JNI_OWNERS = ("M3IndexPathMasks", "M3IndexMaskCompactor", "M3IndexMaskWindow")
@@ -153,7 +153,7 @@ def read_manifest(path, target, before):
             if old != "ABSENT":
                 require(sha(preimage) == old, "preimage source drift: " + path)
         found[path] = row
-    required = {JAVA + "com/m3/collections/" + n + ".java" for n in RUNTIME_OWNERS}
+    required = {JAVA + "jdk/m3/collections/" + n + ".java" for n in RUNTIME_OWNERS}
     required |= {NATIVE + n for n in ("m3_index_path_masks.c", "m3_index_mask_compactor.c",
                                        "m3_index_mask_window.c")}
     names = set(FROZEN_TESTS) | {n for n, _, _ in MASK_PROOFS} | {n for n, _ in WRAPPER_PROOFS}
@@ -319,8 +319,8 @@ def native_build(evidence, java_home, root, headers, before_headers, native_dir,
                 require(all(expected.get(symbol) == signature for symbol, signature in old.items()),
                         "existing JNI declaration changed: " + owner)
         if "M3IndexPathMasks" in owners:
-            require({"Java_com_m3_collections_M3IndexPathMasks_selectNative",
-                     "Java_com_m3_collections_M3IndexPathMasks_selectLongNative"} <= expected.keys(),
+            require({"Java_jdk_m3_collections_M3IndexPathMasks_selectNative",
+                     "Java_jdk_m3_collections_M3IndexPathMasks_selectLongNative"} <= expected.keys(),
                     "old int/new long path-mask JNI declarations missing")
         binary = native_dir / library
         evidence.run(library + "-gcc-c17-ubsan", [gcc, "-std=c17", "-O2", "-Wall", "-Wextra",

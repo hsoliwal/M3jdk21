@@ -11,10 +11,10 @@
   },
   "namespaceMapping": {
     "source": "org.eclipse.collections",
-    "target": "com.m3.collections.eclipse",
+    "target": "jdk.m3.collections.eclipse",
     "modules": [
-      "com.m3.collections.eclipse.api",
-      "com.m3.collections.eclipse.impl"
+      "jdk.m3.collections.eclipse.api",
+      "jdk.m3.collections.eclipse.impl"
     ],
     "sourceTree": "97cd9b660586845b0015e4882d28af6834ed5527",
     "scope": "Complete independently licensed source custody of the relocated fork tree; source-only namespace pass"

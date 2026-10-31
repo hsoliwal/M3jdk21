@@ -6,7 +6,7 @@
   "indexBytes": 209211,
   "indexSHA256": "802f254d1d4639a5bd0f436756bf1b43c418844828db6e2b07f9e8a0797628b1",
   "proofGatesExecuted": false,
-  "schema": "synexia.evidence.package-result/1",
+  "schema": "m3.evidence.package-result/1",
   "status": "PACKAGED_REVIEW_EVIDENCE",
   "summary": {
     "omissionsByReason": {},
