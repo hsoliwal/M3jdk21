@@ -45,9 +45,10 @@ stays HOLD and `--release` cannot report `release_ready: true`.
 
 ## 4. Release branch
 
-The prepared branch holds one commit whose tree is master plus #2184 as of 2026-10-31. If master's
-tree differs after steps 1-3, rebuild the commit from the final master tree. Never force-push:
-first delete the prepared branch, which is the user's call, then push the rebuilt commit.
+The prepared branch is a candidate. It holds one commit whose tree is master `bb66a8c16642` plus
+#2184 at `70c28a8bfadf`. Steps 1-3 change master's tree (the custody deletion always does), so
+rebuild the commit from the final master tree. Never force-push: first delete the candidate
+branch, which is the user's call, then push the rebuilt commit.
 
 ```sh
 git fetch origin master

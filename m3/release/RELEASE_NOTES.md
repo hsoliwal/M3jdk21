@@ -17,7 +17,7 @@ GitHub Release contains its exact command, environment, raw result and SHA-256.
 | Upstream repository | `openjdk/jdk21` |
 | Upstream baseline (parent of the release commit) | `890adb6410dab4606a4f26a942aed02fb2f55387` (tag `jdk-21+35`, `jdk-21-ga`) |
 | Release history | one fork commit above the baseline (`single_fork_commit_required`); immutable after the tag |
-| Version in the tree | `make/conf/version-numbers.conf`: 21.0.14 (`DEFAULT_VERSION_UPDATE=14`); the jdk21u updates are part of the tree, not of the ancestry |
+| Version in the tree | `make/conf/version-numbers.conf`: 21.0.14 (`DEFAULT_VERSION_UPDATE=14`); the ancestry baseline is `jdk-21+35` |
 | Release tree | the master tree after the release-preview PR. The release commit, the tree and the evidence manifest are listed in the GitHub Release. |
 
 Verify a checkout:
@@ -80,7 +80,7 @@ run exists at the release commit.
 
 | Platform | JDK build lane | Latest evidence | Preview state |
 | --- | --- | --- | --- |
-| linux-x64 | `main.yml` -> `build-linux.yml`, tier1 `test.yml` | Last green build: run 39250083857 (`bb6b279495ce`, 2026-10-19, another branch). `main.yml` creates jobs again (run 41153588755 at `bb66a8c16642`: 17 jobs, cancelled by concurrency). | build pending |
+| linux-x64 | `main.yml` -> `build-linux.yml`, tier1 `test.yml` | Last green build: run 39250083857 (`bb6b279495ce`, 2026-10-19, another branch). `main.yml` creates jobs again (run 41153588755 at `bb66a8c16642`: 17 jobs created, run cancelled). | build pending |
 | linux-x86 | `build-linux.yml` (hs) | run 39250083857 | build pending |
 | linux-aarch64, ppc64le, riscv64, s390x, arm | `build-cross-compile.yml` (cross build only, no tests) | run 39250083857 | cross build pending |
 | windows-x64 | `build-windows.yml`, tier1 | run 39250083857 | build pending |
@@ -111,9 +111,10 @@ run exists at the release commit.
 - **Admission workflow trigger (audit blocker 5):** `m3-first-release-admission.yml` runs on
   `release/**` pushes, pull requests and dispatch, but not on master pushes.
 - **Compile audit:** `javac --release 21 -Xlint:all,-module -Werror` over the 27 audited `m3/**`
-  modules gives 16 PASS. The other 10 fail only on dependencies that are not on the probe
-  classpath:
-  - Jackson, Lucene/OpenNLP, OpenRewrite, JavaFX and TornadoVM API;
+  modules gives 16 PASS, 9 FAIL, 1 ABSENT (`module-packs/build-support`: sources live under
+  vendor subtrees) and 1 NO_SOURCES (`module-packs/collections`: module-info only). Each of the 9
+  failures is a dependency that is not on the probe classpath:
+  - Jackson, Lucene/OpenNLP, OpenRewrite, JavaFX, TornadoVM API and Synexia MIndex;
   - `jdk.internal.vm.parallel`, which needs the built image;
   - intra-repository parser closure.
 
