@@ -9,34 +9,35 @@ import com.m3.swing.viewport.M3ViewportPlanes;
  * M3JDK Swing binding of the web widgets' viewport aspects (pattern M3P-VIEWPORT-1): every answer comes from
  * the port core in {@code com.m3.swing.viewport}: the resident window from {@link M3ViewportIndexWindow},
  * extents and the scroll bar from {@link M3ViewportExtent}, dirty planes from {@link M3ViewportPlanes},
- * damage from {@link M3ViewportDamage}. Their contracts equal the SWT fork's public M3 viewport facades.
+ * damage from {@link M3ViewportDamage}. Their contracts equal the SWT fork's public M3 viewport facades. Public: the
+ * viewport adapters of existing components (package {@code adapter}) bind to the same core.
  */
-final class M3WebViewportCore {
-	static final int BODY = M3ViewportPlanes.BODY, HEADER = M3ViewportPlanes.HEADER, SCROLLBAR = M3ViewportPlanes.SCROLLBAR;
+public final class M3WebViewportCore {
+	public static final int BODY = M3ViewportPlanes.BODY, HEADER = M3ViewportPlanes.HEADER, SCROLLBAR = M3ViewportPlanes.SCROLLBAR;
 	private final M3ViewportPlanes planes = new M3ViewportPlanes();
 	private final M3ViewportDamage damage = new M3ViewportDamage();
 
-	void project(int count, int first, int visible, int overscan, int[] out) {
+	public void project(int count, int first, int visible, int overscan, int[] out) {
 		M3ViewportIndexWindow.project(count, first, visible, overscan, out, 0);
 	}
 
-	long extent(long count, int itemExtent) {
+	public long extent(long count, int itemExtent) {
 		return M3ViewportExtent.contentExtent(count, itemExtent);
 	}
 
-	void thumb(long count, int itemExtent, int view, long scroll, int track, int[] out) {
+	public void thumb(long count, int itemExtent, int view, long scroll, int track, int[] out) {
 		M3ViewportExtent.projectThumb(count, itemExtent, Math.max(0, view), scroll / Math.max(1, itemExtent), track, out, 0);
 	}
 
-	int scrolled(long x, long y) {
+	public int scrolled(long x, long y) {
 		return planes.scrollTo(x, y);
 	}
 
-	void damage(int x, int y, int w, int h) {
+	public void damage(int x, int y, int w, int h) {
 		damage.add(x, y, w, h);
 	}
 
-	boolean take(int[] out) {
+	public boolean take(int[] out) {
 		return damage.take(out);
 	}
 }

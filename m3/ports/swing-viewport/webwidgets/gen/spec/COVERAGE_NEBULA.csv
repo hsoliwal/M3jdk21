@@ -46,6 +46,31 @@ JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web,M3BottomSheet,0,12,0,0,0
 JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web,M3AlertBanner,0,12,0,0,0,3,0,2,0,2
 JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web,M3PullToRefresh,0,12,0,0,0,3,0,2,0,2
 JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web,M3Ribbon,0,12,0,0,0,3,0,2,0,2
+JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web.adapter,M3ContainerViewports,0,40,0,0,0,5,0,5,0,5
+JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web.adapter,M3PickerViewports,0,40,0,0,0,5,0,5,0,5
+JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web.adapter,M3AnimvalueViewports,0,16,0,0,0,2,0,2,0,2
+JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web.adapter,M3CollectionViewports,0,56,0,0,0,7,0,7,0,7
+JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web.adapter,M3ViewportKind.new M3ViewportKind() {...},0,16,0,0,0,3,0,3,0,3
+JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web.adapter,M3ViewportKind.new M3ViewportKind() {...},0,71,0,4,0,7,0,9,0,7
+JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web.adapter,M3ViewportKind.new M3ViewportKind() {...},0,44,0,4,0,6,0,8,0,6
+JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web.adapter,M3ViewportKind.new M3ViewportKind() {...},0,50,0,6,0,4,0,7,0,4
+JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web.adapter,M3ViewportKind.new M3ViewportKind() {...},0,20,0,0,0,4,0,4,0,4
+JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web.adapter,M3ViewportKind.new M3ViewportKind() {...},0,20,0,0,0,4,0,4,0,4
+JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web.adapter,M3ViewportKind.new M3ViewportKind() {...},0,20,0,0,0,4,0,4,0,4
+JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web.adapter,M3ViewportKind.new M3ViewportKind() {...},0,41,0,4,0,5,0,7,0,5
+JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web.adapter,M3ViewportKind.new M3ViewportKind() {...},0,30,0,2,0,5,0,6,0,5
+JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web.adapter,M3TokenViewports,0,88,0,0,0,11,0,11,0,11
+JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web.adapter,M3SegmentsViewports,0,88,0,0,0,11,0,11,0,11
+JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web.adapter,M3OverlayViewports,0,40,0,0,0,5,0,5,0,5
+JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web.adapter,M3PlotViewports,0,24,0,0,0,3,0,3,0,3
+JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web.adapter,M3InputViewports,0,48,0,0,0,6,0,6,0,6
+JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web.adapter,M3EmbedViewports,0,24,0,0,0,3,0,3,0,3
+JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web.adapter,M3CommandsViewports,0,48,0,0,0,6,0,6,0,6
+JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web.adapter,M3ViewportKind,0,600,0,74,0,72,0,56,0,19
+JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web.adapter,M3ViewportAdapter,0,468,1,31,0,82,1,40,0,25
+JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web.adapter,M3ViewportKind.new M3ViewportKind() {...},0,16,0,0,0,3,0,3,0,3
+JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web.adapter,M3ViewportKind.new M3ViewportKind() {...},0,18,0,0,0,3,0,3,0,3
+JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web.adapter,M3ViewportKind.new M3ViewportKind() {...},0,44,0,0,0,7,0,7,0,7
 JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web.model,M3InputModel,0,1556,1,175,0,207,1,124,0,34
 JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web.model,M3HighlightMarkModel,0,18,0,0,0,5,0,2,0,2
 JaCoCo Coverage Report,org.eclipse.nebula.widgets.m3web.model,M3AlertBannerModel,0,18,0,0,0,5,0,2,0,2

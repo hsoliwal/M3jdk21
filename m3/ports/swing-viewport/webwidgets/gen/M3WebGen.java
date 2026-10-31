@@ -103,6 +103,7 @@ public final class M3WebGen {
 		}
 		if (s.nebula()) {
 			emit("nebula/M3WebCanvasChecks.java.tmpl", s.test(s.wpkg()).resolve("M3WebCanvasChecks.java"), base);
+			emit("nebula/M3WebTestMain.java.tmpl", s.test(s.wpkg()).resolve("M3WebTestMain.java"), base);
 		} else {
 			emit("swing/M3WebComponentChecks.java.tmpl", s.test(s.wpkg()).resolve("M3WebComponentChecks.java"), base);
 		}
@@ -113,8 +114,99 @@ public final class M3WebGen {
 		}
 		if (only.isEmpty()) {
 			probes(s, base);
+			adapters(s, base);
 		}
 		manifest(s);
+	}
+
+	/** Viewport adapters of the widgets each toolkit already ships (spec/ADAPTERS.tsv rows of this side), pattern M3P-ADAPTER-1. */
+	void adapters(Side s, Map<String, String> base) throws IOException {
+		String tk = "adapter/" + (s.nebula() ? "nebula/" : "swing/"), pkg = s.wpkg() + ".adapter";
+		adapterCore(s, tk, pkg, base);
+		Map<String, StringBuilder> factories = new TreeMap<>();
+		StringBuilder standIns = new StringBuilder();
+		for (Map<String, String> row : tsv(gen.resolve("spec/ADAPTERS.tsv"))) {
+			if (row.get("toolkit").equals(s.nebula() ? "nebula" : "swing")) {
+				adapter(s, tk, pkg, row, factories, standIns);
+			}
+		}
+		for (Map.Entry<String, StringBuilder> e : factories.entrySet()) {
+			Map<String, String> v = new LinkedHashMap<>(base);
+			v.put("@FACTORIES@", e.getValue().toString()); v.put("@FAMILY@", e.getKey()); v.put("@FAM@", e.getKey().toUpperCase());
+			emit(tk + "Viewports.java.tmpl", s.main(pkg).resolve("M3" + e.getKey() + "Viewports.java"), v);
+		}
+		standIns(s, tk, pkg, base, standIns);
+	}
+
+	/** The adapter pattern itself: measure, kinds, adapter; the shared contract, fills and kind edges tests. */
+	void adapterCore(Side s, String tk, String pkg, Map<String, String> base) throws IOException {
+		for (String c : new String[] { "M3ViewportMeasure", "M3ViewportKind", "M3ViewportAdapter" }) {
+			emit(tk + c + ".java.tmpl", s.main(pkg).resolve(c + ".java"), base);
+		}
+		for (String c : new String[] { "M3ViewportAdapterChecks", "M3ViewportFills" }) {
+			emit(tk + c + ".java.tmpl", s.test(pkg).resolve(c + ".java"), base);
+		}
+		emit(tk + "KindsTest.tmpl", s.test(pkg).resolve(s.nebula() ? "M3ViewportKinds_Test.java" : "M3ViewportKindsTest.java"), base);
+	}
+
+	/** Nebula: the factories of widgets in other bundles, bound on stand-in hosts (their own tests are NOT_RUN without the bundle). */
+	void standIns(Side s, String tk, String pkg, Map<String, String> base, StringBuilder calls) throws IOException {
+		if (s.nebula()) {
+			Map<String, String> v = new LinkedHashMap<>(base);
+			v.put("@CALLS@", calls.toString());
+			emit(tk + "FactoriesTest.tmpl", s.test(pkg).resolve("M3ViewportFactories_Test.java"), v);
+		}
+	}
+
+	/** One adapter row: its typed factory (collected per family) and its contract test. */
+	void adapter(Side s, String tk, String pkg, Map<String, String> row, Map<String, StringBuilder> factories, StringBuilder standIns)
+			throws IOException {
+		Map<String, String> m = members.stream().filter(r -> r.get("concept").equals(row.get("concept"))).findFirst().orElseThrow();
+		String fam = pascal(m.get("family").toLowerCase());
+		Map<String, String> v = vars(s, m, fam);
+		v.put("@CLASS@", row.get("class")); v.put("@KIND@", row.get("measure")); v.put("@STYLE@", row.get("style"));
+		v.put("@FILL@", row.get("fill")); v.put("@TARGS@", row.get("args"));
+		aspects(v, m.get("family"), row.get("measure"));
+		String[] b = binding(s.nebula(), row.get("create"), row.get("class") + (row.get("args").isEmpty() ? "" : "<?>"));
+		v.put("@PARAM@", b[0]); v.put("@HOSTPARAM@", b[1]); v.put("@HOST@", b[2]);
+		factories.computeIfAbsent(fam, k -> new StringBuilder()).append(bind(template(tk + "Factory.tmpl"), v));
+		v.put("@CREATE@", bind(template(tk + "create/" + row.get("create") + ".tmpl"), v));
+		emit(tk + "AdapterTest.tmpl", s.test(pkg).resolve("M3" + v.get("@C@") + (s.nebula() ? "Viewport_Test.java" : "ViewportTest.java")), v);
+		standIn(tk, row.get("create"), v, standIns);
+	}
+
+	/** Reflect and class rows (Nebula widgets in other bundles) add a stand-in call: K cycles the three AUTO resolutions. */
+	void standIn(String tk, String create, Map<String, String> v, StringBuilder calls) throws IOException {
+		if (create.equals("reflect") || create.equals("class")) {
+			v.put("@K@", Long.toString(calls.chars().filter(ch -> ch == 10).count() % 3));
+			calls.append(bind(template(tk + "standin/" + create + ".tmpl"), v));
+		}
+	}
+
+	/** Provided aspects = the family's declared aspects that the measure kind can provide. */
+	void aspects(Map<String, String> v, String family, String kind) throws IOException {
+		List<String> planned = List.of(column("spec/FAMILIES.tsv", "family", family, "aspects").split(";"));
+		List<String> kindAspects = List.of(column("spec/ADAPTER_KINDS.tsv", "kind", kind, "aspects").split(";"));
+		List<String> provided = planned.stream().filter(kindAspects::contains).toList();
+		v.put("@ASPECTS@", String.join(" | ", provided.stream().map(a -> "M3ViewportAdapter." + a).toList()));
+		v.put("@ASPECTLIST@", String.join(" ", provided)); v.put("@PLANNED@", String.join(" ", planned));
+	}
+
+	String column(String file, String key, String value, String col) throws IOException {
+		return tsv(gen.resolve(file)).stream().filter(r -> r.get(key).equals(value)).findFirst().orElseThrow().get(col);
+	}
+
+	/** {factory parameter type, host parameter, host expression} per create kind of spec/ADAPTERS.tsv. */
+	static String[] binding(boolean nebula, String create, String cls) {
+		String control = nebula ? "org.eclipse.swt.widgets.Control" : "javax.swing.JComponent";
+		switch (create) {
+		case "control": case "shell": case "component": return new String[] { cls, "", "w" };
+		case "reflect": return new String[] { control, "", "w" };
+		case "root-pane": return new String[] { "javax.swing.JRootPane", "", "w" };
+		case "class": case "host": return new String[] { "Object", ", " + control + " host", "host" };
+		case "layout": return new String[] { cls, ", " + (nebula ? "org.eclipse.swt.widgets.Composite" : control) + " host", "host" };
+		default: return new String[] { cls, ", " + control + " host", "host" };
+		}
 	}
 
 	/** Desktop pixel probe over the first Nebula-generated member of every family. */

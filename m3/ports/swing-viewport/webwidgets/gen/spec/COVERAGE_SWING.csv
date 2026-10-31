@@ -90,6 +90,27 @@ JaCoCo Coverage Report,com.m3.swing.web.model,M3ReorderDragModel,0,18,0,0,0,5,0,
 JaCoCo Coverage Report,com.m3.swing.web.model,M3MessageListModel,0,18,0,0,0,5,0,2,0,2
 JaCoCo Coverage Report,com.m3.swing.web.model,M3WebViewModel,0,18,0,0,0,5,0,2,0,2
 JaCoCo Coverage Report,com.m3.swing.web.model,M3BackdropModel,0,18,0,0,0,5,0,2,0,2
+JaCoCo Coverage Report,com.m3.swing.web.adapter,M3ViewportAdapter,0,434,0,24,0,77,0,38,0,26
+JaCoCo Coverage Report,com.m3.swing.web.adapter,M3OverlayViewports,0,32,0,0,0,4,0,4,0,4
+JaCoCo Coverage Report,com.m3.swing.web.adapter,M3PickerViewports,0,16,0,0,0,2,0,2,0,2
+JaCoCo Coverage Report,com.m3.swing.web.adapter,M3ViewportKind.new M3ViewportKind() {...},0,69,0,4,0,7,0,9,0,7
+JaCoCo Coverage Report,com.m3.swing.web.adapter,M3ViewportKind.new M3ViewportKind() {...},0,23,0,2,0,3,0,4,0,3
+JaCoCo Coverage Report,com.m3.swing.web.adapter,M3ViewportKind.new M3ViewportKind() {...},0,35,0,0,0,4,0,4,0,4
+JaCoCo Coverage Report,com.m3.swing.web.adapter,M3ViewportKind.new M3ViewportKind() {...},0,48,0,4,0,6,0,8,0,6
+JaCoCo Coverage Report,com.m3.swing.web.adapter,M3ViewportKind.new M3ViewportKind() {...},0,16,0,0,0,3,0,3,0,3
+JaCoCo Coverage Report,com.m3.swing.web.adapter,M3ViewportKind.new M3ViewportKind() {...},0,35,0,2,0,4,0,5,0,4
+JaCoCo Coverage Report,com.m3.swing.web.adapter,M3ViewportKind.new M3ViewportKind() {...},0,36,0,0,0,4,0,4,0,4
+JaCoCo Coverage Report,com.m3.swing.web.adapter,M3ViewportKind.new M3ViewportKind() {...},0,25,0,0,0,4,0,4,0,4
+JaCoCo Coverage Report,com.m3.swing.web.adapter,M3ViewportKind.new M3ViewportKind() {...},0,36,0,2,0,4,0,5,0,4
+JaCoCo Coverage Report,com.m3.swing.web.adapter,M3CommandsViewports,0,40,0,0,0,5,0,5,0,5
+JaCoCo Coverage Report,com.m3.swing.web.adapter,M3AnimvalueViewports,0,8,0,0,0,1,0,1,0,1
+JaCoCo Coverage Report,com.m3.swing.web.adapter,M3SegmentsViewports,0,16,0,0,0,2,0,2,0,2
+JaCoCo Coverage Report,com.m3.swing.web.adapter,M3InputViewports,0,40,0,0,0,5,0,5,0,5
+JaCoCo Coverage Report,com.m3.swing.web.adapter,M3EmbedViewports,0,8,0,0,0,1,0,1,0,1
+JaCoCo Coverage Report,com.m3.swing.web.adapter,M3TokenViewports,0,48,0,0,0,6,0,6,0,6
+JaCoCo Coverage Report,com.m3.swing.web.adapter,M3ViewportKind,0,491,0,58,0,62,0,44,0,15
+JaCoCo Coverage Report,com.m3.swing.web.adapter,M3CollectionViewports,0,48,0,0,0,6,0,6,0,6
+JaCoCo Coverage Report,com.m3.swing.web.adapter,M3ContainerViewports,0,32,0,0,0,4,0,4,0,4
 JaCoCo Coverage Report,com.m3.swing.web,M3StatKpi,0,10,0,0,0,3,0,2,0,2
 JaCoCo Coverage Report,com.m3.swing.web,M3EmptyState,0,10,0,0,0,3,0,2,0,2
 JaCoCo Coverage Report,com.m3.swing.web,M3Stepper,0,10,0,0,0,3,0,2,0,2
