@@ -16,9 +16,9 @@ out=${OUT:-"$here/target/standalone"}
 junit=${JUNIT_OUT:-"$out.junit"}
 sep=':'; case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) sep=';' ;; esac
 win() { if command -v cygpath >/dev/null 2>&1; then cygpath -m "$1"; else printf '%s' "$1"; fi; }
-# JUnit Platform 1.11.4 + Jupiter 5.11.4 and their API dependencies, as vendored sources (classpath mode).
-JUNIT_SOURCES="opentest4j apiguardian-api junit-platform-commons-1.11.4 junit-platform-engine-1.11.4
-  junit-platform-launcher-1.11.4 junit-jupiter-api-5.11.4 junit-jupiter-engine-5.11.4"
+# JUnit Platform 1.10.2 + Jupiter 5.10.2 (the family M3jdk21 keeps, M3jdk21 PR 2199) and their API dependencies, as vendored sources (classpath mode).
+JUNIT_SOURCES="opentest4j apiguardian-api junit-platform-commons-1.10.2 junit-platform-engine-1.10.2
+  junit-platform-launcher-1.10.2 junit-jupiter-api-5.10.2 junit-jupiter-engine-5.10.2"
 
 vendored_junit() {
   [ -f "$junit/.complete" ] && return 0
@@ -27,7 +27,7 @@ vendored_junit() {
     [ -d "$vendor/$d/src/main/java" ] || { echo "missing vendored source: m3/vendor/third_party/$d" >&2; exit 3; }
     find "$vendor/$d/src/main/java" -name '*.java' ! -name module-info.java
   done | while read -r f; do win "$f"; echo; done > "$junit.txt"
-  # JUnit 5.11 targets Java 8: its ObjectInputStream.GetField uses predate the JDK 21 throws clause, hence --release 17
+  # JUnit 5.10 targets Java 8: its ObjectInputStream.GetField uses predate the JDK 21 throws clause, hence --release 17
   "$jdk/bin/javac" -J-Xmx768m --release 17 -nowarn -encoding UTF-8 -d "$(win "$junit")" @"$(win "$junit.txt")"
   for d in $JUNIT_SOURCES; do
     if [ -d "$vendor/$d/src/main/resources" ]; then cp -r "$vendor/$d/src/main/resources/." "$junit/"; fi
