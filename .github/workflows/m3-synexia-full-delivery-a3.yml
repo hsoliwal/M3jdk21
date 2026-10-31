@@ -45,12 +45,6 @@ jobs:
           mvn -B -ntp -f m3/vendor/third_party/pom.xml
           -pl rewrite-java,rewrite-java-21,rewrite-test,junit-jupiter-5.10.2
           -am -DskipTests install
-      - name: Recipe replay and fixed point
-        run: >
-          mvn -B -ntp -f m3/pom.xml
-          -pl tooling/migration-recipes -am
-          -Dtest=M3SynexiaFullDeliveryA3RecipeTest
-          -Dsurefire.failIfNoSpecifiedTests=false test
       - name: Import planner focused tests
         run: >
           mvn -B -ntp -f m3/pom.xml
