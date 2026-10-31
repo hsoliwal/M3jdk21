@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 check	refutation	commons	input	expected	actual	result
-R4_TRANSFORMING_HOOK	R4	map.TransformedMap	java.util.Set<java.util.Map.Entry<K, V>> entrySet()	MANUAL	MANUAL	PASS
+R4_TRANSFORMING_HOOK	R4	map.TransformedMap	java.util.Set<java.util.Map.Entry<K, V>> entrySet()	CHECKED_ENTRY_SET	CHECKED_ENTRY_SET	PASS
+R4_UNEMITTED_HOOK	R4	map.TransformedMap	java.util.Set<java.util.Map.Entry<K, V>> entrySet() with checkSetValue not emitted	MANUAL	MANUAL	PASS
 R4_VALIDATING_HOOK	R4	map.PredicatedMap	java.util.Set<java.util.Map.Entry<K, V>> entrySet()	CHECKED_ENTRY_SET	CHECKED_ENTRY_SET	PASS
 R5_SELF_LOCK	R5	collection.SynchronizedCollection	collection.SynchronizedCollection constructor arity 1	MANUAL	MANUAL	PASS
 R5_LOCK_PARAMETER	R5	collection.SynchronizedCollection	collection.SynchronizedCollection constructor arity 2	LANES_CONSTRUCTOR	LANES_CONSTRUCTOR	PASS

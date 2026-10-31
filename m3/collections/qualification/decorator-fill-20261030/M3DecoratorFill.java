@@ -458,6 +458,24 @@ public final class M3DecoratorFill {
     }
 
     /**
+     * v1.5: a simple class name as the Commons source that declares the current atom resolves it:
+     * the decorator's own package first, then a single-type import of that source (for example
+     * {@code set.TransformedSet} in {@code bag.TransformedBag}, which also declares the
+     * {@code uniqueSet()} of its subclass {@code TransformedSortedBag}).
+     */
+    private Optional<Class<?>> imported(String simple) throws IOException {
+        Optional<Class<?>> local = load(commons.getPackageName() + "." + simple);
+        if (local.isPresent()) {
+            return local;
+        }
+        Class<?> declaring = declaringNow == null ? commons : declaringNow;
+        Matcher m = Pattern.compile("(?m)^import\\s+(org\\.apache\\.commons\\.collections4"
+                + "\\.[\\w.]+\\." + Pattern.quote(simple) + ")\\s*;")
+                .matcher(source(declaring).orElse(""));
+        return m.find() ? load(m.group(1)) : Optional.empty();
+    }
+
+    /**
      * Comment-stripped source of the top-level class that encloses c (cached); empty when the
      * sources lack it.
      */
@@ -1381,6 +1399,14 @@ public final class M3DecoratorFill {
             rest = rest.substring(m.end()).trim();
             m = LANE_CHECK.matcher(rest);
         }
+        // v1.5: the transforming hook (TransformedMap.checkSetValue): the lane's result is returned
+        Matcher hook = Pattern.compile("^return (\\w+)\\.apply\\((\\w+)\\);$").matcher(rest);
+        if (out.isEmpty() && hook.matches() && isTransformerLane(hook.group(1))
+                && names.contains(hook.group(2))
+                && ps[names.indexOf(hook.group(2))].getTypeName().equals(returnType)) {
+            return Optional.of("return " + hook.group(1) + ".apply("
+                    + rename.get(hook.group(2)) + ");");
+        }
         Matcher r = Pattern.compile("return (\\w+);").matcher(rest);
         boolean voidOk = rest.isEmpty() && returnType.equals("void");
         boolean returnOk = r.matches() && names.contains(r.group(1))
@@ -1509,8 +1535,267 @@ public final class M3DecoratorFill {
                 return Optional.of(
                         checkedEntrySet(a, checked.group(1)).orElse(new Emit("MANUAL", body)));
             }
+            return transformShape(a, body, names);
         } catch (IOException e) {
             return Optional.of(new Emit("MANUAL", body + " (" + e + ")"));
+        }
+    }
+
+    private static final Pattern TRANSFORM_ARG =
+            Pattern.compile("transform(Key|Value|Map)?\\((\\w+)\\)");
+
+    /**
+     * v1.5: a policy lane of this class (or, for a nested helper, its owner) of Transformer type.
+     * laneType() stores the deprecated Commons Transformer as its java.util.function.Function
+     * supertype, so both spellings are a transformer lane.
+     */
+    private boolean isTransformerLane(String lane) {
+        M3DecoratorFill o = outer != null ? outer : this;
+        String t = o.laneTypes.get(lane);
+        return t != null && (t.startsWith("org.apache.commons.collections4.Transformer<")
+                || t.startsWith("java.util.function.Function<"));
+    }
+
+    /** The owner class's type parameter names (E, or K and V). */
+    private String[] typeParamNames() {
+        M3DecoratorFill o = outer != null ? outer : this;
+        return Arrays.stream(o.commons.getTypeParameters())
+                .map(java.lang.reflect.TypeVariable::getName).toArray(String[]::new);
+    }
+
+    /**
+     * v1.5: {@code name} is a static factory of {@code c} whose whole body is the plain
+     * constructor call over its parameters ({@code return new C<>(p0, p1);}), such as Commons
+     * {@code transformingSet}: the same view as {@code new C<>(..)}.
+     */
+    private boolean plainNewFactory(Class<?> c, String name, int arity) throws IOException {
+        Optional<Method> m = Arrays.stream(c.getDeclaredMethods())
+                .filter(x -> x.getName().equals(name) && Modifier.isStatic(x.getModifiers())
+                        && x.getParameterCount() == arity)
+                .findFirst();
+        if (m.isEmpty()) {
+            return false;
+        }
+        Optional<String> b = memberBody(m.get());
+        if (b.isEmpty()) {
+            return false;
+        }
+        String body = b.get().substring(0, b.get().indexOf('\u0000'));
+        String params = b.get().substring(b.get().indexOf('\u0000') + 1).replace(",", ", ");
+        return body.equals("return new " + c.getSimpleName() + "<>(" + params + ");");
+    }
+
+    /**
+     * v1.5 TRANSFORMED family. TRANSFORM_DELEGATE: parameters pass through a lane transform and
+     * the call delegates, inline ({@code return decorated().m(transform(p), q);}) or assigned
+     * first ({@code p = transform(p); decorated().m(p, q);}). The transform members are emitted
+     * once per class (TRANSFORM_* lane members). TRANSFORMED_FACTORY: the static factory that
+     * also transforms the existing contents (toArray, clear, add each; or transformMap, clear,
+     * putAll), which FACTORY_NEW must never match.
+     */
+    private Optional<Emit> transformShape(Atom a, String body, List<String> names)
+            throws IOException {
+        if (Arrays.stream(typeParamNames()).count() == 0
+                || !(isTransformerLane("transformer")
+                || isTransformerLane("keyTransformer") && isTransformerLane("valueTransformer"))) {
+            return Optional.empty();
+        }
+        if (a.isStatic) {
+            return transformedFactory(a, body, names);
+        }
+        String call = body;
+        Matcher asg = Pattern.compile("^((?:\\w+ = transform(?:Key|Value|Map)?\\(\\w+\\); )+)"
+                + "((?:return )?decorated\\(\\)\\.\\w+\\([^()]*\\);)$").matcher(body);
+        if (asg.matches()) {
+            call = asg.group(2);
+            for (String st : asg.group(1).trim().replaceAll(";$", "").split("; ")) {
+                String p = st.substring(0, st.indexOf(" = "));
+                String wrapped = st.substring(st.indexOf(" = ") + 3);
+                if (!wrapped.endsWith("(" + p + ")") || !names.contains(p)) {
+                    return Optional.empty();
+                }
+                call = call.replaceAll("\\b" + p + "\\b", Matcher.quoteReplacement(wrapped));
+            }
+        }
+        String arg = "(?:[^(),]+|transform(?:Key|Value|Map)?\\(\\w+\\))";
+        Matcher m = Pattern.compile("^(return )?decorated\\(\\)\\.(\\w+)\\((" + arg + "?(?:, "
+                + arg + ")*)\\);$").matcher(call);
+        if (!m.matches() || !m.group(2).equals(a.name)
+                || (m.group(1) != null) == ret(a).isEmpty()) {
+            return Optional.empty();
+        }
+        List<String> given = m.group(3).isEmpty() ? List.of() : List.of(m.group(3).split(", "));
+        if (given.size() != names.size()) {
+            return Optional.empty();
+        }
+        List<String> out = new ArrayList<>();
+        Set<String> needed = new LinkedHashSet<>();
+        for (int i = 0; i < names.size(); i++) {
+            Matcher t = TRANSFORM_ARG.matcher(given.get(i));
+            if (t.matches()) {
+                if (!t.group(2).equals(names.get(i))) {
+                    return Optional.empty();
+                }
+                String kind = t.group(1) == null ? "" : t.group(1);
+                Optional<List<String>> h = transformHelpers(kind, a.params.get(i)[0]);
+                if (h.isEmpty()) {
+                    return Optional.empty();
+                }
+                needed.addAll(h.get());
+                out.add("transform" + kind + "(arg" + i + ")");
+            } else if (given.get(i).equals(names.get(i))) {
+                out.add("arg" + i);
+            } else {
+                return Optional.empty();
+            }
+        }
+        if (needed.isEmpty()) {
+            return Optional.empty();
+        }
+        M3DecoratorFill o = outer != null ? outer : this;
+        needed.forEach(h -> o.helpers.put(h, transformHelperText(h)));
+        return Optional.of(new Emit("TRANSFORM_DELEGATE",
+                ret(a) + "backing." + a.name + "(" + String.join(", ", out) + ");"));
+    }
+
+    /** The TRANSFORM_* lane members a wrapped parameter needs, by lane kind and parameter type. */
+    private Optional<List<String>> transformHelpers(String kind, String paramType) {
+        String[] tp = typeParamNames();
+        switch (kind) {
+            case "":
+                if (!isTransformerLane("transformer") || tp.length != 1) {
+                    return Optional.empty();
+                }
+                if (paramType.equals(tp[0])) {
+                    return Optional.of(List.of("TRANSFORM_ELEMENT"));
+                }
+                return paramType.startsWith("java.util.Collection<")
+                        ? Optional.of(List.of("TRANSFORM_ELEMENT", "TRANSFORM_COLLECTION"))
+                        : Optional.empty();
+            case "Key":
+                return isTransformerLane("keyTransformer") && tp.length == 2
+                        && paramType.equals(tp[0]) ? Optional.of(List.of("TRANSFORM_KEY"))
+                        : Optional.empty();
+            case "Value":
+                return isTransformerLane("valueTransformer") && tp.length == 2
+                        && paramType.equals(tp[1]) ? Optional.of(List.of("TRANSFORM_VALUE"))
+                        : Optional.empty();
+            case "Map":
+                return isTransformerLane("keyTransformer") && isTransformerLane("valueTransformer")
+                        && tp.length == 2 && paramType.startsWith("java.util.Map<")
+                        ? Optional.of(List.of("TRANSFORM_KEY", "TRANSFORM_VALUE", "TRANSFORM_MAP"))
+                        : Optional.empty();
+            default:
+                return Optional.empty();
+        }
+    }
+
+    /**
+     * The TRANSFORM_* lane member source (one blank line first), over the owner's type parameter
+     * names.
+     */
+    private String transformHelperText(String key) {
+        String[] tp = typeParamNames();
+        String e = tp[0];
+        String k = tp[0];
+        String v = tp.length > 1 ? tp[1] : "V";
+        return "\n" + switch (key) {
+            case "TRANSFORM_ELEMENT" ->
+                "    /** TRANSFORM lane member: one element through the {@code transformer}"
+                + " lane. */\n"
+                + "    private " + e + " transform(final " + e + " object) {\n"
+                + "        return transformer.apply(object);\n    }\n";
+            case "TRANSFORM_COLLECTION" ->
+                "    /**\n     * TRANSFORM lane member: every element through the lane, in"
+                + " iteration order, into a new list.\n     */\n"
+                + "    private java.util.Collection<" + e + "> transform("
+                + "final java.util.Collection<? extends " + e + "> coll) {\n"
+                + "        final java.util.List<" + e + "> list = "
+                + "new java.util.ArrayList<>(coll.size());\n"
+                + "        for (final " + e + " item : coll) {\n"
+                + "            list.add(transform(item));\n"
+                + "        }\n        return list;\n    }\n";
+            case "TRANSFORM_KEY" ->
+                "    /** TRANSFORM lane member: a key through the {@code keyTransformer} lane;"
+                + " identity without a lane. */\n"
+                + "    private " + k + " transformKey(final " + k + " object) {\n"
+                + "        return keyTransformer == null ? object"
+                + " : keyTransformer.apply(object);\n"
+                + "    }\n";
+            case "TRANSFORM_VALUE" ->
+                "    /** TRANSFORM lane member: a value through the {@code valueTransformer}"
+                + " lane; identity without a lane. */\n"
+                + "    private " + v + " transformValue(final " + v + " object) {\n"
+                + "        return valueTransformer == null ? object"
+                + " : valueTransformer.apply(object);\n"
+                + "    }\n";
+            case "TRANSFORM_MAP" ->
+                "    /**\n     * TRANSFORM lane member: a copy of the map with both lanes"
+                + " applied, in iteration order; the copy is a\n     * JDK LinkedHashMap (the"
+                + " provider uses its own insertion-ordered map; both keep that order).\n"
+                + "     */\n"
+                + "    @SuppressWarnings(\"unchecked\")\n"
+                + "    private java.util.Map<" + k + ", " + v + "> transformMap("
+                + "final java.util.Map<? extends " + k + ", ? extends " + v + "> map) {\n"
+                + "        if (map.isEmpty()) {\n            return (java.util.Map<" + k + ", " + v
+                + ">) map;\n        }\n"
+                + "        final java.util.Map<" + k + ", " + v + "> result = new"
+                + " java.util.LinkedHashMap<>(map.size());\n"
+                + "        for (final java.util.Map.Entry<? extends " + k + ", ? extends " + v
+                + "> entry : map.entrySet()) {\n"
+                + "            result.put(transformKey(entry.getKey()),"
+                + " transformValue(entry.getValue()));\n        }\n        return result;\n    }\n";
+            default -> throw new IllegalArgumentException(key);
+        };
+    }
+
+    /**
+     * TRANSFORMED_FACTORY: the Commons factory that decorates and then transforms the existing
+     * contents through the backing (toArray, clear, add each transformed value; maps: transformMap,
+     * clear, putAll). Emitted over the owned class and its backing field.
+     */
+    private Optional<Emit> transformedFactory(Atom a, String body, List<String> names) {
+        String self = commons.getSimpleName();
+        String tps = "<" + String.join(", ", typeParamNames()) + ">";
+        Matcher coll = Pattern.compile("^final " + self + "<[^>]+> decorated = new " + self
+                + "<>\\((\\w+), (\\w+)\\); if \\(!\\1\\.isEmpty\\(\\)\\) \\{ "
+                + "(?:@SuppressWarnings\\(\"unchecked\"\\) )?final (\\w+)\\[\\] values = "
+                + "\\(\\3\\[\\]\\) \\1\\.toArray\\(\\); \\1\\.clear\\(\\); "
+                + "for \\(final \\3 value : values\\) \\{ "
+                + "decorated\\.decorated\\(\\)\\.add\\(\\2\\.apply\\(value\\)\\); \\} \\}"
+                + " return decorated;$").matcher(body);
+        if (coll.matches() && names.equals(List.of(coll.group(1), coll.group(2)))
+                && isTransformerLane("transformer")) {
+            String e = coll.group(3);
+            return Optional.of(new Emit("TRANSFORMED_FACTORY",
+                    "final " + m3Simple + tps + " decorated = new " + m3Simple + "<>(arg0, arg1);\n"
+                    + "        if (!arg0.isEmpty()) {\n"
+                    + "            @SuppressWarnings(\"unchecked\")\n"
+                    + "            final " + e + "[] values = (" + e + "[]) arg0.toArray();\n"
+                    + "            arg0.clear();\n"
+                    + "            for (final " + e + " value : values) {\n"
+                    + "                decorated.backing.add(arg1.apply(value));\n"
+                    + "            }\n        }\n        return decorated;"));
+        }
+        Matcher map = Pattern.compile("^final " + self + "<[^>]+> decorated = new " + self
+                + "<>\\((\\w+), (\\w+), (\\w+)\\); if \\(!\\1\\.isEmpty\\(\\)\\) \\{ "
+                + "final Map<K, V> transformed = decorated\\.transformMap\\(\\1\\); "
+                + "decorated\\.clear\\(\\); "
+                + "decorated\\.decorated\\(\\)\\.putAll\\(transformed\\); \\} return decorated;$")
+                .matcher(body);
+        if (map.matches() && names.equals(List.of(map.group(1), map.group(2), map.group(3)))
+                && isTransformerLane("keyTransformer") && isTransformerLane("valueTransformer")) {
+            List.of("TRANSFORM_KEY", "TRANSFORM_VALUE", "TRANSFORM_MAP")
+                    .forEach(h -> helpers.put(h, transformHelperText(h)));
+            return Optional.of(new Emit("TRANSFORMED_FACTORY",
+                    "final " + m3Simple + tps + " decorated = new " + m3Simple
+                    + "<>(arg0, arg1, arg2);\n"
+                    + "        if (!arg0.isEmpty()) {\n"
+                    + "            final java.util.Map" + tps + " transformed = "
+                    + "decorated.transformMap(arg0);\n"
+                    + "            decorated.clear();\n"
+                    + "            decorated.backing.putAll(transformed);\n"
+                    + "        }\n        return decorated;"));
         }
         return Optional.empty();
     }
@@ -1608,6 +1893,25 @@ public final class M3DecoratorFill {
                     && ownFactoryIsNew()) {
                 return new Emit("LANE_VIEW/self", "return new " + m3Simple + "<>(" + delegated
                         + ");");
+            }
+            // v1.5: the class's own, or a same-package sibling's, plain-constructor factory
+            // (Commons transformingX) is the same view as new X<>(..)
+            int arity = lanes.size() + 1;
+            if (plainNewFactory(commons, w, arity)) {
+                return new Emit("LANE_VIEW/self", "return new " + m3Simple + "<>(" + delegated
+                        + ");");
+            }
+            Matcher sf = Pattern.compile("^(\\w+)\\.(\\w+)$").matcher(w);
+            if (sf.matches()) {
+                Optional<Class<?>> sc = imported(sf.group(1))
+                        .filter(c -> !Modifier.isAbstract(c.getModifiers()));
+                if (sc.isPresent() && plainNewFactory(sc.get(), sf.group(2), arity)) {
+                    Optional<String> h = siblingHelper(sc.get(), lanes);
+                    if (h.isPresent()) {
+                        return new Emit("LANE_VIEW/sibling", "return new " + h.get() + "<>("
+                                + delegated + ");");
+                    }
+                }
             }
             Optional<Class<?>> sibling = w.matches("new \\w+<>")
                     ? siblingSuper(w.substring(4, w.length() - 2)) : Optional.empty();
@@ -2671,7 +2975,8 @@ public final class M3DecoratorFill {
         private Optional<List<String>> factoryDoc(Parsed p, com.sun.source.tree.ClassTree cls,
                 com.sun.source.tree.MethodTree m, Noun noun) {
             String name = m.getName().toString();
-            String kind = name.replaceFirst("^(predicated|synchronized|unmodifiable).*", "$1");
+            String kind = name.replaceFirst(
+                    "^(predicated|synchronized|unmodifiable|transformed|transforming).*", "$1");
             List<String> params = m.getParameters().stream().map(
                     v -> v.getName().toString()).toList();
             if (!m.getModifiers().getFlags().contains(javax.lang.model.element.Modifier.STATIC)
@@ -2721,6 +3026,16 @@ public final class M3DecoratorFill {
                 case "synchronized" -> doc.add("Returns a synchronized (thread-safe) " + noun.name()
                         + " backed by the specified "
                         + noun.name() + ".");
+                case "transformed" -> doc.add("Returns a transformed " + noun.name()
+                        + " backed by the specified " + noun.name() + "; the "
+                        + (map ? "keys and values" : "elements") + " it already contains are"
+                        + " transformed in place, and those " + (map ? "put" : "added")
+                        + " through the returned " + noun.name() + " are transformed first.");
+                case "transforming" -> doc.add("Returns a transforming " + noun.name()
+                        + " backed by the specified " + noun.name() + "; "
+                        + (map ? "keys and values put" : "elements added") + " through the"
+                        + " returned " + noun.name() + " are transformed first, and those it"
+                        + " already contains are left as they are.");
                 default -> doc.add("Returns an unmodifiable view of the specified " + noun.name()
                         + ".");
             }
@@ -2738,11 +3053,19 @@ public final class M3DecoratorFill {
                 }
                 String lane = facts.lanes().getOrDefault(toCtor.apply(param), "");
                 String typeText = m.getParameters().get(params.indexOf(param)).getType().toString();
+                String what = lane.startsWith("key") ? "key" : lane.startsWith("value") ? "value"
+                        : "element";
+                if (typeText.contains("Transformer") && !lane.isEmpty()) {
+                    // a transformer lane may be null only where the constructor does not check it
+                    boolean nullable = !facts.nonNull().contains(toCtor.apply(param));
+                    doc.add("@param " + param + " the transformer applied to each " + what
+                            + (nullable ? ", or {@code null} to leave the " + what + "s as they are"
+                            : ""));
+                    continue;
+                }
                 if (!typeText.contains("Predicate") || lane.isEmpty()) {
                     return Optional.empty();
                 }
-                String what = lane.startsWith("key") ? "key" : lane.startsWith("value") ? "value"
-                        : "element";
                 boolean nullable = !facts.nonNull().contains(toCtor.apply(param))
                         && p.text().contains(lane + " != null && !" + lane + ".test(");
                 doc.add("@param " + param + " the predicate that each " + what + " must satisfy"
@@ -2752,6 +3075,10 @@ public final class M3DecoratorFill {
                 case "predicated" -> "@return a new predicated " + noun.name()
                         + " backed by {@code " + first + "}";
                 case "synchronized" -> "@return a new synchronized " + noun.name()
+                        + " backed by {@code " + first + "}";
+                case "transformed" -> "@return a new transformed " + noun.name()
+                        + " backed by {@code " + first + "}";
+                case "transforming" -> "@return a new transforming " + noun.name()
                         + " backed by {@code " + first + "}";
                 default -> passThrough[0] ? "@return an unmodifiable view of {@code " + first
                         + "}, or {@code " + first
@@ -3038,8 +3365,12 @@ public final class M3DecoratorFill {
                     new ArrayList<>(
                     List.of("check\trefutation\tcommons\tinput\texpected\tactual\tresult"));
             String entrySet = "java.util.Set<java.util.Map.Entry<K, V>> entrySet()";
+            // v1.5: the transforming hook (return L.apply(value);) is an emitted lane member
             rows.add(
                     real(sources, "R4_TRANSFORMING_HOOK", "R4", "map.TransformedMap", entrySet,
+                    "CHECKED_ENTRY_SET"));
+            rows.add(
+                    unemittedHook(sources, "R4_UNEMITTED_HOOK", "map.TransformedMap", entrySet,
                     "MANUAL"));
             rows.add(
                     real(sources, "R4_VALIDATING_HOOK", "R4", "map.PredicatedMap", entrySet,
@@ -3118,6 +3449,20 @@ public final class M3DecoratorFill {
                 String sig, String expected) {
             return row(id, refutation, fqn, sig, expected,
                     guarded(() -> generator(sources, fqn).classify(atom("public", sig)).category));
+        }
+
+        /**
+         * R4 case with the checkSetValue hook recorded as not emitted (empty member): the
+         * entrySet view must stay MANUAL.
+         */
+        private static String unemittedHook(Path sources, String id, String fqn, String sig,
+                String expected) {
+            return row(id, "R4", fqn, sig + " with checkSetValue not emitted", expected,
+                    guarded(() -> {
+                        M3DecoratorFill g = generator(sources, fqn);
+                        g.members.put("checkSetValue/1", "");
+                        return g.classify(atom("public", sig)).category;
+                    }));
         }
 
         private static String synthetic(Path sources, String id, String fqn, String sig,
