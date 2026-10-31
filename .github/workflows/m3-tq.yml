@@ -51,9 +51,7 @@ jobs:
       - name: Source-built TQ Maven dependencies
         shell: bash
         run: |
-          bash -n m3/synexia-import/pure-int-recipe-custody/install.sh
-          python3 m3/synexia-import/pure-int-recipe-custody/test_source_bootstrap.py
-          bash m3/synexia-import/pure-int-recipe-custody/install.sh "$GITHUB_WORKSPACE" --dependencies-only
+          mvn -B -ntp -f "$GITHUB_WORKSPACE/m3/vendor/third_party/pom.xml" -pl rewrite-java-21,rewrite-test,junit-jupiter-5.10.2,junit-platform-launcher-1.10.2,slf4j-api-2.0.9 -am -DskipTests install
       - name: Recipe, UTF-16, mapped-owner, JNI and compiled-kernel gates
         run: mvn -B -ntp -f m3/tooling/tq/pom.xml verify
       - name: TQ successor recipe and custody

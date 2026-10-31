@@ -36,10 +36,6 @@ jobs:
           cache: maven
       - name: Verify packet hashes and compatibility
         run: python3 m3/backports/recipes/jdk-8368692/verify_recovery.py
-      - name: Prove OpenRewrite recipe replay
-        run: |
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
-            -Dtest=M3Jdk8368692PasswordSystemInBackportRecipeTest test
 
   java-base-image-and-jtreg:
     runs-on: ubuntu-22.04

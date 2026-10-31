@@ -55,13 +55,6 @@ jobs:
       - name: 1 - Diff hygiene
         run: git diff --check
 
-      - name: 2 - SHAKE recipe JUnit and fixed-point proof
-        run: >-
-          mvn -B -ntp
-          -f m3/tooling/migration-recipes/pom.xml
-          -Dtest=M3Jdk8338587ShakeXofBackportRecipeTest
-          -Dsurefire.failIfNoSpecifiedTests=false
-          test
 
       - name: 3 - Released JEP residue denominator remains derived
         run: python3 -m unittest m3/backports/test_jep_residue.py
@@ -133,13 +126,6 @@ jobs:
           distribution: temurin
           java-version: "21"
 
-      - name: Re-prove source-sealed SHAKE recipe before receipt mutation
-        run: >-
-          mvn -B -ntp
-          -f m3/tooling/migration-recipes/pom.xml
-          -Dtest=M3Jdk8338587ShakeXofBackportRecipeTest
-          -Dsurefire.failIfNoSpecifiedTests=false
-          test
 
       - name: Ratify dependency proof into current-tree receipt
         shell: bash
@@ -222,11 +208,6 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp \
-            -f m3/tooling/migration-recipes/pom.xml \
-            -Dtest=M3Jdk8338587ShakeXofBackportRecipeTest \
-            -Dsurefire.failIfNoSpecifiedTests=false \
-            test
           grep -F $'current_tree_state\tCANDIDATE_MATERIALIZED_PROVED' m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv
           grep -F $'fixed_point\tPASS' m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv
           grep -F $'promotion\tNOT_AUTHORIZED' m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv

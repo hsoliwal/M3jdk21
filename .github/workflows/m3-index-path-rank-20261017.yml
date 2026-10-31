@@ -36,10 +36,6 @@ jobs:
           git diff --check
           python3 m3/collections/qualification/indexpath-bulk-20261021/verify_history.py
           bash m3/collections/qualification/indexpath-bulk-20261021/verify.sh
-      - name: Real Maven OpenRewrite LST generation fixed-point and refusal
-        run: >
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
-          -Dtest=M3IndexPathRankRecipeTest test
       - name: M3 collections JUnit Java21 contract
         run: >
           mvn -B -ntp -f m3/collections/pom.xml

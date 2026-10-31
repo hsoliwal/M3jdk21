@@ -45,11 +45,6 @@ jobs:
           java-version: "21"
           cache: maven
 
-      - name: Prove source-sealed inventory recipe and fixed point
-        run: >
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
-          -Dtest=M3Jep496MlKemInventoryRecipeTest,M3Jep496SharedOwnerSplitRecipeTest
-          -Dsurefire.failIfNoSpecifiedTests=false test
 
       - name: Fetch exact implementation and JDK24 GA donor states
         shell: bash

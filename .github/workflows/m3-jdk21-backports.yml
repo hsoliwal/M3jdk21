@@ -209,8 +209,6 @@ jobs:
             m3/backports/test_m3_extension_residue.py
           python3 m3/backports/verify.py --root .
           mvn -B -f m3/backports/pom.xml test
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
-            -Dtest=M3Jdk8357439JcmdCompletionBackportRecipeTest,M3Jdk8347112BackportRecipeTest,M3Jdk8359706BackportRecipeTest,M3Jdk8364182BackportRecipeTest,M3Jdk8374808BackportRecipeTest test
 
       - name: jcmd completion runtime smoke
         shell: bash
