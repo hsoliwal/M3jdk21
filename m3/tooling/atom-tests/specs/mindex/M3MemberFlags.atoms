@@ -1,0 +1,107 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+// Atoms of M3MemberFlags.java. Oracle: java.lang.reflect member predicates over JDK classes plus literal expectations.
+#class M3MemberFlagsAtomTest
+#summary Per-atom contracts of jdk.internal.mindex.M3MemberFlags against java.lang.reflect member predicates
+#import jdk.internal.mindex.M3MemberFlags java.lang.reflect.Constructor java.lang.reflect.Field java.lang.reflect.Method java.lang.reflect.RecordComponent java.util.Arrays java.util.List java.util.function.Consumer
+#helper <<<
+    /** Number of named member flags. */
+    private static final int FLAG_COUNT = 6;
+    /** Components of {@link Pair}. */
+    private static final int PAIR_COMPONENTS = 2;
+
+    record Pair(String left, int right) { }
+
+    private static final List<Class<?>> CORPUS = List.of(String.class, Thread.State.class, ProcessBuilder.class,
+            java.util.ArrayList.class, Iterable.class, Integer.class, Pair.class, M3MemberFlagsAtomTest.class);
+
+    private static void assertNamedFlags() {
+        int[] named = {M3MemberFlags.SYNTHETIC, M3MemberFlags.BRIDGE, M3MemberFlags.VARARGS,
+                M3MemberFlags.DEFAULT_METHOD, M3MemberFlags.ENUM_CONSTANT, M3MemberFlags.RECORD_COMPONENT};
+        assertEquals(FLAG_COUNT, named.length);
+        int union = 0;
+        for (int flag : named) {
+            assertEquals(1, Integer.bitCount(flag), "single-bit flag " + flag);
+            assertEquals(0, union & flag, "distinct flag " + flag);
+            union |= flag;
+        }
+    }
+>>>
+
+@atom M3MemberFlags.M3MemberFlags 1 UTILITY_CTOR java.lang.reflect.Modifier
+type = M3MemberFlags
+
+@atom M3MemberFlags.of 1 SCENARIO java.lang.reflect.Field.isSynthetic/isEnumConstant
+setup <<<
+assertNamedFlags();
+Field enumConstant = Thread.State.class.getField("NEW");
+Field values = Thread.State.class.getDeclaredField("$VALUES");
+>>>
+check <<<
+for (Class<?> c : CORPUS) {
+    for (Field f : c.getDeclaredFields()) {
+        int expected = (f.isSynthetic() ? M3MemberFlags.SYNTHETIC : 0)
+                | (f.isEnumConstant() ? M3MemberFlags.ENUM_CONSTANT : 0);
+        assertEquals(expected, M3MemberFlags.of(f), f.toString());
+    }
+}
+assertEquals(M3MemberFlags.ENUM_CONSTANT, M3MemberFlags.of(enumConstant));
+assertEquals(M3MemberFlags.SYNTHETIC, M3MemberFlags.of(values));
+assertEquals(0, M3MemberFlags.of(Integer.class.getField("MAX_VALUE")));
+M3AtomKit.expectMessage(NullPointerException.class, "field", () -> M3MemberFlags.of((Field) null));
+>>>
+
+@atom M3MemberFlags.of 2 SCENARIO java.lang.reflect.Method.isSynthetic/isBridge/isVarArgs/isDefault
+setup <<<
+Method bridge = String.class.getDeclaredMethod("compareTo", Object.class);
+Method varargs = String.class.getMethod("format", String.class, Object[].class);
+Method defaultMethod = Iterable.class.getMethod("forEach", Consumer.class);
+Runnable lambda = () -> { };
+lambda.run();
+Method lambdaBody = Arrays.stream(M3MemberFlagsAtomTest.class.getDeclaredMethods())
+        .filter(m -> m.isSynthetic() && m.getName().startsWith("lambda$")).findFirst().orElseThrow();
+>>>
+check <<<
+for (Class<?> c : CORPUS) {
+    for (Method m : c.getDeclaredMethods()) {
+        int expected = (m.isSynthetic() ? M3MemberFlags.SYNTHETIC : 0) | (m.isBridge() ? M3MemberFlags.BRIDGE : 0)
+                | (m.isVarArgs() ? M3MemberFlags.VARARGS : 0) | (m.isDefault() ? M3MemberFlags.DEFAULT_METHOD : 0);
+        assertEquals(expected, M3MemberFlags.of(m), m.toString());
+    }
+}
+assertEquals(M3MemberFlags.SYNTHETIC | M3MemberFlags.BRIDGE, M3MemberFlags.of(bridge));
+assertEquals(M3MemberFlags.VARARGS, M3MemberFlags.of(varargs));
+assertEquals(M3MemberFlags.DEFAULT_METHOD, M3MemberFlags.of(defaultMethod));
+assertEquals(M3MemberFlags.SYNTHETIC, M3MemberFlags.of(lambdaBody));
+assertEquals(0, M3MemberFlags.of(Object.class.getMethod("hashCode")));
+M3AtomKit.expectMessage(NullPointerException.class, "method", () -> M3MemberFlags.of((Method) null));
+>>>
+
+@atom M3MemberFlags.of 3 SCENARIO java.lang.reflect.Constructor.isSynthetic/isVarArgs
+setup <<<
+Constructor<?> varargs = ProcessBuilder.class.getConstructor(String[].class);
+Constructor<?> plain = String.class.getConstructor();
+>>>
+check <<<
+for (Class<?> c : CORPUS) {
+    for (Constructor<?> k : c.getDeclaredConstructors()) {
+        int expected = (k.isSynthetic() ? M3MemberFlags.SYNTHETIC : 0) | (k.isVarArgs() ? M3MemberFlags.VARARGS : 0);
+        assertEquals(expected, M3MemberFlags.of(k), k.toString());
+    }
+}
+assertEquals(M3MemberFlags.VARARGS, M3MemberFlags.of(varargs));
+assertEquals(0, M3MemberFlags.of(plain));
+M3AtomKit.expectMessage(NullPointerException.class, "constructor", () -> M3MemberFlags.of((Constructor<?>) null));
+>>>
+
+@atom M3MemberFlags.of 4 SCENARIO java.lang.reflect.RecordComponent
+setup <<<
+RecordComponent[] components = Pair.class.getRecordComponents();
+>>>
+check <<<
+assertEquals(PAIR_COMPONENTS, components.length);
+for (RecordComponent component : components) {
+    assertEquals(M3MemberFlags.RECORD_COMPONENT, M3MemberFlags.of(component), component.toString());
+}
+M3AtomKit.expectMessage(NullPointerException.class, "component", () -> M3MemberFlags.of((RecordComponent) null));
+>>>

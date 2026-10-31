@@ -1,0 +1,261 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+// Atoms of M3RX7Transitions.java (package-private transfer and vocabulary-closure kernels).
+// Oracle: RelationOracle fixed-point reachability, BitSet masks, chain walks with cycle detection.
+#class M3RX7TransitionsAtomTest
+#summary Per-atom contracts of jdk.internal.mindex.M3RX7Transitions against naive reachability and transfer models
+#build RelationOracle
+#import java.util.Arrays java.util.BitSet java.util.SplittableRandom
+#helper <<<
+    private static final Class<?> OWNER = M3AtomKit.type("M3RX7Transitions");
+    /** Bounded dimensions of the owner (MAX_STATES, MAX_CELLS, MAX_WORK). */
+    private static final int MAX_STATES = 4096;
+    private static final int MAX_CELLS = 1 << 20;
+    private static final long MAX_WORK = 32L << 20;
+    /** Generated table geometry and dead-transition rate. */
+    private static final int GEN_STATES = 40;
+    private static final int GEN_COLUMNS = 130;
+    private static final double DEAD_RATE = 0.2;
+    /** Exponents probed by repeat: small, word-crossing and extreme. */
+    private static final long[] COUNTS = {0, 1, 2, 3, 7, 64, 1000, 65_537, Long.MAX_VALUE};
+
+    private static byte[] flags(SplittableRandom random, int states, double rate) {
+        byte[] flags = new byte[states];
+        for (int q = 0; q < states; q++) {
+            flags[q] = (byte) (random.nextDouble() < rate ? 1 : 0);
+        }
+        return flags;
+    }
+>>>
+
+@atom M3RX7Transitions.M3RX7Transitions 1 UTILITY_CTOR java.lang.reflect.Modifier
+type = M3RX7Transitions
+
+@atom M3RX7Transitions.useful 1 SCENARIO RelationOracle.useful+BFS
+setup <<<
+MethodHandle atom = M3AtomKit.findStatic(OWNER, "useful",
+        MethodType.methodType(byte[].class, short[].class, int.class, int.class, byte[].class));
+SplittableRandom random = M3AtomKit.random("useful");
+>>>
+check <<<
+for (int c = 0; c < M3AtomKit.CASES; c++) {
+    int states = random.nextInt(1, GEN_STATES);
+    int columns = random.nextInt(0, GEN_COLUMNS);
+    short[] rows = RelationOracle.randomTable(random, states, columns, DEAD_RATE);
+    byte[] accepting = flags(random, states, DEAD_RATE);
+    byte[] before = accepting.clone();
+    byte[] got = (byte[]) atom.invokeExact(rows, states, columns, accepting);
+    assertArrayEquals(RelationOracle.useful(rows, states, columns, accepting), got);
+    BitSet seeds = new BitSet();
+    for (int q = 0; q < states; q++) if (accepting[q] != 0) seeds.set(q);
+    BitSet reach = RelationOracle.reverseReachable(rows, Math.max(columns, 1), seeds);
+    for (int q = 0; q < states; q++) assertEquals(reach.get(q) ? 1 : 0, got[q], "state " + q);
+    assertArrayEquals(before, accepting, "accepting flags unchanged");
+    assertNotSame(accepting, got, "fresh result");
+}
+M3AtomKit.expectMessage(IllegalArgumentException.class, "invalid state flag",
+        () -> { byte[] b = (byte[]) atom.invokeExact(new short[] {0}, 1, 1, new byte[] {2}); });
+M3AtomKit.expectMessage(IllegalArgumentException.class, "invalid transition state",
+        () -> { byte[] b = (byte[]) atom.invokeExact(new short[] {1}, 1, 1, new byte[] {0}); });
+>>>
+
+@atom M3RX7Transitions.masks 1 SCENARIO RelationOracle.masks(java.util.BitSet)
+setup <<<
+MethodHandle atom = M3AtomKit.findStatic(OWNER, "masks",
+        MethodType.methodType(long[].class, short[].class, int.class, int.class, byte[].class));
+SplittableRandom random = M3AtomKit.random("masks");
+>>>
+check <<<
+for (int c = 0; c < M3AtomKit.CASES; c++) {
+    int states = random.nextInt(1, GEN_STATES);
+    int tokens = random.nextInt(0, GEN_COLUMNS);
+    short[] rows = RelationOracle.randomTable(random, states, tokens, DEAD_RATE);
+    byte[] useful = flags(random, states, 1.0 - DEAD_RATE);
+    long[] got = (long[]) atom.invokeExact(rows, states, tokens, useful);
+    assertArrayEquals(RelationOracle.masks(rows, states, tokens, useful), got, "states=" + states + " tokens=" + tokens);
+    int words = (tokens + Long.SIZE - 1) / Long.SIZE;
+    if (tokens % Long.SIZE != 0) {
+        long unused = -1L << (tokens % Long.SIZE);
+        for (int q = 0; q < states; q++) assertEquals(0L, got[q * words + words - 1] & unused, "unused bits zero");
+    }
+}
+M3AtomKit.expectMessage(IllegalArgumentException.class, "invalid state flags",
+        () -> { long[] m = (long[]) atom.invokeExact(new short[] {0}, 1, 1, new byte[2]); });
+>>>
+
+@atom M3RX7Transitions.tokens 1 SCENARIO RelationOracle.tokens
+setup <<<
+MethodHandle atom = M3AtomKit.findStatic(OWNER, "tokens", MethodType.methodType(short[].class,
+        short[].class, int.class, int.class, int[].class, int.class, int.class));
+SplittableRandom random = M3AtomKit.random("tokens");
+>>>
+check <<<
+for (int c = 0; c < M3AtomKit.CASES; c++) {
+    int states = random.nextInt(1, GEN_STATES);
+    int tokens = random.nextInt(1, GEN_COLUMNS);
+    short[] rows = RelationOracle.randomTable(random, states, tokens, DEAD_RATE / 4);
+    int[] ids = random.ints(random.nextInt(0, GEN_STATES), 0, tokens).toArray();
+    int offset = ids.length == 0 ? 0 : random.nextInt(ids.length);
+    int length = ids.length - offset;
+    short[] got = (short[]) atom.invokeExact(rows, states, tokens, ids, offset, length);
+    assertArrayEquals(RelationOracle.tokens(rows, states, tokens, ids, offset, length), got);
+}
+short[] wide = new short[MAX_STATES];
+int[] overBudget = new int[(int) (MAX_WORK / MAX_STATES) + 1];
+assertNull((short[]) atom.invokeExact(wide, MAX_STATES, 1, overBudget, 0, overBudget.length), "work budget refusal");
+M3AtomKit.expect(IndexOutOfBoundsException.class,
+        () -> { short[] s = (short[]) atom.invokeExact(new short[] {0}, 1, 1, new int[] {1}, 0, 1); });
+M3AtomKit.expect(IndexOutOfBoundsException.class,
+        () -> { short[] s = (short[]) atom.invokeExact(new short[] {0}, 1, 1, new int[1], 1, 1); });
+M3AtomKit.expectMessage(NullPointerException.class, "ids",
+        () -> { short[] s = (short[]) atom.invokeExact(new short[] {0}, 1, 1, (int[]) null, 0, 0); });
+>>>
+
+@atom M3RX7Transitions.compose 1 SCENARIO RelationOracle.composeTransfer
+setup <<<
+MethodHandle atom = M3AtomKit.findStatic(OWNER, "compose",
+        MethodType.methodType(short[].class, short[].class, short[].class));
+SplittableRandom random = M3AtomKit.random("compose");
+>>>
+check <<<
+for (int c = 0; c < M3AtomKit.CASES; c++) {
+    int states = random.nextInt(1, GEN_STATES);
+    short[] left = RelationOracle.randomTransfer(random, states, DEAD_RATE);
+    short[] right = RelationOracle.randomTransfer(random, states, DEAD_RATE);
+    short[] l = left.clone();
+    short[] r = right.clone();
+    assertArrayEquals(RelationOracle.composeTransfer(left, right), (short[]) atom.invokeExact(l, r));
+    assertArrayEquals(left, l, "left unchanged");
+    assertArrayEquals(right, r, "right unchanged");
+}
+M3AtomKit.expectMessage(IllegalArgumentException.class, "different transfer dimensions",
+        () -> { short[] s = (short[]) atom.invokeExact(new short[] {0}, new short[] {0, 1}); });
+>>>
+
+@atom M3RX7Transitions.repeat 1 SCENARIO RelationOracle.powerTransfer(cycle-walk)
+setup <<<
+MethodHandle atom = M3AtomKit.findStatic(OWNER, "repeat", MethodType.methodType(short[].class, short[].class, long.class));
+SplittableRandom random = M3AtomKit.random("repeat");
+>>>
+check <<<
+for (int c = 0; c < M3AtomKit.CASES; c++) {
+    int states = random.nextInt(1, GEN_STATES);
+    short[] rows = RelationOracle.randomTransfer(random, states, DEAD_RATE / 4);
+    for (long count : COUNTS) {
+        short[] got = (short[]) atom.invokeExact(rows.clone(), count);
+        assertArrayEquals(RelationOracle.powerTransfer(rows, count), got, "count=" + count);
+    }
+    long count = random.nextLong(0, Long.MAX_VALUE);
+    assertArrayEquals(RelationOracle.powerTransfer(rows, count), (short[]) atom.invokeExact(rows, count));
+}
+M3AtomKit.expectMessage(IllegalArgumentException.class, "negative repeat count",
+        () -> { short[] s = (short[]) atom.invokeExact(new short[] {0}, -1L); });
+>>>
+
+@atom M3RX7Transitions.identity 1 SCENARIO index-identity
+setup <<<
+MethodHandle atom = M3AtomKit.findStatic(OWNER, "identity", MethodType.methodType(short[].class, int.class));
+>>>
+check <<<
+for (int states : new int[] {1, 2, GEN_STATES, MAX_STATES}) {
+    short[] rows = (short[]) atom.invokeExact(states);
+    assertEquals(states, rows.length);
+    for (int q = 0; q < states; q++) assertEquals(q, rows[q]);
+}
+>>>
+
+@atom M3RX7Transitions.composeJava 1 SCENARIO RelationOracle.composeTransfer
+setup <<<
+MethodHandle atom = M3AtomKit.findStatic(OWNER, "composeJava",
+        MethodType.methodType(void.class, short[].class, short[].class, short[].class));
+SplittableRandom random = M3AtomKit.random("composeJava");
+>>>
+check <<<
+for (int c = 0; c < M3AtomKit.CASES; c++) {
+    int states = random.nextInt(1, GEN_STATES);
+    short[] left = RelationOracle.randomTransfer(random, states, DEAD_RATE);
+    short[] right = RelationOracle.randomTransfer(random, states, DEAD_RATE);
+    short[] result = new short[states];
+    atom.invokeExact(left, right, result);
+    assertArrayEquals(RelationOracle.composeTransfer(left, right), result);
+}
+>>>
+
+@atom M3RX7Transitions.checkTransfer 1 SCENARIO bounded-transfer-dimensions
+setup <<<
+MethodHandle atom = M3AtomKit.findStatic(OWNER, "checkTransfer", MethodType.methodType(int.class, short[].class));
+>>>
+check <<<
+assertEquals(1, (int) atom.invokeExact(new short[] {-1}));
+assertEquals(MAX_STATES, (int) atom.invokeExact(new short[MAX_STATES]));
+M3AtomKit.expectMessage(NullPointerException.class, "rows", () -> { int n = (int) atom.invokeExact((short[]) null); });
+M3AtomKit.expectMessage(IllegalArgumentException.class, "dimensions", () -> { int n = (int) atom.invokeExact(new short[0]); });
+M3AtomKit.expectMessage(IllegalArgumentException.class, "dimensions",
+        () -> { int n = (int) atom.invokeExact(new short[MAX_STATES + 1]); });
+M3AtomKit.expectMessage(IllegalArgumentException.class, "invalid transition state",
+        () -> { int n = (int) atom.invokeExact(new short[] {0, 2}); });
+M3AtomKit.expectMessage(IllegalArgumentException.class, "invalid transition state",
+        () -> { int n = (int) atom.invokeExact(new short[] {-2}); });
+>>>
+
+@atom M3RX7Transitions.checkTable 1 SCENARIO bounded-table-dimensions
+setup <<<
+MethodHandle atom = M3AtomKit.findStatic(OWNER, "checkTable",
+        MethodType.methodType(void.class, short[].class, int.class, int.class));
+>>>
+check <<<
+atom.invokeExact(new short[0], 1, 0);
+atom.invokeExact(new short[MAX_CELLS], MAX_STATES, MAX_CELLS / MAX_STATES);
+for (int[] bad : new int[][] {{1, 0, 1}, {1, MAX_STATES + 1, 0}, {1, 1, -1}, {2, 1, 1}}) {
+    M3AtomKit.expectMessage(IllegalArgumentException.class, "dimensions",
+            () -> { atom.invokeExact(new short[bad[0]], bad[1], bad[2]); });
+}
+M3AtomKit.expectMessage(IllegalArgumentException.class, "dimensions",
+        () -> { atom.invokeExact(new short[MAX_CELLS + MAX_STATES], MAX_STATES, MAX_CELLS / MAX_STATES + 1); });
+M3AtomKit.expectMessage(NullPointerException.class, "rows", () -> { atom.invokeExact((short[]) null, 1, 1); });
+>>>
+
+@atom M3RX7Transitions.checkFlags 1 SCENARIO zero-one-flags
+setup <<<
+MethodHandle atom = M3AtomKit.findStatic(OWNER, "checkFlags", MethodType.methodType(void.class, byte[].class, int.class));
+>>>
+check <<<
+atom.invokeExact(new byte[] {0, 1, 1, 0}, 4);
+M3AtomKit.expectMessage(IllegalArgumentException.class, "invalid state flags", () -> { atom.invokeExact(new byte[3], 4); });
+M3AtomKit.expectMessage(IllegalArgumentException.class, "invalid state flag", () -> { atom.invokeExact(new byte[] {-1}, 1); });
+M3AtomKit.expectMessage(NullPointerException.class, "flags", () -> { atom.invokeExact((byte[]) null, 1); });
+>>>
+
+@atom M3RX7Transitions.checkState 1 SCENARIO interval[-1,states)
+setup <<<
+MethodHandle atom = M3AtomKit.findStatic(OWNER, "checkState", MethodType.methodType(void.class, int.class, int.class));
+>>>
+check <<<
+for (int state = -1; state < GEN_STATES; state++) atom.invokeExact(state, GEN_STATES);
+for (int bad : new int[] {Integer.MIN_VALUE, -2, GEN_STATES, Integer.MAX_VALUE}) {
+    M3AtomKit.expectMessage(IllegalArgumentException.class, "invalid transition state", () -> { atom.invokeExact(bad, GEN_STATES); });
+}
+>>>
+
+@atom M3RX7Transitions.compose0 1 NATIVE_LANE RelationOracle.composeTransfer
+type = M3RX7Transitions
+setup <<<
+SplittableRandom random = M3AtomKit.random("compose0");
+short[] left = RelationOracle.randomTransfer(random, GEN_STATES, DEAD_RATE);
+short[] right = RelationOracle.randomTransfer(random, GEN_STATES, DEAD_RATE);
+short[] result = new short[GEN_STATES];
+MethodHandle atom = M3AtomKit.findStatic(owner, "compose0",
+        MethodType.methodType(void.class, short[].class, short[].class, short[].class));
+>>>
+call = atom.invokeExact(left, right, result); assertArrayEquals(RelationOracle.composeTransfer(left, right), result);
+
+@atom M3RX7Transitions.repeat0 1 NATIVE_LANE RelationOracle.powerTransfer
+type = M3RX7Transitions
+setup <<<
+short[] rows = RelationOracle.randomTransfer(M3AtomKit.random("repeat0"), GEN_STATES, DEAD_RATE);
+short[] result = new short[GEN_STATES];
+long count = COUNTS[COUNTS.length - 2];
+MethodHandle atom = M3AtomKit.findStatic(owner, "repeat0",
+        MethodType.methodType(void.class, short[].class, long.class, short[].class));
+>>>
+call = atom.invokeExact(rows, count, result); assertArrayEquals(RelationOracle.powerTransfer(rows, count), result);

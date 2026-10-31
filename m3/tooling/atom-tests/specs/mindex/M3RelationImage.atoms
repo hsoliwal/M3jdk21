@@ -1,0 +1,203 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+// Atoms of M3RelationImage.java (package-private wire codec of Boolean relation rows).
+// Oracle: java.io.DataOutputStream big-endian image "M3RI0001" + states + scope + rows; java.security.MessageDigest.
+#class M3RelationImageAtomTest
+#summary Per-atom contracts of jdk.internal.mindex.M3RelationImage against a DataOutputStream/MessageDigest image
+#build RelationOracle
+#import java.io.ByteArrayOutputStream java.io.DataOutputStream java.nio.charset.StandardCharsets java.security.MessageDigest java.util.HexFormat java.util.SplittableRandom java.util.concurrent.atomic.AtomicInteger
+#helper <<<
+    private static final Class<?> OWNER = M3AtomKit.type("M3RelationImage");
+    private static final MethodHandle ENCODE = M3AtomKit.findStatic(OWNER, "encode",
+            MethodType.methodType(byte[].class, long[].class, String.class, Runnable.class));
+    private static final MethodHandle DECODE = M3AtomKit.findStatic(OWNER, "decode",
+            MethodType.methodType(long[].class, byte[].class, String.class, String.class, int.class, Runnable.class));
+    /** Format and semantics version tag of the image. */
+    private static final String MAGIC = "M3RI0001";
+    /** Largest relation dimension. */
+    private static final int MAX_STATES = Long.SIZE;
+    /** Length of a SHA-256 fingerprint in hex digits. */
+    private static final int SHA256_HEX = 64;
+    /** Offset of the state-count field (after the magic). */
+    private static final int STATES_OFFSET = Long.BYTES;
+    /** Bit density of generated relations. */
+    private static final double DENSITY = 0.4;
+
+    private static String sha256Hex(byte[] bytes) throws Exception {
+        return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(bytes));
+    }
+
+    private static String scope(String label) throws Exception {
+        return sha256Hex(label.getBytes(StandardCharsets.UTF_8));
+    }
+
+    private static byte[] image(long[] rows, String scope) throws Exception {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        DataOutputStream out = new DataOutputStream(bytes);
+        out.write(MAGIC.getBytes(StandardCharsets.US_ASCII));
+        out.writeInt(rows.length);
+        out.write(HexFormat.of().parseHex(scope));
+        for (long row : rows) {
+            out.writeLong(row);
+        }
+        out.flush();
+        return bytes.toByteArray();
+    }
+
+    private static long[] relation(SplittableRandom random, int states) {
+        return RelationOracle.randomRelation(random, states, DENSITY);
+    }
+>>>
+
+@atom M3RelationImage.M3RelationImage 1 UTILITY_CTOR java.lang.reflect.Modifier
+type = M3RelationImage
+
+@atom M3RelationImage.encode 1 SCENARIO java.io.DataOutputStream
+setup <<<
+SplittableRandom random = M3AtomKit.random("encode");
+String scope = scope("encode");
+AtomicInteger calls = new AtomicInteger();
+>>>
+check <<<
+for (int states = 1; states <= MAX_STATES; states++) {
+    long[] rows = relation(random, states);
+    long[] before = rows.clone();
+    calls.set(0);
+    byte[] encoded = (byte[]) ENCODE.invokeExact(rows, scope, (Runnable) calls::incrementAndGet);
+    assertArrayEquals(image(rows, scope), encoded, "image of " + states + " states");
+    assertArrayEquals(before, rows, "rows unchanged");
+    assertTrue(calls.get() >= states, "checkpoint runs at least once per row");
+    assertArrayEquals(encoded, (byte[]) ENCODE.invokeExact(rows, scope, (Runnable) null), "null checkpoint");
+}
+long[] foreign = {1L << 2};
+M3AtomKit.expectMessage(IllegalArgumentException.class, "foreign state bits",
+        () -> { byte[] b = (byte[]) ENCODE.invokeExact(foreign, scope, (Runnable) null); });
+M3AtomKit.expectMessage(IllegalArgumentException.class, "[1,64]",
+        () -> { byte[] b = (byte[]) ENCODE.invokeExact(new long[0], scope, (Runnable) null); });
+M3AtomKit.expectMessage(IllegalArgumentException.class, "[1,64]",
+        () -> { byte[] b = (byte[]) ENCODE.invokeExact(new long[MAX_STATES + 1], scope, (Runnable) null); });
+M3AtomKit.expectMessage(IllegalArgumentException.class, "SHA-256",
+        () -> { byte[] b = (byte[]) ENCODE.invokeExact(new long[1], "abc", (Runnable) null); });
+M3AtomKit.expectMessage(NullPointerException.class, "rows",
+        () -> { byte[] b = (byte[]) ENCODE.invokeExact((long[]) null, scope, (Runnable) null); });
+M3AtomKit.expectMessage(NullPointerException.class, "scope",
+        () -> { byte[] b = (byte[]) ENCODE.invokeExact(new long[1], (String) null, (Runnable) null); });
+IllegalStateException stop = new IllegalStateException("cancelled");
+assertSame(stop, M3AtomKit.expect(IllegalStateException.class,
+        () -> { byte[] b = (byte[]) ENCODE.invokeExact(new long[1], scope, (Runnable) () -> { throw stop; }); }));
+>>>
+
+@atom M3RelationImage.decode 1 SCENARIO round-trip+java.security.MessageDigest
+setup <<<
+SplittableRandom random = M3AtomKit.random("decode");
+String scope = scope("decode");
+String otherScope = scope("other");
+>>>
+check <<<
+for (int states = 1; states <= MAX_STATES; states++) {
+    long[] rows = relation(random, states);
+    byte[] encoded = image(rows, scope);
+    String receipt = sha256Hex(encoded);
+    assertArrayEquals(rows, (long[]) DECODE.invokeExact(encoded, receipt, scope, states, (Runnable) null));
+}
+long[] rows = relation(random, MAX_STATES);
+byte[] encoded = image(rows, scope);
+String receipt = sha256Hex(encoded);
+byte[] mutable = encoded.clone();
+AtomicInteger calls = new AtomicInteger();
+Runnable mutateLater = () -> { if (calls.incrementAndGet() == 2) java.util.Arrays.fill(mutable, (byte) 0); };
+assertArrayEquals(rows, (long[]) DECODE.invokeExact(mutable, receipt, scope, MAX_STATES, mutateLater),
+        "snapshot taken before the second checkpoint");
+M3AtomKit.expectMessage(IllegalArgumentException.class, "receipt mismatch",
+        () -> { long[] r = (long[]) DECODE.invokeExact(encoded, scope, scope, MAX_STATES, (Runnable) null); });
+M3AtomKit.expectMessage(IllegalArgumentException.class, "semantic scope mismatch",
+        () -> { long[] r = (long[]) DECODE.invokeExact(encoded, receipt, otherScope, MAX_STATES, (Runnable) null); });
+M3AtomKit.expectMessage(IllegalArgumentException.class, "byte geometry",
+        () -> { long[] r = (long[]) DECODE.invokeExact(encoded, receipt, scope, MAX_STATES - 1, (Runnable) null); });
+byte[] wrongStates = image(new long[] {1L, 1L}, scope);
+wrongStates[STATES_OFFSET + Integer.BYTES - 1] = 1;
+String wrongStatesReceipt = sha256Hex(wrongStates);
+M3AtomKit.expectMessage(IllegalArgumentException.class, "version/state mismatch",
+        () -> { long[] r = (long[]) DECODE.invokeExact(wrongStates, wrongStatesReceipt, scope, 2, (Runnable) null); });
+byte[] foreign = image(new long[] {1L << 1}, scope);
+String foreignReceipt = sha256Hex(foreign);
+M3AtomKit.expectMessage(IllegalArgumentException.class, "foreign state bits",
+        () -> { long[] r = (long[]) DECODE.invokeExact(foreign, foreignReceipt, scope, 1, (Runnable) null); });
+M3AtomKit.expectMessage(NullPointerException.class, "image",
+        () -> { long[] r = (long[]) DECODE.invokeExact((byte[]) null, receipt, scope, 1, (Runnable) null); });
+>>>
+
+@atom M3RelationImage.requireStates 1 SCENARIO interval[1,64]
+setup <<<
+MethodHandle atom = M3AtomKit.findStatic(OWNER, "requireStates", MethodType.methodType(void.class, int.class));
+>>>
+check <<<
+for (int states = 1; states <= MAX_STATES; states++) {
+    atom.invokeExact(states);
+}
+for (int bad : new int[] {Integer.MIN_VALUE, -1, 0, MAX_STATES + 1, Integer.MAX_VALUE}) {
+    M3AtomKit.expectMessage(IllegalArgumentException.class, "[1,64]", () -> { atom.invokeExact(bad); });
+}
+>>>
+
+@atom M3RelationImage.validate 1 SCENARIO state-mask
+setup <<<
+MethodHandle atom = M3AtomKit.findStatic(OWNER, "validate",
+        MethodType.methodType(void.class, long[].class, int.class, Runnable.class));
+AtomicInteger calls = new AtomicInteger();
+>>>
+check <<<
+for (int states = 1; states < MAX_STATES; states++) {
+    final int dimension = states;
+    long mask = (1L << states) - 1L;
+    atom.invokeExact(new long[] {mask, 0L}, states, (Runnable) calls::incrementAndGet);
+    long foreign = 1L << states;
+    M3AtomKit.expectMessage(IllegalArgumentException.class, "foreign state bits",
+            () -> { atom.invokeExact(new long[] {foreign}, dimension, (Runnable) null); });
+}
+atom.invokeExact(new long[] {-1L}, MAX_STATES, (Runnable) null);
+assertTrue(calls.get() >= MAX_STATES - 1, "checkpoint per row");
+>>>
+
+@atom M3RelationImage.digestBytes 1 SCENARIO java.util.HexFormat
+setup <<<
+MethodHandle atom = M3AtomKit.findStatic(OWNER, "digestBytes", MethodType.methodType(byte[].class, String.class));
+String digest = scope("digestBytes");
+>>>
+check <<<
+assertArrayEquals(HexFormat.of().parseHex(digest), (byte[]) atom.invokeExact(digest));
+assertArrayEquals(HexFormat.of().parseHex(digest), (byte[]) atom.invokeExact(digest.toUpperCase()));
+M3AtomKit.expectMessage(IllegalArgumentException.class, "SHA-256",
+        () -> { byte[] b = (byte[]) atom.invokeExact(digest.substring(1)); });
+M3AtomKit.expect(IllegalArgumentException.class,
+        () -> { byte[] b = (byte[]) atom.invokeExact("z".repeat(SHA256_HEX)); });
+M3AtomKit.expectMessage(NullPointerException.class, "SHA-256",
+        () -> { byte[] b = (byte[]) atom.invokeExact((String) null); });
+>>>
+
+@atom M3RelationImage.sha256 1 SCENARIO java.security.MessageDigest
+setup <<<
+MethodHandle atom = M3AtomKit.findStatic(OWNER, "sha256", MethodType.methodType(byte[].class, byte[].class));
+SplittableRandom random = M3AtomKit.random("sha256");
+>>>
+check <<<
+for (int c = 0; c < M3AtomKit.CASES; c++) {
+    byte[] input = new byte[c];
+    random.nextBytes(input);
+    assertArrayEquals(MessageDigest.getInstance("SHA-256").digest(input), (byte[]) atom.invokeExact(input));
+}
+>>>
+
+@atom M3RelationImage.check 1 SCENARIO java.lang.Runnable
+setup <<<
+MethodHandle atom = M3AtomKit.findStatic(OWNER, "check", MethodType.methodType(void.class, Runnable.class));
+AtomicInteger calls = new AtomicInteger();
+>>>
+check <<<
+atom.invokeExact((Runnable) null);
+atom.invokeExact((Runnable) calls::incrementAndGet);
+assertEquals(1, calls.get(), "runs the checkpoint exactly once");
+UnsupportedOperationException stop = new UnsupportedOperationException("stop");
+assertSame(stop, M3AtomKit.expect(UnsupportedOperationException.class,
+        () -> { atom.invokeExact((Runnable) () -> { throw stop; }); }));
+>>>

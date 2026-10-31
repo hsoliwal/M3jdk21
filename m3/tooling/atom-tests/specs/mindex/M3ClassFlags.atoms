@@ -1,0 +1,111 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+// Atoms of M3ClassFlags.java. Oracle: java.lang.Class kind predicates plus literal expectations.
+#class M3ClassFlagsAtomTest
+#summary Per-atom contracts of jdk.internal.mindex.M3ClassFlags against java.lang.Class kind predicates
+#import jdk.internal.mindex.M3ClassFlags java.lang.invoke.MethodHandles java.util.List
+#helper <<<
+    /** Number of named class-kind flags. */
+    private static final int FLAG_COUNT = 12;
+
+    record Point(int x, int y) { }
+
+    sealed interface Shape permits Square, Circle { }
+
+    static final class Square implements Shape { }
+
+    static final class Circle implements Shape { }
+
+    /** Class-file magic number. */
+    private static final int CLASS_MAGIC = 0xCAFEBABE;
+    /** Class-file major version of Java 21. */
+    private static final int JAVA_21_MAJOR = 65;
+    /** Constant-pool tags and access flags of the minimal top-level seed class. */
+    private static final int CONSTANT_UTF8 = 1;
+    private static final int CONSTANT_CLASS = 7;
+    private static final int ACC_FINAL_SUPER = 0x0011;
+    /** Constant-pool entries #1..#4 of the seed; the count field is entries + 1. */
+    private static final int POOL_COUNT = 5;
+    private static final int THIS_CLASS = 1;
+    private static final int SUPER_CLASS = 3;
+
+    private static int expected(Class<?> c) {
+        return (c.isInterface() ? M3ClassFlags.INTERFACE : 0) | (c.isEnum() ? M3ClassFlags.ENUM : 0)
+                | (c.isAnnotation() ? M3ClassFlags.ANNOTATION : 0) | (c.isRecord() ? M3ClassFlags.RECORD : 0)
+                | (c.isArray() ? M3ClassFlags.ARRAY : 0) | (c.isPrimitive() ? M3ClassFlags.PRIMITIVE : 0)
+                | (c.isSealed() ? M3ClassFlags.SEALED : 0) | (c.isHidden() ? M3ClassFlags.HIDDEN : 0)
+                | (c.isSynthetic() ? M3ClassFlags.SYNTHETIC : 0)
+                | (c.isAnonymousClass() ? M3ClassFlags.ANONYMOUS : 0)
+                | (c.isLocalClass() ? M3ClassFlags.LOCAL : 0) | (c.isMemberClass() ? M3ClassFlags.MEMBER : 0);
+    }
+
+    /** Minimal top-level class file (no InnerClasses attribute) defined as a hidden class. */
+    private static Class<?> hiddenClass() throws Exception {
+        java.io.ByteArrayOutputStream bytes = new java.io.ByteArrayOutputStream();
+        java.io.DataOutputStream out = new java.io.DataOutputStream(bytes);
+        out.writeInt(CLASS_MAGIC);
+        out.writeShort(0);
+        out.writeShort(JAVA_21_MAJOR);
+        out.writeShort(POOL_COUNT);
+        out.writeByte(CONSTANT_CLASS);
+        out.writeShort(THIS_CLASS + 1);
+        out.writeByte(CONSTANT_UTF8);
+        out.writeUTF("M3ClassFlagsHiddenSeed");
+        out.writeByte(CONSTANT_CLASS);
+        out.writeShort(SUPER_CLASS + 1);
+        out.writeByte(CONSTANT_UTF8);
+        out.writeUTF("java/lang/Object");
+        out.writeShort(ACC_FINAL_SUPER);
+        out.writeShort(THIS_CLASS);
+        out.writeShort(SUPER_CLASS);
+        out.writeShort(0);
+        out.writeShort(0);
+        out.writeShort(0);
+        out.writeShort(0);
+        out.flush();
+        return MethodHandles.lookup().defineHiddenClass(bytes.toByteArray(), false).lookupClass();
+    }
+>>>
+
+@atom M3ClassFlags.M3ClassFlags 1 UTILITY_CTOR java.lang.reflect.Modifier
+type = M3ClassFlags
+
+@atom M3ClassFlags.of 1 SCENARIO java.lang.Class.isXxx+literal
+setup <<<
+class Local { }
+Runnable lambda = () -> { };
+Object anonymous = new Object() { };
+List<Class<?>> corpus = List.of(String.class, Runnable.class, Thread.State.class, Deprecated.class, Point.class,
+        int[].class, String[][].class, int.class, void.class, Shape.class, Square.class, hiddenClass(),
+        lambda.getClass(), anonymous.getClass(), Local.class, Thread.UncaughtExceptionHandler.class);
+int[] named = {M3ClassFlags.INTERFACE, M3ClassFlags.ENUM, M3ClassFlags.ANNOTATION, M3ClassFlags.RECORD,
+        M3ClassFlags.ARRAY, M3ClassFlags.PRIMITIVE, M3ClassFlags.SEALED, M3ClassFlags.HIDDEN,
+        M3ClassFlags.SYNTHETIC, M3ClassFlags.ANONYMOUS, M3ClassFlags.LOCAL, M3ClassFlags.MEMBER};
+>>>
+check <<<
+assertEquals(FLAG_COUNT, named.length);
+int union = 0;
+for (int flag : named) {
+    assertEquals(1, Integer.bitCount(flag), "single-bit flag " + flag);
+    assertEquals(0, union & flag, "distinct flag " + flag);
+    union |= flag;
+}
+int seen = 0;
+for (Class<?> c : corpus) {
+    int flags = M3ClassFlags.of(c);
+    assertEquals(expected(c), flags, c.getName());
+    seen |= flags;
+}
+assertEquals(union, seen, "corpus covers every flag");
+assertEquals(0, M3ClassFlags.of(String.class));
+assertEquals(M3ClassFlags.INTERFACE | M3ClassFlags.ANNOTATION, M3ClassFlags.of(Deprecated.class));
+assertEquals(M3ClassFlags.ENUM | M3ClassFlags.MEMBER, M3ClassFlags.of(Thread.State.class));
+assertEquals(M3ClassFlags.RECORD | M3ClassFlags.MEMBER, M3ClassFlags.of(Point.class));
+assertEquals(M3ClassFlags.ARRAY, M3ClassFlags.of(int[].class));
+assertEquals(M3ClassFlags.PRIMITIVE, M3ClassFlags.of(int.class));
+assertEquals(M3ClassFlags.INTERFACE | M3ClassFlags.SEALED | M3ClassFlags.MEMBER, M3ClassFlags.of(Shape.class));
+assertEquals(M3ClassFlags.LOCAL, M3ClassFlags.of(Local.class));
+assertEquals(M3ClassFlags.ANONYMOUS, M3ClassFlags.of(anonymous.getClass()));
+assertTrue((M3ClassFlags.of(lambda.getClass()) & M3ClassFlags.HIDDEN) != 0, "lambda proxy is hidden");
+M3AtomKit.expectMessage(NullPointerException.class, "type", () -> M3ClassFlags.of(null));
+>>>

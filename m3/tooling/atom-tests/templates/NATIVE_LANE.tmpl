@@ -1,0 +1,5 @@
+Class<?> owner = M3AtomKit.type("${type}");
+${setup}
+M3AtomKit.assertNativeLane(owner, "${atom}", () -> {
+    ${call}
+});
