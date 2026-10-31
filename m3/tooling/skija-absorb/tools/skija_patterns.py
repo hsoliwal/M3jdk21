@@ -2,13 +2,18 @@
 # Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
 """skija_patterns.py <skija_root> <dll_exports.txt> <out_dir> [<owner_pkg> <owner_internal_pkg>]
 
-CPU-only, read-only projection of a Skija source tree (shared/java + platform/cc) for its absorption into M3jdk:
+CPU-only, read-only projection of a Skija source tree (shared/java* + platform/cc) for its absorption into M3jdk. The
+Java source of every class is the one mr_select.py selects (MR_SELECT v1: the highest Multi-Release version <= 21 of
+shared/java and shared/java<K>, the class a Java 21 runtime loads from the published jar):
 
   CLASSES.tsv      one row per top-level Java type: package, type, kind, supertype, pattern (SKIJA-PATTERN v1, closed
                    set; anything unmatched is RESIDUE, the typed @IAntiPattern row), native/public method counts, lines
   JNI_BINDINGS.tsv one row per Java native method: owner type, method, JNI symbol (JNI 1.1 mangling), the C++ file that
                    defines it, whether the shipped dll exports it
   CC_CLASSREFS.tsv one row per "io/github/humbleui/..." class-name string in the C++ glue (FindClass / signatures)
+  JAVA_CLASSREFS.tsv one row per Java string literal that names a donor class for a run-time lookup: a class-file
+                   resource "T.class" of a donor type T of the declaring package (Class.getResource), or a binary name
+                   (dotted or slashed); text that only mentions a type (messages, toString) is not a lookup
   OWNER_MAP.tsv    Skija type -> M3 owner type (package io.github.humbleui.skija[.x] -> <owner_pkg>[.x], impl ->
                    <owner_internal_pkg>, type T -> M3T); the parameter of the rename recipes
   SUMMARY.tsv      counts per pattern and per binding state
@@ -18,6 +23,9 @@ import os
 import re
 import sys
 from collections import Counter
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from mr_select import select_sources  # noqa: E402  (MR_SELECT v1, the sibling tool)
 
 MASK = re.compile(r'//[^\n]*|/\*.*?\*/|"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'', re.S)
 PKG = re.compile(r'^\s*package\s+([\w.]+)\s*;', re.M)
@@ -52,6 +60,9 @@ def jni_mangle(s):
 LOMBOK_VALUE = re.compile(r'@(?:lombok\.)?(?:Data|Value|AllArgsConstructor|Getter|EqualsAndHashCode|With|ToString|RequiredArgsConstructor)\b')
 IMPLEMENTS = re.compile(r'\bimplements\s+([\w.<>, ]+)')
 INSTANCE_FIELD = re.compile(r'^\s*(?:public\s+|protected\s+|private\s+)?(?:final\s+)?(?!static\b)(?!return\b)[\w.<>\[\]]+\s+_?\w+\s*(?:=[^;]*)?;', re.M)
+JAVA_LEXEME = re.compile(r'//[^\n]*|/\*.*?\*/|"(?:\\.|[^"\\\n])*"|\'(?:\\.|[^\'\\\n])*\'', re.S)
+CLASS_FILE_LITERAL = re.compile(r'^([A-Za-z_$][\w$]*)\.class$')
+BINARY_NAME_LITERAL = re.compile(r'io[./]github[./]humbleui(?:[./][a-z_$][\w$]*)*[./][A-Z][\w$]*')
 
 
 def pattern(kind, sup, natives, name, pkg, head="", tail="", body=""):
@@ -84,12 +95,42 @@ def pattern(kind, sup, natives, name, pkg, head="", tail="", body=""):
 
 
 def java_rows(root):
+    """(path from root, text) of the MR_SELECT v1 source of every class, in the walk order of shared/java; a class that
+    has only versioned sources follows, sorted. Module descriptors are not classes."""
+    _, selected, _ = select_sources(root)
     base = os.path.join(root, "shared", "java")
-    for dirpath, _, files in os.walk(base):
+    seen = set()
+    for dirpath, dirs, files in os.walk(base):
+        dirs.sort()
         for f in sorted(files):
-            if f.endswith(".java"):
-                p = os.path.join(dirpath, f)
-                yield os.path.relpath(p, root).replace(os.sep, "/"), open(p, encoding="utf-8", errors="replace").read()
+            if f.endswith(".java") and f != "module-info.java":
+                rel = os.path.relpath(os.path.join(dirpath, f), base).replace(os.sep, "/")
+                seen.add(rel)
+                yield source_row(root, selected[rel][1])
+    for rel in sorted(set(selected) - seen):
+        yield source_row(root, selected[rel][1])
+
+
+def source_row(root, p):
+    return os.path.relpath(p, root).replace(os.sep, "/"), open(p, encoding="utf-8", errors="replace").read()
+
+
+def java_classrefs(sources):
+    """JAVA_CLASSREFS rows (path, line, declaring type, literal) of the string literals that name a donor class for a
+    run-time lookup: "T.class" with T a donor type of the declaring package, or a binary name with a type segment."""
+    names = {}
+    for _, pkg, name, _ in sources:
+        names.setdefault(pkg, set()).add(name)
+    refs = []
+    for rel, pkg, name, text in sources:
+        for m in JAVA_LEXEME.finditer(text):
+            body = m.group(0)[1:-1] if m.group(0).startswith('"') else None
+            if body is None:
+                continue
+            cf = CLASS_FILE_LITERAL.match(body)
+            if (cf and cf.group(1) in names.get(pkg, ())) or BINARY_NAME_LITERAL.search(body):
+                refs.append((rel, text.count("\n", 0, m.start()) + 1, pkg + "." + name, body))
+    return refs
 
 
 def main():
@@ -108,7 +149,7 @@ def main():
                     cc_defs.setdefault(m.group(1), rel)
                 for m in CC_REF.finditer(text):
                     cc_refs.append((rel, text.count("\n", 0, m.start()) + 1, m.group(1)))
-    classes, bindings, owners = [], [], []
+    classes, bindings, owners, sources = [], [], [], []
     for rel, text in java_rows(root):
         mt = mask(text)
         pm = PKG.search(mt)
@@ -123,6 +164,7 @@ def main():
         pub = PUBLIC_METHOD.findall(mt)
         pat = pattern(kind, sup, nat, name, pkg, mt[:tm.start()], tail, mt[tm.end():])
         classes.append((rel, pkg, name, kind, sup or "-", pat, len(nat), len(pub), text.count("\n") + 1))
+        sources.append((rel, pkg, name, text))
         for meth in nat:
             sym = "Java_" + jni_mangle(pkg) + "_" + jni_mangle(name) + "_" + jni_mangle(meth)
             if sym not in cc_defs and nat.count(meth) > 1:
@@ -142,6 +184,7 @@ def main():
     w("CLASSES.tsv", ("path", "package", "type", "kind", "supertype", "pattern", "natives", "public_methods", "lines"), classes)
     w("JNI_BINDINGS.tsv", ("java_type", "method", "jni_symbol", "cc_file", "dll_export"), bindings)
     w("CC_CLASSREFS.tsv", ("cc_file", "line", "class_string"), cc_refs)
+    w("JAVA_CLASSREFS.tsv", ("java_file", "line", "java_type", "class_string"), java_classrefs(sources))
     w("OWNER_MAP.tsv", ("skija_type", "m3_type", "pattern"), sorted(owners))
     pc = Counter(r[5] for r in classes)
     bc = Counter(("defined" if b[3] != "-" else "undefined") + "/" + ("exported" if b[4] == "yes" else "not_exported") for b in bindings)

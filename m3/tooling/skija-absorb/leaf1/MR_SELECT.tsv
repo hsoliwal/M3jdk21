@@ -1,0 +1,7 @@
+kind	name	versions	selected	source	sha256	jar_entry	change
+CLASS	io.github.humbleui.skija.impl.Cleanable	base,9	9	shared/java9/impl/Cleanable.java	337140c91d0f4f01beabf8dd4d4629c96590c1642d5dcd3188a918b24527bc9c	META-INF/versions/9/io/github/humbleui/skija/impl/Cleanable.class	base -> 9
+CLASS	io.github.humbleui.skija.impl.ReferenceUtil	base,9	9	shared/java9/impl/ReferenceUtil.java	02c0ed3d6f47bb960f2e7d8010907ae512a254ed8f68962d35772f73f208b8f7	META-INF/versions/9/io/github/humbleui/skija/impl/ReferenceUtil.class	base -> 9
+CLASS	io.github.humbleui.skija.impl.ResourceFinder	base,9	9	shared/java9/impl/ResourceFinder.java	0b48526d412f92383de9650f98f5ca44970dc216c700f24139f2b7c974ef10ad	META-INF/versions/9/io/github/humbleui/skija/impl/ResourceFinder.class	base -> 9
+MODULE_DESCRIPTOR	io.github.humbleui.skija.shared	9	-	shared/java9/module-info.java	cfc4cd2fa6ebd7de468ed33dda72271ac32500c03d0cd6c33c4863f586170339	-	not absorbed: src/jdk.m3.graphics/share/classes/module-info.java
+MODULE_DESCRIPTOR	skija-shared-0.143.18.jar	9	-	-	-	META-INF/versions/9/module-info.class	not absorbed: src/jdk.m3.graphics/share/classes/module-info.java
+MODULE_DESCRIPTOR	types-0.2.0.jar	9	-	-	-	META-INF/versions/9/module-info.class	not absorbed: src/jdk.m3.graphics/share/classes/module-info.java
