@@ -1,0 +1,35 @@
+{
+  "schema": "M3JDK21_PROGRESS_EXECUTOR_SCOPE_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receiving_target": "hsoliwal/M3JDK21",
+  "canonical_recipe_home": "hsoliwal/com.synexia",
+  "canonical_recipe_pr": 14627,
+  "canonical_recipe_id": "com.synexia.rewrite.M3Jdk21ProgressScopeCarrierRecipe",
+  "canonical_recipe_crate_id": "m3jdk21-progress-scope-carrier-v1",
+  "target_sources": [
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
+      "before_sha256": "2f3bb91b55fa9715aed6e774501b83474b7fdb9451e601f29499c123bbc4959a",
+      "after_sha256": "bea1290f9d14f9e7848d9dcf7958b38b77e3ae0742366a1a4771afc03c64690e",
+      "contract": "Add opt-in Runnable and Callable borrowed progress scope wrapper methods; preserve existing Java 21 APIs, executor ownership and implicit thread behavior"
+    },
+    {
+      "path": "test/jdk/java/util/concurrent/ProgressMonitors/ProgressExecutorScopeTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "a3a9caa96b6803061544dee6c18d01c47f70597b3053cf5ca5774ef6b03c9124",
+      "contract": "jtreg cancellation, exception, scope restoration, delayed task, rejection and ProgressJob test"
+    }
+  ],
+  "source_transform_execution": "PENDING_CANONICAL_OPENREWRITE",
+  "exact_source_postimage_equality": "PASS_GITHUB_BLOBS_MATCH",
+  "independent_java21_scope_smoke": "PASS_API_EQUIVALENT_STAND_IN_ONLY",
+  "independent_openjdk21_build": "NOT_EXECUTED",
+  "independent_jtreg": "NOT_EXECUTED",
+  "installed_sdk_api_abi": "NOT_EXECUTED",
+  "jni_exports_changed": false,
+  "jni_callback_scheduler_introduced": false,
+  "jni_regression_gate": "NOT_APPLICABLE_NO_NEW_NATIVE_ABI",
+  "full_eclipse_jobmanager_swt_efs_jdt_integration": "NOT_CLAIMED",
+  "promotion_authority": false,
+  "merge_admission": "BLOCKED_UNTIL_CANONICAL_RECIPE_EXECUTION_AND_TARGET_GATES_PASS"
+}
