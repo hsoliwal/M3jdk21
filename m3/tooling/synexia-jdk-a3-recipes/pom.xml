@@ -37,6 +37,13 @@
       <version>${junit.version}-m3-source-1</version>
       <scope>test</scope>
     </dependency>
+    <!-- The absorbed export unit tests (RewriteTest) need the source-built rewrite-test closure (install.sh). -->
+    <dependency>
+      <groupId>org.openrewrite</groupId>
+      <artifactId>rewrite-test</artifactId>
+      <version>${rewrite.version}-m3-source-1</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -73,6 +80,29 @@
             <include>com/synexia/rewrite/M3RecipeMasteryPortableReceipt.java</include>
           </includes>
         </configuration>
+        <executions>
+          <!-- Standalone (2026-10-31): the export's seven unit tests are absorbed byte-identically
+               (sealed in .github/workflows/m3-a3.yml) and compile beside the module's mirror test. -->
+          <execution>
+            <id>default-testCompile</id>
+            <configuration>
+              <compileSourceRoots>
+                <compileSourceRoot>${project.basedir}/src/test/java</compileSourceRoot>
+                <compileSourceRoot>${project.basedir}/../../vendor/synexia/synexia-openrewrite-recipes/src/test/java</compileSourceRoot>
+              </compileSourceRoots>
+              <testIncludes>
+                <testInclude>com/m3/tooling/synexia/a3/PublicA3ExportMirrorTest.java</testInclude>
+                <testInclude>com/synexia/rewrite/atom/M3AtomCoverageClosureTest.java</testInclude>
+                <testInclude>com/synexia/rewrite/atom/M3AtomDefensiveBranchTest.java</testInclude>
+                <testInclude>com/synexia/rewrite/atom/M3AtomizePureIntReturnRecipeTest.java</testInclude>
+                <testInclude>com/synexia/rewrite/atom/M3InventoryPureIntAtomCandidatesTest.java</testInclude>
+                <testInclude>com/synexia/rewrite/atom/M3PureIntConvergenceRecipeTest.java</testInclude>
+                <testInclude>com/synexia/rewrite/M3JdkA3RecipeExportTest.java</testInclude>
+                <testInclude>com/synexia/rewrite/M3RecipeMasteryPortableReceiptTest.java</testInclude>
+              </testIncludes>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -81,6 +111,11 @@
         <configuration>
           <useModulePath>false</useModulePath>
           <failIfNoTests>true</failIfNoTests>
+          <!-- the export tests resolve manifest and source paths from the export root, as in the donor module -->
+          <workingDirectory>${project.basedir}/../../vendor/synexia/synexia-openrewrite-recipes</workingDirectory>
+          <!-- HOLD (m3/tooling/standalone/GATES.tsv A3_EXPORT_TAG_ASSERTION): one export test method, listed in
+               the file with its reason; Surefire accepts method filters only there -->
+          <excludesFile>${project.basedir}/surefire-hold-excludes.txt</excludesFile>
         </configuration>
       </plugin>
     </plugins>

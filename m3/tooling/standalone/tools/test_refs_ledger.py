@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
 # Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
-"""Tests for REFS_LEDGER v1 and for the LINEAGE_LEDGER_REF v1 consumers it introduced.
+"""Tests for REFS_LEDGER v2 and for the LINEAGE_LEDGER_REF v1 consumers it introduced.
 
 Run from the repository root: python3 -m unittest -v m3/tooling/standalone/tools/test_refs_ledger.py
 """
@@ -65,11 +65,12 @@ def run(script_or_file, cwd: Path) -> subprocess.CompletedProcess:
 class RuleEngineTest(unittest.TestCase):
     HEADER = ("kind", "path", "line", "text")
 
-    def rules(self, td: Path) -> Path:
+    def rules(self, td: Path, *extra: tuple[str, ...]) -> Path:
         path = td / "rules.tsv"
         write_tsv(path, refs.RULE_FIELDS, [
             ("10", "1", "^D_REPO_REF$", "^a\\.yml$", ".", "A", "ABSORB", "act-a", "ev-a"),
             ("20", "0", "^D_", ".", "lineage", "B", "NEXT", "act-b", "ev-b"),
+            *extra,
         ])
         return path
 
@@ -89,6 +90,33 @@ class RuleEngineTest(unittest.TestCase):
             self.assertEqual("before=2 after=1", counts[(refs.FULL_SCOPE, "D_REPO_REF")])
             self.assertEqual("before=1 after=0", counts[(refs.LEAF_SCOPE, "D_REPO_REF")])
 
+    def test_after_only_findings_new_kinds_and_moved_paths_are_counted_and_listed(self):
+        # review of #2236: v1 took "after" from the REMAINS rows and dropped every after-only finding
+        with tempfile.TemporaryDirectory() as name:
+            td = Path(name)
+            write_tsv(td / "before.tsv", self.HEADER, [("D_REPO_REF", "a.yml", "3", "x lineage"),
+                                                       ("D_REPO_REF", "old/m.py", "4", "m lineage")])
+            write_tsv(td / "after.tsv", self.HEADER, [("D_REPO_REF", "a.yml", "9", "x lineage"),
+                                                      ("D_REPO_REF", "a.yml", "3", "x lineage"),
+                                                      ("D_REPO_REF", "moved/m.py", "4", "m lineage"),
+                                                      ("D_REPO_REF", "new.yml", "1", "git clone https://example.invalid/d"),
+                                                      ("D_SECRET", "new.yml", "2", "secrets.DONOR_TOKEN")])
+            rules = self.rules(td, ("30", "0", "^D_", ".", ".", "C", "NEXT", "act-c", "ev-c"))
+            rows = refs.build(refs.dependency_findings(td / "before.tsv"), refs.dependency_findings(td / "after.tsv"),
+                              refs.load_rules(rules))
+            body = [(r[0], r[5], r[1], r[6], r[7]) for r in rows if r[2] != refs.COUNT_DECISION]
+            self.assertEqual([("a.yml", "3", "D_REPO_REF", "A", "REMAINS"),
+                              ("a.yml", "9", "D_REPO_REF", "A", "NEW"),
+                              ("moved/m.py", "4", "D_REPO_REF", "B", "NEW"),
+                              ("new.yml", "1", "D_REPO_REF", "C", "NEW"),
+                              ("new.yml", "2", "D_SECRET", "C", "NEW"),
+                              ("old/m.py", "4", "D_REPO_REF", "B", "RESOLVED")], body)
+            counts = [(r[0], r[1], r[3]) for r in rows if r[2] == refs.COUNT_DECISION]
+            self.assertEqual([(refs.FULL_SCOPE, "D_REPO_REF", "before=2 after=4"),
+                              (refs.FULL_SCOPE, "D_SECRET", "before=0 after=1"),
+                              (refs.LEAF_SCOPE, "D_REPO_REF", "before=1 after=2"),
+                              (refs.LEAF_SCOPE, "D_SECRET", "before=0 after=0")], counts)
+
     def test_unmatched_finding_and_header_drift_are_refused(self):
         with tempfile.TemporaryDirectory() as name:
             td = Path(name)
@@ -97,6 +125,8 @@ class RuleEngineTest(unittest.TestCase):
             write_tsv(rules, refs.RULE_FIELDS, [("1", "0", "^D_REPO_REF$", ".", ".", "A", "HOLD", "a", "e")])
             with self.assertRaises(ValueError):
                 refs.build(refs.dependency_findings(td / "f.tsv"), [], refs.load_rules(rules))
+            with self.assertRaises(ValueError):  # v2: after-only findings are classified as well
+                refs.build([], refs.dependency_findings(td / "f.tsv"), refs.load_rules(rules))
             write_tsv(rules, ("order", "kind"), [("1", "^D_")])
             with self.assertRaises(ValueError):
                 refs.load_rules(rules)

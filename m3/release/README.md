@@ -158,9 +158,12 @@ claimed gate. Synthetic verifier fixtures are never release receipts.
 
 Historical recipe-bearing target POMs and scripts are custody debt. Do not run
 them as new transformation entrypoints. Keep product tests and raw evidence
-available, recover the canonical recipe and callers in Synexia, then perform
-an executed, source-preserving cleanup. Moving those recipes to another folder
-inside M3JDK21 does not satisfy this boundary.
+available, recover each canonical recipe and its callers as a deterministic,
+re-runnable tool in this repository (`m3/tooling/<lane>/tools/`), then perform
+an executed, source-preserving cleanup. Moving a recipe to another folder
+without that recovery and an executed proof does not satisfy this boundary.
+Standalone rule (2026-10-31): no other repository owns or executes a recipe
+that a release needs (`release-contract.json`, `maven_gate_scope`).
 
 Receipt field details: artifact paths resolve relative to the manifest directory.
 Every gate includes `owner_repository` and an `environment` object with `os`,
@@ -215,11 +218,14 @@ has archived native `wc` sources with no original live path under
 This is a **path-level observation** only; it is not proof that the
 functionality is entirely absent, nor permission to copy archived code.
 
-For each unresolved row, reuse the **private Synexia** Maven/Java
-`M3HistoricalCodeLossRecipe` to compare the exact merge base, donor parent,
-historical merge result, and current delivered Git blobs. Reuse existing
-`M3HunkResolver`, `ExactFileHunkReplay` and `m3-pr-stack-preservation`
-compiler/JUnit gates to prepare a bounded candidate. The public queue is
+For each unresolved row, compare the exact merge base, donor parent,
+historical merge result and current delivered Git blobs with a deterministic
+tool carried in this repository (`m3/tooling/<lane>/tools/`), then prepare a
+bounded candidate behind compiler/JUnit gates. The donor-side
+`M3HistoricalCodeLossRecipe`, `M3HunkResolver`, `ExactFileHunkReplay` and
+`m3-pr-stack-preservation` gates are lineage only: none of them is in this tree,
+so absorb the logic as such a tool before relying on it (standalone rule,
+2026-10-31; `m3/tooling/standalone/SYNEXIA_REFS.md`). The public queue is
 a review input, **not** a competing source transformation implementation.
 GitHub's merge action handles mergeable history, but even a clean merge
 needs content no-loss review. Conflicts require an explicit reviewed patch
@@ -228,10 +234,13 @@ and compiler, JUnit and (where applicable) matched-image JNI/jtreg gates.
 Public JDK class and method names stay those of Java 21. Internal class/method
 renames, package moves, documentation changes, service/reflection/JNI symbols
 and consumption must be registered under the stable capability ID in
-`m3/docs/name-mapping.json` and processed with the existing Synexia typed
-Maven/OpenRewrite recipe before target acceptance. Preserve ABI, serialization
-and native entry-point behavior. Recipes and execution memory live in Synexia;
-only qualified product results and evidence live in M3JDK21.
+`m3/docs/name-mapping.json` and processed with a typed, deterministic recipe
+carried in this repository (name contract: `m3/tooling/name-contract/`) before
+target acceptance. Preserve ABI, serialization and native entry-point behavior.
+Standalone rule (2026-10-31): recipes, their execution memory
+(`RECIPE_MEMORY.tsv`, `GATES.tsv`) and the qualified product results and
+evidence all live in M3JDK21; donor lineage stays in ledgers
+(`m3/tooling/standalone/`).
 
 ## Canonical recipe execution and migration HOLD
 

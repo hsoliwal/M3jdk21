@@ -56,8 +56,8 @@ jobs:
           git diff --check "$BASE_SHA...HEAD"
 
       # Standalone (2026-10-31): the slim A3 export is absorbed (m3/vendor/synexia/README.md);
-      # the reactor module tooling/synexia-jdk-a3-recipes builds it into the same coordinate and its
-      # test verifies the absorbed bytes. No other repository is fetched
+      # the reactor module tooling/synexia-jdk-a3-recipes builds it into the same coordinate; its tests
+      # verify the absorbed bytes and run the export's own unit tests. No other repository is fetched
       # (m3/tooling/standalone/SYNEXIA_REFS.tsv).
       - name: 2 build the absorbed slim A3 artifact
         shell: bash

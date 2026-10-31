@@ -231,10 +231,12 @@ def validate(root: Path, release_mode: bool = False,
     else:
         passed("contract.execution_evidence")
     gate_owners = evidence_policy.get("gate_owners", {})
+    foreign_owners = sorted(str(gate) for gate, owner in gate_owners.items()
+                            if owner != PRODUCT_REPOSITORY) if isinstance(gate_owners, dict) else []
     if (not isinstance(gate_owners, dict)
-            or gate_owners.get(MAVEN_GATE) != PRODUCT_REPOSITORY):
-        block("contract.recipe_owner", "Maven/OpenRewrite execution must be owned by " + PRODUCT_REPOSITORY)
-        gate_owners = {MAVEN_GATE: PRODUCT_REPOSITORY}
+            or gate_owners.get(MAVEN_GATE) != PRODUCT_REPOSITORY or foreign_owners):
+        block("contract.recipe_owner", "every release gate, " + MAVEN_GATE + " included, must be owned by "
+              + PRODUCT_REPOSITORY + "; owned elsewhere: " + (", ".join(foreign_owners) or "-"))
 
     notice = read_text("M3-SYNEXIA-NOTICE.md")
     rights = read_text("M3-SYNEXIA-RIGHTS.md")
@@ -390,9 +392,8 @@ def validate(root: Path, release_mode: bool = False,
         try:
             if entry.get("status") != "PASS" or type(entry.get("exit_code")) is not int or entry["exit_code"] != 0:
                 raise ValueError("gate did not record PASS with integer exit_code=0")
-            expected_owner = gate_owners.get(ident, PRODUCT_REPOSITORY)
-            if entry.get("owner_repository") != expected_owner:
-                raise ValueError("wrong gate owner; expected " + str(expected_owner))
+            if entry.get("owner_repository") != PRODUCT_REPOSITORY:
+                raise ValueError("wrong gate owner; expected " + PRODUCT_REPOSITORY)
             command = entry.get("command")
             if (not isinstance(command, list) or not command
                     or any(not isinstance(x, str) or not x.strip() for x in command)):

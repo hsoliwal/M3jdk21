@@ -294,6 +294,27 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
         self.write("m3/release/release-contract.json", json.dumps(self.contract))
         self.assert_blocked(self.result(), "contract.recipe_owner")
 
+    def test_contract_delegating_any_other_gate_to_another_repository_is_refused(self):
+        # review of #2236: the owner rule covers every gate, not only the Maven gate; the delegating contract is
+        # amended into the single release commit and the evidence re-pinned, so the delegation is the only change
+        other = "example/another-repository"
+        ident = next(g for g in self.contract["mandatory_release_gates"] if g != release.MAVEN_GATE)
+        self.contract["execution_evidence"]["gate_owners"][ident] = other
+        self.write("m3/release/release-contract.json", json.dumps(self.contract))
+        self.git("add", ".")
+        self.git("commit", "--amend", "-qm", "synthetic release tree delegating " + ident)
+        self.evidence["source_commit"] = self.git("rev-parse", "HEAD")
+        self.evidence["source_tree"] = self.git("rev-parse", "HEAD^{tree}")
+        entry = next(g for g in self.evidence["gates"] if g["id"] == ident)
+        for owner, expected in ((other, {"contract.recipe_owner", "gate:" + ident}),
+                                (release.PRODUCT_REPOSITORY, {"contract.recipe_owner"})):
+            entry["owner_repository"] = owner
+            with self.subTest(evidence_owner=owner):
+                result = self.result()
+                self.assertFalse(result["policy_valid"], result)
+                self.assertFalse(result["release_ready"], result)
+                self.assertEqual(expected, {b["name"] for b in result["blockers"]}, result)
+
     def test_retained_legacy_recipe_sources_remain_visible_holds(self):
         self.write("m3/recipes/apply.py", "# synthetic legacy recipe fixture\n")
         self.git("add", ".")
