@@ -69,8 +69,8 @@ public final class M3WebComponentChecks {
 		c.paint(g);
 		g.dispose();
 		int[] probe = M3WebPixelProbe.probe(c.getModel(), c.getWidth(), c.getHeight());
-		if (probe.length == 3) {
-			check(M3WebPixelProbe.close(img.getRGB(probe[0], probe[1]), probe[2], 24),
+		if (probe.length == 4) {
+			check(M3WebPixelProbe.close(img.getRGB(probe[0], probe[1]), probe[2], probe[3]),
 					"pixel at " + probe[0] + "," + probe[1] + " is " + Integer.toHexString(img.getRGB(probe[0], probe[1]) & 0xffffff) + " not " + Integer.toHexString(probe[2]));
 		}
 	}

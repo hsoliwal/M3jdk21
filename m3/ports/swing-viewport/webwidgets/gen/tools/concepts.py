@@ -63,6 +63,34 @@ def best_concept(name, aliases, tokens):
     return ([], "T3_NON_WIDGET") if words & NON_WIDGET else ([], "UNMAPPED")
 
 
+# Tier 6 (2026-10-31): clusters of the remaining names, from a CPU token census of the UNMAPPED rows.
+# Words match exactly; in all-lowercase concatenations (GTK, wx) they also match as substrings.
+CLUSTER = {"backdrop": "watermark blockui", "drawer": "offcanvas", "menu": "megamenu tieredmenu overflow", "panel": "dock frame",
+           "table": "dataview descriptions", "code-block": "terminal", "navigation": "navigator burger", "layout-primitive": "region scaffold layout",
+           "image": "logo figure magnifier thumb illustration texture", "transition-anim": "lottie circularreveal", "icon": "svg octicon",
+           "select": "roller tumbler", "label": "span", "card": "hero elevation", "chart": "legend viz curves", "infinite-scroll": "deferredcontent",
+           "gallery": "galleria", "text-input": "iconfield inplace autofill", "reorder-drag": "orderlist", "list": "picklist repeater",
+           "affix": "scrolltop", "fab": "speeddial", "tabs": "tabmenu", "tree": "treenode", "virtual-list": "virtualscroller",
+           "stepper": "steplist", "tooltip": "tip", "stat-kpi": "countdown timer digits", "avatar": "persona", "accordion": "expandable expansible",
+           "qr-code": "barcode", "video-player": "camera media", "toggle-button": "toggler toggleable", "chip": "tags", "slider": "adjuster adjustment",
+           "dialog": "dlg window about login", "tray-status": "statusbr", "scroll": "scrolwin viewport", "time-picker": "clock",
+           "button": "btn pressable copy", "toast": "feedback note", "progress": "circle arc"}
+NON_WIDGET_SUB = ("private", "impl", "builder", "buildable", "constraint", "css", "accessible", "action", "bitmask", "bitset", "utils",
+                  "factory", "model", "filter", "sorter", "expression", "parser", "solver", "types", "context", "boundary", "error",
+                  "dictionary", "flags", "constants", "properties", "setter", "dependency", "exception", "hooks", "internal", "debug", "class")
+
+
+def cluster(name, path, tokens):
+    words, joined = tokens(name)
+    concat = name.islower() and "_" not in name and "-" not in name
+    hits = sorted({c for c, al in CLUSTER.items() for a in al.split() if a in words or (concat and a in joined)})
+    if hits:
+        return hits, "T6_CLUSTER"
+    if any(n in joined for n in NON_WIDGET_SUB):
+        return [], "T3_NON_WIDGET"
+    return [], "UNMAPPED"
+
+
 PREFIXES = ("Gtk", "Gdk", "Wx", "wx", "Fl_", "lv_", "Ion", "Mud", "Kendo", "Md", "Mat", "El", "Ant", "Rad", "Sf", "Dx", "Ui", "UI", "V", "Q", "N", "T", "Ons", "F7")
 
 
@@ -80,7 +108,7 @@ def best_with_fallbacks(name, path, aliases, tokens):
         cs3, t3 = best_concept(seg, aliases, tokens)
         if cs3 and t3 in ("T1_ALIAS", "T2_WORD"):
             return cs3, "T5_PATH"
-    return cs, tier
+    return cluster(name, path, tokens)
 
 
 def verify(existing, nebula, swt, jdk, m3port=frozenset()):

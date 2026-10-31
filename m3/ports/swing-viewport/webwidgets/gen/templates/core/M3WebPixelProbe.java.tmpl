@@ -1,25 +1,45 @@
 package @PKG@;
 
 /**
- * Picks a pixel the display list fully determines (pattern M3P-CORE-1): the last solid fill record
- * (RECT, ROUND, OVAL) whose centre lies inside the widget and is not inside any later record's box.
- * Both toolkits' probes sample that pixel from a real render and compare it to the record's colour.
+ * Picks a pixel the display list fully determines (pattern M3P-CORE-1): scanning solid fill records
+ * (RECT, ROUND, OVAL) from the last one back, the first candidate point inside the widget that no later
+ * record's box touches and whose colour differs from the background. Both toolkits' probes sample that
+ * pixel from a real render and compare it to the record's colour.
  */
 public final class M3WebPixelProbe {
+	private static final int[][] RECT_POINTS = { { 2, 2 }, { 1, 1 }, { 3, 1 }, { 1, 3 }, { 3, 3 }, { 1, 2 }, { 3, 2 }, { 2, 1 }, { 2, 3 } };
+
 	private M3WebPixelProbe() {
 	}
 
-	/** Returns {x, y, rgb} of a determined pixel, or an empty array when the list has none. */
+	/**
+	 * Returns {x, y, rgb, tolerance} of a determined pixel, or an empty array when the list has none. A colour within
+	 * 24 of the background gets tolerance 2 (exact interior fill), others 12 (anti-aliasing of nearby edges).
+	 */
 	public static int[] probe(M3WebModel m, int width, int height) {
 		M3WebPaint p = new M3WebPaint();
 		m.paint(p);
+		int bg = m.theme().slot(M3WebTheme.BG);
 		for (int i = p.count() - 1; i >= 0; i--) {
-			int op = p.get(i, M3WebPaint.F_OP);
-			int x = p.get(i, M3WebPaint.F_X) + p.get(i, M3WebPaint.F_W) / 2, y = p.get(i, M3WebPaint.F_Y) + p.get(i, M3WebPaint.F_H) / 2;
-			boolean solid = (op == M3WebPaint.RECT || op == M3WebPaint.ROUND || op == M3WebPaint.OVAL) && p.get(i, M3WebPaint.F_W) >= 6
-					&& p.get(i, M3WebPaint.F_H) >= 6;
-			if (solid && x > 0 && y > 0 && x < width - 1 && y < height - 1 && !coveredLater(p, i, x, y)) {
-				return new int[] { x, y, p.get(i, M3WebPaint.F_RGB) };
+			int op = p.get(i, M3WebPaint.F_OP), w = p.get(i, M3WebPaint.F_W), h = p.get(i, M3WebPaint.F_H), rgb = p.get(i, M3WebPaint.F_RGB);
+			boolean solid = (op == M3WebPaint.RECT || op == M3WebPaint.ROUND || op == M3WebPaint.OVAL) && w >= 8 && h >= 8;
+			int[] at = solid ? point(p, i, width, height) : new int[0];
+			if (at.length == 2) {
+				return new int[] { at[0], at[1], rgb, close(rgb, bg, 24) ? 2 : 12 };
+			}
+		}
+		return new int[0];
+	}
+
+	/** Candidate points at quarter positions of the record's box (corners excluded for rounded shapes). */
+	private static int[] point(M3WebPaint p, int i, int width, int height) {
+		int x0 = p.get(i, M3WebPaint.F_X), y0 = p.get(i, M3WebPaint.F_Y), w = p.get(i, M3WebPaint.F_W), h = p.get(i, M3WebPaint.F_H);
+		boolean rect = p.get(i, M3WebPaint.F_OP) == M3WebPaint.RECT;
+		for (int[] q : RECT_POINTS) {
+			boolean corner = q[0] != 2 && q[1] != 2;
+			int x = x0 + w * q[0] / 4, y = y0 + h * q[1] / 4;
+			if ((rect || !corner) && x > 0 && y > 0 && x < width - 1 && y < height - 1 && !coveredLater(p, i, x, y)) {
+				return new int[] { x, y };
 			}
 		}
 		return new int[0];
@@ -27,11 +47,22 @@ public final class M3WebPixelProbe {
 
 	private static boolean coveredLater(M3WebPaint p, int record, int x, int y) {
 		for (int k = record + 1; k < p.count(); k++) {
-			if (p.intersects(k, x - 2, y - 2, 4, 4)) {
+			boolean hit = p.get(k, M3WebPaint.F_OP) == M3WebPaint.TEXT ? glyphs(p, k, x, y) : p.intersects(k, x - 2, y - 2, 4, 4);
+			if (hit) {
 				return true;
 			}
 		}
 		return false;
+	}
+
+	/** Conservative glyph box of a TEXT record: 0.8 em per char plus margins, 1.6 em high, by alignment. */
+	private static boolean glyphs(M3WebPaint p, int k, int x, int y) {
+		int bx = p.get(k, M3WebPaint.F_X), by = p.get(k, M3WebPaint.F_Y), bw = p.get(k, M3WebPaint.F_W), bh = p.get(k, M3WebPaint.F_H);
+		int style = p.get(k, M3WebPaint.F_ARG), px = Math.max(8, style & 0xff);
+		int tw = Math.min(bw, p.text(p.get(k, M3WebPaint.F_REF)).length() * px * 8 / 10 + 8), th = Math.min(bh, px * 16 / 10 + 4);
+		int tx = (style & M3WebPaint.CENTER) != 0 ? bx + (bw - tw) / 2 : (style & M3WebPaint.RIGHT) != 0 ? bx + bw - tw : bx;
+		int ty = by + (bh - th) / 2;
+		return x >= tx - 3 && x <= tx + tw + 3 && y >= ty - 3 && y <= ty + th + 3;
 	}
 
 	/** True when two packed RGB values differ by at most {@code tolerance} per channel. */

@@ -61,23 +61,64 @@ public final class M3WebPixelProbeSnippet {
 		gc.copyArea(screen, 0, 0);
 		gc.dispose();
 		ImageData data = screen.getImageData();
+		boolean blank = blank(data, widgets);
 		int failed = 0;
-		System.out.println("concept\tx\ty\texpected\tactual\tresult");
+		System.out.println("concept	x	y	expected	screen	screen_result	print	print_result");
 		for (M3WebCanvas<?> w : widgets) {
-			M3WebModel m = w.getModel();
-			int[] probe = M3WebPixelProbe.probe(m, w.getSize().x, w.getSize().y);
-			if (probe.length != 3) {
-				System.out.println(m.concept() + "\t-\t-\t-\t-\tNO_PROBE");
-				continue;
-			}
-			Point at = w.toDisplay(probe[0], probe[1]);
-			org.eclipse.swt.graphics.RGB rgb = data.palette.getRGB(data.getPixel(at.x, at.y));
-			int actual = rgb.red << 16 | rgb.green << 8 | rgb.blue;
-			boolean ok = M3WebPixelProbe.close(actual, probe[2], 24);
-			failed += ok ? 0 : 1;
-			System.out.println(m.concept() + "\t" + at.x + "\t" + at.y + "\t" + Integer.toHexString(probe[2]) + "\t" + Integer.toHexString(actual) + "\t" + (ok ? "PASS" : "FAIL"));
+			failed += row(w, data, printed(display, w), blank) ? 0 : 1;
 		}
 		screen.dispose();
 		return failed;
+	}
+
+	/** A screen frame that is one colour over every widget is rejected (hidden desktop not composited). */
+	private static boolean blank(ImageData data, M3WebCanvas<?>[] widgets) {
+		int first = -1;
+		for (M3WebCanvas<?> w : widgets) {
+			Point o = w.toDisplay(0, 0);
+			for (int k = 0; k < 64; k++) {
+				int v = rgb(data, Math.min(data.width - 1, o.x + k * 4), Math.min(data.height - 1, o.y + k * 2));
+				first = first < 0 ? v : first;
+				if (v != first) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	/** Control.print evidence, labelled separately from the screen capture. */
+	private static ImageData printed(Display display, M3WebCanvas<?> w) {
+		Image image = new Image(display, Math.max(1, w.getSize().x), Math.max(1, w.getSize().y));
+		GC gc = new GC(image);
+		w.print(gc);
+		gc.dispose();
+		ImageData data = image.getImageData();
+		image.dispose();
+		return data;
+	}
+
+	private static boolean row(M3WebCanvas<?> w, ImageData screen, ImageData print, boolean blank) {
+		M3WebModel m = w.getModel();
+		int[] probe = M3WebPixelProbe.probe(m, w.getSize().x, w.getSize().y);
+		if (probe.length != 4) {
+			System.out.println(m.concept() + "	-	-	-	-	NO_PROBE	-	NO_PROBE");
+			return true;
+		}
+		Point at = w.toDisplay(probe[0], probe[1]);
+		int s = rgb(screen, at.x, at.y), q = rgb(print, probe[0], probe[1]);
+		boolean okPrint = M3WebPixelProbe.close(q, probe[2], probe[3]), ok = blank ? okPrint : M3WebPixelProbe.close(s, probe[2], probe[3]);
+		System.out.println(m.concept() + "	" + at.x + "	" + at.y + "	" + hex(probe[2]) + "	" + hex(s) + "	" + (blank ? "BLANK_FRAME" : ok ? "PASS" : "FAIL")
+				+ "	" + hex(q) + "	" + (okPrint ? "PASS" : "FAIL"));
+		return ok;
+	}
+
+	private static int rgb(ImageData data, int x, int y) {
+		org.eclipse.swt.graphics.RGB c = data.palette.getRGB(data.getPixel(x, y));
+		return c.red << 16 | c.green << 8 | c.blue;
+	}
+
+	private static String hex(int rgb) {
+		return String.format("%06x", rgb);
 	}
 }

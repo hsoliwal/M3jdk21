@@ -1,0 +1,12 @@
+concept	x	y	expected	screen	screen_result	print	print_result
+card	-	-	-	-	NO_PROBE	-	NO_PROBE
+avatar	-	-	-	-	NO_PROBE	-	NO_PROBE
+skeleton	686	86	eaeef4	ffffff	BLANK_FRAME	eaeef4	PASS
+drawer	1070	120	ffffff	ffffff	BLANK_FRAME	ffffff	PASS
+autocomplete	-	-	-	-	NO_PROBE	-	NO_PROBE
+kanban-board	562	320	edeff2	ffffff	BLANK_FRAME	edeff2	PASS
+video-player	700	377	3f3f3f	ffffff	BLANK_FRAME	3f3f3f	PASS
+cascader	-	-	-	-	NO_PROBE	-	NO_PROBE
+qr-code	98	594	0f172a	ffffff	BLANK_FRAME	0f172a	PASS
+ribbon	-	-	-	-	NO_PROBE	-	NO_PROBE
+navigation	-	-	-	-	NO_PROBE	-	NO_PROBE

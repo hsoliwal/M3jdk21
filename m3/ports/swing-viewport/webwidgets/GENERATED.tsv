@@ -298,7 +298,7 @@ src/main/java/com/m3/swing/web/model/M3WebGlyphs.java	core/M3WebGlyphs.java.tmpl
 src/main/java/com/m3/swing/web/model/M3WebLanes.java	core/M3WebLanes.java.tmpl	534e2b0f53dd7b1d83995c07230c02840f8be708e18406995ef4e24cd438ba4a
 src/main/java/com/m3/swing/web/model/M3WebModel.java	core/M3WebModel.java.tmpl	db9757f566faf258b622c34f95106b540a8ae57029a51ef07e8cb0d77181a9f3
 src/main/java/com/m3/swing/web/model/M3WebPaint.java	core/M3WebPaint.java.tmpl	ce3715e32a0a1c2ea7a31b48471b818865b9182a9deda2cea4924e660c5fad1d
-src/main/java/com/m3/swing/web/model/M3WebPixelProbe.java	core/M3WebPixelProbe.java.tmpl	ca5718908c71369ae07f2f4627e68a2e864febc0fa168990f9d78d5619b3289b
+src/main/java/com/m3/swing/web/model/M3WebPixelProbe.java	core/M3WebPixelProbe.java.tmpl	015454c7abf9c806c4ee5d835b529c07a6205fab34bb191e41d30e32f63bcba1
 src/main/java/com/m3/swing/web/model/M3WebStates.java	core/M3WebStates.java.tmpl	f125fe5abc03e20ab76308b9b6aa0fbc5d4e07e3ccd7ff20e00b1a0cce3d3360
 src/main/java/com/m3/swing/web/model/M3WebTheme.java	core/M3WebTheme.java.tmpl	0aa439636cc4bd63691df52ed14411301e3dba986d6454e242e193ab7977144c
 src/main/java/com/m3/swing/web/model/M3WebView.java	core/M3WebView.java.tmpl	6661c3b7c367cde728353210a4693b9ff0ace998fd17102eb49d863e8cf5a1c6
@@ -371,7 +371,7 @@ src/test/java/com/m3/swing/web/M3TourTest.java	swing/Test.tmpl	15ca1fefb804ed260
 src/test/java/com/m3/swing/web/M3TransitionAnimTest.java	swing/Test.tmpl	081b665aa954a5ba29496c30ca7d2b7c8acbf4234e7fc6f1140475683219be03
 src/test/java/com/m3/swing/web/M3TreemapTest.java	swing/Test.tmpl	bf3eb408ac2a5e58537cca25a674ea7dad2fd535029c7d2845a2bb00413e82d0
 src/test/java/com/m3/swing/web/M3VideoPlayerTest.java	swing/Test.tmpl	770e443c181012e3a1d41fe143ddcb6f927cfbabbffd61bf5cfc51e4895dba99
-src/test/java/com/m3/swing/web/M3WebComponentChecks.java	swing/M3WebComponentChecks.java.tmpl	11aeb05ddeeba193e96455e56cb5149f0c7e37880b5187935c6232664af734b2
+src/test/java/com/m3/swing/web/M3WebComponentChecks.java	swing/M3WebComponentChecks.java.tmpl	b44afe3958780632c5a5c4e20b24f89cb4077921727647caa47129277302373b
 src/test/java/com/m3/swing/web/M3WebViewTest.java	swing/Test.tmpl	aa7fd1967f44b11f69b9e2871db9b29bb4d23613b223a1158032fb70e31667a6
 src/test/java/com/m3/swing/web/model/M3AnimvalueChecks.java	checks/ANIMVALUE.checks.tmpl	e4fac686b50d8bdf7d3aba200671931a3dbc25e18d9cc91547f9822a6a8b63f6
 src/test/java/com/m3/swing/web/model/M3CollectionChecks.java	checks/COLLECTION.checks.tmpl	cb35b18d928d8b1f059abfd6b9ce745a7dba13113dcb5421570312d97993d9db

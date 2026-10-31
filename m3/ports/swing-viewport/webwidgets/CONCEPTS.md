@@ -5,11 +5,15 @@
 
 | tier | rule | names |
 |---|---|---|
-| T1_ALIAS | the harvest's own alias table (`universe_concepts.py`, verbatim) | see the `tier` column |
-| T2_WORD | exact-word aliases added in `tools/concepts.py` (`EXTRA`) | |
-| T5_PATH | a concept word in the component's directory path | |
-| T3_NON_WIDGET | infrastructure names (events, bindings, converters, hooks) | |
-| UNMAPPED | none of the above; still open | |
+| T1_ALIAS | the harvest's own alias table (`universe_concepts.py`, verbatim) | 4,774 |
+| T2_WORD | exact-word aliases added in `tools/concepts.py` (`EXTRA`) | 831 |
+| T5_PATH | a concept word in the component's directory path | 58 |
+| T6_CLUSTER | clusters from a CPU token census of the remaining names (`CLUSTER`; substrings for all-lowercase GTK/wx names) | 210 |
+| T3_NON_WIDGET | infrastructure names (events, bindings, converters, hooks, GTK private/builder/css types) | 577 |
+| UNMAPPED | none of the above; still open (mostly single GTK/wx/Flutter/FLTK internals) | 351 |
+
+Total 6,801 names (6,323 harvested + 478 addendum); 5,873 map to one of the 104 concepts (86.4%), 577 are support
+types, 351 (5.2%) remain open. No new concept was added in this pass: the remaining names are singletons.
 
 Run `python tools/concepts.py <inputs> spec/MEMBERS.tsv <out>`; it prints the counts per tier.
 
