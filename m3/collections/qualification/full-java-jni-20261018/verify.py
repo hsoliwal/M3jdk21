@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
+# Modified 2026: validate Linux inputs before output changes and reuse arrays Java/JNI at every boundary.
 """Build the source-JUnit closure, owning collection module and every collection JNI library."""
 import hashlib
 import json
@@ -7,13 +8,14 @@ import os
 from pathlib import Path
 import shutil
 import subprocess
+import sys
 import xml.etree.ElementTree as ET
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[4]
 MODULE = ROOT / 'm3/collections'
 OUT = MODULE / 'target/full-java-jni'
-JAVA = Path(os.environ['JAVA_HOME'])
+JAVA = Path(os.environ.get('JAVA_HOME', ''))
 VENDOR = ROOT / 'm3/vendor/third_party'
 DEPENDENCIES = ('apiguardian-api', 'opentest4j', 'univocity-parsers',
                 'junit-platform-commons-1.10.2', 'junit-platform-engine-1.10.2',
@@ -63,16 +65,47 @@ def reports(mode):
         raise RuntimeError('Required-native suite skipped tests: ' + str(totals))
     return totals
 
+def preflight():
+    """Refuse an unsupported host or wrong checkout before changing old evidence."""
+    if not sys.platform.startswith('linux'):
+        raise RuntimeError('This JNI acceptance host requires Linux; no partial overall PASS')
+    if not os.environ.get('JAVA_HOME') or any(
+            not (JAVA / 'bin' / tool).is_file() for tool in ('java', 'javac', 'jar', 'jdeps')):
+        raise RuntimeError('JAVA_HOME must name the selected full JDK')
+    head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
+    expected = os.environ.get('EXPECTED_HEAD')
+    if expected and head != expected:
+        raise RuntimeError('Checked-out head differs from expected head')
+    return head
+
+
+def prepare_arrays():
+    """Reuse the existing source-built arrays module and required JNI allocator."""
+    maven(ROOT / 'm3/arrays/pom.xml', '-Dmaven.test.skip=true', 'install')
+    array_jar = ROOT / 'm3/arrays/target/m3-arrays-0.1.0-SNAPSHOT.jar'
+    if not array_jar.is_file():
+        raise RuntimeError('Source-built jdk.m3.arrays module jar is absent')
+    with zipfile.ZipFile(array_jar) as archive:
+        if 'module-info.class' not in archive.namelist():
+            raise RuntimeError('jdk.m3.arrays module descriptor is missing')
+    native = OUT / 'arrays-native'
+    run(['cmake', '-S', ROOT / 'm3/arrays/src/main/native', '-B', native,
+         '-DCMAKE_BUILD_TYPE=Release'])
+    run(['cmake', '--build', native, '--config', 'Release', '--parallel', '2'])
+    library = native / 'libm3_arrays.so'
+    if not library.is_file():
+        raise RuntimeError('Source-built M3 arrays JNI library is absent')
+    return array_jar.resolve(), library.resolve()
+
+
 def main():
+    head = preflight()
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / 'PROOF.json').unlink(missing_ok=True)  # Never leave a prior PASS after a failed rerun.
-    for name in ('headers', 'classes', 'fixture-classes', 'native', 'missing'):
+    for name in ('headers', 'classes', 'fixture-classes', 'native', 'missing', 'arrays-native'):
         path = OUT / name
         if path.exists(): shutil.rmtree(path)
         path.mkdir()
-    head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
-    expected = os.environ.get('EXPECTED_HEAD')
-    if expected and head != expected: raise RuntimeError('Checked-out head differs from expected head')
     dependency_proof = {}
     for module in DEPENDENCIES:
         owner = VENDOR / module
@@ -89,14 +122,9 @@ def main():
     # Reuse the existing source-owned jdk.m3.arrays module (Eclipse/Synexia
     # collection donor), rather than compiling jdk.m3.collections as an
     # unresolved JPMS module or placing arrays classes on the class path.
-    maven(ROOT / 'm3/arrays/pom.xml', '-Dmaven.test.skip=true', 'install')
-    array_jar = ROOT / 'm3/arrays/target/m3-arrays-0.1.0-SNAPSHOT.jar'
-    if not array_jar.is_file():
-        raise RuntimeError('Source-built jdk.m3.arrays module jar is absent')
-    with zipfile.ZipFile(array_jar) as archive:
-        if 'module-info.class' not in archive.namelist():
-            raise RuntimeError('jdk.m3.arrays module descriptor is missing')
-    dependency_proof['jdk.m3.arrays'] = {'jar_sha256': sha(array_jar)}
+    array_jar, array_library = prepare_arrays()
+    dependency_proof['jdk.m3.arrays'] = {'jar_sha256': sha(array_jar),
+                                        'native_library_sha256': sha(array_library)}
     sources = sorted((MODULE / 'src/main/java').rglob('*.java'))
     tests = sorted((MODULE / 'src/test/java').rglob('*.java'))
     (OUT / 'main.args').write_text('\n'.join(map(str, sources)) + '\n')
@@ -125,7 +153,8 @@ def main():
         run(cc + ['-shared', *objects, '-o', OUT / 'native' / ('lib' + library + '.so')])
     # Existing navigation fixture has its own test-only JNI ABI; keep it out of the product library.
     run([JAVA / 'bin/javac', '--release', '21', '-Xlint:all,-module', '-Werror',
-         '-cp', OUT / 'classes', '-h', OUT / 'headers', '-d', OUT / 'fixture-classes',
+          '-cp', os.pathsep.join(map(str, (OUT / 'classes', array_jar))),
+          '-h', OUT / 'headers', '-d', OUT / 'fixture-classes',
          MODULE / 'src/test/java/jdk/m3/collections/M3BitLaneJumpProof.java'])
     run(cc + ['-shared', '-fPIC', '-include', OUT / 'headers/jdk_m3_collections_M3BitLaneJumpProof.h',
               MODULE / 'src/test/native/m3_bitlane_jump_jni.c', '-o',
@@ -140,6 +169,7 @@ def main():
               '-o', gather_fixture])
     run([gather_fixture])
     common = ['-Xmx768m', '-XX:ActiveProcessorCount=2', '-Xcheck:jni',
+              '-Dm3.arrays.native.path=' + str(array_library), '-Dm3.arrays.native.required=true',
               '-Dm3.collections.rank.native=true', '-Dm3.collections.signal.native=true']
     results = {}
     for mode, required in [('java', 'false'), ('native', 'true')]:
@@ -162,9 +192,9 @@ def main():
     runtime_modules = subprocess.check_output(
         [JAVA / 'bin/jdeps', '--module-path', array_jar, '--print-module-deps', jar],
         text=True).strip()
-    if runtime_modules != 'jdk.m3.arrays,java.base':
+    if runtime_modules != 'java.base,jdk.m3.arrays':
         raise RuntimeError('Unexpected JPMS dependency closure: ' + runtime_modules)
-    cp = str(MODULE / 'target/classes') + os.pathsep + str(MODULE / 'target/test-classes')
+    cp = os.pathsep.join(map(str, (MODULE / 'target/classes', MODULE / 'target/test-classes', array_jar)))
     java = [JAVA / 'bin/java', *common, '-Djava.library.path=' + str(OUT / 'native'), '-cp', cp]
     contracts = [('M3MaskWindowSparseContract', ['native']),
                  ('M3BudgetedMaskWindowContract', ['--native']),

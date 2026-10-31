@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
+# Modified 2026: preserve sealed source preflight and reuse the required arrays Java/JNI owners.
 # Modified 2026 by Hitesh Soliwal and contributors: qualify concurrent EnumSet in a new exact inventory; preserve all acceptance guards and historical receipts.
 # Modified 2026 by Hitesh Soliwal and contributors: restore exact collection receiving provenance and verification while retaining current owners and String phase authority.
 # Modified 2026 by Hitesh Soliwal and contributors: restore the Tools4j predecessor selector and seal the superset source set as an exact additive successor after the Tools4j refinement; historical receipts stay unchanged.
@@ -286,38 +287,8 @@ def include_superset_source_successor(previous_rows, receipt=_SUPERSET_RECEIPT):
     return result
 
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--cost-probe', action='store_true', help='record paired diagnostic allocation/time samples')
-    args = parser.parse_args()
-    java_home = Path(os.environ['JAVA_HOME']).resolve()
-    junit = Path(os.environ['JUNIT_CONSOLE_JAR']).resolve()
-    if not junit.is_file():
-        raise SystemExit('JUNIT_CONSOLE_JAR must name a real JUnit platform console standalone JAR')
-    if digest(junit) != '329bd10288875a74d04c9ca6b7c9889c265ddf87b21a9ea42a7f7392f391472a':
-        raise SystemExit('Expected exact JUnit console 1.12.2 artifact')
-    if not sys.platform.startswith('linux'):
-        raise SystemExit('This JNI acceptance host requires Linux; no partial overall PASS')
-    target = HERE / 'target/donation-verification'
-    shutil.rmtree(target, ignore_errors=True)
-    evidence = target / 'evidence'
-    evidence.mkdir(parents=True)
-
-    def run(name, command):
-        command = [str(x) for x in command]
-        result = subprocess.run(command, cwd=REPO, capture_output=True, text=True)
-        output = result.stdout + result.stderr
-        (evidence / (name + '.log')).write_text(
-            '$ ' + repr(command) + '\n' + output + '\nEXIT=' + str(result.returncode) + '\n')
-        if result.returncode:
-            print(output[-16000:])
-            raise SystemExit(result.returncode)
-        print(name + ': PASS', flush=True)
-        return output
-
-    version = run('01-java-version', [java_home / 'bin/java', '-version'])
-    if 'version "21.' not in version and 'version "21"' not in version:
-        raise SystemExit('The qualified baseline requires Java 21')
+def verified_source_rows():
+    """Validate the unchanged sealed source chain before creating build output."""
     packet = read_donation_packet()
     manifest_name = packet.get('installed_source_manifest', 'qualification/installed-source-enum-set-20261008.tsv')
     manifest_relative = Path(manifest_name)
@@ -348,6 +319,70 @@ def main():
     actual_java = {str(path.relative_to(REPO)) for path in (HERE / 'src').rglob('*.java')}
     if declared_java != actual_java:
         raise SystemExit('Java source set changed; qualify a successor packet')
+    return manifest, rows
+
+
+def prepare_arrays(target, run):
+    """Build the existing arrays Java/JNI owners; never replace required allocation."""
+    command = [os.environ.get('MVN', 'mvn'), '-B', '-ntp']
+    if os.environ.get('M3_MAVEN_OFFLINE') == '1': command.append('-o')
+    if os.environ.get('M2_REPO'): command.append('-Dmaven.repo.local=' + os.environ['M2_REPO'])
+    run('01-arrays-java', command + ['-f', REPO / 'm3/arrays/pom.xml',
+                                   '-Dmaven.test.skip=true', 'install'])
+    array_jar = REPO / 'm3/arrays/target/m3-arrays-0.1.0-SNAPSHOT.jar'
+    if not array_jar.is_file():
+        raise SystemExit('Source-built jdk.m3.arrays module jar is absent')
+    with zipfile.ZipFile(array_jar) as archive:
+        if 'module-info.class' not in archive.namelist():
+            raise SystemExit('jdk.m3.arrays module descriptor is missing')
+    native = target / 'arrays-native'
+    run('01-arrays-native-configure', ['cmake', '-S', REPO / 'm3/arrays/src/main/native',
+                                     '-B', native, '-DCMAKE_BUILD_TYPE=Release'])
+    run('01-arrays-native-build', ['cmake', '--build', native, '--config', 'Release',
+                                 '--parallel', '2'])
+    library = native / 'libm3_arrays.so'
+    if not library.is_file():
+        raise SystemExit('Source-built M3 arrays JNI library is absent')
+    return array_jar.resolve(), library.resolve()
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--cost-probe', action='store_true', help='record paired diagnostic allocation/time samples')
+    args = parser.parse_args()
+    java_home = Path(os.environ['JAVA_HOME']).resolve()
+    junit = Path(os.environ['JUNIT_CONSOLE_JAR']).resolve()
+    if not junit.is_file():
+        raise SystemExit('JUNIT_CONSOLE_JAR must name a real JUnit platform console standalone JAR')
+    if digest(junit) != '329bd10288875a74d04c9ca6b7c9889c265ddf87b21a9ea42a7f7392f391472a':
+        raise SystemExit('Expected exact JUnit console 1.12.2 artifact')
+    if not sys.platform.startswith('linux'):
+        raise SystemExit('This JNI acceptance host requires Linux; no partial overall PASS')
+    manifest, rows = verified_source_rows()
+    target = HERE / 'target/donation-verification'
+    shutil.rmtree(target, ignore_errors=True)
+    evidence = target / 'evidence'
+    evidence.mkdir(parents=True)
+
+    def run(name, command):
+        command = [str(x) for x in command]
+        result = subprocess.run(command, cwd=REPO, capture_output=True, text=True)
+        output = result.stdout + result.stderr
+        (evidence / (name + '.log')).write_text(
+            '$ ' + repr(command) + '\n' + output + '\nEXIT=' + str(result.returncode) + '\n')
+        if result.returncode:
+            print(output[-16000:])
+            raise SystemExit(result.returncode)
+        print(name + ': PASS', flush=True)
+        return output
+
+    version = run('01-java-version', [java_home / 'bin/java', '-version'])
+    if 'version "21.' not in version and 'version "21"' not in version:
+        raise SystemExit('The qualified baseline requires Java 21')
+    array_jar, array_library = prepare_arrays(target, run)
+    array_vm = ['-Dm3.arrays.native.path=' + str(array_library),
+                '-Dm3.arrays.native.required=true']
+    declared_java = {path for path, _ in rows if path.endswith('.java') and '/src/' in path}
     mains = sorted(REPO / path for path in declared_java if '/src/main/' in path)
     tests = sorted(REPO / path for path in declared_java if '/src/test/' in path)
     probes = [HERE / 'verification' / (name + '.java') for name in
@@ -356,12 +391,12 @@ def main():
     classes.mkdir()
     test_classes.mkdir()
     common = [java_home / 'bin/javac', '--release', '21', '-Xlint:all,-module', '-Werror']
-    run('02-module-compile', common + ['-d', classes] + mains)
-    run('03-test-compile', common + ['-cp', str(classes) + os.pathsep + str(junit),
+    run('02-module-compile', common + ['--module-path', array_jar, '-d', classes] + mains)
+    run('03-test-compile', common + ['-cp', os.pathsep.join(map(str, (classes, array_jar, junit))),
                                    '-d', test_classes] + tests + probes)
-    runtime_classpath = str(classes) + os.pathsep + str(test_classes)
+    runtime_classpath = os.pathsep.join(map(str, (classes, test_classes, array_jar)))
     reports = target / 'junit-reports'
-    run('04-all-contract-tests', [java_home / 'bin/java', '-jar', junit, 'execute',
+    run('04-all-contract-tests', [java_home / 'bin/java', *array_vm, '-jar', junit, 'execute',
                                 '--disable-banner', '--class-path', runtime_classpath,
                                 '--scan-class-path', '--fail-if-no-tests', '--reports-dir', reports])
     totals = {'tests': 0, 'failures': 0, 'errors': 0, 'skipped': 0}
@@ -372,7 +407,7 @@ def main():
     if not totals['tests'] or any(totals[key] for key in ('failures', 'errors', 'skipped')):
         raise SystemExit('JUnit acceptance requires nonzero tests and no failures/errors/skips: ' + repr(totals))
     for name in ('M3LazyTreeMapSelfTest', 'M3LazyValueStateSelfTest'):
-        run('04-' + name, [java_home / 'bin/java', '-ea', '-cp', runtime_classpath,
+        run('04-' + name, [java_home / 'bin/java', *array_vm, '-ea', '-cp', runtime_classpath,
                            'jdk.m3.collections.' + name])
     resources = target / 'module-resources/META-INF'
     resources.mkdir(parents=True)
@@ -384,7 +419,7 @@ def main():
                             '-C', classes, '.', '-C', resources.parent, '.'])
     descriptor = run('06-module-descriptor', [java_home / 'bin/jar', '--describe-module', '--file', jar])
     requirements = [line.strip() for line in descriptor.splitlines() if line.strip().startswith('requires ')]
-    if requirements != ['requires java.base mandated']:
+    if sorted(requirements) != ['requires java.base mandated', 'requires jdk.m3.arrays']:
         raise SystemExit('Unexpected runtime dependency: ' + repr(requirements))
     with zipfile.ZipFile(jar) as archive:
         for name in names:
@@ -397,12 +432,12 @@ def main():
     library = target / 'libsegmented_bits.so'
     run('07-native-static', native_args + ['-fsyntax-only', native])
     run('08-native-compile', native_args + ['-shared', '-fPIC', native, '-o', library])
-    run('09-checked-jni-parity', [java_home / 'bin/java', '-Xcheck:jni', '-cp', runtime_classpath,
+    run('09-checked-jni-parity', [java_home / 'bin/java', *array_vm, '-Xcheck:jni', '-cp', runtime_classpath,
                                  'SegmentedLaneNativeProbe', library])
-    run('10-prepared-allocation', [java_home / 'bin/java', '-Xbatch', '-cp', runtime_classpath,
+    run('10-prepared-allocation', [java_home / 'bin/java', *array_vm, '-Xbatch', '-cp', runtime_classpath,
                                   'PreparedLaneAllocationProbe'])
     if args.cost_probe:
-        cost = run('11-collection-cost-probe', [java_home / 'bin/java', '-Xbatch', '-cp', runtime_classpath,
+        cost = run('11-collection-cost-probe', [java_home / 'bin/java', *array_vm, '-Xbatch', '-cp', runtime_classpath,
                                                'jdk.m3.collections.M3CollectionCostProbe'])
         (evidence / 'collection-cost.csv').write_text(cost)
     receipt = {'copyright': 'Copyright 2026 Hitesh Soliwal and contributors', 'license': 'Apache-2.0', 'schema': 'M3_COLLECTION_RECEIVING_QUALIFICATION_V1',
@@ -411,7 +446,9 @@ def main():
                'java_sources': len(mains), 'test_sources': len(tests), 'junit': totals,
                'main_self_tests': ['M3LazyTreeMapSelfTest:PASS', 'M3LazyValueStateSelfTest:PASS'],
                'java_compile': '--release 21 -Xlint:all,-module -Werror',
-               'runtime_requires': ['java.base'], 'native_standard': 'c17',
+               'runtime_requires': ['java.base', 'jdk.m3.arrays'],
+               'arrays_jar_sha256': digest(array_jar),
+               'arrays_native_library_sha256': digest(array_library), 'native_standard': 'c17',
                'undefined_behavior_sanitizer': 'PASS', 'checked_jni': 'PASS',
                'prepared_lane_allocation': 'PASS', 'packaged_license_provenance': 'PASS',
                'cost_probe': 'DIAGNOSTIC_RECORDED' if args.cost_probe else 'NOT_RUN',
