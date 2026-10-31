@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
 # Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
-"""index_free_commit.py <worktree> <message_file> <path>...
+"""index_free_commit.py <worktree> <message_file> <path>...     (INDEX_FREE_COMMIT v1.1)
 
 Commits the listed paths (relative to the worktree root, as they are on disk now) on top of HEAD without reading or
 writing the index. For a blobless, sparse M3jdk worktree whose full index is tens of MB on a nearly full disk:
@@ -10,16 +10,41 @@ writing the index. For a blobless, sparse M3jdk worktree whose full index is ten
           fetched)
   commit  git commit-tree <tree> -p HEAD -F <message_file>
   ref     git update-ref refs/heads/<branch> <commit> <old HEAD>: refused if the branch moved meanwhile
-Existing entries keep their mode; new files get 100644. The index keeps describing the old HEAD: run 'git reset -q'
-once the disk has room (it rewrites the index from HEAD and touches no file). Prints the new commit id."""
+Existing entries keep their mode; new files get 100644. Prints the new commit id.
+
+The index keeps describing the old HEAD, and that is a commit hazard: a porcelain commit in that worktree
+(git add --sparse <paths>; git commit) builds its tree from the index and silently reverts what was committed here.
+So after each commit stderr gets 'INDEX_STALE <n>', n = the index entries that differ from the new HEAD (git
+diff-index --cached compares object ids only, nothing is fetched). Until 'git reset -q' has rewritten the index from
+HEAD (it touches no file, but needs the index size free on the disk of the git dir, above the disk floor) and
+'git diff-index --cached --quiet HEAD' exits 0, commit in that worktree only through this tool and keep the open sync
+as a HOLD row in the lane's GATES.tsv. tools/index_free_commit_check.py checks this contract in a scratch repo."""
 import os
 import subprocess
 import sys
 
+STALE_ENV = {"GIT_OPTIONAL_LOCKS": "0", "GIT_NO_LAZY_FETCH": "1"}
+STALE_DIFF = ("diff-index", "--cached", "--name-only", "-z")
+NUL = b"\0"
+STALE_UNKNOWN = "?"
+STALE_REPORT = ("INDEX_STALE\t%s\tindex entries differ from %s: a porcelain commit in this worktree would revert "
+                "them; commit through tools/index_free_commit.py until 'git reset -q' and "
+                "'git diff-index --cached --quiet HEAD' pass\n")
 
-def git(cwd, *args, data=None):
-    out = subprocess.run(("git",) + args, cwd=cwd, input=data, capture_output=True, check=True)
+
+def git(cwd, *args, data=None, env=None):
+    out = subprocess.run(("git",) + args, cwd=cwd, input=data, env=env, capture_output=True, check=True)
     return out.stdout
+
+
+def stale_count(cwd, head):
+    """How many index entries differ from the tree of head ('?' when git cannot tell). Object ids only: no blob is
+    read, so a blobless clone fetches nothing."""
+    try:
+        raw = git(cwd, *STALE_DIFF, head, env=dict(os.environ, **STALE_ENV))
+    except subprocess.CalledProcessError:
+        return STALE_UNKNOWN
+    return sum(1 for p in raw.split(NUL) if p)
 
 
 def tree_entries(cwd, head, path):
@@ -67,6 +92,9 @@ def main(argv):
     subject = open(message, encoding="utf-8").readline().strip()
     git(cwd, "update-ref", "-m", "commit (index-free): " + subject, branch, commit, head)
     sys.stdout.write(commit + "\n")
+    stale = stale_count(cwd, commit)
+    if stale:
+        sys.stderr.write(STALE_REPORT % (stale, commit))
     return 0
 
 
