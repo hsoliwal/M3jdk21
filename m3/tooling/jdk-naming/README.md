@@ -34,7 +34,7 @@ Some lines and files are left alone:
 ## Dry run on master `bb66a8c16642`
 
 - 8,719 path moves.
-- Rewrites in 2,727 checked-out files. Another 4,375 files need a wider checkout before `apply`.
+- Rewrites in 2,702 checked-out files. Another 4,375 files need a wider checkout before `apply`.
 - 0 refusals.
 - Token counts:
 
