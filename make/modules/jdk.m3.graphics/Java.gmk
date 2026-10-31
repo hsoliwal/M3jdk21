@@ -1,0 +1,10 @@
+#
+# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+# Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+#
+
+# jdk.m3.graphics: sources absorbed from HumbleUI Skija 0.143.18 (m3/tooling/skija-absorb). javac -Xlint:all on the
+# module reports only these four kinds: 56 missing-explicit-ctor, 4 this-escape, 2 fallthrough (intended, in
+# M3ColorType and M3SVGLengthContext), and 1 module (the "m3" component of the module name).
+
+DISABLED_WARNINGS_java += missing-explicit-ctor this-escape fallthrough module
