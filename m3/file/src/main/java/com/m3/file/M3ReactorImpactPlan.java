@@ -49,6 +49,7 @@ public final class M3ReactorImpactPlan {
         Objects.requireNonNull(snapshot, "snapshot");
         Objects.requireNonNull(fileImpact, "fileImpact");
         Objects.requireNonNull(fileProject, "fileProject");
+        fileImpact.requireSnapshot(snapshot);
         if (projects < 0 || projects > 1_000_000 || fileProject.length != snapshot.slots()) {
             throw new IllegalArgumentException("incomplete M3 physical file/project coordinates");
         }

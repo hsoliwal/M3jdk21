@@ -71,6 +71,15 @@ public final class M3ReactorImpactPlanContract {
             var changed = M3FileDeltaLedger.scan(root, steady, names);
             var impacted = M3BuildImpactPlan.compute(changed, true,
                     noDeps, new int[0], unsafe);
+            // A separately captured generation has the same direct delta masks.
+            // It must never accept graph/ABI impact facts from the previous capture.
+            var sameMaskOtherGeneration = M3FileDeltaLedger.scan(root, steady, names);
+            check(sameMaskOtherGeneration != changed, "different captured snapshot identity");
+            check(Arrays.equals(sameMaskOtherGeneration.changedSlots(M3FileDeltaLedger.Kind.SOURCE),
+                    changed.changedSlots(M3FileDeltaLedger.Kind.SOURCE)), "equal direct source mask");
+            reject(IllegalArgumentException.class, () -> M3ReactorImpactPlan.compute(
+                    sameMaskOtherGeneration, impacted, projectForFile, 4, true,
+                    reactorOffsets, reactorTargets));
             var reactor = M3ReactorImpactPlan.compute(changed, impacted,
                     projectForFile, 4, true, reactorOffsets, reactorTargets);
             same(new int[] {0,1,2}, reactor, "dependency closure");
