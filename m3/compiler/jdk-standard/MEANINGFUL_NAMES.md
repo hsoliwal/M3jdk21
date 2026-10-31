@@ -41,3 +41,20 @@ contract and are exempt from the additional semantic-quality check.
 Repository-wide adoption starts in `mode=warning` to establish a census. Error mode applies to new
 or explicitly renamed M3-owned APIs after their compatibility and naming records are admitted. No
 bulk rename, generated alias, or silent public-surface change follows from this contract.
+
+## Changed-source admission
+
+`M3ChangedNameGate` compares two exact Git commits, parses only M3-owned Java files changed between
+them, and refuses findings located on added source lines. Existing names on untouched lines do not
+block unrelated maintenance. A rename, a new declaration, or a new file necessarily adds the
+relevant declaration line and is therefore checked.
+
+The gate excludes vendored, generated, qualification, retained-variant and archived source trees.
+Ordinary OpenJDK owners are not reinterpreted as M3 APIs; the existing public-JDK naming and ABI
+gates remain authoritative for them. `scheme=m3` remains a separate opt-in until namespace
+migration has an admitted compatibility recipe.
+
+`M3JdkStandardCensus` provides the complementary repository-wide, parse-only warning inventory.
+It uses javac parsing without type attribution, so unresolved module or dependency closures do not
+hide names. Java syntax errors still fail closed. Reports are sorted by path, numeric line and
+numeric column, making repeated runs byte-stable.
