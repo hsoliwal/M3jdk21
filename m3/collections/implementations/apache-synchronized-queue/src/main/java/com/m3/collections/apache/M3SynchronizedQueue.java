@@ -8,12 +8,11 @@
 package com.m3.collections.apache;
 
 /**
- * SCAFFOLD, not an owned implementation: declares the public surface of
- * {@code org.apache.commons.collections4.queue.SynchronizedQueue} and every body throws {@link UnsupportedOperationException}.
+ * Owned decorator with the public contract of {@code org.apache.commons.collections4.queue.SynchronizedQueue}.
  *
  * <p>Storage plan (decorator): decorator over one backing owner reference plus int state bits; elements are never copied; predicate/transformer/lock policy applies at the API boundary.
  *
- * <p>Lanes: {@code Object backing}, {@code int state}. No Entry or Node object is stored per element; any
+ * <p>Lanes: {@code backing}. No Entry or Node object is stored per element; any
  * Entry-shaped value the provider API demands is a boundary flyweight created only at that call.
  *
  * <p>The class is final and has no provider implementation superclass or delegate; provider
@@ -24,127 +23,198 @@ public final class M3SynchronizedQueue<E>
                 java.io.Serializable,
                 java.util.Collection<E>,
                 java.util.Queue<E> {
-    private static final String M3_SCAFFOLD_MESSAGE = "M3 scaffold: org.apache.commons.collections4.queue.SynchronizedQueue not yet owned";
     @java.io.Serial
     private static final long serialVersionUID = 0L;
 
-    // Planned lanes (decorator): arrays, offsets and bit-mask state; no Entry/Node objects.
-    private transient Object backing;
-    private transient int state;
+    /** The decorated owner: one reference, elements are never copied. */
+    @SuppressWarnings("serial")
+    private final java.util.Queue<E> backing;
 
-    private M3SynchronizedQueue() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+    private M3SynchronizedQueue(final java.util.Queue<E> arg0) {
+        this.backing = java.util.Objects.requireNonNull(arg0, "collection");
     }
 
     public static <E> M3SynchronizedQueue<E> synchronizedQueue(java.util.Queue<E> arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return new M3SynchronizedQueue<>(arg0);
     }
 
+    @Override
     public boolean add(E arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        synchronized (this) {
+            return backing.add(arg0);
+        }
     }
 
+    @Override
     public boolean addAll(java.util.Collection<? extends E> arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        synchronized (this) {
+            return backing.addAll(arg0);
+        }
     }
 
+    @Override
     public void clear() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        synchronized (this) {
+            backing.clear();
+        }
     }
 
+    @Override
     public boolean contains(Object arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        synchronized (this) {
+            return backing.contains(arg0);
+        }
     }
 
+    @Override
     public boolean containsAll(java.util.Collection<?> arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        synchronized (this) {
+            return backing.containsAll(arg0);
+        }
     }
 
+    @Override
     public E element() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        synchronized (this) {
+            return backing.element();
+        }
     }
 
+    @Override
     public boolean equals(Object arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        if (arg0 == this) {
+            return true;
+        }
+        synchronized (this) {
+            return backing.equals(arg0);
+        }
     }
 
+    @Override
     public void forEach(java.util.function.Consumer<? super E> arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        java.util.Queue.super.forEach(arg0);
     }
 
+    @Override
     public int hashCode() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        synchronized (this) {
+            return backing.hashCode();
+        }
     }
 
+    @Override
     public boolean isEmpty() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        synchronized (this) {
+            return backing.isEmpty();
+        }
     }
 
+    @Override
     public java.util.Iterator<E> iterator() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return backing.iterator();
     }
 
+    @Override
     public boolean offer(E arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        synchronized (this) {
+            return backing.offer(arg0);
+        }
     }
 
+    @Override
     public java.util.stream.Stream<E> parallelStream() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return java.util.Queue.super.parallelStream();
     }
 
+    @Override
     public E peek() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        synchronized (this) {
+            return backing.peek();
+        }
     }
 
+    @Override
     public E poll() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        synchronized (this) {
+            return backing.poll();
+        }
     }
 
+    @Override
     public E remove() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        synchronized (this) {
+            return backing.remove();
+        }
     }
 
+    @Override
     public boolean remove(Object arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        synchronized (this) {
+            return backing.remove(arg0);
+        }
     }
 
+    @Override
     public boolean removeAll(java.util.Collection<?> arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        synchronized (this) {
+            return backing.removeAll(arg0);
+        }
     }
 
+    @Override
     public boolean removeIf(java.util.function.Predicate<? super E> arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        synchronized (this) {
+            return backing.removeIf(arg0);
+        }
     }
 
+    @Override
     public boolean retainAll(java.util.Collection<?> arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        synchronized (this) {
+            return backing.retainAll(arg0);
+        }
     }
 
+    @Override
     public int size() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        synchronized (this) {
+            return backing.size();
+        }
     }
 
+    @Override
     public java.util.Spliterator<E> spliterator() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return java.util.Queue.super.spliterator();
     }
 
+    @Override
     public java.util.stream.Stream<E> stream() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return java.util.Queue.super.stream();
     }
 
+    @Override
     public Object[] toArray() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        synchronized (this) {
+            return backing.toArray();
+        }
     }
 
+    @Override
     public <T> T[] toArray(T[] arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        synchronized (this) {
+            return backing.toArray(arg0);
+        }
     }
 
+    @Override
     public <T> T[] toArray(java.util.function.IntFunction<T[]> arg0) {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        return java.util.Queue.super.toArray(arg0);
     }
 
+    @Override
     public String toString() {
-        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);
+        synchronized (this) {
+            return backing.toString();
+        }
     }
 }

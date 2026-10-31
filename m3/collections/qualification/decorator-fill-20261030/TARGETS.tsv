@@ -1,0 +1,13 @@
+m3_class	oracle	backing	factory	probe
+com.m3.collections.apache.M3UnmodifiableCollection	org.apache.commons.collections4.collection.UnmodifiableCollection	list	unmodifiableCollection	none
+com.m3.collections.apache.M3UnmodifiableList	org.apache.commons.collections4.list.UnmodifiableList	list	unmodifiableList	none
+com.m3.collections.apache.M3UnmodifiableQueue	org.apache.commons.collections4.queue.UnmodifiableQueue	deque	unmodifiableQueue	none
+com.m3.collections.apache.M3UnmodifiableSortedSet	org.apache.commons.collections4.set.UnmodifiableSortedSet	treeset	unmodifiableSortedSet	none
+com.m3.collections.apache.M3UnmodifiableNavigableSet	org.apache.commons.collections4.set.UnmodifiableNavigableSet	treeset	unmodifiableNavigableSet	none
+com.m3.collections.apache.M3UnmodifiableBag	org.apache.commons.collections4.bag.UnmodifiableBag	hashbag	unmodifiableBag	none
+com.m3.collections.apache.M3UnmodifiableSortedBag	org.apache.commons.collections4.bag.UnmodifiableSortedBag	treebag	unmodifiableSortedBag	none
+com.m3.collections.apache.M3SynchronizedCollection	org.apache.commons.collections4.collection.SynchronizedCollection	list	synchronizedCollection	sync
+com.m3.collections.apache.M3SynchronizedBag	org.apache.commons.collections4.bag.SynchronizedBag	hashbag	synchronizedBag	sync
+com.m3.collections.apache.M3SynchronizedMultiSet	org.apache.commons.collections4.multiset.SynchronizedMultiSet	hashmultiset	synchronizedMultiSet	sync
+com.m3.collections.apache.M3SynchronizedQueue	org.apache.commons.collections4.queue.SynchronizedQueue	deque	synchronizedQueue	sync
+com.m3.collections.apache.M3SynchronizedSortedBag	org.apache.commons.collections4.bag.SynchronizedSortedBag	treebag	synchronizedSortedBag	sync
