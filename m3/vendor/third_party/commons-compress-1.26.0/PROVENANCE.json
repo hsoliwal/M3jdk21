@@ -31,7 +31,7 @@
       "group": "commons-io",
       "optional": false,
       "scope": "compile",
-      "version": "2.15.1-m3-source-1"
+      "version": "2.18.0-m3-source-1"
     },
     {
       "artifact": "commons-lang3",
