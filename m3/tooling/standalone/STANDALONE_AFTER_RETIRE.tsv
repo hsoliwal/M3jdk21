@@ -1,0 +1,51 @@
+D_REPO_REF	.github/workflows/m3-a3-backport-completion.yml	46	"https://codeload.github.com/hsoliwal/com.synexia/tar.gz/${SYNEXIA_A3_COMMIT}" \
+D_CHECKOUT	.github/workflows/m3-a3-portable-mastery-gate-java21.yml	46	repository: hsoliwal/com.synexia
+D_REPO_REF	.github/workflows/m3-a3.yml	73	# hsoliwal/com.synexia is a private repository: unauthenticated codeload tarballs
+D_REPO_REF	.github/workflows/m3-a3.yml	77	# Successor pin record: hsoliwal/com.synexia
+D_CHECKOUT	.github/workflows/m3-a3.yml	82	repository: hsoliwal/com.synexia
+D_SECRET	.github/workflows/m3-a3.yml	84	token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
+D_REPO_REF	.github/workflows/m3-backport-contract-current-owner.yml	248	or binding["repository"]!="hsoliwal/com.synexia" or binding["receiverRepository"]!="hsoliwal/M3jdk21"
+D_REPO_REF	.github/workflows/m3-collections.yml	3	# Canonical recipe: com.synexia.m3.M3PackedCollectionsReceivingMetadata in hsoliwal/com.synexia.
+D_REPO_REF	.github/workflows/m3-first-release-admission.yml	193	raise SystemExit('HOLD: execute and qualify source-bound recipes in hsoliwal/com.synexia; attach the exact command, source pins and raw artifact hashes.')
+D_REPO_REF	.github/workflows/m3-hf-intake-20261017.yml	64	--source-repository https://github.com/hsoliwal/com.synexia \
+D_REPO_REF	.github/workflows/m3-jdk21-second-pass-review-dag.yml	70	gh repo clone hsoliwal/com.synexia "$RUNNER_TEMP/com.synexia"
+D_REPO_REF	.github/workflows/m3-jep484-classfile-path-map.yml	42	git -C "$SYNEXIA" remote add origin https://github.com/hsoliwal/com.synexia.git
+D_REPO_REF	.github/workflows/m3-jep484-custody-plan.yml	45	git -C "$SYNEXIA" remote add origin https://github.com/hsoliwal/com.synexia.git
+D_REPO_REF	.github/workflows/m3-jep485-stream-gatherers.yml	67	"canonical_repository": "hsoliwal/com.synexia",
+D_REPO_REF	.github/workflows/m3-jep493-runtime-image-materialize.yml	74	"canonical_repository": "hsoliwal/com.synexia",
+D_REPO_REF	.github/workflows/m3-merged-atom-preservation-20261022.yml	61	echo 'ERROR: executable transformation recipes belong in hsoliwal/com.synexia, not M3JDK21'
+D_REPO_REF	.github/workflows/m3-original-mapping-provider-qualification.yml	308	if binding["repository"]!="hsoliwal/com.synexia" or binding["receiverCorePath"]!="m3/migration/original-provider-20261017/sdk":raise RuntimeError("canonical owner drift")
+D_REPO_REF	m3/ports/collections/verify_collection_port_wave1.py	57	if row["sourceRepository"] != "hsoliwal/com.synexia":
+D_REPO_REF	m3/ports/collections/verify_collection_port_wave1.py	89	"canonical_repository": "hsoliwal/com.synexia",
+D_REPO_REF	m3/qualification/master-landing-20261028/retained-variants/pr1530/m3/tooling/migration-recipes/pom.xml	74	Canonical reusable recipes are owned by hsoliwal/com.synexia.
+D_REPO_REF	m3/tooling/migration-recipes/pom.xml	122	Canonical reusable recipes are owned by hsoliwal/com.synexia.
+D_MAVEN	.m3/openrewrite-recipes/pom.xml	255	dependency com.synexia.m3:m3-pr-stack-preservation
+D_MAVEN	m3/collections/implementations/guava-minmax-priority-queue/pom.xml	91	dependency com.synexia.m3:m3-pr-stack-preservation
+D_MAVEN	m3/collections/receiving/guava-minmax-priority-queue/pom.xml	128	dependency com.synexia.m3:m3-pr-stack-preservation
+D_MAVEN	m3/tooling/migration-recipes/apache-reuse/pom.xml	270	dependency com.synexia.m3:m3-pr-stack-preservation
+D_MAVEN	m3/tooling/migration-recipes/pom.xml	372	dependency com.synexia.m3:m3-pr-stack-preservation
+D_MAVEN	m3/tooling/migration-recipes/tasks/a3-code-string-repair-20261006/verification/pom.xml	98	dependency com.synexia.m3:m3-pr-stack-preservation
+D_MAVEN	m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/pom.xml	119	dependency com.synexia.m3:m3-pr-stack-preservation
+D_MAVEN	m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/a3-behavior-verification/pom.xml	114	dependency com.synexia.m3:m3-pr-stack-preservation
+D_MAVEN	m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/verification/pom.xml	98	dependency com.synexia.m3:m3-pr-stack-preservation
+D_MAVEN	m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/pom.xml	114	dependency com.synexia.m3:m3-pr-stack-preservation
+D_MAVEN	m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/pom.xml	114	dependency com.synexia.m3:m3-pr-stack-preservation
+D_MAVEN	m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/verification/pom.xml	104	dependency com.synexia.m3:m3-pr-stack-preservation
+D_MAVEN	m3/tooling/migration-recipes/tasks/jdk-focus/pom.xml	94	dependency com.synexia.m3:m3-pr-stack-preservation
+D_MAVEN	m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/followup/pom.xml	132	dependency com.synexia.m3:m3-pr-stack-preservation
+D_MAVEN	m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/pattern-hidden/pom.xml	132	dependency com.synexia.m3:m3-pr-stack-preservation
+D_MAVEN	m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/pom.xml	132	dependency com.synexia.m3:m3-pr-stack-preservation
+D_MAVEN	m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/runtime-checker/pom.xml	132	dependency com.synexia.m3:m3-pr-stack-preservation
+D_MAVEN	m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/pom.xml	132	dependency com.synexia.m3:m3-pr-stack-preservation
+D_MAVEN	m3/tooling/migration-recipes/verification/jcc-handoff/pom.xml	104	dependency com.synexia.m3:m3-pr-stack-preservation
+D_MAVEN	m3/tooling/migration-recipes/verification/jcc-receiving/pom.xml	113	dependency com.synexia.m3:m3-pr-stack-preservation
+D_MAVEN	m3/tooling/migration-recipes/verification/jcc-source-final-handoff/pom.xml	104	dependency com.synexia.m3:m3-pr-stack-preservation
+D_MAVEN	m3/tooling/migration-recipes/verification/jcc-source-recovery-handoff/pom.xml	105	dependency com.synexia.m3:m3-pr-stack-preservation
+D_MAVEN	m3/tooling/migration-recipes/verification/jni/pom.xml	104	dependency com.synexia.m3:m3-pr-stack-preservation
+D_MAVEN	m3/vendor/third_party/fastdoubleparser-1.0.90/pom.xml	192	dependency com.synexia.m3:m3-pr-stack-preservation
+D_MAVEN	m3/vendor/third_party/jackson-annotations-2.19.2/pom.xml	123	dependency com.synexia.m3:m3-pr-stack-preservation
+D_MAVEN	m3/vendor/third_party/jackson-core-2.19.2/pom.xml	198	dependency com.synexia.m3:m3-pr-stack-preservation
+D_MAVEN	m3/vendor/third_party/jackson-databind-2.19.2/pom.xml	136	dependency com.synexia.m3:m3-pr-stack-preservation
+D_MAVEN	make/m3/recipes/pom.xml	77	dependency com.synexia.m3:m3-pr-stack-preservation
+D_MAVEN	src/utils/IdealGraphVisualizer/pom.xml	145	dependency com.synexia.m3:m3-pr-stack-preservation
+D_MAVEN	src/utils/LogCompilation/pom.xml	137	dependency com.synexia.m3:m3-pr-stack-preservation
