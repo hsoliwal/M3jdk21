@@ -1,0 +1,106 @@
+{
+  "schema": 1,
+  "recipe": "m3-jni-array-storage-20261021/primitive-family-20261031",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_source_commit": "bf63a5550acd26e76bd92572521c1d0a8cce1c2b",
+  "canonical_artifact_root": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/qualification/primitive-family-20261031",
+  "source_base": "a20ef608c1bd7ce1016686d549ccee1fc87f4f92",
+  "receiving_parent": "52fb81c483c74448a12eecb63aa9465e42cdb82c",
+  "receiving_repin": "Entire src tree and module POM unchanged from source base",
+  "files": [
+    {
+      "path": "m3/arrays/src/main/java/com/m3/arrays/M3ArrayNative.java",
+      "sha256": "237daac1ac1582cc459a7c43c7e79ff1892f1c8caac0d5f29df912f613445ce1"
+    },
+    {
+      "path": "m3/arrays/src/main/native/m3_arrays_jni.c",
+      "sha256": "da1f56009e24a6956e168c9bf4d549117279a8ea3a52c51d7118bd24463bebd8"
+    },
+    {
+      "path": "m3/arrays/src/main/native/CMakeLists.txt",
+      "sha256": "0b3ec17554f9f127f7700febfe9aba1c8e71c510dca8f9f318266c63cfa30656"
+    },
+    {
+      "path": "m3/arrays/src/main/native/tests/m3_array_allocation_fault_test.c",
+      "sha256": "423b3ce308f813662016124ec3c03045a3c32426c3df3fc01d44190fbfb6b53b"
+    },
+    {
+      "path": "m3/arrays/src/main/native/tests/m3_array_allocation_null_fixture.c",
+      "sha256": "745490b8557a32f4f4a01e7a207fa03427d0e423b2b5d15942d900ab0e3a9a6b"
+    },
+    {
+      "path": "m3/arrays/src/test/java/com/m3/arrays/M3ArrayAllocationAtomsTest.java",
+      "sha256": "08974280e4439060a6d41107680d968aaacb54e2b4ddb0329562422d79430d33"
+    }
+  ],
+  "source_passes": [
+    {
+      "pass": 1,
+      "recipe": "m3-jni-primitive-allocation-20261031-boolean",
+      "type": "boolean",
+      "java_before": "45c7b7f4ea8417e501f7ad9de26f8c9fe441b27b8b59722525c24542048a6021",
+      "java_after": "02871e6dce6695edb1031b7f2a6e42637bef5d7692d41addd4b3fbdaeeb912d3",
+      "native_before": "da4ba8620a190e07f08446d4a1cc6081d860dcd6d98f94ab2633b87643ddcfb7",
+      "native_after": "db5876edde5ba2359cd67dbf3c14a7425f5e3a6b396759106295f5402aef8fe1"
+    },
+    {
+      "pass": 2,
+      "recipe": "m3-jni-primitive-allocation-20261031-char",
+      "type": "char",
+      "java_before": "02871e6dce6695edb1031b7f2a6e42637bef5d7692d41addd4b3fbdaeeb912d3",
+      "java_after": "ec4facd6cd387a9c95c1b2bcb08dfb0d5bf5fcca2d9f255fd49eeabfaf56ac4d",
+      "native_before": "db5876edde5ba2359cd67dbf3c14a7425f5e3a6b396759106295f5402aef8fe1",
+      "native_after": "ad82b8bb68c9bcf2f1e4efb0a4386061041a9fa46149b54346125367e6abf7d3"
+    },
+    {
+      "pass": 3,
+      "recipe": "m3-jni-primitive-allocation-20261031-short",
+      "type": "short",
+      "java_before": "ec4facd6cd387a9c95c1b2bcb08dfb0d5bf5fcca2d9f255fd49eeabfaf56ac4d",
+      "java_after": "d43df303aad2d363694bd5c0e97d2fb0f4ca29e1e6919f9b750310eafaab8b89",
+      "native_before": "ad82b8bb68c9bcf2f1e4efb0a4386061041a9fa46149b54346125367e6abf7d3",
+      "native_after": "3cf5267bd148c8009a6605f7e22063e5c74749926212d518c2f7ab0973a9bc0e"
+    },
+    {
+      "pass": 4,
+      "recipe": "m3-jni-primitive-allocation-20261031-float",
+      "type": "float",
+      "java_before": "d43df303aad2d363694bd5c0e97d2fb0f4ca29e1e6919f9b750310eafaab8b89",
+      "java_after": "91a8ed90df48bba375c5272b58a8d63b9260dc3820492aada4802c1ed895b7b5",
+      "native_before": "3cf5267bd148c8009a6605f7e22063e5c74749926212d518c2f7ab0973a9bc0e",
+      "native_after": "c99161cfbb6eaaa4d6cd5e6dcf898cf4fab8f06b170ecaedb5cd3c16a8a25a15"
+    },
+    {
+      "pass": 5,
+      "recipe": "m3-jni-primitive-allocation-20261031-double",
+      "type": "double",
+      "java_before": "91a8ed90df48bba375c5272b58a8d63b9260dc3820492aada4802c1ed895b7b5",
+      "java_after": "237daac1ac1582cc459a7c43c7e79ff1892f1c8caac0d5f29df912f613445ce1",
+      "native_before": "c99161cfbb6eaaa4d6cd5e6dcf898cf4fab8f06b170ecaedb5cd3c16a8a25a15",
+      "native_after": "da1f56009e24a6956e168c9bf4d549117279a8ea3a52c51d7118bd24463bebd8"
+    }
+  ],
+  "qualification": {
+    "recipe_sdk_tests": 19,
+    "junit": 47,
+    "allocation_junit": 13,
+    "ctest": 4,
+    "allocation_fault_cases": 54,
+    "jni_exports": 17,
+    "java": "Temurin21.0.13+9",
+    "jni_check": true,
+    "failures": 0,
+    "skips": 0,
+    "command": "mvn -f m3/arrays/pom.xml -Pnative-linux -Dm3.arrays.native.required=true -DargLine=-Xcheck:jni verify"
+  },
+  "review": "Independent read-only review: no critical/important finding; concurrency start-barrier test hardening deferred",
+  "pending": [
+    "fleet source adoption",
+    "full Synexia reactor",
+    "installed JDK/core integration",
+    "Windows/macOS",
+    "hosted CI",
+    "performance qualification"
+  ],
+  "scope": "Normal JVM-managed primitive/Object arrays in the existing owner; no automatic core replacement or native speedup claim"
+}
