@@ -1,0 +1,314 @@
+donor	method	first_sentence
+commons-csv	CSVFormat.build	Builds a new CSVFormat instance.
+commons-csv	CSVFormat.builder	Creates a new Builder for this instance.
+commons-csv	CSVFormat.create	Creates a new default builder.
+commons-csv	CSVFormat.format	Formats the specified values.
+commons-csv	CSVFormat.getAllowDuplicateHeaderNames	Gets whether duplicate names are allowed in the headers.
+commons-csv	CSVFormat.getAllowMissingColumnNames	Gets whether missing column names are allowed when parsing the header line.
+commons-csv	CSVFormat.getAutoFlush	Gets whether to flush on close.
+commons-csv	CSVFormat.getCommentMarker	Gets the comment marker character, null disables comments.
+commons-csv	CSVFormat.getDelimiter	Gets the first character delimiting the values (typically ';', ',' or '\t').
+commons-csv	CSVFormat.getDelimiterString	Gets the character delimiting the values (typically ";", "," or "\t").
+commons-csv	CSVFormat.getDuplicateHeaderMode	Gets how duplicate headers are handled.
+commons-csv	CSVFormat.getEscapeCharacter	Gets the escape character.
+commons-csv	CSVFormat.getFormat	Gets the format.
+commons-csv	CSVFormat.getHeader	Gets a copy of the header array.
+commons-csv	CSVFormat.getHeaderComments	Gets a copy of the header comment array to write before the CSV data.
+commons-csv	CSVFormat.getIgnoreEmptyLines	Gets whether empty lines between records are ignored when parsing input.
+commons-csv	CSVFormat.getIgnoreHeaderCase	Gets whether header names will be accessed ignoring case when parsing input.
+commons-csv	CSVFormat.getIgnoreSurroundingSpaces	Gets whether spaces around values are ignored when parsing input.
+commons-csv	CSVFormat.getLenientEof	Gets whether reading end-of-file is allowed even when input is malformed, helps Excel compatibility.
+commons-csv	CSVFormat.getNullString	Gets the String to convert to and from null.
+commons-csv	CSVFormat.getQuoteCharacter	Gets the character used to encapsulate values containing special characters.
+commons-csv	CSVFormat.getQuoteMode	Gets the quote policy output fields.
+commons-csv	CSVFormat.getRecordSeparator	Gets the record separator delimiting output records.
+commons-csv	CSVFormat.getSkipHeaderRecord	Gets whether to skip the header record.
+commons-csv	CSVFormat.getTrailingData	Gets whether reading trailing data is allowed in records, helps Excel compatibility.
+commons-csv	CSVFormat.getTrailingDelimiter	Gets whether to add a trailing delimiter.
+commons-csv	CSVFormat.getTrim	Gets whether to trim leading and trailing blanks.
+commons-csv	CSVFormat.isCommentMarkerSet	Tests whether comments are supported by this format.
+commons-csv	CSVFormat.isEscapeCharacterSet	Tests whether escapes are being processed.
+commons-csv	CSVFormat.isNullStringSet	Tests whether a null string has been defined.
+commons-csv	CSVFormat.isQuoteCharacterSet	Tests whether a quoteChar has been defined.
+commons-csv	CSVFormat.newFormat	Creates a new CSV format with the specified delimiter.
+commons-csv	CSVFormat.parse	Parses the specified content.
+commons-csv	CSVFormat.print	Prints to the specified output.
+commons-csv	CSVFormat.printRecord	Prints the given values to out as a single record of delimiter-separated values followed by the record separator.
+commons-csv	CSVFormat.printer	Prints to the System#out.
+commons-csv	CSVFormat.println	Outputs the trailing delimiter (if set) followed by the record separator (if set).
+commons-csv	CSVFormat.setAllowDuplicateHeaderNames	Sets the duplicate header names behavior, true to allow, false to disallow.
+commons-csv	CSVFormat.setAllowMissingColumnNames	Sets the parser missing column names behavior, true to allow missing column names in the header line, false to cause an IllegalArgumentException to be thrown.
+commons-csv	CSVFormat.setAutoFlush	Sets whether to flush on close.
+commons-csv	CSVFormat.setCommentMarker	Sets the comment marker character, use null to disable comments.
+commons-csv	CSVFormat.setDelimiter	Sets the delimiter character.
+commons-csv	CSVFormat.setDuplicateHeaderMode	Sets the duplicate header names behavior.
+commons-csv	CSVFormat.setEscape	Sets the escape character.
+commons-csv	CSVFormat.setHeader	Sets the header defined by the given Enum class.
+commons-csv	CSVFormat.setHeaderComments	Sets the header comments to write before the CSV data.
+commons-csv	CSVFormat.setIgnoreEmptyLines	Sets the empty line skipping behavior, true to ignore the empty lines between the records, false to translate empty lines to empty records.
+commons-csv	CSVFormat.setIgnoreHeaderCase	Sets the parser case mapping behavior, true to access name/values, false to leave the mapping as is.
+commons-csv	CSVFormat.setIgnoreSurroundingSpaces	Sets the parser trimming behavior, true to remove the surrounding spaces, false to leave the spaces as is.
+commons-csv	CSVFormat.setLenientEof	Sets whether reading end-of-file is allowed even when input is malformed, helps Excel compatibility.
+commons-csv	CSVFormat.setNullString	Sets the String to convert to and from null.
+commons-csv	CSVFormat.setQuote	Sets the quote character.
+commons-csv	CSVFormat.setQuoteMode	Sets the quote policy to use for output.
+commons-csv	CSVFormat.setRecordSeparator	Sets the record separator to use for output.
+commons-csv	CSVFormat.setSkipHeaderRecord	Sets whether to skip the header record.
+commons-csv	CSVFormat.setTrailingData	Sets whether reading trailing data is allowed in records, helps Excel compatibility.
+commons-csv	CSVFormat.setTrailingDelimiter	Sets whether to add a trailing delimiter.
+commons-csv	CSVFormat.setTrim	Sets whether to trim leading and trailing blanks.
+commons-csv	CSVFormat.valueOf	Gets one of the predefined formats from CSVFormat.Predefined.
+commons-csv	CSVFormat.withAllowDuplicateHeaderNames	Builds a new CSVFormat that allows duplicate header names.
+commons-csv	CSVFormat.withAllowMissingColumnNames	Builds a new CSVFormat with the missing column names behavior of the format set to true.
+commons-csv	CSVFormat.withAutoFlush	Builds a new CSVFormat with whether to flush on close.
+commons-csv	CSVFormat.withCommentMarker	Builds a new CSVFormat with the comment start marker of the format set to the specified character.
+commons-csv	CSVFormat.withDelimiter	Builds a new CSVFormat with the delimiter of the format set to the specified character.
+commons-csv	CSVFormat.withEscape	Builds a new CSVFormat with the escape character of the format set to the specified character.
+commons-csv	CSVFormat.withFirstRecordAsHeader	Builds a new CSVFormat using the first record as header.
+commons-csv	CSVFormat.withHeader	Builds a new CSVFormat with the header of the format defined by the enum class.
+commons-csv	CSVFormat.withHeaderComments	Builds a new CSVFormat with the header comments of the format set to the given values.
+commons-csv	CSVFormat.withIgnoreEmptyLines	Builds a new CSVFormat with the empty line skipping behavior of the format set to true.
+commons-csv	CSVFormat.withIgnoreHeaderCase	Builds a new CSVFormat with the header ignore case behavior set to true.
+commons-csv	CSVFormat.withIgnoreSurroundingSpaces	Builds a new CSVFormat with the parser trimming behavior of the format set to true.
+commons-csv	CSVFormat.withNullString	Builds a new CSVFormat with conversions to and from null for strings on input and output.
+commons-csv	CSVFormat.withQuote	Builds a new CSVFormat with the quoteChar of the format set to the specified character.
+commons-csv	CSVFormat.withQuoteMode	Builds a new CSVFormat with the output quote policy of the format set to the specified value.
+commons-csv	CSVFormat.withRecordSeparator	Builds a new CSVFormat with the record separator of the format set to the specified character.
+commons-csv	CSVFormat.withSkipHeaderRecord	Builds a new CSVFormat with skipping the header record set to true.
+commons-csv	CSVFormat.withSystemRecordSeparator	Builds a new CSVFormat with the record separator of the format set to the operating system's line separator string, typically CR+LF on Windows and LF on Linux.
+commons-csv	CSVFormat.withTrailingDelimiter	Builds a new CSVFormat to add a trailing delimiter.
+commons-csv	CSVFormat.withTrim	Builds a new CSVFormat to trim leading and trailing blanks.
+jackson-dataformat-csv	CsvGenerator.canUseSchema	******************************************************* /* Public API, capability introspection methods /**********************************************************
+jackson-dataformat-csv	CsvGenerator.collectDefaults	Method that calculates bit set (flags) of all features that are enabled by default.
+jackson-dataformat-csv	CsvGenerator.flush	******************************************************* /* Public API: low-level I/O /**********************************************************
+jackson-dataformat-csv	CsvGenerator.getOutputBuffered	NOTE: while this method will return some information on amount of data buffered, it may be an incomplete view as some buffering happens at a higher level, as not-yet-serialized values.
+jackson-dataformat-csv	CsvGenerator.isEnabled	******************************************************* /* Extended API, configuration /**********************************************************
+jackson-dataformat-csv	CsvGenerator.setPrettyPrinter	No way (or need) to indent anything, so let's block any attempts.
+jackson-dataformat-csv	CsvGenerator.useDefaultPrettyPrinter	No way (or need) to indent anything, so let's block any attempts.
+jackson-dataformat-csv	CsvGenerator.version	******************************************************* /* Versioned /**********************************************************
+jackson-dataformat-csv	CsvGenerator.writeBinary	******************************************************* /* Output method implementations, base64-encoded binary /**********************************************************
+jackson-dataformat-csv	CsvGenerator.writeBoolean	******************************************************* /* Output method implementations, primitive /**********************************************************
+jackson-dataformat-csv	CsvGenerator.writeOmittedField	******************************************************* /* Overrides for field methods /**********************************************************
+jackson-dataformat-csv	CsvGenerator.writeRaw	******************************************************* /* Output method implementations, unprocessed ("raw") /**********************************************************
+jackson-dataformat-csv	CsvGenerator.writeStartArray	******************************************************* /* Public API: structural output /**********************************************************
+jackson-dataformat-csv	CsvGenerator.writeString	******************************************************* /* Output method implementations, textual /**********************************************************
+jackson-dataformat-csv	CsvMapper.builder	-
+jackson-dataformat-csv	CsvMapper.configure	******************************************************************* /* Configuration /**********************************************************************
+jackson-dataformat-csv	CsvMapper.copy	-
+jackson-dataformat-csv	CsvMapper.csvBuilder	Short-cut for: return builder(new CsvFactory());
+jackson-dataformat-csv	CsvMapper.enable	*************************************************************** /* Format features /******************************************************************
+jackson-dataformat-csv	CsvMapper.getFactory	Overridden with more specific type, since factory we have is always of type CsvFactory
+jackson-dataformat-csv	CsvMapper.readerWithSchemaFor	Convenience method which is functionally equivalent to: reader(pojoType).withSchema(schemaFor(pojoType)); that is, constructs a ObjectReader which both binds to specified type and uses "loose" CsvSchema introspected from
+jackson-dataformat-csv	CsvMapper.readerWithTypedSchemaFor	Convenience method which is functionally equivalent to: reader(pojoType).withSchema(typedSchemaFor(pojoType)); that is, constructs a ObjectReader which both binds to specified type and uses "strict" CsvSchema introspecte
+jackson-dataformat-csv	CsvMapper.schema	Convenience method that is same as CsvSchema.emptySchema() that is, returns an "empty" Schema; one with default values and no column definitions.
+jackson-dataformat-csv	CsvMapper.schemaFor	Method that can be used to determine a CSV schema to use for given POJO type, using default serialization settings including ordering.
+jackson-dataformat-csv	CsvMapper.schemaWithHeader	Convenience method that is same as CsvSchema.emptySchema().withHeader(); and returns a CsvSchema instance that uses default configuration with additional setting that the first content line contains intended column names
+jackson-dataformat-csv	CsvMapper.typedSchemaFor	Method that can be used to determine a CSV schema to use for given POJO type, using default serialization settings including ordering.
+jackson-dataformat-csv	CsvMapper.writerWithSchemaFor	Convenience method which is functionally equivalent to: writer(pojoType).with(schemaFor(pojoType)); that is, constructs a ObjectWriter which both binds to specified type and uses "loose" CsvSchema introspected from speci
+jackson-dataformat-csv	CsvMapper.writerWithTypedSchemaFor	Convenience method which is functionally equivalent to: writer(pojoType).with(typedSchemaFor(pojoType)); that is, constructs a ObjectWriter which both binds to specified type and uses "strict" CsvSchema introspected from
+jackson-dataformat-csv	CsvParser._getByteArrayBuilder	******************************************************************* /* Internal methods /**********************************************************************
+jackson-dataformat-csv	CsvParser._reportCsvMappingError	Method called when there is a problem related to mapping data (compared to a low-level generation); if so, should be surfaced as
+jackson-dataformat-csv	CsvParser.canUseSchema	******************************************************* /* Overrides: capability introspection methods /**********************************************************
+jackson-dataformat-csv	CsvParser.collectDefaults	Method that calculates bit set (flags) of all features that are enabled by default.
+jackson-dataformat-csv	CsvParser.configure	Method for enabling or disabling specified CSV feature (check Feature for list of features)
+jackson-dataformat-csv	CsvParser.disable	Method for disabling specified CSV feature (check Feature for list of features)
+jackson-dataformat-csv	CsvParser.enable	Method for enabling specified CSV feature (check Feature for list of features)
+jackson-dataformat-csv	CsvParser.getCodec	******************************************************* /* Overridden methods /**********************************************************
+jackson-dataformat-csv	CsvParser.getEmbeddedObject	******************************************************************* /* Binary (base64) /**********************************************************************
+jackson-dataformat-csv	CsvParser.getFormatFeatures	******************************************************* /* FormatFeature support /**********************************************************
+jackson-dataformat-csv	CsvParser.getNumberType	******************************************************************* /* Number accessors /**********************************************************************
+jackson-dataformat-csv	CsvParser.getParsingContext	******************************************************* /* Location info /**********************************************************
+jackson-dataformat-csv	CsvParser.getSchema	Accessor for getting active schema definition: it may be "empty" (no column definitions), but will never be null since it defaults to an empty schema (and default configuration)
+jackson-dataformat-csv	CsvParser.isEnabled	Method for checking whether specified CSV Feature is enabled.
+jackson-dataformat-csv	CsvParser.isExpectedStartArrayToken	We need to override this method to support coercion from basic String value into array, in cases where schema does not specify actual type.
+jackson-dataformat-csv	CsvParser.nextFieldName	******************************************************* /* Parsing, optimized methods /**********************************************************
+jackson-dataformat-csv	CsvParser.version	******************************************************* /* Versioned /**********************************************************
+jackson-dataformat-csv	CsvSchema.addArrayColumn	-
+jackson-dataformat-csv	CsvSchema.addColumn	NOTE: does NOT check for duplicate column names so it is possibly to accidentally add duplicates.
+jackson-dataformat-csv	CsvSchema.addColumns	NOTE: does NOT check for duplicate column names so it is possibly to accidentally add duplicates.
+jackson-dataformat-csv	CsvSchema.addColumnsFrom	NOTE: unlike many other add methods, this method DOES check for, and discard, possible duplicate columns: that is, if this builder already has a column with same name as column to be added, existing column is retained an
+jackson-dataformat-csv	CsvSchema.column	Accessor for column at specified index (0-based); index having to be within 0 &lt;= index &lt; size()
+jackson-dataformat-csv	CsvSchema.columnName	-
+jackson-dataformat-csv	CsvSchema.disableArrayElementSeparator	-
+jackson-dataformat-csv	CsvSchema.disableEscapeChar	Method for specifying that no escape character is to be used with CSV documents this schema defines.
+jackson-dataformat-csv	CsvSchema.disableQuoteChar	-
+jackson-dataformat-csv	CsvSchema.dropLastColumnIfEmpty	Helper method called to drop the last collected column name if it is empty: called if {link CsvParser.Feature#ALLOW_TRAILING_COMMA} enabled to remove the last entry after being added initially.
+jackson-dataformat-csv	CsvSchema.emptySchema	Accessor for creating a "default" CSV schema instance, with following settings: Does NOT use header line Uses double quotes ('"') for quoting of field values (if necessary) Uses comma (',') as the field separator Uses Un
+jackson-dataformat-csv	CsvSchema.getAnyPropertyName	-
+jackson-dataformat-csv	CsvSchema.getArrayElementSeparator	-
+jackson-dataformat-csv	CsvSchema.getColumnDesc	Method for getting description of column definitions in developer-readable form
+jackson-dataformat-csv	CsvSchema.getColumnNames	Accessor for getting names of included columns, in the order they are included in the schema.
+jackson-dataformat-csv	CsvSchema.getNextWithName	Access that returns same as #getNext iff name of that column is same as given name
+jackson-dataformat-csv	CsvSchema.getNullValue	if not.
+jackson-dataformat-csv	CsvSchema.getNullValueOrEmpty	Same as #getNullValue() except that undefined null value (one that remains as null, or explicitly set as such) will be returned as empty char[]
+jackson-dataformat-csv	CsvSchema.getNullValueString	-
+jackson-dataformat-csv	CsvSchema.getSchemaType	******************************************************************* /* Public API, FormatSchema /**********************************************************************
+jackson-dataformat-csv	CsvSchema.hasArrayElementSeparator	-
+jackson-dataformat-csv	CsvSchema.hasColumn	NOTE: this method requires linear scan over existing columns so it may be more efficient to use other types of lookups if available (for example, CsvSchema#column(String) has a hash lookup to use).
+jackson-dataformat-csv	CsvSchema.iterator	******************************************************************* /* Public API, extended; column access /**********************************************************************
+jackson-dataformat-csv	CsvSchema.rebuild	Helper method for constructing Builder that can be used to create modified schema.
+jackson-dataformat-csv	CsvSchema.removeColumn	-
+jackson-dataformat-csv	CsvSchema.setAllowComments	Method for specifying whether Schema should indicate that "hash comments" (lines where the first non-whitespace character is '#') are allowed; if so, they will be skipped without processing.
+jackson-dataformat-csv	CsvSchema.setArrayElementSeparator	Method for specifying character used to separate array element values.
+jackson-dataformat-csv	CsvSchema.setColumnSeparator	Method for specifying character used to separate column values.
+jackson-dataformat-csv	CsvSchema.setEscapeChar	Method for specifying character used for optional escaping of characters in quoted String values.
+jackson-dataformat-csv	CsvSchema.setQuoteChar	Method for specifying character used for optional quoting of values.
+jackson-dataformat-csv	CsvSchema.setReorderColumns	Use in combination with setUseHeader.
+jackson-dataformat-csv	CsvSchema.setSkipFirstDataRow	Method for specifying whether Schema should indicate that the first line that is not a header (if header handling enabled) should be skipped in its entirety.
+jackson-dataformat-csv	CsvSchema.setStrictHeaders	Use in combination with #setUseHeader.
+jackson-dataformat-csv	CsvSchema.setUseHeader	Method for specifying whether Schema should indicate that a header line (first row that contains column names) is to be used for reading and writing or not.
+jackson-dataformat-csv	CsvSchema.size	Accessor for finding out how many columns this schema defines.
+jackson-dataformat-csv	CsvSchema.sortedBy	Mutant factory method that will construct a new instance in which columns are sorted based on names given as argument.
+jackson-dataformat-csv	CsvSchema.toString	******************************************************************* /* Other overrides /**********************************************************************
+jackson-dataformat-csv	CsvSchema.usesHeader	******************************************************************* /* Public API, extended, properties /**********************************************************************
+jackson-dataformat-csv	CsvSchema.withAllowComments	Method to indicate whether "hash comments" are allowed for document described by this schema.
+jackson-dataformat-csv	CsvSchema.withAnyPropertyName	-
+jackson-dataformat-csv	CsvSchema.withArrayElementSeparator	-
+jackson-dataformat-csv	CsvSchema.withColumnReordering	Returns a clone of this instance by changing or setting the column reordering flag the column reordering feature.
+jackson-dataformat-csv	CsvSchema.withColumnsFrom	Mutant factory method that will try to combine columns of this schema with those from `toAppend`, starting with columns of this instance, and ignoring duplicates (if any) from argument `toAppend`.
+jackson-dataformat-csv	CsvSchema.withComments	Method to indicate that "hash comments" ARE allowed for document described by this schema.
+jackson-dataformat-csv	CsvSchema.withHeader	Helper method for constructing and returning schema instance that is similar to this one, except that it will be using header line.
+jackson-dataformat-csv	CsvSchema.withNext	-
+jackson-dataformat-csv	CsvSchema.withNullValue	-
+jackson-dataformat-csv	CsvSchema.withStrictHeaders	Returns a clone of this instance by changing or setting the strict headers flag the strict headers feature.
+jackson-dataformat-csv	CsvSchema.withUseHeader	******************************************************************* /* Mutant factories /**********************************************************************
+jackson-dataformat-csv	CsvSchema.withoutArrayElementSeparator	-
+jackson-dataformat-csv	CsvSchema.withoutComments	Method to indicate that "hash comments" are NOT allowed for document described by this schema.
+jackson-dataformat-csv	CsvSchema.withoutHeader	Helper method for construcing and returning schema instance that is similar to this one, except that it will not be using header line.
+univocity-parsers	CommonSettings.excludeFields	Selects fields which will not be read/written, by their names When reading, only the values of the selected columns will be parsed, and the content of the other columns ignored.
+univocity-parsers	CommonSettings.excludeIndexes	Selects columns which will not be read/written, by their positions When reading, only the values of the selected columns will be parsed, and the content of the other columns ignored.
+univocity-parsers	CommonSettings.getErrorContentLength	Configures the parser/writer to limit the length of displayed contents being parsed/written in the exception message when an error occurs If set to 0, then no exceptions will include the content being manipulated in thei
+univocity-parsers	CommonSettings.getFormat	The format of the file to be parsed/written (returns the format's defaults).
+univocity-parsers	CommonSettings.getHeaders	Returns the field names in the input/output, in the sequence they occur (defaults to null).
+univocity-parsers	CommonSettings.getIgnoreLeadingWhitespaces	Returns whether or not leading whitespaces from values being read/written should be skipped (defaults to true)
+univocity-parsers	CommonSettings.getIgnoreTrailingWhitespaces	Returns whether or not trailing whitespaces from values being read/written should be skipped (defaults to true)
+univocity-parsers	CommonSettings.getMaxCharsPerColumn	The maximum number of characters allowed for any given value being written/read.
+univocity-parsers	CommonSettings.getMaxColumns	Returns the hard limit of how many columns a record can have (defaults to 512).
+univocity-parsers	CommonSettings.getNullValue	Returns the String representation of a null value (defaults to null) When reading, if the parser does not read any character from the input, the nullValue is used instead of an empty string When writing, if the writer ha
+univocity-parsers	CommonSettings.getProcessorErrorHandler	Returns the custom error handler to be used to capture and handle errors that might happen while processing records with a com.univocity.parsers.common.processor.core.Processor or a RowWriterProcessor (i.e.
+univocity-parsers	CommonSettings.getRowProcessorErrorHandler	Returns the custom error handler to be used to capture and handle errors that might happen while processing records with a RowProcessor or a RowWriterProcessor (i.e.
+univocity-parsers	CommonSettings.getSkipBitsAsWhitespace	Returns a flag indicating whether the parser/writer should skip bit values as whitespace.
+univocity-parsers	CommonSettings.getSkipEmptyLines	Returns whether or not empty lines should be ignored (defaults to true) when reading, if the parser reads a line that is empty, it will be skipped.
+univocity-parsers	CommonSettings.isAutoConfigurationEnabled	Indicates whether this settings object can automatically derive configuration options.
+univocity-parsers	CommonSettings.isProcessorErrorHandlerDefined	Returns a flag indicating whether or not a ProcessorErrorHandler has been defined through the use of method #setProcessorErrorHandler(ProcessorErrorHandler)
+univocity-parsers	CommonSettings.selectFields	Selects a sequence of fields for reading/writing by their names.
+univocity-parsers	CommonSettings.selectIndexes	Selects a sequence of fields for reading/writing by their positions.
+univocity-parsers	CommonSettings.setAutoConfigurationEnabled	Indicates whether this settings object can automatically derive configuration options.
+univocity-parsers	CommonSettings.setErrorContentLength	Configures the parser/writer to limit the length of displayed contents being parsed/written in the exception message when an error occurs.
+univocity-parsers	CommonSettings.setFormat	Defines the format of the file to be parsed/written (returns the format's defaults).
+univocity-parsers	CommonSettings.setHeaders	Defines the field names in the input/output, in the sequence they occur (defaults to null).
+univocity-parsers	CommonSettings.setIgnoreLeadingWhitespaces	Defines whether or not leading whitespaces from values being read/written should be skipped (defaults to true)
+univocity-parsers	CommonSettings.setIgnoreTrailingWhitespaces	Defines whether or not trailing whitespaces from values being read/written should be skipped (defaults to true)
+univocity-parsers	CommonSettings.setMaxCharsPerColumn	Defines the maximum number of characters allowed for any given value being written/read.
+univocity-parsers	CommonSettings.setMaxColumns	Defines a hard limit of how many columns a record can have (defaults to 512).
+univocity-parsers	CommonSettings.setNullValue	Sets the String representation of a null value (defaults to null) When reading, if the parser does not read any character from the input, the nullValue is used instead of an empty string When writing, if the writer has a
+univocity-parsers	CommonSettings.setProcessorErrorHandler	Defines a custom error handler to capture and handle errors that might happen while processing records with a com.univocity.parsers.common.processor.core.Processor or a RowWriterProcessor (i.e.
+univocity-parsers	CommonSettings.setRowProcessorErrorHandler	Defines a custom error handler to capture and handle errors that might happen while processing records with a RowProcessor or a RowWriterProcessor (i.e.
+univocity-parsers	CommonSettings.setSkipBitsAsWhitespace	Configures the parser to skip bit values as whitespace.
+univocity-parsers	CommonSettings.setSkipEmptyLines	Defines whether or not empty lines should be ignored (defaults to true) when reading, if the parser reads a line that is empty, it will be skipped.
+univocity-parsers	CommonSettings.trimValues	Configures the parser/writer to trim or keep leading and trailing whitespaces around values This has the same effect as invoking both #setIgnoreLeadingWhitespaces(boolean) and #setIgnoreTrailingWhitespaces(boolean) with
+univocity-parsers	CsvFormat.getCharToEscapeQuoteEscaping	Returns the character used to escape the character used for escaping quotes defined by #getQuoteEscape().
+univocity-parsers	CsvFormat.getDelimiter	Returns the field delimiter character.
+univocity-parsers	CsvFormat.getDelimiterString	Returns the field delimiter sequence.
+univocity-parsers	CsvFormat.getQuote	Returns the character used for escaping values where the field delimiter is part of the value.
+univocity-parsers	CsvFormat.getQuoteEscape	Returns the character used for escaping quotes inside an already quoted value.
+univocity-parsers	CsvFormat.isCharToEscapeQuoteEscaping	Identifies whether or not a given character is used to escape the character used for escaping quotes defined by #getQuoteEscape().
+univocity-parsers	CsvFormat.isDelimiter	Identifies whether or not a given character represents a field delimiter
+univocity-parsers	CsvFormat.isQuote	Identifies whether or not a given character is used for escaping values where the field delimiter is part of the value
+univocity-parsers	CsvFormat.isQuoteEscape	Identifies whether or not a given character is used for escaping quotes inside an already quoted value.
+univocity-parsers	CsvFormat.setCharToEscapeQuoteEscaping	Defines the character used to escape the character used for escaping quotes defined by #getQuoteEscape().
+univocity-parsers	CsvFormat.setDelimiter	Defines the field delimiter character.
+univocity-parsers	CsvFormat.setQuote	Defines the character used for escaping values where the field delimiter is part of the value.
+univocity-parsers	CsvFormat.setQuoteEscape	Defines the character used for escaping quotes inside an already quoted value.
+univocity-parsers	CsvParserSettings.detectFormatAutomatically	Convenience method to turn on all format detection features in a single method call, namely: #setDelimiterDetectionEnabled(boolean, char[]) #setQuoteDetectionEnabled(boolean) #setLineSeparatorDetectionEnabled(boolean)
+univocity-parsers	CsvParserSettings.getDelimitersForDetection	Returns the sequence of possible delimiters for detection when #isDelimiterDetectionEnabled() evaluates to true, in order of priority.
+univocity-parsers	CsvParserSettings.getEmptyValue	Returns the String representation of an empty value (defaults to null) When reading, if the parser does not read any character from the input, and the input is within quotes, the empty is used instead of an empty string
+univocity-parsers	CsvParserSettings.getFormatDetectorRowSampleCount	Returns the number of sample rows used in the CSV format auto-detection process (defaults to 20)
+univocity-parsers	CsvParserSettings.getIgnoreLeadingWhitespacesInQuotes	Returns whether or not leading whitespaces from quoted values should be skipped (defaults to false) Note: if #keepQuotes evaluates to true, values won't be trimmed.
+univocity-parsers	CsvParserSettings.getIgnoreTrailingWhitespacesInQuotes	Returns whether or not trailing whitespaces from within quoted values should be skipped (defaults to false) Note: if #keepQuotes evaluates to true, values won't be trimmed.
+univocity-parsers	CsvParserSettings.getKeepQuotes	Flag indicating whether the parser should keep enclosing quote characters in the values parsed from the input.
+univocity-parsers	CsvParserSettings.getUnescapedQuoteHandling	Returns the method of handling values with unescaped quotes.
+univocity-parsers	CsvParserSettings.isDelimiterDetectionEnabled	Returns a flag indicating whether the parser should analyze the input to discover the column delimiter character.
+univocity-parsers	CsvParserSettings.isEscapeUnquotedValues	Indicates whether escape sequences should be processed in unquoted values.
+univocity-parsers	CsvParserSettings.isKeepEscapeSequences	Indicates whether the parser should keep any escape sequences if they are present in the input (i.e.
+univocity-parsers	CsvParserSettings.isNormalizeLineEndingsWithinQuotes	Flag indicating whether the parser should replace line separators, specified in Format#getLineSeparator() by the normalized line separator character specified in Format#getNormalizedNewline(), even on quoted values.
+univocity-parsers	CsvParserSettings.isParseUnescapedQuotes	Indicates whether the CSV parser should accept unescaped quotes inside quoted values and parse them normally.
+univocity-parsers	CsvParserSettings.isParseUnescapedQuotesUntilDelimiter	When parsing unescaped quotes, indicates the parser should stop accumulating characters and consider the value parsed when a delimiter is found.
+univocity-parsers	CsvParserSettings.isQuoteDetectionEnabled	Returns a flag indicating whether the parser should analyze the input to discover the quote character.
+univocity-parsers	CsvParserSettings.setDelimiterDetectionEnabled	Configures the parser to analyze the input before parsing to discover the column delimiter character.
+univocity-parsers	CsvParserSettings.setEmptyValue	Sets the String representation of an empty value (defaults to null) When reading, if the parser does not read any character from the input, and the input is within quotes, the empty is used instead of an empty string
+univocity-parsers	CsvParserSettings.setEscapeUnquotedValues	Configures the parser to process escape sequences in unquoted values.
+univocity-parsers	CsvParserSettings.setFormatDetectorRowSampleCount	Updates the number of sample rows used in the CSV format auto-detection process (defaults to 20)
+univocity-parsers	CsvParserSettings.setIgnoreLeadingWhitespacesInQuotes	Defines whether or not leading whitespaces from quoted values should be skipped (defaults to false) Note: if #keepQuotes evaluates to true, values won't be trimmed.
+univocity-parsers	CsvParserSettings.setIgnoreTrailingWhitespacesInQuotes	Defines whether or not trailing whitespaces from quoted values should be skipped (defaults to false) Note: if #keepQuotes evaluates to true, values won't be trimmed.
+univocity-parsers	CsvParserSettings.setKeepEscapeSequences	Configures the parser to keep any escape sequences if they are present in the input (i.e.
+univocity-parsers	CsvParserSettings.setKeepQuotes	Configures the parser to keep enclosing quote characters in the values parsed from the input.
+univocity-parsers	CsvParserSettings.setNormalizeLineEndingsWithinQuotes	Configures the parser to replace line separators, specified in Format#getLineSeparator() by the normalized line separator character specified in Format#getNormalizedNewline(), even on quoted values.
+univocity-parsers	CsvParserSettings.setParseUnescapedQuotes	Configures how to handle unescaped quotes inside quoted values.
+univocity-parsers	CsvParserSettings.setParseUnescapedQuotesUntilDelimiter	Configures the parser to process values with unescaped quotes, and stop accumulating characters and consider the value parsed when a delimiter is found.
+univocity-parsers	CsvParserSettings.setQuoteDetectionEnabled	Configures the parser to analyze the input before parsing to discover the quote character.
+univocity-parsers	CsvParserSettings.setUnescapedQuoteHandling	Configures the handling of values with unescaped quotes.
+univocity-parsers	CsvParserSettings.trimQuotedValues	Configures the parser to trim any whitespaces around values extracted from within quotes.
+univocity-parsers	CsvWriterSettings.getQuotationTriggers	Returns the list of characters that when present in a value to be written, will force the output value to be enclosed in quotes.
+univocity-parsers	CsvWriterSettings.getQuoteAllFields	Indicates that all written values should be enclosed within quotes (as defined in CsvFormat) (Defaults to false)
+univocity-parsers	CsvWriterSettings.getQuoteNulls	Flag whether to quote null values sent to the CsvWriter when the corresponding column is configured to be quoted via #quoteFields(String...), or #getQuoteAllFields() evaluates to true.
+univocity-parsers	CsvWriterSettings.isEscapeUnquotedValues	Indicates whether escape sequences should be written in unquoted values.
+univocity-parsers	CsvWriterSettings.isInputEscaped	Indicates that the user will provide escaped input, and the writer will not try to introduce escape sequences.
+univocity-parsers	CsvWriterSettings.isNormalizeLineEndingsWithinQuotes	Flag indicating whether the writer should replace the the normalized line separator character specified in Format#getNormalizedNewline() by the sequence specified in Format#getLineSeparator(), when the value is enclosed
+univocity-parsers	CsvWriterSettings.isQuotationTrigger	Queries if a given character is a quotation trigger, i.e.
+univocity-parsers	CsvWriterSettings.isQuoteEscapingEnabled	Indicates whether the CSV writer should escape values that contain the quote character, by enclosing the entire value in quotes.
+univocity-parsers	CsvWriterSettings.quoteFields	Selects fields whose values should always be written within quotes
+univocity-parsers	CsvWriterSettings.quoteIndexes	Selects field positions whose values should always be written within quotes
+univocity-parsers	CsvWriterSettings.setEscapeUnquotedValues	Configures the writer to process escape sequences in unquoted values.
+univocity-parsers	CsvWriterSettings.setInputEscaped	Configures the writer to prevent it to introduce escape sequences.
+univocity-parsers	CsvWriterSettings.setNormalizeLineEndingsWithinQuotes	Flag indicating whether the writer should replace the the normalized line separator character specified in Format#getNormalizedNewline() by the sequence specified in Format#getLineSeparator(), when the value is enclosed
+univocity-parsers	CsvWriterSettings.setQuotationTriggers	Defines one or more "triggers" for enclosing a value within quotes.
+univocity-parsers	CsvWriterSettings.setQuoteAllFields	Indicates indicates whether or not all written values should be enclosed within quotes (as defined in CsvFormat) (Defaults to false) By default, only values that contain a field separator are enclosed within quotes.
+univocity-parsers	CsvWriterSettings.setQuoteEscapingEnabled	Configures the CSV writer to escape values that contain the quote character, by enclosing the entire value in quotes.
+univocity-parsers	CsvWriterSettings.setQuoteNulls	Configures whether to quote null values sent to the CsvWriter when the corresponding column is configured to be quoted via #quoteFields(String...), or #getQuoteAllFields() evaluates to true.
+univocity-parsers	FixedWidthFormat.getLookupWildcard	Returns the lookup wildcard character to accept any character in look-ahead or look-behind patterns defined using FixedWidthParserSettings#addFormatForLookahead(String, FixedWidthFields) or FixedWidthParserSettings#addFo
+univocity-parsers	FixedWidthFormat.getPadding	Returns the padding character used to represent unwritten spaces.
+univocity-parsers	FixedWidthFormat.isPadding	Identifies whether or not a given character represents a padding character
+univocity-parsers	FixedWidthFormat.setLookupWildcard	Defines the lookup wildcard character to accept any character in look-ahead or look-behind patterns defined using FixedWidthParserSettings#addFormatForLookahead(String, FixedWidthFields) or FixedWidthParserSettings#addFo
+univocity-parsers	FixedWidthFormat.setPadding	Defines the padding character used to represent unwritten spaces.
+univocity-parsers	FixedWidthParserSettings.addFormatForLookahead	Defines the format of records identified by a lookahead symbol.
+univocity-parsers	FixedWidthParserSettings.addFormatForLookbehind	Defines the format of records identified by a lookbehind symbol.
+univocity-parsers	FixedWidthParserSettings.clone	Clones this configuration object to reuse all user-provided settings, including the fixed-width field configuration.
+univocity-parsers	FixedWidthParserSettings.getKeepPadding	Indicate the padding character should be kept in the parsed value (defaults to false) This setting can be overridden for individual fields through FixedWidthFields#stripPaddingFrom(String, String...) and FixedWidthFields
+univocity-parsers	FixedWidthParserSettings.getMaxCharsPerColumn	The maximum number of characters allowed for any given value being written/read.
+univocity-parsers	FixedWidthParserSettings.getMaxColumns	Returns the hard limit of how many columns a record can have (defaults to a maximum of 512).
+univocity-parsers	FixedWidthParserSettings.getRecordEndsOnNewline	Indicates whether or not a record is considered parsed when a newline is reached.
+univocity-parsers	FixedWidthParserSettings.getSkipTrailingCharsUntilNewline	Indicates whether or not any trailing characters beyond the record's length should be skipped until the newline is reached (defaults to false) For example, if the record length is 5, but the row contains "12345678\n", th
+univocity-parsers	FixedWidthParserSettings.getUseDefaultPaddingForHeaders	Indicates whether headers should be parsed using the default padding specified in FixedWidthFormat#getPadding() instead of any custom padding associated with a given field (in FixedWidthFields#setPadding(char, int...)) D
+univocity-parsers	FixedWidthParserSettings.setKeepPadding	Configures the fixed-width parser to retain the padding character in any parsed values (defaults to false) This setting can be overridden for individual fields through FixedWidthFields#stripPaddingFrom(String, String...)
+univocity-parsers	FixedWidthParserSettings.setRecordEndsOnNewline	Defines whether or not a record is considered parsed when a newline is reached.
+univocity-parsers	FixedWidthParserSettings.setSkipTrailingCharsUntilNewline	Defines whether or not any trailing characters beyond the record's length should be skipped until the newline is reached (defaults to false) For example, if the record length is 5, but the row contains "12345678\n", then
+univocity-parsers	FixedWidthParserSettings.setUseDefaultPaddingForHeaders	Defines whether headers should be parsed using the default padding specified in FixedWidthFormat#getPadding() instead of any custom padding associated with a given field (in FixedWidthFields#setPadding(char, int...))
+univocity-parsers	FixedWidthWriterSettings.addFormatForLookahead	Defines the format of records identified by a lookahead symbol.
+univocity-parsers	FixedWidthWriterSettings.addFormatForLookbehind	Defines the format of records identified by a lookbehind symbol.
+univocity-parsers	FixedWidthWriterSettings.clone	Clones this configuration object to reuse all user-provided settings, including the fixed-width field configuration.
+univocity-parsers	FixedWidthWriterSettings.getDefaultAlignmentForHeaders	Returns the default alignment to use when writing headers.
+univocity-parsers	FixedWidthWriterSettings.getUseDefaultPaddingForHeaders	Indicates whether headers should be written using the default padding specified in FixedWidthFormat#getPadding() instead of any custom padding associated with a given field (in FixedWidthFields#setPadding(char, int...))
+univocity-parsers	FixedWidthWriterSettings.getWriteLineSeparatorAfterRecord	Returns a flag indicating whether each record, when written, should be followed by a line separator (as specified in Format#getLineSeparator().
+univocity-parsers	FixedWidthWriterSettings.setDefaultAlignmentForHeaders	Defines the default alignment to use when writing headers.
+univocity-parsers	FixedWidthWriterSettings.setUseDefaultPaddingForHeaders	Defines whether headers should be written using the default padding specified in FixedWidthFormat#getPadding() instead of any custom padding associated with a given field (in FixedWidthFields#setPadding(char, int...))
+univocity-parsers	FixedWidthWriterSettings.setWriteLineSeparatorAfterRecord	Defines whether each record, when written, should be followed by a line separator (as specified in Format#getLineSeparator().
+univocity-parsers	Format.getComment	Returns the character that represents a line comment.
+univocity-parsers	Format.getLineSeparator	Returns the current line separator character sequence, which can contain 1 to 2 characters.
+univocity-parsers	Format.getLineSeparatorString	Returns the current line separator sequence as a String of 1 to 2 characters.
+univocity-parsers	Format.getNormalizedNewline	Returns the normalized newline character, which is automatically replaced by Format#lineSeparator when reading/writing.
+univocity-parsers	Format.getSystemLineSeparator	Returns the system's line separator sequence, which can contain 1 to 2 characters.
+univocity-parsers	Format.isComment	Identifies whether or not a given character represents a comment
+univocity-parsers	Format.isNewLine	Compares the given character against the Format#normalizedNewline character.
+univocity-parsers	Format.setComment	Defines the character that represents a line comment when found in the beginning of a line of text.
+univocity-parsers	Format.setLineSeparator	Defines the line separator sequence that should be used for parsing and writing.
+univocity-parsers	Format.setNormalizedNewline	Sets the normalized newline character, which is automatically replaced by Format#lineSeparator when reading/writing
+univocity-parsers	TsvFormat.getEscapeChar	Returns the character used for escaping special characters in TSV inputs: \t, \n, \r and \
+univocity-parsers	TsvFormat.getEscapedTabChar	Returns the character that should be used to represent an escaped tab, i.e.
+univocity-parsers	TsvFormat.isEscapeChar	Identifies whether or not a given character is used for escaping special characters in TSV (\t, \n, \r and \).
+univocity-parsers	TsvFormat.setEscapeChar	Defines the character used for escaping special characters in TSV inputs: \t, \n, \r and \ .
+univocity-parsers	TsvFormat.setEscapedTabChar	Defines the character that should be used to represent an escaped tab, i.e.
+univocity-parsers	TsvParserSettings.isLineJoiningEnabled	Identifies whether or lines ending with the escape character (defined by TsvFormat#getEscapeChar() and followed by a line separator character should be joined with the following line.
+univocity-parsers	TsvParserSettings.setLineJoiningEnabled	Defines how the parser should handle escaped line separators.
+univocity-parsers	TsvWriterSettings.isLineJoiningEnabled	Identifies whether values containing line endings should have the line separator written using the escape character (defined by TsvFormat#getEscapeChar() followed by the actual line separator character instead of other c
+univocity-parsers	TsvWriterSettings.setLineJoiningEnabled	Defines how the writer should handle the escaping of line separators.
