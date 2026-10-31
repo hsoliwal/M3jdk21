@@ -212,7 +212,7 @@
       "kind": "m3-overlay-source",
       "overlay": "FDP_DELEGATES_TO_JDK v1",
       "recipe": "m3/tooling/fdp-delegate/tools/fdp_delegate_overlay.py",
-      "recipe_sha256": "acd81c51a41b4444f8eb53c793403789fbddddc744aae35440302984c7536396",
+      "recipe_sha256": "3140cf434cdea1abd83b9626f86066bc72c40a23cfc9144bfe64d5345809faf5",
       "repository": "m3/vendor/third_party/fastdoubleparser-1.0.90/src/main/java/ch/randelshofer/fastdoubleparser/JavaDoubleParser.java",
       "sha256": "4a543d61076c6f6d2a589168b1bd80218de9948cf75d0523a3a20271f928334c",
       "upstream": "ch/randelshofer/fastdoubleparser/JavaDoubleParser.java"
@@ -241,7 +241,7 @@
       "kind": "m3-overlay-source",
       "overlay": "FDP_DELEGATES_TO_JDK v1",
       "recipe": "m3/tooling/fdp-delegate/tools/fdp_delegate_overlay.py",
-      "recipe_sha256": "acd81c51a41b4444f8eb53c793403789fbddddc744aae35440302984c7536396",
+      "recipe_sha256": "3140cf434cdea1abd83b9626f86066bc72c40a23cfc9144bfe64d5345809faf5",
       "repository": "m3/vendor/third_party/fastdoubleparser-1.0.90/src/main/java/ch/randelshofer/fastdoubleparser/JavaFloatParser.java",
       "sha256": "6d2fbfc7a553b73f51992559093c284ef240f956346233de7ad209a91e8d085d",
       "upstream": "ch/randelshofer/fastdoubleparser/JavaFloatParser.java"
@@ -393,7 +393,7 @@
     {
       "kind": "retained-provenance",
       "repository": "m3/vendor/third_party/fastdoubleparser-1.0.90/OVERLAY_SOURCES.json",
-      "sha256": "b792ea2f2a2eb1fbe67e48729f0edccbc4d51400e83ad603d285d4cd99c055b6",
+      "sha256": "ddb8e2bf9a9ffec871937e092777ae718d1c4e9ebc840515d55261f1bbac2c01",
       "upstream": "fetch_overlays.py; m3_overlays: m3/tooling/fdp-delegate/tools/fdp_delegate_overlay.py"
     },
     {

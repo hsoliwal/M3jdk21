@@ -7,9 +7,9 @@
       "license": "MIT License",
       "module": null,
       "path": "m3/vendor/third_party/fastdoubleparser-1.0.90",
-      "provenance_sha256": "60fe03f55481f45031dd7cffe45126dd441a8d9bc56c8036f18abaf82ebd4a45",
+      "provenance_sha256": "cfee2e16d3aae17efbc32492a9ca8db63172454f01342c664d296abe72872d76",
       "sources_jar_sha256": "9ef19b07959b456930efdfd4c5690caeb9ac39b07a813e84557ca12957478ce4",
-      "tree_sha256": "c8c6e5cfe32e718af4665d006b4b3e73f303e18875043f1d7baf2f5e90c77b11"
+      "tree_sha256": "d95b2302ce35265fc1c3d44522769592437c3218d28f51ea286fd07b5d9b3afb"
     },
     "jackson-annotations-2.19.2": {
       "coordinate": "com.fasterxml.jackson.core:jackson-annotations:2.19.2-m3-source-1",
@@ -76,7 +76,7 @@
       "sha256": "d28ab95812ea2b2024d18e037b42eaabd06ee041a74b86ce760c238d3155399d"
     }
   ],
-  "predecessor_path": "qualification/fdp-delegate-20261031/SOURCE_LOCK_PREDECESSOR.json",
+  "predecessor_path": "qualification/fdp-delegate/SOURCE_LOCK_PREDECESSOR.json",
   "predecessor_sha256": "a1c253b045c0996c436f44f305a3aba77ad1272ff90e3e1f04799fe90d78e008",
   "schema": 1,
   "target_base_revision": "52fb81c483c74448a12eecb63aa9465e42cdb82c",
