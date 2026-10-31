@@ -29,7 +29,7 @@ APPROVED_ADDITIVE_TEST = (
     'M3FiveLibraryArrayificationTest.java')
 APPROVED_REPAIR_SHA256 = '6d31a53eb94af7c3cfe08ce126ce1be1f8d7da1b09150bd72a12c602d3ab3565'
 APPROVED_REPAIR_GIT_BLOB = 'e220622405432368d2c46b32f9f1c197913e7c0a'
-APPROVED_REPAIR_RECIPE = 'com.synexia.m3.M3Jdk21InteropArrayificationVar20261022'
+APPROVED_REPAIR_RECIPE = 'jdk.internal.m3.M3Jdk21InteropArrayificationVar20261022'
 
 
 def read_admitted_additive_revision(receipts: Path, original_rows: list[list[str]],
@@ -71,7 +71,7 @@ COMPILER_TEST_PATHS = (
     TEST + 'M3FiveLibraryKeyRangesTest.java',
     TEST + 'M3FiveProviderFlagSelectionTest.java',
 )
-COMPILER_RECIPE = 'com.synexia.m3.M3Jdk21InteropThreeCompilerAtoms20261022'
+COMPILER_RECIPE = 'jdk.internal.m3.M3Jdk21InteropThreeCompilerAtoms20261022'
 
 
 def admitted_compiler_revisions(receipts: Path) -> dict[str, tuple[str, str, str, str]]:

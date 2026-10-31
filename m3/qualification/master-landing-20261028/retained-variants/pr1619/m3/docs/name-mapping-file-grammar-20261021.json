@@ -1,7 +1,7 @@
 {
   "status": "CANDIDATE_HOLD_NOT_ADMITTED",
   "productBase": "d7b9e65241b717a387b25234df4cf21531f07d9f",
-  "canonicalRecipe": "com.synexia.m3.FileGrammar20261021",
+  "canonicalRecipe": "jdk.internal.m3.FileGrammar20261021",
   "canonicalRevision": "3dacf226b2026cb5bc033311b811d192a855b5f3",
   "globalReceivingPhaseAdvanced": false,
   "mappingDisposition": "Scoped candidate fragment; canonical aggregate mapping admission remains pending actual SDK/product gates.",

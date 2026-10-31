@@ -74,9 +74,9 @@ class NebulaUpstreamProofAdmissionTest(unittest.TestCase):
         row = self.mod.read(self.receipt)
         for field, value in (
             ("upstream_revision", "0" * 40),
-            ("synexia_commit", "0" * 40),
-            ("synexia_pr", "1"),
-            ("synexia_workflow_state", "GREEN"),
+            ("m3_commit", "0" * 40),
+            ("m3_pr", "1"),
+            ("m3_workflow_state", "GREEN"),
         ):
             changed = dict(row)
             changed[field] = value

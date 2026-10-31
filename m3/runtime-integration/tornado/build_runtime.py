@@ -642,7 +642,7 @@ class Build:
                 "--add-exports", "java.base/jdk.internal.vm.parallel=jdk.m3.tornado,ALL-UNNAMED",
                 "--add-reads", "jdk.m3.tornado=ALL-UNNAMED",
                 "--add-opens", "jdk.m3.tornado/com.m3.tornado=ALL-UNNAMED",
-                "--add-opens", "jdk.m3.tornado/com.synexia.m3.cpugpu=ALL-UNNAMED", "-Dm3.gpu=" + str(mode == "device").lower(),
+                "--add-opens", "jdk.m3.tornado/jdk.internal.m3.cpugpu=ALL-UNNAMED", "-Dm3.gpu=" + str(mode == "device").lower(),
                 "-classpath", str(self.out / "junit-runner-classes") + os.pathsep + self.junit_classpath(), "Rv32iJUnitLauncher", mode]
 
     def test(self):

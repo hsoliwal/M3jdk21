@@ -11,16 +11,16 @@
     "repository": "hsoliwal/com.synexia",
     "pull_request": 12855,
     "receipt_commit": "9bf7218eb373ba095d41f936fdec0e2c810bd4a6",
-    "receipt_path": "synexia-openrewrite-recipes/qualification/tree-residency-20261026/EXECUTION.json",
+    "receipt_path": "m3-openrewrite-recipes/qualification/tree-residency-20261026/EXECUTION.json",
     "recipes": [
       {
-        "name": "com.synexia.m3.ViewportResidencyReuse20261026",
+        "name": "jdk.internal.m3.ViewportResidencyReuse20261026",
         "dataset": "vpt-residency-reuse-20261026",
         "before_blob": "65ab293a00da1092243f7f1904771c5a0cc60a44",
         "after_blob": "6026f2eaee317bb2fe3bcaacb3f6d2c51a3b23b3"
       },
       {
-        "name": "com.synexia.m3.ViewportTreeClosure20261026",
+        "name": "jdk.internal.m3.ViewportTreeClosure20261026",
         "dataset": "vpt-tree-closure-20261026",
         "before_blob": "6026f2eaee317bb2fe3bcaacb3f6d2c51a3b23b3",
         "after_blob": "9725e48f7850b107b8b968527827eb5fde5b1fe6"

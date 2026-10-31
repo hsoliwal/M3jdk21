@@ -7,29 +7,29 @@
   "parentDocs": "04b5feb1874fce2074f86244d83b3b0947c64a9f",
   "sourceOnly": true,
   "sdk": {
-    "path": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk",
+    "path": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk",
     "tree": "0079fba204e2a2820e66c4a83268ca6bb51cd329",
     "files": 35,
     "nonselfPins": 34,
     "pins": {
-      "path": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/pins.json",
+      "path": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/pins.json",
       "gitBlob": "329efb21b5878910ff3db1277bae25a948d62e13",
       "bytes": 10316,
       "sha256": "72274d3e0dbdaf86d8cadd8a41c696bcd7a43ba3ab729f0fb0da8c018547db9e"
     },
     "verifier": {
-      "path": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/verify.py",
+      "path": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/verify.py",
       "gitBlob": "40c2e4a35315e953500ec3a3942bdc584db2f2b7",
       "bytes": 25785,
       "sha256": "b1cf55f585929b49f6ffeea0f4e5c93314c0e1bf3e89976c1ddc95fa070236d3"
     },
     "test": {
-      "path": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/test/java/com/synexia/rewrite/M3JoinedRangeDirectoryRecipeTest.java",
+      "path": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/test/java/jdk/internal/m3/rewrite/M3JoinedRangeDirectoryRecipeTest.java",
       "gitBlob": "73471b80d618b4ab2b016d097459dd5cb390ef93",
       "bytes": 22058,
       "sha256": "a36dd62e6d2cb03614473e90e77298971bb8203eeeefcf1f11689f3d128ec61f"
     },
-    "suite": "com.synexia.rewrite.M3JoinedRangeDirectoryRecipeTest",
+    "suite": "jdk.internal.m3.rewrite.M3JoinedRangeDirectoryRecipeTest",
     "methods": [
       "allTwoPartialStatesBothOrdersReachExactFixedPoint",
       "allTwoInverseStatesBothOrdersRecoverExactBefore",
@@ -76,7 +76,7 @@
     "proofSummary": "JOINED_FRESH_RANGE_PASS fixtures=5 ranges=466 nested=466 freshResults=1864 invalidRanges=25 indexRefusals=3738 aliasMutations=3"
   },
   "proof": {
-    "path": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/test/resources/com/synexia/rewrite/joined-range-directory-20261020/proof/M3JoinedFreshRangeProof.java.txt",
+    "path": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/test/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/proof/M3JoinedFreshRangeProof.java.txt",
     "gitBlob": "fa35d3170995ad74f6d7363d6e3fe85dd0b2449c",
     "bytes": 14816,
     "sha256": "8194f210675ff2da605989cf885687549a77ac6037757ac0a8fabcea307cee1f"

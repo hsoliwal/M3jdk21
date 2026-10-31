@@ -4,252 +4,252 @@
   "file_family_java_count": 50,
   "mappings": [
     {
-      "source": "com.synexia.indexstring.file.MIndexByteFile",
+      "source": "jdk.internal.m3.indexstring.file.MIndexByteFile",
       "target": "com.m3.file.M3ByteFile",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexByteFileStreamIndexer",
+      "source": "jdk.internal.m3.indexstring.file.MIndexByteFileStreamIndexer",
       "target": "com.m3.file.M3ByteFileStreamIndexer",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFile",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFile",
       "target": "com.m3.file.M3File",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileAttributeOrder",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileAttributeOrder",
       "target": "com.m3.file.M3FileAttributeOrder",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileAttributes",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileAttributes",
       "target": "com.m3.file.M3FileAttributes",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileBuilder",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileBuilder",
       "target": "com.m3.file.M3FileBuilder",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileByteFacts",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileByteFacts",
       "target": "com.m3.file.M3FileByteFacts",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileByteFactsSnapshot",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileByteFactsSnapshot",
       "target": "com.m3.file.M3FileByteFactsSnapshot",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileEventReader",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileEventReader",
       "target": "com.m3.file.M3FileEventReader",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileEventSnapshotCollector",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileEventSnapshotCollector",
       "target": "com.m3.file.M3FileEventSnapshotCollector",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileEventWriter",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileEventWriter",
       "target": "com.m3.file.M3FileEventWriter",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileFrequencyIndex",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileFrequencyIndex",
       "target": "com.m3.file.M3FileFrequencyIndex",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileImage",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileImage",
       "target": "com.m3.file.M3FileImage",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileKindIndex",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileKindIndex",
       "target": "com.m3.file.M3FileKindIndex",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileLexicon",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileLexicon",
       "target": "com.m3.file.M3FileLexicon",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileLexiconSnapshot",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileLexiconSnapshot",
       "target": "com.m3.file.M3FileLexiconSnapshot",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileMultiPattern",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileMultiPattern",
       "target": "com.m3.file.M3FileMultiPattern",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFilePattern",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFilePattern",
       "target": "com.m3.file.M3FilePattern",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFilePrimitiveSnapshot",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFilePrimitiveSnapshot",
       "target": "com.m3.file.M3FilePrimitiveSnapshot",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileProjection",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileProjection",
       "target": "com.m3.file.M3FileProjection",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileProjectionSnapshot",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileProjectionSnapshot",
       "target": "com.m3.file.M3FileProjectionSnapshot",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileRangeFingerprint",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileRangeFingerprint",
       "target": "com.m3.file.M3FileRangeFingerprint",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileRollingIndex",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileRollingIndex",
       "target": "com.m3.file.M3FileRollingIndex",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileSnapshot",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileSnapshot",
       "target": "com.m3.file.M3FileSnapshot",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileSnapshotCodec",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileSnapshotCodec",
       "target": "com.m3.file.M3FileSnapshotCodec",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileSourceFacts",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileSourceFacts",
       "target": "com.m3.file.M3FileSourceFacts",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileSourceFactsImage",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileSourceFactsImage",
       "target": "com.m3.file.M3FileSourceFactsImage",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileSourceFactsKey",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileSourceFactsKey",
       "target": "com.m3.file.M3FileSourceFactsKey",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileSourceFactsSnapshot",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileSourceFactsSnapshot",
       "target": "com.m3.file.M3FileSourceFactsSnapshot",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileSourceFactsStore",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileSourceFactsStore",
       "target": "com.m3.file.M3FileSourceFactsStore",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileSpan",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileSpan",
       "target": "com.m3.file.M3FileSpan",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileSpanSnapshot",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileSpanSnapshot",
       "target": "com.m3.file.M3FileSpanSnapshot",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileStreamEvents",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileStreamEvents",
       "target": "com.m3.file.M3FileStreamEvents",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileStreamIndexer",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileStreamIndexer",
       "target": "com.m3.file.M3FileStreamIndexer",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileTokenKind",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileTokenKind",
       "target": "com.m3.file.M3FileTokenKind",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileTokenRange",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileTokenRange",
       "target": "com.m3.file.M3FileTokenRange",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileTokenRangeSha256",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileTokenRangeSha256",
       "target": "com.m3.file.M3FileTokenRangeSha256",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileTokenStore",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileTokenStore",
       "target": "com.m3.file.M3FileTokenStore",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileTokenizer",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileTokenizer",
       "target": "com.m3.file.M3FileTokenizer",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileUniverseEventReader",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileUniverseEventReader",
       "target": "com.m3.file.M3FileUniverseEventReader",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileUniverseEventWriter",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileUniverseEventWriter",
       "target": "com.m3.file.M3FileUniverseEventWriter",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileUniversePlan",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileUniversePlan",
       "target": "com.m3.file.M3FileUniversePlan",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileUniverseSnapshot",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileUniverseSnapshot",
       "target": "com.m3.file.M3FileUniverseSnapshot",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileUniverseSnapshotImage",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileUniverseSnapshotImage",
       "target": "com.m3.file.M3FileUniverseSnapshotImage",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileUniverseTokenIndex",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileUniverseTokenIndex",
       "target": "com.m3.file.M3FileUniverseTokenIndex",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileUniverseTokenIndexImage",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileUniverseTokenIndexImage",
       "target": "com.m3.file.M3FileUniverseTokenIndexImage",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileUniverseTokenRangeSha256",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileUniverseTokenRangeSha256",
       "target": "com.m3.file.M3FileUniverseTokenRangeSha256",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MIndexFileUniverseTokenSpan",
+      "source": "jdk.internal.m3.indexstring.file.MIndexFileUniverseTokenSpan",
       "target": "com.m3.file.M3FileUniverseTokenSpan",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.MappedMIndexFile",
+      "source": "jdk.internal.m3.indexstring.file.MappedMIndexFile",
       "target": "com.m3.file.MappedM3File",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     },
     {
-      "source": "com.synexia.indexstring.file.json.MIndexJsonStructuralIndex",
+      "source": "jdk.internal.m3.indexstring.file.json.MIndexJsonStructuralIndex",
       "target": "com.m3.file.json.M3JsonStructuralIndex",
       "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
     }

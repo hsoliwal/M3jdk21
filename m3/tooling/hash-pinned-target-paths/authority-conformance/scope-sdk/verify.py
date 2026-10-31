@@ -27,36 +27,36 @@ SOURCE_LINEAGES = {
         "gitBlob": "2768fe5846c2c67c52e872a97f735a0fb4d0d69a"
     }
 }
-RESOURCE = "src/main/resources/com/synexia/rewrite/canonical-scope-boundary-20261020"
-SUITE = "com.synexia.rewrite.M3CanonicalScopeBoundaryRecipeTest"
+RESOURCE = "src/main/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020"
+SUITE = "jdk.internal.m3.rewrite.M3CanonicalScopeBoundaryRecipeTest"
 METHODS = ["bothPartialStatesRoundTripAndReachFixedPointsInBothOrders",
            "everyOwnerRefusesDriftMissingAndDuplicateWithoutMutation",
            "actualEmittedClassesPreserveAcceptedScopesAndFixCounterexamples"]
 SUITES = {SUITE: METHODS}
 OWNER_GIT = {
-    "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
-    "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java": "9174dd681f0d75b5086fc19904a71524a03972dc"
+    "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
+    "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java": "9174dd681f0d75b5086fc19904a71524a03972dc"
 }
-SCOPE_OWNER = "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java"
+SCOPE_OWNER = "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java"
 C_BEFORE_SHA = "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579"
 C_AFTER_GIT = "8b7d2adb648d98ef8654e5ab4eb0f03560a982c8"
 C_AFTER_SHA = "e95b11ebad61c551bc25df3276fa560a613d476bcee2d865ac272bd35bdade9d"
 TARGET_PATHS = list(OWNER_GIT)
 KEEP_PATHS = [name for name in TARGET_PATHS if name != SCOPE_OWNER]
-HISTORICAL = "src/test/resources/com/synexia/rewrite/canonical-scope-boundary-20261020/historical/M3ScopeInference.java.txt"
+HISTORICAL = "src/test/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/historical/M3ScopeInference.java.txt"
 HISTORICAL_GIT = "2768fe5846c2c67c52e872a97f735a0fb4d0d69a"
-DIVERGENT = "src/test/resources/com/synexia/rewrite/canonical-scope-boundary-20261020/divergent/M3ScopeInference.java.txt"
+DIVERGENT = "src/test/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/divergent/M3ScopeInference.java.txt"
 DIVERGENT_GIT = "d24729950508857280ea1b56d4e930f05137ec85"
 RECEIVER_OUTPUTS: dict[str, str] = {}
 RECEIVER_CUSTODY: dict[str, str] = {}
 DESCRIPTOR = "src/main/resources/META-INF/rewrite/canonical-scope-boundary-20261020.yml"
-TEST = "src/test/java/com/synexia/rewrite/M3CanonicalScopeBoundaryRecipeTest.java"
+TEST = "src/test/java/jdk/internal/m3/rewrite/M3CanonicalScopeBoundaryRecipeTest.java"
 INVERSE_DESCRIPTOR = "src/main/resources/META-INF/rewrite/canonical-scope-boundary-20261020-inverse.yml"
-INVERSE_ADAPTER = "pinned-engine/com/synexia/rewrite/M3CanonicalScopeBoundaryInverseRecipe.java"
+INVERSE_ADAPTER = "pinned-engine/jdk/internal/m3/rewrite/M3CanonicalScopeBoundaryInverseRecipe.java"
 REQUIRED_PATHS = sorted([
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
-    "pinned-engine/com/synexia/rewrite/M3CanonicalScopeBoundaryRecipe.java",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
+    "pinned-engine/jdk/internal/m3/rewrite/M3CanonicalScopeBoundaryRecipe.java",
     "pom.xml", DESCRIPTOR, INVERSE_DESCRIPTOR, INVERSE_ADAPTER, TEST, "verify.py", HISTORICAL, DIVERGENT,
     "FOSS_REUSE_DECISION.tsv", "THIRD_PARTY_NOTICES.md", "README.md",
     RESOURCE + "/manifest.tsv", RESOURCE + "/inverse/manifest.tsv",
@@ -64,14 +64,14 @@ REQUIRED_PATHS = sorted([
     *[RESOURCE + "/" + stage + "/" + name for stage in ("before", "out") for name in TARGET_PATHS],
 ])
 ORIGINAL_GIT = {
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java": "1c1b1b568d369f688f6953161636bf36b484bf5a",
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
     "pom.xml": "d79867bcc09ad6329e12418e15907e54b8ab025f",
     HISTORICAL: HISTORICAL_GIT,
     DIVERGENT: DIVERGENT_GIT,
 }
-PROVIDERS = {"openrewriteAdapter": ORIGINAL_GIT["pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java"],
-             "manifestKernel": ORIGINAL_GIT["pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java"]}
+PROVIDERS = {"openrewriteAdapter": ORIGINAL_GIT["pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java"],
+             "manifestKernel": ORIGINAL_GIT["pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java"]}
 COMPILED_PROVIDERS = ("M3GpuToolJoinRecipe", "M3GpuToolJoinManifest", "M3CanonicalScopeBoundaryRecipe",
                       "M3CanonicalScopeBoundaryInverseRecipe")
 FALSE_GATES = ("canonicalModuleCompiled", "canonicalModuleQualified", "receiverCustodyQualified",
@@ -239,7 +239,7 @@ def validate_marker(xml: bytes, ident: str) -> None:
 def self_test_reports() -> None:
     """Prove exact provider-derived names without stripping parameter signatures."""
     # Independent literal oracle matches the sealed Java methods and pinned provider.
-    expected_suites = {"com.synexia.rewrite.M3CanonicalScopeBoundaryRecipeTest":["bothPartialStatesRoundTripAndReachFixedPointsInBothOrders","everyOwnerRefusesDriftMissingAndDuplicateWithoutMutation","actualEmittedClassesPreserveAcceptedScopesAndFixCounterexamples"]}
+    expected_suites = {"jdk.internal.m3.rewrite.M3CanonicalScopeBoundaryRecipeTest":["bothPartialStatesRoundTripAndReachFixedPointsInBothOrders","everyOwnerRefusesDriftMissingAndDuplicateWithoutMutation","actualEmittedClassesPreserveAcceptedScopesAndFixCounterexamples"]}
     if SUITES != expected_suites:
         raise AssertionError("sealed SDK report inventory drift")
     refused = 0
@@ -466,7 +466,7 @@ def reports(pins: dict, pins_data: bytes) -> None:
             "actual emitted Java21 baseline/candidate regression proof required")
     compiled = {}
     for name in COMPILED_PROVIDERS:
-        relative = "target/classes/com/synexia/rewrite/" + name + ".class"
+        relative = "target/classes/jdk/internal/m3/rewrite/" + name + ".class"
         raw = regular(ROOT / relative).read_bytes()
         require(len(raw) > 8 and raw[:4] == bytes.fromhex("cafebabe")
                 and int.from_bytes(raw[6:8], "big") == 65, "actual Java21 SDK provider class required")

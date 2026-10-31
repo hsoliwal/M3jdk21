@@ -4,7 +4,7 @@
   "canonical_pr": 12855,
   "canonical_commit": "f0f28b82a161f94e4227adee0363df15c4d17985",
   "canonical_dataset": "viewport-frame-allstate-20261027",
-  "canonical_recipe": "com.synexia.m3.ViewportFrameAllState20261027",
+  "canonical_recipe": "jdk.internal.m3.ViewportFrameAllState20261027",
   "target": "m3/collections/src/main/c/m3maskviewport.c",
   "pre_git_blob": "f29d081e28ba8ccc4516bd28c09e738b7a408a76",
   "post_git_blob": "e7db071a5e1768442ef016fc6516e9dc9e3f9396",

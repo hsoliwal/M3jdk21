@@ -48,14 +48,14 @@
     "038e984bf445fe99562ce922bd9e09d0912036cd": [
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.JccApplyTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.JccApplyTest.xml",
         "sha": "08c98f28aa5a9ebbb783756a5466c747d9dfc9a8",
         "size": 16967,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.JccApplyTest.txt",
+        "path": "jdk.internal.m3.rewrite.JccApplyTest.txt",
         "sha": "b7b99c962030f2ccc9ed99cf559591bff3dac532",
         "size": 314,
         "type": "blob"
@@ -232,14 +232,14 @@
     "088ad962baeaad756abe1bbc0c0a9679f03e668d": [
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.JccApplyTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.JccApplyTest.xml",
         "sha": "942501cbaee22426166c79ddc1eb3eb4b25530ac",
         "size": 17156,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.JccApplyTest.txt",
+        "path": "jdk.internal.m3.rewrite.JccApplyTest.txt",
         "sha": "c1daec542f6bbaf16692953f2b55275fef4c57a7",
         "size": 314,
         "type": "blob"
@@ -256,112 +256,112 @@
     "0984fa7420f78ac65d3343ce9ae701066bd277a3": [
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.mindex.MIndexDonorLiteralRegressionTest.xml",
+        "path": "TEST-jdk.internal.m3.mindex.MIndexDonorLiteralRegressionTest.xml",
         "sha": "e8b478c95f75c118336377adcc666fcc893d4d19",
         "size": 24179,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.mindex.MIndexDonorRegexRegressionTest.xml",
+        "path": "TEST-jdk.internal.m3.mindex.MIndexDonorRegexRegressionTest.xml",
         "sha": "80a33544b4e78eed54fc4c9c971a082f960cd516",
         "size": 24405,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.JccCompositionTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.JccCompositionTest.xml",
         "sha": "72c1ed7488a72566644676dcf0b2f2bfe4123f1b",
         "size": 23967,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.JccHostVerifierTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.JccHostVerifierTest.xml",
         "sha": "247c2cc75d4fedcff0bb7e2269d7d61bef64dccb",
         "size": 24154,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.JccLedgerContractTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.JccLedgerContractTest.xml",
         "sha": "568498e331b5c5b14b622550297716491361d2be",
         "size": 23897,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.JccMasteryTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.JccMasteryTest.xml",
         "sha": "91f56e68570277e3d1bdae69525ba28f7e576357",
         "size": 25350,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.JccProjectCycleTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.JccProjectCycleTest.xml",
         "sha": "f10b51a52f4a3f85a38910b0d1816f10ae49c591",
         "size": 23997,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.JccUnicodeTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.JccUnicodeTest.xml",
         "sha": "df5a724b8f88e97c549f9334d10d6765bb50561e",
         "size": 30438,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.mindex.MIndexDonorLiteralRegressionTest.txt",
+        "path": "jdk.internal.m3.mindex.MIndexDonorLiteralRegressionTest.txt",
         "sha": "e019bc4b7dd97554b81e61631380ac7c8cd9f842",
         "size": 352,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.mindex.MIndexDonorRegexRegressionTest.txt",
+        "path": "jdk.internal.m3.mindex.MIndexDonorRegexRegressionTest.txt",
         "sha": "20669b1d63332e6bb73ef01d77b4e0b0b9a6dc2b",
         "size": 348,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.JccCompositionTest.txt",
+        "path": "jdk.internal.m3.rewrite.JccCompositionTest.txt",
         "sha": "a923c0db24d4e1469d2fb8837cdfab7aa25d88ee",
         "size": 326,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.JccHostVerifierTest.txt",
+        "path": "jdk.internal.m3.rewrite.JccHostVerifierTest.txt",
         "sha": "0df5e47374020c1cd0dbb15a6447cdf90143a02a",
         "size": 328,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.JccLedgerContractTest.txt",
+        "path": "jdk.internal.m3.rewrite.JccLedgerContractTest.txt",
         "sha": "b61fb936ae1720dfb8aa77c7db8e5d0dbce1afee",
         "size": 332,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.JccMasteryTest.txt",
+        "path": "jdk.internal.m3.rewrite.JccMasteryTest.txt",
         "sha": "b14b8eb39d96a70a5fe87150beb2d5373dca249f",
         "size": 319,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.JccProjectCycleTest.txt",
+        "path": "jdk.internal.m3.rewrite.JccProjectCycleTest.txt",
         "sha": "408db3a3487e54518e68fc48a20d9e534b846413",
         "size": 328,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.JccUnicodeTest.txt",
+        "path": "jdk.internal.m3.rewrite.JccUnicodeTest.txt",
         "sha": "fbc7efe6ab4c2ff13f005dff31ff0c888fa5bc88",
         "size": 319,
         "type": "blob"
@@ -536,14 +536,14 @@
     "0ed76b6a7b5fa53bd24951c0644fad8bbf3748d5": [
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.JccApplyTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.JccApplyTest.xml",
         "sha": "bf639842ed9eec4e5fa86349139470e31300557a",
         "size": 17603,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.JccApplyTest.txt",
+        "path": "jdk.internal.m3.rewrite.JccApplyTest.txt",
         "sha": "6e0a605ad1c244c2489c39b0e2de8e9f373ac499",
         "size": 314,
         "type": "blob"
@@ -687,14 +687,14 @@
     "15a6d37559bcd3c80dc599f5e02a1523217426a5": [
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.JccApplyTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.JccApplyTest.xml",
         "sha": "05fc3d80ba74d6530ba2e1fff2bcee1a0a58947f",
         "size": 16965,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.JccApplyTest.txt",
+        "path": "jdk.internal.m3.rewrite.JccApplyTest.txt",
         "sha": "cca960e63221af1c9c2e019727590a6837ea2fd5",
         "size": 314,
         "type": "blob"
@@ -825,19 +825,19 @@
       },
       {
         "mode": "040000",
-        "path": "synexia-algo",
+        "path": "m3-algo",
         "sha": "9434f7b0563399dde2fd6a5beaac7ed8380f0bcc",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-donor-inventory",
+        "path": "m3-donor-inventory",
         "sha": "8443c93d6d0ab4ab105164731018c6dc80013cd0",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-openrewrite-recipes",
+        "path": "m3-openrewrite-recipes",
         "sha": "94692decb333f521aa2cdb88c49c09de45be3805",
         "type": "tree"
       }
@@ -9073,21 +9073,21 @@
       },
       {
         "mode": "100644",
-        "path": "M3SynexiaEtlReviewRecipe.java",
+        "path": "M3EtlReviewRecipe.java",
         "sha": "13cf49226c014a2ec4a0e5caa678ccf12a516c24",
         "size": 28209,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "M3SynexiaSourceCanonCheckpoint.java",
+        "path": "M3SourceCanonCheckpoint.java",
         "sha": "f6322031c71ae7ab31528f06c60fa25a78694f2d",
         "size": 14284,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "M3SynexiaSourceCanonCheckpointRecipe.java",
+        "path": "M3SourceCanonCheckpointRecipe.java",
         "sha": "a81ff9aa831721a2ec187bcb5956d43db000f4dc",
         "size": 691,
         "type": "blob"
@@ -10368,7 +10368,7 @@
       },
       {
         "mode": "100644",
-        "path": "SynexiaRepositoryJavaCandidateRecipe.java",
+        "path": "M3RepositoryJavaCandidateRecipe.java",
         "sha": "ee8a13cf32121fd3b5225737ac1064efc4ef1022",
         "size": 2648,
         "type": "blob"
@@ -11154,14 +11154,14 @@
     "357c0b57094fec76a9030ec27a8d2eb66bb740c0": [
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.JccApplyTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.JccApplyTest.xml",
         "sha": "5f5c08cce0cfc82d435e27b01f2e422479a8701d",
         "size": 17295,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.JccApplyTest.txt",
+        "path": "jdk.internal.m3.rewrite.JccApplyTest.txt",
         "sha": "ef1c6730af3accc80791603dcd65010b62250f7f",
         "size": 314,
         "type": "blob"
@@ -12817,913 +12817,913 @@
       },
       {
         "mode": "040000",
-        "path": "synexia-agent",
+        "path": "m3-agent",
         "sha": "e53598bfeb9bfef195cf8335e44e7123f3551ce4",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-aicore",
+        "path": "m3-aicore",
         "sha": "ecd1ac28403d47067f250f8cbc8d380c9e51ecba",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-aiop",
+        "path": "m3-aiop",
         "sha": "db35a88f2f24dad80096c6cd2db57c5b22c78e9e",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-algo",
+        "path": "m3-algo",
         "sha": "755c9232b78ea69896c62a43a5b5f8a694cac9c7",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-algorithm-runtime",
+        "path": "m3-algorithm-runtime",
         "sha": "d5495d319957c19037b156bb96ea12d2d2cf206c",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-anop",
+        "path": "m3-anop",
         "sha": "8c2c98620e4fba051df2b563ffa2352687c650e9",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-aop",
+        "path": "m3-aop",
         "sha": "590ddca493f80e806b6251da88b762fcedc2fbc2",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-api-corpus",
+        "path": "m3-api-corpus",
         "sha": "a4323f8c0830f2746fb1bff40e52945d5f8e86f3",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-appliance-watchdog",
+        "path": "m3-appliance-watchdog",
         "sha": "b836c8af196983a3acfdf78d3ab5a9dd986354c1",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-archive-mavenizer",
+        "path": "m3-archive-mavenizer",
         "sha": "ff7400016e764157040ccfda0110f7eb911bbd58",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-artifact-intelligence",
+        "path": "m3-artifact-intelligence",
         "sha": "a38402f66edcd5116d707f76a07c1364ec99564b",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-beam-cpullm",
+        "path": "m3-beam-cpullm",
         "sha": "e9cf765d9bf7c54dec0be0b9a55f1d3495a31fdf",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-beam-etl",
+        "path": "m3-beam-etl",
         "sha": "2a06177acb4829f41812045f5ae80a39a1e3d17e",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-bitop",
+        "path": "m3-bitop",
         "sha": "7d7a274af6ca55f0f2d9d47f29a0f8d2f39ee1d5",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-bom",
+        "path": "m3-bom",
         "sha": "a18845b6b185de74056e7475f2719a2ef85b1c2e",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-bop",
+        "path": "m3-bop",
         "sha": "08bbecb9d6e73cd8dc073032beff1426b0368a7c",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-build-inventory",
+        "path": "m3-build-inventory",
         "sha": "8f60508b9857671b1ed8cb0a8289da3c702d2420",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-camel-dag-bridge",
+        "path": "m3-camel-dag-bridge",
         "sha": "7d70a1fea4c56c8bc52481fac143b558d8e7f5b1",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-camel-dag-kie",
+        "path": "m3-camel-dag-kie",
         "sha": "d40f66993f14d5e1d94d84282696de8d529e3108",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-chat-artifacts",
+        "path": "m3-chat-artifacts",
         "sha": "451b0554b19b9448425ba333f85d68b38953ecc8",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-chrome-ai",
+        "path": "m3-chrome-ai",
         "sha": "326bec4f0ce32cb005c4298c67d763656a6da7ab",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-chrome-diffusion",
+        "path": "m3-chrome-diffusion",
         "sha": "1bc7b2b1bbf26a538e914ac278adece14a0db7c6",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-chromeml-api",
+        "path": "m3-chromeml-api",
         "sha": "4d319dc870c9975731b2f67e6fd3b9e53ef33ada",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-classic-intelligence",
+        "path": "m3-classic-intelligence",
         "sha": "8169898b534a591234d7b17e21880eb277e07466",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-classic-tools",
+        "path": "m3-classic-tools",
         "sha": "20220d3ec69fd2249bf4b9b36faccdf46cdde241",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-classic-tools-jni",
+        "path": "m3-classic-tools-jni",
         "sha": "98da56c41cdabda65085787222cf0594ae6cb16b",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-cmop",
+        "path": "m3-cmop",
         "sha": "0b9eccde61ebe1008d6beb70ecff3730301100b3",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-code-convergence",
+        "path": "m3-code-convergence",
         "sha": "10481b75998a6cc0f6f1ca8a405943fbe9577ff6",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-code-convergence-jini",
+        "path": "m3-code-convergence-jini",
         "sha": "a1dbada9cf320cca376f77e72a07b2dd2459bdfd",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-common",
+        "path": "m3-common",
         "sha": "70d0b0f8dfec5ff8ae277eb2a605128adbcaaa23",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-common-cache",
+        "path": "m3-common-cache",
         "sha": "1309dae05f0ec1a18f75ddf3eb9c5e2624ce1413",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-common-core",
+        "path": "m3-common-core",
         "sha": "0ee2a5813767f9bb68c1a552c6a066cd00b89efb",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-consolidation-runtime",
+        "path": "m3-consolidation-runtime",
         "sha": "5a2fcf5cb9dfed6c7d83aab86e2ddbfa66e2dd31",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-cop",
+        "path": "m3-cop",
         "sha": "b4500eb5b96c756429a584d9828bccbfc51610b9",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-cop-bop",
+        "path": "m3-cop-bop",
         "sha": "05676ad5249f35d8643500357cd438c57e792f10",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-cpu-camel-fabric",
+        "path": "m3-cpu-camel-fabric",
         "sha": "b4ca713130b58be9781e51c83c968a156a8196c0",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-cpullm",
+        "path": "m3-cpullm",
         "sha": "4176db681cf0317a3817b8385baa0f9d1f929e2a",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-dashboard-api",
+        "path": "m3-dashboard-api",
         "sha": "86af41120a1c7c38acf9d711b231d8cde36ae8f1",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-dawn-jni",
+        "path": "m3-dawn-jni",
         "sha": "d5f98f9e918f4afd473a83e0a137fd3ccf5370ca",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-dfs",
+        "path": "m3-dfs",
         "sha": "d8a44fe7dc7124e42dc1cbd6bc303bc98e222160",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-dictlang",
+        "path": "m3-dictlang",
         "sha": "ab1a651e0d0bb205152bd58a29e73175f5113a94",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-diffusion",
+        "path": "m3-diffusion",
         "sha": "13582f4781a12995d809971196d32c3b16f39bda",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-docker",
+        "path": "m3-docker",
         "sha": "29e559614ce163caf00f8169851ff73809a5565f",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-donor-inventory",
+        "path": "m3-donor-inventory",
         "sha": "c5b779af825e71cb677ecba0b757c053ecffc89b",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-donor-superset",
+        "path": "m3-donor-superset",
         "sha": "e9f9f2f8157a79e24e5d07fa0d3908ffc57c8cec",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-donor-superset-api",
+        "path": "m3-donor-superset-api",
         "sha": "aa91e8c2f4d30d1fe884016cf5e3e8fc0f015dab",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-donor-superset-bridge-archive",
+        "path": "m3-donor-superset-bridge-archive",
         "sha": "a5579bca3033c63e6de0f725d668ba98eb7283f2",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-donor-superset-bridge-build",
+        "path": "m3-donor-superset-bridge-build",
         "sha": "235732e5cd8aaddb91e7445a290419081e494333",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-donor-superset-bridge-git",
+        "path": "m3-donor-superset-bridge-git",
         "sha": "05636e7d04d869ec49b4d1d912c074db7893d090",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-donor-superset-core",
+        "path": "m3-donor-superset-core",
         "sha": "751f334fc62a9420263cadb5de3acddb0fe446c4",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-donor-superset-headless",
+        "path": "m3-donor-superset-headless",
         "sha": "d09f58ab75f94810a1eaba4c974bc9df4f168bdf",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-edge-ingress",
+        "path": "m3-edge-ingress",
         "sha": "1e48e5e6d3b1e8476e4879e6f5e9b51578acd8bb",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-enterprise-data-plane",
+        "path": "m3-enterprise-data-plane",
         "sha": "552c3e1b921497228c6e4e0a900ff05e0ec65c54",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-etl",
+        "path": "m3-etl",
         "sha": "dcd586a26e287671b449fa7bc072ff5558ccd666",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-etl-dfs",
+        "path": "m3-etl-dfs",
         "sha": "b1ef1f16be726439d3e61d55bd1b3d56f1d6ca09",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-fastsearch",
+        "path": "m3-fastsearch",
         "sha": "86dec56588f970051c515bcfcbb39b9a6501f4fa",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-fileindex",
+        "path": "m3-fileindex",
         "sha": "10e016e92182ae5c4f896138a3eb057de33eceb3",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-flink-cpullm",
+        "path": "m3-flink-cpullm",
         "sha": "459d85b607d4b739211b1bfe03c0b90a93a414f4",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-flink-datastream",
+        "path": "m3-flink-datastream",
         "sha": "a659d02270014f6dabfe693af5d7957d79ca9ec1",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-flink-spi",
+        "path": "m3-flink-spi",
         "sha": "e4dbaac7b9451e1c218e10bca02aa2e440ca99c1",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-flldcim",
+        "path": "m3-flldcim",
         "sha": "e443758088aa4b7bfaac80b1d812f17c8d2adff4",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-fop",
+        "path": "m3-fop",
         "sha": "7501ae3a10b82a46bc772f37550d3374d7946821",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-forge",
+        "path": "m3-forge",
         "sha": "90c3ece29e4cea15c3814ceed0e9558bb8f04754",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-format-fabric",
+        "path": "m3-format-fabric",
         "sha": "3739cb4fe30a8b525f2be53044f770760bb7ed5f",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-game-kernel",
+        "path": "m3-game-kernel",
         "sha": "89bab0180eafd8ab684f854e9cd7423f54aefb88",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-hash-pack-parent",
+        "path": "m3-hash-pack-parent",
         "sha": "6447a3a2fdb848605757b8558f70be5def1c7016",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-hpcpop",
+        "path": "m3-hpcpop",
         "sha": "68a122dff051c4be42a19e06c888c95a92c32179",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-index-precompute",
+        "path": "m3-index-precompute",
         "sha": "527faec803802de6ee9ae737dd46b734293e6727",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-index-precompute-adapters",
+        "path": "m3-index-precompute-adapters",
         "sha": "731d84521b5027b3c03b5b21b5329b943234a661",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-indexstring",
+        "path": "m3-indexstring",
         "sha": "6202bc85b16a43f6f02a21b3f3afb9a573ba3755",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-indexstring-compiler",
+        "path": "m3-indexstring-compiler",
         "sha": "85d2fa3f71e6e1123ffea6d47bcee05a0817f1d5",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-indexstring-jini",
+        "path": "m3-indexstring-jini",
         "sha": "8010015d18a583757a277819fe1006da477273e0",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-indexstring-maven-plugin",
+        "path": "m3-indexstring-maven-plugin",
         "sha": "4138ef8507bf46aa61de484306be2f970da74cc7",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-indexstring-tornadovm",
+        "path": "m3-indexstring-tornadovm",
         "sha": "25f03d1f848dd7ed20b4f21d1227bb5bce512912",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-interned-language",
+        "path": "m3-interned-language",
         "sha": "dfb18ebcc07352acc9a18e96497abb7a19b62bd9",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-ioc",
+        "path": "m3-ioc",
         "sha": "f09605b582bfae22e00184b601a7ba53ed420558",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-iop",
+        "path": "m3-iop",
         "sha": "a82744ec82bf8e673582f31f2228a30e2a72d79a",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-java-web-workbench",
+        "path": "m3-java-web-workbench",
         "sha": "f2f20d4bb648fb375a3fc3c681a1a0d37be0e4c9",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-jev",
+        "path": "m3-jev",
         "sha": "4d8601936fff2f0efb446950dbe89234efeb8b91",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-job",
+        "path": "m3-job",
         "sha": "9d81ffe2134a6c37f592cf2567d1203faf920c89",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-kie-policy",
+        "path": "m3-kie-policy",
         "sha": "836f7c4d775c6cdf8a37ce2fcf0d8db1b39c4f24",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-kubernetes",
+        "path": "m3-kubernetes",
         "sha": "d3a54486010d20fa44752ed724168eb45d5c3926",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-l2c",
+        "path": "m3-l2c",
         "sha": "6c806f7744381583b6c2ee63f309f235f73b50b5",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-l2g",
+        "path": "m3-l2g",
         "sha": "e7e212efa8eab8766dfe7183e79d6dc1a4ce52d2",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-l2v",
+        "path": "m3-l2v",
         "sha": "721091e79aa6007ccdd138a059145178f80d91b5",
         "type": "tree"
       },
       {
         "mode": "160000",
-        "path": "synexia-llmcpp",
+        "path": "m3-llmcpp",
         "sha": "480d0c8c9aa9f844ad961392c79a5867559d5e9f",
         "type": "commit"
       },
       {
         "mode": "040000",
-        "path": "synexia-local-appliance",
+        "path": "m3-local-appliance",
         "sha": "e04eb7442f985d707cdd688e24cd79644eca4954",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-local-appliance-shell",
+        "path": "m3-local-appliance-shell",
         "sha": "77ffd8f2471db67ef22f7f58990000644fc311fa",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-local-k3s",
+        "path": "m3-local-k3s",
         "sha": "9a365e76cc562d7238c63ca8deb050e142a5a5c9",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-m3-api-factory",
+        "path": "m3-m3-api-factory",
         "sha": "4290badf2b3b5a30f8ac0285553bc4404b8f4281",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-m3-cloner",
+        "path": "m3-m3-cloner",
         "sha": "98d956d5eeabf2a1661c6006b09716eee77cb776",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-m3-recipe",
+        "path": "m3-m3-recipe",
         "sha": "5ff39ab4e2f316c8b442e1d3debf8ecb314d8202",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-m3-tooling",
+        "path": "m3-m3-tooling",
         "sha": "5c9f16e7fc36130d822481cc0d44de9840fbb6b1",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-m3index",
+        "path": "m3-m3index",
         "sha": "4bee45fa7f9f510ba19a3abe489ed0b12ebd5bce",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-machine",
+        "path": "m3-machine",
         "sha": "2caf4b64b6b03e654c9838c471cf656e81c87594",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-mat-collections",
+        "path": "m3-mat-collections",
         "sha": "29ef2cbfae23e07b5634067ea64dc2e12fea200e",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-mat-index-string",
+        "path": "m3-mat-index-string",
         "sha": "993fa6caae8aa436ce800ee4571c79ae3bc240b6",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-mat-value",
+        "path": "m3-mat-value",
         "sha": "f40f817770495f97142c57d5a09334a8fbcca588",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-mat-value-maven-plugin",
+        "path": "m3-mat-value-maven-plugin",
         "sha": "accab6a540caba2b229f9b938c8f3f6ec21712b0",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-mat-value-processor",
+        "path": "m3-mat-value-processor",
         "sha": "a55308557545b27d077221f1e4c322f37522db11",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-maven-plugin",
+        "path": "m3-maven-plugin",
         "sha": "e9f4ac467a7d3ff98fc169247b09eb9d03d1579a",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-mindex",
+        "path": "m3-mindex",
         "sha": "041a317f87daf727c661acc7c7206398b50f5b4a",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-mindex-indexstring-bridge",
+        "path": "m3-mindex-indexstring-bridge",
         "sha": "997bf5af5b4a26879b51e047f9123122b33dfd78",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-mindex-vm",
+        "path": "m3-mindex-vm",
         "sha": "273189d58174201d133a4616fe5b8c68854d6e39",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-mllm",
+        "path": "m3-mllm",
         "sha": "a1cc488e9fcfb3f461523baf96da3e928cdadb54",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-native-interop",
+        "path": "m3-native-interop",
         "sha": "3865d42cacd6b7dc9c6ca8cc289603af805153be",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-netnet",
+        "path": "m3-netnet",
         "sha": "79764ff6c67e1a9ae28ddb0f16b9d7e16504a119",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-neural-renderer-jni",
+        "path": "m3-neural-renderer-jni",
         "sha": "e0bc9d365f82a0ae66a848a7b788ddb6b7d87004",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-neural-rendering",
+        "path": "m3-neural-rendering",
         "sha": "df6d582b7266fb41da174a58e906d34db4825ad9",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-ngrok",
+        "path": "m3-ngrok",
         "sha": "4cac29404b2947c47421156a2888aa3c7fb25deb",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-openrewrite-recipes",
+        "path": "m3-openrewrite-recipes",
         "sha": "4e96428a487b132f24d3155eb724e18fdd05c529",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-opsdash",
+        "path": "m3-opsdash",
         "sha": "fdd571624220332d3bea7d502dc3cb981f3661e2",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-picocli-shell-m3",
+        "path": "m3-picocli-shell-m3",
         "sha": "244afd28c2dcf0c3ccc7aa6e1bf1cb79737ceb68",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-pluginify-api",
+        "path": "m3-pluginify-api",
         "sha": "ebd67230394e9d036ab5b33e4dd9c54a1c2fc45b",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-pluginify-bridge-eclipse",
+        "path": "m3-pluginify-bridge-eclipse",
         "sha": "27b3633f173d596d41a506dd0aa9ee23e384d71c",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-pluginify-bridge-native",
+        "path": "m3-pluginify-bridge-native",
         "sha": "f4ef33f4b24f443a74acfd134577b65b475814c8",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-pluginify-bridge-teavm",
+        "path": "m3-pluginify-bridge-teavm",
         "sha": "888d4eafddb4f14d3e2de30b9065184e6d3b39e5",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-pluginify-core",
+        "path": "m3-pluginify-core",
         "sha": "2d1fa80816bfeed03c950a3c05e275f17de1d515",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-pluginify-headless",
+        "path": "m3-pluginify-headless",
         "sha": "953153ebf7b8763fd1afed5f0009e9f6e25da819",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-pluginify-maven-plugin",
+        "path": "m3-pluginify-maven-plugin",
         "sha": "c9ff91c0fe804ccf201c0ee475c88baed241e83e",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-primitives",
+        "path": "m3-primitives",
         "sha": "e4b4a34dd67d513d7e8a5f9dfc2299faef27c7a1",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-process",
+        "path": "m3-process",
         "sha": "2a08a5ea477355cedc66a7299f61ced237f634a8",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-repository-java-candidate",
+        "path": "m3-repository-java-candidate",
         "sha": "0d9542033898268f01b3ca5a2850503e83cffb4c",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-retrieval-fabric",
+        "path": "m3-retrieval-fabric",
         "sha": "01328ad796ff1811774cd240efb6331ab6d2fba5",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-retrieval-runtime",
+        "path": "m3-retrieval-runtime",
         "sha": "04500e9c7c585e92a669f2157ee0ccbabf036af4",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-rop",
+        "path": "m3-rop",
         "sha": "110c06663481a566b547f520c94dacd4e2ae5952",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-rop-h2",
+        "path": "m3-rop-h2",
         "sha": "85903554b67ac9a96c3979fe5f85faed50964a25",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-route-policy",
+        "path": "m3-route-policy",
         "sha": "45a569f90642ce9a9a7e30176f23893b83a9aab0",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-runtime",
+        "path": "m3-runtime",
         "sha": "74d65667b795e014c1ab7902d237917bf566cdbe",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-sap-compat",
+        "path": "m3-sap-compat",
         "sha": "bdcce5f3a200843f3c31cd3d31439cb757d172f8",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-sap-migration",
+        "path": "m3-sap-migration",
         "sha": "1a64145df9cb56c69dd5356562b804e91dc96231",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-shape-bridge",
+        "path": "m3-shape-bridge",
         "sha": "d5af59c0396be68c5dbfcbca8aa3b72efc25b88d",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-shape-compiler",
+        "path": "m3-shape-compiler",
         "sha": "0dd547e958f43c4d2d93a483a551a0b2cce15488",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-specgrep",
+        "path": "m3-specgrep",
         "sha": "261637c00009b5d102f71da93d5f3eaf6e8f2867",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-specialist-ai",
+        "path": "m3-specialist-ai",
         "sha": "ec3da64be363e4572dee730e5b1115c20a064776",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-ssh",
+        "path": "m3-ssh",
         "sha": "c4bfdce1f73ca75bf84726a24ad12fb6e89b7a18",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-sshd-server",
+        "path": "m3-sshd-server",
         "sha": "22de36680f9661587b75b9c85b9b7657adbae83c",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-synthesis",
+        "path": "m3-synthesis",
         "sha": "9a733af767588984030c4f07f08b6d7534789a01",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-tabletree",
+        "path": "m3-tabletree",
         "sha": "fb54f9ba1fb77a6756d12fe8470a961c1cc2c72d",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-tabletree-spring-data",
+        "path": "m3-tabletree-spring-data",
         "sha": "b14344a34a0d7f92d865d26adff0fe281f25d874",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-tmop",
+        "path": "m3-tmop",
         "sha": "d91e9b6d8b462d292da57ee34cc089e962b9dc59",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-top",
+        "path": "m3-top",
         "sha": "928f7ad8fe14d892aa88630f7efa042446636f26",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-tornadovm-m3",
+        "path": "m3-tornadovm-m3",
         "sha": "b2fd3e1453a383a219d8871cc5b7d41bed275db7",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-translate",
+        "path": "m3-translate",
         "sha": "001bbf3628a0a0a1dbd75d357683d61d83046b68",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-truckmate",
+        "path": "m3-truckmate",
         "sha": "ac195fa6912910f4826c73414070da82f196d8c3",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-tunnel",
+        "path": "m3-tunnel",
         "sha": "6e13f8fd7cfcb64569da2d2ee7331682858ba408",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-unicodex",
+        "path": "m3-unicodex",
         "sha": "06c3c178c53478f763cfcb5214528a23dff025a4",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-unix4j-m3",
+        "path": "m3-unix4j-m3",
         "sha": "8bd1b458309096286ee20b57b55e13d8c2af1cda",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-upwork-pipeline",
+        "path": "m3-upwork-pipeline",
         "sha": "7ced7b79dbcd15c4d68ed250b010e13f69b4c3c3",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-vdp",
+        "path": "m3-vdp",
         "sha": "4559cc62be6624ef552b3f6fee2516bb8e6ce883",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-visual-pixel-runtime",
+        "path": "m3-visual-pixel-runtime",
         "sha": "5106adf6c01e3fedce807c4f5e187edf52225629",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-watchdog-policy",
+        "path": "m3-watchdog-policy",
         "sha": "16fb77867e89d926b48e355193602b76cd99e11e",
         "type": "tree"
       },
@@ -13842,7 +13842,7 @@
     "3f21255c9980b9e53eb2d6efd859189d8d3e992a": [
       {
         "mode": "040000",
-        "path": "synexia-openrewrite-recipes",
+        "path": "m3-openrewrite-recipes",
         "sha": "b43b700555bedcc3c37c97a9eff63526d82082d9",
         "type": "tree"
       }
@@ -14019,14 +14019,14 @@
     "427b27220909e209f53f9eb98811593065f8911e": [
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.JccApplyTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.JccApplyTest.xml",
         "sha": "39a97d21e5e24ca750311268a9bd2e1784be487c",
         "size": 17565,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.JccApplyTest.txt",
+        "path": "jdk.internal.m3.rewrite.JccApplyTest.txt",
         "sha": "5257228f41c0294f26835e9c602c9135c51e8459",
         "size": 314,
         "type": "blob"
@@ -14473,14 +14473,14 @@
     "4ac50a23466ebafb4c5eb1f3163ca40f23cb4756": [
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.JccApplyTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.JccApplyTest.xml",
         "sha": "57e4d7ee40757d3429ba9f23881767c8b9c007d4",
         "size": 38449,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.JccApplyTest.txt",
+        "path": "jdk.internal.m3.rewrite.JccApplyTest.txt",
         "sha": "9ba5c7c6c65e4c53f75be14e3d3738acd58d90c4",
         "size": 11502,
         "type": "blob"
@@ -23587,21 +23587,21 @@
       },
       {
         "mode": "100644",
-        "path": "M3SynexiaEtlReviewRecipe.java",
+        "path": "M3EtlReviewRecipe.java",
         "sha": "13cf49226c014a2ec4a0e5caa678ccf12a516c24",
         "size": 28209,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "M3SynexiaSourceCanonCheckpoint.java",
+        "path": "M3SourceCanonCheckpoint.java",
         "sha": "f6322031c71ae7ab31528f06c60fa25a78694f2d",
         "size": 14284,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "M3SynexiaSourceCanonCheckpointRecipe.java",
+        "path": "M3SourceCanonCheckpointRecipe.java",
         "sha": "a81ff9aa831721a2ec187bcb5956d43db000f4dc",
         "size": 691,
         "type": "blob"
@@ -25078,7 +25078,7 @@
       },
       {
         "mode": "100644",
-        "path": "SynexiaRepositoryJavaCandidateRecipe.java",
+        "path": "M3RepositoryJavaCandidateRecipe.java",
         "sha": "ee8a13cf32121fd3b5225737ac1064efc4ef1022",
         "size": 2648,
         "type": "blob"
@@ -30337,913 +30337,913 @@
       },
       {
         "mode": "040000",
-        "path": "synexia-agent",
+        "path": "m3-agent",
         "sha": "6ec9e4a128fd3a939e5532e0e819c8a2c0ef923d",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-aicore",
+        "path": "m3-aicore",
         "sha": "ecd1ac28403d47067f250f8cbc8d380c9e51ecba",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-aiop",
+        "path": "m3-aiop",
         "sha": "db35a88f2f24dad80096c6cd2db57c5b22c78e9e",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-algo",
+        "path": "m3-algo",
         "sha": "a8c10cc39bc257a2b3ee137d616deada022c938f",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-algorithm-runtime",
+        "path": "m3-algorithm-runtime",
         "sha": "d5495d319957c19037b156bb96ea12d2d2cf206c",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-anop",
+        "path": "m3-anop",
         "sha": "8c2c98620e4fba051df2b563ffa2352687c650e9",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-aop",
+        "path": "m3-aop",
         "sha": "590ddca493f80e806b6251da88b762fcedc2fbc2",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-api-corpus",
+        "path": "m3-api-corpus",
         "sha": "a4323f8c0830f2746fb1bff40e52945d5f8e86f3",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-appliance-watchdog",
+        "path": "m3-appliance-watchdog",
         "sha": "b836c8af196983a3acfdf78d3ab5a9dd986354c1",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-archive-mavenizer",
+        "path": "m3-archive-mavenizer",
         "sha": "ff7400016e764157040ccfda0110f7eb911bbd58",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-artifact-intelligence",
+        "path": "m3-artifact-intelligence",
         "sha": "a38402f66edcd5116d707f76a07c1364ec99564b",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-beam-cpullm",
+        "path": "m3-beam-cpullm",
         "sha": "e9cf765d9bf7c54dec0be0b9a55f1d3495a31fdf",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-beam-etl",
+        "path": "m3-beam-etl",
         "sha": "2a06177acb4829f41812045f5ae80a39a1e3d17e",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-bitop",
+        "path": "m3-bitop",
         "sha": "7d7a274af6ca55f0f2d9d47f29a0f8d2f39ee1d5",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-bom",
+        "path": "m3-bom",
         "sha": "a18845b6b185de74056e7475f2719a2ef85b1c2e",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-bop",
+        "path": "m3-bop",
         "sha": "08bbecb9d6e73cd8dc073032beff1426b0368a7c",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-build-inventory",
+        "path": "m3-build-inventory",
         "sha": "8f60508b9857671b1ed8cb0a8289da3c702d2420",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-camel-dag-bridge",
+        "path": "m3-camel-dag-bridge",
         "sha": "7d70a1fea4c56c8bc52481fac143b558d8e7f5b1",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-camel-dag-kie",
+        "path": "m3-camel-dag-kie",
         "sha": "d40f66993f14d5e1d94d84282696de8d529e3108",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-chat-artifacts",
+        "path": "m3-chat-artifacts",
         "sha": "451b0554b19b9448425ba333f85d68b38953ecc8",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-chrome-ai",
+        "path": "m3-chrome-ai",
         "sha": "326bec4f0ce32cb005c4298c67d763656a6da7ab",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-chrome-diffusion",
+        "path": "m3-chrome-diffusion",
         "sha": "1bc7b2b1bbf26a538e914ac278adece14a0db7c6",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-chromeml-api",
+        "path": "m3-chromeml-api",
         "sha": "4d319dc870c9975731b2f67e6fd3b9e53ef33ada",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-classic-intelligence",
+        "path": "m3-classic-intelligence",
         "sha": "8169898b534a591234d7b17e21880eb277e07466",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-classic-tools",
+        "path": "m3-classic-tools",
         "sha": "20220d3ec69fd2249bf4b9b36faccdf46cdde241",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-classic-tools-jni",
+        "path": "m3-classic-tools-jni",
         "sha": "98da56c41cdabda65085787222cf0594ae6cb16b",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-cmop",
+        "path": "m3-cmop",
         "sha": "0b9eccde61ebe1008d6beb70ecff3730301100b3",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-code-convergence",
+        "path": "m3-code-convergence",
         "sha": "22b099d170ff650ed5ba4ec79b82f502e93871bb",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-code-convergence-jini",
+        "path": "m3-code-convergence-jini",
         "sha": "a1dbada9cf320cca376f77e72a07b2dd2459bdfd",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-common",
+        "path": "m3-common",
         "sha": "e4b851b5d64a2436c372a05da37e59de3a3c8249",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-common-cache",
+        "path": "m3-common-cache",
         "sha": "1309dae05f0ec1a18f75ddf3eb9c5e2624ce1413",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-common-core",
+        "path": "m3-common-core",
         "sha": "0ee2a5813767f9bb68c1a552c6a066cd00b89efb",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-consolidation-runtime",
+        "path": "m3-consolidation-runtime",
         "sha": "5a2fcf5cb9dfed6c7d83aab86e2ddbfa66e2dd31",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-cop",
+        "path": "m3-cop",
         "sha": "b4500eb5b96c756429a584d9828bccbfc51610b9",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-cop-bop",
+        "path": "m3-cop-bop",
         "sha": "05676ad5249f35d8643500357cd438c57e792f10",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-cpu-camel-fabric",
+        "path": "m3-cpu-camel-fabric",
         "sha": "46b4307031e05d956fe56454b3cfe9538e7564f0",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-cpullm",
+        "path": "m3-cpullm",
         "sha": "4176db681cf0317a3817b8385baa0f9d1f929e2a",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-dashboard-api",
+        "path": "m3-dashboard-api",
         "sha": "86af41120a1c7c38acf9d711b231d8cde36ae8f1",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-dawn-jni",
+        "path": "m3-dawn-jni",
         "sha": "d5f98f9e918f4afd473a83e0a137fd3ccf5370ca",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-dfs",
+        "path": "m3-dfs",
         "sha": "d8a44fe7dc7124e42dc1cbd6bc303bc98e222160",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-dictlang",
+        "path": "m3-dictlang",
         "sha": "ab1a651e0d0bb205152bd58a29e73175f5113a94",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-diffusion",
+        "path": "m3-diffusion",
         "sha": "13582f4781a12995d809971196d32c3b16f39bda",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-docker",
+        "path": "m3-docker",
         "sha": "29e559614ce163caf00f8169851ff73809a5565f",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-donor-inventory",
+        "path": "m3-donor-inventory",
         "sha": "c5b779af825e71cb677ecba0b757c053ecffc89b",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-donor-superset",
+        "path": "m3-donor-superset",
         "sha": "e9f9f2f8157a79e24e5d07fa0d3908ffc57c8cec",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-donor-superset-api",
+        "path": "m3-donor-superset-api",
         "sha": "aa91e8c2f4d30d1fe884016cf5e3e8fc0f015dab",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-donor-superset-bridge-archive",
+        "path": "m3-donor-superset-bridge-archive",
         "sha": "a5579bca3033c63e6de0f725d668ba98eb7283f2",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-donor-superset-bridge-build",
+        "path": "m3-donor-superset-bridge-build",
         "sha": "235732e5cd8aaddb91e7445a290419081e494333",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-donor-superset-bridge-git",
+        "path": "m3-donor-superset-bridge-git",
         "sha": "05636e7d04d869ec49b4d1d912c074db7893d090",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-donor-superset-core",
+        "path": "m3-donor-superset-core",
         "sha": "751f334fc62a9420263cadb5de3acddb0fe446c4",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-donor-superset-headless",
+        "path": "m3-donor-superset-headless",
         "sha": "d09f58ab75f94810a1eaba4c974bc9df4f168bdf",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-edge-ingress",
+        "path": "m3-edge-ingress",
         "sha": "1e48e5e6d3b1e8476e4879e6f5e9b51578acd8bb",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-enterprise-data-plane",
+        "path": "m3-enterprise-data-plane",
         "sha": "552c3e1b921497228c6e4e0a900ff05e0ec65c54",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-etl",
+        "path": "m3-etl",
         "sha": "dcd586a26e287671b449fa7bc072ff5558ccd666",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-etl-dfs",
+        "path": "m3-etl-dfs",
         "sha": "b1ef1f16be726439d3e61d55bd1b3d56f1d6ca09",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-fastsearch",
+        "path": "m3-fastsearch",
         "sha": "86dec56588f970051c515bcfcbb39b9a6501f4fa",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-fileindex",
+        "path": "m3-fileindex",
         "sha": "10e016e92182ae5c4f896138a3eb057de33eceb3",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-flink-cpullm",
+        "path": "m3-flink-cpullm",
         "sha": "459d85b607d4b739211b1bfe03c0b90a93a414f4",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-flink-datastream",
+        "path": "m3-flink-datastream",
         "sha": "a659d02270014f6dabfe693af5d7957d79ca9ec1",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-flink-spi",
+        "path": "m3-flink-spi",
         "sha": "e4dbaac7b9451e1c218e10bca02aa2e440ca99c1",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-flldcim",
+        "path": "m3-flldcim",
         "sha": "e443758088aa4b7bfaac80b1d812f17c8d2adff4",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-fop",
+        "path": "m3-fop",
         "sha": "7501ae3a10b82a46bc772f37550d3374d7946821",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-forge",
+        "path": "m3-forge",
         "sha": "90c3ece29e4cea15c3814ceed0e9558bb8f04754",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-format-fabric",
+        "path": "m3-format-fabric",
         "sha": "3739cb4fe30a8b525f2be53044f770760bb7ed5f",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-game-kernel",
+        "path": "m3-game-kernel",
         "sha": "89bab0180eafd8ab684f854e9cd7423f54aefb88",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-hash-pack-parent",
+        "path": "m3-hash-pack-parent",
         "sha": "6447a3a2fdb848605757b8558f70be5def1c7016",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-hpcpop",
+        "path": "m3-hpcpop",
         "sha": "68a122dff051c4be42a19e06c888c95a92c32179",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-index-precompute",
+        "path": "m3-index-precompute",
         "sha": "527faec803802de6ee9ae737dd46b734293e6727",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-index-precompute-adapters",
+        "path": "m3-index-precompute-adapters",
         "sha": "731d84521b5027b3c03b5b21b5329b943234a661",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-indexstring",
+        "path": "m3-indexstring",
         "sha": "b5c246331464186cb3fca73c1a13d253983e15af",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-indexstring-compiler",
+        "path": "m3-indexstring-compiler",
         "sha": "85d2fa3f71e6e1123ffea6d47bcee05a0817f1d5",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-indexstring-jini",
+        "path": "m3-indexstring-jini",
         "sha": "8010015d18a583757a277819fe1006da477273e0",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-indexstring-maven-plugin",
+        "path": "m3-indexstring-maven-plugin",
         "sha": "4138ef8507bf46aa61de484306be2f970da74cc7",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-indexstring-tornadovm",
+        "path": "m3-indexstring-tornadovm",
         "sha": "25f03d1f848dd7ed20b4f21d1227bb5bce512912",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-interned-language",
+        "path": "m3-interned-language",
         "sha": "dfb18ebcc07352acc9a18e96497abb7a19b62bd9",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-ioc",
+        "path": "m3-ioc",
         "sha": "f09605b582bfae22e00184b601a7ba53ed420558",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-iop",
+        "path": "m3-iop",
         "sha": "a82744ec82bf8e673582f31f2228a30e2a72d79a",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-java-web-workbench",
+        "path": "m3-java-web-workbench",
         "sha": "f2f20d4bb648fb375a3fc3c681a1a0d37be0e4c9",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-jev",
+        "path": "m3-jev",
         "sha": "4d8601936fff2f0efb446950dbe89234efeb8b91",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-job",
+        "path": "m3-job",
         "sha": "9d81ffe2134a6c37f592cf2567d1203faf920c89",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-kie-policy",
+        "path": "m3-kie-policy",
         "sha": "836f7c4d775c6cdf8a37ce2fcf0d8db1b39c4f24",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-kubernetes",
+        "path": "m3-kubernetes",
         "sha": "d3a54486010d20fa44752ed724168eb45d5c3926",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-l2c",
+        "path": "m3-l2c",
         "sha": "6c806f7744381583b6c2ee63f309f235f73b50b5",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-l2g",
+        "path": "m3-l2g",
         "sha": "e7e212efa8eab8766dfe7183e79d6dc1a4ce52d2",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-l2v",
+        "path": "m3-l2v",
         "sha": "721091e79aa6007ccdd138a059145178f80d91b5",
         "type": "tree"
       },
       {
         "mode": "160000",
-        "path": "synexia-llmcpp",
+        "path": "m3-llmcpp",
         "sha": "480d0c8c9aa9f844ad961392c79a5867559d5e9f",
         "type": "commit"
       },
       {
         "mode": "040000",
-        "path": "synexia-local-appliance",
+        "path": "m3-local-appliance",
         "sha": "e04eb7442f985d707cdd688e24cd79644eca4954",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-local-appliance-shell",
+        "path": "m3-local-appliance-shell",
         "sha": "77ffd8f2471db67ef22f7f58990000644fc311fa",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-local-k3s",
+        "path": "m3-local-k3s",
         "sha": "9a365e76cc562d7238c63ca8deb050e142a5a5c9",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-m3-api-factory",
+        "path": "m3-m3-api-factory",
         "sha": "4290badf2b3b5a30f8ac0285553bc4404b8f4281",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-m3-cloner",
+        "path": "m3-m3-cloner",
         "sha": "98d956d5eeabf2a1661c6006b09716eee77cb776",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-m3-recipe",
+        "path": "m3-m3-recipe",
         "sha": "92d4317598fc46e5eeb33da5e7603d38246da41e",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-m3-tooling",
+        "path": "m3-m3-tooling",
         "sha": "5c9f16e7fc36130d822481cc0d44de9840fbb6b1",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-m3index",
+        "path": "m3-m3index",
         "sha": "4bee45fa7f9f510ba19a3abe489ed0b12ebd5bce",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-machine",
+        "path": "m3-machine",
         "sha": "2caf4b64b6b03e654c9838c471cf656e81c87594",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-mat-collections",
+        "path": "m3-mat-collections",
         "sha": "29ef2cbfae23e07b5634067ea64dc2e12fea200e",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-mat-index-string",
+        "path": "m3-mat-index-string",
         "sha": "993fa6caae8aa436ce800ee4571c79ae3bc240b6",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-mat-value",
+        "path": "m3-mat-value",
         "sha": "f40f817770495f97142c57d5a09334a8fbcca588",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-mat-value-maven-plugin",
+        "path": "m3-mat-value-maven-plugin",
         "sha": "accab6a540caba2b229f9b938c8f3f6ec21712b0",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-mat-value-processor",
+        "path": "m3-mat-value-processor",
         "sha": "a55308557545b27d077221f1e4c322f37522db11",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-maven-plugin",
+        "path": "m3-maven-plugin",
         "sha": "7001abb7a4ac5e7a21e3969249d5d70fa986e30d",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-mindex",
+        "path": "m3-mindex",
         "sha": "f61c3e629e12e5011ca3033506eec98a5b5c4b89",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-mindex-indexstring-bridge",
+        "path": "m3-mindex-indexstring-bridge",
         "sha": "997bf5af5b4a26879b51e047f9123122b33dfd78",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-mindex-vm",
+        "path": "m3-mindex-vm",
         "sha": "273189d58174201d133a4616fe5b8c68854d6e39",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-mllm",
+        "path": "m3-mllm",
         "sha": "a1cc488e9fcfb3f461523baf96da3e928cdadb54",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-native-interop",
+        "path": "m3-native-interop",
         "sha": "13e44efb59c14fc0fe3ec1bd69e079c31dd1cfe9",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-netnet",
+        "path": "m3-netnet",
         "sha": "79764ff6c67e1a9ae28ddb0f16b9d7e16504a119",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-neural-renderer-jni",
+        "path": "m3-neural-renderer-jni",
         "sha": "e0bc9d365f82a0ae66a848a7b788ddb6b7d87004",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-neural-rendering",
+        "path": "m3-neural-rendering",
         "sha": "df6d582b7266fb41da174a58e906d34db4825ad9",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-ngrok",
+        "path": "m3-ngrok",
         "sha": "4cac29404b2947c47421156a2888aa3c7fb25deb",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-openrewrite-recipes",
+        "path": "m3-openrewrite-recipes",
         "sha": "d8106554d43b3b9fa0d25d5eb1b89b90ebc28a91",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-opsdash",
+        "path": "m3-opsdash",
         "sha": "fdd571624220332d3bea7d502dc3cb981f3661e2",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-picocli-shell-m3",
+        "path": "m3-picocli-shell-m3",
         "sha": "244afd28c2dcf0c3ccc7aa6e1bf1cb79737ceb68",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-pluginify-api",
+        "path": "m3-pluginify-api",
         "sha": "ebd67230394e9d036ab5b33e4dd9c54a1c2fc45b",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-pluginify-bridge-eclipse",
+        "path": "m3-pluginify-bridge-eclipse",
         "sha": "27b3633f173d596d41a506dd0aa9ee23e384d71c",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-pluginify-bridge-native",
+        "path": "m3-pluginify-bridge-native",
         "sha": "f4ef33f4b24f443a74acfd134577b65b475814c8",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-pluginify-bridge-teavm",
+        "path": "m3-pluginify-bridge-teavm",
         "sha": "888d4eafddb4f14d3e2de30b9065184e6d3b39e5",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-pluginify-core",
+        "path": "m3-pluginify-core",
         "sha": "2d1fa80816bfeed03c950a3c05e275f17de1d515",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-pluginify-headless",
+        "path": "m3-pluginify-headless",
         "sha": "953153ebf7b8763fd1afed5f0009e9f6e25da819",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-pluginify-maven-plugin",
+        "path": "m3-pluginify-maven-plugin",
         "sha": "c9ff91c0fe804ccf201c0ee475c88baed241e83e",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-primitives",
+        "path": "m3-primitives",
         "sha": "bfd692b93feb5f46745aa43c7acada2e62071d9d",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-process",
+        "path": "m3-process",
         "sha": "2a08a5ea477355cedc66a7299f61ced237f634a8",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-repository-java-candidate",
+        "path": "m3-repository-java-candidate",
         "sha": "0d9542033898268f01b3ca5a2850503e83cffb4c",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-retrieval-fabric",
+        "path": "m3-retrieval-fabric",
         "sha": "01328ad796ff1811774cd240efb6331ab6d2fba5",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-retrieval-runtime",
+        "path": "m3-retrieval-runtime",
         "sha": "04500e9c7c585e92a669f2157ee0ccbabf036af4",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-rop",
+        "path": "m3-rop",
         "sha": "110c06663481a566b547f520c94dacd4e2ae5952",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-rop-h2",
+        "path": "m3-rop-h2",
         "sha": "85903554b67ac9a96c3979fe5f85faed50964a25",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-route-policy",
+        "path": "m3-route-policy",
         "sha": "45a569f90642ce9a9a7e30176f23893b83a9aab0",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-runtime",
+        "path": "m3-runtime",
         "sha": "74d65667b795e014c1ab7902d237917bf566cdbe",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-sap-compat",
+        "path": "m3-sap-compat",
         "sha": "bdcce5f3a200843f3c31cd3d31439cb757d172f8",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-sap-migration",
+        "path": "m3-sap-migration",
         "sha": "1a64145df9cb56c69dd5356562b804e91dc96231",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-shape-bridge",
+        "path": "m3-shape-bridge",
         "sha": "d5af59c0396be68c5dbfcbca8aa3b72efc25b88d",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-shape-compiler",
+        "path": "m3-shape-compiler",
         "sha": "0dd547e958f43c4d2d93a483a551a0b2cce15488",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-specgrep",
+        "path": "m3-specgrep",
         "sha": "261637c00009b5d102f71da93d5f3eaf6e8f2867",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-specialist-ai",
+        "path": "m3-specialist-ai",
         "sha": "ec3da64be363e4572dee730e5b1115c20a064776",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-ssh",
+        "path": "m3-ssh",
         "sha": "c4bfdce1f73ca75bf84726a24ad12fb6e89b7a18",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-sshd-server",
+        "path": "m3-sshd-server",
         "sha": "22de36680f9661587b75b9c85b9b7657adbae83c",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-synthesis",
+        "path": "m3-synthesis",
         "sha": "9a733af767588984030c4f07f08b6d7534789a01",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-tabletree",
+        "path": "m3-tabletree",
         "sha": "fb54f9ba1fb77a6756d12fe8470a961c1cc2c72d",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-tabletree-spring-data",
+        "path": "m3-tabletree-spring-data",
         "sha": "b14344a34a0d7f92d865d26adff0fe281f25d874",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-tmop",
+        "path": "m3-tmop",
         "sha": "d91e9b6d8b462d292da57ee34cc089e962b9dc59",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-top",
+        "path": "m3-top",
         "sha": "928f7ad8fe14d892aa88630f7efa042446636f26",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-tornadovm-m3",
+        "path": "m3-tornadovm-m3",
         "sha": "b2fd3e1453a383a219d8871cc5b7d41bed275db7",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-translate",
+        "path": "m3-translate",
         "sha": "001bbf3628a0a0a1dbd75d357683d61d83046b68",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-truckmate",
+        "path": "m3-truckmate",
         "sha": "ac195fa6912910f4826c73414070da82f196d8c3",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-tunnel",
+        "path": "m3-tunnel",
         "sha": "6e13f8fd7cfcb64569da2d2ee7331682858ba408",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-unicodex",
+        "path": "m3-unicodex",
         "sha": "06c3c178c53478f763cfcb5214528a23dff025a4",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-unix4j-m3",
+        "path": "m3-unix4j-m3",
         "sha": "8bd1b458309096286ee20b57b55e13d8c2af1cda",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-upwork-pipeline",
+        "path": "m3-upwork-pipeline",
         "sha": "7ced7b79dbcd15c4d68ed250b010e13f69b4c3c3",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-vdp",
+        "path": "m3-vdp",
         "sha": "4559cc62be6624ef552b3f6fee2516bb8e6ce883",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-visual-pixel-runtime",
+        "path": "m3-visual-pixel-runtime",
         "sha": "5106adf6c01e3fedce807c4f5e187edf52225629",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-watchdog-policy",
+        "path": "m3-watchdog-policy",
         "sha": "16fb77867e89d926b48e355193602b76cd99e11e",
         "type": "tree"
       },
@@ -34774,14 +34774,14 @@
     "81cc209ace680bd99b5bb40cfb0abfc50e187ed9": [
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.JccApplyTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.JccApplyTest.xml",
         "sha": "267a138cec02d7687919c06248a76fc9df1bc824",
         "size": 17881,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.JccApplyTest.txt",
+        "path": "jdk.internal.m3.rewrite.JccApplyTest.txt",
         "sha": "7325d17b4ea8ce289dc3795c64b14515b28f83a6",
         "size": 314,
         "type": "blob"
@@ -35097,126 +35097,126 @@
     "8ec687760d8db396cdfd97b6d88d34d705da44f7": [
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.algorithms.corpus.CompetitiveCapabilityPlanIndexTest.xml",
+        "path": "TEST-jdk.internal.m3.algorithms.corpus.CompetitiveCapabilityPlanIndexTest.xml",
         "sha": "c7e3f8266d31bbd1114d89ae0f0336008fba3ed6",
         "size": 24365,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.donor.DonorMechanicalShapeCatalogTest.xml",
+        "path": "TEST-jdk.internal.m3.donor.DonorMechanicalShapeCatalogTest.xml",
         "sha": "3d5850265255e301f9fec1f6cff42ea3fdbc2967",
         "size": 24955,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.m3.search.CompetitiveProblemReviewTest.xml",
+        "path": "TEST-jdk.internal.m3.search.CompetitiveProblemReviewTest.xml",
         "sha": "09a8beb3e7dac57967372b92f681121e642408ba",
         "size": 26429,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.M3DocumentationAttributionExecutionTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.M3DocumentationAttributionExecutionTest.xml",
         "sha": "2f97bb87c1942c02cfd0ab89dc553e80a196483b",
         "size": 24446,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.M3OpenRewriteTranspilerTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.M3OpenRewriteTranspilerTest.xml",
         "sha": "a08aa790db6d7514789fae35e8501fa69fdeccb1",
         "size": 26807,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.M3SemanticAttributionIntegrityTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.M3SemanticAttributionIntegrityTest.xml",
         "sha": "cd8a1dec05a2f01474620079642e057dfe41b40d",
         "size": 26154,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.M3SemanticAttributionReplayTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.M3SemanticAttributionReplayTest.xml",
         "sha": "ec331511b9ba1001ef2d3d81865656a4e01f33fb",
         "size": 24552,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.M3SemanticCodeInventoryRecipeTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.M3SemanticCodeInventoryRecipeTest.xml",
         "sha": "ab6ac6abbc6f282e70b0332c1b6af8d86063d792",
         "size": 24252,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.M3SemanticInvocationScopeTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.M3SemanticInvocationScopeTest.xml",
         "sha": "2a0b4cb8eeeedd2b382f43bcdc8916a805bfc495",
         "size": 24745,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.algorithms.corpus.CompetitiveCapabilityPlanIndexTest.txt",
+        "path": "jdk.internal.m3.algorithms.corpus.CompetitiveCapabilityPlanIndexTest.txt",
         "sha": "782daa6582e015d7e0029da5e8bbe6344ecf7de2",
         "size": 378,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.donor.DonorMechanicalShapeCatalogTest.txt",
+        "path": "jdk.internal.m3.donor.DonorMechanicalShapeCatalogTest.txt",
         "sha": "ec4c7f905d068c8c7931e7866e05db20058ae1a9",
         "size": 348,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.m3.search.CompetitiveProblemReviewTest.txt",
+        "path": "jdk.internal.m3.search.CompetitiveProblemReviewTest.txt",
         "sha": "72d374b54dec26507525c482e4bfe6a27cb839fa",
         "size": 351,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.M3DocumentationAttributionExecutionTest.txt",
+        "path": "jdk.internal.m3.rewrite.M3DocumentationAttributionExecutionTest.txt",
         "sha": "6cbb8e25fa99ad1d99988423e4dfb49a7e769aa9",
         "size": 368,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.M3OpenRewriteTranspilerTest.txt",
+        "path": "jdk.internal.m3.rewrite.M3OpenRewriteTranspilerTest.txt",
         "sha": "40840c41f95eb5cc151f58dc0407f4c060505d34",
         "size": 2474,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.M3SemanticAttributionIntegrityTest.txt",
+        "path": "jdk.internal.m3.rewrite.M3SemanticAttributionIntegrityTest.txt",
         "sha": "48a90f64f2b87b138bfa978eecfdaa4ca108acb7",
         "size": 359,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.M3SemanticAttributionReplayTest.txt",
+        "path": "jdk.internal.m3.rewrite.M3SemanticAttributionReplayTest.txt",
         "sha": "346740cab5638b80851b961f376fb145204a8d5c",
         "size": 352,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.M3SemanticCodeInventoryRecipeTest.txt",
+        "path": "jdk.internal.m3.rewrite.M3SemanticCodeInventoryRecipeTest.txt",
         "sha": "4d172b45a0ce557dd7312e71bcf94c331c8d421f",
         "size": 356,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.M3SemanticInvocationScopeTest.txt",
+        "path": "jdk.internal.m3.rewrite.M3SemanticInvocationScopeTest.txt",
         "sha": "c80f4aff797cc220b389e9f0126db5472abd3632",
         "size": 348,
         "type": "blob"
@@ -37911,14 +37911,14 @@
     "b7470ddcddef843fa6cdc72ecd69e85877961bd7": [
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.M3AtomPatternMasteryConvergenceTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.M3AtomPatternMasteryConvergenceTest.xml",
         "sha": "aeee67c36a22235caab8448e14f8d451aeedb3e2",
         "size": 20322,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.M3AtomPatternMasteryConvergenceTest.txt",
+        "path": "jdk.internal.m3.rewrite.M3AtomPatternMasteryConvergenceTest.txt",
         "sha": "19c0714f76dd81644207133b84fe6aca082108a9",
         "size": 360,
         "type": "blob"
@@ -40512,7 +40512,7 @@
       },
       {
         "mode": "040000",
-        "path": "synexia-source-canon-checkpoint",
+        "path": "m3-source-canon-checkpoint",
         "sha": "df0a3074aa0c758899f0dee0df63cdd59df7a909",
         "type": "tree"
       },
@@ -41965,14 +41965,14 @@
     "cf5db5772b307bea29248fcb942214daee6c70c5": [
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.JccApplyTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.JccApplyTest.xml",
         "sha": "ef114cb32f86d2931308cd0a10aaf13f486d889a",
         "size": 17131,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.JccApplyTest.txt",
+        "path": "jdk.internal.m3.rewrite.JccApplyTest.txt",
         "sha": "15142412187afc78c14bf9fbc1fc1b6e57261fd2",
         "size": 314,
         "type": "blob"
@@ -46124,7 +46124,7 @@
       },
       {
         "mode": "040000",
-        "path": "synexia-source-canon-checkpoint",
+        "path": "m3-source-canon-checkpoint",
         "sha": "df0a3074aa0c758899f0dee0df63cdd59df7a909",
         "type": "tree"
       },
@@ -46318,126 +46318,126 @@
     "dabf8337f8db039f1b80e974c1753a62e6de834d": [
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.algorithms.corpus.CompetitiveCapabilityPlanIndexTest.xml",
+        "path": "TEST-jdk.internal.m3.algorithms.corpus.CompetitiveCapabilityPlanIndexTest.xml",
         "sha": "6b6a3291fcd51417caa1d1d82ef6d5748d7e5487",
         "size": 22896,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.donor.DonorMechanicalShapeCatalogTest.xml",
+        "path": "TEST-jdk.internal.m3.donor.DonorMechanicalShapeCatalogTest.xml",
         "sha": "754720a39ff36991155188cc374d95676d4c8e9d",
         "size": 23495,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.m3.search.CompetitiveProblemReviewTest.xml",
+        "path": "TEST-jdk.internal.m3.search.CompetitiveProblemReviewTest.xml",
         "sha": "5175ced4e45883e01e065265f22dddd9bce939fc",
         "size": 26185,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.M3DocumentationAttributionExecutionTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.M3DocumentationAttributionExecutionTest.xml",
         "sha": "2f1ec08616e235e66f6e20f73664247ecbbb60ae",
         "size": 22987,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.M3OpenRewriteTranspilerTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.M3OpenRewriteTranspilerTest.xml",
         "sha": "c3953b336fb720e6155487856a9a5a17013980af",
         "size": 25348,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.M3SemanticAttributionIntegrityTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.M3SemanticAttributionIntegrityTest.xml",
         "sha": "09314c3a45d8b6953e9e09d831edca02963f1cea",
         "size": 24691,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.M3SemanticAttributionReplayTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.M3SemanticAttributionReplayTest.xml",
         "sha": "973cb0b1ca64c8b67277f01bb0d783910d6ee32c",
         "size": 23094,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.M3SemanticCodeInventoryRecipeTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.M3SemanticCodeInventoryRecipeTest.xml",
         "sha": "9e7533851213a75f466fe1f9a2cd7af5c9c61f0f",
         "size": 22793,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.M3SemanticInvocationScopeTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.M3SemanticInvocationScopeTest.xml",
         "sha": "be9e834ae4ed7965c8f00f0ae6938c8ac95e5eaf",
         "size": 23287,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.algorithms.corpus.CompetitiveCapabilityPlanIndexTest.txt",
+        "path": "jdk.internal.m3.algorithms.corpus.CompetitiveCapabilityPlanIndexTest.txt",
         "sha": "d9321712111b6855435c7ba2bfa7fceb0d024df4",
         "size": 378,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.donor.DonorMechanicalShapeCatalogTest.txt",
+        "path": "jdk.internal.m3.donor.DonorMechanicalShapeCatalogTest.txt",
         "sha": "7988374b4fb65c1ddd3d895035c66eeb14be2269",
         "size": 348,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.m3.search.CompetitiveProblemReviewTest.txt",
+        "path": "jdk.internal.m3.search.CompetitiveProblemReviewTest.txt",
         "sha": "719bd5b44432af59cf998110ab2e1237c8167ad7",
         "size": 1491,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.M3DocumentationAttributionExecutionTest.txt",
+        "path": "jdk.internal.m3.rewrite.M3DocumentationAttributionExecutionTest.txt",
         "sha": "519644e10e2cc79cdfb2ddc7eb06c31558180d5b",
         "size": 368,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.M3OpenRewriteTranspilerTest.txt",
+        "path": "jdk.internal.m3.rewrite.M3OpenRewriteTranspilerTest.txt",
         "sha": "79c95e1ce54dc631819473e45cf63db4273730aa",
         "size": 2474,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.M3SemanticAttributionIntegrityTest.txt",
+        "path": "jdk.internal.m3.rewrite.M3SemanticAttributionIntegrityTest.txt",
         "sha": "26e63b74067ad5fc65633a96ca25236c41f7809d",
         "size": 359,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.M3SemanticAttributionReplayTest.txt",
+        "path": "jdk.internal.m3.rewrite.M3SemanticAttributionReplayTest.txt",
         "sha": "36ff05c7bb83eb6d4a49e834092bdb0236adfd01",
         "size": 352,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.M3SemanticCodeInventoryRecipeTest.txt",
+        "path": "jdk.internal.m3.rewrite.M3SemanticCodeInventoryRecipeTest.txt",
         "sha": "29931851562d650667f799194bd7beacbf0a8972",
         "size": 356,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.M3SemanticInvocationScopeTest.txt",
+        "path": "jdk.internal.m3.rewrite.M3SemanticInvocationScopeTest.txt",
         "sha": "8e311155916af7235c03817d6c0ed756c008b994",
         "size": 348,
         "type": "blob"
@@ -46794,98 +46794,98 @@
     "e538fade97da767901ed450c5f3c0da7deede305": [
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.mindex.MIndexDonorLiteralRegressionTest.xml",
+        "path": "TEST-jdk.internal.m3.mindex.MIndexDonorLiteralRegressionTest.xml",
         "sha": "4ce9c8fc21f863474df00bdf0c3f10fa1a4e6d8d",
         "size": 22912,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.mindex.MIndexDonorRegexRegressionTest.xml",
+        "path": "TEST-jdk.internal.m3.mindex.MIndexDonorRegexRegressionTest.xml",
         "sha": "9949bf4c59f1bb86dcc1ebe00ec8b8b733613a0d",
         "size": 23138,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.JccCompositionTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.JccCompositionTest.xml",
         "sha": "65bf5955e6fc789bb9ce057a6ff1974b7c8d9fb6",
         "size": 41501,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.JccHostVerifierTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.JccHostVerifierTest.xml",
         "sha": "c33abe8654c3a3b0db1921adcb284d91f40f5200",
         "size": 22886,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.JccLedgerContractTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.JccLedgerContractTest.xml",
         "sha": "2347327d6f64440dc3caf11a23db2ec577a72f44",
         "size": 22620,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.JccMasteryTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.JccMasteryTest.xml",
         "sha": "61d8b19a57c1a01c23082d561ff411db61299850",
         "size": 24084,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.JccUnicodeTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.JccUnicodeTest.xml",
         "sha": "4a6dc762cd164bc937eac4a9dda5edb023560449",
         "size": 29171,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.mindex.MIndexDonorLiteralRegressionTest.txt",
+        "path": "jdk.internal.m3.mindex.MIndexDonorLiteralRegressionTest.txt",
         "sha": "4cefffbb1823a3840371d44de1e686c7ec85ac1e",
         "size": 352,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.mindex.MIndexDonorRegexRegressionTest.txt",
+        "path": "jdk.internal.m3.mindex.MIndexDonorRegexRegressionTest.txt",
         "sha": "0cf59225a3580721e78a66a2fb28b8a7efdd4d83",
         "size": 348,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.JccCompositionTest.txt",
+        "path": "jdk.internal.m3.rewrite.JccCompositionTest.txt",
         "sha": "0da896a6ec68b7fa3eed6354a89cc9e354e74ebf",
         "size": 18863,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.JccHostVerifierTest.txt",
+        "path": "jdk.internal.m3.rewrite.JccHostVerifierTest.txt",
         "sha": "651dd7d245e32ad3dab95a4b4728b79737f023c4",
         "size": 328,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.JccLedgerContractTest.txt",
+        "path": "jdk.internal.m3.rewrite.JccLedgerContractTest.txt",
         "sha": "c6629c8e93f40a2b5da1cc5865f607cad20c04d4",
         "size": 332,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.JccMasteryTest.txt",
+        "path": "jdk.internal.m3.rewrite.JccMasteryTest.txt",
         "sha": "e7d71716d7578762ad516712ebfb73390ef07ce5",
         "size": 319,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.JccUnicodeTest.txt",
+        "path": "jdk.internal.m3.rewrite.JccUnicodeTest.txt",
         "sha": "b6c0976771e0f934c2c28ccf6ebe811e5527245c",
         "size": 319,
         "type": "blob"
@@ -46940,19 +46940,19 @@
       },
       {
         "mode": "040000",
-        "path": "synexia-algo",
+        "path": "m3-algo",
         "sha": "aa44facf528970a7a9952ec366f5a9d59537c5b5",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-donor-inventory",
+        "path": "m3-donor-inventory",
         "sha": "72d5e2ceb0c7f92685c986888ef6a5ddf2c47d9b",
         "type": "tree"
       },
       {
         "mode": "040000",
-        "path": "synexia-openrewrite-recipes",
+        "path": "m3-openrewrite-recipes",
         "sha": "099f94902050d038cc4632c8eeb0898875d5eef8",
         "type": "tree"
       }
@@ -48651,112 +48651,112 @@
     "ff6788639d7d8892ec915012fdf8c0d27f3465dc": [
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.mindex.MIndexDonorLiteralRegressionTest.xml",
+        "path": "TEST-jdk.internal.m3.mindex.MIndexDonorLiteralRegressionTest.xml",
         "sha": "c3fb12ebb54a0e5a857cf1695241af0d56247870",
         "size": 22938,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.mindex.MIndexDonorRegexRegressionTest.xml",
+        "path": "TEST-jdk.internal.m3.mindex.MIndexDonorRegexRegressionTest.xml",
         "sha": "9ff183833c7199ad554c8e2a6e6e91e2ba09e14f",
         "size": 23164,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.JccCompositionTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.JccCompositionTest.xml",
         "sha": "fff721156826abc04994ed04750919f2460b6c68",
         "size": 22727,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.JccHostVerifierTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.JccHostVerifierTest.xml",
         "sha": "057a7ad7e6553f52406f8c035b0094f3ad7cea6d",
         "size": 22914,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.JccLedgerContractTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.JccLedgerContractTest.xml",
         "sha": "fbc4f4627297c51fb42f070b04b17c5cdcc4dce5",
         "size": 22647,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.JccMasteryTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.JccMasteryTest.xml",
         "sha": "ba43ed5dff9af2e92480d992988e087f0adadeab",
         "size": 24110,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.JccProjectCycleTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.JccProjectCycleTest.xml",
         "sha": "df5a2282a963d50322a20045736b212db725c3d9",
         "size": 22755,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "TEST-com.synexia.rewrite.JccUnicodeTest.xml",
+        "path": "TEST-jdk.internal.m3.rewrite.JccUnicodeTest.xml",
         "sha": "6a01753e6564c55fb195055e616536843131f216",
         "size": 29200,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.mindex.MIndexDonorLiteralRegressionTest.txt",
+        "path": "jdk.internal.m3.mindex.MIndexDonorLiteralRegressionTest.txt",
         "sha": "e019bc4b7dd97554b81e61631380ac7c8cd9f842",
         "size": 352,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.mindex.MIndexDonorRegexRegressionTest.txt",
+        "path": "jdk.internal.m3.mindex.MIndexDonorRegexRegressionTest.txt",
         "sha": "ba14c25cc96aaa5f2ca9b28940b03a52c3238c41",
         "size": 348,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.JccCompositionTest.txt",
+        "path": "jdk.internal.m3.rewrite.JccCompositionTest.txt",
         "sha": "eef8c8c4e919f3489d809362aeea43785f9a0c7b",
         "size": 326,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.JccHostVerifierTest.txt",
+        "path": "jdk.internal.m3.rewrite.JccHostVerifierTest.txt",
         "sha": "adb4328e50a4ed2c70d9a24b8b097d5b1b1dba11",
         "size": 328,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.JccLedgerContractTest.txt",
+        "path": "jdk.internal.m3.rewrite.JccLedgerContractTest.txt",
         "sha": "0e33de17f4ef388c020ebc3e06f4e542f231c328",
         "size": 332,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.JccMasteryTest.txt",
+        "path": "jdk.internal.m3.rewrite.JccMasteryTest.txt",
         "sha": "476d810a6d3bcc0fcad7b68d953f98adb0aef9f3",
         "size": 319,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.JccProjectCycleTest.txt",
+        "path": "jdk.internal.m3.rewrite.JccProjectCycleTest.txt",
         "sha": "8a60ed434b6346833b3de18e216b2538c20ee11e",
         "size": 328,
         "type": "blob"
       },
       {
         "mode": "100644",
-        "path": "com.synexia.rewrite.JccUnicodeTest.txt",
+        "path": "jdk.internal.m3.rewrite.JccUnicodeTest.txt",
         "sha": "160d10f0f5db93624850318a684fef4bbd6cfa6b",
         "size": 319,
         "type": "blob"

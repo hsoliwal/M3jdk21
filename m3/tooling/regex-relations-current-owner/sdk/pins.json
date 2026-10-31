@@ -6,17 +6,17 @@
   },
   "files": [
     {
-      "path": "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
+      "path": "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
       "unchangedGitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
       "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
     },
     {
-      "path": "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
+      "path": "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
       "unchangedGitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
       "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec"
     },
     {
-      "path": "pinned-engine/com/synexia/rewrite/M3RegexRelationsCurrentOwnerRecipe.java",
+      "path": "pinned-engine/jdk/internal/m3/rewrite/M3RegexRelationsCurrentOwnerRecipe.java",
       "unchangedGitBlob": "c82f01cdf2c4524d86161ce3a2cdab68d5b5ad3b",
       "sha256": "31cf12a75e4ba6fa8a1edbbe18d91a1de255a82a40777bd83459e92b99677022"
     },
@@ -31,12 +31,12 @@
       "sha256": "b17b32aff512f61f78123a97f301c56d325c65b7531d2b68e04d6bffbbc3723f"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/manifest.tsv",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/manifest.tsv",
       "unchangedGitBlob": "bee28697e6267d75ee0eb7a9c26abd77fbf9a278",
       "sha256": "e105f9a78f102d42ddee319ef51b1aa78b348af6ae477b136dc60669c1eb396d"
     },
     {
-      "path": "src/test/java/com/synexia/rewrite/M3RegexRelationsCurrentOwnerRecipeTest.java",
+      "path": "src/test/java/jdk/internal/m3/rewrite/M3RegexRelationsCurrentOwnerRecipeTest.java",
       "unchangedGitBlob": "ed6c37da522fa59f8f1a68c5f971a6625806af71",
       "sha256": "d4ce25880247e57766ad2580820507c280417fb2d87ad809b19bf986d0d6daf0"
     },
@@ -51,52 +51,52 @@
       "sha256": "9be905c3a3d3e20a38b0a92bde462be4803cecc83b6d9785fdf527581d25af9a"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/before/M3StringRegexDp.java",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/before/M3StringRegexDp.java",
       "unchangedGitBlob": "0f99affbec7a0d995e0a18ac4cf7f2e815da6e3b",
       "sha256": "ca679153b93b33214e48c3d7cce4414cf9622ff380ee9aea3334c9a680f37779"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/out/M3StringRegexDp.java",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/out/M3StringRegexDp.java",
       "unchangedGitBlob": "3fe2940825734a508967b559664c74bffd673d58",
       "sha256": "471ffbf34b6046b5bc811783397e56bd57f94fadd1883680e39192ea08ce486e"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/before/M3DotStarRelations.java",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/before/M3DotStarRelations.java",
       "unchangedGitBlob": "780c7887aaa6b0892a76f4eee1dcb17086a60289",
       "sha256": "bbc2901ebe5b2de9951b672127bd47e9d13c70b5a39482fa0727703d0a2ff757"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/out/M3DotStarRelations.java",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/out/M3DotStarRelations.java",
       "unchangedGitBlob": "780c7887aaa6b0892a76f4eee1dcb17086a60289",
       "sha256": "bbc2901ebe5b2de9951b672127bd47e9d13c70b5a39482fa0727703d0a2ff757"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/before/M3StateRelation.java",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/before/M3StateRelation.java",
       "unchangedGitBlob": "ea904c0962fb976f43b45575f06f46ad198e29a2",
       "sha256": "3270f7889a8c94fa15c90e88491b7fbe483d5ad3053ab36d7e07a63c4c734caa"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/out/M3StateRelation.java",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/out/M3StateRelation.java",
       "unchangedGitBlob": "ea904c0962fb976f43b45575f06f46ad198e29a2",
       "sha256": "3270f7889a8c94fa15c90e88491b7fbe483d5ad3053ab36d7e07a63c4c734caa"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/before/M3StateRelation.c",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/before/M3StateRelation.c",
       "unchangedGitBlob": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
       "sha256": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/out/M3StateRelation.c",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/out/M3StateRelation.c",
       "unchangedGitBlob": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
       "sha256": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/before/M3StringHierarchicalRegexTest.java",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/before/M3StringHierarchicalRegexTest.java",
       "unchangedGitBlob": "5d47787597630efc70a4e3b173f2e788dfb6aa3a",
       "sha256": "1653c23098529c2fc9f7e66e1bfb5c5c2c97adc67c422b0e67cfbd7b5fb121fd"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/out/M3StringHierarchicalRegexTest.java",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/out/M3StringHierarchicalRegexTest.java",
       "unchangedGitBlob": "5228849e52b921e24731a42b6e3074ba76ac0aba",
       "sha256": "69c725cb7cfe13b0a02bd6419cba2566f9c6b6ac30823d336765cbcebabbe601"
     },

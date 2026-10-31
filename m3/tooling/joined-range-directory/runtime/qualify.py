@@ -18,7 +18,7 @@ PROOF = Path(os.environ["M3_PROOF_ROOT"]).resolve()
 ROOT = PROOF / "joined-range-runtime"
 SDK = HERE.parent / "sdk"
 TARGET = "m3/core/src/com/m3/text/JoinedM3StringPiece.java"
-RESOURCE = "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020"
+RESOURCE = "src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020"
 MODES = {"jit": [], "int": ["-Xint"], "nocompact": ["-XX:-CompactStrings"],
          "c2": ["-Xbatch", "-XX:-TieredCompilation"]}
 MARKERS = [

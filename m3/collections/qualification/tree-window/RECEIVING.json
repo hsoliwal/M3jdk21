@@ -5,7 +5,7 @@
   "canonical_repository": "hsoliwal/com.synexia",
   "canonical_pr": 12855,
   "canonical_commit": "8ec2ca63a1e6cbd6d2e01e24c23619519ce311af",
-  "source_recipe": "com.synexia.m3.ViewportTreeCurrent20261025",
+  "source_recipe": "jdk.internal.m3.ViewportTreeCurrent20261025",
   "dataset": "viewport-tree-current-20261025",
   "target_files": [
     {

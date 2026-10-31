@@ -6,7 +6,7 @@ python3 - "$repo" <<'PY'
 from pathlib import Path
 import hashlib,sys
 root=Path(sys.argv[1]).resolve()
-crate=root/'m3/collections/qualification/state-slots-constructor-20261017/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-state-slots-constructor-20261017'
+crate=root/'m3/collections/qualification/state-slots-constructor-20261017/recipe/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-state-slots-constructor-20261017'
 row=(crate/'manifest.tsv').read_text(encoding='utf-8').strip().split('\t')
 assert len(row)==4 and row[0]=='m3/collections/src/main/java/com/m3/collections/M3ObjectStateSlots28.java'
 before=(crate/'pre'/row[3]).read_bytes()
@@ -26,7 +26,7 @@ trap 'rm -rf "$work"' EXIT HUP INT TERM
 mkdir -p "$work/old-src/com/m3/collections" "$work/old" "$work/new"
 main="$repo/m3/collections/src/main/java/com/m3/collections"
 test="$repo/m3/collections/src/test/java/com/m3/collections"
-cp "$repo/m3/collections/qualification/state-slots-constructor-20261017/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-state-slots-constructor-20261017/pre/M3ObjectStateSlots28.java.txt" \
+cp "$repo/m3/collections/qualification/state-slots-constructor-20261017/recipe/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-state-slots-constructor-20261017/pre/M3ObjectStateSlots28.java.txt" \
     "$work/old-src/com/m3/collections/M3ObjectStateSlots28.java"
 javac --release 21 -proc:none -Xlint:all,-missing-explicit-ctor,-serial -Werror -d "$work/old" \
   "$main/M3Address28.java" "$main/M3IntLane28.java" "$main/M3BitLane28.java" \

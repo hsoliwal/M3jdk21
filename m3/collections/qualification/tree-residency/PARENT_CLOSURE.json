@@ -2,8 +2,8 @@
   "schema": "M3JDK21_TREE_PARENT_CLOSURE_RECEIVING_V1",
   "canonical_repo": "hsoliwal/com.synexia",
   "canonical_commit": "97cb92f40023785853b701f8abcd2f63d8e3621e",
-  "java_recipe": "com.synexia.m3.ViewportTreeParentClosure20261026",
-  "text_pin_recipe": "com.synexia.m3.ViewportTreeParentPin20261027",
+  "java_recipe": "jdk.internal.m3.ViewportTreeParentClosure20261026",
+  "text_pin_recipe": "jdk.internal.m3.ViewportTreeParentPin20261027",
   "master_preimage_commit": "9dd1df62f3d5406760427cb5e840a36c9e7a59ea",
   "targets": [
     {

@@ -12,7 +12,7 @@
     "repository": "hsoliwal/com.synexia",
     "pr": 12855,
     "dataset": "vpt-residency-reuse-20261026",
-    "named_recipe": "com.synexia.m3.ViewportResidencyReuse20261026",
+    "named_recipe": "jdk.internal.m3.ViewportResidencyReuse20261026",
     "exact_engines": {
       "M3HashPinnedJavaSnapshotRecipe": "98138cb6734ad86e3f77b8722fa5ff459842e841",
       "M3HashPinnedTextSnapshotRecipe": "14c383724cd3e9dda80d9311e298cc4ed4cf46c7",

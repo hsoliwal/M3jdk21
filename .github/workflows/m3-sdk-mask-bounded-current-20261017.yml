@@ -35,7 +35,7 @@ jobs:
       - name: Check the installed two postimages
         run: |
           java -cp m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe/target/classes \
-            com.synexia.m3.M3MaskBoundedCurrentRecipe --check "$PWD"
+            jdk.internal.m3.M3MaskBoundedCurrentRecipe --check "$PWD"
       - name: Java21 real owner and JNI strict compile
         shell: bash
         run: |
@@ -60,7 +60,7 @@ jobs:
             com.m3.collections.M3BudgetedMaskWindowContract --native
           java -ea -Xcheck:jni -Djava.library.path="$RUNNER_TEMP/no-library" \
             -cp "$RUNNER_TEMP/m3-classes" com.m3.collections.M3BudgetedMaskWindowContract --missing
-          cp m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe/src/main/resources/com/synexia/m3/m3_index_mask_window.c.before.txt "$RUNNER_TEMP/m3-oldnative/old_window.c"
+          cp m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe/src/main/resources/jdk/internal/m3/m3_index_mask_window.c.before.txt "$RUNNER_TEMP/m3-oldnative/old_window.c"
           gcc -std=c17 -O2 -Wall -Wextra -Werror -pedantic -fPIC -shared \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" -include "$javahdr" \
             "$RUNNER_TEMP/m3-oldnative/old_window.c" \

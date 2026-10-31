@@ -1,8 +1,8 @@
 {
   "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
   "license": "Apache-2.0",
-  "recipe": "com.synexia.m3.GvasNativePath20261019",
-  "canonical_crate": "synexia-openrewrite-recipes/crates/m3jdk21-20261019/string-native",
+  "recipe": "jdk.internal.m3.GvasNativePath20261019",
+  "canonical_crate": "m3-openrewrite-recipes/crates/m3jdk21-20261019/string-native",
   "target_baseline": "672e29f20bd039acaaeeb97ea17eee2939fcc8e4",
   "target_owner": "com.m3.text.M3FixedAddressMapping.mapExact0",
   "target_native_source": "m3/lexicon/native/m3_fixed_address_mapping_jni.c",

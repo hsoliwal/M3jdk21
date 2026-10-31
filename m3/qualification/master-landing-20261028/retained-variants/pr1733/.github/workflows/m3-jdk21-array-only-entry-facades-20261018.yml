@@ -25,7 +25,7 @@ jobs:
       - name: Check actual generated files against canonical recipe templates
         run: |
           set -eu
-          BASE=m3/collections/qualification/jdk21-array-only-entry-facades-20261018/recipe/src/main/resources/com/synexia/rewrite/jdk21-array-only-entry-facades-20261018
+          BASE=m3/collections/qualification/jdk21-array-only-entry-facades-20261018/recipe/src/main/resources/jdk/internal/m3/rewrite/jdk21-array-only-entry-facades-20261018
           cmp "$BASE/M3LFUCache.java.txt" m3/collections/src/main/java/com/m3/collections/M3LFUCache.java
           cmp "$BASE/M3ApiEntryFacades.java.txt" m3/collections/src/main/java/com/m3/collections/M3ApiEntryFacades.java
           cmp "$BASE/M3ArrayOnlyFacadeSelfTest.java.txt" m3/collections/src/test/java/com/m3/collections/M3ArrayOnlyFacadeSelfTest.java

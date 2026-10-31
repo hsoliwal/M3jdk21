@@ -23,10 +23,10 @@
       "copyright": "Existing per-file copyright retained; see SOURCE_RIGHTS.tsv",
       "source_rights": "Published target-owned GPLv2 with Classpath exception source; retain exact header, root LICENSE and ADDITIONAL_LICENSE_INFO. Donor LICENSE_DECISIONS.tsv records leaf-3/fixed-cache authority; no separate leaf-4 rows are invented.",
       "canonical_recipe": {
-        "name": "com.synexia.rewrite.M3SwingUiConvergence20261019",
-        "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SwingUiConvergence20261019.java",
+        "name": "jdk.internal.m3.rewrite.M3SwingUiConvergence20261019",
+        "source_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3SwingUiConvergence20261019.java",
         "source_sha256": "03e17219365378a2f1773c36bccf52f54c49ca3e2a343a8cb137276532ee5f3e",
-        "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
+        "manifest_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
         "manifest_sha256": "8700ab0a685f1d8ac2890874d13a440461d1a496e92907759cc718a6dc7b6d16",
         "canonical_repository": "hsoliwal/com.synexia",
         "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
@@ -34,7 +34,7 @@
         "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
         "owner": "Existing M3GpuToolJoinRecipe / M3GpuToolJoinManifest",
         "sdk": {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json",
           "sha256": "2b2e935ceb68b54d4d1a3d053533e1fec31b0e72c2ca1d481c3845e4733db82c",
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
@@ -77,7 +77,7 @@
       "receiving_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1525",
       "evidence": [
         {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json",
           "sha256": "89caed5b70931312775d451f5f65225898d1a2cfa1d12152536f4636ff98bcbc",
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
@@ -85,7 +85,7 @@
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json"
         },
         {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md",
           "sha256": "133a02765dd8ccb7448fd1ced7bc3c2a0309881012857694937d435b5d7634cd",
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
@@ -93,7 +93,7 @@
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md"
         },
         {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
@@ -102,7 +102,7 @@
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
         },
         {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
@@ -132,7 +132,7 @@
         "historical_execution_parent": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
         "runtime_or_sdk_rerun": "NOT_RUN_BY_METADATA_RECOVERY",
         "admission": {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
@@ -141,7 +141,7 @@
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
         },
         "module_admission": {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
@@ -183,10 +183,10 @@
       "copyright": "Existing per-file copyright retained; see SOURCE_RIGHTS.tsv",
       "source_rights": "Published target-owned GPLv2 with Classpath exception source; retain exact header, root LICENSE and ADDITIONAL_LICENSE_INFO. Donor LICENSE_DECISIONS.tsv records leaf-3/fixed-cache authority; no separate leaf-4 rows are invented.",
       "canonical_recipe": {
-        "name": "com.synexia.rewrite.M3SwingUiConvergence20261019",
-        "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SwingUiConvergence20261019.java",
+        "name": "jdk.internal.m3.rewrite.M3SwingUiConvergence20261019",
+        "source_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3SwingUiConvergence20261019.java",
         "source_sha256": "03e17219365378a2f1773c36bccf52f54c49ca3e2a343a8cb137276532ee5f3e",
-        "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
+        "manifest_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
         "manifest_sha256": "8700ab0a685f1d8ac2890874d13a440461d1a496e92907759cc718a6dc7b6d16",
         "canonical_repository": "hsoliwal/com.synexia",
         "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
@@ -194,7 +194,7 @@
         "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
         "owner": "Existing M3GpuToolJoinRecipe / M3GpuToolJoinManifest",
         "sdk": {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json",
           "sha256": "2b2e935ceb68b54d4d1a3d053533e1fec31b0e72c2ca1d481c3845e4733db82c",
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
@@ -237,7 +237,7 @@
       "receiving_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1525",
       "evidence": [
         {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json",
           "sha256": "89caed5b70931312775d451f5f65225898d1a2cfa1d12152536f4636ff98bcbc",
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
@@ -245,7 +245,7 @@
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json"
         },
         {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md",
           "sha256": "133a02765dd8ccb7448fd1ced7bc3c2a0309881012857694937d435b5d7634cd",
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
@@ -253,7 +253,7 @@
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md"
         },
         {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
@@ -262,7 +262,7 @@
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
         },
         {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
@@ -292,7 +292,7 @@
         "historical_execution_parent": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
         "runtime_or_sdk_rerun": "NOT_RUN_BY_METADATA_RECOVERY",
         "admission": {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
@@ -301,7 +301,7 @@
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
         },
         "module_admission": {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
@@ -343,10 +343,10 @@
       "copyright": "Existing per-file copyright retained; see SOURCE_RIGHTS.tsv",
       "source_rights": "Published target-owned GPLv2 with Classpath exception source; retain exact header, root LICENSE and ADDITIONAL_LICENSE_INFO. Donor LICENSE_DECISIONS.tsv records leaf-3/fixed-cache authority; no separate leaf-4 rows are invented.",
       "canonical_recipe": {
-        "name": "com.synexia.rewrite.M3SwingUiConvergence20261019",
-        "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SwingUiConvergence20261019.java",
+        "name": "jdk.internal.m3.rewrite.M3SwingUiConvergence20261019",
+        "source_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3SwingUiConvergence20261019.java",
         "source_sha256": "03e17219365378a2f1773c36bccf52f54c49ca3e2a343a8cb137276532ee5f3e",
-        "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
+        "manifest_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
         "manifest_sha256": "8700ab0a685f1d8ac2890874d13a440461d1a496e92907759cc718a6dc7b6d16",
         "canonical_repository": "hsoliwal/com.synexia",
         "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
@@ -354,7 +354,7 @@
         "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
         "owner": "Existing M3GpuToolJoinRecipe / M3GpuToolJoinManifest",
         "sdk": {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json",
           "sha256": "2b2e935ceb68b54d4d1a3d053533e1fec31b0e72c2ca1d481c3845e4733db82c",
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
@@ -397,7 +397,7 @@
       "receiving_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1525",
       "evidence": [
         {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json",
           "sha256": "89caed5b70931312775d451f5f65225898d1a2cfa1d12152536f4636ff98bcbc",
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
@@ -405,7 +405,7 @@
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json"
         },
         {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md",
           "sha256": "133a02765dd8ccb7448fd1ced7bc3c2a0309881012857694937d435b5d7634cd",
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
@@ -413,7 +413,7 @@
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md"
         },
         {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
@@ -422,7 +422,7 @@
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
         },
         {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
@@ -452,7 +452,7 @@
         "historical_execution_parent": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
         "runtime_or_sdk_rerun": "NOT_RUN_BY_METADATA_RECOVERY",
         "admission": {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
@@ -461,7 +461,7 @@
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
         },
         "module_admission": {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
@@ -503,10 +503,10 @@
       "copyright": "Existing per-file copyright retained; see SOURCE_RIGHTS.tsv",
       "source_rights": "Published target-owned GPLv2 with Classpath exception source; retain exact header, root LICENSE and ADDITIONAL_LICENSE_INFO. Donor LICENSE_DECISIONS.tsv records leaf-3/fixed-cache authority; no separate leaf-4 rows are invented.",
       "canonical_recipe": {
-        "name": "com.synexia.rewrite.M3SwingUiConvergence20261019",
-        "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SwingUiConvergence20261019.java",
+        "name": "jdk.internal.m3.rewrite.M3SwingUiConvergence20261019",
+        "source_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3SwingUiConvergence20261019.java",
         "source_sha256": "03e17219365378a2f1773c36bccf52f54c49ca3e2a343a8cb137276532ee5f3e",
-        "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
+        "manifest_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
         "manifest_sha256": "8700ab0a685f1d8ac2890874d13a440461d1a496e92907759cc718a6dc7b6d16",
         "canonical_repository": "hsoliwal/com.synexia",
         "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
@@ -514,7 +514,7 @@
         "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
         "owner": "Existing M3GpuToolJoinRecipe / M3GpuToolJoinManifest",
         "sdk": {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json",
           "sha256": "2b2e935ceb68b54d4d1a3d053533e1fec31b0e72c2ca1d481c3845e4733db82c",
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
@@ -557,7 +557,7 @@
       "receiving_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1525",
       "evidence": [
         {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json",
           "sha256": "89caed5b70931312775d451f5f65225898d1a2cfa1d12152536f4636ff98bcbc",
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
@@ -565,7 +565,7 @@
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json"
         },
         {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md",
           "sha256": "133a02765dd8ccb7448fd1ced7bc3c2a0309881012857694937d435b5d7634cd",
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
@@ -573,7 +573,7 @@
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md"
         },
         {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
@@ -582,7 +582,7 @@
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
         },
         {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
@@ -612,7 +612,7 @@
         "historical_execution_parent": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
         "runtime_or_sdk_rerun": "NOT_RUN_BY_METADATA_RECOVERY",
         "admission": {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
@@ -621,7 +621,7 @@
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
         },
         "module_admission": {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
@@ -663,10 +663,10 @@
       "copyright": "Existing per-file copyright retained; see SOURCE_RIGHTS.tsv",
       "source_rights": "Published target-owned GPLv2 with Classpath exception source; retain exact header, root LICENSE and ADDITIONAL_LICENSE_INFO. Donor LICENSE_DECISIONS.tsv records leaf-3/fixed-cache authority; no separate leaf-4 rows are invented.",
       "canonical_recipe": {
-        "name": "com.synexia.rewrite.M3SwingUiConvergence20261019",
-        "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SwingUiConvergence20261019.java",
+        "name": "jdk.internal.m3.rewrite.M3SwingUiConvergence20261019",
+        "source_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3SwingUiConvergence20261019.java",
         "source_sha256": "03e17219365378a2f1773c36bccf52f54c49ca3e2a343a8cb137276532ee5f3e",
-        "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
+        "manifest_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
         "manifest_sha256": "8700ab0a685f1d8ac2890874d13a440461d1a496e92907759cc718a6dc7b6d16",
         "canonical_repository": "hsoliwal/com.synexia",
         "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
@@ -674,7 +674,7 @@
         "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
         "owner": "Existing M3GpuToolJoinRecipe / M3GpuToolJoinManifest",
         "sdk": {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json",
           "sha256": "2b2e935ceb68b54d4d1a3d053533e1fec31b0e72c2ca1d481c3845e4733db82c",
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
@@ -717,7 +717,7 @@
       "receiving_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1525",
       "evidence": [
         {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json",
           "sha256": "89caed5b70931312775d451f5f65225898d1a2cfa1d12152536f4636ff98bcbc",
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
@@ -725,7 +725,7 @@
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json"
         },
         {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md",
           "sha256": "133a02765dd8ccb7448fd1ced7bc3c2a0309881012857694937d435b5d7634cd",
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
@@ -733,7 +733,7 @@
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md"
         },
         {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
@@ -742,7 +742,7 @@
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
         },
         {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
@@ -772,7 +772,7 @@
         "historical_execution_parent": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
         "runtime_or_sdk_rerun": "NOT_RUN_BY_METADATA_RECOVERY",
         "admission": {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
@@ -781,7 +781,7 @@
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
         },
         "module_admission": {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
@@ -823,10 +823,10 @@
       "copyright": "Existing per-file copyright retained; see SOURCE_RIGHTS.tsv",
       "source_rights": "Published target-owned GPLv2 with Classpath exception source; retain exact header, root LICENSE and ADDITIONAL_LICENSE_INFO. Donor LICENSE_DECISIONS.tsv records leaf-3/fixed-cache authority; no separate leaf-4 rows are invented.",
       "canonical_recipe": {
-        "name": "com.synexia.rewrite.M3SwingUiConvergence20261019",
-        "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SwingUiConvergence20261019.java",
+        "name": "jdk.internal.m3.rewrite.M3SwingUiConvergence20261019",
+        "source_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3SwingUiConvergence20261019.java",
         "source_sha256": "03e17219365378a2f1773c36bccf52f54c49ca3e2a343a8cb137276532ee5f3e",
-        "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
+        "manifest_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
         "manifest_sha256": "8700ab0a685f1d8ac2890874d13a440461d1a496e92907759cc718a6dc7b6d16",
         "canonical_repository": "hsoliwal/com.synexia",
         "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
@@ -834,7 +834,7 @@
         "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
         "owner": "Existing M3GpuToolJoinRecipe / M3GpuToolJoinManifest",
         "sdk": {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json",
           "sha256": "2b2e935ceb68b54d4d1a3d053533e1fec31b0e72c2ca1d481c3845e4733db82c",
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
@@ -877,7 +877,7 @@
       "receiving_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1525",
       "evidence": [
         {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json",
           "sha256": "89caed5b70931312775d451f5f65225898d1a2cfa1d12152536f4636ff98bcbc",
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
@@ -885,7 +885,7 @@
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json"
         },
         {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md",
           "sha256": "133a02765dd8ccb7448fd1ced7bc3c2a0309881012857694937d435b5d7634cd",
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
@@ -893,7 +893,7 @@
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md"
         },
         {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
@@ -902,7 +902,7 @@
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
         },
         {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
@@ -932,7 +932,7 @@
         "historical_execution_parent": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
         "runtime_or_sdk_rerun": "NOT_RUN_BY_METADATA_RECOVERY",
         "admission": {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
@@ -941,7 +941,7 @@
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
         },
         "module_admission": {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
@@ -983,10 +983,10 @@
       "copyright": "Existing per-file copyright retained; see SOURCE_RIGHTS.tsv",
       "source_rights": "Published target-owned GPLv2 with Classpath exception source; retain exact header, root LICENSE and ADDITIONAL_LICENSE_INFO. Donor LICENSE_DECISIONS.tsv records leaf-3/fixed-cache authority; no separate leaf-4 rows are invented.",
       "canonical_recipe": {
-        "name": "com.synexia.rewrite.M3SwingUiConvergence20261019",
-        "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SwingUiConvergence20261019.java",
+        "name": "jdk.internal.m3.rewrite.M3SwingUiConvergence20261019",
+        "source_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3SwingUiConvergence20261019.java",
         "source_sha256": "03e17219365378a2f1773c36bccf52f54c49ca3e2a343a8cb137276532ee5f3e",
-        "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
+        "manifest_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
         "manifest_sha256": "8700ab0a685f1d8ac2890874d13a440461d1a496e92907759cc718a6dc7b6d16",
         "canonical_repository": "hsoliwal/com.synexia",
         "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
@@ -994,7 +994,7 @@
         "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
         "owner": "Existing M3GpuToolJoinRecipe / M3GpuToolJoinManifest",
         "sdk": {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json",
           "sha256": "2b2e935ceb68b54d4d1a3d053533e1fec31b0e72c2ca1d481c3845e4733db82c",
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
@@ -1037,7 +1037,7 @@
       "receiving_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1525",
       "evidence": [
         {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json",
           "sha256": "89caed5b70931312775d451f5f65225898d1a2cfa1d12152536f4636ff98bcbc",
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
@@ -1045,7 +1045,7 @@
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json"
         },
         {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md",
           "sha256": "133a02765dd8ccb7448fd1ced7bc3c2a0309881012857694937d435b5d7634cd",
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
@@ -1053,7 +1053,7 @@
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md"
         },
         {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
@@ -1062,7 +1062,7 @@
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
         },
         {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
@@ -1092,7 +1092,7 @@
         "historical_execution_parent": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
         "runtime_or_sdk_rerun": "NOT_RUN_BY_METADATA_RECOVERY",
         "admission": {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
@@ -1101,7 +1101,7 @@
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
         },
         "module_admission": {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",

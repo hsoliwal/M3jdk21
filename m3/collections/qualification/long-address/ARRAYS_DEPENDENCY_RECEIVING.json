@@ -4,7 +4,7 @@
   "canonical_pr": 12855,
   "canonical_commit": "073b8062405b916cab841dd2c1dea8f0520fef32",
   "dataset": "long-address-arrays-20261027",
-  "named_recipe": "com.synexia.m3.LongAddressArrays20261027",
+  "named_recipe": "jdk.internal.m3.LongAddressArrays20261027",
   "recipe_engine_blob": "14c383724cd3e9dda80d9311e298cc4ed4cf46c7",
   "product_repo": "hsoliwal/M3jdk21",
   "product_pr": 2006,

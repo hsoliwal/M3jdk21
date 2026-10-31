@@ -28,7 +28,7 @@ class CurrentSourceCensusTest(unittest.TestCase):
         manifest.parent.mkdir(parents=True)
         manifest.write_text('m3/collections/src/main/java/com/m3/collections/A.java\t'
                             + sha(old.read_bytes()) + '\n')
-        packet = root / 'm3/collections/synexia-donation.json'
+        packet = root / 'm3/collections/m3-donation.json'
         packet.write_text(json.dumps({'installed_source_manifest': 'qualification/historical.tsv',
                                       'installed_source_manifest_sha256': sha(manifest.read_bytes())}))
         return root, old, new, manifest
@@ -62,7 +62,7 @@ class CurrentSourceCensusTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'manifest is missing or changed'):
                 inspect(root)
             # Even a newly signed manifest must refuse duplicate owner paths.
-            packet = root / 'm3/collections/synexia-donation.json'
+            packet = root / 'm3/collections/m3-donation.json'
             info = json.loads(packet.read_text())
             info['installed_source_manifest_sha256'] = sha(manifest.read_bytes())
             packet.write_text(json.dumps(info))
@@ -76,7 +76,7 @@ class CurrentSourceCensusTest(unittest.TestCase):
             manifest.write_text('m3/collections/src/test/java/com/m3/collections/T.java\t'
                                 + sha(new.read_bytes()) + '\n'
                                 + manifest.read_text())
-            packet = root / 'm3/collections/synexia-donation.json'
+            packet = root / 'm3/collections/m3-donation.json'
             info = json.loads(packet.read_text())
             info['installed_source_manifest_sha256'] = sha(manifest.read_bytes())
             packet.write_text(json.dumps(info))

@@ -7,20 +7,20 @@
   "target_base": "a62756a22a379d7d08c1e633e55b93155cea9ff5",
   "canonical_recipe_repository": "hsoliwal/com.synexia",
   "canonical_recipe_base": "47981356df68c2e12c658d2d6fe3969b695aa2fe",
-  "canonical_recipe_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
-  "canonical_recipe_name": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+  "canonical_recipe_path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "canonical_recipe_name": "jdk.internal.m3.m3jdk.CollectionsContractRefinement20261017",
   "source_role": "Convergence workspace: reusable recipes, catalogue, fixtures, donor evaluation and qualification",
   "target_role": "M3JDK21 Java, JNI and HotSpot runtime owners",
   "runtime_dependency_on_synexia": false,
   "receiving_sequence_advanced": false,
   "status": "REVIEW_CANDIDATE; runtime evidence does not promote a whole receiving family",
-  "catalogue_authority": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/CATALOGUE.tsv",
+  "catalogue_authority": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/CATALOGUE.tsv",
   "target_catalogue": "docs/m3/donor-catalogue.tsv",
   "historical_maps_preserved": [
     "m3/docs/name-mapping.d/m3-regex-lexical-nfa-20261018.json",
     "m3/docs/name-mapping.d/m3-filtered-collection-pack-20261017.json",
-    "m3/synexia-import/current-full-borrow/string-target-successors.tsv",
-    "m3/synexia-import/current-full-borrow/m3-string-precompute-observation-v2.tsv"
+    "m3/m3-import/current-full-borrow/string-target-successors.tsv",
+    "m3/m3-import/current-full-borrow/m3-string-precompute-observation-v2.tsv"
   ],
   "mappings": [
     {

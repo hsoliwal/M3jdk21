@@ -1404,7 +1404,7 @@
       "scope": "prospective compact public packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/engine-src/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/engine-src/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "bytes": 13805,
       "sha256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599",
       "scope": "prospective compact public packet input"
@@ -1440,31 +1440,31 @@
       "scope": "prospective compact public packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/owned-spring-case-insensitive-map/M3LinkedCaseInsensitiveMap.java.txt",
+      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-spring-case-insensitive-map/M3LinkedCaseInsensitiveMap.java.txt",
       "bytes": 31224,
       "sha256": "450e3f70be37f0fa0fcee7edd4adc8a2eea4a05a40646fb3e5c531e4ee8447ca",
       "scope": "prospective compact public packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/owned-spring-case-insensitive-map/engine-receipt.tsv",
+      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-spring-case-insensitive-map/engine-receipt.tsv",
       "bytes": 179,
       "sha256": "7b1a2aee52fb611cc6fdf406bee8eeaf25d505598d4cbb08b86b228f7e6670de",
       "scope": "prospective compact public packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/owned-spring-case-insensitive-map/manifest.tsv",
+      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-spring-case-insensitive-map/manifest.tsv",
       "bytes": 239,
       "sha256": "0e81b6c09c63b3c9c73007f4585a85112259ec079606a646029fcf55812c99fe",
       "scope": "prospective compact public packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/owned-spring-case-insensitive-map/source-receipt.tsv",
+      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-spring-case-insensitive-map/source-receipt.tsv",
       "bytes": 202,
       "sha256": "e060f53dbdc5b66063a840175a9f6364ddad90d77d2475588b2bf24f617fbc37",
       "scope": "prospective compact public packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/test/java/com/synexia/rewrite/M3OwnedSpringCaseInsensitiveMapRecipeTest.java",
+      "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/test/java/jdk/internal/m3/rewrite/M3OwnedSpringCaseInsensitiveMapRecipeTest.java",
       "bytes": 13550,
       "sha256": "04943fca61debfe7ae48fe8fb83899e3cb9b128f5dce78cbbc4c4cbdb31fe135",
       "scope": "prospective compact public packet input"

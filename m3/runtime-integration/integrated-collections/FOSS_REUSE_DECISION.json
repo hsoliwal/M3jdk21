@@ -23,7 +23,7 @@
     "No sorted positional insertion that silently moves the requested index",
     "Redundant detached snapshot int[] permutation/indirect mergesort: whole-call CPU regressed3/6 and allocation5/6 measured workloads; replaced with existing JDK stable object sorter."
   ],
-  "recipe": "com.synexia.rewrite.M3IntegratedUtilitiesRecipe",
+  "recipe": "jdk.internal.m3.rewrite.M3IntegratedUtilitiesRecipe",
   "status": "FOSS_REUSE_DECISION_RECORDED_BEFORE_CANDIDATE_GENERATION",
   "refinement": "The initial donor/category decision preceded candidate generation; later measured/refused candidates remain in counterexamples and qualification/rejected."
 }

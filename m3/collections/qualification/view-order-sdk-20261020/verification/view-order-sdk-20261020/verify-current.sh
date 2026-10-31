@@ -3,7 +3,7 @@
 set -euo pipefail
 crate=$(cd "$(dirname "$0")" && pwd)
 root=$(cd "${1:?exact dependency checkout required}" && pwd)
-res="$crate/../../src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-view-order-sdk-20261020"
+res="$crate/../../src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-view-order-sdk-20261020"
 relative=m3/collections/src/main/java/com/m3/collections
 emitted="$crate/target/generated-receiver/$relative/M3LongIndexProjection.java"
 evidence="$crate/target/evidence"

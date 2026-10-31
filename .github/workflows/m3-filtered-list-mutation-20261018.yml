@@ -8,7 +8,7 @@ on:
     paths:
       - '.github/workflows/m3-filtered-list-mutation-20261018.yml'
       - 'm3/collections/qualification/filtered-list-mutation-20261018/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-filtered-list-mutation-20261018/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-filtered-list-mutation-20261018/**'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3jdk21-filtered-list-mutation-20261018.yml'
       - 'm3/collections/src/main/java/com/m3/collections/M3FilteredLists.java'
       - 'm3/collections/src/test/java/com/m3/collections/M3FilteredListMutation*.java'
@@ -30,8 +30,8 @@ jobs:
           persist-credentials: false
           sparse-checkout: |
             m3/collections
-            m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite
-            m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-filtered-list-mutation-20261018
+            m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite
+            m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-filtered-list-mutation-20261018
             m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite
       - uses: actions/setup-java@v5
         with:
@@ -42,7 +42,7 @@ jobs:
         run: |
           set -euo pipefail
           P=m3/collections/qualification/filtered-list-mutation-20261018
-          test "$(git hash-object m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java)" = 05e02169c7429183107a99c60e1aad05b4d73b5f
+          test "$(git hash-object m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java)" = 05e02169c7429183107a99c60e1aad05b4d73b5f
           mkdir -p "$P/target/pre"
           cp "$P/pre/M3FilteredLists.java.txt" "$P/target/pre/M3FilteredLists.java"
           echo "b2dc49d3a9ec43b6e6bd34cf5c6dac53057cf90f42cc9ed506d54822a760fc2d  $P/target/pre/M3FilteredLists.java" | sha256sum -c -
@@ -53,7 +53,7 @@ jobs:
           set -euo pipefail
           P=m3/collections/qualification/filtered-list-mutation-20261018
           mvn -B -ntp -f "$P/pom.xml" test | tee "$P/target/maven.log"
-          grep -F 'Tests run: 4, Failures: 0, Errors: 0, Skipped: 0' "$P/target/surefire-reports/com.synexia.rewrite.FilteredListMutationRecipeTest.txt"
+          grep -F 'Tests run: 4, Failures: 0, Errors: 0, Skipped: 0' "$P/target/surefire-reports/jdk.internal.m3.rewrite.FilteredListMutationRecipeTest.txt"
       - name: Generated-source red green, public API and actual receiver state
         shell: bash
         run: |

@@ -6,7 +6,7 @@
     "bytes": 5081
   },
   {
-    "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+    "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
     "state": "MATERIALIZED_EXISTING_TRACKED_INPUT",
     "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
     "bytes": 2451
@@ -24,15 +24,15 @@
     "bytes": 392
   },
   {
-    "path": "m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
+    "path": "m3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
     "state": "MATERIALIZED_EXISTING_TRACKED_INPUT",
     "sha256": "c47151b5df79d6d2711e6de748bff3fb08e2c01af5e9c6ac0b4b3b91ac97425c",
     "bytes": 453
   },
   {
-    "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/manifest.tsv",
+    "path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/manifest.tsv",
     "state": "NOT_PRESENT_IN_PINNED_TARGET_TREE_NO_HYDRATION",
-    "detail": "fatal: path 'synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/manifest.tsv' does not exist in 'ab6cc64eddd17ea81242bf58a7a19cb130a58c77'"
+    "detail": "fatal: path 'm3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/manifest.tsv' does not exist in 'ab6cc64eddd17ea81242bf58a7a19cb130a58c77'"
   },
   {
     "path": "m3/algorithms/test/PrefixZContractTest.java",
@@ -77,13 +77,13 @@
     "sha256": "1a0ef88a0edc06a87cc2d899edccb2ae931d7bec303448277b1c83f7ea782ecb"
   },
   {
-    "path": ".m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/M3BootstrapInventoryRecipe.java",
+    "path": ".m3/openrewrite-recipes/src/main/java/jdk/internal/m3/bootstrap/M3BootstrapInventoryRecipe.java",
     "state": "MATERIALIZED_EXISTING_TRACKED_INPUT",
     "bytes": 2302,
     "sha256": "05ac05e7f3cb7549d26866a61dec0edf19515317c95f73db82d1c517cad88ef5"
   },
   {
-    "path": ".m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/M3BootstrapTaskRecipe.java",
+    "path": ".m3/openrewrite-recipes/src/main/java/jdk/internal/m3/bootstrap/M3BootstrapTaskRecipe.java",
     "state": "MATERIALIZED_EXISTING_TRACKED_INPUT",
     "bytes": 1526,
     "sha256": "58bac6968ebd2cce6f43f338c289db14435b3ef05ed2abc13402275285b89462"

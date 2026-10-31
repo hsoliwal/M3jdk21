@@ -126,14 +126,14 @@ def main() -> int:
             pin = next(p for p in retained["owners"] if p["path"] == record["target_path"])
             assert record["sha256"] == pin["sha256"] and blob == pin["git_blob"]
 
-    host = C2 / ("custody/synexia-openrewrite-recipes/recipe-crates/"
+    host = C2 / ("custody/m3-openrewrite-recipes/recipe-crates/"
                  "m3-wrapper-convergence-20261018/recipe-host")
     fixture_records = []
     for pass_name, class_name in [
         ("wrapper-contract-v2", "M3WrapperConvergenceContract"),
         ("wrapper-junit-v2", "M3WrapperConvergenceTest"),
     ]:
-        root = host / ("passes/" + pass_name + "/resources/com/synexia/rewrite/"
+        root = host / ("passes/" + pass_name + "/resources/jdk/internal/m3/rewrite/"
                        "hash-pinned-java/m3-wrapper-" + pass_name)
         original = root / (class_name + ".java.txt")
         manifest = root / "manifest.tsv"
@@ -162,7 +162,7 @@ def main() -> int:
             qualification_kind="historical fixture, executed freshly in this run",
         ))
 
-    old_guard = host / ("passes/readonly-iterator/resources/com/synexia/rewrite/"
+    old_guard = host / ("passes/readonly-iterator/resources/jdk/internal/m3/rewrite/"
                        "hash-pinned-java/m3-wrapper-readonly-iterator/M3FilteredLists.java.txt")
     assert old_guard.read_bytes() == (source_dir / "M3FilteredLists.java").read_bytes()
     remember(old_guard, "historical accepted read-only guard postimage")

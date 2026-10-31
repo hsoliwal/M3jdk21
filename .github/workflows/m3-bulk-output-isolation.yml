@@ -61,7 +61,7 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Install canonical source-built recipe custody
-        run: bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
+        run: bash m3/m3-import/pure-int-recipe-custody/install.sh "$PWD"
       - name: Execute target receiver fixed-point test
         run: |
           mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \

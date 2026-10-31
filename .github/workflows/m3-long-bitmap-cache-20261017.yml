@@ -26,7 +26,7 @@ jobs:
           set -eu
           DIR=m3/collections/qualification/m3-long-bitmap-cache-20261017/recipe
           mvn -B -ntp -f "$DIR/pom.xml" verify
-          java -cp "$DIR/target/classes" com.synexia.m3.M3LongBitmapFilteredSnapshotRecipe --check .
+          java -cp "$DIR/target/classes" jdk.internal.m3.M3LongBitmapFilteredSnapshotRecipe --check .
       - name: Strict Java 21 selected-source contract gate
         run: |
           set -eu

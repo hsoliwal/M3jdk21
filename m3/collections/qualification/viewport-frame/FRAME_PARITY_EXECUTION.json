@@ -17,7 +17,7 @@
     "source": "proof-extras/M3FrameAdmissionProof.java"
   },
   "canonical_evidence_commit": "6c0b31b126c050c1c5b48e7ec51630ef8adef3df",
-  "canonical_evidence_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/viewport-frame-tree-receiving-20261027",
+  "canonical_evidence_path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/viewport-frame-tree-receiving-20261027",
   "canonical_evidence_url": "https://github.com/hsoliwal/com.synexia/tree/6c0b31b126c050c1c5b48e7ec51630ef8adef3df/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/viewport-frame-tree-receiving-20261027/assembled",
   "canonical_recipe_ref": "cce68668ecdbe699140d87196d035578cb548a99",
   "canonical_repository": "hsoliwal/com.synexia",
@@ -76,7 +76,7 @@
   "preimage_git_blob": "9614892a7257c9948716c2b49d80732183fce772",
   "product_parent": "48492f1609a4acf714676268256c2e99c3497a54",
   "product_repository": "hsoliwal/M3jdk21",
-  "recipe": "com.synexia.m3.ViewportFrameParity20261027",
+  "recipe": "jdk.internal.m3.ViewportFrameParity20261027",
   "schema": "M3_FRAME_PARITY_EXECUTION_V1",
   "source_epoch_note": "Saved SDK bindings are for immutable cce source epoch. Later parity metadata is not relabelled as executed; emitted output bytes are identical.",
   "target": "m3/collections/viewport-proof/verify.py"

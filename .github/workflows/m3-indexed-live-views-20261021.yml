@@ -13,7 +13,7 @@ on:
       - 'm3/collections/src/test/java/com/m3/collections/M3IndexedLiveView*.java'
       - 'm3/collections/algorithm-catalog/indexed-live-views-20261021.tsv'
       - 'm3/collections/qualification/indexed-live-views-20261021/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-indexed-live-views-20261021/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-indexed-live-views-20261021/**'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-indexed-live-views-20261021.yml'
   workflow_dispatch:
 permissions:
@@ -32,8 +32,8 @@ jobs:
           persist-credentials: false
           sparse-checkout: |
             m3/collections
-            m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite
-            m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-indexed-live-views-20261021
+            m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite
+            m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-indexed-live-views-20261021
             m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-indexed-live-views-20261021.yml
       - uses: actions/setup-java@v4
         with:

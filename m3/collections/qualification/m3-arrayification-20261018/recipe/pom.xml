@@ -36,7 +36,7 @@
    <resource>
     <directory>${project.basedir}/src/main/resources</directory>
     <includes>
-     <include>com/synexia/rewrite/arrayification-20261018/**</include>
+     <include>jdk/internal/m3/rewrite/arrayification-20261018/**</include>
      <include>META-INF/rewrite/m3-arrayification-20261018.yml</include>
     </includes>
    </resource>
@@ -48,9 +48,9 @@
     <version>3.13.0</version>
     <configuration>
      <includes>
-      <include>com/synexia/rewrite/M3GpuToolJoinManifest.java</include>
-      <include>com/synexia/rewrite/M3GpuToolJoinRecipe.java</include>
-      <include>com/synexia/rewrite/M3Arrayification20261018Recipe.java</include>
+      <include>jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java</include>
+      <include>jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java</include>
+      <include>jdk/internal/m3/rewrite/M3Arrayification20261018Recipe.java</include>
      </includes>
      <compilerArgs>
       <arg>-Xlint:all,-processing</arg>
@@ -102,7 +102,7 @@
         </goals>
         <configuration>
          <skip>${m3.recipe.boot.skip}</skip>
-         <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+         <mainClass>jdk.internal.m3.prstack.M3RecipeBoot</mainClass>
          <includeProjectDependencies>false</includeProjectDependencies>
          <includePluginDependencies>true</includePluginDependencies>
          <arguments>

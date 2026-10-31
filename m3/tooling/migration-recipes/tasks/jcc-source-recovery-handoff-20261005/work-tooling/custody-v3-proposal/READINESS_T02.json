@@ -68,9 +68,9 @@
   "fixture_count": 2,
   "fixture_identity_read_only_observations": [
     {
-      "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
+      "repository_path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/jdk/internal/m3/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
       "local_file_identity": {
-        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/jdk/internal/m3/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
         "bytes": 4,
         "sha256": "823a8864668594f33fd21b51f42c08643d90be2f0d903653175047f5d0298e6c",
         "git_blob_sha1": "59b4ec83f687499a54f15695b9b246599f9579d7",
@@ -78,9 +78,9 @@
       }
     },
     {
-      "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
+      "repository_path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/jdk/internal/m3/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
       "local_file_identity": {
-        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/jdk/internal/m3/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
         "bytes": 22,
         "sha256": "7eb80c376a9681170665f5c0d8b86214e9b44aa6f1d08690a83b26aeba536f3c",
         "git_blob_sha1": "24cdc62e634934527d551324c2449bcf951b5589",

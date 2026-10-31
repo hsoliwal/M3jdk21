@@ -2,7 +2,7 @@
   "schema": "M3_SWIFT_DEQUE_EXECUTION_V1",
   "target_predecessor": "7c6b3b51094c50c84746b819d79665e5f003bbdf",
   "local_worktree_dirty": true,
-  "recipe": "com.synexia.m3.SwiftDequeSpans20261018",
+  "recipe": "jdk.internal.m3.SwiftDequeSpans20261018",
   "recipe_tests": 4,
   "focused_baseline_tests": 5,
   "focused_candidate_tests": 5,

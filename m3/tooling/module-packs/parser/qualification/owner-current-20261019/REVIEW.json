@@ -23,7 +23,7 @@
       "after_sha256": "e337b44516d2fe8b2ce31e06051b15653e510f155cff2a10df7f9b0e36981808"
     }
   ],
-  "current_sdk_recipe": "com.synexia.m3.ParserOwnerCurrent20261019",
+  "current_sdk_recipe": "jdk.internal.m3.ParserOwnerCurrent20261019",
   "current_sdk_output": "/workspace/scratch/7ea994fb52d9/proofs/sdk-parser-current-01/sdk-output",
   "ordered_phase_receipts": [
     {

@@ -4,7 +4,7 @@
   "repository": "hsoliwal/M3JDK21",
   "baseline_ref": "677437be295b23f7ccf7409be287008944d0e8b0",
   "crate_name": "m3-ast-general-source-20261019",
-  "recipe_name": "com.synexia.m3jdk.AstGeneralSourceFacts20261019",
+  "recipe_name": "jdk.internal.m3.m3jdk.AstGeneralSourceFacts20261019",
   "targets": 2,
   "java_targets": 2,
   "text_targets": 0,

@@ -17,7 +17,7 @@ ROOT = Path(os.environ["M3_PROOF_ROOT"]).resolve()
 ARTIFACTS = ROOT / "artifacts"
 PREFIX = "m3/tooling/joined-range-directory/"
 WORKFLOW = ".github/workflows/m3-joined-range-directory.yml"
-SUITE = "com.synexia.rewrite.M3JoinedRangeDirectoryRecipeTest"
+SUITE = "jdk.internal.m3.rewrite.M3JoinedRangeDirectoryRecipeTest"
 METHODS = ["allTwoPartialStatesBothOrdersReachExactFixedPoint",
            "allTwoInverseStatesBothOrdersRecoverExactBefore",
            "eachOwnedInputRefusesDriftMissingAndDuplicateOwnership"]
@@ -261,7 +261,7 @@ def report():
     if tuple(module["COMPILED_PROVIDERS"]) != providers or set(sdk["compiledProviders"]) != set(providers):
         raise RuntimeError("four exact compiled source providers required")
     for name in providers:
-        body = regular(SDK / ("target/classes/com/synexia/rewrite/" + name + ".class")).read_bytes()
+        body = regular(SDK / ("target/classes/jdk/internal/m3/rewrite/" + name + ".class")).read_bytes()
         item = sdk["compiledProviders"][name]
         if (len(body) < 9 or body[:4] != bytes.fromhex("cafebabe")
                 or int.from_bytes(body[6:8], "big") != 65

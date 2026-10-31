@@ -24,12 +24,12 @@ EXPECTED = {
     "upstream_revision": "5d0bcbb9c6e3a118685a5ec91c6f5d8eb7833893",
     "upstream_license": "EPL-2.0",
     "upstream_java": "21",
-    "synexia_repository": "hsoliwal/com.synexia",
-    "synexia_pr": "11749",
-    "synexia_commit": "b3b35e5fd706a6584df4f476b38e8255f8692ee3",
-    "synexia_state": "DRAFT_WORKFLOW_QUEUED",
-    "synexia_workflow": "M3 Nebula Recipe DAG Convergence",
-    "synexia_workflow_state": "QUEUED",
+    "m3_repository": "hsoliwal/com.synexia",
+    "m3_pr": "11749",
+    "m3_commit": "b3b35e5fd706a6584df4f476b38e8255f8692ee3",
+    "m3_state": "DRAFT_WORKFLOW_QUEUED",
+    "m3_workflow": "M3 Nebula Recipe DAG Convergence",
+    "m3_workflow_state": "QUEUED",
     "physical_atom_extraction": "HOLD_TRUSTED_VERIFIER_REQUIRED",
     "backport_packet_execution": "false",
     "mutation_authority": "false",
@@ -57,7 +57,7 @@ def validate(row: dict[str, str]) -> dict[str, str]:
         raise ValueError(
             f"upstream proof admission drift: mismatches={mismatches}, extra={extra}"
         )
-    for field in ("upstream_revision", "synexia_commit"):
+    for field in ("upstream_revision", "m3_commit"):
         if not re.fullmatch(r"[0-9a-f]{40}", row[field]):
             raise ValueError(f"invalid Git commit in {field}")
     if row["physical_atom_extraction"] != "HOLD_TRUSTED_VERIFIER_REQUIRED":
@@ -87,10 +87,10 @@ def summary(row: dict[str, str]) -> dict[str, object]:
         "target": TARGET,
         "upstreamRepository": row["upstream_repository"],
         "upstreamRevision": row["upstream_revision"],
-        "synexiaPr": int(row["synexia_pr"]),
-        "synexiaCommit": row["synexia_commit"],
-        "synexiaState": row["synexia_state"],
-        "workflowState": row["synexia_workflow_state"],
+        "synexiaPr": int(row["m3_pr"]),
+        "synexiaCommit": row["m3_commit"],
+        "synexiaState": row["m3_state"],
+        "workflowState": row["m3_workflow_state"],
         "physicalAtomExtraction": row["physical_atom_extraction"],
         "backportPacketExecution": False,
         "mutationAuthority": False,

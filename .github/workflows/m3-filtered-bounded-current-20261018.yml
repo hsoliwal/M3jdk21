@@ -50,7 +50,7 @@ jobs:
           sha=lambda data:hashlib.sha256(data).hexdigest()
           total=0
           for kind in ("java","text"):
-              lane=dataset/"resources/com/synexia/rewrite"/("hash-pinned-"+kind)/crate
+              lane=dataset/"resources/jdk/internal/m3/rewrite"/("hash-pinned-"+kind)/crate
               manifest=lane/"manifest.tsv"
               for line in manifest.read_text().splitlines():
                   if not line or line.startswith("#"):continue
@@ -105,7 +105,7 @@ jobs:
           workflow=".github/workflows/m3-filtered-bounded-current-20261018.yml"
           total=kept=reviewed=0
           for kind in ("java","text"):
-              lane=dataset/"resources/com/synexia/rewrite"/("hash-pinned-"+kind)/crate
+              lane=dataset/"resources/jdk/internal/m3/rewrite"/("hash-pinned-"+kind)/crate
               for line in (lane/"manifest.tsv").read_text().splitlines():
                   if not line or line.startswith("#"):continue
                   path,original,post,filename=line.split("\t")

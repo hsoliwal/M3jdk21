@@ -7,5 +7,5 @@ description: >-
   Source-sealed installation of A3Lab and its hostile Atomize/Patternize compiler-convergence
   corpus. Candidate-only; JDK product source and canonical promotion remain outside this recipe.
 recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+  - jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe:
       crateName: a3-mastery-lab

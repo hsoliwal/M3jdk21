@@ -1,7 +1,7 @@
 {
   "schema": "M3_FILE_LINKED_IMAGE_PROBES_1",
   "module": "org.m3jdk.file",
-  "source_contract": "hsoliwal/com.synexia/synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/BUILD_CONTRACT.json",
+  "source_contract": "hsoliwal/com.synexia/m3-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/BUILD_CONTRACT.json",
   "family_sources": 50,
   "mapped_public_protected_declarations_and_record_components": 709,
   "module_java_sources": 80,

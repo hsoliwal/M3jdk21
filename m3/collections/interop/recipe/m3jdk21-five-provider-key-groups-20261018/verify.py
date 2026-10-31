@@ -7,7 +7,7 @@ import sys
 CRATE = 'm3jdk21-five-provider-key-groups-20261018'
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[4]
-PACK = HERE/'src/main/resources/com/synexia/rewrite/hash-pinned-java'/CRATE
+PACK = HERE/'src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java'/CRATE
 REVIEWED_SUCCESSOR = HERE / 'REVIEWED_SUCCESSOR_20261029.tsv'
 HISTORICAL_MANIFEST_BLOB = 'fee4850a1d6703b35142d3afce3b3cf0ea431690'
 GROUP_OWNER = 'm3/collections/interop/src/main/java/com/m3/collections/interop/M3FiveProviderKeyGroups.java'

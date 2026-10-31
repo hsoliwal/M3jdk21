@@ -1,5 +1,5 @@
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.Fc0Tqc
+name: jdk.internal.m3.Fc0Tqc
 displayName: Fc0 Tqc exact composed-candidate snapshot
 description: Exact follow-up family over the qualified Ic0 candidate; source-operation qualification only.
 recipeList:

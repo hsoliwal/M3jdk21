@@ -33,7 +33,7 @@ jobs:
         run: |
           mvn -B -ntp -f m3/collections/qualification/m3-linked-list-live-mask-20261017/recipe/pom.xml verify
           java -cp m3/collections/qualification/m3-linked-list-live-mask-20261017/recipe/target/classes \
-            com.synexia.m3.M3LinkedListLiveMaskRecipe --check "$PWD"
+            jdk.internal.m3.M3LinkedListLiveMaskRecipe --check "$PWD"
       - name: Strict source Java21 and 25k seeded JDK LinkedList oracle
         shell: bash
         run: |

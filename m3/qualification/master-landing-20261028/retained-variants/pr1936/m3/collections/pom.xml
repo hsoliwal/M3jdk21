@@ -44,7 +44,7 @@
           <include>LICENSE</include>
           <include>NOTICE</include>
           <include>provenance.json</include>
-          <include>synexia-donation.json</include>
+          <include>m3-donation.json</include>
           <include>name-mapping.json</include>
           <include>SYNEXIA-DONATION-NOTICE.txt</include>
           <include>NETBEANS-NOTICE.txt</include>
@@ -106,7 +106,7 @@
   </build>
   <profiles>
     <profile>
-      <id>m3-synexia-atom-pattern</id>
+      <id>m3-m3-atom-pattern</id>
       <build>
         <plugins>
           <plugin>
@@ -116,13 +116,13 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
               </dependency>
             </dependencies>
             <executions>
               <execution>
-                <id>m3-synexia-atom-pattern-verify</id>
+                <id>m3-m3-atom-pattern-verify</id>
                 <phase>verify</phase>
                 <goals>
                   <goal>dryRun</goal>
@@ -131,7 +131,7 @@
             </executions>
             <configuration>
               <activeRecipes>
-                <recipe>com.synexia.m3.EveryModuleAtomPatternApplication</recipe>
+                <recipe>jdk.internal.m3.EveryModuleAtomPatternApplication</recipe>
               </activeRecipes>
               <exportDatatables>true</exportDatatables>
               <runPerSubmodule>false</runPerSubmodule>
@@ -194,7 +194,7 @@
       </build>
     </profile>
     <profile>
-      <id>m3-synexia-atom-pattern-mastery</id>
+      <id>m3-m3-atom-pattern-mastery</id>
       <build>
         <plugins>
           <plugin>
@@ -204,13 +204,13 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
               </dependency>
             </dependencies>
             <executions>
               <execution>
-                <id>m3-synexia-atom-pattern-mastery-verify</id>
+                <id>m3-m3-atom-pattern-mastery-verify</id>
                 <phase>verify</phase>
                 <goals>
                   <goal>dryRun</goal>
@@ -219,7 +219,7 @@
             </executions>
             <configuration>
               <activeRecipes>
-                <recipe>com.synexia.m3.EveryModuleAtomPatternMastery</recipe>
+                <recipe>jdk.internal.m3.EveryModuleAtomPatternMastery</recipe>
               </activeRecipes>
               <exportDatatables>true</exportDatatables>
               <runPerSubmodule>false</runPerSubmodule>
@@ -314,7 +314,7 @@
                 </goals>
                 <configuration>
                   <skip>${m3.recipe.boot.skip}</skip>
-                  <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+                  <mainClass>jdk.internal.m3.prstack.M3RecipeBoot</mainClass>
                   <includeProjectDependencies>false</includeProjectDependencies>
                   <includePluginDependencies>true</includePluginDependencies>
                   <arguments>

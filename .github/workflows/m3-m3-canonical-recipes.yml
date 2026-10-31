@@ -1,0 +1,61 @@
+name: M3 Synexia canonical recipe consumer
+
+on:
+  pull_request:
+    paths:
+      - "m3/docs/M3_CONVERGENCE_MODEL.md"
+      - "m3/compatibility/m3-recipe-ownership.tsv"
+      - "m3/compatibility/m3-recipe-home-pin.tsv"
+      - "m3/compatibility/nebula-proven-recipe-transfer.tsv"
+      - "m3/compatibility/test_nebula_proven_recipe_transfer.py"
+      - "m3/compatibility/check_synexia_recipe_ownership.py"
+      - "m3/m3-import/pure-int-recipe-custody/**"
+      - "m3/tooling/migration-recipes/pom.xml"
+      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-m3-pure-int.yml"
+      - "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/scope/**"
+      - "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/semantic/**"
+      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3RecipeScopeRegistry.java"
+      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-canonical-recipe-ownership.yml"
+      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/synexia/M3CanonicalRecipeConsumerTest.java"
+      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/synexia/M3ScopeKernelConsumerTest.java"
+      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/synexia/M3SemanticFingerprintConsumerTest.java"
+      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/scope/M3RecipeScopeDeclarationTest.java"
+      - ".github/workflows/m3-m3-canonical-recipes.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  prove:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Diff hygiene
+        run: git diff --check HEAD^ HEAD || git diff --check
+
+      - name: Verify exact Synexia and frozen legacy blobs
+        run: python3 m3/compatibility/check_synexia_recipe_ownership.py
+
+      - name: Verify Nebula proving-ground transfer receipt
+        run: python3 m3/compatibility/test_nebula_proven_recipe_transfer.py
+
+      - name: Install provenance-pinned Synexia custody artifact
+        run: |
+          mvn -B -ntp -f m3/m3-import/pure-int-recipe-custody/pom.xml clean install
+
+      - name: Compile and execute canonical recipe consumer
+        run: |
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3CanonicalRecipeConsumerTest,M3ScopeKernelConsumerTest,M3SemanticFingerprintConsumerTest,M3RecipeScopeDeclarationTest             test

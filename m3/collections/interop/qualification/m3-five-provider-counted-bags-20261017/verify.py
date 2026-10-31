@@ -7,7 +7,7 @@ import sys
 
 HERE=Path(__file__).resolve().parent
 ROOT=HERE.parents[4]
-CRATE=HERE/"recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-five-provider-counted-bags-20261017"
+CRATE=HERE/"recipe/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-five-provider-counted-bags-20261017"
 
 def checked(path):
     if path.is_symlink() or not path.is_file():

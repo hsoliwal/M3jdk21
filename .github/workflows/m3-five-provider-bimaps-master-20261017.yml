@@ -31,7 +31,7 @@ jobs:
           from pathlib import Path
           from hashlib import sha256
           root=Path(".")
-          recipe=root/"m3/collections/qualification/m3-five-provider-bimaps-master-20261017/recipe/src/main/resources/com/synexia/rewrite/m3-five-provider-bimaps-master-20261017"
+          recipe=root/"m3/collections/qualification/m3-five-provider-bimaps-master-20261017/recipe/src/main/resources/jdk/internal/m3/rewrite/m3-five-provider-bimaps-master-20261017"
           count=0
           for line in (recipe/"manifest.tsv").read_text(encoding="utf-8").splitlines():
               path,before,after,resource=line.split("\t")

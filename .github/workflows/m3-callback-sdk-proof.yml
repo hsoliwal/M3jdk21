@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - '.github/workflows/m3-callback-sdk-proof.yml'
-      - 'm3/synexia-import/intakes/callback-parity/**'
+      - 'm3/m3-import/intakes/callback-parity/**'
 permissions:
   contents: read
   issues: read
@@ -152,7 +152,7 @@ jobs:
           BASE = '01554337e0051018e6d932f3775378a01faf88f8'
           SOURCE = '01561606c6adec4c5c3a3d81247924c60f9a9fd0'
           TARGET = 'c1acefe582ac84414f1082f095e96bbee167bc33'
-          PATH = 'synexia-openrewrite-recipes/tools/patternizer/callback-parity/receivers/m3jdk21/hosted_apply.py'
+          PATH = 'm3-openrewrite-recipes/tools/patternizer/callback-parity/receivers/m3jdk21/hosted_apply.py'
           BEFORE = '5cb0930da45a862207360b684579219c6a208bac5f5c27e2f409caf1d26f96c7'
           AFTER = '3718546fc3fe883a56fdb00ae30c4343efa91d3954fca465dac8928c5994ec4d'
 
@@ -240,14 +240,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 -B "$RUNNER_TEMP/callback-source/synexia-openrewrite-recipes/tools/patternizer/callback-parity/receivers/m3jdk21/hosted_apply.py" provision \
+          python3 -B "$RUNNER_TEMP/callback-source/m3-openrewrite-recipes/tools/patternizer/callback-parity/receivers/m3jdk21/hosted_apply.py" provision \
             --source "$RUNNER_TEMP/callback-source" --target "$GITHUB_WORKSPACE/target" \
             --work "$RUNNER_TEMP/callback-run"
       - name: Execute offline SDK and exact receiving checkout proof
         shell: bash
         run: |
           set -euo pipefail
-          python3 -B "$RUNNER_TEMP/callback-source/synexia-openrewrite-recipes/tools/patternizer/callback-parity/receivers/m3jdk21/hosted_apply.py" execute \
+          python3 -B "$RUNNER_TEMP/callback-source/m3-openrewrite-recipes/tools/patternizer/callback-parity/receivers/m3jdk21/hosted_apply.py" execute \
             --source "$RUNNER_TEMP/callback-source" --target "$GITHUB_WORKSPACE/target" \
             --work "$RUNNER_TEMP/callback-run"
       - name: Retain actual command and Result evidence
@@ -266,11 +266,11 @@ jobs:
             ${{ runner.temp }}/callback-run/FAILED.json
             ${{ runner.temp }}/callback-run/candidate.patch
             ${{ runner.temp }}/callback-run/postimages/
-            ${{ runner.temp }}/callback-source/synexia-openrewrite-recipes/tools/patternizer/callback-parity/receivers/m3jdk21/target/surefire-reports/
-            ${{ runner.temp }}/callback-source/synexia-openrewrite-recipes/tools/patternizer/callback-parity/receivers/m3jdk21/target/sdk-results/
-            ${{ runner.temp }}/callback-source/synexia-openrewrite-recipes/tools/patternizer/callback-parity/receivers/m3jdk21/target/hosted-fixture/*.json
-            ${{ runner.temp }}/callback-source/synexia-openrewrite-recipes/tools/patternizer/callback-parity/receivers/m3jdk21/target/hosted-fixture/*.jsonl
-            ${{ runner.temp }}/callback-source/synexia-openrewrite-recipes/tools/patternizer/callback-parity/receivers/m3jdk21/target/hosted-fixture/*.log
+            ${{ runner.temp }}/callback-source/m3-openrewrite-recipes/tools/patternizer/callback-parity/receivers/m3jdk21/target/surefire-reports/
+            ${{ runner.temp }}/callback-source/m3-openrewrite-recipes/tools/patternizer/callback-parity/receivers/m3jdk21/target/sdk-results/
+            ${{ runner.temp }}/callback-source/m3-openrewrite-recipes/tools/patternizer/callback-parity/receivers/m3jdk21/target/hosted-fixture/*.json
+            ${{ runner.temp }}/callback-source/m3-openrewrite-recipes/tools/patternizer/callback-parity/receivers/m3jdk21/target/hosted-fixture/*.jsonl
+            ${{ runner.temp }}/callback-source/m3-openrewrite-recipes/tools/patternizer/callback-parity/receivers/m3jdk21/target/hosted-fixture/*.log
       - name: Retain provisioned offline toolchain for independent replay
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

@@ -197,9 +197,9 @@
   "recipe": {
     "canonical_source_pin": "192eb86b7ba87fd93ba5c4701a31ed65d224a876",
     "engine_modified_by_recovery": false,
-    "existing_owner": "synexia-openrewrite-recipes/recipes/m3-jackson-jmod-20261018",
+    "existing_owner": "m3-openrewrite-recipes/recipes/m3-jackson-jmod-20261018",
     "materialization": "Actual OpenRewrite SDK Results, admitted by the existing receiver",
-    "name": "com.synexia.m3jdk.JacksonJmod20261018",
+    "name": "jdk.internal.m3.m3jdk.JacksonJmod20261018",
     "repository": "hsoliwal/com.synexia"
   },
   "schema": "M3_JACKSON_PR1289_ACTIVE_RECOVERY_ACCEPTANCE_V1",

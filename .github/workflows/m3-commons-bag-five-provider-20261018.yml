@@ -32,7 +32,7 @@ jobs:
           from pathlib import Path
           import hashlib
           base=Path('m3/collections')
-          resources=base/'qualification/m3-commons-bag-20261018/recipe/src/main/resources/com/synexia/rewrite/m3-commons-bag-20261018'
+          resources=base/'qualification/m3-commons-bag-20261018/recipe/src/main/resources/jdk/internal/m3/rewrite/m3-commons-bag-20261018'
           entries=[
             ('M3ApacheBag.java.txt','interop/src/main/java/com/m3/collections/interop/M3ApacheBag.java','5ff51272c4fd48ef11a09b9138ac2329392bb2a70e2a4fe43fab2889909d224f'),
             ('M3ApacheBagContractTest.java.txt','interop/src/test/java/com/m3/collections/interop/M3ApacheBagContractTest.java','737dba455e469117b94cd82a48458bcbe2e4c1fd038b0beb578dcc00ccc1982a')

@@ -7,6 +7,6 @@
   "-Xlint:all",
   "-Werror",
   "-d",
-  "/workspace/scratch/87fb3604f641/m3-implementation/collections-lane/synexia/synexia-openrewrite-recipes/recipe-crates/m3-object-base-vtable-20261018/target/runtime-classes",
-  "/workspace/scratch/87fb3604f641/m3-implementation/collections-lane/synexia/synexia-openrewrite-recipes/recipe-crates/m3-object-base-vtable-20261018/contract/M3ObjectBaseVtableContract.java"
+  "/workspace/scratch/87fb3604f641/m3-implementation/collections-lane/synexia/m3-openrewrite-recipes/recipe-crates/m3-object-base-vtable-20261018/target/runtime-classes",
+  "/workspace/scratch/87fb3604f641/m3-implementation/collections-lane/synexia/m3-openrewrite-recipes/recipe-crates/m3-object-base-vtable-20261018/contract/M3ObjectBaseVtableContract.java"
 ]

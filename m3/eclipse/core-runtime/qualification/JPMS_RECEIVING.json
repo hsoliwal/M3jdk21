@@ -2,7 +2,7 @@
   "schema": "M3_ECLIPSE_PROGRESS_JPMS_RECEIVING_V1",
   "canonical_repository": "hsoliwal/com.synexia",
   "canonical_commit": "34a2477b65e68c3ad1e91b4200b8bae2f736729c",
-  "dataset": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/vpt-eclipse-progress-20261026",
+  "dataset": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/vpt-eclipse-progress-20261026",
   "original_product_parent": "dffb0b92724ea02e0ef4e2b17ede4ff2462f4c60",
   "source": ".github/workflows/m3-eclipse-progress-forward-20261017.yml",
   "source_before_git_blob": "59bb88b5e483974ea7dbb28782795d0c697ccdef",

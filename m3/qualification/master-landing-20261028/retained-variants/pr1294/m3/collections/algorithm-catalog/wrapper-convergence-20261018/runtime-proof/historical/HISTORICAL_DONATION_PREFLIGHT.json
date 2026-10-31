@@ -6,7 +6,7 @@
   "unchanged_guard_inputs": {
     "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/verify_donation.py": "2e98edda477e2805586ffced0749c62bd2d9674727e84c65cc8b2511fbb622cb",
     "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/m3_object_state_offset_receipt.py": "5c238acdff67e47e0284eabfc1ea7a585c8f3e44d9d78e98f272df9935d84fd8",
-    "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/synexia-donation.json": "50df53dec7be6b25b0f84c1635fa3abbe1391dc8a9c28c4ad0c993b0aa5ed964",
+    "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/m3-donation.json": "50df53dec7be6b25b0f84c1635fa3abbe1391dc8a9c28c4ad0c993b0aa5ed964",
     "/workspace/scratch/8762dba320ce/M3JDK21/m3/collections/qualification/installed-source-enum-set-20261014.tsv": "046e3aa7f4d9523a72657942fac62bcb7d7bb6eaafb928dbe1c1d87afed1252c"
   },
   "guard_recipe_paths_unchanged_since": "07ba6e383343d32c83cfdaf641387bbe72bf325d",

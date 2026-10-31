@@ -5,7 +5,7 @@
     "junit_passed": 13
   },
   "canonical_evidence_commit": "6c0b31b126c050c1c5b48e7ec51630ef8adef3df",
-  "canonical_evidence_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/viewport-frame-tree-receiving-20261027",
+  "canonical_evidence_path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/viewport-frame-tree-receiving-20261027",
   "canonical_evidence_url": "https://github.com/hsoliwal/com.synexia/tree/6c0b31b126c050c1c5b48e7ec51630ef8adef3df/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/viewport-frame-tree-receiving-20261027/assembled",
   "canonical_repository": "hsoliwal/com.synexia",
   "canonical_source_commit": "7e57e961d4ae02d1aa99199362475c10c7230b82",

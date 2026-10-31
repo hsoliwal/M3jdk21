@@ -5,14 +5,14 @@
         "Rfc"
       ],
       "id": "Forward",
-      "recipe": "com.synexia.m3.Rf0Forward"
+      "recipe": "jdk.internal.m3.Rf0Forward"
     },
     {
       "families": [
         "Rfc"
       ],
       "id": "Reverse",
-      "recipe": "com.synexia.m3.Rf0Reverse"
+      "recipe": "jdk.internal.m3.Rf0Reverse"
     }
   ],
   "schema": "synexia.rf0.composition-orders/1",

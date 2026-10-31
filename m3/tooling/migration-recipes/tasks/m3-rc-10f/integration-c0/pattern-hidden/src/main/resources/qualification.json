@@ -18,7 +18,7 @@
       "id": "Phc",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ph0-phc/manifest.tsv",
       "manifestSHA256": "dc47ddb048af9ca88df53439d6609ceb21c4f8cf86f20ec5cac92fb1d4a255d4",
-      "namedRecipe": "com.synexia.m3.Ph0Phc",
+      "namedRecipe": "jdk.internal.m3.Ph0Phc",
       "targets": [
         {
           "afterBytes": 79664,
@@ -71,14 +71,14 @@
         "Phc"
       ],
       "id": "Forward",
-      "recipe": "com.synexia.m3.Ph0Forward"
+      "recipe": "jdk.internal.m3.Ph0Forward"
     },
     {
       "families": [
         "Phc"
       ],
       "id": "Reverse",
-      "recipe": "com.synexia.m3.Ph0Reverse"
+      "recipe": "jdk.internal.m3.Ph0Reverse"
     }
   ],
   "ownerSHA256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",

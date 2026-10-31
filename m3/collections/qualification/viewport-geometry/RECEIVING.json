@@ -6,7 +6,7 @@
   "canonical_pr": 12855,
   "canonical_commit": "7b0a5a072b6c6db16b8861bbc6a1307f40f88840",
   "canonical_dataset": "vpt-geometry-20261027",
-  "canonical_named_recipe": "com.synexia.m3.ViewportGeometry20261027",
+  "canonical_named_recipe": "jdk.internal.m3.ViewportGeometry20261027",
   "canonical_engine": "M3HashPinnedJavaSnapshotRecipe",
   "product_owner": "m3/collections/src/main/java/com/m3/collections/M3SparseExtents.java",
   "source_before_git_blob": "650356bcdffa372328e5a79f4f596a887fe5f447",

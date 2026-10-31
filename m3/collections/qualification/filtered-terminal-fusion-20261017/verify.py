@@ -6,7 +6,7 @@ import hashlib
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[3]
-R = HERE / "src/main/resources/com/synexia/rewrite/hash-pinned-java/filtered-terminal-fusion"
+R = HERE / "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/filtered-terminal-fusion"
 
 def digest(p):
     if not p.is_file() or p.is_symlink():

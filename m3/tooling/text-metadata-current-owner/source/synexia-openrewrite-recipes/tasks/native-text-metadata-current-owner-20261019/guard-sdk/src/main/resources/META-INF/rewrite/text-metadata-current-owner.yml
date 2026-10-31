@@ -1,9 +1,0 @@
-# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
-# SPDX-License-Identifier: Apache-2.0
----
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.rewrite.TextMetadataCurrentOwner
-displayName: Verify the exact current TextMetadata JNI source tuple
-description: Exact six-KEEP source custody; grants no native or M3 promotion authority.
-recipeList:
-  - com.synexia.rewrite.M3TextMetadataCurrentOwnerRecipe

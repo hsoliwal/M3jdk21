@@ -1,6 +1,6 @@
 {
   "targetBase": "5cb893e1ab224236b33d41132a31f604d89a4e12",
-  "canonicalRecipe": "com.synexia.m3.ParserFilterRefinement",
+  "canonicalRecipe": "jdk.internal.m3.ParserFilterRefinement",
   "canonicalPR": "https://github.com/hsoliwal/com.synexia/pull/12511",
   "strictTreeMapCorpusAcceptance": true,
   "fullProductAcceptance": false,

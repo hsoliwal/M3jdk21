@@ -7,7 +7,7 @@ import sys
 
 HERE=Path(__file__).resolve().parent
 ROOT=HERE.parents[4]
-RESOURCE=ROOT/"m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-spring-case-indexed-20261018"
+RESOURCE=ROOT/"m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-spring-case-indexed-20261018"
 TARGETS={
     "m3/collections/interop/src/main/java/com/m3/collections/interop/M3SpringCaseInsensitiveMap.java":"24e2d7542cb86f777f90f99ae2db1cbc18b3fa5bb46441fd66e2c0461d09c7d8",
     "m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringCaseInsensitiveContract.java":"e62a783c8d389e10627a8226cbee239ae837fdafd06893f403d52b5854146767",

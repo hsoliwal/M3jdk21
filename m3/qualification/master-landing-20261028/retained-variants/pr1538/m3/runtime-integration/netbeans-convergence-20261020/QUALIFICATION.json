@@ -3,7 +3,7 @@
   "status": "SCOPED_JAVA_JNI_OWNER_PROOFS_PASS_FULL_SOURCE_IMAGE_PENDING",
   "qualification_baseline": "df532e779056dbec203dde20030657c3d144f5b5",
   "canonical_repository": "hsoliwal/com.synexia",
-  "canonical_path": "synexia-openrewrite-recipes/recipes/netbeans-convergence-20261020",
+  "canonical_path": "m3-openrewrite-recipes/recipes/netbeans-convergence-20261020",
   "final_custody_and_publication_receipt": "evidence/FINAL_RESULT.json in the canonical commit pinned by the receiving PR",
   "collections": {
     "status": "PASS",

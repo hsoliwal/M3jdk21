@@ -7,7 +7,7 @@ import sys
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[4]
-CANONICAL = HERE / "recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-five-eclipse-multimaps-20261017"
+CANONICAL = HERE / "recipe/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-five-eclipse-multimaps-20261017"
 
 def read_checked(path: Path):
     if path.is_symlink() or not path.is_file():

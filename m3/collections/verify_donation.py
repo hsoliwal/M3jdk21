@@ -39,7 +39,7 @@ def unique_json_object(pairs):
     return result
 
 
-def read_donation_packet(path=HERE / 'synexia-donation.json'):
+def read_donation_packet(path=HERE / 'm3-donation.json'):
     """Read all nested objects without silently accepting duplicate JSON keys."""
     return json.loads(path.read_text(), object_pairs_hook=unique_json_object)
 
@@ -376,7 +376,7 @@ def main():
                            'com.m3.collections.' + name])
     resources = target / 'module-resources/META-INF'
     resources.mkdir(parents=True)
-    names = ('LICENSE', 'NOTICE', 'provenance.json', 'synexia-donation.json', 'SYNEXIA-DONATION-NOTICE.txt', 'name-mapping.json')
+    names = ('LICENSE', 'NOTICE', 'provenance.json', 'm3-donation.json', 'SYNEXIA-DONATION-NOTICE.txt', 'name-mapping.json')
     for name in names:
         shutil.copyfile(HERE / name, resources / name)
     jar = target / 'm3-collections.jar'

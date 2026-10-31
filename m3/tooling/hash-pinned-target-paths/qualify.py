@@ -17,7 +17,7 @@ ROOT = Path(os.environ["M3_PROOF_ROOT"]).resolve()
 ARTIFACTS = ROOT / "artifacts"
 PREFIX = "m3/tooling/hash-pinned-target-paths/"
 WORKFLOW = ".github/workflows/m3-hash-pinned-target-paths.yml"
-SUITE = "com.synexia.rewrite.M3HashPinnedTargetPathsCompatRecipeTest"
+SUITE = "jdk.internal.m3.rewrite.M3HashPinnedTargetPathsCompatRecipeTest"
 METHODS = ["bothPartialStatesRoundTripAndReachFixedPointsInBothOrders",
            "everyOwnerRefusesDriftMissingAndDuplicateWithoutMutation",
            "canonicalAccessorPreservesAllReceivingModes"]
@@ -67,15 +67,15 @@ def write(name, value):
     destination.write_text(json.dumps(value, indent=2) + "\n", encoding="utf-8")
 
 
-TARGET_PROVIDER = "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
+TARGET_PROVIDER = "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
 SOURCE_GIT = {
-    "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java": "d58ca50dfaeb60f581b64f43545e688aca5c6530",
-    "m3/tooling/migration-recipes/src/test/java/com/synexia/rewrite/M3ObjectSlotIndexSnapshot20261017RecipeTest.java": "eb4a10e788530074df0616dcf601debb7618a4ee",
-    "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectIndexSnapshot.java.txt": "a212ea57297199900add9e1cc3aef1088abc9d1c",
-    "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexSelfTest.java.txt": "b57580a60c3692d64c34cadab43e6be82d24331d",
-    "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexTest.java.txt": "c2eba295f79b0db87e55703d73324323237165b3",
-    "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotStore28.java.txt": "0c65469024118a25399f9581a1be2769078fa087",
-    "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/manifest.tsv": "1813be7b3196f384682ee9fd0a6661e9ec84bb2f"
+    "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java": "d58ca50dfaeb60f581b64f43545e688aca5c6530",
+    "m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3ObjectSlotIndexSnapshot20261017RecipeTest.java": "eb4a10e788530074df0616dcf601debb7618a4ee",
+    "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectIndexSnapshot.java.txt": "a212ea57297199900add9e1cc3aef1088abc9d1c",
+    "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexSelfTest.java.txt": "b57580a60c3692d64c34cadab43e6be82d24331d",
+    "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexTest.java.txt": "c2eba295f79b0db87e55703d73324323237165b3",
+    "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotStore28.java.txt": "0c65469024118a25399f9581a1be2769078fa087",
+    "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/manifest.tsv": "1813be7b3196f384682ee9fd0a6661e9ec84bb2f"
 }
 AFTER_GIT = {**SOURCE_GIT, TARGET_PROVIDER: "0b944b326d1911661476b1ae06556869c2778282"}
 
@@ -242,7 +242,7 @@ def report():
     if tuple(module["COMPILED_PROVIDERS"]) != expected_providers:
         raise RuntimeError("exact four Java21 source providers required")
     for name in expected_providers:
-        path = regular(SDK / ("target/classes/com/synexia/rewrite/" + name + ".class"))
+        path = regular(SDK / ("target/classes/jdk/internal/m3/rewrite/" + name + ".class"))
         raw = path.read_bytes()
         item = sdk["compiledProviders"][name]
         if (len(raw) <= 8 or raw[:4] != b"\xca\xfe\xba\xbe" or int.from_bytes(raw[6:8], "big") != 65

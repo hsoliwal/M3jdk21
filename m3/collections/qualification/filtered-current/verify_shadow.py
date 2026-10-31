@@ -60,7 +60,7 @@ def checked(root: Path, relative: str) -> Path:
 
 
 def manifests(crate: Path, dataset: str) -> list[tuple[str, str, str, bytes, bytes | None]]:
-    lane_root = crate / "datasets" / dataset / "resources/com/synexia/rewrite"
+    lane_root = crate / "datasets" / dataset / "resources/jdk/internal/m3/rewrite"
     meta = json.loads((crate / "datasets" / dataset / "DATASET.json").read_text())
     if (dataset != RECIPE_NAME or meta["dataset"] != RECIPE_NAME
             or meta["targets"] != TARGET_COUNT or meta["java_targets"] != 5

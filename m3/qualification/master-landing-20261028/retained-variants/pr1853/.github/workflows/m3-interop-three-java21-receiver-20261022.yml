@@ -60,7 +60,7 @@ jobs:
                   b'blob ' + str(len(data)).encode() + b'\0' + data).hexdigest()
               if actual_sha != after_sha or actual_blob != after_blob:
                   raise SystemExit('generated source changed: ' + path)
-              if recipe != 'com.synexia.m3.M3InteropThreeJava21Diagnostics20261022':
+              if recipe != 'jdk.internal.m3.M3InteropThreeJava21Diagnostics20261022':
                   raise SystemExit('unattributed result: ' + path)
               declared = len(re.findall(r'@Test\b', data.decode('utf-8')))
               if declared != int(methods) or state != 'PENDING_JAVA21_VENDOR_CI':

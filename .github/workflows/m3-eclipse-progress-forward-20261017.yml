@@ -5,7 +5,7 @@ on:
     paths:
       - 'm3/eclipse/core-runtime/**'
       - 'm3/collections/src/main/java/**'
-      - 'm3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
+      - 'm3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
       - '.github/workflows/m3-eclipse-progress-forward-20261017.yml'
   workflow_dispatch:
 permissions:
@@ -36,7 +36,7 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           import hashlib
-          base = Path('m3/eclipse/core-runtime/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/eclipse-m3-progress-forward')
+          base = Path('m3/eclipse/core-runtime/recipe/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/eclipse-m3-progress-forward')
           rows = [s.split('\t') for s in (base / 'manifest.tsv').read_text().splitlines() if s and not s.startswith('#')]
           assert len(rows) == 2
           for relative, before, digest, name in rows:
@@ -53,7 +53,7 @@ jobs:
           python3 - <<'PY'
           import hashlib
           from pathlib import Path
-          root = Path("m3/eclipse/core-runtime/recipe/src/test/resources/com/synexia/rewrite/hash-pinned-java/eclipse-m3-scheduled-tasks-20261021")
+          root = Path("m3/eclipse/core-runtime/recipe/src/test/resources/jdk/internal/m3/rewrite/hash-pinned-java/eclipse-m3-scheduled-tasks-20261021")
           rows = [line.split("\t") for line in (root / "manifest.tsv").read_text(encoding="utf-8").splitlines()
                   if line and not line.startswith("#")]
           assert len(rows) == 2, rows
@@ -114,7 +114,7 @@ jobs:
           import xml.etree.ElementTree as ET
           cases = {
               Path("m3/eclipse/core-runtime/recipe/target/surefire-reports/"
-                   "TEST-com.synexia.rewrite.M3EclipseScheduledTasksRecipeTest.xml"): 4,
+                   "TEST-jdk.internal.m3.rewrite.M3EclipseScheduledTasksRecipeTest.xml"): 4,
               Path("m3/eclipse/core-runtime/target/surefire-reports/"
                    "TEST-com.m3.eclipse.runtime.M3EclipseScheduledTasksTest.xml"): 9
           }

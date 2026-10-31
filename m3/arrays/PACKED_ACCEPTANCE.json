@@ -4,12 +4,12 @@
     "corrected_image_same_precompiled_witness": "PASS",
     "correction": "The existing JMOD packer forwards native --do-not-resolve-by-default only when explicitly selected; both published and generated descriptor lanes retain their old default behavior and --d date alias.",
     "initial_image_classpath_witness": "FAIL_RETAINED",
-    "installed_runtime_evidence": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/default-resolution-regression/OBSERVATION.json",
+    "installed_runtime_evidence": "m3-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/default-resolution-regression/OBSERVATION.json",
     "installed_runtime_evidence_sha256": "82a047c9288e9090645be0594e9cbce2fe81750950079860eb68551d66f66ff5",
     "jmod_entries_equivalent_except_module_info": true,
     "jmod_entry_equivalence_sha256": "8cffec219e6e6f01a46380eb01ce276eb9e5baa75c4438c2093df527fccfc074",
     "permanent_real_jdk_regressions": 4,
-    "regression_evidence": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/c05-jmod-resolution/FINAL_RESULTS.json",
+    "regression_evidence": "m3-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/c05-jmod-resolution/FINAL_RESULTS.json",
     "regression_evidence_sha256": "c9ce8b51d9df5512f18c7c545b4e23a1c32779e4f8db869d47aba1bca2cea580",
     "source_image_witness": "PASS",
     "status": "PASS"
@@ -27,7 +27,7 @@
   "global_receiving_stage_advanced": false,
   "implementation_source_anchor": {
     "commit": "08d257942d1f30ee30aa66146f96a673e75bdb36",
-    "recipe": "com.synexia.rewrite.M3JdkPackedIntegersRecipe",
+    "recipe": "jdk.internal.m3.rewrite.M3JdkPackedIntegersRecipe",
     "repository": "hsoliwal/com.synexia",
     "role": "Exact compiled Java/native product source lineage. C05 packaging is pinned separately by content; the final receiving recipe execution and source commit are bound independently."
   },
@@ -297,7 +297,7 @@
       },
       "source": "m3/arrays/src/test/java/com/m3/arrays/packed/PackedIntArrayTest.java",
       "status": "PASS",
-      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/current-source-native/clean-source-sdk-native-03.log",
+      "stdout_path": "m3-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/current-source-native/clean-source-sdk-native-03.log",
       "stdout_sha256": "f23349aa8799c24e95b5f24b05c2c8f087cba30d321aba5eeb7adfb982fe93ea"
     },
     {
@@ -328,7 +328,7 @@
       },
       "source": "m3/arrays/src/test/java/com/m3/arrays/packed/MemoryProbe.java",
       "status": "PASS",
-      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/memory/run.log",
+      "stdout_path": "m3-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/memory/run.log",
       "stdout_sha256": "801aa71790b791ec534ac7d49ef0ee98dc746bc1a470c03f66a8bf491b61139b"
     },
     {
@@ -355,7 +355,7 @@
       },
       "source": "m3/arrays/src/test/java/com/m3/arrays/packed/VIntTest.java",
       "status": "PASS",
-      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/current-source-native/clean-source-sdk-native-03.log",
+      "stdout_path": "m3-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/current-source-native/clean-source-sdk-native-03.log",
       "stdout_sha256": "f23349aa8799c24e95b5f24b05c2c8f087cba30d321aba5eeb7adfb982fe93ea"
     },
     {
@@ -382,7 +382,7 @@
       },
       "source": "m3/arrays/src/test/java/com/m3/arrays/M3PackedNativeTest.java",
       "status": "PASS",
-      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/current-source-native/clean-source-sdk-native-03.log",
+      "stdout_path": "m3-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/current-source-native/clean-source-sdk-native-03.log",
       "stdout_sha256": "f23349aa8799c24e95b5f24b05c2c8f087cba30d321aba5eeb7adfb982fe93ea"
     },
     {
@@ -402,7 +402,7 @@
       },
       "source": "m3/arrays/src/main/native/tests/m3_packed_codec_checks.c",
       "status": "PASS",
-      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/current-source-native/LastTest.log",
+      "stdout_path": "m3-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/current-source-native/LastTest.log",
       "stdout_sha256": "2313b4fa601d841038c720744b98ecf92bfc28ac8d8ca3446838e86643b244e6"
     },
     {
@@ -422,7 +422,7 @@
       },
       "source": "m3/arrays/src/main/native/tests/m3_packed_codec_jni_fault_test.c",
       "status": "PASS",
-      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/current-source-native/LastTest.log",
+      "stdout_path": "m3-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/current-source-native/LastTest.log",
       "stdout_sha256": "2313b4fa601d841038c720744b98ecf92bfc28ac8d8ca3446838e86643b244e6"
     },
     {
@@ -445,7 +445,7 @@
         "installed_product_jmod": "4144428e7b9b2224d67542ead1073325ac4a94757fa9c3dc8f70d20f7535a5dc"
       },
       "status": "PASS",
-      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/installed-acceptance/installed.log",
+      "stdout_path": "m3-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/installed-acceptance/installed.log",
       "stdout_sha256": "bebadb6e2f68b9dd2d8d41f74f3ade6f653c6e2774fd01861a2bddddc19e073d"
     },
     {
@@ -469,7 +469,7 @@
         "installed_product_jmod": "4144428e7b9b2224d67542ead1073325ac4a94757fa9c3dc8f70d20f7535a5dc"
       },
       "status": "PASS",
-      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/installed-acceptance/legacy.log",
+      "stdout_path": "m3-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/installed-acceptance/legacy.log",
       "stdout_sha256": "cfda59abc63eadab0b0d95f84c1a25c6dedb6286c492d124ec21b89e9c3161dd"
     },
     {
@@ -493,7 +493,7 @@
         "installed_product_jmod": "4144428e7b9b2224d67542ead1073325ac4a94757fa9c3dc8f70d20f7535a5dc"
       },
       "status": "PASS",
-      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/installed-acceptance/resource.log",
+      "stdout_path": "m3-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/installed-acceptance/resource.log",
       "stdout_sha256": "3583b66e930502b88f71fba2377871cdd268fb6592687130070367f896e22e18"
     },
     {
@@ -513,7 +513,7 @@
         "installed_product_jmod": "4144428e7b9b2224d67542ead1073325ac4a94757fa9c3dc8f70d20f7535a5dc"
       },
       "status": "PASS",
-      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/installed-acceptance/missing-native.log",
+      "stdout_path": "m3-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/installed-acceptance/missing-native.log",
       "stdout_sha256": "30aed137b2b9dd83fd47a62edc6ba073b866a1fe348482aee86124cb4416edc3"
     },
     {
@@ -535,7 +535,7 @@
         "selected_old_native_library": "e9a8b2b5e9e28ca12b47c4c5cd9b34a7b2b849d6d1a7258b86a40b690c80aa3c"
       },
       "status": "PASS",
-      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/installed-acceptance/old-native.log",
+      "stdout_path": "m3-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/installed-acceptance/old-native.log",
       "stdout_sha256": "bbf9ddb7911e9e5846da87332ab3ffcdbeb999c1440703b0c3cfdcfb523a9176"
     },
     {
@@ -557,7 +557,7 @@
         "selected_null_result_fixture_library": "7d97c766fcfb2eeab41b9de39d07bd580960bb9a8d38b35b672819be277fdb76"
       },
       "status": "PASS",
-      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/installed-acceptance/null-native-fixture.log",
+      "stdout_path": "m3-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/installed-acceptance/null-native-fixture.log",
       "stdout_sha256": "1c36359cae6e4a6cef2cd5712b203d40e7bd8ef7b1781f6fdb799460361a0cf2"
     },
     {
@@ -575,7 +575,7 @@
         "original_classpath_witness": "6ffab6596d99cb3dc5672fbb8593841b7dd9008530ed76527265da4c9eb76ad2"
       },
       "status": "PASS",
-      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/default-resolution-regression/confirmed-classpath.stdout",
+      "stdout_path": "m3-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/default-resolution-regression/confirmed-classpath.stdout",
       "stdout_sha256": "899873b87462ff8ac70409250c5a151f710c52bb17e8fa9db49c7715208520c3"
     },
     {
@@ -592,7 +592,7 @@
         "original_classpath_witness": "6ffab6596d99cb3dc5672fbb8593841b7dd9008530ed76527265da4c9eb76ad2"
       },
       "status": "PASS",
-      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/default-resolution-regression/confirmed-default-resolution.stdout",
+      "stdout_path": "m3-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/default-resolution-regression/confirmed-default-resolution.stdout",
       "stdout_sha256": "2f91deebdf4731a2515262edd7d61578f9fa0c88a11ea9a0624fb5b46fd60c63"
     },
     {
@@ -609,7 +609,7 @@
         "original_classpath_witness": "6ffab6596d99cb3dc5672fbb8593841b7dd9008530ed76527265da4c9eb76ad2"
       },
       "status": "PASS",
-      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/default-resolution-regression/installed-module-resolution-attribute.stdout",
+      "stdout_path": "m3-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/default-resolution-regression/installed-module-resolution-attribute.stdout",
       "stdout_sha256": "a6e52637a4c1c4a3f8cd476f50d80ead18612a6aff2c58ffa0f8e77f12f95ffe"
     },
     {
@@ -644,7 +644,7 @@
         "/tmp/m3jdk21-native-packaging-1d203c91-20261029/images/jdk/release": "8c3003c4fe0b77486ceaf785c0160fd5755db18ad198d5a636e3cb82f85a2631"
       },
       "status": "PASS",
-      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/c05-jmod-resolution/real-jdk-regression.log",
+      "stdout_path": "m3-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/c05-jmod-resolution/real-jdk-regression.log",
       "stdout_sha256": "6a4204ec7ecd8f20b23bcaac0a5e03c9ae3e8642f63f87fb0eeb5cd9657d3c96",
       "working_directory": "/tmp/m3jdk-packed-final-20261029"
     }

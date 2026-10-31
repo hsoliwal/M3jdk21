@@ -26,7 +26,7 @@ jobs:
           set -eu
           mvn -B -ntp -f m3/collections/qualification/m3-state-mask-arrays-20261017/recipe/pom.xml verify
           java -cp m3/collections/qualification/m3-state-mask-arrays-20261017/recipe/target/classes \
-            com.synexia.m3.M3StateMaskArraysRecipe --check .
+            jdk.internal.m3.M3StateMaskArraysRecipe --check .
       - name: Compile against unchanged M3 mask engine and run Java differential tests
         run: |
           set -eu

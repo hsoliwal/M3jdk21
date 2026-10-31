@@ -41,7 +41,7 @@ def main() -> int:
                 or not re.fullmatch(r"hsoliwal/[A-Za-z0-9._-]+", facts["repository"])
                 or not re.fullmatch(r"[0-9a-f]{64}", facts["root_sha256"])
                 or not re.fullmatch(r"[0-9a-f]{40}", facts["canonical_commit"])
-                or not facts["canonical_recipe"].startswith("com.synexia.eclipse.EstateAst")
+                or not facts["canonical_recipe"].startswith("jdk.internal.m3.eclipse.EstateAst")
                 or facts["status"] != "HOLD_NATIVE_AND_SEMANTIC_GATES"):
             raise ValueError("source receiver contract or owner changed")
         source = root / facts["root_path"]

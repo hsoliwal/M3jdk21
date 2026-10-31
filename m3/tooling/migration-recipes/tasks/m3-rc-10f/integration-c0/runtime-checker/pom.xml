@@ -98,7 +98,7 @@
           <forkCount>1</forkCount>
           <reuseForks>true</reuseForks>
           <includes>
-            <include>com/synexia/rewrite/Rf0RecipeTest.java</include>
+            <include>jdk/internal/m3/rewrite/Rf0RecipeTest.java</include>
           </includes>
           <systemPropertyVariables>
             <junit.jupiter.execution.parallel.enabled>false</junit.jupiter.execution.parallel.enabled>
@@ -142,7 +142,7 @@
                 </goals>
                 <configuration>
                   <skip>${m3.recipe.boot.skip}</skip>
-                  <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+                  <mainClass>jdk.internal.m3.prstack.M3RecipeBoot</mainClass>
                   <includeProjectDependencies>false</includeProjectDependencies>
                   <includePluginDependencies>true</includePluginDependencies>
                   <arguments>

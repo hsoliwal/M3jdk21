@@ -1,6 +1,6 @@
 {
   "baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
-  "resource_root": "/dev/shm/m3jdk21-work/recipe-candidates/src/main/resources/com/synexia/rewrite/m3jdk21-integrated-utilities-20261018",
+  "resource_root": "/dev/shm/m3jdk21-work/recipe-candidates/src/main/resources/jdk/internal/m3/rewrite/m3jdk21-integrated-utilities-20261018",
   "manifest_sha256": "a7ea777197248e5430680dd599004ca815b881890bf7a746cb156ad79950301d",
   "source_intakes": [
     {

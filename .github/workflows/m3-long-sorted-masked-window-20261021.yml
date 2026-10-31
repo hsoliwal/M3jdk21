@@ -8,7 +8,7 @@ on:
       - 'm3/collections/src/test/java/com/m3/collections/M3LongSortedMaskedWindow*'
       - 'm3/collections/qualification/long-sorted-masked-window-20261021/**'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-long-sorted-masked-window-20261021.yml'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-long-sorted-masked-window-20261021/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-long-sorted-masked-window-20261021/**'
       - '.github/workflows/m3-long-sorted-masked-window-20261021.yml'
   workflow_dispatch:
 permissions:

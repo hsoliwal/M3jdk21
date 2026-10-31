@@ -1,2 +1,0 @@
-Exception in thread "main" java.lang.AssertionError: NAVIGATION/JDK_ORACLE_MISMATCH/mutable-range-forward expected=4 observed=java.lang.IllegalArgumentException
-	at com.synexia.common.collections.M3WrapperNavigationCounterexample.main(M3WrapperNavigationCounterexample.java:54)

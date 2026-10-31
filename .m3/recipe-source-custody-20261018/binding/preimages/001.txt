@@ -6,7 +6,7 @@ Status: **source-pin refresh only; no source materialization or target promotion
 Canonical donor:
 - repository: `hsoliwal/com.synexia`
 - revision: `8959c18722d5bca20cf324de8d9fa70640b7c5c6`
-- canonical recipe manifest: `synexia-openrewrite-recipes/CANONICAL_RECIPE_HOME.tsv`
+- canonical recipe manifest: `m3-openrewrite-recipes/CANONICAL_RECIPE_HOME.tsv`
 - manifest Git blob: `d671e9f0b93535b7eb34b3d7d2be2dc28ca18bed`
 - convergence invariant: `docs/M3-SCALE/invariants/SYNEXIA-PUBLIC-TARGET-CONVERGENCE-1.json`
 - invariant Git blob: `7fe4ff7a9a7e436416cc836f76ea1dd3ed34408c`

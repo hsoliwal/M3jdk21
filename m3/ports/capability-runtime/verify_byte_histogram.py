@@ -91,7 +91,7 @@ def main():
     receipt = {'java': oracle, 'jni': accelerated, 'source_sha256': expected,
                'status': 'JAVA_JNI_PARITY_PASS' if not args.java_only else 'JAVA_ONLY_PASS',
                'full_modified_jdk_jtreg': 'NOT_RUN',
-               'synexia_openrewrite_sdk': 'NOT_RUN',
+               'm3_openrewrite_sdk': 'NOT_RUN',
                'setup_inclusive_performance': 'NOT_RUN'}
     (out / 'REPORT.json').write_text(json.dumps(receipt, sort_keys=True, indent=2) + '\n',
                                      encoding='utf-8')

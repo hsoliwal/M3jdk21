@@ -116,7 +116,7 @@
     "openrewrite": "8.17.1",
     "surefire": "3.2.5",
     "source": {
-      "path": "repo/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/pom.xml",
+      "path": "repo/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/pom.xml",
       "bytes": 16270,
       "sha256": "feb6d0d9b6058016caaed29c00ca9f6dac23d60ec13216c31822bf294ba1cc28"
     }
@@ -757,7 +757,7 @@
     "fixture_mapping": [
       {
         "id": "LIT-ASCII",
-        "source": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/com/synexia/mindex/MIndexDonorLiteralRegressionTest.java",
+        "source": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/jdk/internal/m3/mindex/MIndexDonorLiteralRegressionTest.java",
         "method": "everyAsciiPairEverySeamAndEveryPaddedSliceMatchesTheLiteralOracle",
         "catalogue_ids": [
           "LC-0028",
@@ -800,7 +800,7 @@
       },
       {
         "id": "LIT-UNICODE",
-        "source": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/com/synexia/mindex/MIndexDonorLiteralRegressionTest.java",
+        "source": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/jdk/internal/m3/mindex/MIndexDonorLiteralRegressionTest.java",
         "method": "scalarUnicodeKeepsUtf16AndUtf8PositionsDistinctAcrossEverySeam",
         "catalogue_ids": [
           "LC-0028",
@@ -843,7 +843,7 @@
       },
       {
         "id": "LIT-BOUNDS",
-        "source": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/com/synexia/mindex/MIndexDonorLiteralRegressionTest.java",
+        "source": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/jdk/internal/m3/mindex/MIndexDonorLiteralRegressionTest.java",
         "method": "invalidSlicesAreRejectedBeforeAnOptionalNativeDispatch",
         "catalogue_ids": [
           "JUNIT-FANIN-01"
@@ -865,7 +865,7 @@
       },
       {
         "id": "RX-RESTRICTED",
-        "source": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/com/synexia/mindex/MIndexDonorRegexRegressionTest.java",
+        "source": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/jdk/internal/m3/mindex/MIndexDonorRegexRegressionTest.java",
         "method": "everyRestrictedTokenCombinationMatchesJdkAcrossRepresentations",
         "catalogue_ids": [
           "LC-0010",
@@ -913,7 +913,7 @@
       },
       {
         "id": "RX-STRUCTURED",
-        "source": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/com/synexia/mindex/MIndexDonorRegexRegressionTest.java",
+        "source": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/jdk/internal/m3/mindex/MIndexDonorRegexRegressionTest.java",
         "method": "declaredStructuredPatternsTreatCodeLookingInputAsData",
         "catalogue_ids": [
           "HR-SPECIFIC-STRING",
@@ -967,7 +967,7 @@
       },
       {
         "id": "RX-REFUSAL",
-        "source": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/com/synexia/mindex/MIndexDonorRegexRegressionTest.java",
+        "source": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/jdk/internal/m3/mindex/MIndexDonorRegexRegressionTest.java",
         "method": "validUnsupportedAndOverBudgetPatternsAreExplicitlyRefused",
         "catalogue_ids": [
           "HR-PATTERN-SYNTAX",
@@ -1012,7 +1012,7 @@
       },
       {
         "id": "RX-MALFORMED",
-        "source": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/com/synexia/mindex/MIndexDonorRegexRegressionTest.java",
+        "source": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/jdk/internal/m3/mindex/MIndexDonorRegexRegressionTest.java",
         "method": "malformedPatternsFailSyntaxChecksInsteadOfCountingAsNoMatch",
         "catalogue_ids": [
           "HR-PATTERN-SYNTAX",
@@ -1042,12 +1042,12 @@
     ],
     "test_source_snapshots": [
       {
-        "path": "repo/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/com/synexia/mindex/MIndexDonorLiteralRegressionTest.java",
+        "path": "repo/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/jdk/internal/m3/mindex/MIndexDonorLiteralRegressionTest.java",
         "bytes": 13294,
         "sha256": "ddce76a22c1c4e08725c36595d5f5c232c59c7babb54b96a3d7113e442b59ddc"
       },
       {
-        "path": "repo/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/com/synexia/mindex/MIndexDonorRegexRegressionTest.java",
+        "path": "repo/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/jdk/internal/m3/mindex/MIndexDonorRegexRegressionTest.java",
         "bytes": 9854,
         "sha256": "3c89f1cf945db9a05626cdf96016517f7903687cdfa2348a2d0bad6013727925"
       }
@@ -1109,17 +1109,17 @@
       "sha256": "6b2360fb3c16138ce34bad981e558ecda477c1c342b639c76c3783741a13f186"
     },
     {
-      "path": "repo/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/pom.xml",
+      "path": "repo/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/pom.xml",
       "bytes": 16270,
       "sha256": "feb6d0d9b6058016caaed29c00ca9f6dac23d60ec13216c31822bf294ba1cc28"
     },
     {
-      "path": "repo/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/com/synexia/mindex/MIndexDonorLiteralRegressionTest.java",
+      "path": "repo/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/jdk/internal/m3/mindex/MIndexDonorLiteralRegressionTest.java",
       "bytes": 13294,
       "sha256": "ddce76a22c1c4e08725c36595d5f5c232c59c7babb54b96a3d7113e442b59ddc"
     },
     {
-      "path": "repo/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/com/synexia/mindex/MIndexDonorRegexRegressionTest.java",
+      "path": "repo/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/jdk/internal/m3/mindex/MIndexDonorRegexRegressionTest.java",
       "bytes": 9854,
       "sha256": "3c89f1cf945db9a05626cdf96016517f7903687cdfa2348a2d0bad6013727925"
     }

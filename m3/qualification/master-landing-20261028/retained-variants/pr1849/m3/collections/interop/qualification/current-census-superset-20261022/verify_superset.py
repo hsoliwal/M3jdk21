@@ -59,7 +59,7 @@ COMPILER_TEST_PATHS = (
     TEST + 'M3FiveLibraryKeyRangesTest.java',
     TEST + 'M3FiveProviderFlagSelectionTest.java',
 )
-COMPILER_RECIPE = 'com.synexia.m3.M3Jdk21InteropThreeCompilerAtoms20261022'
+COMPILER_RECIPE = 'jdk.internal.m3.M3Jdk21InteropThreeCompilerAtoms20261022'
 
 
 def admitted_compiler_revisions(receipts: Path) -> dict[str, tuple[str, str, str, str]]:

@@ -4,11 +4,11 @@
   "license": "Apache-2.0",
   "target_repository": "hsoliwal/M3jdk21",
   "target_base_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
-  "synexia_recipe_commit": "83cbf7399396afafa42ec75ecd81e6d2131166da",
-  "synexia_recipe_pr": "https://github.com/hsoliwal/com.synexia/pull/12292",
-  "recipe": "com.synexia.rewrite.M3GuavaArrayValueLists20261018",
+  "m3_recipe_commit": "83cbf7399396afafa42ec75ecd81e6d2131166da",
+  "m3_recipe_pr": "https://github.com/hsoliwal/com.synexia/pull/12292",
+  "recipe": "jdk.internal.m3.rewrite.M3GuavaArrayValueLists20261018",
   "recipe_engine_blob": "3bdeeaea9a212fe0c7d1f544510f87c4cd49eb40",
-  "canonical_proof_path": "synexia-openrewrite-recipes/docs/guava-array-value-lists-20261018/PROOF.json",
+  "canonical_proof_path": "m3-openrewrite-recipes/docs/guava-array-value-lists-20261018/PROOF.json",
   "canonical_proof_sha256": "1b5ac019e764e55237832ab6f2dbe3187999ebe247d5b7898a8dfe258fd7806a",
   "bindings": [
     {

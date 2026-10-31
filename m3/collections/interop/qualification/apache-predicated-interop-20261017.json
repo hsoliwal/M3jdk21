@@ -4,7 +4,7 @@
   "status": "DRAFT_HOLD",
   "canonical_repo": "hsoliwal/com.synexia",
   "canonical_pr": "https://github.com/hsoliwal/com.synexia/pull/12122",
-  "canonical_recipe": "com.synexia.m3.Jdk21ApachePredicatedInterop20261017",
+  "canonical_recipe": "jdk.internal.m3.Jdk21ApachePredicatedInterop20261017",
   "canonical_source_base": "892e3f6c51d78bc0948e8a8cf736055b4c70eafa",
   "target_repo": "hsoliwal/M3jdk21",
   "target_base": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",

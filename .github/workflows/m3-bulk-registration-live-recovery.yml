@@ -8,7 +8,7 @@ on:
       - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3BulkLiveRegistrationRecoveryRecipe.java'
       - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/m3-bulk-live-registration-recovery/**'
       - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3BulkLiveRegistrationRecoveryRecipeTest.java'
-      - 'm3/synexia-import/pure-int-recipe-custody/**'
+      - 'm3/m3-import/pure-int-recipe-custody/**'
       - 'm3/tooling/migration-recipes/pom.xml'
       - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3BulkRegistrationCiBootstrapRecipe.java'
       - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3BulkRegistrationCiBootstrapRecipeTest.java'
@@ -38,7 +38,7 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Install pinned Synexia recipe custody
-        run: bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
+        run: bash m3/m3-import/pure-int-recipe-custody/install.sh "$PWD"
       - run: |
           mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3BulkLiveRegistrationRecoveryRecipeTest,M3BulkRegistrationCiBootstrapRecipeTest,M3PureIntPublishedDepsReceiverRecipeTest test
       - run: |

@@ -89,7 +89,7 @@ def verify_recipe() -> None:
         "canonical_repository": "hsoliwal/com.synexia",
         "canonical_source_commit": SOURCE_COMMIT,
         "canonical_source_pr": 9778,
-        "source_selection_recipe": "com.synexia.rewrite.M3CollectionFacadeWave1",
+        "source_selection_recipe": "jdk.internal.m3.rewrite.M3CollectionFacadeWave1",
         "target_repository": "hsoliwal/M3jdk21",
         "mode": "ISOLATED_PORT_ONLY",
         "first_party_license": "Apache-2.0",
@@ -101,7 +101,7 @@ def verify_recipe() -> None:
     for key, value in expected.items():
         if data.get(key) != value:
             fail(f"recipe drift: {key}")
-    if data.get("target_materialization_recipe") != "com.synexia.rewrite.M3JdkCollectionPortWave1":
+    if data.get("target_materialization_recipe") != "jdk.internal.m3.rewrite.M3JdkCollectionPortWave1":
         fail("target materialization recipe drift")
 
 

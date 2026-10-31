@@ -39,7 +39,7 @@ jobs:
           from pathlib import Path
           import hashlib
           root = Path('m3/collections/qualification/five-provider-count-recovery-20261018/recipe')
-          resources = root / 'src/main/resources/com/synexia/rewrite/five-provider-count-recovery-20261018'
+          resources = root / 'src/main/resources/jdk/internal/m3/rewrite/five-provider-count-recovery-20261018'
           for line in (resources/'manifest.tsv').read_text().splitlines():
               path,before,after,name = line.split('\t')
               payload = (resources/name).read_bytes()

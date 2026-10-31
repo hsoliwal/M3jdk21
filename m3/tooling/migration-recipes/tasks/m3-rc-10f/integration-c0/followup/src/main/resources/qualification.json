@@ -18,7 +18,7 @@
       "id": "Cwf",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/fc0-cwf/manifest.tsv",
       "manifestSHA256": "cea64f87482a492daeea04f17edf41093c94a427506dab39049a360eec411979",
-      "namedRecipe": "com.synexia.m3.Fc0Cwf",
+      "namedRecipe": "jdk.internal.m3.Fc0Cwf",
       "targets": [
         {
           "afterBytes": 5526,
@@ -77,7 +77,7 @@
       "id": "Tqc",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/fc0-tqc/manifest.tsv",
       "manifestSHA256": "78dcf91b92f44e0851fc4d11217b99ad30d697ec9ab4cc688b7a5a1e899afe1b",
-      "namedRecipe": "com.synexia.m3.Fc0Tqc",
+      "namedRecipe": "jdk.internal.m3.Fc0Tqc",
       "targets": [
         {
           "afterBytes": 5101,
@@ -112,7 +112,7 @@
       "id": "Pdc",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/fc0-pdc/manifest.tsv",
       "manifestSHA256": "fa7fd3b28b9a5cd05aab4052c84f85e29370909a6f3ece9a66f4ad8de2fa3a0f",
-      "namedRecipe": "com.synexia.m3.Fc0Pdc",
+      "namedRecipe": "jdk.internal.m3.Fc0Pdc",
       "targets": [
         {
           "afterBytes": 235261,
@@ -155,7 +155,7 @@
       "id": "Clr",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/fc0-clr/manifest.tsv",
       "manifestSHA256": "4c6996b6d5f06fb13742cd1ab6d44113bb936d9a7f624b18edd6aad6377d2809",
-      "namedRecipe": "com.synexia.m3.Fc0Clr",
+      "namedRecipe": "jdk.internal.m3.Fc0Clr",
       "targets": [
         {
           "afterBytes": 8717,
@@ -187,7 +187,7 @@
         "Clr"
       ],
       "id": "Forward",
-      "recipe": "com.synexia.m3.Fc0Forward"
+      "recipe": "jdk.internal.m3.Fc0Forward"
     },
     {
       "families": [
@@ -197,7 +197,7 @@
         "Cwf"
       ],
       "id": "Reverse",
-      "recipe": "com.synexia.m3.Fc0Reverse"
+      "recipe": "jdk.internal.m3.Fc0Reverse"
     }
   ],
   "ownerSHA256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",

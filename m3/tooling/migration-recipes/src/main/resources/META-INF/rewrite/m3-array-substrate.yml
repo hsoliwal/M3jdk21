@@ -8,7 +8,7 @@ description: >-
   recipe; native, Maven and documentation owners use the M3JDK21 text snapshot.
   The recipe grants no java.base or public Java-array replacement authority.
 recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+  - jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe:
       crateName: m3-array-substrate-v1
   - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
       crateName: m3-array-substrate-v1

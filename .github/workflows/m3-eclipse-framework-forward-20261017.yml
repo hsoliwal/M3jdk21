@@ -5,7 +5,7 @@ on:
     paths:
       - 'm3/eclipse/framework/**'
       - 'm3/collections/src/main/java/**'
-      - 'm3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
+      - 'm3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
       - '.github/workflows/m3-eclipse-framework-forward-20261017.yml'
   workflow_dispatch:
 permissions:
@@ -42,8 +42,8 @@ jobs:
           from pathlib import Path
           import hashlib
           import subprocess
-          original = Path('m3/eclipse/framework/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/eclipse-framework-m3-index-forward')
-          current = Path('m3/eclipse/framework/recipe/flags-20261020/src/test/resources/com/synexia/rewrite/hash-pinned-java/m3-eclipse-full-delta-flags-20261020')
+          original = Path('m3/eclipse/framework/recipe/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/eclipse-framework-m3-index-forward')
+          current = Path('m3/eclipse/framework/recipe/flags-20261020/src/test/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-eclipse-full-delta-flags-20261020')
           old = [row.split('\t') for row in (original/'manifest.tsv').read_text().splitlines() if row and not row.startswith('#')]
           latest = [row.split('\t') for row in (current/'manifest.tsv').read_text().splitlines() if row and not row.startswith('#')]
           assert len(old) == 8 and len(latest) == 2

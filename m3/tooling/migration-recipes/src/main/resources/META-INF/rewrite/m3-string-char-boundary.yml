@@ -7,5 +7,5 @@ description: >-
   so String.toCharArray/getChars allocate only their required destination and
   traverse canonical joined atoms sequentially instead of resolving every code unit.
 recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+  - jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe:
       crateName: mindex-string-bulk-char-boundary

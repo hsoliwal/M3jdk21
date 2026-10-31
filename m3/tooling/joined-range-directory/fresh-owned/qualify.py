@@ -27,7 +27,7 @@ ARTIFACTS = PROOF / "artifacts"
 PREFIX = CFG["publicPrefix"]
 WORKFLOW = ".github/workflows/m3-joined-range-directory.yml"
 TARGET = "m3/core/src/com/m3/text/JoinedM3StringPiece.java"
-SUITE = "com.synexia.rewrite.M3JoinedRangeDirectoryRecipeTest"
+SUITE = "jdk.internal.m3.rewrite.M3JoinedRangeDirectoryRecipeTest"
 METHODS = ["allTwoPartialStatesBothOrdersReachExactFixedPoint",
            "allTwoInverseStatesBothOrdersRecoverExactBefore",
            "eachOwnedInputRefusesDriftMissingAndDuplicateOwnership"]
@@ -236,11 +236,11 @@ def sdk_evidence():
     for flag in module["FALSE_GATES"]:
         require(receipt[flag] is False, "new SDK scope drift:" + flag)
     for name in module["COMPILED_PROVIDERS"]:
-        raw = read(SDK / ("target/classes/com/synexia/rewrite/" + name + ".class"))
+        raw = read(SDK / ("target/classes/jdk/internal/m3/rewrite/" + name + ".class"))
         item = receipt["compiledProviders"][name]
         require(raw[:4] == bytes.fromhex("cafebabe") and len(raw) > 8
                 and int.from_bytes(raw[6:8], "big") == 65 and item ==
-                {"path": "target/classes/com/synexia/rewrite/" + name + ".class",
+                {"path": "target/classes/jdk/internal/m3/rewrite/" + name + ".class",
                  "bytes": len(raw), "sha256": ident(raw)["sha256"], "majorVersion": 65},
                 "actual new compiled provider identity differs")
     require(set(receipt["compiledProviders"]) == set(module["COMPILED_PROVIDERS"]),

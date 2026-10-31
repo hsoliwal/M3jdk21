@@ -33,19 +33,19 @@ REQUIRED_COLUMNS = (
 )
 REQUIRED_ASSETS = {
     "recipe-dag": (
-        "synexia-m3-recipe/src/main/java/com/synexia/m3/recipe/RecipeDag.java",
+        "m3-m3-recipe/src/main/java/jdk/internal/m3/recipe/RecipeDag.java",
         "881e598dc80ba25444df63d82e1f4fe43b2ca836378b68b855f9c9ebd0c80ac3",
     ),
     "openrewrite-recipe-dag-plan": (
-        "synexia-m3-recipe/src/main/java/com/synexia/m3/recipe/OpenRewriteRecipeDagPlan.java",
+        "m3-m3-recipe/src/main/java/jdk/internal/m3/recipe/OpenRewriteRecipeDagPlan.java",
         "156201feb19943bfe235bafef714b448c4be40139ce36b332cd967b129681971",
     ),
     "recipe-first-invariant": (
-        "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeFirstInvariant.java",
+        "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeFirstInvariant.java",
         "050e43f3f6db2d5a99b109147a6728edefb2323d698e82ebc7356bc23dfeab0c",
     ),
 }
-SYNEXIA_ASSET_COMMIT = "850f5b0c2546ee6f645d91e3c341fd744d883480"
+M3_ASSET_COMMIT = "850f5b0c2546ee6f645d91e3c341fd744d883480"
 # Verify the immutable proof bytes at the pinned Nebula revision; a valid-length
 # but stale hash must never be accepted as evidence of the source handoff.
 NEBULA_PROOF_COMMIT = "7b36ce9e3e0c8d1e91324589b38b9d9d5a164356"
@@ -54,7 +54,7 @@ TARGET = "hsoliwal/M3jdk21"
 NEBULA_RECEIVER_SCHEMA = "M3_NEBULA_MASTERED_DAG_RECEIVER_V2"
 NEBULA_RECEIVER_PATH = (
     Path(__file__).resolve().parents[1]
-    / "synexia-import"
+    / "m3-import"
     / "nebula-mastered-dag-receiver-v2.tsv"
 )
 
@@ -114,11 +114,11 @@ def validate(rows: Iterable[Mapping[str, str]]) -> list[dict[str, str]]:
         row = by_id.get(asset_id)
         if row is None:
             raise ValueError(f"missing required Synexia asset: {asset_id}")
-        if row["kind"] != "SYNEXIA_RECIPE_DAG_ASSET":
+        if row["kind"] != "M3_RECIPE_DAG_ASSET":
             raise ValueError(f"wrong kind for {asset_id}")
         if row["repository"] != "hsoliwal/com.synexia":
             raise ValueError(f"wrong repository for {asset_id}")
-        if row["commit"] != SYNEXIA_ASSET_COMMIT:
+        if row["commit"] != M3_ASSET_COMMIT:
             raise ValueError(f"wrong canonical Synexia commit for {asset_id}")
         if row["path"] != path or row["contentHash"] != digest:
             raise ValueError(f"wrong path/hash for {asset_id}")
@@ -126,14 +126,14 @@ def validate(rows: Iterable[Mapping[str, str]]) -> list[dict[str, str]]:
             raise ValueError(f"Synexia asset must use SHA-256: {asset_id}")
         if row["license"] != "Apache-2.0":
             raise ValueError(f"reusable Synexia asset must be Apache-2.0: {asset_id}")
-        if row["authorship"] != "SYNEXIA_ORIGINAL":
+        if row["authorship"] != "M3_ORIGINAL":
             raise ValueError(f"wrong authorship for {asset_id}")
         if row["delivery"] != "COPY_ADAPT":
             raise ValueError(f"wrong delivery mode for {asset_id}")
         if row["applicationPolicy"] != "PROVEN_RECIPE_DAG_ONLY":
             raise ValueError(f"wrong application policy for {asset_id}")
 
-    target = by_id.get("synexia-target-policy")
+    target = by_id.get("m3-target-policy")
     if target is None:
         raise ValueError("missing Synexia target policy evidence")
     if (
@@ -203,7 +203,7 @@ def summary(rows: Sequence[Mapping[str, str]]) -> dict[str, object]:
         "root": canonical_root(rows),
         "rows": len(rows),
         "target": TARGET,
-        "canonicalSynexiaCommit": SYNEXIA_ASSET_COMMIT,
+        "canonicalSynexiaCommit": M3_ASSET_COMMIT,
         "mutationAuthority": False,
         "promotionAuthority": False,
         "applicationPolicy": "PROVEN_RECIPE_DAG_ONLY",
@@ -216,7 +216,7 @@ def _args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "--receipt",
         type=Path,
-        default=Path(__file__).with_name("SYNEXIA_NEBULA_RECIPE_DAG_HANDOFF.tsv"),
+        default=Path(__file__).with_name("M3_NEBULA_RECIPE_DAG_HANDOFF.tsv"),
     )
     parser.add_argument("--out", type=Path)
     return parser.parse_args(argv)

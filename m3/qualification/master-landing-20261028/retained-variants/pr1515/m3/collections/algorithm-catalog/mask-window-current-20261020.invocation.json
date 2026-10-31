@@ -101,7 +101,7 @@
     "owner_repository": "hsoliwal/com.synexia",
     "source_commit": "f188e2af9117f0a0126b70aec3f87bb4489cbf42",
     "packet_tree": "34febf76a5471c984bb255daafbe9f5bb468f2c5",
-    "main_class": "com.synexia.rewrite.SealReplay",
+    "main_class": "jdk.internal.m3.rewrite.SealReplay",
     "arguments": [
       "check|apply",
       "source-root",

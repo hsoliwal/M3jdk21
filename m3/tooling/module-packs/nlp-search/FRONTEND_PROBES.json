@@ -1,7 +1,7 @@
 {
   "schema": "M3_SOURCE_INDEX_LINKED_IMAGE_PROBES_1",
   "module": "org.m3jdk.tools.search",
-  "source_contract": "hsoliwal/com.synexia/synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/frontend/BUILD_CONTRACT.json",
+  "source_contract": "hsoliwal/com.synexia/m3-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/frontend/BUILD_CONTRACT.json",
   "fixture_source": "fixtures/frontend/src/test/java/M3SourceIndexProbe.java",
   "execution": "Each case executes in a fresh JVM on the final image, patched into org.m3jdk.tools.search. It uses the actual linked jdk.compiler, M3File, Lucene and OpenNLP modules. File JNI mode is independently required by FILE_PROBES.json.",
   "expected_observations": {

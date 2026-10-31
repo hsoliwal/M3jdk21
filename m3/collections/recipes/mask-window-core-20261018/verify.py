@@ -62,7 +62,7 @@ def main():
         run('recipe-lint',['javac','--release','21','-proc:none','-Xlint:all','-Werror','-d',lint,*tools])
         run('recipe-compile',['javac','--release','21','-proc:none','-d',cp,*tools])
         def seal(root,res=R,mode='apply',fail=False):
-            answer=run('recipe-'+mode,['java','-cp',cp,'com.synexia.rewrite.SealReplay',mode,root,res],fail)
+            answer=run('recipe-'+mode,['java','-cp',cp,'jdk.internal.m3.rewrite.SealReplay',mode,root,res],fail)
             if not fail and mode=='check' and 'changes=0' not in answer:raise ValueError('not a fixed point')
             return answer
         def seed(root):

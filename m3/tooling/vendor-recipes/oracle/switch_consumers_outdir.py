@@ -3,7 +3,7 @@
 """[DIFFERENTIAL ORACLE COPY of <apex-run>/switch_consumers.py
 sha256 4462296f54a0b98c181e9bdd5d2027eed72ab9a61375b269f603c8bb4fa46000; only change: --out-dir]
 C6 DEPENDENCY-SOURCE-INLINE, phase COMPOSE (consumers): point every Synexia consumer at the
-source-built coordinate (<version>-synexia-source-1) of each admitted third_party module.
+source-built coordinate (<version>-m3-source-1) of each admitted third_party module.
 
 Edits are textual and minimal (one <version> value per dependency entry), applied to pom blobs through
 git plumbing so that poms outside the sparse cone are changed in the index without a checkout:
@@ -11,7 +11,7 @@ git plumbing so that poms outside the sparse cone are changed in the index witho
 Rules (recorded in CONSUMER_SWITCH.tsv):
   * BOM: suffix the <version> of the managed <dependency> entry for the artifact (the shared property
     such as ${jackson.version} is left alone so artifacts that were not inlined keep resolving).
-  * explicit <version>X</version> pins in consumer poms: X -> X-synexia-source-1 when the module exists.
+  * explicit <version>X</version> pins in consumer poms: X -> X-m3-source-1 when the module exists.
   * never switched: artifacts in NATIVE_IN_BINARY (natives live in the binary jar) and M3jdk21 consumers
     (no published repository for the source-built coordinate).
 Dry-run by default; --apply writes the index entries (worktree files inside the cone are written too).
@@ -20,20 +20,20 @@ from __future__ import annotations
 import argparse, csv, io, re, subprocess, sys
 from pathlib import Path
 
-SUFFIX = "-synexia-source-1"
+SUFFIX = "-m3-source-1"
 NATIVE_IN_BINARY = set()  # the equivalence gate decides; native libraries are completed byte-for-byte from the published jar and compared by SHA-256
 # (pom path, group, artifact, version) -> how the pin is expressed; "bom" = managed entry under dependencyManagement
 TARGETS = [
-    ("synexia-bom/pom.xml", "bom"),
+    ("m3-bom/pom.xml", "bom"),
     ("pom.xml", "bom"),
-    ("synexia-indexstring/pom.xml", "explicit"),
-    ("synexia-mindex/codec-toml/pom.xml", "explicit"),
-    ("synexia-mindex/codec-yaml/pom.xml", "explicit"),
-    ("synexia-mindex/runtime/pom.xml", "explicit"),
-    ("synexia-mindex/integration/fixed-univocity/pom.xml", "explicit"),
-    ("synexia-mindex/pom.xml", "explicit"),
-    ("synexia-openrewrite-recipes/pom.xml", "explicit"),
-    ("synexia-common/pom.xml", "explicit"),
+    ("m3-indexstring/pom.xml", "explicit"),
+    ("m3-mindex/codec-toml/pom.xml", "explicit"),
+    ("m3-mindex/codec-yaml/pom.xml", "explicit"),
+    ("m3-mindex/runtime/pom.xml", "explicit"),
+    ("m3-mindex/integration/fixed-univocity/pom.xml", "explicit"),
+    ("m3-mindex/pom.xml", "explicit"),
+    ("m3-openrewrite-recipes/pom.xml", "explicit"),
+    ("m3-common/pom.xml", "explicit"),
 ]
 DEP_RE = re.compile(r"<dependency>(.*?)</dependency>", re.S)
 

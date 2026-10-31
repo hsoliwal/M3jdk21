@@ -13,8 +13,8 @@ import tempfile
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parent
-RESOURCE = "src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020"
-SUITE = "com.synexia.rewrite.M3BackportWaveCurrentOutputRecipeTest"
+RESOURCE = "src/main/resources/jdk/internal/m3/rewrite/backport-wave-current-output-20261020"
+SUITE = "jdk.internal.m3.rewrite.M3BackportWaveCurrentOutputRecipeTest"
 METHODS = ["bothPartialStatesRoundTripAndReachFixedPointsInBothOrders",
            "everyOwnerRefusesDriftMissingAndDuplicateWithoutMutation",
            "exactCurrentWorkflowPinsPreserveHistoricalReceipt"]
@@ -28,7 +28,7 @@ OWNER_GIT = {
     "m3/backports/test_backport_execution_waves.py": "7a3b961caa4302a2ebd1675360e29e6b1df9697b",
     "m3/backports/backport_execution_waves.py": "cc2a6ceb90b56d3b05d1307e705586c8d7cf1b40",
     "m3/backports/BACKPORT_EXECUTION_WAVES.md": "428d775ca476b187dceb26a012401b11b975bbbb",
-    "m3/compatibility/synexia-wave-admission-pin-20261014.tsv": "60c11d68f482efadeadbbe6f58bfac9ec9aa0090",
+    "m3/compatibility/m3-wave-admission-pin-20261014.tsv": "60c11d68f482efadeadbbe6f58bfac9ec9aa0090",
     ".github/workflows/m3-jdk21-backport-wave-admission.yml": "9ba94e55b4c8f468fb0ff5f3cd7c530caa6fdff2"
 }
 WAVE_OWNER = ".github/workflows/m3-jdk21-backport-wave-admission.yml"
@@ -40,13 +40,13 @@ KEEP_PATHS = [name for name in TARGET_PATHS if name != WAVE_OWNER]
 RECEIVER_OUTPUTS: dict[str, str] = {}
 RECEIVER_CUSTODY: dict[str, str] = {}
 DESCRIPTOR = "src/main/resources/META-INF/rewrite/backport-wave-current-output-20261020.yml"
-TEST = "src/test/java/com/synexia/rewrite/M3BackportWaveCurrentOutputRecipeTest.java"
+TEST = "src/test/java/jdk/internal/m3/rewrite/M3BackportWaveCurrentOutputRecipeTest.java"
 INVERSE_DESCRIPTOR = "src/main/resources/META-INF/rewrite/backport-wave-current-output-20261020-inverse.yml"
-INVERSE_ADAPTER = "pinned-engine/com/synexia/rewrite/M3BackportWaveCurrentOutputInverseRecipe.java"
+INVERSE_ADAPTER = "pinned-engine/jdk/internal/m3/rewrite/M3BackportWaveCurrentOutputInverseRecipe.java"
 REQUIRED_PATHS = sorted([
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
-    "pinned-engine/com/synexia/rewrite/M3BackportWaveCurrentOutputRecipe.java",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
+    "pinned-engine/jdk/internal/m3/rewrite/M3BackportWaveCurrentOutputRecipe.java",
     "pom.xml", DESCRIPTOR, INVERSE_DESCRIPTOR, INVERSE_ADAPTER, TEST, "verify.py",
     "FOSS_REUSE_DECISION.tsv", "THIRD_PARTY_NOTICES.md", "README.md",
     RESOURCE + "/manifest.tsv", RESOURCE + "/inverse/manifest.tsv",
@@ -54,12 +54,12 @@ REQUIRED_PATHS = sorted([
     *[RESOURCE + "/" + stage + "/" + name for stage in ("before", "out") for name in TARGET_PATHS],
 ])
 ORIGINAL_GIT = {
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java": "1c1b1b568d369f688f6953161636bf36b484bf5a",
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
     "pom.xml": "d79867bcc09ad6329e12418e15907e54b8ab025f",
 }
-PROVIDERS = {"openrewriteAdapter": ORIGINAL_GIT["pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java"],
-             "manifestKernel": ORIGINAL_GIT["pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java"]}
+PROVIDERS = {"openrewriteAdapter": ORIGINAL_GIT["pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java"],
+             "manifestKernel": ORIGINAL_GIT["pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java"]}
 COMPILED_PROVIDERS = ("M3GpuToolJoinRecipe", "M3GpuToolJoinManifest", "M3BackportWaveCurrentOutputRecipe",
                       "M3BackportWaveCurrentOutputInverseRecipe")
 FALSE_GATES = ("targetJavaCompiled", "originalPrivateOwnerModuleQualified", "receiverRuntimeQualified",
@@ -222,7 +222,7 @@ def validate_marker(xml: bytes, ident: str) -> None:
 def self_test_reports() -> None:
     """Prove exact provider-derived names without stripping parameter signatures."""
     # Independent literal oracle matches the sealed Java methods and pinned provider.
-    expected_suites = {"com.synexia.rewrite.M3BackportWaveCurrentOutputRecipeTest":["bothPartialStatesRoundTripAndReachFixedPointsInBothOrders","everyOwnerRefusesDriftMissingAndDuplicateWithoutMutation","exactCurrentWorkflowPinsPreserveHistoricalReceipt"]}
+    expected_suites = {"jdk.internal.m3.rewrite.M3BackportWaveCurrentOutputRecipeTest":["bothPartialStatesRoundTripAndReachFixedPointsInBothOrders","everyOwnerRefusesDriftMissingAndDuplicateWithoutMutation","exactCurrentWorkflowPinsPreserveHistoricalReceipt"]}
     if SUITES != expected_suites:
         raise AssertionError("sealed SDK report inventory drift")
     refused = 0
@@ -443,7 +443,7 @@ def reports(pins: dict, pins_data: bytes) -> None:
                             "bytes": len(raw), "sha256": digest(raw), "gitBlob": git_blob(raw)}
     compiled = {}
     for name in COMPILED_PROVIDERS:
-        relative = "target/classes/com/synexia/rewrite/" + name + ".class"
+        relative = "target/classes/jdk/internal/m3/rewrite/" + name + ".class"
         raw = regular(ROOT / relative).read_bytes()
         require(len(raw) > 8 and raw[:4] == bytes.fromhex("cafebabe")
                 and int.from_bytes(raw[6:8], "big") == 65, "actual Java21 SDK provider class required")

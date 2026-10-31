@@ -12,7 +12,7 @@ on:
   pull_request:
     paths:
       - 'm3/file/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-file-move-candidates-20261021/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-file-move-candidates-20261021/**'
       - '.github/workflows/m3-file-move-candidates-20261021.yml'
   workflow_dispatch:
 

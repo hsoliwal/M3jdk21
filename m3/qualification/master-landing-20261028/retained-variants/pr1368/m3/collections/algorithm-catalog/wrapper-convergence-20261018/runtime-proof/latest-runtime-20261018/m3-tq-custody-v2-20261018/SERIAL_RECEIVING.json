@@ -1,7 +1,7 @@
 {
   "dataset": "m3-tq-custody-v2-20261018",
   "input_head": "2e9508c90952b8d66d6c3ee4855e1e4d8fd856fe",
-  "qualified_crate": "/dev/shm/m3-tq-successor-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "qualified_crate": "/dev/shm/m3-tq-successor-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
   "check": {
     "dataset": "m3-tq-custody-v2-20261018",
     "targets": 14,

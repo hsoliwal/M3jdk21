@@ -17,9 +17,9 @@
   "eclipse_source_disposition": "REFERENCE_ONLY_NO_CORE_SOURCE_COPIED",
   "canonical_recipe": {
     "repository": "hsoliwal/com.synexia",
-    "path": "synexia-openrewrite-recipes/recipe-crates/m3fs-capability-port-20261018",
-    "class": "com.synexia.rewrite.M3FsCapabilityPort",
-    "application_owner": "com.synexia.rewrite.M3FsApply",
+    "path": "m3-openrewrite-recipes/recipe-crates/m3fs-capability-port-20261018",
+    "class": "jdk.internal.m3.rewrite.M3FsCapabilityPort",
+    "application_owner": "jdk.internal.m3.rewrite.M3FsApply",
     "engine": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe",
     "engine_git_blob": "4a38e39d0755462d40c2b22548b87abde938ea0b",
     "engine_sha256": "8133bcf7e9f750c714cdd42784bdf30b60f67dd957b2831cd54cb01c9a2cfc3a",
@@ -35,7 +35,7 @@
     "requires": [
       "java.base"
     ],
-    "synexia_runtime_dependency": false,
+    "m3_runtime_dependency": false,
     "native_abi": 1,
     "sqlite_schema": 1,
     "jni_capability_mask": 16383,

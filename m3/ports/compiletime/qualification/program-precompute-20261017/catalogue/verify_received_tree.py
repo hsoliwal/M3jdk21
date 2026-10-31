@@ -89,14 +89,14 @@ def admit_recipe(recipe, target, run=None):
     """Delegate source/Result qualification to the existing receiver; additionally require POST."""
     recipe, target = recipe.resolve(strict=True), target.resolve(strict=True)
     candidate = contained(recipe, 'target/candidate', file=False)
-    report = contained(recipe, 'target/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml')
+    report = contained(recipe, 'target/surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml')
     inputs = contained(candidate, 'SDK_INPUTS.tsv')
     results = contained(candidate, 'SDK_RESULTS.tsv')
     require_fresh_sdk_report(report, inputs, results)
     command = [sys.executable, contained(recipe, 'receive.py'), '--crate', recipe,
                '--target', target, '--check']
     message = (run or checked_process)(command)
-    seals = list((recipe/'src/main/resources/com/synexia/rewrite').glob('hash-pinned-*/*/manifest.tsv'))
+    seals = list((recipe/'src/main/resources/jdk/internal/m3/rewrite').glob('hash-pinned-*/*/manifest.tsv'))
     identities = {manifest.parent.name for manifest in seals}
     if len(identities) != 1:
         raise ValueError('ambiguous or missing recipe identity')

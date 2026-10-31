@@ -88,9 +88,9 @@ jobs:
           -pl rewrite-java-21,rewrite-test,junit-jupiter-5.10.2,junit-platform-launcher-1.10.2
           -am -DskipTests install
       - name: Verify canonical published source-build coordinates
-        run: python3 -S m3/synexia-import/pure-int-recipe-custody/verify-source-rewrite-coordinate.py
+        run: python3 -S m3/m3-import/pure-int-recipe-custody/verify-source-rewrite-coordinate.py
       - name: Install bounded Synexia recipe dependencies
-        run: bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
+        run: bash m3/m3-import/pure-int-recipe-custody/install.sh "$PWD"
       - name: Verify geometry receiver recipe
         run: >
           mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
@@ -106,12 +106,12 @@ jobs:
           java-version: '21'
       - uses: actions/checkout@v5
         with:
-          repository: hsoliwal/synexia-tornadovm
+          repository: hsoliwal/m3-tornadovm
           ref: d7b4615ccaa286a1a11a60bc079969f24cc7f197
-          path: target/synexia-tornadovm
+          path: target/m3-tornadovm
       - name: Install pinned RV32IM provider with Java 21 preview ABI
         run: >
-          mvn -B -ntp -f target/synexia-tornadovm/m3/cpu-gpu/pom.xml
+          mvn -B -ntp -f target/m3-tornadovm/m3/cpu-gpu/pom.xml
           -Dmaven.compiler.enablePreview=true -DskipTests install
       - name: Install source-built JUnit 5.11.4
         run: >

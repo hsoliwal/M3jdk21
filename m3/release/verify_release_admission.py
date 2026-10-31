@@ -47,8 +47,8 @@ REQUIRED_GATES = frozenset({
 })
 RECIPE_ROOTS = (
     ".m3/openrewrite-recipes", ".m3/task-crates", "m3/recipes",
-    "m3/tooling/migration-recipes", "m3/tooling/synexia-jdk-a3-recipes",
-    "m3/synexia-import/pure-int-recipe-custody",
+    "m3/tooling/migration-recipes", "m3/tooling/m3-jdk-a3-recipes",
+    "m3/m3-import/pure-int-recipe-custody",
     "m3/runtime-integration/recipe",
     "m3/runtime-integration/char-array-copy/recipe",
     "m3/runtime-integration/utf8-cursor-20261014/recipe/canonical",

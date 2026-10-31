@@ -43,7 +43,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
+          bash m3/m3-import/pure-int-recipe-custody/install.sh "$PWD"
 
       - name: Verify recipe substrate and DAG semantic kernel
         run: |

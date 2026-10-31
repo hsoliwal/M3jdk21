@@ -4,11 +4,11 @@
       "blob": "6bba09bc43c7f140c7ef49a5ffa756661c252937",
       "bytes": 17456,
       "mode": "100644",
-      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-wrapper-verification-20261018/publication/author_source_pin.py",
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-wrapper-verification-20261018/publication/author_source_pin.py",
       "sha256": "f37fd23cc7e6a3fd88f61104ceb1bdaaefec9561dba186050a6a1c756c511264"
     },
-    "common_crate": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
-    "common_owner": "synexia-openrewrite-recipes",
+    "common_crate": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+    "common_owner": "m3-openrewrite-recipes",
     "core_commit": "dfe51be2e1e973f44a8a4827fac51b551593b3cc",
     "core_publication_files": 959,
     "core_publication_manifest_sha256": "b21d6a4f80068823845e0f202c7964822a856fdb06d1872bc3d59bf9c5e6581d",
@@ -23,7 +23,7 @@
       "published_paths": [],
       "sha256": "db258f16e1841f6f5191c1c969c20314a8d143bfa6558b60f684bea440cc1712"
     },
-    "recipe_name": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+    "recipe_name": "jdk.internal.m3.m3jdk.CollectionsContractRefinement20261017",
     "repository": "hsoliwal/com.synexia"
   },
   "datasets": [
@@ -33,20 +33,20 @@
       "effective_engines": {
         "bytes": 747,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/history/catalogue-delivery-v1/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-long-bridge-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog2-20261018/0119-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0176-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0184-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0192-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/ENGINE_EFFECTIVE.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/history/catalogue-delivery-v1/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-long-bridge-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog2-20261018/0119-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0176-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0184-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0192-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/ENGINE_EFFECTIVE.tsv"
         ],
         "sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23"
       },
@@ -54,37 +54,37 @@
       "metadata": {
         "bytes": 507,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/CANDIDATE_DATASET.json",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/history/candidate-56-20261018/files/catalogue/CANDIDATE_DATASET.json",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/DATASET.json",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog2-20261018/0003-CANDIDATE_DATASET.json.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog2-20261018/0064-CANDIDATE_DATASET.json.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0191-DATASET.json.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/DATASET.json"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/CANDIDATE_DATASET.json",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/history/candidate-56-20261018/files/catalogue/CANDIDATE_DATASET.json",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/DATASET.json",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog2-20261018/0003-CANDIDATE_DATASET.json.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog2-20261018/0064-CANDIDATE_DATASET.json.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0191-DATASET.json.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/DATASET.json"
         ],
         "sha256": "b5038403f5e9fe60b244327e149846af1af1cc002a30cba5f44be72356e53be7"
       },
       "modes": {
         "bytes": 2366,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/MODES.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/MODES.tsv"
         ],
         "sha256": "24913ed4a09924773754dd8f941cf12f98fee8999250c8a29b1be39aef48323e"
       },
       "sdk_inputs": {
         "bytes": 11448,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/SDK_INPUTS.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0193-SDK_INPUTS.tsv.txt"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/SDK_INPUTS.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0193-SDK_INPUTS.tsv.txt"
         ],
         "sha256": "e256cbb767211ce5d41417dd3fa9a90682dbec07afcd4b5607c4bb7538bdc13e"
       },
       "sdk_results": {
         "bytes": 4650,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/SDK_RESULTS.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0196-SDK_RESULTS.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/R2_SDK_RESULTS.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/SDK_RESULTS.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0196-SDK_RESULTS.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/R2_SDK_RESULTS.tsv"
         ],
         "sha256": "9d3dfa387f6f2d3240223e26cfd1108aa78dcca9f4f3abc17cd446fb4f751ad8"
       },
@@ -92,8 +92,8 @@
       "successful_sdk_xml": {
         "bytes": 14447,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/SDK_TEST_REPORT.xml",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0197-SDK_TEST_REPORT.xml.txt"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/SDK_TEST_REPORT.xml",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0197-SDK_TEST_REPORT.xml.txt"
         ],
         "sha256": "7f09f0e3c28a542ea55cbcfa9f3105ea5554966aca4ee34c81c4b1457a48a8ad"
       },
@@ -106,20 +106,20 @@
       "effective_engines": {
         "bytes": 747,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/history/catalogue-delivery-v1/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-long-bridge-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog2-20261018/0119-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0176-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0184-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0192-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/ENGINE_EFFECTIVE.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/history/catalogue-delivery-v1/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-long-bridge-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog2-20261018/0119-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0176-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0184-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0192-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/ENGINE_EFFECTIVE.tsv"
         ],
         "sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23"
       },
@@ -127,39 +127,39 @@
       "metadata": {
         "bytes": 505,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/DATASET.json",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-long-bridge-20261018/DATASET.json",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0175-DATASET.json.txt"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/DATASET.json",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-long-bridge-20261018/DATASET.json",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0175-DATASET.json.txt"
         ],
         "sha256": "94d49b12e2ba8460832f7c62fffc4e1d228c4695a35217a619723b8888b1e9d5"
       },
       "modes": {
         "bytes": 79,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-long-bridge-20261018/MODES.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-long-bridge-20261018/MODES.tsv"
         ],
         "sha256": "6246b5fba2e26bae90b2911cfe792cf43b08fb827fb57472c3a3276d4c645a16"
       },
       "sdk_inputs": {
         "bytes": 2587,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/long-bridge/proof/SDK_INPUTS.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/SDK_INPUTS.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0013-SDK_INPUTS.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0177-SDK_INPUTS.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/SDK_INPUTS.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/long-bridge/proof/SDK_INPUTS.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/SDK_INPUTS.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0013-SDK_INPUTS.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0177-SDK_INPUTS.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/SDK_INPUTS.tsv"
         ],
         "sha256": "243710c8bc02df0e20d2035867b7c7ad28a6361b50076d8457a841110835a185"
       },
       "sdk_results": {
         "bytes": 264,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/long-bridge/proof/SDK_RESULTS.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/SDK_RESULTS.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0015-SDK_RESULTS.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0180-SDK_RESULTS.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/LONG_BRIDGE_SDK_RESULTS.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/SDK_RESULTS.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/long-bridge/proof/SDK_RESULTS.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/SDK_RESULTS.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0015-SDK_RESULTS.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0180-SDK_RESULTS.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/LONG_BRIDGE_SDK_RESULTS.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/SDK_RESULTS.tsv"
         ],
         "sha256": "f1add8381883e63970281efc5ea3d6684310e011e9ad418ae2d11de1592754f9"
       },
@@ -167,11 +167,11 @@
       "successful_sdk_xml": {
         "bytes": 14438,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/long-bridge/proof/SDK_TEST_REPORT.xml",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/SDK_TEST_REPORT.xml",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0016-SDK_TEST_REPORT.xml.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0181-SDK_TEST_REPORT.xml.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/SDK_TEST_REPORT.xml"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/long-bridge/proof/SDK_TEST_REPORT.xml",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/SDK_TEST_REPORT.xml",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0016-SDK_TEST_REPORT.xml.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0181-SDK_TEST_REPORT.xml.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/SDK_TEST_REPORT.xml"
         ],
         "sha256": "dc908f2b40609672873ae8a2a756400aa3e08a4c3be13969c749d77f5fdf4e0b"
       },
@@ -184,20 +184,20 @@
       "effective_engines": {
         "bytes": 747,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/history/catalogue-delivery-v1/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-long-bridge-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog2-20261018/0119-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0176-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0184-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0192-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/ENGINE_EFFECTIVE.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/history/catalogue-delivery-v1/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-long-bridge-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog2-20261018/0119-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0176-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0184-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0192-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/ENGINE_EFFECTIVE.tsv"
         ],
         "sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23"
       },
@@ -205,33 +205,33 @@
       "metadata": {
         "bytes": 511,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/DATASET.json",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0183-DATASET.json.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/DATASET.json"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/DATASET.json",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0183-DATASET.json.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/DATASET.json"
         ],
         "sha256": "d31c835762d935eec94d9e3b1fa7a923a7ed460d817b0d8802af0fbfc4bd09eb"
       },
       "modes": {
         "bytes": 227,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof-20261018/MODES.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/MODES.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof-20261018/MODES.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/MODES.tsv"
         ],
         "sha256": "83951eeb55c1f4e4cdede745b00e4b94a5a4bca67edc15668b205b605e5072d1"
       },
       "sdk_inputs": {
         "bytes": 2849,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/SDK_INPUTS.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0185-SDK_INPUTS.tsv.txt"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/SDK_INPUTS.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0185-SDK_INPUTS.tsv.txt"
         ],
         "sha256": "fbf3a62b84e9e6947d2fe79f0c945857d2a5afae91e847e4e1b2eab624f433c8"
       },
       "sdk_results": {
         "bytes": 488,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/SDK_RESULTS.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0188-SDK_RESULTS.tsv.txt"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/SDK_RESULTS.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0188-SDK_RESULTS.tsv.txt"
         ],
         "sha256": "f36aea78c259571800d34b80ba80efe0262bbbc7ae656b8093b9656d7d3c3d3b"
       },
@@ -239,8 +239,8 @@
       "successful_sdk_xml": {
         "bytes": 14793,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/SDK_TEST_REPORT.xml",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0189-SDK_TEST_REPORT.xml.txt"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/SDK_TEST_REPORT.xml",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0189-SDK_TEST_REPORT.xml.txt"
         ],
         "sha256": "e40def8ea2bd93b0f9c11e94933e148b0bf7cb43e4a7eb0c9e1f6b460d829994"
       },
@@ -253,20 +253,20 @@
       "effective_engines": {
         "bytes": 747,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/history/catalogue-delivery-v1/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-long-bridge-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog2-20261018/0119-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0176-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0184-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0192-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/ENGINE_EFFECTIVE.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/history/catalogue-delivery-v1/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-long-bridge-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog2-20261018/0119-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0176-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0184-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0192-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/ENGINE_EFFECTIVE.tsv"
         ],
         "sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23"
       },
@@ -274,28 +274,28 @@
       "metadata": {
         "bytes": 513,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/DATASET.json"
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/DATASET.json"
         ],
         "sha256": "3a1824b0c7660e9df373732dcd1ce007de29aa26e9942541ae5f31ea9635998d"
       },
       "modes": {
         "bytes": 18432,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/MODES.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/MODES.tsv"
         ],
         "sha256": "f8b27ae07eceffbf5997f194b515a3df3ee61345c8829c4eaa4bea5b5742edc2"
       },
       "sdk_inputs": {
         "bytes": 40406,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-wrapper-verification-20261018/publication/qualification/m3jdk21-wrap-catalog2-20261018/SDK_INPUTS.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-wrapper-verification-20261018/publication/qualification/m3jdk21-wrap-catalog2-20261018/SDK_INPUTS.tsv"
         ],
         "sha256": "bff49cf755b980399d46f14dbdb176a17450133c0dc1c7f9531fb569bac0b310"
       },
       "sdk_results": {
         "bytes": 28006,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-wrapper-verification-20261018/publication/qualification/m3jdk21-wrap-catalog2-20261018/SDK_RESULTS.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-wrapper-verification-20261018/publication/qualification/m3jdk21-wrap-catalog2-20261018/SDK_RESULTS.tsv"
         ],
         "sha256": "338781863cb8b1c254b0904e9602cee5761c8893aef967b426182bf0dde855d1"
       },
@@ -303,7 +303,7 @@
       "successful_sdk_xml": {
         "bytes": 14601,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-wrapper-verification-20261018/publication/qualification/m3jdk21-wrap-catalog2-20261018/SDK_SUCCESS.xml"
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-wrapper-verification-20261018/publication/qualification/m3jdk21-wrap-catalog2-20261018/SDK_SUCCESS.xml"
         ],
         "sha256": "25bf33dabd56609334122447765efb541d65e7568c6d883a6b81dcb422d9be59"
       },
@@ -316,20 +316,20 @@
       "effective_engines": {
         "bytes": 747,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/history/catalogue-delivery-v1/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-long-bridge-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog2-20261018/0119-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0176-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0184-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0192-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/ENGINE_EFFECTIVE.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/history/catalogue-delivery-v1/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-long-bridge-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog2-20261018/0119-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0176-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0184-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0192-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/ENGINE_EFFECTIVE.tsv"
         ],
         "sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23"
       },
@@ -337,28 +337,28 @@
       "metadata": {
         "bytes": 513,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/DATASET.json"
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/DATASET.json"
         ],
         "sha256": "01945592861fe4d88c6505bea48a45eadc7b2b95b77240078a325fc070c177bb"
       },
       "modes": {
         "bytes": 25047,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/MODES.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/MODES.tsv"
         ],
         "sha256": "9a24836ee504985a3f767d5579cb250889c29b320a247915fea51f9d905f4886"
       },
       "sdk_inputs": {
         "bytes": 56378,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-wrapper-verification-20261018/publication/qualification/m3jdk21-wrap-evidence-20261018/SDK_INPUTS.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-wrapper-verification-20261018/publication/qualification/m3jdk21-wrap-evidence-20261018/SDK_INPUTS.tsv"
         ],
         "sha256": "a878bdc5e7b83e48cd59dbc0c346d95875fcbead9e516bf1f41352bac6cd8f1c"
       },
       "sdk_results": {
         "bytes": 38306,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-wrapper-verification-20261018/publication/qualification/m3jdk21-wrap-evidence-20261018/SDK_RESULTS.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-wrapper-verification-20261018/publication/qualification/m3jdk21-wrap-evidence-20261018/SDK_RESULTS.tsv"
         ],
         "sha256": "bf1dfccce09ada5ddfec20471f59794f0f1f9e666a6f263679aa613a50a9b297"
       },
@@ -366,7 +366,7 @@
       "successful_sdk_xml": {
         "bytes": 14598,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-wrapper-verification-20261018/publication/qualification/m3jdk21-wrap-evidence-20261018/SDK_SUCCESS.xml"
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-wrapper-verification-20261018/publication/qualification/m3jdk21-wrap-evidence-20261018/SDK_SUCCESS.xml"
         ],
         "sha256": "6734c0777b0faa21ce61a656379dc142970376f5ae15556877d3a0726b046c2f"
       },
@@ -3721,8 +3721,8 @@
       "bytes": 44598,
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/historical/HISTORICAL_DONATION_PREFLIGHT.json",
       "published_paths": [
-        "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/historical/HISTORICAL_DONATION_PREFLIGHT.json",
-        "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0005-HISTORICAL_DONATION_PREFLIGHT.json.txt"
+        "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/historical/HISTORICAL_DONATION_PREFLIGHT.json",
+        "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0005-HISTORICAL_DONATION_PREFLIGHT.json.txt"
       ],
       "sha256": "720db0fb379d84279abf54ad14acf067ea17bdf8eaca1bec71e9b1198bc26c60"
     },
@@ -3767,10 +3767,10 @@
     "files": 337,
     "path": "m3/collections/verification/wrapper-convergence-20261018/SOURCE_MANIFEST.json",
     "published_paths": [
-      "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/received/SOURCE_MANIFEST.json",
-      "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0162-SOURCE_MANIFEST.json.txt",
-      "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrapper-proof2-20261018/0002-SOURCE_MANIFEST.json.txt",
-      "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-verification-20261018/r2/candidates/m3/collections/verification/wrapper-convergence-20261018/SOURCE_MANIFEST.json"
+      "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/received/SOURCE_MANIFEST.json",
+      "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0162-SOURCE_MANIFEST.json.txt",
+      "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrapper-proof2-20261018/0002-SOURCE_MANIFEST.json.txt",
+      "m3-openrewrite-recipes/recipe-crates/m3-wrapper-verification-20261018/r2/candidates/m3/collections/verification/wrapper-convergence-20261018/SOURCE_MANIFEST.json"
     ],
     "sha256": "90ec8c484c8ca68f1381133a0979ef88f4975dd4c46ced480db7a87d21b0a98e"
   },
@@ -3778,9 +3778,9 @@
     "bytes": 381707,
     "historical_donation_guard": "NOT_RUN_IN_THIS_SCOPED_RUNNER",
     "published_paths": [
-      "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/received/RECEIPT.json",
-      "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0160-RECEIPT.json.txt",
-      "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/RECEIVER_RUNTIME_RECEIPT.json"
+      "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/received/RECEIPT.json",
+      "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0160-RECEIPT.json.txt",
+      "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/RECEIVER_RUNTIME_RECEIPT.json"
     ],
     "scope": "sealed collections module and named Java/JNI proofs",
     "sha256": "bf9bbd87748c76d0b2da931bc1246114eea49118e5b2ecc3cd5d2bf19aedc568",

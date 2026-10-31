@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.CatalogueGapsV1
+name: jdk.internal.m3.CatalogueGapsV1
 displayName: M3JDK21 algorithm-catalogue gap owners v1 (LFU cache, PATRICIA trie, lane algorithms)
 description: >-
   Adds three behavioural-atom owners to com.m3.collections, each with its differential test:
@@ -15,5 +15,5 @@ description: >-
   ALGORITHM_CATALOGUE.tsv (leaf GAP-LC-catalogue-gaps). Proving ground only; no java.util type is
   replaced.
 recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+  - jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe:
       crateName: m3-catalogue-gaps-v1

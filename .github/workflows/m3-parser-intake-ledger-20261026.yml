@@ -3,7 +3,7 @@ name: M3 parser intake review ledger closure
 on:
   pull_request:
     paths:
-      - 'm3/docs/synexia-direct-copy-review.tsv'
+      - 'm3/docs/m3-direct-copy-review.tsv'
       - '.github/workflows/m3-parser-intake-ledger-20261026.yml'
   workflow_dispatch:
 permissions:
@@ -23,12 +23,12 @@ jobs:
           set -euo pipefail
           python3 m3/compatibility/check_synexia_full_family.py
           python3 m3/compatibility/check_synexia_full_borrow_receiver.py
-          python3 m3/runtime-integration/verify-synexia-intake.py
+          python3 m3/runtime-integration/verify-m3-intake.py
       - name: Require all 29 independent rights reviews to remain pending
         run: |
           python3 - <<'PY'
           import csv
-          with open('m3/docs/synexia-direct-copy-review.tsv', encoding='utf-8') as stream:
+          with open('m3/docs/m3-direct-copy-review.tsv', encoding='utf-8') as stream:
               rows = list(csv.DictReader(stream, delimiter='\t'))
           assert len(rows) == len({r['mapping_id'] for r in rows}) == 29
           assert all(r['review_status'] == 'REVIEW_REQUIRED' for r in rows)

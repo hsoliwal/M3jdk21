@@ -3,7 +3,7 @@
   "canonical_repo": "hsoliwal/com.synexia",
   "canonical_commit": "c64f07024b8b05c898a003369486f9de36cc197c",
   "dataset": "viewport-frame-allstate-20261027",
-  "recipe": "com.synexia.m3.ViewportFrameAllState20261027",
+  "recipe": "jdk.internal.m3.ViewportFrameAllState20261027",
   "original_owner": "m3/collections/src/main/c/m3maskviewport.c",
   "source_pre_git_blob": "f29d081e28ba8ccc4516bd28c09e738b7a408a76",
   "source_post_git_blob": "e7db071a5e1768442ef016fc6516e9dc9e3f9396",

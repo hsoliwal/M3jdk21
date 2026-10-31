@@ -6,7 +6,7 @@ python3 - "$repo" <<'PY'
 from pathlib import Path
 import hashlib, sys
 root = Path(sys.argv[1]).resolve()
-recipe = root/'m3/collections/qualification/residency-state-mask-20261017/recipe/src/main/resources/com/synexia/rewrite'
+recipe = root/'m3/collections/qualification/residency-state-mask-20261017/recipe/src/main/resources/jdk/internal/m3/rewrite'
 j = recipe/'hash-pinned-java/m3jdk21-residency-state-mask-20261017'
 n = recipe/'hash-pinned-text/m3jdk21-residency-state-mask-native-20261017'
 paths=[]

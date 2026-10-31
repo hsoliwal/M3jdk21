@@ -18,7 +18,7 @@ import xml.etree.ElementTree as ET
 SOURCE = "d1ecbd43dbadaf218deec0d98a2ddc23f3a3f45c"
 TARGET = "c0a14387009aefc7d62bd3268055d526e04f9074"
 TARGET_TREE = "491bbd80a51483d0710fc12c1bad3a037b385ba0"
-SUITE = "com.synexia.rewrite.Ic0RecipeTest"
+SUITE = "jdk.internal.m3.rewrite.Ic0RecipeTest"
 QUALIFICATION_SHA256 = "ca8176f2a2a2617c0fb76c86c48ca152a28396381b1266f3ce0c84e7b65caba5"
 MAIN = ("com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",)
 OWNER_SHA256 = "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
@@ -181,13 +181,13 @@ FAMILIES = {'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cmp': ('m3/docs/
                                                             'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java',
                                                             'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java'),
  'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-acs': ('m3/tooling/a3/src/main/java/com/m3/a3/A3Cases.java',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv'),
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv'),
  'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-arm': ('m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java',
                                                             'm3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv',
                                                             'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java',
                                                             'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java'),
  'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-scp': ('m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/02-M3RecipeScopeRegistry.java.txt',
@@ -211,13 +211,13 @@ FAMILIES = {'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cmp': ('m3/docs/
  'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-avp': ('m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-v6-pom/manifest.tsv',
                                                             'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-v6-pom/pom.xml.txt',
                                                             'm3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-mastery-v6/pom.before.xml'),
- 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-arr': ('m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/A3.java.after',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/A3Lab.java.after',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/A3LabTest.java.after',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/A3M.java.after',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/A3MCodec.java.after',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/A3MTest.java.after',
-                                                            'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/manifest.tsv'),
+ 'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-arr': ('m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-receipt/A3.java.after',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-receipt/A3Lab.java.after',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-receipt/A3LabTest.java.after',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-receipt/A3M.java.after',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-receipt/A3MCodec.java.after',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-receipt/A3MTest.java.after',
+                                                            'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-receipt/manifest.tsv'),
  'com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-awr': ('m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-receipt-workflow/a3-lab.md.txt',
                                                             'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-receipt-workflow/a3-mastery.md.txt',
                                                             'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-receipt-workflow/a3.md.txt',
@@ -296,13 +296,13 @@ REPLACEMENTS = ('m3/docs/name-mapping.json',
  'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java',
  'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java',
  'm3/tooling/a3/src/main/java/com/m3/a3/A3Cases.java',
- 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after',
- 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv',
+ 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after',
+ 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv',
  'm3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java',
  'm3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java',
- 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after',
- 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after',
- 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv',
+ 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after',
+ 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after',
+ 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv',
  'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java',
  'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java',
  'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/02-M3RecipeScopeRegistry.java.txt',
@@ -406,7 +406,7 @@ def files(directory):
 
 
 def expected_paths():
-    paths = {"pom.xml", "proof.py", "README.md", "src/test/java/com/synexia/rewrite/Ic0RecipeTest.java"}
+    paths = {"pom.xml", "proof.py", "README.md", "src/test/java/jdk/internal/m3/rewrite/Ic0RecipeTest.java"}
     paths.update("dependency-source/" + name for name in MAIN)
     paths.update("src/test/resources/before/" + name for name in REPLACEMENTS)
     for family, targets in FAMILIES.items():
@@ -599,8 +599,8 @@ def qualification(project):
             and orders["schema"] == "synexia.ic0.composition-orders/1"
             and orders["sourceCommit"] == SOURCE and orders["targetCommit"] == TARGET,
             "composition order protocol drift")
-    expected_orders = [{"id": "Forward", "recipe": "com.synexia.m3.Ic0Forward", "families": list(FAMILY_IDS)},
-                       {"id": "Reverse", "recipe": "com.synexia.m3.Ic0Reverse", "families": list(reversed(FAMILY_IDS))}]
+    expected_orders = [{"id": "Forward", "recipe": "jdk.internal.m3.Ic0Forward", "families": list(FAMILY_IDS)},
+                       {"id": "Reverse", "recipe": "jdk.internal.m3.Ic0Reverse", "families": list(reversed(FAMILY_IDS))}]
     require(orders["orders"] == value["orders"] == expected_orders, "only both declared complete orders admitted")
     require(sha(resource / "composition-orders.json") == value["compositionOrdersSHA256"]
             and sha(resource / "META-INF/rewrite/ic0-orders.yml") == value["compositionYamlSHA256"],
@@ -612,7 +612,7 @@ def qualification(project):
         require(set(family) == {"id", "crate", "namedRecipe", "manifestPath", "manifestSHA256",
                 "yamlPath", "yamlSHA256", "targets"}, "family declaration fields drift")
         require(family["crate"] == "ic0-" + family["id"].lower()
-                and family["namedRecipe"] == "com.synexia.m3.Ic0" + family["id"]
+                and family["namedRecipe"] == "jdk.internal.m3.Ic0" + family["id"]
                 and family["manifestPath"] == folder + "/manifest.tsv"
                 and family["yamlPath"] == "META-INF/rewrite/" + family["crate"] + ".yml",
                 "family path/name relationship drift")
@@ -688,7 +688,7 @@ def static_gate(proof):
     require({path.relative_to(project).as_posix() for path in files(project)} == expected_paths(), "unexpected static project file")
     value = qualification(project)
     outputs = manifest_outputs(project)
-    fixture = (project / "src/test/java/com/synexia/rewrite/Ic0RecipeTest.java").read_text()
+    fixture = (project / "src/test/java/jdk/internal/m3/rewrite/Ic0RecipeTest.java").read_text()
     observed = re.findall(r"@Test\s+(?:(?:public|final)\s+)*void\s+(\w+)\s*\(", fixture)
     require(sorted(observed) == METHODS, "actual source test method inventory drift")
     nul_refusals = 0
@@ -940,7 +940,7 @@ def run(args):
             if stage == "compile":
                 compiled = artifacts(proof)
                 required = {"classes/" + name.removesuffix(".java") + ".class" for name in MAIN}
-                required.add("test-classes/com/synexia/rewrite/Ic0RecipeTest.class")
+                required.add("test-classes/jdk/internal/m3/rewrite/Ic0RecipeTest.class")
                 require(required.issubset({row["path"] for row in compiled}), "required compiled classes missing")
                 write(proof / "build-artifacts.json", compiled)
                 compiled_seal = sha(proof / "build-artifacts.json")

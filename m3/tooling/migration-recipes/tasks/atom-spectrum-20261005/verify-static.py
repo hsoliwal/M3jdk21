@@ -15,7 +15,7 @@ def main():
     owner = task.parent.parent
     ET.parse(task / 'pom.xml')
     ET.parse(task / 'checkstyle.xml')
-    crate = owner / 'src/main/resources/com/synexia/rewrite/hash-pinned-java/atom-comment-custody'
+    crate = owner / 'src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/atom-comment-custody'
     target, before, after, filename = (crate / 'manifest.tsv').read_text().strip().split('\t')
     if target != 'src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java':
         raise SystemExit('RECIPE_TARGET_SCOPE')
@@ -23,7 +23,7 @@ def main():
         raise SystemExit('RECIPE_PREIMAGE_DRIFT')
     if hashlib.sha256((crate / filename).read_bytes()).hexdigest() != after:
         raise SystemExit('RECIPE_POSTIMAGE_DRIFT')
-    final_crate = owner / 'src/main/resources/com/synexia/rewrite/hash-pinned-java/atom-pattern-spectrum'
+    final_crate = owner / 'src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/atom-pattern-spectrum'
     for line in (final_crate / 'manifest.tsv').read_text().splitlines():
         target, before, after, filename = line.split('\t')
         if target not in ('src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java',

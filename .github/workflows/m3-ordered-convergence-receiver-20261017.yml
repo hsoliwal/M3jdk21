@@ -7,7 +7,7 @@ on:
       - 'm3/compatibility/M3OrderedConvergenceReceiver.java'
       - 'm3/compatibility/M3OrderedConvergenceReceiverTest.java'
       - 'm3/docs/ordered-convergence-receiving-20261017.md'
-      - 'm3/docs/SYNEXIA_CONVERGENCE_MODEL.md'
+      - 'm3/docs/M3_CONVERGENCE_MODEL.md'
       - '.github/workflows/m3-ordered-convergence-receiver-20261017.yml'
   workflow_dispatch:
 

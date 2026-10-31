@@ -8,8 +8,8 @@ on:
       - '.m3/openrewrite-recipes/**'
       - 'm3/tooling/tq/**'
       - 'm3/tooling/tq-sync/**'
-      - 'm3/synexia-import/pure-int-recipe-custody/install.sh'
-      - 'm3/synexia-import/pure-int-recipe-custody/test_source_bootstrap.py'
+      - 'm3/m3-import/pure-int-recipe-custody/install.sh'
+      - 'm3/m3-import/pure-int-recipe-custody/test_source_bootstrap.py'
       - 'm3/tooling/lane28/**'
       - 'm3/tooling/migration-recipes/**'
       - 'm3/migration/**'
@@ -51,9 +51,9 @@ jobs:
       - name: Source-built TQ Maven dependencies
         shell: bash
         run: |
-          bash -n m3/synexia-import/pure-int-recipe-custody/install.sh
-          python3 m3/synexia-import/pure-int-recipe-custody/test_source_bootstrap.py
-          bash m3/synexia-import/pure-int-recipe-custody/install.sh "$GITHUB_WORKSPACE" --dependencies-only
+          bash -n m3/m3-import/pure-int-recipe-custody/install.sh
+          python3 m3/m3-import/pure-int-recipe-custody/test_source_bootstrap.py
+          bash m3/m3-import/pure-int-recipe-custody/install.sh "$GITHUB_WORKSPACE" --dependencies-only
       - name: Recipe, UTF-16, mapped-owner, JNI and compiled-kernel gates
         run: mvn -B -ntp -f m3/tooling/tq/pom.xml verify
       - name: TQ successor recipe and custody

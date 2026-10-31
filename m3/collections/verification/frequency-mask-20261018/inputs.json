@@ -24,11 +24,11 @@
     "sha256": "83646955cd51020bdeb8cc93318aebd3992ec5b216f4d51325b2737700bd565a"
   },
   {
-    "path": "m3/collections/verification/frequency-mask-20261018/donor/com/synexia/primitives/DenseHash.java",
+    "path": "m3/collections/verification/frequency-mask-20261018/donor/jdk/internal/m3/primitives/DenseHash.java",
     "sha256": "10d4a854d77f6a137782a5db69af84a6fb1d4e03fc5afa25da5180e5eac920c3"
   },
   {
-    "path": "m3/collections/verification/frequency-mask-20261018/donor/com/synexia/primitives/IntIntHashMap.java",
+    "path": "m3/collections/verification/frequency-mask-20261018/donor/jdk/internal/m3/primitives/IntIntHashMap.java",
     "sha256": "5e417a279c0b56a0eb0ab430d933e11cc6326d7a4fc2104a241b2ed9ddbc5354"
   }
 ]

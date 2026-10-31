@@ -1,6 +1,6 @@
 {
   "schema": "m3-wrapper-final-catalogue-metadata-freeze/v1",
-  "task": "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018",
+  "task": "/workspace/scratch/8762dba320ce/com.synexia/m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018",
   "status": "METADATA_READY_FOR_EXISTING_TEXT_RECIPE",
   "source_files": [
     {

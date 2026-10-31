@@ -65,7 +65,7 @@ def verify(root: Path, receipt: dict) -> dict:
     if receipt.get("source_master") != "882ebe18891c719c0e26b6ee42558e50e96fe33e":
         refuse("current source custody base drift")
     convergence = receipt.get("synexia", {})
-    if convergence.get("recipe") != "com.synexia.rewrite.M3ArrayListDualWordCurrentRecipe":
+    if convergence.get("recipe") != "jdk.internal.m3.rewrite.M3ArrayListDualWordCurrentRecipe":
         refuse("no canonical Synexia recipe linkage")
     rows = receipt.get("source_postimages")
     if not isinstance(rows, list) or len(rows) != len(FILES):

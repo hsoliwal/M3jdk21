@@ -3,7 +3,7 @@
   "canonical_repo": "hsoliwal/com.synexia",
   "canonical_pr": 12855,
   "canonical_commit": "1a4b37fc14debf9c1ea693396166e7b6e1caa7b6",
-  "recipe": "com.synexia.m3.LongAddressCurrent20261027",
+  "recipe": "jdk.internal.m3.LongAddressCurrent20261027",
   "target": ".github/workflows/m3-long-direct-address-kernel.yml",
   "pre_source_git_blob": "7753da6af91ccc4e1f4310629db9d05f329e3bbc",
   "post_source_git_blob": "b0bf1b2a1e3121ccb47e74ba72e3f29bb7dca9b9",

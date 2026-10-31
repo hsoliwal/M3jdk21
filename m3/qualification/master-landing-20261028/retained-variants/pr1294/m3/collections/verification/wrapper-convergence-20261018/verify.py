@@ -36,7 +36,7 @@ NATIVE = MODULE + "src/main/native/collections/"
 HERE = MODULE + "verification/wrapper-convergence-20261018/"
 PACKAGE = "com.m3.collections."
 RESOURCE_FILES = ("pom.xml", "LICENSE", "NOTICE", "provenance.json",
-                  "synexia-donation.json", "name-mapping.json",
+                  "m3-donation.json", "name-mapping.json",
                   "SYNEXIA-DONATION-NOTICE.txt")
 RUNTIME_OWNERS = ("M3FilteredNavigableSet", "M3FilteredViews",
                   "M3MutableFilteredViews", "M3LongIndexProjection", "M3IndexPathMasks")

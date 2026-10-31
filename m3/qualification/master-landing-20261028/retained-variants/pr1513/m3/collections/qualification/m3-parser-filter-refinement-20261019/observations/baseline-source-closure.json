@@ -2702,7 +2702,7 @@
       "git_blob": "305ce4be316210b5daf7811553a0b4dc79bc24c5"
     },
     {
-      "path": "m3/compatibility/synexia-full-family-pin.tsv",
+      "path": "m3/compatibility/m3-full-family-pin.tsv",
       "sha256": "5d2a89e133164bfc276ed834be47ad3d1bd2583e4bed08a7f94a7e1eb2b50bcc",
       "git_blob": "3d24fc38677435453787ca67f3d5458dbfaf5b5f"
     },
@@ -2712,42 +2712,42 @@
       "git_blob": "291eec22b13d01baecf2c3acef24c3749e19cc24"
     },
     {
-      "path": "m3/docs/synexia-full-family-catalogue.json",
+      "path": "m3/docs/m3-full-family-catalogue.json",
       "sha256": "2e6fa85aeaaec5a6c37aa429b66d102ee9497735fdd5476ca4085d34667b5eef",
       "git_blob": "8145c667c941a9358e9a5149489e455d950afc34"
     },
     {
-      "path": "m3/synexia-import/current-full-borrow/README.md",
+      "path": "m3/m3-import/current-full-borrow/README.md",
       "sha256": "9b6960f76ed3dfaf2cb97ad497b59d0c76294502d6d0047bed70a1dd7d5e26c6",
       "git_blob": "92347a83839d85d5e9b07b829a545f5c8a4c431a"
     },
     {
-      "path": "m3/synexia-import/current-full-borrow/historical-evidence.tsv",
+      "path": "m3/m3-import/current-full-borrow/historical-evidence.tsv",
       "sha256": "4057f1681c9e0c16ef879d9b9ea432f46d8be504b31f8bc152d9a16704ec56f0",
       "git_blob": "014698216f9c2804d62de290e51aef448e03fe75"
     },
     {
-      "path": "m3/synexia-import/current-full-borrow/pin.tsv",
+      "path": "m3/m3-import/current-full-borrow/pin.tsv",
       "sha256": "d84e185891f08d76da765e43d1e138e33fbef99f50de9cc83a99c5284ab46ab5",
       "git_blob": "7b3c0b7d0a6b8daab40ef0062a9e9293d9b7abd2"
     },
     {
-      "path": "m3/synexia-import/current-full-borrow/promotion-phases.tsv",
+      "path": "m3/m3-import/current-full-borrow/promotion-phases.tsv",
       "sha256": "e4730068f321d551913a4cf7d40832f43b315c3973312c73b744ca5081758eb5",
       "git_blob": "c4e8582f99caba32d718b2c1e86dae0854cdce3d"
     },
     {
-      "path": "m3/synexia-import/current-full-borrow/receiver-status.tsv",
+      "path": "m3/m3-import/current-full-borrow/receiver-status.tsv",
       "sha256": "7c1326d024e111e953c139e30be1cfe3026bab0458d648963efb0247684a0715",
       "git_blob": "be8a15064e9b50f2c5c2a581159ee9e6b3e60cbc"
     },
     {
-      "path": "m3/synexia-import/current-full-borrow/synexia-dag.tsv",
+      "path": "m3/m3-import/current-full-borrow/m3-dag.tsv",
       "sha256": "b888ee614bf2a07ece1844b789eaec396e06bb42f29ff5e1183e2fc9ae4c2b33",
       "git_blob": "3e6c56b8555231fb36d0ac620ab112aa5970d45a"
     },
     {
-      "path": "m3/synexia-import/current-full-borrow/synexia-estate.tsv",
+      "path": "m3/m3-import/current-full-borrow/m3-estate.tsv",
       "sha256": "90c2b8a5f1046e397d2b049b0155858877788e714dd3e1c7540b008069b42c13",
       "git_blob": "292bc31a96cd3d20c36d617045c6b01a7a7c8faf"
     },

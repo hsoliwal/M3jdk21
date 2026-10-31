@@ -51,7 +51,7 @@
   ],
   "executed_commands": [
     {
-      "command": "python3 design/publication/measurement_parts.py --bundle-dir canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles --output-dir publication-v2/restored-transport",
+      "command": "python3 design/publication/measurement_parts.py --bundle-dir canonical/m3-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles --output-dir publication-v2/restored-transport",
       "exit_code": 0,
       "result": "EXACT_FIVE_FILE_BUNDLE_RESTORED"
     },

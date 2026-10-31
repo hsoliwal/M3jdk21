@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / 'baseline/m3/collections'
 B = ROOT.parent / 'm3fs-vfs-20261020'
 JDK = B / 'toolchain/jdk21/bin'
-HOST = ROOT / 'custody/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host'
+HOST = ROOT / 'custody/m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host'
 BEFORE = '77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545'
 AFTER = '7bf939ea374ce6c0b13c403f5e154c0f8d376f9cddb8e623cf00ef299183a77e'
 OWNERS = ['M3LongIndexProjection', 'M3LongAddressKernel', 'M3IndexMaskCompactor', 'M3IndexMaskWindow']
@@ -55,7 +55,7 @@ def main():
         sdk = json.loads(sdk_path.read_text())
         expected_admissions = {}
         for pass_id in ['stable-order-groups', *[p for p, _ in PACKET_PROOFS]]:
-            manifest = HOST / ('passes/' + pass_id + '/resources/com/synexia/rewrite/hash-pinned-java/'
+            manifest = HOST / ('passes/' + pass_id + '/resources/jdk/internal/m3/rewrite/hash-pinned-java/'
                                + 'm3-wrapper-' + pass_id + '/manifest.tsv')
             rows = [line.split('\t') for line in manifest.read_text().splitlines()
                     if line and not line.startswith('#')]
@@ -122,7 +122,7 @@ def main():
         if args.label == 'generated':
             proofs.append(receiver / ('m3/collections/src/test/java/com/m3/collections/' + name + '.java'))
         else:
-            source = HOST / ('passes/' + pass_id + '/resources/com/synexia/rewrite/hash-pinned-java/m3-wrapper-'
+            source = HOST / ('passes/' + pass_id + '/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-'
                              + pass_id + '/' + name + '.java.txt')
             target = proof_sources / (name + '.java')
             target.write_bytes(source.read_bytes())

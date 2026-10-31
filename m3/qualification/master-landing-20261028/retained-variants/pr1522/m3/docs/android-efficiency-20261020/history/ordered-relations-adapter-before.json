@@ -62,8 +62,8 @@
       "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
       "fingerprint": null,
       "git_blob_sha1": "9b75e3370bcec6de914954490cc355b9573f7505",
-      "module": "synexia-indexstring",
-      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexDotStarRelations.java",
+      "module": "m3-indexstring",
+      "path": "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexDotStarRelations.java",
       "repo": "hsoliwal/com.synexia",
       "revision_role": "pinned",
       "sha256": "1eeaef102a313396a000538f2f8b1c04cd1dbfd5553d7fa81b4d97a131fb1573",
@@ -77,14 +77,14 @@
         "T Access.second(T)",
         "long[] Join.compose(long[],long[])"
       ],
-      "symbol": "com.synexia.indexstring.MIndexDotStarRelations"
+      "symbol": "jdk.internal.m3.indexstring.MIndexDotStarRelations"
     },
     {
       "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
       "fingerprint": null,
       "git_blob_sha1": "bc5eb2bf64eaacb85011c50749f8b02b7608f4f4",
-      "module": "synexia-indexstring",
-      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexStateRelation.java",
+      "module": "m3-indexstring",
+      "path": "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexStateRelation.java",
       "repo": "hsoliwal/com.synexia",
       "revision_role": "pinned",
       "sha256": "b74e54410a6ece719ec38e88fa725271ec2ad0fe6a2a9a3446580e54d6c323d4",
@@ -93,14 +93,14 @@
         "native long[] composeNative(long[],long[])",
         "native long[] repeatNative(long[],long)"
       ],
-      "symbol": "com.synexia.indexstring.MIndexStateRelation"
+      "symbol": "jdk.internal.m3.indexstring.MIndexStateRelation"
     },
     {
       "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
       "fingerprint": null,
       "git_blob_sha1": "37cb952c9d9aea30de6f34e8dd6d5a5a571e46cd",
-      "module": "synexia-indexstring/native",
-      "path": "synexia-indexstring/native/src/mindex_state_relation_jni.c",
+      "module": "m3-indexstring/native",
+      "path": "m3-indexstring/native/src/mindex_state_relation_jni.c",
       "repo": "hsoliwal/com.synexia",
       "revision_role": "pinned",
       "sha256": "7210ecac2b72d411870889233957ce8213ec3cd0028b4f0a034a48b989f6d9f1",
@@ -116,8 +116,8 @@
       "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
       "fingerprint": null,
       "git_blob_sha1": "8ceee90e2e3b3665b433b410f81c4057b7e1de72",
-      "module": "synexia-indexstring/native",
-      "path": "synexia-indexstring/native/include/mindex_state_relation.h",
+      "module": "m3-indexstring/native",
+      "path": "m3-indexstring/native/include/mindex_state_relation.h",
       "repo": "hsoliwal/com.synexia",
       "revision_role": "pinned",
       "sha256": "fcf42319350f44cb82b76f0cd4a8b71af87b474d643452e27cb07d3e163d021c",

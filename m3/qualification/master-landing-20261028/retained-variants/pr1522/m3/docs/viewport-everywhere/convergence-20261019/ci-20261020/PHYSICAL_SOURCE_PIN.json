@@ -51,7 +51,7 @@
     }
   ],
   "qualified_evidence": {
-    "path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-foundation-validation/attempt02/RECEIPT.json",
+    "path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-foundation-validation/attempt02/RECEIPT.json",
     "sha256": "01c2b1d6078b2b4a8cd45a54ce81f4a07122e541a500995f2bfdfb595cc7f7b3",
     "physical_proof": {
       "sha256": "9174fa71d39499cfce9de491c80d5626bb7f4bd4285c0a10bd3b963e26ab6fcb",

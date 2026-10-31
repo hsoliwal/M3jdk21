@@ -25,8 +25,8 @@ PUBLIC = re.compile(r"\bpublic\s+(?:(?:abstract|final|sealed|non-sealed)\s+)*"
                     r"(?:class|interface|enum|record)\s+([A-Za-z_$][\w$]*)\b")
 JDK_SOURCE = re.compile(r"^src/[^/]+/(?:share|unix|linux|windows|macosx|bsd)/classes/(java|javax)/")
 RECIPE_ROOTS = (
-    "synexia-openrewrite-recipes/",
-    "synexia-m3-recipe/",
+    "m3-openrewrite-recipes/",
+    "m3-m3-recipe/",
     "m3/tooling/migration-recipes/",
 )
 RECIPE_DESCRIPTOR = re.compile(r"(?:^|/)META-INF/rewrite/[^/]+\.ya?ml$")
@@ -57,7 +57,7 @@ QUALIFICATION_RECEIPTS = frozenset({
     "VERIFICATION_RECEIPT.json",
 })
 REVIEWED_FULL_BORROW_OBSERVATION = (
-    "m3/synexia-import/current-full-borrow/string-source-observation-v3.tsv"
+    "m3/m3-import/current-full-borrow/string-source-observation-v3.tsv"
 )
 
 

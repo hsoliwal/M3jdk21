@@ -1,5 +1,5 @@
 {
-  "canonical_recipe": "synexia-openrewrite-recipes/recipes/m3jdk21-pcollections-superset-20261018",
+  "canonical_recipe": "m3-openrewrite-recipes/recipes/m3jdk21-pcollections-superset-20261018",
   "canonical_repository": "hsoliwal/com.synexia",
   "copyright": "2026 Hitesh Soliwal and contributors",
   "global_mapping_policy": "existing M3 collection and root mappings unchanged",

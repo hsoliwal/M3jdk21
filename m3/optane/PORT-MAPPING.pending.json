@@ -3,7 +3,7 @@
   "status": "PENDING_OPTIONAL_MODULE_ADMISSION",
   "target": "m3/optane; module com.m3.optane",
   "intake": "INDEPENDENT_APACHE_MODULE",
-  "canonical_recipe": "hsoliwal/com.synexia:synexia-openrewrite-recipes/recipes/optane-list-handoff-20261015",
+  "canonical_recipe": "hsoliwal/com.synexia:m3-openrewrite-recipes/recipes/optane-list-handoff-20261015",
   "reuse": [
     {
       "source": "MIndexProgressMonitor",

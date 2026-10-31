@@ -2,7 +2,7 @@
   "/usr/bin/g++",
   "-MMD",
   "-MF",
-  "/workspace/scratch/87fb3604f641/m3-implementation/collections-lane/synexia/synexia-openrewrite-recipes/recipe-crates/m3-object-base-vtable-20261018/target/hotspot-owner-proof/after.d",
+  "/workspace/scratch/87fb3604f641/m3-implementation/collections-lane/synexia/m3-openrewrite-recipes/recipe-crates/m3-object-base-vtable-20261018/target/hotspot-owner-proof/after.d",
   "-I/workspace/scratch/87fb3604f641/m3-implementation/M3jdk21/build/m3-p0/hotspot/variant-server/libjvm/objs/precompiled",
   "-D__STDC_FORMAT_MACROS",
   "-D__STDC_LIMIT_MACROS",
@@ -91,7 +91,7 @@
   "-O3",
   "-c",
   "-o",
-  "/workspace/scratch/87fb3604f641/m3-implementation/collections-lane/synexia/synexia-openrewrite-recipes/recipe-crates/m3-object-base-vtable-20261018/target/hotspot-owner-proof/after.o",
-  "/workspace/scratch/87fb3604f641/m3-implementation/collections-lane/synexia/synexia-openrewrite-recipes/recipe-crates/m3-object-base-vtable-20261018/target/hotspot-owner-proof/owner/classLoader.cpp",
+  "/workspace/scratch/87fb3604f641/m3-implementation/collections-lane/synexia/m3-openrewrite-recipes/recipe-crates/m3-object-base-vtable-20261018/target/hotspot-owner-proof/after.o",
+  "/workspace/scratch/87fb3604f641/m3-implementation/collections-lane/synexia/m3-openrewrite-recipes/recipe-crates/m3-object-base-vtable-20261018/target/hotspot-owner-proof/owner/classLoader.cpp",
   "-frandom-seed=classLoader.cpp"
 ]

@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.ReverseNeedleStock
+name: jdk.internal.m3.ReverseNeedleStock
 displayName: M3JDK21 reverse search of an M3 needle over a flat haystack in the stock shape
 description: >-
   lastIndexOf of an M3 needle of 16 units and up over a flat String or StringBuilder ran the
@@ -19,5 +19,5 @@ description: >-
   M3StringSearchPrecompute and the jtreg proof; no upstream file changed. Stacks on crate
   m3-flat-needle-gate epoch 2; the M3StringSearchPrecompute preimage is its postimage.
 recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+  - jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe:
       crateName: m3-reverse-needle-stock

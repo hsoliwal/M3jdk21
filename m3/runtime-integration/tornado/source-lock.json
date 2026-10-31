@@ -14464,7 +14464,7 @@
     }
   ],
   "target_baseline": "2779aba3f98f31c324be43f731be7914e1a05935",
-  "synexia_recipe_base": "361d57154f70e16788bef1006781b89b978732a5",
+  "m3_recipe_base": "361d57154f70e16788bef1006781b89b978732a5",
   "qualification": {
     "source_built_tornado": true,
     "prebuilt_compiler_support_dependencies": true,

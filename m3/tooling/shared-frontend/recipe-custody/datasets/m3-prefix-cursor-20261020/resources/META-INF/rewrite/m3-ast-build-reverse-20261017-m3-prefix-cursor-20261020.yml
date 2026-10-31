@@ -1,5 +1,5 @@
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3jdk.AstBuildReverse20261017
+name: jdk.internal.m3.m3jdk.AstBuildReverse20261017
 displayName: M3String composite cursor FILE-local multi-pass refinement
 description: >-
   Ordered mechanical Java21 passes over already-owned M3String atoms: one source
@@ -12,9 +12,9 @@ tags:
   - recipe-first
   - contract-preserving
 recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+  - jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe:
       crateName: m3-prefix-cursor-20261020-p1
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+  - jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe:
       crateName: m3-prefix-cursor-20261020-p2
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+  - jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe:
       crateName: m3-prefix-cursor-20261020-p3

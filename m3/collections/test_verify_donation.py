@@ -54,7 +54,7 @@ class DonationPacketTest(unittest.TestCase):
             self.assertNotIn(path + "\t", old)
 
     def test_duplicate_selector_is_refused_even_if_values_match(self):
-        packet = (HERE / "synexia-donation.json").read_text()
+        packet = (HERE / "m3-donation.json").read_text()
         duplicate = packet.replace(
             '"historical_installed_source_manifest_20261008"',
             '"installed_source_manifest"', 1)

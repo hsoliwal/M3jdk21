@@ -9,10 +9,10 @@ import sys
 SCHEMA = "M3JDK21_RECIPE_OWNERSHIP_V1"
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE_ROOT = ROOT / "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite"
-LEDGER = ROOT / "m3/docs/synexia-recipe-ownership-classification.tsv"
+LEDGER = ROOT / "m3/docs/m3-recipe-ownership-classification.tsv"
 
 ALLOWED = {
-    "SYNEXIA_CANONICAL_RESIDUE",
+    "M3_CANONICAL_RESIDUE",
     "TARGET_ADAPTER_ONLY",
     "JDK_TARGET_SPECIFIC",
 }
@@ -57,7 +57,7 @@ def read_rows() -> dict[str, dict[str, str]]:
             if not (owner.startswith("com.synexia.") or owner.startswith("com.synexia:")):
                 raise SystemExit(f"non-Synexia provenance/canonical owner for {path}: {owner}")
             if classification == "JDK_TARGET_SPECIFIC" and not (
-                owner.startswith("com.synexia.rewrite.")
+                owner.startswith("jdk.internal.m3.rewrite.")
                 or owner.startswith("com.synexia:")
             ):
                 raise SystemExit(

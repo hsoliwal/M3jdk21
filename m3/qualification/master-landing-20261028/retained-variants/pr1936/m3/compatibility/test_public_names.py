@@ -43,7 +43,7 @@ class PublicNamesTest(unittest.TestCase):
         self.assertFalse(self.issue(
             "m3/qualification/indexed-sort-image-20261026/SOURCE_RECEIPT.tsv"))
         self.assertFalse(self.issue(
-            "m3/synexia-import/current-full-borrow/string-target-successor-v4.tsv"))
+            "m3/m3-import/current-full-borrow/string-target-successor-v4.tsv"))
 
     def test_recipe_and_code_in_evidence_directory_still_refused(self):
         self.assertTrue(self.issue(
@@ -94,7 +94,7 @@ class PublicNamesTest(unittest.TestCase):
         self.assertFalse(self.issue("src/java.base/share/classes/java/util/M3Existing.java", status="M"))
 
     def test_new_synexia_recipe_crate_refused(self):
-        self.assertTrue(self.issue("synexia-openrewrite-recipes/crates/catalogue/pom.xml"))
+        self.assertTrue(self.issue("m3-openrewrite-recipes/crates/catalogue/pom.xml"))
 
     def test_historical_product_recipe_source_mutation_refused(self):
         self.assertTrue(self.issue(
@@ -150,9 +150,9 @@ class PublicNamesTest(unittest.TestCase):
 
 class PinnedPassiveReceiptTest(unittest.TestCase):
     RECEIPTS = (
-        ("m3/compatibility/synexia-java-base-collection-core-receipt-20261025.json",
+        ("m3/compatibility/m3-java-base-collection-core-receipt-20261025.json",
          "M3JDK21_JAVA_BASE_COLLECTION_CORE_RECEIPT_V1"),
-        ("m3/compatibility/synexia-sdk-catalogue-maintenance-receipt-20261025.json",
+        ("m3/compatibility/m3-sdk-catalogue-maintenance-receipt-20261025.json",
          "M3JDK21_SDK_CATALOGUE_MAINTENANCE_RECEIPT_V1"),
     )
 
@@ -209,7 +209,7 @@ class PinnedPassiveReceiptTest(unittest.TestCase):
                      "m3/compatibility/" + digest + "-20261025.json",
                      "src/java.base/share/classes/java/util/Receipt20261025-20261025.java",
                      "m3/collections/src/main/resources/META-INF/rewrite/recipe-20261025.yml",
-                     "synexia-openrewrite-recipes/recipe-20261025.json"):
+                     "m3-openrewrite-recipes/recipe-20261025.json"):
             with self.subTest(path=path):
                 self.assertTrue(GATE.problems(GATE.Change("A", path), source))
 

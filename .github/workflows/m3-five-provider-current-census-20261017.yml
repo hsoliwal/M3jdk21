@@ -52,7 +52,7 @@ jobs:
           from pathlib import Path
           from hashlib import sha256
           root=Path(".")
-          r=root/"m3/collections/qualification/m3-five-provider-current-census-20261017/recipe/src/main/resources/com/synexia/rewrite/m3-five-provider-current-census-20261017"
+          r=root/"m3/collections/qualification/m3-five-provider-current-census-20261017/recipe/src/main/resources/jdk/internal/m3/rewrite/m3-five-provider-current-census-20261017"
           rows=(r/"manifest.tsv").read_text(encoding="utf-8").splitlines()
           assert len(rows)==4,len(rows)
           for line in rows:

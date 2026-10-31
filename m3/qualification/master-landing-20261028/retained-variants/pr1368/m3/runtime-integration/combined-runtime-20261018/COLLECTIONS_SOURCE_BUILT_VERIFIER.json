@@ -1112,13 +1112,13 @@
     "module/m3/collections/src/test/native/collections/m3_bimap_consumer.c": "c6a073b211459f278d2674336ddc84ac28fe19324a0c3cbc30a44193eec84d1e",
     "module/m3/collections/src/test/native/m3_bitlane_jump_jni.c": "6a81bde570bbef1ad25786e225667fd0918bfdde563356865e38255eaf1aab0c",
     "module/m3/collections/src/test/native/m3_mask_window_regions.c": "ac09456844268b592475d9da1e6eee6f154e741c893167cf21d675010580deab",
-    "module/m3/collections/synexia-donation.json": "50df53dec7be6b25b0f84c1635fa3abbe1391dc8a9c28c4ad0c993b0aa5ed964",
+    "module/m3/collections/m3-donation.json": "50df53dec7be6b25b0f84c1635fa3abbe1391dc8a9c28c4ad0c993b0aa5ed964",
     "module/m3/collections/target/classes/META-INF/LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
     "module/m3/collections/target/classes/META-INF/NOTICE": "81138f9994f4afa899c22904debf7cf8277803cf21b53536108ac7e254b0a5bb",
     "module/m3/collections/target/classes/META-INF/SYNEXIA-DONATION-NOTICE.txt": "8b99e55314dface1175cf4c9a0f5d23d699920877b838b54e657c65dd8f25556",
     "module/m3/collections/target/classes/META-INF/name-mapping.json": "320f47e9a8381350cd641a3444119513e5fd32b961369c98338846d7735d03f4",
     "module/m3/collections/target/classes/META-INF/provenance.json": "b5f4029a3b44a064d848f23ed513882e58d5e04b23f2a123ea268a18705fa9c0",
-    "module/m3/collections/target/classes/META-INF/synexia-donation.json": "50df53dec7be6b25b0f84c1635fa3abbe1391dc8a9c28c4ad0c993b0aa5ed964",
+    "module/m3/collections/target/classes/META-INF/m3-donation.json": "50df53dec7be6b25b0f84c1635fa3abbe1391dc8a9c28c4ad0c993b0aa5ed964",
     "module/m3/collections/target/classes/com/m3/collections/M3AdaptiveEnumLongMap.class": "d375df6732f883e780104370e60e8d18020d8c13685140c8a69989a02e4d2d14",
     "module/m3/collections/target/classes/com/m3/collections/M3Address28.class": "bc99279fc022a8f6bf4bc4e3e9f3ada1f0e28c49332e047af8a88270cef4c4e2",
     "module/m3/collections/target/classes/com/m3/collections/M3ArrayList.class": "07ac9032c9fa8ad2567b9e358bf689d86b2bc274245d4562a67422fbb690765f",
@@ -3949,7 +3949,7 @@
     "publication_custody": "The companion SOURCE_PIN.json binds the immutable canonical commit without making this manifest self-referential.",
     "receiver_baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
     "receiver_repository": "hsoliwal/M3jdk21",
-    "recipe_name": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+    "recipe_name": "jdk.internal.m3.m3jdk.CollectionsContractRefinement20261017",
     "runner_reuse": {
       "changed_files": [
         "SOURCE_MANIFEST.json"

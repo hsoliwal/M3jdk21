@@ -6,7 +6,7 @@ SCRIPT=Path(__file__).absolute()
 for p in (SCRIPT,*SCRIPT.parents):
  if p.is_symlink() or getattr(p,'is_junction',lambda:False)():raise RuntimeError('aliased qualification path')
 ROOT=SCRIPT.parents[4]
-OWNER=ROOT/'m3/collections/recipe/owned-apache-bidimap-20261017/src/main/resources/com/synexia/rewrite/hash-pinned-java/owned-apache-bidimap-v3'
+OWNER=ROOT/'m3/collections/recipe/owned-apache-bidimap-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-apache-bidimap-v3'
 EXPECTED={
  'm3/collections/implementations/apache/src/main/java/com/m3/collections/apache/M3BidiMap.java':'8f0448814922c2c0375728c7a5d50262c564f8be158a369f28e68452eeb177ac',
  'm3/collections/implementations/apache/src/test/java/com/m3/collections/apache/M3BidiMapSelfTest.java':'e6cdb48ba26466b8e8a3c6afe31036182b353d7c10cfd83896737714a209419d'}

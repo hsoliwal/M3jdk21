@@ -2,10 +2,10 @@
   "schema": "M3_ARRAY_QUALIFICATION_SOURCE_V1",
   "canonical_repository": "hsoliwal/com.synexia",
   "canonical_commit": "11ac8a842ef832ceaed9365b7d70c71df7368432",
-  "canonical_crate_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "canonical_crate_path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
   "canonical_crate_url": "https://github.com/hsoliwal/com.synexia/tree/11ac8a842ef832ceaed9365b7d70c71df7368432/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
   "canonical_checkpoint_manifest_sha256": "1a963539087c6dc3e895b1f32b2f4c4a8ee205719c9e32d5bf10524d0e4bb540",
-  "recipe_name": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+  "recipe_name": "jdk.internal.m3.m3jdk.CollectionsContractRefinement20261017",
   "array_dataset": "m3jdk21-arrays",
   "retained_datasets": [
     "fixture",

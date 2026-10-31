@@ -23,11 +23,11 @@ CONTRACTS = {
         "sourceTree": "3e3a863f12be6cd1cc390579655f7e31a5766e50",
         "sdkFiles": 22, "verifyGitBlob": "ded464e1f4618d19d0ac76f78ab36707fc4aca7f",
         "baselineCounterexamples": 9,
-        "suites": {"com.synexia.rewrite.M3CanonicalScopeBoundaryRecipeTest": [
+        "suites": {"jdk.internal.m3.rewrite.M3CanonicalScopeBoundaryRecipeTest": [
             "bothPartialStatesRoundTripAndReachFixedPointsInBothOrders",
             "everyOwnerRefusesDriftMissingAndDuplicateWithoutMutation",
             "actualEmittedClassesPreserveAcceptedScopesAndFixCounterexamples"]},
-        "emittedOwners": ["synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java"],
+        "emittedOwners": ["m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java"],
         "counters": {"tests": 3, "successfulRuns": 18, "refusedRuns": 16, "emittedOutputs": 2},
         "schema": "M3_CANONICAL_SCOPE_BOUNDARY_SDK_RECEIPT_V1",
     },
@@ -35,7 +35,7 @@ CONTRACTS = {
         "sourceCommit": "0b81b343363f74bbe78000143bff5e77e02696dc",
         "sourceTree": "eb0f89026b1618164a998f4dc9e36cf54bfa09ec",
         "sdkFiles": 59,
-        "suites": {"com.synexia.rewrite.M3ReleaseJepManifestOrderRecipeTest": [
+        "suites": {"jdk.internal.m3.rewrite.M3ReleaseJepManifestOrderRecipeTest": [
             "bothPartialStatesRoundTripAndReachFixedPointsInBothOrders",
             "everyOwnerRefusesDriftMissingAndDuplicateWithoutMutation",
             "authenticStrictProviderReplaysElevenTargetsAndRejectsBothOrderFailures"]},
@@ -204,7 +204,7 @@ def validate_sdk(lane):
     expected_names = module["COMPILED_PROVIDERS"]
     require(set(sdk["compiledProviders"]) == set(expected_names), "compiled provider inventory differs")
     for name in expected_names:
-        binary_name = "com/synexia/rewrite/" + name if lane == "scope" else name
+        binary_name = "jdk/internal/m3/rewrite/" + name if lane == "scope" else name
         raw = regular(folder / ("target/classes/" + binary_name + ".class")).read_bytes()
         item = sdk["compiledProviders"][name]
         expected = {"bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest()}

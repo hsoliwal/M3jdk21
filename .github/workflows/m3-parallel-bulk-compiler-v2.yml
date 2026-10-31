@@ -45,8 +45,8 @@ jobs:
           arguments = [x.text for x in config.findall('m:compilerArgs/m:arg',ns)]
           assert '--patch-module' in arguments and '--add-exports' in arguments and '-Werror' in arguments
           ids = [x.text for x in project.findall('m:profiles/m:profile/m:id', ns)]
-          assert 'm3-synexia-atom-pattern' in ids
-          assert 'm3-synexia-atom-pattern-mastery' in ids
+          assert 'm3-m3-atom-pattern' in ids
+          assert 'm3-m3-atom-pattern-mastery' in ids
           print('PASS exact POM SHA, current profiles, Java21 compiler arguments')
           PY
 

@@ -5375,7 +5375,7 @@
       "id": "synexia.mechanical.01-upper-case-literal-suffixes",
       "kind": "CANONICAL_TYPED_CATALOGUE_ENTRY",
       "category": "java.mechanical",
-      "executor": "com.synexia.rewrite.M3UpperCaseLiteralSuffixesRecipe",
+      "executor": "jdk.internal.m3.rewrite.M3UpperCaseLiteralSuffixesRecipe",
       "options": [
         {
           "name": "sourceFilePattern",
@@ -5386,7 +5386,7 @@
       "source": {
         "repository": "hsoliwal/com.synexia",
         "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
-        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3UpperCaseLiteralSuffixesRecipe.java",
+        "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3UpperCaseLiteralSuffixesRecipe.java",
         "git_blob": "23e450ca2dad7e7f2ae729825142463a87a91fb7",
         "bytes": 3648,
         "sha256": "d2d0fce61377c06d1f1bc46df81ac43babe30d1a3e7cda6be35efb46111360ff",
@@ -5419,7 +5419,7 @@
       "catalogue_source": {
         "repository": "hsoliwal/com.synexia",
         "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
-        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MechanicalRecipeCatalog.java",
+        "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3MechanicalRecipeCatalog.java",
         "git_blob": "5aa47e0c35ced74e2b5d497d8f55d96777682a4e",
         "bytes": 2273,
         "sha256": "5c26af8ffb0dc35ee53314ff742b02d9fab6af5037e704195c2120228d791bb0",
@@ -5429,7 +5429,7 @@
       "scope_source": {
         "repository": "hsoliwal/com.synexia",
         "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
-        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MechanicalPasses.java",
+        "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3MechanicalPasses.java",
         "git_blob": "2cec710aeebc3dca7dee4b4f489f5b180765b5ca",
         "bytes": 1399,
         "sha256": "b8b74d942474d68cd42bbbf6e81286a7c0b0e88790144b96880544dc5055bfc6",
@@ -5439,7 +5439,7 @@
       "execution_source": {
         "repository": "hsoliwal/com.synexia",
         "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
-        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteTranspiler.java",
+        "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3OpenRewriteTranspiler.java",
         "git_blob": "d06c42aa8ad27118497cd057d1aef8168e4e97f5",
         "bytes": 27717,
         "sha256": "ca98114b1f46cc0858d674393f7ac86d3e92cbbb66842cc511709e725239c911",
@@ -5453,7 +5453,7 @@
       "id": "synexia.mechanical.02-modifier-order",
       "kind": "CANONICAL_TYPED_CATALOGUE_ENTRY",
       "category": "java.mechanical",
-      "executor": "com.synexia.rewrite.M3ModifierOrderRecipe",
+      "executor": "jdk.internal.m3.rewrite.M3ModifierOrderRecipe",
       "options": [
         {
           "name": "sourceFilePattern",
@@ -5464,7 +5464,7 @@
       "source": {
         "repository": "hsoliwal/com.synexia",
         "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
-        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ModifierOrderRecipe.java",
+        "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ModifierOrderRecipe.java",
         "git_blob": "29d78ec2f4edafff54c464af501574570d1a92f0",
         "bytes": 4981,
         "sha256": "80bc9e5607e746fd529307f1876837b784384b693ecc62b40296f1e08db6eda6",
@@ -5497,7 +5497,7 @@
       "catalogue_source": {
         "repository": "hsoliwal/com.synexia",
         "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
-        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MechanicalRecipeCatalog.java",
+        "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3MechanicalRecipeCatalog.java",
         "git_blob": "5aa47e0c35ced74e2b5d497d8f55d96777682a4e",
         "bytes": 2273,
         "sha256": "5c26af8ffb0dc35ee53314ff742b02d9fab6af5037e704195c2120228d791bb0",
@@ -5507,7 +5507,7 @@
       "scope_source": {
         "repository": "hsoliwal/com.synexia",
         "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
-        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MechanicalPasses.java",
+        "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3MechanicalPasses.java",
         "git_blob": "2cec710aeebc3dca7dee4b4f489f5b180765b5ca",
         "bytes": 1399,
         "sha256": "b8b74d942474d68cd42bbbf6e81286a7c0b0e88790144b96880544dc5055bfc6",
@@ -5517,7 +5517,7 @@
       "execution_source": {
         "repository": "hsoliwal/com.synexia",
         "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
-        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteTranspiler.java",
+        "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3OpenRewriteTranspiler.java",
         "git_blob": "d06c42aa8ad27118497cd057d1aef8168e4e97f5",
         "bytes": 27717,
         "sha256": "ca98114b1f46cc0858d674393f7ac86d3e92cbbb66842cc511709e725239c911",
@@ -5531,7 +5531,7 @@
       "id": "synexia.mechanical.03-negated-equality",
       "kind": "CANONICAL_TYPED_CATALOGUE_ENTRY",
       "category": "java.mechanical",
-      "executor": "com.synexia.rewrite.M3NegatedEqualityRecipe",
+      "executor": "jdk.internal.m3.rewrite.M3NegatedEqualityRecipe",
       "options": [
         {
           "name": "sourceFilePattern",
@@ -5542,7 +5542,7 @@
       "source": {
         "repository": "hsoliwal/com.synexia",
         "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
-        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3NegatedEqualityRecipe.java",
+        "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3NegatedEqualityRecipe.java",
         "git_blob": "13ea4c9ff7db679a4bd44b1662f7a2c5173b8813",
         "bytes": 4254,
         "sha256": "cf89d50a5da84a8d13be224cd7a35abacfc296f32f4c1f73f92f19fc10ffa0ee",
@@ -5575,7 +5575,7 @@
       "catalogue_source": {
         "repository": "hsoliwal/com.synexia",
         "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
-        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MechanicalRecipeCatalog.java",
+        "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3MechanicalRecipeCatalog.java",
         "git_blob": "5aa47e0c35ced74e2b5d497d8f55d96777682a4e",
         "bytes": 2273,
         "sha256": "5c26af8ffb0dc35ee53314ff742b02d9fab6af5037e704195c2120228d791bb0",
@@ -5585,7 +5585,7 @@
       "scope_source": {
         "repository": "hsoliwal/com.synexia",
         "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
-        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MechanicalPasses.java",
+        "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3MechanicalPasses.java",
         "git_blob": "2cec710aeebc3dca7dee4b4f489f5b180765b5ca",
         "bytes": 1399,
         "sha256": "b8b74d942474d68cd42bbbf6e81286a7c0b0e88790144b96880544dc5055bfc6",
@@ -5595,7 +5595,7 @@
       "execution_source": {
         "repository": "hsoliwal/com.synexia",
         "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
-        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteTranspiler.java",
+        "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3OpenRewriteTranspiler.java",
         "git_blob": "d06c42aa8ad27118497cd057d1aef8168e4e97f5",
         "bytes": 27717,
         "sha256": "ca98114b1f46cc0858d674393f7ac86d3e92cbbb66842cc511709e725239c911",
@@ -5609,7 +5609,7 @@
       "id": "synexia.mechanical.04-remove-unused-imports",
       "kind": "CANONICAL_TYPED_CATALOGUE_ENTRY",
       "category": "java.mechanical",
-      "executor": "com.synexia.rewrite.M3MechanicalJavaRecipe",
+      "executor": "jdk.internal.m3.rewrite.M3MechanicalJavaRecipe",
       "options": [
         {
           "name": "sourceFilePattern",
@@ -5620,7 +5620,7 @@
       "source": {
         "repository": "hsoliwal/com.synexia",
         "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
-        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MechanicalJavaRecipe.java",
+        "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3MechanicalJavaRecipe.java",
         "git_blob": "765a603de75d3ac9106c87f04163f7375f0bab02",
         "bytes": 4971,
         "sha256": "f13e7415a02ede233f68441caef287f69135fbeb637ddd0e1633e852d7158ed7",
@@ -5653,7 +5653,7 @@
       "catalogue_source": {
         "repository": "hsoliwal/com.synexia",
         "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
-        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MechanicalRecipeCatalog.java",
+        "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3MechanicalRecipeCatalog.java",
         "git_blob": "5aa47e0c35ced74e2b5d497d8f55d96777682a4e",
         "bytes": 2273,
         "sha256": "5c26af8ffb0dc35ee53314ff742b02d9fab6af5037e704195c2120228d791bb0",
@@ -5663,7 +5663,7 @@
       "scope_source": {
         "repository": "hsoliwal/com.synexia",
         "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
-        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MechanicalPasses.java",
+        "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3MechanicalPasses.java",
         "git_blob": "2cec710aeebc3dca7dee4b4f489f5b180765b5ca",
         "bytes": 1399,
         "sha256": "b8b74d942474d68cd42bbbf6e81286a7c0b0e88790144b96880544dc5055bfc6",
@@ -5673,7 +5673,7 @@
       "execution_source": {
         "repository": "hsoliwal/com.synexia",
         "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
-        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteTranspiler.java",
+        "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3OpenRewriteTranspiler.java",
         "git_blob": "d06c42aa8ad27118497cd057d1aef8168e4e97f5",
         "bytes": 27717,
         "sha256": "ca98114b1f46cc0858d674393f7ac86d3e92cbbb66842cc511709e725239c911",
@@ -5692,7 +5692,7 @@
       "id": "synexia.mechanical.05-order-imports",
       "kind": "CANONICAL_TYPED_CATALOGUE_ENTRY",
       "category": "java.mechanical",
-      "executor": "com.synexia.rewrite.M3MechanicalJavaRecipe",
+      "executor": "jdk.internal.m3.rewrite.M3MechanicalJavaRecipe",
       "options": [
         {
           "name": "sourceFilePattern",
@@ -5703,7 +5703,7 @@
       "source": {
         "repository": "hsoliwal/com.synexia",
         "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
-        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MechanicalJavaRecipe.java",
+        "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3MechanicalJavaRecipe.java",
         "git_blob": "765a603de75d3ac9106c87f04163f7375f0bab02",
         "bytes": 4971,
         "sha256": "f13e7415a02ede233f68441caef287f69135fbeb637ddd0e1633e852d7158ed7",
@@ -5736,7 +5736,7 @@
       "catalogue_source": {
         "repository": "hsoliwal/com.synexia",
         "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
-        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MechanicalRecipeCatalog.java",
+        "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3MechanicalRecipeCatalog.java",
         "git_blob": "5aa47e0c35ced74e2b5d497d8f55d96777682a4e",
         "bytes": 2273,
         "sha256": "5c26af8ffb0dc35ee53314ff742b02d9fab6af5037e704195c2120228d791bb0",
@@ -5746,7 +5746,7 @@
       "scope_source": {
         "repository": "hsoliwal/com.synexia",
         "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
-        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MechanicalPasses.java",
+        "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3MechanicalPasses.java",
         "git_blob": "2cec710aeebc3dca7dee4b4f489f5b180765b5ca",
         "bytes": 1399,
         "sha256": "b8b74d942474d68cd42bbbf6e81286a7c0b0e88790144b96880544dc5055bfc6",
@@ -5756,7 +5756,7 @@
       "execution_source": {
         "repository": "hsoliwal/com.synexia",
         "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
-        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteTranspiler.java",
+        "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3OpenRewriteTranspiler.java",
         "git_blob": "d06c42aa8ad27118497cd057d1aef8168e4e97f5",
         "bytes": 27717,
         "sha256": "ca98114b1f46cc0858d674393f7ac86d3e92cbbb66842cc511709e725239c911",
@@ -5775,7 +5775,7 @@
       "id": "synexia.mechanical.06-auto-format",
       "kind": "CANONICAL_TYPED_CATALOGUE_ENTRY",
       "category": "java.mechanical",
-      "executor": "com.synexia.rewrite.M3MechanicalJavaRecipe",
+      "executor": "jdk.internal.m3.rewrite.M3MechanicalJavaRecipe",
       "options": [
         {
           "name": "sourceFilePattern",
@@ -5786,7 +5786,7 @@
       "source": {
         "repository": "hsoliwal/com.synexia",
         "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
-        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MechanicalJavaRecipe.java",
+        "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3MechanicalJavaRecipe.java",
         "git_blob": "765a603de75d3ac9106c87f04163f7375f0bab02",
         "bytes": 4971,
         "sha256": "f13e7415a02ede233f68441caef287f69135fbeb637ddd0e1633e852d7158ed7",
@@ -5819,7 +5819,7 @@
       "catalogue_source": {
         "repository": "hsoliwal/com.synexia",
         "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
-        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MechanicalRecipeCatalog.java",
+        "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3MechanicalRecipeCatalog.java",
         "git_blob": "5aa47e0c35ced74e2b5d497d8f55d96777682a4e",
         "bytes": 2273,
         "sha256": "5c26af8ffb0dc35ee53314ff742b02d9fab6af5037e704195c2120228d791bb0",
@@ -5829,7 +5829,7 @@
       "scope_source": {
         "repository": "hsoliwal/com.synexia",
         "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
-        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MechanicalPasses.java",
+        "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3MechanicalPasses.java",
         "git_blob": "2cec710aeebc3dca7dee4b4f489f5b180765b5ca",
         "bytes": 1399,
         "sha256": "b8b74d942474d68cd42bbbf6e81286a7c0b0e88790144b96880544dc5055bfc6",
@@ -5839,7 +5839,7 @@
       "execution_source": {
         "repository": "hsoliwal/com.synexia",
         "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
-        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteTranspiler.java",
+        "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3OpenRewriteTranspiler.java",
         "git_blob": "d06c42aa8ad27118497cd057d1aef8168e4e97f5",
         "bytes": 27717,
         "sha256": "ca98114b1f46cc0858d674393f7ac86d3e92cbbb66842cc511709e725239c911",
@@ -5858,12 +5858,12 @@
       "id": "synexia.meta.meta_recipe_perfection_check",
       "kind": "EXISTING_MAVEN_OR_TYPED_ACTION",
       "category": "recipe.correctness",
-      "executor": "com.synexia.build:m3-recipe-perfection:1.0.0-SNAPSHOT",
+      "executor": "jdk.internal.m3.build:m3-recipe-perfection:1.0.0-SNAPSHOT",
       "options": {},
       "source_paths": [
-        "synexia-openrewrite-recipes/crates/m3-recipe-enhance/perfection/pom.xml",
-        "synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3RecipePerfectionRecipeTest.java",
-        "synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3RecipeTestScaffoldRecipeTest.java"
+        "m3-openrewrite-recipes/crates/m3-recipe-enhance/perfection/pom.xml",
+        "m3-openrewrite-recipes/src/test/java/jdk/internal/m3/rewrite/M3RecipePerfectionRecipeTest.java",
+        "m3-openrewrite-recipes/src/test/java/jdk/internal/m3/rewrite/M3RecipeTestScaffoldRecipeTest.java"
       ],
       "source_commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
       "availability": "SOURCE_INSPECTED_NOT_RUN",
@@ -5883,7 +5883,7 @@
           "-B",
           "-ntp",
           "-f",
-          "synexia-openrewrite-recipes/crates/m3-recipe-enhance/perfection/pom.xml",
+          "m3-openrewrite-recipes/crates/m3-recipe-enhance/perfection/pom.xml",
           "test"
         ]
       },
@@ -5900,12 +5900,12 @@
       "id": "synexia.meta.meta_recipe_audit",
       "kind": "EXISTING_MAVEN_OR_TYPED_ACTION",
       "category": "recipe.correctness",
-      "executor": "com.synexia.rewrite.M3RecipePerfectionAuditRecipe",
+      "executor": "jdk.internal.m3.rewrite.M3RecipePerfectionAuditRecipe",
       "options": {},
       "source_paths": [
-        "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipePerfectionAuditRecipe.java",
-        "synexia-openrewrite-recipes/pom.xml",
-        "synexia-openrewrite-recipes/README.md"
+        "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipePerfectionAuditRecipe.java",
+        "m3-openrewrite-recipes/pom.xml",
+        "m3-openrewrite-recipes/README.md"
       ],
       "source_commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
       "availability": "SOURCE_INSPECTED_NOT_RUN",
@@ -5923,8 +5923,8 @@
           "-B",
           "-ntp",
           "-f",
-          "synexia-openrewrite-recipes/pom.xml",
-          "-Drewrite.activeRecipes=com.synexia.rewrite.M3RecipePerfectionAuditRecipe",
+          "m3-openrewrite-recipes/pom.xml",
+          "-Drewrite.activeRecipes=jdk.internal.m3.rewrite.M3RecipePerfectionAuditRecipe",
           "org.openrewrite.maven:rewrite-maven-plugin:5.23.1:dryRunNoFork"
         ]
       },
@@ -5944,12 +5944,12 @@
       "id": "synexia.meta.meta_recipe_header_anchor_fix",
       "kind": "EXISTING_MAVEN_OR_TYPED_ACTION",
       "category": "recipe.correctness",
-      "executor": "com.synexia.rewrite.M3RecipeHeaderAndAnchorRecipe",
+      "executor": "jdk.internal.m3.rewrite.M3RecipeHeaderAndAnchorRecipe",
       "options": {},
       "source_paths": [
-        "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeHeaderAndAnchorRecipe.java",
-        "synexia-openrewrite-recipes/pom.xml",
-        "synexia-openrewrite-recipes/README.md"
+        "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeHeaderAndAnchorRecipe.java",
+        "m3-openrewrite-recipes/pom.xml",
+        "m3-openrewrite-recipes/README.md"
       ],
       "source_commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
       "availability": "SOURCE_INSPECTED_NOT_RUN",
@@ -5967,8 +5967,8 @@
           "-B",
           "-ntp",
           "-f",
-          "synexia-openrewrite-recipes/pom.xml",
-          "-Drewrite.activeRecipes=com.synexia.rewrite.M3RecipeHeaderAndAnchorRecipe",
+          "m3-openrewrite-recipes/pom.xml",
+          "-Drewrite.activeRecipes=jdk.internal.m3.rewrite.M3RecipeHeaderAndAnchorRecipe",
           "org.openrewrite.maven:rewrite-maven-plugin:5.23.1:dryRunNoFork"
         ]
       },
@@ -5987,12 +5987,12 @@
       "id": "synexia.meta.meta_recipe_test_scaffold_fix",
       "kind": "EXISTING_MAVEN_OR_TYPED_ACTION",
       "category": "recipe.correctness",
-      "executor": "com.synexia.rewrite.M3RecipeTestScaffoldRecipe",
+      "executor": "jdk.internal.m3.rewrite.M3RecipeTestScaffoldRecipe",
       "options": {},
       "source_paths": [
-        "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeTestScaffoldRecipe.java",
-        "synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3RecipeTestScaffoldRecipeTest.java",
-        "synexia-openrewrite-recipes/pom.xml"
+        "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeTestScaffoldRecipe.java",
+        "m3-openrewrite-recipes/src/test/java/jdk/internal/m3/rewrite/M3RecipeTestScaffoldRecipeTest.java",
+        "m3-openrewrite-recipes/pom.xml"
       ],
       "source_commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
       "availability": "SOURCE_INSPECTED_NOT_RUN",
@@ -6010,8 +6010,8 @@
           "-B",
           "-ntp",
           "-f",
-          "synexia-openrewrite-recipes/pom.xml",
-          "-Drewrite.activeRecipes=com.synexia.rewrite.M3RecipeTestScaffoldRecipe",
+          "m3-openrewrite-recipes/pom.xml",
+          "-Drewrite.activeRecipes=jdk.internal.m3.rewrite.M3RecipeTestScaffoldRecipe",
           "org.openrewrite.maven:rewrite-maven-plugin:5.23.1:dryRunNoFork"
         ]
       },
@@ -6029,11 +6029,11 @@
       "id": "synexia.meta.meta_recipe_perfection_composed_fix",
       "kind": "EXISTING_MAVEN_OR_TYPED_ACTION",
       "category": "recipe.correctness",
-      "executor": "com.synexia.m3.RecipePerfection",
+      "executor": "jdk.internal.m3.RecipePerfection",
       "options": {},
       "source_paths": [
-        "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-recipe-perfection.yml",
-        "synexia-openrewrite-recipes/crates/m3-recipe-enhance/perfection/pom.xml"
+        "m3-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-recipe-perfection.yml",
+        "m3-openrewrite-recipes/crates/m3-recipe-enhance/perfection/pom.xml"
       ],
       "source_commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
       "availability": "SOURCE_INSPECTED_NOT_RUN",
@@ -6051,8 +6051,8 @@
           "-B",
           "-ntp",
           "-f",
-          "synexia-openrewrite-recipes/pom.xml",
-          "-Drewrite.activeRecipes=com.synexia.m3.RecipePerfection",
+          "m3-openrewrite-recipes/pom.xml",
+          "-Drewrite.activeRecipes=jdk.internal.m3.RecipePerfection",
           "org.openrewrite.maven:rewrite-maven-plugin:5.23.1:dryRunNoFork"
         ]
       },
@@ -6069,12 +6069,12 @@
       "id": "synexia.meta.meta_recipe_perfection_recheck",
       "kind": "EXISTING_MAVEN_OR_TYPED_ACTION",
       "category": "recipe.correctness",
-      "executor": "com.synexia.build:m3-recipe-perfection:1.0.0-SNAPSHOT",
+      "executor": "jdk.internal.m3.build:m3-recipe-perfection:1.0.0-SNAPSHOT",
       "options": {},
       "source_paths": [
-        "synexia-openrewrite-recipes/crates/m3-recipe-enhance/perfection/pom.xml",
-        "synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3RecipePerfectionRecipeTest.java",
-        "synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3RecipeTestScaffoldRecipeTest.java"
+        "m3-openrewrite-recipes/crates/m3-recipe-enhance/perfection/pom.xml",
+        "m3-openrewrite-recipes/src/test/java/jdk/internal/m3/rewrite/M3RecipePerfectionRecipeTest.java",
+        "m3-openrewrite-recipes/src/test/java/jdk/internal/m3/rewrite/M3RecipeTestScaffoldRecipeTest.java"
       ],
       "source_commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
       "availability": "SOURCE_INSPECTED_NOT_RUN",
@@ -6092,7 +6092,7 @@
           "-B",
           "-ntp",
           "-f",
-          "synexia-openrewrite-recipes/crates/m3-recipe-enhance/perfection/pom.xml",
+          "m3-openrewrite-recipes/crates/m3-recipe-enhance/perfection/pom.xml",
           "test"
         ]
       },
@@ -6109,11 +6109,11 @@
       "id": "synexia.meta.meta_recipe_header_audit_batch_cli",
       "kind": "EXISTING_MAVEN_OR_TYPED_ACTION",
       "category": "recipe.correctness",
-      "executor": "com.synexia.rewrite.M3RecipePerfectionApply",
+      "executor": "jdk.internal.m3.rewrite.M3RecipePerfectionApply",
       "options": {},
       "source_paths": [
-        "synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3RecipePerfectionApply.java",
-        "synexia-openrewrite-recipes/crates/m3-recipe-enhance/perfection/pom.xml"
+        "m3-openrewrite-recipes/src/test/java/jdk/internal/m3/rewrite/M3RecipePerfectionApply.java",
+        "m3-openrewrite-recipes/crates/m3-recipe-enhance/perfection/pom.xml"
       ],
       "source_commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
       "availability": "SOURCE_INSPECTED_NOT_RUN",
@@ -6124,7 +6124,7 @@
       },
       "invocation": {
         "kind": "JAVA_MAIN_TEST_CLASSPATH_REQUIRED",
-        "main_class": "com.synexia.rewrite.M3RecipePerfectionApply",
+        "main_class": "jdk.internal.m3.rewrite.M3RecipePerfectionApply",
         "args": [
           "LIST_FILE",
           "IMAGE_ROOT",
@@ -6148,7 +6148,7 @@
       "id": "synexia.meta.meta_recipe_laboratory_check",
       "kind": "EXISTING_MAVEN_OR_TYPED_ACTION",
       "category": "recipe.correctness",
-      "executor": "com.synexia.rewrite.M3RecipeLaboratoryCli",
+      "executor": "jdk.internal.m3.rewrite.M3RecipeLaboratoryCli",
       "options": {
         "m3.recipeLab.maxFeatures": 2,
         "m3.recipeLab.maxFixtures": 8,
@@ -6157,9 +6157,9 @@
         "m3.recipeLab.maxCandidates": 16
       },
       "source_paths": [
-        "synexia-openrewrite-recipes/RECIPE_LABORATORY.md",
-        "synexia-openrewrite-recipes/pom.xml",
-        "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeLaboratoryCli.java"
+        "m3-openrewrite-recipes/RECIPE_LABORATORY.md",
+        "m3-openrewrite-recipes/pom.xml",
+        "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeLaboratoryCli.java"
       ],
       "source_commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
       "availability": "SOURCE_INSPECTED_NOT_RUN",
@@ -6177,7 +6177,7 @@
           "-B",
           "-ntp",
           "-pl",
-          "synexia-openrewrite-recipes",
+          "m3-openrewrite-recipes",
           "-am",
           "-Pm3-recipe-laboratory",
           "verify"

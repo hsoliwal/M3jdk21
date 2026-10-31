@@ -39,17 +39,17 @@ jobs:
           set -euo pipefail
           CRATE=m3/collections/qualification/m3-long-index-path-jni-20261018/recipe
           mvn -B -ntp -f "$CRATE/pom.xml" -DskipTests package
-          java -cp "$CRATE/target/classes" com.synexia.m3.M3LongIndexPathJNIRecipe --check . "$CRATE/templates"
+          java -cp "$CRATE/target/classes" jdk.internal.m3.M3LongIndexPathJNIRecipe --check . "$CRATE/templates"
           FRESH="$RUNNER_TEMP/source-sealed-fresh"
           mkdir -p "$FRESH"
-          java -cp "$CRATE/target/classes" com.synexia.m3.M3LongIndexPathJNIRecipe --apply "$FRESH" "$CRATE/templates"
-          java -cp "$CRATE/target/classes" com.synexia.m3.M3LongIndexPathJNIRecipe --check "$FRESH" "$CRATE/templates"
-          java -cp "$CRATE/target/classes" com.synexia.m3.M3LongIndexPathJNIRecipe --apply "$FRESH" "$CRATE/templates"
+          java -cp "$CRATE/target/classes" jdk.internal.m3.M3LongIndexPathJNIRecipe --apply "$FRESH" "$CRATE/templates"
+          java -cp "$CRATE/target/classes" jdk.internal.m3.M3LongIndexPathJNIRecipe --check "$FRESH" "$CRATE/templates"
+          java -cp "$CRATE/target/classes" jdk.internal.m3.M3LongIndexPathJNIRecipe --apply "$FRESH" "$CRATE/templates"
           cmp "$CRATE/templates/M3LongIndexPathMasksJNI.java" "$FRESH/m3/collections/src/main/java/com/m3/collections/M3LongIndexPathMasksJNI.java"
           cmp "$CRATE/templates/M3LongIndexPathMasksJNISelfTest.java" "$FRESH/m3/collections/src/test/java/com/m3/collections/M3LongIndexPathMasksJNISelfTest.java"
           cmp "$CRATE/templates/m3_long_index_path_masks_jni.c" "$FRESH/m3/collections/src/main/native/collections/m3_long_index_path_masks_jni.c"
           printf '\n// deliberate drift\n' >> "$FRESH/m3/collections/src/main/java/com/m3/collections/M3LongIndexPathMasksJNI.java"
-          if java -cp "$CRATE/target/classes" com.synexia.m3.M3LongIndexPathJNIRecipe --check "$FRESH" "$CRATE/templates"; then
+          if java -cp "$CRATE/target/classes" jdk.internal.m3.M3LongIndexPathJNIRecipe --check "$FRESH" "$CRATE/templates"; then
             echo 'ERROR: changed generated source was accepted' >&2
             exit 1
           fi

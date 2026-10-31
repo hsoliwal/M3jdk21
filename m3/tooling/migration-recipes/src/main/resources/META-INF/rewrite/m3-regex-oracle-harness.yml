@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.RegexOracleHarness
+name: jdk.internal.m3.RegexOracleHarness
 displayName: M3JDK21 regex oracle harness (frozen 10k x 64 corpus)
 description: >-
   Adds com.m3.precompute.M3RegexOracleCorpus (the Synexia Regex10kMatrixMasteryCorpus generator
@@ -11,5 +11,5 @@ description: >-
   reproduces the roots, samples stock Pattern independently and proves the literal-shape candidate
   sound. Oracle for the A1/A2/A3 String consumers; JDK Pattern remains the regex authority.
 recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+  - jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe:
       crateName: m3-regex-oracle-harness

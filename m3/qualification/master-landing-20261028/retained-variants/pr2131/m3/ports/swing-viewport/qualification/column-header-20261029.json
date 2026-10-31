@@ -13,34 +13,34 @@
     "repository": "hsoliwal/com.synexia",
     "code_qualification_commit": "8e6a01014c5217a4582d419f7ad1a9eaf7509f17",
     "canonical_recipe_engine_commit": "8e6a01014c5217a4582d419f7ad1a9eaf7509f17",
-    "code_proof_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-receive-20261029/swing-column-header/QUALIFICATION.json",
+    "code_proof_path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-receive-20261029/swing-column-header/QUALIFICATION.json",
     "execution_evidence": [
       {
-        "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-followup-20261029/seal-replay/header/SDK_INPUTS.tsv",
+        "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-followup-20261029/seal-replay/header/SDK_INPUTS.tsv",
         "sha256": "9e156ec2c0b69130f00f355069ea94acb65ba8e75e10599f2927f92fc6b55198",
         "git_blob": "78b0ea75e90d68554ffc56eaa2292b67df3f2d78",
         "bytes": 3688
       },
       {
-        "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-followup-20261029/seal-replay/header/SDK_RESULTS.tsv",
+        "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-followup-20261029/seal-replay/header/SDK_RESULTS.tsv",
         "sha256": "95d5d9c2babfbbda21db2d606a02d0e4348468cfec9e9881f07940410ae77812",
         "git_blob": "897509298a58d8c1fb3b51103537f9c17c8d6379",
         "bytes": 827
       },
       {
-        "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-followup-20261029/seal-replay/header/SDK_JUNIT.xml",
+        "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-followup-20261029/seal-replay/header/SDK_JUNIT.xml",
         "sha256": "7835aee1167bfd840f1438ebe9aac8dab7d9905bccd2080f04b84ecb934e3d40",
         "git_blob": "333050b1fad37f6a2a6c00517fc3baa38b586ddf",
         "bytes": 15873
       },
       {
-        "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-followup-20261029/seal-replay/header/RECEIVER_RECEIPT.json",
+        "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-followup-20261029/seal-replay/header/RECEIVER_RECEIPT.json",
         "sha256": "f6bcf06b1b2ace0e74a3929bfb2954cdc04032b59c61280b987c9c109f129902",
         "git_blob": "06941cdc8ea5333cef460e93afc7e695578a23ba",
         "bytes": 2581
       }
     ],
-    "final_seal_replay_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-followup-20261029/seal-replay/header"
+    "final_seal_replay_path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-followup-20261029/seal-replay/header"
   },
   "files": [
     {
@@ -89,12 +89,12 @@
   ],
   "receipt_generation": {
     "dataset": "ui-header-receipt-20261029",
-    "recipe_identity": "com.synexia.m3jdk.AstBuildReverse20261017",
+    "recipe_identity": "jdk.internal.m3.m3jdk.AstBuildReverse20261017",
     "target_path": "m3/ports/swing-viewport/qualification/column-header-20261029.json",
     "execution_lane": "MAVEN_OPENREWRITE_SDK",
     "template_and_execution_evidence": "successor additions to the immutable code qualification commit; their content is not asserted to be present in that earlier commit",
     "successor_commit": "resolved by the private publication that records these artifacts; deliberately no self-referential hash",
-    "proof_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-public-receipts-20261029/header"
+    "proof_path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-contract-public-receipts-20261029/header"
   },
   "promotion": "Draft review only; bounded evidence does not constitute full platform or release qualification."
 }

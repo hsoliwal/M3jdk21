@@ -3,8 +3,8 @@
   "canonical_synexia_pr": "https://github.com/hsoliwal/com.synexia/pull/13707",
   "canonical_synexia_commit": "ba6bd8738aa8b411718e6afbfa5de53520924049",
   "canonical_recipe_stages": [
-    "com.synexia.m3.ViewportPlanIdentity20261027",
-    "com.synexia.m3.ViewportPlanCompose20261027"
+    "jdk.internal.m3.ViewportPlanIdentity20261027",
+    "jdk.internal.m3.ViewportPlanCompose20261027"
   ],
   "product_pr": "https://github.com/hsoliwal/M3jdk21/pull/2013",
   "original_product_master": "92962fbba10cbf13799253a307dc90f4de94b179",

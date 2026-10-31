@@ -27,7 +27,7 @@ CRATE = "jcc-merge-recovery-20261006-mapping-v04"
 LAB = "synexia.jcc-recipe-laboratory"
 JNI = "synexia.jcc-java-jni-regression"
 IDS = (LAB, JNI)
-IOP = "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3IopPatternMechanicalPasses.java"
+IOP = "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3IopPatternMechanicalPasses.java"
 PATHS = (
     "m3/docs/name-mapping.json",
     "m3/docs/jcc-source-handoff.md",
@@ -145,7 +145,7 @@ def validate_source(packet, prior_map, *, allow_fixture=False):
     prior = {row["id"]: row for row in prior_map["migration"]["records"] if row["id"] in IDS}
     expected = {source["path"]: (record_id, source) for record_id, record in prior.items() for source in record["sources"]}
     require(len(expected) == 19, "expected prior19-owner source set")
-    expected[IOP] = (LAB, {"path": IOP, "symbol": "com.synexia.rewrite.M3IopPatternMechanicalPasses", "module": "synexia-openrewrite-recipes"})
+    expected[IOP] = (LAB, {"path": IOP, "symbol": "jdk.internal.m3.rewrite.M3IopPatternMechanicalPasses", "module": "m3-openrewrite-recipes"})
     artifacts = packet.get("artifacts")
     require(isinstance(artifacts, list) and len(artifacts) == 20, "exact current 20-owner source set required")
     actual = {}
@@ -177,8 +177,8 @@ def validate_build_components(packet):
     require(isinstance(components, list) and len(components) == 1, "exact module-POM source component required")
     row = components[0]
     require(row.get("kind") == "module-pom-compile-edge"
-            and row.get("path") == "synexia-openrewrite-recipes/pom.xml"
-            and row.get("module") == "synexia-openrewrite-recipes", "source build component owner mismatch")
+            and row.get("path") == "m3-openrewrite-recipes/pom.xml"
+            and row.get("module") == "m3-openrewrite-recipes", "source build component owner mismatch")
     require(row.get("repository") == SOURCE_REPO and row.get("commit") == packet["commit"], "mixed source build revision")
     decode_body(row)
     require(row.get("sha256") == "7846d9447016ab714a4d1c82d7f3814efa7a94049cb99bb59ba09f6f6d8c7a80"

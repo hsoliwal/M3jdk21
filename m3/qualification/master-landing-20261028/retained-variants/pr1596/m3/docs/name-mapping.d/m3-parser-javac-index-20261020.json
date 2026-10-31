@@ -2,7 +2,7 @@
   "schema": "M3_OPTIONAL_MODULE_MAPPING_V1",
   "module": "jdk.m3.parser",
   "intake_mode": "INDEPENDENT_APACHE_MODULE",
-  "canonical_recipe": "com.synexia.m3.JavacIndexIngress20261020",
+  "canonical_recipe": "jdk.internal.m3.JavacIndexIngress20261020",
   "recipe_repository": "hsoliwal/com.synexia",
   "recipe_revision": "d3993252efdf973e0c87a996cff389f849720be8",
   "target": "m3/tooling/module-packs/parser",

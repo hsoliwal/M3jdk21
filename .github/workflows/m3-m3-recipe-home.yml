@@ -1,0 +1,108 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 Synexia recipe home
+
+on:
+  push:
+    branches:
+      - "m3/m3-consumer-only-*"
+    paths:
+      - "m3/compatibility/m3-recipe-home-policy.tsv"
+      - "m3/compatibility/m3-a3-regex-memory-recipe-receipt-20261008.tsv"
+      - "m3/compatibility/test_synexia_a3_regex_memory_receipt.py"
+      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-regex-memory-lab.yml"
+      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-regex-memory-workflow.yml"
+      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jni-newstring-admission.yml"
+      - "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv"
+      - "m3/compatibility/test_synexia_recipe_home_policy.py"
+      - "m3/compatibility/m3-string-focused-recipe-receipt-20261008.tsv"
+      - "m3/compatibility/m3-string-focused-estate-binding-20261008.tsv"
+      - "m3/compatibility/test_synexia_string_focused_recipe_receipt.py"
+      - "m3/compatibility/test_synexia_string_runtime_responsibility.py"
+      - "m3/compatibility/m3-string-runtime-responsibility-20261008.tsv"
+      - "m3/docs/mindex-migration-handoff.md"
+      - "m3/compatibility/test_synexia_m3index_ownership_policy.py"
+      - "m3/compatibility/M3_M3INDEX_RECEIVER.md"
+      - "m3/compatibility/m3-m3index-family-handoff.tsv"
+      - "m3/compatibility/m3-m3index-ownership-pin.tsv"
+      - "m3/tooling/migration-recipes/README.md"
+      - "m3/tooling/migration-recipes/pom.xml"
+      - "m3/m3-import/pure-int-recipe-custody/**"
+      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-m3-pure-int.yml"
+      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/synexia/M3RecipeHomePolicyTest.java"
+      - "m3/docs/m3-apache2-borrowing-contract.md"
+      - "m3/docs/M3_CONVERGENCE_MODEL.md"
+      - ".github/workflows/m3-m3-recipe-home.yml"
+  pull_request:
+    paths:
+      - "m3/compatibility/m3-recipe-home-policy.tsv"
+      - "m3/compatibility/m3-a3-regex-memory-recipe-receipt-20261008.tsv"
+      - "m3/compatibility/test_synexia_a3_regex_memory_receipt.py"
+      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-regex-memory-lab.yml"
+      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-regex-memory-workflow.yml"
+      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jni-newstring-admission.yml"
+      - "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv"
+      - "m3/compatibility/test_synexia_recipe_home_policy.py"
+      - "m3/compatibility/m3-string-focused-recipe-receipt-20261008.tsv"
+      - "m3/compatibility/m3-string-focused-estate-binding-20261008.tsv"
+      - "m3/compatibility/test_synexia_string_focused_recipe_receipt.py"
+      - "m3/docs/mindex-migration-handoff.md"
+      - "m3/compatibility/test_synexia_m3index_ownership_policy.py"
+      - "m3/compatibility/M3_M3INDEX_RECEIVER.md"
+      - "m3/compatibility/m3-m3index-family-handoff.tsv"
+      - "m3/compatibility/m3-m3index-ownership-pin.tsv"
+      - "m3/tooling/migration-recipes/README.md"
+      - "m3/tooling/migration-recipes/pom.xml"
+      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/synexia/M3RecipeHomePolicyTest.java"
+      - "m3/docs/m3-apache2-borrowing-contract.md"
+      - "m3/docs/M3_CONVERGENCE_MODEL.md"
+      - ".github/workflows/m3-m3-recipe-home.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Diff hygiene
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="$(git merge-base origin/master HEAD)"
+          git diff --check "$base"...HEAD
+      - name: Receiver policy unit test
+        run: >
+          python -m unittest
+          m3/compatibility/test_synexia_recipe_home_policy.py
+          m3/compatibility/test_synexia_a3_regex_memory_receipt.py
+          m3/compatibility/test_synexia_m3index_ownership_policy.py
+          m3/compatibility/test_synexia_string_focused_recipe_receipt.py
+          m3/compatibility/test_synexia_string_runtime_responsibility.py
+      - name: Install provenance-pinned Synexia custody artifact
+        run: >
+          mvn -B -ntp
+          -f m3/m3-import/pure-int-recipe-custody/pom.xml
+          clean install
+      - name: Migration-recipes JUnit ownership proof
+        run: >
+          mvn -B -ntp
+          -f m3/tooling/migration-recipes/pom.xml
+          -Dtest=M3RecipeHomePolicyTest
+          test

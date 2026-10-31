@@ -100,7 +100,7 @@ class PublicNamesTest(unittest.TestCase):
 
 
     def test_new_synexia_recipe_crate_refused(self):
-        self.assertTrue(self.issue("synexia-openrewrite-recipes/crates/catalogue/pom.xml"))
+        self.assertTrue(self.issue("m3-openrewrite-recipes/crates/catalogue/pom.xml"))
 
     def test_historical_product_recipe_source_mutation_refused(self):
         self.assertTrue(self.issue(
@@ -130,7 +130,7 @@ class PublicNamesTest(unittest.TestCase):
     def test_new_donor_imports_in_jdk_owner_refused(self):
         path = "src/java.base/share/classes/java/util/CollectionViews.java"
         self.assertTrue(self.issue(
-            path, "package java.util;\nimport com.synexia.indexstring.MIndexString;\n"
+            path, "package java.util;\nimport jdk.internal.m3.indexstring.MIndexString;\n"
                   "class CollectionViews {}"))
         self.assertTrue(self.issue(
             path, "package java.util;\nimport org.eclipse.collections.api.list.MutableList;\n"

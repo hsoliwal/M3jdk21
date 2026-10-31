@@ -51,7 +51,7 @@ jobs:
           from pathlib import Path
           import hashlib
           import subprocess
-          root = Path('m3/eclipse/optional-jmod/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/eclipse-core-optional-jmod')
+          root = Path('m3/eclipse/optional-jmod/recipe/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/eclipse-core-optional-jmod')
           lines = [x.split('\t') for x in (root / 'manifest.tsv').read_text().splitlines()
                    if x and not x.startswith('#')]
           assert len(lines) == 8, lines
@@ -72,13 +72,13 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           import hashlib
-          root = Path('m3/eclipse/optional-jmod/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-shared-lexicon-builder-explicit-ctor-20261018')
+          root = Path('m3/eclipse/optional-jmod/recipe/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-shared-lexicon-builder-explicit-ctor-20261018')
           rows = [x.split('\t') for x in (root / 'manifest.tsv').read_text().splitlines()
                   if x and not x.startswith('#')]
           assert len(rows) == 1, rows
           path, before, after, template = rows[0]
           assert path == 'm3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java'
-          fixture = Path('m3/eclipse/optional-jmod/recipe/src/test/resources/com/synexia/rewrite/m3-shared-lexicon-builder-explicit-ctor-20261018/SharedLexiconPrecomputeCatalog.java.before.txt')
+          fixture = Path('m3/eclipse/optional-jmod/recipe/src/test/resources/jdk/internal/m3/rewrite/m3-shared-lexicon-builder-explicit-ctor-20261018/SharedLexiconPrecomputeCatalog.java.before.txt')
           target = Path(path)
           postimage = root / template
           for item in (fixture, target, postimage):

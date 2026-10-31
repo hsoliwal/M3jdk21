@@ -1,5 +1,5 @@
 {
-  "schema": "SYNEXIA_PASSIVE_QUALIFICATION_RECEIPT_V1",
+  "schema": "M3_PASSIVE_QUALIFICATION_RECEIPT_V1",
   "target_repository": "hsoliwal/M3jdk21",
   "qualified_target_base": "1d203c915ed0b07a6235700eea2bbf988745a778",
   "followup_target_base": "1d203c915ed0b07a6235700eea2bbf988745a778",
@@ -10,17 +10,17 @@
   "datasets": [
     {
       "dataset": "swing-tracked-20261029",
-      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swing-tracked-20261029",
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swing-tracked-20261029",
       "baseline_ref": "652ff7cfb605b088866eafb677917203af0964eb",
       "manifests": [
         {
-          "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swing-tracked-20261029/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-swing-tracked-20261029/manifest.tsv",
+          "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swing-tracked-20261029/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-swing-tracked-20261029/manifest.tsv",
           "sha256": "60383469fb71a70d085ff6481e5e7f5f37202d2d4b9c6779c05edf64773cd303"
         }
       ],
-      "sdk_results": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/swing-tracked-followup-20261029/sdk/SDK_RESULTS.tsv",
+      "sdk_results": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/swing-tracked-followup-20261029/sdk/SDK_RESULTS.tsv",
       "sdk_results_sha256": "8b825e16ddb76ecdc10bfde411a9f0d5caa7202447904386f5f75cbef5ed0b29",
-      "sdk_inputs": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/swing-tracked-followup-20261029/sdk/SDK_INPUTS.tsv",
+      "sdk_inputs": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/swing-tracked-followup-20261029/sdk/SDK_INPUTS.tsv",
       "sdk_inputs_sha256": "8549a2847c0574004920bbea36ac3bc4327eef6dd486e7c17e1568ef5349fdb2",
       "actual_sdk_tests": 5,
       "input_sealing_tests": 12,
@@ -29,17 +29,17 @@
     },
     {
       "dataset": "swingx-selection-v2-20261029",
-      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swingx-selection-v2-20261029",
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swingx-selection-v2-20261029",
       "baseline_ref": "652ff7cfb605b088866eafb677917203af0964eb",
       "manifests": [
         {
-          "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swingx-selection-v2-20261029/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-swingx-selection-v2-20261029/manifest.tsv",
+          "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swingx-selection-v2-20261029/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-swingx-selection-v2-20261029/manifest.tsv",
           "sha256": "185260047c2cf22dfedaf9aa54b60b45b868c33589cefea5b17e3bb8657ba6af"
         }
       ],
-      "sdk_results": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-selection-followup-20261029/swingx-selection/SDK_RESULTS.tsv",
+      "sdk_results": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-selection-followup-20261029/swingx-selection/SDK_RESULTS.tsv",
       "sdk_results_sha256": "347426363d09006b550e4150a361d079a266db7c2e37601db1529ca101afead9",
-      "sdk_inputs": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-selection-followup-20261029/swingx-selection/SDK_INPUTS.tsv",
+      "sdk_inputs": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-selection-followup-20261029/swingx-selection/SDK_INPUTS.tsv",
       "sdk_inputs_sha256": "15f236dd9c6fc8a64c1b338345581b428cfd3c0d6d2fc56d28fb116de0d97575",
       "actual_sdk_tests": 5,
       "input_sealing_tests": 12,
@@ -106,7 +106,7 @@
     "java_version": 21,
     "public_api": "All prior public JVM descriptors retained; three explicit installTracked factories added.",
     "tracking_contract": "Opt-in EDT coalescing, model/sorter/tree subscription replacement and close lifecycle; existing install remains manual.",
-    "evidence": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/swing-tracked-followup-20261029/"
+    "evidence": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/swing-tracked-followup-20261029/"
   },
   "evidence_corrections": [
     "The original binding input archive omitted two published metadata files and included four unpublished refusal manifests; the exact canonical published dataset replay and unchanged output proof are retained in canonical-replay-repair-20261029.",

@@ -22,12 +22,12 @@ EXPECTED = {
     "nebula_pr": "217",
     "nebula_commit": "0ff8c981a655b4fffb940f59ed4b6c73a516c50d",
     "nebula_state": "HOLD_UNTIL_PROVEN",
-    "synexia_repository": "hsoliwal/com.synexia",
-    "synexia_pr": "11632",
-    "synexia_commit": "cf21063f2620ca12202122643bf7d4120ed16194",
-    "synexia_state": "DRAFT_UNMERGED",
-    "canonical_recipe_dag": "com.synexia.rewrite.M3NebulaRecipeDag",
-    "canonical_viewport_recipe": "com.synexia.rewrite.M3NebulaViewportDistillationRecipe",
+    "m3_repository": "hsoliwal/com.synexia",
+    "m3_pr": "11632",
+    "m3_commit": "cf21063f2620ca12202122643bf7d4120ed16194",
+    "m3_state": "DRAFT_UNMERGED",
+    "canonical_recipe_dag": "jdk.internal.m3.rewrite.M3NebulaRecipeDag",
+    "canonical_viewport_recipe": "jdk.internal.m3.rewrite.M3NebulaViewportDistillationRecipe",
     "target_repository": TARGET,
     "packet_execution": "false",
     "mutation_authority": "false",
@@ -49,7 +49,7 @@ def validate(row: dict[str, str]) -> dict[str, str]:
         missing = {k: (row.get(k), v) for k, v in EXPECTED.items() if row.get(k) != v}
         extra = sorted(set(row) - set(EXPECTED))
         raise ValueError(f"proof-gated admission drift: mismatches={missing}, extra={extra}")
-    for field in ("nebula_commit", "synexia_commit"):
+    for field in ("nebula_commit", "m3_commit"):
         if not re.fullmatch(r"[0-9a-f]{40}", row[field]):
             raise ValueError(f"invalid Git commit in {field}")
     if any(row[field] != "false" for field in (
@@ -71,7 +71,7 @@ def summary(row: dict[str, str]) -> dict[str, object]:
         "root": canonical_root(row),
         "target": TARGET,
         "nebulaState": row["nebula_state"],
-        "synexiaState": row["synexia_state"],
+        "synexiaState": row["m3_state"],
         "packetExecution": False,
         "mutationAuthority": False,
         "promotionAuthority": False,

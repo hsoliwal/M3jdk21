@@ -3,7 +3,7 @@
   "baseCommit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
   "baseTree": "a493469edd30b3345cc32f608fca19b55b4a378a",
   "ownerPath": "m3/collections/implementations/guava-minmax-priority-queue/src/main/java/com/m3/collections/guava/M3MinMaxPriorityQueue.java",
-  "recipePayloadPath": "m3/collections/receiving/guava-minmax-priority-queue/src/main/resources/com/synexia/rewrite/hash-pinned-java/owned-guava-minmax-priority-queue/M3MinMaxPriorityQueue.java.txt",
+  "recipePayloadPath": "m3/collections/receiving/guava-minmax-priority-queue/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-guava-minmax-priority-queue/M3MinMaxPriorityQueue.java.txt",
   "modulePath": "m3/collections/implementations/guava-minmax-priority-queue",
   "recipePath": "m3/collections/receiving/guava-minmax-priority-queue",
   "qualificationPath": "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018",
@@ -1115,7 +1115,7 @@
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/receiving/guava-minmax-priority-queue/engine-src/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "path": "m3/collections/receiving/guava-minmax-priority-queue/engine-src/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "bytes": 13805,
       "sha256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599",
       "role": "NEW_PACKET_SOURCE"
@@ -1139,25 +1139,25 @@
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/receiving/guava-minmax-priority-queue/src/main/resources/com/synexia/rewrite/hash-pinned-java/owned-guava-minmax-priority-queue/engine-receipt.tsv",
+      "path": "m3/collections/receiving/guava-minmax-priority-queue/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-guava-minmax-priority-queue/engine-receipt.tsv",
       "bytes": 179,
       "sha256": "7b1a2aee52fb611cc6fdf406bee8eeaf25d505598d4cbb08b86b228f7e6670de",
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/receiving/guava-minmax-priority-queue/src/main/resources/com/synexia/rewrite/hash-pinned-java/owned-guava-minmax-priority-queue/M3MinMaxPriorityQueue.java.txt",
+      "path": "m3/collections/receiving/guava-minmax-priority-queue/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-guava-minmax-priority-queue/M3MinMaxPriorityQueue.java.txt",
       "bytes": 38983,
       "sha256": "29ffcd071461307e4cc7fc623baeba65eb19079f2dc2536cfa119a821c3b6a96",
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/receiving/guava-minmax-priority-queue/src/main/resources/com/synexia/rewrite/hash-pinned-java/owned-guava-minmax-priority-queue/manifest.tsv",
+      "path": "m3/collections/receiving/guava-minmax-priority-queue/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-guava-minmax-priority-queue/manifest.tsv",
       "bytes": 228,
       "sha256": "4da92465d1bd683ae18d5660bffdc7dbf2ee312cc4c4997e5102fcbef5a374f9",
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/receiving/guava-minmax-priority-queue/src/main/resources/com/synexia/rewrite/hash-pinned-java/owned-guava-minmax-priority-queue/source-receipt.tsv",
+      "path": "m3/collections/receiving/guava-minmax-priority-queue/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-guava-minmax-priority-queue/source-receipt.tsv",
       "bytes": 196,
       "sha256": "2d7fd2774aee706e0dafb6b3793a43a34fa078c937ae097698c03e56968c9506",
       "role": "NEW_PACKET_SOURCE"
@@ -1169,7 +1169,7 @@
       "role": "NEW_PACKET_SOURCE"
     },
     {
-      "path": "m3/collections/receiving/guava-minmax-priority-queue/src/test/java/com/synexia/rewrite/M3OwnedGuavaMinMaxPriorityQueueRecipeTest.java",
+      "path": "m3/collections/receiving/guava-minmax-priority-queue/src/test/java/jdk/internal/m3/rewrite/M3OwnedGuavaMinMaxPriorityQueueRecipeTest.java",
       "bytes": 13541,
       "sha256": "ff1bd22fe1fe3fa2b8c3684ceb6a95cd21901ad899dc37c3510302c57a405428",
       "role": "NEW_PACKET_SOURCE"
