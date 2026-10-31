@@ -1,0 +1,70 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 original M3File shadow streams and subprogress
+on:
+  pull_request:
+    paths:
+      - 'm3/file/**'
+      - '.github/workflows/m3-file-shadow-stream-20261020.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  original-provider-shadow:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Qualify existing original M3File contracts on host and linked Java21 image
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-file-shadow-module-contracts"
+          python3 m3/file/verify.py --java-home "$JAVA_HOME" --output "$out"
+          python3 - "$out/receipt.json" <<'PY'
+          import json
+          from pathlib import Path
+          import sys
+          receipt = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
+          if receipt.get("state") != "PASSED":
+              raise SystemExit("M3_FILE_SHADOW_MODULE_NOT_QUALIFIED")
+          host = receipt.get("host_module_contracts", {})
+          image = receipt.get("image_module_contracts", {})
+          if not isinstance(host, dict) or not isinstance(image, dict):
+              raise SystemExit("M3_FILE_SHADOW_MISSING_CONTRACT_MAPS")
+          if len(host) != 16 or set(host) != set(image):
+              raise SystemExit("M3_FILE_SHADOW_EXACT_16_HOST_IMAGE_CENSUS_MISMATCH")
+          expected = {
+              "M3FileStreamsContract": "M3_FILE_SHADOW_STREAM_PASS",
+              "M3ShadowStreamsContract": "M3_SHADOW_STREAM_PASS",
+          }
+          for name, marker in expected.items():
+              if marker not in host.get(name, "") or marker not in image.get(name, ""):
+                  raise SystemExit("M3_FILE_SHADOW_CONTRACT_NOT_EXECUTED: " + name)
+          if receipt.get("full_m3jdk21_bootstrap") != "NOT_RUN":
+              raise SystemExit("M3_FILE_SHADOW_SCOPE_MARKER_CHANGED")
+          print("M3_FILE_SHADOW_HOST_LINKED_IMAGE_PASS contracts=16")
+          PY
+      - name: Strict Java21 original M3File plus bounded shadow contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-shadow-file"
+          mkdir -p "$out"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$out" \
+            m3/file/src/main/java/jdk/m3/file/M3File.java \
+            m3/file/src/main/java/jdk/m3/file/M3FileStreams.java \
+            m3/file/src/main/java/jdk/m3/file/M3StreamProgress.java \
+            m3/file/src/main/java/jdk/m3/file/M3ShadowStreams.java \
+            m3/file/src/test/java/jdk/m3/file/M3FileStreamsContract.java
+          java -cp "$out" jdk.m3.file.M3FileStreamsContract
+          java -Xint -cp "$out" jdk.m3.file.M3FileStreamsContract
