@@ -19,6 +19,8 @@ RENAME_RESEAL.tsv records every carried value (kind before after), so an old dig
 ledger is the lineage, the manifests are live pins. Not carried, and reported instead of guessed: an old digest that
 still names bytes in the tree while its renamed copy moved on (AMBIGUOUS), and composite digests over sets of files,
 whose owners recompute them.
+With --ref the passes repeat until one changes nothing and are squashed into one commit: a digest is ambiguous only
+on a tree the reseal no longer changes (a kept copy resealed to the renamed bytes resolves its ambiguity).
 CLI: python -I reseal.py --base BASE --tree REV [--ref REF] [--message TEXT]
 """
 from __future__ import annotations
@@ -40,6 +42,7 @@ LEDGER = "m3/tooling/jdk-naming/RENAME_RESEAL.tsv"
 HEX = re.compile(r"(?<![0-9A-Za-z])(?:[0-9a-f]{64}|[0-9a-f]{40}|[0-9A-F]{64}|[0-9A-F]{40})(?![0-9A-Za-z])")
 HEX_QUICK = re.compile(r"[0-9a-fA-F]{40}")
 PATHISH = re.compile(r"[A-Za-z0-9_.$+@~-]+(?:/[A-Za-z0-9_.$+@~-]+)+")
+MAX_PASSES = 6
 
 
 def digests(data: bytes) -> tuple[str, str]:
@@ -262,24 +265,48 @@ def commit(root: Path, rev: str, ref: str, message: str, files: dict) -> str:
     return jn.git(root, "rev-parse", ref)
 
 
+def report(number: int, result: dict) -> str:
+    paths = sum(1 for kind in result["pins"].kind.values() if kind == "PATH")
+    return "JDK_NAMING_RESEAL pass=%d files=%d nodes=%d layers=%d carried=%d paths=%d ambiguous=%d cycles=%d unmapped=%d" % (
+        number, len(result["files"]), result["nodes"], result["layers"], len(result["carried"]), paths,
+        len(result["pins"].ambiguous), len(result["cycles"]), len(result["unmapped"]))
+
+
+def reseal_to_fixed_point(root: Path, base: str, rev: str, ref: str, message: str) -> str:
+    """Passes until one changes nothing, squashed into one commit on REF (parent REV) with the ledger. A digest
+    ambiguous in one pass (its bytes renamed in one place, kept in another) can stop being ambiguous once the kept
+    copy is resealed to the same bytes, so ambiguity is only final on a tree the reseal no longer changes
+    (RESEAL_AMBIGUITY_AFTER_RESEAL)."""
+    scratch, tree, carried_values = ref + "-pass", rev, {}
+    for number in range(1, MAX_PASSES + 1):
+        result = reseal(root, base, tree)
+        print(report(number, result), flush=True)
+        if not result["files"]:
+            result["carried"] = carried_values
+            final_tree = commit(root, tree, scratch, message + " (ledger)", {LEDGER: ledger(result)})
+            squashed = jn.git(root, "commit-tree", final_tree + "^{tree}", "-p", jn.git(root, "rev-parse", rev),
+                              "-m", message)
+            jn.git(root, "update-ref", ref, squashed)
+            jn.git(root, "update-ref", "-d", scratch)
+            return squashed
+        carried_values.update(result["carried"])
+        tree = commit(root, tree, scratch, "%s (pass %d)" % (message, number), result["files"])
+    raise SystemExit("REFUSED: reseal did not reach a fixed point in %d passes" % MAX_PASSES)
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--root", default=".")
     parser.add_argument("--base", required=True, help="the tree before the rename")
     parser.add_argument("--tree", required=True, help="the renamed tree")
-    parser.add_argument("--ref", help="write the resealed commit to this ref")
+    parser.add_argument("--ref", help="write the resealed commit (passes to a fixed point, squashed) to this ref")
     parser.add_argument("--message", default="JDK naming: reseal pins after the rename (recipe JDK_NAMING_RESEAL)")
     args = parser.parse_args(argv)
     root = Path(args.root)
-    result = reseal(root, args.base, args.tree)
-    paths = sum(1 for kind in result["pins"].kind.values() if kind == "PATH")
-    print("JDK_NAMING_RESEAL files=%d nodes=%d layers=%d carried=%d paths=%d ambiguous=%d cycles=%d unmapped=%d" % (
-        len(result["files"]), result["nodes"], result["layers"], len(result["carried"]), paths,
-        len(result["pins"].ambiguous), len(result["cycles"]), len(result["unmapped"])))
-    if args.ref:
-        files = dict(result["files"])
-        files[LEDGER] = ledger(result)
-        print("COMMIT %s %s" % (args.ref, commit(root, args.tree, args.ref, args.message, files)))
+    if not args.ref:
+        print(report(1, reseal(root, args.base, args.tree)))
+        return 0
+    print("COMMIT %s %s" % (args.ref, reseal_to_fixed_point(root, args.base, args.tree, args.ref, args.message)))
     return 0
 
 
