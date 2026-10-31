@@ -600,6 +600,9 @@ public abstract class M3LongTupleHashFunction implements Serializable {
                                        final int off, final int len, final long[] result) {
         if (input.hasArray()) {
             unsafeHash(f, input.array(), BYTE_BASE + input.arrayOffset() + off, len, result);
+        } else if (input.isDirect() && off + len > input.limit()) {
+            // read up to the capacity, as the donor's address read did (the limit does not bound it)
+            f.hash(input.duplicate().order(input.order()).limit(input.capacity()), BYTE_BUF_ACCESS, off, len, result);
         } else {
             f.hash(input, BYTE_BUF_ACCESS, off, len, result);
         }

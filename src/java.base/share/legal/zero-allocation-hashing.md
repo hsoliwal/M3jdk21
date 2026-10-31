@@ -24,7 +24,9 @@ file says so above its package line.
   MathsJDK9 -> M3MathsJDK9); the JetBrains and JSR-305 annotations are removed.
 - No sun.misc.Unsafe: UnsafeAccess became the byte[] access over jdk.internal.util.ByteArrayLittleEndian
   (little-endian, bounds-checked reads, index base 0). Direct and read-only ByteBuffers are read through
-  ByteBufferAccess. Access.unsafe() and the LongHashFunction / LongTupleHashFunction methods that read raw memory
+  ByteBufferAccess. When off + len passes a direct buffer's limit, it is read through a view whose limit is its
+  capacity, so hashBytes(ByteBuffer, off, len) hashes the same ranges as the donor's address read (off + len up to
+  the capacity). Access.unsafe() and the LongHashFunction / LongTupleHashFunction methods that read raw memory
   (hashMemory, hashBoolean, hashBooleans, hashChars(char[]), hashShorts, hashInts, hashLongs) are not included.
 - hashChars(String) hashes the native-order chars through CharSequenceAccess (the donor's UnknownJvmStringHash path).
   The per-JVM String-internals classes (StringHash, ModernCompactStringHash, ModernHotSpotStringHash,
@@ -33,7 +35,8 @@ file says so above its package line.
 - For javac -Xlint:all -Werror: @SuppressWarnings("fallthrough") on the MurmurHash3 tail switch, and a redundant
   (byte) cast in XXH3 is removed.
 
-Nothing else was changed. Comments and documentation are the donor's and still name the donor API. The published
+Nothing else was changed. Comments and documentation are the donor's (plus one comment line on each direct-buffer
+branch) and still name the donor API. The published
 sources jar carries no NOTICE file.
 
 ### LICENSE

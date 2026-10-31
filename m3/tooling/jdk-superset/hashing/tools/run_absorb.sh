@@ -4,7 +4,7 @@
 #
 # run_absorb.sh <repo root> <work dir>
 # The zero-allocation-hashing absorption into java.base, end to end and re-runnable:
-#   1. hash_jdk_form.py (HASH_JDK_FORM v1 rules + CHANGE_NOTICE v1) on a staged copy of the kept donor files
+#   1. hash_jdk_form.py (HASH_JDK_FORM v2 rules + CHANGE_NOTICE v1) on a staged copy of the kept donor files
 #   2. absorb_rename_generic.py (STRIP_JB v1 + RENAME v1): net.openhft.hashing -> jdk.internal.m3.hash, T -> M3T
 #   3. the result replaces <repo>/src/java.base/share/classes/jdk/internal/m3/hash/*.java
 # A second run over the same donor bytes must leave the repository unchanged (git diff --exit-code).

@@ -21,14 +21,14 @@ UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v1	U13-unsafe-get-to-byte-array-le	3	3
 UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v1	U14-unsafe-get-byte-to-index	1	1
 UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v1	U15-order-little-endian	1	1
 UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v1	U16-drop-old-android-classes	1	1
-LongHashFunction.java	FACADE_DROP_RAW_MEMORY v1	direct-buffer-import	1	1
-LongHashFunction.java	FACADE_DROP_RAW_MEMORY v1	byte-array-unsafe-hash	1	1
-LongHashFunction.java	FACADE_DROP_RAW_MEMORY v1	direct-buffer-through-buffer-access	1	1
+LongHashFunction.java	FACADE_DROP_RAW_MEMORY v2	direct-buffer-import	1	1
+LongHashFunction.java	FACADE_DROP_RAW_MEMORY v2	byte-array-unsafe-hash	1	1
+LongHashFunction.java	FACADE_DROP_RAW_MEMORY v2	direct-buffer-capacity-view	1	1
 LongHashFunction.java	STRING_INTERNALS_TO_CHARSEQ v1	string-native-chars	2	2
-LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v1	direct-buffer-import	1	1
-LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v1	byte-array-access-field	1	1
-LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v1	byte-array-unsafe-hash	1	1
-LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v1	direct-buffer-through-buffer-access	1	1
+LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v2	direct-buffer-import	1	1
+LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v2	byte-array-access-field	1	1
+LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v2	byte-array-unsafe-hash	1	1
+LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v2	direct-buffer-capacity-view	1	1
 LongTupleHashFunction.java	STRING_INTERNALS_TO_CHARSEQ v1	string-native-chars	4	4
 Util.java	UTIL_DROP_JVM_PROBES v1	direct-buffer-import	1	1
 XXH3.java	XXH3_SECRET_ACCESS v1	secret-byte-array-access	1	1
@@ -51,42 +51,42 @@ WyHash.java	CHANGE_NOTICE v1	notice-above-package	1	1
 XXH3.java	CHANGE_NOTICE v1	notice-above-package	1	1
 XxHash.java	CHANGE_NOTICE v1	notice-above-package	1	1
 Access.java	ACCESS_DROP_UNSAFE v1	drop public static <T> Access<T> unsafe()	1	1
-LongHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public long hashBoolean(boolean input)	1	1
-LongHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public long hashBooleans(@NotNull boolean[] input)	1	1
-LongHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public long hashBooleans(@NotNull boolean[] input, int off, int len)	1	1
-LongHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public long hashMemory(long address, long len)	1	1
-LongHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public long hashChars(@NotNull char[] input)	1	1
-LongHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public long hashChars(@NotNull char[] input, int off, int len)	1	1
-LongHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public long hashShorts(@NotNull short[] input)	1	1
-LongHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public long hashShorts(@NotNull short[] input, int off, int len)	1	1
-LongHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public long hashInts(@NotNull int[] input)	1	1
-LongHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public long hashInts(@NotNull int[] input, int off, int len)	1	1
-LongHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public long hashLongs(@NotNull long[] input)	1	1
-LongHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public long hashLongs(@NotNull long[] input, int off, int len)	1	1
-LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public void hashBoolean(final boolean input, final long[] result)	1	1
-LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public long[] hashBoolean(final boolean input)	1	1
-LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public void hashBooleans(final boolean[] input, final long[] result)	1	1
-LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public long[] hashBooleans(final boolean[] input)	1	1
-LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public void hashBooleans(final boolean[] input,	1	1
-LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public long[] hashBooleans(final boolean[] input, final int off, final int len)	1	1
-LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public void hashMemory(final long address, final long len, final long[] result)	1	1
-LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public long[] hashMemory(final long address, final long len)	1	1
-LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public void hashChars(final char[] input, final long[] result)	1	1
-LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public long[] hashChars(final char[] input)	1	1
-LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public void hashChars(final char[] input, final int off, final int len, final long[] result)	1	1
-LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public long[] hashChars(final char[] input, final int off, final int len)	1	1
-LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public void hashShorts(final short[] input, final long[] result)	1	1
-LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public long[] hashShorts(final short[] input)	1	1
-LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public void hashShorts(final short[] input, final int off, final int len, final long[] result)	1	1
-LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public long[] hashShorts(final short[] input, final int off, final int len)	1	1
-LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public void hashInts(final int[] input, final long[] result)	1	1
-LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public long[] hashInts(final int[] input)	1	1
-LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public void hashInts(final int[] input, final int off, final int len, final long[] result)	1	1
-LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public long[] hashInts(final int[] input, final int off, final int len)	1	1
-LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public void hashLongs(final long[] input, final long[] result)	1	1
-LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public long[] hashLongs(final long[] input)	1	1
-LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public void hashLongs(final long[] input, final int off, final int len, final long[] result)	1	1
-LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v1	drop public long[] hashLongs(final long[] input, final int off, final int len)	1	1
+LongHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public long hashBoolean(boolean input)	1	1
+LongHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public long hashBooleans(@NotNull boolean[] input)	1	1
+LongHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public long hashBooleans(@NotNull boolean[] input, int off, int len)	1	1
+LongHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public long hashMemory(long address, long len)	1	1
+LongHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public long hashChars(@NotNull char[] input)	1	1
+LongHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public long hashChars(@NotNull char[] input, int off, int len)	1	1
+LongHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public long hashShorts(@NotNull short[] input)	1	1
+LongHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public long hashShorts(@NotNull short[] input, int off, int len)	1	1
+LongHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public long hashInts(@NotNull int[] input)	1	1
+LongHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public long hashInts(@NotNull int[] input, int off, int len)	1	1
+LongHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public long hashLongs(@NotNull long[] input)	1	1
+LongHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public long hashLongs(@NotNull long[] input, int off, int len)	1	1
+LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public void hashBoolean(final boolean input, final long[] result)	1	1
+LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public long[] hashBoolean(final boolean input)	1	1
+LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public void hashBooleans(final boolean[] input, final long[] result)	1	1
+LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public long[] hashBooleans(final boolean[] input)	1	1
+LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public void hashBooleans(final boolean[] input,	1	1
+LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public long[] hashBooleans(final boolean[] input, final int off, final int len)	1	1
+LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public void hashMemory(final long address, final long len, final long[] result)	1	1
+LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public long[] hashMemory(final long address, final long len)	1	1
+LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public void hashChars(final char[] input, final long[] result)	1	1
+LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public long[] hashChars(final char[] input)	1	1
+LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public void hashChars(final char[] input, final int off, final int len, final long[] result)	1	1
+LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public long[] hashChars(final char[] input, final int off, final int len)	1	1
+LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public void hashShorts(final short[] input, final long[] result)	1	1
+LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public long[] hashShorts(final short[] input)	1	1
+LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public void hashShorts(final short[] input, final int off, final int len, final long[] result)	1	1
+LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public long[] hashShorts(final short[] input, final int off, final int len)	1	1
+LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public void hashInts(final int[] input, final long[] result)	1	1
+LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public long[] hashInts(final int[] input)	1	1
+LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public void hashInts(final int[] input, final int off, final int len, final long[] result)	1	1
+LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public long[] hashInts(final int[] input, final int off, final int len)	1	1
+LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public void hashLongs(final long[] input, final long[] result)	1	1
+LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public long[] hashLongs(final long[] input)	1	1
+LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public void hashLongs(final long[] input, final int off, final int len, final long[] result)	1	1
+LongTupleHashFunction.java	FACADE_DROP_RAW_MEMORY v2	drop public long[] hashLongs(final long[] input, final int off, final int len)	1	1
 Util.java	UTIL_DROP_JVM_PROBES v1	drop static private boolean isHotSpotVM(@NotNull final String name)	1	1
 Util.java	UTIL_DROP_JVM_PROBES v1	drop static private boolean isJ9VM(@NotNull final String name)	1	1
 Util.java	UTIL_DROP_JVM_PROBES v1	drop static final StringHash VALID_STRING_HASH;	1	1

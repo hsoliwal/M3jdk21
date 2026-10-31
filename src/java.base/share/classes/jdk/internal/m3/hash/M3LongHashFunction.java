@@ -501,6 +501,10 @@ public abstract class M3LongHashFunction implements Serializable {
     private long hashByteBuffer(ByteBuffer input, int off, int len) {
         if (input.hasArray()) {
             return unsafeHash(input.array(), BYTE_BASE + input.arrayOffset() + off, len);
+        } else if (input.isDirect() && off + len > input.limit()) {
+            // read up to the capacity, as the donor's address read did (the limit does not bound it)
+            return hash(input.duplicate().order(input.order()).limit(input.capacity()),
+                    M3ByteBufferAccess.INSTANCE, off, len);
         } else {
             return hash(input, M3ByteBufferAccess.INSTANCE, off, len);
         }

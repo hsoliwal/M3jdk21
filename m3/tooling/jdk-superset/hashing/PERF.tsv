@@ -1,5 +1,5 @@
 # host: Windows 11 (shared with other sessions; rows vary run to run), stock JDK 21.0.9 + patched java.base (--patch-module); M3HashAtomsPerf: static final MethodHandles bound to the function (invokeExact), corpus 2048 random inputs of length 0..1100, 40 passes per round, warm-up 6, best of 7
-# committed-N: M3ByteArrayAccess over jdk.internal.util.ByteArrayLittleEndian (this change), three runs (committed-3: tools/gate.sh)
+# committed-N: M3ByteArrayAccess over jdk.internal.util.ByteArrayLittleEndian (this change), four runs (committed-3: tools/gate.sh; committed-4: tools/gate.sh after the review fixes of #2232)
 # alternative-internal-unsafe: the same rows with M3ByteArrayAccess over jdk.internal.misc.Unsafe getLong/getInt/getShort (NOT committed; isolates the cost of the access)
 # speedup = vendored ns/op / absorbed ns/op (above 1: absorbed faster)
 run	atom	form	ns_per_op_absorbed	ns_per_op_vendored	speedup
@@ -45,6 +45,20 @@ committed-3	M3MetroHash	metro() hashBytes(byte[])	64.04	46.41	0.72
 committed-3	M3CharSequenceAccess	xx3() hashChars(Latin-1 String)	593.41	148.11	0.25
 committed-3	M3CharSequenceAccess	xx3() hashChars(UTF-16 String)	1489.05	87.39	0.06
 committed-3	M3ByteBufferAccess	xx3() hashBytes(direct ByteBuffer, off, len)	687.52	111.67	0.16
+committed-4	M3XxHash	xx() hashBytes(byte[])	66.48	59.31	0.89
+committed-4	M3XXH3	xx3() hashBytes(byte[])	83.37	61.72	0.74
+committed-4	M3XXH3	xx128low() hashBytes(byte[])	238.39	63.77	0.27
+committed-4	M3XXH3	xx128() hashBytes(byte[]) -> long[2]	259.00	54.13	0.21
+committed-4	M3WyHash	wy_3() hashBytes(byte[])	62.12	64.88	1.04
+committed-4	M3MurmurHash_3	murmur_3() hashBytes(byte[])	104.07	84.41	0.81
+committed-4	M3MurmurHash_3	murmur_3() tuple hashBytes(byte[]) -> long[2]	100.60	90.43	0.90
+committed-4	M3CityAndFarmHash_1_1	city_1_1() hashBytes(byte[])	77.26	50.90	0.66
+committed-4	M3CityAndFarmHash_1_1	farmNa() hashBytes(byte[])	55.76	48.83	0.88
+committed-4	M3CityAndFarmHash_1_1	farmUo() hashBytes(byte[])	63.32	79.30	1.25
+committed-4	M3MetroHash	metro() hashBytes(byte[])	83.50	93.07	1.11
+committed-4	M3CharSequenceAccess	xx3() hashChars(Latin-1 String)	423.78	116.57	0.28
+committed-4	M3CharSequenceAccess	xx3() hashChars(UTF-16 String)	1147.67	61.28	0.05
+committed-4	M3ByteBufferAccess	xx3() hashBytes(direct ByteBuffer, off, len)	385.08	64.80	0.17
 alternative-internal-unsafe	M3XxHash	xx() hashBytes(byte[])	57.83	63.23	1.09
 alternative-internal-unsafe	M3XXH3	xx3() hashBytes(byte[])	68.14	88.43	1.30
 alternative-internal-unsafe	M3XXH3	xx128low() hashBytes(byte[])	71.07	66.57	0.94
