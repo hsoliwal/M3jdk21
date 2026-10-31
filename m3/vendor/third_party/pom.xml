@@ -36,7 +36,6 @@
     <module>commons-io-2.15.1</module>
     <module>commons-io-2.18.0</module>
     <module>commons-jexl3</module>
-    <module>commons-lang3-3.14.0</module>
     <module>commons-lang3-3.17.0</module>
     <module>commons-logging</module>
     <module>commons-net</module>
