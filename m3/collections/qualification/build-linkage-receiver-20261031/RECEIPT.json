@@ -1,0 +1,71 @@
+{
+  "schema": "m3.receiver-postimage-reference/v1",
+  "status": "DRAFT_UNADMITTED",
+  "repository": "hsoliwal/M3jdk21",
+  "preimage": "252d0b1030a4a543901a669326606ab24a09c76b",
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "pullRequest": 15006,
+    "revision": "09e07e4fd2d6e116e8f36ab5091e34ab2a035496",
+    "path": "synexia-openrewrite-recipes/recipe-crates/collection-build-linkage-20261031",
+    "recipeId": "M3HashPinnedTextSnapshotRecipe",
+    "crateId": "m3-collection-build-linkage-20261031",
+    "qualification": "synexia-openrewrite-recipes/recipe-crates/collection-build-linkage-20261031/QUALIFICATION.json",
+    "mavenVerify": "synexia-openrewrite-recipes/recipe-crates/collection-build-linkage-20261031/validation/INTEGRATED_QUALIFICATION.json"
+  },
+  "postimages": [
+    {
+      "path": "m3/collections/qualification/full-java-jni-20261018/verify.py",
+      "sha256": "c2be1d8f305d6a2fc5c0bd6d6030fa93a329a7928b58aa633508998e029cfa3f",
+      "gitBlob": "1876e627bb678b968c38b74135533c5961f6e141"
+    },
+    {
+      "path": "m3/collections/test_verify_donation.py",
+      "sha256": "0a4b4c0103a50a79de06bc7ed6a88a96a7aab6cd0e74e49649ae236110ce3641",
+      "gitBlob": "8f0bce72db13cd7d5674394466efa57d1777cb9c"
+    },
+    {
+      "path": "m3/collections/verify_donation.py",
+      "sha256": "5eff13d453a42271a41d730ce0f4e58bdeb89db73a3c396a907b8970c75edb25",
+      "gitBlob": "af61ee8e4a6f07f8a73779f30020f4147ccb4d72"
+    }
+  ],
+  "componentEvidence": {
+    "pythonTests": 15,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "originalPythonTests": 5,
+    "typedLinkageAtoms": 8,
+    "strictModularJDK21Compile": true,
+    "actualCheckedJNIProjection": true,
+    "missingModuleJarAndProviderCounterexamples": true,
+    "actualTextSDK": {
+      "outputs": 3,
+      "replayChanges": 0,
+      "refusals": 15,
+      "metadataPreserved": 3
+    },
+    "mavenVerify": true,
+    "sourceGuardsRelaxed": false,
+    "verifierMainInvocations": 0,
+    "producerBuildInvocations": 0,
+    "sourceGenerationCalls": 0
+  },
+  "targetGates": {
+    "naming": "INHERITED_SOURCE_HASH_REFUSAL_UNRESOLVED",
+    "currentSourceSuccessorCustody": "OPEN",
+    "fullLinuxDonationAndSdkMains": "NOT_RUN",
+    "fullTargetMavenSuite": "NOT_RUN",
+    "installedImage": "NOT_RUN",
+    "globalPerAtomJUnitAndPerformanceCoverage": "OPEN",
+    "repositoryCompletion": false,
+    "automaticApplication": false
+  },
+  "phase": {
+    "STRING": "QUALIFICATION_REQUIRED",
+    "ARRAYS": "WAITING_FOR_PREDECESSOR",
+    "COLLECTIONS": "WAITING_FOR_PREDECESSOR"
+  },
+  "custody": "Three actual SDK-produced Python postimages and this passive receipt only. Recipes, validation, fixtures and improvement memory remain in Synexia."
+}
