@@ -58,6 +58,6 @@ jobs:
           git fetch --no-tags --depth=1 origin "$M3_BASE_SHA"
           git diff --diff-filter=A --name-only "$M3_BASE_SHA" HEAD > "$RUNNER_TEMP/m3-new-paths.txt"
           if grep -E '(^m3/recipes/|^m3/tooling/migration-recipes/|/recipe(s)?/)' "$RUNNER_TEMP/m3-new-paths.txt"; then
-            echo 'ERROR: executable transformation recipes belong in hsoliwal/com.synexia, not M3JDK21'
+            echo 'ERROR: recipe roots (m3/recipes, migration-recipes, */recipe(s)/) take no new sources; add tools under m3/tooling/<lane>/tools/ (standalone, m3/tooling/standalone/SYNEXIA_REFS.tsv)'
             exit 1
           fi

@@ -1,0 +1,19 @@
+gate	state	detail
+FULL_SCOPE_SCAN	PASS	check_standalone.py (#2192, sha256 44703e6a3eb1953239f55c3ae4a9a8305fc39598fd0c05d09dfe1142c96683cd) over every scoped file at master 52fb81c4: scanned=5353 unscanned=0 before; scanned=5357 unscanned=0 after (4 new scoped files of this lane). Scan TSV sha256 before ad752a1d85258f3c, after 288954e7d3d670bc
+D_COUNTS_FULL	PASS	D_CHECKOUT 4->2, D_SECRET 4->3, D_REPO_REF 361->338, D_MAVEN 474->474 (#2213 lane); all remaining D_CHECKOUT/D_SECRET rows are history copies under m3/qualification/ retained variants (pr1816, pr2163), not live workflows
+D_COUNTS_LEAF	PASS	leaf scope (the 21 listed rows plus the 8 rows in m3/release that the sparse list had not scanned): 29 -> 3 (D_CHECKOUT 2->0, D_SECRET 1->0, D_REPO_REF 26->3); the 3 are HOLD: 2 byte-bound workflows, 1 retained-variant pom
+NAMING_RATCHET	PASS	N_PATH 3412->3412 (tools named without the donor word), N_NAME 5967->5916, N_PACKAGE 0->0
+LIVE_FETCH_GUARD	PASS	test_refs_ledger.py fetch guard over .github/workflows/*.y*ml: 8 donor checkout/download/clone/secret lines at base (including secrets.M3_SYNEXIA_TOKEN, which the D_SECRET rule does not match), 0 after
+YAML_JSON_XML_PARSE	PASS	PyYAML safe_load of the 13 changed workflows and the new m3-standalone-refs.yml (each has jobs); json.load of release-contract.json; ElementTree parse of migration-recipes/pom.xml
+WORKFLOW_STRUCTURE	PASS	absorbed validator m3/tooling/validators/WorkflowStructureCheck.java (Git blob f61be81f): --self-test WORKFLOW_STRUCTURE_SELF_TEST_OK; WORKFLOW_STRUCTURE_OK for all 14 workflows (JDK 21.0.9)
+RELEASE_ADMISSION_TESTS	PASS	python -m unittest m3/release/test_release_admission.py: 29 run, 0 failures, 1 error = test_untracked_source_is_refused (Windows cannot create its newline file name; same error on master: 28 run, 1 error); test_retained_source_queue.py OK
+RELEASE_OWNER_DISCRIMINATOR	PASS	the new tests against the old owner logic (old verifier plus only the two new constants): 3 positive tests fail (complete receipts, default manifest, generated reports), so the tests bind the new owner
+COLLECTION_PORT_VERIFIER	PASS	verify_collection_port_wave1.py: M3_COLLECTION_PORT_WAVE1_PASS before and after; drifted ledger, missing ledger key and drifted PROVENANCE row each refused (test_refs_ledger.py)
+RECEIVER_STEPS	PASS	inline receiver steps of m3-jep485/493 extracted and run: PASS with the ledger, refused ('receiver drift') when the ledger names another repository; the j485 step is exercised on a copy with the field/value header (see RECIPE_MEMORY 9)
+A3_CLOSURE_BYTES	PASS	9/9 sealed sha256 of the A3 closure equal the vendored files under m3/vendor/synexia/synexia-openrewrite-recipes/; donor pom-jdk-a3-export.xml (blob 7beaa39f, read through GraphQL) matches its old seal c3be01bc and is replaced by the in-repo module tooling/synexia-jdk-a3-recipes
+VALIDATOR_BLOB	PASS	git hash-object m3/tooling/validators/WorkflowStructureCheck.java = f61be81f5a15bea78f1c5ae7d5555844c9cd2ea7 = source_git_blob of the donor commit 0f0f9965 (m3/compatibility receiver record)
+PATCH_RECIPE_REPLAY	PASS	SYNEXIA_REFS.patch applied by apply_patch_recipe.py to the base images of the 19 edited files: 19/19 byte-identical to the commit; second run FIXED_POINT; the work tree itself reports FIXED_POINT
+LEDGER_FIXED_POINT	PASS	refs_ledger.py run twice: SYNEXIA_REFS.tsv sha256 443649f897aacd98 both times; --check PASS
+LEAF_TESTS	PASS	python -m unittest m3/tooling/standalone/tools/test_refs_ledger.py: 9 tests OK
+DIFF_HYGIENE	PASS	git diff --check clean; every changed or new file LF-only
+MAVEN_WORKFLOW_RUNTIME	NOT_RUN	the A3 workflows' Maven source builds (install.sh closure, reactor -am) were not executed locally (disk on H:/K: below the floor); the draft PR's own CI runs them
