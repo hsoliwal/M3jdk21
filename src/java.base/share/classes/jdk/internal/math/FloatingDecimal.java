@@ -107,8 +107,20 @@ public class FloatingDecimal{
      * represent a properly formatted double precision value.
      */
     public static double parseDouble(String s) throws NumberFormatException {
+        //FLLDCIM: M3 - one fast parser in the JDK (FastDoubleParser 1.0.90 absorbed as M3JavaDoubleBitsFromCharSequence);
+        // a null or any input it rejects takes the original path, so results and exceptions stay exactly the JDK's
+        if (s != null) {
+            try {
+                return Double.longBitsToDouble(M3_DOUBLE.parseFloatingPointLiteral(s, 0, s.length()));
+            } catch (IllegalArgumentException rejected) {
+                // NumberFormatException included: the original converter decides and reports
+            }
+        }
         return readJavaFormatString(s).doubleValue();
     }
+
+    private static final M3JavaDoubleBitsFromCharSequence M3_DOUBLE = new M3JavaDoubleBitsFromCharSequence();
+    private static final M3JavaFloatBitsFromCharSequence M3_FLOAT = new M3JavaFloatBitsFromCharSequence();
 
     /**
      * Converts a <code>String</code> to a single precision floating point value.
@@ -119,6 +131,14 @@ public class FloatingDecimal{
      * represent a properly formatted single precision value.
      */
     public static float parseFloat(String s) throws NumberFormatException {
+        //FLLDCIM: M3 - same fast path as parseDouble (M3JavaFloatBitsFromCharSequence); rejection -> original path
+        if (s != null) {
+            try {
+                return Float.intBitsToFloat((int) M3_FLOAT.parseFloatingPointLiteral(s, 0, s.length()));
+            } catch (IllegalArgumentException rejected) {
+                // NumberFormatException included: the original converter decides and reports
+            }
+        }
         return readJavaFormatString(s).floatValue();
     }
 
